@@ -107,7 +107,7 @@ def main(argv=None):
                        action='store_const', const=logging.FATAL,
                        help="log message in critical level")
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     logfmt = '[%(levelname)s] %(name)s: %(message)s'
     if args.pid:
@@ -138,6 +138,7 @@ def main(argv=None):
         logger.fatal("Hello, world!")
     else:
         logger.info("Hello, world!")
+    return 0
 
 
 if __name__ == '__main__':
