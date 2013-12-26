@@ -51,9 +51,9 @@ on other architectures. Hence this is changed in the configuration::
 
 SELinux support
 ~~~~~~~~~~~~~~~
-Before 3.13 Arch Linux' kernel don't provide SELinux at all
+Before 3.13 Arch Linux' kernel doesn't provide SELinux at all
 (https://bugs.archlinux.org/task/37578 may improve the situation).
-Theredore following configuration options need to be added to enable SELinux::
+Therefore following configuration options need to be added to enable SELinux::
 
     CONFIG_SECURITY_SELINUX=y
     CONFIG_SECURITY_SELINUX_BOOTPARAM=y
@@ -86,8 +86,8 @@ NTPd needs to have read access to ``/proc/net/if_inet6`` to use IPv6
 
     gpasswd proc-trusted -a ntp
 
-To grant an user the right to execute its own executables, she must belong to
-group ``tpe-trusted``. Also to do administrative actions without being ``root``,
+For an user to be able to run its own programs, she must belong to group
+``tpe-trusted``. Also to do administrative actions without being ``root``,
 being member of group ``adm`` is a good idea.
 
 
