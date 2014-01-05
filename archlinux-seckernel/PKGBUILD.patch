@@ -1,29 +1,33 @@
 --- a/PKGBUILD	
 +++ b/PKGBUILD
-@@ -45,6 +45,8 @@ source=(
+@@ -44,6 +44,9 @@ source=(
    $pkgname.preset
    sysctl.conf
    module-blacklist.conf
 +  bugon-add-null-timer.patch
 +  usr-bin-usermode-helper.patch
++  http://dev.gentoo.org/~mpagano/genpatches/trunk/$_basekernel/4200_fbcondecor-0.9.6.patch
  )
  
  build() {
-@@ -67,6 +69,10 @@ build() {
+@@ -66,6 +69,11 @@ build() {
    patch -Np1 -i "$srcdir/grsecurity-$_grsecver-$pkgver-$_timestamp.patch"
    rm localversion-grsec
  
 +  # Add custom patches
 +  patch -Np1 -i "$srcdir/bugon-add-null-timer.patch"
 +  patch -Np1 -i "$srcdir/usr-bin-usermode-helper.patch"
++  patch -Np1 -i "$srcdir/4200_fbcondecor-0.9.6.patch"
 +
    cat "${srcdir}/config.${CARCH}" > ./.config
  
    if [ "${_kernelname}" != "" ]; then
-@@ -327,4 +331,5 @@ sha256sums=('2e120ec7fde19fa51dc6b6cc11c
+@@ -326,4 +334,7 @@ sha256sums=('2e120ec7fde19fa51dc6b6cc11c
              '305542cb76d1487dc97015316a8a867900b3640c16ab9c8798f39233259b329d'
              'ca7e718375b3790888756cc0a64a7500cd57dddb9bf7e10a0df22c860d91f74d'
              'f1a770e2a769f07f2fbb63d18bd0f2bb319d080149643b97503ec39c5df1b90d'
 -            '50e9e4ce335bae3787aa6b28c535d32035d39803387d17b67a05dc0589606c8f')
 +            '50e9e4ce335bae3787aa6b28c535d32035d39803387d17b67a05dc0589606c8f'
-+            'SKIP' 'SKIP')
++            'SKIP'
++            'SKIP'
++            'd5a4f93bfbe08490b8948bb2a8a2fa57755301dc4ef810f02fdfa754807ff0fd')
