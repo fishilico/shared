@@ -23,6 +23,7 @@
  */
 
 #define _GNU_SOURCE
+#include <assert.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -169,6 +170,9 @@ int main()
 {
     /* Disable stdout buffering */
     setvbuf(stdout, NULL, _IONBF, 0);
+
+    /* Check that data and function pointers have the same size */
+    assert(sizeof(int (*)()) == sizeof(void*));
 
     if (test_anon_wx_mmap()) return 1;
     printf("\n");
