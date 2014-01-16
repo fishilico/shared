@@ -74,19 +74,76 @@ static int test_anon_wx_mmap()
 }
 
 /**
- * Test WX mmap for a given file descriptor
+ * Test doing an anonymous RW mapping which then becomes executable
  */
-static void test_mmap_wx_fd(int fd)
+static void test_anon_wx_mprotect()
+{
+    int result;
+    void *ptr;
+    ptr = mmap(NULL, sizeof(CODE),
+               PROT_READ | PROT_WRITE,
+               MAP_PRIVATE | MAP_ANONYMOUS,
+               -1, 0);
+    if (ptr == MAP_FAILED) {
+        perror("[-] mmap-RW");
+        return;
+    }
+    printf("[ ] RW mmap succeeded at %p\n", ptr);
+    memcpy(ptr, CODE, sizeof(CODE));
+    if (mprotect(ptr, sizeof(CODE), PROT_READ | PROT_EXEC) < 0) {
+        if (errno != EACCES && errno != EPERM) perror("[-] mprotect-RW2RX");
+        printf("[+] RX-mprotect on a RW mmap failed as expected\n");
+        munmap(ptr, sizeof(CODE));
+        return;
+    }
+
+    result = ( (int (*)())ptr )();
+    if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap");
+    if (result != 0) {
+        fprintf(stderr, "[!] unexpected result: %d\n", result);
+        return;
+    }
+    printf("[~] Code successfully executed. Your kernel allows JIT\n");
+}
+
+/**
+ * Test RW mmap + RX mprotect for a given file descriptor
+ */
+static void test_mmap_w_mprotect_x_fd(int fd)
+{
+    void *ptr;
+    int result;
+
+    ptr = mmap(NULL, sizeof(CODE), PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
+    if (ptr == MAP_FAILED) {
+        perror("[!] mmap-RW");
+        return;
+    }
+    printf("... RW mmap succeeded at %p\n", ptr);
+    memcpy(ptr, CODE, sizeof(CODE));
+
+    if (mprotect(ptr, sizeof(CODE), PROT_READ | PROT_EXEC) < 0) {
+        if (errno != EACCES) perror("[!] mprotect-RW2RX");
+        else printf("... RX-mprotect on a RW mmap failed as expected\n");
+        munmap(ptr, sizeof(CODE));
+        return;
+    }
+    result = ( (int (*)())ptr )();
+    if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap");
+    if (result != 0) {
+        fprintf(stderr, "[!] unexpected result: %d\n", result);
+    }
+    printf("[~] Code successfully executed\n");
+}
+
+/**
+ * Test RW+RX mmaps for a given file descriptor
+ */
+static void test_mmap_rw_rx_fd(int fd)
 {
     void *wptr, *xptr;
     int result;
     size_t i;
-
-    /* Expand the file to the used size, otherwise a SIGBUS will be raised */
-    if (ftruncate(fd, sizeof(CODE)) < 0) {
-        perror("[!] ftruncate");
-        return;
-    }
 
     /* RW mmap */
     wptr = mmap(NULL, sizeof(CODE), PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
@@ -159,8 +216,16 @@ static void test_mmap_wx_dir(const char *dirname)
         fprintf(stderr, "[!] failed to unlink %s", filename);
         return;
     }
+
+    /* Expand the file to the used size, otherwise a SIGBUS will be raised */
+    if (ftruncate(fd, sizeof(CODE)) < 0) {
+        perror("[!] ftruncate");
+        return;
+    }
+
     printf("... created file %s\n", filename);
-    test_mmap_wx_fd(fd);
+    test_mmap_w_mprotect_x_fd(fd);
+    test_mmap_rw_rx_fd(fd);
     close(fd);
 }
 
@@ -173,6 +238,7 @@ int main()
     assert(sizeof(int (*)()) == sizeof(void*));
 
     if (test_anon_wx_mmap()) return 1;
+    test_anon_wx_mprotect();
     printf("\n");
 
     printf("[ ] Testing /tmp\n");

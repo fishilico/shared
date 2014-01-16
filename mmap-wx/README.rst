@@ -29,17 +29,26 @@ Output sample with a grsecurity kernel
 Program output::
 
     [+] Direct RWX mmap failed as expected with a secure kernel
+    [ ] RW mmap succeeded at 0x699fc5b75000
+    [+] RX-mprotect on a RW mmap failed as expected
 
     [ ] Testing /tmp
     ... created file /tmp/mmap-wx-tmpXoRKx7
+    ... RW mmap succeeded at 0x699fc5b75000
+    ... RX-mprotect on a RW mmap failed as expected
     [!] mmap-RX: Permission denied
 
     [ ] Testing current directory
-    ... created file ./mmap-wx-tmp8M26CK
-    ... RW+RX mmap succeeded at 0x79434be1c000 and 0x79434be1b000
+    ... created file ./mmap-wx-tmpbPKghU
+    ... RW mmap succeeded at 0x699fc5b75000
+    ... RX-mprotect on a RW mmap failed as expected
+    ... RW+RX mmap succeeded at 0x699fc5b75000 and 0x699fc5b74000
     [+] Code successfully executed
 
 Kernel log::
 
     grsec: denied RWX mmap of <anonymous mapping> by /.../mmap-wx/mmap-wx[mmap-wx:7538] uid/euid:1000/1000 gid/egid:100/100, parent ... uid/euid:1000/1000 gid/egid:100/100
+    grsec: denied RWX mprotect of <anonymous mapping> by /.../mmap-wx/mmap-wx[mmap-wx:7538] uid/euid:1000/1000 gid/egid:100/100, parent ... uid/euid:1000/1000 gid/egid:100/100
+    grsec: denied RWX mprotect of /tmp/mmap-wx-tmpXoRKx7 by /.../mmap-wx/mmap-wx[mmap-wx:7538] uid/euid:1000/1000 gid/egid:100/100, parent ... uid/euid:1000/1000 gid/egid:100/100
     grsec: denied untrusted exec (due to file in world-writable directory) of /tmp/mmap-wx-tmpXoRKx7 by /.../mmap-wx/mmap-wx[mmap-wx:7538] uid/euid:1000/1000 gid/egid:100/100, parent ... uid/euid:1000/1000 gid/egid:100/100
+    grsec: denied RWX mprotect of /.../mmap-wx/mmap-wx-tmpbPKghU by /.../mmap-wx/mmap-wx[mmap-wx:7538] uid/euid:1000/1000 gid/egid:100/100, parent ... uid/euid:1000/1000 gid/egid:100/100
