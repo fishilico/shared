@@ -1,6 +1,7 @@
 CC ?= gcc
 CFLAGS ?= -Wall -W -Wextra -Wformat=2 -ansi -pedantic -D_GNU_SOURCE -O2 -pipe \
-    -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -pie -fPIE
+    -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -pie -fPIE \
+    -Wl,-z,relro,-z,now
 
 all: mmap-wx mmap-wx-simple
 
