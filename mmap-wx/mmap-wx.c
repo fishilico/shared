@@ -24,11 +24,19 @@
 
 #include <assert.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
+
+/**
+ * Dump memory mappings after successful code execution
+ */
+/*#define MMAP_WX_DUMP_MMAPS 1*/
 
 /**
  * Binary representation of "return 0;" in x86 assembly language:
@@ -43,6 +51,36 @@ static const unsigned char CODE[] = "\x31\xc0\xc3";
  */
 static const char TEMPFILE_SUFFIX[] = "/mmap-wx-tmpXXXXXX";
 
+
+#if MMAP_WX_DUMP_MMAPS
+/**
+ * Dump current memory mappings
+ */
+static void dump_proc_maps()
+{
+    char buffer[4096];
+    int fd;
+    size_t rdlen, wrlen, offset;
+
+    fd = open("/proc/self/maps", O_RDONLY);
+    if (fd == -1) {
+        perror("[!] open(/proc/self/maps)");
+        return;
+    }
+    while ((rdlen = read(fd, buffer, sizeof(buffer))) > 0) {
+        for (offset = 0; offset < rdlen; offset += wrlen) {
+            wrlen = fwrite(buffer + offset, 1, rdlen - offset, stdout);
+            if (wrlen <= 0) {
+                fprintf(stderr, "[!] fwrite failed with error: %d\n",
+                    ferror(stdout));
+                close(fd);
+                return;
+            }
+        }
+    }
+    close(fd);
+}
+#endif
 
 /**
  * Test doing an anonymous RWX mapping, which is denied by grsecurity kernel
@@ -177,13 +215,18 @@ static void test_mmap_rw_rx_fd(int fd)
 
     /* Execute code */
     result = ( (int (*)())xptr )();
+    if (result == 0) {
+#if MMAP_WX_DUMP_MMAPS
+        printf("[+] Code successfully executed. Dump /proc/self/maps\n");
+        dump_proc_maps();
+#else
+        printf("[+] Code successfully executed.\n");
+#endif
+    } else {
+        fprintf(stderr, "[!] Unexpected result: %x\n", result);
+    }
     if (munmap(xptr, sizeof(CODE)) < 0) perror("[-] munmap-RX");
     if (munmap(wptr, sizeof(CODE)) < 0) perror("[-] munmap-RW");
-    if (result != 0) {
-        fprintf(stderr, "[!] Unexpected result: %x\n", result);
-        return;
-    }
-    printf("[+] Code successfully executed\n");
 }
 
 /**
