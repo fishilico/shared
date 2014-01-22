@@ -20,7 +20,7 @@ int main()
 {
     const char template[] = "./mmap-wx-XXXXXX";
     /* "xor %eax,%eax ; ret" in x86  */
-    const char code[] = "\x31\xc0\xc3";
+    const unsigned char code[] = "\x31\xc0\xc3";
     char filename[4096];
     int fd, result;
     void *wptr, *xptr;

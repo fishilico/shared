@@ -35,7 +35,7 @@
  *     31 c0      xor    %eax,%eax
  *     c3         ret
  */
-static const char CODE[] = "\x31\xc0\xc3";
+static const unsigned char CODE[] = "\x31\xc0\xc3";
 
 
 /**
@@ -103,7 +103,7 @@ static void test_anon_wx_mprotect()
         fprintf(stderr, "[!] unexpected result: %d\n", result);
         return;
     }
-    printf("[~] Code successfully executed. Your kernel allows JIT\n");
+    printf("[~] Code successfully executed after RX mprotect\n");
 }
 
 /**
@@ -133,7 +133,7 @@ static void test_mmap_w_mprotect_x_fd(int fd)
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
     }
-    printf("[~] Code successfully executed\n");
+    printf("[~] Code successfully executed after RX mprotect\n");
 }
 
 /**
@@ -168,7 +168,7 @@ static void test_mmap_rw_rx_fd(int fd)
         fprintf(stderr, "[!] RW and RX mmaps are different:\n");
         for (i = 0; i < sizeof(CODE); i++) {
             fprintf(stderr, "... %02x %02x\n",
-                    CODE[i], ((char*)xptr)[i]);
+                    CODE[i], ((unsigned char*)xptr)[i]);
         }
         munmap(xptr, sizeof(CODE));
         munmap(wptr, sizeof(CODE));
