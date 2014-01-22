@@ -84,9 +84,8 @@ static void dump_proc_maps()
 
 /**
  * Test doing an anonymous RWX mapping, which is denied by grsecurity kernel
- * Return 1 if successful, 0 otherwise
  */
-static int test_anon_wx_mmap()
+static void test_anon_wx_mmap()
 {
     void *ptr;
     int result;
@@ -97,7 +96,7 @@ static int test_anon_wx_mmap()
     if (ptr == MAP_FAILED) {
         if (errno != EACCES && errno != EPERM) perror("[-] mmap-RWX");
         printf("[+] Direct RWX mmap failed as expected with a secure kernel\n");
-        return 0;
+        return;
     }
     printf("[ ] RWX mmap succeeded at %p, let's try to use it!\n", ptr);
     memcpy(ptr, CODE, sizeof(CODE));
@@ -105,10 +104,9 @@ static int test_anon_wx_mmap()
     if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap-RWX");
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
-        return 0;
+        return;
     }
     printf("[!] Code successfully executed. Your kernel is NOT secure!\n");
-    return 1;
 }
 
 /**
@@ -280,7 +278,7 @@ int main()
     /* Check that data and function pointers have the same size */
     assert(sizeof(int (*)()) == sizeof(void*));
 
-    if (test_anon_wx_mmap()) return 1;
+    test_anon_wx_mmap();
     test_anon_wx_mprotect();
     printf("\n");
 
