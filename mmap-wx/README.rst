@@ -19,14 +19,30 @@ memory restrictions on the executable::
 
     paxctl -cm mmap-wx
 
-Then, the program will give this kind of output::
+Then, the program will give this kind of output. Please note that here ``/tmp``
+is a ``tmpfs`` mounted with ``noexec`` option::
 
-    [ ] RWX mmap succeeded at 0x7672ca102000, let's try to use it!
+    [ ] RWX mmap succeeded at 0x7a16e8b97000, let's try to use it!
     [!] Code successfully executed. Your kernel is NOT secure!
+    [ ] RW mmap succeeded at 0x7a16e8b97000
+    [~] Code successfully executed after RX mprotect
+
+    [ ] Testing /tmp
+    ... created file /tmp/mmap-wx-tmp1exeuZ
+    ... RW mmap succeeded at 0x7a16e8b97000
+    ... RX-mprotect on a RW mmap failed as expected
+    [!] mmap-RX: Operation not permitted
+
+    [ ] Testing current directory
+    ... created file ./mmap-wx-tmp43RDJb
+    ... RW mmap succeeded at 0x7a16e8b97000
+    [~] Code successfully executed after RX mprotect
+    ... RW+RX mmap succeeded at 0x7a16e8b97000 and 0x7a16e8b96000
+    [+] Code successfully executed.
 
 Output sample with a grsecurity kernel
 --------------------------------------
-Program output::
+Program output. Here `/tmp`` is a ``tmpfs`` mounted with ``exec`` option::
 
     [+] Direct RWX mmap failed as expected with a secure kernel
     [ ] RW mmap succeeded at 0x699fc5b75000
