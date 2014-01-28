@@ -6,6 +6,7 @@
 """
 from cffi import FFI
 import os.path
+import weakref
 
 
 # Call functions from the standard lib C library
@@ -43,3 +44,23 @@ _cffi_example = ffi.dlopen(os.path.join(current_dir, '_cffi_example.so'))
 
 print(ffi.string(_cffi_example.helloworld).decode('utf-8'))
 print("The answer is {}".format(_cffi_example.get_answer()))
+
+
+# Using stringpair requires weak references
+global_weakkeydict = weakref.WeakKeyDictionary()
+
+
+def new_stringpair(str1, str2):
+    """Create a new stringpair structure"""
+    spair = ffi.new('struct stringpair*')
+    s1 = ffi.new('char[]', str1.encode('utf-8'))
+    s2 = ffi.new('char[]', str2.encode('utf-8'))
+    spair.str1 = s1
+    spair.str2 = s2
+    global_weakkeydict[spair] = (s1, s2)
+    return spair
+
+stringpair = new_stringpair('string one', 'string two')
+print("String pair: '{}', '{}'".format(
+    ffi.string(stringpair.str1).decode('utf-8'),
+    ffi.string(stringpair.str2).decode('utf-8')))
