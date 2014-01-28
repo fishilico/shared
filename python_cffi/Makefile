@@ -26,6 +26,7 @@ lint:
 
 test: _cffi_example.so
 	$(PYTHON) cffi_example.py
+	$(PYTHON) cffi_numpy.py
 
 _cffi_example.so: _cffi_example.o
 	$(CC) $(LDFLAGS) -fPIC -shared -Wl,-soname,$@ -o $@ $^

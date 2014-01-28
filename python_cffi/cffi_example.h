@@ -10,4 +10,8 @@ extern char *helloworld;
 
 extern int get_answer(void);
 
+extern void matrix_add_coords(double *matrix, unsigned int lines, unsigned int cols);
+
+extern void transpose_square_matrix(double *matrix, unsigned int n);
+
 #endif /* CFFI_EXAMPLE_H */
