@@ -7,6 +7,9 @@ CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 -ansi -pedantic \
 # Linker flags
 LDFLAGS ?= -Wl,-z,relro,-z,now -pie
 
+# Use Linux >=3.11 O_TMPFILE feature, if available
+CPPFLAGS += -DO_TMPFILE=020200000
+
 all: mmap-wx mmap-wx-simple
 
 clean:

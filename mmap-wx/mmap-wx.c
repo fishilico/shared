@@ -240,23 +240,39 @@ static void test_mmap_wx_dir(const char *dirname)
         return;
     }
 
-    memcpy(filename, dirname, dirlen);
-    memcpy(filename + dirlen, TEMPFILE_SUFFIX, sizeof(TEMPFILE_SUFFIX));
+#ifdef O_TMPFILE
+    fd = open(dirname, O_TMPFILE|O_RDWR|O_CLOEXEC|O_EXCL, S_IRUSR|S_IWUSR);
+    if (fd >= 0) {
+        /* Retrieve file name using procfs */
+        char procfile[1024];
+        snprintf(procfile, sizeof(procfile), "/proc/self/fd/%d", fd);
+        if (readlink(procfile, filename, sizeof(filename)) == -1) {
+            perror("[!] readlink");
+            snprintf(filename, sizeof(filename), "%s/<deleted file>", dirname);
+        }
+    } else {
+        perror("[!] open");
+#endif
+        memcpy(filename, dirname, dirlen);
+        memcpy(filename + dirlen, TEMPFILE_SUFFIX, sizeof(TEMPFILE_SUFFIX));
 
-    /* Create file */
-    fd = mkstemp(filename);
-    if (fd == -1) {
-        perror("mkstemp");
-        fprintf(stderr, "[!] failed to create file in %s", dirname);
-        return;
-    }
+        /* Create file */
+        fd = mkstemp(filename);
+        if (fd == -1) {
+            perror("mkstemp");
+            fprintf(stderr, "[!] failed to create file in %s", dirname);
+            return;
+        }
 
-    /* Unlink it so that only the program can see it */
-    if (unlink(filename) < 0) {
-        perror("unlink");
-        fprintf(stderr, "[!] failed to unlink %s", filename);
-        return;
+        /* Unlink it so that only the program can see it */
+        if (unlink(filename) < 0) {
+            perror("unlink");
+            fprintf(stderr, "[!] failed to unlink %s", filename);
+            return;
+        }
+#ifdef O_TMPFILE
     }
+#endif
 
     /* Expand the file to the used size, otherwise a SIGBUS will be raised */
     if (ftruncate(fd, sizeof(CODE)) < 0) {
