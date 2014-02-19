@@ -128,7 +128,7 @@ static void test_anon_wx_mprotect()
     memcpy(ptr, CODE, sizeof(CODE));
     if (mprotect(ptr, sizeof(CODE), PROT_READ | PROT_EXEC) < 0) {
         if (errno != EACCES && errno != EPERM) perror("[-] mprotect-RW2RX");
-        printf("[+] RX-mprotect on a RW mmap failed as expected\n");
+        printf("[+] RX mprotect on a RW mmap failed as expected\n");
         munmap(ptr, sizeof(CODE));
         return;
     }
@@ -160,7 +160,7 @@ static void test_mmap_w_mprotect_x_fd(int fd)
 
     if (mprotect(ptr, sizeof(CODE), PROT_READ | PROT_EXEC) < 0) {
         if (errno != EACCES) perror("[!] mprotect-RW2RX");
-        else printf("... RX-mprotect on a RW mmap failed as expected\n");
+        else printf("... RX mprotect on a RW mmap failed as expected\n");
         munmap(ptr, sizeof(CODE));
         return;
     }

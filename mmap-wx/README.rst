@@ -30,7 +30,7 @@ is a ``tmpfs`` mounted with ``noexec`` option::
     [ ] Testing /tmp
     ... created file /tmp/mmap-wx-tmp1exeuZ
     ... RW mmap succeeded at 0x7a16e8b97000
-    ... RX-mprotect on a RW mmap failed as expected
+    ... RX mprotect on a RW mmap failed as expected
     [!] mmap-RX: Operation not permitted
 
     [ ] Testing current directory
@@ -51,15 +51,15 @@ Program output. Here `/tmp`` is a ``tmpfs`` mounted with ``exec`` option::
     [ ] Testing /tmp
     ... created file /tmp/mmap-wx-tmpXoRKx7
     ... RW mmap succeeded at 0x699fc5b75000
-    ... RX-mprotect on a RW mmap failed as expected
+    ... RX mprotect on a RW mmap failed as expected
     [!] mmap-RX: Permission denied
 
     [ ] Testing current directory
     ... created file ./mmap-wx-tmpbPKghU
     ... RW mmap succeeded at 0x699fc5b75000
-    ... RX-mprotect on a RW mmap failed as expected
+    ... RX mprotect on a RW mmap failed as expected
     ... RW+RX mmap succeeded at 0x699fc5b75000 and 0x699fc5b74000
-    [+] Code successfully executed
+    [+] Code successfully executed.
 
 Kernel log::
 
