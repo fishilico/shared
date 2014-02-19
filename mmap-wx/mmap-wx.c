@@ -245,10 +245,15 @@ static void test_mmap_wx_dir(const char *dirname)
     if (fd >= 0) {
         /* Retrieve file name using procfs */
         char procfile[1024];
+        ssize_t numbytes;
         snprintf(procfile, sizeof(procfile), "/proc/self/fd/%d", fd);
-        if (readlink(procfile, filename, sizeof(filename)) == -1) {
+        numbytes = readlink(procfile, filename, sizeof(filename));
+        if (numbytes == -1) {
             perror("[!] readlink");
             snprintf(filename, sizeof(filename), "%s/<deleted file>", dirname);
+        } else {
+            assert((size_t)numbytes < sizeof(filename));
+            filename[numbytes] = 0;
         }
     } else {
         perror("[!] open");
