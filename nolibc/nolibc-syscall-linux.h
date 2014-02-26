@@ -110,4 +110,13 @@ static int write_all(int fd, const char *buf, unsigned long count)
     return 1;
 }
 
+/**
+ * Execute program
+ */
+static int execve(const char *filename, char *const argv[],
+                   char *const envp[])
+{
+    return (int) syscall3(__NR_execve, filename, argv, envp);
+}
+
 #endif /* NOLIBC_SYSCALL_H */
