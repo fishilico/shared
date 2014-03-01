@@ -16,14 +16,6 @@ void _start(void) __attribute__((noreturn));
 
 /**
  * Define System Call with 3 arguments for each supported architectures
- *
- * Here are some documentation links:
- * * http://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html
- * * http://gcc.gnu.org/onlinedocs/gcc/Constraints.html
- * * http://www.ibm.com/developerworks/library/l-ia/
- * * https://sourceware.org/git/?p=glibc.git glibc source code, with:
- *     sysdeps/unix/sysv/linux/i386/syscall.S
- *     sysdeps/unix/sysv/linux/x86_64/syscall.S
  */
 static long _syscall3(
     int number, unsigned long arg1, unsigned long arg2, unsigned long arg3)
@@ -51,14 +43,14 @@ static long _syscall3(
      * edi = arg5
      * ebp = arg6
      */
-#if defined __GNUC__ && defined __pic__
+#if defined __GNUC__ && defined __PIC__
     /* GCC with PIC flag (Program Independent Code) complains with
      * "error: inconsistent operand constraints in an 'asm'"
      * because ebx has a special meaning in PIC
      */
-    __asm__ volatile ("push %%ebx ; movl %2, %%ebx ; int $0x80 ; pop %%ebx"
+    __asm__ volatile ("xchgl %%ebx, %2 ; int $0x80 ; xchgl %%ebx, %2"
         : "=a" (result)
-        : "0" (number), "g" (arg1), "c" (arg2), "d" (arg3)
+        : "0" (number), "r" (arg1), "c" (arg2), "d" (arg3)
         : "memory", "cc");
 #else
     __asm__ volatile ("int $0x80"
