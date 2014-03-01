@@ -8,7 +8,7 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic \
 # Linker flags
 LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie
 
-all: cpuid
+all: cpuid openmp_matrix
 
 clean:
 	rm -f *.o
@@ -16,6 +16,11 @@ clean:
 
 cpuid: cpuid.o
 	$(CC) $(LDFLAGS) -o $@ $^
+
+openmp_matrix: openmp_matrix.o
+	$(CC) $(LDFLAGS) -fopenmp -o $@ $^
+
+openmp_matrix.o: CFLAGS += -fopenmp
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
