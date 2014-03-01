@@ -1,15 +1,16 @@
 # Run every Makefile in subdirectories
 SUBMAKEFILES := $(wildcard */Makefile)
-SUBDIRS := $(SUBMAKEFILES:/Makefile=)
+SUBDIRS := $(SUBMAKEFILES:%/Makefile=%)
+ALL_TARGETS := $(addprefix all\:, $(SUBDIRS))
+CLEAN_TARGETS := $(addprefix clean\:, $(SUBDIRS))
+TARGETS := $(ALL_TARGETS) $(CLEAN_TARGETS)
 
-all: $(addprefix all.., $(SUBDIRS))
+all: $(ALL_TARGETS)
 
-all..%: %
-	$(MAKE) -C "$<" all
+clean: $(CLEAN_TARGETS)
 
-clean: $(addprefix clean.., $(SUBDIRS))
+$(TARGETS): TARGET = $(firstword $(subst :, ,$@))
+$(TARGETS):
+	$(MAKE) -C "$(@:$(TARGET):%=%)" $(TARGET)
 
-clean..%: %
-	$(MAKE) -C "$<" clean
-
-.PHONY: all clean
+.PHONY: all clean $(TARGETS)
