@@ -27,9 +27,7 @@ all64: $(BINARIES64)
 
 clean:
 	rm -f $(OBJECTS)
-
-mrproper:
-	rm -f $(OBJECTS) $(BINARIES)
+	rm -f $(BINARIES)
 
 %.32: %.32.o
 	$(CC) $(LDFLAGS) -m32 -nostdlib -o $@ $^
@@ -43,4 +41,4 @@ mrproper:
 %.64.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -m64 -c -o $@ $<
 
-.PHONY: all all32 all64 clean mrproper
+.PHONY: all all32 all64 clean
