@@ -1,7 +1,6 @@
 /**
  * Display cpuid's information
  */
-#include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -17,7 +16,10 @@ static void print_escaped_ascii(const char *prefix, const char *text)
             /* Print text..(current-1) */
             while (text < current) {
                 size_t count = fwrite(text, 1, current - text, stdout);
-                assert(count > 0);
+                if (!count) {
+                    fprintf(stderr, "fwrite error to stdout\n");
+                    return;
+                }
                 text += count;
             }
             printf("\\x%02x", (unsigned)(unsigned char)c);
