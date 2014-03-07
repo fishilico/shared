@@ -27,6 +27,8 @@ openmp_matrix.o: CFLAGS += -fopenmp
 view_sizes: view_sizes.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
+view_sizes.o: CFLAGS += -Wno-long-long
+
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
