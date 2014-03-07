@@ -24,7 +24,7 @@ clean:
 	rm -f *.exe *.o
 
 helloworld_noimport.exe: LDFLAGS += -nostdlib -Wl,-nostdlib
-helloworld_noimport.o: CFLAGS += -nostdlib
+helloworld_noimport.o: CFLAGS += -nostdlib -fno-stack-protector
 check_internals.exe: LDFLAGS += -Wl,-subsystem=console
 
 %.exe: %.o
