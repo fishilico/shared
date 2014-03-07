@@ -59,7 +59,7 @@ static long _syscall3(
         : "memory", "cc");
 #endif
 #else
-#error Unsuported architecture
+#error Unsupported architecture
 #endif
     return result;
 }

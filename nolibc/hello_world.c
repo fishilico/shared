@@ -7,6 +7,6 @@ void _start(void)
 {
     int ret;
     const char helloworld[] = "Hello, world!\n";
-    ret = write_all(1, helloworld, sizeof(helloworld));
+    ret = write_all(1, helloworld, sizeof(helloworld) - 1);
     exit(ret ? 0 : 1);
 }
