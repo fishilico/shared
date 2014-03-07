@@ -3,30 +3,19 @@
  */
 #include "internal_structures.h"
 
-
 /**
  * Depending on the chosen subsystem at link-time, the entry point has different names
  *
  * More information on how binutils' ld find the entry point can be get by
  * reading the code of the set_entry_point() function in ld/emultempl/pe.em:
  * https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=blob;f=ld/emultempl/pe.em
- *
- * TODO: define symbols aliases to the same address
  */
-void __cdecl WinMainCRTStartup(void);
-void __cdecl mainCRTStartup(void);
-static void _start(void);
+void __cdecl WinMainCRTStartup(void) __attribute__ ((alias("_start")));
+void __cdecl mainCRTStartup(void) __attribute__ ((alias("_start")));
+void __cdecl _start(void);
 static int _main(void);
 
-void __cdecl WinMainCRTStartup(void)
-{
-    _start();
-}
-void __cdecl mainCRTStartup(void)
-{
-    _start();
-}
-static void _start(void)
+void __cdecl _start(void)
 {
     _ExitProcess(_main());
 }
