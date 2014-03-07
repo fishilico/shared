@@ -166,12 +166,14 @@ static LPCVOID _GetProcAddress(LPCVOID pModuleBase, LPCSTR szFunctionName)
     return NULL;
 }
 
-static LPCVOID _GetModuleProcAddress(LPCWSTR szModuleName, LPCSTR szFunctionName)
+static LPCVOID _GetKernel32ProcAddress(LPCSTR szFunctionName)
 {
-    LPCVOID pModuleBase;
-    pModuleBase = _GetModuleBase(szModuleName);
+    static LPCVOID pModuleBase = NULL;
     if (!pModuleBase) {
-        return NULL;
+        pModuleBase = _GetModuleBase(L"kernel32.dll");
+        if (!pModuleBase) {
+            return NULL;
+        }
     }
     return _GetProcAddress(pModuleBase, szFunctionName);
 }
@@ -179,7 +181,7 @@ static LPCVOID _GetModuleProcAddress(LPCWSTR szModuleName, LPCSTR szFunctionName
 static VOID _ExitProcess(UINT uExitCode)
 {
     VOID (WINAPI *pfnExitProcess)(IN UINT uExitCode);
-    pfnExitProcess = _GetModuleProcAddress(L"kernel32.dll", "ExitProcess");
+    pfnExitProcess = _GetKernel32ProcAddress("ExitProcess");
     if (!pfnExitProcess) {
         return;
     }
@@ -189,14 +191,14 @@ static VOID _ExitProcess(UINT uExitCode)
 static HMODULE _LoadLibraryW(LPCWSTR lpFileName)
 {
     HMODULE (WINAPI *pfnLoadLibraryW)(IN LPCWSTR lpFileName);
-    pfnLoadLibraryW = _GetModuleProcAddress(L"kernel32.dll", "LoadLibraryW");
+    pfnLoadLibraryW = _GetKernel32ProcAddress("LoadLibraryW");
     return pfnLoadLibraryW ? pfnLoadLibraryW(lpFileName) : NULL;
 }
 
 static BOOL _FreeLibrary(HMODULE hModule)
 {
     BOOL (WINAPI *pfnFreeLibrary)(IN HMODULE hModule);
-    pfnFreeLibrary = _GetModuleProcAddress(L"kernel32.dll", "FreeLibrary");
+    pfnFreeLibrary = _GetKernel32ProcAddress("FreeLibrary");
     return pfnFreeLibrary ? pfnFreeLibrary(hModule) : FALSE;
 }
 
