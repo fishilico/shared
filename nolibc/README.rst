@@ -16,6 +16,39 @@ The entry point of such program is::
 and the program ends when the ``exit`` system call is issued, with an exit value
 as parameter.
 
+At the entry points, the stack contains the arguments and environment of the
+program. If ``sp`` is the stack pointer (``esp`` on x86, ``rsp`` on x86_64 and
+``sp`` on ARM), and ``n`` the size in bytes of a pointer (4 on a 32-bits adress
+architecture, 8 on a 64-bits one), then ``argc``, ``argv`` and ``envp`` are
+organised as follows.
+
++-------------------------------+--------------+
+|    Address                    |    Content   |
++===============================+==============+
+|  ``sp``                       |  ``argc``    |
++-------------------------------+--------------+
+|  ``sp + n``                   |  ``argv[0]`` |
++-------------------------------+--------------+
+|  ...                          |  ...         |
++-------------------------------+--------------+
+|  ``sp + n * i``               |  ``argv[i]`` |
++-------------------------------+--------------+
+|  ...                          |  ...         |
++-------------------------------+--------------+
+|  ``sp + n * argc``            |  ``NULL``    |
++-------------------------------+--------------+
+|  ``sp + n * (argc + 1)``      |  ``envp[0]`` |
++-------------------------------+--------------+
+|  ...                          |  ...         |
++-------------------------------+--------------+
+|  ``sp + n * (argc + 1 + i)``  |  ``envp[i]`` |
++-------------------------------+--------------+
+|  ...                          |  ...         |
++-------------------------------+--------------+
+|  ``sp + n * (argc + ...)``    |  ``NULL``    |
++-------------------------------+--------------+
+
+
 Documentation links
 -------------------
 
@@ -30,7 +63,6 @@ GCC inline ASM:
 
 glibc source code: https://sourceware.org/git/?p=glibc.git
 
-``syscall()`` is implemented in:
-
-* sysdeps/unix/sysv/linux/i386/syscall.S
-* sysdeps/unix/sysv/linux/x86_64/syscall.S
+With ``$ARCH`` being x86, x86_64 or arm, ``syscall()`` is implemented in
+``sysdeps/unix/sysv/linux/$ARCH/syscall.S`` and ``_start()`` in
+``sysdeps/$ARCH/start.S``.

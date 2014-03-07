@@ -8,6 +8,7 @@
 /* Import the lists of error numbers and system calls */
 #include <errno.h>
 #include <sys/syscall.h>
+#include <sys/types.h>
 
 /**
  * Program entry point
@@ -100,6 +101,55 @@ static int write_all(int fd, const char *buf, unsigned long count)
         count -= ret;
     }
     return 1;
+}
+
+/**
+ * Get the length of a string
+ */
+static size_t strlen(const char *str)
+{
+    /* This is really inefficient but works */
+    const char *ptr = str;
+    while (*ptr) {
+        ptr++;
+    }
+    return (size_t)(ptr - str);
+}
+
+/**
+ * Write a nul-terminated string to file descriptor fd
+ * Return value: same as write_all
+ */
+static int write_string(int fd, const char *str)
+{
+    return write_all(fd, str, strlen(str));
+}
+/**
+ * Efficient implementation for constant strings
+ */
+#define write_cstring(fd, str) write_all((fd), (str), sizeof((str)) - 1)
+
+/**
+ * Write an unsigned long to a file descriptor
+ */
+static int write_ulong(int fd, unsigned long l)
+{
+    char buffer[sizeof(unsigned long) * 3 + 1], *ptr;
+
+    if (!l) {
+        return write_cstring(fd, "0");
+    }
+
+    ptr = &(buffer[sizeof(buffer) - 1]);
+    while (l) {
+        *(ptr--) = '0' + (char)(l % 10);
+        l /= 10;
+        if (ptr < buffer) {
+            write_cstring(2, "BUG: number too long for buffer\n");
+            exit(255);
+        }
+    }
+    return write_all(fd, ptr + 1, sizeof(buffer) - (size_t)(ptr + 1 - buffer));
 }
 
 /**
