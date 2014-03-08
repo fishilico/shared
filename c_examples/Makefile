@@ -10,6 +10,13 @@ LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie
 
 BINARIES := cpuid openmp_matrix view_sizes
 
+HAS_GTK2 := $(shell pkg-config --exists gtk+-2.0 && echo 'y' || echo 'n')
+ifeq ($(HAS_GTK2), y)
+	BINARIES += gtk_alpha_window
+	GTK_LDFLAGS := $(shell pkg-config --libs gtk+-2.0)
+	GTK_CFLAGS := $(shell pkg-config --cflags gtk+-2.0)
+endif
+
 all: $(BINARIES)
 
 clean:
@@ -17,6 +24,11 @@ clean:
 	rm -f $(BINARIES)
 
 cpuid: cpuid.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+gtk_alpha_window: LDFLAGS += $(GTK_LDFLAGS)
+gtk_alpha_window.o: CFLAGS += $(GTK_CFLAGS)
+gtk_alpha_window: gtk_alpha_window.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
 openmp_matrix: openmp_matrix.o
