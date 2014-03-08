@@ -10,11 +10,19 @@ LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie
 
 BINARIES := cpuid openmp_matrix view_sizes
 
-HAS_GTK2 := $(shell pkg-config --exists gtk+-2.0 && echo 'y' || echo 'n')
-ifeq ($(HAS_GTK2), y)
+
+HAS_GTK3 := $(shell pkg-config --exists gtk+-3.0 && echo 'y' || echo 'n')
+ifeq ($(HAS_GTK3), y)
 	BINARIES += gtk_alpha_window
-	GTK_LDFLAGS := $(shell pkg-config --libs gtk+-2.0)
-	GTK_CFLAGS := $(shell pkg-config --cflags gtk+-2.0)
+	GTK_LDFLAGS := $(shell pkg-config --libs gtk+-3.0)
+	GTK_CFLAGS := $(shell pkg-config --cflags gtk+-3.0)
+else
+	HAS_GTK2 := $(shell pkg-config --exists gtk+-2.0 && echo 'y' || echo 'n')
+	ifeq ($(HAS_GTK2), y)
+		BINARIES += gtk_alpha_window
+		GTK_LDFLAGS := $(shell pkg-config --libs gtk+-2.0)
+		GTK_CFLAGS := $(shell pkg-config --cflags gtk+-2.0)
+	endif
 endif
 
 all: $(BINARIES)

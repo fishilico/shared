@@ -26,7 +26,11 @@ int main(int argc, char **argv)
 
     gtk_widget_set_app_paintable(window, TRUE);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    g_signal_connect(G_OBJECT(window), "draw", G_CALLBACK(expose), NULL);
+#else
     g_signal_connect(G_OBJECT(window), "expose-event", G_CALLBACK(expose), NULL);
+#endif
     g_signal_connect(G_OBJECT(window), "screen-changed", G_CALLBACK(screen_changed), NULL);
 
     gtk_window_set_decorated(GTK_WINDOW(window), TRUE);
@@ -53,12 +57,33 @@ static void screen_changed(
     gpointer userdata __attribute__ ((unused)))
 {
     GdkScreen *screen;
+
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GdkVisual *visual;
+    int depth;
+
+    /* To check if the display supports alpha channels, get the visual */
+    screen = gtk_widget_get_screen(widget);
+    visual = gdk_screen_get_rgba_visual(screen);
+    if (!visual) {
+        printf("Unable to get a visual associated to your screen\n");
+        supports_alpha = FALSE;
+        return;
+    }
+    depth = gdk_visual_get_depth(visual);
+    supports_alpha = (depth == 32);
+    if (supports_alpha) {
+        printf("Your screen supports alpha channels (color depth %d)\n", depth);
+    } else {
+        printf("Your screen does not support alpha channels (color depth %d)\n", depth);
+    }
+    gtk_widget_set_visual(widget, visual);
+#else
     GdkColormap *colormap;
 
     /* To check if the display supports alpha channels, get the colormap */
     screen = gtk_widget_get_screen(widget);
     colormap = gdk_screen_get_rgba_colormap(screen);
-
     if (!colormap) {
         printf("Your screen does not support alpha channels\n");
         colormap = gdk_screen_get_rgb_colormap(screen);
@@ -68,6 +93,7 @@ static void screen_changed(
         supports_alpha = TRUE;
     }
     gtk_widget_set_colormap(widget, colormap);
+#endif
 }
 
 static gboolean expose(
