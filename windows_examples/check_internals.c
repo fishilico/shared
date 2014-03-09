@@ -6,12 +6,24 @@
 #include <stdio.h>
 #include "internal_structures.h"
 
+typedef enum _PROCESSINFOCLASS {
+    ProcessBasicInformation = 0 /* Only this value is used here */
+} PROCESSINFOCLASS;
+
 typedef NTSTATUS (NTAPI *pfnNtQueryInformationProcess)(
-    IN  HANDLE ProcessHandle,
-    IN  PROCESSINFOCLASS ProcessInformationClass,
-    OUT PVOID ProcessInformation,
-    IN  ULONG ProcessInformationLength,
-    OUT PULONG ReturnLength OPTIONAL);
+    HANDLE ProcessHandle,
+    PROCESSINFOCLASS ProcessInformationClass,
+    PVOID ProcessInformation,
+    ULONG ProcessInformationLength,
+    PULONG ReturnLength OPTIONAL);
+
+typedef struct _PROCESS_BASIC_INFORMATION {
+    PVOID Reserved1;
+    PPEB PebBaseAddress;
+    PVOID Reserved2[2];
+    ULONG_PTR UniqueProcessId;
+    PVOID Reserved3;
+} PROCESS_BASIC_INFORMATION, *PPROCESS_BASIC_INFORMATION;
 
 int main()
 {
@@ -20,7 +32,7 @@ int main()
     HANDLE hProcess;
     pfnNtQueryInformationProcess _NtQueryInformationProcess;
     PROCESS_BASIC_INFORMATION pbi;
-    const TEB *pTeb;
+    const void *pTeb;
     const PEB *pPeb;
     const LIST_ENTRY *ListHead, *ListEntry;
     const LDR_DATA_TABLE_ENTRY *CurEntry;

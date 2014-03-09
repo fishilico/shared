@@ -5,7 +5,82 @@
 #define INTERNAL_STRUCTURES_H
 
 #include <windows.h>
-#include <winternl.h>
+
+/**
+ * winnt.h provides NtCurrentTeb to retrieve the Thread Environment Block, which
+ * lies in special locations (in fs segment on 32-bits x86, gs on x86_64, and at
+ * a fixed address on ARM)
+ *
+ * reactos/include/ndk/peb_teb.h gives the offset of the Process Environment
+ * Block address in the TEB structure
+ */
+typedef LONG NTSTATUS, *PNTSTATUS;
+
+#ifndef __UNICODE_STRING_DEFINED
+#define __UNICODE_STRING_DEFINED
+typedef struct _UNICODE_STRING {
+    USHORT Length;
+    USHORT MaximumLength;
+    PWSTR Buffer;
+} UNICODE_STRING;
+#endif
+
+typedef struct _PEB_LDR_DATA {
+    BYTE Reserved1[8];
+    PVOID Reserved2[3];
+    LIST_ENTRY InMemoryOrderModuleList;
+} PEB_LDR_DATA, *PPEB_LDR_DATA;
+
+typedef struct _LDR_DATA_TABLE_ENTRY {
+    PVOID Reserved1[2];
+    LIST_ENTRY InMemoryOrderLinks;
+    PVOID Reserved2[2];
+    PVOID DllBase;
+    PVOID Reserved3[2];
+    UNICODE_STRING FullDllName;
+    BYTE Reserved4[8];
+    PVOID Reserved5[3];
+    PVOID Reserved6;
+    ULONG TimeDateStamp;
+} LDR_DATA_TABLE_ENTRY, *PLDR_DATA_TABLE_ENTRY;
+
+typedef struct _RTL_USER_PROCESS_PARAMETERS {
+    BYTE Reserved1[16];
+    PVOID Reserved2[10];
+    UNICODE_STRING ImagePathName;
+    UNICODE_STRING CommandLine;
+} RTL_USER_PROCESS_PARAMETERS,*PRTL_USER_PROCESS_PARAMETERS;
+
+typedef struct _PEB {
+    BYTE Reserved1[2];
+    BYTE BeingDebugged;
+    BYTE Reserved2[1];
+    PVOID Reserved3[2];
+    PPEB_LDR_DATA Ldr;
+    PRTL_USER_PROCESS_PARAMETERS ProcessParameters;
+    BYTE Reserved4[104];
+    PVOID Reserved5[53];
+    BYTE Reserved6[128];
+    PVOID Reserved7[1];
+    ULONG SessionId;
+} PEB, *PPEB;
+
+typedef struct _CLIENT_ID {
+    HANDLE UniqueProcess;
+    HANDLE UniqueThread;
+} CLIENT_ID, *PCLIENT_ID;
+
+#pragma pack(push,1)
+typedef struct _TEB_internal {
+    NT_TIB NtTib;
+    PVOID EnvironmentPointer;
+    CLIENT_ID ClientId;
+    PVOID ActiveRpcHandle;
+    PVOID ThreadLocalStoragePointer;
+    PPEB ProcessEnvironmentBlock;
+    ULONG LastErrorValue;
+} TEB_internal, *PTEB_internal;
+#pragma pack(pop)
 
 static BOOL StringsEqualsA(LPCSTR str1, LPCSTR str2)
 {
@@ -35,32 +110,11 @@ static BOOL StringsCaseLenEqualsW(LPCWSTR str1, LPCWSTR str2, ULONG cbLen)
 }
 
 /**
- * winnt.h provides NtCurrentTeb to retrieve the Thread Environment Block, which
- * lies in special locations (in fs segment on 32-bits x86, gs on x86_64, and at
- * a fixed address on ARM)
- *
- * reactos/include/ndk/peb_teb.h gives the offset of the Process Environment
- * Block address in the TEB structure
- */
-#pragma pack(push,1)
-struct TEB_internal
-{
-    NT_TIB NtTib;
-    PVOID EnvironmentPointer;
-    CLIENT_ID ClientId;
-    PVOID ActiveRpcHandle;
-    PVOID ThreadLocalStoragePointer;
-    PPEB ProcessEnvironmentBlock;
-    ULONG LastErrorValue;
-};
-#pragma pack(pop)
-
-/**
  * Get current Process Environment Block
  */
 static PPEB _NtCurrentPeb(VOID)
 {
-    const struct TEB_internal *pTeb = (struct TEB_internal*)NtCurrentTeb();
+    const TEB_internal *pTeb = (PTEB_internal)NtCurrentTeb();
     if (!pTeb) {
         return NULL;
     }
@@ -115,7 +169,7 @@ static LPCVOID _GetModuleBase(LPCWSTR szModuleName)
  */
 static LPCVOID _GetProcAddress(LPCVOID pModuleBase, LPCSTR szFunctionName)
 {
-    const BYTE *pbModuleBase = (LPCBYTE) pModuleBase;
+    const BYTE *pbModuleBase = (PBYTE) pModuleBase;
     const IMAGE_DOS_HEADER *pDOSHeader;
     const IMAGE_NT_HEADERS *pNTHeader;
     const IMAGE_DATA_DIRECTORY *pExportDataDir;
