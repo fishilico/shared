@@ -11,7 +11,9 @@ import os.path
 ffi = FFI()
 current_dir = os.path.dirname(__file__) or os.path.curdir
 with open(os.path.join(current_dir, 'cffi_example.h'), 'r') as fhead:
-    ffi.cdef(''.join([line for line in fhead if not line.startswith('#')]))
+    ffi.cdef(''.join([
+        line.replace('CFFI_EXAMPLE_API', '')
+        for line in fhead if not line.lstrip().startswith('#')]))
 _cffi_example = ffi.dlopen(os.path.join(current_dir, '_cffi_example.so'))
 
 matrix = numpy.zeros((10, 10))

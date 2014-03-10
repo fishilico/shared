@@ -37,7 +37,8 @@ print("sizeof(long) = {}".format(libv.LONG_SIZE))
 ffi = FFI()
 current_dir = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(current_dir, 'cffi_example.h'), 'r') as fhead:
-    cdefs = [line for line in fhead if not line.startswith('#')]
+    cdefs = [line.replace('CFFI_EXAMPLE_API', '')
+             for line in fhead if not line.lstrip().startswith('#')]
     ffi.cdef(''.join(cdefs))
 
 _cffi_example = ffi.dlopen(os.path.join(current_dir, '_cffi_example.so'))

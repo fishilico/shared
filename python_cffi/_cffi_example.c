@@ -1,13 +1,13 @@
 #include "cffi_example.h"
 
-char *helloworld = "Hello, world!";
+char CFFI_EXAMPLE_API helloworld[] = "Hello, world!";
 
-int get_answer(void)
+int CFFI_EXAMPLE_API get_answer(void)
 {
     return 42;
 }
 
-extern void matrix_add_coords(double *matrix, unsigned int lines, unsigned int cols)
+void CFFI_EXAMPLE_API matrix_add_coords(double *matrix, unsigned int lines, unsigned int cols)
 {
     unsigned int i, j;
     for (i = 0; i < lines; i++) {
@@ -17,7 +17,7 @@ extern void matrix_add_coords(double *matrix, unsigned int lines, unsigned int c
     }
 }
 
-void transpose_square_matrix(double *matrix, unsigned int n)
+void CFFI_EXAMPLE_API transpose_square_matrix(double *matrix, unsigned int n)
 {
     unsigned int i, j;
     for (i = 0; i < n - 1; i++) {
