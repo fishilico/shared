@@ -3,6 +3,8 @@
  * 
  * Original source code from:
  * http://stackoverflow.com/questions/3908565/how-to-make-gtk-window-background-transparent
+ * Equivalent program in Python with gtk 3:
+ * http://zetcode.com/gfx/pycairo/root/
  */
 #include <gtk/gtk.h>
 #include <gdk/gdkscreen.h>
@@ -64,6 +66,11 @@ static void screen_changed(
 
     /* To check if the display supports alpha channels, get the visual */
     screen = gtk_widget_get_screen(widget);
+    if (!gdk_screen_is_composited(screen)) {
+        printf("Your screen is not composited, no transparency support\n");
+        supports_alpha = FALSE;
+        return;
+    }
     visual = gdk_screen_get_rgba_visual(screen);
     if (!visual) {
         printf("Unable to get a visual associated to your screen\n");
