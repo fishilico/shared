@@ -71,6 +71,30 @@ static long _syscall3(
 #define syscall0(num) syscall1((num), 0)
 
 /**
+ * Simple system calls
+ */
+static int open3(const char *pathname, int flags, mode_t mode)
+{
+    return (int)syscall3(__NR_open, pathname, flags, mode);
+}
+static int open2(const char *pathname, int flags)
+{
+    return open3(pathname, flags, 0);
+}
+static int close(int fd)
+{
+    return (int)syscall1(__NR_close, fd);
+}
+static ssize_t read(int fd, const void *buf, size_t count)
+{
+    return (ssize_t)syscall3(__NR_read, fd, buf, count);
+}
+static ssize_t write(int fd, const void *buf, size_t count)
+{
+    return (ssize_t)syscall3(__NR_write, fd, buf, count);
+}
+
+/**
  * Exit current process
  */
 static void __attribute__((noreturn)) exit(int status)
@@ -87,10 +111,10 @@ static void __attribute__((noreturn)) exit(int status)
  * Write all count bytes from buf to file descriptor fd
  * Return value: 0 if an error occured, 1 if successful
  */
-static int write_all(int fd, const char *buf, unsigned long count)
+static int write_all(int fd, const char *buf, size_t count)
 {
     while (count > 0) {
-        long int ret = syscall3(__NR_write, fd, buf, count);
+        ssize_t ret = write(fd, buf, count);
         if (ret == -EINTR) {
             continue;
         }
