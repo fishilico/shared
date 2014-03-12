@@ -2,11 +2,12 @@ CC ?= cc
 # C preprocessor flags
 CPPFLAGS ?= -D_FORTIFY_SOURCE=2
 # C compiler flags
-CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic \
-	-Wmissing-prototypes -Wno-unused-function -Wformat=2 \
-	-fPIE
+CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic -pipe \
+	-Wmissing-prototypes -Wno-unused-function -Wformat=2 -Wpointer-arith \
+	-Winit-self -Wwrite-strings -Wno-shadow \
+	-fPIE -fno-exceptions
 # Linker flags
-LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie
+LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
 
 # Files
 SOURCES := $(wildcard *.c)
