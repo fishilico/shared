@@ -12,6 +12,7 @@
 #include <linux/videodev2.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
+#include <sys/time.h>
 #include <SDL/SDL.h>
 
 
@@ -257,6 +258,9 @@ int main()
     SDL_Surface* screen;
     SDL_Overlay* overlay;
     SDL_Event event;
+    struct timeval tv;
+    time_t time_start;
+    bool is_first_frame;
 
     width = 640;
     height = 480;
@@ -289,6 +293,16 @@ int main()
         fprintf(stderr, "Unable to start video capture\n");
         return 1;
     }
+    printf("Capture started with %u buffers\n", NB_BUFFER);
+
+    /* Start timer */
+    result = gettimeofday(&tv, NULL);
+    if (result < 0) {
+        perror("gettimeofday");
+        goto quit;
+    }
+    time_start = tv.tv_sec;
+    is_first_frame = true;
 
     for (;;) {
         while (SDL_PollEvent(&event)) {
@@ -313,6 +327,15 @@ int main()
             continue;
         }
 
+        if (is_first_frame) {
+            is_first_frame = false;
+            result = gettimeofday(&tv, NULL);
+            if (result < 0) {
+                perror("gettimeofday");
+            } else if (tv.tv_sec != time_start) {
+                printf("First frame after %ld seconds\n", tv.tv_sec - time_start);
+            }
+        }
         /* Convert and display frame */
         SDL_LockYUVOverlay(overlay);
         uyvy2yv12(overlay->pixels[0], uyvy_frame, width, height);
