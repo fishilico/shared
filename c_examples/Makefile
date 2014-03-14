@@ -9,26 +9,35 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic \
 LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie
 
 BINARIES := cpuid view_sizes
+OPENMP_BINARIES := openmp_matrix
+GTK_BINARIES := gtk_alpha_window
+SDL_BINARIES := sdl_v4l_video
+ALL_BINARIES := $(BINARIES) $(OPENMP_BINARIES) $(GTK_BINARIES) $(SDL_BINARIES)
 
+# view_sizes.c uses "long long" type, so disable the related warning
+view_sizes.o: CFLAGS += -Wno-long-long
+
+# clang doesn't support OPENMP yet
 ifneq ($(CC), clang)
-BINARIES += openmp_matrix
+BINARIES += $(OPENMP_BINARIES)
+$(OPENMP_BINARIES): LDFLAGS += -fopenmp
+$(OPENMP_BINARIES).o: CFLAGS += -fopenmp
 endif
 
 HAS_GTK3 := $(shell pkg-config --exists gtk+-3.0 && echo 'y' || echo 'n')
 ifeq ($(HAS_GTK3), y)
-	BINARIES += gtk_alpha_window
-	GTK_LDFLAGS := $(shell pkg-config --libs gtk+-3.0)
-	GTK_CFLAGS := $(shell pkg-config --cflags gtk+-3.0)
+	BINARIES += $(GTK_BINARIES)
+$(GTK_BINARIES): LDFLAGS += $(shell pkg-config --libs gtk+-3.0)
+$(GTK_BINARIES).o: CFLAGS += $(shell pkg-config --cflags gtk+-3.0)
 else
 	HAS_GTK2 := $(shell pkg-config --exists gtk+-2.0 && echo 'y' || echo 'n')
 	ifeq ($(HAS_GTK2), y)
-		BINARIES += gtk_alpha_window
-		GTK_LDFLAGS := $(shell pkg-config --libs gtk+-2.0)
-		GTK_CFLAGS := $(shell pkg-config --cflags gtk+-2.0)
+		BINARIES += $(GTK_BINARIES)
+$(GTK_BINARIES): LDFLAGS += $(shell pkg-config --libs gtk+-2.0)
+$(GTK_BINARIES).o: CFLAGS += $(shell pkg-config --cflags gtk+-2.0)
 	endif
 endif
 
-SDL_BINARIES := sdl_v4l_video
 HAS_SDL := $(shell pkg-config --exists sdl && echo 'y' || echo 'n')
 ifeq ($(HAS_SDL), y)
 	BINARIES += $(SDL_BINARIES)
@@ -40,28 +49,14 @@ all: $(BINARIES)
 
 clean:
 	rm -f *.o
-	rm -f $(BINARIES)
+	rm -f $(ALL_BINARIES)
 
 cpuid: cpuid.o
-	$(CC) $(LDFLAGS) -o $@ $^
-
-gtk_alpha_window: LDFLAGS += $(GTK_LDFLAGS)
-gtk_alpha_window.o: CFLAGS += $(GTK_CFLAGS)
 gtk_alpha_window: gtk_alpha_window.o
-	$(CC) $(LDFLAGS) -o $@ $^
-
 openmp_matrix: openmp_matrix.o
-	$(CC) $(LDFLAGS) -fopenmp -o $@ $^
-
-openmp_matrix.o: CFLAGS += -fopenmp
-
 sdl_v4l_video: sdl_v4l_video.o
-	$(CC) $(LDFLAGS) -o $@ $^
-
 view_sizes: view_sizes.o
 	$(CC) $(LDFLAGS) -o $@ $^
-
-view_sizes.o: CFLAGS += -Wno-long-long
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
