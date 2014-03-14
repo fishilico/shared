@@ -28,6 +28,14 @@ else
 	endif
 endif
 
+SDL_BINARIES := sdl_v4l_video
+HAS_SDL := $(shell pkg-config --exists sdl && echo 'y' || echo 'n')
+ifeq ($(HAS_SDL), y)
+	BINARIES += $(SDL_BINARIES)
+$(SDL_BINARIES): LDFLAGS += $(shell pkg-config --libs sdl)
+$(SDL_BINARIES).o: CFLAGS += $(shell pkg-config --cflags sdl)
+endif
+
 all: $(BINARIES)
 
 clean:
@@ -46,6 +54,9 @@ openmp_matrix: openmp_matrix.o
 	$(CC) $(LDFLAGS) -fopenmp -o $@ $^
 
 openmp_matrix.o: CFLAGS += -fopenmp
+
+sdl_v4l_video: sdl_v4l_video.o
+	$(CC) $(LDFLAGS) -o $@ $^
 
 view_sizes: view_sizes.o
 	$(CC) $(LDFLAGS) -o $@ $^
