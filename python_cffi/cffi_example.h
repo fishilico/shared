@@ -27,4 +27,10 @@ extern void CFFI_EXAMPLE_API matrix_add_coords(double *matrix, unsigned int line
 
 extern void CFFI_EXAMPLE_API transpose_square_matrix(double *matrix, unsigned int n);
 
+extern void CFFI_EXAMPLE_API scalar_mul_matrix(
+    double *matrix,
+    unsigned long shape0, unsigned long shape1,
+    unsigned long strides0, unsigned long strides1,
+    double scalar);
+
 #endif /* CFFI_EXAMPLE_H */

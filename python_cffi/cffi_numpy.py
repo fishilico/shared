@@ -25,3 +25,10 @@ print("Matrix after add_coords:\n{}".format(matrix))
 
 _cffi_example.transpose_square_matrix(matrix_data, matrix.shape[0])
 print("Transposed matrix:\n{}".format(matrix))
+
+submatrix_c = matrix[2:7, 2:7].ctypes
+_cffi_example.scalar_mul_matrix(
+    ffi.cast("double *", submatrix_c.data),
+    submatrix_c.shape[0], submatrix_c.shape[1],
+    submatrix_c.strides[0], submatrix_c.strides[1], -1)
+print("Matrix after sub-matrix multiplication by -1:\n{}".format(matrix))
