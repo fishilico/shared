@@ -11,11 +11,18 @@ PYTHON ?= python
 PEP8 ?= pep8
 PYLINT ?= pylint
 
+# Ignore line-too-long
+PEP8_PARAMS := '--ignore=E501'
+
 PYLINT_PARAMS := '--msg-template=L{line}: {msg_id}({symbol}) {msg}'
+# Disable too-many-instance-attributes, too-many-arguments
+PYLINT_PARAMS += --disable=R0902,R0913
 # Disable invalid-name, superfluous-parens
 PYLINT_PARAMS += --disable=C0103,C0325
-# Disable no-member
-PYLINT_PARAMS += --disable=E1101
+# Disable no-member, maybe-no-member
+PYLINT_PARAMS += --disable=E1101,E1103
+# Disable import-error
+PYLINT_PARAMS += --disable=F0401
 
 
 all: _cffi_example.so
@@ -25,7 +32,7 @@ clean:
 	rm -rf __pycache__
 
 lint:
-	$(PEP8) *.py
+	$(PEP8) $(PEP8_PARAMS) *.py
 	$(PYLINT) $(PYLINT_PARAMS) *.py
 
 test: _cffi_example.so

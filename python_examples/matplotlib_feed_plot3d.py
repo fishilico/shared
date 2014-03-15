@@ -71,6 +71,10 @@ def log_fps(frames, timediff):
 
 
 class FeedPlot3d(object):
+    """
+    Create a 3D plot which simulate a feed of continuous data with a random
+    walk
+    """
 
     def __init__(self, method, blit=False, draw=None, color=None, marker=None):
         self.method = method
@@ -120,7 +124,7 @@ class FeedPlot3d(object):
                 self.plt = self.ax.scatter(
                     [], [], [],
                     c=self.color, marker=self.marker,
-                   animated=(self.method == METHOD_ANIMATE))
+                    animated=(self.method == METHOD_ANIMATE))
             elif self.draw == DRAW_PLOT:
                 self.plt = self.ax.plot([], [], [], self.color + self.marker)[0]
             else:
@@ -150,6 +154,7 @@ class FeedPlot3d(object):
         return self.plt,
 
     def _computing_thread(self):
+        """Entry point of the thread which draws the plot"""
         # Only redraw background once per second
         background = None
         bkg_tic = None
@@ -170,7 +175,6 @@ class FeedPlot3d(object):
                 self.plt.set_offsets(xyz[:2])
                 self.plt.set_3d_properties(xyz[2], 'z')
             elif self.draw == DRAW_PLOT:
-                x, y, z = xyz
                 self.plt.set_data(xyz[:2])
                 self.plt.set_3d_properties(xyz[2])
 
@@ -199,7 +203,8 @@ class FeedPlot3d(object):
                 self.fig.canvas.blit(self.ax.bbox)
             log_fps(iframe, tic - start_tic)
 
-    def loop(self):
+    @staticmethod
+    def loop():
         """Blocking main loop"""
         pyplot.show(block=True)
 
