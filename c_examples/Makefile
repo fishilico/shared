@@ -24,22 +24,22 @@ $(OPENMP_BINARIES): LDFLAGS += -fopenmp
 $(OPENMP_BINARIES).o: CFLAGS += -fopenmp
 endif
 
-HAS_GTK3 := $(shell pkg-config --exists gtk+-3.0 && echo 'y' || echo 'n')
-ifeq ($(HAS_GTK3), y)
+HAVE_GTK3 := $(shell pkg-config --exists gtk+-3.0 && echo 'y' || echo 'n')
+ifeq ($(HAVE_GTK3), y)
 	BINARIES += $(GTK_BINARIES)
 $(GTK_BINARIES): LDFLAGS += $(shell pkg-config --libs gtk+-3.0)
 $(GTK_BINARIES).o: CFLAGS += $(shell pkg-config --cflags gtk+-3.0)
 else
-	HAS_GTK2 := $(shell pkg-config --exists gtk+-2.0 && echo 'y' || echo 'n')
-	ifeq ($(HAS_GTK2), y)
+	HAVE_GTK2 := $(shell pkg-config --exists gtk+-2.0 && echo 'y' || echo 'n')
+	ifeq ($(HAVE_GTK2), y)
 		BINARIES += $(GTK_BINARIES)
 $(GTK_BINARIES): LDFLAGS += $(shell pkg-config --libs gtk+-2.0)
 $(GTK_BINARIES).o: CFLAGS += $(shell pkg-config --cflags gtk+-2.0)
 	endif
 endif
 
-HAS_SDL := $(shell pkg-config --exists sdl && echo 'y' || echo 'n')
-ifeq ($(HAS_SDL), y)
+HAVE_SDL := $(shell pkg-config --exists sdl && echo 'y' || echo 'n')
+ifeq ($(HAVE_SDL), y)
 	BINARIES += $(SDL_BINARIES)
 $(SDL_BINARIES): LDFLAGS += $(shell pkg-config --libs sdl)
 $(SDL_BINARIES).o: CFLAGS += $(shell pkg-config --cflags sdl)
