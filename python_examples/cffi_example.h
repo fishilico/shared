@@ -30,7 +30,6 @@ extern void CFFI_EXAMPLE_API transpose_square_matrix(double *matrix, unsigned in
 extern void CFFI_EXAMPLE_API scalar_mul_matrix(
     double *matrix,
     unsigned long shape0, unsigned long shape1,
-    unsigned long strides0, unsigned long strides1,
-    double scalar);
+    unsigned long stride, double scalar);
 
 #endif /* CFFI_EXAMPLE_H */

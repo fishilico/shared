@@ -33,16 +33,9 @@ void CFFI_EXAMPLE_API transpose_square_matrix(double *matrix, unsigned int n)
 void CFFI_EXAMPLE_API scalar_mul_matrix(
     double *matrix,
     unsigned long shape0, unsigned long shape1,
-    unsigned long strides0, unsigned long strides1,
-    double scalar)
+    unsigned long stride, double scalar)
 {
     unsigned long i, j;
-    const unsigned long stride = strides0 / sizeof(double);
-
-    assert(strides1 == sizeof(double));
-    assert(strides0 >= shape1 * strides1);
-    assert(strides0 % sizeof(double) == 0);
-
     for (i = 0; i < shape0; i++) {
         for (j = 0; j < shape1; j++) {
             matrix[i * stride + j] = scalar * matrix[i * stride + j];
