@@ -15,7 +15,7 @@ void _start(void)
         write_cstring(2, "Error: unable to open /proc/self/maps\n");
         exit(1);
     }
-    while ((rdlen = read(fd, buffer, sizeof(buffer))) > 0) {
+    while ((rdlen = read_buffer(fd, buffer, sizeof(buffer))) > 0) {
         if (!write_all(1, buffer, rdlen)) {
             write_cstring(2, "Error: failed writing to the standard output\n");
             close(fd);
@@ -25,6 +25,7 @@ void _start(void)
     close(fd);
     if (rdlen < 0) {
         write_cstring(2, "Error: failed reading /proc/self/maps\n");
+        exit(1);
     }
     exit(0);
 }

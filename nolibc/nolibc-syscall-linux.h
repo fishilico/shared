@@ -108,6 +108,18 @@ static void __attribute__((noreturn)) exit(int status)
 }
 
 /**
+ * Read a file in a buffer, looping if the call is interrupted
+ */
+static ssize_t read_buffer(int fd, const void *buf, size_t count)
+{
+    ssize_t ret;
+    do {
+        ret = read(fd, buf, count);
+    } while (ret == -EINTR);
+    return ret;
+}
+
+/**
  * Write all count bytes from buf to file descriptor fd
  * Return value: 0 if an error occured, 1 if successful
  */
