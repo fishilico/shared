@@ -12,29 +12,47 @@ LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
 # Files
 SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
+OBJECTS :=
 
-OBJECTS32 := $(SOURCES:%.c=%.32.o)
-OBJECTS64 := $(SOURCES:%.c=%.64.o)
-OBJECTS := $(OBJECTS32) $(OBJECTS64)
-BINARIES32 := $(SOURCES:%.c=%.32)
-BINARIES64 := $(SOURCES:%.c=%.64)
-BINARIES := $(BINARIES32) $(BINARIES64)
+# Compile 32-bits versions and 64-bits versions, if available
+HAVE_M32_M64 ?= y
+ifeq ($(shell $(CC) -m32 -E -v - < /dev/null > /dev/null 2>&1 && echo y),y)
+OBJECTS += $(SOURCES:%.c=%.32.o)
+else
+HAVE_M32_M64 := n
+endif
+ifeq ($(shell $(CC) -m64 -E -v - < /dev/null > /dev/null 2>&1 && echo y),y)
+OBJECTS += $(SOURCES:%.c=%.64.o)
+else
+HAVE_M32_M64 := n
+endif
+ifneq ($(HAVE_M32_M64),y)
+OBJECTS := $(SOURCES:%.c=%.out.o)
+endif
+
+BINARIES := $(OBJECTS:%.o=%)
 
 all: $(BINARIES)
 
-all32: $(BINARIES32)
+all32: $(SOURCES:%.c=%.32)
 
-all64: $(BINARIES64)
+all64: $(SOURCES:%.c=%.64)
 
 clean:
-	rm -f $(OBJECTS)
-	rm -f $(BINARIES)
+	rm -f *.o
+	rm -f *.out *.32 *.64
+
+%.out: %.out.o
+	$(CC) $(LDFLAGS) -nostdlib -o $@ $^
 
 %.32: %.32.o
 	$(CC) $(LDFLAGS) -m32 -nostdlib -o $@ $^
 
 %.64: %.64.o
 	$(CC) $(LDFLAGS) -m64 -nostdlib -o $@ $^
+
+%.out.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 %.32.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -m32 -c -o $@ $<
