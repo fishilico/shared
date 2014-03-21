@@ -10,7 +10,7 @@ LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined
 
 # Compile a shared object because there is no need of ld.so
 CFLAGS += -fPIC
-LDFLAGS += -fPIC -shared -nostdlib
+LDFLAGS += -fPIC -shared -nostdlib -e _start
 
 # Files
 SOURCES := $(wildcard *.c)

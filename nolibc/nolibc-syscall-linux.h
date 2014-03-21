@@ -7,7 +7,7 @@
 
 /* Import the lists of error numbers and system calls */
 #include <errno.h>
-#include <sys/syscall.h>
+#include <asm/unistd.h>
 #include <sys/types.h>
 
 /**
