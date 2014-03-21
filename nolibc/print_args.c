@@ -29,6 +29,7 @@ static void _c_start(const void *stack)
 /**
  * Call _c_start(stack_pointer) with a NULL return address
  */
+#if defined __x86_64__ || defined __i386__
 __asm__ (
 "    .text\n"
 "    .globl _start\n"
@@ -41,9 +42,21 @@ __asm__ (
 #elif defined __i386__
 "    pushl %esp\n"
 "    pushl $0\n"
-#else
-#error Unsupported architecture
 #endif
 "    jmp _c_start\n"
 "    .cfi_endproc\n"
 );
+#elif defined __arm__
+__asm__ (
+"    .text\n"
+"    .global _start\n"
+"    .type _start, %function\n"
+"_start:\n"
+"    mov r0, sp\n"
+"    mov fp, #0\n"
+"    mov lr, #0\n"
+"    b _c_start\n"
+);
+#else
+#error Unsupported architecture
+#endif

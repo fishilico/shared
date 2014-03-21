@@ -59,6 +59,24 @@ static long _syscall3(
         : "0" (number), "b" (arg1), "c" (arg2), "d" (arg3)
         : "memory", "cc");
 #endif
+#elif defined __arm__
+    /* r7 = syscall number
+     * r0 = arg1 and result
+     * r1 = arg2
+     * r2 = arg3
+     * r3 = arg4
+     * r4 = arg5
+     * r5 = arg6
+     */
+    register long r7 __asm__ ("r7") = number;
+    register long r0 __asm__ ("r0") = arg1;
+    register long r1 __asm__ ("r1") = arg2;
+    register long r2 __asm__ ("r2") = arg3;
+    __asm__ volatile ("swi $0"
+        : "=r" (r0)
+        : "0" (r0), "r" (r1), "r" (r2), "r" (r7)
+        : "memory", "cc", "r4", "r5", "r6");
+    result = r0;
 #else
 #error Unsupported architecture
 #endif
