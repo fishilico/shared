@@ -1,0 +1,7 @@
+This directory has been extracted from the Syslinux project, which is licensed
+under GPLv2.
+
+The Makefile has been modified so that it no longer includes .mk files.
+
+The original files from Syslinux can be found at:
+http://git.kernel.org/cgit/boot/syslinux/syslinux.git/tree/mbr
