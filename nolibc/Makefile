@@ -4,10 +4,13 @@ CPPFLAGS ?= -D_FORTIFY_SOURCE=2
 # C compiler flags
 CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic -pipe \
 	-Wmissing-prototypes -Wno-unused-function -Wformat=2 -Wpointer-arith \
-	-Winit-self -Wwrite-strings -Wno-shadow \
-	-fPIE -fno-exceptions
+	-Winit-self -Wwrite-strings -Wno-shadow -fno-exceptions
 # Linker flags
-LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
+LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined
+
+# Compile a shared object because there is no need of ld.so
+CFLAGS += -fPIC
+LDFLAGS += -fPIC -shared -nostdlib
 
 # Files
 SOURCES := $(wildcard *.c)
@@ -43,13 +46,13 @@ clean:
 	rm -f *.out *.32 *.64
 
 %.out: %.out.o
-	$(CC) $(LDFLAGS) -nostdlib -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^
 
 %.32: %.32.o
-	$(CC) $(LDFLAGS) -m32 -nostdlib -o $@ $^
+	$(CC) $(LDFLAGS) -m32 -o $@ $^
 
 %.64: %.64.o
-	$(CC) $(LDFLAGS) -m64 -nostdlib -o $@ $^
+	$(CC) $(LDFLAGS) -m64 -o $@ $^
 
 %.out.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<

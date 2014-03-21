@@ -3,9 +3,9 @@
  */
 #include "nolibc-syscall-linux.h"
 
-void _c_start(const void *stack)  __attribute__((noreturn));
+static void _c_start(const void *stack)  __attribute__((used, noreturn));
 
-void _c_start(const void *stack)
+static void _c_start(const void *stack)
 {
     const unsigned long argc = *(const unsigned long *) stack;
     const char *const *argv = ((const char *const *) stack) + 1;
