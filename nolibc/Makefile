@@ -18,9 +18,9 @@ CFLAGS += $(shell [ -d include ] && echo '-I./include')
 LDFLAGS += -nostdlib -e _start
 
 # Compile a shared object because there is no need of ld.so on Intel architecture.
-# However, on ARM, all constant strings are in the GOT and ld.so fixes the
-# offsets at startup when using ASLR.
-ifeq ($(shell $(CC) -E -v - < /dev/null 2>&1 > /dev/null | $(GREP) -qi "^Target.\s*x86" && echo y),y)
+# However, some ARM compilers rely on ld.so to remap offsets when doing ASLR, so
+# whitelist some known-to-work compilers, such as arm-none-eabi-gcc (bare metal).
+ifeq ($(shell $(CC) -E -v - < /dev/null 2>&1 > /dev/null | $(GREP) -qi "^Target.\s*\(x86\|arm-none-\)" && echo y),y)
 CFLAGS += -fPIC
 LDFLAGS += -fPIC -shared
 else
