@@ -8,9 +8,19 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic -pipe \
 # Linker flags
 LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined
 
-# Compile a shared object because there is no need of ld.so
+LDFLAGS += -nostdlib -e _start
+
+# Compile a shared object because there is no need of ld.so on Intel architecture.
+# However, on ARM, all constant strings are in the GOT and ld.so fixes the
+# offsets at startup when using ASLR.
+GREP := grep
+ifeq ($(shell $(CC) -E -v - < /dev/null 2>&1 > /dev/null | $(GREP) -qi "^Target.\s*x86" && echo y),y)
 CFLAGS += -fPIC
-LDFLAGS += -fPIC -shared -nostdlib -e _start
+LDFLAGS += -fPIC -shared
+else
+CFLAGS += -fPIE
+LDFLAGS += -fPIE -pie
+endif
 
 # Files
 SOURCES := $(wildcard *.c)
