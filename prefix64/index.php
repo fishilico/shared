@@ -23,7 +23,7 @@
 <body>
     <h1>IPv6 /64 prefix experiment</h1>
     <p>
-    This page is a proof of concept that one server can listen to 2^64 IPv6 addresses!
+    This page is a proof of concept that one server can listen to 2<sup>64</sup> IPv6 addresses!
     </p>
     <p>
     This server is configured to listen on <code><?php echo $network; ?></code>.
