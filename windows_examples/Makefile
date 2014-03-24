@@ -26,7 +26,13 @@ SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
 BINARIES := $(SOURCES:%.c=%.exe)
 
+# Compile things only if windows.h can be included
+ifeq ($(shell $(GCC) -E helloworld.c > /dev/null 2>&1 && echo y),y)
 all: $(BINARIES)
+else
+all:
+	@echo "Skip compilation as $(GCC) can't compile helloworld.c."
+endif
 
 clean:
 	rm -f *.exe *.o
