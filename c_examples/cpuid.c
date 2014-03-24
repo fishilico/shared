@@ -29,6 +29,23 @@ static void print_escaped_ascii(const char *prefix, const char *text)
     printf("%s\n", text);
 }
 
+static void asm_cpuid(uint32_t code, uint32_t *peax, uint32_t *pebx, uint32_t *pecx, uint32_t *pedx)
+{
+#if defined __i386__ && defined __GNUC__ && defined __PIC__
+    /* x86 GCC with PIC flag (Program Independent Code) complains with
+     * "error: inconsistent operand constraints in an 'asm'"
+     * because ebx has a special meaning in PIC
+     */
+    __asm__ volatile ("xchgl %%ebx, %1 ; cpuid ; xchgl %%ebx, %1"
+        : "=a"(*peax), "=r"(*pebx), "=c"(*pecx), "=d"(*pedx)
+        :"0"(code));
+#else
+    __asm__ volatile ("cpuid"
+        :"=a"(*peax), "=b"(*pebx), "=c"(*pecx), "=d"(*pedx)
+        :"0"(code));
+#endif
+}
+
 int main()
 {
     char vendor_str[13];
@@ -40,17 +57,13 @@ int main()
     uint32_t eax, ebx, ecx, edx;
 
     /* CPUID 0: get vendor string */
-    __asm__ volatile ("cpuid"
-        :"=a"(max_code), "=b"(data[0]), "=d"(data[1]), "=c"(data[2])
-        :"0"(0));
+    asm_cpuid(0, &max_code, &data[0], &data[2], &data[1]);
     vendor_str[12] = 0;
     print_escaped_ascii("CPUID vendor string", vendor_str);
     printf("Max CPUID code: %u\n", max_code);
 
     /* CPUID 1: get features */
-    __asm__ volatile ("cpuid"
-        :"=a"(eax), "=b"(ebx), "=c"(ecx), "=d"(edx)
-        :"0"(1));
+    asm_cpuid(1, &eax, &ebx, &ecx, &edx);
     printf("Features:");
 #define print_cpufeat(reg, bit, name) \
     printf(" %c" name, e##reg##x & (1 << bit) ? '+' : '-')
@@ -114,18 +127,14 @@ int main()
     printf("\n");
 
     /* CPUID 0x80000000: extended features */
-    __asm__ volatile ("cpuid"
-        :"=a"(eax), "=b"(ebx), "=c"(ecx), "=d"(edx)
-        :"0"(0x80000000));
+    asm_cpuid(0x80000000, &eax, &ebx, &ecx, &edx);
     printf("Maximum extended function: 0x%08x\n", eax);
     if (eax >= 0x80000004) {
         /* Processor Brand String */
         char brand_str[256], *start_brand_str;
         for (i = 0; i < 3; i++) {
             data = (uint32_t*)(brand_str + 16 * i);
-            __asm__ volatile ("cpuid"
-                :"=a"(data[0]), "=b"(data[1]), "=c"(data[2]), "=d"(data[3])
-                :"0"(0x80000002 + i));
+            asm_cpuid(0x80000002 + i, &data[0], &data[1], &data[2], &data[3]);
         }
         brand_str[16*i] = 0;
         start_brand_str = brand_str;
