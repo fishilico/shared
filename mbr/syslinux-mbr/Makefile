@@ -32,13 +32,15 @@ ARCH ?= $(strip $(SUBARCH))
 GCCWARN  = -W -Wall -Wstrict-prototypes
 
 # Common stanza to make gcc generate .*.d dependency files
-MAKEDEPS = -Wp,-MT,$@,-MD,$(dir $@).$(notdir $@).d
+MAKEDEPS = -Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d
 
 # Support IA32 and x86_64 platforms with one build
 # Set up architecture specifics; for cross compilation, set ARCH as apt
 gcc_ok = $(shell tmpf=gcc_ok.$$$$.tmp; \
 		if $(CC) $(GCCOPT) $(1) -c dummy.c -o $$tmpf 2>/dev/null ; \
-		then echo '$(1)'; else echo '$(2)'; fi; \
+		then echo '$(1)'; \
+		elif test -n "$(2)" && $(CC) $(GCCOPT) $(2) -c dummy.c -o $$tmpf 2>/dev/null ; \
+		then echo '$(2)'; fi; \
 		rm -f $$tmpf)
 
 # Initialize GCCOPT to null to begin with. Without this, make generates
