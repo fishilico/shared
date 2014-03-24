@@ -21,6 +21,7 @@ CC = gcc
 CHMOD = chmod
 LD = ld
 OBJCOPY = objcopy
+SHA1SUM = sha1sum
 
 # Architecture definition
 SUBARCH := $(shell uname -m | sed -e s/i.86/i386/) 
@@ -107,5 +108,10 @@ all: $(MBR_SRC:%.S=%.bin) $(MBR_SRC:%.S=%_c.bin) $(MBR_SRC:%.S=%_f.bin)
 clean:
 	rm -f *.o *.elf .*.d
 	rm -f *.bin
+
+check: all
+	$(SHA1SUM) -c sha1sums.txt
+
+.PHONY: all clean check
 
 -include .*.d
