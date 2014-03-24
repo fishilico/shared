@@ -33,6 +33,7 @@ static void _c_start(const void *stack)
 __asm__ (
 "    .text\n"
 "    .globl _start\n"
+"    .hidden _start\n"
 "    .type _start, @function\n"
 "_start:\n"
 "    .cfi_startproc\n"
@@ -50,6 +51,7 @@ __asm__ (
 __asm__ (
 "    .text\n"
 "    .global _start\n"
+"    .hidden _start\n"
 "    .type _start, %function\n"
 "_start:\n"
 "    mov r0, sp\n"

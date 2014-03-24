@@ -4,7 +4,7 @@ CFLAGS ?= -g -pipe -O2 -ansi -pedantic \
 	-Wall -W -Wextra -Wformat=2 -Wpointer-arith -Winit-self \
 	-Wmissing-prototypes -Wmissing-declarations -Wwrite-strings -Wshadow \
 	-fstack-protector --param=ssp-buffer-size=4 \
-	-fno-exceptions -fvisibility=internal
+	-fno-exceptions -fvisibility=hidden
 LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined
 
 PYTHON ?= python

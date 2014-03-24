@@ -9,7 +9,8 @@ CPPFLAGS ?= -D_FORTIFY_SOURCE=2
 # C compiler flags
 CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic -pipe \
 	-Wmissing-prototypes -Wno-unused-function -Wformat=2 -Wpointer-arith \
-	-Winit-self -Wwrite-strings -Wno-shadow -fno-exceptions
+	-Winit-self -Wwrite-strings -Wno-shadow \
+	-fno-exceptions -fvisibility=hidden
 # Linker flags
 LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined
 
