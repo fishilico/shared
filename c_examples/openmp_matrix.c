@@ -34,7 +34,8 @@ static void* malloc_nofail(size_t size)
 {
     void *ptr = malloc(size);
     if (!ptr) {
-        fprintf(stderr, "malloc: failed to allocate %lu bytes", size);
+        fprintf(stderr, "malloc: failed to allocate %lu bytes",
+                (unsigned long)size);
         exit(1);
     }
     return ptr;

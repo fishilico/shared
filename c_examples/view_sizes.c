@@ -51,7 +51,8 @@ static void print_machine(void)
 static void _print_type_size(const char *name, size_t size)
 {
     printf(" * sizeof(%11s) = %2lu %s (%3lu bits)\n",
-        name, size, (size ==1) ? "byte " : "bytes", size * 8);
+        name, (unsigned long) size, (size == 1) ? "byte " : "bytes",
+        (unsigned long) size * 8);
 }
 
 #define print_type_size(type) _print_type_size(#type, sizeof(type))
