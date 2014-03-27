@@ -19,9 +19,12 @@ view_sizes.o: CFLAGS += -Wno-long-long
 
 # clang doesn't support OPENMP yet
 ifneq ($(CC), clang)
+# when gcc is not compiled with pthread, -fopenmp makes the preprocessor fails
+ifeq ($(shell $(CC) -fopenmp -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 BINARIES += $(OPENMP_BINARIES)
 $(OPENMP_BINARIES): LDFLAGS += -fopenmp
 $(OPENMP_BINARIES).o: CFLAGS += -fopenmp
+endif
 endif
 
 HAVE_GTK3 := $(shell pkg-config --exists gtk+-3.0 && echo 'y' || echo 'n')
