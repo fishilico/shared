@@ -12,6 +12,8 @@ static void print_machine(void)
     struct utsname utsname;
     if (uname(&utsname) == 0) {
         printf("Machine: %s\n", utsname.machine);
+    } else {
+        perror("uname");
     }
 }
 #elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
