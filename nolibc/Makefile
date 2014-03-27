@@ -16,7 +16,7 @@ LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined
 
 # Compile without the standard library, and use custom include dir if any
 CFLAGS += $(shell [ -d include ] && echo '-I./include')
-LDFLAGS += -nostdlib -e _start
+override LDFLAGS += -nostdlib -e _start
 
 # Compile a shared object because there is no need of ld.so on Intel architecture.
 # However, some ARM compilers rely on ld.so to remap offsets when doing ASLR, so
