@@ -25,8 +25,9 @@
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <stdlib.h>
+#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
@@ -38,12 +39,24 @@
  */
 /*#define MMAP_WX_DUMP_MMAPS 1*/
 
+#if defined __i386__ || defined __x86_64__
 /**
- * Binary representation of "return 0;" in x86 assembly language:
+ * Binary representation of "return 0;" in x86 instruction set:
  *     31 c0      xor    %eax,%eax
  *     c3         ret
  */
-static const unsigned char CODE[] = "\x31\xc0\xc3";
+static const uint8_t CODE[] = {0x31, 0xc0, 0xc3};
+#elif defined __arm__
+/**
+ * Binary representation of "return 0;" in ARM instruction set, using the
+ * endianness of the compiler:
+ *     e3a00000     mov r0, #0
+ *     e12fff1e     bx  lr
+ */
+static const uint32_t CODE[] = {0xe3a00000, 0xe12fff1e};
+#else
+#error Unsupported architecture
+#endif
 
 
 /**
@@ -204,7 +217,7 @@ static void test_mmap_rw_rx_fd(int fd)
         fprintf(stderr, "[!] RW and RX mmaps are different:\n");
         for (i = 0; i < sizeof(CODE); i++) {
             fprintf(stderr, "... %02x %02x\n",
-                    CODE[i], ((unsigned char*)xptr)[i]);
+                    ((uint8_t*)CODE)[i], ((uint8_t*)xptr)[i]);
         }
         munmap(xptr, sizeof(CODE));
         munmap(wptr, sizeof(CODE));

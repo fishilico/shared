@@ -4,8 +4,9 @@
  * Simpler version of mmap-wx.c
  */
 
-#include <stdlib.h>
+#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/mman.h>
 #include <unistd.h>
@@ -20,7 +21,13 @@ int main()
 {
     const char template[] = "./mmap-wx-XXXXXX";
     /* "xor %eax,%eax ; ret" in x86  */
-    const unsigned char code[] = "\x31\xc0\xc3";
+#if defined __i386__ || defined __x86_64__
+    const uint8_t code[] = {0x31, 0xc0, 0xc3};
+#elif defined __arm__
+    const uint32_t code[] = {0xe3a00000, 0xe12fff1e};
+#else
+#error Unsupported architecture
+#endif
     char filename[4096];
     int fd, result;
     void *wptr, *xptr;
