@@ -256,7 +256,10 @@ static void test_mmap_wx_dir(const char *dirname)
             filename[numbytes] = 0;
         }
     } else {
-        perror("[!] open");
+        /* EISDIR means kernel doesn't support yet O_TMPFILE */
+        if (errno != EISDIR) {
+            perror("[!] open");
+        }
 #endif
         memcpy(filename, dirname, dirlen);
         memcpy(filename + dirlen, TEMPFILE_SUFFIX, sizeof(TEMPFILE_SUFFIX));
