@@ -86,7 +86,13 @@ endif
 MBR_SRC := $(wildcard *.S)
 
 
+# Skip compilation if compiler don't support 32-bits x86
+ifeq ($(shell $(CC) -E -m32 -march=i386 - < /dev/null > /dev/null 2>&1 && echo y),y)
 all: $(MBR_SRC:%.S=%.bin) $(MBR_SRC:%.S=%_c.bin) $(MBR_SRC:%.S=%_f.bin)
+else
+all:
+	@echo "Skip compilation as $(CC) can't compile to x86 architecture."
+endif
 
 %.o: %.S
 	$(CC) $(MAKEDEPS) $(SFLAGS) -c -o $@ $<
