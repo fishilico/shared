@@ -39,6 +39,12 @@ def decode_chs(chsdata):
 def print_partition(partdata, partnum):
     """Describe the 16 bytes of partdata into a printed message"""
     assert len(partdata) == 16
+
+    # Detect empty partitions
+    if not any(b for b in partdata):
+        print("Partition {}: empty".format(partnum))
+        return True
+
     flags = int(partdata[0])
     chs_first = decode_chs(partdata[1:4])
     parttype = int(partdata[4])
@@ -47,8 +53,9 @@ def print_partition(partdata, partnum):
     numsectors = struct.unpack('<I', partdata[12:16])[0]
 
     print("Partition {}:".format(partnum))
-    print("    flags {:02x}h{} type {:02x}h".format(
-        flags, " (active)" if flags & 0x80 else "", parttype))
+    print("    flags {:02x}h{} type {:02x}h{}".format(
+        flags, " (active)" if flags & 0x80 else "",
+        parttype, " (extended)" if parttype == 5 else ""))
     print("    {} sectors from LBA {}".format(numsectors, lba))
 
     if chs_first == (1023, 254, 63):
