@@ -57,8 +57,33 @@ def print_partition(partdata, partnum):
                 chs_first, chs_last))
     elif chs_last == (1023, 254, 63):
         print("    CHS first {}, last too big".format(chs_first))
+        # Check if geometry is (63 SPT, 255 HPC)
+        c1, h1, s1 = chs_first
+        lba_from_chs = ((c1 * 255) + h1) * 63 + (s1 - 1)
+        if lba_from_chs == lba:
+            print("    Geometry: 63 sectors/track, 255 heads/cylinder")
+        else:
+            print("    Unknown disk geometry")
     else:
-        print("    CHS first {} .. last {}".format(chs_first, chs_last))
+        print("    CHS first {}, last {}".format(chs_first, chs_last))
+
+        # Find geometry using this formula:
+        # LBA = ((C * HPC) + H) * SPT + (S - 1)
+        c1, h1, s1 = chs_first
+        c2, h2, s2 = chs_last
+        const1 = lba - s1 + 1
+        const2 = lba + numsectors - s2
+        denom = c1 * h2 - c2 * h1
+        if denom == 0:
+            print("    Unable to guess geometry (singular equations)")
+        else:
+            spt = (c1 * const2 - c2 * const1) // denom
+            hpc_spt = (const1 * h2 - const2 * h1) // denom
+            if spt < 0 or hpc_spt < 0 or hpc_spt % spt != 0:
+                print("    Unable to guess geometry (unrealistic constants)")
+            else:
+                print("    Geometry: {} sectors/track, {} heads/cylinder"
+                      .format(spt, hpc_spt // spt))
 
 
 def print_parttable(sector, filename=None):
