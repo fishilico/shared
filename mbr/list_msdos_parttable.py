@@ -36,6 +36,19 @@ def decode_chs(chsdata):
     return ((b2 & 0xc0) << 2) | b3, b1, b2 & 0x3f
 
 
+def get_human_size(size):
+    """Return a string describing the size in bytes"""
+    if size < 1024:
+        return '{} B'.format(size)
+    if size < 1024 * 1024:
+        return '{:.2f} KB'.format(float(size) / 1024)
+    if size < 1024 * 1024 * 1024:
+        return '{:.2f} MB'.format(float(size) / (1024 * 1024))
+    if size < 1024 * 1024 * 1024 * 1024:
+        return '{:.2f} GB'.format(float(size) / (1024 * 1024 * 1024))
+    return '{:.2f} TB'.format(float(size) / (1024 * 1024 * 1024 * 1024))
+
+
 def print_partition(partdata, partnum):
     """Describe the 16 bytes of partdata into a printed message"""
     assert len(partdata) == 16
@@ -56,7 +69,8 @@ def print_partition(partdata, partnum):
     print("    flags {:02x}h{} type {:02x}h{}".format(
         flags, " (active)" if flags & 0x80 else "",
         parttype, " (extended)" if parttype == 5 else ""))
-    print("    {} sectors from LBA {}".format(numsectors, lba))
+    print("    {} sectors from LBA {} ({})".format(
+        numsectors, lba, get_human_size(numsectors * 512)))
 
     if chs_first == (1023, 254, 63):
         if chs_last != (1023, 254, 63):
