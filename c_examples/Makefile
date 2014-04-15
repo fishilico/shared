@@ -1,4 +1,7 @@
 CC ?= cc
+SH ?= sh
+WGET ?= wget
+
 # C preprocessor flags
 CPPFLAGS ?= -D_GNU_SOURCE -D_FORTIFY_SOURCE=2
 # C compiler flags
@@ -61,7 +64,15 @@ sdl_v4l_video: sdl_v4l_video.o
 view_sizes: view_sizes.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
+cpuid.o: cpuid_enum.h
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-.PHONY: all clean
+update_cpuid: kernel-x86-cpufeature.h create_cpuid_enum_h.sh
+	$(SH) ./create_cpuid_enum_h.sh $< > cpuid_enum.h
+
+LINUX_URL := https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain
+kernel-x86-cpufeature.h:
+	$(WGET) -q -O $@ "$(LINUX_URL)/arch/x86/include/asm/cpufeature.h" || (rm $@ ; false)
+
+.PHONY: all clean update_cpuid

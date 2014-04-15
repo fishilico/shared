@@ -3,6 +3,7 @@
  */
 #include <stdint.h>
 #include <stdio.h>
+#include "cpuid_enum.h"
 
 #if defined __i386__ || defined __x86_64__
 
@@ -40,23 +41,35 @@ static void asm_cpuid(uint32_t code, uint32_t *peax, uint32_t *pebx, uint32_t *p
      */
     __asm__ volatile ("xchgl %%ebx, %1 ; cpuid ; xchgl %%ebx, %1"
         : "=a"(*peax), "=r"(*pebx), "=c"(*pecx), "=d"(*pedx)
-        :"0"(code));
+        :"0"(code), "1"(*pebx), "2"(*pecx), "3"(*pedx));
 #else
     __asm__ volatile ("cpuid"
         :"=a"(*peax), "=b"(*pebx), "=c"(*pecx), "=d"(*pedx)
-        :"0"(code));
+        :"0"(code), "1"(*pebx), "2"(*pecx), "3"(*pedx));
 #endif
+}
+
+static void print_features(const char *name, uint32_t bits, const char* const cpuidstr[32])
+{
+    int i;
+    printf("%s:", name);
+    for (i = 0; i < 32; i++) {
+        if (cpuidstr[i]) {
+            printf(" %c%s", bits & (1 << i) ? '+' : '-', cpuidstr[i]);
+        }
+    }
+    printf("\n");
 }
 
 int main()
 {
-    char vendor_str[13];
-    unsigned int max_code;
+    char vendor_str[13] = {0};
+    uint32_t max_code, max_extcode;
     int i;
 
     /* Convert str to an array of 32-bits values */
     uint32_t *data = (uint32_t*)vendor_str;
-    uint32_t eax, ebx, ecx, edx;
+    uint32_t eax = 0, ebx = 0, ecx = 0, edx = 0;
 
     /* CPUID 0: get vendor string */
     asm_cpuid(0, &max_code, &data[0], &data[2], &data[1]);
@@ -66,72 +79,25 @@ int main()
 
     /* CPUID 1: get features */
     asm_cpuid(1, &eax, &ebx, &ecx, &edx);
-    printf("Features:");
-#define print_cpufeat(reg, bit, name) \
-    printf(" %c" name, e##reg##x & (1 << bit) ? '+' : '-')
-    /* List of features: http://wiki.osdev.org/CPUID */
-    print_cpufeat(d, 0, "fpu");
-    print_cpufeat(d, 1, "vme");
-    print_cpufeat(d, 2, "de");
-    print_cpufeat(d, 3, "pse");
-    print_cpufeat(d, 4, "tsc");
-    print_cpufeat(d, 5, "msr");
-    print_cpufeat(d, 6, "pae");
-    print_cpufeat(d, 7, "mce");
-    print_cpufeat(d, 8, "cx8");
-    print_cpufeat(d, 9, "apic");
-    print_cpufeat(d, 11, "sep");
-    print_cpufeat(d, 12, "mtrr");
-    print_cpufeat(d, 13, "pge");
-    print_cpufeat(d, 14, "mca");
-    print_cpufeat(d, 15, "cmov");
-    print_cpufeat(d, 16, "pat");
-    print_cpufeat(d, 17, "pse36");
-    print_cpufeat(d, 18, "psn");
-    print_cpufeat(d, 19, "clflush");
-    print_cpufeat(d, 21, "dtes");
-    print_cpufeat(d, 22, "acpi");
-    print_cpufeat(d, 23, "mmx");
-    print_cpufeat(d, 24, "fxsr");
-    print_cpufeat(d, 25, "sse");
-    print_cpufeat(d, 26, "sse2");
-    print_cpufeat(d, 27, "ss");
-    print_cpufeat(d, 28, "htt");
-    print_cpufeat(d, 29, "tm1");
-    print_cpufeat(d, 30, "ia64");
-    print_cpufeat(d, 31, "pbe");
-
-    print_cpufeat(c, 0, "sse3");
-    print_cpufeat(c, 1, "pclmulqdq");
-    print_cpufeat(c, 2, "dtes64");
-    print_cpufeat(c, 3, "monitor");
-    print_cpufeat(c, 4, "ds_cpl");
-    print_cpufeat(c, 5, "vmx");
-    print_cpufeat(c, 6, "smx");
-    print_cpufeat(c, 7, "est");
-    print_cpufeat(c, 8, "tm2");
-    print_cpufeat(c, 9, "ssse3");
-    print_cpufeat(c, 10, "cid");
-    print_cpufeat(c, 12, "fma");
-    print_cpufeat(c, 13, "cx16");
-    print_cpufeat(c, 14, "etprd");
-    print_cpufeat(c, 15, "pdcm");
-    print_cpufeat(c, 18, "dca");
-    print_cpufeat(c, 19, "sse4_1");
-    print_cpufeat(c, 20, "sse4_2");
-    print_cpufeat(c, 21, "x2apic");
-    print_cpufeat(c, 22, "movbe");
-    print_cpufeat(c, 23, "popcnt");
-    print_cpufeat(c, 25, "aes");
-    print_cpufeat(c, 26, "xsave");
-    print_cpufeat(c, 27, "osxsave");
-    print_cpufeat(c, 28, "avx");
-    printf("\n");
+    print_features("Features 1.edx", edx, cpuidstr_1_edx);
+    print_features("Features 1.ecx", ecx, cpuidstr_1_ecx);
+    if (max_code >= 7) {
+        ecx = 0;
+        asm_cpuid(7, &eax, &ebx, &ecx, &edx);
+        if (ebx) {
+            print_features("Features 7:0.ebx", ebx, cpuidstr_7_ebx);
+        }
+    }
 
     /* CPUID 0x80000000: extended features */
-    asm_cpuid(0x80000000, &eax, &ebx, &ecx, &edx);
-    printf("Maximum extended function: 0x%08x\n", eax);
-    if (eax >= 0x80000004) {
+    asm_cpuid(0x80000000, &max_extcode, &ebx, &ecx, &edx);
+    printf("Maximum extended function: 0x%08x\n", max_extcode);
+    if (max_extcode >= 0x80000001) {
+        asm_cpuid(0x80000001, &eax, &ebx, &ecx, &edx);
+        print_features("Features ext1.edx", edx, cpuidstr_ext1_edx);
+        print_features("Features ext1.ecx", ecx, cpuidstr_ext1_ecx);
+    }
+    if (max_extcode >= 0x80000004) {
         /* Processor Brand String */
         char brand_str[256], *start_brand_str;
         for (i = 0; i < 3; i++) {
