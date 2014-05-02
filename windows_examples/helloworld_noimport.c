@@ -12,12 +12,15 @@
  */
 void __cdecl WinMainCRTStartup(void) __attribute__ ((alias("_start")));
 void __cdecl mainCRTStartup(void) __attribute__ ((alias("_start")));
-void __cdecl _start(void);
+void __cdecl _start(void) __attribute__((noreturn));
 static int _main(void);
 
 void __cdecl _start(void)
 {
-    _ExitProcess(_main());
+    int status = _main();
+    while (TRUE) {
+        _ExitProcess(status);
+    }
 }
 
 /**

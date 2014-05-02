@@ -118,6 +118,12 @@ int main()
         return 1;
     }
     printf("MessageBoxA is at %p\n", pProcAddress);
+    pProcAddress = _GetProcAddress(hModule, "MessageBoxW");
+    if (!pProcAddress) {
+        printf("Unable to find MessageBoxW in user32.dll\n");
+        return 1;
+    }
+    printf("MessageBoxW is at %p\n", pProcAddress);
     bRet = _FreeLibrary(hModule);
     assert(bRet);
 
