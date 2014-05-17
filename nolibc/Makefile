@@ -14,20 +14,22 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic -pipe \
 # Linker flags
 LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined
 
-# Compile without the standard library, and use custom include dir if any
+# Use custom include dir if it exists
 CFLAGS += $(shell [ -d include ] && echo '-I./include')
-override LDFLAGS += -nostdlib -e _start
 
 # Compile a shared object because there is no need of ld.so on Intel architecture.
 # However, some ARM compilers rely on ld.so to remap offsets when doing ASLR, so
 # whitelist some known-to-work compilers, such as arm-none-eabi-gcc (bare metal).
-ifeq ($(shell $(CC) -E -v - < /dev/null 2>&1 > /dev/null | $(GREP) -qi "^Target.\s*\(x86\|arm-none-\)" && echo y),y)
+ifeq ($(shell $(CC) -E -v - < /dev/null 2>&1 > /dev/null | $(GREP) -qi "^Target:\s*\(i.86\|x86\|arm-none-\)" && echo y),y)
 CFLAGS += -fPIC
 LDFLAGS += -fPIC -shared
 else
 CFLAGS += -fPIE
 LDFLAGS += -fPIE -pie
 endif
+
+# Force linking without the standard library
+override LDFLAGS += -nostdlib -e _start
 
 # Files
 SOURCES := $(wildcard *.c)
