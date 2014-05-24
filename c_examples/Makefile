@@ -11,7 +11,7 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic \
 # Linker flags
 LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie
 
-BINARIES := cpuid view_sizes
+BINARIES := cpuid view_sizes seccomp
 OPENMP_BINARIES := openmp_matrix
 GTK_BINARIES := gtk_alpha_window
 SDL_BINARIES := sdl_v4l_video
