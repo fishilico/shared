@@ -26,16 +26,27 @@ SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
 BINARIES := $(SOURCES:%.c=%.exe)
 
+SUBMAKEFILES := $(wildcard */Makefile)
+SUBDIRS := $(SUBMAKEFILES:%/Makefile=%)
+ALL_TARGETS := $(addprefix all.., $(SUBDIRS))
+CLEAN_TARGETS := $(addprefix clean.., $(SUBDIRS))
+
 # Compile things only if windows.h can be included
 ifeq ($(shell $(GCC) -E helloworld.c > /dev/null 2>&1 && echo y),y)
-all: $(BINARIES)
+all: $(BINARIES) $(ALL_TARGETS)
 else
 all:
 	@echo "Skip compilation as $(GCC) can't compile helloworld.c."
 endif
 
-clean:
+all..%:
+	$(MAKE) -C $* all
+
+clean: $(CLEAN_TARGETS)
 	rm -f *.exe *.o
+
+clean..%:
+	$(MAKE) -C $* clean
 
 helloworld_noimport.exe: LDFLAGS += -nostdlib -Wl,-nostdlib
 helloworld_noimport.o: CFLAGS += -nostdlib -fno-stack-protector
@@ -47,4 +58,4 @@ check_internals.exe: LDFLAGS += -Wl,-subsystem=console
 %.o: %.c $(HEADERS)
 	$(GCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-.PHONY: all clean
+.PHONY: all all..% clean clean..%
