@@ -61,7 +61,7 @@ int main()
         return 1;
     }
     printf("Process Environment block is at %p\n", pPeb);
-    printf("PEB Ldr is at at %p\n", pPeb->Ldr);
+    printf("PEB Ldr is at %p\n", pPeb->Ldr);
 
     /* Enumerate modules */
     ListHead = &pPeb->Ldr->InMemoryOrderModuleList;
