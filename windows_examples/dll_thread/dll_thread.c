@@ -78,7 +78,9 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, __UNUSED_PARAM(LPVOID lp
 {
     switch (dwReason) {
         case DLL_PROCESS_ATTACH:
-            mainlog("Process Attach from module @%lx", (ULONG)GetModuleHandle(NULL));
+            mainlog("Process Attach from module @%lx (%s)",
+                (ULONG)GetModuleHandle(NULL),
+                (lpvReserved != NULL) ? "static load" : "LoadLibrary call");
             g_dwTlsIndex = TlsAlloc();
             if (g_dwTlsIndex == TLS_OUT_OF_INDEXES) {
                 printerr("TlsAlloc failed: no more TLS Indexes");
@@ -102,7 +104,8 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, __UNUSED_PARAM(LPVOID lp
             dlltls_free_data();
             break;
         case DLL_PROCESS_DETACH:
-            mainlog("Process Detach");
+            mainlog("Process Detach (%s)",
+                (lpvReserved != NULL) ? "dying process" : "FreeLibrary call");
             dlltls_free_data();
             TlsFree(g_dwTlsIndex);
             break;
