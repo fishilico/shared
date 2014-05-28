@@ -46,8 +46,16 @@ static bool install_syscall_filter(void)
         BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
         BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_fstat, 0, 1),
         BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
+#ifdef __NR_fstat64
+        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_fstat64, 0, 1),
+        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
+#endif
         BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_mmap, 0, 1),
         BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
+#ifdef __NR_mmap2
+        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_mmap2, 0, 1),
+        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
+#endif
         /* Deny some other syscalls */
         BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_getcwd, 0, 1), \
         BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ERRNO|EPERM),
