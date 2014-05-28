@@ -19,7 +19,7 @@ else
 endif
 CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 \
 	-Wmissing-prototypes -Wno-unused-parameter -Wno-unused-function \
-	-fstack-protector --param=ssp-buffer-size=4
+	-fno-stack-protector --param=ssp-buffer-size=4
 LDFLAGS ?= -Wl,-subsystem=windows
 
 SOURCES := $(wildcard *.c)
