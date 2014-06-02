@@ -21,7 +21,7 @@ endif
 CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 \
 	-Wmissing-prototypes -Wno-unused-parameter -Wno-unused-function \
 	-fno-stack-protector
-LDFLAGS ?= -Wl,-subsystem=windows,--dynamicbase,--nxcompat
+LDFLAGS ?= -Wl,--subsystem=windows,--dynamicbase,--nxcompat
 
 SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
@@ -49,9 +49,9 @@ clean: $(CLEAN_TARGETS)
 clean..%:
 	$(MAKE) -C $* clean
 
-helloworld_noimport.exe: LDFLAGS += -nostdlib -Wl,-nostdlib
+helloworld_noimport.exe: LDFLAGS += -nostdlib -Wl,--nostdlib
 helloworld_noimport.o: CFLAGS += -nostdlib -fno-stack-protector
-check_internals.exe: LDFLAGS += -Wl,-subsystem=console
+check_internals.exe: LDFLAGS += -Wl,--subsystem=console
 
 %.exe: %.o
 	$(GCC) $(LDFLAGS) -o $@ $^
