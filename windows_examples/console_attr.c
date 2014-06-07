@@ -23,34 +23,7 @@
  * 0x4000 : COMMON_LVB_REVERSE_VIDEO, Reverse foreground and background attribute.
  * 0x8000 : COMMON_LVB_UNDERSCORE, Underscore.
  */
-
-#include <windows.h>
-#include <stdlib.h>
-#include <stdio.h>
-
-/**
- * Print last Windows error
- */
-static void print_winerr(const char *message)
-{
-    DWORD dwLastErr;
-    LPTSTR lpLastErrMsgBuf = NULL;
-
-    dwLastErr = GetLastError();
-    if(!FormatMessage( 
-        FORMAT_MESSAGE_ALLOCATE_BUFFER|FORMAT_MESSAGE_FROM_SYSTEM|FORMAT_MESSAGE_IGNORE_INSERTS,
-        NULL, dwLastErr,
-        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-        (LPTSTR)&lpLastErrMsgBuf, 0, NULL)
-    ) {
-        lpLastErrMsgBuf = NULL;
-    }
-    printf("%s: error %lu, %s\n", message, dwLastErr,
-        lpLastErrMsgBuf ? lpLastErrMsgBuf : "(unknown)");
-    if (lpLastErrMsgBuf) {
-        LocalFree(lpLastErrMsgBuf);
-    }
-}
+#include "common.h"
 
 int main()
 {
@@ -60,7 +33,7 @@ int main()
 
     AllocConsole();
 
-    hStdout = GetStdHandle(STD_OUTPUT_HANDLE); 
+    hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
     if(hStdout == INVALID_HANDLE_VALUE){
         print_winerr("Unable to get hStdout");
         return 1;
