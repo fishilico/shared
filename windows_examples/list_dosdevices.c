@@ -13,22 +13,22 @@
 /**
  * Wrap QueryDosDevice to allocate memory
  */
-static BOOL QueryDosDeviceWithAlloc(LPCTSTR lpDeviceName, LPTSTR *lppTargetPath, DWORD *pccSize){
+static BOOL QueryDosDeviceWithAlloc(LPCTSTR lpDeviceName, LPTSTR *lppTargetPath, DWORD *pcchSize){
     LPTSTR buffer = NULL;
-    DWORD ccSize = 1024, ccRet;
+    DWORD cchSize = 1024, cchRet;
 
-    assert(lppTargetPath && pccSize);
+    assert(lppTargetPath && pcchSize);
     do {
-        buffer = HeapAlloc(GetProcessHeap(), 0, ccSize * sizeof(TCHAR));
+        buffer = HeapAlloc(GetProcessHeap(), 0, cchSize * sizeof(TCHAR));
         if (!buffer) {
             print_winerr(_T("HeapAlloc"));
             return FALSE;
         }
-        ccRet = QueryDosDevice(lpDeviceName, buffer, ccSize);
-        if (ccRet) {
-            assert(ccRet <= ccSize);
+        cchRet = QueryDosDevice(lpDeviceName, buffer, cchSize);
+        if (cchRet) {
+            assert(cchRet <= cchSize);
         } else if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
-            ccSize *= 2;
+            cchSize *= 2;
             HeapFree(GetProcessHeap(), 0, buffer);
             buffer = NULL;
         } else {
@@ -36,8 +36,8 @@ static BOOL QueryDosDeviceWithAlloc(LPCTSTR lpDeviceName, LPTSTR *lppTargetPath,
             HeapFree(GetProcessHeap(), 0, buffer);
             return FALSE;
         }
-    } while (!ccRet);
-    *pccSize = ccRet;
+    } while (!cchRet);
+    *pcchSize = cchRet;
     *lppTargetPath = buffer;
     return TRUE;
 }
@@ -49,49 +49,41 @@ static int CompareStringList(const void *arg1, const void *arg2)
 
 int _tmain()
 {
-    LPTSTR lszDosDevicesList, szDosDevice, lszDevicePathsList;
-    LPTSTR *aszDosDevices;
-    DWORD ccSize, nDevices, i;
+    LPTSTR lszDosDevicesList, lszDevicePathsList;
+    LPCTSTR szDosDevice, szPath;
+    LPCTSTR *aszDosDevices;
+    DWORD cchSize, nDevices, i;
 
-    if (!QueryDosDeviceWithAlloc(NULL, &lszDosDevicesList, &ccSize)) {
+    if (!QueryDosDeviceWithAlloc(NULL, &lszDosDevicesList, &cchSize)) {
         return 1;
     }
 
-    /* Sort the DosDevices list using an array of strings */
-    for (szDosDevice = lszDosDevicesList, i = 0; *szDosDevice; i++) {
-        size_t len = _tcslen(szDosDevice);
-        szDosDevice = _tcsninc(szDosDevice, len + 1);
-        assert((size_t)(szDosDevice - lszDosDevicesList) < ccSize);
+    /* Sort the Dos Devices list using an array of strings */
+    nDevices = 0;
+    foreach_str(szDosDevice, lszDosDevicesList, cchSize) {
+        nDevices ++;
     }
-    nDevices = i;
-    aszDosDevices = HeapAlloc(GetProcessHeap(), 0, nDevices * sizeof(LPTSTR));
+    aszDosDevices = HeapAlloc(GetProcessHeap(), 0, nDevices * sizeof(LPCTSTR));
     if (!aszDosDevices) {
         print_winerr(_T("HeapAlloc"));
         return 1;
     }
-    for (szDosDevice = lszDosDevicesList, i = 0; *szDosDevice; i++) {
-        size_t len;
-        aszDosDevices[i] = szDosDevice;
-        len = _tcslen(szDosDevice);
-        szDosDevice = _tcsninc(szDosDevice, len + 1);
-        assert((size_t)(szDosDevice - lszDosDevicesList) < ccSize);
+    i = 0;
+    foreach_str(szDosDevice, lszDosDevicesList, cchSize) {
+        aszDosDevices[i++] = szDosDevice;
     }
     qsort(aszDosDevices, nDevices, sizeof(LPTSTR), CompareStringList);
 
+    /* Print the sorted array */
     for (i = 0; i < nDevices; i ++) {
-        LPTSTR szPath;
         _tprintf(_T("%s"), aszDosDevices[i]);
-        if (!QueryDosDeviceWithAlloc(aszDosDevices[i], &lszDevicePathsList, &ccSize)) {
+        if (!QueryDosDeviceWithAlloc(aszDosDevices[i], &lszDevicePathsList, &cchSize)) {
             break;
         }
-        for (szPath = lszDevicePathsList; *szPath;) {
-            size_t len;
-            _tprintf(_T(" -> %s "), szPath);
-            len = _tcslen(szPath);
-            szPath = _tcsninc(szPath, len + 1);
-            assert((size_t)(szPath - lszDevicePathsList) < ccSize);
+        foreach_str(szPath, lszDevicePathsList, cchSize) {
+            _tprintf(_T(" -> %s"), szPath);
         }
-        printf("\n");
+        _tprintf(_T("\n"));
         HeapFree(GetProcessHeap(), 0, lszDevicePathsList);
     }
     HeapFree(GetProcessHeap(), 0, aszDosDevices);
