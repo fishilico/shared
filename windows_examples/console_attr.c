@@ -25,7 +25,7 @@
  */
 #include "common.h"
 
-int main()
+int _tmain()
 {
     HANDLE hStdout;
     CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
@@ -35,32 +35,32 @@ int main()
 
     hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
     if(hStdout == INVALID_HANDLE_VALUE){
-        print_winerr("Unable to get hStdout");
+        print_winerr(_T("Unable to get hStdout"));
         return 1;
     }
     if(!GetConsoleScreenBufferInfo(hStdout, &csbiInfo)){
-        print_winerr("GetConsoleScreenBufferInfo");
+        print_winerr(_T("GetConsoleScreenBufferInfo"));
         return 1;
     }
     SetConsoleTextAttribute(hStdout, 0x1A);
-    printf("Console size %d x %d\n", csbiInfo.dwSize.X, csbiInfo.dwSize.Y);
+    _tprintf(_T("Console size %d x %d\n"), csbiInfo.dwSize.X, csbiInfo.dwSize.Y);
 
     /* Foreground colors */
     for(i = 0; i < 16; i++) {
         SetConsoleTextAttribute(hStdout, i);
-        printf("[%X]", i);
+        _tprintf(_T("[%X]"), i);
     }
     printf("\n");
 
     /* Background colors */
     for(i = 0; i < 16; i++) {
         SetConsoleTextAttribute(hStdout, (i * 16) | 7);
-        printf("[%x]", i);
+        _tprintf(_T("[%x]"), i);
     }
-    printf("\n");
+    _tprintf(_T("\n"));
     SetConsoleTextAttribute(hStdout, 0x07);
 
-    MessageBoxW(NULL, L"The colors are displayed on the console", L"Console Attributes", MB_ICONINFORMATION | MB_OK);
+    MessageBox(NULL, _T("The colors are displayed on the console"), _T("Console Attributes"), MB_ICONINFORMATION | MB_OK);
     FreeConsole();
     return 0;
 }

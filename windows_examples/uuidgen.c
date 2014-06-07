@@ -5,8 +5,9 @@
  */
 #include <windows.h>
 #include <stdio.h>
+#include <tchar.h>
 
-int main()
+int _tmain()
 {
     LPCSTR szDesc;
     UUID uuid;

@@ -2,9 +2,10 @@
  * Display "Hello, world!" in a message box
  */
 #include <windows.h>
+#include <tchar.h>
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
-    MessageBox(NULL, TEXT("Hello, world!"), TEXT("Hello world box"), MB_ICONINFORMATION | MB_OK);
+    MessageBox(NULL, _T("Hello, world!"), _T("Hello world box"), MB_ICONINFORMATION | MB_OK);
     return 0;
 }

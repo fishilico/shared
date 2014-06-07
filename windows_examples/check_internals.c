@@ -4,6 +4,7 @@
  */
 #include <assert.h>
 #include <stdio.h>
+#include <tchar.h>
 #include "internal_structures.h"
 
 typedef enum _PROCESSINFOCLASS {
@@ -25,7 +26,7 @@ typedef struct _PROCESS_BASIC_INFORMATION {
     PVOID Reserved3;
 } PROCESS_BASIC_INFORMATION, *PPROCESS_BASIC_INFORMATION;
 
-int main()
+int _tmain()
 {
     NTSTATUS dwStatus;
     HMODULE hNtDll, hModule;

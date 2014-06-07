@@ -3,11 +3,12 @@
  */
 #include <windows.h>
 #include <stdio.h>
+#include <tchar.h>
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
     HINSTANCE hInstance2;
-    LPSTR lpCmdLine2;
+    LPTSTR lpCmdLine2;
     int nCmdShow2, n;
     STARTUPINFO startupInfo;
     BOOL isOk;

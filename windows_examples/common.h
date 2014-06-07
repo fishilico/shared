@@ -4,15 +4,25 @@
 #ifndef WINDOWS_EXAMPLES_COMMON_H
 #define WINDOWS_EXAMPLES_COMMON_H
 
+/* -municode defines UNICODE but not _UNICODE */
+#ifndef UNICODE
+#undef _UNICODE
+#else
+#ifndef _UNICODE
+#define _UNICODE
+#endif
+#endif
+
 /* Always-included headers */
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <tchar.h>
 
 /**
  * Print the last Windows error
  */
-static void print_winerr(const char *message)
+static void print_winerr(LPCTSTR szMessage)
 {
     DWORD dwLastErr;
     LPTSTR lpLastErrMsgBuf = NULL;
@@ -26,8 +36,8 @@ static void print_winerr(const char *message)
     ) {
         lpLastErrMsgBuf = NULL;
     }
-    fprintf(stderr, "%s: error %lu, %s\n", message, dwLastErr,
-        lpLastErrMsgBuf ? lpLastErrMsgBuf : "(unknown)");
+    _ftprintf(stderr, _T("%s: error %lu, %s\n"), szMessage, dwLastErr,
+        lpLastErrMsgBuf ? lpLastErrMsgBuf : _T("(unknown)"));
     if (lpLastErrMsgBuf) {
         LocalFree(lpLastErrMsgBuf);
     }

@@ -17,11 +17,13 @@ ifneq ($(TARGET),)
 else
 	GCC ?= gcc
 endif
-# Disable stack protector as it requires linking with libssp DDL, not always provided
+
+CPPFLAGS ?= -D_UNICODE
+# Disable stack protector as it requires linking with libssp DLL, not always provided
 CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 \
 	-Wmissing-prototypes -Wno-unused-parameter -Wno-unused-function \
-	-fno-stack-protector
-LDFLAGS ?= -Wl,--subsystem=windows,--dynamicbase,--nxcompat
+	-fno-stack-protector -municode
+LDFLAGS ?= -Wl,--subsystem=windows,--dynamicbase,--nxcompat -municode
 LIBS ?=
 
 SOURCES := $(wildcard *.c)
