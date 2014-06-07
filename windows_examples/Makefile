@@ -22,6 +22,7 @@ CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 \
 	-Wmissing-prototypes -Wno-unused-parameter -Wno-unused-function \
 	-fno-stack-protector
 LDFLAGS ?= -Wl,--subsystem=windows,--dynamicbase,--nxcompat
+LIBS ?=
 
 SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
@@ -52,9 +53,10 @@ clean..%:
 helloworld_noimport.exe: LDFLAGS += -nostdlib -Wl,--nostdlib
 helloworld_noimport.o: CFLAGS += -nostdlib -fno-stack-protector
 check_internals.exe: LDFLAGS += -Wl,--subsystem=console
+uuidgen.exe: LIBS += -lrpcrt4
 
 %.exe: %.o
-	$(GCC) $(LDFLAGS) -o $@ $^
+	$(GCC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c $(HEADERS)
 	$(GCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
