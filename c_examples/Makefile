@@ -11,11 +11,10 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic \
 # Linker flags
 LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie
 
-BINARIES := cpuid view_sizes seccomp
+BINARIES := cpuid view_sizes
 OPENMP_BINARIES := openmp_matrix
 GTK_BINARIES := gtk_alpha_window
-SDL_BINARIES := sdl_v4l_video
-ALL_BINARIES := $(BINARIES) $(OPENMP_BINARIES) $(GTK_BINARIES) $(SDL_BINARIES)
+ALL_BINARIES := $(BINARIES) $(OPENMP_BINARIES) $(GTK_BINARIES)
 
 # view_sizes.c uses "long long" type, so disable the related warning
 view_sizes.o: CFLAGS += -Wno-long-long
@@ -44,13 +43,6 @@ $(GTK_BINARIES).o: CFLAGS += $(shell pkg-config --cflags gtk+-2.0)
 	endif
 endif
 
-HAVE_SDL := $(shell pkg-config --exists sdl && echo 'y' || echo 'n')
-ifeq ($(HAVE_SDL), y)
-	BINARIES += $(SDL_BINARIES)
-$(SDL_BINARIES): LDFLAGS += $(shell pkg-config --libs sdl)
-$(SDL_BINARIES).o: CFLAGS += $(shell pkg-config --cflags sdl)
-endif
-
 all: $(BINARIES)
 
 clean:
@@ -60,7 +52,6 @@ clean:
 cpuid: cpuid.o
 gtk_alpha_window: gtk_alpha_window.o
 openmp_matrix: openmp_matrix.o
-sdl_v4l_video: sdl_v4l_video.o
 view_sizes: view_sizes.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
