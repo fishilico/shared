@@ -4,9 +4,9 @@ CPPFLAGS ?= -D_GNU_SOURCE -D_FORTIFY_SOURCE=2
 CFLAGS ?= -O2 -Wall -W -Wextra -ansi \
 	-Wmissing-prototypes -Wno-unused-function -Wformat=2 \
 	-fstack-protector --param=ssp-buffer-size=4 -fPIE
-LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie
+LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
 
-BINARIES := seccomp
+BINARIES := override_uname_dl.so seccomp
 SDL_BINARIES := sdl_v4l_video
 ALL_BINARIES := $(BINARIES) $(SDL_BINARIES)
 
@@ -28,9 +28,17 @@ clean:
 	rm -f *.o
 	rm -f $(ALL_BINARIES)
 
+override_uname_dl.o: CFLAGS += -fPIC -shared -fvisibility=hidden
+override_uname_dl.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@ -ldl
+
 sdl_v4l_video: sdl_v4l_video.o
+	$(CC) -o $@ $^ $(LDFLAGS)
+
 seccomp: seccomp.o
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+%.so: %.o
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
