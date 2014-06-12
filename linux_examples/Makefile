@@ -6,7 +6,7 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi \
 	-fstack-protector --param=ssp-buffer-size=4 -fPIE
 LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
 
-BINARIES := override_uname_dl.so seccomp
+BINARIES := override_uname_dl.so read_vdso seccomp
 SDL_BINARIES := sdl_v4l_video
 ALL_BINARIES := $(BINARIES) $(SDL_BINARIES)
 
@@ -30,6 +30,9 @@ clean:
 
 override_uname_dl.o: CFLAGS += -fPIC -shared -fvisibility=hidden
 override_uname_dl.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@ -ldl
+
+read_vdso: read_vdso.o
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 sdl_v4l_video: sdl_v4l_video.o
 	$(CC) -o $@ $^ $(LDFLAGS)
