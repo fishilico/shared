@@ -34,7 +34,7 @@ static long _syscall3(
     __asm__ volatile ("syscall"
         : "=a" (result)
         : "0" (number), "D" (arg1), "S" (arg2), "d" (arg3)
-        : "memory", "cc", "r11", "cx");
+        : "cc", "memory", "rcx", "r8", "r9", "r10", "r11");
 #elif defined __i386__
     /* eax = syscall number and result
      * ebx = arg1
