@@ -12,7 +12,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
-#include <sys/auxv.h>
 
 #if defined __x86_64__
 #define DEFINE_ELF_STRUCT(name) typedef Elf64_##name Elf_##name
@@ -37,7 +36,39 @@ DEFINE_ELF_STRUCT(Verdaux);
 DEFINE_ELF_STRUCT(Versym);
 DEFINE_ELF_STRUCT(Word);
 
-int main()
+/**
+ * Implement getauxval for old systems without sys/auxv.h
+ *
+ * In Linux ABI, the initial stack contains:
+ * * argc
+ * * char* argv[0]...argv[argc-1]
+ * * NULL
+ * * envp[0]...
+ * * NULL
+ * * Elf_auxv_t auxv[0]...{.a_type = AT_NULL}
+ */
+static unsigned long getauxval_from_args(unsigned long type, int argc, char **argv)
+{
+    void **stack;
+    Elf_auxv_t *auxv;
+    int i;
+
+    assert(argc >= 0 && argv[argc] == NULL);
+    stack = (void**)&argv[argc + 1];
+    /* Skip environment variables */
+    while (*stack) {
+        stack++;
+    }
+    auxv = (Elf_auxv_t*)(stack + 1);
+    for (i = 0; auxv[i].a_type != AT_NULL; i++) {
+        if (auxv[i].a_type == type) {
+            return auxv[i].a_un.a_val;
+        }
+    }
+    return 0L;
+}
+
+int main(int argc, char **argv)
 {
     size_t i;
     uintptr_t vdso_base = 0;
@@ -53,16 +84,8 @@ int main()
     const Elf_Word *vdso_bucket, *vdso_chain;
     Elf_Word vdso_nbucket, vdso_nchain;
 
-    /* Retrieve vDSO address from the auxiliary vector
-     * Note: in Linux ABI, the initial stack contains:
-     * * argc
-     * * char* argv[0]...argv[argc-1]
-     * * NULL
-     * * envp[0]...
-     * * NULL
-     * * Elf_auxv_t auxv[0]...{.a_type = AT_NULL}
-     */
-    vdso_base = (uintptr_t)getauxval(AT_SYSINFO_EHDR);
+    /* Retrieve vDSO address from the auxiliary vector */
+    vdso_base = (uintptr_t)getauxval_from_args(AT_SYSINFO_EHDR, argc, argv);
     if (!vdso_base) {
         fprintf(stderr, "SYSINFO_EHDR not found in auxv\n");
         return 1;
