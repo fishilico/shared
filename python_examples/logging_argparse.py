@@ -62,7 +62,7 @@ class ColoredFormatter(logging.Formatter):
 
 def logging_level(string):
     """Convert a string to a logging level"""
-    if string.isnumeric():
+    if string.isdigit():
         return int(string)
     level = getattr(logging, string.upper(), None)
     if not isinstance(level, int):

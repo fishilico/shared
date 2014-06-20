@@ -27,6 +27,7 @@
 # pylint: disable=invalid-name,missing-docstring,superfluous-parens
 # pylint: disable=too-few-public-methods
 import argparse
+import array
 import ctypes
 import ctypes.util
 import socket
@@ -61,7 +62,8 @@ class struct_sockaddr_in(ctypes.Structure):
     def str_addr(self):
         assert self.sin_family == socket.AF_INET
         assert self.sin_port == 0
-        return socket.inet_ntop(socket.AF_INET, self.sin_addr)
+        addr = array.array('B', self.sin_addr)
+        return socket.inet_ntop(socket.AF_INET, addr.tostring())
 
 
 class struct_sockaddr_in6(ctypes.Structure):
@@ -75,10 +77,11 @@ class struct_sockaddr_in6(ctypes.Structure):
     def str_addr(self):
         assert self.sin6_family == socket.AF_INET6
         assert self.sin6_port == 0
-        addr = socket.inet_ntop(socket.AF_INET6, self.sin6_addr)
+        addr = array.array('B', self.sin6_addr)
+        text = socket.inet_ntop(socket.AF_INET6, addr.tostring())
         if self.sin6_scope_id:
-            addr += '%{:d}'.format(self.sin6_scope_id)
-        return addr
+            text += '%{:d}'.format(self.sin6_scope_id)
+        return text
 
 
 class struct_sockaddr_ll(ctypes.Structure):
@@ -101,7 +104,6 @@ class struct_sockaddr_ll(ctypes.Structure):
 
 
 class struct_sockaddr(ctypes.Union):
-    _anonymous_ = ('sa_storage', )
     _fields_ = [
         ('sa_storage', struct_sockaddr_storage),
         ('sa_in', struct_sockaddr_in),
@@ -109,7 +111,7 @@ class struct_sockaddr(ctypes.Union):
         ('sa_ll', struct_sockaddr_ll)]
 
     def str_addr(self):
-        family = self.ss_family
+        family = self.sa_storage.ss_family
         if family == socket.AF_INET:
             return self.sa_in.str_addr()
         elif family == socket.AF_INET6:
@@ -143,6 +145,7 @@ struct_ifaddrs._fields_ = [  # pylint: disable=protected-access
 
 libc = ctypes.CDLL(ctypes.util.find_library('c'))
 libc.getifaddrs.argtypes = [ctypes.POINTER(ctypes.POINTER(struct_ifaddrs))]
+libc.freeifaddrs.argtypes = [ctypes.POINTER(struct_ifaddrs)]
 
 
 def get_network_interfaces():
@@ -199,7 +202,7 @@ def main(argv=None):
             if_addrs[ifname] = []
             if_indexes[ifname] = -1
         sa = ifa.ifa_addr.contents
-        family = sa.ss_family
+        family = sa.sa_storage.ss_family
         if not displayed_families or family in displayed_families:
             if_addrs[ifname].append((family, sa.str_addr()))
         if family == socket.AF_PACKET:
