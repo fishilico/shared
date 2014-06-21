@@ -41,6 +41,9 @@ import sys
 
 logger = logging.getLogger(__name__)
 
+# Check feature availability (need python>=3.3)
+if not hasattr(socket.socket, 'recvmsg'):
+    raise NotImplementedError("socket.recvmsg() not found (need Python >= 3.3)")
 
 # Define some system-specific constants
 if sys.platform.startswith('linux'):
