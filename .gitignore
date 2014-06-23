@@ -18,7 +18,7 @@ __pycache__
 !/c_examples/*.[ch]
 !/c_examples/*.sh
 !/c_examples/Makefile
-/c_examples/kernel-x86-cpufeature.h
+/c_examples/kernel-x86-*.[ch]
 /linux_examples/*
 !/linux_examples/*.[ch]
 !/linux_examples/*.py

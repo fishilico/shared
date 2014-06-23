@@ -71,16 +71,30 @@ int main()
     uint32_t *data = (uint32_t*)vendor_str;
     uint32_t eax = 0, ebx = 0, ecx = 0, edx = 0;
 
+    add_manual_cpuid_str();
+
     /* CPUID 0: get vendor string */
     asm_cpuid(0, &max_code, &data[0], &data[2], &data[1]);
     vendor_str[12] = 0;
     print_escaped_ascii("CPUID vendor string", vendor_str);
+    if (data[0] == 0x756e6547 && data[1] == 0x49656e69 && data[2] == 0x6c65746e) {
+        printf(" (This is genuine Intel)\n");
+    }
     printf("Max CPUID code: %u\n", max_code);
 
     /* CPUID 1: get features */
     asm_cpuid(1, &eax, &ebx, &ecx, &edx);
     print_features("Features 1.edx", edx, cpuidstr_1_edx);
     print_features("Features 1.ecx", ecx, cpuidstr_1_ecx);
+    if (max_code >= 6) {
+        asm_cpuid(6, &eax, &ebx, &ecx, &edx);
+        if (eax) {
+            print_features("Features 6.eax", eax, cpuidstr_6_eax);
+        }
+        if (ecx) {
+            print_features("Features 6.ecx", ecx, cpuidstr_6_ecx);
+        }
+    }
     if (max_code >= 7) {
         ecx = 0;
         asm_cpuid(7, &eax, &ebx, &ecx, &edx);
@@ -109,7 +123,11 @@ int main()
         while (*start_brand_str == ' ') {
             start_brand_str ++;
         }
-        print_escaped_ascii("Processor Brand String", start_brand_str);
+        print_escaped_ascii("Processor Brand String (ext2..4)", start_brand_str);
+    }
+    if (max_extcode >= 0x80000007) {
+        asm_cpuid(0x80000007, &eax, &ebx, &ecx, &edx);
+        print_features("Features ext7.edx", edx, cpuidstr_ext7_edx);
     }
     return 0;
 }
