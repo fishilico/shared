@@ -19,18 +19,14 @@ OBJECTS :=
 
 OBJECTS := $(SOURCES:%.c=%.o)
 BINARIES := $(OBJECTS:%.o=%.out)
-FRAMAC_SESSIONS := $(SOURCES:%.c=%.sav)
+FRAMAC_TARGETS := $(SOURCES:%.c=%.frama)
 
-# Compile things only if windows.h can be included
-ifeq ($(shell $(FRAMAC) --version > /dev/null 2>&1 && echo y),y)
-all: $(BINARIES) $(FRAMAC_SESSIONS)
-else
 all: $(BINARIES)
-	@echo "Skip verification as $(FRAMAC) does not exist."
-endif
+
+all-frama: $(FRAMAC_TARGETS)
 
 clean:
-	rm -f *.o *.out *.i
+	rm -f *.o *.out
 	rm -rf tmp
 
 %.out: %.o
@@ -39,14 +35,14 @@ clean:
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-%.sav: %.c
+%.frama: %.c
 	[ -d tmp ] || mkdir tmp
 	@# Examples of Frama-C parameters:
 	@# - Value: -val -slevel 3
-	@# - Weakest precondition: -wp -wp-rte -wp-model Typed+cast -wp-timeout 5 -wp-split -wp-out tmp
+	@# - Weakest precondition: -wp -wp-rte -wp-model Typed+cast -wp-timeout 5 -wp-split -wp-out tmp -wp-fct main
 	@# - Jessie: -jessie -jessie-atp=simplify -jessie-infer-annot pre
-	$(FRAMAC) -cpp-extra-args='$(FRAMAC_CFLAGS)' -save $@ \
+	$(FRAMAC) -cpp-extra-args='$(FRAMAC_CFLAGS)' \
 		-pp-annot -no-unicode \
-		-wp -wp-rte -wp-model Typed+cast -wp-timeout 5 -wp-split -wp-out tmp $<
+		-wp -wp-rte -wp-model Typed+cast -wp-timeout 25 -wp-split -wp-out tmp $<
 
-.PHONY: all clean
+.PHONY: all all-frama clean
