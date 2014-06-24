@@ -6,15 +6,22 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi \
 	-fstack-protector --param=ssp-buffer-size=4 -fPIE
 LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
 
-BINARIES := override_uname_dl.so read_vdso seccomp
+BINARIES := override_uname_dl.so read_vdso
 SDL_BINARIES := sdl_v4l_video
-ALL_BINARIES := $(BINARIES) $(SDL_BINARIES)
+SECCOMP_BINARIES := seccomp
+ALL_BINARIES := $(BINARIES) $(SDL_BINARIES) $(SECCOMP_BINARIES)
 
 HAVE_SDL := $(shell pkg-config --exists sdl && echo 'y' || echo 'n')
 ifeq ($(HAVE_SDL), y)
 	BINARIES += $(SDL_BINARIES)
 $(SDL_BINARIES): LDFLAGS += $(shell pkg-config --libs sdl)
 $(SDL_BINARIES).o: CFLAGS += $(shell pkg-config --cflags sdl)
+endif
+
+HAVE_SECCOMP := $(shell echo '\#include <linux/seccomp.h>' | \
+	$(CC) -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
+ifeq ($(HAVE_SECCOMP), y)
+	BINARIES += $(SECCOMP_BINARIES)
 endif
 
 ifeq ($(shell uname -s), Linux)
