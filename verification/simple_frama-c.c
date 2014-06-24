@@ -68,7 +68,7 @@ static void swap_int(int *pa, int *pb)
     *pb = tmp;
 }
 
-/*@
+/*@ assigns \nothing;
   @ ensures \result == 0;
   @*/
 int main()
