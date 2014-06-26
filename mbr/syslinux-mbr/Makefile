@@ -103,7 +103,6 @@ endif
 %_f.o: %.S
 	$(CC) $(MAKEDEPS) $(SFLAGS) -DFORCE_80 -c -o $@ $<
 
-.PRECIOUS: %.elf
 %.elf: %.o mbr.ld
 	$(LD) $(LDFLAGS) -T mbr.ld -e _start -o $@ $<
 
@@ -119,5 +118,6 @@ check: all
 	$(SHA1SUM) -c sha1sums.txt
 
 .PHONY: all clean check
+.PRECIOUS: %.elf %.o %_c.o %_f.o
 
 -include .*.d
