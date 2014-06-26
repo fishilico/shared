@@ -11,7 +11,7 @@ LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
 
 # Use Frama-C libc headers which contains ACSL annotations.
 FRAMAC_SHARE_PATH := $(shell frama-c -print-share-path)
-FRAMAC_CFLAGS := -nostdinc -I$(FRAMAC_SHARE_PATH)/libc
+FRAMAC_CFLAGS := -nostdinc -I$(FRAMAC_SHARE_PATH)/libc -D__FRAMAC__
 FRAMAC_TMPDIR := /tmp/frama-c-$(id -u)
 
 SOURCES := $(wildcard *.c)
