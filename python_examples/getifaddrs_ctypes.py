@@ -101,7 +101,7 @@ class struct_sockaddr_ll(ctypes.Structure):
         ('sll_hatype', ctypes.c_uint16),  # ARPHRD_...
         ('sll_pkttype', ctypes.c_uint8),  # PACKET_...
         ('sll_halen', ctypes.c_uint8),
-        ('sll_addr', ctypes.c_uint8 * 8)]
+        ('sll_addr', ctypes.c_uint8 * 16)]
 
     def str_addr(self):
         assert self.sll_family == socket.AF_PACKET
