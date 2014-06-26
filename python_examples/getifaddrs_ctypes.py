@@ -30,8 +30,17 @@ import argparse
 import array
 import ctypes
 import ctypes.util
+import fcntl
 import socket
 import sys
+
+# /usr/include/linux/if.h
+IFNAMSIZ = 16
+IFF_NOARP = 0x80
+
+# /usr/include/linux/sockios.h
+SIOCGIFNAME = 0x8910
+SIOCGIFINDEX = 0x8933
 
 
 def str_family(family, _static_known_af={}):
@@ -143,6 +152,24 @@ struct_ifaddrs._fields_ = [  # pylint: disable=protected-access
     ('ifa_data', ctypes.c_void_p)]
 
 
+class union_ifreq(ctypes.Union):
+    _fields_ = [
+        ('ifr_addr', struct_sockaddr),
+        ('ifr_broadaddr', struct_sockaddr),
+        ('ifr_netmask', struct_sockaddr),
+        ('ifr_hwaddr', struct_sockaddr),
+        ('ifr_flags', ctypes.c_uint16),
+        ('ifr_ifindex', ctypes.c_int32),
+        ('ifr_metric', ctypes.c_int32),
+        ('ifr_mtu', ctypes.c_int32)]  # Some types are missing but useless here
+
+
+class struct_ifreq(ctypes.Structure):
+    _fields_ = [
+        ('ifr_name', ctypes.c_char * IFNAMSIZ),
+        ('u', union_ifreq)]
+
+
 libc = ctypes.CDLL(ctypes.util.find_library('c'))
 libc.getifaddrs.argtypes = [ctypes.POINTER(ctypes.POINTER(struct_ifaddrs))]
 libc.freeifaddrs.argtypes = [ctypes.POINTER(struct_ifaddrs)]
@@ -162,6 +189,26 @@ def get_network_interfaces():
             ifa_item = ifa.ifa_next
     finally:
         libc.freeifaddrs(ifa_list)
+
+
+def get_ifindex_from_name(ifname):
+    """Get the interface index associated to the given name"""
+    sd = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM, 0)
+    ifr = struct_ifreq()
+    ifr.ifr_name = ifname.encode('ascii')
+    fcntl.ioctl(sd, SIOCGIFINDEX, ifr, True)
+    sd.close()
+    return int(ifr.u.ifr_ifindex)
+
+
+def get_ifname_from_index(ifindex):
+    """Get the interface name associated to the given index"""
+    sd = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM, 0)
+    ifr = struct_ifreq()
+    ifr.u.ifr_ifindex = ifindex
+    fcntl.ioctl(sd, SIOCGIFNAME, ifr, True)
+    sd.close()
+    return ifr.ifr_name.decode('ascii')
 
 
 def family_addresses_sortkey(family_address):
@@ -197,16 +244,25 @@ def main(argv=None):
     if_addrs = {}
     if_indexes = {}
     for ifa in get_network_interfaces():
-        ifname = ifa.ifa_name.decode('ascii', 'ignore')
+        ifname = ifa.ifa_name.decode('ascii')
         if ifname not in if_addrs:
+            # Get interface index and check that the name is right
+            ifindex = get_ifindex_from_name(ifname)
+            ifname2 = get_ifname_from_index(ifindex)
+            # When ifname = "eth0:0", ifname2 = "eth0"
+            assert ifname.startswith(ifname2)
             if_addrs[ifname] = []
-            if_indexes[ifname] = -1
+            if_indexes[ifname] = ifindex
+        if not ifa.ifa_addr:
+            # If no ARP, it's normal not to have a L2 address
+            assert ifa.ifa_flags & IFF_NOARP
+            continue
         sa = ifa.ifa_addr.contents
         family = sa.sa_storage.ss_family
         if not displayed_families or family in displayed_families:
             if_addrs[ifname].append((family, sa.str_addr()))
         if family == socket.AF_PACKET:
-            if_indexes[ifname] = sa.sa_ll.sll_ifindex
+            assert if_indexes[ifname] == sa.sa_ll.sll_ifindex
 
     sorted_ifidx = sorted(if_indexes.items(), key=lambda x: (x[1], x[0]))
     for ifname, ifindex in sorted_ifidx:
