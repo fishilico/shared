@@ -36,14 +36,20 @@ SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
 OBJECTS :=
 
-# Compile 32-bits versions and 64-bits versions, if available
+# Compile 32-bits versions and 64-bits versions, if available.
+# Check with a header because the compiler may accept -m32 even if headers are
+# missing.  The headers are used to get the value of constants.
 HAVE_M32_M64 ?= y
-ifeq ($(shell $(CC) -m32 -E -v - < /dev/null > /dev/null 2>&1 && echo y),y)
+HAVE_M32 := $(shell echo '\#include <linux/types.h>' | \
+	$(CC) -m32 -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
+HAVE_M64 := $(shell echo '\#include <linux/types.h>' | \
+	$(CC) -m64 -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
+ifeq ($(HAVE_M32),y)
 OBJECTS += $(SOURCES:%.c=%.32.o)
 else
 HAVE_M32_M64 := n
 endif
-ifeq ($(shell $(CC) -m64 -E -v - < /dev/null > /dev/null 2>&1 && echo y),y)
+ifeq ($(HAVE_M64),y)
 OBJECTS += $(SOURCES:%.c=%.64.o)
 else
 HAVE_M32_M64 := n
