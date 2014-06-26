@@ -33,7 +33,7 @@ int _tmain()
     HANDLE hProcess;
     pfnNtQueryInformationProcess _NtQueryInformationProcess;
     PROCESS_BASIC_INFORMATION pbi;
-    const void *pTeb;
+    const void *pTeb, *pTeb2;
     const PEB *pPeb;
     const LIST_ENTRY *ListHead, *ListEntry;
     const LDR_DATA_TABLE_ENTRY *CurEntry;
@@ -54,6 +54,12 @@ int _tmain()
 
     /* Directly use internal structures */
     pTeb = NtCurrentTeb();
+    pTeb2 = _NtCurrentTeb();
+    if (pTeb != pTeb2) {
+        printf("Invalid NtCurrentTeb implementation. Windows API gives %p and internal structures %p.\n",
+            pTeb, pTeb2);
+        return 1;
+    }
     printf("Thread Environment block is at %p\n", pTeb);
     pPeb = _NtCurrentPeb();
     if (pPeb != pbi.PebBaseAddress) {

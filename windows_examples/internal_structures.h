@@ -70,6 +70,22 @@ typedef struct _CLIENT_ID {
     HANDLE UniqueThread;
 } CLIENT_ID, *PCLIENT_ID;
 
+#ifndef _NT_TIB_DEFINED
+#define _NT_TIB_DEFINED
+typedef struct _NT_TIB {
+    struct _EXCEPTION_REGISTRATION_RECORD *ExceptionList;
+    PVOID StackBase;
+    PVOID StackLimit;
+    PVOID SubSystemTib;
+    union {
+        PVOID FiberData;
+        DWORD Version;
+    };
+    PVOID ArbitraryUserPointer;
+    struct _NT_TIB *Self;
+} NT_TIB, *PNT_TIB;
+#endif
+
 #pragma pack(push,1)
 typedef struct _TEB_internal {
     NT_TIB NtTib;
@@ -110,15 +126,48 @@ static BOOL StringsCaseLenEqualsW(LPCWSTR str1, LPCWSTR str2, ULONG cbLen)
 }
 
 /**
+ * Get the linear address of the Thread Environment Block
+ */
+static inline const TEB_internal* _NtCurrentTeb(VOID)
+{
+    PTEB_internal pTeb;
+#if defined(__x86_64)
+    _STATIC_ASSERT(FIELD_OFFSET(NT_TIB, Self) == 0x30);
+    __asm__ volatile ("movq %%gs:48, %0"
+        : "=r" (pTeb));
+#elif defined(__i386__)
+    _STATIC_ASSERT(FIELD_OFFSET(NT_TIB, Self) == 0x18);
+    __asm__ volatile ("movl %%fs:24, %0"
+        : "=r" (pTeb));
+#else
+    /* Use Windows API headers */
+    ret = (PTEB_internal)NtCurrentTeb();
+#endif
+    return pTeb;
+}
+
+/**
  * Get current Process Environment Block
  */
-static PPEB _NtCurrentPeb(VOID)
+static const PEB* _NtCurrentPeb(VOID)
 {
-    const TEB_internal *pTeb = (PTEB_internal)NtCurrentTeb();
+    PPEB pPeb;
+#if defined(__x86_64)
+    _STATIC_ASSERT(FIELD_OFFSET(TEB_internal, ProcessEnvironmentBlock) == 0x60);
+    __asm__ volatile ("movq %%gs:96, %0"
+        : "=r" (pPeb));
+#elif defined(__i386__)
+    _STATIC_ASSERT(FIELD_OFFSET(TEB_internal, ProcessEnvironmentBlock) == 0x30);
+    __asm__ volatile ("movl %%fs:48, %0"
+        : "=r" (pPeb));
+#else
+    const TEB_internal *pTeb = _NtCurrentTeb();
     if (!pTeb) {
         return NULL;
     }
-    return pTeb->ProcessEnvironmentBlock;
+    pPeb = pTeb->ProcessEnvironmentBlock;
+#endif
+    return pPeb;
 }
 
 /**
