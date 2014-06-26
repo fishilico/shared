@@ -12,6 +12,7 @@ LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
 # Use Frama-C libc headers which contains ACSL annotations.
 FRAMAC_SHARE_PATH := $(shell frama-c -print-share-path)
 FRAMAC_CFLAGS := -nostdinc -I$(FRAMAC_SHARE_PATH)/libc
+FRAMAC_TMPDIR := /tmp/frama-c-$(id -u)
 
 SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
@@ -27,7 +28,6 @@ all-frama: $(FRAMAC_TARGETS)
 
 clean:
 	rm -f *.o *.out
-	rm -rf tmp
 
 %.out: %.o
 	$(CC) $(LDFLAGS) -o $@ $^
@@ -36,13 +36,13 @@ clean:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 %.frama: %.c
-	[ -d tmp ] || mkdir tmp
+	[ -d '$(FRAMAC_TMPDIR)' ] || mkdir '$(FRAMAC_TMPDIR)'
 	@# Examples of Frama-C parameters:
 	@# - Value: -val -slevel 3
 	@# - Weakest precondition: -wp -wp-rte -wp-model Typed+cast -wp-timeout 5 -wp-split -wp-out tmp -wp-fct main
 	@# - Jessie: -jessie -jessie-atp=simplify -jessie-infer-annot pre
 	$(FRAMAC) -cpp-extra-args='$(FRAMAC_CFLAGS)' \
 		-pp-annot -no-unicode \
-		-wp -wp-rte -wp-model Typed+cast -wp-timeout 25 -wp-split -wp-out tmp $<
+		-wp -wp-rte -wp-model Typed+cast -wp-timeout 25 -wp-split -wp-out '$(FRAMAC_TMPDIR)' $<
 
 .PHONY: all all-frama clean
