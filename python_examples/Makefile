@@ -28,7 +28,7 @@ PYLINT_PARAMS += --disable=F0401
 all: _cffi_example.so
 
 clean:
-	rm -f *.o
+	rm -f *.o *.so
 	rm -rf __pycache__
 
 lint:

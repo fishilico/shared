@@ -11,10 +11,14 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic \
 # Linker flags
 LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie
 
-BINARIES := cpuid view_sizes
-OPENMP_BINARIES := openmp_matrix
-GTK_BINARIES := gtk_alpha_window
-ALL_BINARIES := $(BINARIES) $(OPENMP_BINARIES) $(GTK_BINARIES)
+# Programs which need specific options
+OPENMP_PROGRAMS := openmp_matrix
+GTK_PROGRAMS := gtk_alpha_window
+
+# Find other programs. Only programs in $(PROGRAMS) are built.
+SOURCES := $(wildcard *.c)
+ALL_PROGRAMS := $(SOURCES:%.c=%)
+PROGRAMS := $(filter-out $(OPENMP_PROGRAMS) $(GTK_PROGRAMS), $(ALL_PROGRAMS))
 
 # view_sizes.c uses "long long" type, so disable the related warning
 view_sizes.o: CFLAGS += -Wno-long-long
@@ -23,36 +27,32 @@ view_sizes.o: CFLAGS += -Wno-long-long
 ifneq ($(CC), clang)
 # when gcc is not compiled with pthread, -fopenmp makes the preprocessor fails
 ifeq ($(shell $(CC) -fopenmp -E - < /dev/null > /dev/null 2>&1 && echo y), y)
-BINARIES += $(OPENMP_BINARIES)
-$(OPENMP_BINARIES): LDFLAGS += -fopenmp
-$(OPENMP_BINARIES).o: CFLAGS += -fopenmp
+PROGRAMS += $(OPENMP_PROGRAMS)
+$(OPENMP_PROGRAMS:%=%.bin): LDFLAGS += -fopenmp
+$(OPENMP_PROGRAMS:%=%.o): CFLAGS += -fopenmp
 endif
 endif
 
 HAVE_GTK3 := $(shell pkg-config --exists gtk+-3.0 && echo 'y' || echo 'n')
 ifeq ($(HAVE_GTK3), y)
-	BINARIES += $(GTK_BINARIES)
-$(GTK_BINARIES): LDFLAGS += $(shell pkg-config --libs gtk+-3.0)
-$(GTK_BINARIES).o: CFLAGS += $(shell pkg-config --cflags gtk+-3.0)
+	PROGRAMS += $(GTK_PROGRAMS)
+$(GTK_PROGRAMS:%=%.bin): LDFLAGS += $(shell pkg-config --libs gtk+-3.0)
+$(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell pkg-config --cflags gtk+-3.0)
 else
 	HAVE_GTK2 := $(shell pkg-config --exists gtk+-2.0 && echo 'y' || echo 'n')
 	ifeq ($(HAVE_GTK2), y)
-		BINARIES += $(GTK_BINARIES)
-$(GTK_BINARIES): LDFLAGS += $(shell pkg-config --libs gtk+-2.0)
-$(GTK_BINARIES).o: CFLAGS += $(shell pkg-config --cflags gtk+-2.0)
+		PROGRAMS += $(GTK_PROGRAMS)
+$(GTK_PROGRAMS:%=%.bin): LDFLAGS += $(shell pkg-config --libs gtk+-2.0)
+$(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell pkg-config --cflags gtk+-2.0)
 	endif
 endif
 
-all: $(BINARIES)
+all: $(PROGRAMS:%=%.bin)
 
 clean:
-	rm -f *.o
-	rm -f $(ALL_BINARIES)
+	rm -f *.o *.bin kernel-x86-*.[ch]
 
-cpuid: cpuid.o
-gtk_alpha_window: gtk_alpha_window.o
-openmp_matrix: openmp_matrix.o
-view_sizes: view_sizes.o
+%.bin: %.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
 cpuid.o: cpuid_enum.h
@@ -64,9 +64,9 @@ update_cpuid: kernel-x86-cpufeature.h kernel-x86-cpu-scattered.c create_cpuid_en
 
 LINUX_URL := https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain
 kernel-x86-cpufeature.h:
-	$(WGET) -q -O $@ "$(LINUX_URL)/arch/x86/include/asm/cpufeature.h" || (rm $@ ; false)
+	$(WGET) -q -O $@ '$(LINUX_URL)/arch/x86/include/asm/cpufeature.h' || (rm $@ ; false)
 
 kernel-x86-cpu-scattered.c:
-	$(WGET) -q -O $@ "$(LINUX_URL)/arch/x86/kernel/cpu/scattered.c" || (rm $@ ; false)
+	$(WGET) -q -O $@ '$(LINUX_URL)/arch/x86/kernel/cpu/scattered.c' || (rm $@ ; false)
 
 .PHONY: all clean update_cpuid
