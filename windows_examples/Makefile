@@ -55,6 +55,7 @@ clean..%:
 helloworld_noimport.exe: LDFLAGS += -nostdlib -Wl,--nostdlib
 helloworld_noimport.o: CFLAGS += -nostdlib -fno-stack-protector
 check_internals.exe console%.exe list%.exe uuidgen.exe: LDFLAGS += -Wl,--subsystem=console
+list_processes.exe: LIBS += -lpsapi
 uuidgen.exe: LIBS += -lrpcrt4
 
 %.exe: %.o
