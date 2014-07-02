@@ -54,7 +54,7 @@ static LPCTSTR StringListNext(LPCTSTR str, LPCTSTR base, DWORD cchMax) {
     LPCTSTR end;
     end = _tcsninc(base, cchMax);
     assert(base && base <= str && str < end);
-    if (!str[0]){
+    if (!str[0]) {
         return NULL;
     }
     cchLength = _tcscnlen(str, cchMax);

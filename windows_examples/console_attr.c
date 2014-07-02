@@ -34,11 +34,11 @@ int _tmain()
     AllocConsole();
 
     hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-    if(hStdout == INVALID_HANDLE_VALUE){
+    if(hStdout == INVALID_HANDLE_VALUE) {
         print_winerr(_T("Unable to get hStdout"));
         return 1;
     }
-    if(!GetConsoleScreenBufferInfo(hStdout, &csbiInfo)){
+    if(!GetConsoleScreenBufferInfo(hStdout, &csbiInfo)) {
         print_winerr(_T("GetConsoleScreenBufferInfo"));
         return 1;
     }

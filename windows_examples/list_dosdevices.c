@@ -13,7 +13,8 @@
 /**
  * Wrap QueryDosDevice to allocate memory
  */
-static BOOL QueryDosDeviceWithAlloc(LPCTSTR lpDeviceName, LPTSTR *lppTargetPath, DWORD *pcchSize){
+static BOOL QueryDosDeviceWithAlloc(LPCTSTR lpDeviceName, LPTSTR *lppTargetPath, DWORD *pcchSize)
+{
     LPTSTR buffer = NULL;
     DWORD cchSize = 1024, cchRet;
 
