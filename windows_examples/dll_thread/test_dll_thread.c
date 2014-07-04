@@ -2,6 +2,7 @@
  * Test dll_thread.dll TLS interaction
  */
 #include <assert.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <windows.h>
 #include "dll_thread.h"
@@ -11,12 +12,12 @@
 /* Entry Point des threads */
 static DWORD WINAPI thread_main(LPVOID lpParam)
 {
-    int id = (int)lpParam;
+    int id = PtrToInt(lpParam);
     char *tls_buffer, *tls_buffer2;
 
     tls_buffer = dll_thread_tls_data();
 
-    printf("[Thread #%d] Spawned yet another thread with TLS buffer @%lx\n", id, (ULONG)tls_buffer);
+    printf("[Thread #%d] Spawned yet another thread with TLS buffer @%"PRIxPTR"\n", id, (ULONG_PTR)tls_buffer);
 
     /* Write something in the TLS buffer */
     snprintf(tls_buffer, DLL_TLS_SIZE, "Hey! This is thread %d!", id);
@@ -46,7 +47,7 @@ int main()
             NULL,                   /* default security attributes */
             0,                      /* use default stack size */
             thread_main,            /* thread function name */
-            (LPVOID)(i + 1),        /* argument to thread function */
+            IntToPtr(i + 1),        /* argument to thread function */
             0,                      /* use default creation flags */
             NULL);                  /* do not returns the thread identifier */
         if(hTreads[i] == NULL) {

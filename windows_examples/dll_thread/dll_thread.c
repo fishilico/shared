@@ -5,6 +5,7 @@
  *
  * Documentation: http://www.mingw.org/wiki/sampleDLL
 */
+#include <inttypes.h>
 #include <stdio.h>
 #include "dll_thread.h"
 
@@ -72,14 +73,14 @@ DLLIMPORT LPVOID dll_thread_tls_data(void)
 /**
  * DLL Entry Point
  */
-#define mainlog(format, ...) printf("[%s @%lx] " format "\n", __FUNCTION__, (ULONG)hinstDLL, ##__VA_ARGS__)
+#define mainlog(format, ...) printf("[%s @%"PRIxPTR"] " format "\n", __FUNCTION__, (ULONG_PTR)hinstDLL, ##__VA_ARGS__)
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, LPVOID lpvReserved);
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, __UNUSED_PARAM(LPVOID lpvReserved))
 {
     switch (dwReason) {
         case DLL_PROCESS_ATTACH:
-            mainlog("Process Attach from module @%lx (%s)",
-                (ULONG)GetModuleHandle(NULL),
+            mainlog("Process Attach from module @%"PRIxPTR" (%s)",
+                (ULONG_PTR)GetModuleHandle(NULL),
                 (lpvReserved != NULL) ? "static load" : "LoadLibrary call");
             g_dwTlsIndex = TlsAlloc();
             if (g_dwTlsIndex == TLS_OUT_OF_INDEXES) {

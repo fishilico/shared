@@ -102,7 +102,7 @@ int _tmain()
         CloseHandle(hThread);
 
         /* Assume the address of the command line fits a 32-bit pointer */
-        if (!ReadProcessMemory(hProcess, (LPVOID)dwRetAddr, szCmdLine, sizeof(szCmdLine), &cbRead)) {
+        if (!ReadProcessMemory(hProcess, ULongToPtr(dwRetAddr), szCmdLine, sizeof(szCmdLine), &cbRead)) {
             print_winerr(_T("ReadProcessMemory"));
             CloseHandle(hProcess);
             continue;

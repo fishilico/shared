@@ -17,9 +17,9 @@ ifneq ($(TARGET),)
 else
 	GCC ?= gcc
 endif
+CPPFLAGS ?=
 CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 \
 	-Wmissing-prototypes -Wno-unused-parameter -Wno-unused-function \
-	-Wno-pointer-to-int-cast -Wno-int-to-pointer-cast \
 	-fno-stack-protector
 LDFLAGS ?= -Wl,--enable-auto-image-base,--dynamicbase,--nxcompat
 
