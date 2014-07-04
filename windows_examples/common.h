@@ -36,6 +36,17 @@ static void print_winerr(LPCTSTR szMessage)
         (LPTSTR)&lpLastErrMsgBuf, 0, NULL)
     ) {
         lpLastErrMsgBuf = NULL;
+    } else {
+        /* Strip end of line */
+        size_t len = _tcslen(lpLastErrMsgBuf);
+        while (len > 0) {
+            len--;
+            TCHAR c = lpLastErrMsgBuf[len];
+            if (c != _T('\n') && c != _T('\r')) {
+                break;
+            }
+        }
+        lpLastErrMsgBuf[len] = 0;
     }
     _ftprintf(stderr, _T("%s: error %lu, %s\n"), szMessage, dwLastErr,
         lpLastErrMsgBuf ? lpLastErrMsgBuf : _T("(unknown)"));
