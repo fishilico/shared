@@ -48,7 +48,7 @@ int main()
         fprintf(stderr, "RW and RX mmaps don't share the same data\n");
         return 1;
     }
-    result = ( (int (*)())xptr )();
+    result = ( (int (*)())(uintptr_t)xptr )();
     if (result != 0) {
         fprintf(stderr, "Unexpected result: %d\n", result);
         return 1;

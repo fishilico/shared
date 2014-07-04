@@ -113,7 +113,7 @@ static void test_anon_wx_mmap()
     }
     printf("[ ] RWX mmap succeeded at %p, let's try to use it!\n", ptr);
     memcpy(ptr, CODE, sizeof(CODE));
-    result = ( (int (*)())ptr )();
+    result = ( (int (*)())(uintptr_t)ptr )();
     if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap-RWX");
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
@@ -146,7 +146,7 @@ static void test_anon_wx_mprotect()
         return;
     }
 
-    result = ( (int (*)())ptr )();
+    result = ( (int (*)())(uintptr_t)ptr )();
     if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap");
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
@@ -177,7 +177,7 @@ static void test_mmap_w_mprotect_x_fd(int fd)
         munmap(ptr, sizeof(CODE));
         return;
     }
-    result = ( (int (*)())ptr )();
+    result = ( (int (*)())(uintptr_t)ptr )();
     if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap");
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
@@ -225,7 +225,7 @@ static void test_mmap_rw_rx_fd(int fd)
     }
 
     /* Execute code */
-    result = ( (int (*)())xptr )();
+    result = ( (int (*)())(uintptr_t)xptr )();
     if (result == 0) {
 #if MMAP_WX_DUMP_MMAPS
         printf("[+] Code successfully executed. Dump /proc/self/maps\n");
