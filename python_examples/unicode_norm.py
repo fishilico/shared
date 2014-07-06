@@ -46,7 +46,7 @@ def normalize(unistr, form='NFKD', toascii=False):
     normstr = unicodedata.normalize(form, unistr)
     if toascii:
         # Encode unicode to ASCII bytes and return a string
-        return normstr.encode('ascii', errors='ignore').decode('ascii')
+        return normstr.encode('ascii', 'ignore').decode('ascii')
     else:
         # Encode unicode to bytes and return ASCII string
         ret = repr(normstr.encode('utf8'))
