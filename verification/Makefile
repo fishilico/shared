@@ -10,7 +10,7 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic -pipe \
 LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
 
 # Use Frama-C libc headers which contains ACSL annotations.
-FRAMAC_SHARE_PATH := $(shell frama-c -print-share-path)
+FRAMAC_SHARE_PATH := $(shell $(FRAMAC) -print-share-path)
 FRAMAC_CFLAGS := -nostdinc -I$(FRAMAC_SHARE_PATH)/libc -D__FRAMAC__
 FRAMAC_TMPDIR := /tmp/frama-c-$(id -u)
 
