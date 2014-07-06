@@ -35,7 +35,7 @@ def check_double_matrix(mat):
         return False
 
     # If the strides hasn't got the same number of elements, really weird
-    # things happened... Let's abort in such case
+    # things happened... Let's abort in such case
     assert len(mat.strides) == len(mat.shape)
 
     if mat.itemsize != SIZEOF_DOUBLE:
