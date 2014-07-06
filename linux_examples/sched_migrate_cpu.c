@@ -13,6 +13,58 @@
 #include <sys/types.h>
 #include <time.h>
 
+#if !defined CPU_ALLOC && !defined CPU_ZERO_S
+/* Define the _S API from the older one */
+#define CPU_ISSET_S(cpu, setsize, set) CPU_ISSET((cpu), (set))
+#define CPU_SET_S(cpu, setsize, set) do {(void)setsize; CPU_SET((cpu), (set));} while (0)
+#define CPU_CLR_S(cpu, setsize, set) do {(void)setsize; CPU_CLR((cpu), (set));} while (0)
+
+#define CPU_ZERO_S(setsize, set) CPU_ZERO((set))
+#define CPU_COUNT_S(setsize, set) _cpu_count_s((setsize), (set))
+static int _cpu_count_s(size_t setsize, cpu_set_t *set)
+{
+    int count = 0;
+    size_t i;
+    assert(setsize == sizeof(set->__bits));
+    for (i = 0; i < sizeof(set->__bits)/sizeof(set->__bits[0]); i++) {
+        __cpu_mask b;
+        for (b = set->__bits[i]; b; b >>= 1) {
+            if (b & 1) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+#define CPU_AND_S(setsize, destset, srcset1, srcset2) \
+    do { \
+        size_t i; \
+        assert((setsize) == sizeof((destset)->__bits)); \
+        for (i = 0; i < sizeof((destset)->__bits)/sizeof((destset)->__bits[0]); i++) { \
+            (destset)->__bits[i] = (srcset1)->__bits[i] & (srcset2)->__bits[i]; \
+        } \
+    } while (0)
+
+#define CPU_EQUAL_S(setsize, cpusetp1, cpusetp2) (!memcmp((cpusetp1), (cpusetp2), (setsize)))
+
+#define CPU_ALLOC_SIZE(count) ((void)(count), sizeof(cpu_set_t))
+#define CPU_ALLOC(count) malloc(CPU_ALLOC_SIZE((count)))
+#define CPU_FREE(set) free((set))
+
+#include <sys/syscall.h>
+#include <unistd.h>
+#define sched_getcpu() sched_getcpu_from_syscall()
+int sched_getcpu_from_syscall() {
+    unsigned int cpu = 0;
+    if (syscall(__NR_getcpu, &cpu, NULL, NULL) == -1) {
+        return -1;
+    }
+    assert(cpu <= INT_MAX);
+    return (int)cpu;
+}
+#endif
+
 /**
  * List available CPUs with sched_getaffinity
  * Fill set if not NULL and return the number of CPUs, or -1 on error.
