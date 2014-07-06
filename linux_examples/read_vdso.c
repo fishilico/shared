@@ -9,6 +9,7 @@
  */
 #include <assert.h>
 #include <elf.h>
+#include <inttypes.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -18,7 +19,7 @@
 #define ELF_ST_BIND(val) ELF64_ST_BIND(val)
 #define ELF_ST_TYPE(val) ELF64_ST_TYPE(val)
 #define ELF_ST_INFO(bind, type) ELF64_ST_INFO((bind), (type))
-#elif defined  __i386__
+#elif defined  __i386__ || defined __arm__
 #define DEFINE_ELF_STRUCT(name) typedef Elf32_##name Elf_##name
 #define ELF_ST_BIND(val) ELF32_ST_BIND(val)
 #define ELF_ST_TYPE(val) ELF32_ST_TYPE(val)
@@ -90,7 +91,7 @@ int main(int argc, char **argv)
         fprintf(stderr, "SYSINFO_EHDR not found in auxv\n");
         return 1;
     }
-    printf("vDSO header found @0x%lx\n", vdso_base);
+    printf("vDSO header found @0x%"PRIxPTR"\n", vdso_base);
 
     vdso_hdr = (Elf_Ehdr*)vdso_base;
     vdso_pt = (Elf_Phdr*)(vdso_base + vdso_hdr->e_phoff);
