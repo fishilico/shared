@@ -253,7 +253,7 @@ static void test_mmap_wx_dir(const char *dirname)
         return;
     }
 
-#ifdef O_TMPFILE
+#if defined O_TMPFILE && defined O_CLOEXEC
     fd = open(dirname, O_TMPFILE|O_RDWR|O_CLOEXEC|O_EXCL, S_IRUSR|S_IWUSR);
     if (fd >= 0) {
         /* Retrieve file name using procfs */
@@ -291,7 +291,7 @@ static void test_mmap_wx_dir(const char *dirname)
             fprintf(stderr, "[!] failed to unlink %s", filename);
             return;
         }
-#ifdef O_TMPFILE
+#if defined O_TMPFILE && defined O_CLOEXEC
     }
 #endif
 
