@@ -111,7 +111,11 @@ static gboolean expose(
     GdkWindow *window;
     cairo_t *cr;
 
+#if GTK_CHECK_VERSION(2, 14, 0)
     window = gtk_widget_get_window(widget);
+#else
+    window = widget->window;
+#endif
     cr = gdk_cairo_create(window);
 
     /* Select white color, semi-transparent if alpha is supported */
