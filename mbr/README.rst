@@ -108,7 +108,7 @@ Here are some useful BIOS interrupts:
     * Returns status in ``CF, AH`` and number of sectors read in ``AL``
 
   * ``AH = 0x08``: get drive parameters of drive number ``DL``. Returns:
-    
+
     * ``CF, AH`` = error/status
     * ``CH`` = low order byte of cylinder count (c7-0)
     * ``CL`` = sectors per track (6 bits) and bits c9-8 of cylinder count

@@ -1,6 +1,6 @@
 /**
  * Create a semi-transparent window with Gtk+
- * 
+ *
  * Original source code from:
  * http://stackoverflow.com/questions/3908565/how-to-make-gtk-window-background-transparent
  * Equivalent program in Python with gtk 3:
