@@ -3,6 +3,7 @@
 *.backup
 *.bak
 *.bin
+.*.cmd
 .*.d
 *.dll
 *.elf
@@ -15,6 +16,10 @@
 *.64
 __pycache__
 /c_examples/kernel-x86-*.[ch]
+/linux_examples/modules/*.mod.c
+/linux_examples/modules/Module.symvers
+/linux_examples/modules/modules.order
+/linux_examples/modules/.tmp_versions/
 /mmap-wx/mmap-wx
 /mmap-wx/mmap-wx-simple
 /nolibc/include/
