@@ -67,7 +67,7 @@ int sched_getcpu_from_syscall() {
 
 /**
  * List available CPUs with sched_getaffinity
- * Fill set if not NULL and return the number of CPUs, or -1 on error.
+ * Fill set if not NULL and return the number of CPUs, or 0 on error.
  */
 static unsigned long list_cpus_sched_affinity(cpu_set_t *set, size_t setsize)
 {
