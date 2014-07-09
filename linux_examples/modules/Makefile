@@ -1,4 +1,5 @@
 obj-m += hello_world.o
+obj-m += proc_setroot.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules

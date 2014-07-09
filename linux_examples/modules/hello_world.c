@@ -9,10 +9,6 @@
 #include <linux/printk.h>
 #include <linux/version.h>
 
-MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Nicolas Iooss");
-MODULE_DESCRIPTION("Simple kernel module which says hello and bye");
-
 static int num = 42;
 module_param(num, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 MODULE_PARM_DESC(num, "A number");
@@ -32,3 +28,6 @@ static void __exit hello_world_exit(void)
 
 module_init(hello_world_init);
 module_exit(hello_world_exit);
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Nicolas Iooss");
+MODULE_DESCRIPTION("Simple kernel module which says hello and bye");
