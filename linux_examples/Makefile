@@ -39,6 +39,7 @@ endif
 clean:
 	rm -f *.bin *.o *.so
 
+message_queue.bin: LDFLAGS += -lrt
 override_uname_dl.o: CFLAGS += -fPIC -shared -fvisibility=hidden
 override_uname_dl.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@ -ldl
 
