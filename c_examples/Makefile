@@ -5,7 +5,7 @@ WGET ?= wget
 # C preprocessor flags
 CPPFLAGS ?= -D_GNU_SOURCE -D_FORTIFY_SOURCE=2
 # C compiler flags
-CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic \
+CFLAGS ?= -O2 -Wall -W -Wextra -ansi \
 	-Wmissing-prototypes -Wno-unused-function -Wformat=2 \
 	-fstack-protector --param=ssp-buffer-size=4 -fPIE
 # Linker flags

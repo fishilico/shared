@@ -5,6 +5,7 @@
 #include <dirent.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <inttypes.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -84,7 +85,7 @@ int main()
             fprintf(stderr, "A component in the working directory is not a directory\n");
             goto cleanup;
         }
-        printf("  device %lu inode %ld (0x%08lx)\n", st.st_dev, st.st_ino, st.st_ino);
+        printf("  device %"PRIu64" inode %ld (0x%08lx)\n", st.st_dev, st.st_ino, st.st_ino);
 
         /* Find the entry in the directory enumeration */
         if (dirfd != AT_FDCWD) {
