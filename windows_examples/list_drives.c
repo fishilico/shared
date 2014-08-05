@@ -52,7 +52,7 @@ static BOOL enum_logical_drives(void)
     _tprintf(_T("Logical drives:"));
     for (i = 0; i < 26 && (dwLogicalDrives >> i); i++) {
         if ((dwLogicalDrives >> i) & 1) {
-            _tprintf(_T(" %c"), 'A' + i);
+            _tprintf(_T(" %c"), 'A' + (char)i);
         }
     }
     if (dwLogicalDrives >> i) {

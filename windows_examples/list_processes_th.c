@@ -27,6 +27,9 @@ int _tmain()
 
         _tprintf(_T("PID %lu, PPID %lu: %s (%ld thread(s))\n"),
             pe32.th32ProcessID, pe32.th32ParentProcessID, pe32.szExeFile, pe32.cntThreads);
+        if (!pe32.th32ProcessID) {
+            continue;
+        }
 
         /* Take a snapshot of the modules of the given process */
         hModuleSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pe32.th32ProcessID);

@@ -87,7 +87,10 @@ int _tmain()
     nProcesses = cbSize / sizeof(DWORD);
     for (i = 0; i < nProcesses; i++) {
         DWORD dwPid = pProcessIds[i];
-        assert(dwPid);
+        if (!dwPid) {
+            _tprintf(_T("PID %lu: skipped\n"), dwPid);
+            continue;
+        }
         hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, dwPid);
         if(!hProcess) {
             if (GetLastError() == ERROR_ACCESS_DENIED) {

@@ -109,7 +109,7 @@ int _tmain()
         }
         assert(cbRead <= sizeof(szCmdLine));
         szCmdLine[ARRAYSIZE(szCmdLine) - 1] = 0;
-        _tprintf(_T("PID %lu: %s\n"), pe32.th32ProcessID, szCmdLine);
+        wprintf(L"PID %lu: %s\n", pe32.th32ProcessID, szCmdLine);
         CloseHandle(hProcess);
     } while (Process32Next(hProcessSnap, &pe32));
     CloseHandle(hProcessSnap);
