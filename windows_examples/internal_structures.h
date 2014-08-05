@@ -6,6 +6,11 @@
 
 #include <windows.h>
 
+/* Define a custom static assert if none is provided */
+#ifndef _STATIC_ASSERT
+#define _STATIC_ASSERT(cond) ((void)sizeof(char[1 - 2*!(cond)]))
+#endif
+
 /**
  * winnt.h provides NtCurrentTeb to retrieve the Thread Environment Block, which
  * lies in special locations (in fs segment on 32-bits x86, gs on x86_64, and at

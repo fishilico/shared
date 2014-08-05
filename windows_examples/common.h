@@ -20,6 +20,11 @@
 #include <stdio.h>
 #include <tchar.h>
 
+/* Define ARRAYSIZE if not found */
+#ifndef ARRAYSIZE
+#define ARRAYSIZE(a) (sizeof(a)/sizeof((a)[0]))
+#endif
+
 /**
  * Print the last Windows error
  */
@@ -68,7 +73,11 @@ static LPCTSTR StringListNext(LPCTSTR str, LPCTSTR base, DWORD cchMax) {
     if (!str[0]) {
         return NULL;
     }
+#ifdef _tcscnlen
     cchLength = _tcscnlen(str, cchMax);
+#else
+    cchLength = min(_tcslen(str), cchMax);
+#endif
     str = _tcsninc(str, cchLength + 1);
     assert(str < end);
     return str;
