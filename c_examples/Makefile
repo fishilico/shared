@@ -9,7 +9,7 @@ CFLAGS ?= -O2 -Wall -W -Wextra -ansi \
 	-Wmissing-prototypes -Wno-unused-function -Wformat=2 \
 	-fstack-protector --param=ssp-buffer-size=4 -fPIE
 # Linker flags
-LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie
+LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie -fstack-protector
 
 # Programs which need specific options
 OPENMP_PROGRAMS := openmp_matrix
