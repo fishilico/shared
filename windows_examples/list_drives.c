@@ -4,8 +4,10 @@
 #define _WIN32_WINNT 0x0500 /* Needed for FindFirstVolume... in winbase.h */
 #include "common.h"
 
+#if (_WIN32_WINNT >= 0x0501)
 /* Wrap GetVolumePathNamesForVolumeName to allocate memory */
 _ParamStringBufSizeToAlloc1(GetVolumePathNamesForVolumeName, LPCTSTR, lpszVolumeName);
+#endif
 
 static LPCTSTR DescribeDriveType(UINT type)
 {
@@ -137,6 +139,7 @@ static BOOL enum_volumes(void)
     do {
         _tprintf(_T("* %s\n"), szVolumeName);
 
+#if (_WIN32_WINNT >= 0x0501)
         /* Get volume paths */
         lpszVolumePathNames = GetVolumePathNamesForVolumeName_a(szVolumeName, &cchLength);
         if (!lpszVolumePathNames) {
@@ -147,6 +150,12 @@ static BOOL enum_volumes(void)
             _tprintf(_T("  - Volume Path Name: %s\n"), szItem);
         }
         HeapFree(GetProcessHeap(), 0, lpszVolumePathNames);
+#else
+        /* Mark variable as used */
+        (void)lpszVolumePathNames;
+        (void)szItem;
+        (void)cchLength;
+#endif
 
         /* Find mount points */
         hFindMP = FindFirstVolumeMountPoint(szVolumeName, szVolumeMountPoint, ARRAYSIZE(szVolumeMountPoint));
