@@ -34,7 +34,11 @@ int _tmain()
         /* Take a snapshot of the modules of the given process */
         hModuleSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pe32.th32ProcessID);
         if (hModuleSnap == INVALID_HANDLE_VALUE) {
-            print_winerr(_T("CreateToolhelp32Snapshot(Module)"));
+            if (GetLastError() == ERROR_ACCESS_DENIED) {
+                _tprintf(_T("  - Access denied\n"));
+            } else {
+                print_winerr(_T("CreateToolhelp32Snapshot(Module)"));
+            }
             continue;
         }
         me32.dwSize = sizeof(MODULEENTRY32);

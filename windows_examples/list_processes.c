@@ -22,7 +22,7 @@ static BOOL EnumProcessesWithAlloc(PDWORD *ppProcessIds, DWORD *pcbSize)
         }
         cbRet = 0;
         if (!EnumProcesses(pProcessIds, cbSize, &cbRet)) {
-            print_winerr(_T("HeapAlloc"));
+            print_winerr(_T("EnumProcesses"));
             HeapFree(GetProcessHeap(), 0, pProcessIds);
             return FALSE;
         }
@@ -45,7 +45,7 @@ static BOOL EnumProcessesWithAlloc(PDWORD *ppProcessIds, DWORD *pcbSize)
 static BOOL EnumProcessModulesWithAlloc(HANDLE hProcess, HMODULE **pphModules, DWORD *pcbSize)
 {
     HMODULE *phModules = NULL;
-    DWORD cbSize = 1024, cbRet;
+    DWORD cbSize = 4096, cbRet;
 
     assert(pphModules && pcbSize);
     do {

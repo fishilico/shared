@@ -130,8 +130,7 @@ static BOOL ListWindowsRec(HWND hwndParent, DWORD nIndent)
     }
 
     for (i = 0; i < wininfos.nCount; i++) {
-        HANDLE hModule;
-        WINDOW_INFORMATIONS *pInfo = &wininfos.infos[i];
+        const WINDOW_INFORMATIONS *pInfo = &wininfos.infos[i];
         for (j = 0; j < nIndent; j++) {
             _tprintf(_T("  "));
         }
@@ -142,9 +141,14 @@ static BOOL ListWindowsRec(HWND hwndParent, DWORD nIndent)
         if (pInfo->szTitle) {
             _tprintf(_T(" \"%s\""), pInfo->szTitle);
         }
-        hModule = (pInfo->hModule) ? pInfo->hModule : pInfo->hInstance;
-        assert(!pInfo->hInstance || pInfo->hInstance == hModule);
-        _tprintf(_T(" PID %lu TID %lu module @%p\n"), pInfo->dwProcessId, pInfo->dwThreadId, hModule);
+        _tprintf(_T(" PID %lu TID %lu"), pInfo->dwProcessId, pInfo->dwThreadId);
+        if (pInfo->hModule) {
+             _tprintf(_T(" module @%p"), pInfo->hModule);
+        }
+        if (pInfo->hInstance && pInfo->hInstance != pInfo->hModule) {
+            _tprintf(_T(" instance @%p"), pInfo->hInstance);
+        }
+        _tprintf(_T("\n"));
         if (!ListWindowsRec(pInfo->hwnd, nIndent + 1)) {
             bRet = FALSE;
             goto cleanup;

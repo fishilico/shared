@@ -161,8 +161,12 @@ static BOOL enum_volumes(void)
         hFindMP = FindFirstVolumeMountPoint(szVolumeName, szVolumeMountPoint, ARRAYSIZE(szVolumeMountPoint));
         if (hFindMP == INVALID_HANDLE_VALUE) {
             err = GetLastError();
-            if (err != ERROR_NO_MORE_FILES && err != ERROR_CALL_NOT_IMPLEMENTED) {
-                print_winerr(_T("FindFirstVolume"));
+            if (err == ERROR_ACCESS_DENIED) {
+                _tprintf(_T("  - Mount Point: access denied\n"));
+            } else if (err == ERROR_NOT_READY) {
+                _tprintf(_T("  - Mount Point: not ready\n"));
+            } else if (err != ERROR_NO_MORE_FILES && err != ERROR_CALL_NOT_IMPLEMENTED) {
+                print_winerr(_T("FindFirstVolumeMountPoint"));
                 FindVolumeClose(hFindVol);
                 return FALSE;
             }
@@ -171,7 +175,7 @@ static BOOL enum_volumes(void)
                 _tprintf(_T("  - Mount Point: %s\n"), szVolumeMountPoint);
                 bSuccess = FindNextVolumeMountPoint(hFindMP, szVolumeMountPoint, ARRAYSIZE(szVolumeMountPoint));
                 if (!bSuccess && GetLastError() != ERROR_NO_MORE_FILES) {
-                    print_winerr(_T("FindNextVolume"));
+                    print_winerr(_T("FindNextVolumeMountPoint"));
                     break; /* Non-fatal error */
                 }
             } while (bSuccess);
