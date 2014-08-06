@@ -13,9 +13,9 @@ else
 endif
 
 ifneq ($(TARGET),)
-	GCC := $(TARGET)-gcc
+	WINCC := $(TARGET)-gcc
 else
-	GCC ?= gcc
+	WINCC ?= gcc
 endif
 CPPFLAGS ?=
 CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 \
@@ -30,13 +30,13 @@ clean:
 
 # Either "dll_thread.dll" or "-L. -ldll_thread" are available to the linker
 test_dll_thread.exe: test_dll_thread.o dll_thread.dll
-	$(GCC) $(LDFLAGS) -Wl,--subsystem=console -o $@ $^
+	$(WINCC) $(LDFLAGS) -Wl,--subsystem=console -o $@ $^
 
 %.dll: %.o
-	$(GCC) $(LDFLAGS) -shared -o $@ $^ -Wl,--subsystem=0,--out-implib,lib$*.a
+	$(WINCC) $(LDFLAGS) -shared -o $@ $^ -Wl,--subsystem=0,--out-implib,lib$*.a
 
 dll_thread.o: CPPFLAGS += -DBUILDING_DLL
 %.o: %.c dll_thread.h
-	$(GCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(WINCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean

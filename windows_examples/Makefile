@@ -13,9 +13,9 @@ else
 endif
 
 ifneq ($(TARGET),)
-	GCC := $(TARGET)-gcc
+	WINCC := $(TARGET)-gcc
 else
-	GCC ?= gcc
+	WINCC ?= gcc
 endif
 
 CPPFLAGS ?=
@@ -27,7 +27,7 @@ LIBS ?=
 
 
 # Enable Unicode if available
-ifeq ($(shell $(GCC) -municode -E - < /dev/null > /dev/null 2>&1 && echo y),y)
+ifeq ($(shell $(WINCC) -municode -E - < /dev/null > /dev/null 2>&1 && echo y),y)
 CPPFLAGS += -D_UNICODE
 CFLAGS += -municode
 LDFLAGS += -municode
@@ -43,11 +43,11 @@ ALL_TARGETS := $(addprefix all.., $(SUBDIRS))
 CLEAN_TARGETS := $(addprefix clean.., $(SUBDIRS))
 
 # Compile things only if windows.h can be included
-ifeq ($(shell $(GCC) -E helloworld.c > /dev/null 2>&1 && echo y),y)
+ifeq ($(shell $(WINCC) -E helloworld.c > /dev/null 2>&1 && echo y),y)
 all: $(BINARIES) $(ALL_TARGETS)
 else
 all:
-	@echo "Skip compilation as $(GCC) can't compile helloworld.c."
+	@echo "Skip compilation as $(WINCC) can't compile helloworld.c."
 endif
 
 all..%:
@@ -66,9 +66,9 @@ list_processes.exe: LIBS += -lpsapi
 uuidgen.exe: LIBS += -lrpcrt4
 
 %.exe: %.o
-	$(GCC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c $(HEADERS)
-	$(GCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(WINCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all all..% clean clean..%
