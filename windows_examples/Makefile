@@ -18,13 +18,20 @@ else
 	GCC ?= gcc
 endif
 
-CPPFLAGS ?= -D_UNICODE
-# Disable stack protector as it requires linking with libssp DLL, not always provided
+CPPFLAGS ?=
 CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 \
 	-Wmissing-prototypes -Wno-unused-parameter -Wno-unused-function \
-	-fno-stack-protector -municode
-LDFLAGS ?= -Wl,--subsystem=windows,--dynamicbase,--nxcompat -municode
+	-fstack-protector --param=ssp-buffer-size=4
+LDFLAGS ?= -Wl,--subsystem=windows,--dynamicbase,--nxcompat -fstack-protector
 LIBS ?=
+
+
+# Enable Unicode if available
+ifeq ($(shell $(GCC) -municode -E - < /dev/null > /dev/null 2>&1 && echo y),y)
+CPPFLAGS += -D_UNICODE
+CFLAGS += -municode
+LDFLAGS += -municode
+endif
 
 SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
