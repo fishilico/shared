@@ -6,7 +6,7 @@
 
 #if (_WIN32_WINNT >= 0x0501)
 /* Wrap GetVolumePathNamesForVolumeName to allocate memory */
-_ParamStringBufSizeToAlloc1(GetVolumePathNamesForVolumeName, LPCTSTR, lpszVolumeName);
+_ParamStringBufSizeToAlloc1(GetVolumePathNamesForVolumeName, LPCTSTR, lpszVolumeName)
 #endif
 
 static LPCTSTR DescribeDriveType(UINT type)

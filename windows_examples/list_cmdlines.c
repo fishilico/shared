@@ -11,8 +11,6 @@
  *      IN DWORD dwCreationFlags,
  *      OUT LPDWORD lpThreadId
  *  );
-);
-
  */
 #include "common.h"
 #include <tlhelp32.h>
