@@ -18,6 +18,9 @@ else
 	WINCC ?= gcc
 endif
 
+# Note: when using the stack protector with wine, libssp-0.dll needs to be found
+# by the loader.  On Arch Linux, this can be done with:
+#   ln -s /usr/x86_64-w64-mingw32/bin/libssp-0.dll ~/.wine/drive_c/windows/system32/
 CPPFLAGS ?=
 CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 \
 	-Wmissing-prototypes -Wno-unused-parameter -Wno-unused-function \
