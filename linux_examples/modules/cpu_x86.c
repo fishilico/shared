@@ -104,6 +104,26 @@ static void dump_x86_msr(void)
 	show_efer_bit(msr, SVME, "Virtualization Enable");
 	show_efer_bit(msr, LMSLE, "Long Mode Segment Limit Enable");
 	show_efer_bit(msr, FFXSR, "Fast FXSAVE/FXRSTOR");
+
+	rdmsrl(MSR_IA32_SYSENTER_CS, msr);
+	pr_info("msr:ia32_sysenter_CS = 0x%llx\n", msr);
+	rdmsrl(MSR_IA32_SYSENTER_ESP, msr);
+	pr_info("msr:ia32_sysenter_ESP = 0x%llx\n", msr);
+	rdmsrl(MSR_IA32_SYSENTER_EIP, msr);
+	pr_info("msr:ia32_sysenter_EIP = 0x%llx (%pS)\n", msr, (void*)msr);
+
+	/* http://wiki.osdev.org/SYSENTER
+	 * Setup in /usr/src/linux/arch/x86/kernel/cpu/common.c
+	 */
+	rdmsrl(MSR_STAR, msr);
+	pr_info("msr:star = user32 CS 0x%llx, kernel CS 0x%llx, EIP 0x%llx\n",
+		msr >> 48, (msr >> 32) & 0xffff, msr & 0xffffffff);
+	rdmsrl(MSR_LSTAR, msr); /* Long mode */
+	pr_info("msr:lstar = 0x%llx (%pS)\n", msr, (void*)msr);
+	rdmsrl(MSR_CSTAR, msr); /* Compatibility mode */
+	pr_info("msr:cstar = 0x%llx (%pS)\n", msr, (void*)msr);
+	rdmsrl(MSR_SYSCALL_MASK, msr);
+	pr_info("msr:sfmask = 0x%llx\n", msr);
 #endif
 }
 
@@ -111,7 +131,7 @@ static void dump_x86_segments(void)
 {
 	unsigned long seg;
 	savesegment(cs, seg);
-	pr_info("CS = 0x%04lx\n", seg);
+	pr_info("CS = 0x%04lx (kernel CS is 0x%04x)\n", seg, __KERNEL_CS);
 	savesegment(ds, seg);
 	pr_info("DS = 0x%04lx (current thread: 0x%04x)\n", seg, current->thread.ds);
 	savesegment(es, seg);
@@ -121,7 +141,7 @@ static void dump_x86_segments(void)
 	savesegment(gs, seg);
 	pr_info("GS = 0x%04lx (current thread: 0x%04x)\n", seg, current->thread.gsindex);
 	savesegment(ss, seg);
-	pr_info("SS = 0x%04lx\n", seg);
+	pr_info("SS = 0x%04lx (kernel DS is 0x%04x)\n", seg, __KERNEL_DS);
 }
 
 static void dump_x86_tables(void)
@@ -305,6 +325,10 @@ static void dump_x86_tables(void)
 			else if (i == SPURIOUS_APIC_VECTOR)
 				comment = "Spurious APIC Vector";
 
+			/* Skip unknown vectors */
+			if (!comment[0])
+				continue;
+
 			/* http://wiki.osdev.org/Interrupts_Descriptor_Table */
 			type = idt[i].type;
 			pr_info(" 0x%02x: seg 0x%x offset %p%s%s\n",
@@ -357,9 +381,6 @@ static void dump_x86_tables(void)
 					break;
 				plus = strchr(sym, '+');
 				if (plus && plus[1] == '0' && plus[2] == 'x') {
-					/* Do not display symbols with offset */
-					if (plus[3] != '0')
-						break;
 					/* Remove "+0x0" offset */
 					if (plus[3] == '0' && plus[4] == '/')
 						*plus = '\0';
