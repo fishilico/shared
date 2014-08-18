@@ -7,7 +7,7 @@ clean:
 
 # Either "dll_thread.dll" or "-L. -ldll_thread" are available to the linker
 test_dll_thread.exe: test_dll_thread.o dll_thread.dll
-	$(WINCC) $(LDFLAGS) -Wl,--subsystem=console -o $@ $^
+	$(WINCC) $(LDFLAGS) -o $@ $^
 
 %.dll: %.o
 	$(WINCC) $(LDFLAGS) -shared -o $@ $^ -Wl,--subsystem=0,--out-implib,lib$*.a
