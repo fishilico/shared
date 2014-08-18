@@ -17,7 +17,7 @@ static void perror_exit(const char *s)
     exit(1);
 }
 
-int main()
+int main(void)
 {
     const char template[] = "./mmap-wx-XXXXXX";
     /* "xor %eax,%eax ; ret" in x86  */
@@ -48,7 +48,7 @@ int main()
         fprintf(stderr, "RW and RX mmaps don't share the same data\n");
         return 1;
     }
-    result = ( (int (*)())(uintptr_t)xptr )();
+    result = ( (int (*)(void))(uintptr_t)xptr )();
     if (result != 0) {
         fprintf(stderr, "Unexpected result: %d\n", result);
         return 1;

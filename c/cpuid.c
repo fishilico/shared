@@ -61,7 +61,7 @@ static void print_features(const char *name, uint32_t bits, const char* const cp
     printf("\n");
 }
 
-int main()
+int main(void)
 {
     char vendor_str[13] = {0};
     uint32_t max_code, max_extcode;
@@ -133,7 +133,7 @@ int main()
 }
 
 #else
-int main()
+int main(void)
 {
     fprintf(stderr, "cpuid not implemented on this architecture :(\n");
     return 255;

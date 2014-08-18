@@ -34,7 +34,7 @@ static char *getcwd_a(void)
     return buffer;
 }
 
-int main()
+int main(void)
 {
     char *wd;
     const char *path_part;

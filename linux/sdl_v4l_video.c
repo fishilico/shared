@@ -246,7 +246,7 @@ static void uyvy2yv12(
     }
 }
 
-int main()
+int main(void)
 {
     unsigned int width, height, fps, new_w, new_h;
     int result;

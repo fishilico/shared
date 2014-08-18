@@ -69,7 +69,7 @@ static const char TEMPFILE_SUFFIX[] = "/mmap-wx-tmpXXXXXX";
 /**
  * Dump current memory mappings
  */
-static void dump_proc_maps()
+static void dump_proc_maps(void)
 {
     char buffer[4096];
     int fd;
@@ -98,7 +98,7 @@ static void dump_proc_maps()
 /**
  * Test doing an anonymous RWX mapping, which is denied by grsecurity kernel
  */
-static void test_anon_wx_mmap()
+static void test_anon_wx_mmap(void)
 {
     void *ptr;
     int result;
@@ -113,7 +113,7 @@ static void test_anon_wx_mmap()
     }
     printf("[ ] RWX mmap succeeded at %p, let's try to use it!\n", ptr);
     memcpy(ptr, CODE, sizeof(CODE));
-    result = ( (int (*)())(uintptr_t)ptr )();
+    result = ( (int (*)(void))(uintptr_t)ptr )();
     if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap-RWX");
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
@@ -125,7 +125,7 @@ static void test_anon_wx_mmap()
 /**
  * Test doing an anonymous RW mapping which then becomes executable
  */
-static void test_anon_wx_mprotect()
+static void test_anon_wx_mprotect(void)
 {
     int result;
     void *ptr;
@@ -146,7 +146,7 @@ static void test_anon_wx_mprotect()
         return;
     }
 
-    result = ( (int (*)())(uintptr_t)ptr )();
+    result = ( (int (*)(void))(uintptr_t)ptr )();
     if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap");
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
@@ -177,7 +177,7 @@ static void test_mmap_w_mprotect_x_fd(int fd)
         munmap(ptr, sizeof(CODE));
         return;
     }
-    result = ( (int (*)())(uintptr_t)ptr )();
+    result = ( (int (*)(void))(uintptr_t)ptr )();
     if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap");
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
@@ -225,7 +225,7 @@ static void test_mmap_rw_rx_fd(int fd)
     }
 
     /* Execute code */
-    result = ( (int (*)())(uintptr_t)xptr )();
+    result = ( (int (*)(void))(uintptr_t)xptr )();
     if (result == 0) {
 #if MMAP_WX_DUMP_MMAPS
         printf("[+] Code successfully executed. Dump /proc/self/maps\n");
@@ -307,13 +307,13 @@ static void test_mmap_wx_dir(const char *dirname)
     close(fd);
 }
 
-int main()
+int main(void)
 {
     /* Disable stdout buffering */
     setvbuf(stdout, NULL, _IONBF, 0);
 
     /* Check that data and function pointers have the same size */
-    assert(sizeof(int (*)()) == sizeof(void*));
+    assert(sizeof(int (*)(void)) == sizeof(void*));
 
     test_anon_wx_mmap();
     test_anon_wx_mprotect();

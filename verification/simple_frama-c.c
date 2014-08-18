@@ -71,7 +71,7 @@ static void swap_int(int *pa, int *pb)
 /*@ assigns \nothing;
   @ ensures \result == 0;
   @*/
-int main()
+int main(void)
 {
     int a, b;
     char buffer1[42], buffer2[20];

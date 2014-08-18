@@ -94,7 +94,7 @@ static bool test_open_by_handle_with_name(const char *pathname, bool is_file)
     return result;
 }
 
-int main()
+int main(void)
 {
     if (!test_open_by_handle_with_name("/", false))
         return 1;
@@ -107,7 +107,7 @@ int main()
     return 0;
 }
 #else /* MAX_HANDLE_SZ */
-int main()
+int main(void)
 {
     fprintf(stderr, "name_to_handle_at and open_by_handle_at seem to be unsupported by your libc.\n");
     return 1;

@@ -59,7 +59,7 @@ static void _print_type_size(const char *name, size_t size)
 
 #define print_type_size(type) _print_type_size(#type, sizeof(type))
 
-int main()
+int main(void)
 {
     print_machine();
     printf("Integer types:\n");

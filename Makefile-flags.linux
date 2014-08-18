@@ -17,6 +17,7 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 	-Wmissing-prototypes \
 	-Wpointer-arith \
 	-Wshadow \
+	-Wstrict-prototypes \
 	-Wtrampolines \
 	-Wwrite-strings \
 	-Wno-unused-function \

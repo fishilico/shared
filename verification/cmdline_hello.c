@@ -49,7 +49,7 @@ int real_main(int argc, char **argv);
 /*@ assigns *__fc_stdout;
   @ ensures \result == 0;
   @*/
-int main()
+int main(void)
 {
     return real_main(*main_argc, (char**)main_argv);
 }

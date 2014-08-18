@@ -12,7 +12,7 @@
 
 #define NUM_CHILDS 7
 
-int main()
+int main(void)
 {
     int efd;
     pid_t pids[NUM_CHILDS];

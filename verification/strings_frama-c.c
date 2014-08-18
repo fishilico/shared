@@ -202,7 +202,7 @@ static bool is_valid_cstring(const char *str, size_t len)
 /*@ // TODO: assigns \nothing;
   @ ensures \result == 0;
   @*/
-int main()
+int main(void)
 {
     const char helloworld[] = "Hello, world!";
     char buffer_small[6];
