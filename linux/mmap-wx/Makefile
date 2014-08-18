@@ -12,7 +12,7 @@ clean:
 	rm -f *.bin *.o
 
 %.bin: %.o
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $^

@@ -15,7 +15,7 @@ PROGRAMS := $(filter-out $(SDL_PROGRAMS) $(SECCOMP_PROGRAMS), $(ALL_PROGRAMS))
 HAVE_SDL := $(shell $(PKG_CONFIG) --exists sdl && echo 'y' || echo 'n')
 ifeq ($(HAVE_SDL), y)
 	PROGRAMS += $(SDL_PROGRAMS)
-$(SDL_PROGRAMS:%=%.bin): LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl)
+$(SDL_PROGRAMS:%=%.bin): LIBS += $(shell $(PKG_CONFIG) --libs sdl)
 $(SDL_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags sdl)
 endif
 
@@ -47,12 +47,13 @@ clean: $(CLEAN_TARGETS)
 clean..%:
 	$(MAKE) -C $* clean
 
-message_queue.bin: LDFLAGS += -lrt
+message_queue.bin: LIBS += -lrt
 override_uname_dl.o: CFLAGS += -fPIC -shared -fvisibility=hidden
-override_uname_dl.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@ -ldl
+override_uname_dl.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@
+override_uname_dl.so: LIBS += -ldl
 
 %.bin %.so: %.o
-	$(CC) -o $@ $^ $(LDFLAGS)
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<

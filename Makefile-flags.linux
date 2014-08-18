@@ -26,3 +26,5 @@ CFLAGS ?= -O2  -ansi -pipe \
 # Linker flags
 LDFLAGS ?= -Wl,-as-needed,-no-undefined,-z,relro,-z,now \
 	-fPIE -pie -fstack-protector
+
+LIBS ?=

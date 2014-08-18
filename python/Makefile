@@ -43,7 +43,7 @@ _cffi_example.so: CPPFLAGS += -D_CFFI_EXAMPLE_EXPORTS
 _cffi_example.so: CFLAGS += -fPIC -shared
 _cffi_example.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@
 _cffi_example.so: _cffi_example.o
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 _cffi_example.o: _cffi_example.c cffi_example.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<

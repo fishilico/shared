@@ -41,13 +41,13 @@ endif
 HAVE_GTK3 := $(shell $(PKG_CONFIG) --exists gtk+-3.0 && echo 'y' || echo 'n')
 ifeq ($(HAVE_GTK3), y)
 	PROGRAMS += $(GTK_PROGRAMS)
-$(GTK_PROGRAMS:%=%.bin): LDFLAGS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
+$(GTK_PROGRAMS:%=%.bin): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
 $(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0)
 else
 	HAVE_GTK2 := $(shell $(PKG_CONFIG) --exists gtk+-2.0 && echo 'y' || echo 'n')
 	ifeq ($(HAVE_GTK2), y)
 		PROGRAMS += $(GTK_PROGRAMS)
-$(GTK_PROGRAMS:%=%.bin): LDFLAGS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
+$(GTK_PROGRAMS:%=%.bin): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
 $(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0)
 	endif
 endif
@@ -58,7 +58,7 @@ clean:
 	rm -f *.o *.bin *.exe kernel-x86-*.[ch]
 
 %$(BIN_EXT): %.o
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 cpuid.o: cpuid_enum.h
 %.o: %.c
