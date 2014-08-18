@@ -33,7 +33,7 @@ test: _cffi_example.so
 	$(PYTHON) cffi_numpy.py
 
 _cffi_example.so: CPPFLAGS += -D_CFFI_EXAMPLE_EXPORTS
-_cffi_example.so: CFLAGS += -fPIC -shared
+_cffi_example.so: CFLAGS += -fPIC
 _cffi_example.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@
 _cffi_example.so: _cffi_example.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)

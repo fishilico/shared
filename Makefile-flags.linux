@@ -18,13 +18,17 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 	-Wpointer-arith \
 	-Wshadow \
 	-Wstrict-prototypes \
-	-Wtrampolines \
 	-Wwrite-strings \
 	-Wno-unused-function \
 	-fPIE  \
 	-fno-exceptions \
 	-fstack-protector --param=ssp-buffer-size=4 \
 	-fvisibility=hidden
+
+# Add GCC-specific options unknown to clang
+ifeq ($(shell $(CC) -Wtrampolines -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+CFLAGS += -Wtrampolines
+endif
 
 # Linker flags
 LDFLAGS ?= -Wl,-as-needed,-no-undefined,-z,relro,-z,now \

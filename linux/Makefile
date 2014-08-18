@@ -48,7 +48,7 @@ clean..%:
 	$(MAKE) -C $* clean
 
 message_queue.bin: LIBS += -lrt
-override_uname_dl.o: CFLAGS += -fPIC -shared -fvisibility=hidden
+override_uname_dl.o: CFLAGS += -fPIC -fvisibility=hidden
 override_uname_dl.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@
 override_uname_dl.so: LIBS += -ldl
 
