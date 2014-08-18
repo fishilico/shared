@@ -37,9 +37,44 @@ static void _show_sid(
     LocalFree(szSid);
 }
 
+/*
+ * As some definitions may happen not to be defined, use preprocessor
+ * stringification process to detect undefined constants.
+ */
+#define _show_sid_ifdef(d, a, n, sa0, sa1, sa2, sa3, sa4, sa5, sa6, sa7, name, value) \
+    do { \
+        if (!strncmp(#value, "SECURITY_", 9)) { \
+            _tprintf(_T("%-12s = %s\n"), _T("??? (undef)"), d); \
+        } else { \
+            DWORD _dwSa = 0, _base = 10; \
+            const char *_v = #value; \
+            while (*_v == '(') { \
+                _v++; \
+            } \
+            if (_v[0] == '0' && _v[1] == 'x') { \
+                _base = 16; \
+                _v += 2; \
+            } \
+            while (*_v && *_v != ')' && *_v != 'l') { \
+                if (*_v >= '0' && *_v <= '9') { \
+                    _dwSa = _dwSa * _base + (DWORD)(*_v - '0'); \
+                } else if (*_v >= 'a' && *_v <= 'f') { \
+                    _dwSa = _dwSa * _base + (DWORD)(*_v - 'a'); \
+                } else if (*_v >= 'A' && *_v <= 'F') { \
+                    _dwSa = _dwSa * _base + (DWORD)(*_v - 'A'); \
+                } else { \
+                    _tprintf(_T("%-12s : error parsing %s value, %s\n"), name, #value); \
+                    ExitProcess(EXIT_FAILURE); \
+                } \
+                _v++; \
+            } \
+            _show_sid(d, a, n, sa0, sa1, sa2, sa3, sa4, sa5, sa6, sa7); \
+        } \
+    } while(0)
+
 #define show_sid0(d, a) _show_sid(d, a, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#define show_sid1(d, a, sa0) _show_sid(d, a, 1, sa0, 0, 0, 0, 0, 0, 0, 0)
-#define show_sid2(d, a, sa0, sa1) _show_sid(d, a, 2, sa0, sa1, 0, 0, 0, 0, 0, 0)
+#define show_sid1(d, a, sa0) _show_sid_ifdef(d, a, 1, _dwSa, 0, 0, 0, 0, 0, 0, 0, #sa0, sa0)
+#define show_sid2(d, a, sa0, sa1) _show_sid_ifdef(d, a, 2, sa0, _dwSa, 0, 0, 0, 0, 0, 0, #sa1, sa1)
 
 int _tmain()
 {
