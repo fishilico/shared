@@ -2,6 +2,7 @@
  * Override uname return value with environment variables
  */
 #include <dlfcn.h>
+#include <inttypes.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -30,7 +31,7 @@ int EXPORT_FUNC uname(struct utsname *buf)
     int ret;
     uname_t real_uname;
 
-    real_uname = (uname_t)dlsym(RTLD_NEXT, __FUNCTION__);
+    real_uname = (uname_t)(intptr_t)dlsym(RTLD_NEXT, __FUNCTION__);
     if (!real_uname) {
         fprintf(stderr, "dlsym(%s): %s", __FUNCTION__, dlerror());
         exit(EXIT_FAILURE);

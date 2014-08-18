@@ -299,7 +299,7 @@ int main(int argc, char **argv)
                 perror("time");
                 return 1;
             }
-            printf("... active loop for %.3lf seconds\n", duration);
+            printf("... active loop for %.3f seconds\n", duration);
             do {
                 if (time(&now) == (time_t) -1) {
                     perror("time");

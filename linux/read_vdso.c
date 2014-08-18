@@ -106,10 +106,10 @@ int main(int argc, char **argv)
         fprintf(stderr, "Unable to find PT_LOAD and PT_DYNAMIC is vDSO header\n");
         return 1;
     }
-    printf("* EHDR = %p\n", vdso_hdr);
-    printf("* PHDR = %p\n", vdso_pt);
+    printf("* EHDR = %p\n", (void*)vdso_hdr);
+    printf("* PHDR = %p\n", (void*)vdso_pt);
     printf("* PT_LOAD = %p\n", (void*)vdso_load_offset);
-    printf("* PT_DYNAMIC = %p\n", vdso_dyn);
+    printf("* PT_DYNAMIC = %p\n", (void*)vdso_dyn);
 
     /* Gather information from PT_DYNAMIC header */
     for (i = 0; vdso_dyn[i].d_tag != DT_NULL; i++) {

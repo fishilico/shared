@@ -5,9 +5,6 @@ SED ?= sed
 SH ?= sh
 WGET ?= wget
 
-# Be pedantic, because we can!
-CFLAGS += -pedantic
-
 # Disable some features because linking is done without the standard library
 NOLIBC_CFLAGS := -fno-exceptions -fno-stack-protector
 NOLIBC_LDFLAGS := -nostdlib -e _start
