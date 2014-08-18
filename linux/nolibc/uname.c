@@ -1,7 +1,9 @@
 /**
  * Print name and information about current kernel
  */
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <sys/utsname.h>
 #include "nolibc-syscall-linux.h"
 

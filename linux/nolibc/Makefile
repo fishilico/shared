@@ -1,18 +1,16 @@
-CC ?= cc
+include ../../Makefile-flags.linux
+
 GREP ?= grep
 SED ?= sed
 SH ?= sh
 WGET ?= wget
 
-# C preprocessor flags
-CPPFLAGS ?= -D_FORTIFY_SOURCE=2
-# C compiler flags
-CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic -pipe \
-	-Wmissing-prototypes -Wno-unused-function -Wformat=2 -Wpointer-arith \
-	-Winit-self -Wwrite-strings -Wno-shadow \
-	-fno-exceptions -fno-stack-protector -fvisibility=hidden
-# Linker flags
-LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined
+# Be pedantic, because we can!
+CFLAGS += -pedantic
+
+# Disable some features because linking is done without the standard library
+NOLIBC_CFLAGS := -fno-exceptions -fno-stack-protector
+NOLIBC_LDFLAGS := -nostdlib -e _start
 
 # Use custom include dir if it exists
 CFLAGS += $(shell [ -d include ] && echo '-I./include')
@@ -28,13 +26,9 @@ CFLAGS += -fPIE
 LDFLAGS += -fPIE -pie
 endif
 
-# Force linking without the standard library
-override LDFLAGS += -nostdlib -e _start
-
 # Files
 SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
-OBJECTS :=
 
 # Compile 32-bits versions and 64-bits versions, if available.
 # Check with a header because the compiler may accept -m32 even if headers are
@@ -44,6 +38,7 @@ HAVE_M32 := $(shell echo '\#include <linux/types.h>' | \
 	$(CC) -m32 -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
 HAVE_M64 := $(shell echo '\#include <linux/types.h>' | \
 	$(CC) -m64 -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
+OBJECTS :=
 ifeq ($(HAVE_M32),y)
 OBJECTS += $(SOURCES:%.c=%.32.o)
 else
@@ -71,22 +66,22 @@ clean:
 	rm -f *.out *.32 *.64
 
 %.out: %.out.o
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) $(NOLIBC_LDFLAGS) -o $@ $^
 
 %.32: %.32.o
-	$(CC) $(LDFLAGS) -m32 -o $@ $^
+	$(CC) $(LDFLAGS) $(NOLIBC_LDFLAGS) -m32 -o $@ $^
 
 %.64: %.64.o
-	$(CC) $(LDFLAGS) -m64 -o $@ $^
+	$(CC) $(LDFLAGS) $(NOLIBC_LDFLAGS) -m64 -o $@ $^
 
 %.out.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 %.32.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -m32 -c -o $@ $<
+	$(CC) $(CFLAGS) $(NOLIBC_CFLAGS) $(CPPFLAGS) -m32 -c -o $@ $<
 
 %.64.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -m64 -c -o $@ $<
+	$(CC) $(CFLAGS) $(NOLIBC_CFLAGS) $(CPPFLAGS) -m64 -c -o $@ $<
 
 
 # Make an "include" directory, when no system header is available

@@ -115,7 +115,7 @@ static ssize_t write(int fd, const void *buf, size_t count)
 /**
  * Exit current process
  */
-static void __attribute__((noreturn)) exit(int status)
+static void __attribute__((noreturn)) nolibc_exit(int status)
 {
     while(1) {
 #ifdef __NR_exit_group
@@ -124,6 +124,7 @@ static void __attribute__((noreturn)) exit(int status)
         syscall1(__NR_exit, status);
     }
 }
+#define exit(status) nolibc_exit(status) /* Be fine with -Wshadow */
 
 /**
  * Read a file in a buffer, looping if the call is interrupted
@@ -160,7 +161,7 @@ static int write_all(int fd, const char *buf, size_t count)
 /**
  * Get the length of a string
  */
-static size_t strlen(const char *str)
+static size_t nolibc_strlen(const char *str)
 {
     /* This is really inefficient but works */
     const char *ptr = str;
@@ -169,6 +170,7 @@ static size_t strlen(const char *str)
     }
     return (size_t)(ptr - str);
 }
+#define strlen(str) nolibc_strlen(str) /* Be fine with -Wshadow */
 
 /**
  * Write a nul-terminated string to file descriptor fd
