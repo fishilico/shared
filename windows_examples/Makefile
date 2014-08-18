@@ -30,6 +30,7 @@ check_winmain_params.exe helloworld.exe helloworld_noimport.exe: LDFLAGS += -Wl,
 helloworld_noimport.exe: LDFLAGS += -nostdlib -Wl,--nostdlib
 helloworld_noimport.o: CFLAGS += -nostdlib -fno-stack-protector
 list_processes.exe: LIBS += -lpsapi
+network_stat.exe: LIBS += -liphlpapi -lws2_32
 uuidgen.exe: LIBS += -lrpcrt4
 
 %.exe: %.o

@@ -25,6 +25,21 @@
 #define ARRAYSIZE(a) (sizeof(a)/sizeof((a)[0]))
 #endif
 
+/* Stringify a value like an integer */
+#ifndef STR
+#define _STR(x) #x
+#define STR(x) _STR(x)
+#endif
+
+/* Print format for ANSI and wide-char string in _tprintf */
+#if defined(UNICODE)
+#define PRIsA "S"
+#define PRIsW "s"
+#else
+#define PRIsA "s"
+#define PRIsW "S"
+#endif
+
 /**
  * Print the last Windows error
  */
