@@ -1,4 +1,4 @@
-include ../../Makefile-flags.windows
+include ../../windows-flags.mk
 
 SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)

@@ -1,4 +1,4 @@
-include ../Makefile-flags.linux
+include ../linux-flags.mk
 
 PKG_CONFIG ?= pkg-config
 

@@ -5,14 +5,14 @@ WGET ?= wget
 
 # Use Linux or Windows flags depending on the host
 ifeq ($(OS), Windows_NT)
-include ../Makefile-flags.windows
+include ../windows-flags.mk
 BIN_EXT := .exe
 CC = $(WINCC)
 else
 BIN_EXT := .bin
 UNAME_s := $(shell $(UNAME) -s)
 ifeq ($(UNAME_s), Linux)
-include ../Makefile-flags.linux
+include ../linux-flags.mk
 endif
 endif
 

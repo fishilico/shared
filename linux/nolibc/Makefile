@@ -1,4 +1,4 @@
-include ../../Makefile-flags.linux
+include ../../linux-flags.mk
 
 GREP ?= grep
 SED ?= sed

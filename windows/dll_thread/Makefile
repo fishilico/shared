@@ -1,4 +1,4 @@
-include ../../Makefile-flags.windows
+include ../../windows-flags.mk
 
 all: dll_thread.dll test_dll_thread.exe
 

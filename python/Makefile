@@ -1,4 +1,4 @@
-include ../Makefile-flags.linux
+include ../linux-flags.mk
 
 PYTHON ?= python
 PEP8 ?= pep8
