@@ -135,4 +135,65 @@ static LPCTSTR StringListNext(LPCTSTR str, LPCTSTR base, DWORD cchMax) {
         return pszBuffer; \
     }
 
+#define _ParamStringBufInOutSizeToAlloc2(f, type1, param1, type2, param2) \
+    static LPTSTR f##_a(type1 param1, type2 param2, PDWORD pcchReturnLength) \
+    { \
+        BOOL bSuccess; \
+        LPTSTR pszBuffer; \
+        DWORD cchLength = 0, cchLength2 = 0; \
+        if (pcchReturnLength) { \
+            *pcchReturnLength = 0; \
+        } else { \
+            pcchReturnLength = &cchLength2; \
+        } \
+        bSuccess = f(param1, param2, NULL, &cchLength); \
+        if (bSuccess) { \
+            _ftprintf(stderr, _T(#f": unexpected success\n")); \
+            return NULL; \
+        } \
+        pszBuffer = HeapAlloc(GetProcessHeap(), 0, cchLength * sizeof(TCHAR)); \
+        if (!pszBuffer) { \
+            print_winerr(_T("HeapAlloc")); \
+            return NULL; \
+        } \
+        *pcchReturnLength = cchLength; \
+        bSuccess = f(param1, param2, pszBuffer, pcchReturnLength); \
+        if (!bSuccess) { \
+            print_winerr(_T(#f)); \
+            HeapFree(GetProcessHeap(), 0, pszBuffer); \
+            return NULL; \
+        } \
+        assert(*pcchReturnLength <= cchLength); \
+        return pszBuffer; \
+    }
+
+#define _ParamBufSizeToAlloc2(f, type1, param1, type2, param2) \
+    static LPVOID f##_a(type1 param1, type2 param2, PDWORD pcbReturnLength) \
+    { \
+        BOOL bSuccess; \
+        LPVOID pBuffer; \
+        DWORD cbLength = 0; \
+        if (pcbReturnLength) { \
+            *pcbReturnLength = 0; \
+        } \
+        bSuccess = f(param1, param2, NULL, 0, &cbLength); \
+        if (bSuccess) { \
+            _ftprintf(stderr, _T(#f": unexpected success\n")); \
+            return NULL; \
+        } \
+        pBuffer = HeapAlloc(GetProcessHeap(), 0, cbLength); \
+        if (!pBuffer) { \
+            print_winerr(_T("HeapAlloc")); \
+            return NULL; \
+        } \
+        bSuccess = f(param1, param2, pBuffer, cbLength, pcbReturnLength); \
+        if (!bSuccess) { \
+            print_winerr(_T(#f)); \
+            HeapFree(GetProcessHeap(), 0, pBuffer); \
+            return NULL; \
+        } \
+        assert(!pcbReturnLength || *pcbReturnLength <= cbLength); \
+        return pBuffer; \
+    }
+
 #endif /* WINDOWS_EXAMPLES_COMMON_H */
