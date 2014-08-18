@@ -1,7 +1,6 @@
-CC ?= cc
-PKG_CONFIG ?= pkg-config
-
 include ../Makefile-flags.linux
+
+PKG_CONFIG ?= pkg-config
 
 # Programs which need specific options
 SDL_PROGRAMS := sdl_v4l_video
@@ -26,15 +25,27 @@ ifeq ($(HAVE_SECCOMP), y)
 	PROGRAMS += $(SECCOMP_PROGRAMS)
 endif
 
+# Include subdirectories
+SUBMAKEFILES := $(wildcard */Makefile)
+SUBDIRS := $(filter-out modules, $(SUBMAKEFILES:%/Makefile=%))
+ALL_TARGETS := $(addprefix all.., $(SUBDIRS))
+CLEAN_TARGETS := $(addprefix clean.., $(SUBDIRS))
+
 ifeq ($(shell uname -s), Linux)
-all: $(PROGRAMS:%=%.bin) $(SHARED_OBJECTS)
+all: $(PROGRAMS:%=%.bin) $(SHARED_OBJECTS) $(ALL_TARGETS)
 else
 all:
 	@echo "Skip compilation on a non-Linux system."
 endif
 
-clean:
+all..%:
+	$(MAKE) -C $* all
+
+clean: $(CLEAN_TARGETS)
 	rm -f *.bin *.o *.so
+
+clean..%:
+	$(MAKE) -C $* clean
 
 message_queue.bin: LDFLAGS += -lrt
 override_uname_dl.o: CFLAGS += -fPIC -shared -fvisibility=hidden
@@ -46,4 +57,4 @@ override_uname_dl.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@ -ldl
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-.PHONY: all clean
+.PHONY: all all..% clean clean..%

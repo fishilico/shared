@@ -11,7 +11,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-void perror_exit(const char *s)
+static void perror_exit(const char *s)
 {
     perror(s);
     exit(1);
