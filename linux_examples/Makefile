@@ -1,10 +1,7 @@
 CC ?= cc
+PKG_CONFIG ?= pkg-config
 
-CPPFLAGS ?= -D_GNU_SOURCE -D_FORTIFY_SOURCE=2
-CFLAGS ?= -O2 -Wall -W -Wextra -ansi \
-	-Wmissing-prototypes -Wno-unused-function -Wformat=2 \
-	-fstack-protector --param=ssp-buffer-size=4 -fPIE
-LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
+include ../Makefile-flags.linux
 
 # Programs which need specific options
 SDL_PROGRAMS := sdl_v4l_video
@@ -16,11 +13,11 @@ SOURCES := $(wildcard *.c)
 ALL_PROGRAMS := $(filter-out $(SHARED_OBJECTS:%.so=%), $(SOURCES:%.c=%))
 PROGRAMS := $(filter-out $(SDL_PROGRAMS) $(SECCOMP_PROGRAMS), $(ALL_PROGRAMS))
 
-HAVE_SDL := $(shell pkg-config --exists sdl && echo 'y' || echo 'n')
+HAVE_SDL := $(shell $(PKG_CONFIG) --exists sdl && echo 'y' || echo 'n')
 ifeq ($(HAVE_SDL), y)
 	PROGRAMS += $(SDL_PROGRAMS)
-$(SDL_PROGRAMS:%=%.bin): LDFLAGS += $(shell pkg-config --libs sdl)
-$(SDL_PROGRAMS:%=%.o): CFLAGS += $(shell pkg-config --cflags sdl)
+$(SDL_PROGRAMS:%=%.bin): LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl)
+$(SDL_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags sdl)
 endif
 
 HAVE_SECCOMP := $(shell echo '\#include <linux/seccomp.h>' | \

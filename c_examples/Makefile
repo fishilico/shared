@@ -1,15 +1,20 @@
-CC ?= cc
+PKG_CONFIG ?= pkg-config
 SH ?= sh
+UNAME ?= uname
 WGET ?= wget
 
-# C preprocessor flags
-CPPFLAGS ?= -D_GNU_SOURCE -D_FORTIFY_SOURCE=2
-# C compiler flags
-CFLAGS ?= -O2 -Wall -W -Wextra -ansi \
-	-Wmissing-prototypes -Wno-unused-function -Wformat=2 \
-	-fstack-protector --param=ssp-buffer-size=4 -fPIE
-# Linker flags
-LDFLAGS ?= -Wl,-z,relro,-z,now -fPIE -pie -fstack-protector
+# Use Linux or Windows flags depending on the host
+ifeq ($(OS), Windows_NT)
+include ../Makefile-flags.windows
+BIN_EXT := .exe
+CC = $(WINCC)
+else
+BIN_EXT := .bin
+UNAME_s := $(shell $(UNAME) -s)
+ifeq ($(UNAME_s), Linux)
+include ../Makefile-flags.linux
+endif
+endif
 
 # Programs which need specific options
 OPENMP_PROGRAMS := openmp_matrix
@@ -33,26 +38,26 @@ $(OPENMP_PROGRAMS:%=%.o): CFLAGS += -fopenmp
 endif
 endif
 
-HAVE_GTK3 := $(shell pkg-config --exists gtk+-3.0 && echo 'y' || echo 'n')
+HAVE_GTK3 := $(shell $(PKG_CONFIG) --exists gtk+-3.0 && echo 'y' || echo 'n')
 ifeq ($(HAVE_GTK3), y)
 	PROGRAMS += $(GTK_PROGRAMS)
-$(GTK_PROGRAMS:%=%.bin): LDFLAGS += $(shell pkg-config --libs gtk+-3.0)
-$(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell pkg-config --cflags gtk+-3.0)
+$(GTK_PROGRAMS:%=%.bin): LDFLAGS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
+$(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0)
 else
-	HAVE_GTK2 := $(shell pkg-config --exists gtk+-2.0 && echo 'y' || echo 'n')
+	HAVE_GTK2 := $(shell $(PKG_CONFIG) --exists gtk+-2.0 && echo 'y' || echo 'n')
 	ifeq ($(HAVE_GTK2), y)
 		PROGRAMS += $(GTK_PROGRAMS)
-$(GTK_PROGRAMS:%=%.bin): LDFLAGS += $(shell pkg-config --libs gtk+-2.0)
-$(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell pkg-config --cflags gtk+-2.0)
+$(GTK_PROGRAMS:%=%.bin): LDFLAGS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
+$(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0)
 	endif
 endif
 
-all: $(PROGRAMS:%=%.bin)
+all: $(PROGRAMS:%=%$(BIN_EXT))
 
 clean:
-	rm -f *.o *.bin kernel-x86-*.[ch]
+	rm -f *.o *.bin *.exe kernel-x86-*.[ch]
 
-%.bin: %.o
+%$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
 cpuid.o: cpuid_enum.h

@@ -5,6 +5,7 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include <windows.h>
+#include <tchar.h>
 #include "dll_thread.h"
 
 #define NUM_THREADS 5
@@ -31,7 +32,7 @@ static DWORD WINAPI thread_main(LPVOID lpParam)
     return 0;
 }
 
-int main()
+int _tmain()
 {
     int i;
     HANDLE hTreads[NUM_THREADS];

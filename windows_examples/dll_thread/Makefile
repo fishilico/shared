@@ -1,27 +1,4 @@
-# Find a C compiler for windows
-ifneq ($(shell mingw32-gcc --version 2> /dev/null),)
-	TARGET := mingw32
-else
-	ARCH := $(shell uname -m)
-	ifneq ($(shell $(ARCH)-w64-mingw32-gcc --version 2> /dev/null),)
-		TARGET := $(ARCH)-w64-mingw32
-	else
-		ifneq ($(shell $(ARCH)-w32-mingw32-gcc --version 2> /dev/null),)
-			TARGET := $(ARCH)-w32-mingw32
-		endif
-	endif
-endif
-
-ifneq ($(TARGET),)
-	WINCC := $(TARGET)-gcc
-else
-	WINCC ?= gcc
-endif
-CPPFLAGS ?=
-CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 \
-	-Wmissing-prototypes -Wno-unused-parameter -Wno-unused-function \
-	-fno-stack-protector
-LDFLAGS ?= -Wl,--enable-auto-image-base,--dynamicbase,--nxcompat
+include ../../Makefile-flags.windows
 
 all: dll_thread.dll test_dll_thread.exe
 
