@@ -13,6 +13,7 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 	-Wfloat-equal \
 	-Wformat=2 \
 	-Winit-self \
+	-Wmissing-declarations \
 	-Wmissing-prototypes \
 	-Wpointer-arith \
 	-Wshadow \
@@ -20,6 +21,7 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 	-Wwrite-strings \
 	-Wno-unused-function \
 	-fPIE  \
+	-fno-exceptions \
 	-fstack-protector --param=ssp-buffer-size=4 \
 	-fvisibility=hidden
 

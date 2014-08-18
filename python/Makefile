@@ -1,11 +1,4 @@
-CC ?= gcc
-CPPFLAGS ?= -D_GNU_SOURCE -D_FORTIFY_SOURCE=2
-CFLAGS ?= -g -pipe -O2 -ansi -pedantic \
-	-Wall -W -Wextra -Wformat=2 -Wpointer-arith -Winit-self \
-	-Wmissing-prototypes -Wmissing-declarations -Wwrite-strings -Wshadow \
-	-fstack-protector --param=ssp-buffer-size=4 \
-	-fno-exceptions -fvisibility=hidden
-LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined
+include ../Makefile-flags.linux
 
 PYTHON ?= python
 PEP8 ?= pep8
