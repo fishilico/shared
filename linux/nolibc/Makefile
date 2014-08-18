@@ -6,7 +6,7 @@ SH ?= sh
 WGET ?= wget
 
 # Disable some features because linking is done without the standard library
-NOLIBC_CFLAGS := -fno-exceptions -fno-stack-protector
+NOLIBC_CFLAGS := -fno-builtin -fno-stack-protector
 NOLIBC_LDFLAGS := -nostdlib -e _start
 
 # Use custom include dir if it exists
