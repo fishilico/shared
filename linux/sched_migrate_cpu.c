@@ -293,7 +293,7 @@ int main(int argc, char **argv)
         }
 
         /* Do a busy wait in a loop if a number of seconds is given */
-        if (duration) {
+        if (duration > 0) {
             time_t start_time, now;
             if (time(&start_time) == (time_t) -1) {
                 perror("time");
