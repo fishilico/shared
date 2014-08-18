@@ -91,7 +91,7 @@ static BOOL enum_logical_drives(void)
         } else {
             _tprintf(_T("  - Volume Name: %s\n"), szVolumeName);
             _tprintf(_T("  - Volume Serial Number: x%08lx\n"), dwVolumeSerialNumber);
-            _tprintf(_T("  - Maximum Component Length: %ld\n"), dwMaximumComponentLength);//Taille entre deux slashes
+            _tprintf(_T("  - Maximum Component Length: %lu\n"), dwMaximumComponentLength);
             _tprintf(_T("  - FS Name: %s\n"), szFileSystemNameBuffer);
             _tprintf(_T("  - FS Flags: x%08lx\n"), dwFileSystemFlags);
 #define print_flag(mask, name) do { if (dwFileSystemFlags&(mask)) _tprintf(_T("      "#name"\n"));} while (0)
