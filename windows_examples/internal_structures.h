@@ -75,9 +75,8 @@ typedef struct _CLIENT_ID {
     HANDLE UniqueThread;
 } CLIENT_ID, *PCLIENT_ID;
 
-#ifndef _NT_TIB_DEFINED
-#define _NT_TIB_DEFINED
-typedef struct _NT_TIB {
+/* NT_TIB conflicts with a definition in winnt.h header from MinGW */
+typedef struct _NT_TIB_redef {
     struct _EXCEPTION_REGISTRATION_RECORD *ExceptionList;
     PVOID StackBase;
     PVOID StackLimit;
@@ -88,8 +87,8 @@ typedef struct _NT_TIB {
     };
     PVOID ArbitraryUserPointer;
     struct _NT_TIB *Self;
-} NT_TIB, *PNT_TIB;
-#endif
+} NT_TIB_redef, *PNT_TIB_redef;
+#define NT_TIB NT_TIB_redef
 
 #pragma pack(push,1)
 typedef struct _TEB_internal {
