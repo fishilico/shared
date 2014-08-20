@@ -107,6 +107,8 @@ Here are some useful BIOS interrupts:
     * ``ES:BX`` = pointer to buffer
     * Returns status in ``CF, AH`` and number of sectors read in ``AL``
 
+  * ``AH = 0x03``: write disk sectors. Same parameters as for ``AH = 0x02``.
+
   * ``AH = 0x08``: get drive parameters of drive number ``DL``. Returns:
 
     * ``CF, AH`` = error/status
@@ -116,7 +118,37 @@ Here are some useful BIOS interrupts:
     * ``DL`` = number of drives attached
     * ``ES:DI`` = ?
 
-* Interrupt ``0x18``, Boot Fault Routine
+* Interrupt ``0x16``, keyboard services:
+
+  * ``AH = 0x00``: read a character from keyboard (wait key). Returns:
+
+    * ``AH`` = BIOS scan code
+    * ``AL`` = ASCII character
+
+  * ``AH = 0x01``: check for keyboard buffer. Returns:
+
+    * ``ZF`` = 0 is a keystroke is available, 1 otherwise
+    * ``AH`` = BIOS scan code
+    * ``AL`` = ASCII character
+
+  * ``AH = 0x02``: read keyboard shift status
+
+* Interrupt ``0x18``, Boot Fault Routine.
+
+* Interrupt ``0x19``, system reboot.
+
+* Interrupt ``0x1A``, Real Time Clock (RTC) services:
+
+  * ``AH = 0x00``: read RTC (get system time)
+
+    * ``AL``: midnight counter
+    * ``CX:DX``: number of clock ticks since midnight
+
+  * ``AH = 0x01``: set RTC
+  * ``AH = 0x02``: read RTC time
+  * ``AH = 0x03``: set RTC time
+  * ``AH = 0x04``: read RTC date
+  * ``AH = 0x05``: set RTC date
 
 
 Tips
@@ -137,4 +169,7 @@ To disassemble a boot record with ``objdump``, you may do::
 Some websites:
 
 * Syslinux MBR implementation: http://git.kernel.org/cgit/boot/syslinux/syslinux.git/tree/mbr
-* Wikipedia article: http://en.wikipedia.org/wiki/Master_boot_record
+* GRUB boot record: http://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/boot/i386/pc/diskboot.S
+* Wikipedia MBR article: http://en.wikipedia.org/wiki/Master_boot_record
+* Wikipedia BIOS interrupts: http://en.wikipedia.org/wiki/BIOS_interrupt_call
+* Linux boot sector for x86: https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/x86/boot/header.S
