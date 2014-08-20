@@ -1,5 +1,10 @@
 /**
  * Display cpuid's information
+ *
+ * gcc defines __cpuid and __cpuid_count macros in cpuid.h:
+ * https://gcc.gnu.org/git/gitweb.cgi?p=gcc.git;a=blob;f=gcc/config/i386/cpuid.h
+ * and glibc uses these macros to retrieve CPU cache information:
+ * https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/x86_64/cacheinfo.c
  */
 #include <stdint.h>
 #include <stdio.h>
