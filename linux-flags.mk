@@ -25,9 +25,17 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 	-fstack-protector --param=ssp-buffer-size=4 \
 	-fvisibility=hidden
 
+# Uncomment the next line to enable debug
+#CFLAGS += -g -fvar-tracking-assignments -fno-omit-frame-pointer
+
 # Add GCC-specific options unknown to clang
 ifeq ($(shell $(CC) -Wtrampolines -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 CFLAGS += -Wtrampolines
+endif
+
+# Add string stack protector if supported
+ifeq ($(shell $(CC) -fstack-protector-strong -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+CFLAGS += -fstack-protector-strong
 endif
 
 # Linker flags
