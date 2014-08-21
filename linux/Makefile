@@ -25,27 +25,10 @@ ifeq ($(HAVE_SECCOMP), y)
 	PROGRAMS += $(SECCOMP_PROGRAMS)
 endif
 
-# Include subdirectories
-SUBMAKEFILES := $(wildcard */Makefile)
-SUBDIRS := $(filter-out modules, $(SUBMAKEFILES:%/Makefile=%))
-ALL_TARGETS := $(addprefix all.., $(SUBDIRS))
-CLEAN_TARGETS := $(addprefix clean.., $(SUBDIRS))
+all: $(PROGRAMS:%=%.bin) $(SHARED_OBJECTS)
 
-ifeq ($(shell uname -s), Linux)
-all: $(PROGRAMS:%=%.bin) $(SHARED_OBJECTS) $(ALL_TARGETS)
-else
-all:
-	@echo "Skip compilation on a non-Linux system."
-endif
-
-all..%:
-	$(MAKE) -C $* all
-
-clean: $(CLEAN_TARGETS)
+clean:
 	rm -f *.bin *.o *.so
-
-clean..%:
-	$(MAKE) -C $* clean
 
 message_queue.bin: LIBS += -lrt
 override_uname_dl.o: CFLAGS += -fPIC -fvisibility=hidden
@@ -58,4 +41,4 @@ override_uname_dl.so: LIBS += -ldl
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-.PHONY: all all..% clean clean..%
+.PHONY: all clean
