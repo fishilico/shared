@@ -26,9 +26,7 @@ clean: $(CLEAN_TARGETS)
 clean..%:
 	$(MAKE) -C $* clean
 
-check_winmain_params.exe helloworld.exe helloworld_noimport.exe: LDFLAGS += -Wl,--subsystem=windows
-helloworld_noimport.exe: LDFLAGS += -nostdlib -Wl,--nostdlib
-helloworld_noimport.o: CFLAGS += -nostdlib -fno-stack-protector
+check_winmain_params.exe helloworld.exe: LDFLAGS += -Wl,--subsystem=windows
 list_processes.exe: LIBS += -lpsapi
 network_stat.exe: LIBS += -liphlpapi -lws2_32
 uuidgen.exe: LIBS += -lrpcrt4
