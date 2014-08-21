@@ -1,13 +1,7 @@
-CC ?= cc
+include ../linux-flags.mk
+
 # Use FRAMAC=frama-c-gui to use the gui
 FRAMAC ?= frama-c
-
-CPPFLAGS ?= -D_FORTIFY_SOURCE=2
-CFLAGS ?= -O2 -Wall -W -Wextra -ansi -pedantic -pipe \
-	-Wmissing-prototypes -Wno-unused-function -Wformat=2 -Wpointer-arith \
-	-Winit-self -Wwrite-strings -Wno-shadow \
-	-fno-exceptions -fno-stack-protector -fvisibility=hidden -fPIE
-LDFLAGS ?= -Wl,-z,relro,-z,now,--no-undefined -fPIE -pie
 
 # Use Frama-C libc headers which contains ACSL annotations.
 FRAMAC_SHARE_PATH := $(shell $(FRAMAC) -print-share-path)
@@ -15,11 +9,8 @@ FRAMAC_CFLAGS := -nostdinc -I$(FRAMAC_SHARE_PATH)/libc -D__FRAMAC__
 FRAMAC_TMPDIR := /tmp/frama-c-$(id -u)
 
 SOURCES := $(wildcard *.c)
-HEADERS := $(wildcard *.h)
-OBJECTS :=
-
 OBJECTS := $(SOURCES:%.c=%.o)
-BINARIES := $(OBJECTS:%.o=%.out)
+BINARIES := $(OBJECTS:%.o=%.bin)
 FRAMAC_TARGETS := $(SOURCES:%.c=%.frama)
 
 all: $(BINARIES)
@@ -27,10 +18,13 @@ all: $(BINARIES)
 all-frama: $(FRAMAC_TARGETS)
 
 clean:
-	rm -f *.o *.out
+	rm -f *.bin *.o
 
-%.out: %.o
-	$(CC) $(LDFLAGS) -o $@ $^
+%.bin: %.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+# some files redefine C built-in functions strlen and memcpy
+%.o: CFLAGS += -fno-builtin
 
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
