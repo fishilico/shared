@@ -28,6 +28,16 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 # Uncomment the next line to enable debug
 #CFLAGS += -g -fvar-tracking-assignments -fno-omit-frame-pointer
 
+# Add clang-specific options unknown to GCC
+ifeq ($(shell $(CC) -Weverything -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+CFLAGS += -Weverything \
+	-Wno-disabled-macro-expansion \
+	-Wno-documentation \
+	-Wno-padded \
+	-Wno-shift-sign-overflow \
+	-Wno-unused-macros
+endif
+
 # Add GCC-specific options unknown to clang
 ifeq ($(shell $(CC) -Wtrampolines -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 CFLAGS += -Wtrampolines
