@@ -29,7 +29,7 @@ static bool read_active_tty(int active_tty_fd, bool is_changed)
             return false;
         }
         assert(bytes >= 0);
-        count += bytes;
+        count += (size_t)bytes;
     } while (bytes && count < sizeof(buffer));
     if (count >= sizeof(buffer)) {
         fprintf(stderr, "Error: active tty file too big");

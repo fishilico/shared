@@ -16,7 +16,7 @@ void _start(void)
         exit(1);
     }
     while ((rdlen = read_buffer(fd, buffer, sizeof(buffer))) > 0) {
-        if (!write_all(1, buffer, rdlen)) {
+        if (!write_all(1, buffer, (size_t)rdlen)) {
             write_cstring(2, "Error: failed writing to the standard output\n");
             close(fd);
             exit(1);

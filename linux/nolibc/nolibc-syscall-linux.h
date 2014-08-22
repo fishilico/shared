@@ -153,7 +153,7 @@ static int write_all(int fd, const char *buf, size_t count)
             return 0;
         }
         buf += ret;
-        count -= ret;
+        count -= (size_t)ret;
     }
     return 1;
 }

@@ -112,7 +112,7 @@ static size_t strlen(const char *str)
         p++;
         /*@ ghost c++; */
     }
-    return p - str;
+    return (size_t)(p - str);
 }
 
 /*@ requires valid_dst: size == 0 || \valid(dest + (0..size - 1));

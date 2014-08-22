@@ -101,7 +101,7 @@ int main(int argc, char **argv)
         goto cleanup;
     }
     while (--attr.mq_curmsgs >= 0) {
-        recv_size = mq_receive(mqdes, buffer, attr.mq_msgsize, &prio);
+        recv_size = mq_receive(mqdes, buffer, (size_t)attr.mq_msgsize, &prio);
         if (recv_size == -1) {
             perror("mq_receive");
             goto cleanup;

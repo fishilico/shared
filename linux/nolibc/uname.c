@@ -67,6 +67,6 @@ void _start(void)
     ptr = stplcpy(ptr, text_domainname, sizeof(text_domainname) - 1);
     ptr = stplcpy(ptr, name.domainname, sizeof(name.domainname));
     *ptr++ = '\n';
-    write_all(1, buffer, ptr - buffer);
+    write_all(1, buffer, (size_t)(ptr - buffer));
     exit(0);
 }

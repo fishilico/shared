@@ -34,7 +34,7 @@ static bool same_content(int fd1, int fd2)
             return false;
         }
 
-        if (size1 != size2 || memcmp(buffer1, buffer2, size1)) {
+        if (size1 != size2 || memcmp(buffer1, buffer2, (size_t)size1)) {
             return false;
         }
     } while (size1 > 0 && size2 > 0);

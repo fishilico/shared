@@ -23,7 +23,7 @@ static void print_escaped_ascii(const char *prefix, const char *text)
         if (c < 32 || c >= 127) {
             /* Print text..(current-1) */
             while (text < current) {
-                size_t count = fwrite(text, 1, current - text, stdout);
+                size_t count = fwrite(text, 1, (size_t)(current - text), stdout);
                 if (!count) {
                     fprintf(stderr, "fwrite error to stdout\n");
                     return;
@@ -70,7 +70,6 @@ int main(void)
 {
     char vendor_str[13] = {0};
     uint32_t max_code, max_extcode;
-    int i;
 
     /* Convert str to an array of 32-bits values */
     uint32_t *data = (uint32_t*)vendor_str;
@@ -119,6 +118,7 @@ int main(void)
     if (max_extcode >= 0x80000004) {
         /* Processor Brand String */
         char brand_str[256], *start_brand_str;
+        unsigned int i;
         for (i = 0; i < 3; i++) {
             data = (uint32_t*)(brand_str + 16 * i);
             asm_cpuid(0x80000002 + i, &data[0], &data[1], &data[2], &data[3]);
