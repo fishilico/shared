@@ -170,14 +170,26 @@ int main(int argc, char **argv)
             const Elf_Verdef *def = vdso_verdef;
             while (1) {
                 if ((def->vd_flags & VER_FLG_BASE) == 0 && (def->vd_ndx & 0x7fff) == ver) {
-                    Elf_Verdaux *aux = (Elf_Verdaux*)((char *)def + def->vd_aux);
+                    Elf_Verdaux *aux;
+                    /* Force align with Elf_Word */
+                    if (def->vd_aux % sizeof(Elf_Word)) {
+                        fprintf(stderr, "Oops, Elf_Verdef.vd_aux field not %lu-byte aligned (%u)\n",
+                            sizeof(Elf_Word), def->vd_aux);
+                        return 1;
+                    }
+                    aux = (Elf_Verdaux*)((Elf_Word*)def + (def->vd_aux / sizeof(Elf_Word)));
                     verstr = &vdso_symstrings[aux->vda_name];
                     break;
                 }
                 if (!def->vd_next) {
                     break;
                 }
-                def = (Elf_Verdef*)((uint8_t*)def + def->vd_next);
+                if (def->vd_next % sizeof(Elf_Word)) {
+                    fprintf(stderr, "Oops, Elf_Verdef.vd_next field not %lu-byte aligned (%u)\n",
+                        sizeof(Elf_Word), def->vd_next);
+                    return 1;
+                }
+                def = (Elf_Verdef*)((Elf_Word*)def + (def->vd_next / sizeof(Elf_Word)));
             }
         }
         printf("* %s = %p (%s",

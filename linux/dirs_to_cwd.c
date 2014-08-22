@@ -117,7 +117,8 @@ int main(void)
         {
             int mount_id = 0;
             unsigned int i;
-            char fh_buffer[sizeof(struct file_handle) + MAX_HANDLE_SZ];
+            /* Force fh_buffer memory to be aligned on an integer boundary */
+            int fh_buffer[(sizeof(struct file_handle) + MAX_HANDLE_SZ + sizeof(int) - 1) / sizeof(int)];
             struct file_handle *fhp = (struct file_handle*)fh_buffer;
             fhp->handle_bytes = MAX_HANDLE_SZ;
             if (name_to_handle_at(dirfd, path_part, fhp, &mount_id, 0) == -1) {

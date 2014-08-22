@@ -55,7 +55,9 @@ static int memcpy_to_pid(pid_t pid, void *dst, const void *src, size_t size)
 
     /* ptrace works with words of size a pointer. */
     for (i = 0; i + sizeof(intptr_t) <= size; i += sizeof(intptr_t)) {
-        if (ptrace(PTRACE_POKEDATA, pid, &pdst[i], *(intptr_t*)&psrc[i]) == -1) {
+        intptr_t bytes;
+        memcpy(&bytes, &psrc[i], sizeof(intptr_t));
+        if (ptrace(PTRACE_POKEDATA, pid, &pdst[i], bytes) == -1) {
             perror("ptrace(POKEDATA)");
             return -1;
         }
@@ -68,6 +70,7 @@ static int memcpy_to_pid(pid_t pid, void *dst, const void *src, size_t size)
             perror("ptrace(PEEKDATA)");
             return -1;
         }
+        assert(i + sizeof(intptr_t) > size);
         memcpy(&bytes, &psrc[i], size - i);
         if (ptrace(PTRACE_POKEDATA, pid, &pdst[i], bytes) == -1) {
             perror("ptrace(POKEDATA)");

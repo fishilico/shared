@@ -68,20 +68,20 @@ static void print_features(const char *name, uint32_t bits, const char* const cp
 
 int main(void)
 {
-    char vendor_str[13] = {0};
+    uint32_t vendor_data[4] = {0};
     uint32_t max_code, max_extcode;
 
     /* Convert str to an array of 32-bits values */
-    uint32_t *data = (uint32_t*)vendor_str;
+    uint32_t *data;
     uint32_t eax = 0, ebx = 0, ecx = 0, edx = 0;
 
     add_manual_cpuid_str();
 
     /* CPUID 0: get vendor string */
-    asm_cpuid(0, &max_code, &data[0], &data[2], &data[1]);
-    vendor_str[12] = 0;
-    print_escaped_ascii("CPUID vendor string", vendor_str);
-    if (data[0] == 0x756e6547 && data[1] == 0x49656e69 && data[2] == 0x6c65746e) {
+    asm_cpuid(0, &max_code, &vendor_data[0], &vendor_data[2], &vendor_data[1]);
+    vendor_data[3] = 0;
+    print_escaped_ascii("CPUID vendor string", (char*)vendor_data);
+    if (vendor_data[0] == 0x756e6547 && vendor_data[1] == 0x49656e69 && vendor_data[2] == 0x6c65746e) {
         printf(" (This is genuine Intel)\n");
     }
     printf("Max CPUID code: %u\n", max_code);
@@ -117,14 +117,15 @@ int main(void)
     }
     if (max_extcode >= 0x80000004) {
         /* Processor Brand String */
-        char brand_str[256], *start_brand_str;
+        uint32_t brand_str[64];
+        char *start_brand_str;
         unsigned int i;
         for (i = 0; i < 3; i++) {
-            data = (uint32_t*)(brand_str + 16 * i);
+            data = (brand_str + 4 * i);
             asm_cpuid(0x80000002 + i, &data[0], &data[1], &data[2], &data[3]);
         }
-        brand_str[16*i] = 0;
-        start_brand_str = brand_str;
+        start_brand_str = (char*)brand_str;
+        start_brand_str[sizeof(brand_str) - 1] = '\0';
         while (*start_brand_str == ' ') {
             start_brand_str ++;
         }
