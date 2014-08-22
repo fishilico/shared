@@ -48,13 +48,6 @@ void _start(void)
         write_string(2, "Error: uname failed\n");
         exit(1);
     }
-    /* Every field is a vector so may not be null */
-    if (!name.sysname || !name.nodename || !name.release || !name.version ||
-        !name.machine || !name.domainname)
-    {
-        write_string(2, "BUG: a field in utsname structure is NULL\n");
-        exit(1);
-    }
     ptr = buffer;
     ptr = stplcpy(ptr, text_sysname, sizeof(text_sysname) - 1);
     ptr = stplcpy(ptr, name.sysname, sizeof(name.sysname));

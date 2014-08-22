@@ -248,7 +248,7 @@ static void uyvy2yv12(
 
 int main(void)
 {
-    unsigned int width, height, fps, new_w, new_h;
+    uint16_t width, height, fps, resz_w, resz_h, new_w, new_h;
     int result;
     char driver_name[128];
     void *uyvy_frame;
@@ -314,16 +314,20 @@ int main(void)
                 case SDL_VIDEORESIZE:
                     screen = SDL_SetVideoMode(event.resize.w, event.resize.h,
                                               0, video_format);
+                    /* Don't support more than what SDL_Rect can handle */
+                    resz_w = (event.resize.w > UINT16_MAX) ? UINT16_MAX : (uint16_t)event.resize.w;
+                    resz_h = (event.resize.h > UINT16_MAX) ? UINT16_MAX : (uint16_t)event.resize.h;
+
                     /* Compute new size so that w/h is constant */
-                    if (event.resize.w * height >= event.resize.h * width) {
-                        new_h = event.resize.h;
+                    if (resz_w * height >= resz_h * width) {
+                        new_h = resz_h;
                         new_w = width * new_h / height;
                     } else {
-                        new_w = event.resize.w;
+                        new_w = resz_w;
                         new_h = height * new_w / width;
                     }
-                    screen_rect.x = (event.resize.w - new_w) / 2;
-                    screen_rect.y = (event.resize.h - new_h) / 2;
+                    screen_rect.x = (resz_w - new_w) / 2;
+                    screen_rect.y = (resz_h - new_h) / 2;
                     screen_rect.w = new_w;
                     screen_rect.h = new_h;
                     break;

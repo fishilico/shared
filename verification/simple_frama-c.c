@@ -83,7 +83,7 @@ int main(void)
       @ loop variant sizeof(buffer1) - i;
       @*/
     for (i = 0; i < sizeof(buffer1); i++) {
-        buffer1[i] = i;
+        buffer1[i] = (char)i;
     }
     memcpy(buffer2, buffer1, sizeof(buffer2));
     a = buffer2[10];

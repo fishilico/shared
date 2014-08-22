@@ -146,7 +146,7 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
 
     /* Emulate getpriority */
     if (info->si_syscall == __NR_getpriority && ctx) {
-        int syscall, arg0, arg1;
+        greg_t syscall, arg0, arg1;
         syscall = ctx->uc_mcontext.gregs[REG_SYSCALL];
         assert(syscall == info->si_syscall);
         arg0 = ctx->uc_mcontext.gregs[REG_ARG0];
@@ -170,7 +170,8 @@ int main(int argc, char **argv)
     struct utsname name;
     struct sigaction act;
     sigset_t mask;
-    int c, prio;
+    int c;
+    long prio;
     bool do_kill = false;
 
     while ((c = getopt(argc, argv, "hk")) != -1) {

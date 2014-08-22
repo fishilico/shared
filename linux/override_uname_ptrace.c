@@ -157,7 +157,8 @@ static int handle_ptrace_events(pid_t child)
 
 int main(int argc, char **argv)
 {
-    char c, **cmd;
+    char **cmd;
+    int c;
     pid_t child;
 
     /* Run real uname syscall before overwriting values */

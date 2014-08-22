@@ -44,7 +44,7 @@ static bool same_content(int fd1, int fd2)
 
 static bool test_open_by_handle_with_name(const char *pathname, bool is_file)
 {
-    size_t fh_allocated = MAX_HANDLE_SZ;
+    unsigned int fh_allocated = MAX_HANDLE_SZ;
     char fh_buffer[sizeof(struct file_handle) + MAX_HANDLE_SZ];
     struct file_handle *fhp = (struct file_handle*)fh_buffer;
     int mount_id = 0, fd_ref, fd;

@@ -52,7 +52,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-gboolean supports_alpha = FALSE;
+static gboolean supports_alpha = FALSE;
 static void screen_changed(
     GtkWidget *widget,
     GdkScreen *old_screen __attribute__ ((unused)),

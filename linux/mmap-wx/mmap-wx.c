@@ -65,7 +65,7 @@ static const uint32_t CODE[] = {0xe3a00000, 0xe12fff1e};
 static const char TEMPFILE_SUFFIX[] = "/mmap-wx-tmpXXXXXX";
 
 
-#if MMAP_WX_DUMP_MMAPS
+#if defined(MMAP_WX_DUMP_MMAPS) && MMAP_WX_DUMP_MMAPS
 /**
  * Dump current memory mappings
  */
@@ -227,7 +227,7 @@ static void test_mmap_rw_rx_fd(int fd)
     /* Execute code */
     result = ( (int (*)(void))(uintptr_t)xptr )();
     if (result == 0) {
-#if MMAP_WX_DUMP_MMAPS
+#if defined(MMAP_WX_DUMP_MMAPS) && MMAP_WX_DUMP_MMAPS
         printf("[+] Code successfully executed. Dump /proc/self/maps\n");
         dump_proc_maps();
 #else
@@ -247,13 +247,13 @@ static void test_mmap_wx_dir(const char *dirname)
 {
     char filename[4096];
     int fd;
-    const int dirlen = strlen(dirname);
+    const size_t dirlen = strlen(dirname);
     if (dirlen + sizeof(TEMPFILE_SUFFIX) + 1 >= sizeof(filename)) {
         fprintf(stderr, "[!] too long directory name: %.512s\n", dirname);
         return;
     }
 
-#if defined O_TMPFILE && defined O_CLOEXEC
+#if defined(O_TMPFILE) && defined(O_CLOEXEC)
     fd = open(dirname, O_TMPFILE|O_RDWR|O_CLOEXEC|O_EXCL, S_IRUSR|S_IWUSR);
     if (fd >= 0) {
         /* Retrieve file name using procfs */
@@ -291,7 +291,7 @@ static void test_mmap_wx_dir(const char *dirname)
             fprintf(stderr, "[!] failed to unlink %s", filename);
             return;
         }
-#if defined O_TMPFILE && defined O_CLOEXEC
+#if defined(O_TMPFILE) && defined(O_CLOEXEC)
     }
 #endif
 

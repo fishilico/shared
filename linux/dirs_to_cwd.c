@@ -18,11 +18,13 @@
  */
 static char *getcwd_a(void)
 {
+    long lsize;
     size_t size;
     char *buffer, *ptr;
     /* From http://pubs.opengroup.org/onlinepubs/009695399/functions/getcwd.html */
-    size = pathconf(".", _PC_PATH_MAX);
-    assert(size > 0);
+    lsize = pathconf(".", _PC_PATH_MAX);
+    assert(lsize > 0);
+    size = (size_t)lsize;
     buffer = malloc(size);
     assert(buffer);
     ptr = getcwd(buffer, size);
@@ -37,9 +39,9 @@ static char *getcwd_a(void)
 int main(void)
 {
     char *wd;
-    const char *path_part;
-    int dirfd, retval = 1;
-    bool is_not_end;
+    const char *path_part = NULL;
+    int dirfd = -1, retval = 1;
+    bool is_not_end = true;
 
     wd = getcwd_a();
 
@@ -50,7 +52,6 @@ int main(void)
         return 1;
     }
     /* Enumerate every subdirectory */
-    path_part = NULL;
     do {
         char *path_end;
         struct stat st;
