@@ -174,7 +174,7 @@ int main(int argc, char **argv)
                     /* Force align with Elf_Word */
                     if (def->vd_aux % sizeof(Elf_Word)) {
                         fprintf(stderr, "Oops, Elf_Verdef.vd_aux field not %lu-byte aligned (%u)\n",
-                            sizeof(Elf_Word), def->vd_aux);
+                                (unsigned long)sizeof(Elf_Word), def->vd_aux);
                         return 1;
                     }
                     aux = (Elf_Verdaux*)((Elf_Word*)def + (def->vd_aux / sizeof(Elf_Word)));
@@ -186,14 +186,16 @@ int main(int argc, char **argv)
                 }
                 if (def->vd_next % sizeof(Elf_Word)) {
                     fprintf(stderr, "Oops, Elf_Verdef.vd_next field not %lu-byte aligned (%u)\n",
-                        sizeof(Elf_Word), def->vd_next);
+                            (unsigned long)sizeof(Elf_Word), def->vd_next);
                     return 1;
                 }
                 def = (Elf_Verdef*)((Elf_Word*)def + (def->vd_next / sizeof(Elf_Word)));
             }
         }
         printf("* %s = %p (%s",
-            vdso_symstrings + sym->st_name, (void*)(vdso_load_offset + sym->st_value), bindstr);
+               vdso_symstrings + sym->st_name,
+               (void*)(vdso_load_offset + sym->st_value),
+               bindstr);
         if (verstr) {
             printf(", %s", verstr);
         }

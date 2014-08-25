@@ -145,7 +145,7 @@ static bool capture_start(
             return false;
         }
 
-        capst->mem[i] = mmap(0, buf.length, PROT_READ, MAP_SHARED, fd, buf.m.offset);
+        capst->mem[i] = mmap(0, buf.length, PROT_READ, MAP_SHARED, fd, (off_t)buf.m.offset);
         if (capst->mem[i] == MAP_FAILED) {
             perror("mmap(video buffer)");
             return false;
