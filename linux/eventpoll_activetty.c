@@ -79,8 +79,8 @@ int main(void)
 
     /* Add stdin to the epoll */
     ev.events = EPOLLIN;
-    ev.data.fd = 0;
-    if (epoll_ctl(epollfd, EPOLL_CTL_ADD, 0, &ev) == -1) {
+    ev.data.fd = STDIN_FILENO;
+    if (epoll_ctl(epollfd, EPOLL_CTL_ADD, STDIN_FILENO, &ev) == -1) {
         perror("epoll_ctl(EPOLL_CTL_ADD, stdin)");
         close(active_tty_fd);
         close(epollfd);
@@ -114,7 +114,7 @@ int main(void)
         for (i = 0; i < nfds; i++) {
             if (events[i].data.fd == 0) {
                 /* Consume stdin until EOF */
-                bytes = read(0, buffer, sizeof(buffer));
+                bytes = read(STDIN_FILENO, buffer, sizeof(buffer));
                 if (bytes == -1) {
                     if (errno == EINTR) {
                         /* Next iteration will consume the data */
@@ -144,7 +144,7 @@ int main(void)
     }
     close(active_tty_fd);
 
-    if (epoll_ctl(epollfd, EPOLL_CTL_DEL, 0, &ev) == -1) {
+    if (epoll_ctl(epollfd, EPOLL_CTL_DEL, STDIN_FILENO, &ev) == -1) {
         perror("epoll_ctl(EPOLL_CTL_DEL, stdin)");
         retval = 1;
     }
