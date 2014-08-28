@@ -43,7 +43,7 @@ static void _show_sid(
  */
 #define _show_sid_ifdef(d, a, n, sa0, sa1, sa2, sa3, sa4, sa5, sa6, sa7, name, value) \
     do { \
-        if (!strncmp(#value, "SECURITY_", 9)) { \
+        if (!strncmp(#value, "SECURITY_", 9) || !strncmp(#value, "DOMAIN_", 7)) { \
             _tprintf(_T("%-12s = %s\n"), _T("??? (undef)"), d); \
         } else { \
             DWORD _dwSa = 0, _base = 10; \
@@ -55,7 +55,7 @@ static void _show_sid(
                 _base = 16; \
                 _v += 2; \
             } \
-            while (*_v && *_v != ')' && *_v != 'l') { \
+            while (*_v && *_v != ')' && *_v != 'l' && *_v != 'L') { \
                 if (*_v >= '0' && *_v <= '9') { \
                     _dwSa = _dwSa * _base + (DWORD)(*_v - '0'); \
                 } else if (*_v >= 'a' && *_v <= 'f') { \
@@ -63,7 +63,8 @@ static void _show_sid(
                 } else if (*_v >= 'A' && *_v <= 'F') { \
                     _dwSa = _dwSa * _base + (DWORD)(*_v - 'A'); \
                 } else { \
-                    _tprintf(_T("%-12s : error parsing %s value, %s\n"), name, #value); \
+                    _tprintf(_T("%-12s : error parsing %s value, %s\n"), \
+                             _T("??? (undef)"), name, _T(#value)); \
                     ExitProcess(EXIT_FAILURE); \
                 } \
                 _v++; \
@@ -84,7 +85,6 @@ int _tmain()
     SID_IDENTIFIER_AUTHORITY SIDAuthCreator = {SECURITY_CREATOR_SID_AUTHORITY};
     SID_IDENTIFIER_AUTHORITY SIDAuthNonUnique = {SECURITY_NON_UNIQUE_AUTHORITY};
     SID_IDENTIFIER_AUTHORITY SIDAuthNt = {SECURITY_NT_AUTHORITY};
-    SID_IDENTIFIER_AUTHORITY SIDAuthRsrcMan = {SECURITY_RESOURCE_MANAGER_AUTHORITY};
 
     show_sid1(_T("Null"), &SIDAuthNull, SECURITY_NULL_RID); /* S-1-0-0 */
     show_sid1(_T("World"), &SIDAuthWorld, SECURITY_WORLD_RID); /* S-1-1-0 */
@@ -165,6 +165,17 @@ int _tmain()
     show_sid2(_T("Built-in Access Control Assistance Ops"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ACCESS_CONTROL_ASSISTANCE_OPS); /* S-1-5-32-579 */
     show_sid2(_T("Built-in Remote Management Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_REMOTE_MANAGEMENT_USERS); /* S-1-5-32-580 */
     show_sid1(_T("Other Organization"), &SIDAuthNt, SECURITY_OTHER_ORGANIZATION_RID); /* S-1-5-1000 */
-    show_sid0(_T("Resource Manager Authority"), &SIDAuthRsrcMan); /* S-1-9 */
+#ifdef SECURITY_RESOURCE_MANAGER_AUTHORITY
+    {
+        SID_IDENTIFIER_AUTHORITY SIDAuthRsrcMan = {SECURITY_RESOURCE_MANAGER_AUTHORITY};
+        show_sid0(_T("Resource Manager Authority"), &SIDAuthRsrcMan); /* S-1-9 */
+    }
+#endif
+#ifdef SECURITY_MANDATORY_LABEL_AUTHORITY
+    {
+           SID_IDENTIFIER_AUTHORITY SIDAuthMandatoryLabel = {SECURITY_MANDATORY_LABEL_AUTHORITY};
+        show_sid0(_T("Mandatory Label Authority"), &SIDAuthMandatoryLabel); /* S-1-16 */
+    }
+#endif
     return 0;
 }

@@ -8,6 +8,12 @@ ifeq ($(OS), Windows_NT)
 include ../windows-flags.mk
 BIN_EXT := .exe
 CC = $(WINCC)
+
+# Don't use wide characters
+CPPFLAGS := $(filter-out -D_UNICODE, $(CPPFLAGS))
+CFLAGS := $(filter-out -municode, $(CFLAGS))
+LDFLAGS := $(filter-out -municode, $(LDFLAGS))
+
 else
 BIN_EXT := .bin
 UNAME_s := $(shell $(UNAME) -s)
@@ -33,21 +39,21 @@ ifneq ($(CC), clang)
 # when gcc is not compiled with pthread, -fopenmp makes the preprocessor fails
 ifeq ($(shell $(CC) -fopenmp -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 PROGRAMS += $(OPENMP_PROGRAMS)
-$(OPENMP_PROGRAMS:%=%.bin): LDFLAGS += -fopenmp
+$(OPENMP_PROGRAMS:%=%$(BIN_EXT)): LDFLAGS += -fopenmp
 $(OPENMP_PROGRAMS:%=%.o): CFLAGS += -fopenmp
 endif
 endif
 
-HAVE_GTK3 := $(shell $(PKG_CONFIG) --exists gtk+-3.0 && echo 'y' || echo 'n')
+HAVE_GTK3 := $(shell $(PKG_CONFIG) --exists gtk+-3.0 2> /dev/null && echo 'y' || echo 'n')
 ifeq ($(HAVE_GTK3), y)
 	PROGRAMS += $(GTK_PROGRAMS)
-$(GTK_PROGRAMS:%=%.bin): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
+$(GTK_PROGRAMS:%=%$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
 $(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0)
 else
-	HAVE_GTK2 := $(shell $(PKG_CONFIG) --exists gtk+-2.0 && echo 'y' || echo 'n')
+	HAVE_GTK2 := $(shell $(PKG_CONFIG) --exists gtk+-2.0 2> /dev/null && echo 'y' || echo 'n')
 	ifeq ($(HAVE_GTK2), y)
 		PROGRAMS += $(GTK_PROGRAMS)
-$(GTK_PROGRAMS:%=%.bin): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
+$(GTK_PROGRAMS:%=%$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
 $(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0)
 	endif
 endif
