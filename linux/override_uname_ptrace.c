@@ -24,9 +24,9 @@ static struct utsname fake_uname;
 
 #if defined __i386__
     #define REG_SYSCALL(regs) ((regs).orig_eax)
-    #define REG_ARG0(regs) ((regs).ecx)
-    #define REG_ARG1(regs) ((regs).edx)
-    #define REG_ARG2(regs) ((regs).edi)
+    #define REG_ARG0(regs) ((regs).ebx)
+    #define REG_ARG1(regs) ((regs).ecx)
+    #define REG_ARG2(regs) ((regs).edx)
     #define REG_ARG3(regs) ((regs).esi)
     #define REG_ARG4(regs) ((regs).edi)
     #define REG_ARG5(regs) ((regs).ebp)
