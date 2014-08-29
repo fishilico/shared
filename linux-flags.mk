@@ -19,6 +19,7 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 	-Wshadow \
 	-Wstrict-prototypes \
 	-Wwrite-strings \
+	-Wno-long-long \
 	-Wno-unused-function \
 	-fPIE  \
 	-fno-exceptions \
