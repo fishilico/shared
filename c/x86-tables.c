@@ -1,0 +1,182 @@
+/**
+ * Show current addresses of GDT and IDT
+ *
+ * Linux-specific information
+ * --------------------------
+ * On Linux it might be useful to check whether kASLR is enabled by doing:
+ *    grep _stext /proc/kallsyms /boot/System.map-$(uname -r)
+ * ... if the two given addresses are equal, kASLR is disabled.
+ * Nevertheless kernel addresses read from unprivileged instructions like sidt
+ * do not depend on the kernel random base address ;)
+ *
+ * The GDT address is per_cpu(gdt_page, cpu)
+ * Documentation:
+ * * arch/x86/kernel/cpu/common.c: switch_to_new_gdt
+ * * arch/x86/include/asm/desc_defs.h: get_cpu_gdt_table, load_gdt
+ *
+ * The IDT is fix_to_virt(FIX_RO_IDT) for userspace, which is mapped to kernel
+ * data idt_table in trap_init:
+ *     __set_fixmap(FIX_RO_IDT, __pa_symbol(idt_table), PAGE_KERNEL_RO);
+ *     idt_descr.address = fix_to_virt(FIX_RO_IDT);
+ * Documentation:
+ * * arch/x86/kernel/cpu/common.c: cpu_init
+ * * arch/x86/include/asm/desc_defs.h: load_current_idt, load_idt
+ * * arch/x86/kernel/traps.c: trap_init
+ */
+#include <assert.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#if defined(__i386__) || defined(__x86_64__)
+
+/**
+ * Setting CPU affinity is an OS-dependent operation, hence the #if parts
+ */
+#ifdef __linux__
+#include <sched.h>
+
+static const char os_name[] = "Linux";
+static const char gdt_comment[] = "per_cpu(gdt_page, cpu)";
+static const char idt_comment[] = "fix_to_virt(FIX_RO_IDT)";
+
+static cpu_set_t initial_cpuset;
+
+static void initialize_cpu_affinity(void)
+{
+    CPU_ZERO(&initial_cpuset);
+    if (sched_getaffinity(0, sizeof(initial_cpuset), &initial_cpuset) == -1) {
+        perror("sched_getaffinity");
+        exit(1);
+    }
+}
+
+static int get_next_cpu(int cpu)
+{
+    if (cpu < 0) {
+        return -1;
+    }
+    do {
+        cpu++;
+        if (cpu >= (int)(sizeof(initial_cpuset.__bits)/sizeof(initial_cpuset.__bits[0]))) {
+            return -1;
+        }
+    } while(!CPU_ISSET(cpu, &initial_cpuset));
+    return cpu;
+}
+
+/**
+ * Set CPU affinity to migrate to cpu
+ */
+static void migrate_to_cpu(int cpu)
+{
+    cpu_set_t cpuset;
+
+    CPU_ZERO(&cpuset);
+    CPU_SET(cpu, &cpuset);
+    if (sched_setaffinity(0, sizeof(cpuset), &cpuset) == -1) {
+        perror("sched_setaffinity");
+        exit(1);
+    }
+}
+#elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#include <windows.h>
+
+static const char os_name[] = "Windows";
+static const char gdt_comment[] = "?";
+static const char idt_comment[] = "?";
+
+static DWORD_PTR InitialAffinityMask;
+
+static void initialize_cpu_affinity(void)
+{
+    DWORD_PTR ProcessAffinityMask, SystemAffinityMask;
+    if (!GetProcessAffinityMask(GetCurrentProcess(), &ProcessAffinityMask, &SystemAffinityMask)) {
+        fprintf(stderr, "GetProcessAffinityMask: error %lu\n", GetLastError());
+        exit(1);
+    }
+    if (ProcessAffinityMask != SystemAffinityMask) {
+        fprintf(stderr, "Warning: process affinity mask 0x%lx != system 0x%lx\n",
+                (ULONG)ProcessAffinityMask, (ULONG)SystemAffinityMask);
+    }
+    assert(ProcessAffinityMask);
+    InitialAffinityMask = ProcessAffinityMask;
+}
+
+static int get_next_cpu(int cpu)
+{
+    if (cpu < 0) {
+        return -1;
+    }
+    do {
+        cpu++;
+        if (cpu >= (int)(8 * sizeof(DWORD_PTR))) {
+            return -1;
+        }
+    } while(!(InitialAffinityMask & (((DWORD_PTR)1) << cpu)));
+    return cpu;
+}
+
+/**
+ * Set CPU affinity to migrate to cpu
+ */
+static void migrate_to_cpu(int cpu)
+{
+    if (!SetProcessAffinityMask(GetCurrentProcess(), 1 << (unsigned)cpu)) {
+        fprintf(stderr, "SetProcessAffinityMask: error %lu\n", GetLastError());
+        exit(1);
+    }
+}
+#else
+#warning Unknown target OS
+#endif
+
+int main(void)
+{
+    /* Linux kernel defines a structure for a table descriptor:
+     * * arch/x86/include/asm/desc_defs.h:
+     *       struct desc_ptr {
+     *           unsigned short size;
+     *           unsigned long address;
+     *       } __attribute__((packed));
+     */
+    uint8_t descriptor[2 + sizeof(uintptr_t)];
+    uint16_t size;
+    void *address;
+    int cpu;
+
+    assert(sizeof(size) == 2);
+
+    initialize_cpu_affinity();
+
+    /* Get GDT */
+    printf("GDT (%s: %s):\n", os_name, gdt_comment);
+    for (cpu = 0; cpu >= 0; cpu = get_next_cpu(cpu)) {
+        migrate_to_cpu(cpu);
+        __asm__ volatile ("sgdt %0" : "=m"(descriptor));
+        memcpy(&size, descriptor, 2);
+        memcpy(&address, descriptor + 2, sizeof(void*));
+        printf("CPU %2d GDT @%p, size %u (%u 8-byte entries)\n", cpu, address, size, (size + 1) / 8);
+    }
+    printf("\n");
+
+    /* Get IDT */
+    printf("IDT (%s: %s):\n", os_name, idt_comment);
+    for (cpu = 0; cpu >= 0; cpu = get_next_cpu(cpu)) {
+        migrate_to_cpu(cpu);
+        __asm__ volatile ("sidt %0" : "=m"(descriptor));
+        memcpy(&size, descriptor, 2);
+        memcpy(&address, descriptor + 2, sizeof(void*));
+        printf("CPU %2d IDT @%p, size %u (256 %u-byte vectors)\n", cpu, address, size, (size + 1) / 256);
+    }
+    return 0;
+}
+
+#else
+int main(void)
+{
+    fprintf(stderr, "The architecture does not support GDT/IDT.\n");
+    return 1;
+}
+#endif
