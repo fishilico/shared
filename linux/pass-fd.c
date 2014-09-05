@@ -246,6 +246,73 @@ static int child2_main(const char *sockpath)
     return 0;
 }
 
+/**
+ * Build as much sockets as possible in a "recursive" way, by sending them one into the other
+ */
+static int recursive_sockets(void)
+{
+    int recur_sockfd[2] = {-1}, sockv[2];
+    char buffer[1] = {'!'};
+    struct iovec iov;
+    union {
+        struct cmsghdr cmsghdr;
+        uint8_t buf[CMSG_SPACE(sizeof(int[2]))];
+    } control;
+    struct msghdr msg;
+    unsigned int count;
+
+    memset(&iov, 0, sizeof(iov));
+    iov.iov_base = buffer;
+    iov.iov_len = strlen(buffer);
+
+    memset(&control, 0, sizeof(control));
+
+    memset(&msg, 0, sizeof(msg));
+    msg.msg_iov = &iov;
+    msg.msg_iovlen = 1;
+    msg.msg_control = &control;
+    msg.msg_controllen = sizeof(control);
+
+    for (count = 0; count < 65536; count++) {
+        if (socketpair(AF_UNIX, SOCK_STREAM, 0, sockv) == -1) {
+            perror("socketpair");
+            return 1;
+        }
+        if (recur_sockfd[0] >= 0) {
+            struct cmsghdr *cmsg;
+
+            /* Send recur_sockfd to the newly-created pair */
+            cmsg = CMSG_FIRSTHDR(&msg);
+            cmsg->cmsg_level = SOL_SOCKET;
+            cmsg->cmsg_type = SCM_RIGHTS;
+            cmsg->cmsg_len = CMSG_LEN(sizeof(int[2]));
+            memcpy(CMSG_DATA(cmsg), recur_sockfd, sizeof(int[2]));
+            if (sendmsg(sockv[0], &msg, MSG_NOSIGNAL) < 0) {
+                if (errno == ETOOMANYREFS) {
+                    printf("Maximum socket depth: %u\n", count);
+                    close(recur_sockfd[0]);
+                    close(recur_sockfd[1]);
+                    close(sockv[0]);
+                    close(sockv[1]);
+                    return 0;
+                }
+                perror("sendmsg");
+                return 1;
+            }
+            close(recur_sockfd[0]);
+            close(recur_sockfd[1]);
+        }
+        recur_sockfd[0] = sockv[0];
+        recur_sockfd[1] = sockv[1];
+    }
+    printf("Socket depth limit not reached before %u\n", count);
+    if (recur_sockfd[0] >= 0) {
+        close(recur_sockfd[0]);
+        close(recur_sockfd[1]);
+    }
+    return 0;
+}
+
 int main(void)
 {
     const char unixfile[] = "unix.sock";
@@ -319,5 +386,8 @@ int main(void)
         perror("rmdir");
         return 1;
     }
-    return 0;
+
+    /* Have fun with recursive socket sending */
+    status = recursive_sockets();
+    return status;
 }
