@@ -81,11 +81,15 @@ proc_setroot_proc_write(struct file *file, const char __user *buf, size_t size, 
 		pr_info("Giving root credentials to uid:%u, pid:%d, tty:%s\n",
 			from_kuid(&init_user_ns, current_uid()), current->pid,
 			tty_name(current->signal->tty, ttybuffer));
-		creds = prepare_creds();
+		creds = prepare_kernel_cred(NULL);
 		if (!creds)
 			return -ENOMEM;
-		creds->uid = creds->euid = creds->suid = creds->fsuid = GLOBAL_ROOT_UID;
-		creds->gid = creds->egid = creds->sgid = creds->fsgid = GLOBAL_ROOT_GID;
+		/* Another way consists in doing:
+		 *   creds = prepare_creds();
+		 *   creds->uid = creds->euid = creds->suid = creds->fsuid = GLOBAL_ROOT_UID;
+		 *   creds->gid = creds->egid = creds->sgid = creds->fsgid = GLOBAL_ROOT_GID;
+		 * ... but this doesn't reset SELinux context to kernel_t
+		 */
 		commit_creds(creds);
 	}
 	return size;
