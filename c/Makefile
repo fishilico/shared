@@ -3,24 +3,7 @@ SH ?= sh
 UNAME ?= uname
 WGET ?= wget
 
-# Use Linux or Windows flags depending on the host
-ifeq ($(OS), Windows_NT)
-include ../windows-flags.mk
-BIN_EXT := .exe
-CC = $(WINCC)
-
-# Don't use wide characters
-CPPFLAGS := $(filter-out -D_UNICODE, $(CPPFLAGS))
-CFLAGS := $(filter-out -municode, $(CFLAGS))
-LDFLAGS := $(filter-out -municode, $(LDFLAGS))
-
-else
-BIN_EXT := .bin
-UNAME_s := $(shell $(UNAME) -s)
-ifeq ($(UNAME_s), Linux)
-include ../linux-flags.mk
-endif
-endif
+include ../os-detect.mk
 
 # Programs which need specific options
 OPENMP_PROGRAMS := openmp_matrix
