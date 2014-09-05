@@ -34,14 +34,11 @@ PROGRAMS := $(filter-out $(OPENMP_PROGRAMS) $(GTK_PROGRAMS), $(ALL_PROGRAMS))
 # view_sizes.c uses "long long" type, so disable the related warning
 view_sizes.o: CFLAGS += -Wno-long-long
 
-# clang doesn't support OPENMP yet
-ifneq ($(CC), clang)
 # when gcc is not compiled with pthread, -fopenmp makes the preprocessor fails
-ifeq ($(shell $(CC) -fopenmp -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+ifeq ($(shell $(CC) -Werror -fopenmp -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 PROGRAMS += $(OPENMP_PROGRAMS)
 $(OPENMP_PROGRAMS:%=%$(BIN_EXT)): LDFLAGS += -fopenmp
 $(OPENMP_PROGRAMS:%=%.o): CFLAGS += -fopenmp
-endif
 endif
 
 HAVE_GTK3 := $(shell $(PKG_CONFIG) --exists gtk+-3.0 2> /dev/null && echo 'y' || echo 'n')
