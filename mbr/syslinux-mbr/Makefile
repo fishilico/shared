@@ -21,10 +21,12 @@ CC = gcc
 CHMOD = chmod
 LD = ld
 OBJCOPY = objcopy
+UNAME = uname
+SED = sed
 SHA1SUM = sha1sum
 
 # Architecture definition
-SUBARCH := $(shell uname -m | sed -e s/i.86/i386/) 
+SUBARCH := $(shell $(UNAME) -m | $(SED) -e s/i.86/i386/)
 # on x86_64, ARCH has trailing whitespace
 # strip white spaces in ARCH
 ARCH ?= $(strip $(SUBARCH))

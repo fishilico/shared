@@ -1,5 +1,7 @@
 # Detect which OS the host is and include the corresponding flags.mk file
 
+UNAME ?= uname
+
 # Include files from this directory
 TOPDIR := $(dir $(lastword $(MAKEFILE_LIST)))
 

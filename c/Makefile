@@ -1,6 +1,5 @@
 PKG_CONFIG ?= pkg-config
 SH ?= sh
-UNAME ?= uname
 WGET ?= wget
 
 include ../os-detect.mk

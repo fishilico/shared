@@ -1,8 +1,11 @@
 # Find a C compiler for windows
+
+UNAME ?= uname
+
 ifneq ($(shell mingw32-gcc --version 2> /dev/null),)
 	TARGET := mingw32
 else
-	ARCH := $(shell uname -m)
+	ARCH := $(shell $(UNAME) -m)
 	ifneq ($(shell $(ARCH)-w64-mingw32-gcc --version 2> /dev/null),)
 		TARGET := $(ARCH)-w64-mingw32
 	else
