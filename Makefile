@@ -1,4 +1,6 @@
 # Run every Makefile in subdirectories
+CHMOD ?= chmod
+SH ?= sh
 UNAME ?= uname
 
 # Make does not support ** glob pattern, so only list directory levels by hand
@@ -41,5 +43,9 @@ clean: $(CLEAN_TARGETS)
 $(TARGETS): TARGET = $(firstword $(subst .., ,$@))
 $(TARGETS):
 	$(MAKE) -C "$(@:$(TARGET)..%=%)" $(TARGET)
+
+indent-c: gen-indent-c.sh
+	$(SH) $< > $@
+	$(CHMOD) +x $@
 
 .PHONY: all clean $(TARGETS)
