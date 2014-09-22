@@ -15,17 +15,17 @@
 #include <stdint.h>
 
 #if defined __x86_64__
-#define DEFINE_ELF_STRUCT(name) typedef Elf64_##name Elf_##name
-#define ELF_ST_BIND(val) ELF64_ST_BIND(val)
-#define ELF_ST_TYPE(val) ELF64_ST_TYPE(val)
-#define ELF_ST_INFO(bind, type) ELF64_ST_INFO((bind), (type))
+#    define DEFINE_ELF_STRUCT(name) typedef Elf64_##name Elf_##name
+#    define ELF_ST_BIND(val) ELF64_ST_BIND(val)
+#    define ELF_ST_TYPE(val) ELF64_ST_TYPE(val)
+#    define ELF_ST_INFO(bind, type) ELF64_ST_INFO((bind), (type))
 #elif defined  __i386__ || defined __arm__
-#define DEFINE_ELF_STRUCT(name) typedef Elf32_##name Elf_##name
-#define ELF_ST_BIND(val) ELF32_ST_BIND(val)
-#define ELF_ST_TYPE(val) ELF32_ST_TYPE(val)
-#define ELF_ST_INFO(bind, type) ELF32_ST_INFO ((bind), (type))
+#    define DEFINE_ELF_STRUCT(name) typedef Elf32_##name Elf_##name
+#    define ELF_ST_BIND(val) ELF32_ST_BIND(val)
+#    define ELF_ST_TYPE(val) ELF32_ST_TYPE(val)
+#    define ELF_ST_INFO(bind, type) ELF32_ST_INFO ((bind), (type))
 #else
-#error Unsupported architecture
+#    error Unsupported architecture
 #endif
 DEFINE_ELF_STRUCT(auxv_t);
 DEFINE_ELF_STRUCT(Dyn);
@@ -55,12 +55,12 @@ static unsigned long getauxval_from_args(unsigned long type, int argc, char **ar
     int i;
 
     assert(argc >= 0 && argv[argc] == NULL);
-    stack = (void**)&argv[argc + 1];
+    stack = (void **)&argv[argc + 1];
     /* Skip environment variables */
     while (*stack) {
         stack++;
     }
-    auxv = (Elf_auxv_t*)(stack + 1);
+    auxv = (Elf_auxv_t *)(stack + 1);
     for (i = 0; auxv[i].a_type != AT_NULL; i++) {
         if (auxv[i].a_type == type) {
             return auxv[i].a_un.a_val;
@@ -91,29 +91,29 @@ int main(int argc, char **argv)
         fprintf(stderr, "SYSINFO_EHDR not found in auxv\n");
         return 1;
     }
-    printf("vDSO header found @0x%"PRIxPTR"\n", vdso_base);
+    printf("vDSO header found @0x%" PRIxPTR "\n", vdso_base);
 
-    vdso_hdr = (Elf_Ehdr*)vdso_base;
-    vdso_pt = (Elf_Phdr*)(vdso_base + vdso_hdr->e_phoff);
+    vdso_hdr = (Elf_Ehdr *)vdso_base;
+    vdso_pt = (Elf_Phdr *)(vdso_base + vdso_hdr->e_phoff);
     for (i = 0; i < vdso_hdr->e_phnum; i++) {
         if (vdso_pt[i].p_type == PT_LOAD && !vdso_load_offset) {
             vdso_load_offset = vdso_base + vdso_pt[i].p_offset - vdso_pt[i].p_vaddr;
         } else if (vdso_pt[i].p_type == PT_DYNAMIC) {
-            vdso_dyn = (Elf_Dyn*)(vdso_base + vdso_pt[i].p_offset);
+            vdso_dyn = (Elf_Dyn *)(vdso_base + vdso_pt[i].p_offset);
         }
     }
     if (!vdso_load_offset || !vdso_dyn) {
         fprintf(stderr, "Unable to find PT_LOAD and PT_DYNAMIC is vDSO header\n");
         return 1;
     }
-    printf("* EHDR = %p\n", (void*)vdso_hdr);
-    printf("* PHDR = %p\n", (void*)vdso_pt);
-    printf("* PT_LOAD = %p\n", (void*)vdso_load_offset);
-    printf("* PT_DYNAMIC = %p\n", (void*)vdso_dyn);
+    printf("* EHDR = %p\n", (void *)vdso_hdr);
+    printf("* PHDR = %p\n", (void *)vdso_pt);
+    printf("* PT_LOAD = %p\n", (void *)vdso_load_offset);
+    printf("* PT_DYNAMIC = %p\n", (void *)vdso_dyn);
 
     /* Gather information from PT_DYNAMIC header */
     for (i = 0; vdso_dyn[i].d_tag != DT_NULL; i++) {
-        const void *ptr = (void*)(vdso_load_offset + vdso_dyn[i].d_un.d_ptr);
+        const void *ptr = (void *)(vdso_load_offset + vdso_dyn[i].d_un.d_ptr);
         switch (vdso_dyn[i].d_tag) {
             case DT_STRTAB:
                 vdso_symstrings = ptr;
@@ -173,11 +173,12 @@ int main(int argc, char **argv)
                     Elf_Verdaux *aux;
                     /* Force align with Elf_Word */
                     if (def->vd_aux % sizeof(Elf_Word)) {
-                        fprintf(stderr, "Oops, Elf_Verdef.vd_aux field not %lu-byte aligned (%u)\n",
+                        fprintf(stderr,
+                                "Oops, Elf_Verdef.vd_aux field not %lu-byte aligned (%u)\n",
                                 (unsigned long)sizeof(Elf_Word), def->vd_aux);
                         return 1;
                     }
-                    aux = (Elf_Verdaux*)((Elf_Word*)def + (def->vd_aux / sizeof(Elf_Word)));
+                    aux = (Elf_Verdaux *)((Elf_Word *)def + (def->vd_aux / sizeof(Elf_Word)));
                     verstr = &vdso_symstrings[aux->vda_name];
                     break;
                 }
@@ -185,11 +186,12 @@ int main(int argc, char **argv)
                     break;
                 }
                 if (def->vd_next % sizeof(Elf_Word)) {
-                    fprintf(stderr, "Oops, Elf_Verdef.vd_next field not %lu-byte aligned (%u)\n",
+                    fprintf(stderr,
+                            "Oops, Elf_Verdef.vd_next field not %lu-byte aligned (%u)\n",
                             (unsigned long)sizeof(Elf_Word), def->vd_next);
                     return 1;
                 }
-                def = (Elf_Verdef*)((Elf_Word*)def + (def->vd_next / sizeof(Elf_Word)));
+                def = (Elf_Verdef *)((Elf_Word *)def + (def->vd_next / sizeof(Elf_Word)));
             }
         }
         printf("* %s = %p (%s",

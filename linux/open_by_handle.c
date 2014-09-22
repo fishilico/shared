@@ -41,13 +41,12 @@ static bool same_content(int fd1, int fd2)
     return true;
 }
 
-
 static bool test_open_by_handle_with_name(const char *pathname, bool is_file)
 {
     /* Align buffer with the alignment required for struct file_handle */
     int fh_buffer[(sizeof(struct file_handle) + MAX_HANDLE_SZ + sizeof(int) - 1) / sizeof(int)];
     unsigned int fh_allocated = MAX_HANDLE_SZ;
-    struct file_handle *fhp = (struct file_handle*)fh_buffer;
+    struct file_handle *fhp = (struct file_handle *)fh_buffer;
     int mount_id = 0, fd_ref, fd;
     unsigned int i;
     bool result;

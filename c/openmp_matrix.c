@@ -65,7 +65,7 @@ static void init_vector_list(double *vectors, size_t size, size_t dim)
     #pragma omp parallel for private(i, j)
     for (i = 0; i < size; i++) {
         for (j = 0; j < dim; j++) {
-            vectors[i * dim + j] = ((double) i) + ((double) j + 1) / 100.;
+            vectors[i * dim + j] = ((double)i) + ((double)j + 1) / 100.;
         }
     }
 }

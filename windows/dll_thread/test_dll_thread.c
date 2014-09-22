@@ -18,7 +18,7 @@ static DWORD WINAPI thread_main(LPVOID lpParam)
 
     tls_buffer = dll_thread_tls_data();
 
-    printf("[Thread #%d] Spawned yet another thread with TLS buffer @%"PRIxPTR"\n", id, (ULONG_PTR)tls_buffer);
+    printf("[Thread #%d] Spawned yet another thread with TLS buffer @%" PRIxPTR "\n", id, (ULONG_PTR)tls_buffer);
 
     /* Write something in the TLS buffer */
     snprintf(tls_buffer, DLL_TLS_SIZE, "Hey! This is thread %d!", id);
@@ -38,7 +38,7 @@ int _tmain()
     HANDLE hTreads[NUM_THREADS];
 
     /* Unbufferize standard output to prevent caching issues */
-    setvbuf(stdout, (char*)0, _IONBF, 0);
+    setvbuf(stdout, (char *)0, _IONBF, 0);
 
     hello_world();
 
@@ -51,7 +51,7 @@ int _tmain()
             IntToPtr(i + 1),        /* argument to thread function */
             0,                      /* use default creation flags */
             NULL);                  /* do not returns the thread identifier */
-        if(hTreads[i] == NULL) {
+        if (hTreads[i] == NULL) {
             fprintf(stderr, "CreateThread failed for thread #%d: error code %lu\n", i + 1, GetLastError());
             return 1;
         }

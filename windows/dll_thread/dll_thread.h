@@ -11,9 +11,9 @@ extern "C" {
 #endif
 
 #if BUILDING_DLL
-#define DLLIMPORT __declspec(dllexport) __cdecl
+#    define DLLIMPORT __declspec(dllexport) __cdecl
 #else
-#define DLLIMPORT __declspec(dllimport) __cdecl
+#    define DLLIMPORT __declspec(dllimport) __cdecl
 #endif
 
 /**

@@ -77,7 +77,7 @@ int main(void)
         perror("eventfd_read");
         return 1;
     }
-    printf("Final value: %"PRIu64"\n", value);
+    printf("Final value: %" PRIu64 "\n", value);
 
     close(efd);
     return 0;

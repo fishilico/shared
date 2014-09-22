@@ -39,7 +39,7 @@ int _tmain()
         print_winerr(_T("CreateToolhelp32Snapshot(Process)"));
         return 1;
     }
-    pe32.dwSize=sizeof(PROCESSENTRY32);
+    pe32.dwSize = sizeof(PROCESSENTRY32);
     if (!Process32First(hProcessSnap, &pe32)) {
         print_winerr(_T("Process32First"));
         CloseHandle(hProcessSnap);
@@ -82,7 +82,7 @@ int _tmain()
         hProcess = OpenProcess(
             PROCESS_CREATE_THREAD | PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE,
             0, pe32.th32ProcessID);
-        if(!hProcess) {
+        if (!hProcess) {
             if (GetLastError() != ERROR_ACCESS_DENIED) {
                 _ftprintf(stderr, _T("%lu: access error:\n"), pe32.th32ProcessID);
                 print_winerr(_T("OpenProcess"));

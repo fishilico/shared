@@ -57,14 +57,14 @@ int _tmain()
     pTeb2 = _NtCurrentTeb();
     if (pTeb != pTeb2) {
         printf("Invalid NtCurrentTeb implementation. Windows API gives %p and internal structures %p.\n",
-            pTeb, pTeb2);
+               pTeb, pTeb2);
         return 1;
     }
     printf("Thread Environment block is at %p\n", pTeb);
     pPeb = _NtCurrentPeb();
     if (pPeb != pbi.PebBaseAddress) {
         printf("Unknown TEB format. PEB from TEB is %p but real one is %p.\n",
-            pPeb, pbi.PebBaseAddress);
+               pPeb, pbi.PebBaseAddress);
         return 1;
     }
     printf("Process Environment block is at %p\n", pPeb);
@@ -80,7 +80,7 @@ int _tmain()
         hModule = GetModuleHandleW(CurEntry->FullDllName.Buffer);
         if (hModule != CurEntry->DllBase) {
             printf("Module %S: base address mismatch, hMod = %p, Ldr entry = %p\n",
-                CurEntry->FullDllName.Buffer, hModule, CurEntry->DllBase);
+                   CurEntry->FullDllName.Buffer, hModule, CurEntry->DllBase);
             return 1;
         }
         printf("   %p: %S\n", CurEntry->DllBase, CurEntry->FullDllName.Buffer);
@@ -91,14 +91,14 @@ int _tmain()
     pModuleBase = _GetModuleBase(L"ntdll.dll");
     if (pModuleBase != hNtDll) {
         printf("ntdll.dll base address mismatches, expected %p got %p\n",
-            hNtDll, pModuleBase);
+               hNtDll, pModuleBase);
         return 1;
     }
     pProcAddress = _GetProcAddress(pModuleBase, "NtQueryInformationProcess");
     pProcAddress2 = (LPCVOID)_NtQueryInformationProcess;
     if (pProcAddress != pProcAddress2) {
         printf("NtQueryInformationProcess address mismatches, expected %p got %p\n",
-            pProcAddress2, pProcAddress);
+               pProcAddress2, pProcAddress);
         return 1;
     }
 
@@ -106,14 +106,14 @@ int _tmain()
     hModule = GetModuleHandleW(L"kernel32.dll");
     if (pModuleBase != hModule) {
         printf("kernel32.dll base address mismatches, expected %p got %p\n",
-            hModule, pModuleBase);
+               hModule, pModuleBase);
         return 1;
     }
     pProcAddress = _GetProcAddress(pModuleBase, "ExitProcess");
     pProcAddress2 = GetProcAddress(hModule, "ExitProcess");
     if (pProcAddress != pProcAddress2) {
         printf("ExitProcess address mismatches, expected %p got %p\n",
-            pProcAddress2, pProcAddress);
+               pProcAddress2, pProcAddress);
         return 1;
     }
 

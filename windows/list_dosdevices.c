@@ -45,7 +45,7 @@ static BOOL QueryDosDeviceWithAlloc(LPCTSTR lpDeviceName, LPTSTR *lppTargetPath,
 
 static int CompareStringList(const void *arg1, const void *arg2)
 {
-    return _tcsicmp(*(const LPCTSTR*)arg1, *(const LPCTSTR*)arg2);
+    return _tcsicmp(*(const LPCTSTR *)arg1, *(const LPCTSTR *)arg2);
 }
 
 int _tmain()
@@ -62,7 +62,7 @@ int _tmain()
     /* Sort the Dos Devices list using an array of strings */
     nDevices = 0;
     foreach_str(szDosDevice, lszDosDevicesList, cchSize) {
-        nDevices ++;
+        nDevices++;
     }
     aszDosDevices = HeapAlloc(GetProcessHeap(), 0, nDevices * sizeof(LPCTSTR));
     if (!aszDosDevices) {
@@ -76,7 +76,7 @@ int _tmain()
     qsort(aszDosDevices, nDevices, sizeof(LPTSTR), CompareStringList);
 
     /* Print the sorted array */
-    for (i = 0; i < nDevices; i ++) {
+    for (i = 0; i < nDevices; i++) {
         _tprintf(_T("%s"), aszDosDevices[i]);
         if (!QueryDosDeviceWithAlloc(aszDosDevices[i], &lszDevicePathsList, &cchSize)) {
             break;

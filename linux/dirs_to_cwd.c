@@ -86,7 +86,7 @@ int main(void)
             fprintf(stderr, "A component in the working directory is not a directory\n");
             goto cleanup;
         }
-        printf("  device %"PRIu64" inode %ld (0x%08lx)\n", st.st_dev, st.st_ino, st.st_ino);
+        printf("  device %" PRIu64 " inode %ld (0x%08lx)\n", st.st_dev, st.st_ino, st.st_ino);
 
         /* Find the entry in the directory enumeration */
         if (dirfd != AT_FDCWD) {
@@ -111,7 +111,6 @@ int main(void)
                 }
             }
         }
-
 #if defined(__linux__) && defined(_GNU_SOURCE) && defined(MAX_HANDLE_SZ)
         /* Use name_to_handle_at */
         {
@@ -119,7 +118,7 @@ int main(void)
             unsigned int i;
             /* Force fh_buffer memory to be aligned on an integer boundary */
             int fh_buffer[(sizeof(struct file_handle) + MAX_HANDLE_SZ + sizeof(int) - 1) / sizeof(int)];
-            struct file_handle *fhp = (struct file_handle*)fh_buffer;
+            struct file_handle *fhp = (struct file_handle *)fh_buffer;
             fhp->handle_bytes = MAX_HANDLE_SZ;
             if (name_to_handle_at(dirfd, path_part, fhp, &mount_id, 0) == -1) {
                 if (errno == ENOTSUP) {

@@ -8,7 +8,7 @@
 
 /* Define a custom static assert if none is provided */
 #ifndef _STATIC_ASSERT
-#define _STATIC_ASSERT(cond) ((void)sizeof(char[1 - 2*!(cond)]))
+#    define _STATIC_ASSERT(cond) ((void)sizeof(char[1 - 2*!(cond)]))
 #endif
 
 /**
@@ -22,7 +22,7 @@
 typedef LONG NTSTATUS, *PNTSTATUS;
 
 #ifndef __UNICODE_STRING_DEFINED
-#define __UNICODE_STRING_DEFINED
+#    define __UNICODE_STRING_DEFINED
 typedef struct _UNICODE_STRING {
     USHORT Length;
     USHORT MaximumLength;
@@ -54,7 +54,7 @@ typedef struct _RTL_USER_PROCESS_PARAMETERS {
     PVOID Reserved2[10];
     UNICODE_STRING ImagePathName;
     UNICODE_STRING CommandLine;
-} RTL_USER_PROCESS_PARAMETERS,*PRTL_USER_PROCESS_PARAMETERS;
+} RTL_USER_PROCESS_PARAMETERS, *PRTL_USER_PROCESS_PARAMETERS;
 
 typedef struct _PEB {
     BYTE Reserved1[2];
@@ -222,7 +222,7 @@ static LPCVOID _GetModuleBase(LPCWSTR szModuleName)
  */
 static LPCVOID _GetProcAddress(LPCVOID pModuleBase, LPCSTR szFunctionName)
 {
-    const BYTE *pbModuleBase = (PBYTE) pModuleBase;
+    const BYTE *pbModuleBase = (PBYTE)pModuleBase;
     const IMAGE_DOS_HEADER *pDOSHeader;
     const IMAGE_NT_HEADERS *pNTHeader;
     const IMAGE_DATA_DIRECTORY *pExportDataDir;

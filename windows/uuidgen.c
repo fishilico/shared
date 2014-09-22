@@ -24,9 +24,9 @@ int _tmain()
     }
 
     _tprintf(_T("%s: {%08lX-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X}\n"),
-        szDesc,
-        uuid.Data1, uuid.Data2, uuid.Data3,
-        uuid.Data4[0], uuid.Data4[1], uuid.Data4[2], uuid.Data4[3],
-        uuid.Data4[4], uuid.Data4[5], uuid.Data4[6], uuid.Data4[7]);
+             szDesc,
+             uuid.Data1, uuid.Data2, uuid.Data3,
+             uuid.Data4[0], uuid.Data4[1], uuid.Data4[2], uuid.Data4[3],
+             uuid.Data4[4], uuid.Data4[5], uuid.Data4[6], uuid.Data4[7]);
     return 0;
 }

@@ -23,7 +23,8 @@ static void _show_sid(
     PSID pSid = NULL;
     LPTSTR szSid = NULL;
     if (!AllocateAndInitializeSid(pIdentifierAuthority, nSubAuthorityCount,
-        dwSA0, dwSA1, dwSA2, dwSA3, dwSA4, dwSA5, dwSA6, dwSA7, &pSid)) {
+                                  dwSA0, dwSA1, dwSA2, dwSA3,
+                                  dwSA4, dwSA5, dwSA6, dwSA7, &pSid)) {
         print_winerr(_T("AllocateAndInitializeSid"));
         exit(1);
     }
@@ -79,12 +80,12 @@ static void _show_sid(
 
 int _tmain()
 {
-    SID_IDENTIFIER_AUTHORITY SIDAuthNull = {SECURITY_NULL_SID_AUTHORITY};
-    SID_IDENTIFIER_AUTHORITY SIDAuthWorld = {SECURITY_WORLD_SID_AUTHORITY};
-    SID_IDENTIFIER_AUTHORITY SIDAuthLocal = {SECURITY_LOCAL_SID_AUTHORITY};
-    SID_IDENTIFIER_AUTHORITY SIDAuthCreator = {SECURITY_CREATOR_SID_AUTHORITY};
-    SID_IDENTIFIER_AUTHORITY SIDAuthNonUnique = {SECURITY_NON_UNIQUE_AUTHORITY};
-    SID_IDENTIFIER_AUTHORITY SIDAuthNt = {SECURITY_NT_AUTHORITY};
+    SID_IDENTIFIER_AUTHORITY SIDAuthNull = { SECURITY_NULL_SID_AUTHORITY };
+    SID_IDENTIFIER_AUTHORITY SIDAuthWorld = { SECURITY_WORLD_SID_AUTHORITY };
+    SID_IDENTIFIER_AUTHORITY SIDAuthLocal = { SECURITY_LOCAL_SID_AUTHORITY };
+    SID_IDENTIFIER_AUTHORITY SIDAuthCreator = { SECURITY_CREATOR_SID_AUTHORITY };
+    SID_IDENTIFIER_AUTHORITY SIDAuthNonUnique = { SECURITY_NON_UNIQUE_AUTHORITY };
+    SID_IDENTIFIER_AUTHORITY SIDAuthNt = { SECURITY_NT_AUTHORITY };
 
     show_sid1(_T("Null"), &SIDAuthNull, SECURITY_NULL_RID); /* S-1-0-0 */
     show_sid1(_T("World"), &SIDAuthWorld, SECURITY_WORLD_RID); /* S-1-1-0 */
@@ -167,13 +168,13 @@ int _tmain()
     show_sid1(_T("Other Organization"), &SIDAuthNt, SECURITY_OTHER_ORGANIZATION_RID); /* S-1-5-1000 */
 #ifdef SECURITY_RESOURCE_MANAGER_AUTHORITY
     {
-        SID_IDENTIFIER_AUTHORITY SIDAuthRsrcMan = {SECURITY_RESOURCE_MANAGER_AUTHORITY};
+        SID_IDENTIFIER_AUTHORITY SIDAuthRsrcMan = { SECURITY_RESOURCE_MANAGER_AUTHORITY };
         show_sid0(_T("Resource Manager Authority"), &SIDAuthRsrcMan); /* S-1-9 */
     }
 #endif
 #ifdef SECURITY_MANDATORY_LABEL_AUTHORITY
     {
-           SID_IDENTIFIER_AUTHORITY SIDAuthMandatoryLabel = {SECURITY_MANDATORY_LABEL_AUTHORITY};
+        SID_IDENTIFIER_AUTHORITY SIDAuthMandatoryLabel = { SECURITY_MANDATORY_LABEL_AUTHORITY };
         show_sid0(_T("Mandatory Label Authority"), &SIDAuthMandatoryLabel); /* S-1-16 */
     }
 #endif

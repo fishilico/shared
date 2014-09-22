@@ -45,7 +45,7 @@
  *     31 c0      xor    %eax,%eax
  *     c3         ret
  */
-static const uint8_t CODE[] = {0x31, 0xc0, 0xc3};
+static const uint8_t CODE[] = { 0x31, 0xc0, 0xc3 };
 #elif defined __arm__
 /**
  * Binary representation of "return 0;" in ARM instruction set, using the
@@ -53,17 +53,15 @@ static const uint8_t CODE[] = {0x31, 0xc0, 0xc3};
  *     e3a00000     mov r0, #0
  *     e12fff1e     bx  lr
  */
-static const uint32_t CODE[] = {0xe3a00000, 0xe12fff1e};
+static const uint32_t CODE[] = { 0xe3a00000, 0xe12fff1e };
 #else
-#error Unsupported architecture
+#    error Unsupported architecture
 #endif
-
 
 /**
  * Temporary file name
  */
 static const char TEMPFILE_SUFFIX[] = "/mmap-wx-tmpXXXXXX";
-
 
 #if defined(MMAP_WX_DUMP_MMAPS) && MMAP_WX_DUMP_MMAPS
 /**
@@ -85,7 +83,7 @@ static void dump_proc_maps(void)
             wrlen = fwrite(buffer + offset, 1, rdlen - offset, stdout);
             if (wrlen <= 0) {
                 fprintf(stderr, "[!] fwrite failed with error: %d\n",
-                    ferror(stdout));
+                        ferror(stdout));
                 close(fd);
                 return;
             }
@@ -107,14 +105,16 @@ static void test_anon_wx_mmap(void)
                MAP_PRIVATE | MAP_ANONYMOUS,
                -1, 0);
     if (ptr == MAP_FAILED) {
-        if (errno != EACCES && errno != EPERM) perror("[-] mmap-RWX");
+        if (errno != EACCES && errno != EPERM)
+            perror("[-] mmap-RWX");
         printf("[+] Direct RWX mmap failed as expected with a secure kernel\n");
         return;
     }
     printf("[ ] RWX mmap succeeded at %p, let's try to use it!\n", ptr);
     memcpy(ptr, CODE, sizeof(CODE));
-    result = ( (int (*)(void))(uintptr_t)ptr )();
-    if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap-RWX");
+    result = ((int (*)(void))(uintptr_t)ptr) ();
+    if (munmap(ptr, sizeof(CODE)) < 0)
+        perror("[-] munmap-RWX");
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
         return;
@@ -140,14 +140,16 @@ static void test_anon_wx_mprotect(void)
     printf("[ ] RW mmap succeeded at %p\n", ptr);
     memcpy(ptr, CODE, sizeof(CODE));
     if (mprotect(ptr, sizeof(CODE), PROT_READ | PROT_EXEC) < 0) {
-        if (errno != EACCES && errno != EPERM) perror("[-] mprotect-RW2RX");
+        if (errno != EACCES && errno != EPERM)
+            perror("[-] mprotect-RW2RX");
         printf("[+] RX mprotect on a RW mmap failed as expected\n");
         munmap(ptr, sizeof(CODE));
         return;
     }
 
-    result = ( (int (*)(void))(uintptr_t)ptr )();
-    if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap");
+    result = ((int (*)(void))(uintptr_t)ptr) ();
+    if (munmap(ptr, sizeof(CODE)) < 0)
+        perror("[-] munmap");
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
         return;
@@ -172,13 +174,16 @@ static void test_mmap_w_mprotect_x_fd(int fd)
     memcpy(ptr, CODE, sizeof(CODE));
 
     if (mprotect(ptr, sizeof(CODE), PROT_READ | PROT_EXEC) < 0) {
-        if (errno != EACCES) perror("[!] mprotect-RW2RX");
-        else printf("... RX mprotect on a RW mmap failed as expected\n");
+        if (errno != EACCES)
+            perror("[!] mprotect-RW2RX");
+        else
+            printf("... RX mprotect on a RW mmap failed as expected\n");
         munmap(ptr, sizeof(CODE));
         return;
     }
-    result = ( (int (*)(void))(uintptr_t)ptr )();
-    if (munmap(ptr, sizeof(CODE)) < 0) perror("[-] munmap");
+    result = ((int (*)(void))(uintptr_t)ptr) ();
+    if (munmap(ptr, sizeof(CODE)) < 0)
+        perror("[-] munmap");
     if (result != 0) {
         fprintf(stderr, "[!] unexpected result: %d\n", result);
     }
@@ -225,7 +230,7 @@ static void test_mmap_rw_rx_fd(int fd)
     }
 
     /* Execute code */
-    result = ( (int (*)(void))(uintptr_t)xptr )();
+    result = ((int (*)(void))(uintptr_t)xptr) ();
     if (result == 0) {
 #if defined(MMAP_WX_DUMP_MMAPS) && MMAP_WX_DUMP_MMAPS
         printf("[+] Code successfully executed. Dump /proc/self/maps\n");
@@ -236,8 +241,10 @@ static void test_mmap_rw_rx_fd(int fd)
     } else {
         fprintf(stderr, "[!] Unexpected result: %x\n", result);
     }
-    if (munmap(xptr, sizeof(CODE)) < 0) perror("[-] munmap-RX");
-    if (munmap(wptr, sizeof(CODE)) < 0) perror("[-] munmap-RW");
+    if (munmap(xptr, sizeof(CODE)) < 0)
+        perror("[-] munmap-RX");
+    if (munmap(wptr, sizeof(CODE)) < 0)
+        perror("[-] munmap-RW");
 }
 
 /**
@@ -252,9 +259,9 @@ static void test_mmap_wx_dir(const char *dirname)
         fprintf(stderr, "[!] too long directory name: %.512s\n", dirname);
         return;
     }
-
 #if defined(O_TMPFILE) && defined(O_CLOEXEC)
-    fd = open(dirname, O_TMPFILE|O_RDWR|O_CLOEXEC|O_EXCL, S_IRUSR|S_IWUSR);
+    fd = open(dirname, O_TMPFILE | O_RDWR | O_CLOEXEC | O_EXCL,
+              S_IRUSR | S_IWUSR);
     if (fd >= 0) {
         /* Retrieve file name using procfs */
         char procfile[1024];
@@ -313,7 +320,7 @@ int main(void)
     setvbuf(stdout, NULL, _IONBF, 0);
 
     /* Check that data and function pointers have the same size */
-    assert(sizeof(int (*)(void)) == sizeof(void*));
+    assert(sizeof(int (*)(void)) == sizeof(void *));
 
     test_anon_wx_mmap();
     test_anon_wx_mprotect();

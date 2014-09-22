@@ -9,12 +9,12 @@
 #include <sys/utsname.h>
 
 #if __GNUC__ >= 4
-    #define EXPORT_FUNC __attribute__((visibility("default")))
+#    define EXPORT_FUNC __attribute__((visibility("default")))
 #else
-    #define EXPORT_FUNC
+#    define EXPORT_FUNC
 #endif
 
-typedef int (*uname_t)(struct utsname * buf);
+typedef int (*uname_t) (struct utsname * buf);
 
 static void fake_with_env(char *value, size_t size, const char *env_name)
 {
@@ -42,7 +42,7 @@ int EXPORT_FUNC uname(struct utsname *buf)
         fake_with_env(buf->nodename, sizeof(buf->nodename), "FAKEUNAME_N");
         fake_with_env(buf->release, sizeof(buf->release), "FAKEUNAME_R");
         fake_with_env(buf->version, sizeof(buf->version), "FAKEUNAME_V");
-        fake_with_env(buf->machine,sizeof(buf->machine),  "FAKEUNAME_M");
+        fake_with_env(buf->machine, sizeof(buf->machine), "FAKEUNAME_M");
     }
     return ret;
 }

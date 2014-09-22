@@ -47,7 +47,7 @@ int main(void)
 
         /* Record time */
         now = time(0);
-        if (now == ((time_t) -1)) {
+        if (now == ((time_t)-1)) {
             perror("time");
             return 1;
         }
@@ -87,7 +87,7 @@ int main(void)
         for (i = 0; i < (size_t)bytes; i += sizeof(struct inotify_event) + event.len) {
             assert(i + sizeof(struct inotify_event) <= (size_t)bytes);
             memcpy(&event, buffer + i, sizeof(struct inotify_event));
-            name = (char*)(buffer + i + sizeof(struct inotify_event));
+            name = (char *)(buffer + i + sizeof(struct inotify_event));
             assert(i + sizeof(struct inotify_event) + event.len <= (size_t)bytes);
             assert(event.wd == wd);
 

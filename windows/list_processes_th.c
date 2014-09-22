@@ -15,7 +15,7 @@ int _tmain()
         print_winerr(_T("CreateToolhelp32Snapshot(Process)"));
         return 1;
     }
-    pe32.dwSize=sizeof(PROCESSENTRY32);
+    pe32.dwSize = sizeof(PROCESSENTRY32);
     if (!Process32First(hProcessSnap, &pe32)) {
         print_winerr(_T("Process32First"));
         CloseHandle(hProcessSnap);
@@ -26,7 +26,7 @@ int _tmain()
         MODULEENTRY32 me32;
 
         _tprintf(_T("PID %lu, PPID %lu: %s (%ld thread(s))\n"),
-            pe32.th32ProcessID, pe32.th32ParentProcessID, pe32.szExeFile, pe32.cntThreads);
+                 pe32.th32ProcessID, pe32.th32ParentProcessID, pe32.szExeFile, pe32.cntThreads);
         if (!pe32.th32ProcessID) {
             continue;
         }
@@ -50,7 +50,7 @@ int _tmain()
         do {
             assert(me32.th32ProcessID == pe32.th32ProcessID);
             _tprintf(_T("  - @%p (size 0x%06lx): %s (%s)\n"),
-                me32.modBaseAddr, me32.modBaseSize, me32.szModule, me32.szExePath);
+                     me32.modBaseAddr, me32.modBaseSize, me32.szModule, me32.szExePath);
         } while (Module32Next(hModuleSnap, &me32));
         CloseHandle(hModuleSnap);
     } while (Process32Next(hProcessSnap, &pe32));

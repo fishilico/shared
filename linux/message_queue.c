@@ -12,7 +12,6 @@
 
 #define DEV_MQUEUE_PATH "/dev/mqueue"
 
-
 static void dump_mqueue_state(const char *queue_name)
 {
     char filename[sizeof(DEV_MQUEUE_PATH) + NAME_MAX];

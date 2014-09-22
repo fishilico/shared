@@ -110,8 +110,7 @@ static void DumpProccessToken(VOID)
                 _sntprintf(szPriv, 20, _T("{%08x-%08lx}"), pLuid->LowPart, pLuid->HighPart);
             }
             dwAttr = pTokenPrivileges->Privileges[i].Attributes;
-            _tprintf(_T("   %c %s ("),
-                (dwAttr & SE_PRIVILEGE_ENABLED) ? '+' : '-', szPriv);
+            _tprintf(_T("   %c %s ("), (dwAttr & SE_PRIVILEGE_ENABLED) ? '+' : '-', szPriv);
             if (dwAttr & SE_PRIVILEGE_ENABLED) {
                 if (dwAttr & SE_PRIVILEGE_ENABLED_BY_DEFAULT) {
                     _tprintf(_T("enabled"));
@@ -164,8 +163,8 @@ static void DumpProccessToken(VOID)
     if (pTokenSource) {
 #if defined(UNICODE)
         if (!MultiByteToWideChar(CP_ACP, 0,
-            pTokenSource->SourceName, TOKEN_SOURCE_LENGTH,
-            szTokenSourceName, TOKEN_SOURCE_LENGTH)) {
+                                 pTokenSource->SourceName, TOKEN_SOURCE_LENGTH,
+                                 szTokenSourceName, TOKEN_SOURCE_LENGTH)) {
             print_winerr(_T("MultiByteToWideChar"));
             _sntprintf(szTokenSourceName, TOKEN_SOURCE_LENGTH + 1, _T("(error)"));
         }
@@ -174,8 +173,8 @@ static void DumpProccessToken(VOID)
 #endif
         szTokenSourceName[TOKEN_SOURCE_LENGTH] = 0;
         pLuid = &pTokenSource->SourceIdentifier;
-        _tprintf(_T("- Source: %s {%08x-%08lx}\n"),
-            szTokenSourceName, pLuid->LowPart, pLuid->HighPart);
+        _tprintf(_T("- Source: %s {%08x-%08lx}\n"), szTokenSourceName,
+                 pLuid->LowPart, pLuid->HighPart);
         HeapFree(GetProcessHeap(), 0, pTokenSource);
     }
 

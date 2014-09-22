@@ -44,7 +44,7 @@ static long _syscall3(
      * edi = arg5
      * ebp = arg6
      */
-#if defined __GNUC__ && defined __PIC__
+#    if defined __GNUC__ && defined __PIC__
     /* GCC with PIC flag (Program Independent Code) complains with
      * "error: inconsistent operand constraints in an 'asm'"
      * because ebx has a special meaning in PIC
@@ -53,12 +53,12 @@ static long _syscall3(
         : "=a" (result)
         : "0" (number), "r" (arg1), "c" (arg2), "d" (arg3)
         : "memory", "cc");
-#else
+#    else
     __asm__ volatile ("int $0x80"
         : "=a" (result)
         : "0" (number), "b" (arg1), "c" (arg2), "d" (arg3)
         : "memory", "cc");
-#endif
+#    endif
 #elif defined __arm__
     /* r7 = syscall number
      * r0 = arg1 and result
@@ -68,17 +68,17 @@ static long _syscall3(
      * r4 = arg5
      * r5 = arg6
      */
-    register long r7 __asm__ ("r7") = number;
-    register long r0 __asm__ ("r0") = arg1;
-    register long r1 __asm__ ("r1") = arg2;
-    register long r2 __asm__ ("r2") = arg3;
+    register long r7 __asm__("r7") = number;
+    register long r0 __asm__("r0") = arg1;
+    register long r1 __asm__("r1") = arg2;
+    register long r2 __asm__("r2") = arg3;
     __asm__ volatile ("swi $0"
         : "=r" (r0)
         : "0" (r0), "r" (r1), "r" (r2), "r" (r7)
         : "memory", "cc", "r4", "r5", "r6");
     result = r0;
 #else
-#error Unsupported architecture
+#    error Unsupported architecture
 #endif
     return result;
 }
@@ -117,7 +117,7 @@ static ssize_t write(int fd, const void *buf, size_t count)
  */
 static void __attribute__((noreturn)) nolibc_exit(int status)
 {
-    while(1) {
+    while (1) {
 #ifdef __NR_exit_group
         syscall1(__NR_exit_group, status);
 #endif
@@ -214,7 +214,7 @@ static int write_ulong(int fd, unsigned long l)
 static int execve(const char *filename, char *const argv[],
                    char *const envp[])
 {
-    return (int) syscall3(__NR_execve, filename, argv, envp);
+    return (int)syscall3(__NR_execve, filename, argv, envp);
 }
 
 #endif /* NOLIBC_SYSCALL_H */

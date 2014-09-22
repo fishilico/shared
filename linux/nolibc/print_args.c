@@ -3,13 +3,13 @@
  */
 #include "nolibc-syscall-linux.h"
 
-static void _c_start(const void *stack)  __attribute__((used, noreturn));
+static void _c_start(const void *stack) __attribute__((used, noreturn));
 
 static void _c_start(const void *stack)
 {
-    const unsigned long argc = *(const unsigned long *) stack;
-    const char *const *argv = ((const char *const *) stack) + 1;
-    /*const char *const *envp = argv + argc + 1;*/
+    const unsigned long argc = *(const unsigned long *)stack;
+    const char *const *argv = ((const char *const *)stack) + 1;
+    /* const char *const *envp = argv + argc + 1; */
 
     unsigned long i;
     for (i = 0; i < argc; i++) {
@@ -37,13 +37,13 @@ __asm__ (
 "    .type _start, @function\n"
 "_start:\n"
 "    .cfi_startproc\n"
-#if defined __x86_64__
+#    if defined __x86_64__
 "    movq %rsp, %rdi\n"
 "    pushq $0\n"
-#elif defined __i386__
+#    elif defined __i386__
 "    pushl %esp\n"
 "    pushl $0\n"
-#endif
+#    endif
 "    jmp _c_start\n"
 "    .cfi_endproc\n"
 );
@@ -60,5 +60,5 @@ __asm__ (
 "    b _c_start\n"
 );
 #else
-#error Unsupported architecture
+#    error Unsupported architecture
 #endif

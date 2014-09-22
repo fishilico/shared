@@ -15,7 +15,6 @@
 #include <sys/time.h>
 #include <SDL/SDL.h>
 
-
 #define NB_BUFFER 4
 
 /**
@@ -27,7 +26,7 @@ struct capture_state {
     unsigned int capture_frame_rate;
 
     int fd;
-    void* mem[NB_BUFFER];
+    void *mem[NB_BUFFER];
     size_t mem_size[NB_BUFFER];
 };
 
@@ -180,7 +179,8 @@ static bool capture_start(
 /**
  * Get a frame from a V4L capture in UYVY format
  */
-static bool capture_get_frame(struct capture_state *capst, void *uyvy_frame) {
+static bool capture_get_frame(struct capture_state *capst, void *uyvy_frame)
+{
     struct v4l2_buffer buf;
     uint32_t frame_size;
     bool ret = true;
@@ -220,8 +220,7 @@ static bool capture_get_frame(struct capture_state *capst, void *uyvy_frame) {
 /**
  * Convert an image from UYVY to YV12
  */
-static void uyvy2yv12(
-    void *yv12, const void *uyvy, unsigned int w, unsigned int h)
+static void uyvy2yv12(void *yv12, const void *uyvy, unsigned int w, unsigned int h)
 {
     const unsigned int w2 = w / 2, h2 = h / 2;
     uint8_t *y = yv12;
@@ -255,8 +254,8 @@ int main(void)
     struct capture_state capst;
     const int video_format = SDL_ANYFORMAT | SDL_DOUBLEBUF | SDL_RESIZABLE;
     SDL_Rect screen_rect;
-    SDL_Surface* screen;
-    SDL_Overlay* overlay;
+    SDL_Surface *screen;
+    SDL_Overlay *overlay;
     SDL_Event event;
     struct timeval tv;
     time_t time_start;
@@ -312,8 +311,7 @@ int main(void)
                     goto quit;
 
                 case SDL_VIDEORESIZE:
-                    screen = SDL_SetVideoMode(event.resize.w, event.resize.h,
-                                              0, video_format);
+                    screen = SDL_SetVideoMode(event.resize.w, event.resize.h, 0, video_format);
                     /* Don't support more than what SDL_Rect can handle */
                     resz_w = (event.resize.w > UINT16_MAX) ? UINT16_MAX : (uint16_t)event.resize.w;
                     resz_h = (event.resize.h > UINT16_MAX) ? UINT16_MAX : (uint16_t)event.resize.h;

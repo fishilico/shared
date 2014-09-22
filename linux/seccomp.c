@@ -23,88 +23,89 @@
 #include <linux/unistd.h>
 
 #if defined __i386__
-    #define SECCOMP_AUDIT_ARCH AUDIT_ARCH_I386
-    #define REG_RESULT REG_EAX
-    #define REG_SYSCALL REG_EAX
-    #define REG_ARG0 REG_EBX
-    #define REG_ARG1 REG_ECX
-    #define REG_ARG2 REG_EDX
-    #define REG_ARG3 REG_ESI
-    #define REG_ARG4 REG_EDI
-    #define REG_ARG5 REG_EBP
+#    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_I386
+#    define REG_RESULT REG_EAX
+#    define REG_SYSCALL REG_EAX
+#    define REG_ARG0 REG_EBX
+#    define REG_ARG1 REG_ECX
+#    define REG_ARG2 REG_EDX
+#    define REG_ARG3 REG_ESI
+#    define REG_ARG4 REG_EDI
+#    define REG_ARG5 REG_EBP
 #elif defined __x86_64__
-    #define SECCOMP_AUDIT_ARCH AUDIT_ARCH_X86_64
-    #define REG_RESULT REG_RAX
-    #define REG_SYSCALL REG_RAX
-    #define REG_ARG0 REG_RDI
-    #define REG_ARG1 REG_RSI
-    #define REG_ARG2 REG_RDX
-    #define REG_ARG3 REG_R10
-    #define REG_ARG4 REG_R8
-    #define REG_ARG5 REG_R9
+#    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_X86_64
+#    define REG_RESULT REG_RAX
+#    define REG_SYSCALL REG_RAX
+#    define REG_ARG0 REG_RDI
+#    define REG_ARG1 REG_RSI
+#    define REG_ARG2 REG_RDX
+#    define REG_ARG3 REG_R10
+#    define REG_ARG4 REG_R8
+#    define REG_ARG5 REG_R9
 #elif defined __arm__
-    #define SECCOMP_AUDIT_ARCH AUDIT_ARCH_ARM
+#    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_ARM
 #else
-    #error "Unsupported architecture"
+#    error "Unsupported architecture"
 #endif
 
 #if __BYTE_ORDER == __LITTLE_ENDIAN
-    #define SYSCALL_ARG_OFFSET 0
+#    define SYSCALL_ARG_OFFSET 0
 #elif __BYTE_ORDER == __BIG_ENDIAN
-    #define SYSCALL_ARG_OFFSET 4
+#    define SYSCALL_ARG_OFFSET 4
 #else
-    #error "Unknown endianness"
+#    error "Unknown endianness"
 #endif
 
 static bool install_syscall_filter(bool do_kill)
 {
     struct sock_filter filter[] = {
         /* Check architecture (syscall convention), kill process if it fails */
-        BPF_STMT(BPF_LD+BPF_W+BPF_ABS, offsetof(struct seccomp_data, arch)),
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, SECCOMP_AUDIT_ARCH, 1, 0),
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_KILL),
+        BPF_STMT(BPF_LD + BPF_W + BPF_ABS, offsetof(struct seccomp_data, arch)),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, SECCOMP_AUDIT_ARCH, 1, 0),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
 
         /* Load the syscall number */
-        BPF_STMT(BPF_LD+BPF_W+BPF_ABS, offsetof(struct seccomp_data, nr)),
+        BPF_STMT(BPF_LD + BPF_W + BPF_ABS, offsetof(struct seccomp_data, nr)),
 
         /* Allow some syscalls (for exit, printf and sigreturn) */
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_exit_group, 0, 1),
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_exit, 0, 1),
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_fstat, 0, 1),
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_exit_group, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_exit, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_fstat, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
 #ifdef __NR_fstat64
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_fstat64, 0, 1),
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_fstat64, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
 #endif
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_mmap, 0, 1),
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_mmap, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
 #ifdef __NR_mmap2
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_mmap2, 0, 1),
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_mmap2, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
 #endif
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_rt_sigreturn, 0, 1),
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_rt_sigreturn, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
 
         /* Allow writing only to stderr and stdout */
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_write, 0, 5),
-        BPF_STMT(BPF_LD+BPF_W+BPF_ABS, offsetof(struct seccomp_data, args) + SYSCALL_ARG_OFFSET),
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, STDOUT_FILENO, 1, 0),
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, STDERR_FILENO, 0, 1),
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ALLOW),
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_KILL),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_write, 0, 5),
+        BPF_STMT(BPF_LD + BPF_W + BPF_ABS,
+                 offsetof(struct seccomp_data, args) + SYSCALL_ARG_OFFSET),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, STDOUT_FILENO, 1, 0),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, STDERR_FILENO, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
 
         /* Deny some other syscalls */
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_getcwd, 0, 1), \
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_ERRNO|EPERM),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_getcwd, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ERRNO | EPERM),
 
         /* Trap getuid */
-        BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, __NR_getpriority, 0, 1), \
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_TRAP),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_getpriority, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_TRAP),
 
         /* Send SIGSYS to process */
-        BPF_STMT(BPF_RET+BPF_K, SECCOMP_RET_KILL)
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL)
     };
     const size_t filter_len = sizeof(filter) / sizeof(filter[0]);
     struct sock_fprog prog;
@@ -140,7 +141,9 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
         fprintf(stderr, "sigaction warning: unexpected info->si_signo, %d != 1.\n", info->si_signo);
     }
     if (info->si_arch != SECCOMP_AUDIT_ARCH) {
-        fprintf(stderr, "sigaction error: unexpected info->si_arch, 0x%x != 0x%x.\n", info->si_arch, SECCOMP_AUDIT_ARCH);
+        fprintf(stderr,
+                "sigaction error: unexpected info->si_arch, 0x%x != 0x%x.\n",
+                info->si_arch, SECCOMP_AUDIT_ARCH);
         exit(1);
     }
 

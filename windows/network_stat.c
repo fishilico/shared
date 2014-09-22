@@ -50,8 +50,8 @@ _TableBufSizeToAlloc(GetUdpTable, MIB_UDPTABLE)
  * Declare our own InetNtop if not available (< Vista)
  */
 #ifndef InetNtop
-#define InetNtop _InetNtop
-static LPCTSTR InetNtop(INT Family, const void* pAddr, LPTSTR pStringBuf, size_t StringBufSize)
+#    define InetNtop _InetNtop
+static LPCTSTR InetNtop(INT Family, const void *pAddr, LPTSTR pStringBuf, size_t StringBufSize)
 {
     assert(pAddr);
     assert(pStringBuf);
@@ -59,13 +59,13 @@ static LPCTSTR InetNtop(INT Family, const void* pAddr, LPTSTR pStringBuf, size_t
         const BYTE *pbAddr = (PBYTE)pAddr;
         assert(StringBufSize >= 16);
         _sntprintf(pStringBuf, StringBufSize, _T("%u.%u.%u.%u"),
-            pbAddr[0], pbAddr[1], pbAddr[2], pbAddr[3]);
+                   pbAddr[0], pbAddr[1], pbAddr[2], pbAddr[3]);
     } else if (Family == AF_INET6) {
         const WORD *pwAddr = (PWORD)pAddr;
         assert(StringBufSize >= 46);
         _sntprintf(pStringBuf, StringBufSize, _T("%4x:%4x:%4x:%4x:%4x:%4x:%4x:%4x"),
-            pwAddr[0], pwAddr[1], pwAddr[2], pwAddr[3],
-            pwAddr[4], pwAddr[5], pwAddr[6], pwAddr[7]);
+                   pwAddr[0], pwAddr[1], pwAddr[2], pwAddr[3],
+                   pwAddr[4], pwAddr[5], pwAddr[6], pwAddr[7]);
     } else {
         assert(FALSE);
     }
@@ -90,7 +90,7 @@ static void dump_if_table(void)
     for (i = 0; i < pIfTable->dwNumEntries; i++) {
         pIfRow = &pIfTable->table[i];
         _tprintf(_T("  #%lu: %." STR(MAX_INTERFACE_NAME_LEN) PRIsW "\n"),
-            pIfRow->dwIndex, pIfRow->wszName);
+                 pIfRow->dwIndex, pIfRow->wszName);
         _tprintf(_T("    * Type: "));
         switch (pIfRow->dwType) {
             case_print(IF_TYPE_OTHER, _T("Other"));
@@ -161,11 +161,11 @@ static void dump_ipv4addr_table(void)
     for (i = 0; i < pIpAddrTable->dwNumEntries; i++) {
         pIpAddrRow = &pIpAddrTable->table[i];
         _tprintf(_T("  * Iface %lu: %s/%s\n"),
-            pIpAddrRow->dwIndex,
-            InetNtop(AF_INET, &pIpAddrRow->dwAddr, szAddrBuffer, ARRAYSIZE(szAddrBuffer)),
-            InetNtop(AF_INET, &pIpAddrRow->dwMask, szMaskBuffer, ARRAYSIZE(szMaskBuffer)));
+                 pIpAddrRow->dwIndex,
+                 InetNtop(AF_INET, &pIpAddrRow->dwAddr, szAddrBuffer, ARRAYSIZE(szAddrBuffer)),
+                 InetNtop(AF_INET, &pIpAddrRow->dwMask, szMaskBuffer, ARRAYSIZE(szMaskBuffer)));
         _tprintf(_T("    * Broadcast: %s\n"),
-            InetNtop(AF_INET, &pIpAddrRow->dwBCastAddr, szBCastBuffer, ARRAYSIZE(szBCastBuffer)));
+                 InetNtop(AF_INET, &pIpAddrRow->dwBCastAddr, szBCastBuffer, ARRAYSIZE(szBCastBuffer)));
         _tprintf(_T("    * Reassembly size: %lu\n"), pIpAddrRow->dwReasmSize);
     }
     HeapFree(GetProcessHeap(), 0, pIpAddrTable);
@@ -189,11 +189,11 @@ static void dump_ipv4fwd_table(void)
     for (i = 0; i < pIpForwardTable->dwNumEntries; i++) {
         pIpForwardRow = &pIpForwardTable->table[i];
         _tprintf(_T("  * Iface %lu: %s/%s\n"),
-            pIpForwardRow->dwForwardIfIndex,
-            InetNtop(AF_INET, &pIpForwardRow->dwForwardDest, szDestBuffer, ARRAYSIZE(szDestBuffer)),
-            InetNtop(AF_INET, &pIpForwardRow->dwForwardMask, szMaskBuffer, ARRAYSIZE(szMaskBuffer)));
+                 pIpForwardRow->dwForwardIfIndex,
+                 InetNtop(AF_INET, &pIpForwardRow->dwForwardDest, szDestBuffer, ARRAYSIZE(szDestBuffer)),
+                 InetNtop(AF_INET, &pIpForwardRow->dwForwardMask, szMaskBuffer, ARRAYSIZE(szMaskBuffer)));
         _tprintf(_T("    * Next Hop: %s\n"),
-            InetNtop(AF_INET, &pIpForwardRow->dwForwardNextHop, szNextHopBuffer, ARRAYSIZE(szNextHopBuffer)));
+                 InetNtop(AF_INET, &pIpForwardRow->dwForwardNextHop, szNextHopBuffer, ARRAYSIZE(szNextHopBuffer)));
         _tprintf(_T("    * Type: "));
 /* Old MinGW headers do not define MIB_IPROUTE_* */
 #ifdef MIB_IPROUTE_TYPE_OTHER
@@ -263,11 +263,11 @@ static void dump_tcp4_table(void)
     for (i = 0; i < pTcpTable->dwNumEntries; i++) {
         pTcpRow = &pTcpTable->table[i];
         _tprintf(_T("  * %s/%lu -> %s/%lu ("),
-            InetNtop(AF_INET, &pTcpRow->dwLocalAddr, szLocalAddrBuffer, ARRAYSIZE(szLocalAddrBuffer)),
-            ntohs((WORD)pTcpRow->dwLocalPort),
-            InetNtop(AF_INET, &pTcpRow->dwRemoteAddr, szRemoteAddrBuffer, ARRAYSIZE(szRemoteAddrBuffer)),
-            ntohs((WORD)pTcpRow->dwRemotePort));
-        switch(pTcpRow->dwState){
+                 InetNtop(AF_INET, &pTcpRow->dwLocalAddr, szLocalAddrBuffer, ARRAYSIZE(szLocalAddrBuffer)),
+                 ntohs((WORD)pTcpRow->dwLocalPort),
+                 InetNtop(AF_INET, &pTcpRow->dwRemoteAddr, szRemoteAddrBuffer, ARRAYSIZE(szRemoteAddrBuffer)),
+                 ntohs((WORD)pTcpRow->dwRemotePort));
+        switch (pTcpRow->dwState) {
             case_print(MIB_TCP_STATE_CLOSED, _T("CLOSED"));
             case_print(MIB_TCP_STATE_LISTEN, _T("LISTEN"));
             case_print(MIB_TCP_STATE_SYN_SENT, _T("SYN SENT"));
@@ -307,8 +307,8 @@ static void dump_udp4_table(void)
     for (i = 0; i < pUdpTable->dwNumEntries; i++) {
         pUdpRow = &pUdpTable->table[i];
         _tprintf(_T("  * %s/%lu\n"),
-            InetNtop(AF_INET, &pUdpRow->dwLocalAddr, szLocalAddrBuffer, ARRAYSIZE(szLocalAddrBuffer)),
-            ntohs((WORD)pUdpRow->dwLocalPort));
+                 InetNtop(AF_INET, &pUdpRow->dwLocalAddr, szLocalAddrBuffer, ARRAYSIZE(szLocalAddrBuffer)),
+                 ntohs((WORD)pUdpRow->dwLocalPort));
     }
     HeapFree(GetProcessHeap(), 0, pUdpTable);
 }

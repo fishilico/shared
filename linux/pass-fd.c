@@ -18,10 +18,10 @@
 
 /* from Linux kernel, include/linux/net.h and include/linux/socket.h */
 #ifndef SOCK_PASSSEC
-#define SOCK_PASSSEC 4
+#    define SOCK_PASSSEC 4
 #endif
 #ifndef SCM_SECURITY
-#define SCM_SECURITY 0x03
+#    define SCM_SECURITY 0x03
 #endif
 
 static int child1_main(const char *sockpath)
@@ -65,7 +65,7 @@ static int child1_main(const char *sockpath)
     umask(0777 & ~(S_IRUSR | S_IWUSR));
     addr.sun_family = AF_UNIX;
     strncpy(addr.sun_path, sockpath, sizeof(addr.sun_path));
-    if (bind(sockfd, (struct sockaddr*)(&addr), sizeof(addr)) == -1) {
+    if (bind(sockfd, (struct sockaddr *)(&addr), sizeof(addr)) == -1) {
         perror("bind");
         return 1;
     }
@@ -94,7 +94,7 @@ static int child1_main(const char *sockpath)
     msg.msg_iovlen = 1;
     msg.msg_control = &control;
     msg.msg_controllen = sizeof(control);
-    bytes = recvmsg(clientfd, &msg, MSG_NOSIGNAL|MSG_CMSG_CLOEXEC);
+    bytes = recvmsg(clientfd, &msg, MSG_NOSIGNAL | MSG_CMSG_CLOEXEC);
     if (bytes < 0) {
         perror("recvmsg");
         return 1;
@@ -198,7 +198,7 @@ static int child2_main(const char *sockpath)
     }
     addr.sun_family = AF_UNIX;
     strncpy(addr.sun_path, sockpath, sizeof(addr.sun_path));
-    if (connect(sockfd, (struct sockaddr*)(&addr), sizeof(addr)) == -1) {
+    if (connect(sockfd, (struct sockaddr *)(&addr), sizeof(addr)) == -1) {
         perror("connect");
         return 1;
     }
@@ -251,8 +251,8 @@ static int child2_main(const char *sockpath)
  */
 static int recursive_sockets(void)
 {
-    int recur_sockfd[2] = {-1}, sockv[2];
-    char buffer[1] = {'!'};
+    int recur_sockfd[2] = { -1 }, sockv[2];
+    char buffer[1] = { '!' };
     struct iovec iov;
     union {
         struct cmsghdr cmsghdr;

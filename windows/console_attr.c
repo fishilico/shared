@@ -34,11 +34,11 @@ int _tmain()
     AllocConsole();
 
     hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-    if(hStdout == INVALID_HANDLE_VALUE) {
+    if (hStdout == INVALID_HANDLE_VALUE) {
         print_winerr(_T("Unable to get hStdout"));
         return 1;
     }
-    if(!GetConsoleScreenBufferInfo(hStdout, &csbiInfo)) {
+    if (!GetConsoleScreenBufferInfo(hStdout, &csbiInfo)) {
         print_winerr(_T("GetConsoleScreenBufferInfo"));
         return 1;
     }
@@ -46,14 +46,14 @@ int _tmain()
     _tprintf(_T("Console size %d x %d\n"), csbiInfo.dwSize.X, csbiInfo.dwSize.Y);
 
     /* Foreground colors */
-    for(i = 0; i < 16; i++) {
+    for (i = 0; i < 16; i++) {
         SetConsoleTextAttribute(hStdout, i);
         _tprintf(_T("[%X]"), i);
     }
     printf("\n");
 
     /* Background colors */
-    for(i = 0; i < 16; i++) {
+    for (i = 0; i < 16; i++) {
         SetConsoleTextAttribute(hStdout, (i * 16) | 7);
         _tprintf(_T("[%x]"), i);
     }
@@ -61,7 +61,8 @@ int _tmain()
     SetConsoleTextAttribute(hStdout, csbiInfo.wAttributes);
     _tprintf(_T("Restored the initial attributes, 0x%04x\n"), csbiInfo.wAttributes);
 
-    MessageBox(NULL, _T("The colors are displayed on the console"), _T("Console Attributes"), MB_ICONINFORMATION | MB_OK);
+    MessageBox(NULL, _T("The colors are displayed on the console"), _T("Console Attributes"),
+               MB_ICONINFORMATION | MB_OK);
     FreeConsole();
     return 0;
 }

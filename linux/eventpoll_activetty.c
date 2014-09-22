@@ -16,7 +16,7 @@ static bool read_active_tty(int active_tty_fd, bool is_changed)
     ssize_t bytes;
     size_t count;
 
-    if (lseek(active_tty_fd, SEEK_SET, 0) == (off_t) -1) {
+    if (lseek(active_tty_fd, SEEK_SET, 0) == (off_t)-1) {
         perror("lseek");
         return false;
     }
@@ -59,7 +59,7 @@ int main(void)
     /* Use unbuffered stdin */
     setvbuf(stdin, NULL, _IONBF, 0);
 
-    active_tty_fd = open("/sys/class/tty/tty0/active", O_RDONLY|O_CLOEXEC);
+    active_tty_fd = open("/sys/class/tty/tty0/active", O_RDONLY | O_CLOEXEC);
     if (active_tty_fd == -1) {
         perror("open(/sys/class/tty/tty0/active");
         return 1;

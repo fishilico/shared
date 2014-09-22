@@ -37,7 +37,7 @@ static BOOL dlltls_alloc_data(void)
         printerr("LocalAlloc failed");
         return FALSE;
     }
-    if(!TlsSetValue(g_dwTlsIndex, lpvData)) {
+    if (!TlsSetValue(g_dwTlsIndex, lpvData)) {
         printerr("TlsSetValue failed");
         return FALSE;
     }
@@ -79,9 +79,9 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, __UNUSED_PARAM(LPVOID lp
 {
     switch (dwReason) {
         case DLL_PROCESS_ATTACH:
-            mainlog("Process Attach from module @%"PRIxPTR" (%s)",
-                (ULONG_PTR)GetModuleHandle(NULL),
-                (lpvReserved != NULL) ? "static load" : "LoadLibrary call");
+            mainlog("Process Attach from module @%" PRIxPTR " (%s)",
+                    (ULONG_PTR)GetModuleHandle(NULL),
+                    (lpvReserved != NULL) ? "static load" : "LoadLibrary call");
             g_dwTlsIndex = TlsAlloc();
             if (g_dwTlsIndex == TLS_OUT_OF_INDEXES) {
                 printerr("TlsAlloc failed: no more TLS Indexes");
@@ -106,7 +106,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, __UNUSED_PARAM(LPVOID lp
             break;
         case DLL_PROCESS_DETACH:
             mainlog("Process Detach (%s)",
-                (lpvReserved != NULL) ? "dying process" : "FreeLibrary call");
+                    (lpvReserved != NULL) ? "dying process" : "FreeLibrary call");
             dlltls_free_data();
             TlsFree(g_dwTlsIndex);
             break;
@@ -115,4 +115,3 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, __UNUSED_PARAM(LPVOID lp
     }
     return TRUE;
 }
-

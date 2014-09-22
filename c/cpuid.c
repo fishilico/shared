@@ -54,7 +54,7 @@ static void asm_cpuid(uint32_t code, uint32_t *peax, uint32_t *pebx, uint32_t *p
 #endif
 }
 
-static void print_features(const char *name, uint32_t bits, const char* const cpuidstr[32])
+static void print_features(const char *name, uint32_t bits, const char *const cpuidstr[32])
 {
     int i;
     printf("%s:", name);
@@ -68,7 +68,7 @@ static void print_features(const char *name, uint32_t bits, const char* const cp
 
 int main(void)
 {
-    uint32_t vendor_data[4] = {0};
+    uint32_t vendor_data[4] = { 0 };
     uint32_t max_code, max_extcode;
 
     /* Convert str to an array of 32-bits values */
@@ -80,7 +80,7 @@ int main(void)
     /* CPUID 0: get vendor string */
     asm_cpuid(0, &max_code, &vendor_data[0], &vendor_data[2], &vendor_data[1]);
     vendor_data[3] = 0;
-    print_escaped_ascii("CPUID vendor string", (char*)vendor_data);
+    print_escaped_ascii("CPUID vendor string", (char *)vendor_data);
     if (vendor_data[0] == 0x756e6547 && vendor_data[1] == 0x49656e69 && vendor_data[2] == 0x6c65746e) {
         printf(" (This is genuine Intel)\n");
     }
@@ -124,10 +124,10 @@ int main(void)
             data = (brand_str + 4 * i);
             asm_cpuid(0x80000002 + i, &data[0], &data[1], &data[2], &data[3]);
         }
-        start_brand_str = (char*)brand_str;
+        start_brand_str = (char *)brand_str;
         start_brand_str[sizeof(brand_str) - 1] = '\0';
         while (*start_brand_str == ' ') {
-            start_brand_str ++;
+            start_brand_str++;
         }
         print_escaped_ascii("Processor Brand String (ext2..4)", start_brand_str);
     }

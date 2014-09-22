@@ -56,7 +56,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
         n = snprintf(szBuf, nRemaining, "Unexpected nCmdShow (%d != %d)\n", nCmdShow, nCmdShow2);
         isOk = FALSE;
     } else {
-        n = snprintf(szBuf, nRemaining, "nCmdShow = %d%s\n", nCmdShow, (nCmdShow == SW_SHOWDEFAULT) ? " (SW_SHOWDEFAULT)" : "");
+        n = snprintf(szBuf, nRemaining, "nCmdShow = %d%s\n", nCmdShow,
+                     (nCmdShow == SW_SHOWDEFAULT) ? " (SW_SHOWDEFAULT)" : "");
     }
     szBuf += n;
     nRemaining -= n;

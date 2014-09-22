@@ -23,25 +23,25 @@
 static struct utsname fake_uname;
 
 #if defined __i386__
-    #define REG_SYSCALL(regs) ((regs).orig_eax)
-    #define REG_ARG0(regs) ((regs).ebx)
-    #define REG_ARG1(regs) ((regs).ecx)
-    #define REG_ARG2(regs) ((regs).edx)
-    #define REG_ARG3(regs) ((regs).esi)
-    #define REG_ARG4(regs) ((regs).edi)
-    #define REG_ARG5(regs) ((regs).ebp)
-    #define REG_RESULT(regs) ((regs).eax)
+#    define REG_SYSCALL(regs) ((regs).orig_eax)
+#    define REG_ARG0(regs) ((regs).ebx)
+#    define REG_ARG1(regs) ((regs).ecx)
+#    define REG_ARG2(regs) ((regs).edx)
+#    define REG_ARG3(regs) ((regs).esi)
+#    define REG_ARG4(regs) ((regs).edi)
+#    define REG_ARG5(regs) ((regs).ebp)
+#    define REG_RESULT(regs) ((regs).eax)
 #elif defined __x86_64__
-    #define REG_SYSCALL(regs) ((regs).orig_rax)
-    #define REG_ARG0(regs) ((regs).rdi)
-    #define REG_ARG1(regs) ((regs).rsi)
-    #define REG_ARG2(regs) ((regs).rdx)
-    #define REG_ARG3(regs) ((regs).r10)
-    #define REG_ARG4(regs) ((regs).r8)
-    #define REG_ARG5(regs) ((regs).r9)
-    #define REG_RESULT(regs) ((regs).rax)
+#    define REG_SYSCALL(regs) ((regs).orig_rax)
+#    define REG_ARG0(regs) ((regs).rdi)
+#    define REG_ARG1(regs) ((regs).rsi)
+#    define REG_ARG2(regs) ((regs).rdx)
+#    define REG_ARG3(regs) ((regs).r10)
+#    define REG_ARG4(regs) ((regs).r8)
+#    define REG_ARG5(regs) ((regs).r9)
+#    define REG_RESULT(regs) ((regs).rax)
 #else
-    #error "Unsupported architecture"
+#    error "Unsupported architecture"
 #endif
 
 /**
@@ -49,8 +49,8 @@ static struct utsname fake_uname;
  */
 static int memcpy_to_pid(pid_t pid, void *dst, const void *src, size_t size)
 {
-    uint8_t *pdst = (uint8_t*)dst;
-    const uint8_t *psrc = (uint8_t*)src;
+    uint8_t *pdst = (uint8_t *)dst;
+    const uint8_t *psrc = (uint8_t *)src;
     size_t i;
 
     /* ptrace works with words of size a pointer. */
@@ -108,8 +108,8 @@ static int handle_ptrace_events(pid_t child)
                 /* The child suspended so suspend as well */
                 kill(getpid(), SIGSTOP);
                 kill(pid, SIGCONT);
-            } else if ((status == SIGTRAP && is_first) ||
-                       (status == (0x80 | SIGTRAP))) { /* PTRACE_O_TRACESYSGOOD options */
+            } else if ((status == SIGTRAP && is_first) || (status == (0x80 | SIGTRAP))) {
+                /* PTRACE_O_TRACESYSGOOD options */
                 /* This is the expected signal for ptrace! */
                 if (ptrace(PTRACE_GETREGS, pid, NULL, &regs) == -1) {
                     perror("ptrace(GETREGS)");
@@ -119,8 +119,9 @@ static int handle_ptrace_events(pid_t child)
                 if (is_first) {
                     /* First syscall must be execve */
                     if (nsyscall != __NR_execve) {
-                        fprintf(stderr, "Unexpected first syscall number: %ld != %d (execve).\n",
-                            nsyscall, __NR_execve);
+                        fprintf(stderr,
+                                "Unexpected first syscall number: %ld != %d (execve).\n",
+                                nsyscall, __NR_execve);
                         return EXIT_FAILURE;
                     }
                     /* Initialise ptrace options */
@@ -139,7 +140,7 @@ static int handle_ptrace_events(pid_t child)
                      *        Find out something to prevent poking buffer twice, and
                      *        which manages error codes.
                      */
-                    if (memcpy_to_pid(pid, (void*)REG_ARG0(regs), &fake_uname, sizeof(fake_uname)) == -1) {
+                    if (memcpy_to_pid(pid, (void *)REG_ARG0(regs), &fake_uname, sizeof(fake_uname)) == -1) {
                         return EXIT_FAILURE;
                     }
                 }
@@ -213,7 +214,7 @@ int main(int argc, char **argv)
 
     /* Create a child */
     child = fork();
-    if (child == (pid_t) -1) {
+    if (child == (pid_t)-1) {
         perror("fork");
         return -1;
     } else if (child == 0) {

@@ -15,18 +15,18 @@
 
 #if !defined CPU_ALLOC && !defined CPU_ZERO_S
 /* Define the _S API from the older one */
-#define CPU_ISSET_S(cpu, setsize, set) CPU_ISSET((cpu), (set))
-#define CPU_SET_S(cpu, setsize, set) do {(void)setsize; CPU_SET((cpu), (set));} while (0)
-#define CPU_CLR_S(cpu, setsize, set) do {(void)setsize; CPU_CLR((cpu), (set));} while (0)
+#    define CPU_ISSET_S(cpu, setsize, set) CPU_ISSET((cpu), (set))
+#    define CPU_SET_S(cpu, setsize, set) do {(void)setsize; CPU_SET((cpu), (set));} while (0)
+#    define CPU_CLR_S(cpu, setsize, set) do {(void)setsize; CPU_CLR((cpu), (set));} while (0)
 
-#define CPU_ZERO_S(setsize, set) CPU_ZERO((set))
-#define CPU_COUNT_S(setsize, set) _cpu_count_s((setsize), (set))
+#    define CPU_ZERO_S(setsize, set) CPU_ZERO((set))
+#    define CPU_COUNT_S(setsize, set) _cpu_count_s((setsize), (set))
 static int _cpu_count_s(size_t setsize, cpu_set_t *set)
 {
     int count = 0;
     size_t i;
     assert(setsize == sizeof(set->__bits));
-    for (i = 0; i < sizeof(set->__bits)/sizeof(set->__bits[0]); i++) {
+    for (i = 0; i < sizeof(set->__bits) / sizeof(set->__bits[0]); i++) {
         __cpu_mask b;
         for (b = set->__bits[i]; b; b >>= 1) {
             if (b & 1) {
@@ -37,7 +37,7 @@ static int _cpu_count_s(size_t setsize, cpu_set_t *set)
     return count;
 }
 
-#define CPU_AND_S(setsize, destset, srcset1, srcset2) \
+#    define CPU_AND_S(setsize, destset, srcset1, srcset2) \
     do { \
         size_t i; \
         assert((setsize) == sizeof((destset)->__bits)); \
@@ -46,16 +46,17 @@ static int _cpu_count_s(size_t setsize, cpu_set_t *set)
         } \
     } while (0)
 
-#define CPU_EQUAL_S(setsize, cpusetp1, cpusetp2) (!memcmp((cpusetp1), (cpusetp2), (setsize)))
+#    define CPU_EQUAL_S(setsize, cpusetp1, cpusetp2) (!memcmp((cpusetp1), (cpusetp2), (setsize)))
 
-#define CPU_ALLOC_SIZE(count) ((void)(count), sizeof(cpu_set_t))
-#define CPU_ALLOC(count) malloc(CPU_ALLOC_SIZE((count)))
-#define CPU_FREE(set) free((set))
+#    define CPU_ALLOC_SIZE(count) ((void)(count), sizeof(cpu_set_t))
+#    define CPU_ALLOC(count) malloc(CPU_ALLOC_SIZE((count)))
+#    define CPU_FREE(set) free((set))
 
-#include <sys/syscall.h>
-#include <unistd.h>
-#define sched_getcpu() sched_getcpu_from_syscall()
-int sched_getcpu_from_syscall() {
+#    include <sys/syscall.h>
+#    include <unistd.h>
+#    define sched_getcpu() sched_getcpu_from_syscall()
+int sched_getcpu_from_syscall()
+{
     unsigned int cpu = 0;
     if (syscall(__NR_getcpu, &cpu, NULL, NULL) == -1) {
         return -1;
@@ -197,9 +198,10 @@ static uint64_t rdtsc(void)
     __asm__ volatile ("rdtsc" : "=a" (low), "=d" (high));
     return low | ((uint64_t)high) << 32;
 }
-#define HAVE_RDTSC 1
+
+#    define HAVE_RDTSC 1
 #else
-#define HAVE_RDTSC 0
+#    define HAVE_RDTSC 0
 #endif
 
 int main(int argc, char **argv)
@@ -217,7 +219,7 @@ int main(int argc, char **argv)
     cpu_num = (cpu_num > cpu_num3) ? cpu_num : cpu_num3;
     printf("Found %lu CPUs\n", cpu_num);
     if (cpu_num1 && cpu_num1 != cpu_num) {
-        printf( "Warning: sched_getaffinity reported a bad number of CPUs: %lu\n", cpu_num1);
+        printf("Warning: sched_getaffinity reported a bad number of CPUs: %lu\n", cpu_num1);
     }
     if (cpu_num2 && cpu_num2 != cpu_num) {
         printf("Warning: /proc/stat contained a bad number of CPUs: %lu\n", cpu_num2);
@@ -266,7 +268,6 @@ int main(int argc, char **argv)
         }
     }
 
-
     /* Migrate to every CPU */
     for (cpu_index = 0; cpu_index < cpu_num; cpu_index++) {
         int cpu;
@@ -284,7 +285,7 @@ int main(int argc, char **argv)
         assert(cpu >= 0);
         if ((unsigned long)cpu == cpu_index) {
 #if HAVE_RDTSC
-            printf("Migrated to CPU %d, TSC=%"PRIu64"\n", cpu, rdtsc());
+            printf("Migrated to CPU %d, TSC=%" PRIu64 "\n", cpu, rdtsc());
 #else
             printf("Migrated to CPU %d\n", cpu);
 #endif
@@ -295,13 +296,13 @@ int main(int argc, char **argv)
         /* Do a busy wait in a loop if a number of seconds is given */
         if (duration > 0) {
             time_t start_time, now;
-            if (time(&start_time) == (time_t) -1) {
+            if (time(&start_time) == (time_t)-1) {
                 perror("time");
                 return 1;
             }
             printf("... active loop for %.3f seconds\n", duration);
             do {
-                if (time(&now) == (time_t) -1) {
+                if (time(&now) == (time_t)-1) {
                     perror("time");
                     return 1;
                 }

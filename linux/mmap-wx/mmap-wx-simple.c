@@ -11,7 +11,8 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-__attribute__((noreturn)) static void perror_exit(const char *s)
+__attribute__((noreturn))
+static void perror_exit(const char *s)
 {
     perror(s);
     exit(1);
@@ -20,13 +21,12 @@ __attribute__((noreturn)) static void perror_exit(const char *s)
 int main(void)
 {
     const char template[] = "./mmap-wx-XXXXXX";
-    /* "xor %eax,%eax ; ret" in x86  */
 #if defined __i386__ || defined __x86_64__
-    const uint8_t code[] = {0x31, 0xc0, 0xc3};
+    const uint8_t code[] = { 0x31, 0xc0, 0xc3 };
 #elif defined __arm__
-    const uint32_t code[] = {0xe3a00000, 0xe12fff1e};
+    const uint32_t code[] = { 0xe3a00000, 0xe12fff1e };
 #else
-#error Unsupported architecture
+#    error Unsupported architecture
 #endif
     char filename[4096];
     int fd, result;
@@ -34,13 +34,18 @@ int main(void)
 
     memcpy(filename, template, sizeof(template));
     fd = mkstemp(filename);
-    if (fd == -1) perror_exit("mkstemp");
-    if (unlink(filename) < 0) perror_exit("unlink");
-    if (ftruncate(fd, sizeof(code)) < 0) perror_exit("ftruncate");
+    if (fd == -1)
+        perror_exit("mkstemp");
+    if (unlink(filename) < 0)
+        perror_exit("unlink");
+    if (ftruncate(fd, sizeof(code)) < 0)
+        perror_exit("ftruncate");
     wptr = mmap(NULL, sizeof(code), PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-    if (wptr == MAP_FAILED) perror_exit("mmap(RW)");
+    if (wptr == MAP_FAILED)
+        perror_exit("mmap(RW)");
     xptr = mmap(NULL, sizeof(code), PROT_READ | PROT_EXEC, MAP_SHARED, fd, 0);
-    if (xptr == MAP_FAILED) perror_exit("mmap(RX)");
+    if (xptr == MAP_FAILED)
+        perror_exit("mmap(RX)");
     printf("RW+RX mmap succeeded at %p and %p in %s\n", wptr, xptr, filename);
 
     memcpy(wptr, code, sizeof(code));
@@ -48,7 +53,7 @@ int main(void)
         fprintf(stderr, "RW and RX mmaps don't share the same data\n");
         return 1;
     }
-    result = ( (int (*)(void))(uintptr_t)xptr )();
+    result = ((int (*)(void))(uintptr_t)xptr) ();
     if (result != 0) {
         fprintf(stderr, "Unexpected result: %d\n", result);
         return 1;
@@ -56,8 +61,11 @@ int main(void)
         printf("Code successfully executed\n");
     }
 
-    if (munmap(xptr, sizeof(code)) < 0) perror_exit("munmap(RX)");
-    if (munmap(wptr, sizeof(code)) < 0) perror_exit("munmap(RW)");
-    if (close(fd) < 0) perror_exit("close");
+    if (munmap(xptr, sizeof(code)) < 0)
+        perror_exit("munmap(RX)");
+    if (munmap(wptr, sizeof(code)) < 0)
+        perror_exit("munmap(RW)");
+    if (close(fd) < 0)
+        perror_exit("close");
     return 0;
 }

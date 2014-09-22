@@ -33,8 +33,7 @@ static void print_machine(void)
 static void _print_type_size(const char *name, size_t size)
 {
     _tprintf(_T(" * sizeof(%11" PRIsA ") = %2lu %s (%3lu bits)\n"),
-        name, (unsigned long) size, (size == 1) ? _T("byte ") : _T("bytes"),
-        (unsigned long) size * 8);
+             name, (unsigned long)size, (size == 1) ? _T("byte ") : _T("bytes"), (unsigned long)size * 8);
 }
 
 #define print_type_size(type) _print_type_size(#type, sizeof(type))
@@ -61,7 +60,7 @@ int _tmain(void)
     print_type_size(BYTE);
     print_type_size(WORD);
     print_type_size(DWORD);
-    /*print_type_size(QWORD);*/
+    /* print_type_size(QWORD); */
     _tprintf(_T("\nFloat types:\n"));
     print_type_size(FLOAT);
     _tprintf(_T("\nPointer types:\n"));

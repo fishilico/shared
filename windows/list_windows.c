@@ -21,7 +21,7 @@ typedef struct _ENUM_WIN_INFOS_LPARAM {
 
 static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam)
 {
-    ENUM_WIN_INFOS_LPARAM *pWininfos = (ENUM_WIN_INFOS_LPARAM*)lParam;
+    ENUM_WIN_INFOS_LPARAM *pWininfos = (ENUM_WIN_INFOS_LPARAM *)lParam;
     WINDOW_INFORMATIONS *pInfo;
     DWORD i;
     int cchSize, cchLen;
@@ -75,8 +75,8 @@ static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam)
 
 static int CompareWinInfosList(const void *arg1, const void *arg2)
 {
-    const WINDOW_INFORMATIONS *pInfo1 = (const WINDOW_INFORMATIONS*)arg1;
-    const WINDOW_INFORMATIONS *pInfo2 = (const WINDOW_INFORMATIONS*)arg2;
+    const WINDOW_INFORMATIONS *pInfo1 = (const WINDOW_INFORMATIONS *)arg1;
+    const WINDOW_INFORMATIONS *pInfo2 = (const WINDOW_INFORMATIONS *)arg2;
     int cmp;
     if (pInfo1->szTitle && !pInfo2->szTitle)
         return 1;
@@ -143,7 +143,7 @@ static BOOL ListWindowsRec(HWND hwndParent, DWORD nIndent)
         }
         _tprintf(_T(" PID %lu TID %lu"), pInfo->dwProcessId, pInfo->dwThreadId);
         if (pInfo->hModule) {
-             _tprintf(_T(" module @%p"), pInfo->hModule);
+            _tprintf(_T(" module @%p"), pInfo->hModule);
         }
         if (pInfo->hInstance && pInfo->hInstance != pInfo->hModule) {
             _tprintf(_T(" instance @%p"), pInfo->hInstance);

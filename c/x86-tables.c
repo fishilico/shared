@@ -35,7 +35,7 @@
  * Setting CPU affinity is an OS-dependent operation, hence the #if parts
  */
 #ifdef __linux__
-#include <sched.h>
+#    include <sched.h>
 
 static const char os_name[] = "Linux";
 static const char gdt_comment[] = "per_cpu(gdt_page, cpu)";
@@ -59,10 +59,10 @@ static int get_next_cpu(int cpu)
     }
     do {
         cpu++;
-        if (cpu >= (int)(sizeof(initial_cpuset.__bits)/sizeof(initial_cpuset.__bits[0]))) {
+        if (cpu >= (int)(sizeof(initial_cpuset.__bits) / sizeof(initial_cpuset.__bits[0]))) {
             return -1;
         }
-    } while(!CPU_ISSET(cpu, &initial_cpuset));
+    } while (!CPU_ISSET(cpu, &initial_cpuset));
     return cpu;
 }
 
@@ -81,7 +81,7 @@ static void migrate_to_cpu(int cpu)
     }
 }
 #elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
-#include <windows.h>
+#    include <windows.h>
 
 static const char os_name[] = "Windows";
 static const char gdt_comment[] = "?";
@@ -114,7 +114,7 @@ static int get_next_cpu(int cpu)
         if (cpu >= (int)(8 * sizeof(DWORD_PTR))) {
             return -1;
         }
-    } while(!(InitialAffinityMask & (((DWORD_PTR)1) << cpu)));
+    } while (!(InitialAffinityMask & (((DWORD_PTR)1) << cpu)));
     return cpu;
 }
 
@@ -129,7 +129,7 @@ static void migrate_to_cpu(int cpu)
     }
 }
 #else
-#warning Unknown target OS
+#    warning Unknown target OS
 #endif
 
 int main(void)
@@ -156,7 +156,7 @@ int main(void)
         migrate_to_cpu(cpu);
         __asm__ volatile ("sgdt %0" : "=m"(descriptor));
         memcpy(&size, descriptor, 2);
-        memcpy(&address, descriptor + 2, sizeof(void*));
+        memcpy(&address, descriptor + 2, sizeof(void *));
         printf("CPU %2d GDT @%p, size %u (%u 8-byte entries)\n", cpu, address, size, (size + 1) / 8);
     }
     printf("\n");
@@ -167,7 +167,7 @@ int main(void)
         migrate_to_cpu(cpu);
         __asm__ volatile ("sidt %0" : "=m"(descriptor));
         memcpy(&size, descriptor, 2);
-        memcpy(&address, descriptor + 2, sizeof(void*));
+        memcpy(&address, descriptor + 2, sizeof(void *));
         printf("CPU %2d IDT @%p, size %u (256 %u-byte vectors)\n", cpu, address, size, (size + 1) / 256);
     }
     return 0;

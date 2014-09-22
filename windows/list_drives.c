@@ -8,10 +8,9 @@
 /* Wrap GetVolumePathNamesForVolumeName to allocate memory */
 _ParamStringBufSizeToAlloc1(GetVolumePathNamesForVolumeName, LPCTSTR, lpszVolumeName)
 #endif
-
 static LPCTSTR DescribeDriveType(UINT type)
 {
-    switch(type) {
+    switch (type) {
         case DRIVE_UNKNOWN:
             return _T("Unknown");
         case DRIVE_NO_ROOT_DIR:
@@ -56,12 +55,13 @@ static BOOL enum_logical_drives(void)
         }
     }
     if (dwLogicalDrives >> i) {
-         _tprintf(_T(" and x%lx"), dwLogicalDrives >> i);
+        _tprintf(_T(" and x%lx"), dwLogicalDrives >> i);
     }
     _tprintf(_T("\n"));
 
     for (i = 0; i < 26 && (dwLogicalDrives >> i); i++) {
-        if (!((dwLogicalDrives >> i) & 1)) continue;
+        if (!((dwLogicalDrives >> i) & 1))
+            continue;
 
         szRootPathName[0] = 'A' + i;
         type = GetDriveType(szRootPathName);
@@ -83,7 +83,7 @@ static BOOL enum_logical_drives(void)
             &dwVolumeSerialNumber, &dwMaximumComponentLength, &dwFileSystemFlags,
             szFileSystemNameBuffer, ARRAYSIZE(szFileSystemNameBuffer));
         if (!bSuccess) {
-            if(GetLastError() == ERROR_NOT_READY) {
+            if (GetLastError() == ERROR_NOT_READY) {
                 _tprintf(_T("  Not Ready\n"));
             } else {
                 print_winerr(_T("GetVolumeInformation"));
@@ -195,8 +195,10 @@ static BOOL enum_volumes(void)
 
 int _tmain()
 {
-    if (!enum_logical_drives()) return 1;
+    if (!enum_logical_drives())
+        return 1;
     _tprintf(_T("\n"));
-    if (!enum_volumes()) return 1;
+    if (!enum_volumes())
+        return 1;
     return 0;
 }

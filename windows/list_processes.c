@@ -92,7 +92,7 @@ int _tmain()
             continue;
         }
         hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, dwPid);
-        if(!hProcess) {
+        if (!hProcess) {
             if (GetLastError() == ERROR_ACCESS_DENIED) {
                 _tprintf(_T("%lu: access denied\n"), dwPid);
             } else {

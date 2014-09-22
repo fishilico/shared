@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 #if defined(__linux__) || defined(__unix__) || defined(__posix__)
-#include <sys/utsname.h>
+#    include <sys/utsname.h>
 
 static void print_machine(void)
 {
@@ -17,7 +17,7 @@ static void print_machine(void)
     }
 }
 #elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
-#include <windows.h>
+#    include <windows.h>
 
 static void print_machine(void)
 {
@@ -46,15 +46,15 @@ static void print_machine(void)
     printf("Machine: %s\n", machine);
 }
 #else
-#warning Unsupported target OS
-#define print_machine() do {} while(0)
+#    warning Unsupported target OS
+#    define print_machine() do {} while(0)
 #endif
 
 static void _print_type_size(const char *name, size_t size)
 {
     printf(" * sizeof(%11s) = %2lu %s (%3lu bits)\n",
-        name, (unsigned long) size, (size == 1) ? "byte " : "bytes",
-        (unsigned long) size * 8);
+           name, (unsigned long)size, (size == 1) ? "byte " : "bytes",
+           (unsigned long)size * 8);
 }
 
 #define print_type_size(type) _print_type_size(#type, sizeof(type))
@@ -76,6 +76,6 @@ int main(void)
     print_type_size(long double);
     printf("\nPointer types:\n");
     print_type_size(void *);
-    print_type_size(int  *);
+    print_type_size(int *);
     return 0;
 }

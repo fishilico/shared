@@ -2,7 +2,7 @@
  * Print name and information about current kernel
  */
 #ifndef _GNU_SOURCE
-#define _GNU_SOURCE
+#    define _GNU_SOURCE
 #endif
 #include <sys/utsname.h>
 #include "nolibc-syscall-linux.h"
@@ -34,14 +34,12 @@ void _start(void)
     const char text_version[] = "version: ";
     const char text_machine[] = "machine: ";
     const char text_domainname[] = "domainname: ";
-    char buffer[
-        sizeof(text_sysname) + sizeof(name.sysname) +
-        sizeof(text_nodename) + sizeof(name.nodename) +
-        sizeof(text_release) + sizeof(name.release) +
-        sizeof(text_version) + sizeof(name.version) +
-        sizeof(text_machine) + sizeof(name.machine) +
-        sizeof(text_domainname) + sizeof(name.domainname) +
-        1];
+    char buffer[sizeof(text_sysname) + sizeof(name.sysname) +
+                sizeof(text_nodename) + sizeof(name.nodename) +
+                sizeof(text_release) + sizeof(name.release) +
+                sizeof(text_version) + sizeof(name.version) +
+                sizeof(text_machine) + sizeof(name.machine) +
+                sizeof(text_domainname) + sizeof(name.domainname) + 1];
     char *ptr;
 
     if (_uname(&name) < 0) {
