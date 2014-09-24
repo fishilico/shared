@@ -69,9 +69,9 @@ int main(void)
         assert(length > 0);
 
         /* Read all the available events */
-        buffer = malloc(length);
+        buffer = malloc((size_t)length);
         assert(buffer);
-        bytes = read(notifyfd, buffer, length);
+        bytes = read(notifyfd, buffer, (size_t)length);
         if (bytes == -1) {
             if (errno == EINTR) {
                 printf("read() has been interrupted by a signal. Exiting.\n");
@@ -106,7 +106,7 @@ int main(void)
         if (event.mask & IN_##maskname) { \
             printf(" " #maskname); \
         } \
-        mask &= ~IN_##maskname; \
+        mask &= (uint32_t)~IN_##maskname; \
     } while (0)
             print_event_mask(ACCESS);
             print_event_mask(MODIFY);
