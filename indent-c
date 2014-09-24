@@ -46,6 +46,7 @@ exec indent \
     -T DWORD \
     -T DWORD_PTR \
     -T ENUM_WIN_INFOS_LPARAM \
+    -T EXCEPTION_POINTERS \
     -T Elf_Dyn \
     -T Elf_Ehdr \
     -T Elf_Phdr \
@@ -95,7 +96,13 @@ exec indent \
     -T ULONG \
     -T ULONG_PTR \
     -T WORD \
+    -T asm_instr_context \
+    -T asm_instr_reg \
     -T cpu_set_t \
+    -T int16_t \
+    -T int32_t \
+    -T int64_t \
+    -T int8_t \
     -T intptr_t \
     -T mqd_t \
     -T off_t \

@@ -57,6 +57,7 @@ BYTE
 DWORD
 DWORD_PTR
 ENUM_WIN_INFOS_LPARAM
+EXCEPTION_POINTERS
 Elf_Dyn
 Elf_Ehdr
 Elf_Phdr
@@ -106,7 +107,13 @@ UINT
 ULONG
 ULONG_PTR
 WORD
+asm_instr_context
+asm_instr_reg
 cpu_set_t
+int16_t
+int32_t
+int64_t
+int8_t
 intptr_t
 mqd_t
 off_t
