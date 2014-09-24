@@ -48,4 +48,13 @@ indent-c: gen-indent-c.sh
 	$(SH) $< > $@
 	$(CHMOD) +x $@
 
-.PHONY: all clean $(TARGETS)
+# Sort gen-indent-c.sh types
+sort-gen-indent-c: gen-indent-c.sh
+	sed -n '1,/<< END-OF-TYPES/p' < $< > .$@.tmp
+	sed -n '/<< END-OF-TYPES/,/^END-OF-TYPES/ {/END-OF-TYPES/d;p}' < $< | \
+		LANG=C sort >> .$@.tmp
+	sed -n '/^END-OF-TYPES/,$$p' < $< >> .$@.tmp
+	cat < .$@.tmp > $<
+	rm .$@.tmp
+
+.PHONY: all clean $(TARGETS) sort-gen-indent-c

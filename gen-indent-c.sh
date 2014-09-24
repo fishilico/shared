@@ -51,7 +51,7 @@ sed 's/^\(-[^ ]*\) .*/    \1 \\/' << EOF
 EOF
 
 # Moreover, -T is needed to tell indent about some typedefs
-sed 's/^\([^ ]*\).*/    -T \1 \\/' << EOF
+sed 's/^\([^ ]*\).*/    -T \1 \\/' << END-OF-TYPES
 BOOL
 BYTE
 DWORD
@@ -122,7 +122,7 @@ uint64_t
 uint8_t
 uintptr_t
 uname_t
-EOF
+END-OF-TYPES
 
 # end the command with command line parameters
 echo '    "$@"'
