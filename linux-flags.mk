@@ -10,14 +10,23 @@ CPPFLAGS ?= -D_GNU_SOURCE -D_FORTIFY_SOURCE=2
 # list of warnings from https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 CFLAGS ?= -O2 -ansi -pedantic -pipe \
 	-Wall -W -Wextra \
+	-Waggregate-return \
+	-Wcast-align \
 	-Wfloat-equal \
 	-Wformat=2 \
 	-Winit-self \
+	-Winline \
 	-Wmissing-declarations \
+	-Wmissing-format-attribute \
+	-Wmissing-include-dirs \
 	-Wmissing-prototypes \
+	-Wnested-externs \
+	-Wold-style-definition \
 	-Wpointer-arith \
+	-Wredundant-decls \
 	-Wshadow \
 	-Wstrict-prototypes \
+	-Wunknown-pragmas \
 	-Wwrite-strings \
 	-Wno-long-long \
 	-Wno-unused-function \
@@ -41,7 +50,12 @@ endif
 
 # Add GCC-specific options unknown to clang
 ifeq ($(shell $(CC) -Wtrampolines -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
-CFLAGS += -Wtrampolines
+CFLAGS += \
+	-Wjump-misses-init \
+	-Wlogical-op \
+	-Wsuggest-attribute=noreturn \
+	-Wsuggest-attribute=format \
+	-Wtrampolines
 endif
 
 # Add string stack protector if supported
