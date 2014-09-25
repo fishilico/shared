@@ -45,7 +45,7 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 	-Wno-unused-function \
 	-fPIE  \
 	-fno-exceptions \
-	-fstack-protector-strong --param=ssp-buffer-size=4 \
+	-fstack-protector --param=ssp-buffer-size=4 \
 	-fvisibility=hidden
 
 # Uncomment the next line to enable debug
