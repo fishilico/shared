@@ -1,4 +1,17 @@
 # Define some compilation flags for Linux
+#
+# Debian defines hardening flags in https://wiki.debian.org/Hardening:
+# * gcc -Wformat-security -Werror=format-security
+# * gcc -O2 -D_FORTIFY_SOURCE=2
+# * gcc -fstack-protector --param ssp-buffer-size=4
+# * gcc -fPIE -pie
+# * ld -z relro -z now
+#
+# Arch Linux defines compilation flags in /etc/makepkg.conf (from pacman)
+# https://projects.archlinux.org/svntogit/packages.git/tree/trunk/makepkg.conf?h=packages/pacman
+# * -D_FORTIFY_SOURCE=2
+# * -mtune=generic -O2 -pipe -fstack-protector-strong --param=ssp-buffer-size=4
+# * -Wl,-O1,--sort-common,--as-needed,-z,relro
 
 # Centralize the choice of C compiler here (gcc, clang...)
 CC ?= cc
@@ -32,7 +45,7 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 	-Wno-unused-function \
 	-fPIE  \
 	-fno-exceptions \
-	-fstack-protector --param=ssp-buffer-size=4 \
+	-fstack-protector-strong --param=ssp-buffer-size=4 \
 	-fvisibility=hidden
 
 # Uncomment the next line to enable debug
@@ -64,7 +77,7 @@ CFLAGS += -fstack-protector-strong
 endif
 
 # Linker flags
-LDFLAGS ?= -Wl,-as-needed,-no-undefined,-z,relro,-z,now \
+LDFLAGS ?= -Wl,-O1,-as-needed,-no-undefined,-z,relro,-z,now \
 	-fPIE -pie -fstack-protector
 
 LIBS ?=
