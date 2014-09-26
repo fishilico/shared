@@ -1,0 +1,103 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[toc,page]{appendix}
+
+\title{Un document en français}
+\author{L'auteur}
+\date{\today}
+
+% Reduce default margins
+\geometry{%
+a4paper,
+body={160mm,250mm},
+left=25mm,top=25mm,
+headheight=7mm,headsep=4mm,
+marginparsep=4mm,marginparwidth=5mm}
+
+% Set-up PDF properties
+\makeatletter
+  \hypersetup{
+    pdftitle = {\@title},
+    pdfauthor = {\@author}
+  }
+\makeatother
+
+% Rename appendices
+\renewcommand{\appendixname}{Annexes}
+\renewcommand{\appendixpagename}{Annexes}
+\renewcommand{\appendixtocname}{Annexes}
+
+% Some useful commands
+\newcommand{\todo}[1]{\fcolorbox{red}{yellow}{TODO: #1}}
+\newcommand{\bksl}{\char`\\} % Backslash
+
+\begin{document}
+\maketitle
+
+\section*{Résumé}
+
+Ceci est le résumé du document.
+
+\clearpage
+\tableofcontents
+
+\clearpage
+\section{Introduction}
+
+Bonjour, le monde!
+
+\clearpage
+\section{Première partie}
+\subsection{Sous-partie I.1}
+\subsubsection{Sous-sous-partie I.1.a}
+
+\todo{Ceci est un marqueur "à faire"}
+
+\subsubsection{Sous-sous-partie I.1.b}
+\subsection{Sous-partie I.2}
+\subsection{Sous-partie I.3}
+
+\clearpage
+\section{Seconde partie}
+\subsection{Sous-partie II.1}
+
+Pour utiliser un anti-slash comme \texttt{\bksl}, la commande est:
+\begin{verbatim}
+\char`\\
+\end{verbatim}
+
+\subsection{Sous-partie II.2}
+\subsection{Sous-partie II.3}
+
+\clearpage
+\section{Troisième partie}
+\subsection{Sous-partie III.1}
+\subsection{Sous-partie III.2}
+\subsection{Sous-partie III.3}
+
+\clearpage
+\section{Conclusion}
+
+Il faut bien conclure\footnote{même s'il reste les annexes...}
+
+\clearpage
+\begin{appendices}
+\section{Première annexe}
+\label{appendiceA}
+
+\section{Seconde annexe}
+\label{appendiceB}
+
+\subsection{Sous-partie B.1}
+\subsection{Sous-partie B.2}
+\subsection{Sous-partie B.3}
+
+\end{appendices}
+
+\end{document}
