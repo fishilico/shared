@@ -1,5 +1,6 @@
 *~
 *.a
+*.aux
 *.backup
 *.bak
 *.bin
@@ -8,10 +9,14 @@
 *.dll
 *.elf
 *.exe
+*.gz
+*.log
 *.o
 *.out
+*.pdf
 *.so
 .*.swp
+*.toc
 *.32
 *.64
 __pycache__

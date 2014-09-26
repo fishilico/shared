@@ -1,0 +1,48 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{verbatim}
+
+\title{Simple document}
+\author{The author}
+
+\begin{document}
+\maketitle
+
+This is a simple document which shows some simple \LaTeX{} commands.
+
+Here is a \emph{formula}:
+
+\begin{displaymath}
+\forall n \in \mathbbm{N}, n \ge 0
+\end{displaymath}
+
+Here is some text written using a fixed-point font:
+
+\begin{verbatim}
+Hello, world!
+In LaTeX, comments begins with a %
+\end{verbatim}
+
+Color can be used with package \texttt{color} and command \texttt{\\textcolor}.
+A wikibook describes this package: \url{https://en.wikibooks.org/wiki/LaTeX/Colors}
+\begin{itemize}
+\item \textcolor{red}{This is red}.
+\item \textcolor{yellow}{This is yellow}.
+\item \textcolor{green}{This is green}.
+\item \textcolor{cyan}{This is cyan}.
+\item \textcolor{blue}{This is blue}.
+\item \textcolor{magenta}{This is magenta}.
+\item \textcolor{black}{This is black}.
+\item \textcolor[rgb]{0.0, 0.5, 0.0}{This is rgb(0.0, 0.5, 0.0)}.
+\end{itemize}
+
+\end{document}

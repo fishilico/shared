@@ -1,5 +1,6 @@
 # Run every Makefile in subdirectories
 CHMOD ?= chmod
+PDFLATEX ?= pdflatex
 SH ?= sh
 UNAME ?= uname
 
@@ -33,8 +34,13 @@ else ifneq ($(shell $(CC) -Werror -E -falign-functions=0 - < /dev/null > /dev/nu
 SUBDIRS_BLACKLIST += mbr/syslinux-mbr
 endif
 
+# Test PDF-LaTeX availability
+ifneq ($(shell $(PDFLATEX) --version > /dev/null 2>&1 && echo y),y)
+SUBDIRS_BLACKLIST += latex%
+endif
+
 # Build targets
-SUBDIRS_FINAL := $(filter-out $(SUBDIRS_BLACKLIST), $(SUBDIRS))
+SUBDIRS_FINAL := $(sort $(filter-out $(SUBDIRS_BLACKLIST), $(SUBDIRS)))
 ALL_TARGETS := $(addprefix all.., $(SUBDIRS_FINAL))
 CLEAN_TARGETS := $(addprefix clean.., $(SUBDIRS_FINAL))
 TARGETS := $(ALL_TARGETS) $(CLEAN_TARGETS)
