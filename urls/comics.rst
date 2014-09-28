@@ -1,0 +1,24 @@
+Comics, mangas, manhwas, etc.
+=============================
+
+English
+-------
+
+* http://xkcd.com/ XKCD
+* http://what-if.xkcd.com/ What if?
+* http://www.sluggy.com/ Sluggy Freelance
+* http://m.webtoons.com/episodeList?titleNo=95 Tower of God
+
+French
+------
+
+* http://www.bouletcorp.com/ BouletCorp
+* http://www.synopsite.com/ Reflets d'Acide
+* http://www.penofchaos.com/warham/donjon.htm
+  Donjon de Naheulbeuk
+
+French editors
+--------------
+
+* http://soleilprod.com/nouveautes Soleil
+* http://www.askell.com/ Askell
