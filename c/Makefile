@@ -43,6 +43,7 @@ all: $(PROGRAMS:%=%$(BIN_EXT))
 clean:
 	rm -f *.o *.bin *.exe kernel-x86-*.[ch]
 
+float_asm$(BIN_EXT): LIBS += -lm
 %$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
