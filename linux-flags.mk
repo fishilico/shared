@@ -66,9 +66,8 @@ ifeq ($(shell $(CC) -Wtrampolines -Werror -E - < /dev/null > /dev/null 2>&1 && e
 CFLAGS += \
 	-Wjump-misses-init \
 	-Wlogical-op \
-	-Wsuggest-attribute=noreturn \
-	-Wsuggest-attribute=format \
 	-Wtrampolines
+	# -Wsuggest-attribute=noreturn and -Wsuggest-attribute=format are also available for recent gcc
 endif
 
 # Add string stack protector if supported
