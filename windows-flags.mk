@@ -15,8 +15,10 @@ else
 	endif
 endif
 
+# Using "WINCC ?=" here allows disabling build in windows/ on Linux with:
+#   export WINCC=false
 ifneq ($(TARGET),)
-	WINCC := $(TARGET)-gcc
+	WINCC ?= $(TARGET)-gcc
 else
 	WINCC ?= gcc
 endif
