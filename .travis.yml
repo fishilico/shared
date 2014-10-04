@@ -1,0 +1,27 @@
+# Use "python language" so that the C compiler can be chosen in env
+language: python
+python:
+  - "3.4"
+
+env:
+  # gcc without MinGW
+  - CC=gcc WINCC=false
+  - CC="gcc -m32" WINCC=false
+  # clang without MinGW
+  - CC=clang WINCC=false
+  - CC="clang -m32" WINCC=false
+  # MinGW compilation
+  - OS=Windows_NT WINCC=x86_64-w64-mingw32-gcc CC=$WINCC
+  - OS=Windows_NT WINCC=i686-w64-mingw32-gcc CC=$WINCC
+
+install:
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install gcc-multilib libc6-dev-i386
+  - sudo apt-get -qq install binutils-mingw-w64 gcc-mingw-w64
+
+script:
+  - make
+
+# Disable email notifications
+notifications:
+  email: false
