@@ -140,13 +140,16 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
     if (info->si_code != 1) {
         fprintf(stderr, "sigaction warning: unexpected info->si_signo, %d != 1.\n", info->si_signo);
     }
+#ifdef si_arch
     if (info->si_arch != SECCOMP_AUDIT_ARCH) {
         fprintf(stderr,
                 "sigaction error: unexpected info->si_arch, 0x%x != 0x%x.\n",
                 info->si_arch, SECCOMP_AUDIT_ARCH);
         exit(1);
     }
+#endif
 
+#ifdef si_syscall
     /* Emulate getpriority */
     if (info->si_syscall == __NR_getpriority && ctx) {
         greg_t syscall, arg0, arg1;
@@ -165,6 +168,10 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
            info->si_call_addr);
     fflush(stdout);
     exit((info->si_syscall == __NR_uname) ? 0 : 1);
+#else
+    fprintf(stderr, "siginfo_t->si_syscall seems to be unsupported by your libc.\n");
+    exit(1);
+#endif
 }
 
 int main(int argc, char **argv)
