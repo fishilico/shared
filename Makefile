@@ -24,6 +24,9 @@ endif
 # Windows or MinGW check: compile a basic file
 ifneq ($(shell $(WINCC) -E windows/helloworld.c > /dev/null 2>&1 && echo y),y)
 SUBDIRS_BLACKLIST += windows%
+else
+# Do not compile linux and mbr programs on Windows or with MinGW
+SUBDIRS_BLACKLIST += linux% mbr%
 endif
 
 # MBR check: $(CC) needs to be able to produce 16-bit x86
