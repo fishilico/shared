@@ -18,27 +18,25 @@ PYLINT_PARAMS += --disable=E1101,E1103
 PYLINT_PARAMS += --disable=F0401
 
 
-all: _cffi_example.so
+all: _cffi_example.$(LIB_EXT)
 
 clean:
-	rm -f *.o *.so
+	rm -f *.o *.so *.dll
 	rm -rf __pycache__
 
 lint:
 	$(PEP8) $(PEP8_PARAMS) *.py
 	$(PYLINT) $(PYLINT_PARAMS) *.py
 
-test: _cffi_example.so
+test: _cffi_example.$(LIB_EXT)
 	$(PYTHON) cffi_example.py
 	$(PYTHON) cffi_numpy.py
 
-_cffi_example.so: CPPFLAGS += -D_CFFI_EXAMPLE_EXPORTS
-_cffi_example.so: CFLAGS += -fPIC
-_cffi_example.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@
-_cffi_example.so: _cffi_example.o
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+_cffi_example.$(LIB_EXT): _cffi_example.o
+	$(CC) $(LDFLAGS) $(LIB_LDFLAGS) -o $@ $^ $(LIBS)
 
+_cffi_example.o: CPPFLAGS += -D_CFFI_EXAMPLE_EXPORTS
 _cffi_example.o: _cffi_example.c cffi_example.h
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(LIB_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean lint test

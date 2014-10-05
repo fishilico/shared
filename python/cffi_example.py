@@ -41,7 +41,14 @@ with open(os.path.join(current_dir, 'cffi_example.h'), 'r') as fhead:
              for line in fhead if not line.lstrip().startswith('#')]
     ffi.cdef(''.join(cdefs))
 
-_cffi_example = ffi.dlopen(os.path.join(current_dir, '_cffi_example.so'))
+filepath = os.path.join(current_dir, '_cffi_example')
+if os.name == 'nt':
+    filepath += '.dll'
+elif os.name == 'posix':
+    filepath += '.so'
+else:
+    raise RuntimeError("Unknown OS {}".format(os.name))
+_cffi_example = ffi.dlopen(filepath)
 
 print(ffi.string(_cffi_example.helloworld).decode('utf-8'))
 print("The answer is {}".format(_cffi_example.get_answer()))

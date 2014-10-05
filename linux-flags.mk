@@ -80,3 +80,11 @@ LDFLAGS ?= -Wl,-O1,-as-needed,-no-undefined,-z,relro,-z,now \
 	-fPIE -pie -fstack-protector
 
 LIBS ?=
+
+# Application build configuration
+BIN_EXT := bin
+
+# Shared Object build configuration
+LIB_EXT := so
+LIB_CFLAGS ?= -fPIC
+LIB_LDFLAGS ?= -fPIC -shared -Wl,-soname,$@

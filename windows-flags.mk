@@ -42,3 +42,11 @@ CPPFLAGS += -D_UNICODE
 CFLAGS += -municode
 LDFLAGS += -municode
 endif
+
+# Application build configuration
+BIN_EXT := exe
+
+# Dynamic Linked Library build configuration
+LIB_EXT := dll
+LIB_CFLAGS ?=
+LIB_LDFLAGS ?= -shared -Wl,--subsystem=0
