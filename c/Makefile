@@ -24,17 +24,20 @@ $(OPENMP_PROGRAMS:%=%$(BIN_EXT)): LDFLAGS += -fopenmp
 $(OPENMP_PROGRAMS:%=%.o): CFLAGS += -fopenmp
 endif
 
-HAVE_GTK3 := $(shell $(PKG_CONFIG) --exists gtk+-3.0 2> /dev/null && echo 'y' || echo 'n')
-ifeq ($(HAVE_GTK3), y)
-	PROGRAMS += $(GTK_PROGRAMS)
+# Only compile Gtk+ programs where $(CC) is not used for cross-compilation
+ifeq ($(filter-out cc gcc clang, $(CC)),)
+	HAVE_GTK3 := $(shell $(PKG_CONFIG) --exists gtk+-3.0 2> /dev/null && echo 'y' || echo 'n')
+	ifeq ($(HAVE_GTK3), y)
+		PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
 $(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0)
-else
-	HAVE_GTK2 := $(shell $(PKG_CONFIG) --exists gtk+-2.0 2> /dev/null && echo 'y' || echo 'n')
-	ifeq ($(HAVE_GTK2), y)
-		PROGRAMS += $(GTK_PROGRAMS)
+	else
+		HAVE_GTK2 := $(shell $(PKG_CONFIG) --exists gtk+-2.0 2> /dev/null && echo 'y' || echo 'n')
+		ifeq ($(HAVE_GTK2), y)
+			PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
 $(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0)
+		endif
 	endif
 endif
 
