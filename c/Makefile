@@ -20,7 +20,7 @@ view_sizes.o: CFLAGS += -Wno-long-long
 # clang 3.5.0 has partial support for OpenMP, omp.h is missing
 ifeq ($(shell $(CC) -Werror -fopenmp -include omp.h -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 PROGRAMS += $(OPENMP_PROGRAMS)
-$(OPENMP_PROGRAMS:%=%$(BIN_EXT)): LDFLAGS += -fopenmp
+$(OPENMP_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -fopenmp
 $(OPENMP_PROGRAMS:%=%.o): CFLAGS += -fopenmp
 endif
 
@@ -29,25 +29,25 @@ ifeq ($(filter-out cc gcc clang, $(CC)),)
 	HAVE_GTK3 := $(shell $(PKG_CONFIG) --exists gtk+-3.0 2> /dev/null && echo 'y' || echo 'n')
 	ifeq ($(HAVE_GTK3), y)
 		PROGRAMS += $(GTK_PROGRAMS)
-$(GTK_PROGRAMS:%=%$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
+$(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
 $(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0)
 	else
 		HAVE_GTK2 := $(shell $(PKG_CONFIG) --exists gtk+-2.0 2> /dev/null && echo 'y' || echo 'n')
 		ifeq ($(HAVE_GTK2), y)
 			PROGRAMS += $(GTK_PROGRAMS)
-$(GTK_PROGRAMS:%=%$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
+$(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
 $(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0)
 		endif
 	endif
 endif
 
-all: $(PROGRAMS:%=%$(BIN_EXT))
+all: $(PROGRAMS:%=%.$(BIN_EXT))
 
 clean:
 	rm -f *.o *.bin *.exe kernel-x86-*.[ch]
 
-float_asm$(BIN_EXT): LIBS += -lm
-%$(BIN_EXT): %.o
+float_asm.$(BIN_EXT): LIBS += -lm
+%.$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 cpuid.o: cpuid_enum.h

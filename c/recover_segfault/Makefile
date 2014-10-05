@@ -36,7 +36,7 @@ else
 OBJECTS += os_unknown.o
 endif
 
-all: $(PROGRAMS:%=%$(BIN_EXT))
+all: $(PROGRAMS:%=%.$(BIN_EXT))
 
 clean:
 	rm -f *.o *.bin *.exe
@@ -44,7 +44,7 @@ clean:
 debug: CPPFLAGS += -DDEBUG=1
 debug: all
 
-%$(BIN_EXT): %.o $(OBJECTS)
+%.$(BIN_EXT): %.o $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 # Disable strict-aliasing warning for XMM sub-part tests

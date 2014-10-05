@@ -7,7 +7,7 @@ TOPDIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 ifeq ($(OS), Windows_NT)
 include $(TOPDIR)windows-flags.mk
-BIN_EXT := .exe
+BIN_EXT := exe
 CC = $(WINCC)
 
 # Don't use wide characters
@@ -17,7 +17,7 @@ LDFLAGS := $(filter-out -municode, $(LDFLAGS))
 
 else # !Windows
 
-BIN_EXT := .bin
+BIN_EXT := bin
 UNAME_s := $(shell $(UNAME) -s)
 ifeq ($(UNAME_s), Linux)
 include $(TOPDIR)linux-flags.mk

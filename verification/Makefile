@@ -1,4 +1,4 @@
-include ../linux-flags.mk
+include ../os-detect.mk
 
 # Use FRAMAC=frama-c-gui to use the gui
 FRAMAC ?= frama-c
@@ -10,7 +10,7 @@ FRAMAC_TMPDIR := /tmp/frama-c-$(id -u)
 
 SOURCES := $(wildcard *.c)
 OBJECTS := $(SOURCES:%.c=%.o)
-BINARIES := $(OBJECTS:%.o=%.bin)
+BINARIES := $(OBJECTS:%.o=%.$(BIN_EXT))
 FRAMAC_TARGETS := $(SOURCES:%.c=%.frama)
 
 all: $(BINARIES)
@@ -18,9 +18,9 @@ all: $(BINARIES)
 all-frama: $(FRAMAC_TARGETS)
 
 clean:
-	rm -f *.bin *.o
+	rm -f *.bin *.exe *.o
 
-%.bin: %.o
+%.$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 # some files redefine C built-in functions strlen and memcpy

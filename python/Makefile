@@ -1,4 +1,4 @@
-include ../linux-flags.mk
+include ../os-detect.mk
 
 PYTHON ?= python
 PEP8 ?= pep8
