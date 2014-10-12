@@ -3,6 +3,7 @@ include ../linux-flags.mk
 PKG_CONFIG ?= pkg-config
 
 # Programs which need specific options
+NETLINK_PROGRAMS := enum_link_addrs
 SDL_PROGRAMS := sdl_v4l_video
 SECCOMP_PROGRAMS := seccomp
 SHARED_OBJECTS := override_uname_dl.so
@@ -10,7 +11,14 @@ SHARED_OBJECTS := override_uname_dl.so
 # Find other programs. Only programs in $(PROGRAMS) are built.
 SOURCES := $(wildcard *.c)
 ALL_PROGRAMS := $(filter-out $(SHARED_OBJECTS:%.so=%), $(SOURCES:%.c=%))
-PROGRAMS := $(filter-out $(SDL_PROGRAMS) $(SECCOMP_PROGRAMS), $(ALL_PROGRAMS))
+PROGRAMS := $(filter-out $(NETLINK_PROGRAMS) $(SDL_PROGRAMS) $(SECCOMP_PROGRAMS), $(ALL_PROGRAMS))
+
+# libnetlink is provided by iproute2 project
+HAVE_NETLINK := $(shell echo '\#include <libnetlink.h>' | \
+	$(CC) -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
+ifeq ($(HAVE_NETLINK), y)
+	PROGRAMS += $(NETLINK_PROGRAMS)
+endif
 
 HAVE_SDL := $(shell $(PKG_CONFIG) --exists sdl && echo 'y' || echo 'n')
 ifeq ($(HAVE_SDL), y)
