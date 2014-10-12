@@ -45,6 +45,7 @@ static void free_noaccess_page(void *ptr, size_t size)
 static void *alloc_noaccess_page(size_t size, unsigned char mark)
 {
     void *ptr;
+    DWORD dwOldProtect;
 
     ptr = VirtualAlloc(NULL, size, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
     if (!ptr) {
@@ -52,9 +53,9 @@ static void *alloc_noaccess_page(size_t size, unsigned char mark)
         return NULL;
     }
     memset(ptr, mark, size);
-    if (!VirtualProtect(ptr, size, PAGE_NOACCESS, NULL)) {
+    if (!VirtualProtect(ptr, size, PAGE_NOACCESS, &dwOldProtect)) {
         fprintf(stderr, "VirtualProtect: error %lu\n", GetLastError());
-        VirtualFree(ptr, size, MEM_RELEASE);
+        VirtualFree(ptr, 0, MEM_RELEASE);
         return NULL;
     }
     return ptr;
@@ -63,7 +64,7 @@ static void *alloc_noaccess_page(size_t size, unsigned char mark)
 static void free_noaccess_page(void *ptr, size_t size)
 {
     if (ptr) {
-        VirtualFree(ptr, size, MEM_RELEASE);
+        VirtualFree(ptr, 0, MEM_RELEASE);
     }
 }
 #else
