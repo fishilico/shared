@@ -30,6 +30,7 @@ all: $(PROGRAMS:%=%.bin) $(SHARED_OBJECTS)
 clean:
 	rm -f *.bin *.o *.so
 
+enum_link_addrs.bin: LIBS += -lnetlink
 message_queue.bin: LIBS += -lrt
 override_uname_dl.o: CFLAGS += -fPIC -fvisibility=hidden
 override_uname_dl.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@
