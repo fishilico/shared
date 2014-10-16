@@ -16,5 +16,5 @@ Other
 Other, in French
 ----------------
 
-* http://www.sytadin.fr/ traffic en Île-de-France 
+* http://www.sytadin.fr/ traffic en Île-de-France
 * http://carte.epps.fr/ carte de Paris-Saclay

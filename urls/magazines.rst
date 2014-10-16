@@ -5,6 +5,7 @@ English
 -------
 
 * http://www.osronline.com/section.cfm?section=17 The NT Insider
+* http://www.phrack.org/ Phrack
 
 French
 ------
