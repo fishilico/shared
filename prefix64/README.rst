@@ -31,6 +31,7 @@ Here are the commands you need to run as root  (replace ``eth0`` with your
 external interface)::
 
     ip6tables -t mangle -A PREROUTING -i eth0 -p tcp -m tcp --dport 80 -j MARK --set-mark 64
+    ip6tables -t mangle -A PREROUTING -i eth0 -p ipv6-icmp -j MARK --set-mark 64
     ip -6 route add local default dev lo table 64
     ip -6 rule add fwmark 64 lookup 64
 
@@ -64,3 +65,49 @@ Here is what I use with Nginx::
 Copy ``index.php`` into ``/var/www/prefix64`` and go to your literal IPv6
 address in a browser. For example, if your prefix is ``2001:db8::/64``, try
 http://[2001:db8:0:0:fedc:ba98:7654:3210]/.
+
+
+Neighbor Discovery Protocol Proxy
+---------------------------------
+
+The above setup works fine when the routing configuration of the Internet routes
+packets with destination addresses in the /64 range to the server.  Some
+Internet providers only routes until the last router and then the router
+sends a Neighbor Solicitation to retrieve the link-layer address associated to
+the IPv6 address (this is the Neighbor Discovery Protocol, "NDP").  In such a
+scenario, the server needs to reply with a Neighbor Advertisement message so
+that the router sends the packets correctly.
+
+Once the server is configured to answer NS with NA, the server can process
+ICMPv6 echo request ("ping6"), as shown by ``tcpdump -ni eth0 ip6``::
+
+    fe80::2ff:ffff:feff:fffd > ff02::1:ff57:cafe: ICMP6, neighbor solicitation, who has 2001:db8::be57:cafe, length 32
+    fe80::200:00ff:fe00:0000 > fe80::2ff:ffff:feff:fffd: ICMP6, neighbor advertisement, tgt is 2001:db8::be57:cafe, length 32
+    2001:db8::dead:beef > 2001:db8::be57:cafe: ICMP6, echo request, seq 1, length 64
+    2001:db8::be57:cafe > 2001:db8::dead:beef: ICMP6, echo reply, seq 1, length 64
+
+There are two ways to do such a configuration.  The first consists in using the
+kernel IPv6 stack by configuring "IPv6 proxy neighbors".  This enables the
+kernel to answer solicitation for specific addresses.  For example this
+configures the kernel to answer soliciations for 2001:db8::be57:cafe::
+
+    sysctl -w net.ipv6.conf.eth0.proxy_ndp=1
+    ip neigh add proxy 2001:db8::be57:cafe dev eth0
+
+The list of currently-configured neighbor proxies can be seen with::
+
+    ip neigh show proxy
+
+As Linux kernel does not support IP address ranges to be proxied, a daemon has
+been implemented to answer solicitations for ranges, ``ndppd`` (NDP Proxy
+Daemon): http://priv.nu/projects/ndppd/
+
+This daemon is configured with file ``/etc/ndppd.conf``::
+
+    proxy eth0 {
+        rule 2001:db8::/64 {
+        }
+    }
+
+Once the daemon is correctly configured and started, it handles the NDP messages
+so that packets are routed to the server, which can then process them.
