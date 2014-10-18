@@ -19,22 +19,32 @@ Hacking
 * http://electronics.howstuffworks.com/cell-phone6.htm How cell phones work, hardware
 * http://turbochaos.blogspot.fr/2013/09/linux-rootkits-101-1-of-3.html
   Introduction to Linux Rootkits
+* http://astr0baby.wordpress.com/2012/11/20/hacking-ubuntu-12-04-lts-using-metasploit/
+  Hacking Ubuntu 12.04 LTS using Metasploit, with lot of shell commands
 
 Programming
 -----------
 
-* http://turbochaos.blogspot.fr/2013/10/writing-linux-rootkits-301_31.html
-  Writing Linux Rootkits 301 - Bypassing modules_disabled security
 * http://google-styleguide.googlecode.com/svn/trunk/shell.xml
   Google coding rules
-* https://github.com/hackndev/zinc Rust on bare metal
+* http://mywiki.wooledge.org/BashFAQ Bash pitfalls
+
+* https://wiki.debian.org/Hardening Debian hardening options
+
+* http://ootips.org/yonat/4dev/smart-pointers.html Smart pointers in C++
+
 * http://mislav.uniqpath.com/2010/07/git-tips/ Git tips
 * http://sethrobertson.github.io/GitBestPractices/ Git best practices
-* http://mywiki.wooledge.org/BashFAQ Bash pitfalls
+
 * http://www.chromeexperiments.com/webgl/ WebGL experiment
 * http://threejs.org/examples/ Three.js examples (WebGL library)
+
 * http://interrobeng.com/2013/08/25/speed-up-git-5x-to-50x/
   Speed up git-over-SSH
+
+* http://turbochaos.blogspot.fr/2013/10/writing-linux-rootkits-301_31.html
+  Writing Linux Rootkits 301 - Bypassing modules_disabled security
+* https://github.com/hackndev/zinc Rust on bare metal
 * https://github.com/steventroughtonsmith/rpi-basic
   Basic kernel for Raspberry Pi
 
@@ -47,6 +57,7 @@ Packaging
     - http://www.eyrie.org/~eagle/notes/debian/git.html
     - http://www.debian.org/devel/#packaging
 
+* https://release.debian.org/ Debian releases schedule
 * http://clang.debian.net/ Rebuild Debian packages with clang (https://wiki.debian.org/llvm-clang)
 
 Internet

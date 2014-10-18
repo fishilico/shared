@@ -4,8 +4,9 @@ Frequently-updated websites
 News
 ----
 
+* http://www.darkreading.com/ Dark Reading (InformationWeek)
 * https://news.ycombinator.com/ Hacker News
-* https://www.wired.com/ Wired news
+* https://www.wired.com/ Wired News
 * http://lwn.net/ LWN.net
 
 Videos
@@ -34,9 +35,15 @@ Frech Newspapers
 Blogs
 -----
 
-* http://korben.info/ Korben
 * http://blog.j-michel.org/ A little bit of everything
 * http://www.devttys0.com/blog/ Embedded Device Hacking
+* http://astr0baby.wordpress.com/ Astrobaby's random thoughts
+
+French blogs
+------------
+
+* http://korben.info/ Korben - Upgrade your mind
+* http://philpep.org/blog Philpep
 
 Code repositories
 -----------------
@@ -53,3 +60,4 @@ Other
 -----
 
 * http://www.qwertee.com/ Qwertee T-shirts
+* http://theprofoundprogrammer.com/ The profound programmer
