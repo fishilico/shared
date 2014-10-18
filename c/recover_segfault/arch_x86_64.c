@@ -278,6 +278,25 @@ static size_t decode_modrm_check(
 }
 
 /**
+ * Update the EFLAGS according to a 8-bit difference
+ */
+static asm_instr_reg update_eflags_diff8(asm_instr_reg eflags, uint8_t diff)
+{
+    eflags &= ~(X86_EFLAGS_CF | X86_EFLAGS_PF | X86_EFLAGS_AF |
+                X86_EFLAGS_ZF | X86_EFLAGS_SF | X86_EFLAGS_OF);
+    if (__builtin_parity(diff)) {
+        eflags |= X86_EFLAGS_PF;
+    }
+    if (!diff) {
+        eflags |= X86_EFLAGS_ZF;
+    }
+    if (diff & 0x80) {
+        eflags |= X86_EFLAGS_SF;
+    }
+    return eflags;
+}
+
+/**
  * Emulate an ASM instruction in the given context, with data the pseudo content at data_addr
  */
 bool run_mov_asm_instruction_p(
@@ -384,6 +403,36 @@ bool run_mov_asm_instruction_p(
         }
     }
 
+    /* 38 /r: cmpb reg8, reg/mem8 */
+    if (instr[0] == 0x38) {
+        paramlen = decode_modrm_check(ctx, instr + 1, rexprefix | X86_64_REX_FAKE_R8,
+                                      data_addr, &op_reg, &operand_reg, &operand_rm);
+        if (!paramlen) {
+            return false;
+        }
+        asm_printf(asm_instr, "cmp %s, %s", operand_reg, operand_rm);
+        free(operand_rm);
+        free(operand_reg);
+        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(data[0] - *op_reg));
+        R_RIP(ctx) += 1 + paramlen;
+        return true;
+    }
+
+    /* 3a /r: cmpb reg/mem8, reg8 */
+    if (instr[0] == 0x3a) {
+        paramlen = decode_modrm_check(ctx, instr + 1, rexprefix | X86_64_REX_FAKE_R8,
+                                      data_addr, &op_reg, &operand_reg, &operand_rm);
+        if (!paramlen) {
+            return false;
+        }
+        asm_printf(asm_instr, "cmp %s, %s", operand_rm, operand_reg);
+        free(operand_rm);
+        free(operand_reg);
+        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(*op_reg - data[0]));
+        R_RIP(ctx) += 1 + paramlen;
+        return true;
+    }
+
     /* 8b /r: mov reg/mem, reg */
     if (instr[0] == 0x8b) {
         paramlen = decode_modrm_check(ctx, instr + 1, rexprefix, data_addr, &op_reg, &operand_reg, &operand_rm);
@@ -405,8 +454,7 @@ bool run_mov_asm_instruction_p(
 
     /* 80 /7 ib: cmpb imm8, reg/mem8 */
     if (instr[0] == 0x80 && (instr[1] & 0x38) == 0x38) {
-        int8_t op1 = (int8_t)data[0], op2 = 0, diff;
-        asm_instr_reg eflags;
+        int8_t op1 = (int8_t)data[0], op2 = 0;
 
         paramlen = decode_modrm_check(ctx, instr + 1, rexprefix, data_addr, NULL, NULL, &operand_rm);
         if (!paramlen) {
@@ -415,26 +463,7 @@ bool run_mov_asm_instruction_p(
         op2 = (int8_t)instr[1 + paramlen];
         asm_printf(asm_instr, "cmpb 0x%02x, %s", op2, operand_rm);
         free(operand_rm);
-        diff = op1 - op2;
-
-        /* Update EFLAGS */
-        eflags = R_EFL(ctx) & ~(
-            X86_EFLAGS_CF |
-            X86_EFLAGS_PF |
-            X86_EFLAGS_AF |
-            X86_EFLAGS_ZF |
-            X86_EFLAGS_SF |
-            X86_EFLAGS_OF);
-        if (__builtin_parity((uint8_t)diff)) {
-            eflags |= X86_EFLAGS_PF;
-        }
-        if (!diff) {
-            eflags |= X86_EFLAGS_ZF;
-        }
-        if (diff & 0x80) {
-            eflags |= X86_EFLAGS_SF;
-        }
-        R_EFL(ctx) = eflags;
+        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(op1 - op2));
         R_RIP(ctx) += 2 + paramlen;
         return true;
     }

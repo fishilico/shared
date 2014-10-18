@@ -121,6 +121,10 @@ int main(void)
     test("\x80\x38\x17", "cmpb 0x17, (rax=0xda7a0000)", EFL, X86_EFLAGS_ZF);
     R_RCX(&ctx) = data_addr + 1;
     test("\x80\x79\xff\x0a", "cmpb 0x0a, -0x1(rcx=0xda7a0001)", EFL, X86_EFLAGS_PF);
+    R_RCX(&ctx) = data_addr;
+    test("\x44\x38\x09", "cmp r9b, (rcx=0xda7a0000)", EFL, 0);
+    R_RCX(&ctx) = data_addr;
+    test("\x44\x3a\x11", "cmp (rcx=0xda7a0000), r10b", EFL, X86_EFLAGS_SF | X86_EFLAGS_PF);
 
     /* Load 32-bit value */
     R_RSI(&ctx) = data_addr;
