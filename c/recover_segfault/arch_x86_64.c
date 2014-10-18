@@ -25,101 +25,77 @@
 static asm_instr_reg* get_gp_reg(
     asm_instr_context *ctx, unsigned int regnum, unsigned int bitsize, char *regname)
 {
-    const char *regprefix = "", *regsuffix = "";
-
-    if (bitsize == 8) {
-        regsuffix = "b";
-        fprintf(stderr, "warning: 8-bit registers not yet fully supported\n");
-    } else if (bitsize == 16) {
-        regsuffix = "w";
-    } else if (bitsize == 32) {
-        regprefix = "e";
-        regsuffix = "d";
-    } else if (bitsize == 64) {
-        regprefix = "r";
-    }
+    const char *regs8[8] = { "al", "cl", "dl", "bl", "ah", "ch", "dh", "bh" };
+    const char *regs16[8] = { "ax", "cx", "dx", "bx", "sp", "bp", "si", "di" };
 
     assert(regnum < 16);
+
+    if (regname) {
+        if (regnum < 8) {
+            if (bitsize == 8) {
+                snprintf(regname, 3, "%s", regs8[regnum]);
+                if (regnum > 4) {
+                    /* ah, ch, dh, bh are not yet supported */
+                    fprintf(stderr, "warning: 8-bit registers not yet fully supported\n");
+                    regnum &= 3;
+                }
+            } else if (bitsize == 16) {
+                snprintf(regname, 3, "%s", regs16[regnum]);
+            } else if (bitsize == 32) {
+                snprintf(regname, 4, "e%s", regs16[regnum]);
+            } else if (bitsize == 64) {
+                snprintf(regname, 4, "r%s", regs16[regnum]);
+            } else {
+                __builtin_unreachable();
+            }
+        } else {
+            /* r8..r15 */
+            if (bitsize == 8) {
+                snprintf(regname, 5, "r%ub", regnum);
+            } else if (bitsize == 16) {
+                snprintf(regname, 5, "r%uw", regnum);
+            } else if (bitsize == 32) {
+                snprintf(regname, 5, "r%ud", regnum);
+            } else if (bitsize == 64) {
+                snprintf(regname, 4, "r%u", regnum);
+            } else {
+                __builtin_unreachable();
+            }
+        }
+    }
+
     switch (regnum) {
         case 0:
-            if (regname) {
-                snprintf(regname, 5, "%sax", regprefix);
-            }
             return &R_RAX(ctx);
         case 1:
-            if (regname) {
-                snprintf(regname, 5, "%scx", regprefix);
-            }
             return &R_RCX(ctx);
         case 2:
-            if (regname) {
-                snprintf(regname, 5, "%sdx", regprefix);
-            }
             return &R_RDX(ctx);
         case 3:
-            if (regname) {
-                snprintf(regname, 5, "%sbx", regprefix);
-            }
             return &R_RBX(ctx);
         case 4:
-            if (regname) {
-                snprintf(regname, 5, "%ssp", regprefix);
-            }
             return &R_RSP(ctx);
         case 5:
-            if (regname) {
-                snprintf(regname, 5, "%sbp", regprefix);
-            }
             return &R_RBP(ctx);
         case 6:
-            if (regname) {
-                snprintf(regname, 5, "%ssi", regprefix);
-            }
             return &R_RSI(ctx);
         case 7:
-            if (regname) {
-                snprintf(regname, 5, "%sdi", regprefix);
-            }
             return &R_RDI(ctx);
         case 8:
-            if (regname) {
-                snprintf(regname, 5, "r8%s", regsuffix);
-            }
             return &R_R8(ctx);
         case 9:
-            if (regname) {
-                snprintf(regname, 5, "r9%s", regsuffix);
-            }
             return &R_R9(ctx);
         case 10:
-            if (regname) {
-                snprintf(regname, 5, "r10%s", regsuffix);
-            }
             return &R_R10(ctx);
         case 11:
-            if (regname) {
-                snprintf(regname, 5, "r11%s", regsuffix);
-            }
             return &R_R11(ctx);
         case 12:
-            if (regname) {
-                snprintf(regname, 5, "r12%s", regsuffix);
-            }
             return &R_R12(ctx);
         case 13:
-            if (regname) {
-                snprintf(regname, 5, "r13%s", regsuffix);
-            }
             return &R_R13(ctx);
         case 14:
-            if (regname) {
-                snprintf(regname, 5, "r14%s", regsuffix);
-            }
             return &R_R14(ctx);
         case 15:
-            if (regname) {
-                snprintf(regname, 5, "r15%s", regsuffix);
-            }
             return &R_R15(ctx);
     }
     __builtin_unreachable();
@@ -140,7 +116,7 @@ static size_t decode_modrm_check(
 {
     size_t paramlen = 1;
     uint8_t modrm = instr[0], sib;
-    unsigned int regnum;
+    unsigned int regnum, bitsize;
     char *regname, *sibdesc = NULL, *rmdesc;
     uintptr_t computed_addr;
 
@@ -292,7 +268,8 @@ static size_t decode_modrm_check(
         regnum = ((modrm >> 3) & 7) | ((rexprefix & X86_64_REX_R) ? 8 : 0);
         regname = malloc(5);
         assert(regname);
-        *op_reg = get_gp_reg(ctx, regnum, (rexprefix & X86_64_REX_W) ? 64 : 32, regname);
+        bitsize = (rexprefix & X86_64_REX_FAKE_R8) ? 8 : (rexprefix & X86_64_REX_W) ? 64 : 32;
+        *op_reg = get_gp_reg(ctx, regnum, bitsize, regname);
         *operand_reg = regname;
     } else {
         assert(!operand_reg);

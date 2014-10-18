@@ -23,6 +23,8 @@
 #define X86_64_REX_X 2
 #define X86_64_REX_R 4
 #define X86_64_REX_W 8
+/* Use high nibble to encode "reg8" in ModR/M decoder */
+#define X86_64_REX_FAKE_R8 0x10
 
 /* Get registers from a context */
 #define R_RAX(ctx) asm_instr_ctx_reg((ctx), RAX, Rax)
