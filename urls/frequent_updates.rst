@@ -37,6 +37,7 @@ Blogs
 
 * http://blog.j-michel.org/ A little bit of everything
 * http://www.devttys0.com/blog/ Embedded Device Hacking
+* https://doar-e.github.io/ Diary of a reverse-engineer
 * http://astr0baby.wordpress.com/ Astrobaby's random thoughts
 
 French blogs
@@ -54,6 +55,7 @@ Code repositories
   systemd
 * https://github.com/wine-mirror/wine/commits/master Wine
 * https://sourceware.org/git/?p=glibc.git;a=shortlog glibc
+* https://git.kernel.org/cgit/utils/util-linux/util-linux.git/log/ util-linux
 * http://www.sudo.ws/repos/sudo sudo
 
 Other

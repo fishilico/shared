@@ -9,6 +9,8 @@ System administration
 * http://www.mysqlperformanceblog.com/2013/12/07/linux-performance-tuning-tips-mysql/
   Linux performance tuning tips for MySQL
 * https://www.monitoring-plugins.org/ The Monitoring Plugins Project
+* https://www.gnu.org/software/coreutils/manual/html_node/su-invocation.html#index-fascism-2365
+  Why GNU su does not support the 'wheel' group
 
 Hacking
 -------
@@ -21,6 +23,8 @@ Hacking
   Introduction to Linux Rootkits
 * http://astr0baby.wordpress.com/2012/11/20/hacking-ubuntu-12-04-lts-using-metasploit/
   Hacking Ubuntu 12.04 LTS using Metasploit, with lot of shell commands
+* https://viaforensics.com/resources/reports/android-forensics/physical-techniques/
+  Android Forensics - Physical Techniques
 
 Programming
 -----------
@@ -73,3 +77,5 @@ Internet
   Measuring Google's Public DNS  (with interesting figures about how DNS works)
 * http://submarine-cable-map-2014.telegeography.com/
   Submarine Internet cables
+* https://istlsfastyet.com/ Is TLS Fast Yet
+* https://www.ssllabs.com/ssltest/ Qualys SSL Labs server test
