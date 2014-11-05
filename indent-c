@@ -91,6 +91,7 @@ exec indent \
     -T PULONG \
     -T PVOID \
     -T PWORD \
+    -T TCHAR \
     -T TEB_internal \
     -T UINT \
     -T ULONG \

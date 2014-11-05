@@ -10,7 +10,7 @@ clean:
 	rm -f *.exe *.o
 
 check_winmain_params.exe helloworld.exe: LDFLAGS += -Wl,--subsystem=windows
-list_processes.exe: LIBS += -lpsapi
+list_processes.exe virtual_mem.exe: LIBS += -lpsapi
 network_stat.exe: LIBS += -liphlpapi -lws2_32
 uuidgen.exe: LIBS += -lrpcrt4
 
