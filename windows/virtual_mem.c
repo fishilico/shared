@@ -70,6 +70,135 @@ static BOOL GetModuleFileNameWithAlloc(HMODULE hModule, LPTSTR *pszFileName)
     return TRUE;
 }
 
+/**
+ * Get a pointer in the stack
+ */
+static LPCVOID get_stack_pointer(void)
+{
+    LPCVOID pStack;
+#if defined(__x86_64)
+    __asm__ volatile ("movq %%rsp, %0" : "=r" (pStack));
+#elif defined(__i386__)
+    __asm__ volatile ("movl %%esp, %0" : "=r" (pStack));
+#else
+#    warning "get_stack_pointer not yet implemented for this architecture"
+    pStack = NULL;
+#endif
+#ifdef _NT_TIB_DEFINED
+    /* Check with TEB */
+    {
+        const NT_TIB *pTib = (PNT_TIB)NtCurrentTeb();
+        if (pTib->StackLimit < pTib->StackBase) {
+            /* Stack grows down from base to limit */
+            if (pStack < pTib->StackLimit || pStack > pTib->StackBase) {
+                _ftprintf(
+                    stderr,
+                    _T("Warning: stack pointer %p not in stack limits %p..%p\n"),
+                    pStack, pTib->StackLimit, pTib->StackBase);
+                pStack = pTib->StackLimit;
+            }
+        } else {
+            /* Stack grows up from base to limit */
+            if (pStack < pTib->StackBase || pStack > pTib->StackLimit) {
+                _ftprintf(
+                    stderr,
+                    _T("Warning: stack pointer %p not in stack limits %p..%p\n"),
+                    pStack, pTib->StackBase, pTib->StackLimit);
+                pStack = pTib->StackBase;
+            }
+        }
+    }
+#endif
+    return pStack;
+}
+
+/**
+ * Get the Process Environment Block, with the "documented way"
+ * Use NtQueryInformationProcess, dynamically loaded from ntdll
+ */
+typedef NTSTATUS (NTAPI * pfnNtQueryInformationProcess_t) (
+    HANDLE ProcessHandle,
+    int ProcessInformationClass,
+    PVOID ProcessInformation,
+    ULONG ProcessInformationLength,
+    PULONG ReturnLength);
+static LPCVOID get_peb_query_info_proc(void)
+{
+    HMODULE hModNtdll;
+    pfnNtQueryInformationProcess_t pfnNtQueryInformationProcess;
+    NTSTATUS status;
+    ULONG length = 0;
+    /* Use PROCESS_BASIC_INFORMATION without actually using it */
+    struct {
+        PVOID Reserved1;
+        PVOID PebBaseAddress;
+        PVOID Reserved2[2];
+        ULONG_PTR UniqueProcessId;
+        PVOID Reserved3;
+    } ProcBasicInfo;
+
+    hModNtdll = LoadLibrary(_T("ntdll.dll"));
+    if (!hModNtdll) {
+        print_winerr(_T("LoadLibrary(ntdll)"));
+        return NULL;
+    }
+
+    pfnNtQueryInformationProcess = (pfnNtQueryInformationProcess_t)GetProcAddress(
+        hModNtdll, "NtQueryInformationProcess");
+    if (!pfnNtQueryInformationProcess) {
+        print_winerr(_T("GetProcAddress(ntdll, NtQueryInformationProcess)"));
+        FreeLibrary(hModNtdll);
+        return NULL;
+    }
+
+    /* Query ProcessBasicInformation = 0 */
+    status = (*pfnNtQueryInformationProcess)(GetCurrentProcess(), 0, &ProcBasicInfo, sizeof(ProcBasicInfo), &length);
+    FreeLibrary(hModNtdll);
+    if (status) {
+        _ftprintf(stderr, _T("NtQueryInformationProcess: error %lu\n"), status);
+        return NULL;
+    }
+    return ProcBasicInfo.PebBaseAddress;
+}
+
+/**
+ * Get the Process Environment Block from the Thread Environment Block
+ */
+static LPCVOID get_peb_from_teb(void)
+{
+    LPCVOID pPeb;
+#if defined(__x86_64)
+     __asm__ volatile ("movq %%gs:96, %0" : "=r" (pPeb));
+#elif defined(__i386__)
+    __asm__ volatile ("movl %%fs:48, %0" : "=r" (pPeb));
+#else
+#    warning "get_peb_from_teb not yet implemented for this architecture"
+    pPeb = NULL;
+#endif
+    return pPeb;
+}
+
+/**
+ * Get the Process Environment Block using every available method
+ */
+static LPCVOID get_peb(void)
+{
+    LPCVOID pPebInfoProc, pPebTeb;
+
+    pPebInfoProc = get_peb_query_info_proc();
+    pPebTeb = get_peb_from_teb();
+    if (pPebInfoProc) {
+        if (pPebTeb && pPebTeb != pPebInfoProc) {
+            _ftprintf(
+                stderr,
+                _T("Warning: PEB = %p from process info and %p from TEB\n"),
+                pPebInfoProc, pPebTeb);
+        }
+        return pPebInfoProc;
+    }
+    return pPebTeb;
+}
+
 int _tmain(int argc, TCHAR **argv)
 {
     int i;
@@ -80,6 +209,14 @@ int _tmain(int argc, TCHAR **argv)
     DWORD dwLastAllocProtect = 0;
     LPTSTR szFileName;
     BOOL bShowFree = FALSE;
+    LPCVOID pStack, pTeb, pPeb;
+    LPVOID pHeap;
+
+    /* Gather stack, heap, Thread Environment Block and Process Environment Block */
+    pStack = get_stack_pointer();
+    pHeap = HeapAlloc(GetProcessHeap(), 0, 1);
+    pTeb = NtCurrentTeb();
+    pPeb = get_peb();
 
     for (i = 1; i < argc; i++) {
         if (!_tcscmp(argv[1], _T("-f"))) {
@@ -170,8 +307,25 @@ int _tmain(int argc, TCHAR **argv)
             } else {
                 _tprintf(_T(", unknown type 0x%x"), MemInfo.Type);
             }
+
+            if ((LPCVOID)pStart <= pStack && pStack <= (LPCVOID)pEnd) {
+                _tprintf(_T(" [stack]"));
+            }
+            if ((LPCVOID)pStart <= pHeap && pHeap <= (LPCVOID)pEnd) {
+                _tprintf(_T(" [heap]"));
+            }
+            if ((LPCVOID)pStart <= pTeb && pTeb <= (LPCVOID)pEnd) {
+                _tprintf(_T(" [TEB@%" PRIxPTR "]"), (ULONG_PTR)pTeb);
+            }
+            if ((LPCVOID)pStart <= pPeb && pPeb <= (LPCVOID)pEnd) {
+                _tprintf(_T(" [PEB@%" PRIxPTR "]"), (ULONG_PTR)pPeb);
+            }
+
             _tprintf(_T("\n"));
         }
+    }
+    if (pHeap) {
+        HeapFree(GetProcessHeap(), 0, pHeap);
     }
     return 0;
 }
