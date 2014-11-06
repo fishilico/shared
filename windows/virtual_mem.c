@@ -71,6 +71,38 @@ static BOOL GetModuleFileNameWithAlloc(HMODULE hModule, LPTSTR *pszFileName)
 }
 
 /**
+ * Wrap GetMappedFileName to allocate memory
+ */
+static BOOL GetMappedFileNameWithAlloc(LPVOID lpAddr, LPTSTR *pszFileName)
+{
+    LPTSTR buffer = NULL;
+    DWORD cchSize = 1024, cchRet;
+
+    assert(lpAddr && pszFileName);
+    do {
+        buffer = HeapAlloc(GetProcessHeap(), 0, cchSize * sizeof(TCHAR));
+        if (!buffer) {
+            print_winerr(_T("HeapAlloc"));
+            return FALSE;
+        }
+        cchRet = GetMappedFileName(GetCurrentProcess(), lpAddr, buffer, cchSize);
+        if (!cchRet) {
+            print_winerr(_T("GetMappedFileName"));
+            HeapFree(GetProcessHeap(), 0, buffer);
+            return FALSE;
+        }
+        if (cchRet == cchSize) {
+            HeapFree(GetProcessHeap(), 0, buffer);
+            buffer = NULL;
+            cchSize *= 2;
+        }
+        assert(cchRet <= cchSize);
+    } while (!buffer);
+    *pszFileName = buffer;
+    return TRUE;
+}
+
+/**
  * Get a pointer in the stack
  */
 static LPCVOID get_stack_pointer(void)
@@ -267,8 +299,14 @@ int _tmain(int argc, TCHAR **argv)
                     _T("\n%16" PRIxPTR ": allocation (%s)"),
                     (ULONG_PTR)MemInfo.AllocationBase,
                     describe_protect(MemInfo.AllocationProtect));
-                if (MemInfo.Type == SEC_IMAGE &&
+                if (MemInfo.Type == MEM_IMAGE &&
                     GetModuleFileNameWithAlloc(MemInfo.AllocationBase, &szFileName)) {
+                    /* Show associated file for image allocations */
+                    _tprintf(_T(" <%s>"), szFileName);
+                    HeapFree(GetProcessHeap(), 0, szFileName);
+                } else if (MemInfo.Type == MEM_MAPPED &&
+                    GetMappedFileNameWithAlloc(MemInfo.AllocationBase, &szFileName)) {
+                    /* Show associated file for mapped allocations */
                     _tprintf(_T(" <%s>"), szFileName);
                     HeapFree(GetProcessHeap(), 0, szFileName);
                 }
