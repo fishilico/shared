@@ -148,7 +148,7 @@ static LPCVOID get_stack_pointer(void)
  * Get the Process Environment Block, with the "documented way"
  * Use NtQueryInformationProcess, dynamically loaded from ntdll
  */
-typedef NTSTATUS (NTAPI * pfnNtQueryInformationProcess_t) (
+typedef DWORD (WINAPI * pfnNtQueryInformationProcess_t) (
     HANDLE ProcessHandle,
     int ProcessInformationClass,
     PVOID ProcessInformation,
@@ -158,7 +158,7 @@ static LPCVOID get_peb_query_info_proc(void)
 {
     HMODULE hModNtdll;
     pfnNtQueryInformationProcess_t pfnNtQueryInformationProcess;
-    NTSTATUS status;
+    DWORD status;
     ULONG length = 0;
     /* Use PROCESS_BASIC_INFORMATION without actually using it */
     struct {
