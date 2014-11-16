@@ -83,13 +83,36 @@ Here are some useful BIOS interrupts:
 
 * Interrupt ``0x10``, video:
 
-  * ``AH = 0x00``: set video mode ``AL``
+  * ``AH = 0x00``: set video mode ``AL``.
+
+    * ``AL = 0x12``: text resolution 80x30, pixel resolution 640x480, colors 16/256K, VGA.
+
+  * ``AH = 0x02``: set cursor position of page ``BH`` to `DX``.
+
+    * ``DH`` = row.
+    * ``DL`` = column.
+
+  * ``AH = 0x03``: read cursor position of page ``BH`` in `DX``.
+
+  * ``AH = 0x0B``: set background color ``BX`` (depending on video mode).
 
   * ``AH = 0x0E``: print ASCII character in ``AL``, in teletype mode.
 
-    * ``BH`` = page number, ``BL`` = foreground pixel color.
+    * ``BH`` = page number, ``BL`` = foreground pixel color:
+
+      * ``BL = 0x07`` = ligth gray.
+      * ``BL = 0x0F`` = white.
+
     * Newline are done with CRLF (``\n\r = 0x0A 0x0D``).
     * Bell (BEL) is ``0x07`` and backspace (BS) is ``0x08``.
+
+  * ``AH = 0x13``: write ``CX`` characters from ``BP``.
+
+    * ``AL = 1`` to update the cursor after writing and use ``BL`` attribute (color).
+    * ``AL = 2`` to use a string alternating characters and attributes.
+    * ``AL = 3`` to update the cursor and use an alternated string.
+    * ``BH`` = page number, ``BL`` = foreground pixel color.
+    * ``DX`` = cursor position.
 
 * Interrupt ``0x13`, disk I/O. On return, most commands clear ``CF`` on success
   and set it on error, with ``AH`` being a status code. Drive numbers begins
@@ -172,4 +195,7 @@ Some websites:
 * GRUB boot record: http://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/boot/i386/pc/diskboot.S
 * Wikipedia MBR article: http://en.wikipedia.org/wiki/Master_boot_record
 * Wikipedia BIOS interrupts: http://en.wikipedia.org/wiki/BIOS_interrupt_call
+* BIOS article os OSDev wiki: http://wiki.osdev.org/BIOS
+* Interrupt Jump Table: http://www.ctyme.com/intr/int.htm
 * Linux boot sector for x86: https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/x86/boot/header.S
+* QEmu seabios source: http://git.qemu.org/?p=seabios.git;a=tree
