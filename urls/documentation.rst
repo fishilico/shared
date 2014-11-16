@@ -67,15 +67,23 @@ Packaging
 Internet
 --------
 
-* http://xkcdsw.com/content/img/3327.jpg
-  Map of the Internet (IPv4, 2011)
+* SSL/TLS:
+
+    - https://istlsfastyet.com/ Is TLS Fast Yet
+    - https://www.ssllabs.com/ssltest/ Qualys SSL Labs server test
+
+* Maps:
+
+    - http://xkcdsw.com/content/img/3327.jpg
+      Map of the Internet (IPv4, 2011)
+    - http://media.economist.com/sites/default/files/cf_images/images-magazine/2012/12/01/FB/20121201_FBD000.png
+      Map of the Realms of GAFA (The Economist, 2012)
+    - http://submarine-cable-map-2014.telegeography.com/
+      Map of Submarine Internet cables
+
 * http://www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-entirely-text-based-linux-environment
   Install Dropbox In An Entirely Text-Based Linux Environment
 * http://www.dropboxwiki.com/tips-and-tricks/using-the-official-dropbox-command-line-interface-cli
   Using the Official Dropbox Command Line Interface (CLI)
 * https://labs.ripe.net/Members/gih/measuring-googles-public-dns
   Measuring Google's Public DNS  (with interesting figures about how DNS works)
-* http://submarine-cable-map-2014.telegeography.com/
-  Submarine Internet cables
-* https://istlsfastyet.com/ Is TLS Fast Yet
-* https://www.ssllabs.com/ssltest/ Qualys SSL Labs server test
