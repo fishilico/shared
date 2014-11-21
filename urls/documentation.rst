@@ -52,6 +52,8 @@ Programming
 * https://github.com/steventroughtonsmith/rpi-basic
   Basic kernel for Raspberry Pi
 
+* http://dotfiles.github.io/ GitHub dotfiles projects
+
 Packaging
 ---------
 
@@ -87,3 +89,10 @@ Internet
   Using the Official Dropbox Command Line Interface (CLI)
 * https://labs.ripe.net/Members/gih/measuring-googles-public-dns
   Measuring Google's Public DNS  (with interesting figures about how DNS works)
+
+Hardware products
+-----------------
+
+* http://inversepath.com/usbarmory USB Armory (InversePath)
+* https://www.yubico.com/products/yubikey-hardware/yubikey-2/ Yubikey (Yubico)
+* http://www.raspberrypi.org/ Raspberry Pi
