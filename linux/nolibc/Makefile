@@ -31,9 +31,9 @@ HEADERS := $(wildcard *.h)
 # Check with a header because the compiler may accept -m32 even if headers are
 # missing.  The headers are used to get the value of constants.
 HAVE_M32_M64 ?= y
-HAVE_M32 := $(shell echo '\#include <linux/types.h>' | \
+HAVE_M32 := $(shell echo '\#include <errno.h>' | \
 	$(CC) -m32 -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
-HAVE_M64 := $(shell echo '\#include <linux/types.h>' | \
+HAVE_M64 := $(shell echo '\#include <errno.h>' | \
 	$(CC) -m64 -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
 OBJECTS :=
 ifeq ($(HAVE_M32),y)
