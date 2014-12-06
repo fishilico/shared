@@ -9,6 +9,7 @@ English
 * http://www.sluggy.com/ Sluggy Freelance
 * http://www.smbc-comics.com/ SMBC (Saturday Morning Breakfast Cereal)
 * http://m.webtoons.com/episodeList?titleNo=95 Tower of God
+* http://strongfemaleprotagonist.com/ Strong Female Protagonist
 
 French
 ------
@@ -18,6 +19,7 @@ French
 * http://www.penofchaos.com/warham/donjon.htm
   Donjon de Naheulbeuk
 * http://lesjoiesducode.fr/ Les joies du code
+* http://hmm-la-bd.eu/ Hmm-la-bd
 
 French editors
 --------------

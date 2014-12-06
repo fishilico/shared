@@ -39,6 +39,8 @@ Blogs
 * http://www.devttys0.com/blog/ Embedded Device Hacking
 * https://doar-e.github.io/ Diary of a reverse-engineer
 * http://astr0baby.wordpress.com/ Astrobaby's random thoughts
+* http://kutioo.blogspot.fr/ kutio's blog
+  (exploitation, reverse engineering, cryptography, lattices, liblll, knapsack)
 
 French blogs
 ------------

@@ -25,6 +25,8 @@ Hacking
   Hacking Ubuntu 12.04 LTS using Metasploit, with lot of shell commands
 * https://viaforensics.com/resources/reports/android-forensics/physical-techniques/
   Android Forensics - Physical Techniques
+* http://www.mathyvanhoef.com/2013/12/reversing-and-exploiting-arm-binaries.html
+  ARM reversing introduction
 
 Programming
 -----------
