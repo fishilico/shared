@@ -5,6 +5,9 @@
  * https://gcc.gnu.org/git/gitweb.cgi?p=gcc.git;a=blob;f=gcc/config/i386/cpuid.h
  * and glibc uses these macros to retrieve CPU cache information:
  * https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/x86_64/cacheinfo.c
+ *
+ * Some information about x86 flags can also be found on Wikipedia:
+ * http://en.wikipedia.org/wiki/CPUID
  */
 #include <stdint.h>
 #include <stdio.h>
