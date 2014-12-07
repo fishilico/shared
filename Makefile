@@ -16,17 +16,16 @@ include ./windows-flags.mk
 # Never build some specific sub-projects from the main Makefile
 SUBDIRS_BLACKLIST = linux/modules% verification/linux%
 
-# Linux check
-ifneq ($(shell $(UNAME) -s 2>/dev/null),Linux)
+# Linux check: filter-out linux/ on non-Linux systems, and boot/ on Windows
+ifeq ($(OS), Windows_NT)
+SUBDIRS_BLACKLIST += linux% boot%
+else ifneq ($(shell $(UNAME) -s 2>/dev/null),Linux)
 SUBDIRS_BLACKLIST += linux%
 endif
 
 # Windows or MinGW check: compile a basic file
 ifneq ($(shell $(WINCC) -E windows/helloworld.c > /dev/null 2>&1 && echo y),y)
 SUBDIRS_BLACKLIST += windows%
-else
-# Do not compile linux and boot-related programs on Windows or with MinGW
-SUBDIRS_BLACKLIST += linux% boot%
 endif
 
 # MBR check: $(CC) needs to be able to produce 16-bit x86
