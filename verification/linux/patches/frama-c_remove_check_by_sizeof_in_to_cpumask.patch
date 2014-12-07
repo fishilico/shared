@@ -1,0 +1,18 @@
+Remove a check using sizeof' side effect in to_cpumask macro definition
+
+--- a/include/linux/cpumask.h
++++ b/include/linux/cpumask.h
+@@ -749,9 +749,13 @@ void init_cpu_online(const struct cpumas
+  *
+  * This does the conversion, and can be used as a constant initializer.
+  */
++#ifdef __FRAMAC__
++#define to_cpumask(bitmap) ((struct cpumask *)(bitmap))
++#else
+ #define to_cpumask(bitmap)						\
+ 	((struct cpumask *)(1 ? (bitmap)				\
+ 			    : (void *)sizeof(__check_is_bitmap(bitmap))))
++#endif
+ 
+ static inline int __check_is_bitmap(const unsigned long *bitmap)
+ {

@@ -1,0 +1,24 @@
+Frama-C complains about an integer overflow occuring because of the implicit
+cast to signed long.
+
+kernel/time/jiffies.c:67:[kernel] warning: signed overflow.
+                  assert
+                  (long)((long)(1000000000L+(long)((int)(100/2)))/(long)100)<<8 ≤ 2147483647;
+kernel/time/jiffies.c:72:[value] Evaluation of initializer '(unsigned int)((1000000000L + (long)(100 / 2)) / (long)100 << 8)' failed
+
+#define HZ 100
+#define NSEC_PER_SEC    1000000000L
+#define NSEC_PER_JIFFY  ((NSEC_PER_SEC+HZ/2)/HZ)
+#define JIFFIES_SHIFT   8
+
+--- a/kernel/time/jiffies.c
++++ b/kernel/time/jiffies.c
+@@ -69,7 +69,7 @@ static struct clocksource clocksource_ji
+ 	.rating		= 1, /* lowest valid rating*/
+ 	.read		= jiffies_read,
+ 	.mask		= 0xffffffff, /*32bits*/
+-	.mult		= NSEC_PER_JIFFY << JIFFIES_SHIFT, /* details above */
++	.mult		= ((u32)NSEC_PER_JIFFY) << JIFFIES_SHIFT, /* details above */
+ 	.shift		= JIFFIES_SHIFT,
+ };
+ 

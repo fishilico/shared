@@ -1,0 +1,37 @@
+Some switch are matching an unsigned value with negative numbers. Fix this by
+casting to signed int beforehand.
+
+Before sending this patch upstream, please check the consequences on the
+generated code size.
+
+--- a/include/linux/filter.h
++++ b/include/linux/filter.h
+@@ -387,7 +387,7 @@ static inline u16 bpf_anc_helper(const s
+ 	case BPF_LD | BPF_W | BPF_ABS:
+ 	case BPF_LD | BPF_H | BPF_ABS:
+ 	case BPF_LD | BPF_B | BPF_ABS:
+-#define BPF_ANCILLARY(CODE)	case SKF_AD_OFF + SKF_AD_##CODE:	\
++#define BPF_ANCILLARY(CODE)	case (__u32)(SKF_AD_OFF + SKF_AD_##CODE):	\
+ 				return BPF_ANC | SKF_AD_##CODE
+ 		switch (ftest->k) {
+ 		BPF_ANCILLARY(PROTOCOL);
+--- a/arch/um/kernel/signal.c
++++ b/arch/um/kernel/signal.c
+@@ -31,7 +31,7 @@ static void handle_signal(struct ksignal
+ 	/* Did we come from a system call? */
+ 	if (PT_REGS_SYSCALL_NR(regs) >= 0) {
+ 		/* If so, check system call restarting.. */
+-		switch (PT_REGS_SYSCALL_RET(regs)) {
++		switch ((long)PT_REGS_SYSCALL_RET(regs)) {
+ 		case -ERESTART_RESTARTBLOCK:
+ 		case -ERESTARTNOHAND:
+ 			PT_REGS_SYSCALL_RET(regs) = -EINTR;
+@@ -78,7 +78,7 @@ static int kern_do_signal(struct pt_regs
+ 	/* Did we come from a system call? */
+ 	if (!handled_sig && (PT_REGS_SYSCALL_NR(regs) >= 0)) {
+ 		/* Restart the system call - no handlers present */
+-		switch (PT_REGS_SYSCALL_RET(regs)) {
++		switch ((long)PT_REGS_SYSCALL_RET(regs)) {
+ 		case -ERESTARTNOHAND:
+ 		case -ERESTARTSYS:
+ 		case -ERESTARTNOINTR:

@@ -14,9 +14,11 @@
 *.o
 *.out
 *.pdf
+*.sav
 *.so
 .*.swp
 *.toc
+*.xz
 *.32
 *.64
 __pycache__
@@ -27,5 +29,7 @@ __pycache__
 /linux/modules/.tmp_versions/
 /linux/nolibc/include/
 /verification/.frama-c/
-/verification/*.sav
 /verification/*.script
+/verification/linux/.pc/
+/verification/linux/out-linux
+/verification/linux/src-linux-*/

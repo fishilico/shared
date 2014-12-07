@@ -1,0 +1,115 @@
+Define specific macros for Frama-C
+
+--- a/include/linux/bug.h
++++ b/include/linux/bug.h
+@@ -13,6 +13,15 @@ enum bug_trap_type {
+ struct pt_regs;
+ 
+ #ifdef __CHECKER__
++#ifdef __FRAMAC__
++#define BUILD_BUG_ON_NOT_POWER_OF_2(n) BUILD_BUG_ON((n) == 0 || (((n) & ((n) - 1)) != 0))
++#define BUILD_BUG_ON_ZERO(e) (0)
++#define BUILD_BUG_ON_NULL(e) (NULL)
++#define BUILD_BUG_ON_INVALID(e) ((void)0)
++#define BUILD_BUG_ON_MSG(cond, msg) BUG_ON(cond)
++#define BUILD_BUG_ON(condition) BUG_ON(condition)
++#define BUILD_BUG() BUG()
++#else /* __FRAMAC__ */
+ #define BUILD_BUG_ON_NOT_POWER_OF_2(n) (0)
+ #define BUILD_BUG_ON_ZERO(e) (0)
+ #define BUILD_BUG_ON_NULL(e) ((void*)0)
+@@ -20,6 +29,7 @@ struct pt_regs;
+ #define BUILD_BUG_ON_MSG(cond, msg) (0)
+ #define BUILD_BUG_ON(condition) (0)
+ #define BUILD_BUG() (0)
++#endif /* __FRAMAC__ */
+ #else /* __CHECKER__ */
+ 
+ /* Force a compilation error if a constant expression is not a power of 2 */
+--- a/include/linux/compiler.h
++++ b/include/linux/compiler.h
+@@ -3,7 +3,7 @@
+ 
+ #ifndef __ASSEMBLY__
+ 
+-#ifdef __CHECKER__
++#if defined(__CHECKER__) && !defined(__FRAMAC__)
+ # define __user		__attribute__((noderef, address_space(1)))
+ # define __kernel	__attribute__((address_space(0)))
+ # define __safe		__attribute__((safe))
+@@ -70,6 +70,20 @@ extern void __chk_io_ptr(const volatile
+ #include <linux/compiler-clang.h>
+ #endif
+ 
++/* Frama-C doesn't understand ASM nor compiler-specific intrisics */
++#ifdef __FRAMAC__
++/* Borrow code from compiler-intel.h */
++#undef barrier
++#undef RELOC_HIDE
++#undef OPTIMIZER_HIDE_VAR
++
++#define barrier() (void)0
++#define RELOC_HIDE(ptr, off)                                   \
++  ({ unsigned long __ptr;                                      \
++     __ptr = (unsigned long) (ptr);                            \
++    (typeof(ptr)) (__ptr + (off)); })
++#define OPTIMIZER_HIDE_VAR(var) barrier()
++#endif /* __FRAMAC__ */
+ /*
+  * Generic compiler-dependent macros required for kernel
+  * build go below this comment. Actual compiler/compiler version
+--- a/init/do_mounts.c
++++ b/init/do_mounts.c
+@@ -3,7 +3,7 @@
+  * to be __user pointers not __kernel pointers.  To limit the sparse
+  * noise, turn off sparse checking for this file.
+  */
+-#ifdef __CHECKER__
++#if defined(__CHECKER__) && !defined(__FRAMAC__)
+ #undef __CHECKER__
+ #warning "Sparse checking disabled for this file"
+ #endif
+--- a/init/do_mounts_initrd.c
++++ b/init/do_mounts_initrd.c
+@@ -3,7 +3,7 @@
+  * to be __user pointers not __kernel pointers.  To limit the sparse
+  * noise, turn off sparse checking for this file.
+  */
+-#ifdef __CHECKER__
++#if defined(__CHECKER__) && !defined(__FRAMAC__)
+ #undef __CHECKER__
+ #warning "Sparse checking disabled for this file"
+ #endif
+--- a/init/do_mounts_md.c
++++ b/init/do_mounts_md.c
+@@ -3,7 +3,7 @@
+  * to be __user pointers not __kernel pointers.  To limit the sparse
+  * noise, turn off sparse checking for this file.
+  */
+-#ifdef __CHECKER__
++#if defined(__CHECKER__) && !defined(__FRAMAC__)
+ #undef __CHECKER__
+ #warning "Sparse checking disabled for this file"
+ #endif
+--- a/init/do_mounts_rd.c
++++ b/init/do_mounts_rd.c
+@@ -3,7 +3,7 @@
+  * to be __user pointers not __kernel pointers.  To limit the sparse
+  * noise, turn off sparse checking for this file.
+  */
+-#ifdef __CHECKER__
++#if defined(__CHECKER__) && !defined(__FRAMAC__)
+ #undef __CHECKER__
+ #warning "Sparse checking disabled for this file"
+ #endif
+--- a/init/initramfs.c
++++ b/init/initramfs.c
+@@ -3,7 +3,7 @@
+  * to be __user pointers not __kernel pointers.  To limit the sparse
+  * noise, turn off sparse checking for this file.
+  */
+-#ifdef __CHECKER__
++#if defined(__CHECKER__) && !defined(__FRAMAC__)
+ #undef __CHECKER__
+ #warning "Sparse checking disabled for this file"
+ #endif

@@ -13,8 +13,8 @@ SUBDIRS := $(SUBMAKEFILES:%/Makefile=%)
 include ./linux-flags.mk
 include ./windows-flags.mk
 
-# Never build linux/modules from the main Makefile
-SUBDIRS_BLACKLIST = linux/modules%
+# Never build some specific sub-projects from the main Makefile
+SUBDIRS_BLACKLIST = linux/modules% verification/linux%
 
 # Linux check
 ifneq ($(shell $(UNAME) -s 2>/dev/null),Linux)

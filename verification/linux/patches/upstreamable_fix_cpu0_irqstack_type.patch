@@ -1,0 +1,20 @@
+cpu0_irqstack is defined as union thread_union in arch/um/kernel/um_arch.c
+so copy this declaration.  This should probably be put into a header file...
+
+--- a/arch/um/kernel/skas/process.c
++++ b/arch/um/kernel/skas/process.c
+@@ -49,12 +49,12 @@ static int __init start_kernel_proc(void
+ 
+ extern int userspace_pid[];
+ 
+-extern char cpu0_irqstack[];
++extern union thread_union cpu0_irqstack;
+ 
+ int __init start_uml(void)
+ {
+ 	stack_protections((unsigned long) &cpu0_irqstack);
+-	set_sigstack(cpu0_irqstack, THREAD_SIZE);
++	set_sigstack(cpu0_irqstack.stack, THREAD_SIZE);
+ 	if (proc_mm) {
+ 		userspace_pid[0] = start_userspace(0);
+ 		if (userspace_pid[0] < 0) {

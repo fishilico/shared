@@ -1,0 +1,100 @@
+Remove return statement in void functions
+
+Frama-C warning:
+
+  [kernel] warning: Return statement with a value in function returning void
+
+--- a/drivers/tty/tty_ldisc.c
++++ b/drivers/tty/tty_ldisc.c
+@@ -322,7 +322,7 @@ tty_ldisc_lock_nested(struct tty_struct
+ 
+ static inline void tty_ldisc_unlock(struct tty_struct *tty)
+ {
+-	return ldsem_up_write(&tty->ldisc_sem);
++	ldsem_up_write(&tty->ldisc_sem);
+ }
+ 
+ static int __lockfunc
+--- a/drivers/tty/tty_mutex.c
++++ b/drivers/tty/tty_mutex.c
+@@ -29,7 +29,7 @@ static void __lockfunc tty_lock_nested(s
+ 
+ void __lockfunc tty_lock(struct tty_struct *tty)
+ {
+-	return tty_lock_nested(tty, TTY_MUTEX_NORMAL);
++	tty_lock_nested(tty, TTY_MUTEX_NORMAL);
+ }
+ EXPORT_SYMBOL(tty_lock);
+ 
+--- a/fs/fs-writeback.c
++++ b/fs/fs-writeback.c
+@@ -1320,7 +1320,7 @@ EXPORT_SYMBOL(writeback_inodes_sb_nr);
+  */
+ void writeback_inodes_sb(struct super_block *sb, enum wb_reason reason)
+ {
+-	return writeback_inodes_sb_nr(sb, get_nr_dirty_pages(), reason);
++	writeback_inodes_sb_nr(sb, get_nr_dirty_pages(), reason);
+ }
+ EXPORT_SYMBOL(writeback_inodes_sb);
+ 
+--- a/include/linux/clockchips.h
++++ b/include/linux/clockchips.h
+@@ -170,7 +170,7 @@ extern void clockevents_handle_noop(stru
+ static inline void
+ clockevents_calc_mult_shift(struct clock_event_device *ce, u32 freq, u32 minsec)
+ {
+-	return clocks_calc_mult_shift(&ce->mult, &ce->shift, NSEC_PER_SEC,
++	clocks_calc_mult_shift(&ce->mult, &ce->shift, NSEC_PER_SEC,
+ 				      freq, minsec);
+ }
+ 
+--- a/include/linux/crypto.h
++++ b/include/linux/crypto.h
+@@ -494,7 +494,7 @@ void crypto_destroy_tfm(void *mem, struc
+ 
+ static inline void crypto_free_tfm(struct crypto_tfm *tfm)
+ {
+-	return crypto_destroy_tfm(tfm, tfm);
++	crypto_destroy_tfm(tfm, tfm);
+ }
+ 
+ int alg_test(const char *driver, const char *alg, u32 type, u32 mask);
+--- a/include/linux/device.h
++++ b/include/linux/device.h
+@@ -445,7 +445,7 @@ static inline int __must_check class_cre
+ static inline void class_remove_file(struct class *class,
+ 				     const struct class_attribute *attr)
+ {
+-	return class_remove_file_ns(class, attr, NULL);
++	class_remove_file_ns(class, attr, NULL);
+ }
+ 
+ /* Simple class attribute that is just a static string */
+--- a/include/linux/percpu-refcount.h
++++ b/include/linux/percpu-refcount.h
+@@ -85,7 +85,7 @@ void __percpu_ref_kill_expedited(struct
+  */
+ static inline void percpu_ref_kill(struct percpu_ref *ref)
+ {
+-	return percpu_ref_kill_and_confirm(ref, NULL);
++	percpu_ref_kill_and_confirm(ref, NULL);
+ }
+ 
+ #define PCPU_REF_DEAD		1
+--- a/kernel/time/clocksource.c
++++ b/kernel/time/clocksource.c
+@@ -671,12 +671,12 @@ static void __clocksource_select(bool sk
+  */
+ static void clocksource_select(void)
+ {
+-	return __clocksource_select(false);
++	__clocksource_select(false);
+ }
+ 
+ static void clocksource_select_fallback(void)
+ {
+-	return __clocksource_select(true);
++	__clocksource_select(true);
+ }
+ 
+ #else /* !CONFIG_ARCH_USES_GETTIMEOFFSET */
