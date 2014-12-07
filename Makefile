@@ -25,16 +25,16 @@ endif
 ifneq ($(shell $(WINCC) -E windows/helloworld.c > /dev/null 2>&1 && echo y),y)
 SUBDIRS_BLACKLIST += windows%
 else
-# Do not compile linux and mbr programs on Windows or with MinGW
-SUBDIRS_BLACKLIST += linux% mbr%
+# Do not compile linux and boot-related programs on Windows or with MinGW
+SUBDIRS_BLACKLIST += linux% boot%
 endif
 
 # MBR check: $(CC) needs to be able to produce 16-bit x86
 # Syslinux MBR check: $(CC) needs to support some flags
 ifneq ($(shell $(CC) -Werror -E -m16 -march=i386 - < /dev/null > /dev/null 2>&1 && echo y),y)
-SUBDIRS_BLACKLIST += mbr%
+SUBDIRS_BLACKLIST += boot/mbr%
 else ifneq ($(shell $(CC) -Werror -E -falign-functions=0 - < /dev/null > /dev/null 2>&1 && echo y),y)
-SUBDIRS_BLACKLIST += mbr/syslinux-mbr
+SUBDIRS_BLACKLIST += boot/mbr/syslinux-mbr
 endif
 
 # Test PDF-LaTeX availability
