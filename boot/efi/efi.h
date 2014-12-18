@@ -22,11 +22,22 @@
 #    error Unsupported architecture
 #endif
 
-#define EFI_LOAD_ERROR  EFIERR(1)
-#define EFI_INVALID_PARAMETER EFIERR(2)
-#define EFI_UNSUPPORTED EFIERR(3)
+#define EFI_ERROR(a) (((INTN) (a)) < 0)
+#define EFI_SUCCESS             0
+#define EFI_LOAD_ERROR          EFIERR(1)
+#define EFI_INVALID_PARAMETER   EFIERR(2)
+#define EFI_UNSUPPORTED         EFIERR(3)
+#define EFI_BAD_BUFFER_SIZE     EFIERR(4)
+#define EFI_BUFFER_TOO_SMALL    EFIERR(5)
+#define EFI_NOT_READY           EFIERR(6)
+#define EFI_DEVICE_ERROR        EFIERR(7)
+#define EFI_WRITE_PROTECTED     EFIERR(8)
+#define EFI_OUT_OF_RESOURCES    EFIERR(9)
+#define EFI_VOLUME_CORRUPTED    EFIERR(10)
+#define EFI_VOLUME_FULL         EFIERR(11)
 
 typedef void VOID;
+typedef long INTN;
 typedef unsigned long UINTN;
 typedef int8_t INT8;
 typedef int16_t INT16;
@@ -161,24 +172,24 @@ typedef struct _EFI_RUNTIME_SERVICES {
     EFI_TABLE_HEADER Hdr;
 
      EFI_STATUS (EFIAPI *GetTime) (OUT EFI_TIME *Time, OUT EFI_TIME_CAPABILITIES *Capabilities OPTIONAL);
-     EFI_STATUS (EFIAPI *SetTime) (IN EFI_TIME *Time);
+     EFI_STATUS (EFIAPI *SetTime) (IN const EFI_TIME *Time);
      EFI_STATUS (EFIAPI *GetWakeupTime) (OUT BOOLEAN *Enabled, OUT BOOLEAN *Pending, OUT EFI_TIME *Time);
-     EFI_STATUS (EFIAPI *SetWakeupTime) (IN BOOLEAN Enable, IN EFI_TIME *Time OPTIONAL);
+     EFI_STATUS (EFIAPI *SetWakeupTime) (IN BOOLEAN Enable, IN const EFI_TIME *Time OPTIONAL);
 
      EFI_STATUS (EFIAPI *SetVirtualAddressMap) (IN UINTN MemoryMapSize, IN UINTN DescriptorSize,
                                                 IN UINT32 DescriptorVersion, IN EFI_MEMORY_DESCRIPTOR *VirtualMap);
      EFI_STATUS (EFIAPI *ConvertPointer) (IN UINTN DebugDisposition, IN OUT VOID **Address);
 
-     EFI_STATUS (EFIAPI *GetVariable) (IN CHAR16 *VariableName, IN EFI_GUID *VendorGuid,
+     EFI_STATUS (EFIAPI *GetVariable) (IN const CHAR16 *VariableName, IN const EFI_GUID *VendorGuid,
                                        OUT UINT32 *Attributes OPTIONAL, IN OUT UINTN *DataSize, OUT VOID *Data);
      EFI_STATUS (EFIAPI *GetNextVariableName) (IN OUT UINTN *VariableNameSize, IN OUT CHAR16 *VariableName,
                                                IN OUT EFI_GUID *VendorGuid);
-     EFI_STATUS (EFIAPI *SetVariable) (IN CHAR16 *VariableName, IN EFI_GUID *VendorGuid, IN UINT32 Attributes,
+     EFI_STATUS (EFIAPI *SetVariable) (IN const CHAR16 *VariableName, IN const EFI_GUID *VendorGuid, IN UINT32 Attributes,
                                        IN UINTN DataSize, IN VOID *Data);
 
      EFI_STATUS (EFIAPI *GetNextHighMonotonicCount) (OUT UINT32 *HighCount);
      EFI_STATUS (EFIAPI *ResetSystem) (IN EFI_RESET_TYPE ResetType, IN EFI_STATUS ResetStatus, IN UINTN DataSize,
-                                       IN CHAR16 *ResetData OPTIONAL);
+                                       IN const CHAR16 *ResetData OPTIONAL);
 } EFI_RUNTIME_SERVICES;
 
 /* EFI_BOOT_SERVICES definitions */
@@ -330,26 +341,64 @@ typedef struct _EFI_SYSTEM_TABLE {
     EFI_CONFIGURATION_TABLE *ConfigurationTable;
 } EFI_SYSTEM_TABLE;
 
+#define EFI_IMAGE_INFORMATION_REVISION 0x1000
+typedef struct {
+    UINT32 Revision;
+    EFI_HANDLE ParentHandle;
+    struct _EFI_SYSTEM_TABLE *SystemTable;
+
+    EFI_HANDLE DeviceHandle;
+    EFI_DEVICE_PATH *FilePath;
+    VOID *Reserved;
+
+    UINT32 LoadOptionsSize;
+    VOID *LoadOptions;
+
+    VOID *ImageBase;
+    UINT64 ImageSize;
+    EFI_MEMORY_TYPE ImageCodeType;
+    EFI_MEMORY_TYPE ImageDataType;
+
+    EFI_STATUS (EFIAPI *Unload) (IN EFI_HANDLE ImageHandle);
+} EFI_LOADED_IMAGE;
+
+
 /* efi_call */
 #if defined __x86_64__
-/* rcx = arg1
- * rdx = arg2
- * r8 = arg3
- * r9 = arg4
+/* Put the arguments of the EFI call in the following places:
+ * * arg1 in rcx
+ * * arg2 in rdx
+ * * arg3 in r8 = arg3
+ * * arg4 in r9 = arg4
+ * * arg5 in 32(%rsp)
+ * * arg6 in 40(%rsp)
  * allocate on stack enough space for these arguments, so that 8(%rsp) is
  * aligned to 16 (ELF convention) => 40 bytes (0x28)
  */
-static UINT64 _efi_call4(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg3, UINT64 arg4)
+static inline UINT64 _efi_call4(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg3, UINT64 arg4)
 {
     UINT64 result;
     register long r9 __asm__("r9") = arg4;
     register long r8 __asm__("r8") = arg3;
-    __asm__ volatile ("subq $0x28, %%rsp ; call *%0 ; addq $0x28, %%rsp"
+    __asm__ volatile ("subq $0x28, %%rsp ; call *%1 ; addq $0x28, %%rsp"
         : "=a" (result)
-        : "0" (func), "c" (arg1), "d" (arg2), "r" (r8), "r" (r9)
+        : "r" (func), "c" (arg1), "d" (arg2), "r" (r8), "r" (r9)
         : "cc", "memory");
     return result;
 }
+static inline UINT64 _efi_call5(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg3, UINT64 arg4, UINT64 arg5)
+{
+    UINT64 result;
+    register long r9 __asm__("r9") = arg4;
+    register long r8 __asm__("r8") = arg3;
+    __asm__ volatile ("subq $0x28, %%rsp ; mov %6, 0x20(%%rsp) ; call *%1 ; addq $0x28, %%rsp"
+        : "=a" (result)
+        : "r" (func), "c" (arg1), "d" (arg2), "r" (r8), "r" (r9), "g" (arg5)
+        : "cc", "memory");
+    return result;
+}
+#define efi_call5(func, arg1, arg2, arg3, arg4, arg5) _efi_call5((func), \
+    (UINT64)(arg1), (UINT64)(arg2), (UINT64)(arg3), (UINT64)(arg4), (UINT64)(arg5))
 #define efi_call4(func, arg1, arg2, arg3, arg4) _efi_call4((func), \
     (UINT64)(arg1), (UINT64)(arg2), (UINT64)(arg3), (UINT64)(arg4))
 #define efi_call3(func, arg1, arg2, arg3) efi_call4((func), (arg1), (arg2), (arg3), 0)
@@ -359,6 +408,7 @@ static UINT64 _efi_call4(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg3, UINT
 
 #elif defined __i386__
 /* No wrapper, use the stack to pass parameters */
+#define efi_call5(func, arg1, arg2, arg3, arg4, arg5) ((func)((arg1), (arg2), (arg3), (arg4), (arg5)))
 #define efi_call4(func, arg1, arg2, arg3, arg4) ((func)((arg1), (arg2), (arg3), (arg4)))
 #define efi_call3(func, arg1, arg2, arg3) ((func)((arg1), (arg2), (arg3)))
 #define efi_call2(func, arg1, arg2) ((func)((arg1), (arg2)))
@@ -373,9 +423,15 @@ static UINT64 _efi_call4(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg3, UINT
 extern EFI_SYSTEM_TABLE *ST;
 extern EFI_BOOT_SERVICES *BS;
 extern EFI_RUNTIME_SERVICES *RT;
+extern EFI_MEMORY_TYPE PoolAllocationType;
+
+extern EFI_GUID LoadedImageProtocol;
 
 EFI_STATUS efi_main(EFI_HANDLE image, EFI_SYSTEM_TABLE *systab);
 
-void output_string(const CHAR16 *text);
+void print(const CHAR16 *text);
+void waitkey(BOOLEAN message);
+void * pool_alloc(UINTN size);
+void pool_free(void *buffer);
 
 #endif /* EFI_H */

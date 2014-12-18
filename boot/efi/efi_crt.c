@@ -18,13 +18,56 @@ extern const Elf_Dyn *_DYNAMIC;
 EFI_SYSTEM_TABLE *ST;
 EFI_BOOT_SERVICES *BS;
 EFI_RUNTIME_SERVICES *RT;
+EFI_MEMORY_TYPE PoolAllocationType;
+
+EFI_GUID LoadedImageProtocol = {0x5B1B31A1, 0x9562, 0x11d2, {0x8E, 0x3F, 0x00, 0xA0, 0xC9, 0x69, 0x72, 0x3B}};
 
 /**
  * Write a string to the output interface
  */
-void output_string(const CHAR16 *text)
+void print(const CHAR16 *text)
 {
     efi_call2(ST->ConOut->OutputString, ST->ConOut, text);
+}
+
+/**
+ * Wait for a keypress
+ */
+void waitkey(BOOLEAN message)
+{
+    UINTN EventIndex;
+    EFI_INPUT_KEY key;
+
+    if (message) {
+        print(L"Press a key to continue.\n");
+    }
+
+    efi_call3(BS->WaitForEvent, 1, &ST->ConIn->WaitForKey, &EventIndex);
+    efi_call2(ST->ConIn->ReadKeyStroke, ST->ConIn, &key);
+}
+
+/**
+ * Allocate memory in current pool
+ */
+void * pool_alloc(UINTN size)
+{
+    void *buffer = NULL;
+    EFI_STATUS status;
+
+    status = efi_call3(BS->AllocatePool, PoolAllocationType, size, &buffer);
+    if (EFI_ERROR(status) || !buffer) {
+        print(L"Unable to allocate enough bytes in pool\n");
+        return NULL;
+    }
+    return buffer;
+}
+
+/**
+ * Free allocated memory
+ */
+void pool_free(void *buffer)
+{
+    efi_call1(BS->FreePool, buffer);
 }
 
 /**
@@ -34,6 +77,8 @@ static __attribute__ ((used))
 EFI_STATUS crt_efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 {
     unsigned int i;
+    EFI_STATUS status;
+    EFI_LOADED_IMAGE *LoadedImage;
 
     /* Initialize global state */
     ST = SystemTable;
@@ -48,14 +93,23 @@ EFI_STATUS crt_efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
             case DT_REL:
             case DT_RELSZ:
             case DT_RELENT:
-                output_string(L"Error: found REL relocation. Aborting\n");
+                print(L"Error: found REL relocation. Aborting\n");
                 return EFI_LOAD_ERROR;
 
             case DT_RELA:
             case DT_RELASZ:
             case DT_RELAENT:
-                output_string(L"Error: found RELA relocation. Aborting\n");
+                print(L"Error: found RELA relocation. Aborting\n");
                 return EFI_LOAD_ERROR;
+        }
+    }
+
+    /* Initialize PoolAllocationType */
+    if (ImageHandle) {
+        status = efi_call3(BS->HandleProtocol, ImageHandle,
+                           &LoadedImageProtocol, (VOID **)&LoadedImage);
+        if (!EFI_ERROR(status)) {
+            PoolAllocationType = LoadedImage->ImageDataType;
         }
     }
 
