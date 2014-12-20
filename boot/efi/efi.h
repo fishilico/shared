@@ -408,7 +408,12 @@ static inline UINT64 _efi_call4(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg
     __asm__ volatile ("subq $0x28, %%rsp ; call *%1 ; addq $0x28, %%rsp"
         : "=a" (result)
         : "r" (func), "c" (arg1), "d" (arg2), "r" (r8), "r" (r9)
+#if defined(__GNUC__) && !defined(__clang__)
+        /* GCC doesn't like clobbering the parameter registers */
+        : "cc", "memory", "%r10", "%r11");
+#else
         : "cc", "memory", "%rcx", "%rdx", "%r8", "%r9", "%r10", "%r11");
+#endif
     return result;
 }
 static inline UINT64 _efi_call5(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg3, UINT64 arg4, UINT64 arg5)
@@ -420,7 +425,11 @@ static inline UINT64 _efi_call5(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg
     __asm__ volatile ("subq $0x28, %%rsp ; movq %6, 0x20(%%rsp) ; call *%1 ; addq $0x28, %%rsp"
         : "=a" (result)
         : "r" (func), "c" (arg1), "d" (arg2), "r" (r8), "r" (r9), "r" (arg5)
+#if defined(__GNUC__) && !defined(__clang__)
+        : "cc", "memory", "%r10", "%r11");
+#else
         : "cc", "memory", "%rcx", "%rdx", "%r8", "%r9", "%r10", "%r11");
+#endif
     return result;
 }
 #define efi_call5(func, arg1, arg2, arg3, arg4, arg5) _efi_call5((func), \
