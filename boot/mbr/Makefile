@@ -1,8 +1,7 @@
-# Use gcc as clang doesn't support 16-bit code yet
-CC = gcc
-LD = ld
-CHMOD = chmod
-OBJCOPY = objcopy
+CC ?= cc
+LD ?= ld
+CHMOD ?= chmod
+OBJCOPY ?= objcopy
 
 CFLAGS = -Wall -fno-stack-protector -fno-exceptions -fvisibility=hidden
 SFLAGS = $(CFLAGS)
@@ -20,10 +19,10 @@ BINARIES := $(SOURCES:%.S=%.bin)
 all: $(BINARIES)
 
 %.o: %.S
-	$(CC) $(SFLAGS) -c -o $@ $<
+	$(CC) -m16 -march=i386 $(SFLAGS) -c -o $@ $<
 
 %.elf: %.o boot-record.ld
-	$(LD) $(LDFLAGS) -T boot-record.ld -o $@ $<
+	$(LD) -m elf_i386 $(LDFLAGS) -T boot-record.ld -o $@ $<
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
