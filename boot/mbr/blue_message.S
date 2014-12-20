@@ -54,7 +54,7 @@ start2:
 	/* Print string */
 	movw	$0x1301, %ax
 	movw	$0x000f, %bx /* page 0, color white */
-	movw	message_len, %cx
+	movw	$message_len, %cx
 	movw	$message, %bp
 	int	$0x10
 
@@ -76,8 +76,4 @@ hang:
 	.section ".bootdata", "a"
 message:
 	.ascii	"The world is blue!\r\n\nPress a key to continue...\n"
-	/* Hack to make the string displays correctly on QEmu with Seabios,
-	 * where "cx=65" displays 78 characters */
-	.space (65 - (. - message)), '\r'
 message_len = (. - message)
-	.space (78 - message_len), '\r'
