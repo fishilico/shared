@@ -1,21 +1,30 @@
-CC = cc
-LD = ld
-OBJCOPY = objcopy
-UNAME = uname
+CC ?= cc
+LD ?= ld
+OBJCOPY ?= objcopy
+UNAME ?= uname
 
+TARGET_TRIPLET := $(shell $(CC) -dumpmachine)
+ifneq (,$(findstring i386, $(TARGET_TRIPLET)))
+ARCH := ia32
+else ifneq (,$(findstring i686, $(TARGET_TRIPLET)))
+ARCH := ia32
+else ifneq (,$(findstring x86_64, $(TARGET_TRIPLET)))
+# "gcc -m32 -dumpmachine" prints x86_64-unknown-linux-gnu on x86_64, not i386...
+ARCH := $(shell printf '\#ifdef __x86_64__\nx86_64\n\#else\nia32\n\#endif' |$(CC) -E - |grep '^[^\#]')
+else
 ARCH := $(shell $(UNAME) -m | sed 's,i.86,ia32,')
-LDSCRIPT = $(CURDIR)/elf_$(ARCH)_efi.lds
+endif
 
 CPPFLAGS =
 CFLAGS = -O2 -fPIC -Wall -Wextra \
 	-mno-red-zone \
+	-ffreestanding \
 	-fshort-wchar \
 	-fno-strict-aliasing \
-	-fno-merge-constants \
 	-fno-stack-protector \
 	-fno-exceptions \
 	-fvisibility=hidden
-LDFLAGS = -nostdlib -O1 -T $(LDSCRIPT) -shared -Bsymbolic \
+LDFLAGS = -nostdlib -O1 -T $(CURDIR)/elf_$(ARCH)_efi.lds -shared -Bsymbolic \
 	-as-needed -no-undefined -warn-common -fatal-warnings
 LIBS =
 

@@ -24,17 +24,37 @@
 
 #define EFI_ERROR(a) (((INTN) (a)) < 0)
 #define EFI_SUCCESS             0
-#define EFI_LOAD_ERROR          EFIERR(1)
-#define EFI_INVALID_PARAMETER   EFIERR(2)
-#define EFI_UNSUPPORTED         EFIERR(3)
-#define EFI_BAD_BUFFER_SIZE     EFIERR(4)
-#define EFI_BUFFER_TOO_SMALL    EFIERR(5)
-#define EFI_NOT_READY           EFIERR(6)
-#define EFI_DEVICE_ERROR        EFIERR(7)
-#define EFI_WRITE_PROTECTED     EFIERR(8)
-#define EFI_OUT_OF_RESOURCES    EFIERR(9)
-#define EFI_VOLUME_CORRUPTED    EFIERR(10)
-#define EFI_VOLUME_FULL         EFIERR(11)
+#define EFI_LOAD_ERROR              EFIERR(1)
+#define EFI_INVALID_PARAMETER       EFIERR(2)
+#define EFI_UNSUPPORTED             EFIERR(3)
+#define EFI_BAD_BUFFER_SIZE         EFIERR(4)
+#define EFI_BUFFER_TOO_SMALL        EFIERR(5)
+#define EFI_NOT_READY               EFIERR(6)
+#define EFI_DEVICE_ERROR            EFIERR(7)
+#define EFI_WRITE_PROTECTED         EFIERR(8)
+#define EFI_OUT_OF_RESOURCES        EFIERR(9)
+#define EFI_VOLUME_CORRUPTED        EFIERR(10)
+#define EFI_VOLUME_FULL             EFIERR(11)
+#define EFI_NO_MEDIA                EFIERR(12)
+#define EFI_MEDIA_CHANGED           EFIERR(13)
+#define EFI_NOT_FOUND               EFIERR(14)
+#define EFI_ACCESS_DENIED           EFIERR(15)
+#define EFI_NO_RESPONSE             EFIERR(16)
+#define EFI_NO_MAPPING              EFIERR(17)
+#define EFI_TIMEOUT                 EFIERR(18)
+#define EFI_NOT_STARTED             EFIERR(19)
+#define EFI_ALREADY_STARTED         EFIERR(20)
+#define EFI_ABORTED                 EFIERR(21)
+#define EFI_ICMP_ERROR              EFIERR(22)
+#define EFI_TFTP_ERROR              EFIERR(23)
+#define EFI_PROTOCOL_ERROR          EFIERR(24)
+#define EFI_INCOMPATIBLE_VERSION    EFIERR(25)
+#define EFI_SECURITY_VIOLATION      EFIERR(26)
+#define EFI_CRC_ERROR               EFIERR(27)
+#define EFI_END_OF_MEDIA            EFIERR(28)
+#define EFI_END_OF_FILE             EFIERR(31)
+#define EFI_INVALID_LANGUAGE        EFIERR(32)
+#define EFI_COMPROMISED_DATA        EFIERR(33)
 
 typedef void VOID;
 typedef long INTN;
@@ -374,6 +394,11 @@ typedef struct {
  * * arg6 in 40(%rsp)
  * allocate on stack enough space for these arguments, so that 8(%rsp) is
  * aligned to 16 (ELF convention) => 40 bytes (0x28)
+ *
+ * The following registers are volatile and must be considered destroyed on function calls:
+ *      rax, rcx, rdx, r8, r9, r10, r11
+ * The following registers are nonvolatile and must be saved and restored by a function that uses them:
+ *      rbx, rbp, rdi, rsi, rsp, r12, r13, r14, r15
  */
 static inline UINT64 _efi_call4(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg3, UINT64 arg4)
 {
@@ -383,7 +408,7 @@ static inline UINT64 _efi_call4(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg
     __asm__ volatile ("subq $0x28, %%rsp ; call *%1 ; addq $0x28, %%rsp"
         : "=a" (result)
         : "r" (func), "c" (arg1), "d" (arg2), "r" (r8), "r" (r9)
-        : "cc", "memory");
+        : "cc", "memory", "%rcx", "%rdx", "%r8", "%r9", "%r10", "%r11");
     return result;
 }
 static inline UINT64 _efi_call5(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg3, UINT64 arg4, UINT64 arg5)
@@ -391,10 +416,11 @@ static inline UINT64 _efi_call5(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg
     UINT64 result;
     register long r9 __asm__("r9") = arg4;
     register long r8 __asm__("r8") = arg3;
-    __asm__ volatile ("subq $0x28, %%rsp ; mov %6, 0x20(%%rsp) ; call *%1 ; addq $0x28, %%rsp"
+    /* Note: don't use "g" for arg5 as some compilers might want to use %rsp-relative pointer */
+    __asm__ volatile ("subq $0x28, %%rsp ; movq %6, 0x20(%%rsp) ; call *%1 ; addq $0x28, %%rsp"
         : "=a" (result)
-        : "r" (func), "c" (arg1), "d" (arg2), "r" (r8), "r" (r9), "g" (arg5)
-        : "cc", "memory");
+        : "r" (func), "c" (arg1), "d" (arg2), "r" (r8), "r" (r9), "r" (arg5)
+        : "cc", "memory", "%rcx", "%rdx", "%r8", "%r9", "%r10", "%r11");
     return result;
 }
 #define efi_call5(func, arg1, arg2, arg3, arg4, arg5) _efi_call5((func), \
@@ -429,6 +455,7 @@ extern EFI_GUID LoadedImageProtocol;
 
 EFI_STATUS efi_main(EFI_HANDLE image, EFI_SYSTEM_TABLE *systab);
 
+void *memset(void *s, int c, UINTN n);
 void print(const CHAR16 *text);
 void waitkey(BOOLEAN message);
 void * pool_alloc(UINTN size);

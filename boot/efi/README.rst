@@ -35,3 +35,8 @@ gnu-efi library:
 efitools:
 
 * https://git.kernel.org/cgit/linux/kernel/git/jejb/efitools.git/tree/ Git tree
+
+MSDN:
+
+* http://msdn.microsoft.com/en-us/library/ms235286%28v=vs.120%29.aspx
+  Overview of x64 Calling Conventions (UEFI API convention on x86_64)

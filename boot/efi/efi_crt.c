@@ -23,6 +23,19 @@ EFI_MEMORY_TYPE PoolAllocationType;
 EFI_GUID LoadedImageProtocol = {0x5B1B31A1, 0x9562, 0x11d2, {0x8E, 0x3F, 0x00, 0xA0, 0xC9, 0x69, 0x72, 0x3B}};
 
 /**
+ * Implement some routines needed by the compiler
+ */
+void *memset(void *s, int c, UINTN n)
+{
+    UINT8 *bytes = s;
+
+    while (n--) {
+        *(bytes++) = c;
+    }
+    return s;
+}
+
+/**
  * Write a string to the output interface
  */
 void print(const CHAR16 *text)
