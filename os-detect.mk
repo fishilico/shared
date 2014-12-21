@@ -7,7 +7,7 @@ TOPDIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 ifeq ($(OS), Windows_NT)
 include $(TOPDIR)windows-flags.mk
-CC ?= $(WINCC)
+CC := $(WINCC)
 
 # Don't use wide characters
 CPPFLAGS := $(filter-out -D_UNICODE, $(CPPFLAGS))
