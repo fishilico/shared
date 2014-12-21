@@ -1,5 +1,6 @@
 obj-m += cpu_x86.o
 obj-m += hello_world.o
+obj-m += mmap_file.o
 obj-m += proc_setroot.o
 
 # Uncomment to retrieve the prepropressor output
