@@ -51,14 +51,16 @@ French blogs
 Code repositories
 -----------------
 
+* https://sourceware.org/git/?p=glibc.git;a=shortlog glibc
+* http://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=shortlog GnuPG
+* https://github.com/libressl-portable/portable LibreSSL
 * https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/log/
   Linux
+* http://www.sudo.ws/repos/sudo sudo
 * http://cgit.freedesktop.org/systemd/systemd/log/
   systemd
-* https://github.com/wine-mirror/wine/commits/master Wine
-* https://sourceware.org/git/?p=glibc.git;a=shortlog glibc
 * https://git.kernel.org/cgit/utils/util-linux/util-linux.git/log/ util-linux
-* http://www.sudo.ws/repos/sudo sudo
+* https://github.com/wine-mirror/wine/commits/master Wine
 
 Other
 -----
