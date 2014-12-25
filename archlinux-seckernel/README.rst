@@ -51,10 +51,14 @@ on other architectures. Hence this is changed in the configuration::
 
 SELinux support
 ~~~~~~~~~~~~~~~
-Before 3.13 Arch Linux' kernel doesn't provide SELinux at all
+Since 3.15 Arch Linux kernel doesn't provide any Linux Security Module nor the
+audit subsystem.
 (https://bugs.archlinux.org/task/37578 may improve the situation).
 Therefore following configuration options need to be added to enable SELinux::
 
+    CONFIG_AUDIT=y
+    CONFIG_SECURITY=y
+    CONFIG_SECURITY_NETWORK=y
     CONFIG_SECURITY_SELINUX=y
     CONFIG_SECURITY_SELINUX_BOOTPARAM=y
     CONFIG_SECURITY_SELINUX_DISABLE=y
@@ -67,16 +71,8 @@ Therefore following configuration options need to be added to enable SELinux::
     CONFIG_LSM_MMAP_MIN_ADDR=65536
     CONFIG_DEFAULT_SECURITY_SELINUX=y
 
-Framebuffer Console Decoration Patch
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This kernel also includes fbcondecor patch from Gentoo. More information can be
-found here:
-
-* http://www.mepiscommunity.org/fbcondecor
-* http://wiki.gentoo.org/wiki/Fbsplash
-* https://wiki.archlinux.org/index.php/Fbsplash
-* http://sourceforge.net/projects/fbsplash.berlios/files/
-* https://aur.archlinux.org/packages/fbsplash/
+As these options enable new config fields, ``arch-linux-grsec-selinux`` adds a
+bit more config values to the kernel configuration.
 
 
 Grsecurity runtime configuration

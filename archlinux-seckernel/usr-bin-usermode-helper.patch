@@ -2,11 +2,11 @@ Add /usr/bin to the pathes allowed to contain usermode helpers because /sbin is
 a symlink to this directory on Arch Linux
 --- a/kernel/kmod.c
 +++ b/kernel/kmod.c
-@@ -277,6 +277,7 @@ static int ____call_usermodehelper(void *data)
+@@ -277,6 +277,7 @@ static int ____call_usermodehelper(void
  	   on that copy
  	*/
  	if ((strncmp(sub_info->path, "/sbin/", 6) && strncmp(sub_info->path, "/usr/lib/", 9) &&
 +	     strncmp(sub_info->path, "/usr/bin/", 9) &&
- 	     strncmp(sub_info->path, "/lib/", 5) && strncmp(sub_info->path, "/lib64/", 7)) || strstr(sub_info->path, "..")) {
+ 	     strncmp(sub_info->path, "/lib/", 5) && strncmp(sub_info->path, "/lib64/", 7) &&
+ 	     strcmp(sub_info->path, "/usr/share/apport/apport")) || strstr(sub_info->path, "..")) {
  		printk(KERN_ALERT "grsec: denied exec of usermode helper binary %.950s located outside of /sbin and system library paths\n", sub_info->path);
- 		retval = -EPERM;

@@ -1,40 +1,39 @@
 --- a/PKGBUILD
 +++ b/PKGBUILD
-@@ -48,6 +48,9 @@ source=(
-   $pkgname.preset
-   sysctl.conf
-   module-blacklist.conf
-+  bugon-add-null-timer.patch
-+  usr-bin-usermode-helper.patch
-+  http://dev.gentoo.org/~mpagano/genpatches/trunk/$_basekernel/4200_fbcondecor-0.9.6.patch
- )
+@@ -5,7 +5,7 @@
+ # Contributor: henning mueller <henning@orgizm.net>
+ # Contributor: Thomas Dwyer http://tomd.tel
  
- build() {
-@@ -70,6 +73,11 @@ build() {
-   # http://lkml.org/lkml/2013/12/12/358
-   patch -Np1 -i "$srcdir/known-exploit-detection.patch"
- 
-+  # Add custom patches
-+  patch -Np1 -i "$srcdir/bugon-add-null-timer.patch"
-+  patch -Np1 -i "$srcdir/usr-bin-usermode-helper.patch"
-+  patch -Np1 -i "$srcdir/4200_fbcondecor-0.9.6.patch"
-+
-   cat "${srcdir}/config.${CARCH}" > ./.config
- 
-   if [ "${_kernelname}" != "" ]; then
-@@ -329,9 +337,12 @@ sha256sums=('4d5e5eee5f276424c32e9591f1b
-             '074fdf3079b943540918d487ded1a13087b9a31f07feddef03fcf1bbb90f1091'
-             'd615d17bd5d3c51bd6872b5e1f97e847e6a53942902cb6cecb57661537bd64f7'
-             'a1675f0befa71f49fa5f17bedc83625a4105d7bc437e567662ad3d2b4c0f37de'
--            'ba4eeaa2ac1d263ec4ae2c4274ce81e3a79a98055eb63609dd106e1cc66aaccc'
--            '14aa11166d18651ed7a376022b2f701bf1a9589fb91c1e53c0d4e909b37d998d'
-+            '57e02d262c4ed0d6b2093b8db678f5ea1a31f10b55d74b9af65ea5767b31a0be'
-+            'db38c6e1259dc31c6452ad265dfe2d3c5fbd84ec2740c9d45cf582d31d718a31'
-             '305542cb76d1487dc97015316a8a867900b3640c16ab9c8798f39233259b329d'
+-pkgbase=linux-grsec
++pkgbase=linux-grsec-selinux
+ _srcname=linux-3.17
+ _pkgver=3.17.7
+ _grsecver=3.0
+@@ -29,6 +29,7 @@ source=("https://www.kernel.org/pub/linu
+         # standard config files for mkinitcpio ramdisk
+         'linux.preset'
+         'change-default-console-loglevel.patch'
++        'usr-bin-usermode-helper.patch'
+         )
+ sha256sums=('f5153ec93c5fcd41b247950e6a9bcbc63fa87beafd112c133a622439a0f76251'
+             'SKIP'
+@@ -39,7 +40,8 @@ sha256sums=('f5153ec93c5fcd41b247950e6a9
+             '6b74757f23262d567f5880c71ce1a154da7338da38ea305b0dd19b95bb45f336'
+             '9569db95150b09ca393e9cd5008c4a9e873f0db84bf11202f8ca61bf30c6238c'
              'ca7e718375b3790888756cc0a64a7500cd57dddb9bf7e10a0df22c860d91f74d'
-             'f1a770e2a769f07f2fbb63d18bd0f2bb319d080149643b97503ec39c5df1b90d'
--            '50e9e4ce335bae3787aa6b28c535d32035d39803387d17b67a05dc0589606c8f')
-+            '50e9e4ce335bae3787aa6b28c535d32035d39803387d17b67a05dc0589606c8f'
-+            'SKIP'
-+            'SKIP'
-+            'ac7f436b0a20fa61662d783867f9aa69152d8ae04b3548cbb063c7c9112a0a4d')
+-            '1256b241cd477b265a3c2d64bdc19ffe3c9bbcee82ea3994c590c2c76e767d99')
++            '1256b241cd477b265a3c2d64bdc19ffe3c9bbcee82ea3994c590c2c76e767d99'
++            'SKIP')
+ validpgpkeys=(
+               'ABAF11C65A2970B130ABE3C479BE3E4300411886' # Linux Torvalds
+               '647F28654894E3BD457199BE38DBBDC86092693E' # Greg Kroah-Hartman
+@@ -66,6 +68,9 @@ prepare() {
+   patch -Np1 -i "$srcdir/$_grsec_patch"
+   rm localversion-grsec
+ 
++  # Add custom patch
++  patch -Np1 -i "$srcdir/usr-bin-usermode-helper.patch"
++
+   if [ "${CARCH}" = "x86_64" ]; then
+     cat "${srcdir}/config.x86_64" > ./.config
+   else
