@@ -58,6 +58,8 @@ class RandomAddress(object):
 
         xmin = hex(self.and_bits)[2:]
         xmax = hex(self.or_bits)[2:]
+        if len(xmin) < len(xmax):
+            xmin = '0' * (len(xmax) - len(xmin)) + xmin
         xmask = [x if x == y else 'X' for x, y in zip(xmin, xmax)]
 
         # Find out "weak" random bits
