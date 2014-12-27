@@ -48,6 +48,7 @@ EXAMPLES_UTF8 = [
     b'\xef\xbf\xbd',  # U+FFFD replacement character
     b'\xf0\x9f\x90\xa7',  # U+1F427 penguin
     b'\xf0\x9f\x96\x92',  # U+1F592 reversed thumbs up sign
+    b'\xf0\x9f\x98\x8a',  # U+1F60A smiling face with smiling eyes
 ]
 
 
