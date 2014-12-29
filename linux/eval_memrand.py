@@ -7,6 +7,7 @@ interesting memory regions like stack, vDSO...
 It agregates the addresses to evaluate their randomness.
 """
 import argparse
+import re
 import subprocess
 import sys
 
@@ -127,7 +128,7 @@ def main(argv=None):
             elif not has_vdso and path == '[vdso]':
                 vdso.add(addr1)
                 has_vdso = True
-            elif not has_libc and '/lib/libc' in path:
+            elif not has_libc and re.match(r'.*/lib.*/libc', path):
                 libc.add(addr1)
                 has_libc = True
 
