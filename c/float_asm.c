@@ -9,6 +9,8 @@
  * * https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/ieee754/ieee754.h;hb=HEAD
  *   (ieee754_float and ieee754_double definitions)
  * * http://csapp.cs.cmu.edu/public/waside/waside-x87.pdf
+ * * https://courses.engr.illinois.edu/ece390/books/artofasm/CH14/CH14-1.html
+ *  (Art of Assembly Language, "Floating Point Arithmetic")
  */
 #include <assert.h>
 #include <inttypes.h>
