@@ -41,6 +41,7 @@ Blogs
 * http://astr0baby.wordpress.com/ Astrobaby's random thoughts
 * http://kutioo.blogspot.fr/ kutio's blog
   (exploitation, reverse engineering, cryptography, lattices, liblll, knapsack)
+* http://hackaday.com/ Hackaday
 
 French blogs
 ------------
