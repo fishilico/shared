@@ -20,8 +20,8 @@ static const char *const gdt_segment_index_desc[16] = {
     "krnl CS", /* GDT_ENTRY_KERNEL_CS = 2 */
     "krnl DS", /* GDT_ENTRY_KERNEL_DS = 3 */
     "user CS32", /* GDT_ENTRY_DEFAULT_USER32_CS = 4 */
-    "user CS", /* GDT_ENTRY_DEFAULT_USER_CS = 5 */
-    "user DS", /* GDT_ENTRY_DEFAULT_USER_DS = 6 */
+    "user DS", /* GDT_ENTRY_DEFAULT_USER_DS = 5 */
+    "user CS", /* GDT_ENTRY_DEFAULT_USER_CS = 6 */
     NULL,
     "TSS1", "TSS2", /* GDT_ENTRY_TSS = 8 */
     "LDT1", "LDT2", /* GDT_ENTRY_LDT = 10 */
@@ -29,16 +29,22 @@ static const char *const gdt_segment_index_desc[16] = {
     "percpu", /* GDT_ENTRY_PER_CPU = 15 */
 };
 #    elif defined(__i386__)
+#       include <asm/ldt.h>
+#       include <linux/unistd.h>
+#       include <unistd.h>
+/* A 32-bit compiled program sees 64-bit segment indexes when run on a 64-bit kernel.
+ * Therefore show information for both 32- and 64-bit x86 architectures here
+ */
 static const char *const gdt_segment_index_desc[32] = {
-    NULL, NULL, NULL, NULL, "x64 user CS32", "x64 user CS",
-    "x86 TLS1/x64 user DS", "TLS2", "TLS3", /* GDT_ENTRY_TLS_MIN = 6,  GDT_ENTRY_TLS_MAX = 8 */
+    NULL, NULL, NULL, NULL, "x64 user CS32", "x64 user DS",
+    "x86 TLS1 or x64 user CS", "TLS2", "TLS3", /* GDT_ENTRY_TLS_MIN = 6,  GDT_ENTRY_TLS_MAX = 8 */
     NULL, NULL, NULL,
-    "x86 krnl CS/x64 TLS1", /* GDT_ENTRY_KERNEL_CS = 12 */
-    "krnl DS", /* GDT_ENTRY_KERNEL_DS = 13 */
-    "user CS", /* GDT_ENTRY_DEFAULT_USER_CS = 14 */
-    "x86 user DS/x64 percpu", /* GDT_ENTRY_DEFAULT_USER_DS = 15 */
-    "TSS", /* GDT_ENTRY_TSS = 16 */
-    "LDT", /* GDT_ENTRY_LDT = 17 */
+    "x86 krnl CS or x64 TLS1", /* GDT_ENTRY_KERNEL_CS = 12 */
+    "x86 krnl DS", /* GDT_ENTRY_KERNEL_DS = 13 */
+    "x86 user CS", /* GDT_ENTRY_DEFAULT_USER_CS = 14 */
+    "x86 user DS or x64 percpu", /* GDT_ENTRY_DEFAULT_USER_DS = 15 */
+    "x86 TSS", /* GDT_ENTRY_TSS = 16 */
+    "x86 LDT", /* GDT_ENTRY_LDT = 17 */
     NULL, NULL, NULL, NULL, NULL, /* GDT_ENTRY_PNPBIOS_BASE = 18 */
     NULL, NULL, NULL, /* APMBIOS_BASE = 23 */
     "espfix", /* GDT_ENTRY_ESPFIX_SS = 26 */
@@ -63,10 +69,10 @@ static void print_segment_desc(const char *segname, uint16_t segment)
     uint32_t limit;
 
     /* Use a segment limit, loaded with "lsl" */
-    __asm__ volatile ("lsll %2, %0 ; setz %1" \
-        : "=r" (limit), "=q" (lsl_ok) \
-        : "r" ((uint32_t)segment) \
-        : "cc"); \
+    __asm__ volatile ("lsll %2, %0 ; setz %1"
+        : "=r" (limit), "=q" (lsl_ok)
+        : "r" ((uint32_t)segment)
+        : "cc");
     if (segname) {
         printf("%s=0x%04x", segname, segment);
         if (segment) {
@@ -119,6 +125,40 @@ static void print_segment_bases(void)
     printf("  fs base=0x%lx\n", base);
     syscall(__NR_arch_prctl, ARCH_GET_GS, &base);
     printf("  gs base=0x%lx\n", base);
+#elif defined(__i386__) && defined(__linux__)
+    uint16_t segment;
+    unsigned long limit;
+    struct user_desc u_info;
+
+    printf("Segment bases:\n");
+    __asm__ volatile ("movw %%fs, %0" : "=g" (segment));
+    if (segment) {
+        memset(&u_info, 0, sizeof(u_info));
+        u_info.entry_number = segment >> 3;
+        if (syscall(__NR_get_thread_area, &u_info) == -1) {
+            perror("get_thread_area(fs)");
+        } else {
+            limit = u_info.limit;
+            if (u_info.limit_in_pages) {
+                limit = (limit << 12) | 0xfff;
+            }
+            printf("  fs base=0x%lx, limit=0x%lx\n", (unsigned long)u_info.base_addr, limit);
+        }
+    }
+    __asm__ volatile ("movw %%gs, %0" : "=g" (segment));
+    if (segment) {
+        memset(&u_info, 0, sizeof(u_info));
+        u_info.entry_number = segment >> 3;
+        if (syscall(__NR_get_thread_area, &u_info) == -1) {
+            perror("get_thread_area(gs)");
+        } else {
+            limit = u_info.limit;
+            if (u_info.limit_in_pages) {
+                limit = (limit << 12) | 0xfff;
+            }
+            printf("  gs base=0x%lx, limit=0x%lx\n", (unsigned long)u_info.base_addr, limit);
+        }
+    }
 #else
     printf("No known way to get segment bases.\n");
 #endif
