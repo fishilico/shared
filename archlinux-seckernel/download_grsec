@@ -1,0 +1,45 @@
+#!/bin/sh
+# Download the latest grsecurity test patch
+RSS_FEED="https://grsecurity.net/testing_rss.php"
+
+# Create the directory where to put the patches
+PATCH_DIR="$(dirname "$0")/grsec"
+if [ ! -d "$PATCH_DIR" ] && ! mkdir -p "$PATCH_DIR"
+then
+    echo >&2 "Unable to create $PATCH_DIR directory"
+    exit 1
+fi
+
+echo "Reading $RSS_FEED..."
+PATCH_URL="$(curl "$RSS_FEED" | \
+    sed -n 's,.*<link>\(https://grsecurity.net/test/grsecurity-[-._0-9a-zA-Z]*\.patch\)</link>.*,\1,p')"
+if [ -z "$PATCH_URL" ]
+then
+    echo >&2 "Unable to retrieve the URL to the latest patch"
+    exit 1
+fi
+
+PATCH_FILE="$(basename "$PATCH_URL")"
+PATCH_PATH="$PATCH_DIR/$PATCH_FILE"
+
+if [ -e "$PATCH_PATH" ]
+then
+    echo "Last patch already downloaded in $PATCH_PATH"
+    exit
+fi
+
+echo "Downloading $PATCH_URL..."
+[ -e "$PATCH_PATH" ] || curl -o "$PATCH_PATH" "$PATCH_URL" || exit $?
+
+# Verify the GPG signature
+echo "Downloading $PATCH_URL.sig..."
+curl -o "$PATCH_PATH.sig" "$PATCH_URL.sig" || exit $?
+
+if ! gpg --verify "$PATCH_PATH.sig"
+then
+    echo >&2 "GPG verification failed. Renaming patch $PATCH_PATH.bad"
+    mv -v "$PATCH_PATH" "$PATCH_PATH.bad"
+    exit 1
+fi
+
+echo "grsec patch downloaded in $PATCH_PATH"
