@@ -159,9 +159,14 @@ static int handle_ptrace_events(pid_t child)
     }
 }
 
+/* Use non-const strings for the sake of execvp */
+static char cmd_uname[] = { 'u', 'n', 'a', 'm', 'e', '\0' };
+static char cmd_a[] = { '-', 'a', '\0' };
+static char *argv_uname_a[] = { cmd_uname, cmd_a, NULL };
+
 int main(int argc, char **argv)
 {
-    char **cmd;
+    char **cmd = argv_uname_a;
     int c;
     pid_t child;
 
@@ -174,13 +179,14 @@ int main(int argc, char **argv)
     while ((c = getopt(argc, argv, "+hs:n:r:v:m:")) != -1) {
         switch (c) {
             case 'h':
-                printf("Usage: %s [options] [--] command\n", argv[0]);
+                printf("Usage: %s [options] [--] [command]\n", argv[0]);
                 printf("Options:\n");
                 printf("    -s kernel-name\n");
                 printf("    -n nodename\n");
                 printf("    -r kernel-release\n");
                 printf("    -v kernel-version\n");
                 printf("    -m machine\n");
+                printf("If no command is supplied, 'uname' -a is used\n");
                 return 0;
             case 's':
                 strncpy(fake_uname.sysname, optarg, sizeof(fake_uname.sysname));
@@ -206,11 +212,10 @@ int main(int argc, char **argv)
                 return 1;
         }
     }
-    if (argc <= optind) {
-        fprintf(stderr, "missing program in parameters\n");
-        return 1;
+
+    if (argc > optind) {
+        cmd = argv + optind;
     }
-    cmd = argv + optind;
 
     /* Create a child */
     child = fork();

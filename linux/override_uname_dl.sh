@@ -25,13 +25,14 @@ do
             export FAKEUNAME_M
             shift 2;;
         -h|--help)
-            echo "Usage: $0 [options] [--] command"
+            echo "Usage: $0 [options] [--] [command]"
             echo "Options:"
             echo "    -s kernel-name"
             echo "    -n nodename"
             echo "    -r kernel-release"
             echo "    -v kernel-version"
             echo "    -m machine"
+            echo "If no command is supplied, 'uname' -a is used"
             exit 0;;
         --)
             shift
@@ -41,4 +42,5 @@ do
     esac
 done
 
+[ $# -ge 1 ] || set uname -a
 LD_PRELOAD="${0%.sh}.so" exec "$@"
