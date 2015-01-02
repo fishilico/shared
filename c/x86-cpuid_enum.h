@@ -162,6 +162,11 @@ __extension__ static const char* cpuidstr_6_eax[32] = {
     [2] = "arat",
     [4] = "pln",
     [6] = "pts",
+    [7] = "hwp",
+    [8] = "hwp_noitfy",
+    [9] = "hwp_act_window",
+    [10] = "hwp_epp",
+    [11] = "hwp_pkg_req",
 };
 
 /**

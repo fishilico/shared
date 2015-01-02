@@ -19,13 +19,13 @@
 *.sav
 *.so
 .*.swp
+*.tmp
 *.toc
 *.xz
 *.32
 *.64
 __pycache__
 /archlinux-seckernel/grsec/
-/c/kernel-x86-*.[ch]
 /linux/modules/*.mod.c
 /linux/modules/Module.symvers
 /linux/modules/modules.order

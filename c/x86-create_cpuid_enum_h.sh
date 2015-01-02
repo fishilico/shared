@@ -1,13 +1,14 @@
 #!/bin/sh
-# Create cpuid_enum.h by parsing cpufeature.h from Linux
+# Create x86-cpuid_enum.h by parsing cpufeature.h from Linux
 # (/usr/src/linux/arch/x86/include/asm/cpufeature.h)
 
-CPU_FEATURE_FILE="kernel-x86-cpufeature.h"
-CPU_SCATTERED_FILE="kernel-x86-cpu-scattered.c"
+CPU_FEATURE_FILE="x86-linux-cpufeature.h.tmp"
+CPU_SCATTERED_FILE="x86-linux-cpu-scattered.c.tmp"
 
 if ! [ -r "$CPU_FEATURE_FILE" -a -r "$CPU_SCATTERED_FILE" ]
 then
-    echo >&2 "Unable to read $$CPU_FEATURE_FILE or $CPU_SCATTERED_FILE"
+    echo >&2 "Unable to read $CPU_FEATURE_FILE or $CPU_SCATTERED_FILE"
+    echo >&2 "Use 'make update_cpuid' to update x86-cpuid_enum.h"
     exit 1
 fi
 
@@ -36,7 +37,7 @@ extract_cpuid_features() {
  */
 __extension__ static const char* const $2[32] = {
 EOF
-    sed -n 's/^#define X86_FEATURE_\(\S\+\)\s\+('$1'\*32+\s*\([0-9]\+\)\s*).*/    [\2] = "\1",/p' < "$CPU_FEATURE_FILE" | tr '[A-Z]' '[a-z]'
+    sed -n 's/^#define X86_FEATURE_\(\S\+\)\s\+(\s*'$1'\*32+\s*\([0-9]\+\)\s*).*/    [\2] = "\1",/p' < "$CPU_FEATURE_FILE" | tr '[A-Z]' '[a-z]'
     echo '};'
 }
 extract_cpuid_features 0 cpuidstr_1_edx 'cpuid 0x00000001, edx register' | sed 's/"ds"/"dts"/;s/"xmm/"sse/'

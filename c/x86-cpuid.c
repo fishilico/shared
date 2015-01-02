@@ -1,5 +1,5 @@
 /**
- * Display cpuid's information
+ * Display cpuid information on x86 cpus
  *
  * gcc defines __cpuid and __cpuid_count macros in cpuid.h:
  * https://gcc.gnu.org/git/gitweb.cgi?p=gcc.git;a=blob;f=gcc/config/i386/cpuid.h
@@ -8,10 +8,15 @@
  *
  * Some information about x86 flags can also be found on Wikipedia:
  * http://en.wikipedia.org/wiki/CPUID
+ *
+ * On Linux, CPU flags are available in /proc/cpuinfo:
+ *     grep '^flags' /proc/cpuinfo |uniq
+ * and in the auxiliary vector:
+ *     LD_SHOW_AUXV=1 /bin/true | grep AT_HWCAP
  */
 #include <stdint.h>
 #include <stdio.h>
-#include "cpuid_enum.h"
+#include "x86-cpuid_enum.h"
 
 #if defined __i386__ || defined __x86_64__
 

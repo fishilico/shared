@@ -44,24 +44,24 @@ endif
 all: $(PROGRAMS:%=%.$(BIN_EXT))
 
 clean:
-	rm -f *.o *.bin *.exe kernel-x86-*.[ch]
+	rm -f *.o *.bin *.exe *.tmp
 
 float_asm.$(BIN_EXT): LIBS += -lm
 %.$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
-cpuid.o: cpuid_enum.h
+x86-cpuid.o: x86-cpuid_enum.h
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-update_cpuid: kernel-x86-cpufeature.h kernel-x86-cpu-scattered.c create_cpuid_enum_h.sh
-	$(SH) ./create_cpuid_enum_h.sh > cpuid_enum.h
+update_cpuid: x86-linux-cpufeature.h.tmp x86-linux-cpu-scattered.c.tmp x86-create_cpuid_enum_h.sh
+	$(SH) ./x86-create_cpuid_enum_h.sh > x86-cpuid_enum.h
 
 LINUX_URL := https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain
-kernel-x86-cpufeature.h:
+x86-linux-cpufeature.h.tmp:
 	$(WGET) -q -O $@ '$(LINUX_URL)/arch/x86/include/asm/cpufeature.h' || (rm $@ ; false)
 
-kernel-x86-cpu-scattered.c:
+x86-linux-cpu-scattered.c.tmp:
 	$(WGET) -q -O $@ '$(LINUX_URL)/arch/x86/kernel/cpu/scattered.c' || (rm $@ ; false)
 
 .PHONY: all clean update_cpuid
