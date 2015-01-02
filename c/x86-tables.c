@@ -29,8 +29,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#if defined(__i386__) || defined(__x86_64__)
-
 /**
  * Setting CPU affinity is an OS-dependent operation, hence the #if parts
  */
@@ -172,11 +170,3 @@ int main(void)
     }
     return 0;
 }
-
-#else
-int main(void)
-{
-    fprintf(stderr, "The architecture does not support GDT/IDT.\n");
-    return 1;
-}
-#endif

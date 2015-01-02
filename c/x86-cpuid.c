@@ -18,8 +18,6 @@
 #include <stdio.h>
 #include "x86-cpuid_enum.h"
 
-#if defined __i386__ || defined __x86_64__
-
 static void print_escaped_ascii(const char *prefix, const char *text)
 {
     const char *current;
@@ -145,11 +143,3 @@ int main(void)
     }
     return 0;
 }
-
-#else
-int main(void)
-{
-    fprintf(stderr, "cpuid not implemented on this architecture :(\n");
-    return 255;
-}
-#endif

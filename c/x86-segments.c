@@ -55,8 +55,6 @@ static const char *const gdt_segment_index_desc[32] = {
 static const char *const gdt_segment_index_desc[1] = { NULL };
 #endif
 
-#if defined(__i386__) || defined(__x86_64__)
-
 /**
  * Display a textual description of the specified segment selector:
  * * bits 0-1: Requested Privilege Level (RPL)
@@ -188,11 +186,3 @@ int main(void)
     print_gdt_limits();
     return 0;
 }
-
-#else
-int main(void)
-{
-    fprintf(stderr, "The architecture is not x86.\n");
-    return 1;
-}
-#endif
