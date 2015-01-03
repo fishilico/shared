@@ -10,7 +10,9 @@
  *   (ieee754_float and ieee754_double definitions)
  * * http://csapp.cs.cmu.edu/public/waside/waside-x87.pdf
  * * https://courses.engr.illinois.edu/ece390/books/artofasm/CH14/CH14-1.html
- *  (Art of Assembly Language, "Floating Point Arithmetic")
+ *   (Art of Assembly Language, "Floating Point Arithmetic")
+ * * http://mindplusplus.wordpress.com/2012/11/20/comparing-the-x87-and-arm-vfp/
+ *   (Comparing the x87 and ARM VFP)
  */
 #include <assert.h>
 #include <inttypes.h>
@@ -25,6 +27,9 @@ static float add_f(float x, float y)
 #elif defined(__i386__)
     /* "t" is st(0) and "u" st(1) */
     __asm__ ("fadds %1" : "+t"(x) : "fm"(y));
+#elif defined(__arm__) && defined(__VFP_FP__)
+    /* Use VFP floating-point registers */
+    __asm__ ("vadd.f32 %0, %0, %1" : "+w"(x) : "w"(y));
 #else
 #    warning "add_f not yet implemented in asm"
     x += y;
@@ -38,6 +43,8 @@ static double add_d(double x, double y)
     __asm__ ("addsd %1, %0" : "+x"(x) : "x"(y));
 #elif defined(__i386__)
     __asm__ ("faddl %1" : "+t"(x) : "m"(y));
+#elif defined(__arm__) && defined(__VFP_FP__)
+    __asm__ ("vadd.f64 %P0, %P0, %P1" : "+w"(x) : "w"(y));
 #else
 #    warning "add_d not yet implemented in asm"
     x += y;
@@ -54,6 +61,9 @@ static int toint_f(float x)
     __asm__ ("cvttss2si %1, %0" : "=r"(i) : "x"(x));
 #elif defined(__i386__)
     __asm__ ("flds %1 ; fistps %0" : "=m"(i) : "tm"(x));
+#elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
+    /* clang 3.5.0 fails with "error: couldn't allocate output register for constraint 'w'" */
+    __asm__ ("vcvt.s32.f32 %0, %1" : "=w"(i) : "w"(x));
 #else
 #    warning "toint_f not yet implemented in asm"
     i = (int)x;
@@ -69,6 +79,8 @@ static int toint_d(double x)
     __asm__ ("cvttsd2si %1, %0" : "=r"(i) : "x"(x));
 #elif defined(__i386__)
     __asm__ ("fldl %1 ; fistpl %0" : "=m"(i) : "tm"(x));
+#elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
+    __asm__ ("vcvt.s32.f64 %0, %P1" : "=w"(i) : "w"(x));
 #else
 #    warning "toint_d not yet implemented in asm"
     i = (int)x;
@@ -84,6 +96,8 @@ static float sqrt_f(float x)
 #elif defined(__i386__)
     s = x;
     __asm__ ("fsqrt" : "+t"(s));
+#elif defined(__arm__) && defined(__VFP_FP__)
+    __asm__ ("vsqrt.f32 %0, %1" : "=w"(s) : "w"(x));
 #else
 #    warning "sqrt_f not yet implemented in asm"
     s = sqrtf(x);
@@ -99,6 +113,8 @@ static double sqrt_d(double x)
 #elif defined(__i386__)
     s = x;
     __asm__ ("fsqrt": "+t"(s));
+#elif defined(__arm__) && defined(__VFP_FP__)
+    __asm__ ("vsqrt.f64 %P0, %P1" : "=w"(s) : "w"(x));
 #else
 #    warning "sqrt_d not yet implemented in asm"
     s = sqrt(x);
@@ -106,12 +122,24 @@ static double sqrt_d(double x)
     return s;
 }
 
+/* Here are some implementations of sincosf:
+ * * https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/x86_64/fpu/s_sincosf.S;hb=HEAD
+ *   (x86_64 glibc)
+ * * https://code.google.com/p/math-neon/source/browse/trunk/math_sincosf.c
+ *   (ARM Neon)
+ *
+ * To compute sin(x), here are some implementations:
+ * * https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/ieee754/flt-32/k_sinf.c;hb=HEAD
+ *   (glibc, after interval reduction)
+ * * https://code.google.com/p/math-neon/source/browse/trunk/math_sinf.c
+ *   (ARM Neon)
+ */
 static void sincos_f(float angle, float *s, float *c)
 {
 #if defined(__x86_64__) || defined(__i386__)
     __asm__ ("fsincos" : "=t"(*c), "=u"(*s) : "0"(angle));
 #else
-#    warning "sincos_f not yet implemented in asm"
+    /* gcc -O2 groups these calls to a single sincosf */
     *s = sinf(angle);
     *c = cosf(angle);
 #endif
@@ -206,6 +234,8 @@ static int check_constants(void)
     _ok_f("fldl2t = log_2(10)", f, (float)M_LN10 / (float)M_LN2);
     __asm__ ("fldlg2" : "=t"(f));
     _ok_f("fldlg2 = log_10(2)", f, (float)M_LN2 / (float)M_LN10);
+#elif defined(__arm__)
+    /* No constant loading in ARM instruction set */
 #else
 #    warning "no constant operation implemented yet"
 #endif
