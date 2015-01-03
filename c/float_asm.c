@@ -22,29 +22,27 @@ static float add_f(float x, float y)
 #if defined(__x86_64__)
     /* Use XMM registers (SSE, Streaming SIMD Extensions) */
     __asm__ ("addss %1, %0" : "+x"(x) : "x"(y));
-    return x;
 #elif defined(__i386__)
     /* "t" is st(0) and "u" st(1) */
     __asm__ ("fadds %1" : "+t"(x) : "fm"(y));
-    return x;
 #else
 #    warning "add_f not yet implemented in asm"
-    return x + y;
+    x += y;
 #endif
+    return x;
 }
 
 static double add_d(double x, double y)
 {
 #if defined(__x86_64__)
     __asm__ ("addsd %1, %0" : "+x"(x) : "x"(y));
-    return x;
 #elif defined(__i386__)
     __asm__ ("faddl %1" : "+t"(x) : "m"(y));
-    return x;
 #else
 #    warning "add_d not yet implemented in asm"
-    return x + y;
+    x += y;
 #endif
+    return x;
 }
 
 static int toint_f(float x)
@@ -80,30 +78,32 @@ static int toint_d(double x)
 
 static float sqrt_f(float x)
 {
+    float s;
 #if defined(__x86_64__)
-    __asm__ ("sqrtss %1, %0" : "+x"(x));
-    return x;
+    __asm__ ("sqrtss %1, %0" : "=x"(s) : "x"(x));
 #elif defined(__i386__)
-    __asm__ ("fsqrt" : "+t"(x));
-    return x;
+    s = x;
+    __asm__ ("fsqrt" : "+t"(s));
 #else
 #    warning "sqrt_f not yet implemented in asm"
-    return fsqrt(x);
+    s = sqrtf(x);
 #endif
+    return s;
 }
 
 static double sqrt_d(double x)
 {
+    double s;
 #if defined(__x86_64__)
-    __asm__ ("sqrtsd %1, %0" : "+x"(x));
-    return x;
+    __asm__ ("sqrtsd %1, %0" : "=x"(s) : "x"(x));
 #elif defined(__i386__)
-    __asm__ ("fsqrt": "+t"(x));
-    return x;
+    s = x;
+    __asm__ ("fsqrt": "+t"(s));
 #else
-#    warning "sqrt_f not yet implemented in asm"
-    return fsqrt(x);
+#    warning "sqrt_d not yet implemented in asm"
+    s = sqrt(x);
 #endif
+    return s;
 }
 
 static void sincos_f(float angle, float *s, float *c)
@@ -112,8 +112,8 @@ static void sincos_f(float angle, float *s, float *c)
     __asm__ ("fsincos" : "=t"(*c), "=u"(*s) : "0"(angle));
 #else
 #    warning "sincos_f not yet implemented in asm"
-    *s = fsin(angle);
-    *c = fcos(angle);
+    *s = sinf(angle);
+    *c = cosf(angle);
 #endif
 }
 
