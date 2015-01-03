@@ -6,16 +6,16 @@
  *    S N R V M GNU/Linux
  */
 #include <assert.h>
+#include <asm/unistd.h> /* __NR... */
 #include <inttypes.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <asm/unistd.h>
 #include <string.h>
 #include <sys/prctl.h>
-#include <sys/ptrace.h>
+#include <sys/ptrace.h> /* ptrace() */
 #include <sys/types.h>
-#include <sys/user.h>
+#include <sys/user.h> /* struct user_regs_struct */
 #include <sys/utsname.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -31,6 +31,7 @@ static struct utsname fake_uname;
 #    define REG_ARG4(regs) ((regs).edi)
 #    define REG_ARG5(regs) ((regs).ebp)
 #    define REG_RESULT(regs) ((regs).eax)
+typedef struct user_regs_struct user_regs_type;
 #elif defined __x86_64__
 #    define REG_SYSCALL(regs) ((regs).orig_rax)
 #    define REG_ARG0(regs) ((regs).rdi)
@@ -40,6 +41,18 @@ static struct utsname fake_uname;
 #    define REG_ARG4(regs) ((regs).r8)
 #    define REG_ARG5(regs) ((regs).r9)
 #    define REG_RESULT(regs) ((regs).rax)
+typedef struct user_regs_struct user_regs_type;
+#elif defined __arm__
+#    include <asm/ptrace.h>
+#    define REG_SYSCALL(regs) ((regs).ARM_r7)
+#    define REG_ARG0(regs) ((regs).ARM_ORIG_r0)
+#    define REG_ARG1(regs) ((regs).ARM_r1)
+#    define REG_ARG2(regs) ((regs).ARM_r2)
+#    define REG_ARG3(regs) ((regs).ARM_r3)
+#    define REG_ARG4(regs) ((regs).ARM_r4)
+#    define REG_ARG5(regs) ((regs).ARM_r5)
+#    define REG_RESULT(regs) ((regs).ARM_r0)
+typedef struct user_regs user_regs_type;
 #else
 #    error "Unsupported architecture"
 #endif
@@ -85,7 +98,7 @@ static int handle_ptrace_events(pid_t child)
     pid_t pid;
     int status = 0, is_first = 1;
     long nsyscall;
-    struct user_regs_struct regs;
+    user_regs_type regs;
 
     for (;;) {
         pid = waitpid(child, &status, WUNTRACED);
@@ -117,8 +130,8 @@ static int handle_ptrace_events(pid_t child)
                 }
                 nsyscall = (long)REG_SYSCALL(regs);
                 if (is_first) {
-                    /* First syscall must be execve */
-                    if (nsyscall != __NR_execve) {
+                    /* First syscall must be execve or restart_syscall */
+                    if (nsyscall != __NR_execve && nsyscall != __NR_restart_syscall) {
                         fprintf(stderr,
                                 "Unexpected first syscall number: %ld != %d (execve).\n",
                                 nsyscall, __NR_execve);
