@@ -14,9 +14,9 @@
 #define OUT
 #define OPTIONAL
 
-#if defined __x86_64__
+#if defined(__x86_64__)
 #   define EFIERR(a) (0x8000000000000000 | (a))
-#elif defined __i386__
+#elif defined(__i386__) || defined(__arm__)
 #   define EFIERR(a) (0x80000000 | (a))
 #else
 #    error Unsupported architecture
@@ -441,8 +441,8 @@ static inline UINT64 _efi_call5(VOID *func, UINT64 arg1, UINT64 arg2, UINT64 arg
 #define efi_call1(func, arg1) efi_call2((func), (arg1), 0)
 #define efi_call0(func) efi_call1((func), 0)
 
-#elif defined __i386__
-/* No wrapper, use the stack to pass parameters */
+#elif defined(__i386__) || defined(__arm__)
+/* No wrapper, use the stack (x86) or registers (arm) to pass parameters */
 #define efi_call5(func, arg1, arg2, arg3, arg4, arg5) ((func)((arg1), (arg2), (arg3), (arg4), (arg5)))
 #define efi_call4(func, arg1, arg2, arg3, arg4) ((func)((arg1), (arg2), (arg3), (arg4)))
 #define efi_call3(func, arg1, arg2, arg3) ((func)((arg1), (arg2), (arg3)))

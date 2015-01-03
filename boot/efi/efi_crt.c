@@ -4,9 +4,9 @@
 #include <elf.h>
 #include "efi.h"
 
-#if defined __x86_64__
+#if defined(__x86_64__)
 #    define DEFINE_ELF_STRUCT(name) typedef Elf64_##name Elf_##name
-#elif defined  __i386__
+#elif defined(__i386__) || defined(__arm__)
 #    define DEFINE_ELF_STRUCT(name) typedef Elf32_##name Elf_##name
 #else
 #    error Unsupported architecture
@@ -131,18 +131,22 @@ EFI_STATUS crt_efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 
 __asm__ (
 "    .text\n"
+#if defined(__x86_64__)
 "    .globl _start\n"
 "    .hidden _start\n"
 "    .type _start, @function\n"
 "_start:\n"
-#if defined __x86_64__
 "    subq $8, %rsp\n"
 "    movq %rcx, %rdi\n" /* image */
 "    movq %rdx, %rsi\n" /* systab */
 "    call crt_efi_main\n"
 "    addq $8, %rsp\n"
 "    ret\n"
-#elif defined __i386__
+#elif defined(__i386__)
+"    .globl _start\n"
+"    .hidden _start\n"
+"    .type _start, @function\n"
+"_start:\n"
 "    pushl %ebp\n"
 "    movl %esp, %ebp\n"
 "    pushl 12(%ebp)\n" /* image */
@@ -151,6 +155,14 @@ __asm__ (
 "    movl %ebp, %esp\n"
 "    popl %ebp\n"
 "    ret\n"
+#elif defined(__arm__)
+"    .globl _start\n"
+"    .hidden _start\n"
+"    .type _start, %function\n"
+"_start:\n"
+"    push {lr}\n"
+"    bl	efi_main\n"
+"    pop {pc}\n"
 #else
 #    error Unsupported architecture
 #endif
@@ -172,14 +184,14 @@ __asm__ (
 "    .hidden _crt_dummy_reloc\n"
 "_crt_dummy_reloc: .long 0\n"
 
-#if defined __x86_64__
+#if defined(__x86_64__)
 "    .section .reloc, \"a\"\n"
 "    .hidden _crt_base_reloc\n"
 "_crt_base_reloc:\n"
 "    .long _crt_dummy_reloc - _crt_base_reloc\n" /* RVA */
 "    .long 10\n" /* SizeOfBlock: 8 of structure + 2 of data */
 "    .word 0\n" /* IMAGE_REL_BASED_ABSOLUTE << 12 | 0 */
-#elif defined __i386__
+#elif defined(__i386__) || defined(__arm__)
 "    .section .reloc\n"
 "    .long _crt_dummy_reloc\n" /* RVA */
 "    .long 10\n" /* SizeOfBlock: 8 of structure + 2 of data */

@@ -26,7 +26,10 @@ EFI_STATUS efi_main(EFI_HANDLE image __attribute__ ((unused)), EFI_SYSTEM_TABLE 
 #    define ARCH_DESC "x86_64"
 #elif defined  __i386__
 #    define ARCH_DESC "ia32"
+#elif defined  __arm__
+#    define ARCH_DESC "arm"
 #else
+#    error Unsupported architecture
 #    define ARCH_DESC "unknown"
 #endif
 

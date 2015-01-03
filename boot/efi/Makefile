@@ -11,13 +11,14 @@ ARCH := ia32
 else ifneq (,$(findstring x86_64, $(TARGET_TRIPLET)))
 # "gcc -m32 -dumpmachine" prints x86_64-unknown-linux-gnu on x86_64, not i386...
 ARCH := $(shell printf '\#ifdef __x86_64__\nx86_64\n\#else\nia32\n\#endif' |$(CC) -E - |grep '^[^\#]')
+else ifneq (,$(findstring armv, $(TARGET_TRIPLET)))
+ARCH := arm
 else
 ARCH := $(shell $(UNAME) -m | sed 's,i.86,ia32,')
 endif
 
 CPPFLAGS =
 CFLAGS = -O2 -fPIC -Wall -Wextra \
-	-mno-red-zone \
 	-ffreestanding \
 	-fshort-wchar \
 	-fno-strict-aliasing \
@@ -29,7 +30,9 @@ LDFLAGS = -nostdlib -O1 -T $(CURDIR)/elf_$(ARCH)_efi.lds -shared -Bsymbolic \
 LIBS =
 
 ifeq ($(ARCH),ia32)
-	ARCH_CFLAGS += -mno-mmx -mno-sse
+	ARCH_CFLAGS += -mno-mmx -mno-red-zone -mno-sse
+else ifeq ($(ARCH),x86_64)
+	ARCH_CFLAGS += -mno-red-zone
 endif
 
 
