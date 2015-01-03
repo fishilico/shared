@@ -131,7 +131,7 @@ static void sq_euclidean_distance2(
 
 int main(void)
 {
-    const size_t size = 10000, dim = 2;
+    const size_t size = 5000, dim = 2;
     double *matrix;
     double *vectors;
 
