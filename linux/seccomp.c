@@ -22,28 +22,40 @@
 #include <linux/seccomp.h>
 #include <linux/unistd.h>
 
+/**
+ * Define AUDIT_ARCH and helpers to mcontext_t struct
+ * mcontext_t is defined in /usr/include/sys/ucontext.h
+ */
 #if defined __i386__
 #    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_I386
-#    define REG_RESULT REG_EAX
-#    define REG_SYSCALL REG_EAX
-#    define REG_ARG0 REG_EBX
-#    define REG_ARG1 REG_ECX
-#    define REG_ARG2 REG_EDX
-#    define REG_ARG3 REG_ESI
-#    define REG_ARG4 REG_EDI
-#    define REG_ARG5 REG_EBP
+#    define mctx_reg_result(mctx) (mctx).gregs[REG_EAX]
+#    define mctx_reg_syscall(mctx) (mctx).gregs[REG_EAX]
+#    define mctx_reg_arg0(mctx) (mctx).gregs[REG_EBX]
+#    define mctx_reg_arg1(mctx) (mctx).gregs[REG_ECX]
+#    define mctx_reg_arg2(mctx) (mctx).gregs[REG_EDX]
+#    define mctx_reg_arg3(mctx) (mctx).gregs[REG_ESI]
+#    define mctx_reg_arg4(mctx) (mctx).gregs[REG_EDI]
+#    define mctx_reg_arg5(mctx) (mctx).gregs[REG_EBP]
 #elif defined __x86_64__
 #    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_X86_64
-#    define REG_RESULT REG_RAX
-#    define REG_SYSCALL REG_RAX
-#    define REG_ARG0 REG_RDI
-#    define REG_ARG1 REG_RSI
-#    define REG_ARG2 REG_RDX
-#    define REG_ARG3 REG_R10
-#    define REG_ARG4 REG_R8
-#    define REG_ARG5 REG_R9
+#    define mctx_reg_result(mctx) (mctx).gregs[REG_RAX]
+#    define mctx_reg_syscall(mctx) (mctx).gregs[REG_RAX]
+#    define mctx_reg_arg0(mctx) (mctx).gregs[REG_RDI]
+#    define mctx_reg_arg1(mctx) (mctx).gregs[REG_RSI]
+#    define mctx_reg_arg2(mctx) (mctx).gregs[REG_RDX]
+#    define mctx_reg_arg3(mctx) (mctx).gregs[REG_R10]
+#    define mctx_reg_arg4(mctx) (mctx).gregs[REG_R8]
+#    define mctx_reg_arg5(mctx) (mctx).gregs[REG_R9]
 #elif defined __arm__
 #    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_ARM
+#    define mctx_reg_result(mctx) (mctx).arm_r0
+#    define mctx_reg_syscall(mctx) (mctx).arm_r7
+#    define mctx_reg_arg0(mctx) (mctx).arm_r0
+#    define mctx_reg_arg1(mctx) (mctx).arm_r1
+#    define mctx_reg_arg2(mctx) (mctx).arm_r2
+#    define mctx_reg_arg3(mctx) (mctx).arm_r3
+#    define mctx_reg_arg4(mctx) (mctx).arm_r4
+#    define mctx_reg_arg5(mctx) (mctx).arm_r5
 #else
 #    error "Unsupported architecture"
 #endif
@@ -78,8 +90,10 @@ static bool install_syscall_filter(bool do_kill)
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_fstat64, 0, 1),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
 #endif
+#ifdef __NR_mmap
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_mmap, 0, 1),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+#endif
 #ifdef __NR_mmap2
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_mmap2, 0, 1),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
@@ -153,12 +167,12 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
     /* Emulate getpriority */
     if (info->si_syscall == __NR_getpriority && ctx) {
         greg_t syscall, arg0, arg1;
-        syscall = ctx->uc_mcontext.gregs[REG_SYSCALL];
+        syscall = mctx_reg_syscall(ctx->uc_mcontext);
         assert(syscall == info->si_syscall);
-        arg0 = ctx->uc_mcontext.gregs[REG_ARG0];
-        arg1 = ctx->uc_mcontext.gregs[REG_ARG1];
+        arg0 = mctx_reg_arg0(ctx->uc_mcontext);
+        arg1 = mctx_reg_arg1(ctx->uc_mcontext);
         if (arg0 == PRIO_USER && arg1 == 0) {
-            ctx->uc_mcontext.gregs[REG_RESULT] = 42;
+            mctx_reg_result(ctx->uc_mcontext) = 42;
             return;
         }
     }
