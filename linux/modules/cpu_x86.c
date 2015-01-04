@@ -351,9 +351,7 @@ static void dump_x86_tables(void)
 #else
 			if (idt[i].ist) {
 				const char *stack_str = "";
-				if (idt[i].ist == STACKFAULT_STACK)
-					stack_str = " (stack fault stack)";
-				else if (idt[i].ist == DOUBLEFAULT_STACK)
+				if (idt[i].ist == DOUBLEFAULT_STACK)
 					stack_str = " (double fault stack)";
 				else if (idt[i].ist == NMI_STACK)
 					stack_str = " (non-maskable interrupt stack)";
@@ -363,6 +361,10 @@ static void dump_x86_tables(void)
 					stack_str = " (machine check stack)";
 				else if (idt[i].ist == N_EXCEPTION_STACKS)
 					stack_str = " (N Exception stacks)";
+#ifdef STACKFAULT_STACK
+				else if (idt[i].ist == STACKFAULT_STACK)
+					stack_str = " (stack fault stack)";
+#endif
 				pr_info("       ist=%u%s", idt[i].ist, stack_str);
 			}
 #endif
