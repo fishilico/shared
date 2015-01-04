@@ -51,12 +51,13 @@ CLEAN_TARGETS := $(addprefix clean.., $(SUBDIRS_FINAL))
 TARGETS := $(ALL_TARGETS) $(CLEAN_TARGETS)
 
 all: $(ALL_TARGETS)
+	@test -z "$(SUBDIRS_BLACKLIST)" || echo "Done building with blacklist $(SUBDIRS_BLACKLIST)"
 
 clean: $(CLEAN_TARGETS)
 
 $(TARGETS): TARGET = $(firstword $(subst .., ,$@))
 $(TARGETS):
-	$(MAKE) -C "$(@:$(TARGET)..%=%)" $(TARGET)
+	@cd "$(@:$(TARGET)..%=%)" && $(MAKE) $(TARGET)
 
 indent-c: gen-indent-c.sh
 	$(SH) $< > $@
