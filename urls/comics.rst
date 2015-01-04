@@ -10,6 +10,7 @@ English
 * http://www.smbc-comics.com/ SMBC (Saturday Morning Breakfast Cereal)
 * http://m.webtoons.com/episodeList?titleNo=95 Tower of God
 * http://strongfemaleprotagonist.com/ Strong Female Protagonist
+* http://www.gunnerkrigg.com/ Gunnerkrigg Court
 
 French
 ------
