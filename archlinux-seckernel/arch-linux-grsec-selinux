@@ -65,13 +65,11 @@ CONFIG_SECURITY_SELINUX_BOOTPARAM_VALUE=1
 CONFIG_SECURITY_SELINUX_CHECKREQPROT_VALUE=1
 CONFIG_SECURITY_SELINUX_ENABLE_SECMARK_DEFAULT=y
 CONFIG_SECURITY_SELINUX_AVC_STATS=y
-CCONFIG_DEFAULT_SECURITY_SELINUX=y
 # CONFIG_SECURITY_SELINUX_POLICYDB_VERSION_MAX is not set
 # CONFIG_SECURITY_SMACK is not set
 # CONFIG_SECURITY_TOMOYO is not set
 # CONFIG_SECURITY_APPARMOR is not set
-CONFIG_SECURITY_YAMA=y
-CONFIG_SECURITY_YAMA_STACKED=y
+# CONFIG_INTEGRITY is not set
 # CONFIG_IMA is not set
 # CONFIG_EVM is not set
 CONFIG_DEFAULT_SECURITY_SELINUX=y
@@ -123,18 +121,6 @@ fi
 # Configure make variables
 MAKEFLAGS=${MAKEFLAGS:--j3}
 export MENUCONFIG MAKEFLAGS
-
-# For GPG checks, uncompress the source files once there are downloaded
-makepkg -gs || exit $?
-for XZSRC_FILE in ./linux-*.tar.xz ./patch-*.xz
-do
-    UNXZ_FILE="${XZSRC_FILE%.xz}"
-    if [ ! -e "$UNXZ_FILE" ] && ! unxz < "$XZSRC_FILE" > "$UNXZ_FILE"
-    then
-        echo >&2 "Unable to uncompress $XZSRC_FILE"
-        exit 1
-    fi
-done
 
 # Build and install package
 makepkg -i || exit $?

@@ -1,33 +1,18 @@
 --- a/PKGBUILD
 +++ b/PKGBUILD
-@@ -5,7 +5,7 @@
- # Contributor: henning mueller <henning@orgizm.net>
- # Contributor: Thomas Dwyer http://tomd.tel
+@@ -46,6 +46,11 @@ validpgpkeys=(
+               'DE9452CE46F42094907F108B44D1C0F82525FE49' # Bradley Spengler
+ )
  
--pkgbase=linux-grsec
++# grsec-selinux custom definitions
 +pkgbase=linux-grsec-selinux
- _srcname=linux-3.17
- _pkgver=3.17.7
- _grsecver=3.0
-@@ -29,6 +29,7 @@ source=("https://www.kernel.org/pub/linu
-         # standard config files for mkinitcpio ramdisk
-         'linux.preset'
-         'change-default-console-loglevel.patch'
-+        'usr-bin-usermode-helper.patch'
-         )
- sha256sums=('f5153ec93c5fcd41b247950e6a9bcbc63fa87beafd112c133a622439a0f76251'
-             'SKIP'
-@@ -39,7 +40,8 @@ sha256sums=('f5153ec93c5fcd41b247950e6a9
-             '6b74757f23262d567f5880c71ce1a154da7338da38ea305b0dd19b95bb45f336'
-             '9569db95150b09ca393e9cd5008c4a9e873f0db84bf11202f8ca61bf30c6238c'
-             'ca7e718375b3790888756cc0a64a7500cd57dddb9bf7e10a0df22c860d91f74d'
--            '1256b241cd477b265a3c2d64bdc19ffe3c9bbcee82ea3994c590c2c76e767d99')
-+            '1256b241cd477b265a3c2d64bdc19ffe3c9bbcee82ea3994c590c2c76e767d99'
-+            'SKIP')
- validpgpkeys=(
-               'ABAF11C65A2970B130ABE3C479BE3E4300411886' # Linux Torvalds
-               '647F28654894E3BD457199BE38DBBDC86092693E' # Greg Kroah-Hartman
-@@ -66,6 +68,9 @@ prepare() {
++source+=('usr-bin-usermode-helper.patch')
++sha256sums+=('SKIP')
++
+ _kernelname=${pkgbase#linux}
+ 
+ prepare() {
+@@ -66,6 +71,9 @@ prepare() {
    patch -Np1 -i "$srcdir/$_grsec_patch"
    rm localversion-grsec
  
