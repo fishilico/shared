@@ -18,8 +18,6 @@
 #include <linux/printk.h>
 #include <linux/version.h>
 
-#ifdef CONFIG_X86
-
 #define show_reg_bit(reg, bitname, bitnum, desc) \
 	pr_info("  %2d (0x%08lx): %s %s (%s)\n", \
 		bitnum, _BITUL(bitnum), \
@@ -403,16 +401,6 @@ static int __init cpu_x86_init(void)
 	dump_x86_tables();
 	return 0;
 }
-
-#else /* CONFIG_X86 */
-
-static int __init cpu_x86_init(void)
-{
-	pr_alert("Other architectures than x86 are not supported.\n");
-	return -EINVAL;
-}
-
-#endif /* CONFIG_X86 */
 
 static void __exit cpu_x86_exit(void)
 {
