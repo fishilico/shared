@@ -165,11 +165,22 @@ static void dump_x86_tables(void)
 	/* Dump GDT tables. Expected result in written in
 	 * /usr/src/linux/arch/x86/kernel/cpu/common.c
 	 */
+#if defined(CONFIG_GRKERNSEC) && defined(CONFIG_X86_64)
+	/* as grsec patch doesn't export cpu_gdt_table symbol in
+	 * arch/x86/kernel/x8664_ksyms_64.c, contrary to i386_ksyms_32.c,
+	 * only use the gdt of the current cpu
+	 */
+	if (true) {
+		struct desc_struct *descs;
+		cpu = smp_processor_id();
+		descs = (struct desc_struct *)descp.address;
+#else
 	for_each_possible_cpu(cpu) {
 		struct desc_struct *descs;
 		descs = get_cpu_gdt_table(cpu);
 		if (!descs)
 			continue;
+#endif
 		pr_info("  CPU %u: %pS (%u entries)\n", cpu, descs, numentries);
 		for (i = 0; i < numentries; i++) {
 			unsigned int flags, base, limit, type;
@@ -377,7 +388,7 @@ static void dump_x86_tables(void)
 				 * kallsyms_lookup_size_offset is not exported.
 				 */
 				sprint_symbol(sym, gate_offset(idt[i]));
-				if (sym[0] == '0' && sym[1] == 'x')
+				if (sym[0] == '\0' || (sym[0] == '0' && sym[1] == 'x'))
 					break;
 				plus = strchr(sym, '+');
 				if (plus && plus[1] == '0' && plus[2] == 'x') {
