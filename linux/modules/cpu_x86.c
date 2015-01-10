@@ -258,56 +258,56 @@ static void dump_x86_tables(void)
 			 * and /usr/src/linux/arch/x86/kernel/traps.c
 			 */
 			if (i == X86_TRAP_DE)
-				comment = " Divide by Zero";
+				comment = "Divide by Zero";
 			else if (i == X86_TRAP_DB)
-				comment = " Debug";
+				comment = "Debug";
 			else if (i == X86_TRAP_NMI)
-				comment = " Non-maskable Interrupt";
+				comment = "Non-maskable Interrupt";
 			else if (i == X86_TRAP_BP)
-				comment = " Break Point";
+				comment = "Break Point";
 			else if (i == X86_TRAP_OF)
-				comment = " Overflow";
+				comment = "Overflow";
 			else if (i == X86_TRAP_BR)
-				comment = " Bound Range Exceeded";
+				comment = "Bound Range Exceeded";
 			else if (i == X86_TRAP_UD)
-				comment = " Invalid Opcode";
+				comment = "Invalid Opcode";
 			else if (i == X86_TRAP_NM)
-				comment = " Device Not Available";
+				comment = "Device Not Available";
 			else if (i == X86_TRAP_DF)
-				comment = " Double Fault";
+				comment = "Double Fault";
 			else if (i == X86_TRAP_OLD_MF)
-				comment = " Coprocessor Segment Overrun";
+				comment = "Coprocessor Segment Overrun";
 			else if (i == X86_TRAP_TS)
-				comment = " Invalid TSS";
+				comment = "Invalid TSS";
 			else if (i == X86_TRAP_NP)
-				comment = " Segment Not Present";
+				comment = "Segment Not Present";
 			else if (i == X86_TRAP_SS)
-				comment = " Stack Segment Fault";
+				comment = "Stack Segment Fault";
 			else if (i == X86_TRAP_GP)
-				comment = " General Protection Fault";
+				comment = "General Protection Fault";
 			else if (i == X86_TRAP_PF)
-				comment = " Page Fault";
+				comment = "Page Fault";
 			else if (i == X86_TRAP_SPURIOUS)
-				comment = " Spurious Interrupt";
+				comment = "Spurious Interrupt";
 			else if (i == X86_TRAP_MF)
-				comment = " x87 Floating-Point Exception";
+				comment = "x87 Floating-Point Exception";
 			else if (i == X86_TRAP_AC)
-				comment = " Alignment Check";
+				comment = "Alignment Check";
 			else if (i == X86_TRAP_MC)
-				comment = " Machine Check";
+				comment = "Machine Check";
 			else if (i == X86_TRAP_XF)
-				comment = " SIMD Floating-Point Exception";
+				comment = "SIMD Floating-Point Exception";
 			else if (i == X86_TRAP_IRET)
-				comment = " IRET Exception";
+				comment = "IRET Exception";
 			else if (i == FIRST_EXTERNAL_VECTOR)
-				comment = " First External Vector";
+				comment = "First External Vector";
 			else if (i == IA32_SYSCALL_VECTOR)
-				comment = " Syscall Vector";
+				comment = "Syscall Vector";
 			else if (i == LOCAL_TIMER_VECTOR)
-				comment = " Local Timer Vector";
+				comment = "Local Timer Vector";
 #ifdef CONFIG_HAVE_KVM
 			else if (i == POSTED_INTR_VECTOR)
-				comment = " Postr Intr Vector";
+				comment = "Postr Intr Vector";
 #endif
 			else if (i == HYPERVISOR_CALLBACK_VECTOR)
 				comment = "Hypervisor Callback Vector";
@@ -340,9 +340,10 @@ static void dump_x86_tables(void)
 
 			/* http://wiki.osdev.org/Interrupts_Descriptor_Table */
 			type = idt[i].type;
-			pr_info(" 0x%02x: seg 0x%x offset %p%s%s\n",
-				i, gate_segment(idt[i]), (void*)gate_offset(idt[i]),
-				(comment[0]) ? "  " : "", comment);
+			pr_info(" 0x%02x: seg 0x%x offset %p %s\n",
+				i, gate_segment(idt[i]),
+				(void *)gate_offset(idt[i]),
+				comment);
 			if (type == 5)
 				type_str = " (task gate)";
 			else if (type == 6)
