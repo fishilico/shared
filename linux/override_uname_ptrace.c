@@ -96,7 +96,7 @@ static int memcpy_to_pid(pid_t pid, void *dst, const void *src, size_t size)
 static int handle_ptrace_events(pid_t child)
 {
     pid_t pid;
-    int status = 0, is_first = 1;
+    int status = 0;
     long nsyscall;
     user_regs_type regs;
 
@@ -121,16 +121,18 @@ static int handle_ptrace_events(pid_t child)
                 /* The child suspended so suspend as well */
                 kill(getpid(), SIGSTOP);
                 kill(pid, SIGCONT);
-            } else if ((status == SIGTRAP && is_first) || (status == (0x80 | SIGTRAP))) {
-                /* PTRACE_O_TRACESYSGOOD options */
-                /* This is the expected signal for ptrace! */
+            } else if (status == SIGTRAP || status == (0x80 | SIGTRAP)) {
+                /* This is the expected signal for ptrace */
+                /* 0x80 is for PTRACE_O_TRACESYSGOOD options */
                 if (ptrace(PTRACE_GETREGS, pid, NULL, &regs) == -1) {
                     perror("ptrace(GETREGS)");
                     return EXIT_FAILURE;
                 }
                 nsyscall = (long)REG_SYSCALL(regs);
-                if (is_first) {
-                    /* First syscall must be execve or restart_syscall */
+                if (status == SIGTRAP) {
+                    /* First syscall must be execve or restart_syscall.
+                     * This may happen when running a new process
+                     */
                     if (nsyscall != __NR_execve && nsyscall != __NR_restart_syscall) {
                         fprintf(stderr,
                                 "Unexpected first syscall number: %ld != %d (execve).\n",
@@ -145,7 +147,6 @@ static int handle_ptrace_events(pid_t child)
                                 PTRACE_O_TRACECLONE)) == -1) {
                         perror("ptrace(PTRACE_SETOPTIONS)");
                     }
-                    is_first = 0;
                 }
                 if (nsyscall == __NR_uname) {
                     /* Override user buffer */
