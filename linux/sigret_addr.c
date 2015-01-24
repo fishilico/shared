@@ -6,7 +6,11 @@
  * on this program.
  *
  * Documentation:
- * http://man7.org/linux/man-pages/man2/sigreturn.2.html "man 2 sigreturn"
+ * * http://man7.org/linux/man-pages/man2/sigreturn.2.html "man 2 sigreturn"
+ * * http://git.musl-libc.org/cgit/musl/tree/src/signal/i386/restore.s?id=v1.1.6
+ *   musl implementation of the signal restorer for i386
+ * * https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/unix/sysv/linux/i386/sigaction.c;hb=b8079dd0d360648e4e8de48656c5c38972621072#l89
+ *   glibc implementation of the signal restorer for i386
  *
  * Results when using a simple signal handler:
  * * arm, glibc: __default_sa_restorer (syscall 119 = sigreturn)
@@ -16,7 +20,7 @@
  * Results when using sigaction with SA_INFO ("rt_sigaction"):
  * * arm, glibc: __default_rt_sa_restorer (syscall 173 = rt_sigreturn)
  * * x86_32, vdso: __kernel_rt_sigreturn (syscall 173 = rt_sigreturn)
- * * x86_64, glibc: __restore_rt (syscall 15 = rt_sigreturn), same as before
+ * * x86_64, glibc: __restore_rt (syscall 15 = rt_sigreturn), same as simple
  */
 #include <elf.h>
 #include <fcntl.h>
