@@ -42,6 +42,7 @@ Blogs
 * http://kutioo.blogspot.fr/ kutio's blog
   (exploitation, reverse engineering, cryptography, lattices, liblll, knapsack)
 * http://hackaday.com/ Hackaday
+* http://labs.domipheus.com/blog/ Domipheus Labs
 
 French blogs
 ------------

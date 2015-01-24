@@ -66,3 +66,8 @@ glibc source code: https://sourceware.org/git/?p=glibc.git
 With ``$ARCH`` being x86, x86_64 or arm, ``syscall()`` is implemented in
 ``sysdeps/unix/sysv/linux/$ARCH/syscall.S`` and ``_start()`` in
 ``sysdeps/$ARCH/start.S``.
+
+Related works:
+
+* http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html
+  A Whirlwind Tutorial on Creating Really Teensy ELF Executables for Linux

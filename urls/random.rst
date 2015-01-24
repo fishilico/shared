@@ -14,6 +14,8 @@ Other
 * http://wot.wikia.com/wiki/Category:Main_Series Wheel Of Time books
 * https://app.box.com/shared/static/a6omcl2la0ivlxsn3o8m.jpg
   A Guide to Navigating NPR's Top 100 Science Fiction and Fantasy Books
+* http://9gag.com/gag/areQ1mV/choosing-the-perfect-board-game
+  How to choose the perfect board game
 
 Calculus
 --------
