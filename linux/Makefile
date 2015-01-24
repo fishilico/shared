@@ -6,11 +6,11 @@ PKG_CONFIG ?= pkg-config
 NETLINK_PROGRAMS := enum_link_addrs
 SDL_PROGRAMS := sdl_v4l_video
 SECCOMP_PROGRAMS := seccomp
-SHARED_OBJECTS := override_uname_dl.so
+SHARED_OBJECTS := override_uname_dl.$(LIB_EXT)
 
 # Find other programs. Only programs in $(PROGRAMS) are built.
 SOURCES := $(wildcard *.c)
-ALL_PROGRAMS := $(filter-out $(SHARED_OBJECTS:%.so=%), $(SOURCES:%.c=%))
+ALL_PROGRAMS := $(filter-out $(SHARED_OBJECTS:%.$(LIB_EXT)=%), $(SOURCES:%.c=%))
 PROGRAMS := $(filter-out $(NETLINK_PROGRAMS) $(SDL_PROGRAMS) $(SECCOMP_PROGRAMS), $(ALL_PROGRAMS))
 
 # libnetlink is provided by iproute2 project
@@ -23,7 +23,7 @@ endif
 HAVE_SDL := $(shell $(PKG_CONFIG) --exists sdl && echo 'y' || echo 'n')
 ifeq ($(HAVE_SDL), y)
 	PROGRAMS += $(SDL_PROGRAMS)
-$(SDL_PROGRAMS:%=%.bin): LIBS += $(shell $(PKG_CONFIG) --libs sdl)
+$(SDL_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs sdl)
 $(SDL_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags sdl)
 endif
 
@@ -33,18 +33,18 @@ ifeq ($(HAVE_SECCOMP), y)
 	PROGRAMS += $(SECCOMP_PROGRAMS)
 endif
 
-all: $(PROGRAMS:%=%.bin) $(SHARED_OBJECTS)
+all: $(PROGRAMS:%=%.$(BIN_EXT)) $(SHARED_OBJECTS)
 
 clean:
 	rm -f *.bin *.o *.so
 
-enum_link_addrs.bin: LIBS += -lnetlink
-message_queue.bin: LIBS += -lrt
+enum_link_addrs.$(BIN_EXT): LIBS += -lnetlink
+message_queue.$(BIN_EXT): LIBS += -lrt
 override_uname_dl.o: CFLAGS += -fPIC -fvisibility=hidden
-override_uname_dl.so: LDFLAGS += -fPIC -shared -Wl,-soname,$@
-override_uname_dl.so: LIBS += -ldl
+override_uname_dl.$(LIB_EXT): LDFLAGS += -fPIC -shared -Wl,-soname,$@
+override_uname_dl.$(LIB_EXT): LIBS += -ldl
 
-%.bin %.so: %.o
+%.$(BIN_EXT) %.$(LIB_EXT): %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c
