@@ -1,6 +1,11 @@
 # Run every Makefile in subdirectories
+
+# Overridable commands
 CHMOD ?= chmod
+FIND ?= find
 PDFLATEX ?= pdflatex
+LINUX32 ?= linux32
+LINUX64 ?= linux64
 SH ?= sh
 UNAME ?= uname
 
@@ -47,17 +52,36 @@ endif
 # Build targets
 SUBDIRS_FINAL := $(sort $(filter-out $(SUBDIRS_BLACKLIST), $(SUBDIRS)))
 ALL_TARGETS := $(addprefix all.., $(SUBDIRS_FINAL))
+ALL32_TARGETS := $(addprefix all32.., $(SUBDIRS_FINAL))
+ALL64_TARGETS := $(addprefix all64.., $(SUBDIRS_FINAL))
 CLEAN_TARGETS := $(addprefix clean.., $(SUBDIRS_FINAL))
-TARGETS := $(ALL_TARGETS) $(CLEAN_TARGETS)
+TARGETS := $(ALL_TARGETS) $(ALL32_TARGETS) $(ALL64_TARGETS) $(CLEAN_TARGETS)
 
 all: $(ALL_TARGETS)
 	@test -z "$(SUBDIRS_BLACKLIST)" || echo "Done building with blacklist $(SUBDIRS_BLACKLIST)"
 
+all32: $(ALL32_TARGETS)
+	@test -z "$(SUBDIRS_BLACKLIST)" || echo "Done building 32-bit binairies with blacklist $(SUBDIRS_BLACKLIST)"
+
+all64: $(ALL64_TARGETS)
+	@test -z "$(SUBDIRS_BLACKLIST)" || echo "Done building 64-bit binairies with blacklist $(SUBDIRS_BLACKLIST)"
+
 clean: $(CLEAN_TARGETS)
 
-$(TARGETS): TARGET = $(firstword $(subst .., ,$@))
-$(TARGETS):
-	@cd "$(@:$(TARGET)..%=%)" && $(MAKE) $(TARGET)
+clean-obj:
+	$(FIND) . -name '*.o' -delete
+
+$(addprefix all.., $(SUBDIRS)):
+	@cd "$(@:all..%=%)" && $(MAKE) all
+
+$(addprefix all32.., $(SUBDIRS)):
+	@cd "$(@:all32..%=%)" && $(LINUX32) $(MAKE) CC="$(CC) -m32" EXT_PREFIX="32." all
+
+$(addprefix all64.., $(SUBDIRS)):
+	@cd "$(@:all64..%=%)" && $(LINUX64) $(MAKE) CC="$(CC) -m64" EXT_PREFIX="64." all
+
+$(addprefix clean.., $(SUBDIRS)):
+	@cd "$(@:clean..%=%)" && $(MAKE) clean
 
 indent-c: gen-indent-c.sh
 	$(SH) $< > $@
@@ -72,4 +96,9 @@ sort-gen-indent-c: gen-indent-c.sh
 	cat < .$@.tmp > $<
 	rm .$@.tmp
 
-.PHONY: all clean $(TARGETS) sort-gen-indent-c
+.PHONY: all all32 all64 clean clean-obj \
+	$(addprefix all.., $(SUBDIRS)) \
+	$(addprefix all32.., $(SUBDIRS)) \
+	$(addprefix all64.., $(SUBDIRS)) \
+	$(addprefix clean.., $(SUBDIRS)) \
+	sort-gen-indent-c

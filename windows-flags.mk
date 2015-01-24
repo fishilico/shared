@@ -44,9 +44,9 @@ LDFLAGS += -municode
 endif
 
 # Application build configuration
-BIN_EXT := exe
+BIN_EXT := $(EXT_PREFIX)exe
 
 # Dynamic Linked Library build configuration
-LIB_EXT := dll
+LIB_EXT := $(EXT_PREFIX)dll
 LIB_CFLAGS ?=
 LIB_LDFLAGS ?= -shared -Wl,--subsystem=0

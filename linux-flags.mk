@@ -82,9 +82,9 @@ LDFLAGS ?= -Wl,-O1,-as-needed,-no-undefined,-z,relro,-z,now \
 LIBS ?=
 
 # Application build configuration
-BIN_EXT := bin
+BIN_EXT := $(EXT_PREFIX)bin
 
 # Shared Object build configuration
-LIB_EXT := so
+LIB_EXT := $(EXT_PREFIX)so
 LIB_CFLAGS ?= -fPIC
 LIB_LDFLAGS ?= -fPIC -shared -Wl,-soname,$@
