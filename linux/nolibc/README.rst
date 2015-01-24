@@ -63,9 +63,15 @@ GCC inline ASM:
 
 glibc source code: https://sourceware.org/git/?p=glibc.git
 
-With ``$ARCH`` being x86, x86_64 or arm, ``syscall()`` is implemented in
-``sysdeps/unix/sysv/linux/$ARCH/syscall.S`` and ``_start()`` in
-``sysdeps/$ARCH/start.S``.
+* With ``$ARCH`` being x86, x86_64 or arm, ``syscall()`` is implemented in
+  ``sysdeps/unix/sysv/linux/$ARCH/syscall.S`` and ``_start()`` in
+  ``sysdeps/$ARCH/start.S``.
+
+Musl source code: http://git.musl-libc.org/cgit/musl/tree/
+
+* With ``$ARCH`` being i386, x86_64 or arm, ``syscall`` functions are
+  implemented in ``arch/$ARCH/syscall_arch.h`` and ``_start()`` in
+  ``crt/$ARCH/Scrt1.s``.
 
 Related works:
 
