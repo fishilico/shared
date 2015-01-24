@@ -20,7 +20,8 @@ view_sizes.o: CFLAGS += -Wno-long-long
 
 # when gcc is not compiled with pthread, -fopenmp makes the preprocessor fails
 # clang 3.5.0 has partial support for OpenMP, omp.h is missing
-ifeq ($(shell $(CC) -Werror -fopenmp -include omp.h -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+HAVE_OPENMP := $(shell $(CC) -Werror -fopenmp -include omp.h -E - < /dev/null > /dev/null 2>&1 && echo y || echo n)
+ifeq ($(HAVE_OPENMP), y)
 PROGRAMS += $(OPENMP_PROGRAMS)
 $(OPENMP_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -fopenmp
 $(OPENMP_PROGRAMS:%=%.o): CFLAGS += -fopenmp
