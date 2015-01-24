@@ -7,10 +7,9 @@
 #include <string.h>
 
 #ifdef __linux__
+#    include <sys/syscall.h>
+#    include <unistd.h>
 #    ifdef __x86_64__
-#        include <asm/prctl.h>
-#        include <asm/unistd.h>
-#        include <unistd.h>
 /* x86_64 Linux segment indexes in the Global Descriptor Table (GDT)
  * https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/segment.h
  */
@@ -28,10 +27,19 @@ static const char *const gdt_segment_index_desc[16] = {
     "TLS1", "TLS2", "TLS3", /* GDT_ENTRY_TLS_MIN = 12,  GDT_ENTRY_TLS_MAX = 14 */
     "percpu", /* GDT_ENTRY_PER_CPU = 15 */
 };
+
+/* glibc defines these constants in asm/prctl.h but not musl, which hardcodes
+ * such constants, for example in __set_thread_area function:
+ * http://git.musl-libc.org/cgit/musl/tree/src/thread/x86_64/__set_thread_area.s?id=v1.1.6
+ */
+#        ifndef ARCH_GET_FS
+#            define ARCH_GET_FS 0x1003
+#        endif
+#        ifndef ARCH_GET_GS
+#            define ARCH_GET_GS 0x1004
+#        endif
+
 #    elif defined(__i386__)
-#       include <asm/ldt.h>
-#       include <linux/unistd.h>
-#       include <unistd.h>
 /* A 32-bit compiled program sees 64-bit segment indexes when run on a 64-bit kernel.
  * Therefore show information for both 32- and 64-bit x86 architectures here
  */
@@ -52,6 +60,7 @@ static const char *const gdt_segment_index_desc[32] = {
 };
 #    endif
 #else
+#    warning Unsupported target OS
 static const char *const gdt_segment_index_desc[1] = { NULL };
 #endif
 
@@ -126,7 +135,21 @@ static void print_segment_bases(void)
 #elif defined(__i386__) && defined(__linux__)
     uint16_t segment;
     unsigned long limit;
-    struct user_desc u_info;
+    /* Explicitly define user_desc as in asm/ldt.h because some libc like musl
+     * doesn't provide a definition
+     */
+    struct user_desc {
+        unsigned int entry_number;
+        unsigned int base_addr;
+        unsigned int limit;
+        unsigned int seg_32bit:1;
+        unsigned int contents:2;
+        unsigned int read_exec_only:1;
+        unsigned int limit_in_pages:1;
+        unsigned int seg_not_present:1;
+        unsigned int useable:1;
+        unsigned int lm:1;
+    } u_info;
 
     printf("Segment bases:\n");
     __asm__ volatile ("movw %%fs, %0" : "=g" (segment));
