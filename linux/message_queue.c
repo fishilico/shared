@@ -4,6 +4,7 @@
  * Documentation: http://man7.org/linux/man-pages/man7/mq_overview.7.html
  */
 #include <assert.h>
+#include <fcntl.h>
 #include <limits.h>
 #include <mqueue.h>
 #include <stdio.h>
