@@ -103,7 +103,7 @@ int main(int argc, char **argv)
         }
     }
     if (!vdso_load_offset || !vdso_dyn) {
-        fprintf(stderr, "Unable to find PT_LOAD and PT_DYNAMIC is vDSO header\n");
+        fprintf(stderr, "Unable to find PT_LOAD and PT_DYNAMIC in vDSO header\n");
         return 1;
     }
     printf("* EHDR = %p\n", (void *)vdso_hdr);
@@ -133,7 +133,7 @@ int main(int argc, char **argv)
         }
     }
     if (!vdso_symstrings || !vdso_symtab || !vdso_hash) {
-        fprintf(stderr, "Unable to find mandatory fields in PT_DNYAMIC header\n");
+        fprintf(stderr, "Unable to find mandatory fields in PT_DYNAMIC header\n");
         return 1;
     }
     if (!vdso_verdef) {
