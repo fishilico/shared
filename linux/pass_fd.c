@@ -77,7 +77,7 @@ static int child1_main(const char *sockpath)
     printf("[%u] Created Unix socket %s\n", getpid(), sockpath);
 
     /* Wait for an incomming connection */
-    clientfd = accept4(sockfd, &addr, &addrlen, SOCK_CLOEXEC);
+    clientfd = accept4(sockfd, (struct sockaddr *)&addr, &addrlen, SOCK_CLOEXEC);
     if (clientfd == -1) {
         perror("accept");
         return 1;
