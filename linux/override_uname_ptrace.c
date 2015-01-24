@@ -6,7 +6,6 @@
  *    S N R V M GNU/Linux
  */
 #include <assert.h>
-#include <asm/unistd.h> /* __NR... */
 #include <inttypes.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -14,6 +13,7 @@
 #include <string.h>
 #include <sys/prctl.h>
 #include <sys/ptrace.h> /* ptrace() */
+#include <sys/syscall.h> /* __NR... */
 #include <sys/types.h>
 #include <sys/user.h> /* struct user_regs_struct */
 #include <sys/utsname.h>
