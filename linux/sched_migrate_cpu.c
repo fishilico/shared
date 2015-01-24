@@ -10,8 +10,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/syscall.h>
 #include <sys/types.h>
 #include <time.h>
+#include <unistd.h>
 
 #if !defined CPU_ALLOC && !defined CPU_ZERO_S
 /* Define the _S API from the older one */
@@ -51,11 +53,14 @@ static int _cpu_count_s(size_t setsize, cpu_set_t *set)
 #    define CPU_ALLOC_SIZE(count) ((void)(count), sizeof(cpu_set_t))
 #    define CPU_ALLOC(count) malloc(CPU_ALLOC_SIZE((count)))
 #    define CPU_FREE(set) free((set))
+#endif
 
-#    include <sys/syscall.h>
-#    include <unistd.h>
-#    define sched_getcpu() sched_getcpu_from_syscall()
-int sched_getcpu_from_syscall()
+/* Some libc (like musl) doesn't define sched_getcpu, while libc uses the vDSO
+ * if it provides getcpu (with __vdso_getcpu symbol), which can use a CPU trick
+ * to be faster, such as segment limits in x86.
+ * Here, always use the slow path with getcpu syscall.
+ */
+static int sched_getcpu_from_syscall(void)
 {
     unsigned int cpu = 0;
     if (syscall(__NR_getcpu, &cpu, NULL, NULL) == -1) {
@@ -64,7 +69,6 @@ int sched_getcpu_from_syscall()
     assert(cpu <= INT_MAX);
     return (int)cpu;
 }
-#endif
 
 /**
  * List available CPUs with sched_getaffinity
@@ -277,7 +281,7 @@ int main(int argc, char **argv)
         if (!migrate_to_cpu(cpu_index, cpu_num)) {
             return 1;
         }
-        cpu = sched_getcpu();
+        cpu = sched_getcpu_from_syscall();
         if (cpu == -1) {
             perror("sched_getcpu");
             return 1;
