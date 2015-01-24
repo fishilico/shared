@@ -26,60 +26,18 @@ endif
 # Files
 SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
-
-# Compile 32-bits versions and 64-bits versions, if available.
-# Check with a header because the compiler may accept -m32 even if headers are
-# missing.  The headers are used to get the value of constants.
-HAVE_M32_M64 ?= y
-HAVE_M32 := $(shell echo '\#include <errno.h>' | \
-	$(CC) -m32 -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
-HAVE_M64 := $(shell echo '\#include <errno.h>' | \
-	$(CC) -m64 -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
-OBJECTS :=
-ifeq ($(HAVE_M32),y)
-OBJECTS += $(SOURCES:%.c=%.32.o)
-else
-HAVE_M32_M64 := n
-endif
-ifeq ($(HAVE_M64),y)
-OBJECTS += $(SOURCES:%.c=%.64.o)
-else
-HAVE_M32_M64 := n
-endif
-ifneq ($(HAVE_M32_M64),y)
-OBJECTS := $(SOURCES:%.c=%.out.o)
-endif
-
-BINARIES := $(OBJECTS:%.o=%)
+BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 
 all: $(BINARIES)
 
-all32: $(SOURCES:%.c=%.32)
-
-all64: $(SOURCES:%.c=%.64)
-
 clean:
-	rm -f *.o
-	rm -f *.out *.32 *.64
+	rm -f *.bin *.o
 
-%.out: %.out.o
+%.$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) $(NOLIBC_LDFLAGS) -o $@ $^
 
-%.32: %.32.o
-	$(CC) $(LDFLAGS) $(NOLIBC_LDFLAGS) -m32 -o $@ $^
-
-%.64: %.64.o
-	$(CC) $(LDFLAGS) $(NOLIBC_LDFLAGS) -m64 -o $@ $^
-
-%.out.o: %.c $(HEADERS)
+%.o: %.c
 	$(CC) $(CFLAGS) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<
-
-%.32.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) $(NOLIBC_CFLAGS) $(CPPFLAGS) -m32 -c -o $@ $<
-
-%.64.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) $(NOLIBC_CFLAGS) $(CPPFLAGS) -m64 -c -o $@ $<
-
 
 # Make an "include" directory, when no system header is available
 INCLUDE_ARCH := arm i386 x86_64
