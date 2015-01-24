@@ -34,7 +34,7 @@ static void DumpProccessToken(VOID)
         print_winerr(_T("OpenProcessToken"));
         return;
     }
-    _tprintf(_T("Token of current process:\n"));
+    _tprintf(_T("Tokens of current process:\n"));
 
     pTokenUser = (PTOKEN_USER)GetTokenInformation_a(hToken, TokenUser, NULL);
     if (pTokenUser) {
