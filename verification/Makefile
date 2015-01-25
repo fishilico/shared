@@ -20,6 +20,10 @@ all-frama: $(FRAMAC_TARGETS)
 clean:
 	rm -f *.bin *.exe *.o
 
+# In "make test", only test that the binaries actually run, don't actually verify them
+test: all
+	@for P in $(sort $(BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
+
 %.$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
@@ -39,4 +43,4 @@ clean:
 		-pp-annot -no-unicode \
 		-wp -wp-rte -wp-model Typed+cast -wp-timeout 25 -wp-split -wp-out '$(FRAMAC_TMPDIR)' $<
 
-.PHONY: all all-frama clean
+.PHONY: all all-frama clean test
