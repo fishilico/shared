@@ -18,7 +18,8 @@ install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install gcc-multilib libc6-dev-i386
   - sudo apt-get -qq install binutils-mingw-w64 gcc-mingw-w64
-  - pip install cffi numpy
+  # pip does not behave properly when CC is somewhat weird
+  - if [ "$CC" = "gcc" ] ; then pip install cffi numpy ; fi
 
 script:
   # Don't run Windows programs at all, as it is Linux.
