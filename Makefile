@@ -73,6 +73,7 @@ clean-obj:
 
 test:
 	@for D in $(sort $(SUBDIRS_FINAL)); do (cd $$D && $(MAKE) test) || exit $$? ; done
+	@echo "Done testing with blacklist $(SUBDIRS_BLACKLIST)"
 
 $(addprefix all.., $(SUBDIRS)):
 	@cd "$(@:all..%=%)" && $(MAKE) all
