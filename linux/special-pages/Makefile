@@ -1,14 +1,14 @@
 include ../../linux-flags.mk
 
 SOURCES := $(wildcard *.c)
-PROGRAMS := $(SOURCES:%.c=%)
+BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 
-all: $(PROGRAMS:%=%.bin)
+all: $(BINARIES)
 
 clean:
 	rm -f *.bin *.o *.out *.so
 
-%.bin: %.o
+%.$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c
