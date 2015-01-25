@@ -45,9 +45,13 @@ clean:
 	rm -f *.bin *.o *.so
 
 test: all
-	@for P in $(sort $(TEST_BINARIES)); do \
-		echo ./$$P && ./$$P < /dev/null || exit $$? ; \
-	done
+	@for P in $(sort $(filter-out eventpoll_activetty.$(BIN_EXT), $(TEST_BINARIES))); do \
+		echo ./$$P && ./$$P || exit $$? ; \
+	done && \
+	if [ -r /sys/class/tty/tty0/active ] ; then \
+		echo ./eventpoll_activetty.$(BIN_EXT) && \
+		./eventpoll_activetty.$(BIN_EXT) < /dev/null || exit $$? ; \
+	fi
 
 enum_link_addrs.$(BIN_EXT): LIBS += -lnetlink
 message_queue.$(BIN_EXT): LIBS += -lrt

@@ -61,7 +61,7 @@ int main(void)
 
     active_tty_fd = open("/sys/class/tty/tty0/active", O_RDONLY | O_CLOEXEC);
     if (active_tty_fd == -1) {
-        perror("open(/sys/class/tty/tty0/active");
+        perror("open(/sys/class/tty/tty0/active)");
         return 1;
     }
 
