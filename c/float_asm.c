@@ -60,7 +60,7 @@ static int toint_f(float x)
     /* Note: "clang as" has difficulties when the output is a memory, so force it to be a reg. */
     __asm__ ("cvttss2si %1, %0" : "=r"(i) : "x"(x));
 #elif defined(__i386__)
-    __asm__ ("flds %1 ; fistps %0" : "=m"(i) : "tm"(x));
+    __asm__ ("flds %1 ; fistps %0" : "=m"(i) : "m"(x));
 #elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
     /* clang 3.5.0 fails with "error: couldn't allocate output register for constraint 'w'" */
     __asm__ ("vcvt.s32.f32 %0, %1" : "=w"(i) : "w"(x));
@@ -78,7 +78,7 @@ static int toint_d(double x)
     /* Convert scalar double-precision floating-point value (with truncation) to signed integer */
     __asm__ ("cvttsd2si %1, %0" : "=r"(i) : "x"(x));
 #elif defined(__i386__)
-    __asm__ ("fldl %1 ; fistpl %0" : "=m"(i) : "tm"(x));
+    __asm__ ("fldl %1 ; fistpl %0" : "=m"(i) : "m"(x));
 #elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
     __asm__ ("vcvt.s32.f64 %0, %P1" : "=w"(i) : "w"(x));
 #else
@@ -254,6 +254,9 @@ int main(void)
 
     ok_d(add_d(100, 42), 142);
     ok_d(add_d(60, -18), 42);
+
+    ok_i(toint_f(42.f), 42);
+    ok_i(toint_d(1e4), 10000);
 
     ok_f(sqrt_f(100), 10);
     ok_f(sqrt_f(1764), 42);
