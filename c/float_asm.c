@@ -60,7 +60,8 @@ static int toint_f(float x)
     /* Note: "clang as" has difficulties when the output is a memory, so force it to be a reg. */
     __asm__ ("cvttss2si %1, %0" : "=r"(i) : "x"(x));
 #elif defined(__i386__)
-    __asm__ ("flds %1 ; fistps %0" : "=m"(i) : "m"(x));
+    /* Use flds for single-precision float and fistpl for 32-bit integer (fistps would mean 16-bit) */
+    __asm__ ("flds %1 ; fistpl %0" : "=m"(i) : "m"(x));
 #elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
     /* clang 3.5.0 fails with "error: couldn't allocate output register for constraint 'w'" */
     __asm__ ("vcvt.s32.f32 %0, %1" : "=w"(i) : "w"(x));
