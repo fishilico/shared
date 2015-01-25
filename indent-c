@@ -78,6 +78,7 @@ exec indent \
     -T PIMAGE_DOS_HEADER \
     -T PIMAGE_EXPORT_DIRECTORY \
     -T PIMAGE_NT_HEADERS \
+    -T PNT_TIB \
     -T PSHORT \
     -T PTOKEN_ELEVATION \
     -T PTOKEN_ELEVATION_TYPE \
@@ -94,6 +95,7 @@ exec indent \
     -T TCHAR \
     -T TEB_internal \
     -T UINT \
+    -T UINT_PTR \
     -T ULONG \
     -T ULONG_PTR \
     -T WORD \

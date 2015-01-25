@@ -18,7 +18,7 @@ static DWORD WINAPI thread_main(LPVOID lpParam)
 
     tls_buffer = dll_thread_tls_data();
 
-    printf("[Thread #%d] Spawned yet another thread with TLS buffer @%" PRIxPTR "\n", id, (ULONG_PTR)tls_buffer);
+    printf("[Thread #%d] Spawned yet another thread with TLS buffer @%" PRIxPTR "\n", id, (UINT_PTR)tls_buffer);
 
     /* Write something in the TLS buffer */
     snprintf(tls_buffer, DLL_TLS_SIZE, "Hey! This is thread %d!", id);
