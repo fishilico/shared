@@ -3,6 +3,7 @@
  */
 #include <assert.h>
 #include <dirent.h>
+#include <errno.h>
 #include <inttypes.h>
 #include <limits.h>
 #include <sched.h>
@@ -283,19 +284,24 @@ int main(int argc, char **argv)
         }
         cpu = sched_getcpu_from_syscall();
         if (cpu == -1) {
-            perror("sched_getcpu");
-            return 1;
-        }
-        assert(cpu >= 0);
-        if ((unsigned long)cpu == cpu_index) {
-#if HAVE_RDTSC
-            printf("Migrated to CPU %d, TSC=%" PRIu64 "\n", cpu, rdtsc());
-#else
-            printf("Migrated to CPU %d\n", cpu);
-#endif
+            if (errno == ENOSYS) {
+                printf("Maybe migrated to CPU %lu, but getcpu is not implemented in your kernel.", cpu_index);
+            } else {
+                perror("sched_getcpu");
+                return 1;
+            }
         } else {
-            printf("Failed to migrated to CPU %lu, still on %d\n", cpu_index, cpu);
+            assert(cpu >= 0);
+            if ((unsigned long)cpu == cpu_index) {
+                printf("Migrated to CPU %d.", cpu);
+            } else {
+                printf("Failed to migrate to CPU %lu, still on %d\n", cpu_index, cpu);
+            }
         }
+#if HAVE_RDTSC
+        printf(" TSC=%" PRIu64, rdtsc());
+#endif
+        printf("\n");
 
         /* Do a busy wait in a loop if a number of seconds is given */
         if (duration > 0) {
