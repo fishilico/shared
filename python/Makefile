@@ -29,8 +29,16 @@ lint:
 	$(PYLINT) $(PYLINT_PARAMS) *.py
 
 test: _cffi_example.$(LIB_EXT)
-	$(PYTHON) cffi_example.py
-	$(PYTHON) cffi_numpy.py
+	if $(PYTHON) -c 'import cffi'; then \
+		$(PYTHON) cffi_example.py; \
+		if $(PYTHON) -c 'import numpy'; then \
+			$(PYTHON) cffi_numpy.py; \
+		else \
+			echo "Skip cffi-numpy tests because python-numpy is not installed"; \
+		fi \
+	else \
+		echo "Skip cffi tests because python-cffi is not installed"; \
+	fi
 
 _cffi_example.$(LIB_EXT): _cffi_example.o
 	$(CC) $(LDFLAGS) $(LIB_LDFLAGS) -o $@ $^ $(LIBS)
