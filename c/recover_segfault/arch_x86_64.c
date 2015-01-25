@@ -150,13 +150,9 @@ static size_t decode_modrm_check(
                     fprintf(stderr, "Invalid instruction: ModR/M and SIB set to disp32+index\n");
                     return 0;
                 } else if ((modrm & 0xc0) == 0x40) {
-                    /* Mod = 01, base = 101: [rBP]+disp8 with index */
-                    fprintf(stderr, "Invalid instruction: ModR/M and SIB set to [rBP]+disp8+index\n");
-                    return 0;
+                    /* Mod = 01, base = 101: [rBP]+disp8 with index: fall through */
                 } else if ((modrm & 0xc0) == 0x80) {
-                    /* Mod = 10, base = 101: [rBP]+disp32 with index */
-                    fprintf(stderr, "Invalid instruction: ModR/M and SIB set to [rBP]+disp32+index\n");
-                    return 0;
+                    /* Mod = 10, base = 101: [rBP]+disp32 with index: fall through */
                 } else {
                     __builtin_unreachable();
                 }
@@ -307,7 +303,7 @@ bool run_mov_asm_instruction_p(
     const uint8_t *instr = (uint8_t *)(R_RIP(ctx));
     const uint8_t *orig_instr = instr;
     uint8_t rexprefix = 0;
-    asm_instr_reg *op_reg = NULL;
+    asm_instr_reg *op_reg = NULL, tmp_reg;
     char *operand_reg = NULL;
     char *operand_rm = NULL;
     bool has_66_prefix = false, has_f2_prefix = false, has_f3_prefix = false;
@@ -403,6 +399,26 @@ bool run_mov_asm_instruction_p(
         }
     }
 
+    /* 33 /r: xor reg/mem, reg */
+    if (instr[0] == 0x33) {
+        paramlen = decode_modrm_check(ctx, instr + 1, rexprefix, data_addr, &op_reg, &operand_reg, &operand_rm);
+        if (!paramlen) {
+            return false;
+        }
+        asm_printf(asm_instr, "xor %s, %s", operand_rm, operand_reg);
+        free(operand_rm);
+        free(operand_reg);
+        if (rexprefix & X86_64_REX_W) {
+            memcpy(&tmp_reg, data, 8);
+        } else {
+            tmp_reg = 0;
+            memcpy(&tmp_reg, data, 4);
+        }
+        *op_reg ^= tmp_reg;
+        R_RIP(ctx) += 1 + paramlen;
+        return true;
+    }
+
     /* 38 /r: cmpb reg8, reg/mem8 */
     if (instr[0] == 0x38) {
         paramlen = decode_modrm_check(ctx, instr + 1, rexprefix | X86_64_REX_FAKE_R8,
@@ -465,6 +481,44 @@ bool run_mov_asm_instruction_p(
         free(operand_rm);
         R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(op1 - op2));
         R_RIP(ctx) += 2 + paramlen;
+        return true;
+    }
+
+    /* a4: movsb  %ds:(%rsi), %es:(%rdi) */
+    if (has_no_prefix && instr[0] == 0xa4) {
+        uintptr_t source_addr = (uintptr_t)R_RSI(ctx);
+        if (source_addr != data_addr) {
+            fprintf(stderr, "Error: mem parameter rsi is not address %" PRIxPTR "\n", data_addr);
+            return false;
+        }
+        asm_printf(asm_instr, "movsb (rsi=0x%" PRIxREG "), (rdi)", R_RSI(ctx));
+        memcpy((uint8_t *)(uint64_t)R_RDI(ctx), data, 1);
+        R_RDI(ctx) += 1;
+        R_RSI(ctx) += 1;
+        R_RIP(ctx) += 1;
+        return true;
+    }
+
+    /* f3 48 a5: rep movsq %ds:(%rsi), %es:(%rdi) */
+    if (has_f3_prefix && instr[0] == 0xa5) {
+        uintptr_t source_addr = (uintptr_t)R_RSI(ctx);
+        asm_instr_reg rep_count = R_RCX(ctx) + 1;
+        if (source_addr != data_addr) {
+            fprintf(stderr, "Error: mem parameter rsi is not address %" PRIxPTR "\n", data_addr);
+            return false;
+        }
+        if (rexprefix & X86_64_REX_W) {
+            asm_printf(asm_instr, "req movsq (rsi=0x%" PRIxREG "), (rdi)", R_RSI(ctx));
+            rep_count *= 8;
+        } else {
+            asm_printf(asm_instr, "req movsw (rsi=0x%" PRIxREG "), (rdi)", R_RSI(ctx));
+            rep_count *= 4;
+        }
+        memcpy((uint8_t *)(uint64_t)R_RDI(ctx), data, rep_count);
+        R_RDI(ctx) += 1;
+        R_RSI(ctx) += 1;
+        R_RCX(ctx) = 0;
+        R_RIP(ctx) += 1;
         return true;
     }
 

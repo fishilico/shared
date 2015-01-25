@@ -104,6 +104,11 @@ int main(void)
     R_RSI(&ctx) = data_addr;
     test("\x0f\xb7\x0e", "movzwl (rsi=0xda7a0000), ecx", RCX, data16);
 
+    /* XOR */
+    R_RAX(&ctx) = 0x123456;
+    R_RDI(&ctx) = data_addr;
+    test("\x48\x33\x07", "xor (rdi=0xda7a0000), rax", RAX, data64 ^ 0x123456);
+
     /* Load 64-bit value */
     R_RSI(&ctx) = data_addr;
     test("\x48\x8b\x06", "mov (rsi=0xda7a0000), rax", RAX, data64);
@@ -125,6 +130,13 @@ int main(void)
     test("\x44\x38\x09", "cmp r9b, (rcx=0xda7a0000)", EFL, 0);
     R_RCX(&ctx) = data_addr;
     test("\x44\x3a\x11", "cmp (rcx=0xda7a0000), r10b", EFL, X86_EFLAGS_SF | X86_EFLAGS_PF);
+    /* Special case for musl "for (i=l; i && s[i-1] != '\n'; i--);" */
+    R_R13(&ctx) = data_addr;
+    R_RBP(&ctx) = 1;
+    test("\x41\x80\x7c\x2d\xff\x0a", "cmpb 0x0a, -0x1(r13+1*rbp=0xda7a0001)", EFL, X86_EFLAGS_PF);
+    R_R13(&ctx) = data_addr;
+    R_RBP(&ctx) = 2;
+    test("\x41\x80\x7c\x2d\xfe\x17", "cmpb 0x17, -0x2(r13+1*rbp=0xda7a0002)", EFL, X86_EFLAGS_ZF);
 
     /* Load 32-bit value */
     R_RSI(&ctx) = data_addr;
