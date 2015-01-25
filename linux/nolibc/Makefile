@@ -33,6 +33,14 @@ all: $(BINARIES)
 clean:
 	rm -f *.bin *.o
 
+# Test shellcode separately
+test: all
+	@for P in $(sort $(filter-out shellcode.$(BIN_EXT), $(BINARIES))); do \
+		echo ./$$P && ./$$P || exit $$? ; \
+	done && \
+	echo ./shellcode.$(BIN_EXT) && \
+	(echo 'echo $$0 && set && exit' | ./shellcode.$(BIN_EXT))
+
 %.$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) $(NOLIBC_LDFLAGS) -o $@ $^
 
@@ -85,4 +93,4 @@ include/sys/linux_utsname.h:
 include/sys/utsname.h: include/sys/linux_utsname.h
 	$(SED) 's/struct new_utsname/struct utsname/' < $< > $@
 
-.PHONY: all all32 all64 clean create_include
+.PHONY: all all32 all64 clean test create_include

@@ -11,10 +11,13 @@ all: $(BINARIES)
 clean:
 	rm -f *.bin *.o
 
+test: all
+	@for P in $(sort $(BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
+
 %.$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $^
 
-.PHONY: all clean
+.PHONY: all clean test
