@@ -20,7 +20,8 @@ install:
   - sudo apt-get -qq install binutils-mingw-w64 gcc-mingw-w64
 
 script:
-  - make test
+  # Don't run Windows programs at all, as it is Linux.
+  - if [ "$OS" = "Windows_NT" ] ; then make ; else make test ; fi
 
 # Disable email notifications
 notifications:
