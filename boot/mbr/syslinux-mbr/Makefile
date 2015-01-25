@@ -110,10 +110,10 @@ clean:
 	rm -f *.o *.elf .*.d
 	rm -f *.bin
 
-check: all
+test: all
 	$(SHA1SUM) -c sha1sums.txt
 
-.PHONY: all clean check
+.PHONY: all clean test
 .PRECIOUS: %.elf %.o %_c.o %_f.o
 
 -include .*.d
