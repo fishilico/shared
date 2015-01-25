@@ -132,6 +132,11 @@ static bool install_syscall_filter(bool do_kill)
     prog.filter = filter;
 
     if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) == -1) {
+        if (errno == EINVAL) {
+            fprintf(stderr, "The kernel does not support prctl(PR_SET_NO_NEW_PRIVS), available since 3.5.\n");
+            /* Exit with a success value because nothing really failed, there is only nothing available. */
+            exit(0);
+        }
         perror("prctl(NO_NEW_PRIVS)");
         return false;
     }
