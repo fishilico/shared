@@ -69,6 +69,11 @@ int main(void)
         return 1;
     }
 
+    /* If stdin is not a tty, stop here */
+    if (!isatty(STDIN_FILENO)) {
+        return 0;
+    }
+
     /* Create a new epoll instance */
     epollfd = epoll_create1(EPOLL_CLOEXEC);
     if (epollfd == -1) {
