@@ -2,18 +2,18 @@ include ../../windows-flags.mk
 
 SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
-BINARIES := $(SOURCES:%.c=%.exe)
+BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 
 all: $(BINARIES)
 
 clean:
 	rm -f *.exe *.o
 
-helloworld_noimport.exe: LDFLAGS += -Wl,--subsystem=windows
-helloworld_noimport.exe: LDFLAGS += -nostdlib -Wl,--nostdlib
+helloworld_noimport.$(BIN_EXT): LDFLAGS += -Wl,--subsystem=windows
+helloworld_noimport.$(BIN_EXT): LDFLAGS += -nostdlib -Wl,--nostdlib
 helloworld_noimport.o: CFLAGS += -nostdlib -fno-stack-protector
 
-%.exe: %.o
+%.$(BIN_EXT): %.o
 	$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c $(HEADERS)

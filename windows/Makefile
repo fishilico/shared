@@ -2,19 +2,19 @@ include ../windows-flags.mk
 
 SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
-BINARIES := $(SOURCES:%.c=%.exe)
+BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 
 all: $(BINARIES)
 
 clean:
 	rm -f *.exe *.o
 
-check_winmain_params.exe helloworld.exe: LDFLAGS += -Wl,--subsystem=windows
-list_processes.exe virtual_mem.exe: LIBS += -lpsapi
-network_stat.exe: LIBS += -liphlpapi -lws2_32
-uuidgen.exe: LIBS += -lrpcrt4
+check_winmain_params.$(BIN_EXT) helloworld.$(BIN_EXT): LDFLAGS += -Wl,--subsystem=windows
+list_processes.$(BIN_EXT) virtual_mem.$(BIN_EXT): LIBS += -lpsapi
+network_stat.$(BIN_EXT): LIBS += -liphlpapi -lws2_32
+uuidgen.$(BIN_EXT): LIBS += -lrpcrt4
 
-%.exe: %.o
+%.$(BIN_EXT): %.o
 	$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c $(HEADERS)
