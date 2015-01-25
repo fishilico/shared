@@ -31,5 +31,7 @@ all: $(BINARIES)
 clean:
 	rm -f *.bin *.elf *.o
 
-.PHONY: all clean
+test: all
+
+.PHONY: all clean test
 .PRECIOUS: %.elf %.o

@@ -28,7 +28,7 @@ lint:
 	$(PEP8) $(PEP8_PARAMS) *.py
 	$(PYLINT) $(PYLINT_PARAMS) *.py
 
-test: _cffi_example.$(LIB_EXT)
+test: all
 	if $(PYTHON) -c 'import cffi'; then \
 		$(PYTHON) cffi_example.py; \
 		if $(PYTHON) -c 'import numpy'; then \

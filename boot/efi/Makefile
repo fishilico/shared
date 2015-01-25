@@ -50,6 +50,8 @@ all: $(EFIS)
 clean:
 	rm -f *.efi *.o *.so
 
+test: all
+
 %.efi: %.so
 	$(OBJCOPY) -j .text -j .sdata -j .data -j .dynamic -j .dynsym -j .rel* \
 		-j .rela* -j .reloc --target=efi-app-$(ARCH) $< $@
@@ -60,5 +62,5 @@ clean:
 %.o: %.c efi.h
 	$(CC) $(CFLAGS) $(ARCH_CFLAGS) $(CPPFLAGS) -c $< -o $@
 
-.PHONY: all clean
+.PHONY: all clean test
 .PRECIOUS: %.efi %.o %.so

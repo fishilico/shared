@@ -71,6 +71,9 @@ clean: $(CLEAN_TARGETS)
 clean-obj:
 	$(FIND) . -name '*.o' -delete
 
+test:
+	@for D in $(sort $(SUBDIRS_FINAL)); do (cd $$D && $(MAKE) test) || exit $$? ; done
+
 $(addprefix all.., $(SUBDIRS)):
 	@cd "$(@:all..%=%)" && $(MAKE) all
 
@@ -96,7 +99,7 @@ sort-gen-indent-c: gen-indent-c.sh
 	cat < .$@.tmp > $<
 	rm .$@.tmp
 
-.PHONY: all all32 all64 clean clean-obj \
+.PHONY: all all32 all64 clean clean-obj test \
 	$(addprefix all.., $(SUBDIRS)) \
 	$(addprefix all32.., $(SUBDIRS)) \
 	$(addprefix all64.., $(SUBDIRS)) \

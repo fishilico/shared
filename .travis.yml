@@ -20,7 +20,7 @@ install:
   - sudo apt-get -qq install binutils-mingw-w64 gcc-mingw-w64
 
 script:
-  - make
+  - make test
 
 # Disable email notifications
 notifications:

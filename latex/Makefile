@@ -8,9 +8,11 @@ all: $(PDFS)
 clean:
 	rm -f *.aux *.log *.out *.pdf *.toc
 
+test: all
+
 # Compile 2 times each TeX file
 %.pdf: %.tex
 	$(PDFLATEX) $<
 	$(PDFLATEX) $<
 
-.PHONY: all clean
+.PHONY: all clean test
