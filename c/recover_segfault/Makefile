@@ -36,13 +36,18 @@ else
 OBJECTS += os_unknown.o
 endif
 
-all: $(PROGRAMS:%=%.$(BIN_EXT))
+BINARIES := $(PROGRAMS:%=%.$(BIN_EXT))
+
+all: $(BINARIES)
 
 clean:
 	rm -f *.o *.bin *.exe
 
 debug: CPPFLAGS += -DDEBUG=1
 debug: all
+
+test: all
+	@for P in $(sort $(BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
 %.$(BIN_EXT): %.o $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
@@ -61,5 +66,5 @@ os_unknown.o:
 	@echo "Unknown OS from triplet $(TARGET_TRIPLET)"
 	@false
 
-.PHONY: all clean debug
+.PHONY: all clean debug test
 .PRECIOUS: %.o

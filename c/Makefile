@@ -12,6 +12,9 @@ OPENMP_PROGRAMS := openmp_matrix
 GTK_PROGRAMS := gtk_alpha_window
 X86_PROGRAMS := $(filter x86-%, $(ALL_PROGRAMS))
 
+# Programs not to test automatically, because they hang
+NONTEST_PROGRAMS := gtk_alpha_window
+
 # Find other programs. Only programs in $(PROGRAMS) are built.
 PROGRAMS := $(filter-out $(OPENMP_PROGRAMS) $(GTK_PROGRAMS) $(X86_PROGRAMS), $(ALL_PROGRAMS))
 
@@ -54,10 +57,16 @@ else ifneq (,$(findstring x86_64, $(TARGET_TRIPLET)))
 PROGRAMS += $(X86_PROGRAMS)
 endif
 
+TEST_PROGRAMS := $(filter-out $(NONTEST_PROGRAMS), $(PROGRAMS))
+TEST_BINARIES := $(TEST_PROGRAMS:%=%.$(BIN_EXT))
+
 all: $(PROGRAMS:%=%.$(BIN_EXT))
 
 clean:
 	rm -f *.o *.bin *.exe *.tmp
+
+test: all
+	@for P in $(sort $(TEST_BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
 float_asm.$(BIN_EXT): LIBS += -lm
 %.$(BIN_EXT): %.o
@@ -77,4 +86,4 @@ x86-linux-cpufeature.h.tmp:
 x86-linux-cpu-scattered.c.tmp:
 	$(WGET) -q -O $@ '$(LINUX_URL)/arch/x86/kernel/cpu/scattered.c' || (rm $@ ; false)
 
-.PHONY: all clean update_cpuid
+.PHONY: all clean test update_cpuid
