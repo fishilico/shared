@@ -109,7 +109,8 @@ int main(void)
 #else /* MAX_HANDLE_SZ */
 int main(void)
 {
-    fprintf(stderr, "name_to_handle_at and open_by_handle_at seem to be unsupported by your libc.\n");
-    return 1;
+    printf("name_to_handle_at and open_by_handle_at seem to be unsupported by your libc.\n");
+    /* Return success so that "make test" doesn't fail with a libc like musl */
+    return 0;
 }
 #endif /* MAX_HANDLE_SZ */
