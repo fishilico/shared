@@ -27,6 +27,7 @@ static asm_instr_reg* get_gp_reg(
     const char *regs16[8] = { "ax", "cx", "dx", "bx", "sp", "bp", "si", "di" };
 
     assert(regnum < 8);
+    assert(bitsize == 8 || bitsize == 16 || bitsize == 32);
 
     if (regname) {
         if (bitsize == 8) {
@@ -38,7 +39,7 @@ static asm_instr_reg* get_gp_reg(
         } else if (bitsize == 32) {
             snprintf(regname, 4, "e%s", regs16[regnum]);
         } else {
-            __builtin_unreachable();
+            abort(); /* unreachable */
         }
     }
 
@@ -60,7 +61,7 @@ static asm_instr_reg* get_gp_reg(
         case 7:
             return &R_EDI(ctx);
     }
-    __builtin_unreachable();
+    abort(); /* unreachable */
 }
 
 /**
@@ -115,7 +116,7 @@ static size_t decode_modrm_check(
                     fprintf(stderr, "Invalid instruction: ModR/M and SIB set to disp32[EBP][index]\n");
                     return 0;
                 } else {
-                    __builtin_unreachable();
+                    abort(); /* unreachable */
                 }
             }
 
@@ -139,7 +140,7 @@ static size_t decode_modrm_check(
             /* Mod != 11, R/M != 100: memory given by register */
             sibdesc = malloc(5);
             assert(sibdesc);
-            computed_addr = (uintptr_t)*get_gp_reg(ctx, (modrm & 7), 64, sibdesc);
+            computed_addr = (uintptr_t)*get_gp_reg(ctx, (modrm & 7), 32, sibdesc);
         }
 
         assert(sibdesc);
@@ -181,7 +182,7 @@ static size_t decode_modrm_check(
                 computed_addr += disp;
             }
         } else {
-            __builtin_unreachable();
+            abort(); /* unreachable */
         }
         free(sibdesc);
 

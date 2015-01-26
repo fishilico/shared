@@ -29,6 +29,7 @@ static asm_instr_reg* get_gp_reg(
     const char *regs16[8] = { "ax", "cx", "dx", "bx", "sp", "bp", "si", "di" };
 
     assert(regnum < 16);
+    assert(bitsize == 8 || bitsize == 16 || bitsize == 32 || bitsize == 64);
 
     if (regname) {
         if (regnum < 8) {
@@ -46,7 +47,7 @@ static asm_instr_reg* get_gp_reg(
             } else if (bitsize == 64) {
                 snprintf(regname, 4, "r%s", regs16[regnum]);
             } else {
-                __builtin_unreachable();
+                abort(); /* unreachable */
             }
         } else {
             /* r8..r15 */
@@ -59,7 +60,7 @@ static asm_instr_reg* get_gp_reg(
             } else if (bitsize == 64) {
                 snprintf(regname, 4, "r%u", regnum);
             } else {
-                __builtin_unreachable();
+                abort(); /* unreachable */
             }
         }
     }
@@ -98,7 +99,7 @@ static asm_instr_reg* get_gp_reg(
         case 15:
             return &R_R15(ctx);
     }
-    __builtin_unreachable();
+    abort(); /* unreachable */
 }
 
 /**
@@ -154,7 +155,7 @@ static size_t decode_modrm_check(
                 } else if ((modrm & 0xc0) == 0x80) {
                     /* Mod = 10, base = 101: [rBP]+disp32 with index: fall through */
                 } else {
-                    __builtin_unreachable();
+                    abort(); /* unreachable */
                 }
             }
 
@@ -243,7 +244,7 @@ static size_t decode_modrm_check(
                 }
             }
         } else {
-            __builtin_unreachable();
+            abort(); /* unreachable */
         }
         free(sibdesc);
 
