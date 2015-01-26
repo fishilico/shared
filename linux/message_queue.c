@@ -4,6 +4,7 @@
  * Documentation: http://man7.org/linux/man-pages/man7/mq_overview.7.html
  */
 #include <assert.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
 #include <mqueue.h>
@@ -60,6 +61,10 @@ int main(int argc, char **argv)
     attr.mq_curmsgs = 0;
     mqdes = mq_open(queue_name, O_WRONLY | O_CREAT | O_EXCL, 0600, &attr);
     if (mqdes == (mqd_t)-1) {
+        if (errno == ENOSYS) {
+            fprintf(stderr, "Exit because the kernel does not support mq_open.\n");
+            exit(0);
+        }
         perror("mq_open");
         if (queue_name[0] != '/') {
             fprintf(stderr, "It seems that the initial '/' is missing.\n");

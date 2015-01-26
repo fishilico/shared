@@ -133,7 +133,7 @@ static bool install_syscall_filter(bool do_kill)
 
     if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) == -1) {
         if (errno == EINVAL) {
-            fprintf(stderr, "The kernel does not support prctl(PR_SET_NO_NEW_PRIVS), available since 3.5.\n");
+            fprintf(stderr, "Exit because the kernel does not support prctl(PR_SET_NO_NEW_PRIVS).\n");
             /* Exit with a success value because nothing really failed, there is only nothing available. */
             exit(0);
         }
@@ -142,7 +142,8 @@ static bool install_syscall_filter(bool do_kill)
     }
     if (prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog) == -1) {
         if (errno == EINVAL) {
-            fprintf(stderr, "seccomp filters are not available\n");
+            fprintf(stderr, "Exit because the kernel does not seccomp filters.\n");
+            exit(0);
         } else {
             perror("prctl(SECCOMP)");
         }

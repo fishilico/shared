@@ -88,8 +88,8 @@ int main(int argc, char **argv)
     /* Retrieve vDSO address from the auxiliary vector */
     vdso_base = (uintptr_t)getauxval_from_args(AT_SYSINFO_EHDR, argc, argv);
     if (!vdso_base) {
-        fprintf(stderr, "SYSINFO_EHDR not found in auxv\n");
-        return 1;
+        fprintf(stderr, "SYSINFO_EHDR not found in auxv, no vDSO present\n");
+        return 0;
     }
     printf("vDSO header found @0x%" PRIxPTR "\n", vdso_base);
 

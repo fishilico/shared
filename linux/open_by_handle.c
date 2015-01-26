@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -53,6 +54,10 @@ static bool test_open_by_handle_with_name(const char *pathname, bool is_file)
 
     fhp->handle_bytes = fh_allocated;
     if (name_to_handle_at(AT_FDCWD, pathname, fhp, &mount_id, 0) == -1) {
+        if (errno == ENOSYS) {
+            fprintf(stderr, "Exit because the kernel does not support name_to_handle_at.\n");
+            exit(0);
+        }
         perror("name_to_handle_at");
         return false;
     }
