@@ -4,6 +4,21 @@ PYTHON ?= python
 PEP8 ?= pep8
 PYLINT ?= pylint
 
+# Programs not to test automatically
+NONTEST_BINARIES := matplotlib_feed_plot3d.py unicode_norm.py
+
+HAVE_PYTHON_CFFI := $(shell $(PYTHON) -c 'import cffi' 2> /dev/null && echo y || echo n)
+HAVE_PYTHON_NUMPY := $(shell $(PYTHON) -c 'import numpy' 2> /dev/null && echo y || echo n)
+
+ifneq ($(HAVE_PYTHON_CFFI), y)
+NONTEST_BINARIES += cffi_example.py cffi_numpy.py
+else ifneq ($(HAVE_PYTHON_NUMPY), y)
+NONTEST_BINARIES += cffi_numpy.py
+endif
+
+BINARIES := $(wildcard *.py)
+TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(BINARIES))
+
 # Ignore line-too-long
 PEP8_PARAMS := '--ignore=E501'
 
@@ -29,16 +44,7 @@ lint:
 	$(PYLINT) $(PYLINT_PARAMS) *.py
 
 test: all
-	if $(PYTHON) -c 'import cffi'; then \
-		$(PYTHON) cffi_example.py; \
-		if $(PYTHON) -c 'import numpy'; then \
-			$(PYTHON) cffi_numpy.py; \
-		else \
-			echo "Skip cffi-numpy tests because python-numpy is not installed"; \
-		fi \
-	else \
-		echo "Skip cffi tests because python-cffi is not installed"; \
-	fi
+	@@for P in $(sort $(TEST_BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
 _cffi_example.$(LIB_EXT): _cffi_example.o
 	$(CC) $(LDFLAGS) $(LIB_LDFLAGS) -o $@ $^ $(LIBS)
