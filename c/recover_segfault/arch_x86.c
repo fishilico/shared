@@ -147,7 +147,7 @@ static size_t decode_modrm_check(
         /* Decode the displacement and build operand_rm */
         if ((modrm & 0xc0) == 0) {
             /* Mod = 00: no displacement */
-            rmdesc = malloc(sizeof("(=0x)") + 16 + strlen(sibdesc));
+            rmdesc = malloc(sizeof("(=0x)") + 8 + strlen(sibdesc));
             assert(rmdesc);
             sprintf(rmdesc, "(%s=0x%" PRIxPTR ")", sibdesc, computed_addr);
         } else if ((modrm & 0xc0) == 0x40) {
@@ -155,7 +155,7 @@ static size_t decode_modrm_check(
             unsigned int disp = instr[paramlen];
             paramlen += 1;
 
-            rmdesc = malloc(sizeof("0x(=0x)") + 2 + 16 + strlen(sibdesc));
+            rmdesc = malloc(sizeof("-0x(=0x)") + 2 + 8 + strlen(sibdesc));
             assert(rmdesc);
             if (disp >= 0x80) {
                 sprintf(rmdesc, "-0x%x(%s=0x%" PRIxPTR ")", 0x100 - disp, sibdesc, computed_addr);
@@ -170,7 +170,7 @@ static size_t decode_modrm_check(
             memcpy(&disp, &instr[paramlen], 4);
             paramlen += 4;
 
-            rmdesc = malloc(sizeof("-0x(=0x)") + 8 + 16 + strlen(sibdesc));
+            rmdesc = malloc(sizeof("-0x(=0x)") + 8 + 8 + strlen(sibdesc));
             assert(rmdesc);
             if (disp >> 31) {
                 disp = 1 + ((~disp) & 0xffffffffU);

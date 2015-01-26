@@ -199,7 +199,7 @@ static size_t decode_modrm_check(
             unsigned int disp = instr[paramlen];
             paramlen += 1;
 
-            rmdesc = malloc(sizeof("0x(=0x)") + 2 + 16 + strlen(sibdesc));
+            rmdesc = malloc(sizeof("-0x(=0x)") + 2 + 16 + strlen(sibdesc));
             assert(rmdesc);
             if (disp >= 0x80) {
                 sprintf(rmdesc, "-0x%x(%s=0x%" PRIxPTR ")", 0x100 - disp, sibdesc, computed_addr);
