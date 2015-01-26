@@ -43,15 +43,18 @@ typedef struct user_regs_struct user_regs_type;
 #    define REG_RESULT(regs) ((regs).rax)
 typedef struct user_regs_struct user_regs_type;
 #elif defined __arm__
-#    include <asm/ptrace.h>
-#    define REG_SYSCALL(regs) ((regs).ARM_r7)
-#    define REG_ARG0(regs) ((regs).ARM_ORIG_r0)
-#    define REG_ARG1(regs) ((regs).ARM_r1)
-#    define REG_ARG2(regs) ((regs).ARM_r2)
-#    define REG_ARG3(regs) ((regs).ARM_r3)
-#    define REG_ARG4(regs) ((regs).ARM_r4)
-#    define REG_ARG5(regs) ((regs).ARM_r5)
-#    define REG_RESULT(regs) ((regs).ARM_r0)
+/* As musl is missing asm/ptrace.h from Linux kernel, harcode offsets in
+ * user_regs struct, like ARM_r* macros in
+ * https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/arm/include/uapi/asm/ptrace.h
+ */
+#    define REG_SYSCALL(regs) ((regs).uregs[7])
+#    define REG_ARG0(regs) ((regs).uregs[17])
+#    define REG_ARG1(regs) ((regs).uregs[1])
+#    define REG_ARG2(regs) ((regs).uregs[2])
+#    define REG_ARG3(regs) ((regs).uregs[3])
+#    define REG_ARG4(regs) ((regs).uregs[4])
+#    define REG_ARG5(regs) ((regs).uregs[5])
+#    define REG_RESULT(regs) ((regs).uregs[0])
 typedef struct user_regs user_regs_type;
 #else
 #    error "Unsupported architecture"
