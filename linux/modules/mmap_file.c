@@ -9,6 +9,7 @@
 #include <linux/debugfs.h>
 #include <linux/mm.h>
 #include <linux/slab.h>
+#include <linux/vmalloc.h>
 
 static unsigned long mapsize = PAGE_SIZE << 4;
 module_param(mapsize, ulong, S_IRUSR | S_IRGRP | S_IROTH);
