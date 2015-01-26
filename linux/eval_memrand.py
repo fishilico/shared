@@ -55,7 +55,7 @@ class RandomAddress(object):
         # \-----------+-----+----+-----------------/
         rmask = (~self.and_bits) & self.or_bits
         if rmask == 0:
-            return 'not random'
+            return 'not random, always {}'.format(hex(self.and_bits)[2:])
 
         xmin = hex(self.and_bits)[2:]
         xmax = hex(self.or_bits)[2:]
@@ -64,7 +64,7 @@ class RandomAddress(object):
         xmask = [x if x == y else 'X' for x, y in zip(xmin, xmax)]
 
         # Find out "weak" random bits
-        little_weak = []
+        quite_weak = []
         very_weak = []
         for bitidx, cnt in enumerate(self.bitcount):
             if cnt != 0 and cnt != total_count:
@@ -74,15 +74,15 @@ class RandomAddress(object):
                     # Mark very weak bits as W in the hexadecimal mask
                     xmask[-(bitidx // 4) - 1] = 'W'
                 elif not 30 < percent < 70:
-                    little_weak.append('{}({}%)'.format(bitidx, percent))
+                    quite_weak.append('{}({}%)'.format(bitidx, percent))
                     # Mark weak bits as w in the hexadecimal mask
                     xmask[-(bitidx // 4) - 1] = 'w'
 
         description = '{} ({}-{}), {} random bits'.format(
             ''.join(xmask), xmin, xmax, bit_count(rmask))
-        if len(little_weak):
-            description += '\n  {} little weak bits: {}'.format(
-                len(little_weak), ', '.join(little_weak))
+        if len(quite_weak):
+            description += '\n  {} quite weak bits: {}'.format(
+                len(quite_weak), ', '.join(quite_weak))
         if len(very_weak):
             description += '\n  {} very weak bits: {}'.format(
                 len(very_weak), ', '.join(very_weak))
@@ -96,57 +96,64 @@ def main(argv=None):
                         help="number of execution to perfom")
     args = parser.parse_args(argv)
 
-    # Initialize objects which collect random address
-    stack = RandomAddress()
-    heap = RandomAddress()
-    vdso = RandomAddress()
-    libc = RandomAddress()
+    cmdline = ['cat', '/proc/self/maps']
+    mappings = {}
+
+    # First run, to initialize what can be found
+    proc = subprocess.Popen(cmdline, stdout=subprocess.PIPE)
+    for line in proc.stdout:
+        sline = line.decode('ascii', errors='ignore').strip().split()
+        # Ignore anonymous mappings
+        if len(sline) < 6:
+            continue
+        path = sline[5].strip()
+        if not path:
+            continue
+
+        if path[0] == '[' and path[-1] == ']':
+            # Add kernel mappings, like [heap], [stack] and [vdso]
+            mappings[path] = RandomAddress()
+        elif re.match(r'/(.*/)?lib.*/libc(-[^/]*)?\.so', path):
+            # Add a mapping to libc, if found
+            mappings[path] = RandomAddress()
+        elif re.match(r'/(.*/)?lib.*/ld(-[^/]*)?\.so', path):
+            # Add a mapping to ld.so, if found
+            mappings[path] = RandomAddress()
+    retval = proc.wait()
+    if retval:
+        return retval
+    del proc
 
     # Run
-    cmdline = ['cat', '/proc/self/maps']
     numiter = max(args.num, 1)
     print("Iterating {} times".format(numiter))
     for _ in range(numiter):
-        has_stack = False
-        has_heap = False
-        has_vdso = False
-        has_libc = False
+        has_mapping = dict((path, False) for path in mappings.keys())
 
         proc = subprocess.Popen(cmdline, stdout=subprocess.PIPE)
         for line in proc.stdout:
             sline = line.decode('ascii', errors='ignore').strip().split()
             if len(sline) < 6:
                 continue
-            addr1, addr2 = [int(addr, 16) for addr in sline[0].split('-')]
             path = sline[5]
-            if not has_stack and path == '[stack]':
-                stack.add(addr2)
-                has_stack = True
-            elif not has_heap and path == '[heap]':
-                heap.add(addr1)
-                has_heap = True
-            elif not has_vdso and path == '[vdso]':
-                vdso.add(addr1)
-                has_vdso = True
-            elif not has_libc and re.match(r'.*/lib.*/libc', path):
-                libc.add(addr1)
-                has_libc = True
+            if has_mapping.get(path) is False:
+                addr = int(sline[0].split('-')[0], 16)
+                has_mapping[path] = True
+                mappings[path].add(addr)
 
         # Wait for the process
         retval = proc.wait()
         if retval:
-            # Return error immediately
             return retval
         del proc
-        if not (has_stack and has_heap and has_vdso and has_libc):
-            sys.stderr.write("Oops, a section is missing :(\n")
+        if any(val is False for val in has_mapping.values()):
+            missing = [name for (name, val) in has_mapping.items() if not val]
+            sys.stderr.write("Missing: {} :(\n".format(', '.join(missing)))
             return 1
 
     # Display results
-    print("Stack: {}".format(stack.get_stat(numiter)))
-    print("Heap: {}".format(heap.get_stat(numiter)))
-    print("vDSO: {}".format(vdso.get_stat(numiter)))
-    print("libc: {}".format(libc.get_stat(numiter)))
+    for name in sorted(mappings.keys()):
+        print("{}: {}".format(name, mappings[name].get_stat(numiter)))
     return 0
 
 
