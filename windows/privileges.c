@@ -255,7 +255,7 @@ static BOOL EnableDebugPrivilege(VOID)
     return TRUE;
 }
 
-int _tmain()
+int _tmain(void)
 {
     DumpProccessToken();
     if (EnableDebugPrivilege()) {

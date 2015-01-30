@@ -32,7 +32,7 @@ static DWORD WINAPI thread_main(LPVOID lpParam)
     return 0;
 }
 
-int _tmain()
+int _tmain(void)
 {
     int i;
     HANDLE hThreads[NUM_THREADS];

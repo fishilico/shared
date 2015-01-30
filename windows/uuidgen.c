@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <tchar.h>
 
-int _tmain()
+int _tmain(void)
 {
     LPCTSTR szDesc;
     UUID uuid;

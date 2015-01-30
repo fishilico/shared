@@ -73,7 +73,7 @@ static BOOL EnumProcessModulesWithAlloc(HANDLE hProcess, HMODULE **pphModules, D
     return TRUE;
 }
 
-int _tmain()
+int _tmain(void)
 {
     PDWORD pProcessIds = NULL;
     DWORD cbSize = 0, nProcesses, nModules, i, j, cchLen;

@@ -169,7 +169,7 @@ cleanup:
     return bRet;
 }
 
-int _tmain()
+int _tmain(void)
 {
     return ListWindowsRec(NULL, 0) ? 0 : 1;
 }

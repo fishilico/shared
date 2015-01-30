@@ -26,7 +26,7 @@ typedef struct _PROCESS_BASIC_INFORMATION {
     PVOID Reserved3;
 } PROCESS_BASIC_INFORMATION, *PPROCESS_BASIC_INFORMATION;
 
-int _tmain()
+int _tmain(void)
 {
     NTSTATUS dwStatus;
     HMODULE hNtDll, hModule;

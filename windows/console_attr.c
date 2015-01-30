@@ -25,7 +25,7 @@
  */
 #include "common.h"
 
-int _tmain()
+int _tmain(void)
 {
     HANDLE hStdout;
     CONSOLE_SCREEN_BUFFER_INFO csbiInfo;

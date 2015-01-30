@@ -15,7 +15,7 @@
 #include "common.h"
 #include <tlhelp32.h>
 
-int _tmain()
+int _tmain(void)
 {
     HMODULE hKernel;
     LPTHREAD_START_ROUTINE lpfctGetCmdLine;

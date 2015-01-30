@@ -193,7 +193,7 @@ static BOOL enum_volumes(void)
     return TRUE;
 }
 
-int _tmain()
+int _tmain(void)
 {
     if (!enum_logical_drives())
         return 1;

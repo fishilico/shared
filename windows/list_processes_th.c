@@ -4,7 +4,7 @@
 #include "common.h"
 #include <tlhelp32.h>
 
-int _tmain()
+int _tmain(void)
 {
     HANDLE hProcessSnap;
     PROCESSENTRY32 pe32;

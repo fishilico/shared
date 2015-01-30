@@ -48,7 +48,7 @@ static int CompareStringList(const void *arg1, const void *arg2)
     return _tcsicmp(*(const LPCTSTR *)arg1, *(const LPCTSTR *)arg2);
 }
 
-int _tmain()
+int _tmain(void)
 {
     LPTSTR lszDosDevicesList, lszDevicePathsList;
     LPCTSTR szDosDevice, szPath;

@@ -313,7 +313,7 @@ static void dump_udp4_table(void)
     HeapFree(GetProcessHeap(), 0, pUdpTable);
 }
 
-int _tmain()
+int _tmain(void)
 {
     dump_if_table();
     _tprintf(_T("\n"));

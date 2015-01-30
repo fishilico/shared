@@ -78,7 +78,7 @@ static void _show_sid(
 #define show_sid1(d, a, sa0) _show_sid_ifdef(d, a, 1, _dwSa, 0, 0, 0, 0, 0, 0, 0, #sa0, sa0)
 #define show_sid2(d, a, sa0, sa1) _show_sid_ifdef(d, a, 2, sa0, _dwSa, 0, 0, 0, 0, 0, 0, #sa1, sa1)
 
-int _tmain()
+int _tmain(void)
 {
     SID_IDENTIFIER_AUTHORITY SIDAuthNull = { SECURITY_NULL_SID_AUTHORITY };
     SID_IDENTIFIER_AUTHORITY SIDAuthWorld = { SECURITY_WORLD_SID_AUTHORITY };
