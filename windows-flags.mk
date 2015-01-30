@@ -30,8 +30,25 @@ endif
 #   CFLAGS += -fstack-protector --param=ssp-buffer-size=4
 #   LDFLAGS += -fstack-protector
 CPPFLAGS ?=
-CFLAGS ?= -O2 -Wall -W -Wextra -Wformat=2 \
-	-Wmissing-prototypes -Wno-unused-parameter -Wno-unused-function
+CFLAGS ?= -O2 -ansi \
+	-Wall -W -Wextra \
+	-Waggregate-return \
+	-Wformat=2 \
+	-Winit-self \
+	-Winline \
+	-Wmissing-declarations \
+	-Wmissing-format-attribute \
+	-Wmissing-include-dirs \
+	-Wmissing-prototypes \
+	-Wnested-externs \
+	-Wold-style-definition \
+	-Wpointer-arith \
+	-Wshadow \
+	-Wstrict-prototypes \
+	-Wunknown-pragmas \
+	-Wwrite-strings \
+	-Wno-long-long \
+	-Wno-unused-function
 LDFLAGS ?= -Wl,--subsystem=console,--dynamicbase,--nxcompat
 LIBS ?=
 
