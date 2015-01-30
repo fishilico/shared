@@ -70,7 +70,7 @@ CFLAGS += \
 	# -Wsuggest-attribute=noreturn and -Wsuggest-attribute=format are also available for recent gcc
 endif
 
-# Add string stack protector if supported
+# Add strong stack protector if supported
 ifeq ($(shell $(CC) -fstack-protector-strong -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 CFLAGS += -fstack-protector-strong
 endif

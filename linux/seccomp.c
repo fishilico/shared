@@ -142,7 +142,7 @@ static bool install_syscall_filter(bool do_kill)
     }
     if (prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog) == -1) {
         if (errno == EINVAL) {
-            fprintf(stderr, "Exit because the kernel does not seccomp filters.\n");
+            fprintf(stderr, "Exit because the kernel does not support seccomp filters.\n");
             exit(0);
         } else {
             perror("prctl(SECCOMP)");

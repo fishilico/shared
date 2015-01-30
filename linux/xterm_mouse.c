@@ -66,7 +66,7 @@ static int update_winsize(void)
 }
 
 /**
- * write every bytes to the tty
+ * write every byte to the tty
  */
 static int tty_write(const char *buffer, size_t count)
 {
