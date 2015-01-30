@@ -364,13 +364,17 @@ int main(void)
         if (WIFEXITED(status)) {
             if (WEXITSTATUS(status) != EXIT_SUCCESS) {
                 fprintf(stderr, "Child %u exited with status %d\n", pid, WEXITSTATUS(status));
+                status = 1;
             }
         } else if (WIFSIGNALED(status)) {
             fprintf(stderr, "Child %u was killed by signal %d\n", pid, WTERMSIG(status));
+            status = 1;
         } else if (WIFSTOPPED(status)) {
             fprintf(stderr, "Child %u has been stopped by signal %d\n", pid, WSTOPSIG(status));
+            status = 1;
         } else {
             fprintf(stderr, "Child %u has been waited with unexpected status %d\n", pid, status);
+            status = 1;
         }
     }
 
@@ -388,7 +392,9 @@ int main(void)
         return 1;
     }
 
-    /* Have fun with recursive socket sending */
-    status = recursive_sockets();
+    if (!status) {
+        /* Have fun with recursive socket sending */
+        status = recursive_sockets();
+    }
     return status;
 }
