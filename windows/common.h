@@ -47,6 +47,7 @@ static void print_winerr(LPCTSTR szMessage)
 {
     DWORD dwLastErr;
     LPTSTR lpLastErrMsgBuf = NULL;
+    TCHAR c;
 
     dwLastErr = GetLastError();
     if(!FormatMessage(
@@ -60,8 +61,7 @@ static void print_winerr(LPCTSTR szMessage)
         /* Strip end of line */
         size_t len = _tcslen(lpLastErrMsgBuf);
         while (len > 0) {
-            len--;
-            TCHAR c = lpLastErrMsgBuf[len];
+            c = lpLastErrMsgBuf[--len];
             if (c != _T('\n') && c != _T('\r')) {
                 break;
             }
