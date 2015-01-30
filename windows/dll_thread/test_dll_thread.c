@@ -10,7 +10,7 @@
 
 #define NUM_THREADS 5
 
-/* Entry Point des threads */
+/* Entry Point of threads */
 static DWORD WINAPI thread_main(LPVOID lpParam)
 {
     int id = PtrToInt(lpParam);
@@ -35,7 +35,7 @@ static DWORD WINAPI thread_main(LPVOID lpParam)
 int _tmain()
 {
     int i;
-    HANDLE hTreads[NUM_THREADS];
+    HANDLE hThreads[NUM_THREADS];
 
     /* Unbufferize standard output to prevent caching issues */
     setvbuf(stdout, (char *)0, _IONBF, 0);
@@ -44,18 +44,18 @@ int _tmain()
 
     printf("Spawing %u threads.\n", NUM_THREADS);
     for (i = 0; i < NUM_THREADS; i++) {
-        hTreads[i] = CreateThread(
+        hThreads[i] = CreateThread(
             NULL,                   /* default security attributes */
             0,                      /* use default stack size */
             thread_main,            /* thread function name */
             IntToPtr(i + 1),        /* argument to thread function */
             0,                      /* use default creation flags */
             NULL);                  /* do not returns the thread identifier */
-        if (hTreads[i] == NULL) {
+        if (hThreads[i] == NULL) {
             fprintf(stderr, "CreateThread failed for thread #%d: error code %lu\n", i + 1, GetLastError());
             return 1;
         }
     }
-    WaitForMultipleObjects(NUM_THREADS, hTreads, TRUE, INFINITE);
+    WaitForMultipleObjects(NUM_THREADS, hThreads, TRUE, INFINITE);
     return 0;
 }

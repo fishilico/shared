@@ -31,7 +31,7 @@ static int _main(void)
     int (WINAPI *pfnMessageBoxW)(HWND hWnd, PCWSTR lpText, LPCWSTR lpCaption, UINT uType);
     BOOL (WINAPI *pfnAllocConsole)(void);
     BOOL (WINAPI *pfnFreeConsole)(void);
-    HANDLE (WINAPI *pfnGetStdHandle)(IN DWORD nStdHandle);
+    HANDLE (WINAPI *pfnGetStdHandle)(DWORD nStdHandle);
     BOOL (WINAPI *pfnWriteFile)(
         HANDLE hFile, LPCVOID lpBuffer, DWORD nNumberOfBytesToWrite,
         LPDWORD lpNumberOfBytesWritten, LPOVERLAPPED lpOverlapped);
