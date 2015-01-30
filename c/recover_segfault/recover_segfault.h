@@ -35,7 +35,7 @@ typedef mcontext_t asm_instr_context;
 
 typedef CONTEXT asm_instr_context;
 #    define asm_instr_ctx_reg(ctx, upper, ucfirst) ((ctx)->ucfirst)
-#    define asm_instr_ctx_regtype(upper, ucfirst) typeof(((CONTEXT*)0)->ucfirst)
+#    define asm_instr_ctx_regtype(upper, ucfirst) __typeof__(((CONTEXT*)0)->ucfirst)
 
 #    if defined(__x86_64__)
 /* Get a XMM register with a fixed number */

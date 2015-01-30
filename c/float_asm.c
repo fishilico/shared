@@ -14,6 +14,12 @@
  * * http://mindplusplus.wordpress.com/2012/11/20/comparing-the-x87-and-arm-vfp/
  *   (Comparing the x87 and ARM VFP)
  */
+
+/* With -ansi on Windows, some float functions like isnan are not defined */
+#if defined(__STRICT_ANSI__) && (defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64))
+#undef __STRICT_ANSI__
+#endif
+
 #include <assert.h>
 #include <inttypes.h>
 #include <math.h>
