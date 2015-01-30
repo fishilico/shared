@@ -8,11 +8,11 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include <unistd.h>
 #include <linux/videodev2.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
-#include <sys/time.h>
 #include <SDL/SDL.h>
 
 #define NB_BUFFER 4
@@ -257,7 +257,7 @@ int main(void)
     SDL_Surface *screen;
     SDL_Overlay *overlay;
     SDL_Event event;
-    struct timeval tv;
+    struct timespec tv;
     time_t time_start;
     bool is_first_frame;
 
@@ -295,9 +295,9 @@ int main(void)
     printf("Capture started with %u buffers\n", NB_BUFFER);
 
     /* Start timer */
-    result = gettimeofday(&tv, NULL);
-    if (result < 0) {
-        perror("gettimeofday");
+    if (clock_gettime(CLOCK_MONOTONIC, &tv) == -1) {
+        perror("clock_gettime(MONOTONIC)");
+        result = 1;
         goto quit;
     }
     time_start = tv.tv_sec;
@@ -308,6 +308,7 @@ int main(void)
             switch (event.type) {
                 case SDL_QUIT:
                     printf("SDL_QUIT event received\n");
+                    result = 0;
                     goto quit;
 
                 case SDL_VIDEORESIZE:
@@ -341,11 +342,10 @@ int main(void)
 
         if (is_first_frame) {
             is_first_frame = false;
-            result = gettimeofday(&tv, NULL);
-            if (result < 0) {
-                perror("gettimeofday");
+            if (clock_gettime(CLOCK_MONOTONIC, &tv) == -1) {
+                perror("clock_gettime(MONOTONIC)");
             } else if (tv.tv_sec != time_start) {
-                printf("First frame after %ld seconds\n", tv.tv_sec - time_start);
+                printf("First frame after %ld second(s)\n", tv.tv_sec - time_start);
             }
         }
         /* Convert and display frame */
@@ -358,5 +358,5 @@ int main(void)
 quit:
     capture_stop(&capst);
     free(uyvy_frame);
-    return 0;
+    return result;
 }
