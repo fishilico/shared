@@ -66,7 +66,7 @@ static int update_winsize(void)
 }
 
 /**
- * write every byte to the tty
+ * Write every byte to the tty
  */
 static int tty_write(const char *buffer, size_t count)
 {
@@ -121,8 +121,8 @@ static int tty_init(void)
         return 0;
     }
     tty_attr_orig = tty_attr;
-    tty_attr.c_lflag &= ~ICANON;  /* Disable canonical mode */
-    tty_attr.c_lflag &= ~ECHO;  /* Don't echo input characters */
+    tty_attr.c_lflag &= ~(unsigned)ICANON;  /* Disable canonical mode */
+    tty_attr.c_lflag &= ~(unsigned)ECHO;  /* Don't echo input characters */
     tty_attr.c_lflag |= ISIG;  /* Convert INT and QUIT chars to signal */
     if (tcsetattr(tty_fd, TCSAFLUSH, &tty_attr) == -1) {
         perror("tcsetattr");
@@ -162,9 +162,9 @@ static void tty_reset(void)
 }
 
 /**
- * Handle interrupt signal
+ * Quit nicely when handling the interrupt signal
  */
-static void handle_sigterm(int signum)
+static void __attribute__((noreturn)) handle_sigterm(int signum)
 {
     assert(signum == SIGINT || signum == SIGQUIT || signum == SIGTERM);
     tty_reset();
@@ -185,9 +185,8 @@ int main(void)
     struct sigaction sa;
     unsigned char buffer[1024];
     char textbuf[200];
-    off_t curpos, textbufpos;
     ssize_t count;
-    size_t i;
+    size_t i, curpos, textbufpos;
     int saved_errno;
     unsigned int mouse_buttons, mouse_x, mouse_y;
 
@@ -226,7 +225,8 @@ int main(void)
 
     curpos = 0;
     for (;;) {
-        count = read(tty_fd, buffer + curpos, sizeof(buffer) - curpos);
+        assert(curpos < sizeof(buffer));
+        count = read(tty_fd, buffer + curpos, (size_t)(sizeof(buffer) - curpos));
         if (count == -1) {
             if (errno == EINTR) {
                 /* display current window size */
@@ -260,6 +260,7 @@ int main(void)
             }
             /* Mouse is \e[M and 3 characters */
             if (i + 6 > (size_t)count) {
+                /* The sequence has not been completely read, keep its beginning */
                 curpos = ((size_t)count) - i;
                 memmove(buffer, buffer + i, curpos);
                 break;
@@ -316,8 +317,7 @@ int main(void)
             }
             textbufpos = strlen(textbuf);
 
-            /*snprintf(textbuf, sizeof(textbuf), "\033c");
-            textbufpos = strlen(textbuf);*/
+            /* Show a cross on cursor position */
             if (mouse_y >= 1) {
                 snprintf(textbuf + textbufpos, sizeof(textbuf) - textbufpos,
                          "\033[%u;%uH|", mouse_y, mouse_x + 1);
@@ -339,11 +339,11 @@ int main(void)
                          "\033[%u;%uH|", mouse_y + 2, mouse_x + 1);
                 textbufpos += strlen(textbuf + textbufpos);
             }
+            assert(textbufpos + 3 < sizeof(textbuf));
             snprintf(textbuf + textbufpos, sizeof(textbuf) - textbufpos, "\033[m");
             tty_print(textbuf);
             /* printf("\033[H0x%02x, %u, %u\033[K\n", mouse_buttons, mouse_x, mouse_y); */
             i += 5;
         }
     }
-    __builtin_unreachable();
 }
