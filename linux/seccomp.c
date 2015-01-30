@@ -155,6 +155,9 @@ static bool install_syscall_filter(bool do_kill)
 static void sigsys_sigaction(int s, siginfo_t *info, void *context)
 {
     ucontext_t *ctx = (ucontext_t *)context;
+    greg_t syscall, arg0, arg1;
+    void *call_addr;
+
     assert(s == SIGSYS);
     assert(info != NULL && info->si_signo == SIGSYS);
     if (info->si_code != 1) {
@@ -169,12 +172,19 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
     }
 #endif
 
+    if (!ctx) {
+        fprintf(stderr, "sigaction error: no context has been given.\n");
+        exit(1);
+    }
+    syscall = mctx_reg_syscall(ctx->uc_mcontext);
+
+    /* If the libc knows info->si_syscall, use it for a sanity check */
 #ifdef si_syscall
+    assert(syscall == info->si_syscall);
+#endif
+
     /* Emulate getpriority */
-    if (info->si_syscall == __NR_getpriority && ctx) {
-        greg_t syscall, arg0, arg1;
-        syscall = mctx_reg_syscall(ctx->uc_mcontext);
-        assert(syscall == info->si_syscall);
+    if (syscall ==  __NR_getpriority) {
         arg0 = mctx_reg_arg0(ctx->uc_mcontext);
         arg1 = mctx_reg_arg1(ctx->uc_mcontext);
         if (arg0 == PRIO_USER && arg1 == 0) {
@@ -183,15 +193,17 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
         }
     }
 
-    printf("Blocked syscall %d%s @%p\n", info->si_syscall,
-           (info->si_syscall == __NR_uname) ? " (__NR_uname)" : "",
-           info->si_call_addr);
-    fflush(stdout);
-    exit((info->si_syscall == __NR_uname) ? 0 : 1);
+#ifdef si_call_addr
+    call_addr = info->si_call_addr;
 #else
-    fprintf(stderr, "siginfo_t->si_syscall seems to be unsupported by your libc.\n");
-    exit(1);
+    call_addr = NULL;
 #endif
+    /* Block the syscall */
+    printf("Blocked syscall %d%s @%p\n", (int)syscall,
+           (syscall == __NR_uname) ? " (__NR_uname)" : "",
+           call_addr);
+    fflush(stdout);
+    exit((syscall == __NR_uname) ? 0 : 1);
 }
 
 int main(int argc, char **argv)
@@ -259,6 +271,9 @@ int main(int argc, char **argv)
     if (prio == 42) {
         printf("getpriority has been successfully emulated.\n");
     } else {
+        /* Do not use perror as this may call dup with glibc:
+         * https://sourceware.org/git/?p=glibc.git;a=blob;f=stdio-common/perror.c;hb=b8079dd0d360648e4e8de48656c5c38972621072
+         */
         fprintf(stderr, "getpriority(user root): %s\n", strerror(errno));
         return 1;
     }
