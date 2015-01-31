@@ -97,10 +97,10 @@ int main(void)
 #if IS_WINDOWS
     HMODULE hKernel32, hNtDll;
     BOOL (WINAPI *pfnIsDebuggerPresent)(VOID);
-    NTSTATUS (WINAPI *pfnNtQueryInformationProcess)(HANDLE, int, PVOID, ULONG, PULONG);
+    LONG (WINAPI *pfnNtQueryInformationProcess)(HANDLE, int, PVOID, ULONG, PULONG);
     const BYTE *pPeb = NULL;
     BOOL bDebuggerPresent = TRUE;
-    NTSTATUS status;
+    LONG status;
     DWORD_PTR dwpDebuggerPresent = 1;
 #endif
 
@@ -224,7 +224,7 @@ int main(void)
     /* Use NtQueryInformationProcess directly, with class 7 for ProcessDebugPort */
     hNtDll = GetModuleHandleW(L"ntdll.dll");
     pfnNtQueryInformationProcess = \
-        (NTSTATUS (WINAPI *)(HANDLE, int, PVOID, ULONG, PULONG)) \
+        (LONG (WINAPI *)(HANDLE, int, PVOID, ULONG, PULONG)) \
         GetProcAddress(hNtDll, "NtQueryInformationProcess");
     if (!pfnNtQueryInformationProcess) {
         printf("[ ] ntdll!NtQueryInformationProcess does not exist.\n");
