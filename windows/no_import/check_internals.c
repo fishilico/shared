@@ -37,6 +37,7 @@ int _tmain(void)
     const PEB *pPeb;
     const LIST_ENTRY *ListHead, *ListEntry;
     const LDR_DATA_TABLE_ENTRY *CurEntry;
+    const EXCEPTION_REGISTRATION_RECORD *seh_entry;
     LPCVOID pModuleBase, pProcAddress, pProcAddress2;
     ULONG sizeNeeded;
     BOOL bRet;
@@ -85,6 +86,14 @@ int _tmain(void)
         }
         printf("   %p: %S\n", CurEntry->DllBase, CurEntry->FullDllName.Buffer);
         ListEntry = ListEntry->Flink;
+    }
+
+    /* Dump SEH, which may contain interesting addresses */
+    seh_entry = ((const TEB_internal*)pTeb)->NtTib.ExceptionList;
+    printf("SEH list:\n");
+    while (seh_entry && seh_entry != (void *)(-1)) {
+        printf("   %p: %p\n", seh_entry, seh_entry->Handler);
+        seh_entry = seh_entry->Next;
     }
 
     /* Test some functions */
