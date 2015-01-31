@@ -6,23 +6,27 @@ SED ?= sed
 SH ?= sh
 WGET ?= wget
 
-# Disable some features because linking is done without the standard library
-NOLIBC_CFLAGS := -fno-builtin -fno-stack-protector
-NOLIBC_LDFLAGS := -nostdlib -e _start
-
-# Use custom include dir if it exists
-CFLAGS += $(shell [ -d include ] && echo '-I./include')
+# Do not compile both with -pie and -shared
+NOLIBC_CFLAGS := $(filter-out -fPIC -fPIE, $(CFLAGS))
+NOLIBC_LDFLAGS := $(filter-out -fPIC -fPIE -pie -shared, $(LDFLAGS))
 
 # Compile a shared object because there is no need of ld.so on Intel architecture.
 # However, some ARM compilers rely on ld.so to remap offsets when doing ASLR, so
 # whitelist some known-to-work compilers, such as arm-none-eabi-gcc (bare metal).
 ifeq ($(shell $(CC) -E -v - < /dev/null 2>&1 > /dev/null | $(GREP) -qi "^Target:\s*\(i.86\|x86\|arm-none-\)" && echo y),y)
-CFLAGS += -fPIC
-LDFLAGS += -fPIC -shared
+NOLIBC_CFLAGS += -fPIC
+NOLIBC_LDFLAGS += -fPIC -shared
 else
-CFLAGS += -fPIE
-LDFLAGS += -fPIE -pie
+NOLIBC_CFLAGS += -fPIE
+NOLIBC_LDFLAGS += -fPIE -pie
 endif
+
+# Disable some features because linking is done without the standard library
+NOLIBC_CFLAGS += -fno-builtin -fno-stack-protector
+NOLIBC_LDFLAGS += -nostdlib
+
+# Use custom include dir if it exists
+NOLIBC_CFLAGS += $(shell [ -d include ] && echo '-I./include')
 
 # Files
 SOURCES := $(wildcard *.c)
@@ -43,10 +47,10 @@ test: all
 	(echo 'echo $$0 && set && exit' | ./shellcode.$(BIN_EXT))
 
 %.$(BIN_EXT): %.o
-	$(CC) $(LDFLAGS) $(NOLIBC_LDFLAGS) -o $@ $^
+	$(CC) $(NOLIBC_LDFLAGS) -o $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(CC) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 # Make an "include" directory, when no system header is available
 INCLUDE_ARCH := arm i386 x86_64
