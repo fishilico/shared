@@ -29,36 +29,43 @@ static void _c_start(const void *stack)
 /**
  * Call _c_start(stack_pointer) with a NULL return address
  */
-#if defined __x86_64__ || defined __i386__
 __asm__ (
 "    .text\n"
 "    .globl _start\n"
 "    .hidden _start\n"
+
+#if defined(__x86_64__)
 "    .type _start, @function\n"
+"    .align 16\n"
 "_start:\n"
 "    .cfi_startproc\n"
-#    if defined __x86_64__
+/* CFI needs rip to be marked as undefined here */
+"    .cfi_undefined rip\n"
+/* glibc resets the frame pointer too */
+"    xorq %rbp, %rbp\n"
 "    movq %rsp, %rdi\n"
 "    pushq $0\n"
-#    elif defined __i386__
-"    pushl %esp\n"
-"    pushl $0\n"
-#    endif
 "    jmp _c_start\n"
 "    .cfi_endproc\n"
-);
-#elif defined __arm__
-__asm__ (
-"    .text\n"
-"    .global _start\n"
-"    .hidden _start\n"
+#elif defined(__i386__)
+/* Don't use CFI for _start */
+"    .type _start, @function\n"
+"_start:\n"
+"    xorl %ebp, %ebp\n"
+"    pushl %esp\n"
+"    pushl $0\n"
+"    jmp _c_start\n"
+#elif defined(__arm__)
 "    .type _start, %function\n"
 "_start:\n"
 "    mov r0, sp\n"
 "    mov fp, #0\n"
 "    mov lr, #0\n"
 "    b _c_start\n"
-);
 #else
 #    error Unsupported architecture
 #endif
+
+/* Defining the size of _start is common for all architecture */
+"    .size _start, . - _start\n"
+);
