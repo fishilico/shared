@@ -14,6 +14,7 @@ X86_PROGRAMS := $(filter x86-%, $(ALL_PROGRAMS))
 
 # Programs not to test automatically, because they hang
 NONTEST_PROGRAMS := gtk_alpha_window
+NONTEST_BINARIES := $(NONTEST_PROGRAMS:%=%.$(BIN_EXT)) x86-create_cpuid_enum_h.sh
 
 # Find other programs. Only programs in $(PROGRAMS) are built.
 PROGRAMS := $(filter-out $(OPENMP_PROGRAMS) $(GTK_PROGRAMS) $(X86_PROGRAMS), $(ALL_PROGRAMS))
@@ -57,8 +58,7 @@ else ifneq (,$(findstring x86_64, $(TARGET_TRIPLET)))
 PROGRAMS += $(X86_PROGRAMS)
 endif
 
-TEST_PROGRAMS := $(filter-out $(NONTEST_PROGRAMS), $(PROGRAMS))
-TEST_BINARIES := $(TEST_PROGRAMS:%=%.$(BIN_EXT))
+TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(PROGRAMS:%=%.$(BIN_EXT)) $(wildcard *.sh))
 
 all: $(PROGRAMS:%=%.$(BIN_EXT))
 
