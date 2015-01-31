@@ -86,5 +86,5 @@ BIN_EXT := $(EXT_PREFIX)bin
 
 # Shared Object build configuration
 LIB_EXT := $(EXT_PREFIX)so
-LIB_CFLAGS ?= -fPIC
+LIB_CFLAGS ?= -fPIC -fvisibility=hidden
 LIB_LDFLAGS ?= -fPIC -shared -Wl,-soname,$@

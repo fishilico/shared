@@ -46,10 +46,12 @@ lint:
 test: all
 	@@for P in $(sort $(TEST_BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
+_cffi_example.$(LIB_EXT): LDFLAGS := $(filter-out -fPIC -fPIE -pie -shared, $(LDFLAGS))
 _cffi_example.$(LIB_EXT): _cffi_example.o
 	$(CC) $(LDFLAGS) $(LIB_LDFLAGS) -o $@ $^ $(LIBS)
 
 _cffi_example.o: CPPFLAGS += -D_CFFI_EXAMPLE_EXPORTS
+_cffi_example.o: CFLAGS := $(filter-out -fPIC -fPIE, $(CFLAGS))
 _cffi_example.o: _cffi_example.c cffi_example.h
 	$(CC) $(CFLAGS) $(LIB_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 

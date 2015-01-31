@@ -55,12 +55,14 @@ test: all
 
 enum_link_addrs.$(BIN_EXT): LIBS += -lnetlink
 message_queue.$(BIN_EXT): LIBS += -lrt
-override_uname_dl.o: CFLAGS += -fPIC -fvisibility=hidden
-override_uname_dl.$(LIB_EXT): LDFLAGS += -fPIC -shared -Wl,-soname,$@
+override_uname_dl.o: CFLAGS += $(LIB_CFLAGS)
 override_uname_dl.$(LIB_EXT): LIBS += -ldl
 
-%.$(BIN_EXT) %.$(LIB_EXT): %.o
+%.$(BIN_EXT): %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+%.$(LIB_EXT): %.o
+	$(CC) $(filter-out -fPIC -fPIE -pie -shared, $(LDFLAGS)) $(LIB_LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
