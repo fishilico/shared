@@ -161,7 +161,7 @@ __asm__ (
 "    .type _start, %function\n"
 "_start:\n"
 "    push {lr}\n"
-"    bl	efi_main\n"
+"    bl efi_main\n"
 "    pop {pc}\n"
 #else
 #    error Unsupported architecture
