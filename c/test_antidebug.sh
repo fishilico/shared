@@ -31,7 +31,7 @@ $* --quiet --return-child-result < /dev/null \
     "$(dirname "$0")/antidebug.$BIN_EXT"
 EXITCODE=$?
 
-# antidebug program exits with code 3 when it has detects all debugging features
+# antidebug program exits with code 3 when it has detected all debugging features
 if [ $EXITCODE != 3 ]
 then
     echo "Unexpected returned value: $EXITCODE"
