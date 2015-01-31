@@ -37,7 +37,7 @@ int _tmain(void)
     const PEB *pPeb;
     const LIST_ENTRY *ListHead, *ListEntry;
     const LDR_DATA_TABLE_ENTRY *CurEntry;
-    const EXCEPTION_REGISTRATION_RECORD *seh_entry;
+    const void *const *seh_entry;
     LPCVOID pModuleBase, pProcAddress, pProcAddress2;
     ULONG sizeNeeded;
     BOOL bRet;
@@ -88,12 +88,16 @@ int _tmain(void)
         ListEntry = ListEntry->Flink;
     }
 
-    /* Dump SEH, which may contain interesting addresses */
-    seh_entry = ((const TEB_internal*)pTeb)->NtTib.ExceptionList;
+    /* Dump SEH, which may contain interesting addresses
+     * Do not use EXCEPTION_REGISTRATION_RECORD as it is an internal non-standard
+     * structure from MinGW excpt.h header.
+     */
+    seh_entry = (const void *const *)((const TEB_internal*)pTeb)->NtTib.ExceptionList;
     printf("SEH list:\n");
-    while (seh_entry && seh_entry != (void *)(-1)) {
-        printf("   %p: %p\n", seh_entry, seh_entry->Handler);
-        seh_entry = seh_entry->Next;
+    while (seh_entry && seh_entry != (const void *const *)(-1)) {
+        /* seh_entry[0] is the next entry and seh_entry[1] the handler function */
+        printf("   %p: %p\n", seh_entry, seh_entry[1]);
+        seh_entry = seh_entry[0];
     }
 
     /* Test some functions */
