@@ -4,6 +4,8 @@ SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
 BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 
+NOIMPORT_PROGRAMS := $(filter-out check_%, $(SOURCES:%.c=%))
+
 all: $(BINARIES)
 
 clean:
@@ -11,9 +13,9 @@ clean:
 
 test: all
 
-helloworld_noimport.$(BIN_EXT): LDFLAGS += -Wl,--subsystem=windows
-helloworld_noimport.$(BIN_EXT): LDFLAGS += -nostdlib -Wl,--nostdlib
-helloworld_noimport.o: CFLAGS += -nostdlib -fno-stack-protector
+$(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -Wl,--subsystem=windows
+$(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -nostdlib -Wl,--nostdlib
+$(NOIMPORT_PROGRAMS:%=%.o): CFLAGS += -nostdlib -fno-stack-protector
 
 %.$(BIN_EXT): %.o
 	$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
