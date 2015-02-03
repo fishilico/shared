@@ -18,6 +18,7 @@ French News
 -----------
 
 * http://www.courrierinternational.com/ Courrier International
+* http://www.france24.com/fr/ France 24
 * http://rue89.nouvelobs.com/ Rue 89
 * http://www.laquadrature.net/ La quadrature du Net
 * http://www.zdnet.fr/actualites/ ZDNet
@@ -53,6 +54,7 @@ French blogs
 Code repositories
 -----------------
 
+* http://git.busybox.net/busybox/log/ BusyBox
 * https://sourceware.org/git/?p=glibc.git;a=shortlog glibc
 * http://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=shortlog GnuPG
 * https://github.com/libressl-portable/portable LibreSSL
