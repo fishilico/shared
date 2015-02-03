@@ -96,6 +96,7 @@ proc_setroot_proc_write(struct file *file, const char __user *buf, size_t size, 
 }
 
 static const struct file_operations proc_setroot_proc_fops = {
+	.owner = THIS_MODULE,
 	.read  = proc_setroot_proc_read,
 	.write = proc_setroot_proc_write,
 };
