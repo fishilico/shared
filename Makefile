@@ -34,11 +34,11 @@ SUBDIRS_BLACKLIST += windows%
 endif
 
 # boot/ check: only x86 is currently supported
-# MBR check: $(CC) needs to be able to produce 16-bit x86
+# MBR check: $(CC) needs to be able to produce at least 32-bits x86
 # Syslinux MBR check: $(CC) needs to support some flags
 ifneq ($(shell printf '\#if defined(__x86_64__)||defined(__i386__)\ny\n\#endif' |$(CC) -Werror -E - |grep '^[^\#]'),y)
 SUBDIRS_BLACKLIST += boot%
-else ifneq ($(shell $(CC) -Werror -E -m16 -march=i386 - < /dev/null > /dev/null 2>&1 && echo y),y)
+else ifneq ($(shell $(CC) -Werror -E -m32 -march=i386 - < /dev/null > /dev/null 2>&1 && echo y),y)
 SUBDIRS_BLACKLIST += boot/mbr%
 else ifneq ($(shell $(CC) -Werror -E -falign-functions=0 - < /dev/null > /dev/null 2>&1 && echo y),y)
 SUBDIRS_BLACKLIST += boot/mbr/syslinux-mbr

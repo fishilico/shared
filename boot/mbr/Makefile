@@ -19,7 +19,7 @@ BINARIES := $(SOURCES:%.S=%.bin)
 all: $(BINARIES)
 
 %.o: %.S
-	$(CC) -m16 -march=i386 $(SFLAGS) -c -o $@ $<
+	$(CC) -m32 -march=i386 $(SFLAGS) -c -o $@ $<
 
 %.elf: %.o boot-record.ld
 	$(LD) -m elf_i386 $(LDFLAGS) -T boot-record.ld -o $@ $<
