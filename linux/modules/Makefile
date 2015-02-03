@@ -18,8 +18,12 @@ all:
 clean:
 	make -C $(KERNELPATH) M=$(PWD) clean
 
+# install modules in /lib/modules/$(uname -r)/extra/
+install:
+	make -C $(KERNELPATH) M=$(PWD) modules_install
+
 # Some targets added to list useful commands
 infos:
 	modinfo *.ko
 
-.PHONY: all clean infos
+.PHONY: all clean install infos
