@@ -503,7 +503,7 @@ bool run_mov_asm_instruction_p(
     /* f3 48 a5: rep movsq %ds:(%rsi), %es:(%rdi) */
     if (has_f3_prefix && instr[0] == 0xa5) {
         uintptr_t source_addr = (uintptr_t)R_RSI(ctx);
-        asm_instr_reg rep_count = R_RCX(ctx) + 1;
+        size_t rep_count = (size_t)(R_RCX(ctx) + 1);
         if (source_addr != data_addr) {
             fprintf(stderr, "Error: mem parameter rsi is not address %" PRIxPTR "\n", data_addr);
             return false;
