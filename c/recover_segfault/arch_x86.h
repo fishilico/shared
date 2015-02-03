@@ -1,5 +1,5 @@
-#ifndef ARCH_X86_64
-#define ARCH_X86_64
+#ifndef ARCH_X86
+#define ARCH_X86
 
 #include "recover_segfault.h"
 
@@ -43,4 +43,4 @@ typedef asm_instr_ctx_regtype(EAX, Eax) asm_instr_reg;
 #define R_XMM6LL(ctx) (*(asm_instr_reg*)(void*)asm_instr_ctx_xmm_addr((ctx), 6))
 #define R_XMM7LL(ctx) (*(asm_instr_reg*)(void*)asm_instr_ctx_xmm_addr((ctx), 7))
 
-#endif /* ARCH_X86_64 */
+#endif /* ARCH_X86 */

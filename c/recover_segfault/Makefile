@@ -11,11 +11,11 @@ PROGRAMS := $(filter-out arch_% os_% test_asm_%, $(SOURCES:%.c=%))
 OBJECTS = arch_common.o
 TARGET_TRIPLET := $(shell $(CC) -dumpmachine)
 
-ifneq (,$(findstring i386, $(TARGET_TRIPLET)))
+ifneq (,$(filter i386-%, $(TARGET_TRIPLET)))
 OBJECTS += arch_x86.o
-else ifneq (,$(findstring i686, $(TARGET_TRIPLET)))
+else ifneq (,$(filter i686-%, $(TARGET_TRIPLET)))
 OBJECTS += arch_x86.o
-else ifneq (,$(findstring x86_64, $(TARGET_TRIPLET)))
+else ifneq (,$(filter x86_64-%, $(TARGET_TRIPLET)))
 # "gcc -m32 -dumpmachine" prints x86_64-unknown-linux-gnu on x86_64, not i386...
 OBJECTS += $(shell printf '\#ifdef __x86_64__\narch_x86_64.o\n\#else\narch_x86.o\n\#endif' |$(CC) -E - |grep '^arch')
 else
