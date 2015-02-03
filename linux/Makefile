@@ -10,7 +10,7 @@ SHARED_OBJECTS := override_uname_dl.$(LIB_EXT)
 
 # Programs not to test automatically, because they hang
 NONTEST_PROGRAMS := inotify_tmp sdl_v4l_video xterm_mouse
-NONTEST_BINARIES := $(NONTEST_PROGRAMS:%=%.$(BIN_EXT))
+NONTEST_BINARIES := $(NONTEST_PROGRAMS:%=%.$(BIN_EXT)) override_uname_dl.sh
 
 # Find other programs. Only programs in $(PROGRAMS) are built.
 SOURCES := $(wildcard *.c)
