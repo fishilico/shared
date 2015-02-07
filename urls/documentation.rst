@@ -27,6 +27,10 @@ Hacking
   Android Forensics - Physical Techniques
 * http://www.mathyvanhoef.com/2013/12/reversing-and-exploiting-arm-binaries.html
   ARM reversing introduction
+* https://github.com/file/file/tree/master/magic/Magdir
+  magic database for the command "file"
+* http://www.iteamdevelopers.org/building-ultimate-anonymous-malware-analysis-and-reverse-engineering-machine/
+  Building Ultimate Anonymous Malware Analysis and Reverse Engineering Machine (Feb 2015)
 
 Programming
 -----------
@@ -55,6 +59,9 @@ Programming
   Basic kernel for Raspberry Pi
 
 * http://dotfiles.github.io/ GitHub dotfiles projects
+
+* https://github.com/jbmouret/matplotlib_for_papers
+  Creating publication-quality figures with matplotlib
 
 Packaging
 ---------

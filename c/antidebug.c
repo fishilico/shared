@@ -1,5 +1,8 @@
 /**
  * Test antidebug features
+ *
+ * Related projects, which detects virtualization:
+ * * https://github.com/a0rtega/pafish/tree/master/pafish Pafish
  */
 #include <assert.h>
 #include <stdint.h>
