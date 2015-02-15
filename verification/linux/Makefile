@@ -90,16 +90,17 @@ $(SRC_DIR)/include/frama-c-lib.linked: $(SRC_DIR)/Makefile $(FRAMAC_INCDIR)
 $(SRC_DIR)/include/strings.h: $(SRC_DIR)/Makefile
 	echo '/* Fix Frama-C abusive include in its string.h */' > '$@'
 
-# Apply quilt patches
+# Apply quilt patches and don't fail if all patches are applied
 $(SRC_DIR)/.pc/quilt-called: $(SRC_DIR)/Makefile
-	cd '$(SRC_DIR)' && QUILTRC='$(QUILTRC)' $(QUILT) push -a
+	cd '$(SRC_DIR)' && export QUILTRC='$(QUILTRC)' && ($(QUILT) push -a || ! $(QUILT) unapplied)
 	$(TOUCH) '$@'
 
 # Refresh all quilt patches, after they have been applied once
+# (and don't fail if no patch is applied)
 refresh-quilt: $(SRC_DIR)/.pc/quilt-called
-# Don't fail if no patch is applied
-	cd '$(SRC_DIR)' && QUILTRC='$(QUILTRC)' && ($(QUILT) pop -a || ! $(QUILT) applied)
-	cd '$(SRC_DIR)' && QUILTRC='$(QUILTRC)' && ( \
+	$(RM) '$(SRC_DIR)/.pc/quilt-called'
+	cd '$(SRC_DIR)' && export QUILTRC='$(QUILTRC)' && ($(QUILT) pop -a || ! $(QUILT) applied)
+	cd '$(SRC_DIR)' && export QUILTRC='$(QUILTRC)' && ( \
 		for i in $$($(QUILT) series | wc -l | xargs seq) ; \
 		do \
 			($(QUILT) push && $(QUILT) refresh -p ab --no-timestamps --no-index) || exit 1 ; \
