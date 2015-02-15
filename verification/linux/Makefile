@@ -3,18 +3,22 @@ LINUX_VERSION = 3.17.5
 
 # Tools
 FRAMAC = frama-c
+GPG = gpg
 QUILT = quilt
 SH = sh
 WGET = wget
+XZ = xz
 
 # Linux archives and URLs
 LINUX_URL_PUB := https://www.kernel.org/pub/linux/kernel/v3.x/
 LINUX_FILE_ARCHIVE := linux-$(basename $(LINUX_VERSION)).tar.xz
-ifneq ($(suffix $(LINUX_VERSION)), 0)
+LINUX_SIG_ARCHIVE := $(LINUX_FILE_ARCHIVE:%.xz=%.sign)
+ifneq ($(suffix $(LINUX_VERSION)), .0)
 LINUX_FILE_PATCH := patch-$(LINUX_VERSION).xz
 else
 LINUX_FILE_PATCH :=
 endif
+LINUX_SIG_PATCH := $(LINUX_FILE_PATCH:%.xz=%.sign)
 
 # Working directories
 SRC_DIR := $(CURDIR)/src-linux-$(LINUX_VERSION)
@@ -54,15 +58,17 @@ clean:
 	rm -rf '$(OUT_DIR)'
 
 # Download files
-$(LINUX_FILE_ARCHIVE) $(LINUX_FILE_PATCH):
+$(LINUX_FILE_ARCHIVE) $(LINUX_SIG_ARCHIVE) $(LINUX_FILE_PATCH) $(LINUX_SIG_PATCH):
 	$(WGET) -O $@ "$(LINUX_URL_PUB)$@" || (rm -f "$@" ; false)
 
 # Extract Linux
-$(SRC_DIR)/Makefile: $(LINUX_FILE_ARCHIVE) $(LINUX_FILE_PATCH)
+$(SRC_DIR)/Makefile: $(LINUX_FILE_ARCHIVE) $(LINUX_SIG_ARCHIVE) $(LINUX_FILE_PATCH) $(LINUX_SIG_PATCH)
+	$(XZ) -c -d '$(LINUX_FILE_ARCHIVE)' | $(GPG) --quiet --verify '$(LINUX_SIG_ARCHIVE)' -
 	rm -rf '$(SRC_DIR)' 'linux-$(basename $(LINUX_VERSION))'
 	tar -xf '$(LINUX_FILE_ARCHIVE)'
 	mv 'linux-$(basename $(LINUX_VERSION))' '$(SRC_DIR)'
 ifneq ($(LINUX_FILE_PATCH),)
+	$(XZ) -c -d '$(LINUX_FILE_PATCH)' | $(GPG) --quiet --verify '$(LINUX_SIG_PATCH)' -
 	xzcat '$(LINUX_FILE_PATCH)' | (cd '$(SRC_DIR)' && patch -p1)
 endif
 	touch '$@'
