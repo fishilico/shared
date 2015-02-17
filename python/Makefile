@@ -1,6 +1,7 @@
 include ../os-detect.mk
 
 PYTHON ?= python
+PYTHON3 ?= python3
 PEP8 ?= pep8
 PYLINT ?= pylint
 
@@ -9,11 +10,16 @@ NONTEST_BINARIES := matplotlib_feed_plot3d.py unicode_norm.py
 
 HAVE_PYTHON_CFFI := $(shell $(PYTHON) -c 'import cffi' 2> /dev/null && echo y || echo n)
 HAVE_PYTHON_NUMPY := $(shell $(PYTHON) -c 'import numpy' 2> /dev/null && echo y || echo n)
+HAVE_PYTHON3_SOCKET_RECVMSG := $(shell $(PYTHON3) -c 'import socket;socket.socket.recvmsg' 2> /dev/null && echo y || echo n)
 
 ifneq ($(HAVE_PYTHON_CFFI), y)
 NONTEST_BINARIES += cffi_example.py cffi_numpy.py
 else ifneq ($(HAVE_PYTHON_NUMPY), y)
 NONTEST_BINARIES += cffi_numpy.py
+endif
+
+ifneq ($(HAVE_PYTHON3_SOCKET_RECVMSG), y)
+NONTEST_BINARIES += udp_multihome.py
 endif
 
 BINARIES := $(wildcard *.py)
