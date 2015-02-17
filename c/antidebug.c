@@ -92,10 +92,11 @@ int main(void)
     /* ARM breakpoint is an undefined instruction.
      * See BREAKINST_ARM and BREAKINST_THUMB macros in
      * https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/arm/kernel/ptrace.c
+     * Use integers instead of binary strings to use compiler endianness
      */
     const uint32_t arm_break = 0xe7f001f0;
     const uint16_t thumb_break = 0xde01;
-    const uint32_t thumb2_break = 0xf7f0a000;
+    const uint16_t thumb2_break[2] = {0xf7f0, 0xa000};
 #endif
 #if IS_WINDOWS
     HMODULE hKernel32, hNtDll;
