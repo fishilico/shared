@@ -101,21 +101,25 @@ def main(argv=None):
 
     if sys.version_info >= (3,):
         characters = ' '.join(args.chars)
+        # Use binary stdout to avoid issues with pure ascii output and weird
+        # work-arounds such as setting PYTHONIOENCODING=UTF-8
+        stdout = sys.stdout.buffer
     else:
         characters = b' '.join(args.chars).decode('utf-8')
+        stdout = sys.stdout
     if not characters:
         characters = b''.join(EXAMPLES_UTF8).decode('utf-8')
 
     # Get the maximal numeric representation to get the digit count
     maxnum = max(ord(c) for c in characters)
     n = int(math.ceil(math.log(maxnum, 16)))
-    pattern = 'U+{:' + str(n) + 'X} = UTF-8 {:16s} {}'
+    pattern = 'U+{:' + str(n) + 'X} = UTF-8 {:16s} {}\n'
 
     for char in characters:
         byteints = get_utf8_bytes(char)
         assert byteints == get_utf8_bytes_native(char)
         hexa = ''.join('\\x{:02x}'.format(b) for b in byteints)
-        print(pattern.format(ord(char), hexa, char))
+        stdout.write(pattern.format(ord(char), hexa, char).encode('utf-8'))
     return 0
 
 
