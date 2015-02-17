@@ -61,6 +61,10 @@ clean:
 	if [ -e $(OUT_DIR)/Makefile ] ; then $(MAKE) -C '$(OUT_DIR)' ARCH=um mrproper ; fi
 	$(RM) -rf '$(OUT_DIR)'
 
+mrproper: clean
+	$(RM) -r '$(SRC_DIR)'
+	$(RM) ./*.sav ./*.sign ./*.xz
+
 # Download files
 $(LINUX_FILE_ARCHIVE) $(LINUX_SIG_ARCHIVE) $(LINUX_FILE_PATCH) $(LINUX_SIG_PATCH):
 	$(WGET) -O $@ "$(LINUX_URL_PUB)$@" || ($(RM) -f "$@" ; false)
@@ -131,4 +135,4 @@ frama-val: $(OUT_DIR)/vmlinux
 		$$(find $(OUT_DIR) \( -path 'arch/um/kernel/asm-offsets.i' -o -path 'kernel/bounds.i' -o -path 'scripts' \) -prune -o -name '*.i' -print |sort) \
 		2>&1 | $(SH) ./filter_framac_output.sh
 
-.PHONY: all clean comp-% compile frama-val refresh-quilt
+.PHONY: all clean comp-% compile frama-val mrproper refresh-quilt
