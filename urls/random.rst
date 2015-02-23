@@ -24,6 +24,11 @@ Calculus
 * http://magma.maths.usyd.edu.au/calc/ Magma
   (discrete logarithm: ``e := Log(GF(p)!g, GF(p)!x); # x = g^e mod p``)
 
+Interesting hardware-related projets
+------------------------------------
+
+* http://www.foobarflies.io/pianette/ Pianette / "Sound Fighter"
+
 Other, in French
 ----------------
 

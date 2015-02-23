@@ -31,6 +31,10 @@ Hacking
   magic database for the command "file"
 * http://www.iteamdevelopers.org/building-ultimate-anonymous-malware-analysis-and-reverse-engineering-machine/
   Building Ultimate Anonymous Malware Analysis and Reverse Engineering Machine (Feb 2015)
+* http://genode.org/documentation/articles/trustzone
+  An Exploration of ARM TrustZone Technology (with Genode OS as secure OS)
+* https://deathmarine.github.io/Luyten/
+  Luyten, an Open Source Java Decompiler GUI
 
 Programming
 -----------
@@ -105,3 +109,4 @@ Hardware products
 * http://inversepath.com/usbarmory USB Armory (InversePath)
 * https://www.yubico.com/products/yubikey-hardware/yubikey-2/ Yubikey (Yubico)
 * http://www.raspberrypi.org/ Raspberry Pi
+* http://beagleboard.org/ BeagleBoard, BeagleBone Black
