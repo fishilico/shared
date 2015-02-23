@@ -33,6 +33,7 @@ int _tmain(void)
     HANDLE hProcess;
     pfnNtQueryInformationProcess _NtQueryInformationProcess;
     PROCESS_BASIC_INFORMATION pbi;
+    OSVERSIONINFO ovi;
     const void *pTeb, *pTeb2;
     const PEB *pPeb;
     const LIST_ENTRY *ListHead, *ListEntry;
@@ -69,9 +70,18 @@ int _tmain(void)
         return 1;
     }
     printf("Process Environment block is at %p\n", pPeb);
-    printf("PEB Ldr is at %p\n", pPeb->Ldr);
+
+    /* Check ImageBase */
+    hModule = GetModuleHandle(NULL);
+    if (pPeb->ImageBaseAddress != (PVOID)hModule) {
+        printf("Invalid ImageBaseAddress in PEB: %p, expected %p\n",
+               pPeb->ImageBaseAddress, (PVOID)hModule);
+        return 1;
+    }
+    printf("PEB ImageBaseAddress is %p\n", pPeb->ImageBaseAddress);
 
     /* Enumerate modules */
+    printf("PEB Ldr is at %p\n", pPeb->Ldr);
     ListHead = &pPeb->Ldr->InMemoryOrderModuleList;
     ListEntry = ListHead->Flink;
     while (ListEntry != ListHead) {
@@ -92,7 +102,7 @@ int _tmain(void)
      * Do not use EXCEPTION_REGISTRATION_RECORD as it is an internal non-standard
      * structure from MinGW excpt.h header.
      */
-    seh_entry = (const void *const *)((const TEB_internal*)pTeb)->NtTib.ExceptionList;
+    seh_entry = (const void *const *)((const TEB_internal *)pTeb)->NtTib.ExceptionList;
     printf("SEH list:\n");
     while (seh_entry && seh_entry != (const void *const *)(-1)) {
         /* seh_entry[0] is the next entry and seh_entry[1] the handler function */
@@ -148,6 +158,38 @@ int _tmain(void)
     assert(bRet);
 
     FreeLibrary(hNtDll);
+
+    /* Check other PEB fields */
+    if (pPeb->ProcessHeap != (PVOID)GetProcessHeap()) {
+        printf("Invalid ProcessHeap in PEB: %p, expected %p\n",
+               pPeb->ProcessHeap, (PVOID)GetProcessHeap());
+        return 1;
+    }
+    printf("Process heap is at %p\n", pPeb->ProcessHeap);
+
+    printf("Number of processors: %lu\n", pPeb->NumberOfProcessors);
+
+    /* Check OS version info */
+    printf("OS version %lu.%lu build %u CSD %u\n",
+           pPeb->OSMajorVersion, pPeb->OSMinorVersion, pPeb->OSBuildNumber,
+           pPeb->OSCSDVersion);
+    ovi.dwOSVersionInfoSize = sizeof(ovi);
+    if (!GetVersionEx(&ovi)) {
+        printf("GetVersionEx failed with error %lu.\n", GetLastError());
+        return 1;
+    }
+    if (ovi.dwMajorVersion != pPeb->OSMajorVersion ||
+        ovi.dwMinorVersion != pPeb->OSMinorVersion ||
+        ovi.dwBuildNumber != (DWORD)(pPeb->OSBuildNumber)) {
+        printf("GetVersionEx returned a different version: %lu.%lu.%lu\n",
+               ovi.dwMajorVersion, ovi.dwMinorVersion, ovi.dwBuildNumber);
+        return 1;
+    }
+
+    printf("Subsystem %lu version %lu.%lu\n",
+           pPeb->ImageSubsystem, pPeb->ImageSubsystemMajorVersion,
+           pPeb->ImageSubsystemMinorVersion);
+
     _ExitProcess(0);
     printf("Custom ExitProcess call failed\n");
     return 1;

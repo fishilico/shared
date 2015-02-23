@@ -56,18 +56,37 @@ typedef struct _RTL_USER_PROCESS_PARAMETERS {
     UNICODE_STRING CommandLine;
 } RTL_USER_PROCESS_PARAMETERS, *PRTL_USER_PROCESS_PARAMETERS;
 
+/* Offsets are written for 32- and 64-bit systems.
+ * For comparaison with several Windows versions, see:
+ * http://blog.rewolf.pl/blog/?p=573 Evolution of Process Environment Block
+ */
 typedef struct _PEB {
     BYTE Reserved1[2];
-    BYTE BeingDebugged;
+    BYTE BeingDebugged; /* 0x002 0x002 */
     BYTE Reserved2[1];
-    PVOID Reserved3[2];
-    PPEB_LDR_DATA Ldr;
-    PRTL_USER_PROCESS_PARAMETERS ProcessParameters;
-    BYTE Reserved4[104];
-    PVOID Reserved5[53];
-    BYTE Reserved6[128];
-    PVOID Reserved7[1];
-    ULONG SessionId;
+    PVOID Reserved3;
+    PVOID ImageBaseAddress; /* 0x008 0x010 */
+    PPEB_LDR_DATA Ldr; /* 0x00C 0x018 */
+    PRTL_USER_PROCESS_PARAMETERS ProcessParameters; /* 0x010 0x020 */
+    PVOID SubSystemData; /* 0x014 0x028 */
+    PVOID ProcessHeap; /* Ox018 0x030 */
+    BYTE Reserved4[16];
+    PVOID Reserved5[14];
+    DWORD NumberOfProcessors; /* 0x064 0x0b8 */
+    DWORD NtGlobalFlag; /* 0x068 0x0bc */
+    BYTE Reserved6[24];
+    PVOID Reserved7[8];
+    DWORD OSMajorVersion; /* 0x0a4 0x118 */
+    DWORD OSMinorVersion; /* 0x0a8 0x11c */
+    WORD OSBuildNumber; /* 0x0ac 0x120 */
+    WORD OSCSDVersion; /* 0x0ae 0x122 */
+    DWORD OSPlatformId; /* 0x0b0 0x124 */
+    DWORD ImageSubsystem; /* 0x0b4 0x128 */
+    DWORD ImageSubsystemMajorVersion; /* 0x0b8 0x12c */
+    DWORD ImageSubsystemMinorVersion; /* 0x0bc 0x130 */
+    BYTE Reserved8[156];
+    PVOID Reserved9[30];
+    ULONG SessionId; /* 0x1d4 0x2c0 */
 } PEB, *PPEB;
 
 typedef struct _CLIENT_ID {
