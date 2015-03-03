@@ -31,7 +31,7 @@ endif
 #   LDFLAGS += -fstack-protector
 CPPFLAGS ?=
 CFLAGS ?= -O2 -ansi \
-	-Wall -W -Wextra \
+	-Wall -Wextra \
 	-Waggregate-return \
 	-Wformat=2 \
 	-Winit-self \

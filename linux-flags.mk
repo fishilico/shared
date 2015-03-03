@@ -22,7 +22,7 @@ CPPFLAGS ?= -D_GNU_SOURCE -D_FORTIFY_SOURCE=2
 # C compiler flags
 # list of warnings from https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 CFLAGS ?= -O2 -ansi -pedantic -pipe \
-	-Wall -W -Wextra \
+	-Wall -Wextra \
 	-Waggregate-return \
 	-Wcast-align \
 	-Wfloat-equal \
