@@ -32,21 +32,21 @@ typedef struct _UNICODE_STRING {
 
 typedef struct _PEB_LDR_DATA {
     BYTE Reserved1[8];
-    PVOID Reserved2[3];
+    PVOID Reserved2;
+    LIST_ENTRY InLoadOrderModuleList; /* Undocumented */
     LIST_ENTRY InMemoryOrderModuleList;
+    LIST_ENTRY InInitializationOrderModuleList; /* Undocumented */
 } PEB_LDR_DATA, *PPEB_LDR_DATA;
 
 typedef struct _LDR_DATA_TABLE_ENTRY {
-    PVOID Reserved1[2];
+    LIST_ENTRY InLoadOrderLinks; /* Undocumented */
     LIST_ENTRY InMemoryOrderLinks;
-    PVOID Reserved2[2];
+    LIST_ENTRY InInitializationOrderLinks; /* Undocumented */
     PVOID DllBase;
-    PVOID Reserved3[2];
+    PVOID EntryPoint;
+    PVOID Reserved1;
     UNICODE_STRING FullDllName;
-    BYTE Reserved4[8];
-    PVOID Reserved5[3];
-    PVOID Reserved6;
-    ULONG TimeDateStamp;
+    UNICODE_STRING BaseDllName; /* Undocumented */
 } LDR_DATA_TABLE_ENTRY, *PLDR_DATA_TABLE_ENTRY;
 
 typedef struct _RTL_USER_PROCESS_PARAMETERS {
@@ -217,15 +217,15 @@ static LPCVOID _GetModuleBase(LPCWSTR szModuleName)
         ListEntry = ListEntry->Flink;
         /* Find the last directory separator of the full DLL name */
         szCurModuleName = CurEntry->FullDllName.Buffer;
-        modnamelen = CurEntry->FullDllName.Length;
-        for (i = 0; i < CurEntry->FullDllName.Length; i++) {
+        modnamelen = CurEntry->FullDllName.Length / 2;
+        for (i = 0; i < CurEntry->FullDllName.Length / 2; i++) {
             WCHAR c = CurEntry->FullDllName.Buffer[i];
             if (!c) {
-                modnamelen -= CurEntry->FullDllName.Length - i;
+                modnamelen -= CurEntry->FullDllName.Length / 2 - i;
                 break;
             } else if (c == L'\\' || c == '/') {
                 szCurModuleName = &CurEntry->FullDllName.Buffer[i + 1];
-                modnamelen = CurEntry->FullDllName.Length - i - 1;
+                modnamelen = CurEntry->FullDllName.Length / 2 - i - 1;
             }
         }
         if (StringsCaseLenEqualsW(szCurModuleName, szModuleName, modnamelen) &&

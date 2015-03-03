@@ -26,6 +26,31 @@ typedef struct _PROCESS_BASIC_INFORMATION {
     PVOID Reserved3;
 } PROCESS_BASIC_INFORMATION, *PPROCESS_BASIC_INFORMATION;
 
+/**
+ * Check that a given base name matches the full name
+ */
+static BOOL check_base_for_full(const UNICODE_STRING *base, const UNICODE_STRING *full)
+{
+    LPCWSTR szFullBase = full->Buffer;
+    USHORT i, cchFullBase = full->Length / 2;
+    WCHAR c;
+
+    /* Extract the base name of full */
+    for (i = 0; i < full->Length / 2; i++) {
+        c = full->Buffer[i];
+        if (!c) {
+            cchFullBase -= full->Length / 2 - i;
+            break;
+        } else if (c == L'\\' || c == '/') {
+            szFullBase = &full->Buffer[i + 1];
+            cchFullBase = full->Length / 2 - i - 1;
+        }
+    }
+    return (2 * cchFullBase <= base->Length) && \
+        StringsCaseLenEqualsW(base->Buffer, szFullBase, cchFullBase) && \
+        (2 * cchFullBase == base->Length || base->Buffer[cchFullBase] == 0);
+}
+
 int _tmain(void)
 {
     NTSTATUS dwStatus;
@@ -42,6 +67,7 @@ int _tmain(void)
     LPCVOID pModuleBase, pProcAddress, pProcAddress2;
     ULONG sizeNeeded;
     BOOL bRet;
+    int i;
 
     /* Use public API */
     hProcess = GetCurrentProcess();
@@ -82,20 +108,105 @@ int _tmain(void)
 
     /* Enumerate modules */
     printf("PEB Ldr is at %p\n", pPeb->Ldr);
+    printf("In Memory Order list:\n");
     ListHead = &pPeb->Ldr->InMemoryOrderModuleList;
-    ListEntry = ListHead->Flink;
-    while (ListEntry != ListHead) {
+    for (ListEntry = ListHead->Flink; ListEntry != ListHead; ListEntry = ListEntry->Flink) {
         CurEntry = CONTAINING_RECORD(ListEntry, LDR_DATA_TABLE_ENTRY, InMemoryOrderLinks);
         assert(&CurEntry->InMemoryOrderLinks == ListEntry);
+        if (!check_base_for_full(&CurEntry->BaseDllName, &CurEntry->FullDllName)) {
+            printf("Module %*S: base name mismatch with %*S\n",
+                   CurEntry->FullDllName.Length / 2, CurEntry->FullDllName.Buffer,
+                   CurEntry->BaseDllName.Length / 2, CurEntry->BaseDllName.Buffer);
+            return 1;
+        }
         /* Get Module base from standard API and compare the results */
         hModule = GetModuleHandleW(CurEntry->FullDllName.Buffer);
         if (hModule != CurEntry->DllBase) {
-            printf("Module %S: base address mismatch, hMod = %p, Ldr entry = %p\n",
-                   CurEntry->FullDllName.Buffer, hModule, CurEntry->DllBase);
+            printf("Module %*S: base address mismatch, hMod = %p, Ldr entry = %p\n",
+                   CurEntry->FullDllName.Length / 2, CurEntry->FullDllName.Buffer,
+                   hModule, CurEntry->DllBase);
             return 1;
         }
-        printf("   %p: %S\n", CurEntry->DllBase, CurEntry->FullDllName.Buffer);
-        ListEntry = ListEntry->Flink;
+        printf("   %p: %*S\n", CurEntry->DllBase,
+               CurEntry->FullDllName.Length / 2, CurEntry->FullDllName.Buffer);
+    }
+
+    /* Re-enumerate the modules, but in load order and with Base dll */
+    printf("In Load Order list:\n");
+    ListHead = &pPeb->Ldr->InLoadOrderModuleList;
+    for (i = 0, ListEntry = ListHead->Flink; ListEntry != ListHead; i++, ListEntry = ListEntry->Flink) {
+        CurEntry = CONTAINING_RECORD(ListEntry, LDR_DATA_TABLE_ENTRY, InLoadOrderLinks);
+        assert(&CurEntry->InLoadOrderLinks == ListEntry);
+        if (!check_base_for_full(&CurEntry->BaseDllName, &CurEntry->FullDllName)) {
+            printf("Module %*S: base name mismatch with %*S\n",
+                   CurEntry->FullDllName.Length / 2, CurEntry->FullDllName.Buffer,
+                   CurEntry->BaseDllName.Length / 2, CurEntry->BaseDllName.Buffer);
+            return 1;
+        }
+        hModule = GetModuleHandleW(CurEntry->FullDllName.Buffer);
+        if (hModule != CurEntry->DllBase) {
+            printf("Module %*S: base address mismatch, hMod = %p, Ldr entry = %p\n",
+                   CurEntry->FullDllName.Length / 2, CurEntry->FullDllName.Buffer,
+                   hModule, CurEntry->DllBase);
+            return 1;
+        }
+        printf("   %p: %*S\n", CurEntry->DllBase,
+               CurEntry->BaseDllName.Length / 2, CurEntry->BaseDllName.Buffer);
+
+        /* Check expected order: base, ntdll, kernel32 */
+        if (i == 0 && CurEntry->DllBase != (PVOID)GetModuleHandle(NULL)) {
+            printf("Unexpected first module: not base\n");
+            return 1;
+        }
+        if (i == 1 && !StringsCaseLenEqualsW(L"ntdll.dll",
+                                             CurEntry->BaseDllName.Buffer,
+                                             CurEntry->BaseDllName.Length / 2)) {
+            printf("Unexpected second module: not ntdll.dll\n");
+            return 1;
+        }
+        if (i == 2 && !StringsCaseLenEqualsW(L"KERNEL32.dll",
+                                             CurEntry->BaseDllName.Buffer,
+                                             CurEntry->BaseDllName.Length / 2)) {
+            printf("Unexpected third module: not KERNEL32.dll\n");
+            return 1;
+        }
+    }
+
+    /* Re-enumerate the modules, but in initialization order and with Base dll */
+    printf("In Initialization Order list:\n");
+    ListHead = &pPeb->Ldr->InInitializationOrderModuleList;
+    for (i = 0, ListEntry = ListHead->Flink; ListEntry != ListHead; i++, ListEntry = ListEntry->Flink) {
+        CurEntry = CONTAINING_RECORD(ListEntry, LDR_DATA_TABLE_ENTRY, InInitializationOrderLinks);
+        assert(&CurEntry->InInitializationOrderLinks == ListEntry);
+        if (!check_base_for_full(&CurEntry->BaseDllName, &CurEntry->FullDllName)) {
+            printf("Module %*S: base name mismatch with %*S\n",
+                   CurEntry->FullDllName.Length / 2, CurEntry->FullDllName.Buffer,
+                   CurEntry->BaseDllName.Length / 2, CurEntry->BaseDllName.Buffer);
+            return 1;
+        }
+        hModule = GetModuleHandleW(CurEntry->FullDllName.Buffer);
+        if (hModule != CurEntry->DllBase) {
+            printf("Module %*S: base address mismatch, hMod = %p, Ldr entry = %p\n",
+                   CurEntry->FullDllName.Length / 2, CurEntry->FullDllName.Buffer,
+                   hModule, CurEntry->DllBase);
+            return 1;
+        }
+        printf("   %p: %*S\n", CurEntry->DllBase,
+               CurEntry->BaseDllName.Length / 2, CurEntry->BaseDllName.Buffer);
+
+        /* Check expected order: ntdll then kernel32 */
+        if (i == 0 && !StringsCaseLenEqualsW(L"ntdll.dll",
+                                             CurEntry->BaseDllName.Buffer,
+                                             CurEntry->BaseDllName.Length / 2)) {
+            printf("Unexpected first module: not ntdll.dll\n");
+            return 1;
+        }
+        if (i == 1 && !StringsCaseLenEqualsW(L"KERNEL32.dll",
+                                             CurEntry->BaseDllName.Buffer,
+                                             CurEntry->BaseDllName.Length / 2)) {
+            printf("Unexpected second module: not KERNEL32.dll\n");
+            return 1;
+        }
     }
 
     /* Dump SEH, which may contain interesting addresses
