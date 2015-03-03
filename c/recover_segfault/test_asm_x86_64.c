@@ -2,7 +2,7 @@
  * Test the x86-64 implementation
  */
 #include <assert.h>
-#include <inttypes.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 

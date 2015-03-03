@@ -14,6 +14,7 @@
  * and in the auxiliary vector:
  *     LD_SHOW_AUXV=1 /bin/true | grep AT_HWCAP
  */
+#include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include "x86-cpuid_enum.h"

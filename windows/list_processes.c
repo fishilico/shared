@@ -1,8 +1,8 @@
 /**
  * List the currently running processes
  */
-#include <assert.h>
 #include "common.h"
+#include <assert.h>
 #include <psapi.h>
 
 /**

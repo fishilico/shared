@@ -5,9 +5,9 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <sys/epoll.h>
-#include <sys/types.h>
 #include <unistd.h>
 
 static bool read_active_tty(int active_tty_fd, bool is_changed)

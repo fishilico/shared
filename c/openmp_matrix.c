@@ -3,6 +3,7 @@
  */
 #include <errno.h>
 #include <omp.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

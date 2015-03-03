@@ -10,9 +10,9 @@
 #include <assert.h>
 #include <elf.h>
 #include <inttypes.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #if defined __x86_64__
 #    define DEFINE_ELF_STRUCT(name) typedef Elf64_##name Elf_##name

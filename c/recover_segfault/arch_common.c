@@ -2,6 +2,9 @@
  * Common helper accross architectures
  */
 #include <stdarg.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 
 #include "recover_segfault.h"

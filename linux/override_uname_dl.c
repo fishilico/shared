@@ -2,9 +2,10 @@
  * Override uname return value with environment variables
  */
 #include <dlfcn.h>
-#include <inttypes.h>
-#include <stdlib.h>
+#include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/utsname.h>
 

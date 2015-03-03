@@ -6,15 +6,16 @@
  *    S N R V M GNU/Linux
  */
 #include <assert.h>
-#include <inttypes.h>
+#include <getopt.h>
 #include <signal.h>
-#include <stdlib.h>
+#include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/prctl.h>
 #include <sys/ptrace.h> /* ptrace() */
 #include <sys/syscall.h> /* __NR... */
-#include <sys/types.h>
 #include <sys/user.h> /* struct user_regs_struct */
 #include <sys/utsname.h>
 #include <sys/wait.h>

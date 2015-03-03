@@ -4,23 +4,25 @@
  * Linux examples: http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/samples/seccomp
  */
 #include <assert.h>
-#include <ctype.h>
+#include <endian.h>
 #include <errno.h>
+#include <getopt.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <stddef.h> /* for offsetof */
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h> /* for memset */
 #include <sys/prctl.h>
 #include <sys/resource.h>
+#include <sys/syscall.h>
 #include <sys/utsname.h>
+#include <ucontext.h>
 #include <unistd.h>
 
 #include <linux/audit.h>
 #include <linux/filter.h>
 #include <linux/seccomp.h>
-#include <linux/unistd.h>
 
 /**
  * Define AUDIT_ARCH and helpers to mcontext_t struct

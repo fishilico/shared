@@ -1,8 +1,8 @@
 /**
  * Display "Hello, world!" in a message box
  */
-#include <windows.h>
 #include <tchar.h>
+#include <windows.h>
 
 /* Avoid -Wunused-parameter but keep the code mostly clean */
 #define _u __attribute__ ((unused))

@@ -1,7 +1,7 @@
 /**
  * Print the size of the standard types, with the current processor architecture
  */
-
+#include <stddef.h>
 #include <stdio.h>
 
 #if defined(__linux__) || defined(__unix__) || defined(__posix__)

@@ -13,10 +13,10 @@
  *
  * With wine, use WINEDEBUG="trace+seh" to debug exception handling system.
  */
-#include <windows.h>
-
 #include <assert.h>
+#include <stddef.h>
 #include <stdio.h>
+#include <windows.h>
 
 #include "recover_segfault.h"
 

@@ -16,6 +16,7 @@ struct segfault_memcontent {
 
 #if defined(__linux__) || defined(__unix__) || defined(__posix__)
 #    include <signal.h>
+#    include <ucontext.h>
 
 typedef mcontext_t asm_instr_context;
 #    define asm_instr_ctx_reg(ctx, upper, ucfirst) ((ctx)->gregs[REG_##upper])

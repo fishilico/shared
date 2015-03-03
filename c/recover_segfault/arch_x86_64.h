@@ -7,6 +7,7 @@
 #if defined(__linux__) || defined(__unix__) || defined(__posix__)
 #    define PRIxREG "llx"
 #else
+#    include <inttypes.h>
 #    define PRIxREG PRIx64
 #endif
 

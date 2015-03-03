@@ -7,8 +7,9 @@
 
 /* Import the lists of error numbers and system calls */
 #include <errno.h>
+#include <stddef.h> /* for size_t */
 #include <sys/syscall.h>
-#include <sys/types.h>
+#include <sys/types.h> /* for ssize_t */
 
 /**
  * Program entry point

@@ -1,6 +1,7 @@
 /**
  * Print content (apparently) from the null page
  */
+ #include <stdint.h>
 #include <stdio.h>
 
 #include "recover_segfault.h"

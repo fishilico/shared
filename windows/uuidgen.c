@@ -3,9 +3,9 @@
  *
  * Link with rpcrt4.dll
  */
-#include <windows.h>
 #include <stdio.h>
 #include <tchar.h>
+#include <windows.h>
 
 int _tmain(void)
 {

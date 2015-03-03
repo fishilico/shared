@@ -1,4 +1,3 @@
-#include <assert.h>
 #include "cffi_example.h"
 
 char CFFI_EXAMPLE_API helloworld[] = "Hello, world!";

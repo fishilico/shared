@@ -6,6 +6,7 @@
 #ifndef EFI_H
 #define EFI_H
 
+#include <stddef.h>
 #include <stdint.h>
 
 #define EFI_SUCCESS 0

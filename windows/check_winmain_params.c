@@ -1,9 +1,9 @@
 /**
  * Check that WinMain arguments can be found through Windows API
  */
-#include <windows.h>
 #include <stdio.h>
 #include <tchar.h>
+#include <windows.h>
 
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {

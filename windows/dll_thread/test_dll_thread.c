@@ -4,8 +4,8 @@
 #include <assert.h>
 #include <inttypes.h>
 #include <stdio.h>
-#include <windows.h>
 #include <tchar.h>
+#include <windows.h>
 #include "dll_thread.h"
 
 #define NUM_THREADS 5

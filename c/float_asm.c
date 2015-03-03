@@ -20,9 +20,8 @@
 #undef __STRICT_ANSI__
 #endif
 
-#include <assert.h>
-#include <inttypes.h>
 #include <math.h>
+#include <stdint.h>
 #include <stdio.h>
 
 static float add_f(float x, float y)

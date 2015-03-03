@@ -8,6 +8,7 @@
 /* Windows uses DWORD as unsigned long int */
 #    define PRIxREG "lx"
 #else
+#    include <inttypes.h>
 #    define PRIxREG PRIx32
 #endif
 

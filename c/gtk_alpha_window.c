@@ -6,9 +6,10 @@
  * Equivalent program in Python with gtk 3:
  * http://zetcode.com/gfx/pycairo/root/
  */
-#include <gtk/gtk.h>
-#include <gdk/gdkscreen.h>
 #include <cairo.h>
+#include <gdk/gdk.h>
+#include <gtk/gtk.h>
+#include <stdio.h>
 
 static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer user_data);
 static gboolean expose(GtkWidget *widget, GdkEventExpose *event, gpointer user_data);

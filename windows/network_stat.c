@@ -6,8 +6,8 @@
 */
 #include <winsock2.h>
 #include "common.h"
-#include <ws2tcpip.h>
 #include <iphlpapi.h>
+#include <ws2tcpip.h>
 
 /* Describe an enum with a switch-case structure */
 #define case_print(value, text) case value: _tprintf(text); break

@@ -12,6 +12,7 @@
  * * glibc implementation of getifaddrs, using netlink:
  *   https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/unix/sysv/linux/ifaddrs.c;hb=HEAD
  */
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 

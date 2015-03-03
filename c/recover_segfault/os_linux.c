@@ -6,9 +6,13 @@
  *   Cleanly recovering from Segfaults under Windows and Linux (32-bit, x86)
  */
 #include <assert.h>
-#include <stdlib.h>
+#include <signal.h>
+#include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <ucontext.h>
 
 #include "recover_segfault.h"
 
