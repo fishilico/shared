@@ -3,8 +3,8 @@
  *
  * Simpler version of mmap-wx.c
  */
-#ifndef _DEFAULT_SOURCE
-#    define _DEFAULT_SOURCE /* for ftruncate, mkstemp */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for MAP_ANONYMOUS, ftruncate, mkstemp */
 #endif
 
 #include <stdint.h>

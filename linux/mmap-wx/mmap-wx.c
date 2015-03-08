@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef _DEFAULT_SOURCE
-#    define _DEFAULT_SOURCE /* for ftruncate, mkstemp */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for MAP_ANONYMOUS, ftruncate, mkstemp */
 #endif
 
 #include <assert.h>
