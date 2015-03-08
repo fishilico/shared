@@ -21,7 +21,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#if !defined CPU_ALLOC && !defined CPU_ZERO_S
+#if !defined(CPU_ALLOC) && !defined(CPU_ZERO_S)
 /* Define the _S API from the older one */
 #    define CPU_ISSET_S(cpu, setsize, set) CPU_ISSET((cpu), (set))
 #    define CPU_SET_S(cpu, setsize, set) do {(void)setsize; CPU_SET((cpu), (set));} while (0)
@@ -198,7 +198,7 @@ static bool migrate_to_cpu(unsigned long cpu, unsigned long cpu_num)
     return true;
 }
 
-#if defined __x86_64__ || defined __i386__
+#if defined(__x86_64__) || defined(__i386__)
 /**
  * Read the Time Stamp Counter of the current CPU
  */

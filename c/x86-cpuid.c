@@ -46,7 +46,7 @@ static void print_escaped_ascii(const char *prefix, const char *text)
 
 static void asm_cpuid(uint32_t code, uint32_t *peax, uint32_t *pebx, uint32_t *pecx, uint32_t *pedx)
 {
-#if defined __i386__ && defined __GNUC__ && defined __PIC__
+#if defined(__i386__) && defined(__GNUC__) && defined(__PIC__)
     /* x86 GCC with PIC flag (Program Independent Code) complains with
      * "error: inconsistent operand constraints in an 'asm'"
      * because ebx has a special meaning in PIC

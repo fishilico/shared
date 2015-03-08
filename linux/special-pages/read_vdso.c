@@ -14,12 +14,12 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#if defined __x86_64__
+#if defined(__x86_64__)
 #    define DEFINE_ELF_STRUCT(name) typedef Elf64_##name Elf_##name
 #    define ELF_ST_BIND(val) ELF64_ST_BIND(val)
 #    define ELF_ST_TYPE(val) ELF64_ST_TYPE(val)
 #    define ELF_ST_INFO(bind, type) ELF64_ST_INFO((bind), (type))
-#elif defined  __i386__ || defined __arm__
+#elif defined(__i386__) || defined(__arm__)
 #    define DEFINE_ELF_STRUCT(name) typedef Elf32_##name Elf_##name
 #    define ELF_ST_BIND(val) ELF32_ST_BIND(val)
 #    define ELF_ST_TYPE(val) ELF32_ST_TYPE(val)

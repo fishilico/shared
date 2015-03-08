@@ -27,7 +27,7 @@
 
 static struct utsname fake_uname;
 
-#if defined __i386__
+#if defined(__i386__)
 #    define REG_SYSCALL(regs) ((regs).orig_eax)
 #    define REG_ARG0(regs) ((regs).ebx)
 #    define REG_ARG1(regs) ((regs).ecx)
@@ -37,7 +37,7 @@ static struct utsname fake_uname;
 #    define REG_ARG5(regs) ((regs).ebp)
 #    define REG_RESULT(regs) ((regs).eax)
 typedef struct user_regs_struct user_regs_type;
-#elif defined __x86_64__
+#elif defined(__x86_64__)
 #    define REG_SYSCALL(regs) ((regs).orig_rax)
 #    define REG_ARG0(regs) ((regs).rdi)
 #    define REG_ARG1(regs) ((regs).rsi)
@@ -47,7 +47,7 @@ typedef struct user_regs_struct user_regs_type;
 #    define REG_ARG5(regs) ((regs).r9)
 #    define REG_RESULT(regs) ((regs).rax)
 typedef struct user_regs_struct user_regs_type;
-#elif defined __arm__
+#elif defined(__arm__)
 /* As musl is missing asm/ptrace.h from Linux kernel, harcode offsets in
  * user_regs struct, like ARM_r* macros in
  * https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/arm/include/uapi/asm/ptrace.h

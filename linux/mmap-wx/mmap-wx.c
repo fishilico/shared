@@ -41,14 +41,14 @@
  */
 /*#define MMAP_WX_DUMP_MMAPS 1*/
 
-#if defined __i386__ || defined __x86_64__
+#if defined(__i386__) || defined(__x86_64__)
 /**
  * Binary representation of "return 0;" in x86 instruction set:
  *     31 c0      xor    %eax,%eax
  *     c3         ret
  */
 static const uint8_t CODE[] = { 0x31, 0xc0, 0xc3 };
-#elif defined __arm__
+#elif defined(__arm__)
 /**
  * Binary representation of "return 0;" in ARM instruction set, using the
  * endianness of the compiler:

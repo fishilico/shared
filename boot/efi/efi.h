@@ -385,7 +385,7 @@ typedef struct {
 
 
 /* efi_call */
-#if defined __x86_64__
+#if defined(__x86_64__)
 /* Put the arguments of the EFI call in the following places:
  * * arg1 in rcx
  * * arg2 in rdx

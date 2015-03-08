@@ -23,7 +23,7 @@ static long _syscall3(
     int number, unsigned long arg1, unsigned long arg2, unsigned long arg3)
 {
     long result;
-#if defined __x86_64__
+#if defined(__x86_64__)
     /* rax = syscall number and result
      * rdi = arg1
      * rsi = arg2
@@ -36,7 +36,7 @@ static long _syscall3(
         : "=a" (result)
         : "0" (number), "D" (arg1), "S" (arg2), "d" (arg3)
         : "cc", "memory", "rcx", "r8", "r9", "r10", "r11");
-#elif defined __i386__
+#elif defined(__i386__)
     /* eax = syscall number and result
      * ebx = arg1
      * ecx = arg2
@@ -45,7 +45,7 @@ static long _syscall3(
      * edi = arg5
      * ebp = arg6
      */
-#    if defined __GNUC__ && defined __PIC__
+#    if defined(__GNUC__) && defined(__PIC__)
     /* GCC with PIC flag (Program Independent Code) complains with
      * "error: inconsistent operand constraints in an 'asm'"
      * because ebx has a special meaning in PIC
@@ -60,7 +60,7 @@ static long _syscall3(
         : "0" (number), "b" (arg1), "c" (arg2), "d" (arg3)
         : "memory", "cc");
 #    endif
-#elif defined __arm__
+#elif defined(__arm__)
     /* r7 = syscall number
      * r0 = arg1 and result
      * r1 = arg2

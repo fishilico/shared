@@ -82,14 +82,14 @@ static BOOL test_alloc_w_protect_x(LPCVOID pCode, SIZE_T cbSize)
 
 int _tmain(void)
 {
-#if defined __i386__ || defined __x86_64__
+#if defined(__i386__) || defined(__x86_64__)
     /**
      * Binary representation of "return 0;" in x86 instruction set:
      *     31 c0      xor    %eax,%eax
      *     c3         ret
      */
     const BYTE ret_zero[] = { 0x31, 0xc0, 0xc3 };
-#elif defined __arm__
+#elif defined(__arm__)
     /**
      * Binary representation of "return 0;" in ARM instruction set, using the
      * endianness of the compiler:

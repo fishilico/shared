@@ -24,9 +24,9 @@ static void perror_exit(const char *s)
 int main(void)
 {
     const char template[] = "./mmap-wx-XXXXXX";
-#if defined __i386__ || defined __x86_64__
+#if defined(__i386__) || defined(__x86_64__)
     const uint8_t code[] = { 0x31, 0xc0, 0xc3 };
-#elif defined __arm__
+#elif defined(__arm__)
     const uint32_t code[] = { 0xe3a00000, 0xe12fff1e };
 #else
 #    error Unsupported architecture

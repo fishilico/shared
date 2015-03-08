@@ -32,7 +32,7 @@
  * Define AUDIT_ARCH and helpers to mcontext_t struct
  * mcontext_t is defined in /usr/include/sys/ucontext.h
  */
-#if defined __i386__
+#if defined(__i386__)
 #    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_I386
 #    define mctx_reg_result(mctx) (mctx).gregs[REG_EAX]
 #    define mctx_reg_syscall(mctx) (mctx).gregs[REG_EAX]
@@ -42,7 +42,7 @@
 #    define mctx_reg_arg3(mctx) (mctx).gregs[REG_ESI]
 #    define mctx_reg_arg4(mctx) (mctx).gregs[REG_EDI]
 #    define mctx_reg_arg5(mctx) (mctx).gregs[REG_EBP]
-#elif defined __x86_64__
+#elif defined(__x86_64__)
 #    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_X86_64
 #    define mctx_reg_result(mctx) (mctx).gregs[REG_RAX]
 #    define mctx_reg_syscall(mctx) (mctx).gregs[REG_RAX]
@@ -52,7 +52,7 @@
 #    define mctx_reg_arg3(mctx) (mctx).gregs[REG_R10]
 #    define mctx_reg_arg4(mctx) (mctx).gregs[REG_R8]
 #    define mctx_reg_arg5(mctx) (mctx).gregs[REG_R9]
-#elif defined __arm__
+#elif defined(__arm__)
 #    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_ARM
 #    define mctx_reg_result(mctx) (mctx).arm_r0
 #    define mctx_reg_syscall(mctx) (mctx).arm_r7
