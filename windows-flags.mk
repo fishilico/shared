@@ -1,7 +1,11 @@
-# Find a C compiler for windows
+# Define some compilation flags for Windows
+#
+# This file can be both used to compile Windows programs natively or on Linux
+# using MinGW.
 
 UNAME ?= uname
 
+# Find a C compiler for windows
 ifneq ($(shell mingw32-gcc --version 2> /dev/null),)
 	TARGET := mingw32
 else
@@ -67,3 +71,7 @@ BIN_EXT := $(EXT_PREFIX)exe
 LIB_EXT := $(EXT_PREFIX)dll
 LIB_CFLAGS ?=
 LIB_LDFLAGS ?= -shared -Wl,--subsystem=0
+
+# Clean command
+RM ?= rm -f
+CLEAN_CMD := $(RM) *.a *.bin *.dll *.exe *.o *.out *.so *.tmp *.toc .*.d .*.o

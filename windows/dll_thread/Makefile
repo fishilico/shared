@@ -3,7 +3,7 @@ include ../../windows-flags.mk
 all: dll_thread.$(LIB_EXT) test_dll_thread.$(BIN_EXT)
 
 clean:
-	rm -f lib*.a *.dll *.exe *.o
+	$(CLEAN_CMD)
 
 test: all
 

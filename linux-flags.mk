@@ -88,3 +88,7 @@ BIN_EXT := $(EXT_PREFIX)bin
 LIB_EXT := $(EXT_PREFIX)so
 LIB_CFLAGS ?= -fPIC -fvisibility=hidden
 LIB_LDFLAGS ?= -fPIC -shared -Wl,-soname,$@
+
+# Clean command
+RM ?= rm -f
+CLEAN_CMD := $(RM) *.a *.bin *.dll *.exe *.o *.out *.so *.tmp *.toc .*.d .*.o

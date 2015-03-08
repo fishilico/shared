@@ -17,13 +17,14 @@
 #
 # Makefile for MBR
 #
-CC = gcc
-CHMOD = chmod
-LD = ld
-OBJCOPY = objcopy
-UNAME = uname
-SED = sed
-SHA1SUM = sha1sum
+CC ?= gcc
+CHMOD ?= chmod
+LD ?= ld
+OBJCOPY ?= objcopy
+UNAME ?= uname
+RM ?= rm -f
+SED ?= sed
+SHA1SUM ?= sha1sum
 
 # Architecture definition
 SUBARCH := $(shell $(UNAME) -m | $(SED) -e s/i.86/i386/)
@@ -107,8 +108,7 @@ all: $(MBR_SRC:%.S=%.bin) $(MBR_SRC:%.S=%_c.bin) $(MBR_SRC:%.S=%_f.bin)
 	$(CHMOD) -x $@
 
 clean:
-	rm -f *.o *.elf .*.d
-	rm -f *.bin
+	$(RM) *.bin *.o *.elf .*.d
 
 test: all
 	$(SHA1SUM) -c sha1sums.txt

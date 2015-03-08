@@ -9,7 +9,7 @@ NOIMPORT_PROGRAMS := $(filter-out check_%, $(SOURCES:%.c=%))
 all: $(BINARIES)
 
 clean:
-	rm -f *.exe *.o
+	$(CLEAN_CMD)
 
 test: all
 

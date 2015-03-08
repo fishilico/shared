@@ -2,6 +2,7 @@ CC ?= cc
 LD ?= ld
 CHMOD ?= chmod
 OBJCOPY ?= objcopy
+RM ?= rm -f
 
 CFLAGS = -Wall -fno-stack-protector -fno-exceptions -fvisibility=hidden
 SFLAGS = $(CFLAGS)
@@ -29,7 +30,7 @@ all: $(BINARIES)
 	$(CHMOD) -x $@
 
 clean:
-	rm -f *.bin *.elf *.o
+	$(RM) *.bin *.elf *.o
 
 test: all
 

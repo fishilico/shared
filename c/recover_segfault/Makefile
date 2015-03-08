@@ -41,7 +41,7 @@ BINARIES := $(PROGRAMS:%=%.$(BIN_EXT))
 all: $(BINARIES)
 
 clean:
-	rm -f *.o *.bin *.exe
+	$(CLEAN_CMD)
 
 debug: CPPFLAGS += -DDEBUG=1
 debug: all

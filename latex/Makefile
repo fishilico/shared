@@ -1,4 +1,5 @@
 PDFLATEX = pdflatex < /dev/null
+RM ?= rm -f
 
 TEXFILES := $(wildcard *.tex)
 PDFS := $(TEXFILES:%.tex=%.pdf)
@@ -6,7 +7,7 @@ PDFS := $(TEXFILES:%.tex=%.pdf)
 all: $(PDFS)
 
 clean:
-	rm -f *.aux *.log *.out *.pdf *.toc
+	$(RM) *.aux *.log *.out *.pdf *.toc
 
 test: all
 

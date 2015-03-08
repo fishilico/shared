@@ -42,7 +42,7 @@ TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(PROGRAMS:%=%.$(BIN_EXT)) $(
 all: $(PROGRAMS:%=%.$(BIN_EXT)) $(SHARED_OBJECTS)
 
 clean:
-	rm -f *.bin *.o *.so
+	$(CLEAN_CMD)
 
 test: all
 	@for P in $(sort $(filter-out eventpoll_activetty.$(BIN_EXT), $(TEST_BINARIES))); do \

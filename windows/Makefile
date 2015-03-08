@@ -7,7 +7,7 @@ BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 all: $(BINARIES)
 
 clean:
-	rm -f *.exe *.o
+	$(CLEAN_CMD)
 
 # Don't run any program in "make test" as it may require wine or wine64 depending on the distro
 test: all

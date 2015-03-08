@@ -18,7 +18,7 @@ all: $(BINARIES)
 all-frama: $(FRAMAC_TARGETS)
 
 clean:
-	rm -f *.bin *.exe *.o
+	$(CLEAN_CMD)
 
 # In "make test", only test that the binaries actually run, don't actually verify them
 test: all

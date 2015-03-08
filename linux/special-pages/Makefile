@@ -10,7 +10,7 @@ TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(BINARIES) $(wildcard *.py))
 all: $(BINARIES)
 
 clean:
-	rm -f *.bin *.o *.out *.so
+	$(CLEAN_CMD)
 
 test: all
 	@for P in $(sort $(TEST_BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done

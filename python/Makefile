@@ -42,8 +42,8 @@ PYLINT_PARAMS += --disable=F0401
 all: _cffi_example.$(LIB_EXT)
 
 clean:
-	rm -f *.o *.so *.dll
-	rm -rf __pycache__
+	$(CLEAN_CMD)
+	$(RM) -r __pycache__
 
 lint:
 	$(PEP8) $(PEP8_PARAMS) *.py

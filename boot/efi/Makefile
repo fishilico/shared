@@ -1,6 +1,7 @@
 CC ?= cc
 LD ?= ld
 OBJCOPY ?= objcopy
+RM ?= rm -f
 UNAME ?= uname
 
 TARGET_TRIPLET := $(shell $(CC) -dumpmachine)
@@ -48,7 +49,7 @@ endif
 all: $(EFIS)
 
 clean:
-	rm -f *.efi *.o *.so
+	$(RM) *.efi *.o *.so
 
 test: all
 

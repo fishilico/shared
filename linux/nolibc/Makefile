@@ -36,7 +36,7 @@ BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 all: $(BINARIES)
 
 clean:
-	rm -f *.bin *.o
+	$(CLEAN_CMD)
 
 # Test shellcode separately
 test: all

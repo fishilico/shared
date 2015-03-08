@@ -63,7 +63,7 @@ TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(PROGRAMS:%=%.$(BIN_EXT)) $(
 all: $(PROGRAMS:%=%.$(BIN_EXT))
 
 clean:
-	rm -f *.o *.bin *.exe *.tmp
+	$(CLEAN_CMD)
 
 test: all
 	@for P in $(sort $(TEST_BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
