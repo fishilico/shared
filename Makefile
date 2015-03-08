@@ -49,6 +49,26 @@ ifneq ($(shell $(PDFLATEX) --version > /dev/null 2>&1 && echo y),y)
 SUBDIRS_BLACKLIST += latex%
 endif
 
+# Show "SUBDIR ..." only if -w and -s and V=1 are not given, and then add
+# --no-print-directory to invoked make
+ifneq ($(findstring $(MAKEFLAGS), w), w)
+ifneq ($(findstring $(MAKEFLAGS), s), s)
+ifndef V
+_QUIET_SUBDIR := y
+define chdir_do
+	echo 'DIR '$(1) && \
+	cd $(1) && $(2) $(MAKE) --no-print-directory $(3)
+endef
+endif
+endif
+endif
+
+ifneq ($(_QUIET_SUBDIR), y)
+define chdir_do
+	cd $(1) && $(2) $(MAKE) $(2)
+endef
+endif
+
 # Build targets
 SUBDIRS_FINAL := $(sort $(filter-out $(SUBDIRS_BLACKLIST), $(SUBDIRS)))
 ALL_TARGETS := $(addprefix all.., $(SUBDIRS_FINAL))
@@ -72,20 +92,21 @@ clean-obj:
 	$(FIND) . -name '*.o' -delete
 
 test:
-	@for D in $(sort $(SUBDIRS_FINAL)); do (cd $$D && $(MAKE) test) || exit $$? ; done
+	@for D in $(sort $(SUBDIRS_FINAL)); do \
+		($(call chdir_do,$$D,,test)) || exit $$? ; done
 	@echo "Done testing with blacklist $(SUBDIRS_BLACKLIST)"
 
 $(addprefix all.., $(SUBDIRS)):
-	@cd "$(@:all..%=%)" && $(MAKE) all
+	+@$(call chdir_do,$(@:all..%=%),,all)
 
 $(addprefix all32.., $(SUBDIRS)):
-	@cd "$(@:all32..%=%)" && $(LINUX32) $(MAKE) CC="$(CC) -m32" EXT_PREFIX="32." all
+	+@$(call chdir_do,$(@:all32..%=%),$(LINUX32),CC="$(CC) -m32" EXT_PREFIX="32." all)
 
 $(addprefix all64.., $(SUBDIRS)):
-	@cd "$(@:all64..%=%)" && $(LINUX64) $(MAKE) CC="$(CC) -m64" EXT_PREFIX="64." all
+	+@$(call chdir_do,$(@:all64..%=%),$(LINUX64),CC="$(CC) -m64" EXT_PREFIX="64." all)
 
 $(addprefix clean.., $(SUBDIRS)):
-	@cd "$(@:clean..%=%)" && $(MAKE) clean
+	+@$(call chdir_do,$(@:clean..%=%),,clean)
 
 indent-c: gen-indent-c.sh
 	$(SH) $< > $@
