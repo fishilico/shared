@@ -69,3 +69,5 @@ override_uname_dl.$(LIB_EXT): LIBS += -ldl
 
 .PHONY: all clean test
 .PRECIOUS: .%.o
+
+-include .*.d

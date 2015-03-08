@@ -1,7 +1,6 @@
 include ../../windows-flags.mk
 
 SOURCES := $(wildcard *.c)
-HEADERS := $(wildcard *.h)
 BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 
 NOIMPORT_PROGRAMS := $(filter-out check_%, $(SOURCES:%.c=%))
@@ -20,8 +19,10 @@ $(NOIMPORT_PROGRAMS:%=.%.o): CFLAGS += -nostdlib -fno-stack-protector
 %.$(BIN_EXT): .%.o
 	$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
-.%.o: %.c $(HEADERS)
+.%.o: %.c
 	$(WINCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean test
 .PRECIOUS: .%.o
+
+-include .*.d

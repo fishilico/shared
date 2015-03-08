@@ -88,3 +88,5 @@ x86-linux-cpu-scattered.c.tmp:
 
 .PHONY: all clean test update_cpuid
 .PRECIOUS: .%.o
+
+-include .*.d

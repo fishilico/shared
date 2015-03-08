@@ -18,7 +18,7 @@ else
 ARCH := $(shell $(UNAME) -m | sed 's,i.86,ia32,')
 endif
 
-CPPFLAGS =
+CPPFLAGS = -Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d
 CFLAGS = -O2 -fPIC -Wall -Wextra \
 	-ffreestanding \
 	-fshort-wchar \
@@ -49,7 +49,7 @@ endif
 all: $(EFIS)
 
 clean:
-	$(RM) *.efi .*.o *.so
+	$(RM) .*.d *.efi .*.o *.so
 
 test: all
 
@@ -65,3 +65,5 @@ test: all
 
 .PHONY: all clean test
 .PRECIOUS: %.efi .%.o %.so
+
+-include .*.d

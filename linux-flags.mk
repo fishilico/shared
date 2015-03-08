@@ -17,7 +17,8 @@
 CC ?= cc
 
 # C preprocessor flags
-CPPFLAGS ?= -D_FORTIFY_SOURCE=2
+# Generate dependencies files targetting $@ in a .$@.d file
+CPPFLAGS ?= -D_FORTIFY_SOURCE=2 -Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d
 
 # C compiler flags
 # list of warnings from https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html

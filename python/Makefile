@@ -58,7 +58,9 @@ _cffi_example.$(LIB_EXT): ._cffi_example.o
 
 ._cffi_example.o: CPPFLAGS += -D_CFFI_EXAMPLE_EXPORTS
 ._cffi_example.o: CFLAGS := $(filter-out -fPIC -fPIE, $(CFLAGS))
-._cffi_example.o: _cffi_example.c cffi_example.h
+._cffi_example.o: _cffi_example.c
 	$(CC) $(CFLAGS) $(LIB_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean lint test
+
+-include .*.d

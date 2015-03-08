@@ -18,7 +18,9 @@ test: all
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 .%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean test
 .PRECIOUS: .%.o
+
+-include .*.d

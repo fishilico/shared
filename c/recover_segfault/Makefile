@@ -5,7 +5,6 @@ UNAME ?= uname
 
 # Find other programs. Only programs in $(PROGRAMS) are built.
 SOURCES := $(wildcard *.c)
-HEADERS := $(wildcard *.h)
 PROGRAMS := $(filter-out arch_% os_% test_asm_%, $(SOURCES:%.c=%))
 
 # Add OS- and arch-dependent object files
@@ -56,7 +55,7 @@ test: all
 # Disable strict-aliasing warning for XMM sub-part tests
 .test_%.o: CFLAGS += -Wno-strict-aliasing
 
-.%.o: %.c $(HEADERS)
+.%.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .arch_unknown.o:
@@ -69,3 +68,5 @@ test: all
 
 .PHONY: all clean debug test
 .PRECIOUS: .%.o
+
+-include .*.d

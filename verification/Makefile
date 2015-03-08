@@ -29,7 +29,7 @@ test: all
 # some files redefine C built-in functions strlen and memcpy
 .%.o: CFLAGS += -fno-builtin
 
-.%.o: %.c $(HEADERS)
+.%.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 %.frama: %.c
@@ -44,3 +44,5 @@ test: all
 
 .PHONY: all all-frama clean test
 .PRECIOUS: .%.o
+
+-include .*.d

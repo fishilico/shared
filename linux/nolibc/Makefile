@@ -30,7 +30,6 @@ NOLIBC_CFLAGS += $(shell [ -d include ] && echo '-I./include')
 
 # Files
 SOURCES := $(wildcard *.c)
-HEADERS := $(wildcard *.h)
 BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 
 all: $(BINARIES)
@@ -99,3 +98,5 @@ include/sys/utsname.h: include/sys/linux_utsname.h
 
 .PHONY: all all32 all64 clean test create_include
 .PRECIOUS: .%.o
+
+-include .*.d

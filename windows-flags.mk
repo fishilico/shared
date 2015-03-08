@@ -33,7 +33,7 @@ endif
 # As this is buggy, don't enable the stack protector.  It can be enabled with:
 #   CFLAGS += -fstack-protector --param=ssp-buffer-size=4
 #   LDFLAGS += -fstack-protector
-CPPFLAGS ?=
+CPPFLAGS ?= -Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d
 CFLAGS ?= -O2 -ansi \
 	-Wall -Wextra \
 	-Waggregate-return \

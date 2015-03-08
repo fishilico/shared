@@ -23,3 +23,5 @@ test: all
 
 .PHONY: all clean test
 .PRECIOUS: .%.o
+
+-include .*.d

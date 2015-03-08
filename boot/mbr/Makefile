@@ -29,9 +29,11 @@ all: $(BINARIES)
 	$(CHMOD) -x $@
 
 clean:
-	$(RM) *.bin *.elf .*.o
+	$(RM) *.bin *.elf .*.d .*.o
 
 test: all
 
 .PHONY: all clean test
 .PRECIOUS: %.elf .%.o
+
+-include .*.d
