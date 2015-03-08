@@ -66,7 +66,7 @@ int _tmain(void)
     const void *const *seh_entry;
     LPCVOID pModuleBase, pProcAddress, pProcAddress2;
     ULONG sizeNeeded;
-    BOOL bRet;
+    BOOL bRet, bHasKernelBase;
     int i;
 
     /* Use public API */
@@ -173,6 +173,7 @@ int _tmain(void)
     }
 
     /* Re-enumerate the modules, but in initialization order and with Base dll */
+    bHasKernelBase = FALSE;
     printf("In Initialization Order list:\n");
     ListHead = &pPeb->Ldr->InInitializationOrderModuleList;
     for (i = 0, ListEntry = ListHead->Flink; ListEntry != ListHead; i++, ListEntry = ListEntry->Flink) {
@@ -194,18 +195,32 @@ int _tmain(void)
         printf("   %p: %*S\n", CurEntry->DllBase,
                CurEntry->BaseDllName.Length / 2, CurEntry->BaseDllName.Buffer);
 
-        /* Check expected order: ntdll then kernel32 */
+        /* Check expected order: ntdll then kernel32 or kernelbase, then kernel32 */
         if (i == 0 && !StringsCaseLenEqualsW(L"ntdll.dll",
                                              CurEntry->BaseDllName.Buffer,
                                              CurEntry->BaseDllName.Length / 2)) {
             printf("Unexpected first module: not ntdll.dll\n");
             return 1;
         }
-        if (i == 1 && !StringsCaseLenEqualsW(L"KERNEL32.dll",
-                                             CurEntry->BaseDllName.Buffer,
-                                             CurEntry->BaseDllName.Length / 2)) {
-            printf("Unexpected second module: not KERNEL32.dll\n");
-            return 1;
+        if (i == 1) {
+            if (StringsCaseLenEqualsW(L"KERNELBASE.dll",
+                                      CurEntry->BaseDllName.Buffer,
+                                      CurEntry->BaseDllName.Length / 2)) {
+                bHasKernelBase = TRUE;
+            } else if (!StringsCaseLenEqualsW(L"KERNEL32.dll",
+                                              CurEntry->BaseDllName.Buffer,
+                                              CurEntry->BaseDllName.Length / 2)) {
+                printf("Unexpected second module: not KERNEL32.dll nor KERNELBASE.dll\n");
+                return 1;
+            }
+        }
+        if (i == 2 && bHasKernelBase) {
+            if (!StringsCaseLenEqualsW(L"KERNEL32.dll",
+                                       CurEntry->BaseDllName.Buffer,
+                                       CurEntry->BaseDllName.Length / 2)) {
+                printf("Unexpected third module: not KERNEL32.dll\n");
+                return 1;
+            }
         }
     }
 
@@ -294,7 +309,9 @@ int _tmain(void)
         ovi.dwBuildNumber != (DWORD)(pPeb->OSBuildNumber)) {
         printf("GetVersionEx returned a different version: %lu.%lu.%lu\n",
                ovi.dwMajorVersion, ovi.dwMinorVersion, ovi.dwBuildNumber);
-        return 1;
+        /* This is not a fatal error, as it happens with Windows 10 Technical
+         * Preview: PEB 10.0.9926, GetVersionEx 6.2.9200
+         */
     }
 
     printf("Subsystem %lu version %lu.%lu\n",
