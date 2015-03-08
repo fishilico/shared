@@ -1,6 +1,10 @@
 /**
  * Override uname return value with environment variables
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for RTLD_NEXT */
+#endif
+
 #include <dlfcn.h>
 #include <stddef.h>
 #include <stdint.h>

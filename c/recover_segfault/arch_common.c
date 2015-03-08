@@ -1,13 +1,13 @@
 /**
  * Common helper accross architectures
  */
+#include "recover_segfault.h"
+
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
-
-#include "recover_segfault.h"
 
 /**
  * Write an ASM instruction text into a buffer, with format

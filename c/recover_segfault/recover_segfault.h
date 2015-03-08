@@ -1,6 +1,10 @@
 #ifndef RECOVER_SEGFAULT_H
 #define RECOVER_SEGFAULT_H
 
+#if !defined(_GNU_SOURCE) && (defined(__linux__) || defined(__unix__) || defined(__posix__))
+#    define _GNU_SOURCE /* for MAP_ANONYMOUS, REG_*, vsnprintf */
+#endif
+
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>

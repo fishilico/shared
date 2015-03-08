@@ -54,7 +54,8 @@ int main(void)
             return 1;
         }
         if (!strftime(timebuf, sizeof(timebuf), "%H:%M:%S", localtime(&now))) {
-            snprintf(timebuf, sizeof(timebuf), "[strftime error]");
+            assert(sizeof(timebuf) >= sizeof("[strftime error]"));
+            strcpy(timebuf, "[strftime error]");
         }
         timebuf[sizeof(timebuf) - 1] = '\0';
 

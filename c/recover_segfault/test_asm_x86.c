@@ -1,12 +1,12 @@
 /**
  * Test the x86 implementation
  */
+#include "arch_x86.h"
+
 #include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-
-#include "arch_x86.h"
 
 /* Compile-time check that asm_instr_ctx_xmm_addr_const, if defined, is asm_instr_ctx_xmm_addr
  * If the macro is not defined, define it as asm_instr_ctx_xmm_addr_const to compile the code.

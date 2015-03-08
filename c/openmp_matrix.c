@@ -1,6 +1,10 @@
 /**
  * Implement some parallel algorithms operating on matrixes with OpenMP
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for snprintf */
+#endif
+
 #include <errno.h>
 #include <omp.h>
 #include <stddef.h>

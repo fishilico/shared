@@ -3,6 +3,10 @@
  *
  * Documentation: http://man7.org/linux/man-pages/man7/mq_overview.7.html
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for NAME_MAX, stpcpy */
+#endif
+
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>

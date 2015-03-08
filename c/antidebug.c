@@ -4,6 +4,10 @@
  * Related projects, which detects virtualization:
  * * https://github.com/a0rtega/pafish/tree/master/pafish Pafish
  */
+#if !defined(_GNU_SOURCE) && (defined(__linux__) || defined(__unix__) || defined(__posix__))
+#    define _GNU_SOURCE /* for syscall */
+#endif
+
 #include <assert.h>
 #include <stdint.h>
 #include <stdio.h>

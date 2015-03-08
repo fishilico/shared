@@ -17,7 +17,7 @@
 CC ?= cc
 
 # C preprocessor flags
-CPPFLAGS ?= -D_GNU_SOURCE -D_FORTIFY_SOURCE=2
+CPPFLAGS ?= -D_FORTIFY_SOURCE=2
 
 # C compiler flags
 # list of warnings from https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html

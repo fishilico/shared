@@ -1,6 +1,10 @@
 /**
  * Create two children and pass a file descriptor between them using a Unix socket
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for accept4, mkdtemp, pipe2, snprintf */
+#endif
+
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>

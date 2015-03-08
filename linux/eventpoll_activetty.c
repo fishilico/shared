@@ -1,6 +1,10 @@
 /**
  * Use eventpoll to record active TTY switch
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for O_CLOEXEC */
+#endif
+
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>

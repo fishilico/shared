@@ -27,6 +27,10 @@
  * * ... the associated man page is curs_mouse(3x):
  *   http://www.manpagez.com/man/3/curs_mouse/
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for sigaction, sigemptyset, snprintf */
+#endif
+
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>

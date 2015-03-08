@@ -5,6 +5,8 @@
  * * http://feepingcreature.github.io/handling.html
  *   Cleanly recovering from Segfaults under Windows and Linux (32-bit, x86)
  */
+#include "recover_segfault.h"
+
 #include <assert.h>
 #include <signal.h>
 #include <stddef.h>
@@ -13,8 +15,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ucontext.h>
-
-#include "recover_segfault.h"
 
 static struct segfault_memcontent *g_memmap;
 static size_t g_memmap_len;

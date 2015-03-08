@@ -3,6 +3,10 @@
  *
  * Linux examples: http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/samples/seccomp
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for sigaction, sigemptyset, sigprocmask, syscall */
+#endif
+
 #include <assert.h>
 #include <endian.h>
 #include <errno.h>

@@ -9,6 +9,8 @@
  * AMD64 Architecture Programmer's Manual Volume 4: 128-bit and 256 bit media instructions
  * AMD64 Architecture Programmer's Manual Volume 5: 64-Bit Media and x87 Floating-Point Instructions
  */
+#include "arch_x86_64.h"
+
 #include <assert.h>
 #include <inttypes.h>
 #include <stdbool.h>
@@ -17,8 +19,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "arch_x86_64.h"
 
 /**
  * Get a general-purpose register from its number.

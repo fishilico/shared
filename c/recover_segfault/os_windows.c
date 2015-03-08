@@ -13,12 +13,12 @@
  *
  * With wine, use WINEDEBUG="trace+seh" to debug exception handling system.
  */
+#include "recover_segfault.h"
+
 #include <assert.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <windows.h>
-
-#include "recover_segfault.h"
 
 static const BOOL verbose = FALSE;
 

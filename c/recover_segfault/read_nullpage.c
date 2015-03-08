@@ -1,10 +1,10 @@
 /**
  * Print content (apparently) from the null page
  */
- #include <stdint.h>
-#include <stdio.h>
-
 #include "recover_segfault.h"
+
+#include <stdint.h>
+#include <stdio.h>
 
 /* x86_64 glibc strlen can read 16 bytes after the end of the string when using SSE */
 static char hello_null[] = "Hello, world! Here is the pseudo-null page!"

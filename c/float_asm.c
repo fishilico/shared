@@ -17,7 +17,10 @@
 
 /* With -ansi on Windows, some float functions like isnan are not defined */
 #if defined(__STRICT_ANSI__) && (defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64))
-#undef __STRICT_ANSI__
+#    undef __STRICT_ANSI__
+#endif
+#if !defined(_GNU_SOURCE) && (defined(__linux__) || defined(__unix__) || defined(__posix__))
+#    define _GNU_SOURCE /* for math constants and float features */
 #endif
 
 #include <math.h>

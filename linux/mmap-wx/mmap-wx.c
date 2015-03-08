@@ -21,6 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#ifndef _DEFAULT_SOURCE
+#    define _DEFAULT_SOURCE /* for ftruncate, mkstemp */
+#endif
 
 #include <assert.h>
 #include <errno.h>

@@ -23,6 +23,10 @@
  * * arch/x86/include/asm/desc_defs.h: load_current_idt, load_idt
  * * arch/x86/kernel/traps.c: trap_init
  */
+#if !defined(_GNU_SOURCE) && defined(__linux__)
+#    define _GNU_SOURCE /* for sched_getaffinity, sched_setaffinity... */
+#endif
+
 #include <assert.h>
 #include <stdint.h>
 #include <stdio.h>

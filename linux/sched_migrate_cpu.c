@@ -1,6 +1,10 @@
 /**
  * Example program to show how to migrate between several CPUs on a system
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for sched_getaffinity, sched_setaffinity... */
+#endif
+
 #include <assert.h>
 #include <dirent.h>
 #include <errno.h>

@@ -1,6 +1,10 @@
 /**
  * Enumerate directories from the root to the current working directory
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for name_to_handle_at */
+#endif
+
 #include <assert.h>
 #include <dirent.h>
 #include <errno.h>
@@ -112,7 +116,7 @@ int main(void)
                 }
             }
         }
-#if defined(__linux__) && defined(_GNU_SOURCE) && defined(MAX_HANDLE_SZ)
+#if defined(__linux__) && defined(MAX_HANDLE_SZ)
         /* Use name_to_handle_at */
         {
             int mount_id = 0;

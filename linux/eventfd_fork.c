@@ -1,6 +1,10 @@
 /**
  * Use eventfd with child processes
  */
+#ifndef _XOPEN_SOURCE
+#    define _XOPEN_SOURCE /* for pid_t */
+#endif
+
 #include <assert.h>
 #include <inttypes.h>
 #include <signal.h>

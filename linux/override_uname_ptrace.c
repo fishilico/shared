@@ -5,6 +5,10 @@
  *    $ ./override_uname_ptrace.bin -s S -n N -r R -v V -m M uname -a
  *    S N R V M GNU/Linux
  */
+#ifndef _XOPEN_SOURCE
+#    define _XOPEN_SOURCE /* for pid_t */
+#endif
+
 #include <assert.h>
 #include <getopt.h>
 #include <signal.h>

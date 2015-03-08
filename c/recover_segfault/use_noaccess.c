@@ -1,10 +1,10 @@
 /**
  * Read and write from an allocated memory with no normal access
  */
+#include "recover_segfault.h"
+
 #include <stdio.h>
 #include <string.h>
-
-#include "recover_segfault.h"
 
 static uint8_t noaccess_data[4096];
 

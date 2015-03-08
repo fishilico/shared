@@ -7,6 +7,8 @@
  * Intel Architectures Software Developer's Manual Volume 2: Instruction Set Reference
  * Intel Architectures Software Developer's Manual Volume 3: System Programming Guide
  */
+#include "arch_x86.h"
+
 #include <assert.h>
 #include <inttypes.h>
 #include <stdbool.h>
@@ -15,8 +17,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "arch_x86.h"
 
 /**
  * Get a general-purpose register from its number.

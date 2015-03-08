@@ -1,6 +1,10 @@
 /**
  * Show x86 segment information
  */
+#if !defined(_GNU_SOURCE) && defined(__linux__)
+#    define _GNU_SOURCE /* for syscall */
+#endif
+
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>

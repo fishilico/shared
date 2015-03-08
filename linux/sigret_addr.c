@@ -22,6 +22,10 @@
  * * x86_32, vdso: __kernel_rt_sigreturn (syscall 173 = rt_sigreturn)
  * * x86_64, glibc: __restore_rt (syscall 15 = rt_sigreturn), same as simple
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for sigaction */
+#endif
+
 #include <elf.h>
 #include <fcntl.h>
 #include <signal.h>
