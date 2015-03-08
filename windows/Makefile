@@ -17,10 +17,10 @@ network_stat.$(BIN_EXT): LIBS += -liphlpapi -lws2_32
 uuidgen.$(BIN_EXT): LIBS += -lrpcrt4
 
 %.$(BIN_EXT): .%.o
-	$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(V_WINCCLD)$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 .%.o: %.c
-	$(WINCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(V_WINCC)$(WINCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean test
 .PRECIOUS: .%.o

@@ -15,10 +15,10 @@ test: all
 	@for P in $(sort $(BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
 %.$(BIN_EXT): .%.o
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 .%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean test
 .PRECIOUS: .%.o

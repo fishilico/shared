@@ -1,5 +1,6 @@
-PDFLATEX = pdflatex < /dev/null
-RM ?= rm -f
+PDFLATEX = pdflatex -interaction batchmode > /dev/null
+
+include ../common.mk
 
 TEXFILES := $(wildcard *.tex)
 PDFS := $(TEXFILES:%.tex=%.pdf)
@@ -7,13 +8,12 @@ PDFS := $(TEXFILES:%.tex=%.pdf)
 all: $(PDFS)
 
 clean:
-	$(RM) *.aux *.log *.out *.pdf *.toc
+	$(CLEAN_CMD)
 
 test: all
 
 # Compile 2 times each TeX file
 %.pdf: %.tex
-	$(PDFLATEX) $<
-	$(PDFLATEX) $<
+	$(V_PDFLATEX)($(PDFLATEX) $< && $(PDFLATEX) $<) || ($(RM) $@ && false)
 
 .PHONY: all clean test

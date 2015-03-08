@@ -1,8 +1,9 @@
 CC ?= cc
 LD ?= ld
 OBJCOPY ?= objcopy
-RM ?= rm -f
 UNAME ?= uname
+
+include ../../common.mk
 
 TARGET_TRIPLET := $(shell $(CC) -dumpmachine)
 ifneq (,$(findstring i386, $(TARGET_TRIPLET)))
@@ -49,19 +50,19 @@ endif
 all: $(EFIS)
 
 clean:
-	$(RM) .*.d *.efi .*.o *.so
+	$(CLEAN_CMD)
 
 test: all
 
 %.efi: %.so
-	$(OBJCOPY) -j .text -j .sdata -j .data -j .dynamic -j .dynsym -j .rel* \
-		-j .rela* -j .reloc --target=efi-app-$(ARCH) $< $@
+	$(V_OBJCOPY)$(OBJCOPY) -j .text -j .sdata -j .data -j .dynamic -j .dynsym \
+		-j .rel* -j .rela* -j .reloc --target=efi-app-$(ARCH) $< $@
 
 %.so: .%.o .efi_crt.o
-	$(LD) $(LDFLAGS) $^ -o $@ $(LIBS)
+	$(V_LD)$(LD) $(LDFLAGS) $^ -o $@ $(LIBS)
 
 .%.o: %.c efi.h
-	$(CC) $(CFLAGS) $(ARCH_CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(V_CC)$(CC) $(CFLAGS) $(ARCH_CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 .PHONY: all clean test
 .PRECIOUS: %.efi .%.o %.so

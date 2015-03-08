@@ -43,7 +43,6 @@ all: _cffi_example.$(LIB_EXT)
 
 clean:
 	$(CLEAN_CMD)
-	$(RM) -r __pycache__
 
 lint:
 	$(PEP8) $(PEP8_PARAMS) *.py
@@ -54,12 +53,12 @@ test: all
 
 _cffi_example.$(LIB_EXT): LDFLAGS := $(filter-out -fPIC -fPIE -pie -shared, $(LDFLAGS))
 _cffi_example.$(LIB_EXT): ._cffi_example.o
-	$(CC) $(LDFLAGS) $(LIB_LDFLAGS) -o $@ $^ $(LIBS)
+	$(V_CCLD)$(CC) $(LDFLAGS) $(LIB_LDFLAGS) -o $@ $^ $(LIBS)
 
 ._cffi_example.o: CPPFLAGS += -D_CFFI_EXAMPLE_EXPORTS
 ._cffi_example.o: CFLAGS := $(filter-out -fPIC -fPIE, $(CFLAGS))
 ._cffi_example.o: _cffi_example.c
-	$(CC) $(CFLAGS) $(LIB_CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(V_CC)$(CC) $(CFLAGS) $(LIB_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean lint test
 

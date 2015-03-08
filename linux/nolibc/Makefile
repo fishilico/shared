@@ -46,10 +46,10 @@ test: all
 	(echo 'echo $$0 && set && exit' | ./shellcode.$(BIN_EXT))
 
 %.$(BIN_EXT): .%.o
-	$(CC) $(NOLIBC_LDFLAGS) -o $@ $^
+	$(V_CCLD)$(CC) $(NOLIBC_LDFLAGS) -o $@ $^
 
 .%.o: %.c
-	$(CC) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(V_CC)$(CC) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 # Make an "include" directory, when no system header is available
 INCLUDE_ARCH := arm i386 x86_64

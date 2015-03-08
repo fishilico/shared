@@ -50,13 +50,13 @@ test: all
 	@for P in $(sort $(BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
 %.$(BIN_EXT): .%.o $(OBJECTS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 # Disable strict-aliasing warning for XMM sub-part tests
 .test_%.o: CFLAGS += -Wno-strict-aliasing
 
 .%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .arch_unknown.o:
 	@echo "Unknown architecture from triplet $(TARGET_TRIPLET)"

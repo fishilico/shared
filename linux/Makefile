@@ -59,13 +59,13 @@ message_queue.$(BIN_EXT): LIBS += -lrt
 override_uname_dl.$(LIB_EXT): LIBS += -ldl
 
 %.$(BIN_EXT): .%.o
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.$(LIB_EXT): .%.o
-	$(CC) $(filter-out -fPIC -fPIE -pie -shared, $(LDFLAGS)) $(LIB_LDFLAGS) -o $@ $^ $(LIBS)
+	$(V_CCLD)$(CC) $(filter-out -fPIC -fPIE -pie -shared, $(LDFLAGS)) $(LIB_LDFLAGS) -o $@ $^ $(LIBS)
 
 .%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean test
 .PRECIOUS: .%.o

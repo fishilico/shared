@@ -24,13 +24,13 @@ test: all
 	@for P in $(sort $(BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
 %.$(BIN_EXT): .%.o
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 # some files redefine C built-in functions strlen and memcpy
 .%.o: CFLAGS += -fno-builtin
 
 .%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 %.frama: %.c
 	[ -d '$(FRAMAC_TMPDIR)' ] || mkdir '$(FRAMAC_TMPDIR)'
@@ -38,9 +38,9 @@ test: all
 	@# - Value: -val -slevel 3
 	@# - Weakest precondition: -wp -wp-rte -wp-model Typed+cast -wp-timeout 5 -wp-split -wp-out tmp -wp-fct main
 	@# - Jessie: -jessie -jessie-atp=simplify -jessie-infer-annot pre
-	$(FRAMAC) -cpp-extra-args='$(FRAMAC_CFLAGS)' \
+	$(V_FRAMAC)$(FRAMAC) -cpp-extra-args='$(FRAMAC_CFLAGS)' \
 		-pp-annot -no-unicode \
-		-wp -wp-rte -wp-model Typed+cast -wp-timeout 25 -wp-split -wp-out '$(FRAMAC_TMPDIR)' $<
+		-wp -wp-rte -wp-model Typed+cast -wp-timeout 25 -wp-split -wp-out '$(FRAMAC_TMPDIR)' $^
 
 .PHONY: all all-frama clean test
 .PRECIOUS: .%.o

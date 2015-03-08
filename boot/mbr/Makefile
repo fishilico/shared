@@ -2,7 +2,8 @@ CC ?= cc
 LD ?= ld
 CHMOD ?= chmod
 OBJCOPY ?= objcopy
-RM ?= rm -f
+
+include ../../common.mk
 
 CFLAGS = -Wall -fno-stack-protector -fno-exceptions -fvisibility=hidden
 SFLAGS = $(CFLAGS)
@@ -19,17 +20,16 @@ BINARIES := $(SOURCES:%.S=%.bin)
 all: $(BINARIES)
 
 .%.o: %.S
-	$(CC) -m32 -march=i386 $(SFLAGS) -c -o $@ $<
+	$(V_CCAS)$(CC) -m32 -march=i386 $(SFLAGS) -c -o $@ $<
 
 %.elf: .%.o boot-record.ld
-	$(LD) -m elf_i386 $(LDFLAGS) -T boot-record.ld -o $@ $<
+	$(V_LD)$(LD) -m elf_i386 $(LDFLAGS) -T boot-record.ld -o $@ $<
 
 %.bin: %.elf
-	$(OBJCOPY) -O binary $< $@
-	$(CHMOD) -x $@
+	$(V_OBJCOPY)$(OBJCOPY) -O binary $< $@ && $(CHMOD) -x $@
 
 clean:
-	$(RM) *.bin *.elf .*.d .*.o
+	$(CLEAN_CMD)
 
 test: all
 

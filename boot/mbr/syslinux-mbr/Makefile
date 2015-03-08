@@ -22,9 +22,10 @@ CHMOD ?= chmod
 LD ?= ld
 OBJCOPY ?= objcopy
 UNAME ?= uname
-RM ?= rm -f
 SED ?= sed
 SHA1SUM ?= sha1sum
+
+include ../../../common.mk
 
 # Architecture definition
 SUBARCH := $(shell $(UNAME) -m | $(SED) -e s/i.86/i386/)
@@ -92,23 +93,22 @@ MBR_SRC := $(wildcard *.S)
 all: $(MBR_SRC:%.S=%.bin) $(MBR_SRC:%.S=%_c.bin) $(MBR_SRC:%.S=%_f.bin)
 
 .%.o: %.S
-	$(CC) $(MAKEDEPS) $(SFLAGS) -c -o $@ $<
+	$(V_CCAS)$(CC) $(MAKEDEPS) $(SFLAGS) -c -o $@ $<
 
 .%_c.o: %.S
-	$(CC) $(MAKEDEPS) $(SFLAGS) -DCTRL_80 -c -o $@ $<
+	$(V_CCAS)$(CC) $(MAKEDEPS) $(SFLAGS) -DCTRL_80 -c -o $@ $<
 
 .%_f.o: %.S
-	$(CC) $(MAKEDEPS) $(SFLAGS) -DFORCE_80 -c -o $@ $<
+	$(V_CCAS)$(CC) $(MAKEDEPS) $(SFLAGS) -DFORCE_80 -c -o $@ $<
 
 %.elf: .%.o mbr.ld
-	$(LD) $(LDFLAGS) -T mbr.ld -e _start -o $@ $<
+	$(V_LD)$(LD) $(LDFLAGS) -T mbr.ld -e _start -o $@ $<
 
 %.bin: %.elf
-	$(OBJCOPY) -O binary $< $@
-	$(CHMOD) -x $@
+	$(V_OBJCOPY)$(OBJCOPY) -O binary $< $@ && $(CHMOD) -x $@
 
 clean:
-	$(RM) *.bin *.elf .*.d .*.o
+	$(CLEAN_CMD)
 
 test: all
 	$(SHA1SUM) -c sha1sums.txt

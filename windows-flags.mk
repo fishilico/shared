@@ -3,6 +3,8 @@
 # This file can be both used to compile Windows programs natively or on Linux
 # using MinGW.
 
+include $(dir $(lastword $(MAKEFILE_LIST)))common.mk
+
 UNAME ?= uname
 
 # Find a C compiler for windows
@@ -72,7 +74,3 @@ BIN_EXT := $(EXT_PREFIX)exe
 LIB_EXT := $(EXT_PREFIX)dll
 LIB_CFLAGS ?=
 LIB_LDFLAGS ?= -shared -Wl,--subsystem=0
-
-# Clean command
-RM ?= rm -f
-CLEAN_CMD := $(RM) *.a *.bin *.dll *.exe *.o *.out *.so *.tmp *.toc .*.d .*.o

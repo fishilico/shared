@@ -70,11 +70,11 @@ test: all
 
 float_asm.$(BIN_EXT): LIBS += -lm
 %.$(BIN_EXT): .%.o
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 x86-cpuid.o: x86-cpuid_enum.h
 .%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 update_cpuid: x86-linux-cpufeature.h.tmp x86-linux-cpu-scattered.c.tmp x86-create_cpuid_enum_h.sh
 	$(SH) ./x86-create_cpuid_enum_h.sh > x86-cpuid_enum.h

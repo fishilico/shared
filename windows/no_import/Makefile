@@ -17,10 +17,10 @@ $(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -nostdlib -Wl,--nostdlib
 $(NOIMPORT_PROGRAMS:%=.%.o): CFLAGS += -nostdlib -fno-stack-protector
 
 %.$(BIN_EXT): .%.o
-	$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(V_WINCCLD)$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 .%.o: %.c
-	$(WINCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(V_WINCC)$(WINCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean test
 .PRECIOUS: .%.o
