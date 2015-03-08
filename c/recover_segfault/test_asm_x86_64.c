@@ -160,6 +160,15 @@ int main(void)
     R_RSI(&ctx) = data_addr;
     R_RDX(&ctx) = 0x10;
     test("\xf3\x44\x0f\x6f\x44\x16\xf0", "movdqu -0x10(rsi+1*rdx=0xda7a0010), xmm8", XMM8L, data64);
+    R_RSI(&ctx) = data_addr;
+    R_RDX(&ctx) = 0x10;
+    test("\xf3\x44\x0f\x6f\x44\x16\xf0", "movdqu -0x10(rsi+1*rdx=0xda7a0010), xmm8", XMM8H, data64h);
+    R_RSI(&ctx) = data_addr + 0x10;
+    R_RDX(&ctx) = 0x10;
+    test("\xc5\xfa\x6f\x74\x16\xe0", "vmovdqu -0x20(rsi+1*rdx=0xda7a0020), xmm6", XMM6L, data64);
+    R_RSI(&ctx) = data_addr + 0x10;
+    R_RDX(&ctx) = 0x10;
+    test("\xc5\xfa\x6f\x74\x16\xe0", "vmovdqu -0x20(rsi+1*rdx=0xda7a0020), xmm6", XMM6H, data64h);
     R_RAX(&ctx) = data_addr - 0x20;
     test("\x66\x44\x0f\x74\x50\x20", "pcmpeqb 0x20(rax=0xda79ffe0), xmm10", XMM10L, 0);
     R_RAX(&ctx) = data_addr - 0x20;

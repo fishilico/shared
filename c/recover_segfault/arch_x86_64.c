@@ -306,12 +306,14 @@ bool run_mov_asm_instruction_p(
     size_t i, paramlen;
     const uint8_t *instr = (uint8_t *)(R_RIP(ctx));
     const uint8_t *orig_instr = instr;
-    uint8_t rexprefix = 0;
+    uint8_t rexprefix = 0, vexprefix;
     asm_instr_reg *op_reg = NULL, tmp_reg;
     char *operand_reg = NULL;
     char *operand_rm = NULL;
     bool has_66_prefix = false, has_f2_prefix = false, has_f3_prefix = false;
     bool has_no_prefix;
+    bool has_vex128_prefix = false/*, has_vex256_prefix = false*/;
+    bool has_implicit_0f = false;
 
     /* Read at most 5 prefixes */
     for (i = 0; i < 4; i++) {
@@ -330,16 +332,36 @@ bool run_mov_asm_instruction_p(
     }
     has_no_prefix = !(has_66_prefix || has_f2_prefix || has_f3_prefix);
 
-    /* REX.W,R,X,B prefix */
     if ((instr[i] & 0xf0) == 0x40) {
+        /* REX.W,R,X,B prefix */
         rexprefix = instr[i] & 0xf;
+        i++;
+    } else if (has_no_prefix && instr[0] == 0xc5) {
+        /* 2-byte VEX prefix */
+        vexprefix = instr[i + 1];
+        rexprefix = (vexprefix & 0x80) ? 0 : X86_64_REX_R;
+        if (vexprefix & 4) {
+            /*has_vex256_prefix = true;*/
+        } else {
+            has_vex128_prefix = true;
+        }
+        if ((vexprefix & 3) == 1) {
+            has_66_prefix = true;
+        } else if ((vexprefix & 3) == 2) {
+            has_f3_prefix = true;
+        } else if ((vexprefix & 3) == 3) {
+            has_f2_prefix = true;
+        }
+
+        /* Only increment i once so that instr[i] can be considered 0x0f */
+        has_implicit_0f = true;
         i++;
     }
     R_RIP(ctx) += i;
     instr = &instr[i];
 
     /* 0f: Escape opcode */
-    if (instr[0] == 0x0f) {
+    if (has_implicit_0f || instr[0] == 0x0f) {
         /* f3 0f 6f /r: movdqu xmm2/mem, xmm1 */
         if (has_f3_prefix && instr[1] == 0x6f) {
             unsigned int xmmreg = ((instr[2] >> 3) & 7) | ((rexprefix & X86_64_REX_R) ? 8 : 0);
@@ -347,7 +369,12 @@ bool run_mov_asm_instruction_p(
             if (!paramlen) {
                 return false;
             }
-            asm_printf(asm_instr, "movdqu %s, xmm%u", operand_rm, xmmreg);
+            if (has_vex128_prefix) {
+                asm_printf(asm_instr, "vmovdqu %s, xmm%u", operand_rm, xmmreg);
+                /* Should clean the upper bits of xmm register */
+            } else {
+                asm_printf(asm_instr, "movdqu %s, xmm%u", operand_rm, xmmreg);
+            }
             free(operand_rm);
             memcpy(asm_instr_ctx_xmm_addr(ctx, xmmreg), data, 16);
             R_RIP(ctx) += 2 + paramlen;
