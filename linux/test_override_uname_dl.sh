@@ -13,7 +13,7 @@ fi
 
 # Test directly to see whether the override library and uname are compatible.
 # This can fail when the libc (eg. library built with musl and uname with glibc).
-if ! LD_PRELOAD="$OVERRIDE_UNAME_SO" "$UNAME" > /dev/null
+if ! FAKEUNAME_S='' LD_PRELOAD="$OVERRIDE_UNAME_SO" "$UNAME" > /dev/null
 then
     echo "An error occured in the compatibility check. Skipping test."
     exit
