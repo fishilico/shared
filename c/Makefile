@@ -61,6 +61,7 @@ endif
 TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(PROGRAMS:%=%.$(BIN_EXT)) $(wildcard *.sh))
 
 all: $(PROGRAMS:%=%.$(BIN_EXT))
+	@:
 
 clean:
 	$(CLEAN_CMD)

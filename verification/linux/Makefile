@@ -56,6 +56,7 @@ $(MAKE) -C $(OUT_DIR) ARCH=um SUBARCH=x86 \
 endef
 
 all: $(OUT_DIR)/vmlinux
+	@:
 
 clean:
 	if [ -e $(OUT_DIR)/Makefile ] ; then $(MAKE) -C '$(OUT_DIR)' ARCH=um mrproper ; fi

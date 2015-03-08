@@ -39,6 +39,7 @@ endif
 BINARIES := $(PROGRAMS:%=%.$(BIN_EXT))
 
 all: $(BINARIES)
+	@:
 
 clean:
 	$(CLEAN_CMD)

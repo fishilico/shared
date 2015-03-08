@@ -7,6 +7,7 @@ SOURCES := $(wildcard *.c)
 BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 
 all: $(BINARIES)
+	@:
 
 clean:
 	$(CLEAN_CMD)

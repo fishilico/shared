@@ -6,11 +6,13 @@ BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 NOIMPORT_PROGRAMS := $(filter-out check_%, $(SOURCES:%.c=%))
 
 all: $(BINARIES)
+	@:
 
 clean:
 	$(CLEAN_CMD)
 
 test: all
+	@:
 
 $(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -Wl,--subsystem=windows
 $(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -nostdlib -Wl,--nostdlib

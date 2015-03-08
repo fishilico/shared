@@ -18,6 +18,7 @@ ELFS := $(SOURCES:%.S=%.elf)
 BINARIES := $(SOURCES:%.S=%.bin)
 
 all: $(BINARIES)
+	@:
 
 .%.o: %.S
 	$(V_CCAS)$(CC) -m32 -march=i386 $(SFLAGS) -c -o $@ $<
@@ -32,6 +33,7 @@ clean:
 	$(CLEAN_CMD)
 
 test: all
+	@:
 
 .PHONY: all clean test
 .PRECIOUS: %.elf .%.o

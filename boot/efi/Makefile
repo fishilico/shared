@@ -48,11 +48,13 @@ CFLAGS += -m32
 endif
 
 all: $(EFIS)
+	@:
 
 clean:
 	$(CLEAN_CMD)
 
 test: all
+	@:
 
 %.efi: %.so
 	$(V_OBJCOPY)$(OBJCOPY) -j .text -j .sdata -j .data -j .dynamic -j .dynsym \

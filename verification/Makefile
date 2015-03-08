@@ -13,6 +13,7 @@ BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 FRAMAC_TARGETS := $(SOURCES:%.c=%.frama)
 
 all: $(BINARIES)
+	@:
 
 all-frama: $(FRAMAC_TARGETS)
 

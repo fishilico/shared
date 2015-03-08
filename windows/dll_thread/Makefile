@@ -1,11 +1,13 @@
 include ../../windows-flags.mk
 
 all: dll_thread.$(LIB_EXT) test_dll_thread.$(BIN_EXT)
+	@:
 
 clean:
 	$(CLEAN_CMD)
 
 test: all
+	@:
 
 # Either "dll_thread.dll" or "-L. -ldll_thread" are available to the linker
 test_dll_thread.$(BIN_EXT): .test_dll_thread.o dll_thread.$(LIB_EXT)

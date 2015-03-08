@@ -91,6 +91,7 @@ MBR_SRC := $(wildcard *.S)
 
 
 all: $(MBR_SRC:%.S=%.bin) $(MBR_SRC:%.S=%_c.bin) $(MBR_SRC:%.S=%_f.bin)
+	@:
 
 .%.o: %.S
 	$(V_CCAS)$(CC) $(MAKEDEPS) $(SFLAGS) -c -o $@ $<

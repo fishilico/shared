@@ -40,6 +40,7 @@ endif
 TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(PROGRAMS:%=%.$(BIN_EXT)) $(wildcard *.py) $(wildcard *.sh))
 
 all: $(PROGRAMS:%=%.$(BIN_EXT)) $(SHARED_OBJECTS)
+	@:
 
 clean:
 	$(CLEAN_CMD)

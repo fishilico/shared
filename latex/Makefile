@@ -6,11 +6,13 @@ TEXFILES := $(wildcard *.tex)
 PDFS := $(TEXFILES:%.tex=%.pdf)
 
 all: $(PDFS)
+	@:
 
 clean:
 	$(CLEAN_CMD)
 
 test: all
+	@:
 
 # Compile 2 times each TeX file
 %.pdf: %.tex

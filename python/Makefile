@@ -40,6 +40,7 @@ PYLINT_PARAMS += --disable=F0401
 
 
 all: _cffi_example.$(LIB_EXT)
+	@:
 
 clean:
 	$(CLEAN_CMD)

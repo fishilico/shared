@@ -8,6 +8,7 @@ BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(BINARIES) $(wildcard *.py))
 
 all: $(BINARIES)
+	@:
 
 clean:
 	$(CLEAN_CMD)
