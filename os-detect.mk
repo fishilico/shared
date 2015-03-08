@@ -6,13 +6,12 @@ UNAME ?= uname
 TOPDIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 ifeq ($(OS), Windows_NT)
-include $(TOPDIR)windows-flags.mk
-CC := $(WINCC)
 
 # Don't use wide characters
-CPPFLAGS := $(filter-out -D_UNICODE, $(CPPFLAGS))
-CFLAGS := $(filter-out -municode, $(CFLAGS))
-LDFLAGS := $(filter-out -municode, $(LDFLAGS))
+HAVE_UNICODE := n
+
+include $(TOPDIR)windows-flags.mk
+CC := $(WINCC)
 
 else # !Windows
 

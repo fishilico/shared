@@ -58,7 +58,8 @@ LIBS ?=
 
 
 # Enable Unicode if available
-ifeq ($(shell $(WINCC) -municode -E - < /dev/null > /dev/null 2>&1 && echo y),y)
+HAVE_UNICODE ?= $(shell $(WINCC) -municode -E - < /dev/null > /dev/null 2>&1 && echo y)
+ifeq ($(HAVE_UNICODE),y)
 CPPFLAGS += -D_UNICODE
 CFLAGS += -municode
 LDFLAGS += -municode
