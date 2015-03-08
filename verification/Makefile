@@ -9,8 +9,7 @@ FRAMAC_CFLAGS := -nostdinc -I$(FRAMAC_SHARE_PATH)/libc -D__FRAMAC__
 FRAMAC_TMPDIR := /tmp/frama-c-$(id -u)
 
 SOURCES := $(wildcard *.c)
-OBJECTS := $(SOURCES:%.c=%.o)
-BINARIES := $(OBJECTS:%.o=%.$(BIN_EXT))
+BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
 FRAMAC_TARGETS := $(SOURCES:%.c=%.frama)
 
 all: $(BINARIES)
@@ -24,13 +23,13 @@ clean:
 test: all
 	@for P in $(sort $(BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
-%.$(BIN_EXT): %.o
+%.$(BIN_EXT): .%.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 # some files redefine C built-in functions strlen and memcpy
-%.o: CFLAGS += -fno-builtin
+.%.o: CFLAGS += -fno-builtin
 
-%.o: %.c $(HEADERS)
+.%.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 %.frama: %.c
@@ -44,3 +43,4 @@ test: all
 		-wp -wp-rte -wp-model Typed+cast -wp-timeout 25 -wp-split -wp-out '$(FRAMAC_TMPDIR)' $<
 
 .PHONY: all all-frama clean test
+.PRECIOUS: .%.o

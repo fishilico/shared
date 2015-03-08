@@ -17,10 +17,11 @@ list_processes.$(BIN_EXT) virtual_mem.$(BIN_EXT): LIBS += -lpsapi
 network_stat.$(BIN_EXT): LIBS += -liphlpapi -lws2_32
 uuidgen.$(BIN_EXT): LIBS += -lrpcrt4
 
-%.$(BIN_EXT): %.o
+%.$(BIN_EXT): .%.o
 	$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
-%.o: %.c $(HEADERS)
+.%.o: %.c $(HEADERS)
 	$(WINCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean test
+.PRECIOUS: .%.o

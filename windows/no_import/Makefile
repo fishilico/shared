@@ -15,12 +15,13 @@ test: all
 
 $(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -Wl,--subsystem=windows
 $(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -nostdlib -Wl,--nostdlib
-$(NOIMPORT_PROGRAMS:%=%.o): CFLAGS += -nostdlib -fno-stack-protector
+$(NOIMPORT_PROGRAMS:%=.%.o): CFLAGS += -nostdlib -fno-stack-protector
 
-%.$(BIN_EXT): %.o
+%.$(BIN_EXT): .%.o
 	$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
-%.o: %.c $(HEADERS)
+.%.o: %.c $(HEADERS)
 	$(WINCC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean test
+.PRECIOUS: .%.o

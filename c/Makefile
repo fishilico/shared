@@ -28,7 +28,7 @@ HAVE_OPENMP := $(shell $(CC) -Werror -fopenmp -include omp.h -E - < /dev/null > 
 ifeq ($(HAVE_OPENMP), y)
 PROGRAMS += $(OPENMP_PROGRAMS)
 $(OPENMP_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -fopenmp
-$(OPENMP_PROGRAMS:%=%.o): CFLAGS += -fopenmp
+$(OPENMP_PROGRAMS:%=.%.o): CFLAGS += -fopenmp
 endif
 
 # Only compile Gtk+ programs where $(CC) is not used for cross-compilation
@@ -37,13 +37,13 @@ ifeq ($(filter-out cc gcc clang, $(CC)),)
 	ifeq ($(HAVE_GTK3), y)
 		PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
-$(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0)
+$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0)
 	else
 		HAVE_GTK2 := $(shell $(PKG_CONFIG) --exists gtk+-2.0 2> /dev/null && echo 'y' || echo 'n')
 		ifeq ($(HAVE_GTK2), y)
 			PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
-$(GTK_PROGRAMS:%=%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0)
+$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0)
 		endif
 	endif
 endif
@@ -69,11 +69,11 @@ test: all
 	@for P in $(sort $(TEST_BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
 float_asm.$(BIN_EXT): LIBS += -lm
-%.$(BIN_EXT): %.o
+%.$(BIN_EXT): .%.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 x86-cpuid.o: x86-cpuid_enum.h
-%.o: %.c
+.%.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 update_cpuid: x86-linux-cpufeature.h.tmp x86-linux-cpu-scattered.c.tmp x86-create_cpuid_enum_h.sh
@@ -87,3 +87,4 @@ x86-linux-cpu-scattered.c.tmp:
 	$(WGET) -q -O $@ '$(LINUX_URL)/arch/x86/kernel/cpu/scattered.c' || (rm $@ ; false)
 
 .PHONY: all clean test update_cpuid
+.PRECIOUS: .%.o

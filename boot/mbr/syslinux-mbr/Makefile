@@ -91,16 +91,16 @@ MBR_SRC := $(wildcard *.S)
 
 all: $(MBR_SRC:%.S=%.bin) $(MBR_SRC:%.S=%_c.bin) $(MBR_SRC:%.S=%_f.bin)
 
-%.o: %.S
+.%.o: %.S
 	$(CC) $(MAKEDEPS) $(SFLAGS) -c -o $@ $<
 
-%_c.o: %.S
+.%_c.o: %.S
 	$(CC) $(MAKEDEPS) $(SFLAGS) -DCTRL_80 -c -o $@ $<
 
-%_f.o: %.S
+.%_f.o: %.S
 	$(CC) $(MAKEDEPS) $(SFLAGS) -DFORCE_80 -c -o $@ $<
 
-%.elf: %.o mbr.ld
+%.elf: .%.o mbr.ld
 	$(LD) $(LDFLAGS) -T mbr.ld -e _start -o $@ $<
 
 %.bin: %.elf
@@ -108,12 +108,12 @@ all: $(MBR_SRC:%.S=%.bin) $(MBR_SRC:%.S=%_c.bin) $(MBR_SRC:%.S=%_f.bin)
 	$(CHMOD) -x $@
 
 clean:
-	$(RM) *.bin *.o *.elf .*.d
+	$(RM) *.bin *.elf .*.d .*.o
 
 test: all
 	$(SHA1SUM) -c sha1sums.txt
 
 .PHONY: all clean test
-.PRECIOUS: %.elf %.o %_c.o %_f.o
+.PRECIOUS: %.elf .%.o .%_c.o .%_f.o
 
 -include .*.d

@@ -49,7 +49,7 @@ endif
 all: $(EFIS)
 
 clean:
-	$(RM) *.efi *.o *.so
+	$(RM) *.efi .*.o *.so
 
 test: all
 
@@ -57,11 +57,11 @@ test: all
 	$(OBJCOPY) -j .text -j .sdata -j .data -j .dynamic -j .dynsym -j .rel* \
 		-j .rela* -j .reloc --target=efi-app-$(ARCH) $< $@
 
-%.so: %.o efi_crt.o
+%.so: .%.o .efi_crt.o
 	$(LD) $(LDFLAGS) $^ -o $@ $(LIBS)
 
-%.o: %.c efi.h
+.%.o: %.c efi.h
 	$(CC) $(CFLAGS) $(ARCH_CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 .PHONY: all clean test
-.PRECIOUS: %.efi %.o %.so
+.PRECIOUS: %.efi .%.o %.so

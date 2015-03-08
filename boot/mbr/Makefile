@@ -13,16 +13,15 @@ SFLAGS += -Wa,--fatal-warning
 endif
 
 SOURCES := $(wildcard *.S)
-OBJECTS := $(SOURCES:%.S=%.o)
 ELFS := $(SOURCES:%.S=%.elf)
 BINARIES := $(SOURCES:%.S=%.bin)
 
 all: $(BINARIES)
 
-%.o: %.S
+.%.o: %.S
 	$(CC) -m32 -march=i386 $(SFLAGS) -c -o $@ $<
 
-%.elf: %.o boot-record.ld
+%.elf: .%.o boot-record.ld
 	$(LD) -m elf_i386 $(LDFLAGS) -T boot-record.ld -o $@ $<
 
 %.bin: %.elf
@@ -30,9 +29,9 @@ all: $(BINARIES)
 	$(CHMOD) -x $@
 
 clean:
-	$(RM) *.bin *.elf *.o
+	$(RM) *.bin *.elf .*.o
 
 test: all
 
 .PHONY: all clean test
-.PRECIOUS: %.elf %.o
+.PRECIOUS: %.elf .%.o

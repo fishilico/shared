@@ -46,10 +46,10 @@ test: all
 	echo ./shellcode.$(BIN_EXT) && \
 	(echo 'echo $$0 && set && exit' | ./shellcode.$(BIN_EXT))
 
-%.$(BIN_EXT): %.o
+%.$(BIN_EXT): .%.o
 	$(CC) $(NOLIBC_LDFLAGS) -o $@ $^
 
-%.o: %.c
+.%.o: %.c
 	$(CC) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 # Make an "include" directory, when no system header is available
@@ -98,3 +98,4 @@ include/sys/utsname.h: include/sys/linux_utsname.h
 	$(SED) 's/struct new_utsname/struct utsname/' < $< > $@
 
 .PHONY: all all32 all64 clean test create_include
+.PRECIOUS: .%.o
