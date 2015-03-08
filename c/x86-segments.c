@@ -62,6 +62,44 @@ static const char *const gdt_segment_index_desc[32] = {
     "percpu", /* GDT_ENTRY_ESPFIX_SS = 27 */
 };
 #    endif
+#elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#    include <inttypes.h>
+#    define IS_WINDOWS
+/* Some information about Windows segments can be found:
+ * * by reading the Global Descriptor Table in WinDbg using Local Kernel Debugging mode
+ * * in ReactOS source code:
+ *   * https://git.reactos.org/?p=reactos.git;a=blob;f=reactos/include/ndk/amd64/ketypes.h
+ *   * https://git.reactos.org/?p=reactos.git;a=blob;f=reactos/include/ndk/i386/ketypes.h
+ * * in corkami project: https://code.google.com/p/corkami/wiki/InitialValues?wl=en
+ */
+#    ifdef __x86_64__
+static const char *const gdt_segment_index_desc[14] = {
+    NULL, NULL,
+    "krnl CS", /* 0x10 */
+    "krnl DS", /* 0x18 */
+    "user CS32", /* 0x23 */
+    "user DS", /* 0x2b */
+    "user CS", /* 0x33 */
+    NULL,
+    "TSS", /* 0x40 */
+    "TSS+1",
+    "user TEB32", /* 0x53, loaded in fs, Thread Environment Block in 32-bit mode */
+    NULL, NULL, NULL,
+};
+#    else
+static const char *const gdt_segment_index_desc[11] = {
+    NULL,
+    "x86 krnl CS", /* 0x08 */
+    "x86 krnl DS or x64 krnl CS", /* 0x10 */
+    "x86 user CS or x64 krnl DS", /* 0x1b or 0x18 */
+    "x86 user DS or x64 user CS32", /* 0x23 */
+    "x86 TSS or x64 user DS", /* 0x28 or 0x2b */
+    "x86 krnl PCR or x64 user CS", /* 0x30 or 0x33 */
+    "x86 user TEB", /* 0x3b, loaded in fs */
+    NULL, NULL,
+    "x64 user TEB32", /* 0x53, loaded in fs */
+};
+#    endif
 #else
 #    warning Unsupported target OS
 static const char *const gdt_segment_index_desc[1] = { NULL };
@@ -183,6 +221,20 @@ static void print_segment_bases(void)
             printf("  gs base=0x%lx, limit=0x%lx\n", (unsigned long)u_info.base_addr, limit);
         }
     }
+#elif defined(__x86_64__) && defined(IS_WINDOWS)
+    uint64_t gs_base;
+
+    printf("Segment bases (0 for cs, ds, es and ss):\n");
+    printf("  fs base= ?\n");
+    __asm__ volatile ("movq %%gs:48, %0" : "=r" (gs_base));
+    printf("  gs base=0x%" PRIx64 " (TEB)\n", gs_base);
+#elif defined(__i386__) && defined(IS_WINDOWS)
+    uint32_t fs_base;
+
+    printf("Segment bases:\n");
+    __asm__ volatile ("movl %%fs:24, %0" : "=r" (fs_base));
+    printf("  fs base=0x%" PRIx32 " (TEB)\n", fs_base);
+    printf("  gs base= ?\n");
 #else
     printf("No known way to get segment bases.\n");
 #endif
