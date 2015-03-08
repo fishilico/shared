@@ -255,6 +255,34 @@ static void print_gdt_limits(void)
     }
 }
 
+/**
+ * Show cr0 (Control Register 0), also named "Machine Status Word"
+ */
+static void print_cr0(void)
+{
+    uint32_t cr0;
+
+#define print_cr0_bit(bitnum, desc) \
+    printf("  %2d (0x%08x) = %c %s\n", bitnum, 1U << (bitnum), \
+    (cr0 & (1U << (bitnum))) ? '+' : '-', desc);
+
+    /* smsw = Save Machine Status Word */
+    __asm__ volatile ("smsw %0" : "=r"(cr0));
+    printf("cr0 = 0x%08x\n", cr0);
+    print_cr0_bit(0, "PE (Protection Enable)");
+    print_cr0_bit(1, "MP (Monitor Coprocessor)");
+    print_cr0_bit(2, "EM (Emulation)");
+    print_cr0_bit(3, "TS (Task Switched)");
+    print_cr0_bit(4, "ET (Extension Type)");
+    print_cr0_bit(5, "NE (Numeric Error)");
+    print_cr0_bit(16, "WP (Write Protect)");
+    print_cr0_bit(18, "AM (Alignment Mask)");
+    print_cr0_bit(29, "NW (Not Write-through)");
+    print_cr0_bit(30, "CD (Cache Disable)");
+    print_cr0_bit(31, "PG (Paging)");
+#undef print_cr0_bit
+}
+
 int main(void)
 {
     print_segments();
@@ -262,5 +290,7 @@ int main(void)
     print_segment_bases();
     printf("\n");
     print_gdt_limits();
+    printf("\n");
+    print_cr0();
     return 0;
 }
