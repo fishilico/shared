@@ -13,6 +13,9 @@ env:
   # MinGW compilation
   - OS=Windows_NT WINCC=x86_64-w64-mingw32-gcc CC=$WINCC
   - OS=Windows_NT WINCC=i686-w64-mingw32-gcc CC=$WINCC
+  # MinGW compilation with ANSI function instead of the wide-character ones
+  - OS=Windows_NT WINCC=x86_64-w64-mingw32-gcc CC=$WINCC HAVE_UNICODE=n
+  - OS=Windows_NT WINCC=i686-w64-mingw32-gcc CC=$WINCC HAVE_UNICODE=n
 
 install:
   - sudo apt-get -qq update
