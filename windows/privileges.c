@@ -44,7 +44,7 @@ static void DumpProccessToken(VOID)
         } else {
             _tprintf(_T("- User: %s"), szSid);
             if (pTokenUser->User.Attributes) {
-                _tprintf(_T(" attr 0x%x"), pTokenUser->User.Attributes);
+                _tprintf(_T(" attr 0x%lx"), pTokenUser->User.Attributes);
             }
             _tprintf(_T("\n"));
             LocalFree(szSid);
@@ -55,7 +55,7 @@ static void DumpProccessToken(VOID)
 
     pTokenGroups = (PTOKEN_GROUPS)GetTokenInformation_a(hToken, TokenGroups, NULL);
     if (pTokenGroups) {
-        _tprintf(_T("- Groups (%d):\n"), pTokenGroups->GroupCount);
+        _tprintf(_T("- Groups (%ld):\n"), pTokenGroups->GroupCount);
         for (i = 0; i < pTokenGroups->GroupCount; i++) {
             if (!ConvertSidToStringSid(pTokenGroups->Groups[i].Sid, &szSid)) {
                 print_winerr(_T("ConvertSidToStringSid"));
@@ -97,7 +97,7 @@ static void DumpProccessToken(VOID)
 
     pTokenPrivileges = (PTOKEN_PRIVILEGES)GetTokenInformation_a(hToken, TokenPrivileges, NULL);
     if (pTokenPrivileges) {
-        _tprintf(_T("- Privileges (%d):\n"), pTokenPrivileges->PrivilegeCount);
+        _tprintf(_T("- Privileges (%ld):\n"), pTokenPrivileges->PrivilegeCount);
         for (i = 0; i < pTokenPrivileges->PrivilegeCount; i++) {
             szPriv = LookupPrivilegeName_a(NULL, &pTokenPrivileges->Privileges[i].Luid, NULL);
             if (!szPriv) {
@@ -173,7 +173,7 @@ static void DumpProccessToken(VOID)
 #endif
         szTokenSourceName[TOKEN_SOURCE_LENGTH] = 0;
         pLuid = &pTokenSource->SourceIdentifier;
-        _tprintf(_T("- Source: %s {%08x-%08lx}\n"), szTokenSourceName,
+        _tprintf(_T("- Source: %s {%08lx-%08lx}\n"), szTokenSourceName,
                  pLuid->LowPart, pLuid->HighPart);
         HeapFree(GetProcessHeap(), 0, pTokenSource);
     }

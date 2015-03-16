@@ -34,7 +34,7 @@ static LPCTSTR describe_protect(DWORD dwProt)
         case PAGE_WRITECOMBINE:
             return _T("---[wr combine]");
     }
-    _ftprintf(stderr, _T("Unknown protection flag 0x%x\n"), dwProt);
+    _ftprintf(stderr, _T("Unknown protection flag 0x%lx\n"), dwProt);
     return _T("???");
 }
 
@@ -284,13 +284,13 @@ int _tmain(int argc, TCHAR **argv)
                 _tprintf(_T("... AllocationBase = %p\n"), MemInfo.AllocationBase);
             }
             if (MemInfo.AllocationProtect) {
-                _tprintf(_T("... AllocationProtect = 0x%x\n"), MemInfo.AllocationProtect);
+                _tprintf(_T("... AllocationProtect = 0x%lx\n"), MemInfo.AllocationProtect);
             }
             if (MemInfo.Protect != PAGE_NOACCESS) {
-                _tprintf(_T("... Protect = 0x%x\n"), MemInfo.Protect);
+                _tprintf(_T("... Protect = 0x%lx\n"), MemInfo.Protect);
             }
             if (MemInfo.Type) {
-                _tprintf(_T("... Type = 0x%x\n"), MemInfo.Type);
+                _tprintf(_T("... Type = 0x%lx\n"), MemInfo.Type);
             }
         } else {
             /* New allocation zone */
@@ -333,7 +333,7 @@ int _tmain(int argc, TCHAR **argv)
             } else if (MemInfo.State == MEM_RESERVE) { /* 0x2000 */
                 _tprintf(_T(", reserve"));
             } else {
-                _tprintf(_T(", unknown state 0x%x"), MemInfo.State);
+                _tprintf(_T(", unknown state 0x%lx"), MemInfo.State);
             }
 
             if (MemInfo.Type == MEM_PRIVATE) { /* 0x20000 */
@@ -343,7 +343,7 @@ int _tmain(int argc, TCHAR **argv)
             } else if (MemInfo.Type == MEM_IMAGE) { /* 0x1000000 */
                 _tprintf(_T(", image"));
             } else {
-                _tprintf(_T(", unknown type 0x%x"), MemInfo.Type);
+                _tprintf(_T(", unknown type 0x%lx"), MemInfo.Type);
             }
 
             if ((LPCVOID)pStart <= pStack && pStack <= (LPCVOID)pEnd) {

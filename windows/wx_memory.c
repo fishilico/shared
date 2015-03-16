@@ -61,7 +61,7 @@ static BOOL test_alloc_w_protect_x(LPCVOID pCode, SIZE_T cbSize)
         VirtualFree(ptr, 0, MEM_RELEASE);
         return FALSE;
     }
-    _tprintf(_T("... RX VirtualProtect succeeded.\n"), ptr);
+    _tprintf(_T("... RX VirtualProtect succeeded.\n"));
     if (!FlushInstructionCache(GetCurrentProcess(), ptr, cbSize)) {
         print_winerr(_T("FlushInstructionCache"));
         VirtualFree(ptr, 0, MEM_RELEASE);

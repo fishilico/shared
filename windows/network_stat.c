@@ -262,7 +262,7 @@ static void dump_tcp4_table(void)
     _tprintf(_T("TCP/IPv4 connections (%lu):\n"), pTcpTable->dwNumEntries);
     for (i = 0; i < pTcpTable->dwNumEntries; i++) {
         pTcpRow = &pTcpTable->table[i];
-        _tprintf(_T("  * %s/%lu -> %s/%lu ("),
+        _tprintf(_T("  * %s/%u -> %s/%u ("),
                  InetNtop(AF_INET, &pTcpRow->dwLocalAddr, szLocalAddrBuffer, ARRAYSIZE(szLocalAddrBuffer)),
                  ntohs((WORD)pTcpRow->dwLocalPort),
                  InetNtop(AF_INET, &pTcpRow->dwRemoteAddr, szRemoteAddrBuffer, ARRAYSIZE(szRemoteAddrBuffer)),
@@ -306,7 +306,7 @@ static void dump_udp4_table(void)
     _tprintf(_T("UDP/IPv4 connections (%lu):\n"), pUdpTable->dwNumEntries);
     for (i = 0; i < pUdpTable->dwNumEntries; i++) {
         pUdpRow = &pUdpTable->table[i];
-        _tprintf(_T("  * %s/%lu\n"),
+        _tprintf(_T("  * %s/%u\n"),
                  InetNtop(AF_INET, &pUdpRow->dwLocalAddr, szLocalAddrBuffer, ARRAYSIZE(szLocalAddrBuffer)),
                  ntohs((WORD)pUdpRow->dwLocalPort));
     }
