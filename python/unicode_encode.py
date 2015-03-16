@@ -21,6 +21,10 @@
 # THE SOFTWARE.
 """Implement some Unicode encoding algorithms
 
+Some links:
+* https://codepoints.net/ Find all Unicode characters
+* http://apps.timwhitlock.info/emoji/tables/unicode Emoji Unicode Tables
+
 @author: Nicolas Iooss
 @license: MIT
 """
@@ -33,8 +37,11 @@ import sys
 EXAMPLES_UTF8 = [
     b'\xc2\xa0',  # U+A0 non-breaking space (NBSP)
     b'\xc2\xa9',  # U+A9 copyright
+    b'\xc2\xab',  # U+AB left-pointing double angle quotation mark
+    b'\xc2\xbb',  # U+BB right-pointing double angle quotation mark
     b'\xc3\xa9',  # U+E9 e acute
-    b'\xce\xa9',  # U+E9 Omega
+    b'\xc7\x83',  # U+1C3 Latin letter retroflex click (!)
+    b'\xce\xa9',  # U+3A9 Omega
     b'\xe2\x80\xa2',  # U+2022 bullet
     b'\xe2\x80\x8f',  # U+200F right-to-left mark (RLM)
     b'\xe2\x82\xac',  # U+20AC euro
