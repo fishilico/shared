@@ -74,3 +74,21 @@ BIN_EXT := $(EXT_PREFIX)exe
 LIB_EXT := $(EXT_PREFIX)dll
 LIB_CFLAGS ?=
 LIB_LDFLAGS ?= -shared -Wl,--subsystem=0
+
+# Run tests on Windows or on Linux if binfmt_misc has been configured.
+# To configure this, it is possible to run:
+#     mount -t binfmt_misc binfmt_misc /proc/sys/fs/binfmt_misc
+#     echo ':DOSWin:M::MZ::/usr/bin/wine:' > /proc/sys/fs/binfmt_misc/register
+# With systemd, it is possible to configure systemd-binfmt.service by adding a
+# file in /etc/binfmt.d/wine.conf containing ':DOSWin:M::MZ::/usr/bin/wine:',
+# cf. http://www.freedesktop.org/software/systemd/man/binfmt.d.html
+ifeq ($(OS), Windows_NT)
+	RUN_WINDOWS_TEST := y
+else
+	HAVE_WINE_BINFMT := $(shell test -e /proc/sys/fs/binfmt_misc/DOSWin && echo y)
+	ifeq ($(HAVE_WINE_BINFMT), y)
+		RUN_WINDOWS_TEST := y
+	else
+		RUN_WINDOWS_TEST := n
+	endif
+endif

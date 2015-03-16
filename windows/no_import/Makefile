@@ -1,7 +1,10 @@
 include ../../windows-flags.mk
 
+NONTEST_PROGRAMS := helloworld_noimport start_cmd winexec_explorer
+
 SOURCES := $(wildcard *.c)
 BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
+TEST_BINARIES := $(filter-out $(NONTEST_PROGRAMS:%=%.$(BIN_EXT)), $(BINARIES))
 
 NOIMPORT_PROGRAMS := $(filter-out check_%, $(SOURCES:%.c=%))
 
@@ -12,7 +15,11 @@ clean:
 	$(CLEAN_CMD)
 
 test: all
-	@:
+ifeq ($(RUN_WINDOWS_TEST), y)
+	@for P in $(sort $(TEST_BINARIES)); do \
+		echo ./$$P && ./$$P || exit $$? ; \
+	done
+endif
 
 $(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -Wl,--subsystem=windows
 $(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -nostdlib -Wl,--nostdlib
