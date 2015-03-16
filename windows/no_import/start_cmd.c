@@ -21,7 +21,7 @@ static int _main(void)
     BOOL (WINAPI *pfnCloseHandle)(HANDLE hObject);
 
     WCHAR szCmdLine[] = { L'c', L'm', L'd', L'\0' };
-    STARTUPINFO si;
+    STARTUPINFOW si;
     PROCESS_INFORMATION pi;
 
     /* Retrieve function pointers */
