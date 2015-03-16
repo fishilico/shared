@@ -82,11 +82,13 @@ LIB_LDFLAGS ?= -shared -Wl,--subsystem=0
 # With systemd, it is possible to configure systemd-binfmt.service by adding a
 # file in /etc/binfmt.d/wine.conf containing ':DOSWin:M::MZ::/usr/bin/wine:',
 # cf. http://www.freedesktop.org/software/systemd/man/binfmt.d.html
+# Ubuntu uses a binfmt entry named "wine" instead of "DOSWin".
 ifeq ($(OS), Windows_NT)
 	RUN_WINDOWS_TEST := y
 else
-	HAVE_WINE_BINFMT := $(shell test -e /proc/sys/fs/binfmt_misc/DOSWin && echo y)
-	ifeq ($(HAVE_WINE_BINFMT), y)
+	HAVE_DOSWIN_BINFMT := $(shell test -e /proc/sys/fs/binfmt_misc/DOSWin && echo y)
+	HAVE_WINE_BINFMT := $(shell test -e /proc/sys/fs/binfmt_misc/wine && echo y)
+	ifeq ($(findstring y, $(HAVE_DOSWIN_BINFMT) $(HAVE_WINE_BINFMT)), y)
 		RUN_WINDOWS_TEST := y
 	else
 		RUN_WINDOWS_TEST := n
