@@ -135,11 +135,11 @@ static void print_segment_desc(const char *segname, uint16_t segment)
         }
         printf("\n");
     } else if (lsl_ok) {
-        unsigned int index = segment >> 3;
-        printf("%4u: selector 0x%04x", index, segment);
+        unsigned int sindex = segment >> 3;
+        printf("%4u: selector 0x%04x", sindex, segment);
         printf(", limit=0x%x", limit);
-        if (index < sizeof(gdt_segment_index_desc) / sizeof(gdt_segment_index_desc[0])) {
-            printf(", %s", gdt_segment_index_desc[index]);
+        if (sindex < sizeof(gdt_segment_index_desc) / sizeof(gdt_segment_index_desc[0])) {
+            printf(", %s", gdt_segment_index_desc[sindex]);
         }
         printf("\n");
     }

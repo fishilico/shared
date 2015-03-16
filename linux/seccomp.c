@@ -161,7 +161,7 @@ static bool install_syscall_filter(bool do_kill)
 static void sigsys_sigaction(int s, siginfo_t *info, void *context)
 {
     ucontext_t *ctx = (ucontext_t *)context;
-    greg_t syscall, arg0, arg1;
+    greg_t syscall_nr, arg0, arg1;
     void *call_addr;
 
     assert(s == SIGSYS);
@@ -182,15 +182,15 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
         fprintf(stderr, "sigaction error: no context has been given.\n");
         exit(1);
     }
-    syscall = mctx_reg_syscall(ctx->uc_mcontext);
+    syscall_nr = mctx_reg_syscall(ctx->uc_mcontext);
 
     /* If the libc knows info->si_syscall, use it for a sanity check */
 #ifdef si_syscall
-    assert(syscall == info->si_syscall);
+    assert(syscall_nr == info->si_syscall);
 #endif
 
     /* Emulate getpriority */
-    if (syscall ==  __NR_getpriority) {
+    if (syscall_nr ==  __NR_getpriority) {
         arg0 = mctx_reg_arg0(ctx->uc_mcontext);
         arg1 = mctx_reg_arg1(ctx->uc_mcontext);
         if (arg0 == PRIO_USER && arg1 == 0) {
@@ -205,11 +205,11 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
     call_addr = NULL;
 #endif
     /* Block the syscall */
-    printf("Blocked syscall %d%s @%p\n", (int)syscall,
-           (syscall == __NR_uname) ? " (__NR_uname)" : "",
+    printf("Blocked syscall %d%s @%p\n", (int)syscall_nr,
+           (syscall_nr == __NR_uname) ? " (__NR_uname)" : "",
            call_addr);
     fflush(stdout);
-    exit((syscall == __NR_uname) ? 0 : 1);
+    exit((syscall_nr == __NR_uname) ? 0 : 1);
 }
 
 int main(int argc, char **argv)

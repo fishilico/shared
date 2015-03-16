@@ -45,7 +45,7 @@ int main(void)
 {
     char *wd;
     const char *path_part = NULL;
-    int dirfd = -1, retval = 1;
+    int dir_fd = -1, retval = 1;
     bool is_not_end = true;
 
     wd = getcwd_a();
@@ -68,7 +68,7 @@ int main(void)
         if (!path_part) {
             path_part = "/";
             path_end = wd;
-            dirfd = AT_FDCWD;
+            dir_fd = AT_FDCWD;
             is_not_end = (wd[1] != '\0');
             printf("/\n");
         } else {
@@ -83,7 +83,7 @@ int main(void)
         }
 
         /* Stat the subdirectory */
-        if (fstatat(dirfd, path_part, &st, 0) == -1) {
+        if (fstatat(dir_fd, path_part, &st, 0) == -1) {
             perror("fstatat");
             goto cleanup;
         }
@@ -94,8 +94,8 @@ int main(void)
         printf("  device %" PRIu64 " inode %ld (0x%08lx)\n", st.st_dev, st.st_ino, st.st_ino);
 
         /* Find the entry in the directory enumeration */
-        if (dirfd != AT_FDCWD) {
-            dir = fdopendir(dirfd);
+        if (dir_fd != AT_FDCWD) {
+            dir = fdopendir(dir_fd);
             while (true) {
                 if (readdir_r(dir, &entry_buffer, &entry) == -1) {
                     perror("readdir");
@@ -125,7 +125,7 @@ int main(void)
             int fh_buffer[(sizeof(struct file_handle) + MAX_HANDLE_SZ + sizeof(int) - 1) / sizeof(int)];
             struct file_handle *fhp = (struct file_handle *)fh_buffer;
             fhp->handle_bytes = MAX_HANDLE_SZ;
-            if (name_to_handle_at(dirfd, path_part, fhp, &mount_id, 0) == -1) {
+            if (name_to_handle_at(dir_fd, path_part, fhp, &mount_id, 0) == -1) {
                 if (errno == ENOTSUP) {
                     printf("  (name_to_handle_at not supported here)\n");
                 } else {
@@ -145,24 +145,24 @@ int main(void)
 #endif
 
         /* Open the subdirectory */
-        new_dirfd = openat(dirfd, path_part, O_RDONLY | O_CLOEXEC);
+        new_dirfd = openat(dir_fd, path_part, O_RDONLY | O_CLOEXEC);
         if (new_dirfd == -1) {
             perror("openat");
             goto cleanup;
         }
         if (dir) {
             closedir(dir);
-        } else if (dirfd != AT_FDCWD) {
-            close(dirfd);
+        } else if (dir_fd != AT_FDCWD) {
+            close(dir_fd);
         }
         dir = NULL;
-        dirfd = new_dirfd;
+        dir_fd = new_dirfd;
         path_part = path_end + 1;
     } while (is_not_end);
     retval = 0;
 cleanup:
-    if (dirfd >= 0) {
-        close(dirfd);
+    if (dir_fd >= 0) {
+        close(dir_fd);
     }
     if (wd != NULL) {
         free(wd);

@@ -230,7 +230,7 @@ static BOOL EnableDebugPrivilege(VOID)
 {
     LUID luid;
     HANDLE hToken;
-    TOKEN_PRIVILEGES TokenPrivileges;
+    TOKEN_PRIVILEGES tpTokenPrivileges;
 
     if (!LookupPrivilegeValue(NULL, SE_DEBUG_NAME, &luid)) {
         print_winerr(_T("LookupPrivilegeValue(SeDebugPrivilege)"));
@@ -242,11 +242,11 @@ static BOOL EnableDebugPrivilege(VOID)
         return FALSE;
     }
 
-    ZeroMemory(&TokenPrivileges, sizeof(TOKEN_PRIVILEGES));
-    TokenPrivileges.PrivilegeCount = 1;
-    TokenPrivileges.Privileges[0].Luid = luid;
-    TokenPrivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-    if (!AdjustTokenPrivileges(hToken, FALSE, &TokenPrivileges, sizeof(TOKEN_PRIVILEGES), NULL, NULL)) {
+    ZeroMemory(&tpTokenPrivileges, sizeof(TOKEN_PRIVILEGES));
+    tpTokenPrivileges.PrivilegeCount = 1;
+    tpTokenPrivileges.Privileges[0].Luid = luid;
+    tpTokenPrivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+    if (!AdjustTokenPrivileges(hToken, FALSE, &tpTokenPrivileges, sizeof(TOKEN_PRIVILEGES), NULL, NULL)) {
         print_winerr(_T("AdjustTokenPrivileges(Debug)"));
         CloseHandle(hToken);
         return FALSE;
