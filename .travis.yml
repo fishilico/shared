@@ -20,13 +20,14 @@ env:
 install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install gcc-multilib libc6-dev-i386 gdb
-  - sudo apt-get -qq install binutils-mingw-w64 gcc-mingw-w64
+  - if [ "$OS" = "Windows_NT" ] ; then sudo apt-get -qq install binutils-mingw-w64 gcc-mingw-w64 wine ; fi
+  # Run Windows programs using binfmt_misc
+  - if [ "$OS" = "Windows_NT" ] ; then sudo update-binfmts --disable wine ; sudo update-binfmts --enable wine ; fi
   # pip does not behave properly when CC is somewhat weird
   - if [ "$CC" = "gcc" ] ; then pip install cffi numpy ; fi
 
 script:
-  # Don't run Windows programs at all, as it is Linux.
-  - if [ "$OS" = "Windows_NT" ] ; then make ; else make test ; fi
+  - make test
 
 # Disable email notifications
 notifications:
