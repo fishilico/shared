@@ -104,8 +104,11 @@ static void initialize_cpu_affinity(void)
     if (ProcessAffinityMask != SystemAffinityMask) {
         fprintf(stderr, "Warning: process affinity mask 0x%lx != system 0x%lx\n",
                 (ULONG)ProcessAffinityMask, (ULONG)SystemAffinityMask);
+        ProcessAffinityMask &= SystemAffinityMask;
+    } else if (!ProcessAffinityMask) {
+        /* Wine may return 0 when strange things are in place */
+        fprintf(stderr, "Warning: process affinity mask is 0, not changing CPU.\n");
     }
-    assert(ProcessAffinityMask);
     InitialAffinityMask = ProcessAffinityMask;
 }
 
@@ -128,6 +131,10 @@ static int get_next_cpu(int cpu)
  */
 static void migrate_to_cpu(int cpu)
 {
+    /* Do not migrate anywhere if GetProcessAffinityMask returned 0 */
+    if (!InitialAffinityMask) {
+        return;
+    }
     if (!SetProcessAffinityMask(GetCurrentProcess(), 1 << (unsigned)cpu)) {
         fprintf(stderr, "SetProcessAffinityMask: error %lu\n", GetLastError());
         exit(1);
