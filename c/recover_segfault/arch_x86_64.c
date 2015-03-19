@@ -381,6 +381,52 @@ bool run_mov_asm_instruction_p(
             return true;
         }
 
+        /* 66 0f 3a 63 /r imm8: pcmpistri imm8, xmm2/m128, xmm1 */
+        if (has_66_prefix && instr[1] == 0x3a && instr[2] == 0x63) {
+            unsigned int xmmreg = ((instr[3] >> 3) & 7) | ((rexprefix & X86_64_REX_R) ? 8 : 0);
+            uint8_t *xmmdst = (uint8_t *)asm_instr_ctx_xmm_addr(ctx, xmmreg);
+            uint8_t pcmpistri_op;
+            asm_instr_reg eflags;
+
+            paramlen = decode_modrm_check(ctx, instr + 3, rexprefix, data_addr, NULL, NULL, &operand_rm);
+            if (!paramlen) {
+                return false;
+            }
+            pcmpistri_op = instr[3 + paramlen];
+            asm_printf(asm_instr, "pcmpistri 0x%x, %s, xmm%u", pcmpistri_op, operand_rm, xmmreg);
+            free(operand_rm);
+            if (pcmpistri_op == 8) {
+                /* Equal Each, 16 unsigned bytes, Positive Polarity */
+                eflags = R_EFL(ctx);
+                eflags &= ~(X86_EFLAGS_CF | X86_EFLAGS_PF | X86_EFLAGS_AF |
+                            X86_EFLAGS_ZF | X86_EFLAGS_SF | X86_EFLAGS_OF);
+                if (xmmdst[0] != data[0]) {
+                    eflags |= X86_EFLAGS_OF;
+                }
+                for (i = 0; i < 16; i++) {
+                    if (xmmdst[i] == data[i] && !(eflags & X86_EFLAGS_CF)) {
+                        R_RCX(ctx) = i;
+                        eflags |= X86_EFLAGS_CF;
+                    }
+                    if (!data[i]) {
+                        eflags |= X86_EFLAGS_ZF;
+                    }
+                    if (!xmmdst[i]) {
+                        eflags |= X86_EFLAGS_SF;
+                    }
+                }
+                if (!(eflags & X86_EFLAGS_CF)) {
+                    R_RCX(ctx) = 16;
+                }
+                R_EFL(ctx) = eflags;
+            } else {
+                fprintf(stderr, "Error: pcmpistri operation 0x%x not implemented\n", pcmpistri_op);
+                return false;
+            }
+            R_RIP(ctx) += 4 + paramlen;
+            return true;
+        }
+
         /* 66 0f 74 /r: pcmpeqb xmm2/mem, xmm1 ; compare bytes and set 0xff if equal, 0 if not */
         if (has_66_prefix && instr[1] == 0x74) {
             unsigned int xmmreg = ((instr[2] >> 3) & 7) | ((rexprefix & X86_64_REX_R) ? 8 : 0);

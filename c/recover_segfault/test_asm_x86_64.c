@@ -43,6 +43,7 @@ int main(void)
     asm_instr_context ctx;
     const uintptr_t data_addr = 0xda7a0000;
     uint8_t data[] = "\x17\x15\x7e\x57\xda\x7a\xb1\x0b It is test data blob";
+    uint8_t olddata;
     int retval = 0;
     asm_instr_reg data64h;
     const asm_instr_reg data64 = 0x0bb17ada577e1517UL;
@@ -174,6 +175,26 @@ int main(void)
     R_RAX(&ctx) = data_addr - 0x20;
     R_XMM10L(&ctx) = data64 & 0xff00ff;
     test("\x66\x44\x0f\x74\x50\x20", "pcmpeqb 0x20(rax=0xda79ffe0), xmm10", XMM10L, 0xff00ff);
+
+    /* SSE 4.2 */
+    R_RDI(&ctx) = data_addr - 0x10;
+    test("\x66\x0f\x3a\x63\x4f\x10\x08", "pcmpistri 0x8, 0x10(rdi=0xda79fff0), xmm1", XMM1L, 0);
+    R_RDI(&ctx) = data_addr - 0x10;
+    test("\x66\x0f\x3a\x63\x4f\x10\x08", "pcmpistri 0x8, 0x10(rdi=0xda79fff0), xmm1", XMM1H, 0);
+    R_RDI(&ctx) = data_addr - 0x10;
+    test("\x66\x0f\x3a\x63\x4f\x10\x08", "pcmpistri 0x8, 0x10(rdi=0xda79fff0), xmm1", EFL,
+        X86_EFLAGS_OF | X86_EFLAGS_SF);
+    R_RDI(&ctx) = data_addr - 0x10;
+    test("\x66\x0f\x3a\x63\x4f\x10\x08", "pcmpistri 0x8, 0x10(rdi=0xda79fff0), xmm1", RCX, 0x10);
+
+    olddata = data[9];
+    data[9] = 0;
+    R_RDI(&ctx) = data_addr - 0x20;
+    test("\x66\x0f\x3a\x63\x4f\x20\x08", "pcmpistri 0x8, 0x20(rdi=0xda79ffe0), xmm1", EFL,
+        X86_EFLAGS_CF | X86_EFLAGS_OF | X86_EFLAGS_SF | X86_EFLAGS_ZF);
+    R_RDI(&ctx) = data_addr - 0x20;
+    test("\x66\x0f\x3a\x63\x4f\x20\x08", "pcmpistri 0x8, 0x20(rdi=0xda79ffe0), xmm1", RCX, 9);
+    data[9] = olddata;
 
     return retval;
 }
