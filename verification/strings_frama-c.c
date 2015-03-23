@@ -101,9 +101,7 @@ static size_t strlen(const char *str)
 {
     const char *p = str;
     /*@ ghost size_t c = 0; */
-    /*@ loop invariant str <= p;
-      @ loop invariant p == str + c;
-      @ loop invariant \valid_read(p);
+    /*@ loop invariant p == str + c;
       @ loop invariant \forall integer i; 0 <= i < c ==> str[i] != 0;
       @ loop invariant c <= strlen(str);
       @ loop assigns c, p;
@@ -155,24 +153,15 @@ static void strlcpy(char *dest, const char *src, size_t size)
         /*@ assert \separated(dest + (0..size1), src + (0..srclen)); */
         /*@ assert \forall integer i; 0 <= i < len ==> src[i] != 0; */
         /*@ assert \forall integer i; 0 <= i < size1 ==> src[i] != 0; */
-        /*@ assert \forall integer i; 0 <= i <= srclen ==> \at(src[i], begin) == src[i]; */
-        /*@ ghost copy: */
         memcpy_c(dest, src, size1);
-        /*@ assert isequal(dest, src, size1); */
-        /*@ assert \forall integer i; 0 <= i <= srclen ==> \at(src[i], copy) == src[i]; */
-        /*@ ghost endnul: */
+        /*@ ghost after_cpy: */
         dest[size1] = '\0';
-        /*@ assert \forall integer i; 0 <= i <= srclen ==> \at(src[i], endnul) == src[i]; */
-        /*@ assert \forall integer i; 0 <= i < size1 ==> \at(src[i], endnul) == src[i]; */
-        /*@ assert \forall integer i; 0 <= i < size1 ==> \at(dest[i], endnul) == dest[i]; */
+        /*@ assert \forall integer i; 0 <= i <= srclen ==> \at(src[i], begin) == src[i]; */
+        /*@ assert \forall integer i; 0 <= i < size1 ==> \at(src[i], after_cpy) == src[i]; */
+        /*@ assert \forall integer i; 0 <= i < size1 ==> \at(dest[i], after_cpy) == dest[i]; */
         /*@ assert isequal(dest, src, size1); */
-        /*@ assert \forall integer i; 0 <= i < size1 ==> src[i] != '\0'; */
         /*@ assert \forall integer i; 0 <= i < size1 ==> dest[i] == src[i] != '\0'; */
-        /*@ assert isequal(dest, src, size1); */
         /*@ assert strlen(dest) == size1; */
-        /*@ assert \forall integer i; 0 <= i <= srclen ==> \at(src[i], copy) == src[i]; */
-        /*@ assert size - 1 == size1; */
-        /*@ assert dest[size - 1] == '\0'; */
     }
 }
 
