@@ -43,7 +43,12 @@ test: all
 		-pp-annot -no-unicode \
 		-wp -wp-rte -wp-model Typed+cast -wp-timeout 25 -wp-split -wp-out '$(FRAMAC_TMPDIR)' $^
 
-.PHONY: all all-frama clean test
+# Run Frama-C GUI
+%.frama-gui: FRAMAC := $(FRAMAC:%frama-c=%frama-c-gui)
+%.frama-gui: %.frama
+	@:
+
+.PHONY: all all-frama clean test %.frama %.frama-gui
 .PRECIOUS: .%.o
 
 -include .*.d
