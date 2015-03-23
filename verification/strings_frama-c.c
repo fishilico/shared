@@ -85,7 +85,7 @@ static void memcpy_c(char *dest, const char *src, size_t n)
       @ loop variant n - i;
       @*/
     for (i = 0; i < n; i++) {
-        ((char*)dest)[i] = ((char*)src)[i];
+        dest[i] = src[i];
         /*@ assert isequal(dest, src, i + 1); */
     }
 }
@@ -213,7 +213,7 @@ int main(void)
     memset_c(buffer_small, 0, sizeof(buffer_small));
     memset_c(buffer_big, 0, sizeof(buffer_big));
 
-    if (!is_valid_cstring((char*)helloworld, HELLO_WORLD_LEN)) {
+    if (!is_valid_cstring(helloworld, HELLO_WORLD_LEN)) {
         return 0;
     }
     /*@ assert valid_cstring((char*)helloworld); */
@@ -224,7 +224,7 @@ int main(void)
     strlcpy(buffer_small, helloworld, sizeof(buffer_small));
 
     /* TODO: this condition shouldn't be mandatory :( */
-    if (!is_valid_cstring((char*)helloworld, HELLO_WORLD_LEN)) {
+    if (!is_valid_cstring(helloworld, HELLO_WORLD_LEN)) {
         return 0;
     }
     /*@ assert valid_cstring((char*)helloworld); */

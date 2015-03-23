@@ -224,7 +224,7 @@ static void test_mmap_rw_rx_fd(int fd)
         fprintf(stderr, "[!] RW and RX mmaps are different:\n");
         for (i = 0; i < sizeof(CODE); i++) {
             fprintf(stderr, "... %02x %02x\n",
-                    ((uint8_t*)CODE)[i], ((uint8_t*)xptr)[i]);
+                    ((const uint8_t*)CODE)[i], ((uint8_t*)xptr)[i]);
         }
         munmap(xptr, sizeof(CODE));
         munmap(wptr, sizeof(CODE));

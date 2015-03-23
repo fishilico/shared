@@ -405,7 +405,7 @@ bool run_mov_asm_instruction_p(
                 }
                 for (i = 0; i < 16; i++) {
                     if (xmmdst[i] == data[i] && !(eflags & X86_EFLAGS_CF)) {
-                        R_RCX(ctx) = i;
+                        R_RCX(ctx) = (asm_instr_reg)i;
                         eflags |= X86_EFLAGS_CF;
                     }
                     if (!data[i]) {

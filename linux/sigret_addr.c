@@ -139,7 +139,7 @@ static int get_symbol_name_elf(uintptr_t elf_base, const void *addr, int is_file
                 symtab = ptr;
                 break;
             case DT_HASH:
-                nchain = ((Elf_Word *)ptr)[1];
+                nchain = ((const Elf_Word *)ptr)[1];
                 break;
         }
     }

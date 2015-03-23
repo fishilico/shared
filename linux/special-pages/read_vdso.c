@@ -106,10 +106,10 @@ int main(int argc, char **argv)
         fprintf(stderr, "Unable to find PT_LOAD and PT_DYNAMIC in vDSO header\n");
         return 1;
     }
-    printf("* EHDR = %p\n", (void *)vdso_hdr);
-    printf("* PHDR = %p\n", (void *)vdso_pt);
-    printf("* PT_LOAD = %p\n", (void *)vdso_load_offset);
-    printf("* PT_DYNAMIC = %p\n", (void *)vdso_dyn);
+    printf("* EHDR = %p\n", (const void *)vdso_hdr);
+    printf("* PHDR = %p\n", (const void *)vdso_pt);
+    printf("* PT_LOAD = %p\n", (const void *)vdso_load_offset);
+    printf("* PT_DYNAMIC = %p\n", (const void *)vdso_dyn);
 
     /* Gather information from PT_DYNAMIC header */
     for (i = 0; vdso_dyn[i].d_tag != DT_NULL; i++) {
@@ -170,7 +170,7 @@ int main(int argc, char **argv)
             const Elf_Verdef *def = vdso_verdef;
             while (1) {
                 if ((def->vd_flags & VER_FLG_BASE) == 0 && (def->vd_ndx & 0x7fff) == ver) {
-                    Elf_Verdaux *aux;
+                    const Elf_Verdaux *aux;
                     /* Force align with Elf_Word */
                     if (def->vd_aux % sizeof(Elf_Word)) {
                         fprintf(stderr,
@@ -178,7 +178,8 @@ int main(int argc, char **argv)
                                 (unsigned long)sizeof(Elf_Word), def->vd_aux);
                         return 1;
                     }
-                    aux = (Elf_Verdaux *)((Elf_Word *)def + (def->vd_aux / sizeof(Elf_Word)));
+                    aux = (const Elf_Verdaux *)(
+                        (const Elf_Word *)def + (def->vd_aux / sizeof(Elf_Word)));
                     verstr = &vdso_symstrings[aux->vda_name];
                     break;
                 }
@@ -191,7 +192,8 @@ int main(int argc, char **argv)
                             (unsigned long)sizeof(Elf_Word), def->vd_next);
                     return 1;
                 }
-                def = (Elf_Verdef *)((Elf_Word *)def + (def->vd_next / sizeof(Elf_Word)));
+                def = (const Elf_Verdef *)(
+                    (const Elf_Word *)def + (def->vd_next / sizeof(Elf_Word)));
             }
         }
         printf("* %s = %p (%s",

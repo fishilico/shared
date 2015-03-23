@@ -71,7 +71,7 @@ typedef struct user_regs user_regs_type;
 static int memcpy_to_pid(pid_t pid, void *dst, const void *src, size_t size)
 {
     uint8_t *pdst = (uint8_t *)dst;
-    const uint8_t *psrc = (uint8_t *)src;
+    const uint8_t *psrc = (const uint8_t *)src;
     size_t i;
 
     /* ptrace works with words of size a pointer. */
