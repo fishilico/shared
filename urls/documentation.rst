@@ -35,6 +35,7 @@ Hacking
   An Exploration of ARM TrustZone Technology (with Genode OS as secure OS)
 * https://deathmarine.github.io/Luyten/
   Luyten, an Open Source Java Decompiler GUI
+* https://github.com/rapid7/metasploit-framework Metasploit Framework source
 
 Programming
 -----------
@@ -66,6 +67,9 @@ Programming
 
 * https://github.com/jbmouret/matplotlib_for_papers
   Creating publication-quality figures with matplotlib
+
+* http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf
+  C99 standard (http://www.open-std.org/jtc1/sc22/wg14/www/standards.html)
 
 Packaging
 ---------

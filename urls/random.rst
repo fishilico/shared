@@ -28,9 +28,15 @@ Interesting hardware-related projets
 ------------------------------------
 
 * http://www.foobarflies.io/pianette/ Pianette / "Sound Fighter"
+* https://fosdem.org/2015/schedule/event/gps_watch/
+  A GPS watch made of free software and hardware - FOSDEM 2015
+* http://www.kosagi.com/w/index.php?title=Novena_Main_Page
+  Novena, an open hardware and F/OSS-firendly computing platform
 
 Other, in French
 ----------------
 
 * http://www.sytadin.fr/ traffic en Île-de-France
 * http://carte.epps.fr/ carte de Paris-Saclay
+* http://www.laboiteverte.fr/le-plan-des-stations-du-metro-de-paris-en-anagrammes/plan-metro-anagramme/
+  Le plan des stations du métro de Paris en anagrammes
