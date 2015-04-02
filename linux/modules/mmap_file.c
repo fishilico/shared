@@ -62,6 +62,7 @@ static int mmap_file_open(struct inode *inode, struct file *filp)
 {
 	uint8_t *data;
 	unsigned long index;
+	struct qstr *filename;
 
 	/* Forbid call to seek() */
 	nonseekable_open(inode, filp);
@@ -72,10 +73,11 @@ static int mmap_file_open(struct inode *inode, struct file *filp)
 		return -ENOMEM;
 
 	/* Fill data with some "meaningful" information */
+	filename = &filp->f_path.dentry->d_name;
 	snprintf(
 		data, mapsize,
-		"Hello! Here is file %s\npage size is %lu\n",
-		filp->f_dentry->d_name.name, PAGE_SIZE);
+		"Hello! Here is file %*s\npage size is %lu\n",
+		filename->len, filename->name, PAGE_SIZE);
 
 	for (index = 1; index < (mapsize >> PAGE_SHIFT); index++) {
 		off_t offset = index << PAGE_SHIFT;
