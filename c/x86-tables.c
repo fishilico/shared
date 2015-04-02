@@ -141,7 +141,7 @@ static void migrate_to_cpu(int cpu)
     }
 }
 #else
-#    warning Unknown target OS
+#    error Unknown target OS
 #endif
 
 int main(void)
