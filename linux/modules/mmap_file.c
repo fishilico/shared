@@ -86,7 +86,7 @@ static int mmap_file_open(struct inode *inode, struct file *filp)
 	}
 
 	filp->private_data = data;
-	pr_info("File opened, %zu bytes at %pK\n", mapsize, data);
+	pr_info("File opened, %lu bytes at %pK\n", mapsize, data);
 	return 0;
 }
 
