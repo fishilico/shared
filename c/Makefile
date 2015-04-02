@@ -8,6 +8,7 @@ SOURCES := $(wildcard *.c)
 ALL_PROGRAMS := $(SOURCES:%.c=%)
 
 # Programs which need specific options
+GMP_PROGRAMS := gmp_functions
 OPENMP_PROGRAMS := openmp_matrix
 GTK_PROGRAMS := gtk_alpha_window
 X86_PROGRAMS := $(filter x86-%, $(ALL_PROGRAMS))
@@ -17,12 +18,22 @@ NONTEST_PROGRAMS := gtk_alpha_window
 NONTEST_BINARIES := $(NONTEST_PROGRAMS:%=%.$(BIN_EXT)) x86-create_cpuid_enum_h.sh
 
 # Find other programs. Only programs in $(PROGRAMS) are built.
-PROGRAMS := $(filter-out $(OPENMP_PROGRAMS) $(GTK_PROGRAMS) $(X86_PROGRAMS), $(ALL_PROGRAMS))
+PROGRAMS := $(filter-out \
+	$(GMP_PROGRAMS) $(OPENMP_PROGRAMS) $(GTK_PROGRAMS) $(X86_PROGRAMS), \
+	$(ALL_PROGRAMS))
 
 # view_sizes.c uses "long long" type, so disable the related warning
 view_sizes.o: CFLAGS += -Wno-long-long
 
-# when gcc is not compiled with pthread, -fopenmp makes the preprocessor fails
+
+# Only compile GMP programs when gmp.h can be found
+HAVE_GMP := $(shell $(CC) -Werror -include gmp.h -E - < /dev/null > /dev/null 2>&1 && echo y || echo n)
+ifeq ($(HAVE_GMP), y)
+PROGRAMS += $(GMP_PROGRAMS)
+$(GMP_PROGRAMS:%=%.$(BIN_EXT)): LIBS += -lgmp
+endif
+
+# When gcc is not compiled with pthread, -fopenmp makes the preprocessor fails
 # clang 3.5.0 has partial support for OpenMP, omp.h is missing
 HAVE_OPENMP := $(shell $(CC) -Werror -fopenmp -include omp.h -E - < /dev/null > /dev/null 2>&1 && echo y || echo n)
 ifeq ($(HAVE_OPENMP), y)
