@@ -51,7 +51,7 @@ static int print_linkaddr_filter(
     /* Display it */
     printf("%d: ", ifim->ifi_index);
     if (rta_name) {
-        printf("%*s: ", RTA_PAYLOAD(rta_name) - 1, RTA_DATA(rta_name));
+        printf("%*s: ", (int)RTA_PAYLOAD(rta_name) - 1, (char *)RTA_DATA(rta_name));
     }
     if (rta_addr) {
         unsigned char *addr = RTA_DATA(rta_addr);
@@ -82,6 +82,7 @@ static int print_linkaddr_filter(
 int main(void)
 {
     struct rtnl_handle rth;
+    struct rtnl_dump_filter_arg dump_arg_print[2];
 
     /* Open Netlink route socket */
     if (rtnl_open(&rth, 0) == -1) {
@@ -95,8 +96,14 @@ int main(void)
         exit(EXIT_FAILURE);
     }
 
-    /* Process results */
-    rtnl_dump_filter(&rth, print_linkaddr_filter, NULL);
+    /* Process results
+     * Since iproute2 v3.2.0, rtnl_dump_filter takes 2 arguments instead of 4.
+     * To be compatible with both old and new API, use rtnl_dump_filter_l.
+     * cf. https://git.kernel.org/cgit/linux/kernel/git/shemminger/iproute2.git/commit/lib/libnetlink.c?id=cd70f3f522e04b4d2fa80ae10292379bf223a53b
+     */
+    memset(&dump_arg_print, 0, sizeof(dump_arg_print));
+    dump_arg_print[0].filter = print_linkaddr_filter;
+    rtnl_dump_filter_l(&rth, dump_arg_print);
 
     rtnl_close(&rth);
     return 0;
