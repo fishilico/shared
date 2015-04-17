@@ -20,6 +20,7 @@ env:
 install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install gcc-multilib libc6-dev-i386 gdb
+  - sudo apt-get -qq install iproute-dev libgmp-dev
   - if [ "$OS" = "Windows_NT" ] ; then sudo apt-get -qq install binutils-mingw-w64 gcc-mingw-w64 wine ; fi
   # Run Windows programs using binfmt_misc
   - if [ "$OS" = "Windows_NT" ] ; then sudo update-binfmts --disable wine ; sudo update-binfmts --enable wine ; fi
