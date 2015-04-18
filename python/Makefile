@@ -49,6 +49,9 @@ lint:
 	$(PEP8) $(PEP8_PARAMS) *.py
 	$(PYLINT) $(PYLINT_PARAMS) *.py
 
+list-nobuild:
+	@echo $(NONTEST_BINARIES)
+
 test: all
 	@@for P in $(sort $(TEST_BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
@@ -61,6 +64,6 @@ _cffi_example.$(LIB_EXT): ._cffi_example.o
 ._cffi_example.o: _cffi_example.c
 	$(V_CC)$(CC) $(CFLAGS) $(LIB_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-.PHONY: all clean lint test
+.PHONY: all clean lint list-nobuild test
 
 -include .*.d

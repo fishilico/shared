@@ -77,6 +77,9 @@ all: $(PROGRAMS:%=%.$(BIN_EXT))
 clean:
 	$(CLEAN_CMD)
 
+list-nobuild:
+	@echo $(filter-out $(PROGRAMS), $(ALL_PROGRAMS))
+
 test: all
 	@for P in $(sort $(TEST_BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
 
@@ -98,7 +101,7 @@ x86-linux-cpufeature.h.tmp:
 x86-linux-cpu-scattered.c.tmp:
 	$(WGET) -q -O $@ '$(LINUX_URL)/arch/x86/kernel/cpu/scattered.c' || (rm $@ ; false)
 
-.PHONY: all clean test update_cpuid
+.PHONY: all clean list-nobuild test update_cpuid
 .PRECIOUS: .%.o
 
 -include .*.d

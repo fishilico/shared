@@ -3,6 +3,7 @@
 # Overridable commands
 CHMOD ?= chmod
 FIND ?= find
+GREP ?= grep
 PDFLATEX ?= pdflatex
 LINUX32 ?= linux32
 LINUX64 ?= linux64
@@ -78,13 +79,13 @@ CLEAN_TARGETS := $(addprefix clean.., $(SUBDIRS_FINAL))
 TARGETS := $(ALL_TARGETS) $(ALL32_TARGETS) $(ALL64_TARGETS) $(CLEAN_TARGETS)
 
 all: $(ALL_TARGETS)
-	@test -z "$(SUBDIRS_BLACKLIST)" || echo "Done building with blacklist $(SUBDIRS_BLACKLIST)"
+	@:
 
 all32: $(ALL32_TARGETS)
-	@test -z "$(SUBDIRS_BLACKLIST)" || echo "Done building 32-bit binairies with blacklist $(SUBDIRS_BLACKLIST)"
+	@:
 
 all64: $(ALL64_TARGETS)
-	@test -z "$(SUBDIRS_BLACKLIST)" || echo "Done building 64-bit binairies with blacklist $(SUBDIRS_BLACKLIST)"
+	@:
 
 clean: $(CLEAN_TARGETS)
 
@@ -94,7 +95,15 @@ clean-obj:
 test:
 	@for D in $(sort $(SUBDIRS_FINAL)); do \
 		($(call chdir_do,$$D,,test)) || exit $$? ; done
-	@echo "Done testing with blacklist $(SUBDIRS_BLACKLIST)"
+
+# List programs which are explicitly not built
+list-nobuild:
+	@echo "Global blacklist: $(SUBDIRS_BLACKLIST)"
+	@echo "In sub-directories:"
+	@for D in $(sort $(SUBDIRS_FINAL)); do \
+		$(GREP) 'list-nobuild:' "$$D/Makefile" > /dev/null || continue; \
+		echo "   $$D:" $$($(MAKE) -C "$$D" --no-print-directory $@) ; \
+		done
 
 $(addprefix all.., $(SUBDIRS)):
 	+@$(call chdir_do,$(@:all..%=%),,all)
@@ -121,7 +130,7 @@ sort-gen-indent-c: gen-indent-c.sh
 	cat < .$@.tmp > $<
 	rm .$@.tmp
 
-.PHONY: all all32 all64 clean clean-obj test \
+.PHONY: all all32 all64 clean clean-obj test list-nobuild \
 	$(addprefix all.., $(SUBDIRS)) \
 	$(addprefix all32.., $(SUBDIRS)) \
 	$(addprefix all64.., $(SUBDIRS)) \

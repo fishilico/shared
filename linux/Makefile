@@ -45,6 +45,9 @@ all: $(PROGRAMS:%=%.$(BIN_EXT)) $(SHARED_OBJECTS)
 clean:
 	$(CLEAN_CMD)
 
+list-nobuild:
+	@echo $(filter-out $(PROGRAMS), $(ALL_PROGRAMS))
+
 test: all
 	@for P in $(sort $(filter-out eventpoll_activetty.$(BIN_EXT), $(TEST_BINARIES))); do \
 		echo ./$$P && ./$$P || exit $$? ; \
@@ -68,7 +71,7 @@ override_uname_dl.$(LIB_EXT): LIBS += -ldl
 .%.o: %.c
 	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-.PHONY: all clean test
+.PHONY: all clean list-nobuild test
 .PRECIOUS: .%.o
 
 -include .*.d

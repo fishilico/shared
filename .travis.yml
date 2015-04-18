@@ -29,6 +29,7 @@ install:
 
 script:
   - make test
+  - make list-nobuild
 
 # Disable email notifications
 notifications:
