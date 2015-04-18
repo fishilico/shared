@@ -29,7 +29,7 @@ install:
 
 script:
 # When building 32-bit programs, do not use the 64-bit installed libraries
-  - if [ "${CC%m32}" = "$CC" ] ; then make test ; \
+  - if [ "${CC%m32}" = "$CC" ] ; then make test ;
     else make test HAVE_GTK2=n HAVE_GTK3=n HAVE_NETLINK=n HAVE_SDL=n ; fi
   - make list-nobuild
 
