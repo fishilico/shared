@@ -56,7 +56,7 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 #CFLAGS += -g -fvar-tracking-assignments -fno-omit-frame-pointer
 
 # Add clang-specific options unknown to GCC
-ifeq ($(shell $(CC) -Weverything -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+ifeq ($(shell $(CC) -Werror -Weverything -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 	CFLAGS += -Weverything \
 		-Wno-disabled-macro-expansion \
 		-Wno-documentation \
@@ -64,19 +64,19 @@ ifeq ($(shell $(CC) -Weverything -Werror -E - < /dev/null > /dev/null 2>&1 && ec
 		-Wno-shift-sign-overflow \
 		-Wno-unused-macros
 	# clang 3.6 added -Wreserved-id-macro, which is incompatible with _GNU_SOURCE definition
-	ifeq ($(shell $(CC) -Wreserved-id-macro -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+	ifeq ($(shell $(CC) -Werror -Wreserved-id-macro -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 		CFLAGS += -Wno-reserved-id-macro
 	endif
 endif
 
 # Add GCC-specific options unknown to clang
-ifeq ($(shell $(CC) -Wtrampolines -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+ifeq ($(shell $(CC) -Werror -Wtrampolines -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 	CFLAGS += \
 		-Wjump-misses-init \
 		-Wlogical-op \
 		-Wtrampolines
 	# gcc 4.6 added -Wsuggest-attribute=[const|pure|noreturn]
-	ifeq ($(shell $(CC) -Wsuggest-attribute=format  -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+	ifeq ($(shell $(CC) -Werror -Wsuggest-attribute=format -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 		CFLAGS += \
 			-Wsuggest-attribute=format \
 			-Wsuggest-attribute=noreturn
@@ -84,7 +84,7 @@ ifeq ($(shell $(CC) -Wtrampolines -Werror -E - < /dev/null > /dev/null 2>&1 && e
 endif
 
 # Add strong stack protector if supported
-ifeq ($(shell $(CC) -fstack-protector-strong -Werror -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+ifeq ($(shell $(CC) -Werror -fstack-protector-strong -E - < /dev/null > /dev/null 2>&1 && echo y), y)
 	CFLAGS += -fstack-protector-strong
 endif
 
