@@ -5,7 +5,14 @@
 
 /* printf format for general purpose registers */
 #if defined(__linux__) || defined(__unix__) || defined(__posix__)
-#    define PRIxREG "llx"
+/* Since glibc 2.16 greg_t has been long long. It was long before
+ * Commit: https://sourceware.org/git/?p=glibc.git;a=commitdiff;h=d5e051198503e74256b72fee7b93e681f1de6b57
+ */
+#    if defined(__GNU_LIBRARY__) && ((__GLIBC__ << 16) + __GLIBC_MINOR__ < 0x20010)
+#        define PRIxREG "lx"
+#    else
+#        define PRIxREG "llx"
+#    endif
 #else
 #    include <inttypes.h>
 #    define PRIxREG PRIx64
