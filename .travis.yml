@@ -28,12 +28,15 @@ install:
   # pip does not behave properly when CC is somewhat weird
   - if [ "$CC" = "gcc" ] ; then pip install cffi numpy ; fi
 
-script:
+before_script:
 # Find the version of the installed kernel headers from linux-headers-generic package
+# Note: Travis-ci does not like having a colon after "Depends" in the regex :(
   - if "${WITH_KERN:-false}" ; then
     export KERNELVER="$(LANG=C dpkg --status linux-headers-generic |
-        sed -n 's/^Depends: linux-headers-\(.*\)/\1/p')" ;
+        sed -n 's/^Depends. linux-headers-\(.*\)/\1/p')" ;
     fi
+
+script:
 # When building 32-bit programs, do not use the 64-bit installed libraries
   - if [ "${CC%m32}" = "$CC" ] ; then make test ;
     else make test HAVE_GTK2=n HAVE_GTK3=n HAVE_NETLINK=n HAVE_SDL=n ;
