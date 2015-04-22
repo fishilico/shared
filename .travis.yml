@@ -5,7 +5,7 @@ python:
 
 env:
   # gcc without MinGW
-  - CC=gcc WINCC=false
+  - CC=gcc WINCC=false WITH_KERN=true
   - CC="gcc -m32" WINCC=false
   # clang without MinGW
   - CC=clang WINCC=false
@@ -21,6 +21,7 @@ install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install gcc-multilib libc6-dev-i386 gdb
   - sudo apt-get -qq install iproute-dev libgmp-dev libgtk-3-dev libsdl-dev
+  - if "${WITH_KERN:-false}" ; then sudo apt-get -qq install linux-headers-generic ; fi
   - if [ "$OS" = "Windows_NT" ] ; then sudo apt-get -qq install binutils-mingw-w64 gcc-mingw-w64 wine ; fi
   # Run Windows programs using binfmt_misc
   - if [ "$OS" = "Windows_NT" ] ; then sudo update-binfmts --disable wine ; sudo update-binfmts --enable wine ; fi
@@ -28,9 +29,15 @@ install:
   - if [ "$CC" = "gcc" ] ; then pip install cffi numpy ; fi
 
 script:
+# Find the version of the installed kernel headers from linux-headers-generic package
+  - if "${WITH_KERN:-false}" ; then
+    export KERNELVER="$(LANG=C dpkg --status linux-headers-generic |
+        sed -n 's/^Depends: linux-headers-\(.*\)/\1/p')" ;
+    fi
 # When building 32-bit programs, do not use the 64-bit installed libraries
   - if [ "${CC%m32}" = "$CC" ] ; then make test ;
-    else make test HAVE_GTK2=n HAVE_GTK3=n HAVE_NETLINK=n HAVE_SDL=n ; fi
+    else make test HAVE_GTK2=n HAVE_GTK3=n HAVE_NETLINK=n HAVE_SDL=n ;
+    fi
   - make list-nobuild
 
 # Disable email notifications

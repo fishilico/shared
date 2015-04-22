@@ -20,13 +20,20 @@ include ./linux-flags.mk
 include ./windows-flags.mk
 
 # Never build some specific sub-projects from the main Makefile
-SUBDIRS_BLACKLIST = linux/modules% verification/linux%
+SUBDIRS_BLACKLIST = verification/linux%
 
 # Linux check: filter-out linux/ on non-Linux systems, and boot/ on Windows
+# If the kernel headers are not installed, filter out linux/modules
 ifeq ($(OS), Windows_NT)
 SUBDIRS_BLACKLIST += linux% boot%
 else ifneq ($(shell $(UNAME) -s 2>/dev/null),Linux)
 SUBDIRS_BLACKLIST += linux%
+else
+KERNELVER ?= $(shell $(UNAME) -r)
+KERNELPATH ?= /lib/modules/$(KERNELVER)/build
+ifneq ($(shell test -r $(KERNELPATH)/Makefile && echo y),y)
+SUBDIRS_BLACKLIST += linux/modules%
+endif
 endif
 
 # Windows or MinGW check: compile a basic file
