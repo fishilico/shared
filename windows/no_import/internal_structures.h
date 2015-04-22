@@ -6,10 +6,10 @@
 
 #include <windows.h>
 
-/* Define a custom static assert if none is provided */
-#ifndef _STATIC_ASSERT
-#    define _STATIC_ASSERT(cond) ((void)sizeof(char[1 - 2*!(cond)]))
-#endif
+/* Define a custom static assert to prevent issues with duplicate externs.
+ * This static assert is to be used inside functions.
+ */
+#define BUILTTIME_ASSERT(cond) ((void)sizeof(char[1 - 2*!(cond)]))
 
 /**
  * winnt.h provides NtCurrentTeb to retrieve the Thread Environment Block, which
@@ -155,11 +155,11 @@ static const TEB_internal* _NtCurrentTeb(VOID)
 {
     PTEB_internal pTeb;
 #if defined(__x86_64)
-    _STATIC_ASSERT(FIELD_OFFSET(NT_TIB, Self) == 0x30);
+    BUILTTIME_ASSERT(FIELD_OFFSET(NT_TIB, Self) == 0x30);
     __asm__ volatile ("movq %%gs:48, %0"
         : "=r" (pTeb));
 #elif defined(__i386__)
-    _STATIC_ASSERT(FIELD_OFFSET(NT_TIB, Self) == 0x18);
+    BUILTTIME_ASSERT(FIELD_OFFSET(NT_TIB, Self) == 0x18);
     __asm__ volatile ("movl %%fs:24, %0"
         : "=r" (pTeb));
 #else
@@ -176,11 +176,11 @@ static const PEB* _NtCurrentPeb(VOID)
 {
     PPEB pPeb;
 #if defined(__x86_64)
-    _STATIC_ASSERT(FIELD_OFFSET(TEB_internal, ProcessEnvironmentBlock) == 0x60);
+    BUILTTIME_ASSERT(FIELD_OFFSET(TEB_internal, ProcessEnvironmentBlock) == 0x60);
     __asm__ volatile ("movq %%gs:96, %0"
         : "=r" (pPeb));
 #elif defined(__i386__)
-    _STATIC_ASSERT(FIELD_OFFSET(TEB_internal, ProcessEnvironmentBlock) == 0x30);
+    BUILTTIME_ASSERT(FIELD_OFFSET(TEB_internal, ProcessEnvironmentBlock) == 0x30);
     __asm__ volatile ("movl %%fs:48, %0"
         : "=r" (pPeb));
 #else
