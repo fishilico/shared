@@ -58,7 +58,7 @@ ifndef V
 _QUIET_SUBDIR := y
 define chdir_do
 	echo 'DIR '$(1) && \
-	cd $(1) && $(2) $(MAKE) --no-print-directory $(3)
+	$(2) $(MAKE) -C $(1) --no-print-directory $(3)
 endef
 endif
 endif
@@ -66,7 +66,7 @@ endif
 
 ifneq ($(_QUIET_SUBDIR), y)
 define chdir_do
-	cd $(1) && $(2) $(MAKE) $(2)
+	$(2) $(MAKE) -C $(1) $(3)
 endef
 endif
 
