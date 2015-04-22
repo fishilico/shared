@@ -13,6 +13,15 @@
 #include <linux/slab.h>
 #include <linux/tty.h>
 #include <linux/uaccess.h>
+#include <linux/version.h>
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 5, 0)
+/* Commit 7a4e7408c5ca introduced kuid_t and from_uid in Linux 3.5 */
+static inline uid_t from_kuid(struct user_namespace *to, uid_t uid)
+{
+	return uid;
+}
+#endif
 
 static char *magic = "magic";
 module_param(magic, charp, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);

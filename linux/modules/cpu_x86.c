@@ -12,19 +12,33 @@
 #include <asm/processor.h>
 #include <asm/traps.h>
 
+#include <linux/bug.h>
 #include <linux/init.h>
+#include <linux/kallsyms.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/printk.h>
 #include <linux/version.h>
 
-#define show_reg_bit(reg, bitname, bitnum, desc) \
+/* Add missing bitmask definitions which were added in recent kernels */
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 11, 0)
+#define X86_CR4_SMXE 0x00004000
+#define X86_CR4_FSGSBASE 0x00010000
+#endif
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 7, 0)
+#define X86_CR4_SMAP 0x00200000
+#endif
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 6, 0)
+#define X86_CR4_PCIDE 0x00020000
+#endif
+
+#define show_reg_bit(reg, bitname, bitmask, desc) \
 	pr_info("  %2d (0x%08lx): %s %s (%s)\n", \
-		bitnum, _BITUL(bitnum), \
-		((reg) & _BITUL(bitnum)) ? "+" : "-", (bitname), (desc))
+		ilog2(bitmask), (unsigned long)(bitmask), \
+		((reg) & (bitmask)) ? "+" : "-", (bitname), (desc))
 
 #define show_cr_bit(cr, crnum, bitname, desc) \
-	show_reg_bit((cr), #bitname, X86_CR##crnum##_##bitname##_BIT, (desc))
+	show_reg_bit((cr), #bitname, X86_CR##crnum##_##bitname, (desc))
 
 /**
  * Output example on x86_64:
@@ -120,7 +134,7 @@ static void dump_x86_cr(void)
 }
 
 #define show_efer_bit(efer, bitname, desc) \
-	show_reg_bit((efer), #bitname, _EFER_##bitname, (desc))
+	show_reg_bit((efer), #bitname, 1 << _EFER_##bitname, (desc))
 
 /**
  * Output example on x86_64:
@@ -328,8 +342,7 @@ static void dump_x86_tables(void)
 	unsigned long tr;
 	struct desc_ptr descp;
 
-	compiletime_assert(sizeof(struct desc_struct) == 8,
-		"struct desc_struct has changed size!");
+	BUILD_BUG_ON(sizeof(struct desc_struct) != 8);
 
 	store_tr(tr);
 	pr_info("TR: 0x%08lx (Task Register)\n", tr);
@@ -485,12 +498,20 @@ static void dump_x86_tables(void)
 				comment = "Syscall Vector";
 			else if (i == LOCAL_TIMER_VECTOR)
 				comment = "Local Timer Vector";
-#ifdef CONFIG_HAVE_KVM
+#if defined(CONFIG_HAVE_KVM) && LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
+			/* Introduced by commit d78f2664832f
+			 * ("KVM: VMX: Register a new IPI for posted interrupt")
+			 */
 			else if (i == POSTED_INTR_VECTOR)
 				comment = "Postr Intr Vector";
 #endif
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 9, 0)
+			/* Introduced by commit bc2b0331e077
+			 * ("X86: Handle Hyper-V vmbus interrupts as special hypervisor interrupts")
+			 */
 			else if (i == HYPERVISOR_CALLBACK_VECTOR)
 				comment = "Hypervisor Callback Vector";
+#endif
 			else if (i == UV_BAU_MESSAGE)
 				comment = "UV Bau Message";
 			else if (i == IRQ_WORK_VECTOR)

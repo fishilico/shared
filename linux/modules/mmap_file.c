@@ -9,7 +9,13 @@
 #include <linux/debugfs.h>
 #include <linux/mm.h>
 #include <linux/slab.h>
+#include <linux/version.h>
 #include <linux/vmalloc.h>
+
+/* Linux between 3.2 and 3.6 has VM_NODUMP, and VM_DONTDUMP since 3.7 */
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 7, 0)
+#define VM_DONTDUMP 0
+#endif
 
 static unsigned long mapsize = PAGE_SIZE << 4;
 module_param(mapsize, ulong, S_IRUSR | S_IRGRP | S_IROTH);
