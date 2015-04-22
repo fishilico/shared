@@ -26,6 +26,7 @@ install:
 infos:
 	modinfo *.ko
 
-test:
+test: all
+	@:
 
 .PHONY: all clean install infos test
