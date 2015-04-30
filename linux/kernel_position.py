@@ -90,6 +90,9 @@ def get_pa2va_offset(machine=None):
 
 def get_kernel_pos_from_iomem(machine=None):
     """Get the position of some kernel segments using /proc/iomem"""
+    if not os.path.exists('/proc/iomem'):
+        logger.warning("/proc/iomem does not exist")
+        return
     logger.debug("reading live symbols from /proc/iomem")
     offset = get_pa2va_offset(machine)
     kernel_pos = dict(((name, None) for name in KERNEL_SECTIONS.keys()))
@@ -144,6 +147,7 @@ def get_pos_symbols_from_systemmap(path=None):
 def get_kernel_pos_from_kallsyms():
     """Get the position of some kernel segments using /proc/kallsyms"""
     if not os.path.exists('/proc/kallsyms'):
+        logger.warning("/proc/kallsyms does not exist")
         return
     positions = get_pos_symbols_from_systemmap('/proc/kallsyms')
     if positions is None:
