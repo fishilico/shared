@@ -90,6 +90,8 @@ int main(void)
     print_escaped_ascii("CPUID vendor string", (char *)vendor_data);
     if (vendor_data[0] == 0x756e6547 && vendor_data[1] == 0x49656e69 && vendor_data[2] == 0x6c65746e) {
         printf(" (This is genuine Intel)\n");
+    } else if (vendor_data[0] == 0x68747541 && vendor_data[1] == 0x69746e65 && vendor_data[2] == 0x444d4163) {
+        printf(" (This is authentic AMD)\n");
     }
     printf("Max CPUID code: %u\n", max_code);
 
