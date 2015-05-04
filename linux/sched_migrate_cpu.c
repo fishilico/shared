@@ -65,7 +65,12 @@ static int _cpu_count_s(size_t setsize, cpu_set_t *set)
  * if it provides getcpu (with __vdso_getcpu symbol), which can use a CPU trick
  * to be faster, such as segment limits in x86.
  * Here, always use the slow path with getcpu syscall.
+ * However glibc<2.15 did not define __NR_cpu for x86-64, so use sched_getcpu
+ * in this case.
  */
+#ifndef __NR_getcpu
+#    define sched_getcpu_from_syscall sched_getcpu
+#else
 static int sched_getcpu_from_syscall(void)
 {
     unsigned int cpu = 0;
@@ -75,6 +80,7 @@ static int sched_getcpu_from_syscall(void)
     assert(cpu <= INT_MAX);
     return (int)cpu;
 }
+#endif
 
 /**
  * List available CPUs with sched_getaffinity
