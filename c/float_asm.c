@@ -157,18 +157,27 @@ static void sincos_f(float angle, float *s, float *c)
 /**
  * Fast inverse square root
  * http://en.wikipedia.org/wiki/Fast_inverse_square_root
+ *
+ * This requires disabling strict aliasing warnings, and gcc<4.5 does not
+ * support diagnostic push/pop.
  */
+#if defined(__GNUC__)
+#    define HAVE_PRAGMA_GCC_DIAGNOSTIC_PUSH ((__GNUC__ << 16) + __GNUC_MINOR__ >= 0x40005)
+#else
+#    define HAVE_PRAGMA_GCC_DIAGNOSTIC_PUSH 1
+#endif
+#if HAVE_PRAGMA_GCC_DIAGNOSTIC_PUSH
+#    pragma GCC diagnostic push
+#endif
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 static float invsqrt_f(float x)
 {
     int32_t i;
     float xhalf = x * .5f;
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wstrict-aliasing"
     i = *(int32_t *)&x;
     i = 0x5f3759df - (i >> 1);
     x = *(float *)&i;
-#pragma GCC diagnostic pop
     x = x * (1.5f - (xhalf * x * x));
     x = x * (1.5f - (xhalf * x * x));
     return x;
@@ -179,15 +188,15 @@ static double invsqrt_d(double x)
     int64_t i;
     double xhalf = x * .5;
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wstrict-aliasing"
     i = *(int64_t *)&x;
     i = 0x5fe6eb50c7b537a9LL - (i >> 1);
     x = *(double *)&i;
-#pragma GCC diagnostic pop
     x = x * (1.5 - (xhalf * x * x));
     return x;
 }
+#if HAVE_PRAGMA_GCC_DIAGNOSTIC_PUSH
+#    pragma GCC diagnostic pop
+#endif
 
 /* Run some tests */
 #define _ok(description, test, format, result, expected) \
