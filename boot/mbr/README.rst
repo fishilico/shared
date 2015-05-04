@@ -85,6 +85,8 @@ Here are some useful BIOS interrupts:
 
   * ``AH = 0x00``: set video mode ``AL``.
 
+    * ``AL = 0x01``: text resolution 40x25, pixel resolution 640x400, 16 colors, 8 pages.
+    * ``AL = 0x03``: text resolution 80x25, pixel resolution 720x400, 16 colors, 8 pages.
     * ``AL = 0x12``: text resolution 80x30, pixel resolution 640x480, colors 16/256K, VGA.
 
   * ``AH = 0x02``: set cursor position of page ``BH`` to `DX``.

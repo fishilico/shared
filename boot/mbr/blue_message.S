@@ -26,13 +26,12 @@ start2:
 	sti
 	cld
 
-	/* Set video mode to mode 0x12:
-	 * * text resolution 80x30
-	 * * pixel resolution 640x480
-	 * * colors 16/256K
-	 * * VGA
+	/* Set video mode to mode 0x03:
+	 * * text resolution 80x25
+	 * * pixel resolution 720x400
+	 * * colors 16
 	 */
-	movw	$0x0012, %ax
+	movw	$0x0003, %ax
 	int	$0x10
 
 	/* Set blue background color */
@@ -40,10 +39,10 @@ start2:
 	movw	$0x0001, %bx
 	int	$0x10
 
-	/* Set cursor position of page 0 to (row 14, col 31) */
+	/* Set cursor position of page 0 to (row 12, col 31) */
 	movb	$0x02, %ah
 	xorb	%bh, %bh
-	movw	$0x0e1f, %dx
+	movw	$0x0c1f, %dx
 	int	$0x10
 
 	/* Get cursor position in %dx */
