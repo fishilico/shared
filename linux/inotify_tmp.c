@@ -10,6 +10,13 @@
 #include <time.h>
 #include <unistd.h>
 
+/* IN_EXCL_UNLINK has been introduced in Linux 2.6.36, glibc 2.13 */
+#if defined(__GNU_LIBRARY__) && ((__GLIBC__ << 16) + __GLIBC_MINOR__ < 0x2000d)
+#    ifndef IN_EXCL_UNLINK
+#        define IN_EXCL_UNLINK 0
+#    endif
+#endif
+
 int main(void)
 {
     int notifyfd, wd, length;
