@@ -39,8 +39,13 @@ __asm__ (
 "    .align 16\n"
 "_start:\n"
 "    .cfi_startproc\n"
-/* CFI needs rip to be marked as undefined here */
+/* CFI needs rip to be marked as undefined here
+ * but clang support this directive only since 3.2 (commit
+ * https://github.com/llvm-mirror/llvm/commit/c8fec7e21f5c24303eab8a8592f3b8faff347d86 )
+ */
+#if !defined(__clang__) || ((__clang_major__ << 16) + __clang_minor__) >= 0x30002
 "    .cfi_undefined rip\n"
+#endif
 /* glibc resets the frame pointer too */
 "    xorq %rbp, %rbp\n"
 "    movq %rsp, %rdi\n"
