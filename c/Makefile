@@ -54,7 +54,8 @@ $(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0) -Wno-
 		ifeq ($(HAVE_GTK2), y)
 			PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
-$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0)
+			# Some prototypes are not strict in Gtk+ headers
+$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0) -Wno-strict-prototypes
 		endif
 	endif
 endif
