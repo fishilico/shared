@@ -262,8 +262,8 @@ int main(int argc, char **argv)
     if (!CPU_EQUAL_S(setsize, set2, set3)) {
         printf("Warning: list of CPU IDs reported by /proc/stat and /sys/devices/system/cpu differ\n");
     }
-    CPU_AND_S(setsize, set, set1, set2);
-    CPU_AND_S(setsize, set, set, set3);
+    (void)CPU_AND_S(setsize, set, set1, set2);
+    (void)CPU_AND_S(setsize, set, set, set3);
     CPU_FREE(set1);
     CPU_FREE(set2);
     CPU_FREE(set3);
