@@ -106,7 +106,14 @@ static void dump_x86_cr(void)
 	show_cr_bit(cr, 3, PCD, "Page Cache Disable");
 	pr_info("  12...: 0x%08lx PDBR (Page Directory Base Register)\n", cr >> 12);
 
+	/* Commit 1e02ce4cccdc ("x86: Store a per-cpu shadow copy of CR4") renamed
+	 * read_cr4_safe to __read_cr4_safe in Linux 4.0
+	 */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 0, 0)
+	cr = __read_cr4_safe();
+#else
 	cr = read_cr4_safe();
+#endif
 	pr_info("cr4 = 0x%08lx\n", cr);
 	show_cr_bit(cr, 4, VME, "enable vm86 extensions");
 	show_cr_bit(cr, 4, PVI, "virtual interrupts flag enable");
