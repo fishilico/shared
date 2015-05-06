@@ -55,6 +55,7 @@ sed 's/^\([^ ]*\).*/    -T \1 \\/' << END-OF-TYPES
 BOOL
 BYTE
 DWORD
+DWORD64
 DWORD_PTR
 ENUM_WIN_INFOS_LPARAM
 EXCEPTION_POINTERS
@@ -113,6 +114,7 @@ WORD
 asm_instr_context
 asm_instr_reg
 cpu_set_t
+greg_t
 int16_t
 int32_t
 int64_t

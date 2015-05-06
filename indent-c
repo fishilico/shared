@@ -44,6 +44,7 @@ exec indent \
     -T BOOL \
     -T BYTE \
     -T DWORD \
+    -T DWORD64 \
     -T DWORD_PTR \
     -T ENUM_WIN_INFOS_LPARAM \
     -T EXCEPTION_POINTERS \
@@ -102,6 +103,7 @@ exec indent \
     -T asm_instr_context \
     -T asm_instr_reg \
     -T cpu_set_t \
+    -T greg_t \
     -T int16_t \
     -T int32_t \
     -T int64_t \
