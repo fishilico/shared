@@ -502,4 +502,8 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
+    if sys.version_info < (2, 7):
+        sys.stderr.write("This program cannot be run in Python<2.7 mode.\n")
+        sys.exit(0)
+
     sys.exit(main())

@@ -89,7 +89,7 @@ class struct_sockaddr_in6(ctypes.Structure):
         addr = array.array('B', self.sin6_addr)
         text = socket.inet_ntop(socket.AF_INET6, addr.tostring())
         if self.sin6_scope_id:
-            text += '%{:d}'.format(self.sin6_scope_id)
+            text += '%{0:d}'.format(self.sin6_scope_id)
         return text
 
 
@@ -109,7 +109,7 @@ class struct_sockaddr_ll(ctypes.Structure):
         assert self.sll_pkttype == 0
         assert self.sll_halen <= len(self.sll_addr)
         addr = self.sll_addr[:self.sll_halen]
-        return ':'.join('{:02x}'.format(x) for x in addr)
+        return ':'.join('{0:02x}'.format(x) for x in addr)
 
 
 class struct_sockaddr(ctypes.Union):
@@ -128,7 +128,7 @@ class struct_sockaddr(ctypes.Union):
         if family == socket.AF_PACKET:
             return self.sa_ll.str_addr()
         else:
-            raise NotImplementedError("address family {} not yet implemented"
+            raise NotImplementedError("address family {0} not yet implemented"
                                       .format(str_family(family)))
 
 
@@ -269,10 +269,10 @@ def main(argv=None):
         af_addrs = sorted(if_addrs[ifname], key=family_addresses_sortkey)
         if not af_addrs:
             continue
-        print("{}{}:".format(
-            ifname, " (interface {})".format(ifindex) if ifindex else ""))
+        print("{0}{1}:".format(
+            ifname, " (interface {0})".format(ifindex) if ifindex else ""))
         for family, address in af_addrs:
-            print("  {}: {}".format(str_family(family), address))
+            print("  {0}: {1}".format(str_family(family), address))
     return 0
 
 

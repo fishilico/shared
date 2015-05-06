@@ -12,6 +12,11 @@ import subprocess
 import sys
 
 
+if sys.version_info < (2, 7):
+    sys.stderr.write("This program cannot be run in Python<2.7 mode.\n")
+    sys.exit(0)
+
+
 def bit_count(num):
     """Count the bit which are set in num"""
     num = (num & 0x5555555555555555) + ((num & 0xAAAAAAAAAAAAAAAA) >> 1)
