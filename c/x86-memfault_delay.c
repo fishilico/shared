@@ -23,7 +23,9 @@
 #define NUM_SEGV_ITERATIONS_FOR_WARMUP 100
 #define NUM_SEGV_ITERATIONS_FOR_MEAN 1000
 
-static volatile uint64_t g_tsc_end, g_num_segfault;
+static volatile uint64_t g_tsc_end;
+static volatile unsigned long g_num_segfault;
+
 int main(void);
 
 #ifdef __linux__
@@ -168,14 +170,15 @@ static bool show_fault_delay(uintptr_t addr, const char *desc)
     g_num_segfault = 0;
     for (i = 0; i < NUM_SEGV_ITERATIONS_FOR_WARMUP; i++) {
         __asm__ volatile ("movl $0, 0(%[rsi_or_esi])"
-            : : [rsi_or_esi] "S" (addr));
+            : "=S" (dummy)
+            : [rsi_or_esi] "S" (addr));
     }
     if (g_num_segfault) {
         g_num_segfault = 0;
         tsc_diff = 0;
         for (i = 0; i < NUM_SEGV_ITERATIONS_FOR_MEAN; i++) {
             __asm__ volatile ("rdtsc ; movl $0, 0(%[rsi_or_esi])"
-                : "=a" (low), "=d" (high)
+                : "=a" (low), "=d" (high), "=S" (dummy)
                 : [rsi_or_esi] "S" (addr));
             tsc_diff += *(volatile uint64_t *)&g_tsc_end - (((uint64_t)high) << 32 | low);
         }
