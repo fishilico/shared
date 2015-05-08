@@ -35,7 +35,7 @@ extract_cpuid_features() {
 /**
  * $3
  */
-__extension__ static const char* const $2[32] = {
+__extension__ static const char* $2[32] = {
 EOF
     sed -n 's/^#define X86_FEATURE_\(\S\+\)\s\+(\s*'$1'\*32+\s*\([0-9]\+\)\s*).*/    [\2] = "\1",/p' < "$CPU_FEATURE_FILE" | tr '[A-Z]' '[a-z]'
     echo '};'
@@ -70,8 +70,24 @@ cat << EOF
 
 static void add_manual_cpuid_str(void)
 {
-    /* documented in /usr/src/linux/arch/x86/kernel/cpu/{amd.c,intel.c} */
-    /* and also /usr/src/linux/tools/power/x86/turbostat/turbostat.c */
+    /* https://en.wikipedia.org/wiki/CPUID */
+    assert(cpuidstr_1_ecx[11] == NULL);
+    cpuidstr_1_ecx[11] = "sdbg";
+
+    assert(cpuidstr_7_ebx[17] == NULL);
+    cpuidstr_7_ebx[17] = "avx512dq";
+    assert(cpuidstr_7_ebx[21] == NULL);
+    cpuidstr_7_ebx[21] = "avx512ifma";
+    assert(cpuidstr_7_ebx[29] == NULL);
+    cpuidstr_7_ebx[29] = "sha";
+    assert(cpuidstr_7_ebx[30] == NULL);
+    cpuidstr_7_ebx[30] = "avx512bw";
+    assert(cpuidstr_7_ebx[31] == NULL);
+    cpuidstr_7_ebx[31] = "avx512vl";
+
+    /* documented in /usr/src/linux/arch/x86/kernel/cpu/{amd.c,intel.c}
+     * and also /usr/src/linux/tools/power/x86/turbostat/turbostat.c
+     */
     assert(cpuidstr_ext7_edx[8] == NULL);
     cpuidstr_ext7_edx[8] = "constant_tsc";
 }

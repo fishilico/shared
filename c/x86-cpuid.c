@@ -63,14 +63,15 @@ static void asm_cpuid(uint32_t code, uint32_t *peax, uint32_t *pebx, uint32_t *p
 
 static void print_features(const char *name, uint32_t bits, const char *const cpuidstr[32])
 {
-    int i;
-    printf("%s:", name);
+    unsigned int i;
+    printf("%s:\n", name);
     for (i = 0; i < 32; i++) {
         if (cpuidstr[i]) {
-            printf(" %c%s", bits & (1 << i) ? '+' : '-', cpuidstr[i]);
+            printf("  [%2u] %c%s\n", i, (bits & (1 << i)) ? '+' : '-', cpuidstr[i]);
+        } else if (bits & (1 << i)) {
+            printf("  [%2u] +?\n", i);
         }
     }
-    printf("\n");
 }
 
 int main(void)
@@ -95,10 +96,18 @@ int main(void)
     }
     printf("Max CPUID code: %u\n", max_code);
 
-    /* CPUID 1: get features */
-    asm_cpuid(1, &eax, &ebx, &ecx, &edx);
-    print_features("Features 1.edx", edx, cpuidstr_1_edx);
-    print_features("Features 1.ecx", ecx, cpuidstr_1_ecx);
+    if (max_code >= 1) {
+        /* CPUID 1: get family, model and features
+         * Family is eax[8:11] + eax[20:27]
+         * Model is (eax[16:19] << 4) + eax[4:7]
+         */
+        asm_cpuid(1, &eax, &ebx, &ecx, &edx);
+        printf("1.eax = %#x: CPU family %u, model %u\n", eax,
+               ((eax >> 8) & 0xf) + ((eax >> 20) & 0xff),
+               ((eax >> 4) & 0xf) + ((eax >> 12) & 0xf0));
+        print_features("Features 1.edx", edx, cpuidstr_1_edx);
+        print_features("Features 1.ecx", ecx, cpuidstr_1_ecx);
+    }
     if (max_code >= 6) {
         asm_cpuid(6, &eax, &ebx, &ecx, &edx);
         if (eax) {

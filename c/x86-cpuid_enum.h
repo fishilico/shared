@@ -14,7 +14,7 @@
 /**
  * cpuid 0x00000001, edx register
  */
-__extension__ static const char* const cpuidstr_1_edx[32] = {
+__extension__ static const char* cpuidstr_1_edx[32] = {
     [0] = "fpu",
     [1] = "vme",
     [2] = "de",
@@ -50,7 +50,7 @@ __extension__ static const char* const cpuidstr_1_edx[32] = {
 /**
  * cpuid 0x00000001, ecx register
  */
-__extension__ static const char* const cpuidstr_1_ecx[32] = {
+__extension__ static const char* cpuidstr_1_ecx[32] = {
     [0] = "sse3",
     [1] = "pclmulqdq",
     [2] = "dtes64",
@@ -86,7 +86,7 @@ __extension__ static const char* const cpuidstr_1_ecx[32] = {
 /**
  * cpuid 0x00000007:0, ebx register
  */
-__extension__ static const char* const cpuidstr_7_ebx[32] = {
+__extension__ static const char* cpuidstr_7_ebx[32] = {
     [0] = "fsgsbase",
     [1] = "tsc_adjust",
     [3] = "bmi1",
@@ -97,12 +97,15 @@ __extension__ static const char* const cpuidstr_7_ebx[32] = {
     [9] = "erms",
     [10] = "invpcid",
     [11] = "rtm",
+    [12] = "cqm",
     [14] = "mpx",
     [16] = "avx512f",
     [18] = "rdseed",
     [19] = "adx",
     [20] = "smap",
+    [22] = "pcommit",
     [23] = "clflushopt",
+    [24] = "clwb",
     [26] = "avx512pf",
     [27] = "avx512er",
     [28] = "avx512cd",
@@ -111,7 +114,7 @@ __extension__ static const char* const cpuidstr_7_ebx[32] = {
 /**
  * cpuid 0x80000001, edx register
  */
-__extension__ static const char* const cpuidstr_ext1_edx[32] = {
+__extension__ static const char* cpuidstr_ext1_edx[32] = {
     [11] = "syscall",
     [19] = "mp",
     [20] = "nx",
@@ -127,7 +130,7 @@ __extension__ static const char* const cpuidstr_ext1_edx[32] = {
 /**
  * cpuid 0x80000001, ecx register
  */
-__extension__ static const char* const cpuidstr_ext1_ecx[32] = {
+__extension__ static const char* cpuidstr_ext1_ecx[32] = {
     [0] = "lahf_lm",
     [1] = "cmp_legacy",
     [2] = "svm",
@@ -150,6 +153,7 @@ __extension__ static const char* const cpuidstr_ext1_ecx[32] = {
     [22] = "topoext",
     [23] = "perfctr_core",
     [24] = "perfctr_nb",
+    [26] = "bpext",
     [28] = "perfctr_l2",
 };
 
@@ -188,8 +192,24 @@ __extension__ static const char* cpuidstr_ext7_edx[32] = {
 
 static void add_manual_cpuid_str(void)
 {
-    /* documented in /usr/src/linux/arch/x86/kernel/cpu/{amd.c,intel.c} */
-    /* and also /usr/src/linux/tools/power/x86/turbostat/turbostat.c */
+    /* https://en.wikipedia.org/wiki/CPUID */
+    assert(cpuidstr_1_ecx[11] == NULL);
+    cpuidstr_1_ecx[11] = "sdbg";
+
+    assert(cpuidstr_7_ebx[17] == NULL);
+    cpuidstr_7_ebx[17] = "avx512dq";
+    assert(cpuidstr_7_ebx[21] == NULL);
+    cpuidstr_7_ebx[21] = "avx512ifma";
+    assert(cpuidstr_7_ebx[29] == NULL);
+    cpuidstr_7_ebx[29] = "sha";
+    assert(cpuidstr_7_ebx[30] == NULL);
+    cpuidstr_7_ebx[30] = "avx512bw";
+    assert(cpuidstr_7_ebx[31] == NULL);
+    cpuidstr_7_ebx[31] = "avx512vl";
+
+    /* documented in /usr/src/linux/arch/x86/kernel/cpu/{amd.c,intel.c}
+     * and also /usr/src/linux/tools/power/x86/turbostat/turbostat.c
+     */
     assert(cpuidstr_ext7_edx[8] == NULL);
     cpuidstr_ext7_edx[8] = "constant_tsc";
 }
