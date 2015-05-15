@@ -36,6 +36,8 @@ Hacking
 * https://deathmarine.github.io/Luyten/
   Luyten, an Open Source Java Decompiler GUI
 * https://github.com/rapid7/metasploit-framework Metasploit Framework source
+* https://github.com/SecUpwN/Android-IMSI-Catcher-Detector/
+  AIMSICD, Android IMSI Catcher Detector
 
 Programming
 -----------

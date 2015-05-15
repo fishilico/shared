@@ -24,8 +24,8 @@ French News
 * http://www.zdnet.fr/actualites/ ZDNet
 * http://www.developpez.com/ Developpez.com
 
-Frech Newspapers
-----------------
+French Newspapers
+-----------------
 
 * http://www.lemonde.fr/ Le Monde
 * http://www.lesechos.fr/ Les Echos
@@ -54,6 +54,8 @@ French blogs
 Code repositories
 -----------------
 
+* http://grepcode.com/project/repository.grepcode.com/java/ext/com.google.android/android/
+  Android
 * http://git.busybox.net/busybox/log/ BusyBox
 * https://sourceware.org/git/?p=glibc.git;a=shortlog glibc
 * http://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=shortlog GnuPG
@@ -71,3 +73,4 @@ Other
 
 * http://www.qwertee.com/ Qwertee T-shirts
 * http://theprofoundprogrammer.com/ The profound programmer
+* https://github.com/ctfs CTF write-ups

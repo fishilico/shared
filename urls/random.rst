@@ -16,6 +16,8 @@ Other
   A Guide to Navigating NPR's Top 100 Science Fiction and Fantasy Books
 * http://9gag.com/gag/areQ1mV/choosing-the-perfect-board-game
   How to choose the perfect board game
+* http://www.chiark.greenend.org.uk/~sgtatham/puzzles/
+  Simon Tatham's Portable Puzzle Collection
 
 Calculus
 --------
