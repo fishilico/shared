@@ -12,10 +12,13 @@
 *.elf
 *.exe
 *.gz
+*.ko
 *.log
 *.o
 *.out
 *.pdf
+*.pyc
+*.pyo
 *.sav
 *.sign
 *.so
@@ -23,7 +26,9 @@
 *.tmp
 *.toc
 *.xz
-__pycache__
+.coverage
+htmlcov/
+__pycache__/
 /archlinux-seckernel/grsec/
 /linux/modules/*.mod.c
 /linux/modules/Module.symvers
