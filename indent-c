@@ -111,6 +111,12 @@ exec indent \
     -T intptr_t \
     -T mqd_t \
     -T off_t \
+    -T pa_mainloop_api \
+    -T pa_proplist \
+    -T pa_signal_event \
+    -T pa_stream \
+    -T pa_stream_flags_t \
+    -T pa_time_event \
     -T pid_t \
     -T siginfo_t \
     -T size_t \

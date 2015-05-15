@@ -4,24 +4,34 @@ PKG_CONFIG ?= pkg-config
 
 # Programs which need specific options
 NETLINK_PROGRAMS := enum_link_addrs
+PULSE_PROGRAMS := pulseaudio_echo
 SDL_PROGRAMS := sdl_v4l_video
 SECCOMP_PROGRAMS := seccomp
 SHARED_OBJECTS := override_uname_dl.$(LIB_EXT)
 
 # Programs not to test automatically, because they hang
-NONTEST_PROGRAMS := inotify_tmp sdl_v4l_video xterm_mouse
+NONTEST_PROGRAMS := inotify_tmp pulseaudio_echo sdl_v4l_video xterm_mouse
 NONTEST_BINARIES := $(NONTEST_PROGRAMS:%=%.$(BIN_EXT)) override_uname_dl.sh
 
 # Find other programs. Only programs in $(PROGRAMS) are built.
 SOURCES := $(wildcard *.c)
 ALL_PROGRAMS := $(filter-out $(SHARED_OBJECTS:%.$(LIB_EXT)=%), $(SOURCES:%.c=%))
-PROGRAMS := $(filter-out $(NETLINK_PROGRAMS) $(SDL_PROGRAMS) $(SECCOMP_PROGRAMS), $(ALL_PROGRAMS))
+PROGRAMS := $(filter-out \
+	$(NETLINK_PROGRAMS) $(PULSE_PROGRAMS) $(SDL_PROGRAMS) $(SECCOMP_PROGRAMS), \
+	$(ALL_PROGRAMS))
 
 # libnetlink is provided by iproute2 project
 HAVE_NETLINK := $(shell echo '\#include <libnetlink.h>' | \
 	$(CC) -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
 ifeq ($(HAVE_NETLINK), y)
 	PROGRAMS += $(NETLINK_PROGRAMS)
+endif
+
+HAVE_PULSE := $(shell $(PKG_CONFIG) --exists libpulse && echo 'y' || echo 'n')
+ifeq ($(HAVE_PULSE), y)
+	PROGRAMS += $(PULSE_PROGRAMS)
+$(PULSE_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs libpulse)
+$(PULSE_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags libpulse) --std=c99
 endif
 
 HAVE_SDL := $(shell $(PKG_CONFIG) --exists sdl && echo 'y' || echo 'n')

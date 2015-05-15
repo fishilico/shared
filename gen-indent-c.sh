@@ -122,6 +122,12 @@ int8_t
 intptr_t
 mqd_t
 off_t
+pa_mainloop_api
+pa_proplist
+pa_signal_event
+pa_stream
+pa_stream_flags_t
+pa_time_event
 pid_t
 siginfo_t
 size_t
