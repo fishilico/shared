@@ -526,6 +526,23 @@ bool run_mov_asm_instruction_p(
         return true;
     }
 
+    /* 8a /r: mov reg/mem8, reg8 */
+    if (instr[0] == 0x8a) {
+        paramlen = decode_modrm_check(ctx, instr + 1, rexprefix, data_addr, NULL, NULL, &operand_rm);
+        if (!paramlen) {
+            return false;
+        }
+        operand_reg = malloc(5);
+        assert(operand_reg);
+        op_reg = get_gp_reg(ctx, ((instr[1] >> 3) & 7), 8, operand_reg);
+        asm_printf(asm_instr, "mov %s, %s", operand_rm, operand_reg);
+        free(operand_rm);
+        free(operand_reg);
+        *(uint8_t *)op_reg = data[0];
+        R_RIP(ctx) += 1 + paramlen;
+        return true;
+    }
+
     /* 8b /r: mov reg/mem, reg */
     if (instr[0] == 0x8b) {
         paramlen = decode_modrm_check(ctx, instr + 1, rexprefix, data_addr, &op_reg, &operand_reg, &operand_rm);

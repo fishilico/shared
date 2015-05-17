@@ -96,6 +96,11 @@ int main(void)
     R_ESI(&ctx) = (asm_instr_reg)(data_addr - 0x08);
     test("\x8b\x56\x08", "mov 0x8(esi=0xda79fff8), edx", EDX, data32);
 
+    /* Load 8-bit value */
+    R_EAX(&ctx) = 0;
+    R_EBX(&ctx) = (asm_instr_reg)data_addr;
+    test("\x8a\x03", "mov (ebx=0xda7a0000), al", EAX, data8);
+
     /* Compare */
     R_EAX(&ctx) = (asm_instr_reg)data_addr;
     test("\x80\x38\x0a", "cmpb 0x0a, (eax=0xda7a0000)", EFL, X86_EFLAGS_PF);

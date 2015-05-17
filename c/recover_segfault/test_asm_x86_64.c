@@ -143,6 +143,11 @@ int main(void)
     R_RSI(&ctx) = data_addr;
     test("\x8b\x0e", "mov (rsi=0xda7a0000), ecx", RCX, data32);
 
+    /* Load 8-bit value */
+    R_RAX(&ctx) = 0;
+    R_RBX(&ctx) = (asm_instr_reg)data_addr;
+    test("\x8a\x03", "mov (rbx=0xda7a0000), al", RAX, data8);
+
     /* repnz scasb, used by strlen */
     R_RDI(&ctx) = data_addr;
     R_RCX(&ctx) = -1;

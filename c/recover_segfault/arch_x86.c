@@ -35,8 +35,11 @@ static asm_instr_reg* get_gp_reg(
     if (regname) {
         if (bitsize == 8) {
             snprintf(regname, 4, "%s", regs8[regnum]);
-            regnum &= 3;
-            fprintf(stderr, "warning: 8-bit registers not yet fully supported\n");
+            if (regnum > 4) {
+                /* ah, ch, dh, bh are not yet supported */
+                fprintf(stderr, "warning: 8-bit registers not yet fully supported\n");
+                regnum &= 3;
+            }
         } else if (bitsize == 16) {
             snprintf(regname, 4, "%s", regs16[regnum]);
         } else if (bitsize == 32) {
@@ -310,6 +313,23 @@ bool run_mov_asm_instruction_p(
             R_EIP(ctx) += 2 + paramlen;
             return true;
         }
+    }
+
+    /* 8a /r: mov reg/mem8, reg8 */
+    if (instr[0] == 0x8a) {
+        paramlen = decode_modrm_check(ctx, instr + 1, 0, data_addr, NULL, NULL, &operand_rm);
+        if (!paramlen) {
+            return false;
+        }
+        operand_reg = malloc(5);
+        assert(operand_reg);
+        op_reg = get_gp_reg(ctx, ((instr[1] >> 3) & 7), 8, operand_reg);
+        asm_printf(asm_instr, "mov %s, %s", operand_rm, operand_reg);
+        free(operand_rm);
+        free(operand_reg);
+        *(uint8_t *)op_reg = data[0];
+        R_EIP(ctx) += 1 + paramlen;
+        return true;
     }
 
     /* 8b /r: mov reg/mem, reg */
