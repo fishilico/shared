@@ -188,6 +188,7 @@ static bool capture_get_frame(struct capture_state *capst, void *uyvy_frame)
     struct v4l2_buffer buf;
     uint32_t frame_size;
     bool ret = true;
+    SDL_Event quit_event;
 
     assert(capst && capst->fd != -1 && uyvy_frame);
 
@@ -198,6 +199,13 @@ static bool capture_get_frame(struct capture_state *capst, void *uyvy_frame)
     if (ioctl(capst->fd, VIDIOC_DQBUF, &buf) < 0) {
         if (errno == EAGAIN) {
             /* Device is busy */
+            return false;
+        } else if (errno == ENODEV) {
+            /* Quit nicely if the device is no longer here */
+            printf("The video input device disappeared!\n");
+            memset(&quit_event, 0, sizeof(SDL_Event));
+            quit_event.type = SDL_QUIT;
+            SDL_PushEvent(&quit_event);
             return false;
         }
         perror("ioctl(VIDIOC_DQBUF)");
@@ -360,6 +368,8 @@ int main(void)
     }
 
 quit:
+    SDL_FreeYUVOverlay(overlay);
+    SDL_Quit();
     capture_stop(&capst);
     free(uyvy_frame);
     return result;
