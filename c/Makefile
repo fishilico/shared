@@ -64,6 +64,8 @@ endif
 TARGET_TRIPLET := $(shell $(CC) -dumpmachine)
 ifneq (,$(findstring i386, $(TARGET_TRIPLET)))
 PROGRAMS += $(X86_PROGRAMS)
+else ifneq (,$(findstring i486, $(TARGET_TRIPLET)))
+PROGRAMS += $(X86_PROGRAMS)
 else ifneq (,$(findstring i686, $(TARGET_TRIPLET)))
 PROGRAMS += $(X86_PROGRAMS)
 else ifneq (,$(findstring x86_64, $(TARGET_TRIPLET)))

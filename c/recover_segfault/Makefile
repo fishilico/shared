@@ -13,6 +13,8 @@ TARGET_TRIPLET := $(shell $(CC) -dumpmachine)
 
 ifneq (,$(filter i386-%, $(TARGET_TRIPLET)))
 OBJECTS += .arch_x86.o
+else ifneq (,$(filter i486-%, $(TARGET_TRIPLET)))
+OBJECTS += .arch_x86.o
 else ifneq (,$(filter i686-%, $(TARGET_TRIPLET)))
 OBJECTS += .arch_x86.o
 else ifneq (,$(filter x86_64-%, $(TARGET_TRIPLET)))

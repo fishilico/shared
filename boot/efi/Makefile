@@ -8,6 +8,8 @@ include ../../common.mk
 TARGET_TRIPLET := $(shell $(CC) -dumpmachine)
 ifneq (,$(findstring i386, $(TARGET_TRIPLET)))
 ARCH := ia32
+else ifneq (,$(findstring i486, $(TARGET_TRIPLET)))
+ARCH := ia32
 else ifneq (,$(findstring i686, $(TARGET_TRIPLET)))
 ARCH := ia32
 else ifneq (,$(findstring x86_64, $(TARGET_TRIPLET)))
