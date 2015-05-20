@@ -108,11 +108,20 @@ static bool install_syscall_filter(bool do_kill)
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
 
         /* Allow writing only to stderr and stdout */
-        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_write, 0, 5),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_write, 1, 0),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_writev, 0, 5),
         BPF_STMT(BPF_LD + BPF_W + BPF_ABS,
                  offsetof(struct seccomp_data, args) + SYSCALL_ARG_OFFSET),
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, STDOUT_FILENO, 1, 0),
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, STDERR_FILENO, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
+
+        /* Allow ioctl on stdout */
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_ioctl, 0, 4),
+        BPF_STMT(BPF_LD + BPF_W + BPF_ABS,
+                 offsetof(struct seccomp_data, args) + SYSCALL_ARG_OFFSET),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, STDOUT_FILENO, 0, 1),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
 
