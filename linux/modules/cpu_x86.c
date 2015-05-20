@@ -427,8 +427,8 @@ static void dump_x86_tables(void)
 			 * DPL: Protection Level (ring 0 to 3)
 			 * P: Segment is present
 			 * AVL: Available for system (always set to 0)
-			 * L: 0
-			 * D: Operand Size (0 = 16 bit, 1 = 32 bit ?)
+			 * L: Long mode (1 for 64-bit code segment)
+			 * D: Operand Size (if L=0: 0 = 16 bit, 1 = 32 bit)
 			 * G: Granularity (0 = 1 Byte, 1 = 4k Byte)
 			 */
 			type_str[0] = (type & 8) ? 'C' : 'D'; /* Code vs. Data */
