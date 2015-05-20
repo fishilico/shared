@@ -113,35 +113,69 @@ static const char *const gdt_segment_index_desc[1] = { NULL };
  */
 static void print_segment_desc(const char *segname, uint16_t segment)
 {
-    uint8_t lsl_ok = 0;
-    uint32_t limit;
+    uint8_t lsl_ok = 0, lar_ok = 0;
+    uint32_t limit, access_rights;
+    unsigned int sindex = segment >> 3;
 
     /* Use a segment limit, loaded with "lsl" */
     __asm__ volatile ("lsll %2, %0 ; setz %1"
         : "=r" (limit), "=q" (lsl_ok)
         : "r" ((uint32_t)segment)
         : "cc");
+
+    /* Load access right associated with the segment */
+    __asm__ volatile ("larl %2, %0 ; setz %1"
+        : "=r" (access_rights), "=q" (lar_ok)
+        : "r" ((uint32_t)segment)
+        : "cc");
+
     if (segname) {
         printf("%s=0x%04x", segname, segment);
         if (segment) {
-            printf(" (index=%d, RPL=%d", segment >> 3, segment & 3);
+            printf(" (index=%u, RPL=%d", sindex, segment & 3);
             if (segment & 4) {
                 printf(", TI=1:LDT");
             }
             printf(")");
         }
-        if (lsl_ok) {
-            printf(", limit=0x%x", limit);
-        }
-        printf("\n");
-    } else if (lsl_ok) {
-        unsigned int sindex = segment >> 3;
+    } else if (lsl_ok || lar_ok) {
         printf("%4u: selector 0x%04x", sindex, segment);
-        printf(", limit=0x%x", limit);
-        if (sindex < sizeof(gdt_segment_index_desc) / sizeof(gdt_segment_index_desc[0])) {
-            printf(", %s", gdt_segment_index_desc[sindex]);
+    } else {
+        return;
+    }
+    if (lsl_ok) {
+        if (limit == 0xffffffff) {
+            printf(", limit=-1");
+        } else {
+            printf(", limit=%#x", limit);
         }
-        printf("\n");
+    }
+    if (lar_ok) {
+        printf(", access=%#x", access_rights);
+    }
+    if (sindex && sindex < sizeof(gdt_segment_index_desc) / sizeof(gdt_segment_index_desc[0])) {
+        printf(", %s", gdt_segment_index_desc[sindex]);
+    }
+    printf("\n");
+
+    if (!segname && lar_ok) {
+        /* Documentation: http://wiki.osdev.org/Global_Descriptor_Table */
+        printf(
+            "     ... %s%s%s%s%s dpl=%u%s%s%s%s\n",
+            (access_rights & 0x0800) ? "Code" : "Data", /* bit 11: executable */
+            (access_rights & 0x0200) ? /* bit 9: RW, readable/writable */
+                ((access_rights & 0x0800) ? " RX" : " RW") :
+                ((access_rights & 0x0800) ? " X" : " RO"),
+            (access_rights & 0x0400) ? " Grows-Down" : "", /* bit 10: direction/conforming */
+            (access_rights & 0x0100) ? "" : " not-accessed", /* bit 8: accessed */
+            (access_rights & 0x1000) ? "" : " TSS", /* bit 12: s */
+            (access_rights & 0x6000) >> 13, /* bits 13-14: dpl */
+            (access_rights & 0x8000) ? "" : " not-present", /* bit 15: p, present */
+            (access_rights & 0x100000) ? " AVL" : "", /* bit 20: avl */
+            (access_rights & 0x200000) ? /* bit 21: l, long mode. bit 22: d, operand size */
+                ((access_rights & 0x400000) ? " l=d=1???" : " 64-bit") :
+                ((access_rights & 0x400000) ? " 32-bit" : " 16-bit"),
+            (access_rights & 0x800000) ? " 4k-page" : ""); /* bit 23: g, granularity */
     }
 }
 
@@ -170,9 +204,9 @@ static void print_segment_bases(void)
 
     printf("Segment bases (0 for cs, ds, es and ss):\n");
     syscall(__NR_arch_prctl, ARCH_GET_FS, &base);
-    printf("  fs base=0x%lx\n", base);
+    printf("  fs base=%#lx\n", base);
     syscall(__NR_arch_prctl, ARCH_GET_GS, &base);
-    printf("  gs base=0x%lx\n", base);
+    printf("  gs base=%#lx\n", base);
 #elif defined(__i386__) && defined(__linux__)
     uint16_t segment;
     unsigned long limit;
@@ -204,7 +238,7 @@ static void print_segment_bases(void)
             if (u_info.limit_in_pages) {
                 limit = (limit << 12) | 0xfff;
             }
-            printf("  fs base=0x%lx, limit=0x%lx\n", (unsigned long)u_info.base_addr, limit);
+            printf("  fs base=%#lx, limit=%#lx\n", (unsigned long)u_info.base_addr, limit);
         }
     }
     __asm__ volatile ("movw %%gs, %0" : "=g" (segment));
@@ -218,7 +252,7 @@ static void print_segment_bases(void)
             if (u_info.limit_in_pages) {
                 limit = (limit << 12) | 0xfff;
             }
-            printf("  gs base=0x%lx, limit=0x%lx\n", (unsigned long)u_info.base_addr, limit);
+            printf("  gs base=%#lx, limit=%#lx\n", (unsigned long)u_info.base_addr, limit);
         }
     }
 #elif defined(__x86_64__) && defined(IS_WINDOWS)
@@ -227,13 +261,13 @@ static void print_segment_bases(void)
     printf("Segment bases (0 for cs, ds, es and ss):\n");
     printf("  fs base= ?\n");
     __asm__ volatile ("movq %%gs:48, %0" : "=r" (gs_base));
-    printf("  gs base=0x%" PRIx64 " (TEB)\n", gs_base);
+    printf("  gs base=%#" PRIx64 " (TEB)\n", gs_base);
 #elif defined(__i386__) && defined(IS_WINDOWS)
     uint32_t fs_base;
 
     printf("Segment bases:\n");
     __asm__ volatile ("movl %%fs:24, %0" : "=r" (fs_base));
-    printf("  fs base=0x%" PRIx32 " (TEB)\n", fs_base);
+    printf("  fs base=%#" PRIx32 " (TEB)\n", fs_base);
     printf("  gs base= ?\n");
 #else
     printf("No known way to get segment bases.\n");
@@ -249,7 +283,7 @@ static void print_gdt_limits(void)
     __asm__ volatile ("sgdt %0" : "=m" (gdt_descriptor));
     memcpy(&gdt_size, gdt_descriptor, 2);
 
-    printf("GDT limits (%u entries):\n", (gdt_size + 1) / 8);
+    printf("GDT limits and access rights (%u entries):\n", (gdt_size + 1) / 8);
     for (segment = 3; segment < gdt_size; segment += 8) {
         print_segment_desc(NULL, segment);
     }
@@ -267,7 +301,7 @@ static void print_cr0(void)
     (cr0 & (1U << (bitnum))) ? '+' : '-', desc);
 
     /* smsw = Save Machine Status Word */
-    __asm__ volatile ("smsw %0" : "=r"(cr0));
+    __asm__ volatile ("smsw %0" : "=r" (cr0));
     printf("cr0 = 0x%08x\n", cr0);
     print_cr0_bit(0, "PE (Protection Enable)");
     print_cr0_bit(1, "MP (Monitor Coprocessor)");
