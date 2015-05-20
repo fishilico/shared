@@ -25,6 +25,7 @@ import logging
 import os.path
 import platform
 import re
+import struct
 import subprocess
 import sys
 
@@ -227,6 +228,52 @@ def main():
 
     print("Static to current live kernel positions:")
     show_positions_diff(staticpos, livepos)
+
+    # On x86, show some CPU Machine-Specific Registers (if available)
+    if os.getuid() == 0 and os.path.exists('/dev/cpu/0/msr'):
+        machine = platform.machine()
+        if machine == 'x86_64':
+            with open('/dev/cpu/0/msr', 'rb', buffering=0) as fmsr:
+                # Read ia32 sysenter target EIP
+                fmsr.seek(0x176, 0)
+                msr_ia32syse_eip = struct.unpack('<Q', fmsr.read(8))[0]
+
+                # Read EFER (Extended Feature Enable Register)
+                fmsr.seek(0xc0000080, 0)
+                msr_efer = struct.unpack('<Q', fmsr.read(8))[0]
+
+                # Read long-mode/compatibility mode syscall targets
+                fmsr.seek(0xc0000082, 0)
+                msr_lstar = struct.unpack('<Q', fmsr.read(8))[0]
+                fmsr.seek(0xc0000083, 0)
+                msr_cstar = struct.unpack('<Q', fmsr.read(8))[0]
+
+            efer_bits = []
+            if msr_efer & 0x0001:  # SCE, SysCall Enable (SYSCALL/SYSRET)
+                efer_bits.append('SCE')
+            if msr_efer & 0x0100:  # LME, Long Mode Enable
+                efer_bits.append('LME')
+            if msr_efer & 0x0400:  # LMA, Long Mode Active
+                efer_bits.append('LMA')
+            if msr_efer & 0x0800:  # NX, No eXecute
+                efer_bits.append('NX')
+            if msr_efer & 0x1000:  # SVME, Virtualization Enable
+                efer_bits.append('SVME')
+            if msr_efer & 0x2000:  # LMSLE, Long Mode Segment Limit Enable
+                efer_bits.append('LMSLE')
+            if msr_efer & 0x4000:  # FFXSR, Fast FXSAVE/FXRSTOR
+                efer_bits.append('FFXSR')
+            print("MSR (with /dev/cpu/0/msr):")
+            print("  0x176: ia32_sysenter_target@{:#x}".format(
+                msr_ia32syse_eip))
+            print("  0xc0000080: EFER = {:#x}: {}".format(
+                msr_efer, ' '.join(efer_bits)))
+            print("  0xc0000082: LSTAR = system_call@{:#x}".format(msr_lstar))
+            print("  0xc0000083: CSTAR = ia32_cstar_target@{:#x}".format(
+                msr_cstar))
+            ktext = msr_lstar & ~0xffffff
+            if ktext == msr_cstar & ~0xffffff == msr_ia32syse_eip & ~0xffffff:
+                print("  => kernel .text at {:#x}".format(ktext))
     return 0
 
 if __name__ == '__main__':
