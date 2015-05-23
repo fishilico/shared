@@ -1,7 +1,9 @@
 include ../../linux-flags.mk
 
+CHMOD ?= chmod
 GREP ?= grep
 MKDIR ?= mkdir
+OBJCOPY ?= objcopy
 SED ?= sed
 SH ?= sh
 WGET ?= wget
@@ -29,8 +31,9 @@ NOLIBC_LDFLAGS += -nostdlib
 NOLIBC_CFLAGS += $(shell [ -d include ] && echo '-I./include')
 
 # Files
-SOURCES := $(wildcard *.c)
-BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
+C_SOURCES := $(wildcard *.c)
+ASM_SOURCES := $(wildcard *.S)
+BINARIES := $(C_SOURCES:%.c=%.$(BIN_EXT)) $(ASM_SOURCES:%.S=%.$(BIN_EXT))
 
 all: $(BINARIES)
 	@:
@@ -40,16 +43,24 @@ clean:
 
 # Test shellcode separately
 test: all
-	@for P in $(sort $(filter-out shellcode.$(BIN_EXT), $(BINARIES))); do \
+	@for P in $(sort $(filter-out shellcode.$(BIN_EXT) tinyelf.$(BIN_EXT), $(BINARIES))); do \
 		echo ./$$P && ./$$P || exit $$? ; \
 	done && \
 	echo ./shellcode.$(BIN_EXT) && \
-	(echo 'echo $$0 && set && exit' | ./shellcode.$(BIN_EXT))
+	(echo 'echo $$0 && set && exit' | ./shellcode.$(BIN_EXT)) && \
+	echo ./tinyelf.$(BIN_EXT) && \
+	(./tinyelf.$(BIN_EXT) ; test $$? = 42 )
 
 %.$(BIN_EXT): .%.o
 	$(V_CCLD)$(CC) $(NOLIBC_LDFLAGS) -o $@ $^
 
 .%.o: %.c
+	$(V_CC)$(CC) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<
+
+tinyelf.$(BIN_EXT): .tinyelf.o
+	$(V_OBJCOPY)$(OBJCOPY) -j .data --output-target=binary $< $@ && $(CHMOD) +x $@
+
+.%.o: %.S
 	$(V_CC)$(CC) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 # Make an "include" directory, when no system header is available
