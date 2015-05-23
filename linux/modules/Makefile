@@ -6,6 +6,7 @@ KERNELPATH ?= /lib/modules/$(KERNELVER)/build
 obj-m-$(CONFIG_X86) += cpu_x86.o
 obj-m += hello_world.o
 obj-m += mmap_file.o
+obj-m += pagetables.o
 obj-m += proc_setroot.o
 obj-m += $(obj-m-y)
 
