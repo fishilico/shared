@@ -3,6 +3,7 @@ UNAME ?= uname
 KERNELVER ?= $(shell $(UNAME) -r)
 KERNELPATH ?= /lib/modules/$(KERNELVER)/build
 
+obj-m-$(CONFIG_ARM) += cpu_arm.o
 obj-m-$(CONFIG_X86) += cpu_x86.o
 obj-m += hello_world.o
 obj-m += mmap_file.o
