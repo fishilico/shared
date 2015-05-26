@@ -42,8 +42,21 @@
 
 /* Define some macros which prevents some #ifdef */
 #ifdef CONFIG_ARM
-#define pud_large(pgd) false
-#define pgd_large(pgd) false
+# define pud_large(pgd) false
+# define pgd_large(pgd) false
+
+/* pmd_large has been introduced in ARM in Linux 3.14 by commit 1fd15b879d00
+ * ("ARM: add support to dump the kernel page tables")
+ */
+# if LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0)
+#  ifdef CONFIG_ARM_LPAE
+/* arch/arm/include/asm/pgtable-3level.h */
+#   define pmd_large(pmd) pmd_sect(pmd)
+#  else
+/* arch/arm/include/asm/pgtable-2level.h */
+#   define pmd_large(pmd) (pmd_val(pmd) & 2)
+#  endif
+# endif
 #endif
 
 struct pg_state {
@@ -154,10 +167,10 @@ static void print_prot(struct pg_state *st)
 			seq_puts(st->seq, ", MEM/CACHED/WT");
 		else if ((pr & L_PTE_MT_MASK) == L_PTE_MT_WRITEBACK)
 			seq_puts(st->seq, ", MEM/CACHED/WBRA");
-#ifndef CONFIG_ARM_LPAE
+# ifndef CONFIG_ARM_LPAE
 		else if ((pr & L_PTE_MT_MASK) == L_PTE_MT_MINICACHE)
 			seq_puts(st->seq, ", MEM/MINICACHE");
-#endif
+# endif
 		else if ((pr & L_PTE_MT_MASK) == L_PTE_MT_WRITEALLOC)
 			seq_puts(st->seq, ", MEM/CACHED/WBWA");
 		else if ((pr & L_PTE_MT_MASK) == L_PTE_MT_DEV_SHARED)
@@ -182,12 +195,12 @@ static void print_prot(struct pg_state *st)
 			L_PTE_NONE);		/* 11 */
 	} else if (level == 3) {
 		/* PMD flags, also known as section flags */
-#ifdef CONFIG_ARM_LPAE
+# ifdef CONFIG_ARM_LPAE
 		seq_puts(st->seq, (pr & L_PMD_SECT_RDONLY) ? "RO" : "rw");
 		seq_puts(st->seq, (pr & PMD_SECT_XN) ? "NX" : "-x");
 		if (pr & PMD_SECT_USER)
 			seq_puts(st->seq, ", USR");
-#elif __LINUX_ARM_ARCH__ >= 6
+# elif __LINUX_ARM_ARCH__ >= 6
 		switch (pr & (PMD_SECT_APX | PMD_SECT_AP_WRITE)) {
 		case PMD_SECT_APX | PMD_SECT_AP_WRITE: /* Kernel RO */
 		case 0: /* User RO */
@@ -202,12 +215,12 @@ static void print_prot(struct pg_state *st)
 		seq_puts(st->seq, (pr & PMD_SECT_XN) ? "NX" : "-x");
 		if (pr & PMD_SECT_AP_READ)
 			seq_puts(st->seq, ", USR");
-#else /* ARMv4/ARMv5, untested */
+# else /* ARMv4/ARMv5, untested */
 		seq_puts(st->seq, (pr & PMD_SECT_AP_WRITE) ? "RW" : "ro");
 		seq_puts(st->seq, (pr & PMD_SECT_XN) ? "NX" : "-x");
 		if (pr & PMD_SECT_AP_READ)
 			seq_puts(st->seq, ", USR");
-#endif
+# endif
 		if (pr & PMD_SECT_S)
 			seq_puts(st->seq, ", SHD");
 		if ((pr & PMD_TYPE_MASK) == PMD_TYPE_FAULT)
@@ -235,14 +248,14 @@ static void print_prot(struct pg_state *st)
 			PMD_SECT_AP_READ |
 			PMD_SECT_XN |
 			PMD_SECT_APX |
-#ifdef CONFIG_ARM_LPAE
+# ifdef CONFIG_ARM_LPAE
 			PMD_SECT_USER |
 			L_PMD_SECT_VALID |
 			L_PMD_SECT_DIRTY |
 			L_PMD_SECT_SPLITTING |
 			L_PMD_SECT_NONE |
 			L_PMD_SECT_RDONLY |
-#endif
+# endif
 			0);
 	}
 #elif defined(CONFIG_X86)
@@ -339,8 +352,8 @@ static void print_additional_desc(struct pg_state *st, unsigned long last_addr)
 #elif defined(CONFIG_X86_64)
 	/* Before commit f40c330091c7, VSYSCALL_ADDR was a function */
 # if LINUX_VERSION_CODE < KERNEL_VERSION(3, 16, 0)
-# undef VSYSCALL_ADDR
-# define VSYSCALL_ADDR VSYSCALL_START
+#  undef VSYSCALL_ADDR
+#  define VSYSCALL_ADDR VSYSCALL_START
 # endif
 	describe_with_pointer(VSYSCALL_ADDR, "vsyscall pages (with clock)");
 #endif
