@@ -596,7 +596,6 @@ static void walk_pgd(struct pg_state *st, pgd_t *pgd)
  *     Bits per PGD, PUD, PMD, PTE, page = 11, 0, 0, 9, 12
  *       ... gggg gggg  ggge eeee
  *       ... eeee pppp  pppp pppp
- *     PGD table at cf368000 (phys 0xf368000)
  *
  * Output example on x86_64:
  *     Page Global Directory pointers = 512
@@ -609,8 +608,6 @@ static void walk_pgd(struct pg_state *st, pgd_t *pgd)
  *       ... gggg gggg  guuu uuuu
  *       ... uumm mmmm  mmme eeee
  *       ... eeee pppp  pppp pppp
- *     PGD table at ffff8800371df000 (phys 0x371df000)
- *       ... cr3 = 0x371df000
  */
 static void show_address_comp(struct seq_file *s)
 {
@@ -666,6 +663,14 @@ static void show_address_comp(struct seq_file *s)
 
 /**
  * Get a pointer to the PGD table
+ *
+ * Output example on ARM:
+ *     PGD table at df50c000 (phys 0x9f50c000)
+ *       ... cp15,c2,c0,0 = 0x9f50c000
+ *
+ * Output example on x86_64:
+ *     PGD table at ffff8800371df000 (phys 0x371df000)
+ *       ... cr3 = 0x371df000
  */
 static pgd_t *get_pgd_address(struct seq_file *s)
 {
@@ -685,9 +690,12 @@ static pgd_t *get_pgd_address(struct seq_file *s)
 	 *     pgd = phys_to_virt(pg_value & ~0x3fff);
 	 */
 	{
-		pgd_t *cpu_pgd = cpu_get_pgd();
-		unsigned long cpu_pgd_phys = __pa(cpu_pgd);
+		pgd_t *cpu_pgd;
+		unsigned long cpu_pgd_phys;
 
+		cpu_pgd = cpu_get_pgd();
+		cpu_pgd_phys = virt_to_phys(cpu_pgd);
+		seq_printf(s, "  ... cp15,c2,c0,0 = %#lx\n", cpu_pgd_phys);
 		if (cpu_pgd_phys != pgd_phys) {
 			seq_printf(s,
 				"WARN: CPU uses a different PGD: %#lx != %#lx\n",
