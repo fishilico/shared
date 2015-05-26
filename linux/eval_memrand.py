@@ -60,10 +60,10 @@ class RandomAddress(object):
         # \-----------+-----+----+-----------------/
         rmask = (~self.and_bits) & self.or_bits
         if rmask == 0:
-            return 'not random, always {}'.format(hex(self.and_bits)[2:])
+            return 'not random, always {:x}'.format(self.and_bits)
 
-        xmin = hex(self.and_bits)[2:]
-        xmax = hex(self.or_bits)[2:]
+        xmin = '{:x}'.format(self.and_bits)
+        xmax = '{:x}'.format(self.or_bits)
         if len(xmin) < len(xmax):
             xmin = '0' * (len(xmax) - len(xmin)) + xmin
         xmask = [x if x == y else 'X' for x, y in zip(xmin, xmax)]
@@ -83,14 +83,17 @@ class RandomAddress(object):
                     # Mark weak bits as w in the hexadecimal mask
                     xmask[-(bitidx // 4) - 1] = 'w'
 
-        description = '{} ({}-{}), {} random bits'.format(
-            ''.join(xmask), xmin, xmax, bit_count(rmask))
-        if len(quite_weak):
-            description += '\n  {} quite weak bits: {}'.format(
-                len(quite_weak), ', '.join(quite_weak))
-        if len(very_weak):
-            description += '\n  {} very weak bits: {}'.format(
-                len(very_weak), ', '.join(very_weak))
+        cnt = bit_count(rmask)
+        description = '{} ({}-{}), {} random {}'.format(
+            ''.join(xmask), xmin, xmax, cnt, 'bits' if cnt >= 2 else 'bit')
+        cnt = len(quite_weak)
+        if cnt:
+            description += '\n  {} quite weak {}: {}'.format(
+                cnt, 'bits' if cnt >= 2 else 'bit', ', '.join(quite_weak))
+        cnt = len(very_weak)
+        if cnt:
+            description += '\n  {} very weak {}: {}'.format(
+                cnt, 'bits' if cnt >= 2 else 'bit', ', '.join(very_weak))
         return description
 
 
