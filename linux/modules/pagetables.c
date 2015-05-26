@@ -573,6 +573,31 @@ static void walk_pgd(struct pg_state *st, pgd_t *pgd)
 
 /**
  * Present the components of an address
+ *
+ * Output example on ARM (qemu-system-arm -cpu arm1176 -machine versatilepb):
+ *     Page Global Directory pointers = 2048
+ *     Page Upper Directory pointers = 1
+ *     Page Middle Directory pointers = 1
+ *     Page Table Entry pointers = 512
+ *     Page size = 4096
+ *     Bits per PGD, PUD, PMD, PTE, page = 11, 0, 0, 9, 12
+ *       ... gggg gggg  ggge eeee
+ *       ... eeee pppp  pppp pppp
+ *     PGD table at cf368000 (phys 0xf368000)
+ *
+ * Output example on x86_64:
+ *     Page Global Directory pointers = 512
+ *     Page Upper Directory pointers = 512
+ *     Page Middle Directory pointers = 512
+ *     Page Table Entry pointers = 512
+ *     Page size = 4096
+ *     Bits per PGD, PUD, PMD, PTE, page = 9, 9, 9, 9, 12
+ *       ... 0000 0000  0000 0000
+ *       ... gggg gggg  guuu uuuu
+ *       ... uumm mmmm  mmme eeee
+ *       ... eeee pppp  pppp pppp
+ *     PGD table at ffff8800371df000 (phys 0x371df000)
+ *       ... cr3 = 0x371df000
  */
 static void show_address_comp(struct seq_file *s)
 {
@@ -611,10 +636,10 @@ static void show_address_comp(struct seq_file *s)
 		*(p--) = 'p';
 	for (i = 0; i < pte_bits; i++)
 		*(p--) = 'e';
-	for (i = 0; i < pud_bits; i++)
-		*(p--) = 'u';
 	for (i = 0; i < pmd_bits; i++)
 		*(p--) = 'm';
+	for (i = 0; i < pud_bits; i++)
+		*(p--) = 'u';
 	for (i = 0; i < pgd_bits; i++)
 		*(p--) = 'g';
 	while (p >= address_bit)
