@@ -57,9 +57,9 @@ int EXPORT_FUNC uname(struct utsname *buf)
     int ret;
     uname_t real_uname;
 
-    real_uname = (uname_t)(intptr_t)(dlsym(RTLD_NEXT, __FUNCTION__));
+    real_uname = (uname_t)(intptr_t)(dlsym(RTLD_NEXT, "uname"));
     if (!real_uname) {
-        fprintf(stderr, "dlsym(%s): %s", __FUNCTION__, dlerror());
+        fprintf(stderr, "dlsym(uname): %s", dlerror());
         exit(EXIT_FAILURE);
     }
     ret = real_uname(buf);
