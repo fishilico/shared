@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include "dll_thread.h"
 
-#define printerr(format, ...) fprintf(stderr, "[%s] " format "\n", __FUNCTION__, ##__VA_ARGS__)
+#define printerr(format, ...) fprintf(stderr, "[%s] " format "\n", __func__, ##__VA_ARGS__)
 
 static DWORD g_dwTlsIndex = 0;
 
@@ -73,7 +73,7 @@ DLLIMPORT LPVOID dll_thread_tls_data(void)
 /**
  * DLL Entry Point
  */
-#define mainlog(format, ...) printf("[%s @%"PRIxPTR"] " format "\n", __FUNCTION__, (UINT_PTR)hinstDLL, ##__VA_ARGS__)
+#define mainlog(format, ...) printf("[%s @%"PRIxPTR"] " format "\n", __func__, (UINT_PTR)hinstDLL, ##__VA_ARGS__)
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, LPVOID lpvReserved);
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, __UNUSED_PARAM(LPVOID lpvReserved))
 {
