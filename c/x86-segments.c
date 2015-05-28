@@ -18,17 +18,17 @@
  */
 static const char *const gdt_segment_index_desc[16] = {
     NULL,
-    "krnl CS32", /* GDT_ENTRY_KERNEL32_CS = 1 */
-    "krnl CS", /* GDT_ENTRY_KERNEL_CS = 2 */
-    "krnl DS", /* GDT_ENTRY_KERNEL_DS = 3 */
-    "user CS32", /* GDT_ENTRY_DEFAULT_USER32_CS = 4 */
-    "user DS", /* GDT_ENTRY_DEFAULT_USER_DS = 5 */
-    "user CS", /* GDT_ENTRY_DEFAULT_USER_CS = 6 */
+    "krnl CS32", /* GDT_ENTRY_KERNEL32_CS = 1 (0x08) */
+    "krnl CS", /* GDT_ENTRY_KERNEL_CS = 2 (0x10) */
+    "krnl DS", /* GDT_ENTRY_KERNEL_DS = 3 (0x18) */
+    "user CS32", /* GDT_ENTRY_DEFAULT_USER32_CS = 4 (0x23) */
+    "user DS", /* GDT_ENTRY_DEFAULT_USER_DS = 5 (0x2b) */
+    "user CS", /* GDT_ENTRY_DEFAULT_USER_CS = 6 (0x33) */
     NULL,
-    "TSS1", "TSS2", /* GDT_ENTRY_TSS = 8 */
-    "LDT1", "LDT2", /* GDT_ENTRY_LDT = 10 */
-    "TLS1", "TLS2", "TLS3", /* GDT_ENTRY_TLS_MIN = 12,  GDT_ENTRY_TLS_MAX = 14 */
-    "percpu", /* GDT_ENTRY_PER_CPU = 15 */
+    "TSS1", "TSS2", /* GDT_ENTRY_TSS = 8 (0x40) */
+    "LDT1", "LDT2", /* GDT_ENTRY_LDT = 10 (0x50) */
+    "TLS1", "TLS2", "TLS3", /* GDT_ENTRY_TLS_MIN = 12 (0x63), GDT_ENTRY_TLS_MAX = 14 (0x73) */
+    "percpu", /* GDT_ENTRY_PER_CPU = 15 (0x7b) */
 };
 
 /* glibc defines these constants in asm/prctl.h but not musl, which hardcodes
@@ -48,18 +48,21 @@ static const char *const gdt_segment_index_desc[16] = {
  */
 static const char *const gdt_segment_index_desc[32] = {
     NULL, NULL, NULL, NULL, "x64 user CS32", "x64 user DS",
-    "x86 TLS1 or x64 user CS", "TLS2", "TLS3", /* GDT_ENTRY_TLS_MIN = 6,  GDT_ENTRY_TLS_MAX = 8 */
+    "x86 TLS1 or x64 user CS", "TLS2", "TLS3", /* GDT_ENTRY_TLS_MIN = 6 (0x33), GDT_ENTRY_TLS_MAX = 8 (0x43) */
     NULL, NULL, NULL,
-    "x86 krnl CS or x64 TLS1", /* GDT_ENTRY_KERNEL_CS = 12 */
-    "x86 krnl DS", /* GDT_ENTRY_KERNEL_DS = 13 */
-    "x86 user CS", /* GDT_ENTRY_DEFAULT_USER_CS = 14 */
-    "x86 user DS or x64 percpu", /* GDT_ENTRY_DEFAULT_USER_DS = 15 */
-    "x86 TSS", /* GDT_ENTRY_TSS = 16 */
-    "x86 LDT", /* GDT_ENTRY_LDT = 17 */
+    "x86 krnl CS or x64 TLS1", /* GDT_ENTRY_KERNEL_CS = 12 (0x60) */
+    "x86 krnl DS", /* GDT_ENTRY_KERNEL_DS = 13 (0x68) */
+    "x86 user CS", /* GDT_ENTRY_DEFAULT_USER_CS = 14 (0x73) */
+    "x86 user DS or x64 percpu", /* GDT_ENTRY_DEFAULT_USER_DS = 15 (0x7b) */
+    "x86 TSS", /* GDT_ENTRY_TSS = 16 (0x80) */
+    "x86 LDT", /* GDT_ENTRY_LDT = 17 (0x88) */
     NULL, NULL, NULL, NULL, NULL, /* GDT_ENTRY_PNPBIOS_BASE = 18 */
     NULL, NULL, NULL, /* APMBIOS_BASE = 23 */
-    "espfix", /* GDT_ENTRY_ESPFIX_SS = 26 */
-    "percpu", /* GDT_ENTRY_ESPFIX_SS = 27 */
+    "espfix", /* GDT_ENTRY_ESPFIX_SS = 26 (0xd0) */
+    "percpu", /* GDT_ENTRY_PERCPU = 27 (0xdb) */
+    "stack canary", /* GDT_ENTRY_STACK_CANARY = 28 (0xe0) */
+    NULL, NULL,
+    "doublefault TSS", /* GDT_ENTRY_DOUBLEFAULT_TSS = 31 (0xf8) */
 };
 #    endif
 #elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
