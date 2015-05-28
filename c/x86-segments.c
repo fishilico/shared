@@ -121,13 +121,13 @@ static void print_segment_desc(const char *segname, uint16_t segment)
     unsigned int sindex = segment >> 3;
 
     /* Use a segment limit, loaded with "lsl" */
-    __asm__ volatile ("lsll %2, %0 ; setz %1"
+    __asm__ ("lsll %2, %0 ; setz %1"
         : "=r" (limit), "=q" (lsl_ok)
         : "r" ((uint32_t)segment)
         : "cc");
 
     /* Load access right associated with the segment */
-    __asm__ volatile ("larl %2, %0 ; setz %1"
+    __asm__ ("larl %2, %0 ; setz %1"
         : "=r" (access_rights), "=q" (lar_ok)
         : "r" ((uint32_t)segment)
         : "cc");
@@ -188,7 +188,7 @@ static void print_segments(void)
 #define analyze_segment(segname) \
     do { \
         uint16_t segment; \
-        __asm__ volatile ("movw %%" #segname ", %0" : "=g" (segment)); \
+        __asm__ ("movw %%" #segname ", %0" : "=g" (segment)); \
         print_segment_desc("  " #segname, segment); \
     } while (0)
     analyze_segment(cs);
@@ -230,7 +230,7 @@ static void print_segment_bases(void)
     } u_info;
 
     printf("Segment bases:\n");
-    __asm__ volatile ("movw %%fs, %0" : "=g" (segment));
+    __asm__ ("movw %%fs, %0" : "=g" (segment));
     if (segment) {
         memset(&u_info, 0, sizeof(u_info));
         u_info.entry_number = segment >> 3;
@@ -244,7 +244,7 @@ static void print_segment_bases(void)
             printf("  fs base=%#lx, limit=%#lx\n", (unsigned long)u_info.base_addr, limit);
         }
     }
-    __asm__ volatile ("movw %%gs, %0" : "=g" (segment));
+    __asm__ ("movw %%gs, %0" : "=g" (segment));
     if (segment) {
         memset(&u_info, 0, sizeof(u_info));
         u_info.entry_number = segment >> 3;
@@ -263,13 +263,13 @@ static void print_segment_bases(void)
 
     printf("Segment bases (0 for cs, ds, es and ss):\n");
     printf("  fs base= ?\n");
-    __asm__ volatile ("movq %%gs:48, %0" : "=r" (gs_base));
+    __asm__ ("movq %%gs:48, %0" : "=r" (gs_base));
     printf("  gs base=%#" PRIx64 " (TEB)\n", gs_base);
 #elif defined(__i386__) && defined(IS_WINDOWS)
     uint32_t fs_base;
 
     printf("Segment bases:\n");
-    __asm__ volatile ("movl %%fs:24, %0" : "=r" (fs_base));
+    __asm__ ("movl %%fs:24, %0" : "=r" (fs_base));
     printf("  fs base=%#" PRIx32 " (TEB)\n", fs_base);
     printf("  gs base= ?\n");
 #else
@@ -283,7 +283,7 @@ static void print_gdt_limits(void)
     uint16_t gdt_size, segment;
 
     /* Read GDT size to get the number of entries */
-    __asm__ volatile ("sgdt %0" : "=m" (gdt_descriptor));
+    __asm__ ("sgdt %0" : "=m" (gdt_descriptor));
     memcpy(&gdt_size, gdt_descriptor, 2);
 
     printf("GDT limits and access rights (%u entries):\n", (gdt_size + 1) / 8);
@@ -304,7 +304,7 @@ static void print_cr0(void)
     (cr0 & (1U << (bitnum))) ? '+' : '-', desc);
 
     /* smsw = Save Machine Status Word */
-    __asm__ volatile ("smsw %0" : "=r" (cr0));
+    __asm__ ("smsw %0" : "=r" (cr0));
     printf("cr0 = 0x%08x\n", cr0);
     print_cr0_bit(0, "PE (Protection Enable)");
     print_cr0_bit(1, "MP (Monitor Coprocessor)");
