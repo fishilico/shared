@@ -48,7 +48,9 @@ static const char *const gdt_segment_index_desc[16] = {
  */
 static const char *const gdt_segment_index_desc[32] = {
     NULL, NULL, NULL, NULL, "x64 user CS32", "x64 user DS",
-    "x86 TLS1 or x64 user CS", "TLS2", "TLS3", /* GDT_ENTRY_TLS_MIN = 6 (0x33), GDT_ENTRY_TLS_MAX = 8 (0x43) */
+    "x86 TLS1 or x64 user CS",  /* GDT_ENTRY_TLS_MIN = 6 (0x33) */
+    "TLS2",
+    "x86 TLS3 or x64 TSS", /* GDT_ENTRY_TLS_MAX = 8 (0x43) */
     NULL, NULL, NULL,
     "x86 krnl CS or x64 TLS1", /* GDT_ENTRY_KERNEL_CS = 12 (0x60) */
     "x86 krnl DS", /* GDT_ENTRY_KERNEL_DS = 13 (0x68) */
@@ -133,7 +135,7 @@ static void print_segment_desc(const char *segname, uint16_t segment)
         : "cc");
 
     if (segname) {
-        printf("%s=0x%04x", segname, segment);
+        printf("%4s=0x%02x", segname, segment);
         if (segment) {
             printf(" (index=%u, RPL=%d", sindex, segment & 3);
             if (segment & 4) {
@@ -142,7 +144,7 @@ static void print_segment_desc(const char *segname, uint16_t segment)
             printf(")");
         }
     } else if (lsl_ok || lar_ok) {
-        printf("%4u: selector 0x%04x", sindex, segment);
+        printf("%4u: selector 0x%02x", sindex, segment);
     } else {
         return;
     }
@@ -184,12 +186,13 @@ static void print_segment_desc(const char *segname, uint16_t segment)
 
 static void print_segments(void)
 {
+    uint16_t segment;
+
     printf("Segments:\n");
 #define analyze_segment(segname) \
     do { \
-        uint16_t segment; \
         __asm__ ("movw %%" #segname ", %0" : "=g" (segment)); \
-        print_segment_desc("  " #segname, segment); \
+        print_segment_desc(#segname, segment); \
     } while (0)
     analyze_segment(cs);
     analyze_segment(ds);
@@ -198,6 +201,13 @@ static void print_segments(void)
     analyze_segment(gs);
     analyze_segment(ss);
 #undef analyze_segment
+
+    /* Show the Local Descriptor Table Register segment selector */
+    __asm__ ("sldt %0" : "=r" (segment));
+    print_segment_desc("ldt", segment);
+    /* Show the Task Register segment selector */
+    __asm__ ("str %0" : "=r" (segment));
+    print_segment_desc("tr", segment);
 }
 
 static void print_segment_bases(void)
