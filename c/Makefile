@@ -48,7 +48,7 @@ ifeq ($(filter-out cc gcc clang, $(CC)),)
 	ifeq ($(HAVE_GTK3), y)
 		PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
-$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0) -Wno-pedantic
+$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0) -Wno-pedantic -Wno-cast-qual
 	else
 		HAVE_GTK2 := $(shell $(PKG_CONFIG) --exists gtk+-2.0 2> /dev/null && echo 'y' || echo 'n')
 		ifeq ($(HAVE_GTK2), y)
