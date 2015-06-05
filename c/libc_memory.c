@@ -161,10 +161,9 @@ static void show_free_metadata(void)
         ptr[i] = malloc(allocsize);
         if (!ptr[i]) {
             fprintf(stderr, "Error while allocating %u bytes.\n", allocsize);
-            do {
-                i -= 1;
-                free(ptr[i]);
-            } while (i > 0);
+            while (i > 0) {
+                free(ptr[--i]);
+            }
             exit(1);
         }
         memset(ptr[i], 0, allocsize);
