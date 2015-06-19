@@ -300,7 +300,7 @@ int main(void)
         return 1;
     }
 
-    printf("Signal handler returned to: 0x%p\n", sigret_address);
+    printf("Signal handler returned to: %p\n", sigret_address);
 
     ret = describe_address(sigret_address);
     if (ret) {
@@ -324,7 +324,7 @@ int main(void)
         fprintf(stderr, "Unable to capture the signal handler return address\n");
         return 1;
     }
-    printf("Signal handler with siginfo returned to: 0x%p\n", sigret_address);
+    printf("Signal handler with siginfo returned to: %p\n", sigret_address);
     if (sigret_address_simple == sigret_address) {
         printf("... same address\n");
         return 0;
