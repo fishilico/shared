@@ -85,7 +85,7 @@ int main(void)
     fix_cpu();
 
     /* Allocation some memory on the heap */
-    memory = malloc(4096);
+    memory = malloc(42);
     if (!memory) {
         fprintf(stderr, "malloc: cannot allocate memory\n");
         return 1;
