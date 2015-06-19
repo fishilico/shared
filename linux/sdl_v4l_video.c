@@ -181,6 +181,18 @@ static bool capture_start(
 }
 
 /**
+ * Post a SDL quit event
+ */
+static void post_sdlquit_event(void)
+{
+    SDL_Event quit_event;
+
+    memset(&quit_event, 0, sizeof(SDL_Event));
+    quit_event.type = SDL_QUIT;
+    SDL_PushEvent(&quit_event);
+}
+
+/**
  * Get a frame from a V4L capture in UYVY format
  */
 static bool capture_get_frame(struct capture_state *capst, void *uyvy_frame)
@@ -188,7 +200,6 @@ static bool capture_get_frame(struct capture_state *capst, void *uyvy_frame)
     struct v4l2_buffer buf;
     uint32_t frame_size;
     bool ret = true;
-    SDL_Event quit_event;
 
     assert(capst && capst->fd != -1 && uyvy_frame);
 
@@ -203,9 +214,7 @@ static bool capture_get_frame(struct capture_state *capst, void *uyvy_frame)
         } else if (errno == ENODEV) {
             /* Quit nicely if the device is no longer here */
             printf("The video input device disappeared!\n");
-            memset(&quit_event, 0, sizeof(SDL_Event));
-            quit_event.type = SDL_QUIT;
-            SDL_PushEvent(&quit_event);
+            post_sdlquit_event();
             return false;
         }
         perror("ioctl(VIDIOC_DQBUF)");
@@ -264,7 +273,7 @@ int main(void)
     char driver_name[128];
     void *uyvy_frame;
     struct capture_state capst;
-    const int video_format = SDL_ANYFORMAT | SDL_DOUBLEBUF | SDL_RESIZABLE;
+    unsigned int video_format = SDL_ANYFORMAT | SDL_DOUBLEBUF | SDL_RESIZABLE;
     SDL_Rect screen_rect;
     SDL_Surface *screen;
     SDL_Overlay *overlay;
@@ -341,6 +350,17 @@ int main(void)
                     screen_rect.y = (resz_h - new_h) / 2;
                     screen_rect.w = new_w;
                     screen_rect.h = new_h;
+                    break;
+
+                case SDL_KEYDOWN:
+                    if (event.key.keysym.sym == SDLK_q) {
+                        /* Q quits */
+                        post_sdlquit_event();
+                    } else if (event.key.keysym.sym == SDLK_F11) {
+                        /* F11 toggles fullscreen */
+                        video_format ^= SDL_FULLSCREEN;
+                        screen = SDL_SetVideoMode(0, 0, 0, video_format);
+                    }
                     break;
             }
         }
