@@ -62,6 +62,8 @@ EXCEPTION_POINTERS
 Elf_Dyn
 Elf_Ehdr
 Elf_Phdr
+Elf_Shdr
+Elf_Sym
 Elf_Verdaux
 Elf_Verdef
 Elf_Word

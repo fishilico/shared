@@ -74,6 +74,61 @@ static void sig_user(
     sigret_address = __builtin_return_address(0);
 }
 
+/**
+ * Identify the code which lies at the return address of the signal handler
+ */
+static void identify_sigret_code(const void *address)
+{
+    uint32_t i;
+    const uint8_t *addr = (const uint8_t *)address;
+
+#if defined(__arm__)
+    if ((uintptr_t)addr & 1) {
+        /* Thumb code */
+        addr -= 1;
+        if (!memcmp(addr, "\x4f\xf0", 2) && !memcmp(addr + 3, "\x07\x00\xdf", 3)) {
+            /* mov.w r7, #... ; svc 0 */
+            printf("... code: syscall_svc0(%u)\n", addr[2]);
+            return;
+        }
+    } else {
+        /* ARM code */
+        if (!memcmp(addr + 1, "\x70\xa0\xe3\x00\x00\x00\xef", 7)) {
+            /* mov r7, #... ; svc 0 */
+            printf("... code: syscall_svc0(%u)\n", addr[0]);
+            return;
+        }
+    }
+#elif defined(__i386__)
+    if (addr[0] == 0xb8 && !memcmp(addr + 5, "\xcd\x80", 2)) {
+        /* mov $..., %eax ; int $0x80 */
+        memcpy(&i, addr + 1, 4);
+        printf("... code: syscall_int80(%u)\n", i);
+        return;
+    }
+    if (!memcmp(addr, "\x58\xb8", 2) && !memcmp(addr + 6, "\xcd\x80", 2)) {
+        /* pop %eax ; mov $..., %eax ; int $0x80 */
+        memcpy(&i, addr + 2, 4);
+        printf("... code: pop %%eax; syscall_int80(%u)\n", i);
+        return;
+    }
+#elif defined(__x86_64__)
+    if (!memcmp(addr, "\x48\xc7\xc0", 3) && !memcmp(addr + 7, "\x0f\x05", 2)) {
+        /* mov $..., %rax ; syscall */
+        memcpy(&i, addr + 3, 4);
+        printf("... code: syscall(%u)\n", i);
+        return;
+    }
+#else
+#    warning Unsupported architecture
+#endif
+    printf("... unknown code. Here are some bytes:");
+    for (i = 0; i < 8; i++) {
+        printf(" %02x", addr[i]);
+    }
+    printf("\n");
+}
+
 static int get_symbol_name_elf(uintptr_t elf_base, const void *addr, int is_file)
 {
     size_t i;
@@ -228,7 +283,10 @@ static int describe_address(const void *address)
     }
     offset = ((uintptr_t)address) - start;
     printf("Memory range %lx..%lx is %s\n", start, end, name);
-    printf("... offset 0x%lx\n", (unsigned long)offset);
+    printf("... offset %#lx\n", (unsigned long)offset);
+
+    /* Find usual templates of code */
+    identify_sigret_code(address);
 
     /* If the memory is a mmap-ed file, mmap it again */
     if (name[0] == '/') {

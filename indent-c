@@ -51,6 +51,8 @@ exec indent \
     -T Elf_Dyn \
     -T Elf_Ehdr \
     -T Elf_Phdr \
+    -T Elf_Shdr \
+    -T Elf_Sym \
     -T Elf_Verdaux \
     -T Elf_Verdef \
     -T Elf_Word \
