@@ -73,6 +73,7 @@ exec indent \
     -T LPCTSTR \
     -T LPCVOID \
     -T LPCWSTR \
+    -T LPOSVERSIONINFO \
     -T LPTHREAD_START_ROUTINE \
     -T LPTSTR \
     -T LPVOID \
