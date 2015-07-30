@@ -76,13 +76,14 @@
  *        16 (0x00010000): - FSGSBASE (enable RDWRFSGS support)
  *        17 (0x00020000): - PCIDE (enable PCID support)
  *        18 (0x00040000): - OSXSAVE (enable xsave and xrestore)
- *        20 (0x00100000): - SMEP (enable SMEP support)
- *        21 (0x00200000): - SMAP (enable SMAP support)
+ *        20 (0x00100000): - SMEP (enable Supervisor Mode Execution Protection)
+ *        21 (0x00200000): - SMAP (enable Supervisor Mode Access Prevention)
  *      cr8 = 0x0 TPR (Task-Priority Register)
  */
 static void dump_x86_cr(void)
 {
 	unsigned long cr;
+
 	cr = read_cr0();
 	pr_info("cr0 = 0x%08lx\n", cr);
 	show_cr_bit(cr, 0, PE, "Protection Enable");
@@ -131,8 +132,8 @@ static void dump_x86_cr(void)
 	show_cr_bit(cr, 4, FSGSBASE, "enable RDWRFSGS support");
 	show_cr_bit(cr, 4, PCIDE, "enable PCID support");
 	show_cr_bit(cr, 4, OSXSAVE, "enable xsave and xrestore");
-	show_cr_bit(cr, 4, SMEP, "enable SMEP support");
-	show_cr_bit(cr, 4, SMAP, "enable SMAP support");
+	show_cr_bit(cr, 4, SMEP, "enable Supervisor Mode Execution Protection");
+	show_cr_bit(cr, 4, SMAP, "enable Supervisor Mode Access Prevention");
 
 #ifdef CONFIG_X86_64
 	cr = read_cr8();
@@ -168,6 +169,7 @@ static void dump_x86_msr(void)
 {
 #ifdef CONFIG_X86_64
 	unsigned long long msr;
+
 	rdmsrl(MSR_FS_BASE, msr);
 	pr_info("msr:fs_base(0x%x) = 0x%llx\n", MSR_FS_BASE, msr);
 	rdmsrl(MSR_GS_BASE, msr);
@@ -192,7 +194,7 @@ static void dump_x86_msr(void)
 	pr_info("msr:ia32_sysenter_ESP(0x%x) = 0x%llx\n", MSR_IA32_SYSENTER_ESP, msr);
 	rdmsrl(MSR_IA32_SYSENTER_EIP, msr);
 	pr_info("msr:ia32_sysenter_EIP(0x%x) = 0x%llx (%pS)\n",
-		MSR_IA32_SYSENTER_EIP, msr, (void*)msr);
+		MSR_IA32_SYSENTER_EIP, msr, (void *)msr);
 
 	/* http://wiki.osdev.org/SYSENTER
 	 * Setup in /usr/src/linux/arch/x86/kernel/cpu/common.c
@@ -202,9 +204,9 @@ static void dump_x86_msr(void)
 	pr_info("msr:star(0x%x) = user32 CS 0x%llx, kernel CS 0x%llx, EIP 0x%llx\n",
 		MSR_STAR, msr >> 48, (msr >> 32) & 0xffff, msr & 0xffffffff);
 	rdmsrl(MSR_LSTAR, msr); /* Long mode */
-	pr_info("msr:lstar(0x%x) = 0x%llx (%pS)\n", MSR_LSTAR, msr, (void*)msr);
+	pr_info("msr:lstar(0x%x) = 0x%llx (%pS)\n", MSR_LSTAR, msr, (void *)msr);
 	rdmsrl(MSR_CSTAR, msr); /* Compatibility mode */
-	pr_info("msr:cstar(0x%x) = 0x%llx (%pS)\n", MSR_CSTAR, msr, (void*)msr);
+	pr_info("msr:cstar(0x%x) = 0x%llx (%pS)\n", MSR_CSTAR, msr, (void *)msr);
 	rdmsrl(MSR_SYSCALL_MASK, msr);
 	pr_info("msr:sfmask(0x%x) = 0x%llx\n", MSR_SYSCALL_MASK, msr);
 #endif
@@ -223,6 +225,7 @@ static void dump_x86_msr(void)
 static void dump_x86_segments(void)
 {
 	unsigned long seg;
+
 	savesegment(cs, seg);
 	pr_info("CS = 0x%04lx (kernel CS is 0x%04x)\n", seg, __KERNEL_CS);
 	savesegment(ds, seg);
@@ -356,10 +359,10 @@ static void dump_x86_tables(void)
 
 	native_store_gdt(&descp);
 	pr_info("GDT: (Global Descriptor Table)\n");
-	pr_info("  On current cpu: %pS limit %u\n", (void*)descp.address, descp.size);
+	pr_info("  On current cpu: %pS limit %u\n", (void *)descp.address, descp.size);
 	numentries = min(GDT_ENTRIES, (descp.size + 1) / 8);
 	if (descp.size != GDT_ENTRIES * 8 - 1) {
-		pr_warning("   Expected size differs: %u, using %u entries\n",
+		pr_warn("   Expected size differs: %u, using %u entries\n",
 			GDT_ENTRIES * 8 - 1, numentries);
 	}
 	/* Dump GDT tables. Expected result in written in
@@ -372,11 +375,13 @@ static void dump_x86_tables(void)
 	 */
 	if (true) {
 		struct desc_struct *descs;
+
 		cpu = smp_processor_id();
 		descs = (struct desc_struct *)descp.address;
 #else
 	for_each_possible_cpu(cpu) {
 		struct desc_struct *descs;
+
 		descs = get_cpu_gdt_table(cpu);
 		if (!descs)
 			continue;
@@ -386,6 +391,7 @@ static void dump_x86_tables(void)
 			unsigned int flags, base, limit, type;
 			const char *comment = "";
 			char type_str[5];
+
 			if (!descs[i].a && !descs[i].b)
 				continue;
 			if (i == GDT_ENTRY_KERNEL_CS)
@@ -445,10 +451,11 @@ static void dump_x86_tables(void)
 	store_idt(&descp);
 	numentries = (descp.size + 1) / sizeof(gate_desc);
 	pr_info("IDT: %pS limit %u (Interrupt Descriptor Table, %u entries)\n",
-		(void*)descp.address, descp.size, numentries);
+		(void *)descp.address, descp.size, numentries);
 	if (descp.address) {
 		gate_desc *idt;
-		idt = (gate_desc*)descp.address;
+
+		idt = (gate_desc *)descp.address;
 		for (i = 0; i < NR_VECTORS && i < numentries; i++) {
 			unsigned int type;
 			const char *comment = "", *type_str = "";
@@ -569,6 +576,7 @@ static void dump_x86_tables(void)
 #else
 			if (idt[i].ist) {
 				const char *stack_str = "";
+
 				if (idt[i].ist == DOUBLEFAULT_STACK)
 					stack_str = " (double fault stack)";
 				else if (idt[i].ist == NMI_STACK)
