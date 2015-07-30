@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Fingerprint a browser using Javascript</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script language="javascript"><!--
+/**
+ * Gather local IP addresses with WebRTC
+ * https://code.google.com/p/chromium/issues/detail?id=333752
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=959893
+ * http://net.ipcalf.com/
+ */
+function get_local_ips() {
+    var RTCPeerConnection = window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+    if (!RTCPeerConnection) {
+        console.warn("No WebRTC connection available");
+        return;
+    }
+
+    var addrs = Object.create(null);
+    addrs["0.0.0.0"] = false;
+
+    function extract_addr_from_sdp(sdp) {
+        var hosts = [], addr;
+        sdp.split('\r\n').forEach(function (line) { // c.f. http://tools.ietf.org/html/rfc4566#page-39
+            if (~line.indexOf("a=candidate")) {     // http://tools.ietf.org/html/rfc4566#section-5.13
+                var parts = line.split(' ');        // http://tools.ietf.org/html/rfc5245#section-15.1
+                addr = parts[4];
+                var type = parts[7];
+                if (type !== 'host')
+                    return;
+            } else if (~line.indexOf("c=")) {       // http://tools.ietf.org/html/rfc4566#section-5.7
+                var parts = line.split(' ');
+                addr = parts[2];
+            } else
+                return;
+
+            // Got address in addr
+            console.log('WebRTC response: ' + line);
+            if (addr in addrs) {
+                return;
+            } else {
+                addrs[addr] = true;
+            }
+        });
+        var displayed_ips = Object.keys(addrs).filter(function (k) { return addrs[k]; });
+        var elem = document.getElementById('local-ip-addrs');
+        displayed_ips.sort();
+        if (!displayed_ips.length) {
+            elem.innerHTML = 'None found in WebRTC';
+        } else {
+            var content = '';
+            for (var i = 0; i < displayed_ips.length; i++) {
+                content += '<li>' + displayed_ips[i] + '</li>';
+            }
+            elem.innerHTML = '<ul>' + content + '</ul>';
+        }
+    }
+
+    var rtc = new RTCPeerConnection({iceServers: []});
+    rtc.createDataChannel('', {reliable: false});
+
+    rtc.onicecandidate = function (evt) {
+        // convert the candidate to SDP so we can run it through our general parser
+        // see https://twitter.com/lancestout/status/525796175425720320 for details
+        if (evt.candidate) {
+            extract_addr_from_sdp("a="+evt.candidate.candidate);
+        }
+    };
+    rtc.createOffer(
+        function (offerDesc) {
+            extract_addr_from_sdp(offerDesc.sdp);
+            rtc.setLocalDescription(offerDesc);
+        },
+        function (e) {
+            console.warn("WebRTC offer failed", e);
+        });
+}
+
+/**
+ * Create a <code> element with the specified textual content
+ */
+function create_code_text(text) {
+    var elem = document.createElement('code');
+    if (typeof elem.textContent === 'undefined') {
+        elem.innerText = text;
+    } else {
+        elem.textContent = text;
+    }
+    return elem;
+}
+
+/**
+ * Create a <li> element with a text item description
+ */
+function create_list_item(name, text) {
+    var elem = document.createElement('li');
+    elem.innerHTML = name + ': ';
+
+    if (typeof text === 'undefined') {
+        elem.innerHTML += '<i>undefined</i>';
+    } else {
+        elem.appendChild(create_code_text(text));
+    }
+    return elem;
+}
+
+/**
+ * Fill Browser fingerprinting information
+ */
+function fill_fingerprint_infos() {
+    var container = document.getElementById('fingerprint-result');
+    if (!container) {
+        console.error('Item #fingerprint-result not found');
+        return;
+    }
+
+    var e_list;
+    container.innerHTML = '';
+
+    // Gather information from navigator
+    container.innerHTML += '<h2>navigator</h2>';
+    e_list = document.createElement('ul');
+    e_list.appendChild(create_list_item('navigator.userAgent', navigator.userAgent));
+    e_list.appendChild(create_list_item('navigator.platform', navigator.platform));
+    e_list.appendChild(create_list_item('navigator.language', navigator.language));
+    e_list.appendChild(create_list_item('navigator.cpuClass', navigator.cpuClass));
+    e_list.appendChild(create_list_item('navigator.onLine', navigator.onLine));
+    container.appendChild(e_list);
+
+    // Gather information from window
+    container.innerHTML += '<h2>window</h2>';
+    e_list = document.createElement('ul');
+    e_list.appendChild(create_list_item('window.screenX', window.screenX));
+    e_list.appendChild(create_list_item('window.screenY', window.screenY));
+    e_list.appendChild(create_list_item('window.outerWidth', window.outerWidth));
+    e_list.appendChild(create_list_item('window.outerHeight', window.outerHeight));
+    e_list.appendChild(create_list_item('window.defaultStatus', window.defaultStatus));
+    container.appendChild(e_list);
+
+    // Gather information from screen
+    container.innerHTML += '<h2>screen</h2>';
+    e_list = document.createElement('ul');
+    e_list.appendChild(create_list_item('screen.width', screen.width));
+    e_list.appendChild(create_list_item('screen.height', screen.height));
+    e_list.appendChild(create_list_item('screen.colorDepth', screen.colorDepth));
+    container.appendChild(e_list);
+
+    // Display plugins
+    container.innerHTML += '<h2>Plugins</h2>';
+    if (typeof navigator.plugins === 'undefined') {
+        container.innerHTML += '<i>navigator.plugins is undefined.</i>';
+    } else if (navigator.plugins.length == 0) {
+        container.innerHTML += '<i>There is no plugin.</i>';
+    } else {
+        e_list = document.createElement('ul');
+        for (var i = 0; i < navigator.plugins.length; i++) {
+            var plugin = navigator.plugins[i];
+            var name = plugin.name;
+            if (plugin.version) {
+                name += ' (version ' + plugin.version + ')';
+            }
+            var e_item = create_list_item(name, plugin.filename);
+            var e_sublist = document.createElement('ul');
+            for (var j = 0; j < plugin.length; j++) {
+                var mimetype = plugin[j];
+                var text = mimetype.description;
+                if (mimetype.suffixes) {
+                    text += ' (suffixes: ' + mimetype.suffixes + ')';
+                }
+                e_sublist.appendChild(create_list_item(mimetype.type, text));
+            }
+            e_item.appendChild(e_sublist);
+            e_list.appendChild(e_item);
+        }
+        container.appendChild(e_list);
+    }
+
+    // Gather local IP addresses
+    container.innerHTML += '<h2>Local IP addresses</h2>';
+    container.innerHTML += '<div id="local-ip-addrs">None found</div>';
+    get_local_ips();
+}
+window.onload = fill_fingerprint_infos;
+        --></script>
+    </head>
+    <body>
+        <h1>Browser fingerprint</h1>
+        <div id="fingerprint-result">Loading...</div>
+        </ul>
+    </body>
+</html>
