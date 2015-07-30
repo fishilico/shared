@@ -18,20 +18,26 @@ ARCH=
 USE_TMP=false
 RUN_IMAGE=false
 
-while getopts ":a:f:rt" OPT
+while getopts ":a:hrt" OPT
 do
     case "$OPT" in
         a)
             ARCH="$OPTARG"
             ;;
-        f)
-            FWPATH="$OPTARG"
-            ;;
-        t)
-            USE_TMP=true
+        h)
+            echo "Usage: $0 [OPTIONS] EFI_FILE [DISK_FILE]"
+            echo "Create a bootable disk image from a .efi file"
+            echo "options:"
+            echo "    -a ARCH   Specify the architecture"
+            echo "    -r        Create the image disk and run it with QEmu"
+            echo "    -t        Create the image disk in /tmp"
+            exit 0
             ;;
         r)
             RUN_IMAGE=true
+            ;;
+        t)
+            USE_TMP=true
             ;;
         \?)
             echo >&2 "$0: invalid option '$OPTARG'"
