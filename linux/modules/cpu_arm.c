@@ -6,6 +6,8 @@
  * Documentation:
  * * http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0290g/Babebdcb.html
  *   System control coprocessor reference data - Instruction summary
+ * * http://www.phrack.org/issues/68/6.html
+ *   Android platform based linux kernel rootkit (April 04th 2011)
  */
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
