@@ -28,7 +28,41 @@ install:
 infos:
 	modinfo *.ko
 
-test: all
-	@:
+# Build with warnings enabled, and without warnings for kernel headers
+KCFLAGS_WARN = -Wall -Wextra -Werror \
+	-Waggregate-return \
+	-Wfloat-equal \
+	-Wformat=2 -Wno-format-nonliteral \
+	-Winit-self \
+	-Wjump-misses-init \
+	-Wlogical-op \
+	-Wmissing-declarations \
+	-Wmissing-format-attribute \
+	-Wmissing-include-dirs \
+	-Wmissing-prototypes \
+	-Wstrict-prototypes \
+	-Wtrampolines \
+	-Wunknown-pragmas \
+	-Wno-bad-function-cast \
+	-Wno-cast-qual \
+	-Wno-conversion \
+	-Wno-missing-field-initializers \
+	-Wno-nested-externs \
+	-Wno-packed \
+	-Wno-padded \
+	-Wno-pointer-arith \
+	-Wno-redundant-decls \
+	-Wno-shadow \
+	-Wno-sign-conversion \
+	-Wno-switch-default \
+	-Wno-unused-parameter
+
+# Paravirt uses self-initialised local vars
+KCFLAGS_WARN += -Wno-uninitialized
+# grsec adds an unused-but-set variable
+KCFLAGS_WARN += -Wno-error=unused-but-set-variable
+
+test: clean
+	@KCFLAGS='$(KCFLAGS_WARN)' $(MAKE) all
 
 .PHONY: all clean install infos test
