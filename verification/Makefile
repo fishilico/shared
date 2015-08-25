@@ -6,7 +6,7 @@ FRAMAC ?= frama-c
 # Use Frama-C libc headers which contains ACSL annotations.
 FRAMAC_SHARE_PATH := $(shell $(FRAMAC) -print-share-path 2> /dev/null)
 FRAMAC_CFLAGS := -nostdinc -I$(FRAMAC_SHARE_PATH)/libc -D__FRAMAC__
-FRAMAC_TMPDIR := /tmp/frama-c-$(id -u)
+FRAMAC_TMPDIR := /tmp/frama-c-$(shell id -u)
 
 SOURCES := $(wildcard *.c)
 BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
