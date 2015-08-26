@@ -361,6 +361,14 @@ int _tmain(void)
         &pSvc); /* IWbemServices **ppNamespace */
     SysFreeString(strRootCIMV2);
     if (FAILED(hRes)) {
+        if (hRes == (HRESULT)WBEM_E_FAILED) {
+            /* WMI is not supported, for example on old Wine.
+             * Ignore such a runtime failure.
+             */
+            _tprintf(_T("Failed to connect to Windows Management Interface, exiting.\n"));
+            hRes = WBEM_S_NO_ERROR;
+            goto cleanup;
+        }
         _ftprintf(stderr, _T("Error: IWbemLocator::ConnectServer returned %#lx\n"), hRes);
         goto cleanup;
     }
