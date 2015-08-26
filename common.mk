@@ -6,6 +6,7 @@ ifndef V
 V_CC        = @echo '  CC        $<';
 V_CCAS      = @echo '  CCAS      $<';
 V_CCLD      = @echo '  CCLD      $@';
+V_COQC      = @echo '  COQC      $<';
 V_FRAMAC    = @echo '  FRAMA-C   $^';
 V_LD        = @echo '  LD        $@';
 V_OBJCOPY   = @echo '  OBJCOPY   $@';
@@ -20,6 +21,6 @@ endif
 # Clean command
 RM ?= rm -f
 CLEAN_CMD := $(V_CLEAN)$(RM) \
-	*.a *.aux *.bin *.dll *.efi *.elf *.exe *.log *.o *.out *.pdf *.so *.tmp \
-	*.toc .*.d .*.o && \
+	*.a *.aux *.bin *.dll *.efi *.elf *.exe *.glob *.log *.o *.out *.pdf *.so \
+	*.tmp *.toc *.vo .*.d .*.o && \
 	$(RM) -r __pycache__

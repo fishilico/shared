@@ -11,6 +11,7 @@
 *.efi
 *.elf
 *.exe
+*.glob
 *.gz
 *.ko
 *.log
@@ -26,6 +27,7 @@
 *.tmp
 *.toc
 *.xz
+*.vo
 .coverage
 htmlcov/
 __pycache__/

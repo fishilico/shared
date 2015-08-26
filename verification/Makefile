@@ -2,15 +2,22 @@ include ../os-detect.mk
 
 # Use FRAMAC=frama-c-gui to use the gui
 FRAMAC ?= frama-c
+COQC ?= coqc -batch > /dev/null
 
 # Use Frama-C libc headers which contains ACSL annotations.
 FRAMAC_SHARE_PATH := $(shell $(FRAMAC) -print-share-path 2> /dev/null)
 FRAMAC_CFLAGS := -nostdinc -I$(FRAMAC_SHARE_PATH)/libc -D__FRAMAC__
 FRAMAC_TMPDIR := /tmp/frama-c-$(shell id -u)
 
-SOURCES := $(wildcard *.c)
-BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
-FRAMAC_TARGETS := $(SOURCES:%.c=%.frama)
+C_SOURCES := $(wildcard *.c)
+COQ_SOURCES := $(wildcard *.v)
+BINARIES := $(C_SOURCES:%.c=%.$(BIN_EXT))
+COQ_OUTPUT := $(COQ_SOURCES:%.v=%.vo)
+FRAMAC_TARGETS := $(C_SOURCES:%.c=%.frama)
+
+ifeq ($(shell $(COQC) --version 2> /dev/null && echo y), y)
+all: $(COQ_OUTPUT)
+endif
 
 all: $(BINARIES)
 	@:
@@ -47,6 +54,9 @@ test: all
 %.frama-gui: FRAMAC := $(FRAMAC:%frama-c=%frama-c-gui)
 %.frama-gui: %.frama
 	@:
+
+%.vo: %.v
+	$(V_COQC)$(COQC) $<
 
 .PHONY: all all-frama clean test %.frama %.frama-gui
 .PRECIOUS: .%.o
