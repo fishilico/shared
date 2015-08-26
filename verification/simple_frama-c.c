@@ -45,9 +45,10 @@ static void* memcpy(void *dest, const void *src, size_t n)
           @*/
         do {
             /*@ ghost entry: */
-            *(d++) = *(s++);
-            /*@ assert isequallab{Here,entry}((char*)src, (char*)src, i); */
             /*@ assert isequallab{Here,entry}((char*)dest, (char*)src, i); */
+            *(d++) = *(s++);
+            /*@ assert isequallab{Here,entry}((char*)dest, (char*)src, i); */
+            /*@ assert isequallab{Here,entry}((char*)src, (char*)src, \at(n, Pre)); */
             /*@ ghost i++; */
         } while (--n);
     }
