@@ -67,6 +67,10 @@ exec indent \
     -T HLOCAL \
     -T HMODULE \
     -T HWND \
+    -T IEnumWbemClassObject \
+    -T IUnknown \
+    -T IWbemClassObject \
+    -T IWbemServices \
     -T LONG \
     -T LPARAM \
     -T LPCSTR \
@@ -77,6 +81,7 @@ exec indent \
     -T LPTHREAD_START_ROUTINE \
     -T LPTSTR \
     -T LPVOID \
+    -T OLECHAR \
     -T PBYTE \
     -T PDWORD \
     -T PIMAGE_DOS_HEADER \
@@ -102,6 +107,7 @@ exec indent \
     -T UINT_PTR \
     -T ULONG \
     -T ULONG_PTR \
+    -T VARIANT \
     -T WORD \
     -T asm_instr_context \
     -T asm_instr_reg \

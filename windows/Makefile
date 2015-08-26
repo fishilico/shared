@@ -23,6 +23,7 @@ check_winmain_params.$(BIN_EXT) helloworld.$(BIN_EXT): LDFLAGS += -Wl,--subsyste
 list_processes.$(BIN_EXT) virtual_mem.$(BIN_EXT): LIBS += -lpsapi
 network_stat.$(BIN_EXT): LIBS += -liphlpapi -lws2_32
 uuidgen.$(BIN_EXT): LIBS += -lrpcrt4
+wmi_query.$(BIN_EXT): LIBS += -lole32 -loleaut32
 
 %.$(BIN_EXT): .%.o
 	$(V_WINCCLD)$(WINCC) $(LDFLAGS) -o $@ $^ $(LIBS)

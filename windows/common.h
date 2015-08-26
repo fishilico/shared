@@ -38,6 +38,14 @@
 #    define PRIsW "S"
 #endif
 
+/* Print format for OLE strings (LPOLESTR, LPCOLESTR, BSTR) */
+#if defined(OLE2ANSI)
+#    define PRIsOLE PRIsA
+#else
+#    define PRIsOLE PRIsW
+#endif
+
+
 /**
  * Print the last Windows error
  */
