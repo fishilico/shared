@@ -1,7 +1,14 @@
 /**
  * List logical drives and volumes with some meta-information
  */
-#define _WIN32_WINNT 0x0500 /* Needed for FindFirstVolume... in winbase.h */
+#ifndef _WIN32_WINNT
+/* FindFirstVolume... functions have been introduced in 0x0500 (Win 2k) and
+ * GetVolumePathNamesForVolumeName in 0x0501 (Win XP).
+ * Assume this program will always be run on Windows version more recent than
+ * Windows XP, if no specific version has been set.
+ */
+#    define _WIN32_WINNT 0x0501
+#endif
 #include "common.h"
 
 #if (_WIN32_WINNT >= 0x0501)
@@ -165,6 +172,9 @@ static BOOL enum_volumes(void)
                 _tprintf(_T("  - Mount Point: access denied\n"));
             } else if (err == ERROR_NOT_READY) {
                 _tprintf(_T("  - Mount Point: not ready\n"));
+            } else if (err == ERROR_PATH_NOT_FOUND) {
+                /* This may happen for example with CDROM drives */
+                _tprintf(_T("  - Mount Point: path not found\n"));
             } else if (err != ERROR_NO_MORE_FILES && err != ERROR_CALL_NOT_IMPLEMENTED) {
                 print_winerr(_T("FindFirstVolumeMountPoint"));
                 FindVolumeClose(hFindVol);

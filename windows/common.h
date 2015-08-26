@@ -155,7 +155,7 @@ static LPCTSTR StringListNext(LPCTSTR str, LPCTSTR base, DWORD cchMax)
         _ParamBufSizeToAlloc_PROLOG(LPTSTR, cchLength, pcchReturnLength) \
         bSuccess = f(param1, NULL, 0, &cchLength); \
         _ParamBufSizeToAlloc_ALLOC(#f, cchLength * sizeof(TCHAR)) \
-        bSuccess = f(param1, pszBuffer, cchLength, pcchReturnLength); \
+        bSuccess = f(param1, pBuffer, cchLength, pcchReturnLength); \
         _ParamBufSizeToAlloc_EPILOG(#f, cchLength, pcchReturnLength) \
     }
 
