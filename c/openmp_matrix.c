@@ -35,7 +35,7 @@ static void print_nobuf(const char *string)
 /**
  * Malloc and exit if it failed
  */
-static void* malloc_nofail(size_t size)
+static void *malloc_nofail(size_t size)
 {
     void *ptr = malloc(size);
     if (!ptr) {
@@ -139,6 +139,12 @@ int main(void)
     const size_t size = 5000, dim = 2;
     double *matrix;
     double *vectors;
+
+    /* Use omp_get_max_threads() instead of omp_get_thread_num() outside an
+     * OpenMP loop.
+     */
+    printf("OpenMP max threads: %d\n", omp_get_max_threads());
+    fflush(stdout);
 
     /* Test that everything is fine */
     print_nobuf("OpenMP threads:");
