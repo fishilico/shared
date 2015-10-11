@@ -1,4 +1,8 @@
 <!doctype html>
+<!--
+Related websites:
+* https://amiunique.org/
+-->
 <html>
     <head>
         <title>Fingerprint a browser using Javascript</title>
@@ -126,6 +130,8 @@ function fill_fingerprint_infos() {
     e_list.appendChild(create_list_item('navigator.language', navigator.language));
     e_list.appendChild(create_list_item('navigator.cpuClass', navigator.cpuClass));
     e_list.appendChild(create_list_item('navigator.onLine', navigator.onLine));
+    e_list.appendChild(create_list_item('navigator.cookieEnabled', navigator.cookieEnabled));
+    e_list.appendChild(create_list_item('navigator.doNotTrack', navigator.doNotTrack));
     container.appendChild(e_list);
 
     // Gather information from window
@@ -180,6 +186,25 @@ function fill_fingerprint_infos() {
     container.innerHTML += '<h2>Local IP addresses</h2>';
     container.innerHTML += '<div id="local-ip-addrs">None found</div>';
     get_local_ips();
+
+    // Show WebGL information
+    container.innerHTML += '<h2>WebGL information</h2>';
+    try {
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+        if (ctx.getSupportedExtensions().indexOf("WEBGL_debug_renderer_info") >= 0) {
+            var vendor = ctx.getParameter(ctx.getExtension('WEBGL_debug_renderer_info').UNMASKED_VENDOR_WEBGL);
+            var renderer = ctx.getParameter(ctx.getExtension('WEBGL_debug_renderer_info').UNMASKED_RENDERER_WEBGL);
+            e_list = document.createElement('ul');
+            e_list.appendChild(create_list_item('vendor', vendor));
+            e_list.appendChild(create_list_item('renderer', renderer));
+            container.appendChild(e_list);
+        } else {
+            container.innerHTML += '<i>No debug information found in WebGL context extensions.</i>';
+        }
+    } catch(e) {
+        container.innerHTML += '<i>An error occured while looking for WebGL information.</i>';
+    }
 }
 window.onload = fill_fingerprint_infos;
         --></script>
