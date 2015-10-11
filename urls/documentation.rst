@@ -11,6 +11,8 @@ System administration
 * https://www.monitoring-plugins.org/ The Monitoring Plugins Project
 * https://www.gnu.org/software/coreutils/manual/html_node/su-invocation.html#index-fascism-2365
   Why GNU su does not support the 'wheel' group
+* https://github.com/lfit/itpol/blob/master/linux-workstation-security.md
+  Linux workstation security checklist (Linux Foundation)
 
 Hacking
 -------
@@ -18,6 +20,9 @@ Hacking
 * https://www.corelan.be/index.php/2009/07/19/exploit-writing-tutorial-part-1-stack-based-overflows/
   Exploit writing tutorial
 * http://beginners.re/ Reverse Engineering for Beginners, free book
+* http://www.dcode.fr/chiffre-vigenere Vigenere code cracker
+* https://github.com/SecurityInnovation/research/blob/master/presentations/2015-04-15%20The%20CTF%20Toolbox%20-%20Marcus%20Hodges%20-%20Tom%20Samstag.pdf
+  CTF Tools of the Trade (list of most commonly used tools for CTFs)
 * http://electronics.howstuffworks.com/cell-phone6.htm How cell phones work, hardware
 * http://turbochaos.blogspot.fr/2013/09/linux-rootkits-101-1-of-3.html
   Introduction to Linux Rootkits
@@ -38,6 +43,10 @@ Hacking
 * https://github.com/rapid7/metasploit-framework Metasploit Framework source
 * https://github.com/SecUpwN/Android-IMSI-Catcher-Detector/
   AIMSICD, Android IMSI Catcher Detector
+* https://bitbucket.org/dwaley/usb-reverse-engineering/overview
+  USB Reverse Engineering project
+* https://github.com/cure53/HTTPLeaks
+  HTTPLeaks project: enumerate all possible ways a website can leak HTTP requests
 
 Programming
 -----------
@@ -45,6 +54,7 @@ Programming
 * http://google-styleguide.googlecode.com/svn/trunk/shell.xml
   Google coding rules
 * http://mywiki.wooledge.org/BashFAQ Bash pitfalls
+* http://hyperpolyglot.org/unix-shells Unix Shells: Bash, Fish, Ksh, Tcsh, Zsh
 
 * https://wiki.debian.org/Hardening Debian hardening options
 

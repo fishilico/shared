@@ -20,6 +20,8 @@ General information about operating system internals:
   linux-internals - A series of posts about the linux kernel
 * http://lxr.linux.no/linux-old+v1.0/
   Linux 1.0 source
+* http://www.tldp.org/HOWTO/Linux-i386-Boot-Code-HOWTO/index.html
+  Linux i386 Boot Code HOWTO
 
 Implementation of x86 BIOS bootloaders which get in 64-bit mode:
 

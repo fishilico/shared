@@ -4,7 +4,7 @@ Random things found on the Internet
 Fun stuff
 ---------
 
-* http://www.tylervigen.com/ Spuirous correlations
+* http://www.tylervigen.com/ Spurious correlations
 * http://www.norro.be/ HTTP status cats
 
 Other
@@ -18,6 +18,13 @@ Other
   How to choose the perfect board game
 * http://www.chiark.greenend.org.uk/~sgtatham/puzzles/
   Simon Tatham's Portable Puzzle Collection
+* http://www.evanmiller.org/a-taste-of-rust.html
+  A Taste of Rust, which quotes why Rust language was named Rust
+* http://pgp.cs.uu.nl/mk_path.cgi?STAT=A494C5EB
+  PGP pathfinder & key statistics
+* https://github.com/fishilico.keys
+  https://api.github.com/users/fishilico/keys
+  SSH keys configured for a GitHub user
 
 Calculus
 --------
@@ -42,3 +49,5 @@ Other, in French
 * http://carte.epps.fr/ carte de Paris-Saclay
 * http://www.laboiteverte.fr/le-plan-des-stations-du-metro-de-paris-en-anagrammes/plan-metro-anagramme/
   Le plan des stations du métro de Paris en anagrammes
+* http://www.meteociel.fr/accueil/foudre-direct.php
+  Impacts de foudre en temps réel des 30 dernières minutes

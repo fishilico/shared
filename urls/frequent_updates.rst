@@ -56,12 +56,15 @@ Code repositories
 
 * http://grepcode.com/project/repository.grepcode.com/java/ext/com.google.android/android/
   Android
+* https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git binutils and gdb
 * http://git.busybox.net/busybox/log/ BusyBox
+* http://git.savannah.gnu.org/cgit/coreutils.git coreutils
 * https://sourceware.org/git/?p=glibc.git;a=shortlog glibc
 * http://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=shortlog GnuPG
 * https://github.com/libressl-portable/portable LibreSSL
 * https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/log/
   Linux
+* http://git.musl-libc.org/cgit/musl musl
 * http://www.sudo.ws/repos/sudo sudo
 * http://cgit.freedesktop.org/systemd/systemd/log/
   systemd
@@ -72,5 +75,6 @@ Other
 -----
 
 * http://www.qwertee.com/ Qwertee T-shirts
+* https://theyetee.com/ The Yetee T-shirts
 * http://theprofoundprogrammer.com/ The profound programmer
 * https://github.com/ctfs CTF write-ups
