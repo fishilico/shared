@@ -1,5 +1,6 @@
 #!/bin/sh
 # Download the latest grsecurity test patch
+# The ChangeLog is available at http://grsecurity.net/changelog-test.txt
 RSS_FEED="https://grsecurity.net/testing_rss.php"
 
 # Create the directory where to put the patches
