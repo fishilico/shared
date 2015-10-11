@@ -17,6 +17,12 @@ FRAMAC_TARGETS := $(C_SOURCES:%.c=%.frama)
 
 ifeq ($(shell $(COQC) --version 2> /dev/null && echo y), y)
 all: $(COQ_OUTPUT)
+
+list-nobuild:
+	@:
+else
+list-nobuild:
+	@echo $(COQ_OUTPUT)
 endif
 
 all: $(BINARIES)
