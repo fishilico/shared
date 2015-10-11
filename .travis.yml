@@ -3,6 +3,11 @@ language: python
 python:
   - "3.4"
 
+# As of 2015-10-11, Travis container infrastructure does not support running Windows programs using wine binfmt
+# so force using the standard infrastructure.
+# https://github.com/travis-ci/travis-ci/issues/4171
+sudo: required
+
 env:
   # gcc without MinGW
   - CC=gcc WINCC=false WITH_KERN=true
