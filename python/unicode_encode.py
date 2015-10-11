@@ -45,6 +45,7 @@ EXAMPLES_UTF8 = [
     b'\xe2\x80\xa2',  # U+2022 bullet
     b'\xe2\x80\x8f',  # U+200F right-to-left mark (RLM)
     b'\xe2\x82\xac',  # U+20AC euro
+    b'\xe2\x88\x9e',  # U+221E infinity
     b'\xe2\x98\x80',  # U+2605 sun
     b'\xe2\x98\x85',  # U+2605 star
     b'\xe2\x98\xa2',  # U+2622 radioactive sign
@@ -53,8 +54,9 @@ EXAMPLES_UTF8 = [
     b'\xe2\x9a\xa0',  # U+26A0 warning
     b'\xef\xbb\xbf',  # U+FEFF byte order mark (BOM, zero-width no-break space)
     b'\xef\xbf\xbd',  # U+FFFD replacement character
+    b'\xf0\x9f\x98\x87',  # U+1F607 smiling face with halo (angel)
     b'\xf0\x9f\x90\xa7',  # U+1F427 penguin
-    b'\xf0\x9f\x96\x92',  # U+1F592 reversed thumbs up sign
+    b'\xf0\x9f\x96\x92',  # U+1F592 reversed thumbs up sign ("like")
     b'\xf0\x9f\x98\x8a',  # U+1F60A smiling face with smiling eyes
 ]
 
