@@ -67,8 +67,8 @@ static void print_features(const char *name, uint32_t bits, const char *const cp
     printf("%s:\n", name);
     for (i = 0; i < 32; i++) {
         if (cpuidstr[i]) {
-            printf("  [%2u] %c%s\n", i, (bits & (1 << i)) ? '+' : '-', cpuidstr[i]);
-        } else if (bits & (1 << i)) {
+            printf("  [%2u] %c%s\n", i, (bits & (1U << i)) ? '+' : '-', cpuidstr[i]);
+        } else if (bits & (1U << i)) {
             printf("  [%2u] +?\n", i);
         }
     }
