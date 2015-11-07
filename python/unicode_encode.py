@@ -24,6 +24,7 @@
 Some links:
 * https://codepoints.net/ Find all Unicode characters
 * http://apps.timwhitlock.info/emoji/tables/unicode Emoji Unicode Tables
+* https://github.com/reinderien/mimic [ab]using Unicode to create tragedy
 
 @author: Nicolas Iooss
 @license: MIT
@@ -33,26 +34,31 @@ import argparse
 import math
 import sys
 
+try:
+    import unicodedata
+except ImportError:
+    unicodedata = None
+
 
 EXAMPLES_UTF8 = [
     b'\xc2\xa0',  # U+A0 non-breaking space (NBSP)
-    b'\xc2\xa9',  # U+A9 copyright
+    b'\xc2\xa9',  # U+A9 copyright sign
     b'\xc2\xab',  # U+AB left-pointing double angle quotation mark
     b'\xc2\xbb',  # U+BB right-pointing double angle quotation mark
-    b'\xc3\xa9',  # U+E9 e acute
+    b'\xc3\xa9',  # U+E9 Latin small letter E with acute
     b'\xc7\x83',  # U+1C3 Latin letter retroflex click (!)
-    b'\xce\xa9',  # U+3A9 Omega
+    b'\xce\xa9',  # U+3A9 Greek capital letter Omega
     b'\xe2\x80\xa2',  # U+2022 bullet
     b'\xe2\x80\x8f',  # U+200F right-to-left mark (RLM)
-    b'\xe2\x82\xac',  # U+20AC euro
+    b'\xe2\x82\xac',  # U+20AC euro sign
     b'\xe2\x88\x9e',  # U+221E infinity
-    b'\xe2\x98\x80',  # U+2605 sun
-    b'\xe2\x98\x85',  # U+2605 star
+    b'\xe2\x98\x80',  # U+2605 black sun with rays
+    b'\xe2\x98\x85',  # U+2605 black star
     b'\xe2\x98\xa2',  # U+2622 radioactive sign
-    b'\xe2\x98\xba',  # U+263A smiley
-    b'\xe2\x99\xa5',  # U+2665 heart
-    b'\xe2\x9a\xa0',  # U+26A0 warning
-    b'\xef\xbb\xbf',  # U+FEFF byte order mark (BOM, zero-width no-break space)
+    b'\xe2\x98\xba',  # U+263A white smiling face
+    b'\xe2\x99\xa5',  # U+2665 black heart suit
+    b'\xe2\x9a\xa0',  # U+26A0 warning sign
+    b'\xef\xbb\xbf',  # U+FEFF byte order mark (BOM, zero width no-break space)
     b'\xef\xbf\xbd',  # U+FFFD replacement character
     b'\xf0\x9f\x98\x87',  # U+1F607 smiling face with halo (angel)
     b'\xf0\x9f\x90\xa7',  # U+1F427 penguin
@@ -122,13 +128,19 @@ def main(argv=None):
     # Get the maximal numeric representation to get the digit count
     maxnum = max(ord(c) for c in characters)
     n = int(math.ceil(math.log(maxnum, 16)))
-    pattern = 'U+{0:' + str(n) + 'X} = UTF-8 {1:16s} {2}\n'
+    pattern = 'U+{0:' + str(n) + 'X} = UTF-8 {1:16s} {2}'
 
     for char in characters:
         byteints = get_utf8_bytes(char)
         assert byteints == get_utf8_bytes_native(char)
         hexa = ''.join('\\x{0:02x}'.format(b) for b in byteints)
-        stdout.write(pattern.format(ord(char), hexa, char).encode('utf-8'))
+        line = pattern.format(ord(char), hexa, char)
+        if unicodedata is not None:
+            try:
+                line += ' ({0})'.format(unicodedata.name(char).lower())
+            except ValueError:
+                pass
+        stdout.write((line + '\n').encode('utf-8'))
     return 0
 
 
