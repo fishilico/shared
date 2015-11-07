@@ -1,0 +1,33 @@
+FROM debian:squeeze
+LABEL Description="Debian 6 Squeeze with build dependencies for shared"
+
+# Do not install clang because it is too old to support some used options
+# Do not install coq because it is too old (8.2pl2) for some features
+# Do not install gdb because it does not support PIE executables
+# Do not install Linux kernel headers because they use version 2.6
+RUN \
+    apt-get -qq update && \
+    apt-get install -qqy \
+        gcc-mingw32 \
+        gcc-multilib \
+        iproute-dev \
+        libc-dev \
+        libc6-dev-i386 \
+        libgmp3-dev \
+        libgtk2.0-dev \
+        libpulse-dev \
+        libsdl-dev \
+        make \
+        mingw-w64 \
+        mingw32-binutils \
+        pkg-config \
+        python3 \
+        python-argparse \
+        python-numpy && \
+    apt-get clean
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]

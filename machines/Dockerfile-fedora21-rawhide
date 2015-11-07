@@ -1,0 +1,37 @@
+FROM fedora:21
+LABEL Description="Fedora 21 Rawhide with build dependencies for shared"
+
+RUN \
+    yum update -q -y && \
+    yum install -q -y \
+        clang \
+        coq \
+        gcc \
+        gdb \
+        gmp-devel \
+        gtk3-devel \
+        iproute-devel \
+        kernel \
+        kernel-devel \
+        make \
+        mingw64-gcc \
+        numpy \
+        pkgconfig \
+        pulseaudio-libs-devel \
+        python3 \
+        python3-cffi \
+        python3-devel \
+        python3-numpy \
+        python-argparse \
+        python-cffi \
+        python-devel \
+        python-numpy \
+        SDL-devel \
+        which && \
+    yum clean all
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]

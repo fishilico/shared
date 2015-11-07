@@ -1,0 +1,36 @@
+FROM fedora:22
+LABEL Description="Fedora 22 with build dependencies for shared"
+
+RUN \
+    dnf update -q -y --setopt=deltarpm=false && \
+    dnf install -q -y --setopt=deltarpm=false \
+        clang \
+        coq \
+        gcc \
+        gdb \
+        gmp-devel \
+        gtk3-devel \
+        iproute-devel \
+        kernel \
+        kernel-devel \
+        make \
+        mingw64-gcc \
+        numpy \
+        pkgconfig \
+        pulseaudio-libs-devel \
+        python3 \
+        python3-cffi \
+        python3-devel \
+        python3-numpy \
+        python-argparse \
+        python-cffi \
+        python-devel \
+        SDL-devel \
+        which && \
+    dnf clean all
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]

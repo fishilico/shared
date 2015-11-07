@@ -1,0 +1,48 @@
+FROM archlinux
+# Use https://github.com/docker/docker/blob/master/contrib/mkimage-arch.sh
+# to build a local Arch Linux image, from an Arch Linux distribution.
+# (Download https://raw.githubusercontent.com/docker/docker/master/contrib/mkimage-arch.sh
+# and https://raw.githubusercontent.com/docker/docker/master/contrib/mkimage-arch-pacman.conf)
+LABEL Description="Arch Linux with build dependencies for shared"
+
+RUN \
+    pacman --noconfirm -Sy && \
+    pacman --noconfirm -S \
+        clang \
+        gcc \
+        gdb \
+        gtk3 \
+        iproute2 \
+        kernel-headers-musl \
+        libpulse \
+        linux-headers \
+        make \
+        mingw-w64-gcc \
+        musl \
+        pkg-config \
+        python \
+        python-cffi \
+        python-numpy \
+        python2 \
+        python2-cffi \
+        python2-numpy \
+        sdl \
+        which && \
+    pacman --noconfirm -Sc && rm -rf /var/cache/pacman/pkg/*
+
+# Install coq using AUR package
+RUN pacman --noconfirm -S fakeroot git sudo && rm -rf /var/cache/pacman/pkg/*
+RUN mkdir -p /packages
+RUN useradd -d /packages makepkg-user
+RUN chown makepkg-user /packages
+RUN echo 'makepkg-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+RUN sudo -u makepkg-user git -C /packages clone https://aur.archlinux.org/camlp5-transitional.git
+RUN cd /packages/camlp5-transitional && sudo -u makepkg-user makepkg -si --noconfirm --asdeps
+RUN sudo -u makepkg-user git -C /packages clone https://aur.archlinux.org/coq.git
+RUN cd /packages/coq && sudo -u makepkg-user makepkg -si --noconfirm
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]
