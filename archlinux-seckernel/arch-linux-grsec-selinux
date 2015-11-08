@@ -5,7 +5,7 @@
 TEMP_DIR="${TEMP_DIR:-/tmp/makepkg-$(id -nu)/linux-grsec-selinux}"
 
 # Save current path
-cd "$(dirname "$0")"
+cd "$(dirname -- "$0")" || exit $?
 SCRIPT_DIRECTORY="$(pwd -P)"
 
 # Work in temporary directory
@@ -28,6 +28,9 @@ fi
 
 # Patches to source code fail if they were already applied
 rm -rf src
+
+# Replace the base pkgname with a custom one
+sed -i 's/^pkgbase=.*/pkgbase=linux-grsec-selinux/' PKGBUILD
 
 # Update kernel configuration
 # Please read README.rst file for more information.
@@ -88,18 +91,25 @@ EOF
 done
 
 # Add custom patches
-for PATCH in usr-bin-usermode-helper.patch
+for SRCPATCH in "$SCRIPT_DIRECTORY/kernel-patches/"*.patch
 do
-    if [ ! -e "$PATCH" ] && ! cp -v "$SCRIPT_DIRECTORY/$PATCH" "$PATCH"
+    DSTPATCH="custom-${SRCPATCH##*/}"
+    if ! cp -vf "$SRCPATCH" "$DSTPATCH"
     then
-        echo >&2 "Failed to copy $PATCH"
+        echo >&2 "Failed to copy $DSTPATCH"
         exit 1
+    fi
+    # Add the patch to the PKGBUILD
+    if ! grep -q "source+=('$DSTPATCH')" PKGBUILD
+    then
+        echo "source+=('$DSTPATCH')" >> PKGBUILD
+        echo "sha256sums+=('SKIP')" >> PKGBUILD
     fi
 done
 
 # Apply PKGBUILD.patch, but not twice
 # Patch created with "diff -aNpu PKGBUILD{.orig,}" and a custom git-like header
-if ! grep -q 'linux-grsec-selinux' PKGBUILD
+if ! grep -q '# Add custom patches' PKGBUILD
 then
     if ! patch -p1 < "$SCRIPT_DIRECTORY/PKGBUILD.patch"
     then
@@ -122,7 +132,9 @@ fi
 MAKEFLAGS=${MAKEFLAGS:--j3}
 export MENUCONFIG MAKEFLAGS
 
-# Build and install package
-makepkg -i || exit $?
+# Build and install package.  Uncomment the second line to customize configuration
+makepkg -Co || exit $?
+#make -C src/linux-*/ nconfig || exit $?
+makepkg -ei || exit $?
 
 echo "You may now save $TEMP_DIR/src/linux-*/.config and remove $TEMP_DIR"

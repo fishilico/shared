@@ -1,23 +1,16 @@
 --- a/PKGBUILD
 +++ b/PKGBUILD
-@@ -46,6 +46,11 @@ validpgpkeys=(
-               'DE9452CE46F42094907F108B44D1C0F82525FE49' # Bradley Spengler
- )
- 
-+# grsec-selinux custom definitions
-+pkgbase=linux-grsec-selinux
-+source+=('usr-bin-usermode-helper.patch')
-+sha256sums+=('SKIP')
-+
- _kernelname=${pkgbase#linux}
- 
- prepare() {
-@@ -66,6 +71,9 @@ prepare() {
+@@ -66,6 +66,14 @@ prepare() {
    patch -Np1 -i "$srcdir/$_grsec_patch"
    rm localversion-grsec
  
-+  # Add custom patch
-+  patch -Np1 -i "$srcdir/usr-bin-usermode-helper.patch"
++  # Add custom patches
++  for _p in ../custom-*.patch
++  do
++    [ -e "$_p" ] || continue
++    msg2 "Applying ${_p##*/}"
++    patch -Np1 -i "$_p"
++  done
 +
    if [ "${CARCH}" = "x86_64" ]; then
      cat "${srcdir}/config.x86_64" > ./.config
