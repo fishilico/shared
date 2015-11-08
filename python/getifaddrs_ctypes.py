@@ -170,7 +170,7 @@ class struct_ifreq(ctypes.Structure):
         ('u', union_ifreq)]
 
 
-libc = ctypes.CDLL(ctypes.util.find_library('c'))
+libc = ctypes.CDLL(ctypes.util.find_library('c'), use_errno=True)
 libc.getifaddrs.argtypes = [ctypes.POINTER(ctypes.POINTER(struct_ifaddrs))]
 libc.freeifaddrs.argtypes = [ctypes.POINTER(struct_ifaddrs)]
 
