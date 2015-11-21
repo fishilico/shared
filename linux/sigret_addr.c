@@ -133,11 +133,11 @@ static int get_symbol_name_elf(uintptr_t elf_base, const void *addr, int is_file
 {
     size_t i;
     const Elf_Shdr *sect_hdr;
-    size_t symtab_length = 0;
+    size_t symtab_length = 0, dynsymtab_length = 0;
     const Elf_Ehdr *elf_hdr = (Elf_Ehdr *)elf_base;
     const Elf_Phdr *prog_hdr;
     const Elf_Dyn *dyn = NULL;
-    const Elf_Sym *symtab = NULL;
+    const Elf_Sym *symtab = NULL, *dynsymtab = NULL;
     const char *symstrings = NULL;
     Elf_Word nchain = 0;
     uintptr_t elf_load_offset = 0;
@@ -151,6 +151,10 @@ static int get_symbol_name_elf(uintptr_t elf_base, const void *addr, int is_file
                 symtab_length = sect_hdr[i].sh_size / sizeof(Elf_Sym);
             } else if (sect_hdr[i].sh_type == SHT_STRTAB) {
                 symstrings = (char *)(elf_base + sect_hdr[i].sh_offset);
+            } else if (sect_hdr[i].sh_type == SHT_DYNSYM) {
+                /* Grab a pointer and size of .dynsym section */
+                dynsymtab = (Elf_Sym *)(elf_base + sect_hdr[i].sh_offset);
+                dynsymtab_length = sect_hdr[i].sh_size / sizeof(Elf_Sym);
             }
         }
         if (symtab_length && symstrings) {
@@ -198,6 +202,27 @@ static int get_symbol_name_elf(uintptr_t elf_base, const void *addr, int is_file
                 break;
         }
     }
+
+    /* It is possible that PT_DYNAMIC header does not contain a HASH entry
+     * Try to grab the number of symbols from the size of SHT_DYNSYM section
+     */
+    if (!nchain && dynsymtab_length) {
+        nchain = dynsymtab_length;
+    }
+
+    if (dynsymtab && symtab && dynsymtab != symtab) {
+        fprintf(stderr,
+                "Section and dynamic headers disagree on the offset of dynamic symbols table: %p != %p\n",
+                (const void *)dynsymtab, (const void *)symtab);
+        return 1;
+    }
+    if (dynsymtab_length && nchain != dynsymtab_length) {
+        fprintf(stderr,
+                "Section and dynamic headers disagree on the length of dynamic symbols table: %lu != %lu\n",
+                (unsigned long)dynsymtab_length, (unsigned long)nchain);
+        return 1;
+    }
+
     if (!symstrings || !symtab || !nchain) {
         fprintf(stderr, "Unable to find mandatory fields in PT_DYNAMIC header\n");
         return 1;
