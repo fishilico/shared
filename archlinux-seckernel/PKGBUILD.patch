@@ -1,6 +1,6 @@
 --- a/PKGBUILD
 +++ b/PKGBUILD
-@@ -66,6 +66,14 @@ prepare() {
+@@ -70,6 +70,14 @@ prepare() {
    patch -Np1 -i "$srcdir/$_grsec_patch"
    rm localversion-grsec
  

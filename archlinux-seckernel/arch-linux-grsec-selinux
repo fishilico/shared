@@ -93,6 +93,7 @@ done
 # Add custom patches
 for SRCPATCH in "$SCRIPT_DIRECTORY/kernel-patches/"*.patch
 do
+    [ -e "$SRCPATCH" ] || continue
     DSTPATCH="custom-${SRCPATCH##*/}"
     if ! cp -vf "$SRCPATCH" "$DSTPATCH"
     then
