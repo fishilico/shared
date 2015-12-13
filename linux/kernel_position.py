@@ -20,6 +20,7 @@ and then use "readelf -S" to read the section header of the extracted kernel to
 get the static location of .text, .data and .bss segments.
 """
 import collections
+import errno
 import itertools
 import logging
 import os.path
@@ -135,17 +136,23 @@ def get_pos_symbols_from_systemmap(path=None):
             return
     logger.debug("reading symbols from %s", path)
     symbols = dict(((name, None) for name in KERNEL_SYMNAMES))
-    with open(path, 'r') as fsysmap:
-        for line in fsysmap:
-            matches = re.match(r'([0-9a-f]+) . ([0-9a-zA-Z_]+)', line)
-            if matches is None:
-                continue
-            addr, name = matches.groups()
-            if name in symbols:
-                if symbols[name] is not None:
-                    logger.warning("symbol %s is defined twice, %x and %s",
-                                   name, symbols[name], addr)
-                symbols[name] = int(addr, 16)
+    try:
+        with open(path, 'r') as fsysmap:
+            for line in fsysmap:
+                matches = re.match(r'([0-9a-f]+) . ([0-9a-zA-Z_]+)', line)
+                if matches is None:
+                    continue
+                addr, name = matches.groups()
+                if name in symbols:
+                    if symbols[name] is not None:
+                        logger.warning("symbol %s is defined twice, %x and %s",
+                                       name, symbols[name], addr)
+                    symbols[name] = int(addr, 16)
+    except IOError as exc:
+        if exc.errno == errno.EACCES:
+            logger.warning("%s access is not permitted", path)
+            return
+        raise
     return symbols2positions(symbols)
 
 
