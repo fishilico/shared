@@ -34,11 +34,11 @@ $(PULSE_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs libpulse)
 $(PULSE_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags libpulse) --std=c99
 endif
 
-HAVE_SDL := $(shell $(PKG_CONFIG) --exists sdl && echo 'y' || echo 'n')
-ifeq ($(HAVE_SDL), y)
+HAVE_SDL2 := $(shell $(PKG_CONFIG) --exists sdl2 && echo 'y' || echo 'n')
+ifeq ($(HAVE_SDL2), y)
 	PROGRAMS += $(SDL_PROGRAMS)
-$(SDL_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs sdl)
-$(SDL_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags sdl)
+$(SDL_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs sdl2)
+$(SDL_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags sdl2)
 endif
 
 HAVE_SECCOMP := $(shell echo '\#include <linux/seccomp.h>' | \

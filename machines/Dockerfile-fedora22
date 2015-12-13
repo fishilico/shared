@@ -25,7 +25,7 @@ RUN \
         python-argparse \
         python-cffi \
         python-devel \
-        SDL-devel \
+        SDL2-devel \
         which && \
     dnf clean all
 

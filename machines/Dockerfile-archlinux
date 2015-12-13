@@ -26,7 +26,7 @@ RUN \
         python2 \
         python2-cffi \
         python2-numpy \
-        sdl \
+        sdl2 \
         which && \
     pacman --noconfirm -Sc && rm -rf /var/cache/pacman/pkg/*
 

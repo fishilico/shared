@@ -50,7 +50,7 @@ then
     echo '******************************************'
     echo '* Building with musl-gcc                 *'
     echo '******************************************'
-    make CC=musl-gcc clean test HAVE_OPENMP=n HAVE_PULSE=n HAVE_SDL=n HAVE_PYTHON_CFFI=n || exit $?
+    make CC=musl-gcc clean test HAVE_OPENMP=n HAVE_PULSE=n HAVE_SDL2=n HAVE_PYTHON_CFFI=n || exit $?
 fi
 
 make list-nobuild

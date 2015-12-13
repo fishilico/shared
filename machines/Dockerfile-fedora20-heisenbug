@@ -26,7 +26,7 @@ RUN \
         python-cffi \
         python-devel \
         python-numpy \
-        SDL-devel \
+        SDL2-devel \
         which && \
     yum clean all
 

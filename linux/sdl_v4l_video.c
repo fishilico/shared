@@ -1,6 +1,9 @@
 /**
  * Capture a video using V4L (Video for Linux) module and SDL to display
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for clock_gettime, usleep */
+#endif
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -17,7 +20,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 #define NB_BUFFER 4
 
@@ -269,18 +272,18 @@ static void uyvy2yv12(void *yv12, const void *uyvy, unsigned int w, unsigned int
 int main(void)
 {
     uint16_t width, height, fps, resz_w, resz_h, new_w, new_h;
-    int result;
-    char driver_name[128];
-    void *uyvy_frame;
+    int result, yv12_pitch;
+    void *uyvy_frame, *yv12_pixels;
     struct capture_state capst;
-    unsigned int video_format = SDL_ANYFORMAT | SDL_DOUBLEBUF | SDL_RESIZABLE;
     SDL_Rect screen_rect;
-    SDL_Surface *screen;
-    SDL_Overlay *overlay;
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+    SDL_Texture *texture;
     SDL_Event event;
     struct timespec tv;
     time_t time_start;
     bool is_first_frame;
+    bool is_fullscreen = false;
 
     width = 640;
     height = 480;
@@ -297,11 +300,30 @@ int main(void)
         fprintf(stderr, "Could not start SDL (error %d)\n", result);
         return 1;
     }
-    SDL_WM_SetCaption("SDL V4L Test", NULL);
-    SDL_VideoDriverName(driver_name, sizeof(driver_name));
-    printf("Rendering using video driver '%s'\n", driver_name);
-    screen = SDL_SetVideoMode(width, height, 0, video_format);
-    overlay = SDL_CreateYUVOverlay(width, height, SDL_YV12_OVERLAY, screen);
+    window = SDL_CreateWindow(
+        "SDL V4L Test",
+        SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+        width, height,
+        SDL_WINDOW_RESIZABLE);
+    if (!window) {
+        fprintf(stderr, "Could not create window: %s\n", SDL_GetError());
+        return 1;
+    }
+    renderer = SDL_CreateRenderer(window, -1, 0);
+    if (!renderer) {
+        fprintf(stderr, "Could not create renderer: %s\n", SDL_GetError());
+        return 1;
+    }
+    texture = SDL_CreateTexture(
+        renderer,
+        SDL_PIXELFORMAT_YV12,
+        SDL_TEXTUREACCESS_STREAMING,
+        width, height);
+    if (!texture) {
+        fprintf(stderr, "Could not create texture: %s\n", SDL_GetError());
+        return 1;
+    }
+    printf("Rendering using video driver '%s'\n", SDL_GetCurrentVideoDriver());
 
     /* Setup capture */
     uyvy_frame = malloc(width * height * 4);
@@ -328,38 +350,51 @@ int main(void)
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_QUIT:
-                    printf("SDL_QUIT event received\n");
+                    SDL_Log("SDL_QUIT event received");
                     result = 0;
                     goto quit;
 
-                case SDL_VIDEORESIZE:
-                    screen = SDL_SetVideoMode(event.resize.w, event.resize.h, 0, video_format);
-                    /* Don't support more than what SDL_Rect can handle */
-                    resz_w = (event.resize.w > UINT16_MAX) ? UINT16_MAX : (uint16_t)event.resize.w;
-                    resz_h = (event.resize.h > UINT16_MAX) ? UINT16_MAX : (uint16_t)event.resize.h;
+                case SDL_WINDOWEVENT:
+                    if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED && event.window.windowID == SDL_GetWindowID(window)) {
+                        /* SDL_Log("Window size changed to %dx%d", event.window.data1, event.window.data2); */
 
-                    /* Compute new size so that w/h is constant */
-                    if (resz_w * height >= resz_h * width) {
-                        new_h = resz_h;
-                        new_w = width * new_h / height;
-                    } else {
-                        new_w = resz_w;
-                        new_h = height * new_w / width;
+                        /* Don't support more than what SDL_Rect can handle */
+                        resz_w = (event.window.data1 > UINT16_MAX) ? UINT16_MAX : (uint16_t)event.window.data1;
+                        resz_h = (event.window.data2 > UINT16_MAX) ? UINT16_MAX : (uint16_t)event.window.data2;
+
+                        /* Compute new size so that w/h is constant */
+                        if (resz_w * height >= resz_h * width) {
+                            new_h = resz_h;
+                            new_w = width * new_h / height;
+                        } else {
+                            new_w = resz_w;
+                            new_h = height * new_w / width;
+                        }
+                        screen_rect.x = (resz_w - new_w) / 2;
+                        screen_rect.y = (resz_h - new_h) / 2;
+                        screen_rect.w = new_w;
+                        screen_rect.h = new_h;
+                        SDL_RenderSetViewport(renderer, &screen_rect);
                     }
-                    screen_rect.x = (resz_w - new_w) / 2;
-                    screen_rect.y = (resz_h - new_h) / 2;
-                    screen_rect.w = new_w;
-                    screen_rect.h = new_h;
                     break;
 
                 case SDL_KEYDOWN:
                     if (event.key.keysym.sym == SDLK_q) {
                         /* Q quits */
                         post_sdlquit_event();
-                    } else if (event.key.keysym.sym == SDLK_F11) {
-                        /* F11 toggles fullscreen */
-                        video_format ^= SDL_FULLSCREEN;
-                        screen = SDL_SetVideoMode(0, 0, 0, video_format);
+                    } else if (event.key.keysym.sym == SDLK_f || event.key.keysym.sym == SDLK_F11) {
+                        /* F and F11 toggles fullscreen */
+                        result = SDL_SetWindowFullscreen(
+                            window,
+                            is_fullscreen ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
+                        if (result < 0) {
+                            SDL_LogError(
+                                SDL_LOG_CATEGORY_APPLICATION,
+                                "Unable to toggle fullscreen: %s",
+                                SDL_GetError());
+                            break;
+                        }
+                        is_fullscreen = !is_fullscreen;
                     }
                     break;
             }
@@ -381,14 +416,21 @@ int main(void)
             }
         }
         /* Convert and display frame */
-        SDL_LockYUVOverlay(overlay);
-        uyvy2yv12(overlay->pixels[0], uyvy_frame, width, height);
-        SDL_UnlockYUVOverlay(overlay);
-        SDL_DisplayYUVOverlay(overlay, &screen_rect);
+        yv12_pixels = NULL;
+        SDL_LockTexture(texture, NULL, &yv12_pixels, &yv12_pitch);
+        assert(yv12_pitch == width);
+        uyvy2yv12(yv12_pixels, uyvy_frame, width, height);
+        SDL_UnlockTexture(texture);
+
+        SDL_RenderClear(renderer);
+        SDL_RenderCopy(renderer, texture, NULL, NULL);
+        SDL_RenderPresent(renderer);
     }
 
 quit:
-    SDL_FreeYUVOverlay(overlay);
+    SDL_DestroyTexture(texture);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
     SDL_Quit();
     capture_stop(&capst);
     free(uyvy_frame);
