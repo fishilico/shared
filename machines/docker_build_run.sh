@@ -147,18 +147,18 @@ build_and_run() {
         then
             if "$DO_PRETEND"
             then
-                echo "docker run -t -v '$(pwd)/..:/shared' -i '$IMAGE_NAME' $*"
+                echo "docker run --rm -t -v '$(pwd)/..:/shared' -i '$IMAGE_NAME' $*"
             else
                 # Run docker with a pseudo-TTY and with a volume
-                docker run -t -v "$(pwd)/..:/shared" -i "$IMAGE_NAME" "$@" || return $?
+                docker run --rm -t -v "$(pwd)/..:/shared" -i "$IMAGE_NAME" "$@" || return $?
             fi
         else
             # Run docker without a volume to base directory
             if "$DO_PRETEND"
             then
-                echo "docker run -t -i '$IMAGE_NAME' $*"
+                echo "docker run --rm -t -i '$IMAGE_NAME' $*"
             else
-                docker run -t -i "$IMAGE_NAME" "$@" || return $?
+                docker run --rm -t -i "$IMAGE_NAME" "$@" || return $?
             fi
         fi
     fi
