@@ -51,6 +51,11 @@ static BOOL enum_logical_drives(void)
     /* Enumerate logical drives with GetLogicalDrives */
     dwLogicalDrives = GetLogicalDrives();
     if (!dwLogicalDrives) {
+        if (GetLastError() == ERROR_SUCCESS) {
+            /* It may happen that no drives exists, in wine */
+            _tprintf(_T("No logical drives. Let's continue!\n"));
+            return TRUE;
+        }
         print_winerr(_T("GetLogicalDrives"));
         return FALSE;
     }
@@ -139,6 +144,11 @@ static BOOL enum_volumes(void)
 
     hFindVol = FindFirstVolume(szVolumeName, ARRAYSIZE(szVolumeName));
     if (hFindVol == INVALID_HANDLE_VALUE) {
+        if (GetLastError() == ERROR_FILE_NOT_FOUND) {
+            /* This may happen in wine */
+            _tprintf(_T("Volumes: nothing found.\n"));
+            return TRUE;
+        }
         print_winerr(_T("FindFirstVolume"));
         return FALSE;
     }
