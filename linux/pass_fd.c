@@ -57,6 +57,7 @@ static int child1_main(const char *sockpath)
     }
     if (fcntl(sockfd, F_SETFD, FD_CLOEXEC) == -1) {
         perror("fcntl(CLOEXEC)");
+        close(sockfd);
         return 1;
     }
     if (setsockopt(sockfd, SOL_SOCKET, SO_PASSCRED, &on, sizeof(on)) == -1) {
@@ -164,7 +165,7 @@ static int child1_main(const char *sockpath)
 
 static int child2_main(const char *sockpath)
 {
-    int sockfd, pipefd[2];
+    int sockfd = -1, pipefd[2];
     struct sockaddr_un addr;
     struct iovec iov;
     struct msghdr msg;
@@ -192,20 +193,34 @@ static int child2_main(const char *sockpath)
     }
 
     /* Connect to the Unix socket */
-    sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
-    if (sockfd == -1) {
-        perror("socket");
-        return 1;
-    }
-    if (fcntl(sockfd, F_SETFD, FD_CLOEXEC) == -1) {
-        perror("fcntl(CLOEXEC)");
-        return 1;
-    }
-    addr.sun_family = AF_UNIX;
-    strncpy(addr.sun_path, sockpath, sizeof(addr.sun_path));
-    if (connect(sockfd, (struct sockaddr *)(&addr), sizeof(addr)) == -1) {
-        perror("connect");
-        return 1;
+    while (sockfd == -1) {
+        sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
+        if (sockfd == -1) {
+            perror("socket");
+            return 1;
+        }
+        if (fcntl(sockfd, F_SETFD, FD_CLOEXEC) == -1) {
+            perror("fcntl(CLOEXEC)");
+            return 1;
+        }
+        addr.sun_family = AF_UNIX;
+        strncpy(addr.sun_path, sockpath, sizeof(addr.sun_path));
+        if (connect(sockfd, (struct sockaddr *)(&addr), sizeof(addr)) == -1) {
+            /* There is a race condition between bind() and listen() calls.
+             * If connect() falls in it, it fails with ECONNREFUSED error.
+             * Then sleeps a little and try again.
+             */
+            if (errno == ECONNREFUSED) {
+                printf("[%u] Failed to connect because of a race condition, trying again.\n",
+                       getpid());
+                close(sockfd);
+                sockfd = -1;
+                usleep(1);
+                continue;
+            }
+            perror("connect");
+            return 1;
+        }
     }
     printf("[%u] Connected to the socket\n", getpid());
 
