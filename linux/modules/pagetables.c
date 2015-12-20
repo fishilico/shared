@@ -29,6 +29,8 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/debugfs.h>
+#include <linux/device.h>
+#include <linux/fs.h>
 #include <linux/kallsyms.h>
 #include <linux/mm.h>
 #include <linux/module.h>
@@ -754,22 +756,96 @@ static const struct file_operations ptdump_fops = {
 	.release	= single_release,
 };
 
+/**
+ * Create a device node with only user-read permission
+ */
+# if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 3, 0)
+/* (struct class*)->devnode prototype has been changed in Linux 3.3 by commit
+ * 2c9ede55ecec ("switch device_get_devnode() and ->devnode() to umode_t *")
+ */
+static char *ptdump_class_devnode(struct device *dev, umode_t *mode)
+#else
+static char *ptdump_class_devnode(struct device *dev, mode_t *mode)
+#endif
+{
+	/* mode is NULL when devtmpfs_delete_node calls device_get_devnode */
+	if (mode)
+		*mode = S_IRUSR;
+	return kstrdup(dev_name(dev), GFP_KERNEL);
+}
+
+/* By default, use 0 to dynamically allocate a major number. It will for
+ * example allocate a number between 240 and 254, which is advertised as
+ * "LOCAL/EXPERIMENTAL USE" in Documentation/devices.txt.
+ * Make the chose major number available to userspace through
+ * /sys/module/pagetables/parameters/chrdev_major .
+ * It is also available in /proc/devices.
+ */
+static int chrdev_major;
+module_param(chrdev_major, uint, S_IRUSR | S_IRGRP | S_IROTH);
+MODULE_PARM_DESC(chrdev_major, "Character device major number to use");
+
 static struct dentry *debugfs_pe;
+static struct class *chrdev_class;
 
 static int __init pt_dump_init(void)
 {
+	int result;
+	struct device *dev;
+
 	adjust_address_markers();
 
-	debugfs_pe = debugfs_create_file("kernel_pagetables", 0400, NULL, NULL,
-					 &ptdump_fops);
+	/* Create a debugfs file */
+	debugfs_pe = debugfs_create_file("kernel_pagetables", S_IRUSR, NULL,
+					 NULL, &ptdump_fops);
 	if (!debugfs_pe)
 		return -ENOMEM;
 
+	/* Create a device so that it is available on kernels without
+	 * CONFIG_DEBUG_FS
+	 */
+	chrdev_major = register_chrdev(chrdev_major, "pagetables",
+				       &ptdump_fops);
+	if (chrdev_major < 0) {
+		result = chrdev_major;
+		goto error_debugfs;
+	}
+
+	/* Create /sys/class/pagetables */
+	chrdev_class = class_create(THIS_MODULE, "pagetables");
+	if (IS_ERR(chrdev_class)) {
+		result = PTR_ERR(chrdev_class);
+		goto error_chrdev;
+	}
+	chrdev_class->devnode = ptdump_class_devnode;
+
+	/* Create /dev/kernel_pagetables and
+	 * /sys/devices/virtual/pagetables/kernel_pagetables
+	 */
+	dev = device_create(chrdev_class, NULL, MKDEV(chrdev_major, 0), NULL,
+			    "kernel_pagetables");
+	if (IS_ERR(dev)) {
+		result = PTR_ERR(dev);
+		goto error_class;
+	}
+	pr_info("created /dev/%s with major number %d\n", dev_name(dev),
+		chrdev_major);
 	return 0;
+
+error_class:
+	class_destroy(chrdev_class);
+error_chrdev:
+	unregister_chrdev(chrdev_major, "pagetables");
+error_debugfs:
+	debugfs_remove(debugfs_pe);
+	return result;
 }
 
 static void __exit pt_dump_exit(void)
 {
+	device_destroy(chrdev_class, MKDEV(chrdev_major, 0));
+	class_destroy(chrdev_class);
+	unregister_chrdev(chrdev_major, "pagetables");
 	debugfs_remove(debugfs_pe);
 }
 
