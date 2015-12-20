@@ -2,8 +2,9 @@ FROM ubuntu:15.10
 LABEL Description="Ubuntu 15.10 Wily Werewolf with build dependencies for shared"
 
 RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
-    apt-get install -qqy \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         clang \
         coq \

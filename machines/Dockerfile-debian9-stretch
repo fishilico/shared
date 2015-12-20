@@ -2,8 +2,9 @@ FROM debian:stretch
 LABEL Description="Debian 9 Stretch with build dependencies for shared"
 
 RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
-    apt-get install -qqy \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         clang \
         coq \

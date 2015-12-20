@@ -3,8 +3,9 @@ LABEL Description="Debian 8 Jessie with build dependencies for shared"
 
 # libnetlink (previously provided by iproute-dev) disappeared.
 RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
-    apt-get install -qqy \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         clang \
         coq \

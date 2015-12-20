@@ -3,8 +3,9 @@ LABEL Description="Ubuntu 12.04 LTS Precise Pangolin with build dependencies for
 
 # Do not install coq because it is too old (8.3pl4) for some features
 RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
-    apt-get install -qqy \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
         clang \
         gcc-multilib \
         gdb \

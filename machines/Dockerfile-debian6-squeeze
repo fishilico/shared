@@ -6,8 +6,9 @@ LABEL Description="Debian 6 Squeeze with build dependencies for shared"
 # Do not install gdb because it does not support PIE executables
 # Do not install Linux kernel headers because they use version 2.6
 RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
-    apt-get install -qqy \
+    apt-get install --no-install-recommends -qqy \
         gcc-mingw32 \
         gcc-multilib \
         iproute-dev \

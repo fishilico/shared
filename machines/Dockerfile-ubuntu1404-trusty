@@ -5,8 +5,9 @@ LABEL Description="Ubuntu 14.04 LTS Trusty Tahr with build dependencies for shar
 # musl malloc does not seem to support fallback to mmap and brk fails in "make test"
 #   so do not install musl-dev and musl-tools packages
 RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
-    apt-get install -qqy \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         clang \
         coq \
