@@ -1,6 +1,7 @@
 FROM fedora:20
 LABEL Description="Fedora 20 Heisenbug with build dependencies for shared"
 
+# Do not install wine because yum fails to install lib due to multilib issues
 RUN \
     yum update -q -y && \
     yum install -q -y \

@@ -27,7 +27,8 @@ RUN \
         python-devel \
         python-numpy \
         SDL2-devel \
-        which && \
+        which \
+        wine && \
     yum clean all
 
 WORKDIR /shared

@@ -28,7 +28,8 @@ RUN \
         python3-numpy \
         python-cffi \
         python-dev \
-        python-numpy && \
+        python-numpy \
+        wine && \
     apt-get clean
 
 WORKDIR /shared

@@ -6,8 +6,11 @@ FROM archlinux
 LABEL Description="Arch Linux with build dependencies for shared"
 
 RUN \
+    echo '[multilib]' >> /etc/pacman.conf && \
+    echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf && \
     pacman --noconfirm -Sy && \
     pacman --noconfirm -S \
+        base-devel \
         clang \
         gcc \
         gdb \
@@ -27,7 +30,8 @@ RUN \
         python2-cffi \
         python2-numpy \
         sdl2 \
-        which && \
+        which \
+        wine && \
     pacman --noconfirm -Sc && rm -rf /var/cache/pacman/pkg/*
 
 # Install coq using AUR package

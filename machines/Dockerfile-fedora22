@@ -26,7 +26,8 @@ RUN \
         python-cffi \
         python-devel \
         SDL2-devel \
-        which && \
+        which \
+        wine && \
     dnf clean all
 
 WORKDIR /shared

@@ -4,6 +4,7 @@ LABEL Description="Ubuntu 15.04 Vivid Vervet with build dependencies for shared"
 # libnetlink (previously provided by iproute-dev) disappeared.
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
+    dpkg --add-architecture i386 && \
     apt-get -qq update && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
@@ -30,7 +31,8 @@ RUN \
         python-argparse \
         python-cffi \
         python-dev \
-        python-numpy && \
+        python-numpy \
+        wine && \
     apt-get clean
 
 WORKDIR /shared

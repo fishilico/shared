@@ -21,7 +21,8 @@ RUN \
         python3 \
         python-argparse \
         binutils-mingw-w64 \
-        gcc-mingw-w64 && \
+        gcc-mingw-w64 \
+        wine && \
     apt-get clean
 
 WORKDIR /shared

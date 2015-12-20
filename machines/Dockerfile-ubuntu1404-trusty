@@ -6,6 +6,7 @@ LABEL Description="Ubuntu 14.04 LTS Trusty Tahr with build dependencies for shar
 #   so do not install musl-dev and musl-tools packages
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
+    dpkg --add-architecture i386 && \
     apt-get -qq update && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
@@ -30,7 +31,8 @@ RUN \
         python-argparse \
         python-cffi \
         python-dev \
-        python-numpy && \
+        python-numpy \
+        wine && \
     apt-get clean
 
 WORKDIR /shared
