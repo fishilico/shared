@@ -23,6 +23,8 @@
  *     Page bits
  *   - https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/x86/x86_64/mm.txt
  *     Memory structure
+ *
+ * In qemu monitor console, "info tlb" show the page table ("virtual to physical memory mappings")
  */
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
