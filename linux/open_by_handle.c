@@ -1,6 +1,10 @@
 /**
  * Open a file using the "handle" Linux API
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for name_to_handle_at, open_by_handle_at */
+#endif
+
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
