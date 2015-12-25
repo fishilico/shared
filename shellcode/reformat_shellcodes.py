@@ -102,7 +102,9 @@ def instr_match(asminstr, bininstr):
         return True
 
     # x86 jumps
-    for jump in ('call', 'callq', 'jae', 'je', 'jecxz', 'jmp', 'jne'):
+    for jump in ('call', 'callq',
+                 'jae', 'jb', 'je', 'jecxz', 'jmp', 'jne', 'js',
+                 'loop'):
         if asminstr.startswith(jump + ' ') and bininstr.startswith(jump + ' '):
             return True
 

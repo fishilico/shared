@@ -11,8 +11,8 @@ _start:
     /* 52             */  push    %edx
     /* 53             */  push    %ebx
     /* 89 e1          */  mov     %esp, %ecx    /* ecx = [ebx, NULL] */
-    /* 31 c0          */  xor     %eax, %eax
-    /* b0 0b          */  mov     $0xb, %al     /* eax = 11 = __NR_execve */
+    /* 6a 0b          */  push    $0xb
+    /* 58             */  pop     %eax          /* eax = 11 = __NR_execve */
     /* cd 80          */  int     $0x80         /* syscall(eax, ebx, ecx, edx) */
 
 /* Mark the stack as not executable */
