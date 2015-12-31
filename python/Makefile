@@ -8,17 +8,17 @@ PYLINT ?= pylint
 # Programs not to test automatically
 NONTEST_BINARIES := matplotlib_feed_plot3d.py unicode_norm.py
 
-HAVE_PYTHON_CFFI := $(shell $(PYTHON) -c 'import cffi' 2> /dev/null && echo y || echo n)
-HAVE_PYTHON_NUMPY := $(shell $(PYTHON) -c 'import numpy' 2> /dev/null && echo y || echo n)
-HAVE_PYTHON3_SOCKET_RECVMSG := $(shell $(PYTHON3) -c 'import socket;socket.socket.recvmsg' 2> /dev/null && echo y || echo n)
+HAVE_PYTHON_CFFI := $(call can-run,$(PYTHON) -c 'import cffi')
+HAVE_PYTHON_NUMPY := $(call can-run,$(PYTHON) -c 'import numpy')
+HAVE_PYTHON3_SOCKET_RECVMSG := $(call can-run,$(PYTHON3) -c 'import socket;socket.socket.recvmsg')
 
-ifneq ($(HAVE_PYTHON_CFFI), y)
+ifneq ($(HAVE_PYTHON_CFFI),y)
 NONTEST_BINARIES += cffi_example.py cffi_numpy.py
-else ifneq ($(HAVE_PYTHON_NUMPY), y)
+else ifneq ($(HAVE_PYTHON_NUMPY),y)
 NONTEST_BINARIES += cffi_numpy.py
 endif
 
-ifneq ($(HAVE_PYTHON3_SOCKET_RECVMSG), y)
+ifneq ($(HAVE_PYTHON3_SOCKET_RECVMSG),y)
 NONTEST_BINARIES += udp_multihome.py
 endif
 

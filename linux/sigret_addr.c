@@ -131,7 +131,7 @@ static void identify_sigret_code(const void *address)
 
 static int get_symbol_name_elf(uintptr_t elf_base, const void *addr, int is_file)
 {
-    size_t i;
+    size_t i, nchain = 0;
     const Elf_Shdr *sect_hdr;
     size_t symtab_length = 0, dynsymtab_length = 0;
     const Elf_Ehdr *elf_hdr = (Elf_Ehdr *)elf_base;
@@ -139,7 +139,6 @@ static int get_symbol_name_elf(uintptr_t elf_base, const void *addr, int is_file
     const Elf_Dyn *dyn = NULL;
     const Elf_Sym *symtab = NULL, *dynsymtab = NULL;
     const char *symstrings = NULL;
-    Elf_Word nchain = 0;
     uintptr_t elf_load_offset = 0;
 
     /* In a file, find section header and retrieve the symbol table */
@@ -198,7 +197,7 @@ static int get_symbol_name_elf(uintptr_t elf_base, const void *addr, int is_file
                 symtab = ptr;
                 break;
             case DT_HASH:
-                nchain = ((const Elf_Word *)ptr)[1];
+                nchain = (size_t)((const Elf_Word *)ptr)[1];
                 break;
         }
     }

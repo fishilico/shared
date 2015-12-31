@@ -15,7 +15,7 @@ NOLIBC_LDFLAGS := $(filter-out -fPIC -fPIE -pie -shared, $(LDFLAGS))
 # Compile a shared object because there is no need of ld.so on Intel architecture.
 # However, some ARM compilers rely on ld.so to remap offsets when doing ASLR, so
 # whitelist some known-to-work compilers, such as arm-none-eabi-gcc (bare metal).
-ifeq ($(shell $(CC) -E -v - < /dev/null 2>&1 > /dev/null | $(GREP) -qi "^Target:\s*\(i.86\|x86\|arm-none-\)" && echo y),y)
+ifeq ($(call can-run,$(CC) -E -v - < /dev/null 2>&1 > /dev/null | $(GREP) -qi "^Target:\s*\(i.86\|x86\|arm-none-\)"),y)
 NOLIBC_CFLAGS += -fPIC
 NOLIBC_LDFLAGS += -fPIC -shared
 else

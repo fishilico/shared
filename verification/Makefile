@@ -15,7 +15,7 @@ BINARIES := $(C_SOURCES:%.c=%.$(BIN_EXT))
 COQ_OUTPUT := $(COQ_SOURCES:%.v=%.vo)
 FRAMAC_TARGETS := $(C_SOURCES:%.c=%.frama)
 
-ifeq ($(shell $(COQC) --version 2> /dev/null && echo y), y)
+ifeq ($(call can-run,$(COQC) --version),y)
 all: $(COQ_OUTPUT)
 
 list-nobuild:

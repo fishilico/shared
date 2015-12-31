@@ -24,3 +24,15 @@ CLEAN_CMD := $(V_CLEAN)$(RM) \
 	*.a *.aux *.bin *.dll *.efi *.elf *.exe *.glob *.log *.o *.out *.pdf *.so \
 	*.tmp *.toc *.vo .*.d .*.o && \
 	$(RM) -r __pycache__
+
+# Try running a command and output the second or third parameter accordingly.
+# The implementation of this function was copied from Linux (file scripts/Kbuild.include)
+try-run = $(shell set -e; if ($(1)) >/dev/null 2>&1; then echo "$(2)"; else echo "$(3)"; fi)
+
+# Output "y" if the specified command can be run
+can-run = $(call try-run,$(1),y,n)
+
+# Test a C Compiler PreProcessor option
+ccpp-has-option = $(call can-run,$(CC) -Werror $(1) -E - < /dev/null)
+ccpp-option = $(call try-run,$(CC) -Werror $(1) -E - < /dev/null,$(1),$(2))
+cc-disable-warning = $(call try-run,$(CC) -Werror -W$(strip $(1)) -E - < /dev/null,-Wno-$(strip $(1)))

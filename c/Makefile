@@ -23,39 +23,46 @@ PROGRAMS := $(filter-out \
 	$(ALL_PROGRAMS))
 
 # view_sizes.c uses "long long" type, so disable the related warning
-view_sizes.o: CFLAGS += -Wno-long-long
+view_sizes.o: CFLAGS += $(call cc-disable-warning,long-long)
 
 
 # Only compile GMP programs when gmp.h can be found
-HAVE_GMP := $(shell $(CC) -Werror -include gmp.h -E - < /dev/null > /dev/null 2>&1 && echo y || echo n)
-ifeq ($(HAVE_GMP), y)
+HAVE_GMP := $(call ccpp-has-option,-include gmp.h)
+ifeq ($(HAVE_GMP),y)
 PROGRAMS += $(GMP_PROGRAMS)
-$(GMP_PROGRAMS:%=%.$(BIN_EXT)): LIBS += -lgmp
 endif
+$(GMP_PROGRAMS:%=%.$(BIN_EXT)): LIBS += -lgmp
 
 # When gcc is not compiled with pthread, -fopenmp makes the preprocessor fails
-# clang 3.5.0 has partial support for OpenMP, omp.h is missing
-HAVE_OPENMP := $(shell $(CC) -Werror -fopenmp -include omp.h -E - < /dev/null > /dev/null 2>&1 && echo y || echo n)
-ifeq ($(HAVE_OPENMP), y)
+# clang 3.5.0 has partial support for OpenMP, omp.h is missing but gcc's omp.h
+# can be used, and can even be set up in clang include files by copying
+# /usr/lib/gcc/$(gcc -dumpmachine)/${GCC_VERSION}/include/omp.h to
+# /usr/lib/clang/${CLANG_VERSION}/include/omp.h
+HAVE_OPENMP := $(call ccpp-has-option,-fopenmp -include omp.h)
+ifeq ($(HAVE_OPENMP),y)
 PROGRAMS += $(OPENMP_PROGRAMS)
-$(OPENMP_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -fopenmp
-$(OPENMP_PROGRAMS:%=.%.o): CFLAGS += -fopenmp
 endif
+$(OPENMP_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -fopenmp
+$(OPENMP_PROGRAMS:%=.%.o): CFLAGS += -fopenmp $(call cc-disable-warning,source-uses-openmp)
 
 # Only compile Gtk+ programs where $(CC) is not used for cross-compilation
 ifeq ($(filter-out cc gcc clang, $(CC)),)
-	HAVE_GTK3 := $(shell $(PKG_CONFIG) --exists gtk+-3.0 2> /dev/null && echo 'y' || echo 'n')
-	ifeq ($(HAVE_GTK3), y)
+	HAVE_GTK3 := $(call can-run,$(PKG_CONFIG) --exists gtk+-3.0)
+	ifeq ($(HAVE_GTK3),y)
 		PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
-$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0) -Wno-pedantic -Wno-cast-qual
+$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0) \
+	$(call cc-disable-warning,pedantic) $(call cc-disable-warning,cast-qual)
 	else
-		HAVE_GTK2 := $(shell $(PKG_CONFIG) --exists gtk+-2.0 2> /dev/null && echo 'y' || echo 'n')
-		ifeq ($(HAVE_GTK2), y)
+		HAVE_GTK2 := $(call can-run,$(PKG_CONFIG) --exists gtk+-2.0)
+		ifeq ($(HAVE_GTK2),y)
 			PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
-			# Some prototypes are not strict in Gtk+ headers
-$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0) -Wno-strict-prototypes
+			# Gtk+2 headers:
+			# * Use variadic macros (C99 feature)
+			# * Use prototypes wihch are not strict
+$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0) --std=c99 \
+	$(call cc-disable-warning,strict-prototypes) $(call cc-disable-warning,cast-qual)
 		endif
 	endif
 endif

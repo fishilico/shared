@@ -19,13 +19,15 @@ include $(dir $(lastword $(MAKEFILE_LIST)))common.mk
 CC ?= cc
 
 # C preprocessor flags
+# Gentoo Hardened already defines _FORTIFY_SOURCE in the compiler and warns
+# about possible redefinition, so detect these warnings.
 # Generate dependencies files targetting $@ in a .$@.d file
 # ... while allowing using CPPFLAGS outside of a target (where $@ is empty)
-CPPFLAGS ?= -D_FORTIFY_SOURCE=2 $(@:%=-Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d)
+CPPFLAGS = $(call ccpp-option,-D_FORTIFY_SOURCE=2) $(@:%=-Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d)
 
 # C compiler flags
 # list of warnings from https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
-CFLAGS ?= -O2 -ansi -pedantic -pipe \
+CFLAGS = -O2 -ansi -pedantic -pipe \
 	-Wall -Wextra \
 	-Waggregate-return \
 	-Wcast-align \
@@ -56,48 +58,44 @@ CFLAGS ?= -O2 -ansi -pedantic -pipe \
 #CFLAGS += -g -fvar-tracking-assignments -fno-omit-frame-pointer
 
 # Add clang-specific options unknown to GCC
-ifeq ($(shell $(CC) -Werror -Weverything -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+ifeq ($(call ccpp-has-option,-Weverything), y)
 	CFLAGS += -Weverything \
-		-Wno-disabled-macro-expansion \
-		-Wno-documentation \
 		-Wno-padded \
 		-Wno-shift-sign-overflow \
 		-Wno-unused-macros
+	# added after clang 3.0
+	CFLAGS += $(call cc-disable-warning,disabled-macro-expansion)
+	CFLAGS += $(call cc-disable-warning,documentation)
 	# clang 3.6 added -Wreserved-id-macro, which is incompatible with _GNU_SOURCE definition
-	ifeq ($(shell $(CC) -Werror -Wreserved-id-macro -E - < /dev/null > /dev/null 2>&1 && echo y), y)
-		CFLAGS += -Wno-reserved-id-macro
-	endif
+	CFLAGS += $(call cc-disable-warning,reserved-id-macro)
+	# clang 3.7 added -Wdocumentation-unknown-command and -fcatch-undefined-behavior
+	CFLAGS += $(call cc-disable-warning,documentation-unknown-command)
 endif
 
 # Add GCC-specific options unknown to clang
-ifeq ($(shell $(CC) -Werror -Wtrampolines -E - < /dev/null > /dev/null 2>&1 && echo y), y)
+ifeq ($(call ccpp-has-option,-Wtrampolines), y)
 	CFLAGS += \
 		-Wjump-misses-init \
 		-Wlogical-op \
 		-Wtrampolines
 	# gcc 4.6 added -Wsuggest-attribute=[const|pure|noreturn]
-	ifeq ($(shell $(CC) -Werror -Wsuggest-attribute=format -E - < /dev/null > /dev/null 2>&1 && echo y), y)
-		CFLAGS += \
-			-Wsuggest-attribute=format \
-			-Wsuggest-attribute=noreturn
-	endif
+	CFLAGS += $(call ccpp-option,-Wsuggest-attribute=format)
+	CFLAGS += $(call ccpp-option,-Wsuggest-attribute=noreturn)
 endif
 
 # Add strong stack protector if supported
-ifeq ($(shell $(CC) -Werror -fstack-protector-strong -E - < /dev/null > /dev/null 2>&1 && echo y), y)
-	CFLAGS += -fstack-protector-strong
-endif
+CFLAGS += $(call ccpp-option,-fstack-protector-strong)
 
 # Linker flags
-LDFLAGS ?= -Wl,-O1,-as-needed,-no-undefined,-z,relro,-z,now \
+LDFLAGS = -Wl,-O1,-as-needed,-no-undefined,-z,relro,-z,now \
 	-fPIE -pie -fstack-protector
 
-LIBS ?=
+LIBS =
 
 # Application build configuration
 BIN_EXT := $(EXT_PREFIX)bin
 
 # Shared Object build configuration
 LIB_EXT := $(EXT_PREFIX)so
-LIB_CFLAGS ?= -fPIC -fvisibility=hidden
-LIB_LDFLAGS ?= -fPIC -shared -Wl,-soname,$@
+LIB_CFLAGS = -fPIC -fvisibility=hidden
+LIB_LDFLAGS = -fPIC -shared -Wl,-soname,$@

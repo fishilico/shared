@@ -35,8 +35,8 @@ endif
 # As this is buggy, don't enable the stack protector.  It can be enabled with:
 #   CFLAGS += -fstack-protector --param=ssp-buffer-size=4
 #   LDFLAGS += -fstack-protector
-CPPFLAGS ?= $(@:%=-Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d)
-CFLAGS ?= -O2 -ansi \
+CPPFLAGS = $(@:%=-Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d)
+CFLAGS = -O2 -ansi \
 	-Wall -Wextra \
 	-Waggregate-return \
 	-Wformat=2 \
@@ -55,12 +55,12 @@ CFLAGS ?= -O2 -ansi \
 	-Wwrite-strings \
 	-Wno-long-long \
 	-Wno-unused-function
-LDFLAGS ?= -Wl,--subsystem=console,--dynamicbase,--nxcompat
-LIBS ?=
+LDFLAGS = -Wl,--subsystem=console,--dynamicbase,--nxcompat
+LIBS =
 
 
 # Enable Unicode if available
-HAVE_UNICODE ?= $(shell $(WINCC) -municode -E - < /dev/null > /dev/null 2>&1 && echo y)
+HAVE_UNICODE ?= $(call can-run,$(WINCC) -municode -E - < /dev/null)
 ifeq ($(HAVE_UNICODE),y)
 CPPFLAGS += -D_UNICODE
 CFLAGS += -municode
@@ -72,8 +72,8 @@ BIN_EXT := $(EXT_PREFIX)exe
 
 # Dynamic Linked Library build configuration
 LIB_EXT := $(EXT_PREFIX)dll
-LIB_CFLAGS ?=
-LIB_LDFLAGS ?= -shared -Wl,--subsystem=0
+LIB_CFLAGS =
+LIB_LDFLAGS = -shared -Wl,--subsystem=0
 
 # Run tests on Windows or on Linux if binfmt_misc has been configured.
 # To configure this, it is possible to run:
@@ -86,9 +86,9 @@ LIB_LDFLAGS ?= -shared -Wl,--subsystem=0
 ifeq ($(OS), Windows_NT)
 	RUN_WINDOWS_TEST := y
 else
-	HAVE_DOSWIN_BINFMT := $(shell test -e /proc/sys/fs/binfmt_misc/DOSWin && echo y)
-	HAVE_WINE_BINFMT := $(shell test -e /proc/sys/fs/binfmt_misc/wine && echo y)
-	ifeq ($(findstring y, $(HAVE_DOSWIN_BINFMT) $(HAVE_WINE_BINFMT)), y)
+	HAVE_DOSWIN_BINFMT := $(call can-run,test -e /proc/sys/fs/binfmt_misc/DOSWin)
+	HAVE_WINE_BINFMT := $(call can-run,test -e /proc/sys/fs/binfmt_misc/wine)
+	ifeq ($(findstring y, $(HAVE_DOSWIN_BINFMT) $(HAVE_WINE_BINFMT)),y)
 		RUN_WINDOWS_TEST := y
 	else
 		RUN_WINDOWS_TEST := n

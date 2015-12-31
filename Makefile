@@ -24,20 +24,20 @@ SUBDIRS_BLACKLIST = verification/linux%
 
 # Linux check: filter-out linux/ on non-Linux systems, and boot/ on Windows
 # If the kernel headers are not installed, filter out linux/modules
-ifeq ($(OS), Windows_NT)
+ifeq ($(OS),Windows_NT)
 SUBDIRS_BLACKLIST += linux% boot%
 else ifneq ($(shell $(UNAME) -s 2>/dev/null),Linux)
 SUBDIRS_BLACKLIST += linux%
 else
 KERNELVER ?= $(shell $(UNAME) -r)
 KERNELPATH ?= /lib/modules/$(KERNELVER)/build
-ifneq ($(shell test -r $(KERNELPATH)/Makefile && echo y),y)
+ifneq ($(call can-run,test -r $(KERNELPATH)/Makefile),y)
 SUBDIRS_BLACKLIST += linux/modules%
 endif
 endif
 
 # Windows or MinGW check: compile a basic file
-ifneq ($(shell $(WINCC) -E windows/helloworld.c > /dev/null 2>&1 && echo y),y)
+ifneq ($(call can-run,$(WINCC) -E windows/helloworld.c),y)
 SUBDIRS_BLACKLIST += windows%
 endif
 
@@ -46,14 +46,14 @@ endif
 # Syslinux MBR check: $(CC) needs to support some flags
 ifneq ($(shell printf '\#if defined(__x86_64__)||defined(__i386__)\ny\n\#endif' |$(CC) -Werror -E - |grep '^[^\#]'),y)
 SUBDIRS_BLACKLIST += boot%
-else ifneq ($(shell echo '__asm__(".code16");' |$(CC) -Werror -m32 -march=i386 -xc -c /dev/stdin -o /dev/null 2> /dev/null && echo y),y)
+else ifneq ($(call can-run,echo '__asm__(".code16");' |$(CC) -Werror -m32 -march=i386 -xc -c /dev/stdin -o /dev/null),y)
 SUBDIRS_BLACKLIST += boot/mbr%
-else ifneq ($(shell $(CC) -Werror -E -falign-functions=0 - < /dev/null > /dev/null 2>&1 && echo y),y)
+else ifneq ($(call ccpp-has-option,-falign-functions=0),y)
 SUBDIRS_BLACKLIST += boot/mbr/syslinux-mbr
 endif
 
 # Test PDF-LaTeX availability
-ifneq ($(shell $(PDFLATEX) --version > /dev/null 2>&1 && echo y),y)
+ifneq ($(call can-run,$(PDFLATEX) --version),y)
 SUBDIRS_BLACKLIST += latex%
 endif
 

@@ -56,7 +56,7 @@ test: all
 	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 # Disable strict-aliasing warning for XMM sub-part tests
-.test_%.o: CFLAGS += -Wno-strict-aliasing
+.test_%.o: CFLAGS += $(call cc-disable-warning,strict-aliasing)
 
 .%.o: %.c
 	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
