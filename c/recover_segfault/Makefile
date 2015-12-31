@@ -50,7 +50,7 @@ debug: CPPFLAGS += -DDEBUG=1
 debug: all
 
 test: all
-	@for P in $(sort $(BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
+	@$(call run-test-progs,$(BINARIES))
 
 %.$(BIN_EXT): .%.o $(OBJECTS)
 	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)

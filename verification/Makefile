@@ -35,7 +35,7 @@ clean:
 
 # In "make test", only test that the binaries actually run, don't actually verify them
 test: all
-	@for P in $(sort $(BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
+	@$(call run-test-progs,$(BINARIES))
 
 %.$(BIN_EXT): .%.o
 	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)

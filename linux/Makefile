@@ -59,12 +59,9 @@ list-nobuild:
 	@echo $(filter-out $(PROGRAMS), $(ALL_PROGRAMS))
 
 test: all
-	@for P in $(sort $(filter-out eventpoll_activetty.$(BIN_EXT), $(TEST_BINARIES))); do \
-		echo ./$$P && ./$$P || exit $$? ; \
-	done && \
+	@$(call run-test-progs,$(filter-out eventpoll_activetty.$(BIN_EXT), $(TEST_BINARIES))) && \
 	if [ -r /sys/class/tty/tty0/active ] ; then \
-		echo ./eventpoll_activetty.$(BIN_EXT) && \
-		./eventpoll_activetty.$(BIN_EXT) < /dev/null || exit $$? ; \
+		$(call run-test-progs,eventpoll_activetty.$(BIN_EXT)) < /dev/null ; \
 	fi
 
 enum_link_addrs.$(BIN_EXT): LIBS += -lnetlink

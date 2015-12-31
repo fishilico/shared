@@ -43,13 +43,9 @@ clean:
 
 # Test shellcode separately
 test: all
-	@for P in $(sort $(filter-out shellcode.$(BIN_EXT) tinyelf.$(BIN_EXT), $(BINARIES))); do \
-		echo ./$$P && ./$$P || exit $$? ; \
-	done && \
-	echo ./shellcode.$(BIN_EXT) && \
-	(echo 'echo $$0 && set && exit' | ./shellcode.$(BIN_EXT)) && \
-	echo ./tinyelf.$(BIN_EXT) && \
-	(./tinyelf.$(BIN_EXT) ; test $$? = 42 )
+	@$(call run-test-progs,$(filter-out shellcode.$(BIN_EXT) tinyelf.$(BIN_EXT), $(BINARIES))) && \
+	echo 'echo $$0 && set && exit' | $(call run-test-progs,shellcode.$(BIN_EXT)) && \
+	echo ./tinyelf.$(BIN_EXT) && ($(RUN_TEST_PREFIX) ./tinyelf.$(BIN_EXT) ; test $$? = 42)
 
 %.$(BIN_EXT): .%.o
 	$(V_CCLD)$(CC) $(NOLIBC_LDFLAGS) -o $@ $^

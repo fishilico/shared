@@ -53,7 +53,7 @@ list-nobuild:
 	@echo $(NONTEST_BINARIES)
 
 test: all
-	@@for P in $(sort $(TEST_BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
+	@$(call run-test-progs,$(TEST_BINARIES))
 
 _cffi_example.$(LIB_EXT): LDFLAGS := $(filter-out -fPIC -fPIE -pie -shared, $(LDFLAGS))
 _cffi_example.$(LIB_EXT): ._cffi_example.o

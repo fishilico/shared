@@ -13,7 +13,7 @@ clean:
 	$(CLEAN_CMD)
 
 test: all
-	@for P in $(sort $(BINARIES)); do echo ./$$P && ./$$P || exit $$? ; done
+	@$(call run-test-progs,$(BINARIES))
 
 %.$(BIN_EXT): .%.o
 	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)

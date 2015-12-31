@@ -7,9 +7,7 @@ clean:
 	$(CLEAN_CMD)
 
 test: all
-ifeq ($(RUN_WINDOWS_TEST), y)
-	@echo ./test_dll_thread.$(BIN_EXT) && ./test_dll_thread.$(BIN_EXT)
-endif
+	@$(call run-test-progs,test_dll_thread.$(BIN_EXT))
 
 # Either "dll_thread.dll" or "-L. -ldll_thread" are available to the linker
 test_dll_thread.$(BIN_EXT): .test_dll_thread.o dll_thread.$(LIB_EXT)

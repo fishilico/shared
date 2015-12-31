@@ -15,11 +15,7 @@ clean:
 	$(CLEAN_CMD)
 
 test: all
-ifeq ($(RUN_WINDOWS_TEST), y)
-	@for P in $(sort $(TEST_BINARIES)); do \
-		echo ./$$P && ./$$P || exit $$? ; \
-	done
-endif
+	@$(call run-test-progs,$(TEST_BINARIES))
 
 $(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -Wl,--subsystem=windows
 $(NOIMPORT_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -nostdlib -Wl,--nostdlib

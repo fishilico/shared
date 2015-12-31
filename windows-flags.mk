@@ -6,6 +6,7 @@
 include $(dir $(lastword $(MAKEFILE_LIST)))common.mk
 
 UNAME ?= uname
+WINE ?= wine
 
 # Find a C compiler for windows
 ifneq ($(shell mingw32-gcc --version 2> /dev/null),)
@@ -75,22 +76,12 @@ LIB_EXT := $(EXT_PREFIX)dll
 LIB_CFLAGS =
 LIB_LDFLAGS = -shared -Wl,--subsystem=0
 
-# Run tests on Windows or on Linux if binfmt_misc has been configured.
-# To configure this, it is possible to run:
-#     mount -t binfmt_misc binfmt_misc /proc/sys/fs/binfmt_misc
-#     echo ':DOSWin:M::MZ::/usr/bin/wine:' > /proc/sys/fs/binfmt_misc/register
-# With systemd, it is possible to configure systemd-binfmt.service by adding a
-# file in /etc/binfmt.d/wine.conf containing ':DOSWin:M::MZ::/usr/bin/wine:',
-# cf. http://www.freedesktop.org/software/systemd/man/binfmt.d.html
-# Ubuntu uses a binfmt entry named "wine" instead of "DOSWin".
-ifeq ($(OS), Windows_NT)
-	RUN_WINDOWS_TEST := y
-else
-	HAVE_DOSWIN_BINFMT := $(call can-run,test -e /proc/sys/fs/binfmt_misc/DOSWin)
-	HAVE_WINE_BINFMT := $(call can-run,test -e /proc/sys/fs/binfmt_misc/wine)
-	ifeq ($(findstring y, $(HAVE_DOSWIN_BINFMT) $(HAVE_WINE_BINFMT)),y)
-		RUN_WINDOWS_TEST := y
-	else
-		RUN_WINDOWS_TEST := n
-	endif
+# Run tests on Windows or on Linux if wine can be found
+HAVE_WINE := $(call can-run,$(WINE) --version)
+ifeq ($(HAVE_WINE),y)
+	# Use wine to run programs
+	RUN_TEST_PREFIX := $(WINE)
+else ifneq ($(OS), Windows_NT)
+	# Do not run anything on a non-Windows system without wine
+	RUN_TEST_PREFIX := :
 endif

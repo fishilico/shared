@@ -44,9 +44,7 @@ clean:
 	$(CLEAN_CMD)
 
 test: all
-	@for P in $(sort $(wildcard *.py)); do \
-		echo ./$$P && $(PYTHON) ./$$P || exit $$? ; \
-	done
+	@$(call run-test-progs,$(wildcard *.py))
 
 # Dump of the shellcode
 shcdump: $(SHELLCODE_RAW) $(SHELLCODE_BIN)
