@@ -64,8 +64,9 @@ INCLUDE_ARCH := arm i386 x86_64
 INCLUDE_FILES := $(INCLUDE_ARCH:%=include/asm-%/unistd.h) include/sys/syscall.h include/sys/utsname.h
 LINUX_URL := https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain
 
-sync-inet: create_include
-	@:
+sync-inet:
+	$(RM) -rf include
+	$(MAKE) create_include
 
 create_include: $(INCLUDE_FILES)
 
@@ -89,7 +90,7 @@ include/asm-arm/unistd.h:
 # Build x86 syscall tables using script "syscallhdr.sh" from the kernel
 include/syscall-x86/%:
 	$(MKDIR) -p $(@D)
-	$(WGET) -q -O $@ $(LINUX_URL)/arch/x86/syscalls/$(@F) || (rm $@ ; false)
+	$(WGET) -q -O $@ $(LINUX_URL)/arch/x86/entry/syscalls/$(@F) || (rm $@ ; false)
 
 include/asm-i386/unistd.h: include/syscall-x86/syscall_32.tbl include/syscall-x86/syscallhdr.sh
 	$(MKDIR) -p $(@D)
