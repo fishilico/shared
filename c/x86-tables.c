@@ -166,7 +166,7 @@ int main(void)
     printf("GDT (%s: %s):\n", os_name, gdt_comment);
     for (cpu = 0; cpu >= 0; cpu = get_next_cpu(cpu)) {
         migrate_to_cpu(cpu);
-        __asm__ volatile ("sgdt %0" : "=m"(descriptor));
+        __asm__ volatile ("sgdt %0" : "=m"(descriptor) : : "memory");
         memcpy(&size, descriptor, 2);
         memcpy(&address, descriptor + 2, sizeof(void *));
         printf("CPU %2d GDT @%p, size %u (%u 8-byte entries)\n", cpu, address, size, (size + 1) / 8);
@@ -177,7 +177,7 @@ int main(void)
     printf("IDT (%s: %s):\n", os_name, idt_comment);
     for (cpu = 0; cpu >= 0; cpu = get_next_cpu(cpu)) {
         migrate_to_cpu(cpu);
-        __asm__ volatile ("sidt %0" : "=m"(descriptor));
+        __asm__ volatile ("sidt %0" : "=m"(descriptor) : : "memory");
         memcpy(&size, descriptor, 2);
         memcpy(&address, descriptor + 2, sizeof(void *));
         printf("CPU %2d IDT @%p, size %u (256 %u-byte vectors)\n", cpu, address, size, (size + 1) / 256);

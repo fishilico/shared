@@ -293,7 +293,7 @@ static void print_gdt_limits(void)
     uint16_t gdt_size, segment;
 
     /* Read GDT size to get the number of entries */
-    __asm__ ("sgdt %0" : "=m" (gdt_descriptor));
+    __asm__ ("sgdt %0" : "=m" (gdt_descriptor) : : "memory");
     memcpy(&gdt_size, gdt_descriptor, 2);
 
     printf("GDT limits and access rights (%u entries):\n", (gdt_size + 1) / 8);
