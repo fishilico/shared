@@ -1,21 +1,18 @@
 # Do not copy to Docker the .git directory
 .git
 
-# Do not copy the generated files
+# .gitignore patterns expanded with wildcards
 archlinux-seckernel/grsec/
 linux/modules/*.mod.c
 linux/modules/Module.symvers
 linux/modules/modules.order
 linux/modules/.tmp_versions/
-linux/nolibc/include/
+linux/nolibc/include/syscall-x86/
 verification/.frama-c/
 verification/*.script
 verification/linux/.pc/
 verification/linux/out-linux
 verification/linux/src-linux-*/
-
-# .gitignore patterns expanded with wildcards
-# sed -n 's,^[^/#].*,&\n*/&\n*/*/&\n*/*/*/&,p' .gitignore
 *~
 */*~
 */*/*~
@@ -108,6 +105,10 @@ verification/linux/src-linux-*/
 */*.sav
 */*/*.sav
 */*/*/*.sav
+*.sig
+*/*.sig
+*/*/*.sig
+*/*/*/*.sig
 *.sign
 */*.sign
 */*/*.sign

@@ -7,6 +7,8 @@ GREP ?= grep
 PDFLATEX ?= pdflatex
 LINUX32 ?= linux32
 LINUX64 ?= linux64
+RM ?= rm
+SED ?= sed
 SH ?= sh
 UNAME ?= uname
 
@@ -85,7 +87,7 @@ ALL64_TARGETS := $(addprefix all64.., $(SUBDIRS_FINAL))
 CLEAN_TARGETS := $(addprefix clean.., $(SUBDIRS_FINAL))
 TARGETS := $(ALL_TARGETS) $(ALL32_TARGETS) $(ALL64_TARGETS) $(CLEAN_TARGETS)
 
-all: $(ALL_TARGETS)
+all: $(ALL_TARGETS) .dockerignore indent-c
 	@:
 
 all32: $(ALL32_TARGETS)
@@ -131,18 +133,26 @@ $(addprefix all64.., $(SUBDIRS)):
 $(addprefix clean.., $(SUBDIRS)):
 	+@$(call chdir_do,$(@:clean..%=%),,clean)
 
+# Generate a part of .dockerignore from .gitignore
+.dockerignore: .gitignore Makefile
+	$(SED) -n '1,/^# [.]gitignore/p' < $@ > .$@.tmp
+	$(SED) -n 's,^/,,p' $< >> .$@.tmp
+	$(SED) -n 's,^[^/#].*,&\n*/&\n*/*/&\n*/*/*/&,p' $< >> .$@.tmp
+	cat < .$@.tmp > $@
+	$(RM) .$@.tmp
+
 indent-c: gen-indent-c.sh
 	$(SH) $< > $@
 	$(CHMOD) +x $@
 
 # Sort gen-indent-c.sh types
 sort-gen-indent-c: gen-indent-c.sh
-	sed -n '1,/<< END-OF-TYPES/p' < $< > .$@.tmp
-	sed -n '/<< END-OF-TYPES/,/^END-OF-TYPES/ {/END-OF-TYPES/d;p}' < $< | \
+	$(SED) -n '1,/<< END-OF-TYPES/p' < $< > .$@.tmp
+	$(SED) -n '/<< END-OF-TYPES/,/^END-OF-TYPES/ {/END-OF-TYPES/d;p}' < $< | \
 		LANG=C sort >> .$@.tmp
-	sed -n '/^END-OF-TYPES/,$$p' < $< >> .$@.tmp
+	$(SED) -n '/^END-OF-TYPES/,$$p' < $< >> .$@.tmp
 	cat < .$@.tmp > $<
-	rm .$@.tmp
+	$(RM) .$@.tmp
 
 .PHONY: all all32 all64 clean clean-obj test list-nobuild sync-inet \
 	$(addprefix all.., $(SUBDIRS)) \
