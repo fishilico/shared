@@ -159,10 +159,10 @@ static void dump_x86_cr(void)
  *        14 (0x00004000): - FFXSR (Fast FXSAVE/FXRSTOR)
  *      msr:ia32_sysenter_CS(0x174) = 0x10
  *      msr:ia32_sysenter_ESP(0x175) = 0x0
- *      msr:ia32_sysenter_EIP(0x176) = 0xffffffff81732800 (ia32_sysenter_target+0x0/0x62)
+ *      msr:ia32_sysenter_EIP(0x176) = 0xffffffff815a52f0 (entry_SYSENTER_compat+0x0/0x4e)
  *      msr:star(0xc0000081) = user32 CS 0x23, kernel CS 0x10, EIP 0x0
- *      msr:lstar(0xc0000082) = 0xffffffff81730130 (system_call+0x0/0x3)
- *      msr:cstar(0xc0000083) = 0xffffffff81732a40 (ia32_cstar_target+0x0/0x8c)
+ *      msr:lstar(0xc0000082) = 0xffffffff815a2f50 (entry_SYSCALL_64+0x0/0x3)
+ *      msr:cstar(0xc0000083) = 0xffffffff815a54f0 (entry_SYSCALL_compat+0x0/0x51)
  *      msr:sfmask(0xc0000084) = 0x47700
  */
 static void dump_x86_msr(void)
@@ -243,8 +243,8 @@ static void dump_x86_segments(void)
 /**
  * Output example on x86_64:
  *      GDT: (Global Descriptor Table)
- *        On current cpu: 0xffff88003fc0a000 limit 127
- *        CPU 0: 0xffff88003fc0a000 (16 entries)
+ *        On current cpu: 0xffff88041fbc9000 limit 127
+ *        CPU 0: 0xffff88041fa09000 (16 entries)
  *           1: base 0x00000000, limit 0xfffff, flags 0xc09b (Kernel32 CS)
  *              type=0xb (C-RA), s=1, dpl=0, p=1, avl=0, l=0, d=1, g=1
  *           2: base 0x00000000, limit 0xfffff, flags 0xa09b (Kernel CS)
@@ -257,93 +257,92 @@ static void dump_x86_segments(void)
  *              type=0x3 (D-WA), s=1, dpl=3, p=1, avl=0, l=0, d=1, g=1
  *           6: base 0x00000000, limit 0xfffff, flags 0xa0fb (Default user CS)
  *              type=0xb (C-RA), s=1, dpl=3, p=1, avl=0, l=1, d=0, g=1
- *           8: base 0x3fc11c80, limit 0x2087, flags 0x008b (TSS, Task State Segment)
+ *           8: base 0x1fa12740, limit 0x2087, flags 0x008b (TSS, Task State Segment)
  *              type=0xb (C-RA), s=0, dpl=0, p=1, avl=0, l=0, d=0, g=0
- *           9: base 0x0000ffff, limit 0x8800, flags 0x0000 (TSS+1)
+ *           9: base 0x0000ffff, limit 0x8804, flags 0x0000 (TSS+1)
  *              type=0x0 (D---), s=0, dpl=0, p=0, avl=0, l=0, d=0, g=0
- *          15: base 0x00000000, limit 0x0, flags 0x00f4 (per CPU)
- *              type=0x4 (Dv--), s=1, dpl=3, p=1, avl=0, l=0, d=0, g=0
- *      IDT: 0xffffffffff56b000 limit 4095 (Interrupt Descriptor Table, 256 entries)
- *       0x00: seg 0x10 offset ffffffff81731ab0 Divide by Zero
+ *          15: base 0x00000000, limit 0x0, flags 0x40f5 (per CPU)
+ *              type=0x5 (Dv-A), s=1, dpl=3, p=1, avl=0, l=0, d=1, g=0
+ *      IDT: 0xffffffffff57a000 limit 4095 (Interrupt Descriptor Table, 256 entries)
+ *       0x00: seg 0x10 offset ffffffff815a4810 Divide by Zero
  *             Sym: divide_error
- *       0x01: seg 0x10 offset ffffffff81731f80 Debug
- *             ist=4 (debug stack)
+ *       0x01: seg 0x10 offset ffffffff815a4cb0 Debug
+ *             ist=3 (debug stack)
  *             Sym: debug
- *       0x02: seg 0x10 offset ffffffff817323e0 Non-maskable Interrupt
- *             ist=3 (non-maskable interrupt stack)
+ *       0x02: seg 0x10 offset ffffffff815a5140 Non-maskable Interrupt
+ *             ist=2 (non-maskable interrupt stack)
  *             Sym: nmi
- *       0x03: seg 0x10 offset ffffffff81731fc0 Break Point
- *             ist=4 (debug stack)
+ *       0x03: seg 0x10 offset ffffffff815a4d20 Break Point
+ *             ist=3 (debug stack)
  *             dpl=3
  *             Sym: int3
- *       0x04: seg 0x10 offset ffffffff81731ae0 Overflow
+ *       0x04: seg 0x10 offset ffffffff815a4840 Overflow
  *             dpl=3
  *             Sym: overflow
- *       0x05: seg 0x10 offset ffffffff81731b10 Bound Range Exceeded
+ *       0x05: seg 0x10 offset ffffffff815a4870 Bound Range Exceeded
  *             Sym: bounds
- *       0x06: seg 0x10 offset ffffffff81731b40 Invalid Opcode
+ *       0x06: seg 0x10 offset ffffffff815a48a0 Invalid Opcode
  *             Sym: invalid_op
- *       0x07: seg 0x10 offset ffffffff81731b70 Device Not Available
+ *       0x07: seg 0x10 offset ffffffff815a48d0 Device Not Available
  *             Sym: device_not_available
- *       0x08: seg 0x10 offset ffffffff81731ba0 Double Fault
- *             ist=2 (double fault stack)
+ *       0x08: seg 0x10 offset ffffffff815a4900 Double Fault
+ *             ist=1 (double fault stack)
  *             Sym: double_fault
- *       0x09: seg 0x10 offset ffffffff81731bd0 Coprocessor Segment Overrun
+ *       0x09: seg 0x10 offset ffffffff815a4930 Coprocessor Segment Overrun
  *             Sym: coprocessor_segment_overrun
- *       0x0a: seg 0x10 offset ffffffff81731c00 Invalid TSS
+ *       0x0a: seg 0x10 offset ffffffff815a4960 Invalid TSS
  *             Sym: invalid_TSS
- *       0x0b: seg 0x10 offset ffffffff81731c30 Segment Not Present
+ *       0x0b: seg 0x10 offset ffffffff815a4990 Segment Not Present
  *             Sym: segment_not_present
- *       0x0c: seg 0x10 offset ffffffff81732000 Stack Segment Fault
- *             ist=1 (stack fault stack)
+ *       0x0c: seg 0x10 offset ffffffff815a4d90 Stack Segment Fault
  *             Sym: stack_segment
- *       0x0d: seg 0x10 offset ffffffff817320c0 General Protection Fault
+ *       0x0d: seg 0x10 offset ffffffff815a4e50 General Protection Fault
  *             Sym: general_protection
- *       0x0e: seg 0x10 offset ffffffff81732150 Page Fault
- *             Sym: async_page_fault
- *       0x0f: seg 0x10 offset ffffffff81731c60 Spurious Interrupt
+ *       0x0e: seg 0x10 offset ffffffff815a4eb0 Page Fault
+ *             Sym: page_fault
+ *       0x0f: seg 0x10 offset ffffffff815a49c0 Spurious Interrupt
  *             Sym: spurious_interrupt_bug
- *       0x10: seg 0x10 offset ffffffff81731c90 x87 Floating-Point Exception
+ *       0x10: seg 0x10 offset ffffffff815a49f0 x87 Floating-Point Exception
  *             Sym: coprocessor_error
- *       0x11: seg 0x10 offset ffffffff81731cc0 Alignment Check
+ *       0x11: seg 0x10 offset ffffffff815a4a20 Alignment Check
  *             Sym: alignment_check
- *       0x12: seg 0x10 offset ffffffff81732180 Machine Check
- *             ist=5 (machine check stack)
+ *       0x12: seg 0x10 offset ffffffff815a4f10 Machine Check
+ *             ist=4 (machine check stack)
  *             Sym: machine_check
- *       0x13: seg 0x10 offset ffffffff81731cf0 SIMD Floating-Point Exception
+ *       0x13: seg 0x10 offset ffffffff815a4a50 SIMD Floating-Point Exception
  *             Sym: simd_coprocessor_error
- *       0x20: seg 0x10 offset ffffffff81730ec0 IRET Exception
+ *       0x20: seg 0x10 offset ffffffff815a3cb0 IRET Exception
  *             Sym: irq_move_cleanup_interrupt
- *       0x80: seg 0x10 offset ffffffff81732c90 Syscall Vector
+ *       0x80: seg 0x10 offset ffffffff815a5700 Syscall Vector
  *             dpl=3
- *             Sym: ia32_syscall
- *       0xef: seg 0x10 offset ffffffff81731030 Local Timer Vector
+ *             Sym: entry_INT80_compat
+ *       0xef: seg 0x10 offset ffffffff815a3d90 Local Timer Vector
  *             Sym: apic_timer_interrupt
- *       0xf2: seg 0x10 offset ffffffff81731230 Postr Intr Vector
+ *       0xf2: seg 0x10 offset ffffffff815a3f50 Postr Intr Vector
  *             Sym: kvm_posted_intr_ipi
- *       0xf3: seg 0x10 offset ffffffff81730c04 Hypervisor Callback Vector
- *             Sym: irq_entries_start+0x3c4/0x400
- *       0xf5: seg 0x10 offset ffffffff81730c0c UV Bau Message
- *             Sym: irq_entries_start+0x3cc/0x400
- *       0xf6: seg 0x10 offset ffffffff817319b0 IRQ Work Vector
+ *       0xf3: seg 0x10 offset ffffffff815a4650 Hypervisor Callback Vector
+ *             Sym: spurious_interrupt
+ *       0xf5: seg 0x10 offset ffffffff815a4650 UV Bau Message
+ *             Sym: spurious_interrupt
+ *       0xf6: seg 0x10 offset ffffffff815a4730 IRQ Work Vector
  *             Sym: irq_work_interrupt
- *       0xf7: seg 0x10 offset ffffffff81731130 x86 Plateform IPI Vector
+ *       0xf7: seg 0x10 offset ffffffff815a3e70 x86 Plateform IPI Vector
  *             Sym: x86_platform_ipi
- *       0xf8: seg 0x10 offset ffffffff81730f30 Reboot Vector
+ *       0xf8: seg 0x10 offset ffffffff815a3d20 Reboot Vector
  *             Sym: reboot_interrupt
- *       0xf9: seg 0x10 offset ffffffff817312b0 Threshold APIC Vector
+ *       0xf9: seg 0x10 offset ffffffff815a4030 Threshold APIC Vector
  *             Sym: threshold_interrupt
- *       0xfa: seg 0x10 offset ffffffff817313b0 Thermal APIC Vector
+ *       0xfa: seg 0x10 offset ffffffff815a41f0 Thermal APIC Vector
  *             Sym: thermal_interrupt
- *       0xfb: seg 0x10 offset ffffffff817314b0 Call Function Single Vector
+ *       0xfb: seg 0x10 offset ffffffff815a42d0 Call Function Single Vector
  *             Sym: call_function_single_interrupt
- *       0xfc: seg 0x10 offset ffffffff817315b0 Call Function Vector
+ *       0xfc: seg 0x10 offset ffffffff815a43b0 Call Function Vector
  *             Sym: call_function_interrupt
- *       0xfd: seg 0x10 offset ffffffff817316b0 Reschedule Vector
+ *       0xfd: seg 0x10 offset ffffffff815a4490 Reschedule Vector
  *             Sym: reschedule_interrupt
- *       0xfe: seg 0x10 offset ffffffff817317b0 Error APIC Vector
+ *       0xfe: seg 0x10 offset ffffffff815a4570 Error APIC Vector
  *             Sym: error_interrupt
- *       0xff: seg 0x10 offset ffffffff817318b0 Spurious APIC Vector
+ *       0xff: seg 0x10 offset ffffffff815a4650 Spurious APIC Vector
  *             Sym: spurious_interrupt
  */
 static void dump_x86_tables(void)
