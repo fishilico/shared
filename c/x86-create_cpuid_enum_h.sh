@@ -40,11 +40,12 @@ EOF
     sed -n 's/^#define X86_FEATURE_\(\S\+\)\s\+(\s*'$1'\*32+\s*\([0-9]\+\)\s*).*/    [\2] = "\1",/p' < "$CPU_FEATURE_FILE" | tr '[A-Z]' '[a-z]'
     echo '};'
 }
-extract_cpuid_features 0 cpuidstr_1_edx 'cpuid 0x00000001, edx register' | sed 's/"ds"/"dts"/;s/"xmm/"sse/'
-extract_cpuid_features 4 cpuidstr_1_ecx 'cpuid 0x00000001, ecx register' | sed 's/"xmm/"sse/'
-extract_cpuid_features 9 cpuidstr_7_ebx 'cpuid 0x00000007:0, ebx register'
-extract_cpuid_features 1 cpuidstr_ext1_edx 'cpuid 0x80000001, edx register'
-extract_cpuid_features 6 cpuidstr_ext1_ecx 'cpuid 0x80000001, ecx register'
+extract_cpuid_features  0 cpuidstr_1_edx 'cpuid 0x00000001, edx register' | sed 's/"ds"/"dts"/;s/"xmm/"sse/'
+extract_cpuid_features  4 cpuidstr_1_ecx 'cpuid 0x00000001, ecx register' | sed 's/"xmm/"sse/'
+extract_cpuid_features 14 cpuidstr_6_eax 'cpuid 0x00000006, eax register'
+extract_cpuid_features  9 cpuidstr_7_ebx 'cpuid 0x00000007:0, ebx register'
+extract_cpuid_features  1 cpuidstr_ext1_edx 'cpuid 0x80000001, edx register'
+extract_cpuid_features  6 cpuidstr_ext1_ecx 'cpuid 0x80000001, ecx register'
 
 # CPUID fields from /usr/src/linux/arch/x86/kernel/cpu/scattered.c
 extract_cpuid_scat_features() {
@@ -61,7 +62,6 @@ EOF
     sed -n 's/^\t*{ X86_FEATURE_\(\S\+\),\s*CR_'"$REG_NAME_UP"',\s*\([0-9]\+\),\s*'"$1"',.*/    [\2] = "\1",/p' < "$CPU_SCATTERED_FILE" | tr '[A-Z]' '[a-z]'
     echo '};'
 }
-extract_cpuid_scat_features 0x00000006 eax
 extract_cpuid_scat_features 0x00000006 ecx
 extract_cpuid_scat_features 0x80000007 edx
 
@@ -71,15 +71,10 @@ cat << EOF
 static void add_manual_cpuid_str(void)
 {
     /* https://en.wikipedia.org/wiki/CPUID */
-    assert(cpuidstr_1_ecx[11] == NULL);
-    cpuidstr_1_ecx[11] = "sdbg";
-
     assert(cpuidstr_7_ebx[17] == NULL);
     cpuidstr_7_ebx[17] = "avx512dq";
     assert(cpuidstr_7_ebx[21] == NULL);
     cpuidstr_7_ebx[21] = "avx512ifma";
-    assert(cpuidstr_7_ebx[29] == NULL);
-    cpuidstr_7_ebx[29] = "sha";
     assert(cpuidstr_7_ebx[30] == NULL);
     cpuidstr_7_ebx[30] = "avx512bw";
     assert(cpuidstr_7_ebx[31] == NULL);

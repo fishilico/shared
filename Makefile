@@ -101,15 +101,22 @@ clean-obj:
 
 test:
 	@for D in $(sort $(SUBDIRS_FINAL)); do \
-		($(call chdir_do,$$D,,test)) || exit $$? ; done
+		($(call chdir_do,$$D,,$@)) || exit $$? ; done
 
 # List programs which are explicitly not built
 list-nobuild:
 	@echo "Global blacklist: $(SUBDIRS_BLACKLIST)"
 	@echo "In sub-directories:"
 	@for D in $(sort $(SUBDIRS_FINAL)); do \
-		$(GREP) 'list-nobuild:' "$$D/Makefile" > /dev/null || continue; \
+		$(GREP) '^$@:' "$$D/Makefile" > /dev/null || continue; \
 		echo "   $$D:" $$($(MAKE) -C "$$D" --no-print-directory $@) ; \
+		done
+
+# Sync local files with the Internet
+sync-inet:
+	@for D in $(sort $(SUBDIRS_FINAL)); do \
+		$(GREP) '^$@:' "$$D/Makefile" > /dev/null || continue; \
+		($(call chdir_do,$$D,,$@)) || exit $$? ; \
 		done
 
 $(addprefix all.., $(SUBDIRS)):
@@ -137,7 +144,7 @@ sort-gen-indent-c: gen-indent-c.sh
 	cat < .$@.tmp > $<
 	rm .$@.tmp
 
-.PHONY: all all32 all64 clean clean-obj test list-nobuild \
+.PHONY: all all32 all64 clean clean-obj test list-nobuild sync-inet \
 	$(addprefix all.., $(SUBDIRS)) \
 	$(addprefix all32.., $(SUBDIRS)) \
 	$(addprefix all64.., $(SUBDIRS)) \

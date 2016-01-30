@@ -64,6 +64,9 @@ INCLUDE_ARCH := arm i386 x86_64
 INCLUDE_FILES := $(INCLUDE_ARCH:%=include/asm-%/unistd.h) include/sys/syscall.h include/sys/utsname.h
 LINUX_URL := https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain
 
+sync-inet: create_include
+	@:
+
 create_include: $(INCLUDE_FILES)
 
 include/sys/syscall.h: Makefile
@@ -104,7 +107,7 @@ include/sys/linux_utsname.h:
 include/sys/utsname.h: include/sys/linux_utsname.h
 	$(SED) 's/struct new_utsname/struct utsname/' < $< > $@
 
-.PHONY: all all32 all64 clean test create_include
+.PHONY: all all32 all64 clean test sync-inet create_include
 .PRECIOUS: .%.o
 
 -include .*.d

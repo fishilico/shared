@@ -62,6 +62,7 @@ __extension__ static const char* cpuidstr_1_ecx[32] = {
     [8] = "tm2",
     [9] = "ssse3",
     [10] = "cid",
+    [11] = "sdbg",
     [12] = "fma",
     [13] = "cx16",
     [14] = "xtpr",
@@ -81,6 +82,22 @@ __extension__ static const char* cpuidstr_1_ecx[32] = {
     [29] = "f16c",
     [30] = "rdrand",
     [31] = "hypervisor",
+};
+
+/**
+ * cpuid 0x00000006, eax register
+ */
+__extension__ static const char* cpuidstr_6_eax[32] = {
+    [0] = "dtherm",
+    [1] = "ida",
+    [2] = "arat",
+    [4] = "pln",
+    [6] = "pts",
+    [7] = "hwp",
+    [8] = "hwp_notify",
+    [9] = "hwp_act_window",
+    [10] = "hwp_epp",
+    [11] = "hwp_pkg_req",
 };
 
 /**
@@ -109,6 +126,7 @@ __extension__ static const char* cpuidstr_7_ebx[32] = {
     [26] = "avx512pf",
     [27] = "avx512er",
     [28] = "avx512cd",
+    [29] = "sha_ni",
 };
 
 /**
@@ -155,22 +173,7 @@ __extension__ static const char* cpuidstr_ext1_ecx[32] = {
     [24] = "perfctr_nb",
     [26] = "bpext",
     [28] = "perfctr_l2",
-};
-
-/**
- * cpuid 0x00000006, eax register
- */
-__extension__ static const char* cpuidstr_6_eax[32] = {
-    [0] = "dtherm",
-    [1] = "ida",
-    [2] = "arat",
-    [4] = "pln",
-    [6] = "pts",
-    [7] = "hwp",
-    [8] = "hwp_noitfy",
-    [9] = "hwp_act_window",
-    [10] = "hwp_epp",
-    [11] = "hwp_pkg_req",
+    [29] = "mwaitx",
 };
 
 /**
@@ -193,15 +196,10 @@ __extension__ static const char* cpuidstr_ext7_edx[32] = {
 static void add_manual_cpuid_str(void)
 {
     /* https://en.wikipedia.org/wiki/CPUID */
-    assert(cpuidstr_1_ecx[11] == NULL);
-    cpuidstr_1_ecx[11] = "sdbg";
-
     assert(cpuidstr_7_ebx[17] == NULL);
     cpuidstr_7_ebx[17] = "avx512dq";
     assert(cpuidstr_7_ebx[21] == NULL);
     cpuidstr_7_ebx[21] = "avx512ifma";
-    assert(cpuidstr_7_ebx[29] == NULL);
-    cpuidstr_7_ebx[29] = "sha";
     assert(cpuidstr_7_ebx[30] == NULL);
     cpuidstr_7_ebx[30] = "avx512bw";
     assert(cpuidstr_7_ebx[31] == NULL);

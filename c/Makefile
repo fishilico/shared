@@ -101,6 +101,9 @@ x86-cpuid.o: x86-cpuid_enum.h
 .%.o: %.c
 	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
+sync-inet: update_cpuid
+	@:
+
 update_cpuid: x86-linux-cpufeature.h.tmp x86-linux-cpu-scattered.c.tmp x86-create_cpuid_enum_h.sh
 	$(SH) ./x86-create_cpuid_enum_h.sh > x86-cpuid_enum.h
 
@@ -111,7 +114,7 @@ x86-linux-cpufeature.h.tmp:
 x86-linux-cpu-scattered.c.tmp:
 	$(WGET) -q -O $@ '$(LINUX_URL)/arch/x86/kernel/cpu/scattered.c' || (rm $@ ; false)
 
-.PHONY: all clean list-nobuild test update_cpuid
+.PHONY: all clean list-nobuild test sync-inet update_cpuid
 .PRECIOUS: .%.o
 
 -include .*.d
