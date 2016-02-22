@@ -1,6 +1,9 @@
 #!/bin/sh
 # Download the latest grsecurity test patch
 # The ChangeLog is available at http://grsecurity.net/changelog-test.txt
+# It is also possible to browse grsecurity sources online on:
+# * https://github.com/linux-scraping/linux-grsecurity/commits/grsec-test
+# * https://github.com/minipli/linux-grsec
 RSS_FEED="https://grsecurity.net/testing_rss.php"
 
 # Create the directory where to put the patches

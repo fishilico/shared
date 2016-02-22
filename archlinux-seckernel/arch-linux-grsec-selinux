@@ -134,8 +134,9 @@ MAKEFLAGS=${MAKEFLAGS:--j3}
 export MENUCONFIG MAKEFLAGS
 
 # Build and install package.  Uncomment the second line to customize configuration
-makepkg -Co || exit $?
+makepkg -C --nobuild || exit $?
 #make -C src/linux-*/ nconfig || exit $?
-makepkg -ei || exit $?
+makepkg -i --noextract --noprepare || exit $?
 
-echo "You may now save $TEMP_DIR/src/linux-*/.config and remove $TEMP_DIR"
+echo "To reinstall the packages, run 'cd $TEMP_DIR && makepkg -i'"
+echo "Any time, to may delete $TEMP_DIR"
