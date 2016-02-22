@@ -1,4 +1,4 @@
-FROM ubuntu:15.10
+FROM ubuntu-debootstrap:15.10
 LABEL Description="Ubuntu 15.10 Wily Werewolf with build dependencies for shared"
 
 RUN \
