@@ -42,12 +42,15 @@ cc-disable-warning = $(call try-run,$(CC) -Werror -W$(strip $(1)) -E - < /dev/nu
 # ARM programs on x86, etc.
 # Add a special case for Python and Shell programs
 PYTHON ?= python
+PYTHON3 ?= python3
 SH ?= sh
 RUN_TEST_PREFIX ?=
 run-test-progs = \
 	for P in $(sort $(1)); do \
 		echo "./$$P" && \
 		if [ "$${P%.py}" != "$$P" ] ; then \
+			$(PYTHON) "./$$P" || exit $$? ; \
+		elif [ "$${P%.py3}" != "$$P" ] ; then \
 			$(PYTHON) "./$$P" || exit $$? ; \
 		elif [ "$${P%.sh}" != "$$P" ] ; then \
 			$(SH) "./$$P" || exit $$? ; \
