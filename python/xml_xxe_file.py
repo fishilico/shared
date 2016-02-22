@@ -50,7 +50,7 @@ XML_FILE = (
 def main(argv=None):
     parser = argparse.ArgumentParser(
         description="Read a file with XML external entity (XXE)")
-    parser.add_argument('file', nargs='?', default='/etc/hosts',
+    parser.add_argument('file', nargs='?', default='/etc/shells',
                         help="file to be read")
     parser.add_argument('-l', '--lxml', action='store_true',
                         help="use lxml")
