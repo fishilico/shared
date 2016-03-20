@@ -86,6 +86,8 @@ static bool install_syscall_filter(bool do_kill)
         BPF_STMT(BPF_LD + BPF_W + BPF_ABS, offsetof(struct seccomp_data, nr)),
 
         /* Allow some syscalls (for exit, printf and sigreturn) */
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_brk, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_exit_group, 0, 1),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_exit, 0, 1),
