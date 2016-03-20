@@ -61,9 +61,10 @@ static int _cpu_count_s(size_t setsize, cpu_set_t *set)
 #    define CPU_FREE(set) free((set))
 #endif
 
-/* Some libc (like musl) doesn't define sched_getcpu, while libc uses the vDSO
- * if it provides getcpu (with __vdso_getcpu symbol), which can use a CPU trick
- * to be faster, such as segment limits in x86.
+/* Some libc (like musl <= 1.1.14) doesn't define sched_getcpu, while glibc
+ * uses the vDSO if it provides getcpu (with __vdso_getcpu symbol), which can
+ * use a CPU trick to be faster, such as segment limits in x86.
+ *
  * Here, always use the slow path with getcpu syscall.
  * However glibc<2.15 did not define __NR_cpu for x86-64, so use sched_getcpu
  * in this case.
