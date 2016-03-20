@@ -1,3 +1,9 @@
+/**
+ * Monitor inotify events for /tmp directory
+ *
+ * This is quite similar to "busybox inotifyd - /tmp", from:
+ * https://git.busybox.net/busybox/tree/miscutils/inotifyd.c
+ */
 #include <assert.h>
 #include <errno.h>
 #include <stddef.h>
