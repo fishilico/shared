@@ -62,6 +62,9 @@ static bool test_open_by_handle_with_name(const char *pathname, bool is_file)
         if (errno == ENOSYS) {
             fprintf(stderr, "Exit because the kernel does not support name_to_handle_at.\n");
             exit(0);
+        } else if (errno == ENOENT) {
+            printf("%s does not exist\n", pathname);
+            return true;
         }
         perror("name_to_handle_at");
         return false;
