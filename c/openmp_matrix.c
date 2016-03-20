@@ -28,7 +28,7 @@ static void print_nobuf(const char *string)
             break;
         }
         string += count;
-        len -= count;
+        len -= (size_t)count;
     }
 }
 
