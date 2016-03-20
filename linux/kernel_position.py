@@ -102,17 +102,26 @@ def get_kernel_pos_from_iomem(machine=None):
     logger.debug("reading live symbols from /proc/iomem")
     offset = get_pa2va_offset(machine)
     kernel_pos = dict(((name, None) for name in KERNEL_SECTIONS.keys()))
-    with open('/proc/iomem', 'r') as fiomem:
-        for line in fiomem:
-            line = line.strip()
-            matches = re.match(r'([0-9a-f]+)-([0-9a-f]+) : Kernel (.*)$', line)
-            if matches is None:
-                continue
-            start, end, name = matches.groups()
-            if name not in kernel_pos:
-                logger.warning("unknown kernel part %s in /proc/iomem", name)
-                continue
-            kernel_pos[name] = (int(start, 16) + offset, int(end, 16) + offset)
+    try:
+        with open('/proc/iomem', 'r') as fiomem:
+            for line in fiomem:
+                line = line.strip()
+                matches = re.match(r'([0-9a-f]+)-([0-9a-f]+) : Kernel (.*)$',
+                                   line)
+                if matches is None:
+                    continue
+                start, end, name = matches.groups()
+                if name not in kernel_pos:
+                    logger.warning("unknown kernel part %s in /proc/iomem",
+                                   name)
+                    continue
+                kernel_pos[name] = (int(start, 16) + offset,
+                                    int(end, 16) + offset)
+    except IOError as exc:
+        if exc.errno == errno.EACCES:
+            logger.warning("/proc/iomem access is not permitted")
+            return
+        raise
 
     # Some architectures (like ARM) merge data and bss segments
     if kernel_pos['bss'] is None and kernel_pos['data'] is not None:
