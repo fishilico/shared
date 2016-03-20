@@ -51,7 +51,7 @@ static void _show_sid(
 
     if (placeholder_num && placeholder) {
         /* Allocate a new sid */
-        szNewSid = LocalAlloc((_tcslen(szSid) + _tcslen(placeholder) + 3) * sizeof(TCHAR), LPTR);
+        szNewSid = LocalAlloc(LPTR, (_tcslen(szSid) + _tcslen(placeholder) + 3) * sizeof(TCHAR));
         if (!szNewSid) {
             print_winerr(_T("LocalAlloc"));
             LocalFree(szSid);
