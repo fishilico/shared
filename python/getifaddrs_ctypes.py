@@ -30,9 +30,9 @@ import argparse
 import array
 import ctypes
 import ctypes.util
-import fcntl
 import socket
 import sys
+
 
 # /usr/include/linux/if.h
 IFNAMSIZ = 16
@@ -108,8 +108,11 @@ class struct_sockaddr_ll(ctypes.Structure):
         assert self.sll_protocol == 0
         assert self.sll_pkttype == 0
         assert self.sll_halen <= len(self.sll_addr)
-        addr = self.sll_addr[:self.sll_halen]
-        return ':'.join('{0:02x}'.format(x) for x in addr)
+        hwaddr = self.sll_addr[:self.sll_halen]
+        addr = ':'.join('{0:02x}'.format(x) for x in hwaddr)
+        if self.sll_ifindex:
+            addr += ' (iface {0})'.format(self.sll_ifindex)
+        return addr
 
 
 class struct_sockaddr(ctypes.Union):
@@ -196,8 +199,10 @@ def get_ifindex_from_name(ifname):
     sd = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM, 0)
     ifr = struct_ifreq()
     ifr.ifr_name = ifname.encode('ascii')
-    fcntl.ioctl(sd, SIOCGIFINDEX, ifr, True)
+    result = libc.ioctl(sd.fileno(), SIOCGIFINDEX, ctypes.pointer(ifr))
     sd.close()
+    if result == -1:
+        raise OSError(ctypes.get_errno())
     return int(ifr.u.ifr_ifindex)
 
 
@@ -206,8 +211,10 @@ def get_ifname_from_index(ifindex):
     sd = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM, 0)
     ifr = struct_ifreq()
     ifr.u.ifr_ifindex = ifindex
-    fcntl.ioctl(sd, SIOCGIFNAME, ifr, True)
+    result = libc.ioctl(sd.fileno(), SIOCGIFNAME, ctypes.pointer(ifr))
     sd.close()
+    if result == -1:
+        raise OSError(ctypes.get_errno())
     return ifr.ifr_name.decode('ascii')
 
 
