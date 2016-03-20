@@ -109,7 +109,11 @@ static int child1_main(const char *sockpath)
     printf("[%u] Received %ld bytes: %s\n", getpid(), (long)bytes, buffer);
 
     fd = -1;
+/* clang warns that CMSG_NXTHDR increases the required alignment of a pointer */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-align"
     for (cmsg = CMSG_FIRSTHDR(&msg); cmsg; cmsg = CMSG_NXTHDR(&msg, cmsg)) {
+#pragma GCC diagnostic pop
         if (cmsg->cmsg_level != SOL_SOCKET) {
             printf("[%u] * unknown control message %d-%d\n",
                    getpid(), cmsg->cmsg_level, cmsg->cmsg_type);
