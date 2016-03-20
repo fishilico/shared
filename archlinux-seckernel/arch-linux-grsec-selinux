@@ -23,6 +23,55 @@ then
     # Recreate the building directory
     rm -f ./*
     rsync -mrtv --no-motd --no-p --no-o --no-g "rsync.archlinux.org::abs/$(uname -m)/community/linux-grsec/." .
+
+    # Use the last published grsec patch URL to grab its timestamp and versions
+    # The relevant sha256sums gets skipped, but the downloaded files are still
+    # verified with their PGP signatures
+    PATCH_URL="$(curl 'https://grsecurity.net/testing_rss.php' | \
+        sed -n 's,.*<link>\(https://grsecurity.net/test/grsecurity-[-._0-9a-zA-Z]*\.patch\)</link>.*,\1,p')"
+    if [ -z "$PATCH_URL" ]
+    then
+        echo >&2 "Unable to retrieve the URL to the latest patch"
+        exit 1
+    fi
+
+    echo "Latest grsec test patch is $PATCH_URL"
+    GRSECVER="$(echo "$PATCH_URL" | tr '-' '\n' | sed -n 2p)"
+    LINUXVER="$(echo "$PATCH_URL" | tr '-' '\n' | sed -n 3p)"
+    TIMESTAMP="$(echo "$PATCH_URL" | tr '-' '\n' | sed -n 4s/\.patch//p)"
+    if [ -z "$GRSECVER" ] || [ -z "$LINUXVER" ] || [ -z "$TIMESTAMP" ]
+    then
+        echo >&2 "Unable to decode the URL to the latest grsec patch"
+        exit 1
+    fi
+    LINUXVER_FROM_PKG="$(sed -n 's/^_pkgver=//p' PKGBUILD)"
+    if [ "$LINUXVER" != "$LINUXVER_FROM_PKG" ]
+    then
+        # Abort when major version number changes
+        if [ "${LINUXVER%.*}" != "${LINUXVER_FROM_PKG%.*}" ]
+        then
+            echo >&2 "grsec uses an other major version of Linux, config needs to be updated."
+            exit 1
+        fi
+        echo "grsec uses an other stable version of Linux than the downloaded PKGBUILD. Updating it"
+        sed -i "s/^\(_pkgver\)=.*/\1=$LINUXVER/" PKGBUILD
+        echo "sha256sums[2]='SKIP'" >> PKGBUILD
+    fi
+    GRSECVER_FROM_PKG="$(sed -n 's/^_grsecver=//p' PKGBUILD)"
+    if [ "$GRSECVER" != "$GRSECVER_FROM_PKG" ]
+    then
+        echo "grsec uses an other version of grsec than the downloaded PKGBUILD. Updating it"
+        sed -i "s/^\(_grsecver\)=.*/\1=$GRSECVER/" PKGBUILD
+        echo "sha256sums[4]='SKIP'" >> PKGBUILD
+    fi
+    TIMESTAMP_FROM_PKG="$(sed -n 's/^_timestamp=//p' PKGBUILD)"
+    if [ "$TIMESTAMP" != "$TIMESTAMP_FROM_PKG" ]
+    then
+        echo "grsec uses an other timestamp than the downloaded PKGBUILD. Updating it"
+        sed -i "s/^\(_timestamp\)=.*/\1=$TIMESTAMP/" PKGBUILD
+        echo "sha256sums[4]='SKIP'" >> PKGBUILD
+    fi
+
     touch PKGBUILD
 fi
 
@@ -139,4 +188,4 @@ makepkg -C --nobuild || exit $?
 makepkg -i --noextract --noprepare || exit $?
 
 echo "To reinstall the packages, run 'cd $TEMP_DIR && makepkg -i'"
-echo "Any time, to may delete $TEMP_DIR"
+echo "Any time, you may delete $TEMP_DIR"
