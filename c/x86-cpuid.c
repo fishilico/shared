@@ -9,6 +9,10 @@
  * Some information about x86 flags can also be found on Wikipedia:
  * http://en.wikipedia.org/wiki/CPUID
  *
+ * The official documentation is Intel 64 and IA-32 Architectures Software Developer Manuals
+ *   http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html
+ *   in Volume 2A: CPUID instruction
+ *
  * On Linux, CPU flags are available in /proc/cpuinfo:
  *     grep '^flags' /proc/cpuinfo |uniq
  * and in the auxiliary vector:
