@@ -117,6 +117,7 @@ __extension__ static const char* cpuidstr_7_ebx[32] = {
     [12] = "cqm",
     [14] = "mpx",
     [16] = "avx512f",
+    [17] = "avx512dq",
     [18] = "rdseed",
     [19] = "adx",
     [20] = "smap",
@@ -127,6 +128,8 @@ __extension__ static const char* cpuidstr_7_ebx[32] = {
     [27] = "avx512er",
     [28] = "avx512cd",
     [29] = "sha_ni",
+    [30] = "avx512bw",
+    [31] = "avx512vl",
 };
 
 /**
@@ -208,14 +211,8 @@ static void add_manual_cpuid_str(void)
     cpuidstr_7_ebx[25] = "Intel_processor_trace"; /* Intel Processor Trace */
 
     /* https://en.wikipedia.org/wiki/CPUID */
-    assert(cpuidstr_7_ebx[17] == NULL);
-    cpuidstr_7_ebx[17] = "avx512dq";
     assert(cpuidstr_7_ebx[21] == NULL);
     cpuidstr_7_ebx[21] = "avx512ifma";
-    assert(cpuidstr_7_ebx[30] == NULL);
-    cpuidstr_7_ebx[30] = "avx512bw";
-    assert(cpuidstr_7_ebx[31] == NULL);
-    cpuidstr_7_ebx[31] = "avx512vl";
 
     /* documented in /usr/src/linux/arch/x86/kernel/cpu/{amd.c,intel.c}
      * and also /usr/src/linux/tools/power/x86/turbostat/turbostat.c

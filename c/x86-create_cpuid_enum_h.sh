@@ -1,8 +1,9 @@
 #!/bin/sh
-# Create x86-cpuid_enum.h by parsing cpufeature.h from Linux
-# (/usr/src/linux/arch/x86/include/asm/cpufeature.h)
+# Create x86-cpuid_enum.h by parsing cpufeatures.h from Linux:
+# /usr/src/linux/arch/x86/include/asm/cpufeatures.h
+# https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/cpufeatures.h
 
-CPU_FEATURE_FILE="x86-linux-cpufeature.h.tmp"
+CPU_FEATURE_FILE="x86-linux-cpufeatures.h.tmp"
 CPU_SCATTERED_FILE="x86-linux-cpu-scattered.c.tmp"
 
 if ! [ -r "$CPU_FEATURE_FILE" -a -r "$CPU_SCATTERED_FILE" ]
@@ -28,7 +29,7 @@ cat << EOF
 #include <assert.h>
 EOF
 
-# CPUID fields from /usr/src/linux/arch/x86/include/asm/cpufeature.h
+# CPUID fields from /usr/src/linux/arch/x86/include/asm/cpufeatures.h
 extract_cpuid_features() {
     cat << EOF
 
@@ -83,14 +84,8 @@ static void add_manual_cpuid_str(void)
     cpuidstr_7_ebx[25] = "Intel_processor_trace"; /* Intel Processor Trace */
 
     /* https://en.wikipedia.org/wiki/CPUID */
-    assert(cpuidstr_7_ebx[17] == NULL);
-    cpuidstr_7_ebx[17] = "avx512dq";
     assert(cpuidstr_7_ebx[21] == NULL);
     cpuidstr_7_ebx[21] = "avx512ifma";
-    assert(cpuidstr_7_ebx[30] == NULL);
-    cpuidstr_7_ebx[30] = "avx512bw";
-    assert(cpuidstr_7_ebx[31] == NULL);
-    cpuidstr_7_ebx[31] = "avx512vl";
 
     /* documented in /usr/src/linux/arch/x86/kernel/cpu/{amd.c,intel.c}
      * and also /usr/src/linux/tools/power/x86/turbostat/turbostat.c
