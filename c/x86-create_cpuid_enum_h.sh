@@ -45,6 +45,7 @@ extract_cpuid_features  0 cpuidstr_1_edx 'cpuid 0x00000001, edx register' | sed 
 extract_cpuid_features  4 cpuidstr_1_ecx 'cpuid 0x00000001, ecx register' | sed 's/"xmm/"sse/'
 extract_cpuid_features 14 cpuidstr_6_eax 'cpuid 0x00000006, eax register (Thermal and Power Management Features)'
 extract_cpuid_features  9 cpuidstr_7_ebx 'cpuid 0x00000007:0, ebx register'
+extract_cpuid_features 16 cpuidstr_7_ecx 'cpuid 0x00000007:0, ecx register'
 extract_cpuid_features  1 cpuidstr_ext1_edx 'cpuid 0x80000001, edx register'
 extract_cpuid_features  6 cpuidstr_ext1_ecx 'cpuid 0x80000001, ecx register'
 

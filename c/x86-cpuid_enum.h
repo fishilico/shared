@@ -133,6 +133,14 @@ __extension__ static const char* cpuidstr_7_ebx[32] = {
 };
 
 /**
+ * cpuid 0x00000007:0, ecx register
+ */
+__extension__ static const char* cpuidstr_7_ecx[32] = {
+    [3] = "pku",
+    [4] = "ospke",
+};
+
+/**
  * cpuid 0x80000001, edx register
  */
 __extension__ static const char* cpuidstr_ext1_edx[32] = {
