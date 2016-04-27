@@ -108,7 +108,7 @@ def run_code_linux(shellcode):
 
 
 def run_code_windows(shellcode):
-    """Run the specified shellcode on Linux"""
+    """Run the specified shellcode on Windows"""
     k32 = ctypes.windll.kernel32
     k32.VirtualAlloc.restype = ctypes.c_void_p
     int_p = ctypes.POINTER(ctypes.c_int)
