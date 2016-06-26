@@ -219,7 +219,7 @@ static double invsqrt_d(double x)
 #define _ok_f(description, result, expected) \
     do { \
         const float r = (result), e = (expected); \
-        _ok(description, (fabsf(r - e) < 1.e-6), "g", r, e); \
+        _ok(description, (fabsf(r - e) < 1.e-6f), "g", r, e); \
     } while (0)
 #define ok_f(fctcall, value) _ok_f(#fctcall, (fctcall), (value))
 
