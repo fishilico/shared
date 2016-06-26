@@ -25,9 +25,6 @@ get_base_name() {
             echo "archlinux"
             ;;
 
-        *debian6*|*squeeze*)
-            echo "debian6-squeeze"
-            ;;
         *debian7*|*wheezy*)
             echo "debian7-wheezy"
             ;;
@@ -67,7 +64,6 @@ get_available_bases() {
     # Generated with:
     # sed -n '/^get_base_name/,/^get_available_bases/{s/^ *\(echo \)/\1/p}' docker_build_run.sh
     echo "archlinux"
-    echo "debian6-squeeze"
     echo "debian7-wheezy"
     echo "debian8-jessie"
     echo "debian9-stretch"
