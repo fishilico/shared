@@ -159,6 +159,10 @@ int main(void)
         RCX, (asm_instr_reg)(-(sizeof(data) + 1)));
 
     /* SSE2 */
+    R_RSI(&ctx) = data_addr;
+    test("\x0f\x10\x06", "movups (rsi=0xda7a0000), xmm0", XMM0L, data64);
+    R_RSI(&ctx) = data_addr;
+    test("\x0f\x10\x06", "movups (rsi=0xda7a0000), xmm0", XMM0H, data64h);
     R_RAX(&ctx) = data_addr;
     test("\xf3\x44\x0f\x6f\x20", "movdqu (rax=0xda7a0000), xmm12", XMM12L, data64);
     R_RAX(&ctx) = data_addr;

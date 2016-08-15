@@ -445,6 +445,21 @@ bool run_mov_asm_instruction_p(
             return true;
         }
 
+        /* 0f 10 /r: movups xmm2/mem, xmm1 */
+        if (has_no_prefix && instr[1] == 0x10) {
+            unsigned int xmmreg = ((instr[2] >> 3) & 7) | ((rexprefix & X86_64_REX_R) ? 8 : 0);
+
+            paramlen = decode_modrm_check(ctx, instr + 2, rexprefix, data_addr, NULL, NULL, &operand_rm);
+            if (!paramlen) {
+                return false;
+            }
+            asm_printf(asm_instr, "movups %s, xmm%u", operand_rm, xmmreg);
+            free(operand_rm);
+            memcpy(asm_instr_ctx_xmm_addr(ctx, xmmreg), data, 16);
+            R_RIP(ctx) += 2 + paramlen;
+            return true;
+        }
+
         /* 0f b6 /r: movzbl reg/mem8, reg */
         if (has_no_prefix && instr[1] == 0xb6) {
             paramlen = decode_modrm_check(ctx, instr + 2, rexprefix, data_addr, &op_reg, &operand_reg, &operand_rm);
