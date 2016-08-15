@@ -9,11 +9,12 @@ a program is directed towards untrusted user input.
 
 The operation of a shellcode depends on the operating system:
 
-* On Linux, it launches a shell by running this system call:
+* On Linux, it launches a shell by running this system call (``/bin//sh`` is
+  used instead of ``/bin/sh`` to avoid NUL characters in the shellcode):
 
 .. code-block:: c
 
-    execve("/bin/sh", ["/bin/sh"], NULL)
+    execve("/bin//sh", ["/bin//sh"], NULL)
 
 * On Windows, it launches ``cmd.exe`` with:
 
