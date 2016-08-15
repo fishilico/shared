@@ -19,10 +19,23 @@ fi
 # If PKGBUILD is recent enough, don't download the package again
 if ! (find PKGBUILD -type f -mtime -1 2> /dev/null |grep -q PKGBUILD)
 then
-    echo >&2 "Download linux-grsec from the ABS"
+    echo >&2 "Downloading linux-grsec from the ABS"
     # Recreate the building directory
     rm -f ./*
-    rsync -mrtv --no-motd --no-p --no-o --no-g "rsync.archlinux.org::abs/$(uname -m)/community/linux-grsec/." .
+    if ! rsync -mrtv --no-motd --no-p --no-o --no-g "rsync.archlinux.org::abs/$(uname -m)/community/linux-grsec/." .
+    then
+        echo "Downloading failed, trying linux-grsec testing package"
+        if ! rsync -mrtv --no-motd --no-p --no-o --no-g "rsync.archlinux.org::abs/$(uname -m)/community-testing/linux-grsec/." .
+        then
+            echo >&2 "rsync failed to download linux-grsec package"
+            exit 1
+        fi
+    fi
+    if [ ! -r PKGBUILD ]
+    then
+        echo >&2 "No PKGBUILD has been downloaded"
+        exit 1
+    fi
 
     # Use the last published grsec patch URL to grab its timestamp and versions
     # The relevant sha256sums gets skipped, but the downloaded files are still
