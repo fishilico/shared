@@ -69,10 +69,10 @@ static long _syscall3(
      * r4 = arg5
      * r5 = arg6
      */
-    register long r7 __asm__("r7") = number;
-    register long r0 __asm__("r0") = arg1;
-    register long r1 __asm__("r1") = arg2;
-    register long r2 __asm__("r2") = arg3;
+    register long r7 __asm__("r7") = (long)(unsigned int)number;
+    register long r0 __asm__("r0") = (long)arg1;
+    register long r1 __asm__("r1") = (long)arg2;
+    register long r2 __asm__("r2") = (long)arg3;
     __asm__ volatile ("swi $0"
         : "=r" (r0)
         : "0" (r0), "r" (r1), "r" (r2), "r" (r7)
