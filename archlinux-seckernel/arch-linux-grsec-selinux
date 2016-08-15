@@ -198,6 +198,15 @@ fi
 MAKEFLAGS=${MAKEFLAGS:--j3}
 export MENUCONFIG MAKEFLAGS
 
+# Receive the relevant GPG keys
+for GPGKEY in $(makepkg --printsrcinfo |sed -n 's/^\s*validpgpkeys = //p')
+do
+    if ! gpg --list-keys "$GPGKEY" > /dev/null 2>&1
+    then
+        echo "Receiving GPG key $GPGKEY"
+        gpg --recv-keys "$GPGKEY" || exit $?
+    fi
+done
 # Build and install package.  Uncomment the second line to customize configuration
 makepkg -C --nobuild || exit $?
 #make -C src/linux-*/ nconfig || exit $?
