@@ -66,21 +66,24 @@ then
             echo >&2 "grsec uses an other major version of Linux, config needs to be updated."
             exit 1
         fi
-        echo "grsec uses an other stable version of Linux than the downloaded PKGBUILD. Updating it"
+        echo "grsec uses an other stable version of Linux than the downloaded PKGBUILD."
+        echo "... Updating it: $LINUXVER_FROM_PKG -> $LINUXVER"
         sed -i "s/^\(_pkgver\)=.*/\1=$LINUXVER/" PKGBUILD
         echo "sha256sums[2]='SKIP'" >> PKGBUILD
     fi
     GRSECVER_FROM_PKG="$(sed -n 's/^_grsecver=//p' PKGBUILD)"
     if [ "$GRSECVER" != "$GRSECVER_FROM_PKG" ]
     then
-        echo "grsec uses an other version of grsec than the downloaded PKGBUILD. Updating it"
+        echo "grsec uses an other version of grsec than the downloaded PKGBUILD."
+        echo "... Updating it: $GRSECVER_FROM_PKG -> $GRSECVER"
         sed -i "s/^\(_grsecver\)=.*/\1=$GRSECVER/" PKGBUILD
         echo "sha256sums[4]='SKIP'" >> PKGBUILD
     fi
     TIMESTAMP_FROM_PKG="$(sed -n 's/^_timestamp=//p' PKGBUILD)"
     if [ "$TIMESTAMP" != "$TIMESTAMP_FROM_PKG" ]
     then
-        echo "grsec uses an other timestamp than the downloaded PKGBUILD. Updating it"
+        echo "grsec uses an other timestamp than the downloaded PKGBUILD."
+        echo "... Updating it: $TIMESTAMP_FROM_PKG -> $TIMESTAMP"
         sed -i "s/^\(_timestamp\)=.*/\1=$TIMESTAMP/" PKGBUILD
         echo "sha256sums[4]='SKIP'" >> PKGBUILD
     fi
