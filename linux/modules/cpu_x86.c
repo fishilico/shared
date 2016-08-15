@@ -21,6 +21,9 @@
 #include <linux/version.h>
 
 /* Add missing bitmask definitions which were added in recent kernels */
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 6, 0)
+#define X86_CR4_PKE 0x00400000
+#endif
 #if LINUX_VERSION_CODE < KERNEL_VERSION(3, 11, 0)
 #define X86_CR4_SMXE 0x00004000
 #define X86_CR4_FSGSBASE 0x00010000
@@ -134,6 +137,7 @@ static void dump_x86_cr(void)
 	show_cr_bit(cr, 4, OSXSAVE, "enable xsave and xrestore");
 	show_cr_bit(cr, 4, SMEP, "enable Supervisor Mode Execution Protection");
 	show_cr_bit(cr, 4, SMAP, "enable Supervisor Mode Access Prevention");
+	show_cr_bit(cr, 4, PKE, "enable Protection Keys support");
 
 #ifdef CONFIG_X86_64
 	cr = read_cr8();
