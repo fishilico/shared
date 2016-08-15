@@ -81,6 +81,8 @@ static void add_manual_cpuid_str(void)
     cpuidstr_7_ebx[13] = "deprecate_FPU_CS_DS"; /* Deprecates FPU CS and FPU DS values */
     assert(cpuidstr_7_ebx[15] == NULL);
     cpuidstr_7_ebx[15] = "pqe"; /* Platform Quality of Service Enforcement */
+    assert(cpuidstr_7_ebx[22] == NULL);
+    cpuidstr_7_ebx[22] = "pcommit"; /* Deprecated pcommit instruction, Linux commit fd1d961dd681 ("x86/insn: remove pcommit") */
     assert(cpuidstr_7_ebx[25] == NULL);
     cpuidstr_7_ebx[25] = "Intel_processor_trace"; /* Intel Processor Trace */
 
