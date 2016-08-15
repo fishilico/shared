@@ -62,7 +62,7 @@ int main(void)
         struct stat st;
         int new_dirfd;
         DIR *dir = NULL;
-        struct dirent entry_buffer, *entry;
+        struct dirent *entry;
 
         /* Start with the root directory */
         if (!path_part) {
@@ -97,11 +97,13 @@ int main(void)
         if (dir_fd != AT_FDCWD) {
             dir = fdopendir(dir_fd);
             while (true) {
-                if (readdir_r(dir, &entry_buffer, &entry) == -1) {
-                    perror("readdir");
-                    goto cleanup;
-                }
+                errno = 0;
+                entry = readdir(dir);
                 if (!entry) {
+                    if (errno) {
+                        perror("readdir");
+                        goto cleanup;
+                    }
                     printf("... not found in parent directory :(\n");
                     break;
                 }
