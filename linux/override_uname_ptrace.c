@@ -10,6 +10,7 @@
 #endif
 
 #include <assert.h>
+#include <errno.h>
 #include <getopt.h>
 #include <signal.h>
 #include <stddef.h>
@@ -256,6 +257,11 @@ int main(int argc, char **argv)
         /* Child: launch ptrace and run command */
         prctl(PR_SET_PDEATHSIG, SIGTERM);
         if (ptrace(PTRACE_TRACEME, 0, NULL, NULL) == -1) {
+            if (errno == EPERM) {
+                /* Docker filters this syscall in its default seccomp policy */
+                printf("ptrace(TRACEME) is not permitted here.\n");
+                exit(0);
+            }
             perror("ptrace(TRACEME)");
             exit(EXIT_FAILURE);
         }

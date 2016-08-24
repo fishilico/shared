@@ -130,6 +130,8 @@ int main(void)
             if (name_to_handle_at(dir_fd, path_part, fhp, &mount_id, 0) == -1) {
                 if (errno == ENOTSUP) {
                     printf("  (name_to_handle_at not supported here)\n");
+                } else if (errno == EPERM) {
+                    printf("  (name_to_handle_at not permitted here)\n");
                 } else {
                     perror("name_to_handle_at");
                 }
