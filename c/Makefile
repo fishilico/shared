@@ -13,8 +13,8 @@ OPENMP_PROGRAMS := openmp_matrix
 GTK_PROGRAMS := gtk_alpha_window
 X86_PROGRAMS := $(filter x86-%, $(ALL_PROGRAMS))
 
-# Programs not to test automatically, because they hang
-NONTEST_PROGRAMS := gtk_alpha_window
+# Programs not to test automatically, because they hang or are tested an other way
+NONTEST_PROGRAMS := antidebug gtk_alpha_window
 NONTEST_BINARIES := $(NONTEST_PROGRAMS:%=%.$(BIN_EXT)) x86-create_cpuid_enum_h.sh
 
 # Find other programs. Only programs in $(PROGRAMS) are built.

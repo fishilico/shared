@@ -16,19 +16,34 @@ else
     # non-Windows OS
     BIN_EXT="bin"
 fi
+PROG="$(dirname -- "$0")/antidebug.$BIN_EXT"
 
 # Use "set" to expand the command array in sh
 set -- $GDB
-if ! which $1 > /dev/null 2>&1
+if ! which "$1" > /dev/null 2>&1
 then
     echo >&2 "gdb is not installed. Skipping test."
     exit
 fi
 
-$* --quiet --return-child-result < /dev/null \
+# In some Docker environments, tracing is not permitted
+if ! "$@" --quiet -ex r --return-child-result true < /dev/null
+then
+    echo >&2 "gdb is not allowed here. Skipping test."
+    exit
+fi
+
+# Test that the program without any instrumentation works
+if ! "$PROG"
+then
+    echo >&2 "The program does not work!"
+    exit 1
+fi
+
+"$@" --quiet --return-child-result < /dev/null \
     -ex 'b sensitive_computation' \
     -ex 'r' \
-    "$(dirname "$0")/antidebug.$BIN_EXT"
+    "$PROG"
 EXITCODE=$?
 
 # antidebug program exits with code 3 when it has detected all debugging features
