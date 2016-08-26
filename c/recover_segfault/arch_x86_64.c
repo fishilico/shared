@@ -8,6 +8,8 @@
  * AMD64 Architecture Programmer's Manual Volume 3: General Purpose and System Instructions
  * AMD64 Architecture Programmer's Manual Volume 4: 128-bit and 256 bit media instructions
  * AMD64 Architecture Programmer's Manual Volume 5: 64-Bit Media and x87 Floating-Point Instructions
+ *
+ * http://ref.x86asm.net/coder64.html X86 Opcode and Instruction Reference
  */
 #include "arch_x86_64.h"
 

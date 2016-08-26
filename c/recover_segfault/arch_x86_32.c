@@ -6,6 +6,8 @@
  * Intel Architectures Software Developer's Manual Volume 1: Basic Architecture
  * Intel Architectures Software Developer's Manual Volume 2: Instruction Set Reference
  * Intel Architectures Software Developer's Manual Volume 3: System Programming Guide
+ *
+ * http://ref.x86asm.net/coder32.html X86 Opcode and Instruction Reference
  */
 #include "arch_x86_32.h"
 
