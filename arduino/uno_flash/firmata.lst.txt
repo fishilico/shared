@@ -1,0 +1,4385 @@
+
+int0_reset_vect:
+  0000: 940c 0064      jmp 0x00c8 <boot()>
+
+int1_INT0_vect:
+  0004: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int2_INT1_vect:
+  0008: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int3_PCINT0_vect:
+  000c: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int4_PCINT1_vect:
+  0010: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int5_PCINT2_vect:
+  0014: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int6_WDT_vect:
+  0018: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int7_TIMER2_COMPA_vect:
+  001c: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int8_TIMER2_COMPB_vect:
+  0020: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int9_TIMER2_OVF_vect:
+  0024: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int10_TIMER1_CAPT_vect:
+  0028: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int11_TIMER1_COMPA_vect:
+  002c: 940c 034a      jmp 0x0694 <int0b_TIMER1_COMPA_vect>
+
+int12_TIMER1_COMPB_vect:
+  0030: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int13_TIMER1_OVF_vect:
+  0034: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int14_TIMER0_COMPA_vect:
+  0038: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int15_TIMER0_COMPB_vect:
+  003c: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int16_TIMER0_OVF_vect:
+  0040: 940c 0c67      jmp 0x18ce <TIMER0_OVF_vect>
+
+int17_SPI_STC_vect:
+  0044: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int18_USART_RX_vect:
+  0048: 940c 0e51      jmp 0x1ca2 <USART_RX_vect>
+
+int19_USART_UDRE_vect:
+  004c: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int20_USART_TX_vect:
+  0050: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int21_ADC_vect:
+  0054: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int22_EE_READY_vect:
+  0058: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int23_ANALOG_COMP_vect:
+  005c: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int24_TWI_vect:
+  0060: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+int25_SPM_READY_vect:
+  0064: 940c 008c      jmp 0x0118 <bad_interrupt>
+
+rodata:
+  0068:                      0000 0000 2400 2700          ....$.'.
+  0070:  2a00 0000 0000 2500 2800 2b00 0000 0000  *.....%.(.+.....
+  0080:  2300 2600 2900 0404 0404 0404 0404 0202  #.&.)...........
+  0090:  0202 0202 0303 0303 0303 0102 0408 1020  ............... 
+  00a0:  4080 0102 0408 1020 0102 0408 1020 0000  @...... ..... ..
+  00b0:  0007 0002 0100 0003 0406 0000 0000 0000  ................
+  00c0:  0000                                     ..
+
+constructor_table:
+  00c2: 0445 addr 0x088a <cons3_initialize_Firmata>
+  00c4: 07d3 addr 0x0fa6 <sub_0fa6_cons2>
+  00c6: 0f4d addr 0x1e9a <cons1_Serial::Serial(this=0x0361)>
+
+boot():
+  00c8: 2411           r1 := 0
+  00ca: be1f           PORT.SREG := 0
+  00cc: efcf e0d8      r29:r28 := 0x8ff (=__stack)
+  00d0: bfde           PORT.SPH := r29
+  00d2: bfcd           PORT.SPL := r28
+  00d4: e011           r17 := 1          # Copy .data segment to 0100..01ee
+  00d6: e0a0 e0b1      r27:r26 := 0x100 (=".cpp")
+  00da: e5e2 e2f3      r31:r30 := 0x2352
+  00de: c002           jmp 0x00e4 <_memcpy_data_loop_start>
+_memcpy_data_loop:
+  00e0: 9005           r0 := PROG[r31:r30 ++]
+  00e2: 920d           *(r27:r26 ++) := r0
+_memcpy_data_loop_start:
+  00e4: 3eae 07b1 f7d9 if(r27:r26 != r17:0xee):jmp 0x00e0 <_memcpy_data_loop>
+  00ea: e013           r17 := 3          # Clear .bss in 01ee..0378
+  00ec: eeae e0b1      r27:r26 := 0x1ee (=ServoCount)
+  00f0: c001           jmp 0x00f4 <_zeromem_bss_loop_start>
+_zeromem_bss_loop:
+  00f2: 921d           *(r27:r26 ++) := 0
+_zeromem_bss_loop_start:
+  00f4: 37a8 07b1 f7e1 if(r27:r26 != r17:0x78):jmp 0x00f2 <_zeromem_bss_loop>
+  00fa: e010           r17 := 0
+  00fc: ecc8 e0d0      r29:r28 := 0xc8
+  0100: c004           jmp 0x010a <_loc_010a>
+_loc_0102:
+  0102: 9722           r29:r28 -= 2
+  0104: 01fe           r31:r30 := r29:r28
+  0106: 940e 11a3      call 0x2346 <call_constructor(fctptr=r31:r30)>
+_loc_010a:
+  010a: 3cc2 07d1 f7c9 if(r29:r28 != r17:0xc2):jmp 0x0102 <_loc_0102>
+  0110: 940e 0f87      call 0x1f0e <main()>
+  0114: 940c 11a7      jmp 0x234e <exit()>
+
+bad_interrupt:
+  0118: 940c 0000      jmp 0x0000 <int0_reset_vect>
+
+libc.malloc(size=r25:r24)->r25:r24:
+  011c: 93cf           push r28
+  011e: 93df           push r29
+  0120: 01bc           r23:r22 := r25:r24
+  0122: 3082 0591 f410 if(r25:r24 >= 2):jmp 0x012c <_loc_012c>
+  0128: e062 e070      r23:r22 := 2
+_loc_012c:
+  012c: 91a0 0376      r26 := SRAM.Heap.__freelistp_L
+  0130: 91b0 0377      r27 := SRAM.Heap.__freelistp_H
+  0134: 01ed e0e0 e0f0 r31:r30:r29:r28 := 0:0:r27:r26
+  013a: e040 e050      r21:r20 := 0
+  013e: c021           jmp 0x0182 <_loc_0182>
+_loc_0140:
+  0140: 8188           r24 := *(r29:r28)
+  0142: 8199           r25 := *(r29:r28 + 0x01)
+  0144: 1786 0797 f469 if(r25:r24 != r23:r22):jmp 0x0164 <_loc_0164>
+  014a: 818a           r24 := *(r29:r28 + 0x02)
+  014c: 819b           r25 := *(r29:r28 + 0x03)
+  014e: 9730 f019      if(r31:r30 == 0):jmp 0x0158 <_loc_0158>
+  0152: 8393           *(r31:r30 + 0x03) := r25
+  0154: 8382           *(r31:r30 + 0x02) := r24
+  0156: c004           jmp 0x0160 <_loc_0160>
+_loc_0158:
+  0158: 9390 0377      SRAM.Heap.__freelistp_H := r25
+  015c: 9380 0376      SRAM.Heap.__freelistp_L := r24
+_loc_0160:
+  0160: 01fe           r31:r30 := r29:r28
+  0162: c034           jmp 0x01cc <_loc_01cc>
+_loc_0164:
+  0164: 1768 0779 f438 if(r23:r22 >= r25:r24):jmp 0x0178 <_loc_0178>
+  016a: 1541 0551 f019 if(r21:r20 == 0):jmp 0x0176 <_loc_0176>
+  0170: 1784 0795 f408 if(r25:r24 >= r21:r20):jmp 0x0178 <_loc_0178>
+_loc_0176:
+  0176: 01ac           r21:r20 := r25:r24
+_loc_0178:
+  0178: 01fe           r31:r30 := r29:r28
+  017a: 818a           r24 := *(r29:r28 + 0x02)
+  017c: 819b           r25 := *(r29:r28 + 0x03)
+  017e: 019c           r19:r18 := r25:r24
+  0180: 01e9           r29:r28 := r19:r18
+_loc_0182:
+  0182: 9720 f6e9      if(r29:r28 != 0):jmp 0x0140 <_loc_0140>
+  0186: 1541 0551 f1a9 if(r21:r20 == 0):jmp 0x01f6 <_loc_01f6>
+  018c: 01ca           r25:r24 := r21:r20
+  018e: 1b86 0b97      r25:r24 -= r23:r22
+  0192: 9704           r25:r24 -= 4
+  0194: f408           if(r25:r24 >= 0):jmp 0x0198 <_loc_0198>
+  0196: 01ba           r23:r22 := r21:r20
+_loc_0198:
+  0198: e0e0 e0f0      r31:r30 := 0
+  019c: c02a           jmp 0x01f2 <_loc_01f2>
+_loc_019e:
+  019e: 918d           r24 := *(r27:r26 ++)
+  01a0: 919c           r25 := *(r27:r26)
+  01a2: 9711           r27:r26 -= 1
+  01a4: 1784 0795 f4f9 if(r25:r24 != r21:r20):jmp 0x01e8 <_loc_01e8>
+  01aa: 1764 0775 f481 if(r23:r22 != r21:r20):jmp 0x01d0 <_loc_01d0>
+  01b0: 9612           r27:r26 += 2
+  01b2: 918d           r24 := *(r27:r26 ++)
+  01b4: 919c           r25 := *(r27:r26)
+  01b6: 9713           r27:r26 -= 3
+  01b8: 9730 f019      if(r31:r30 == 0):jmp 0x01c2 <_loc_01c2>
+  01bc: 8393           *(r31:r30 + 0x03) := r25
+  01be: 8382           *(r31:r30 + 0x02) := r24
+  01c0: c004           jmp 0x01ca <_loc_01ca>
+_loc_01c2:
+  01c2: 9390 0377      SRAM.Heap.__freelistp_H := r25
+  01c6: 9380 0376      SRAM.Heap.__freelistp_L := r24
+_loc_01ca:
+  01ca: 01fd           r31:r30 := r27:r26
+_loc_01cc:
+  01cc: 9632           r31:r30 += 2
+  01ce: c04c           jmp 0x0268 <_loc_0268>
+_loc_01d0:
+  01d0: 01ca           r25:r24 := r21:r20
+  01d2: 1b86 0b97      r25:r24 -= r23:r22
+  01d6: 01fd           r31:r30 := r27:r26
+  01d8: 0fe8 1ff9      r31:r30 += r25:r24
+  01dc: 9361           *(r31:r30 ++) := r22
+  01de: 9371           *(r31:r30 ++) := r23
+  01e0: 9702           r25:r24 -= 2
+  01e2: 938d           *(r27:r26 ++) := r24
+  01e4: 939c           *(r27:r26) := r25
+  01e6: c040           jmp 0x0268 <_loc_0268>
+_loc_01e8:
+  01e8: 01fd           r31:r30 := r27:r26
+  01ea: 8182           r24 := *(r31:r30 + 0x02)
+  01ec: 8193           r25 := *(r31:r30 + 0x03)
+  01ee: 019c           r19:r18 := r25:r24
+  01f0: 01d9           r27:r26 := r19:r18
+_loc_01f2:
+  01f2: 9710 f6a1      if(r27:r26 != 0):jmp 0x019e <_loc_019e>
+_loc_01f6:
+  01f6: 9180 0374      r24 := SRAM.Heap.__brkval_L
+  01fa: 9190 0375      r25 := SRAM.Heap.__brkval_H
+  01fe: 2b89           r24 |= r25
+  0200: f441           brne 0x0212 <_loc_0212>
+  0202: 9180 01d5      r24 := SRAM.__malloc_heap_start_L
+  0206: 9190 01d6      r25 := SRAM.__malloc_heap_start_H
+  020a: 9390 0375      SRAM.Heap.__brkval_H := r25
+  020e: 9380 0374      SRAM.Heap.__brkval_L := r24
+_loc_0212:
+  0212: 9140 01d7      r20 := SRAM.__malloc_heap_end_L
+  0216: 9150 01d8      r21 := SRAM.__malloc_heap_end_H
+  021a: 1541 0551 f441 if(r21:r20 != 0):jmp 0x0230 <_loc_0230>
+  0220: b74d           r20 := PORT.SPL
+  0222: b75e           r21 := PORT.SPH
+  0224: 9180 01d3      r24 := SRAM.__malloc_margin_L
+  0228: 9190 01d4      r25 := SRAM.__malloc_margin_H
+  022c: 1b48 0b59      r21:r20 -= r25:r24
+_loc_0230:
+  0230: 9120 0374      r18 := SRAM.Heap.__brkval_L
+  0234: 9130 0375      r19 := SRAM.Heap.__brkval_H
+  0238: 01ca           r25:r24 := r21:r20
+  023a: 1b82 0b93      r25:r24 -= r19:r18
+  023e: 1786 0797 f080 if(r25:r24 < r23:r22):jmp 0x0264 <_loc_0264>
+  0244: 01ab           r21:r20 := r23:r22
+  0246: 5f4e 4f5f      r21:r20 -= -2
+  024a: 1784 0795 f050 if(r25:r24 < r21:r20):jmp 0x0264 <_loc_0264>
+  0250: 0f42 1f53      r21:r20 += r19:r18
+  0254: 9350 0375      SRAM.Heap.__brkval_H := r21
+  0258: 9340 0374      SRAM.Heap.__brkval_L := r20
+  025c: 01f9           r31:r30 := r19:r18
+  025e: 9361           *(r31:r30 ++) := r22
+  0260: 9371           *(r31:r30 ++) := r23
+  0262: c002           jmp 0x0268 <_loc_0268>
+_loc_0264:
+  0264: e0e0 e0f0      r31:r30 := 0
+_loc_0268:
+  0268: 01cf           r25:r24 := r31:r30
+  026a: 91df           pop r29
+  026c: 91cf           pop r28
+  026e: 9508           ret
+
+libc.free(p=r25:r24):
+  0270: 93cf           push r28
+  0272: 93df           push r29
+  0274: 9700 f409      if(r25:r24 != 0):jmp 0x027a <_loc_027a>
+  0278: c050           jmp 0x031a <_loc_031a>
+_loc_027a:
+  027a: 01ec           r29:r28 := r25:r24
+  027c: 9722           r29:r28 -= 2
+  027e: 821b           *(r29:r28 + 0x03) := 0
+  0280: 821a           *(r29:r28 + 0x02) := 0
+  0282: 91a0 0376      r26 := SRAM.Heap.__freelistp_L
+  0286: 91b0 0377      r27 := SRAM.Heap.__freelistp_H
+  028a: 9710 f109      if(r27:r26 == 0):jmp 0x02d0 <_loc_02d0>
+  028e: e040 e050      r21:r20 := 0
+_loc_0292:
+  0292: 17ac 07bd f108 if(r27:r26 < r29:r28):jmp 0x02da <_loc_02da>
+  0298: 83bb           *(r29:r28 + 0x03) := r27
+  029a: 83aa           *(r29:r28 + 0x02) := r26
+  029c: 01fe           r31:r30 := r29:r28
+  029e: 9121           r18 := *(r31:r30 ++)
+  02a0: 9131           r19 := *(r31:r30 ++)
+  02a2: 0fe2 1ff3      r31:r30 += r19:r18
+  02a6: 17ae 07bf f479 if(r27:r26 != r31:r30):jmp 0x02ca <_loc_02ca>
+  02ac: 918d           r24 := *(r27:r26 ++)
+  02ae: 919c           r25 := *(r27:r26)
+  02b0: 9711           r27:r26 -= 1
+  02b2: 0f28 1f39      r19:r18 += r25:r24
+  02b6: 5f2e 4f3f      r19:r18 -= -2
+  02ba: 8339           *(r29:r28 + 0x01) := r19
+  02bc: 8328           *(r29:r28) := r18
+  02be: 9612           r27:r26 += 2
+  02c0: 918d           r24 := *(r27:r26 ++)
+  02c2: 919c           r25 := *(r27:r26)
+  02c4: 9713           r27:r26 -= 3
+  02c6: 839b           *(r29:r28 + 0x03) := r25
+  02c8: 838a           *(r29:r28 + 0x02) := r24
+_loc_02ca:
+  02ca: 1541 0551 f471 if(r21:r20 != 0):jmp 0x02ec <_loc_02ec>
+_loc_02d0:
+  02d0: 93d0 0377      SRAM.Heap.__freelistp_H := r29
+  02d4: 93c0 0376      SRAM.Heap.__freelistp_L := r28
+  02d8: c020           jmp 0x031a <_loc_031a>
+_loc_02da:
+  02da: 9612           r27:r26 += 2
+  02dc: 918d           r24 := *(r27:r26 ++)
+  02de: 919c           r25 := *(r27:r26)
+  02e0: 9713           r27:r26 -= 3
+  02e2: 01ad           r21:r20 := r27:r26
+  02e4: 9700 f011      if(r25:r24 == 0):jmp 0x02ec <_loc_02ec>
+  02e8: 01dc           r27:r26 := r25:r24
+  02ea: cfd3           jmp 0x0292 <_loc_0292>
+_loc_02ec:
+  02ec: 01fa           r31:r30 := r21:r20
+  02ee: 83d3           *(r31:r30 + 0x03) := r29
+  02f0: 83c2           *(r31:r30 + 0x02) := r28
+  02f2: 9121           r18 := *(r31:r30 ++)
+  02f4: 9131           r19 := *(r31:r30 ++)
+  02f6: 0fe2 1ff3      r31:r30 += r19:r18
+  02fa: 17ce 07df f469 if(r29:r28 != r31:r30):jmp 0x031a <_loc_031a>
+  0300: 8188           r24 := *(r29:r28)
+  0302: 8199           r25 := *(r29:r28 + 0x01)
+  0304: 0f28 1f39      r19:r18 += r25:r24
+  0308: 5f2e 4f3f      r19:r18 -= -2
+  030c: 01fa           r31:r30 := r21:r20
+  030e: 8331           *(r31:r30 + 0x01) := r19
+  0310: 8320           *(r31:r30) := r18
+  0312: 818a           r24 := *(r29:r28 + 0x02)
+  0314: 819b           r25 := *(r29:r28 + 0x03)
+  0316: 8393           *(r31:r30 + 0x03) := r25
+  0318: 8382           *(r31:r30 + 0x02) := r24
+_loc_031a:
+  031a: 91df           pop r29
+  031c: 91cf           pop r28
+  031e: 9508           ret
+
+libc.strncpy(dest=r25:r24, src=r23:r22, size=r21:r20):
+  0320: 01fb           r31:r30 := r23:r22
+  0322: 01dc           r27:r26 := r25:r24
+_loc_0324:
+  0324: 5041 4050      r21:r20 -= 1
+  0328: f048           if(r21:r20 < 0):jmp 0x033c <_loc_033c>
+  032a: 9001           r0 := *(r31:r30 ++)
+  032c: 920d           *(r27:r26 ++) := r0
+  032e: 2000 f7c9      if(r0):jmp 0x0324 <_loc_0324>
+  0332: c001           jmp 0x0336 <_loc_0336>
+_loc_0334:
+  0334: 921d           *(r27:r26 ++) := 0
+_loc_0336:
+  0336: 5041 4050      r21:r20 -= 1
+  033a: f7e0           if(r21:r20 >= 0):jmp 0x0334 <_loc_0334>
+_loc_033c:
+  033c: 9508           ret
+
+libc.strrchr(r25:r24, r22)->r25:r24:
+  033e: 01fc           r31:r30 := r25:r24
+  0340: e081 e090      r25:r24 := 1
+_loc_0344:
+  0344: 9001           r0 := *(r31:r30 ++)
+  0346: 1606 f409      if(r0 != r22):jmp 0x034c <_loc_034c>
+  034a: 01cf           r25:r24 := r31:r30
+_loc_034c:
+  034c: 2000 f7d1      if(r0):jmp 0x0344 <_loc_0344>
+  0350: 9701           r25:r24 -= 1
+  0352: 9508           ret
+
+libc.strstr(haystack=r25:r24, needle=r23:r22)->r25:r24:
+  0354: 01fb           r31:r30 := r23:r22
+  0356: 9151           r21 := *(r31:r30 ++)
+  0358: 2355 f0a9      if_not(r21):jmp 0x0386 <_loc_0386>
+  035c: 01bf           r23:r22 := r31:r30
+_loc_035e:
+  035e: 01dc           r27:r26 := r25:r24
+_loc_0360:
+  0360: 914d           r20 := *(r27:r26 ++)
+  0362: 1745           cmp r20, r21
+  0364: 1141 f7e1      if_not(r20 == 0):brne 0x0360 <_loc_0360>
+  0368: f459           brne 0x0380 <_loc_0380>
+  036a: 01cd           r25:r24 := r27:r26
+_loc_036c:
+  036c: 9001           r0 := *(r31:r30 ++)
+  036e: 2000 f049      if_not(r0):jmp 0x0384 <_loc_0384>
+  0372: 914d           r20 := *(r27:r26 ++)
+  0374: 1540           cmp r20, r0
+  0376: 1141 f3c9      if_not(r20 == 0):breq 0x036c <_loc_036c>
+  037a: 01fb           r31:r30 := r23:r22
+  037c: 1141 cfef      if_not(r20 == 0):jmp 0x035e <_loc_035e>
+_loc_0380:
+  0380: e081 e090      r25:r24 := 1
+_loc_0384:
+  0384: 9701           r25:r24 -= 1
+_loc_0386:
+  0386: 9508           ret
+
+Servo::Servo(this=r25:r24):
+  0388: 01fc           r31:r30 := r25:r24
+  038a: 9180 01ee      r24 := SRAM.ServoCount
+  038e: 308c f490      if(r24 >= 12):jmp 0x03b6 <_loc_03b6>
+  0392: 8380           *(r31:r30) := r24 # this->servoIndex = ServoCount++
+  0394: 5f8f           r24 -= -1
+  0396: 9380 01ee      SRAM.ServoCount := r24
+  039a: 5081           r24 -= 1
+  039c: e090           r25 := 0
+  039e: 01fc           r31:r30 := r25:r24
+  03a0: 0fee 1fff      r31:r30 *= 2
+  03a4: 0fe8 1ff9      r31:r30 += r25:r24
+  03a8: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  03ac: eb88 e09b      r25:r24 := 0xbb8
+  03b0: 8392           *(r31:r30 + 0x02) := r25
+  03b2: 8381           *(r31:r30 + 0x01) := r24
+  03b4: 9508           ret
+_loc_03b6:
+  03b6: ef8f           r24 := 0xff
+  03b8: 8380           *(r31:r30) := r24
+  03ba: 9508           ret
+
+sub_03bc:
+  03bc: 01dc           r27:r26 := r25:r24
+  03be: 918c           r24 := *(r27:r26)
+  03c0: e090           r25 := 0
+  03c2: 01fc           r31:r30 := r25:r24
+  03c4: 0fee 1fff      r31:r30 *= 2
+  03c8: 0fe8 1ff9      r31:r30 += r25:r24
+  03cc: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  03d0: 8180           r24 := *(r31:r30)
+  03d2: 7b8f           r24 &= 0xbf
+  03d4: 8380           *(r31:r30) := r24
+  03d6: 918c           r24 := *(r27:r26)
+  03d8: e06c           r22 := 12
+  03da: 940e 1131      call 0x2262 <libgcc.udivmodqi4(dividend=r24, divisor=r22)->r25=r,r24=q>
+  03de: e090           r25 := 0
+  03e0: 01ac           r21:r20 := r25:r24
+  03e2: 0f44 1f55      r21:r20 *= 2
+  03e6: 0f48 1f59      r21:r20 += r25:r24
+  03ea: 0f44 1f55      r21:r20 *= 2
+  03ee: 0f44 1f55      r21:r20 *= 2
+  03f2: e020 e030      r19:r18 := 0
+_loc_03f6:
+  03f6: 01c9           r25:r24 := r19:r18
+  03f8: 0f84 1f95      r25:r24 += r21:r20
+  03fc: 01fc           r31:r30 := r25:r24
+  03fe: 0fee 1fff      r31:r30 *= 2
+  0402: 0fe8 1ff9      r31:r30 += r25:r24
+  0406: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  040a: 8180           r24 := *(r31:r30)
+  040c: fd86 c005      if(bit(r24, 6)):jmp 0x041a <_loc_041a>
+  0410: 5f2f 4f3f      r19:r18 -= -1
+  0414: 302c 0531 f771 if(r19:r18 != 12):jmp 0x03f6 <_loc_03f6>
+_loc_041a:
+  041a: 9508           ret
+
+Servo::writeMicroseconds(this=r25:r24, int value=r23:r22):
+  041c: 01fc           r31:r30 := r25:r24
+  041e: 8120           r18 := *(r31:r30)
+  0420: 302c f5b8      if(r18 >= 12):jmp 0x0492 <_loc_0492>
+  0424: 8181           r24 := *(r31:r30 + 0x01)
+  0426: 2799           r25 := 0
+  0428: fd87           skip_if_not(bit(r24, 7))
+  042a: 9590           r25 := 0xff - r25
+  042c: e848 e050      r21:r20 := 0x88 (=OCR1AL)
+  0430: 1b48 0b59      r21:r20 -= r25:r24
+  0434: 0f44 1f55      r21:r20 *= 2
+  0438: 0f44 1f55      r21:r20 *= 2
+  043c: 1764 0775 f084 if(r23:r22 <s r21:r20):jmp 0x0462 <_loc_0462>
+  0442: 8182           r24 := *(r31:r30 + 0x02)
+  0444: 2799           r25 := 0
+  0446: fd87           skip_if_not(bit(r24, 7))
+  0448: 9590           r25 := 0xff - r25
+  044a: e548 e052      r21:r20 := 0x258 (=previousPINs[2])
+  044e: 1b48 0b59      r21:r20 -= r25:r24
+  0452: 0f44 1f55      r21:r20 *= 2
+  0456: 0f44 1f55      r21:r20 *= 2
+  045a: 1764 0775 f40c if(r23:r22 >=s r21:r20):jmp 0x0462 <_loc_0462>
+  0460: 01ab           r21:r20 := r23:r22
+_loc_0462:
+  0462: 5042 4050      r21:r20 -= 2
+  0466: 01ca 27aa      r26:r25:r24 := 0:r21:r20
+  046a: fd97           skip_if_not(bit(r25, 7))
+  046c: 95a0           r26 := 0xff - r26
+  046e: 2fba           r27 := r26
+  0470: 0f88 1f99 1faa 1fbb r27:r26:r25:r24 *= 2
+  0478: b74f           r20 := PORT.SREG
+  047a: 94f8           Clear(I flag)
+  047c: e030           r19 := 0
+  047e: 01f9           r31:r30 := r19:r18
+  0480: 0fee 1fff      r31:r30 *= 2
+  0484: 0fe2 1ff3      r31:r30 += r19:r18
+  0488: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  048c: 8392           *(r31:r30 + 0x02) := r25
+  048e: 8381           *(r31:r30 + 0x01) := r24
+  0490: bf4f           PORT.SREG := r20
+_loc_0492:
+  0492: 9508           ret
+
+sub_0494:
+  0494: 01fc           r31:r30 := r25:r24
+  0496: 8180           r24 := *(r31:r30)
+  0498: e090           r25 := 0
+  049a: 01fc           r31:r30 := r25:r24
+  049c: 0fee 1fff      r31:r30 *= 2
+  04a0: 0fe8 1ff9      r31:r30 += r25:r24
+  04a4: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  04a8: 8180           r24 := *(r31:r30)
+  04aa: 9582           swap_nibbles r24
+  04ac: 9586 9586      r24 /= 4
+  04b0: 7081           r24 &= 1
+  04b2: f009           breq 0x04b6 <_loc_04b6>
+  04b4: e081           r24 := 1
+_loc_04b6:
+  04b6: 9508           ret
+
+Servo::write(this=r25:r24, int value=r23:r22):
+  04b8: 92af           push r10
+  04ba: 92bf           push r11
+  04bc: 92cf           push r12
+  04be: 92df           push r13
+  04c0: 92ef           push r14
+  04c2: 92ff           push r15
+  04c4: 930f           push r16
+  04c6: 931f           push r17
+  04c8: 93cf           push r28
+  04ca: 93df           push r29
+  04cc: 01ec           r29:r28 := r25:r24
+  04ce: 019b           r19:r18 := r23:r22
+  04d0: e082           r24 := 2
+  04d2: 3260 0778 f00c if(r23:r22 <s r24:0x20):jmp 0x04da <_loc_04da>
+  04d8: c048           jmp 0x056a <_loc_056a>
+_loc_04da:
+  04da: ff77 c003      if_not(bit(r23, 7)):jmp 0x04e4 <_loc_04e4>
+  04de: e020 e030      r19:r18 := 0
+  04e2: c005           jmp 0x04ee <_loc_04ee>
+_loc_04e4:
+  04e4: 3b65 0571 f014 if(r23:r22 <s 0xb5):jmp 0x04ee <_loc_04ee>
+  04ea: eb24 e030      r19:r18 := 0xb4 (=OCR2B)
+_loc_04ee:
+  04ee: d000           nop               # value = map(value, 0, 180, SERVO_MIN(),  SERVO_MAX())...
+  04f0: d000           nop
+  04f2: 01b9 2788      r24:r23:r22 := 0:r19:r18
+  04f6: fd77           skip_if_not(bit(r23, 7))
+  04f8: 9580           r24 := 0xff - r24
+  04fa: 2f98           r25 := r24
+  04fc: 8129           r18 := *(r29:r28 + 0x01)
+  04fe: 2733           r19 := 0
+  0500: fd27           skip_if_not(bit(r18, 7))
+  0502: 9530           r19 := 0xff - r19
+  0504: e8e8           r30 := 0x88
+  0506: 2eae 2cb1      r11:r10 := 0:r30
+  050a: 1aa2 0ab3      r11:r10 -= r19:r18
+  050e: 0caa 1cbb      r11:r10 *= 2
+  0512: 0caa 1cbb      r11:r10 *= 2
+  0516: 24cc           r12 := 0
+  0518: fcb7           skip_if_not(bit(r11, 7))
+  051a: 94c0           r12 := 0xff - r12
+  051c: 2cdc           r13 := r12
+  051e: 81ea           r30 := *(r29:r28 + 0x02)
+  0520: 27ff           r31 := 0
+  0522: fde7           skip_if_not(bit(r30, 7))
+  0524: 95f0           r31 := 0xff - r31
+  0526: e528 e032      r19:r18 := 0x258 (=previousPINs[2])
+  052a: 1b2e 0b3f      r19:r18 -= r31:r30
+  052e: 0f22 1f33      r19:r18 *= 2
+  0532: 0f22 1f33      r19:r18 *= 2
+  0536: 2744           r20 := 0
+  0538: fd37           skip_if_not(bit(r19, 7))
+  053a: 9540           r20 := 0xff - r20
+  053c: 2f54           r21 := r20
+  053e: b7ed           r30 := PORT.SPL
+  0540: b7fe           r31 := PORT.SPH
+  0542: 8321           *(r31:r30 + 0x01) := r18
+  0544: 8332           *(r31:r30 + 0x02) := r19
+  0546: 8343           *(r31:r30 + 0x03) := r20
+  0548: 8354           *(r31:r30 + 0x04) := r21
+  054a: e020 e030 e040 e050 r21:r20:r19:r18 := 0
+  0552: eb04           r16 := 0xb4
+  0554: 2ee0 2cf1 2d01 2d11 r17:r16:r15:r14 := 0:0:0:r16
+  055c: 940e 10c9      call 0x2192 <map(x=r25:r24:r23:r22, in_min=r21:r20:r19:r18, in_max=r17:r16:r15:r14, out_min=r13:r12:r11:r10, out_max=sp+4:3:2:1)->r25:r24:r23:r22>
+  0560: 019b           r19:r18 := r23:r22
+  0562: 900f           pop r0
+  0564: 900f           pop r0
+  0566: 900f           pop r0
+  0568: 900f           pop r0
+_loc_056a:
+  056a: 01ce           r25:r24 := r29:r28
+  056c: 01b9           r23:r22 := r19:r18
+  056e: 940e 020e      call 0x041c <Servo::writeMicroseconds(this=r25:r24, int value=r23:r22)>
+  0572: 91df           pop r29
+  0574: 91cf           pop r28
+  0576: 911f           pop r17
+  0578: 910f           pop r16
+  057a: 90ff           pop r15
+  057c: 90ef           pop r14
+  057e: 90df           pop r13
+  0580: 90cf           pop r12
+  0582: 90bf           pop r11
+  0584: 90af           pop r10
+  0586: 9508           ret
+
+sub_0588:
+  0588: 92cf           push r12
+  058a: 92df           push r13
+  058c: 92ef           push r14
+  058e: 92ff           push r15
+  0590: 931f           push r17
+  0592: 93cf           push r28
+  0594: 93df           push r29
+  0596: 01ec           r29:r28 := r25:r24
+  0598: 2f16           r17 := r22
+  059a: 017a           r15:r14 := r21:r20
+  059c: 0169           r13:r12 := r19:r18
+  059e: 8188           r24 := *(r29:r28)
+  05a0: 308c f008      if(r24 < 12):jmp 0x05a6 <_loc_05a6>
+  05a4: c064           jmp 0x066e <_loc_066e>
+_loc_05a6:
+  05a6: 2f86           r24 := r22
+  05a8: e061           r22 := 1
+  05aa: 940e 0dd3      call 0x1ba6 <pinMode(??)>
+  05ae: 8188           r24 := *(r29:r28)
+  05b0: e090           r25 := 0
+  05b2: 01fc           r31:r30 := r25:r24
+  05b4: 0fee 1fff      r31:r30 *= 2
+  05b8: 0fe8 1ff9      r31:r30 += r25:r24
+  05bc: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  05c0: 731f           r17 &= 0x3f
+  05c2: 8180           r24 := *(r31:r30)
+  05c4: 7c80           r24 &= 0xc0
+  05c6: 2b81           r24 |= r17
+  05c8: 8380           *(r31:r30) := r24
+  05ca: e280 e092      r25:r24 := 0x220
+  05ce: 198e 099f      r25:r24 -= r15:r14
+  05d2: e064 e070      r23:r22 := 4
+  05d6: 940e 113d      call 0x227a <libgcc.divmodhi4(dividend=r25:r24, divisor=r23:r22)->25:r24=r,r23:r22=q>
+  05da: 8369           *(r29:r28 + 0x01) := r22
+  05dc: e680 e099      r25:r24 := 0x960
+  05e0: 198c 099d      r25:r24 -= r13:r12
+  05e4: e064 e070      r23:r22 := 4
+  05e8: 940e 113d      call 0x227a <libgcc.divmodhi4(dividend=r25:r24, divisor=r23:r22)->25:r24=r,r23:r22=q>
+  05ec: 836a           *(r29:r28 + 0x02) := r22
+  05ee: 81a8           r26 := *(r29:r28)
+  05f0: 2f8a           r24 := r26
+  05f2: e06c           r22 := 12
+  05f4: 940e 1131      call 0x2262 <libgcc.udivmodqi4(dividend=r24, divisor=r22)->r25=r,r24=q>
+  05f8: 2f68 e070      r23:r22 := 0:r24
+  05fc: 01ab           r21:r20 := r23:r22
+  05fe: 0f44 1f55      r21:r20 *= 2
+  0602: 0f46 1f57      r21:r20 += r23:r22
+  0606: 0f44 1f55      r21:r20 *= 2
+  060a: 0f44 1f55      r21:r20 *= 2
+  060e: e020 e030      r19:r18 := 0
+_loc_0612:
+  0612: 01c9           r25:r24 := r19:r18
+  0614: 0f84 1f95      r25:r24 += r21:r20
+  0618: 01fc           r31:r30 := r25:r24
+  061a: 0fee 1fff      r31:r30 *= 2
+  061e: 0fe8 1ff9      r31:r30 += r25:r24
+  0622: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  0626: 8180           r24 := *(r31:r30)
+  0628: fd86 c015      if(bit(r24, 6)):jmp 0x0656 <_loc_0656>
+  062c: 5f2f 4f3f      r19:r18 -= -1
+  0630: 302c 0531 f771 if(r19:r18 != 12):jmp 0x0612 <_loc_0612>
+  0636: c024           jmp 0x0680 <_loc_0680>
+_loc_0638:
+  0638: 9210 0080      SRAM.TCCR1A := 0
+  063c: e082           r24 := 2
+  063e: 9380 0081      SRAM.TCCR1B := r24
+  0642: 9210 0085      SRAM.TCNT1H := 0
+  0646: 9210 0084      SRAM.TCNT1L := 0
+  064a: 9ab1           set_bit(PORT.TIFR1, 1)
+  064c: 9180 006f      r24 := SRAM.TIMSK1
+  0650: 6082           r24 |= 2
+  0652: 9380 006f      SRAM.TIMSK1 := r24
+_loc_0656:
+  0656: 2f8a e090      r25:r24 := 0:r26
+  065a: 01fc           r31:r30 := r25:r24
+  065c: 0fee 1fff      r31:r30 *= 2
+  0660: 0fe8 1ff9      r31:r30 += r25:r24
+  0664: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  0668: 8180           r24 := *(r31:r30)
+  066a: 6480           r24 |= 0x40
+  066c: 8380           *(r31:r30) := r24
+_loc_066e:
+  066e: 8188           r24 := *(r29:r28)
+  0670: 91df           pop r29
+  0672: 91cf           pop r28
+  0674: 911f           pop r17
+  0676: 90ff           pop r15
+  0678: 90ef           pop r14
+  067a: 90df           pop r13
+  067c: 90cf           pop r12
+  067e: 9508           ret
+_loc_0680:
+  0680: 2b67           r22 |= r23
+  0682: f2d1           breq 0x0638 <_loc_0638>
+  0684: cfe8           jmp 0x0656 <_loc_0656>
+
+sub_0686:
+  0686: e240 e052      r21:r20 := 0x220
+  068a: e620 e039      r19:r18 := 0x960
+  068e: 940e 02c4      call 0x0588 <sub_0588>
+  0692: 9508           ret
+
+int0b_TIMER1_COMPA_vect:
+  0694: 921f           push r1
+  0696: 920f           push r0
+  0698: b60f           r0 := PORT.SREG
+  069a: 920f           push r0
+  069c: 2411           r1 := 0
+  069e: 932f           push r18
+  06a0: 933f           push r19
+  06a2: 934f           push r20
+  06a4: 935f           push r21
+  06a6: 936f           push r22
+  06a8: 937f           push r23
+  06aa: 938f           push r24
+  06ac: 939f           push r25
+  06ae: 93af           push r26
+  06b0: 93bf           push r27
+  06b2: 93ef           push r30
+  06b4: 93ff           push r31
+  06b6: 9180 0213      r24 := SRAM.servos[11].ticks_H
+  06ba: ff87 c005      if_not(bit(r24, 7)):jmp 0x06c8 <_loc_06c8>
+  06be: 9210 0085      SRAM.TCNT1H := 0
+  06c2: 9210 0084      SRAM.TCNT1L := 0
+  06c6: c02b           jmp 0x071e <_loc_071e>
+_loc_06c8:
+  06c8: 9120 0213      r18 := SRAM.servos[11].ticks_H
+  06cc: 2733           r19 := 0
+  06ce: fd27           skip_if_not(bit(r18, 7))
+  06d0: 9530           r19 := 0xff - r19
+  06d2: 9180 01ee      r24 := SRAM.ServoCount
+  06d6: e090           r25 := 0
+  06d8: 1728 0739 f504 if(r19:r18 >=s r25:r24):jmp 0x071e <_loc_071e>
+  06de: 9180 0213      r24 := SRAM.servos[11].ticks_H
+  06e2: 2799           r25 := 0
+  06e4: fd87           skip_if_not(bit(r24, 7))
+  06e6: 9590           r25 := 0xff - r25
+  06e8: 01fc           r31:r30 := r25:r24
+  06ea: 0fee 1fff      r31:r30 *= 2
+  06ee: 0fe8 1ff9      r31:r30 += r25:r24
+  06f2: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  06f6: 8180           r24 := *(r31:r30)
+  06f8: ff86 c011      if_not(bit(r24, 6)):jmp 0x071e <_loc_071e>
+  06fc: 9180 0213      r24 := SRAM.servos[11].ticks_H
+  0700: 2799           r25 := 0
+  0702: fd87           skip_if_not(bit(r24, 7))
+  0704: 9590           r25 := 0xff - r25
+  0706: 01fc           r31:r30 := r25:r24
+  0708: 0fee 1fff      r31:r30 *= 2
+  070c: 0fe8 1ff9      r31:r30 += r25:r24
+  0710: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  0714: 8180           r24 := *(r31:r30)
+  0716: 738f           r24 &= 0x3f
+  0718: e060           r22 := 0
+  071a: 940e 0df9      call 0x1bf2 <sub_1bf2>
+_loc_071e:
+  071e: 9180 0213      r24 := SRAM.servos[11].ticks_H
+  0722: 5f8f           r24 -= -1
+  0724: 9380 0213      SRAM.servos[11].ticks_H := r24
+  0728: 9120 0213      r18 := SRAM.servos[11].ticks_H
+  072c: 2733           r19 := 0
+  072e: fd27           skip_if_not(bit(r18, 7))
+  0730: 9530           r19 := 0xff - r19
+  0732: 9180 01ee      r24 := SRAM.ServoCount
+  0736: e090           r25 := 0
+  0738: 1728 0739 f00c if(r19:r18 <s r25:r24):jmp 0x0740 <_loc_0740>
+  073e: c04e           jmp 0x07dc <_loc_07dc>
+_loc_0740:
+  0740: 9180 0213      r24 := SRAM.servos[11].ticks_H
+  0744: 308c f00c      if(r24 <s 12):jmp 0x074a <_loc_074a>
+  0748: c049           jmp 0x07dc <_loc_07dc>
+_loc_074a:
+  074a: 9120 0084      r18 := SRAM.TCNT1L
+  074e: 9130 0085      r19 := SRAM.TCNT1H
+  0752: 9180 0213      r24 := SRAM.servos[11].ticks_H
+  0756: 2799           r25 := 0
+  0758: fd87           skip_if_not(bit(r24, 7))
+  075a: 9590           r25 := 0xff - r25
+  075c: 01fc           r31:r30 := r25:r24
+  075e: 0fee 1fff      r31:r30 *= 2
+  0762: 0fe8 1ff9      r31:r30 += r25:r24
+  0766: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  076a: 8181           r24 := *(r31:r30 + 0x01)
+  076c: 8192           r25 := *(r31:r30 + 0x02)
+  076e: 0f28 1f39      r19:r18 += r25:r24
+  0772: 9330 0089      SRAM.OCR1AH := r19
+  0776: 9320 0088      SRAM.OCR1AL := r18
+  077a: 9180 0213      r24 := SRAM.servos[11].ticks_H
+  077e: 2799           r25 := 0
+  0780: fd87           skip_if_not(bit(r24, 7))
+  0782: 9590           r25 := 0xff - r25
+  0784: 01fc           r31:r30 := r25:r24
+  0786: 0fee 1fff      r31:r30 *= 2
+  078a: 0fe8 1ff9      r31:r30 += r25:r24
+  078e: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  0792: 8180           r24 := *(r31:r30)
+  0794: ff86 c02a      if_not(bit(r24, 6)):jmp 0x07ec <_loc_07ec>
+  0798: 9180 0213      r24 := SRAM.servos[11].ticks_H
+  079c: 2799           r25 := 0
+  079e: fd87           skip_if_not(bit(r24, 7))
+  07a0: 9590           r25 := 0xff - r25
+  07a2: 01fc           r31:r30 := r25:r24
+  07a4: 0fee 1fff      r31:r30 *= 2
+  07a8: 0fe8 1ff9      r31:r30 += r25:r24
+  07ac: 51e1 4ffe      r31:r30 -= -0x1ef (=servos[0].Pin)
+  07b0: 8180           r24 := *(r31:r30)
+  07b2: 738f           r24 &= 0x3f
+  07b4: e061           r22 := 1
+  07b6: 940e 0df9      call 0x1bf2 <sub_1bf2>
+  07ba: c018           jmp 0x07ec <_loc_07ec>
+_loc_07bc:
+  07bc: e480 e99c      r25:r24 := 0x9c40
+  07c0: c005           jmp 0x07cc <_loc_07cc>
+_loc_07c2:
+  07c2: 9180 0084      r24 := SRAM.TCNT1L
+  07c6: 9190 0085      r25 := SRAM.TCNT1H
+  07ca: 9604           r25:r24 += 4
+_loc_07cc:
+  07cc: 9390 0089      SRAM.OCR1AH := r25
+  07d0: 9380 0088      SRAM.OCR1AL := r24
+  07d4: ef8f           r24 := 0xff
+  07d6: 9380 0213      SRAM.servos[11].ticks_H := r24
+  07da: c008           jmp 0x07ec <_loc_07ec>
+_loc_07dc:
+  07dc: 9180 0084      r24 := SRAM.TCNT1L
+  07e0: 9190 0085      r25 := SRAM.TCNT1H
+  07e4: 5484 499c      r25:r24 -= -0x63bc
+  07e8: f348           if(r25:r24 < 0):jmp 0x07bc <_loc_07bc>
+  07ea: cfeb           jmp 0x07c2 <_loc_07c2>
+_loc_07ec:
+  07ec: 91ff           pop r31
+  07ee: 91ef           pop r30
+  07f0: 91bf           pop r27
+  07f2: 91af           pop r26
+  07f4: 919f           pop r25
+  07f6: 918f           pop r24
+  07f8: 917f           pop r23
+  07fa: 916f           pop r22
+  07fc: 915f           pop r21
+  07fe: 914f           pop r20
+  0800: 913f           pop r19
+  0802: 912f           pop r18
+  0804: 900f           pop r0
+  0806: be0f           PORT.SREG := r0
+  0808: 900f           pop r0
+  080a: 901f           pop r1
+  080c: 9518           ret_int
+
+FirmataClass::attach(this=r25:r24, byte command=r22, callbackFunction newFunction=r21:r20):
+  080e: 01fc           r31:r30 := r25:r24
+  0810: 3d60 f0a9      if(r22 == 0xd0):jmp 0x083e <_loc_083e>
+  0814: 3d61 f428      if(r22 >= 0xd1):jmp 0x0822 <_loc_0822>
+  0818: 3960 f059      if(r22 == 0x90):jmp 0x0832 <_loc_0832>
+  081c: 3c60 f4a1      if(r22 != 0xc0):jmp 0x0848 <_loc_0848>
+  0820: c00b           jmp 0x0838 <_loc_0838>
+_loc_0822:
+  0822: 3e60 f019      if(r22 == 0xe0):jmp 0x082c <_loc_082c>
+  0826: 3f64 f479      if(r22 != 0xf4):jmp 0x0848 <_loc_0848>
+  082a: c00c           jmp 0x0844 <_loc_0844>
+_loc_082c:
+  082c: a752           *(r31:r30 + 0x2a) := r21
+  082e: a741           *(r31:r30 + 0x29) := r20
+  0830: 9508           ret
+_loc_0832:
+  0832: a754           *(r31:r30 + 0x2c) := r21
+  0834: a743           *(r31:r30 + 0x2b) := r20
+  0836: 9508           ret
+_loc_0838:
+  0838: a756           *(r31:r30 + 0x2e) := r21
+  083a: a745           *(r31:r30 + 0x2d) := r20
+  083c: 9508           ret
+_loc_083e:
+  083e: ab50           *(r31:r30 + 0x30) := r21
+  0840: a747           *(r31:r30 + 0x2f) := r20
+  0842: 9508           ret
+_loc_0844:
+  0844: ab52           *(r31:r30 + 0x32) := r21
+  0846: ab41           *(r31:r30 + 0x31) := r20
+_loc_0848:
+  0848: 9508           ret
+
+FirmataClass::attach(this=r25:r24, byte command=r22, sysexCallbackFunction fct=r21:r20):
+  084a: 01fc           r31:r30 := r25:r24
+  084c: af50           *(r31:r30 + 0x38) := r21
+  084e: ab47           *(r31:r30 + 0x37) := r20
+  0850: 9508           ret
+
+FirmataClass::systemReset(this=r25:r24):
+  0852: 01fc           r31:r30 := r25:r24
+  0854: 8213           *(r31:r30 + 0x03) := 0
+  0856: 8214           *(r31:r30 + 0x04) := 0
+  0858: 8215           *(r31:r30 + 0x05) := 0
+  085a: 01dc           r27:r26 := r25:r24
+  085c: e080           r24 := 0
+_loc_085e:
+  085e: 9616           r27:r26 += 6
+  0860: 921c           *(r27:r26) := 0
+  0862: 9716           r27:r26 -= 6
+  0864: 5f8f           r24 -= -1
+  0866: 9611           r27:r26 += 1
+  0868: 3280 f7c9      if(r24 != 0x20):jmp 0x085e <_loc_085e>
+  086c: a216           *(r31:r30 + 0x26) := 0
+  086e: a610           *(r31:r30 + 0x28) := 0
+  0870: a217           *(r31:r30 + 0x27) := 0
+  0872: a803           r0 := *(r31:r30 + 0x33)
+  0874: a9f4           r31 := *(r31:r30 + 0x34)
+  0876: 2de0           r30 := r0
+  0878: 9730 f009      if(r31:r30 == 0):jmp 0x087e <_loc_087e>
+  087c: 9509           icall r31:r30
+_loc_087e:
+  087e: 9508           ret
+
+FirmataClass::FirmataClass(this=r25:r24):
+  0880: 01fc           r31:r30 := r25:r24
+  0882: 8210           *(r31:r30) := 0
+  0884: 940e 0429      call 0x0852 <FirmataClass::systemReset(this=r25:r24)>
+  0888: 9508           ret
+
+cons3_initialize_Firmata:
+  088a: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  088e: 940e 0440      call 0x0880 <FirmataClass::FirmataClass(this=r25:r24)>
+  0892: 9508           ret
+
+FirmataClass::pin13strobe(this=r25:r24, int count=r23:r22, int onInterval=r21:r20, int offInterval=r19:r18):
+  0894: 924f           push r4
+  0896: 925f           push r5
+  0898: 926f           push r6
+  089a: 927f           push r7
+  089c: 928f           push r8
+  089e: 929f           push r9
+  08a0: 92af           push r10
+  08a2: 92bf           push r11
+  08a4: 92cf           push r12
+  08a6: 92df           push r13
+  08a8: 92ef           push r14
+  08aa: 92ff           push r15
+  08ac: 930f           push r16
+  08ae: 93df           push r29
+  08b0: 93cf           push r28
+  08b2: d000           nop
+  08b4: b7cd           r28 := PORT.SPL
+  08b6: b7de           r29 := PORT.SPH
+  08b8: 012b           r5:r4 := r23:r22
+  08ba: 017a           r15:r14 := r21:r20
+  08bc: 833a           *(r29:r28 + 0x02) := r19
+  08be: 8329           *(r29:r28 + 0x01) := r18
+  08c0: e08d           r24 := 13
+  08c2: e061           r22 := 1
+  08c4: 940e 0dd3      call 0x1ba6 <pinMode(??)>
+  08c8: e000           r16 := 0
+  08ca: 8189           r24 := *(r29:r28 + 0x01)
+  08cc: 819a           r25 := *(r29:r28 + 0x02)
+  08ce: 013c 2488      r8:r7:r6 := 0:r25:r24
+  08d2: fc77           skip_if_not(bit(r7, 7))
+  08d4: 9480           r8 := 0xff - r8
+  08d6: 2c98           r9 := r8
+  08d8: 0157 24cc      r12:r11:r10 := 0:r15:r14
+  08dc: fcb7           skip_if_not(bit(r11, 7))
+  08de: 94c0           r12 := 0xff - r12
+  08e0: 2cdc           r13 := r12
+  08e2: c011           jmp 0x0906 <_loc_0906>
+_loc_08e4:
+  08e4: 01c4           r25:r24 := r9:r8
+  08e6: 01b3           r23:r22 := r7:r6
+  08e8: 940e 0cbd      call 0x197a <delay(duration=r25:r24:r23:r22)>
+  08ec: e08d           r24 := 13
+  08ee: e061           r22 := 1
+  08f0: 940e 0df9      call 0x1bf2 <sub_1bf2>
+  08f4: 01c6           r25:r24 := r13:r12
+  08f6: 01b5           r23:r22 := r11:r10
+  08f8: 940e 0cbd      call 0x197a <delay(duration=r25:r24:r23:r22)>
+  08fc: e08d           r24 := 13
+  08fe: e060           r22 := 0
+  0900: 940e 0df9      call 0x1bf2 <sub_1bf2>
+  0904: 5f0f           r16 -= -1
+_loc_0906:
+  0906: 2f80 e090      r25:r24 := 0:r16
+  090a: 1584 0595 f354 if(r25:r24 <s r5:r4):jmp 0x08e4 <_loc_08e4>
+  0910: 900f           pop r0
+  0912: 900f           pop r0
+  0914: 91cf           pop r28
+  0916: 91df           pop r29
+  0918: 910f           pop r16
+  091a: 90ff           pop r15
+  091c: 90ef           pop r14
+  091e: 90df           pop r13
+  0920: 90cf           pop r12
+  0922: 90bf           pop r11
+  0924: 90af           pop r10
+  0926: 909f           pop r9
+  0928: 908f           pop r8
+  092a: 907f           pop r7
+  092c: 906f           pop r6
+  092e: 905f           pop r5
+  0930: 904f           pop r4
+  0932: 9508           ret
+
+FirmataClass::blinkVersion(this=r25:r24):
+  0934: 930f           push r16
+  0936: 931f           push r17
+  0938: 018c           r17:r16 := r25:r24
+  093a: e08d           r24 := 13
+  093c: e061           r22 := 1
+  093e: 940e 0dd3      call 0x1ba6 <pinMode(??)>
+  0942: 01c8           r25:r24 := r17:r16
+  0944: e062 e070      r23:r22 := 2
+  0948: ec48 e050      r21:r20 := 0xc8
+  094c: e920 e031      r19:r18 := 0x190
+  0950: 940e 044a      call 0x0894 <FirmataClass::pin13strobe(this=r25:r24, int count=r23:r22, int onInterval=r21:r20, int offInterval=r19:r18)>
+  0954: e26c e071 e080 e090 r25:r24:r23:r22 := 0x12c
+  095c: 940e 0cbd      call 0x197a <delay(duration=r25:r24:r23:r22)>
+  0960: 01c8           r25:r24 := r17:r16
+  0962: e062 e070      r23:r22 := 2
+  0966: e041 e050      r21:r20 := 1
+  096a: e024 e030      r19:r18 := 4
+  096e: 940e 044a      call 0x0894 <FirmataClass::pin13strobe(this=r25:r24, int count=r23:r22, int onInterval=r21:r20, int offInterval=r19:r18)>
+  0972: e26c e071 e080 e090 r25:r24:r23:r22 := 0x12c
+  097a: 940e 0cbd      call 0x197a <delay(duration=r25:r24:r23:r22)>
+  097e: 01c8           r25:r24 := r17:r16
+  0980: e062 e070      r23:r22 := 2
+  0984: ec48 e050      r21:r20 := 0xc8
+  0988: e920 e031      r19:r18 := 0x190
+  098c: 940e 044a      call 0x0894 <FirmataClass::pin13strobe(this=r25:r24, int count=r23:r22, int onInterval=r21:r20, int offInterval=r19:r18)>
+  0990: 911f           pop r17
+  0992: 910f           pop r16
+  0994: 9508           ret
+
+FirmataClass::sendDigitalPort(this=r25:r24, byte portNumber=r22, int portData=r21:r20):
+  0996: 92ef           push r14
+  0998: 92ff           push r15
+  099a: 930f           push r16
+  099c: 931f           push r17
+  099e: 018a           r17:r16 := r21:r20
+  09a0: e691           r25 := 0x61
+  09a2: 2ee9           r14 := r25
+  09a4: e093           r25 := 3
+  09a6: 2ef9           r15 := r25
+  09a8: e070           r23 := 0
+  09aa: 706f 7070      r23:r22 &= 15
+  09ae: 6960           r22 |= 0x90
+  09b0: 01c7           r25:r24 := r15:r14
+  09b2: e040 e050      r21:r20 := 0
+  09b6: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  09ba: 2f60 e070      r23:r22 := 0:r16
+  09be: 776f 7070      r23:r22 &= 0x7f
+  09c2: 01c7           r25:r24 := r15:r14
+  09c4: e040 e050      r21:r20 := 0
+  09c8: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  09cc: 0f00           r16 *= 2
+  09ce: 2f01           r16 := r17
+  09d0: 1f00           C:r16 := r16:C ; << 1
+  09d2: 0b11           r17 -= r17+C
+  09d4: 01c7           r25:r24 := r15:r14
+  09d6: 01b8           r23:r22 := r17:r16
+  09d8: e040 e050      r21:r20 := 0
+  09dc: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  09e0: 911f           pop r17
+  09e2: 910f           pop r16
+  09e4: 90ff           pop r15
+  09e6: 90ef           pop r14
+  09e8: 9508           ret
+
+FirmataClass::printVersion(this=r25:r24):
+  09ea: 930f           push r16
+  09ec: 931f           push r17
+  09ee: e601 e013      r17:r16 := 0x361 (=Serial)
+  09f2: 01c8           r25:r24 := r17:r16
+  09f4: ef69 e070      r23:r22 := 0xf9
+  09f8: e040 e050      r21:r20 := 0
+  09fc: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  0a00: 01c8           r25:r24 := r17:r16
+  0a02: e062 e070      r23:r22 := 2
+  0a06: e040 e050      r21:r20 := 0
+  0a0a: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  0a0e: 01c8           r25:r24 := r17:r16
+  0a10: e062 e070      r23:r22 := 2
+  0a14: e040 e050      r21:r20 := 0
+  0a18: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  0a1c: 911f           pop r17
+  0a1e: 910f           pop r16
+  0a20: 9508           ret
+
+endSysex():
+  0a22: e681 e093      r25:r24 := 0x361 (=Serial)
+  0a26: ef67 e070      r23:r22 := 0xf7
+  0a2a: e040 e050      r21:r20 := 0
+  0a2e: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  0a32: 9508           ret
+
+startSysex():
+  0a34: e681 e093      r25:r24 := 0x361 (=Serial)
+  0a38: ef60 e070      r23:r22 := 0xf0
+  0a3c: e040 e050      r21:r20 := 0
+  0a40: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  0a44: 9508           ret
+
+sendValueAsTwo7bitBytes(value=r25:r24):
+  0a46: 92ef           push r14
+  0a48: 92ff           push r15
+  0a4a: 930f           push r16
+  0a4c: 931f           push r17
+  0a4e: 018c           r17:r16 := r25:r24
+  0a50: e631           r19 := 0x61
+  0a52: 2ee3           r14 := r19
+  0a54: e033           r19 := 3
+  0a56: 2ef3           r15 := r19
+  0a58: 01bc           r23:r22 := r25:r24
+  0a5a: 776f 7070      r23:r22 &= 0x7f
+  0a5e: 01c7           r25:r24 := r15:r14
+  0a60: e040 e050      r21:r20 := 0
+  0a64: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  0a68: 0f00           r16 *= 2
+  0a6a: 2f01           r16 := r17
+  0a6c: 1f00           C:r16 := r16:C ; << 1
+  0a6e: 0b11           r17 -= r17+C
+  0a70: 770f 7010      r17:r16 &= 0x7f
+  0a74: 01c7           r25:r24 := r15:r14
+  0a76: 01b8           r23:r22 := r17:r16
+  0a78: e040 e050      r21:r20 := 0
+  0a7c: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  0a80: 911f           pop r17
+  0a82: 910f           pop r16
+  0a84: 90ff           pop r15
+  0a86: 90ef           pop r14
+  0a88: 9508           ret
+
+FirmataClass::sendSysex(this=r25:r24, byte command=r22, byte bytec=r20, byte* bytev=r19:r18):
+  0a8a: 92ef           push r14
+  0a8c: 92ff           push r15
+  0a8e: 930f           push r16
+  0a90: 931f           push r17
+  0a92: 93cf           push r28
+  0a94: 93df           push r29
+  0a96: 2f16           r17 := r22
+  0a98: 2ee4           r14 := r20
+  0a9a: 2f02           r16 := r18
+  0a9c: 2ef3           r15 := r19
+  0a9e: 940e 051a      call 0x0a34 <startSysex()>
+  0aa2: e681 e093      r25:r24 := 0x361 (=Serial)
+  0aa6: 2f61           r22 := r17
+  0aa8: e040 e050      r21:r20 := 0
+  0aac: 940e 106e      call 0x20dc <Serial.print(this=r25:r24, bytetosend=r22, r21:r20=0)>
+  0ab0: 2f20 2d3f      r19:r18 := swap_bytes(r16:r15)
+  0ab4: 01c9           r25:r24 := r19:r18
+  0ab6: 01ec           r29:r28 := r25:r24
+  0ab8: e010           r17 := 0
+  0aba: c005           jmp 0x0ac6 <_loc_0ac6>
+_loc_0abc:
+  0abc: 9189           r24 := *(r29:r28 ++)
+  0abe: e090           r25 := 0
+  0ac0: 940e 0523      call 0x0a46 <sendValueAsTwo7bitBytes(value=r25:r24)>
+  0ac4: 5f1f           r17 -= -1
+_loc_0ac6:
+  0ac6: 151e f3c8      if(r17 < r14):jmp 0x0abc <_loc_0abc>
+  0aca: 940e 0511      call 0x0a22 <endSysex()>
+  0ace: 91df           pop r29
+  0ad0: 91cf           pop r28
+  0ad2: 911f           pop r17
+  0ad4: 910f           pop r16
+  0ad6: 90ff           pop r15
+  0ad8: 90ef           pop r14
+  0ada: 9508           ret
+
+FirmataClass::sendString(this=r25:r24, byte command=r22, const char* string=r21:r20):
+  0adc: 019a           r19:r18 := r21:r20
+  0ade: 01fa           r31:r30 := r21:r20
+_loc_0ae0:
+  0ae0: 9001           r0 := *(r31:r30 ++)
+  0ae2: 2000 f7e9      if(r0):jmp 0x0ae0 <_loc_0ae0>
+  0ae6: 9731           r31:r30 -= 1
+  0ae8: 1be4 0bf5      r31:r30 -= r21:r20
+  0aec: 2f4e           r20 := r30        # r20 := strlen(string)
+  0aee: 940e 0545      call 0x0a8a <FirmataClass::sendSysex(this=r25:r24, byte command=r22, byte bytec=r20, byte* bytev=r19:r18)>
+  0af2: 9508           ret
+
+FirmataClass::sendString(this=r25:r24, const char* string=r23:r22):
+  0af4: 01ab           r21:r20 := r23:r22
+  0af6: e761           r22 := 0x71
+  0af8: 940e 056e      call 0x0adc <FirmataClass::sendString(this=r25:r24, byte command=r22, const char* string=r21:r20)>
+  0afc: 9508           ret
+
+FirmataClass::sendAnalog(this=r25:r24, byte pin=r22, int value=r21:r20):
+  0afe: 930f           push r16
+  0b00: 931f           push r17
+  0b02: 018a           r17:r16 := r21:r20
+  0b04: e070           r23 := 0
+  0b06: 706f 7070      r23:r22 &= 15
+  0b0a: 6e60           r22 |= 0xe0
+  0b0c: e681 e093      r25:r24 := 0x361 (=Serial)
+  0b10: e040 e050      r21:r20 := 0
+  0b14: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  0b18: 01c8           r25:r24 := r17:r16
+  0b1a: 940e 0523      call 0x0a46 <sendValueAsTwo7bitBytes(value=r25:r24)>
+  0b1e: 911f           pop r17
+  0b20: 910f           pop r16
+  0b22: 9508           ret
+
+FirmataClass::printFirmwareVersion(this=r25:r24):
+  0b24: 931f           push r17
+  0b26: 93cf           push r28
+  0b28: 93df           push r29
+  0b2a: 01ec           r29:r28 := r25:r24
+  0b2c: 8188           r24 := *(r29:r28)
+  0b2e: 2388 f161      if_not(r24):jmp 0x0b8a <_loc_0b8a>
+  0b32: 940e 051a      call 0x0a34 <startSysex()>
+  0b36: e681 e093      r25:r24 := 0x361 (=Serial)
+  0b3a: e769 e070      r23:r22 := 0x79 (=ADCH)
+  0b3e: e040 e050      r21:r20 := 0
+  0b42: 940e 10b6      call 0x216c <Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0)>
+  0b46: 81e9           r30 := *(r29:r28 + 0x01)
+  0b48: 81fa           r31 := *(r29:r28 + 0x02)
+  0b4a: e681 e093      r25:r24 := 0x361 (=Serial)
+  0b4e: 8160           r22 := *(r31:r30)
+  0b50: e040 e050      r21:r20 := 0
+  0b54: 940e 106e      call 0x20dc <Serial.print(this=r25:r24, bytetosend=r22, r21:r20=0)>
+  0b58: 81e9           r30 := *(r29:r28 + 0x01)
+  0b5a: 81fa           r31 := *(r29:r28 + 0x02)
+  0b5c: e681 e093      r25:r24 := 0x361 (=Serial)
+  0b60: 8161           r22 := *(r31:r30 + 0x01)
+  0b62: e040 e050      r21:r20 := 0
+  0b66: 940e 106e      call 0x20dc <Serial.print(this=r25:r24, bytetosend=r22, r21:r20=0)>
+  0b6a: e012           r17 := 2
+  0b6c: c009           jmp 0x0b80 <_loc_0b80>
+_loc_0b6e:
+  0b6e: 81e9           r30 := *(r29:r28 + 0x01)
+  0b70: 81fa           r31 := *(r29:r28 + 0x02)
+  0b72: 0fe1 1df1      r31:r30 += 0:r17
+  0b76: 8180           r24 := *(r31:r30)
+  0b78: e090           r25 := 0
+  0b7a: 940e 0523      call 0x0a46 <sendValueAsTwo7bitBytes(value=r25:r24)>
+  0b7e: 5f1f           r17 -= -1
+_loc_0b80:
+  0b80: 8188           r24 := *(r29:r28)
+  0b82: 1718 f3a0      if(r17 < r24):jmp 0x0b6e <_loc_0b6e>
+  0b86: 940e 0511      call 0x0a22 <endSysex()>
+_loc_0b8a:
+  0b8a: 91df           pop r29
+  0b8c: 91cf           pop r28
+  0b8e: 911f           pop r17
+  0b90: 9508           ret
+
+FirmataClass::processSysexMessage(this=r25:r24):
+  0b92: 931f           push r17
+  0b94: 93cf           push r28
+  0b96: 93df           push r29
+  0b98: 01ec           r29:r28 := r25:r24
+  0b9a: 818e           r24 := *(r29:r28 + 0x06)
+  0b9c: 3781 f031      if(r24 == 0x71):jmp 0x0bac <_loc_0bac>
+  0ba0: 3789 f589      if(r24 != 0x79):jmp 0x0c06 <_loc_0c06>
+  0ba4: 01ce           r25:r24 := r29:r28
+  0ba6: 940e 0592      call 0x0b24 <FirmataClass::printFirmwareVersion(this=r25:r24)>
+  0baa: c036           jmp 0x0c18 <_loc_0c18>
+_loc_0bac:
+  0bac: a98d           r24 := *(r29:r28 + 0x35)
+  0bae: a99e           r25 := *(r29:r28 + 0x36)
+  0bb0: 2b89           r24 |= r25
+  0bb2: f191           breq 0x0c18 <_loc_0c18>
+  0bb4: a18f           r24 := *(r29:r28 + 0x27)
+  0bb6: a598           r25 := *(r29:r28 + 0x28)
+  0bb8: 9701           r25:r24 -= 1
+  0bba: e062 e070      r23:r22 := 2
+  0bbe: 940e 113d      call 0x227a <libgcc.divmodhi4(dividend=r25:r24, divisor=r23:r22)->25:r24=r,r23:r22=q>
+  0bc2: 2f16           r17 := r22
+  0bc4: 2f86 e090      r25:r24 := 0:r22
+  0bc8: 940e 008e      call 0x011c <libc.malloc(size=r25:r24)->r25:r24>
+  0bcc: 01ac           r21:r20 := r25:r24
+  0bce: 01dc           r27:r26 := r25:r24
+  0bd0: e021 e030      r19:r18 := 1
+  0bd4: c011           jmp 0x0bf8 <_loc_0bf8>
+_loc_0bd6:
+  0bd6: 01fe           r31:r30 := r29:r28
+  0bd8: 0fe2 1df1      r31:r30 += 0:r18
+  0bdc: 8196           r25 := *(r31:r30 + 0x06)
+  0bde: 939c           *(r27:r26) := r25
+  0be0: 5f2f           r18 -= -1
+  0be2: 01fe           r31:r30 := r29:r28
+  0be4: 0fe2 1df1      r31:r30 += 0:r18
+  0be8: 8186           r24 := *(r31:r30 + 0x06)
+  0bea: 9587           r24:C := C:r24 ; >> 1
+  0bec: 2788           r24 := 0
+  0bee: 9587           r24:C := C:r24 ; >> 1
+  0bf0: 0f89           r24 += r25
+  0bf2: 938d           *(r27:r26 ++) := r24
+  0bf4: 5f2f           r18 -= -1
+  0bf6: 5f3f           r19 -= -1
+_loc_0bf8:
+  0bf8: 1731 f368      if(r19 < r17):jmp 0x0bd6 <_loc_0bd6>
+  0bfc: a9ed           r30 := *(r29:r28 + 0x35)
+  0bfe: a9fe           r31 := *(r29:r28 + 0x36)
+  0c00: 01ca           r25:r24 := r21:r20
+  0c02: 9509           icall r31:r30
+  0c04: c009           jmp 0x0c18 <_loc_0c18>
+_loc_0c06:
+  0c06: a9ef           r30 := *(r29:r28 + 0x37)
+  0c08: adf8           r31 := *(r29:r28 + 0x38)
+  0c0a: 9730 f029      if(r31:r30 == 0):jmp 0x0c18 <_loc_0c18>
+  0c0e: a16f           r22 := *(r29:r28 + 0x27)
+  0c10: 5061           r22 -= 1
+  0c12: 9627           r29:r28 += 7
+  0c14: 01ae           r21:r20 := r29:r28
+  0c16: 9509           icall r31:r30
+_loc_0c18:
+  0c18: 91df           pop r29
+  0c1a: 91cf           pop r28
+  0c1c: 911f           pop r17
+  0c1e: 9508           ret
+
+FirmataClass::processInput(this=r25:r24):
+  0c20: 93cf           push r28
+  0c22: 93df           push r29
+  0c24: 01ec           r29:r28 := r25:r24
+  0c26: e681 e093      r25:r24 := 0x361 (=Serial)
+  0c2a: 940e 0f0a      call 0x1e14 <Serial::read(this=r25:r24)>
+  0c2e: 01ac           r21:r20 := r25:r24
+  0c30: a18e           r24 := *(r29:r28 + 0x26)
+  0c32: 2388 f091      if_not(r24):jmp 0x0c5a <_loc_0c5a>
+  0c36: 3f47 0551 f429 if(r21:r20 != 0xf7):jmp 0x0c46 <_loc_0c46>
+  0c3c: a21e           *(r29:r28 + 0x26) := 0
+  0c3e: 01ce           r25:r24 := r29:r28
+  0c40: 940e 05c9      call 0x0b92 <FirmataClass::processSysexMessage(this=r25:r24)>
+  0c44: c093           jmp 0x0d6c <_loc_0d6c>
+_loc_0c46:
+  0c46: a18f           r24 := *(r29:r28 + 0x27)
+  0c48: a598           r25 := *(r29:r28 + 0x28)
+  0c4a: 01fe           r31:r30 := r29:r28
+  0c4c: 0fe8 1ff9      r31:r30 += r25:r24
+  0c50: 8346           *(r31:r30 + 0x06) := r20
+  0c52: 9601           r25:r24 += 1
+  0c54: a798           *(r29:r28 + 0x28) := r25
+  0c56: a38f           *(r29:r28 + 0x27) := r24
+  0c58: c089           jmp 0x0d6c <_loc_0d6c>
+_loc_0c5a:
+  0c5a: 818b           r24 := *(r29:r28 + 0x03)
+  0c5c: 2388 f409      if(r24):jmp 0x0c62 <_loc_0c62>
+  0c60: c046           jmp 0x0cee <_loc_0cee>
+_loc_0c62:
+  0c62: 3840 0551 f00c if(r21:r20 <s 0x80):jmp 0x0c6a <_loc_0c6a>
+  0c68: c042           jmp 0x0cee <_loc_0cee>
+_loc_0c6a:
+  0c6a: 5081           r24 -= 1
+  0c6c: 838b           *(r29:r28 + 0x03) := r24
+  0c6e: 01fe           r31:r30 := r29:r28
+  0c70: 0fe8 1df1      r31:r30 += 0:r24
+  0c74: 8346           *(r31:r30 + 0x06) := r20
+  0c76: 2388 f009      if_not(r24):jmp 0x0c7c <_loc_0c7c>
+  0c7a: c078           jmp 0x0d6c <_loc_0d6c>
+_loc_0c7c:
+  0c7c: 818c           r24 := *(r29:r28 + 0x04)
+  0c7e: 2388 f409      if(r24):jmp 0x0c84 <_loc_0c84>
+  0c82: c074           jmp 0x0d6c <_loc_0d6c>
+_loc_0c84:
+  0c84: 3d80 f149      if(r24 == 0xd0):jmp 0x0cda <_loc_0cda>
+  0c88: 3d81 f428      if(r24 >= 0xd1):jmp 0x0c96 <_loc_0c96>
+  0c8c: 3980 f059      if(r24 == 0x90):jmp 0x0ca6 <_loc_0ca6>
+  0c90: 3c80 f559      if(r24 != 0xc0):jmp 0x0cea <_loc_0cea>
+  0c94: c01f           jmp 0x0cd4 <_loc_0cd4>
+_loc_0c96:
+  0c96: 3e80 f019      if(r24 == 0xe0):jmp 0x0ca0 <_loc_0ca0>
+  0c9a: 3f84 f531      if(r24 != 0xf4):jmp 0x0cea <_loc_0cea>
+  0c9e: c013           jmp 0x0cc6 <_loc_0cc6>
+_loc_0ca0:
+  0ca0: a5e9           r30 := *(r29:r28 + 0x29)
+  0ca2: a5fa           r31 := *(r29:r28 + 0x2a)
+  0ca4: c002           jmp 0x0caa <_loc_0caa>
+_loc_0ca6:
+  0ca6: a5eb           r30 := *(r29:r28 + 0x2b)
+  0ca8: a5fc           r31 := *(r29:r28 + 0x2c)
+_loc_0caa:
+  0caa: 9730 f0f1      if(r31:r30 == 0):jmp 0x0cea <_loc_0cea>
+  0cae: 816e           r22 := *(r29:r28 + 0x06)
+  0cb0: e070           r23 := 0
+  0cb2: 9576           r23 /= 2
+  0cb4: 2f76           r23 := r22
+  0cb6: 2766           r22 := 0
+  0cb8: 9577 9567      r23:r22:C := C:r23:r22 ; >> 1
+  0cbc: 818f           r24 := *(r29:r28 + 0x07)
+  0cbe: 0f68 1d71      r23:r22 += 0:r24
+  0cc2: 818d           r24 := *(r29:r28 + 0x05)
+  0cc4: c011           jmp 0x0ce8 <_loc_0ce8>
+_loc_0cc6:
+  0cc6: a9e9           r30 := *(r29:r28 + 0x31)
+  0cc8: a9fa           r31 := *(r29:r28 + 0x32)
+  0cca: 9730 f071      if(r31:r30 == 0):jmp 0x0cea <_loc_0cea>
+  0cce: 816e           r22 := *(r29:r28 + 0x06)
+  0cd0: 818f           r24 := *(r29:r28 + 0x07)
+  0cd2: c009           jmp 0x0ce6 <_loc_0ce6>
+_loc_0cd4:
+  0cd4: a5ed           r30 := *(r29:r28 + 0x2d)
+  0cd6: a5fe           r31 := *(r29:r28 + 0x2e)
+  0cd8: c002           jmp 0x0cde <_loc_0cde>
+_loc_0cda:
+  0cda: a5ef           r30 := *(r29:r28 + 0x2f)
+  0cdc: a9f8           r31 := *(r29:r28 + 0x30)
+_loc_0cde:
+  0cde: 9730 f021      if(r31:r30 == 0):jmp 0x0cea <_loc_0cea>
+  0ce2: 816e           r22 := *(r29:r28 + 0x06)
+  0ce4: 818d           r24 := *(r29:r28 + 0x05)
+_loc_0ce6:
+  0ce6: e070           r23 := 0
+_loc_0ce8:
+  0ce8: 9509           icall r31:r30
+_loc_0cea:
+  0cea: 821c           *(r29:r28 + 0x04) := 0
+  0cec: c03f           jmp 0x0d6c <_loc_0d6c>
+_loc_0cee:
+  0cee: 3f40 0551 f014 if(r21:r20 <s 0xf0):jmp 0x0cf8 <_loc_0cf8>
+  0cf4: 019a           r19:r18 := r21:r20
+  0cf6: c006           jmp 0x0d04 <_loc_0d04>
+_loc_0cf8:
+  0cf8: 019a           r19:r18 := r21:r20
+  0cfa: 7f20 7030      r19:r18 &= 0xf0
+  0cfe: 2f84           r24 := r20
+  0d00: 708f           r24 &= 15
+  0d02: 838d           *(r29:r28 + 0x05) := r24
+_loc_0d04:
+  0d04: 3e20 0531 f0f1 if(r19:r18 == 0xe0):jmp 0x0d46 <_loc_0d46>
+  0d0a: 3e21 0531 f454 if(r19:r18 >=s 0xe1):jmp 0x0d24 <_loc_0d24>
+  0d10: 3c20 0531 f0d1 if(r19:r18 == 0xc0):jmp 0x0d4a <_loc_0d4a>
+  0d16: 3d20 0531 f0b9 if(r19:r18 == 0xd0):jmp 0x0d4a <_loc_0d4a>
+  0d1c: 3920 0531 f529 if(r19:r18 != 0x90):jmp 0x0d6c <_loc_0d6c>
+  0d22: c011           jmp 0x0d46 <_loc_0d46>
+_loc_0d24:
+  0d24: 3f24 0531 f071 if(r19:r18 == 0xf4):jmp 0x0d46 <_loc_0d46>
+  0d2a: 3f25 0531 f424 if(r19:r18 >=s 0xf5):jmp 0x0d38 <_loc_0d38>
+  0d30: 3f20 0531 f4d9 if(r19:r18 != 0xf0):jmp 0x0d6c <_loc_0d6c>
+  0d36: c00d           jmp 0x0d52 <_loc_0d52>
+_loc_0d38:
+  0d38: 3f29 0531 f099 if(r19:r18 == 0xf9):jmp 0x0d64 <_loc_0d64>
+  0d3e: 3f2f 0531 f4a1 if(r19:r18 != 0xff):jmp 0x0d6c <_loc_0d6c>
+  0d44: c00b           jmp 0x0d5c <_loc_0d5c>
+_loc_0d46:
+  0d46: e082           r24 := 2
+  0d48: c001           jmp 0x0d4c <_loc_0d4c>
+_loc_0d4a:
+  0d4a: e081           r24 := 1
+_loc_0d4c:
+  0d4c: 838b           *(r29:r28 + 0x03) := r24
+  0d4e: 832c           *(r29:r28 + 0x04) := r18
+  0d50: c00d           jmp 0x0d6c <_loc_0d6c>
+_loc_0d52:
+  0d52: e081           r24 := 1
+  0d54: a38e           *(r29:r28 + 0x26) := r24
+  0d56: a618           *(r29:r28 + 0x28) := 0
+  0d58: a21f           *(r29:r28 + 0x27) := 0
+  0d5a: c008           jmp 0x0d6c <_loc_0d6c>
+_loc_0d5c:
+  0d5c: 01ce           r25:r24 := r29:r28
+  0d5e: 940e 0429      call 0x0852 <FirmataClass::systemReset(this=r25:r24)>
+  0d62: c004           jmp 0x0d6c <_loc_0d6c>
+_loc_0d64:
+  0d64: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  0d68: 940e 04f5      call 0x09ea <FirmataClass::printVersion(this=r25:r24)>
+_loc_0d6c:
+  0d6c: 91df           pop r29
+  0d6e: 91cf           pop r28
+  0d70: 9508           ret
+
+FirmataClass::available(this=r25:r24)->r25:r24:
+  0d72: e681 e093      r25:r24 := 0x361 (=Serial)
+  0d76: 940e 0edf      call 0x1dbe <Serial::available(this=r25:r24)->r25:r24>
+  0d7a: 9508           ret
+
+FirmataClass::setFirmwareNameAndVersion(this=r25:r24, const char *name=r23:r22, byte major=r20, byte minor=r18):
+  0d7c: 92af           push r10
+  0d7e: 92bf           push r11
+  0d80: 92cf           push r12
+  0d82: 92df           push r13
+  0d84: 92ef           push r14
+  0d86: 92ff           push r15
+  0d88: 930f           push r16
+  0d8a: 931f           push r17
+  0d8c: 93cf           push r28
+  0d8e: 93df           push r29
+  0d90: 018c           r17:r16 := r25:r24
+  0d92: 2ed6           r13 := r22
+  0d94: 2ec7           r12 := r23
+  0d96: 2eb4           r11 := r20
+  0d98: 2ea2           r10 := r18
+  0d9a: 2f86 2f97      r25:r24 := r23:r22
+  0d9e: e060 e071      r23:r22 := 0x100 (=".cpp")
+  0da2: 940e 01aa      call 0x0354 <libc.strstr(haystack=r25:r24, needle=r23:r22)->r25:r24>
+  0da6: 01ec           r29:r28 := r25:r24
+  0da8: 2d8d 2d9c      r25:r24 := swap_bytes(r13:r12)
+  0dac: e26f e070      r23:r22 := 0x2f
+  0db0: 940e 019f      call 0x033e <libc.strrchr(r25:r24, r22)->r25:r24>
+  0db4: 9720 f071      if(r29:r28 == 0):jmp 0x0dd4 <_loc_0dd4>
+  0db8: 017c           r15:r14 := r25:r24
+  0dba: 9408 1ce1 1cf1 r15:r14 += 1
+  0dc0: 14e1 04f1 f039 if(r15:r14 == 0):jmp 0x0dd4 <_loc_0dd4>
+  0dc6: 019e           r19:r18 := r29:r28
+  0dc8: 5f2e           r18 -= -2
+  0dca: 2f82           r24 := r18
+  0dcc: 198e           r24 -= r14
+  0dce: 01d8           r27:r26 := r17:r16
+  0dd0: 938c           *(r27:r26) := r24
+  0dd2: c00e           jmp 0x0df0 <_loc_0df0>
+_loc_0dd4:
+  0dd4: 2dad 2dbc      r27:r26 := swap_bytes(r13:r12)
+  0dd8: 01fd           r31:r30 := r27:r26
+_loc_0dda:
+  0dda: 9001           r0 := *(r31:r30 ++)
+  0ddc: 2000 f7e9      if(r0):jmp 0x0dda <_loc_0dda>
+  0de0: 19ed           r30 -= r13
+  0de2: 5fef           r30 -= -1
+  0de4: 01d8           r27:r26 := r17:r16
+  0de6: 93ec           *(r27:r26) := r30
+  0de8: 2d2d 2d3c      r19:r18 := swap_bytes(r13:r12)
+  0dec: 01c9           r25:r24 := r19:r18
+  0dee: 017c           r15:r14 := r25:r24
+_loc_0df0:
+  0df0: 01f8           r31:r30 := r17:r16
+  0df2: 8180           r24 := *(r31:r30)
+  0df4: e090           r25 := 0
+  0df6: 940e 008e      call 0x011c <libc.malloc(size=r25:r24)->r25:r24>
+  0dfa: 01fc           r31:r30 := r25:r24
+  0dfc: 01d8           r27:r26 := r17:r16
+  0dfe: 9612           r27:r26 += 2
+  0e00: 939c           *(r27:r26) := r25
+  0e02: 938e           *(-- r27:r26) := r24
+  0e04: 9711           r27:r26 -= 1
+  0e06: 918c           r24 := *(r27:r26)
+  0e08: 0fe8 1df1      r31:r30 += 0:r24
+  0e0c: 8210           *(r31:r30) := 0
+  0e0e: 9611           r27:r26 += 1
+  0e10: 91ed           r30 := *(r27:r26 ++)
+  0e12: 91fc           r31 := *(r27:r26)
+  0e14: 9712           r27:r26 -= 2
+  0e16: 82b0           *(r31:r30) := r11
+  0e18: 9611           r27:r26 += 1
+  0e1a: 91ed           r30 := *(r27:r26 ++)
+  0e1c: 91fc           r31 := *(r27:r26)
+  0e1e: 9712           r27:r26 -= 2
+  0e20: 82a1           *(r31:r30 + 0x01) := r10
+  0e22: 9611           r27:r26 += 1
+  0e24: 918d           r24 := *(r27:r26 ++)
+  0e26: 919c           r25 := *(r27:r26)
+  0e28: 9712           r27:r26 -= 2
+  0e2a: 914c           r20 := *(r27:r26)
+  0e2c: e050           r21 := 0
+  0e2e: 5042 4050      r21:r20 -= 2
+  0e32: 9602           r25:r24 += 2
+  0e34: 01b7           r23:r22 := r15:r14
+  0e36: 940e 0190      call 0x0320 <libc.strncpy(dest=r25:r24, src=r23:r22, size=r21:r20)>
+  0e3a: 91df           pop r29
+  0e3c: 91cf           pop r28
+  0e3e: 911f           pop r17
+  0e40: 910f           pop r16
+  0e42: 90ff           pop r15
+  0e44: 90ef           pop r14
+  0e46: 90df           pop r13
+  0e48: 90cf           pop r12
+  0e4a: 90bf           pop r11
+  0e4c: 90af           pop r10
+  0e4e: 9508           ret
+
+FirmataClass::begin(this=r25:r24, long speed=r23:r22:r21:r20):
+  0e50: 930f           push r16
+  0e52: 931f           push r17
+  0e54: 018c           r17:r16 := r25:r24
+  0e56: e681 e093      r25:r24 := 0x361 (=Serial)
+  0e5a: 940e 0e82      call 0x1d04 <Serial::begin(this=r25:r24, speed=r23:r22:r21:r20)>
+  0e5e: 01c8           r25:r24 := r17:r16
+  0e60: 940e 049a      call 0x0934 <FirmataClass::blinkVersion(this=r25:r24)>
+  0e64: e26c e071 e080 e090 r25:r24:r23:r22 := 0x12c
+  0e6c: 940e 0cbd      call 0x197a <delay(duration=r25:r24:r23:r22)>
+  0e70: 01c8           r25:r24 := r17:r16
+  0e72: 940e 04f5      call 0x09ea <FirmataClass::printVersion(this=r25:r24)>
+  0e76: 01c8           r25:r24 := r17:r16
+  0e78: 940e 0592      call 0x0b24 <FirmataClass::printFirmwareVersion(this=r25:r24)>
+  0e7c: 911f           pop r17
+  0e7e: 910f           pop r16
+  0e80: 9508           ret
+
+digitalWriteCallback(byte port=r24, int value=r23:r22):
+  0e82: 930f           push r16
+  0e84: 931f           push r17
+  0e86: 93cf           push r28
+  0e88: 93df           push r29
+  0e8a: 2f78           r23 := r24
+  0e8c: 2fa6           r26 := r22
+  0e8e: 3083 f008      if(r24 < 3):jmp 0x0e94 <_loc_0e94>
+  0e92: c055           jmp 0x0f3e <_loc_0f3e>
+_loc_0e94:
+  0e94: e090           r25 := 0
+  0e96: 9601           r25:r24 += 1
+  0e98: 2fb8           r27 := r24
+  0e9a: 0fbb 0fbb 0fbb r27 *= 8
+  0ea0: 9701           r25:r24 -= 1
+  0ea2: 2f48           r20 := r24
+  0ea4: 0f44 0f44 0f44 r20 *= 8
+  0eaa: e051 e060      r22:r21 := 1
+  0eae: 2fca e0d0      r29:r28 := 0:r26
+  0eb2: e001 e010      r17:r16 := 1
+  0eb6: c021           jmp 0x0efa <_loc_0efa>
+_loc_0eb8:
+  0eb8: 2f84           r24 := r20
+  0eba: 5082           r24 -= 2
+  0ebc: 308c f018      if(r24 < 12):jmp 0x0ec6 <_loc_0ec6>
+  0ec0: 508e           r24 -= 14
+  0ec2: 3086 f4c0      if(r24 >= 6):jmp 0x0ef6 <_loc_0ef6>
+_loc_0ec6:
+  0ec6: 2f24 e030      r19:r18 := 0:r20
+  0eca: 01f9           r31:r30 := r19:r18
+  0ecc: 5ae7 4ffd      r31:r30 -= -0x259 (=pinConfig[0])
+  0ed0: 8180           r24 := *(r31:r30)
+  0ed2: 3082 f480      if(r24 >= 2):jmp 0x0ef6 <_loc_0ef6>
+  0ed6: 2b65           r22 |= r21
+  0ed8: 01f9           r31:r30 := r19:r18
+  0eda: 0fee 1fff      r31:r30 *= 2
+  0ede: 58ec 4ffd      r31:r30 -= -0x274 (=pinState[0]L)
+  0ee2: 8211           *(r31:r30 + 0x01) := 0
+  0ee4: 8210           *(r31:r30) := 0
+  0ee6: 2f85 e090      r25:r24 := 0:r21
+  0eea: 238c 239d      r25:r24 &= r29:r28
+  0eee: 2b89           r24 |= r25
+  0ef0: f011           breq 0x0ef6 <_loc_0ef6>
+  0ef2: 8311           *(r31:r30 + 0x01) := r17
+  0ef4: 8300           *(r31:r30) := r16
+_loc_0ef6:
+  0ef6: 0f55           r21 *= 2
+  0ef8: 5f4f           r20 -= -1
+_loc_0efa:
+  0efa: 174b f2e8      if(r20 < r27):jmp 0x0eb8 <_loc_0eb8>
+  0efe: 2377 f461      if(r23):jmp 0x0f1a <_loc_0f1a>
+  0f02: 2f86           r24 := r22
+  0f04: 7f8c           r24 &= 0xfc
+  0f06: 94f8           Clear(I flag)
+  0f08: b12b           r18 := PORT.PORTD
+  0f0a: 2f98           r25 := r24
+  0f0c: 9590           r25 := 0xff - r25
+  0f0e: 2392           r25 &= r18
+  0f10: 238a           r24 &= r26
+  0f12: 2b98           r25 |= r24
+  0f14: b99b           PORT.PORTD := r25
+  0f16: 9478           Set(I flag)
+  0f18: c012           jmp 0x0f3e <_loc_0f3e>
+_loc_0f1a:
+  0f1a: 2f96           r25 := r22
+  0f1c: 9590           r25 := 0xff - r25
+  0f1e: 236a           r22 &= r26
+  0f20: 3071 f439      if(r23 != 1):jmp 0x0f32 <_loc_0f32>
+  0f24: 94f8           Clear(I flag)
+  0f26: b185           r24 := PORT.PORTB
+  0f28: 2398           r25 &= r24
+  0f2a: 2b96           r25 |= r22
+  0f2c: b995           PORT.PORTB := r25
+  0f2e: 9478           Set(I flag)
+  0f30: c006           jmp 0x0f3e <_loc_0f3e>
+_loc_0f32:
+  0f32: 94f8           Clear(I flag)
+  0f34: b188           r24 := PORT.PORTC
+  0f36: 2398           r25 &= r24
+  0f38: 2b96           r25 |= r22
+  0f3a: b998           PORT.PORTC := r25
+  0f3c: 9478           Set(I flag)
+_loc_0f3e:
+  0f3e: 91df           pop r29
+  0f40: 91cf           pop r28
+  0f42: 911f           pop r17
+  0f44: 910f           pop r16
+  0f46: 9508           ret
+
+reportAnalogCallback(byte analogPin=r24, int value=r23:r22):
+  0f48: 2f48           r20 := r24
+  0f4a: 3088 f518      if(r24 >= 8):jmp 0x0f94 <_loc_0f94>
+  0f4e: 9120 0251      r18 := SRAM.analogInputsToReport_L
+  0f52: 9130 0252      r19 := SRAM.analogInputsToReport_H
+  0f56: 2b67           r22 |= r23
+  0f58: f481           brne 0x0f7a <_loc_0f7a>
+  0f5a: e081 e090      r25:r24 := 1
+  0f5e: c002           jmp 0x0f64 <_loc_0f64>
+_loc_0f60:
+  0f60: 0f88 1f99      r25:r24 *= 2
+_loc_0f64:
+  0f64: 954a           r20 --
+  0f66: f7e2           brpl 0x0f60 <_loc_0f60>
+  0f68: 9580           r24 := 0xff - r24
+  0f6a: 9590           r25 := 0xff - r25
+  0f6c: 2328 2339      r19:r18 &= r25:r24
+  0f70: 9330 0252      SRAM.analogInputsToReport_H := r19
+  0f74: 9320 0251      SRAM.analogInputsToReport_L := r18
+  0f78: 9508           ret
+_loc_0f7a:
+  0f7a: e081 e090      r25:r24 := 1
+  0f7e: c002           jmp 0x0f84 <_loc_0f84>
+_loc_0f80:
+  0f80: 0f88 1f99      r25:r24 *= 2
+_loc_0f84:
+  0f84: 954a           r20 --
+  0f86: f7e2           brpl 0x0f80 <_loc_0f80>
+  0f88: 2b28 2b39      r19:r18 |= r25:r24
+  0f8c: 9330 0252      SRAM.analogInputsToReport_H := r19
+  0f90: 9320 0251      SRAM.analogInputsToReport_L := r18
+_loc_0f94:
+  0f94: 9508           ret
+
+reportDigitalCallback(byte port=r24, int value=r23:r22):
+  0f96: 3083 f428      if(r24 >= 3):jmp 0x0fa4 <_loc_0fa4>
+  0f9a: 2fe8 e0f0      r31:r30 := 0:r24
+  0f9e: 5aed 4ffd      r31:r30 -= -0x253 (=reportPINs[0])
+  0fa2: 8360           *(r31:r30) := r22
+_loc_0fa4:
+  0fa4: 9508           ret
+
+sub_0fa6_cons2:
+  0fa6: 93cf           push r28
+  0fa8: 93df           push r29
+  0faa: ebc0 e0d2      r29:r28 := 0x2b0 (=servos[0]_L)
+_loc_0fae:
+  0fae: 01ce           r25:r24 := r29:r28
+  0fb0: 940e 01c4      call 0x0388 <Servo::Servo(this=r25:r24)>
+  0fb4: 9623           r29:r28 += 3
+  0fb6: e082           r24 := 2
+  0fb8: 3dc4 07d8 f7c1 if(r29:r28 != r24:0xd4):jmp 0x0fae <_loc_0fae>
+  0fbe: 91df           pop r29
+  0fc0: 91cf           pop r28
+  0fc2: 9508           ret
+
+analogWriteCallback(byte pin=r24, int value=r23:r22):
+  0fc4: 930f           push r16
+  0fc6: 931f           push r17
+  0fc8: 93cf           push r28
+  0fca: 93df           push r29
+  0fcc: 2f98           r25 := r24
+  0fce: 018b           r17:r16 := r23:r22
+  0fd0: 3188 f570      if(r24 >= 0x18):jmp 0x1030 <_return>
+  0fd4: 2fc8 e0d0      r29:r28 := 0:r24
+  0fd8: 01fe           r31:r30 := r29:r28
+  0fda: 5ae7 4ffd      r31:r30 -= -0x259 (=pinConfig[0])
+  0fde: 81e0           r30 := *(r31:r30)
+  0fe0: 30e3 f091      if(r30 == 3):jmp 0x1008 <_pinConfig[pin]==PWM>
+  0fe4: 30e4 f521      if(r30 != 4):jmp 0x1030 <_return>
+_pinConfig[pin]==SERVO:
+  0fe8: 5092           r25 -= 2
+  0fea: 309c f4d8      if(r25 >= 12):jmp 0x1024 <_pinState[pin] := r17:r16>
+  0fee: 019e           r19:r18 := r29:r28
+  0ff0: 5022 4030      r19:r18 -= 2
+  0ff4: 01c9           r25:r24 := r19:r18
+  0ff6: 0f88 1f99      r25:r24 *= 2
+  0ffa: 0f82 1f93      r25:r24 += r19:r18
+  0ffe: 5580 4f9d      r25:r24 -= -0x2b0 (=servos[0]_L)
+  1002: 940e 025c      call 0x04b8 <Servo::write(this=r25:r24, int value=r23:r22)>
+  1006: c00e           jmp 0x1024 <_pinState[pin] := r17:r16>
+_pinConfig[pin]==PWM:
+  1008: 2f28           r18 := r24
+  100a: 5022           r18 -= 2
+  100c: 302c f018      if(r18 < 12):jmp 0x1016 <_loc_1016>
+  1010: 5180           r24 -= 0x10
+  1012: 3086 f438      if(r24 >= 6):jmp 0x1024 <_pinState[pin] := r17:r16>
+_loc_1016:
+  1016: 3190 f008      if(r25 < 0x10):jmp 0x101c <_loc_101c>
+  101a: 2f92           r25 := r18
+_loc_101c:
+  101c: 2f89           r24 := r25        # analogWrite(PIN_TO_PWM(pin), value)
+  101e: 01b8           r23:r22 := r17:r16
+  1020: 940e 0d73      call 0x1ae6 <analogWrite(pwm=r24, value=r23:r22)>
+_pinState[pin] := r17:r16:
+  1024: 0fcc 1fdd      r29:r28 *= 2
+  1028: 58cc 4fdd      r29:r28 -= -0x274 (=pinState[0]L)
+  102c: 8319           *(r29:r28 + 0x01) := r17
+  102e: 8308           *(r29:r28) := r16
+_return:
+  1030: 91df           pop r29
+  1032: 91cf           pop r28
+  1034: 911f           pop r17
+  1036: 910f           pop r16
+  1038: 9508           ret
+
+sub_103a:
+  103a: 940e 0caf      call 0x195e <millis()->r25:r24:r23:r22>
+  103e: 9120 02ac      r18 := SRAM.0x02ac
+  1042: 9130 02ad      r19 := SRAM.0x02ad
+  1046: 9140 02ae      r20 := SRAM.0x02ae
+  104a: 9150 02af      r21 := SRAM.0x02af
+  104e: 1b62 0b73 0b84 0b95 r25:r24:r23:r22 -= r21:r20:r19:r18
+  1056: 5f65 4071 4080 4090 r25:r24:r23:r22 -= 0x1f5
+  105e: f0a8           if(r25:r24:r23:r22 < 0):jmp 0x108a <_loc_108a>
+  1060: e060           r22 := 0
+  1062: 9180 0250      r24 := SRAM.0x0250
+  1066: 2388 f409      if(r24):jmp 0x106c <_loc_106c>
+  106a: e061           r22 := 1
+_loc_106c:
+  106c: 9360 0250      SRAM.0x0250 := r22
+  1070: e08d           r24 := 13
+  1072: 940e 0df9      call 0x1bf2 <sub_1bf2>
+  1076: 940e 0caf      call 0x195e <millis()->r25:r24:r23:r22>
+  107a: 9360 02ac      SRAM.0x02ac := r22
+  107e: 9370 02ad      SRAM.0x02ad := r23
+  1082: 9380 02ae      SRAM.0x02ae := r24
+  1086: 9390 02af      SRAM.0x02af := r25
+_loc_108a:
+  108a: 9508           ret
+
+setPinModeCallback(byte pin=r24, int mode=r23:r22):
+  108c: 92cf           push r12
+  108e: 92df           push r13
+  1090: 92ef           push r14
+  1092: 92ff           push r15
+  1094: 930f           push r16
+  1096: 931f           push r17
+  1098: 93cf           push r28
+  109a: 93df           push r29
+  109c: 2ed8           r13 := r24
+  109e: 018b           r17:r16 := r23:r22
+  10a0: efee           r30 := 0xfe
+  10a2: 2ece           r12 := r30
+  10a4: 0ec8           r12 += r24
+  10a6: e08b           r24 := 11
+  10a8: 158c f0a8      if(r24 < r12):jmp 0x10d6 <_loc_10d6>
+  10ac: 3064 0571 f091 if(r23:r22 == 4):jmp 0x10d6 <_loc_10d6>
+  10b2: 2d8d e090      r25:r24 := 0:r13
+  10b6: 9702           r25:r24 -= 2
+  10b8: 01ec           r29:r28 := r25:r24
+  10ba: 0fcc 1fdd      r29:r28 *= 2
+  10be: 0fc8 1fd9      r29:r28 += r25:r24
+  10c2: 55c0 4fdd      r29:r28 -= -0x2b0 (=servos[0]_L)
+  10c6: 01ce           r25:r24 := r29:r28
+  10c8: 940e 024a      call 0x0494 <sub_0494>
+  10cc: 2388 f019      if_not(r24):jmp 0x10d6 <_loc_10d6>
+  10d0: 01ce           r25:r24 := r29:r28
+  10d2: 940e 01de      call 0x03bc <sub_03bc>
+_loc_10d6:
+  10d6: 2d4d           r20 := r13
+  10d8: 5140           r20 -= 0x10
+  10da: 3048 f4b0      if(r20 >= 8):jmp 0x110a <_loc_110a>
+  10de: 9120 0251      r18 := SRAM.analogInputsToReport_L
+  10e2: 9130 0252      r19 := SRAM.analogInputsToReport_H
+  10e6: 3002 0511 f009 if(r17:r16 == 2):jmp 0x10ee <_loc_10ee>
+  10ec: c113           jmp 0x1314 <_loc_1314>
+_loc_10ee:
+  10ee: e081 e090      r25:r24 := 1
+  10f2: 2e04           r0 := r20
+  10f4: c002           jmp 0x10fa <_loc_10fa>
+_loc_10f6:
+  10f6: 0f88 1f99      r25:r24 *= 2
+_loc_10fa:
+  10fa: 940a           r0 --
+  10fc: f7e2           brpl 0x10f6 <_loc_10f6>
+  10fe: 2b28 2b39      r19:r18 |= r25:r24
+_loc_1102:
+  1102: 9330 0252      SRAM.analogInputsToReport_H := r19
+  1106: 9320 0251      SRAM.analogInputsToReport_L := r18
+_loc_110a:
+  110a: e09b           r25 := 11
+  110c: 159c f410      if(r25 >= r12):jmp 0x1114 <_loc_1114>
+  1110: 3046 f548      if(r20 >= 6):jmp 0x1166 <_loc_1166>
+_loc_1114:
+  1114: 2d2d e030      r19:r18 := 0:r13
+  1118: 2ded           r30 := r13
+  111a: 95e6 95e6 95e6 r30 /= 8
+  1120: 1501 0511 f481 if(r17:r16 != 0):jmp 0x1146 <_loc_1146>
+  1126: e0f0           r31 := 0
+  1128: 58ef 4ffd      r31:r30 -= -0x271 (=portConfigInputs[0])
+  112c: 7027 7030      r19:r18 &= 7
+  1130: e081 e090      r25:r24 := 1
+  1134: c002           jmp 0x113a <_loc_113a>
+_loc_1136:
+  1136: 0f88 1f99      r25:r24 *= 2
+_loc_113a:
+  113a: 952a           r18 --
+  113c: f7e2           brpl 0x1136 <_loc_1136>
+  113e: 8120           r18 := *(r31:r30)
+  1140: 2b28           r18 |= r24
+  1142: 8320           *(r31:r30) := r18
+  1144: c010           jmp 0x1166 <_loc_1166>
+_loc_1146:
+  1146: e0f0           r31 := 0
+  1148: 58ef 4ffd      r31:r30 -= -0x271 (=portConfigInputs[0])
+  114c: 7027 7030      r19:r18 &= 7
+  1150: e081 e090      r25:r24 := 1
+  1154: c002           jmp 0x115a <_loc_115a>
+_loc_1156:
+  1156: 0f88 1f99      r25:r24 *= 2
+_loc_115a:
+  115a: 952a           r18 --
+  115c: f7e2           brpl 0x1156 <_loc_1156>
+  115e: 9580           r24 := 0xff - r24
+  1160: 8120           r18 := *(r31:r30)
+  1162: 2382           r24 &= r18
+  1164: 8380           *(r31:r30) := r24
+_loc_1166:
+  1166: 2ced 24ff      r15:r14 := 0:r13
+  116a: 01f7           r31:r30 := r15:r14
+  116c: 0fee 1fff      r31:r30 *= 2
+  1170: 58ec 4ffd      r31:r30 -= -0x274 (=pinState[0]L)
+  1174: 8211           *(r31:r30 + 0x01) := 0
+  1176: 8210           *(r31:r30) := 0
+  1178: 3002 0511 f0c1 if(r17:r16 == 2):jmp 0x11ae <_loc_11ae>
+  117e: 3003 0511 f444 if(r17:r16 >=s 3):jmp 0x1194 <_loc_1194>
+  1184: 1501 0511 f189 if(r17:r16 == 0):jmp 0x11ec <_loc_11ec>
+  118a: 3001 0511 f009 if(r17:r16 == 1):jmp 0x1192 <_loc_1192>
+  1190: c0ba           jmp 0x1306 <_loc_1306>
+_loc_1192:
+  1192: c04a           jmp 0x1228 <_loc_1228>
+_loc_1194:
+  1194: 3004 0511 f409 if(r17:r16 != 4):jmp 0x119c <_loc_119c>
+  119a: c083           jmp 0x12a2 <_loc_12a2>
+_loc_119c:
+  119c: 3004 0511 f40c if(r17:r16 >=s 4):jmp 0x11a4 <_loc_11a4>
+  11a2: c061           jmp 0x1266 <_loc_1266>
+_loc_11a4:
+  11a4: 3006 0511 f009 if(r17:r16 == 6):jmp 0x11ac <_loc_11ac>
+  11aa: c0ad           jmp 0x1306 <_loc_1306>
+_loc_11ac:
+  11ac: c0a0           jmp 0x12ee <_loc_12ee>
+_loc_11ae:
+  11ae: 3048 f008      if(r20 < 8):jmp 0x11b4 <_loc_11b4>
+  11b2: c0bd           jmp 0x132e <_loc_132e>
+_loc_11b4:
+  11b4: e0eb           r30 := 11
+  11b6: 15ec f410      if(r30 >= r12):jmp 0x11be <_loc_11be>
+  11ba: 3046 f488      if(r20 >= 6):jmp 0x11e0 <_loc_11e0>
+_loc_11be:
+  11be: e0ff           r31 := 15
+  11c0: 15fd f010      if(r31 < r13):jmp 0x11c8 <_loc_11c8>
+  11c4: 2d8d           r24 := r13
+  11c6: c001           jmp 0x11ca <_loc_11ca>
+_loc_11c8:
+  11c8: 2d8c           r24 := r12
+_loc_11ca:
+  11ca: e060           r22 := 0
+  11cc: 940e 0dd3      call 0x1ba6 <pinMode(??)>
+  11d0: e08f           r24 := 15
+  11d2: 158d f008      if(r24 < r13):jmp 0x11d8 <_loc_11d8>
+  11d6: 2ccd           r12 := r13
+_loc_11d8:
+  11d8: 2d8c           r24 := r12
+  11da: e060           r22 := 0
+  11dc: 940e 0df9      call 0x1bf2 <sub_1bf2>
+_loc_11e0:
+  11e0: e5e9 e0f2      r31:r30 := 0x259 (=pinConfig[0])
+  11e4: 0eee 1eff      r15:r14 += r31:r30
+  11e8: e082           r24 := 2
+  11ea: c03a           jmp 0x1260 <_loc_1260>
+_loc_11ec:
+  11ec: e0fb           r31 := 11
+  11ee: 15fc f418      if(r31 >= r12):jmp 0x11f8 <_loc_11f8>
+  11f2: 3046 f008      if(r20 < 6):jmp 0x11f8 <_loc_11f8>
+  11f6: c09b           jmp 0x132e <_loc_132e>
+_loc_11f8:
+  11f8: e08f           r24 := 15
+  11fa: 158d f010      if(r24 < r13):jmp 0x1202 <_loc_1202>
+  11fe: 2d8d           r24 := r13
+  1200: c001           jmp 0x1204 <_loc_1204>
+_loc_1202:
+  1202: 2d8c           r24 := r12
+_loc_1204:
+  1204: e060           r22 := 0
+  1206: 940e 0dd3      call 0x1ba6 <pinMode(??)>
+  120a: e09f           r25 := 15
+  120c: 159d f008      if(r25 < r13):jmp 0x1212 <_loc_1212>
+  1210: 2ccd           r12 := r13
+_loc_1212:
+  1212: 2d8c           r24 := r12
+  1214: e060           r22 := 0
+  1216: 940e 0df9      call 0x1bf2 <sub_1bf2>
+  121a: e5e9 e0f2      r31:r30 := 0x259 (=pinConfig[0])
+  121e: 0eee 1eff      r15:r14 += r31:r30
+  1222: 01f7           r31:r30 := r15:r14
+  1224: 8210           *(r31:r30) := 0
+  1226: c083           jmp 0x132e <_loc_132e>
+_loc_1228:
+  1228: e0fb           r31 := 11
+  122a: 15fc f418      if(r31 >= r12):jmp 0x1234 <_loc_1234>
+  122e: 3046 f008      if(r20 < 6):jmp 0x1234 <_loc_1234>
+  1232: c07d           jmp 0x132e <_loc_132e>
+_loc_1234:
+  1234: e08f           r24 := 15
+  1236: 158d f010      if(r24 < r13):jmp 0x123e <_loc_123e>
+  123a: 2d8d           r24 := r13
+  123c: c001           jmp 0x1240 <_loc_1240>
+_loc_123e:
+  123e: 2d8c           r24 := r12
+_loc_1240:
+  1240: e060           r22 := 0
+  1242: 940e 0df9      call 0x1bf2 <sub_1bf2>
+  1246: e09f           r25 := 15
+  1248: 159d f008      if(r25 < r13):jmp 0x124e <_loc_124e>
+  124c: 2ccd           r12 := r13
+_loc_124e:
+  124e: 2d8c           r24 := r12
+  1250: e061           r22 := 1
+  1252: 940e 0dd3      call 0x1ba6 <pinMode(??)>
+  1256: e5e9 e0f2      r31:r30 := 0x259 (=pinConfig[0])
+  125a: 0eee 1eff      r15:r14 += r31:r30
+  125e: e081           r24 := 1
+_loc_1260:
+  1260: 01f7           r31:r30 := r15:r14
+  1262: 8380           *(r31:r30) := r24
+  1264: c064           jmp 0x132e <_loc_132e>
+_loc_1266:
+  1266: e0fb           r31 := 11
+  1268: 15fc f418      if(r31 >= r12):jmp 0x1272 <_loc_1272>
+  126c: 3046 f008      if(r20 < 6):jmp 0x1272 <_loc_1272>
+  1270: c05e           jmp 0x132e <_loc_132e>
+_loc_1272:
+  1272: e08f           r24 := 15
+  1274: 158d f010      if(r24 < r13):jmp 0x127c <_loc_127c>
+  1278: 2d8d           r24 := r13
+  127a: c001           jmp 0x127e <_loc_127e>
+_loc_127c:
+  127c: 2d8c           r24 := r12
+_loc_127e:
+  127e: e061           r22 := 1
+  1280: 940e 0dd3      call 0x1ba6 <pinMode(??)>
+  1284: e09f           r25 := 15
+  1286: 159d f008      if(r25 < r13):jmp 0x128c <_loc_128c>
+  128a: 2ccd           r12 := r13
+_loc_128c:
+  128c: 2d8c           r24 := r12
+  128e: e060 e070      r23:r22 := 0
+  1292: 940e 0d73      call 0x1ae6 <analogWrite(pwm=r24, value=r23:r22)>
+  1296: e5e9 e0f2      r31:r30 := 0x259 (=pinConfig[0])
+  129a: 0eee 1eff      r15:r14 += r31:r30
+  129e: e083           r24 := 3
+  12a0: cfdf           jmp 0x1260 <_loc_1260>
+_loc_12a2:
+  12a2: e0fb           r31 := 11
+  12a4: 15fc f408      if(r31 >= r12):jmp 0x12aa <_loc_12aa>
+  12a8: c042           jmp 0x132e <_loc_132e>
+_loc_12aa:
+  12aa: 01f7           r31:r30 := r15:r14
+  12ac: 5ae7 4ffd      r31:r30 -= -0x259 (=pinConfig[0])
+  12b0: e084           r24 := 4
+  12b2: 8380           *(r31:r30) := r24
+  12b4: 0187           r17:r16 := r15:r14
+  12b6: 5002 4010      r17:r16 -= 2
+  12ba: 01e8           r29:r28 := r17:r16
+  12bc: 0fcc 1fdd      r29:r28 *= 2
+  12c0: 0fc0 1fd1      r29:r28 += r17:r16
+  12c4: 55c0 4fdd      r29:r28 -= -0x2b0 (=servos[0]_L)
+  12c8: 01ce           r25:r24 := r29:r28
+  12ca: 940e 024a      call 0x0494 <sub_0494>
+  12ce: 2388 f449      if(r24):jmp 0x12e4 <_loc_12e4>
+  12d2: e08f           r24 := 15
+  12d4: 158d f408      if(r24 >= r13):jmp 0x12da <_loc_12da>
+  12d8: 0178           r15:r14 := r17:r16
+_loc_12da:
+  12da: 01ce           r25:r24 := r29:r28
+  12dc: 01b7           r23:r22 := r15:r14
+  12de: 940e 0343      call 0x0686 <sub_0686>
+  12e2: c025           jmp 0x132e <_loc_132e>
+_loc_12e4:
+  12e4: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  12e8: e065 e071      r23:r22 := 0x105 (="Servo only on pins from 2 to 13")
+  12ec: c010           jmp 0x130e <_loc_130e>
+_loc_12ee:
+  12ee: e5e9 e0f2      r31:r30 := 0x259 (=pinConfig[0])
+  12f2: 0eee 1eff      r15:r14 += r31:r30
+  12f6: e086           r24 := 6
+  12f8: 01f7           r31:r30 := r15:r14
+  12fa: 8380           *(r31:r30) := r24
+  12fc: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  1300: e265 e071      r23:r22 := 0x125 (="I2C mode not yet supported")
+  1304: c004           jmp 0x130e <_loc_130e>
+_loc_1306:
+  1306: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  130a: e460 e071      r23:r22 := 0x140 (="Unknown pin mode")
+_loc_130e:
+  130e: 940e 057a      call 0x0af4 <FirmataClass::sendString(this=r25:r24, const char* string=r23:r22)>
+  1312: c00d           jmp 0x132e <_loc_132e>
+_loc_1314:
+  1314: e081 e090      r25:r24 := 1
+  1318: 2e04           r0 := r20
+  131a: c002           jmp 0x1320 <_loc_1320>
+_loc_131c:
+  131c: 0f88 1f99      r25:r24 *= 2
+_loc_1320:
+  1320: 940a           r0 --
+  1322: f7e2           brpl 0x131c <_loc_131c>
+  1324: 9580           r24 := 0xff - r24
+  1326: 9590           r25 := 0xff - r25
+  1328: 2328 2339      r19:r18 &= r25:r24
+  132c: ceea           jmp 0x1102 <_loc_1102>
+_loc_132e:
+  132e: 91df           pop r29
+  1330: 91cf           pop r28
+  1332: 911f           pop r17
+  1334: 910f           pop r16
+  1336: 90ff           pop r15
+  1338: 90ef           pop r14
+  133a: 90df           pop r13
+  133c: 90cf           pop r12
+  133e: 9508           ret
+
+sysexCallback(byte command=r24, byte argc=r22, byte *argv=r21:r20):
+  1340: 929f           push r9
+  1342: 92af           push r10
+  1344: 92bf           push r11
+  1346: 92cf           push r12
+  1348: 92df           push r13
+  134a: 92ef           push r14
+  134c: 92ff           push r15
+  134e: 930f           push r16
+  1350: 931f           push r17
+  1352: 93cf           push r28
+  1354: 93df           push r29
+  1356: 2f26           r18 := r22
+  1358: 01fa           r31:r30 := r21:r20
+  135a: 368d f409      if(r24 != 0x6d):jmp 0x1360 <_loc_1360>
+  135e: c0e0           jmp 0x1520 <_loc_1520>
+_loc_1360:
+  1360: 368e f438      if(r24 >= 0x6e):jmp 0x1372 <_loc_1372>
+  1364: 3689 f409      if(r24 != 0x69):jmp 0x136a <_loc_136a>
+  1368: c12e           jmp 0x15c6 <_loc_15c6>
+_loc_136a:
+  136a: 368b f009      if(r24 == 0x6b):jmp 0x1370 <_loc_1370>
+  136e: c147           jmp 0x15fe <_loc_15fe>
+_loc_1370:
+  1370: c082           jmp 0x1476 <_loc_1476>
+_loc_1372:
+  1372: 3780 f039      if(r24 == 0x70):jmp 0x1384 <_loc_1384>
+  1376: 378a f409      if(r24 != 0x7a):jmp 0x137c <_loc_137c>
+  137a: c045           jmp 0x1406 <_loc_1406>
+_loc_137c:
+  137c: 368f f009      if(r24 == 0x6f):jmp 0x1382 <_loc_1382>
+  1380: c13e           jmp 0x15fe <_loc_15fe>
+_loc_1382:
+  1382: c059           jmp 0x1436 <_loc_1436>
+_loc_1384:
+  1384: 3065 f408      if(r22 >= 5):jmp 0x138a <_loc_138a>
+  1388: c13a           jmp 0x15fe <_loc_15fe>
+_loc_138a:
+  138a: 80d0           r13 := *(r31:r30)
+  138c: 80a1           r10 := *(r31:r30 + 0x01)
+  138e: 80c2           r12 := *(r31:r30 + 0x02)
+  1390: 8093           r9 := *(r31:r30 + 0x03)
+  1392: 80b4           r11 := *(r31:r30 + 0x04)
+  1394: 2d8d           r24 := r13
+  1396: 5082           r24 -= 2
+  1398: 308c f008      if(r24 < 12):jmp 0x139e <_loc_139e>
+  139c: c130           jmp 0x15fe <_loc_15fe>
+_loc_139e:
+  139e: 2ced 24ff      r15:r14 := 0:r13
+  13a2: 0187           r17:r16 := r15:r14
+  13a4: 5002 4010      r17:r16 -= 2
+  13a8: 01e8           r29:r28 := r17:r16
+  13aa: 0fcc 1fdd      r29:r28 *= 2
+  13ae: 0fc0 1fd1      r29:r28 += r17:r16
+  13b2: 55c0 4fdd      r29:r28 -= -0x2b0 (=servos[0]_L)
+  13b6: 01ce           r25:r24 := r29:r28
+  13b8: 940e 024a      call 0x0494 <sub_0494>
+  13bc: 2388 f019      if_not(r24):jmp 0x13c6 <_loc_13c6>
+  13c0: 01ce           r25:r24 := r29:r28
+  13c2: 940e 01de      call 0x03bc <sub_03bc>
+_loc_13c6:
+  13c6: e08f           r24 := 15
+  13c8: 158d f008      if(r24 < r13):jmp 0x13ce <_loc_13ce>
+  13cc: 0187           r17:r16 := r15:r14
+_loc_13ce:
+  13ce: 2d4c e050      r21:r20 := 0:r12
+  13d2: 9556           r21 /= 2
+  13d4: 2f54           r21 := r20
+  13d6: 2744           r20 := 0
+  13d8: 9557 9547      r21:r20:C := C:r21:r20 ; >> 1
+  13dc: 0d4a 1d51      r21:r20 += 0:r10
+  13e0: 2d2b e030      r19:r18 := 0:r11
+  13e4: 9536           r19 /= 2
+  13e6: 2f32           r19 := r18
+  13e8: 2722           r18 := 0
+  13ea: 9537 9527      r19:r18:C := C:r19:r18 ; >> 1
+  13ee: 0d29 1d31      r19:r18 += 0:r9
+  13f2: 01ce           r25:r24 := r29:r28
+  13f4: 01b8           r23:r22 := r17:r16
+  13f6: 940e 02c4      call 0x0588 <sub_0588>
+  13fa: 2d8d           r24 := r13
+  13fc: e064 e070      r23:r22 := 4
+  1400: 940e 0846      call 0x108c <setPinModeCallback(byte pin=r24, int mode=r23:r22)>
+  1404: c0fc           jmp 0x15fe <_loc_15fe>
+_loc_1406:
+  1406: 3062 f078      if(r22 < 2):jmp 0x1428 <_loc_1428>
+  140a: 8181           r24 := *(r31:r30 + 0x01)
+  140c: e090           r25 := 0
+  140e: 9596           r25 /= 2
+  1410: 2f98           r25 := r24
+  1412: 2788           r24 := 0
+  1414: 9597 9587      r25:r24:C := C:r25:r24 ; >> 1
+  1418: 8120           r18 := *(r31:r30)
+  141a: 0f82 1d91      r25:r24 += 0:r18
+  141e: 9390 01da      SRAM.0x01da := r25
+  1422: 9380 01d9      SRAM.0x01d9 := r24
+  1426: c0eb           jmp 0x15fe <_loc_15fe>
+_loc_1428:
+  1428: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  142c: e561 e071      r23:r22 := 0x151 (="Not enough data")
+  1430: 940e 057a      call 0x0af4 <FirmataClass::sendString(this=r25:r24, const char* string=r23:r22)>
+  1434: c0e4           jmp 0x15fe <_loc_15fe>
+_loc_1436:
+  1436: 3062 f408      if(r22 >= 2):jmp 0x143c <_loc_143c>
+  143a: c0e1           jmp 0x15fe <_loc_15fe>
+_loc_143c:
+  143c: 8181           r24 := *(r31:r30 + 0x01)
+  143e: 2f68 e070      r23:r22 := 0:r24
+  1442: 3022 f0a1      if(r18 == 2):jmp 0x146e <_loc_146e>
+  1446: 8182           r24 := *(r31:r30 + 0x02)
+  1448: e090           r25 := 0
+  144a: 9596           r25 /= 2
+  144c: 2f98           r25 := r24
+  144e: 2788           r24 := 0
+  1450: 9597 9587      r25:r24:C := C:r25:r24 ; >> 1
+  1454: 2b68 2b79      r23:r22 |= r25:r24
+  1458: 3023 f049      if(r18 == 3):jmp 0x146e <_loc_146e>
+  145c: 8123           r18 := *(r31:r30 + 0x03)
+  145e: 2f92           r25 := r18
+  1460: 9592           swap_nibbles r25
+  1462: 0f99 0f99      r25 *= 4
+  1466: 7c90           r25 &= 0xc0
+  1468: e080           r24 := 0
+  146a: 2b68 2b79      r23:r22 |= r25:r24
+_loc_146e:
+  146e: 8180           r24 := *(r31:r30)
+  1470: 940e 07e2      call 0x0fc4 <analogWriteCallback(byte pin=r24, int value=r23:r22)>
+  1474: c0c4           jmp 0x15fe <_loc_15fe>
+_loc_1476:
+  1476: e681 e093      r25:r24 := 0x361 (=Serial)
+  147a: ef60           r22 := 0xf0
+  147c: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  1480: e681 e093      r25:r24 := 0x361 (=Serial)
+  1484: e66c           r22 := 0x6c
+  1486: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  148a: ef1e           r17 := 0xfe
+  148c: ef00           r16 := 0xf0
+_loc_148e:
+  148e: 301c f010      if(r17 < 12):jmp 0x1496 <_loc_1496>
+  1492: 3006 f4a0      if(r16 >= 6):jmp 0x14be <_loc_14be>
+_loc_1496:
+  1496: e681 e093      r25:r24 := 0x361 (=Serial)
+  149a: e060           r22 := 0
+  149c: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  14a0: e681 e093      r25:r24 := 0x361 (=Serial)
+  14a4: e061           r22 := 1
+  14a6: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  14aa: e681 e093      r25:r24 := 0x361 (=Serial)
+  14ae: e061           r22 := 1
+  14b0: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  14b4: e681 e093      r25:r24 := 0x361 (=Serial)
+  14b8: e061           r22 := 1
+  14ba: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+_loc_14be:
+  14be: 3008 f450      if(r16 >= 8):jmp 0x14d6 <_loc_14d6>
+  14c2: e681 e093      r25:r24 := 0x361 (=Serial)
+  14c6: e062           r22 := 2
+  14c8: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  14cc: e681 e093      r25:r24 := 0x361 (=Serial)
+  14d0: e06a           r22 := 10
+  14d2: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+_loc_14d6:
+  14d6: 301c f010      if(r17 < 12):jmp 0x14de <_loc_14de>
+  14da: 3006 f4b0      if(r16 >= 6):jmp 0x150a <_loc_150a>
+_loc_14de:
+  14de: e681 e093      r25:r24 := 0x361 (=Serial)
+  14e2: e063           r22 := 3
+  14e4: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  14e8: e681 e093      r25:r24 := 0x361 (=Serial)
+  14ec: e068           r22 := 8
+  14ee: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  14f2: 301c f450      if(r17 >= 12):jmp 0x150a <_loc_150a>
+  14f6: e681 e093      r25:r24 := 0x361 (=Serial)
+  14fa: e064           r22 := 4
+  14fc: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  1500: e681 e093      r25:r24 := 0x361 (=Serial)
+  1504: e06e           r22 := 14
+  1506: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+_loc_150a:
+  150a: e681 e093      r25:r24 := 0x361 (=Serial)
+  150e: e76f           r22 := 0x7f
+  1510: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  1514: 5f1f           r17 -= -1
+  1516: 5f0f           r16 -= -1
+  1518: 3116 f009      if(r17 == 0x16):jmp 0x151e <_loc_151e>
+  151c: cfb8           jmp 0x148e <_loc_148e>
+_loc_151e:
+  151e: c06a           jmp 0x15f4 <_loc_15f4>
+_loc_1520:
+  1520: 2366 f409      if(r22):jmp 0x1526 <_loc_1526>
+  1524: c06c           jmp 0x15fe <_loc_15fe>
+_loc_1526:
+  1526: 8100           r16 := *(r31:r30)
+  1528: e681 e093      r25:r24 := 0x361 (=Serial)
+  152c: ef60           r22 := 0xf0
+  152e: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  1532: e681 e093      r25:r24 := 0x361 (=Serial)
+  1536: e66e           r22 := 0x6e
+  1538: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  153c: e681 e093      r25:r24 := 0x361 (=Serial)
+  1540: 2f60           r22 := r16
+  1542: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  1546: 3108 f008      if(r16 < 0x18):jmp 0x154c <_loc_154c>
+  154a: c054           jmp 0x15f4 <_loc_15f4>
+_loc_154c:
+  154c: 2fc0 e0d0      r29:r28 := 0:r16
+  1550: 01fe           r31:r30 := r29:r28
+  1552: 5ae7 4ffd      r31:r30 -= -0x259 (=pinConfig[0])
+  1556: e681 e093      r25:r24 := 0x361 (=Serial)
+  155a: 8160           r22 := *(r31:r30)
+  155c: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  1560: 018e           r17:r16 := r29:r28
+  1562: 0f00 1f11      r17:r16 *= 2
+  1566: 580c 4f1d      r17:r16 -= -0x274 (=pinState[0]L)
+  156a: 01f8           r31:r30 := r17:r16
+  156c: 8160           r22 := *(r31:r30)
+  156e: 776f           r22 &= 0x7f
+  1570: e681 e093      r25:r24 := 0x361 (=Serial)
+  1574: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  1578: 01f8           r31:r30 := r17:r16
+  157a: 8160           r22 := *(r31:r30)
+  157c: 8171           r23 := *(r31:r30 + 0x01)
+  157e: 01cb           r25:r24 := r23:r22
+  1580: 7880           r24 &= 0x80
+  1582: 2b89           r24 |= r25
+  1584: f049           breq 0x1598 <_loc_1598>
+  1586: 0f66           r22 *= 2
+  1588: 2f67           r22 := r23
+  158a: 1f66           C:r22 := r22:C ; << 1
+  158c: 0b77           r23 -= r23+C
+  158e: 776f           r22 &= 0x7f
+  1590: e681 e093      r25:r24 := 0x361 (=Serial)
+  1594: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+_loc_1598:
+  1598: 0fcc 1fdd      r29:r28 *= 2
+  159c: 58cc 4fdd      r29:r28 -= -0x274 (=pinState[0]L)
+  15a0: 8128           r18 := *(r29:r28)
+  15a2: 8139           r19 := *(r29:r28 + 0x01)
+  15a4: 01c9           r25:r24 := r19:r18
+  15a6: 7080 7c90      r25:r24 &= 0xc000
+  15aa: 2b89           r24 |= r25
+  15ac: f119           breq 0x15f4 <_loc_15f4>
+  15ae: 0f33           r19 *= 2
+  15b0: 0b22           r18 -= r18+C
+  15b2: 0f33           r19 *= 2
+  15b4: 2f32           r19 := r18
+  15b6: 1f22           C:r18 := r18:C ; << 1
+  15b8: 2f62           r22 := r18
+  15ba: 776f           r22 &= 0x7f
+  15bc: e681 e093      r25:r24 := 0x361 (=Serial)
+  15c0: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  15c4: c017           jmp 0x15f4 <_loc_15f4>
+_loc_15c6:
+  15c6: e681 e093      r25:r24 := 0x361 (=Serial)
+  15ca: ef60           r22 := 0xf0
+  15cc: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  15d0: e681 e093      r25:r24 := 0x361 (=Serial)
+  15d4: e66a           r22 := 0x6a
+  15d6: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  15da: ef10           r17 := 0xf0
+_loc_15dc:
+  15dc: 3018 f010      if(r17 < 8):jmp 0x15e4 <_loc_15e4>
+  15e0: e76f           r22 := 0x7f
+  15e2: c001           jmp 0x15e6 <_loc_15e6>
+_loc_15e4:
+  15e4: 2f61           r22 := r17
+_loc_15e6:
+  15e6: e681 e093      r25:r24 := 0x361 (=Serial)
+  15ea: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  15ee: 5f1f           r17 -= -1
+  15f0: 3018 f7a1      if(r17 != 8):jmp 0x15dc <_loc_15dc>
+_loc_15f4:
+  15f4: e681 e093      r25:r24 := 0x361 (=Serial)
+  15f8: ef67           r22 := 0xf7
+  15fa: 940e 0f3a      call 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+_loc_15fe:
+  15fe: 91df           pop r29
+  1600: 91cf           pop r28
+  1602: 911f           pop r17
+  1604: 910f           pop r16
+  1606: 90ff           pop r15
+  1608: 90ef           pop r14
+  160a: 90df           pop r13
+  160c: 90cf           pop r12
+  160e: 90bf           pop r11
+  1610: 90af           pop r10
+  1612: 909f           pop r9
+  1614: 9508           ret
+
+outputPort(byte portNumber=r24, byte portValue=r22, byte forceSend=r20):
+  1616: 931f           push r17
+  1618: 93cf           push r28
+  161a: 93df           push r29
+  161c: 2f28           r18 := r24
+  161e: 2f16           r17 := r22
+  1620: 2fc8 e0d0      r29:r28 := 0:r24
+  1624: 01fe           r31:r30 := r29:r28
+  1626: 58ef 4ffd      r31:r30 -= -0x271 (=portConfigInputs[0])
+  162a: 8180           r24 := *(r31:r30) # r24 := portConfigInputs[portNumber]
+  162c: 2318           r17 &= r24
+  162e: 2344 f431      if(r20):jmp 0x163e <_loc_163e>
+  1632: 01fe           r31:r30 := r29:r28
+  1634: 5aea 4ffd      r31:r30 -= -0x256 (=previousPINs[0])
+  1638: 8180           r24 := *(r31:r30)
+  163a: 1781 f051      if(r24 == r17):jmp 0x1652 <_loc_1652>
+_loc_163e:
+  163e: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  1642: 2f62           r22 := r18
+  1644: 2f41 e050      r21:r20 := 0:r17
+  1648: 940e 04cb      call 0x0996 <FirmataClass::sendDigitalPort(this=r25:r24, byte portNumber=r22, int portData=r21:r20)>
+  164c: 5aca 4fdd      r29:r28 -= -0x256 (=previousPINs[0])
+  1650: 8318           *(r29:r28) := r17
+_loc_1652:
+  1652: 91df           pop r29
+  1654: 91cf           pop r28
+  1656: 911f           pop r17
+  1658: 9508           ret
+
+setup():
+  165a: 931f           push r17
+  165c: 93cf           push r28
+  165e: 93df           push r29
+  1660: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  1664: e661 e071      r23:r22 := 0x161 (="/var/.../StandardFirmata_2_2_forUNO_0_3.cpp")
+  1668: e042           r20 := 2
+  166a: e022           r18 := 2
+  166c: 940e 06be      call 0x0d7c <FirmataClass::setFirmwareNameAndVersion(this=r25:r24, const char *name=r23:r22, byte major=r20, byte minor=r18)>
+  1670: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  1674: ee60           r22 := 0xe0
+  1676: ee42 e057      r21:r20 := 0x7e2
+  167a: 940e 0407      call 0x080e <FirmataClass::attach(this=r25:r24, byte command=r22, callbackFunction newFunction=r21:r20)>
+  167e: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  1682: e960           r22 := 0x90
+  1684: e441 e057      r21:r20 := 0x741
+  1688: 940e 0407      call 0x080e <FirmataClass::attach(this=r25:r24, byte command=r22, callbackFunction newFunction=r21:r20)>
+  168c: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  1690: ec60           r22 := 0xc0
+  1692: ea44 e057      r21:r20 := 0x7a4
+  1696: 940e 0407      call 0x080e <FirmataClass::attach(this=r25:r24, byte command=r22, callbackFunction newFunction=r21:r20)>
+  169a: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  169e: ed60           r22 := 0xd0
+  16a0: ec4b e057      r21:r20 := 0x7cb
+  16a4: 940e 0407      call 0x080e <FirmataClass::attach(this=r25:r24, byte command=r22, callbackFunction newFunction=r21:r20)>
+  16a8: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  16ac: ef64           r22 := 0xf4
+  16ae: e446 e058      r21:r20 := 0x846
+  16b2: 940e 0407      call 0x080e <FirmataClass::attach(this=r25:r24, byte command=r22, callbackFunction newFunction=r21:r20)>
+  16b6: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  16ba: ef60           r22 := 0xf0
+  16bc: ea40 e059      r21:r20 := 0x9a0
+  16c0: 940e 0425      call 0x084a <FirmataClass::attach(this=r25:r24, byte command=r22, sysexCallbackFunction fct=r21:r20)>
+  16c4: e010           r17 := 0
+_loc_16c6:
+  16c6: 2f81           r24 := r17
+  16c8: 5180           r24 -= 0x10
+  16ca: 3088 f420      if(r24 >= 8):jmp 0x16d6 <_loc_16d6>
+  16ce: 2f81           r24 := r17
+  16d0: e062 e070      r23:r22 := 2
+  16d4: c003           jmp 0x16dc <_loc_16dc>
+_loc_16d6:
+  16d6: 2f81           r24 := r17
+  16d8: e061 e070      r23:r22 := 1
+_loc_16dc:
+  16dc: 940e 0846      call 0x108c <setPinModeCallback(byte pin=r24, int mode=r23:r22)>
+  16e0: 5f1f           r17 -= -1
+  16e2: 3118 f781      if(r17 != 0x18):jmp 0x16c6 <_loc_16c6>
+  16e6: 9210 0252      SRAM.analogInputsToReport_H := 0
+  16ea: 9210 0251      SRAM.analogInputsToReport_L := 0
+  16ee: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  16f2: e040 ee51 e060 e070 r23:r22:r21:r20 := 0xe100
+  16fa: 940e 0728      call 0x0e50 <FirmataClass::begin(this=r25:r24, long speed=r23:r22:r21:r20)>
+  16fe: e0c0 e0d0      r29:r28 := 0
+_loc_1702:
+  1702: 2f8c           r24 := r28
+  1704: 01fe           r31:r30 := r29:r28
+  1706: 58ef 4ffd      r31:r30 -= -0x271 (=portConfigInputs[0])
+  170a: 81e0           r30 := *(r31:r30)
+  170c: 23cc f421      if(r28):jmp 0x1718 <_loc_1718>
+  1710: b169           r22 := PORT.PIND
+  1712: 236e           r22 &= r30
+  1714: 7f6c           r22 &= 0xfc
+  1716: c008           jmp 0x1728 <_loc_1728>
+_loc_1718:
+  1718: 30c1 f421      if(r28 != 1):jmp 0x1724 <_loc_1724>
+  171c: b163           r22 := PORT.PINB
+  171e: 236e           r22 &= r30
+  1720: 736f           r22 &= 0x3f
+  1722: c002           jmp 0x1728 <_loc_1728>
+_loc_1724:
+  1724: b166           r22 := PORT.PINC
+  1726: 236e           r22 &= r30
+_loc_1728:
+  1728: e041           r20 := 1
+  172a: 940e 0b0b      call 0x1616 <outputPort(byte portNumber=r24, byte portValue=r22, byte forceSend=r20)>
+  172e: 9621           r29:r28 += 1
+  1730: 30c3 05d1 f731 if(r29:r28 != 3):jmp 0x1702 <_loc_1702>
+  1736: 940e 0caf      call 0x195e <millis()->r25:r24:r23:r22>
+  173a: 9360 02ac      SRAM.0x02ac := r22
+  173e: 9370 02ad      SRAM.0x02ad := r23
+  1742: 9380 02ae      SRAM.0x02ae := r24
+  1746: 9390 02af      SRAM.0x02af := r25
+  174a: e08d           r24 := 13
+  174c: e061           r22 := 1
+  174e: 940e 0dd3      call 0x1ba6 <pinMode(??)>
+  1752: 91df           pop r29
+  1754: 91cf           pop r28
+  1756: 911f           pop r17
+  1758: 9508           ret
+
+checkDigitalInputs():
+  175a: 9180 0253      r24 := SRAM.reportPINs[0]
+  175e: 2388 f049      if_not(r24):jmp 0x1774 <_loc_1774>
+  1762: b169           r22 := PORT.PIND
+  1764: 9180 0271      r24 := SRAM.portConfigInputs[0]
+  1768: 2368           r22 &= r24
+  176a: 7f6c           r22 &= 0xfc
+  176c: e080           r24 := 0
+  176e: e040           r20 := 0
+  1770: 940e 0b0b      call 0x1616 <outputPort(byte portNumber=r24, byte portValue=r22, byte forceSend=r20)>
+_loc_1774:
+  1774: 9180 0254      r24 := SRAM.reportPINs[1]
+  1778: 2388 f049      if_not(r24):jmp 0x178e <_loc_178e>
+  177c: b163           r22 := PORT.PINB
+  177e: 9180 0272      r24 := SRAM.portConfigInputs[1]
+  1782: 2368           r22 &= r24
+  1784: 736f           r22 &= 0x3f
+  1786: e081           r24 := 1
+  1788: e040           r20 := 0
+  178a: 940e 0b0b      call 0x1616 <outputPort(byte portNumber=r24, byte portValue=r22, byte forceSend=r20)>
+_loc_178e:
+  178e: 9180 0255      r24 := SRAM.reportPINs[2]
+  1792: 2388 f041      if_not(r24):jmp 0x17a6 <_loc_17a6>
+  1796: b166           r22 := PORT.PINC
+  1798: 9180 0273      r24 := SRAM.portConfigInputs[2]
+  179c: 2368           r22 &= r24
+  179e: e082           r24 := 2
+  17a0: e040           r20 := 0
+  17a2: 940e 0b0b      call 0x1616 <outputPort(byte portNumber=r24, byte portValue=r22, byte forceSend=r20)>
+_loc_17a6:
+  17a6: 9508           ret
+
+loop():
+  17a8: 92af           push r10
+  17aa: 92bf           push r11
+  17ac: 92cf           push r12
+  17ae: 92df           push r13
+  17b0: 92ef           push r14
+  17b2: 92ff           push r15
+  17b4: 930f           push r16
+  17b6: 931f           push r17
+  17b8: 93cf           push r28
+  17ba: 93df           push r29
+  17bc: 940e 0bad      call 0x175a <checkDigitalInputs()>
+  17c0: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  17c4: 940e 06b9      call 0x0d72 <FirmataClass::available(this=r25:r24)->r25:r24>
+  17c8: 9390 024f      SRAM.0x024f := r25
+  17cc: 9380 024e      SRAM.0x024e := r24
+  17d0: 1618 0619 f43c if(0 >=s r25:r24):jmp 0x17e4 <_loc_17e4>
+  17d6: 9180 024d      r24 := SRAM.0x024d
+  17da: 2388 f419      if(r24):jmp 0x17e4 <_loc_17e4>
+  17de: e081           r24 := 1
+  17e0: 9380 024d      SRAM.0x024d := r24
+_loc_17e4:
+  17e4: 9180 024d      r24 := SRAM.0x024d
+  17e8: 2388 f479      if(r24):jmp 0x180a <_loc_180a>
+  17ec: 940e 081d      call 0x103a <sub_103a>
+  17f0: c00c           jmp 0x180a <_loc_180a>
+_loc_17f2:
+  17f2: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  17f6: 940e 0610      call 0x0c20 <FirmataClass::processInput(this=r25:r24)>
+  17fa: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  17fe: 940e 06b9      call 0x0d72 <FirmataClass::available(this=r25:r24)->r25:r24>
+  1802: 9390 024f      SRAM.0x024f := r25
+  1806: 9380 024e      SRAM.0x024e := r24
+_loc_180a:
+  180a: 9180 024e      r24 := SRAM.0x024e
+  180e: 9190 024f      r25 := SRAM.0x024f
+  1812: 2b89           r24 |= r25
+  1814: f771           brne 0x17f2 <_loc_17f2>
+  1816: 940e 0caf      call 0x195e <millis()->r25:r24:r23:r22>
+  181a: 9360 02a4      SRAM.0x02a4 := r22
+  181e: 9370 02a5      SRAM.0x02a5 := r23
+  1822: 9380 02a6      SRAM.0x02a6 := r24
+  1826: 9390 02a7      SRAM.0x02a7 := r25
+  182a: 90a0 02a8      r10 := SRAM.0x02a8
+  182e: 90b0 02a9      r11 := SRAM.0x02a9
+  1832: 90c0 02aa      r12 := SRAM.0x02aa
+  1836: 90d0 02ab      r13 := SRAM.0x02ab
+  183a: 9120 01d9      r18 := SRAM.0x01d9
+  183e: 9130 01da      r19 := SRAM.0x01da
+  1842: 0179 2700      r16:r15:r14 := 0:r19:r18
+  1846: fcf7           skip_if_not(bit(r15, 7))
+  1848: 9500           r16 := 0xff - r16
+  184a: 2f10           r17 := r16
+  184c: 196a 097b 098c 099d r25:r24:r23:r22 -= r13:r12:r11:r10
+  1854: 16e6 06f7 0708 0719 f568 if(r17:r16:r15:r14 >= r25:r24:r23:r22):jmp 0x18b8 <_loc_18b8>
+  185e: 0cea 1cfb 1d0c 1d1d r17:r16:r15:r14 += r13:r12:r11:r10
+  1866: 92e0 02a8      SRAM.0x02a8 := r14
+  186a: 92f0 02a9      SRAM.0x02a9 := r15
+  186e: 9300 02aa      SRAM.0x02aa := r16
+  1872: 9310 02ab      SRAM.0x02ab := r17
+  1876: e5c9 e0d2      r29:r28 := 0x259 (=pinConfig[0])
+  187a: ef10           r17 := 0xf0
+_loc_187c:
+  187c: 3018 f4c0      if(r17 >= 8):jmp 0x18b0 <_loc_18b0>
+  1880: 8188           r24 := *(r29:r28)
+  1882: 3082 f4a9      if(r24 != 2):jmp 0x18b0 <_loc_18b0>
+  1886: 9180 0251      r24 := SRAM.analogInputsToReport_L
+  188a: 9190 0252      r25 := SRAM.analogInputsToReport_H
+  188e: 2e01           r0 := r17
+  1890: c002           jmp 0x1896 <_loc_1896>
+_loc_1892:
+  1892: 9595           asr r25
+  1894: 9587           r24:C := C:r24 ; >> 1
+_loc_1896:
+  1896: 940a           r0 --
+  1898: f7e2           brpl 0x1892 <_loc_1892>
+  189a: ff80 c009      if_not(bit(r24, 0)):jmp 0x18b0 <_loc_18b0>
+  189e: 2f81           r24 := r17
+  18a0: 940e 0d51      call 0x1aa2 <analogRead(pin=r24)->r25:r24>
+  18a4: 01ac           r21:r20 := r25:r24
+  18a6: e184 e092      r25:r24 := 0x214 (=*Firmata)
+  18aa: 2f61           r22 := r17
+  18ac: 940e 057f      call 0x0afe <FirmataClass::sendAnalog(this=r25:r24, byte pin=r22, int value=r21:r20)>
+_loc_18b0:
+  18b0: 5f1f           r17 -= -1
+  18b2: 9621           r29:r28 += 1
+  18b4: 3018 f711      if(r17 != 8):jmp 0x187c <_loc_187c>
+_loc_18b8:
+  18b8: 91df           pop r29
+  18ba: 91cf           pop r28
+  18bc: 911f           pop r17
+  18be: 910f           pop r16
+  18c0: 90ff           pop r15
+  18c2: 90ef           pop r14
+  18c4: 90df           pop r13
+  18c6: 90cf           pop r12
+  18c8: 90bf           pop r11
+  18ca: 90af           pop r10
+  18cc: 9508           ret
+
+TIMER0_OVF_vect:
+  18ce: 921f           push r1
+  18d0: 920f           push r0
+  18d2: b60f           r0 := PORT.SREG
+  18d4: 920f           push r0
+  18d6: 2411           r1 := 0
+  18d8: 932f           push r18
+  18da: 933f           push r19
+  18dc: 938f           push r24
+  18de: 939f           push r25
+  18e0: 93af           push r26
+  18e2: 93bf           push r27
+  18e4: 9180 02d8      r24 := SRAM.timer0_millis_LL
+  18e8: 9190 02d9      r25 := SRAM.timer0_millis_LH
+  18ec: 91a0 02da      r26 := SRAM.timer0_millis_HL
+  18f0: 91b0 02db      r27 := SRAM.timer0_millis_HH
+  18f4: 9130 02dc      r19 := SRAM.timer0_fract
+  18f8: 9601 1da1 1db1 r27:r26:r25:r24 += 1
+  18fe: 2f23           r18 := r19
+  1900: 5f2d           r18 -= -3
+  1902: 372d f020      if(r18 < 0x7d):jmp 0x190e <_loc_190e>
+  1906: 572d           r18 -= 0x7d
+  1908: 9601 1da1 1db1 r27:r26:r25:r24 += 1
+_loc_190e:
+  190e: 9320 02dc      SRAM.timer0_fract := r18
+  1912: 9380 02d8      SRAM.timer0_millis_LL := r24
+  1916: 9390 02d9      SRAM.timer0_millis_LH := r25
+  191a: 93a0 02da      SRAM.timer0_millis_HL := r26
+  191e: 93b0 02db      SRAM.timer0_millis_HH := r27
+  1922: 9180 02d4      r24 := SRAM.timer0_overflow_count_LL
+  1926: 9190 02d5      r25 := SRAM.timer0_overflow_count_LH
+  192a: 91a0 02d6      r26 := SRAM.timer0_overflow_count_HL
+  192e: 91b0 02d7      r27 := SRAM.timer0_overflow_count_HH
+  1932: 9601 1da1 1db1 r27:r26:r25:r24 += 1
+  1938: 9380 02d4      SRAM.timer0_overflow_count_LL := r24
+  193c: 9390 02d5      SRAM.timer0_overflow_count_LH := r25
+  1940: 93a0 02d6      SRAM.timer0_overflow_count_HL := r26
+  1944: 93b0 02d7      SRAM.timer0_overflow_count_HH := r27
+  1948: 91bf           pop r27
+  194a: 91af           pop r26
+  194c: 919f           pop r25
+  194e: 918f           pop r24
+  1950: 913f           pop r19
+  1952: 912f           pop r18
+  1954: 900f           pop r0
+  1956: be0f           PORT.SREG := r0
+  1958: 900f           pop r0
+  195a: 901f           pop r1
+  195c: 9518           ret_int
+
+millis()->r25:r24:r23:r22:
+  195e: b78f           r24 := PORT.SREG
+  1960: 94f8           Clear(I flag)
+  1962: 9120 02d8      r18 := SRAM.timer0_millis_LL
+  1966: 9130 02d9      r19 := SRAM.timer0_millis_LH
+  196a: 9140 02da      r20 := SRAM.timer0_millis_HL
+  196e: 9150 02db      r21 := SRAM.timer0_millis_HH
+  1972: bf8f           PORT.SREG := r24
+  1974: 01b9 01ca      r25:r24:r23:r22 := r21:r20:r19:r18
+  1978: 9508           ret
+
+delay(duration=r25:r24:r23:r22):
+  197a: 019b 01ac      r21:r20:r19:r18 := r25:r24:r23:r22
+  197e: b77f           r23 := PORT.SREG
+  1980: 94f8           Clear(I flag)
+  1982: 9180 02d4      r24 := SRAM.timer0_overflow_count_LL
+  1986: 9190 02d5      r25 := SRAM.timer0_overflow_count_LH
+  198a: 91a0 02d6      r26 := SRAM.timer0_overflow_count_HL
+  198e: 91b0 02d7      r27 := SRAM.timer0_overflow_count_HH
+  1992: b566           r22 := PORT.TCNT0
+  1994: 9ba8 c005      if_not(bit(PORT.TIFR0, 0)):jmp 0x19a2 <_loc_19a2>
+  1998: 3f6f f019      if(r22 == 0xff):jmp 0x19a2 <_loc_19a2>
+  199c: 9601 1da1 1db1 r27:r26:r25:r24 += 1
+_loc_19a2:
+  19a2: bf7f           PORT.SREG := r23
+  19a4: 2fba           r27 := r26
+  19a6: 2fa9           r26 := r25
+  19a8: 2f98           r25 := r24
+  19aa: 2788           r24 := 0
+  19ac: 0f86 1d91 1da1 1db1 r27:r26:r25:r24 += 0:0:0:r22
+  19b4: e062           r22 := 2
+_loc_19b6:
+  19b6: 0f88 1f99 1faa 1fbb r27:r26:r25:r24 *= 2
+  19be: 956a           r22 --
+  19c0: f7d1           brne 0x19b6 <_loc_19b6>
+  19c2: 01bc           r23:r22 := r25:r24
+  19c4: c02d           jmp 0x1a20 <_loc_1a20>
+_loc_19c6:
+  19c6: b7ff           r31 := PORT.SREG
+  19c8: 94f8           Clear(I flag)
+  19ca: 9180 02d4      r24 := SRAM.timer0_overflow_count_LL
+  19ce: 9190 02d5      r25 := SRAM.timer0_overflow_count_LH
+  19d2: 91a0 02d6      r26 := SRAM.timer0_overflow_count_HL
+  19d6: 91b0 02d7      r27 := SRAM.timer0_overflow_count_HH
+  19da: b5e6           r30 := PORT.TCNT0
+  19dc: 9ba8 c005      if_not(bit(PORT.TIFR0, 0)):jmp 0x19ea <_loc_19ea>
+  19e0: 3fef f019      if(r30 == 0xff):jmp 0x19ea <_loc_19ea>
+  19e4: 9601 1da1 1db1 r27:r26:r25:r24 += 1
+_loc_19ea:
+  19ea: bfff           PORT.SREG := r31
+  19ec: 2fba           r27 := r26
+  19ee: 2fa9           r26 := r25
+  19f0: 2f98           r25 := r24
+  19f2: 2788           r24 := 0
+  19f4: 0f8e 1d91 1da1 1db1 r27:r26:r25:r24 += 0:0:0:r30
+  19fc: e0e2           r30 := 2
+_loc_19fe:
+  19fe: 0f88 1f99 1faa 1fbb r27:r26:r25:r24 *= 2
+  1a06: 95ea           r30 --
+  1a08: f7d1           brne 0x19fe <_loc_19fe>
+  1a0a: 1b86 0b97      r25:r24 -= r23:r22
+  1a0e: 5e88 4093      r25:r24 -= 0x3e8
+  1a12: f2c8           if(r25:r24 < 0):jmp 0x19c6 <_loc_19c6>
+  1a14: 5021 4030 4040 4050 r21:r20:r19:r18 -= 1
+  1a1c: 5168 4f7c      r23:r22 -= -0x3e8
+_loc_1a20:
+  1a20: 1521 0531 0541 0551 f671 if(r21:r20:r19:r18 != 0):jmp 0x19c6 <_loc_19c6>
+  1a2a: 9508           ret
+
+initialize_ports():
+  1a2c: 9478           Set(I flag)
+  1a2e: b584           r24 := PORT.TCCR0A
+  1a30: 6082           r24 |= 2
+  1a32: bd84           PORT.TCCR0A := r24
+  1a34: b584           r24 := PORT.TCCR0A
+  1a36: 6081           r24 |= 1
+  1a38: bd84           PORT.TCCR0A := r24
+  1a3a: b585           r24 := PORT.TCCR0B
+  1a3c: 6082           r24 |= 2
+  1a3e: bd85           PORT.TCCR0B := r24
+  1a40: b585           r24 := PORT.TCCR0B
+  1a42: 6081           r24 |= 1
+  1a44: bd85           PORT.TCCR0B := r24
+  1a46: e6ee e0f0      r31:r30 := 0x6e (=TIMSK0) # Initialize timer
+  1a4a: 8180           r24 := *(r31:r30)
+  1a4c: 6081           r24 |= 1
+  1a4e: 8380           *(r31:r30) := r24
+  1a50: e8e1 e0f0      r31:r30 := 0x81 (=TCCR1B)
+  1a54: 8210           *(r31:r30) := 0
+  1a56: 8180           r24 := *(r31:r30)
+  1a58: 6082           r24 |= 2
+  1a5a: 8380           *(r31:r30) := r24
+  1a5c: 8180           r24 := *(r31:r30)
+  1a5e: 6081           r24 |= 1
+  1a60: 8380           *(r31:r30) := r24
+  1a62: e8e0 e0f0      r31:r30 := 0x80 (=TCCR1A)
+  1a66: 8180           r24 := *(r31:r30)
+  1a68: 6081           r24 |= 1
+  1a6a: 8380           *(r31:r30) := r24
+  1a6c: ebe1 e0f0      r31:r30 := 0xb1 (=TCCR2B)
+  1a70: 8180           r24 := *(r31:r30)
+  1a72: 6084           r24 |= 4
+  1a74: 8380           *(r31:r30) := r24
+  1a76: ebe0 e0f0      r31:r30 := 0xb0 (=TCCR2A)
+  1a7a: 8180           r24 := *(r31:r30)
+  1a7c: 6081           r24 |= 1
+  1a7e: 8380           *(r31:r30) := r24
+  1a80: e7ea e0f0      r31:r30 := 0x7a (=ADCSRA)
+  1a84: 8180           r24 := *(r31:r30)
+  1a86: 6084           r24 |= 4
+  1a88: 8380           *(r31:r30) := r24
+  1a8a: 8180           r24 := *(r31:r30)
+  1a8c: 6082           r24 |= 2
+  1a8e: 8380           *(r31:r30) := r24
+  1a90: 8180           r24 := *(r31:r30)
+  1a92: 6081           r24 |= 1
+  1a94: 8380           *(r31:r30) := r24
+  1a96: 8180           r24 := *(r31:r30)
+  1a98: 6880           r24 |= 0x80
+  1a9a: 8380           *(r31:r30) := r24
+  1a9c: 9210 00c1      SRAM.UCSR0B := 0
+  1aa0: 9508           ret
+
+analogRead(pin=r24)->r25:r24:
+  1aa2: 2f98           r25 := r24
+  1aa4: 308e f008      if(r24 < 14):jmp 0x1aaa <_loc_1aaa>
+  1aa8: 509e           r25 -= 14
+_loc_1aaa:
+  1aaa: 7097           r25 &= 7
+  1aac: 9180 01db      r24 := SRAM.0x01db
+  1ab0: 9582           swap_nibbles r24
+  1ab2: 0f88 0f88      r24 *= 4
+  1ab6: 7c80           r24 &= 0xc0
+  1ab8: 2b89           r24 |= r25
+  1aba: 9380 007c      SRAM.ADMUX := r24
+  1abe: 9180 007a      r24 := SRAM.ADCSRA
+  1ac2: 6480           r24 |= 0x40
+  1ac4: 9380 007a      SRAM.ADCSRA := r24
+_loc_1ac8:
+  1ac8: 9180 007a      r24 := SRAM.ADCSRA
+  1acc: fd86 cffc      if(bit(r24, 6)):jmp 0x1ac8 <_loc_1ac8>
+  1ad0: 9120 0078      r18 := SRAM.ADCL
+  1ad4: 9140 0079      r20 := SRAM.ADCH
+  1ad8: 2f94           r25 := r20
+  1ada: e080           r24 := 0
+  1adc: e030           r19 := 0
+  1ade: 2b28 2b39      r19:r18 |= r25:r24
+  1ae2: 01c9           r25:r24 := r19:r18
+  1ae4: 9508           ret
+
+analogWrite(pwm=r24, value=r23:r22):
+  1ae6: 931f           push r17
+  1ae8: 93cf           push r28
+  1aea: 93df           push r29
+  1aec: 2f18           r17 := r24
+  1aee: 01eb           r29:r28 := r23:r22
+  1af0: e061           r22 := 1
+  1af2: 940e 0dd3      call 0x1ba6 <pinMode(??)>
+  1af6: 9720 f409      if(r29:r28 != 0):jmp 0x1afc <_loc_1afc>
+  1afa: c04a           jmp 0x1b90 <_loc_1b90>
+_loc_1afc:
+  1afc: 3fcf 05d1 f409 if(r29:r28 != 0xff):jmp 0x1b04 <_loc_1b04>
+  1b02: c049           jmp 0x1b96 <_loc_1b96>
+_loc_1b04:
+  1b04: 2fe1 e0f0      r31:r30 := 0:r17
+  1b08: 55e2 4fff      r31:r30 -= -0xae
+  1b0c: 9184           r24 := PROG[r31:r30]
+  1b0e: 3083 f0c1      if(r24 == 3):jmp 0x1b42 <_loc_1b42>
+  1b12: 3084 f428      if(r24 >= 4):jmp 0x1b20 <_loc_1b20>
+  1b16: 3081 f051      if(r24 == 1):jmp 0x1b2e <_loc_1b2e>
+  1b1a: 3082 f5b1      if(r24 != 2):jmp 0x1b8a <_loc_1b8a>
+  1b1e: c00c           jmp 0x1b38 <_loc_1b38>
+_loc_1b20:
+  1b20: 3086 f119      if(r24 == 6):jmp 0x1b6a <_loc_1b6a>
+  1b24: 3087 f149      if(r24 == 7):jmp 0x1b7a <_loc_1b7a>
+  1b28: 3084 f579      if(r24 != 4):jmp 0x1b8a <_loc_1b8a>
+  1b2c: c014           jmp 0x1b56 <_loc_1b56>
+_loc_1b2e:
+  1b2e: b584           r24 := PORT.TCCR0A
+  1b30: 6880           r24 |= 0x80
+  1b32: bd84           PORT.TCCR0A := r24
+  1b34: bdc7           PORT.OCR0A := r28
+  1b36: c033           jmp 0x1b9e <_loc_1b9e>
+_loc_1b38:
+  1b38: b584           r24 := PORT.TCCR0A
+  1b3a: 6280           r24 |= 0x20
+  1b3c: bd84           PORT.TCCR0A := r24
+  1b3e: bdc8           PORT.OCR0B := r28
+  1b40: c02e           jmp 0x1b9e <_loc_1b9e>
+_loc_1b42:
+  1b42: 9180 0080      r24 := SRAM.TCCR1A
+  1b46: 6880           r24 |= 0x80
+  1b48: 9380 0080      SRAM.TCCR1A := r24
+  1b4c: 93d0 0089      SRAM.OCR1AH := r29
+  1b50: 93c0 0088      SRAM.OCR1AL := r28
+  1b54: c024           jmp 0x1b9e <_loc_1b9e>
+_loc_1b56:
+  1b56: 9180 0080      r24 := SRAM.TCCR1A
+  1b5a: 6280           r24 |= 0x20
+  1b5c: 9380 0080      SRAM.TCCR1A := r24
+  1b60: 93d0 008b      SRAM.OCR1BH := r29
+  1b64: 93c0 008a      SRAM.OCR1BL := r28
+  1b68: c01a           jmp 0x1b9e <_loc_1b9e>
+_loc_1b6a:
+  1b6a: 9180 00b0      r24 := SRAM.TCCR2A
+  1b6e: 6880           r24 |= 0x80
+  1b70: 9380 00b0      SRAM.TCCR2A := r24
+  1b74: 93c0 00b3      SRAM.OCR2A := r28
+  1b78: c012           jmp 0x1b9e <_loc_1b9e>
+_loc_1b7a:
+  1b7a: 9180 00b0      r24 := SRAM.TCCR2A
+  1b7e: 6280           r24 |= 0x20
+  1b80: 9380 00b0      SRAM.TCCR2A := r24
+  1b84: 93c0 00b4      SRAM.OCR2B := r28
+  1b88: c00a           jmp 0x1b9e <_loc_1b9e>
+_loc_1b8a:
+  1b8a: 38c0 05d1 f41c if(r29:r28 >=s 0x80):jmp 0x1b96 <_loc_1b96>
+_loc_1b90:
+  1b90: 2f81           r24 := r17
+  1b92: e060           r22 := 0
+  1b94: c002           jmp 0x1b9a <_loc_1b9a>
+_loc_1b96:
+  1b96: 2f81           r24 := r17
+  1b98: e061           r22 := 1
+_loc_1b9a:
+  1b9a: 940e 0df9      call 0x1bf2 <sub_1bf2>
+_loc_1b9e:
+  1b9e: 91df           pop r29
+  1ba0: 91cf           pop r28
+  1ba2: 911f           pop r17
+  1ba4: 9508           ret
+
+pinMode(??):
+  1ba6: 2f48 e050      r21:r20 := 0:r24
+  1baa: 01ca           r25:r24 := r21:r20
+  1bac: 5686 4f9f      r25:r24 -= -0x9a
+  1bb0: 01fc           r31:r30 := r25:r24
+  1bb2: 9124           r18 := PROG[r31:r30]
+  1bb4: 574a 4f5f      r21:r20 -= -0x86 (=ICR1L)
+  1bb8: 01fa           r31:r30 := r21:r20
+  1bba: 9184           r24 := PROG[r31:r30]
+  1bbc: 2388 f0c1      if_not(r24):jmp 0x1bf0 <_loc_1bf0>
+  1bc0: 2fe8 e0f0      r31:r30 := 0:r24
+  1bc4: 0fee 1fff      r31:r30 *= 2
+  1bc8: 59e8 4fff      r31:r30 -= -0x68 (=PCICR)
+  1bcc: 91a5           r26 := PROG[r31:r30 ++]
+  1bce: 91b4           r27 := PROG[r31:r30]
+  1bd0: 2366 f441      if(r22):jmp 0x1be4 <_loc_1be4>
+  1bd4: b79f           r25 := PORT.SREG
+  1bd6: 94f8           Clear(I flag)
+  1bd8: 918c           r24 := *(r27:r26)
+  1bda: 9520           r18 := 0xff - r18
+  1bdc: 2382           r24 &= r18
+  1bde: 938c           *(r27:r26) := r24
+  1be0: bf9f           PORT.SREG := r25
+  1be2: 9508           ret
+_loc_1be4:
+  1be4: b79f           r25 := PORT.SREG
+  1be6: 94f8           Clear(I flag)
+  1be8: 918c           r24 := *(r27:r26)
+  1bea: 2b82           r24 |= r18
+  1bec: 938c           *(r27:r26) := r24
+  1bee: bf9f           PORT.SREG := r25
+_loc_1bf0:
+  1bf0: 9508           ret
+
+sub_1bf2:
+  1bf2: 2f48 e050      r21:r20 := 0:r24
+  1bf6: 01ca           r25:r24 := r21:r20
+  1bf8: 5582 4f9f      r25:r24 -= -0xae
+  1bfc: 01fc           r31:r30 := r25:r24
+  1bfe: 9124           r18 := PROG[r31:r30]
+  1c00: 01ca           r25:r24 := r21:r20
+  1c02: 5686 4f9f      r25:r24 -= -0x9a
+  1c06: 01fc           r31:r30 := r25:r24
+  1c08: 9134           r19 := PROG[r31:r30]
+  1c0a: 574a 4f5f      r21:r20 -= -0x86 (=ICR1L)
+  1c0e: 01fa           r31:r30 := r21:r20
+  1c10: 9194           r25 := PROG[r31:r30]
+  1c12: 2399 f409      if(r25):jmp 0x1c18 <_loc_1c18>
+  1c16: c044           jmp 0x1ca0 <_loc_1ca0>
+_loc_1c18:
+  1c18: 2322 f151      if_not(r18):jmp 0x1c70 <_loc_1c70>
+  1c1c: 3023 f071      if(r18 == 3):jmp 0x1c3c <_loc_1c3c>
+  1c20: 3024 f428      if(r18 >= 4):jmp 0x1c2e <_loc_1c2e>
+  1c24: 3021 f0a1      if(r18 == 1):jmp 0x1c50 <_loc_1c50>
+  1c28: 3022 f511      if(r18 != 2):jmp 0x1c70 <_loc_1c70>
+  1c2c: c014           jmp 0x1c56 <_loc_1c56>
+_loc_1c2e:
+  1c2e: 3026 f0b1      if(r18 == 6):jmp 0x1c5e <_loc_1c5e>
+  1c32: 3027 f0c1      if(r18 == 7):jmp 0x1c66 <_loc_1c66>
+  1c36: 3024 f4d9      if(r18 != 4):jmp 0x1c70 <_loc_1c70>
+  1c3a: c004           jmp 0x1c44 <_loc_1c44>
+_loc_1c3c:
+  1c3c: 9180 0080      r24 := SRAM.TCCR1A
+  1c40: 778f           r24 &= 0x7f
+  1c42: c003           jmp 0x1c4a <_loc_1c4a>
+_loc_1c44:
+  1c44: 9180 0080      r24 := SRAM.TCCR1A
+  1c48: 7d8f           r24 &= 0xdf
+_loc_1c4a:
+  1c4a: 9380 0080      SRAM.TCCR1A := r24
+  1c4e: c010           jmp 0x1c70 <_loc_1c70>
+_loc_1c50:
+  1c50: b584           r24 := PORT.TCCR0A
+  1c52: 778f           r24 &= 0x7f
+  1c54: c002           jmp 0x1c5a <_loc_1c5a>
+_loc_1c56:
+  1c56: b584           r24 := PORT.TCCR0A
+  1c58: 7d8f           r24 &= 0xdf
+_loc_1c5a:
+  1c5a: bd84           PORT.TCCR0A := r24
+  1c5c: c009           jmp 0x1c70 <_loc_1c70>
+_loc_1c5e:
+  1c5e: 9180 00b0      r24 := SRAM.TCCR2A
+  1c62: 778f           r24 &= 0x7f
+  1c64: c003           jmp 0x1c6c <_loc_1c6c>
+_loc_1c66:
+  1c66: 9180 00b0      r24 := SRAM.TCCR2A
+  1c6a: 7d8f           r24 &= 0xdf
+_loc_1c6c:
+  1c6c: 9380 00b0      SRAM.TCCR2A := r24
+_loc_1c70:
+  1c70: 2fe9 e0f0      r31:r30 := 0:r25
+  1c74: 0fee 1fff      r31:r30 *= 2
+  1c78: 58ee 4fff      r31:r30 -= -0x72
+  1c7c: 91a5           r26 := PROG[r31:r30 ++]
+  1c7e: 91b4           r27 := PROG[r31:r30]
+  1c80: 2366 f441      if(r22):jmp 0x1c94 <_loc_1c94>
+  1c84: b79f           r25 := PORT.SREG
+  1c86: 94f8           Clear(I flag)
+  1c88: 918c           r24 := *(r27:r26)
+  1c8a: 9530           r19 := 0xff - r19
+  1c8c: 2383           r24 &= r19
+  1c8e: 938c           *(r27:r26) := r24
+  1c90: bf9f           PORT.SREG := r25
+  1c92: 9508           ret
+_loc_1c94:
+  1c94: b79f           r25 := PORT.SREG
+  1c96: 94f8           Clear(I flag)
+  1c98: 918c           r24 := *(r27:r26)
+  1c9a: 2b83           r24 |= r19
+  1c9c: 938c           *(r27:r26) := r24
+  1c9e: bf9f           PORT.SREG := r25
+_loc_1ca0:
+  1ca0: 9508           ret
+
+USART_RX_vect:
+  1ca2: 921f           push r1
+  1ca4: 920f           push r0
+  1ca6: b60f           r0 := PORT.SREG
+  1ca8: 920f           push r0
+  1caa: 2411           r1 := 0
+  1cac: 932f           push r18
+  1cae: 933f           push r19
+  1cb0: 934f           push r20
+  1cb2: 938f           push r24
+  1cb4: 939f           push r25
+  1cb6: 93ef           push r30
+  1cb8: 93ff           push r31
+  1cba: 9140 00c6      r20 := SRAM.UDR0  # Read one byte from the serial to r20
+  1cbe: 91e0 035d      r30 := SRAM.HardwareSerial._rx_buffer_head_L
+  1cc2: 91f0 035e      r31 := SRAM.HardwareSerial._rx_buffer_head_H
+  1cc6: 9631           r31:r30 += 1
+  1cc8: 019f           r19:r18 := r31:r30
+  1cca: 772f 7030      r19:r18 &= 0x7f
+  1cce: 9731           r31:r30 -= 1
+  1cd0: 9180 035f      r24 := SRAM.HardwareSerial._rx_buffer_tail_L
+  1cd4: 9190 0360      r25 := SRAM.HardwareSerial._rx_buffer_tail_H
+  1cd8: 1728 0739 f039 if(r19:r18 == r25:r24):jmp 0x1cec <_loc_1cec>
+  1cde: 52e3 4ffd      r31:r30 -= -0x2dd (=HardwareSerial._rx_buffer)
+  1ce2: 8340           *(r31:r30) := r20
+  1ce4: 9330 035e      SRAM.HardwareSerial._rx_buffer_head_H := r19
+  1ce8: 9320 035d      SRAM.HardwareSerial._rx_buffer_head_L := r18
+_loc_1cec:
+  1cec: 91ff           pop r31
+  1cee: 91ef           pop r30
+  1cf0: 919f           pop r25
+  1cf2: 918f           pop r24
+  1cf4: 914f           pop r20
+  1cf6: 913f           pop r19
+  1cf8: 912f           pop r18
+  1cfa: 900f           pop r0
+  1cfc: be0f           PORT.SREG := r0
+  1cfe: 900f           pop r0
+  1d00: 901f           pop r1
+  1d02: 9518           ret_int
+
+Serial::begin(this=r25:r24, speed=r23:r22:r21:r20):
+  1d04: 93cf           push r28
+  1d06: 93df           push r29
+  1d08: 01ec           r29:r28 := r25:r24
+  1d0a: 019a 01ab      r21:r20:r19:r18 := r23:r22:r21:r20
+  1d0e: 85e8           r30 := *(r29:r28 + 0x08)
+  1d10: 85f9           r31 := *(r29:r28 + 0x09)
+  1d12: 3020           cmp r18, 0
+  1d14: ee81           r24 := 0xe1
+  1d16: 0738           cmp_carry r19, r24
+  1d18: e080           r24 := 0
+  1d1a: 0748           cmp_carry r20, r24
+  1d1c: e080           r24 := 0
+  1d1e: 0758           cmp_carry r21, r24
+  1d20: f409           brne 0x1d24 <_loc_1d24>
+  1d22: c049           jmp 0x1db6 <_loc_1db6>
+_loc_1d24:
+  1d24: e081 e090      r25:r24 := 1
+  1d28: 880a           r0 := *(r29:r28 + 0x12)
+  1d2a: c002           jmp 0x1d30 <_loc_1d30>
+_loc_1d2c:
+  1d2c: 0f88 1f99      r25:r24 *= 2
+_loc_1d30:
+  1d30: 940a           r0 --
+  1d32: f7e2           brpl 0x1d2c <_loc_1d2c>
+  1d34: 8380           *(r31:r30) := r24
+  1d36: e060 e079 e38d e090 r25:r24:r23:r22 := 0x3d0900
+  1d3e: 940e 1172      call 0x22e4 <libgcc.divmodsi4(dividend=r25:r24:r23:r22, divisor=r21:r20:r19:r18)->r25:r24:r23:r22=r,r21:r20:r19:r18=q>
+  1d42: 5021 4030 4040 4050 r21:r20:r19:r18 -= 1
+  1d4a: 01ca           r25:r24 := r21:r20
+  1d4c: 01b9           r23:r22 := r19:r18
+  1d4e: e022 e030 e040 e050 r21:r20:r19:r18 := 2
+  1d56: 940e 1172      call 0x22e4 <libgcc.divmodsi4(dividend=r25:r24:r23:r22, divisor=r21:r20:r19:r18)->r25:r24:r23:r22=r,r21:r20:r19:r18=q>
+_loc_1d5a:
+  1d5a: 81ec           r30 := *(r29:r28 + 0x04)
+  1d5c: 81fd           r31 := *(r29:r28 + 0x05)
+  1d5e: 8330           *(r31:r30) := r19
+  1d60: 81ee           r30 := *(r29:r28 + 0x06)
+  1d62: 81ff           r31 := *(r29:r28 + 0x07)
+  1d64: 8320           *(r31:r30) := r18
+  1d66: 85ea           r30 := *(r29:r28 + 0x0a)
+  1d68: 85fb           r31 := *(r29:r28 + 0x0b)
+  1d6a: 8120           r18 := *(r31:r30)
+  1d6c: e041 e050      r21:r20 := 1
+  1d70: 01ca           r25:r24 := r21:r20
+  1d72: 840e           r0 := *(r29:r28 + 0x0e) # sbi(*_ucsrb, RXEN0)
+  1d74: c002           jmp 0x1d7a <_loc_1d7a>
+_loc_1d76:
+  1d76: 0f88 1f99      r25:r24 *= 2
+_loc_1d7a:
+  1d7a: 940a           r0 --
+  1d7c: f7e2           brpl 0x1d76 <_loc_1d76>
+  1d7e: 2b28           r18 |= r24
+  1d80: 8320           *(r31:r30) := r18
+  1d82: 85ea           r30 := *(r29:r28 + 0x0a)
+  1d84: 85fb           r31 := *(r29:r28 + 0x0b)
+  1d86: 8120           r18 := *(r31:r30)
+  1d88: 01ca           r25:r24 := r21:r20
+  1d8a: 840f           r0 := *(r29:r28 + 0x0f) # sbi(*_ucsrb, TXEN0)
+  1d8c: c002           jmp 0x1d92 <_loc_1d92>
+_loc_1d8e:
+  1d8e: 0f88 1f99      r25:r24 *= 2
+_loc_1d92:
+  1d92: 940a           r0 --
+  1d94: f7e2           brpl 0x1d8e <_loc_1d8e>
+  1d96: 2b28           r18 |= r24
+  1d98: 8320           *(r31:r30) := r18
+  1d9a: 85ea           r30 := *(r29:r28 + 0x0a)
+  1d9c: 85fb           r31 := *(r29:r28 + 0x0b)
+  1d9e: 8180           r24 := *(r31:r30)
+  1da0: 8808           r0 := *(r29:r28 + 0x10) # sbi(*_ucsrb, RXCIE0)
+  1da2: c002           jmp 0x1da8 <_loc_1da8>
+_loc_1da4:
+  1da4: 0f44 1f55      r21:r20 *= 2
+_loc_1da8:
+  1da8: 940a           r0 --
+  1daa: f7e2           brpl 0x1da4 <_loc_1da4>
+  1dac: 2b84           r24 |= r20
+  1dae: 8380           *(r31:r30) := r24
+  1db0: 91df           pop r29
+  1db2: 91cf           pop r28
+  1db4: 9508           ret
+_loc_1db6:
+  1db6: 8210           *(r31:r30) := 0
+  1db8: e120 e030      r19:r18 := 0x10
+  1dbc: cfce           jmp 0x1d5a <_loc_1d5a>
+
+Serial::available(this=r25:r24)->r25:r24:
+  1dbe: 01dc           r27:r26 := r25:r24
+  1dc0: 9612           r27:r26 += 2
+  1dc2: 91ed           r30 := *(r27:r26 ++)
+  1dc4: 91fc           r31 := *(r27:r26)
+  1dc6: 9713           r27:r26 -= 3
+  1dc8: 58e0 4fff      r31:r30 -= -0x80 (=TCCR1A)
+  1dcc: 9121           r18 := *(r31:r30 ++)
+  1dce: 9131           r19 := *(r31:r30 ++)
+  1dd0: 8180           r24 := *(r31:r30)
+  1dd2: 8191           r25 := *(r31:r30 + 0x01)
+  1dd4: 1b28 0b39      r19:r18 -= r25:r24
+  1dd8: 772f 7030      r19:r18 &= 0x7f
+  1ddc: 01c9           r25:r24 := r19:r18
+  1dde: 9508           ret
+
+Serial::peek(this=r25:r24)->r24:
+  1de0: 01dc           r27:r26 := r25:r24
+  1de2: 9612           r27:r26 += 2
+  1de4: 91ed           r30 := *(r27:r26 ++)
+  1de6: 91fc           r31 := *(r27:r26)
+  1de8: 9713           r27:r26 -= 3
+  1dea: 57ee 4fff      r31:r30 -= -0x82 (=TCCR1C)
+  1dee: 8120           r18 := *(r31:r30)
+  1df0: 8131           r19 := *(r31:r30 + 0x01)
+  1df2: 9192           r25 := *(-- r31:r30)
+  1df4: 9182           r24 := *(-- r31:r30)
+  1df6: 58e0 40f0      r31:r30 -= 0x80
+  1dfa: 1782 0793 f419 if(r25:r24 != r19:r18):jmp 0x1e06 <_loc_1e06>
+  1e00: ef2f ef3f      r19:r18 := 0xffff
+  1e04: c005           jmp 0x1e10 <_loc_1e10>
+_loc_1e06:
+  1e06: 0fe2 1ff3      r31:r30 += r19:r18
+  1e0a: 8180           r24 := *(r31:r30)
+  1e0c: 2f28 e030      r19:r18 := 0:r24
+_loc_1e10:
+  1e10: 01c9           r25:r24 := r19:r18
+  1e12: 9508           ret
+
+Serial::read(this=r25:r24):
+  1e14: 01dc           r27:r26 := r25:r24
+  1e16: 9612           r27:r26 += 2
+  1e18: 91ed           r30 := *(r27:r26 ++)
+  1e1a: 91fc           r31 := *(r27:r26)
+  1e1c: 9713           r27:r26 -= 3
+  1e1e: 01df           r27:r26 := r31:r30
+  1e20: 57ae 4fbf      r27:r26 -= -0x82 (=TCCR1C)
+  1e24: 912d           r18 := *(r27:r26 ++)
+  1e26: 913c           r19 := *(r27:r26)
+  1e28: 9711           r27:r26 -= 1
+  1e2a: 58e0 4fff      r31:r30 -= -0x80 (=TCCR1A)
+  1e2e: 8180           r24 := *(r31:r30)
+  1e30: 8191           r25 := *(r31:r30 + 0x01)
+  1e32: 58e0 40f0      r31:r30 -= 0x80
+  1e36: 1782 0793 f419 if(r25:r24 != r19:r18):jmp 0x1e42 <_loc_1e42>
+  1e3c: ef2f ef3f      r19:r18 := 0xffff
+  1e40: c00b           jmp 0x1e58 <_loc_1e58>
+_loc_1e42:
+  1e42: 0fe2 1ff3      r31:r30 += r19:r18
+  1e46: 8180           r24 := *(r31:r30)
+  1e48: 5f2f 4f3f      r19:r18 -= -1
+  1e4c: 772f 7030      r19:r18 &= 0x7f
+  1e50: 932d           *(r27:r26 ++) := r18
+  1e52: 933c           *(r27:r26) := r19
+  1e54: 2f28 e030      r19:r18 := 0:r24
+_loc_1e58:
+  1e58: 01c9           r25:r24 := r19:r18
+  1e5a: 9508           ret
+
+Serial::get_buffer_pos(this=r25:r24)->r25:r24:
+  1e5c: 01dc           r27:r26 := r25:r24
+  1e5e: 9612           r27:r26 += 2
+  1e60: 91ed           r30 := *(r27:r26 ++)
+  1e62: 91fc           r31 := *(r27:r26)
+  1e64: 9713           r27:r26 -= 3
+  1e66: 57ee 4fff      r31:r30 -= -0x82 (=TCCR1C)
+  1e6a: 8180           r24 := *(r31:r30)
+  1e6c: 8191           r25 := *(r31:r30 + 0x01)
+  1e6e: 9392           *(-- r31:r30) := r25
+  1e70: 9382           *(-- r31:r30) := r24
+  1e72: 9508           ret
+
+Serial::write(this=r25:r24, uint8_t c=r22):
+  1e74: 01fc           r31:r30 := r25:r24
+  1e76: 85a0           r26 := *(r31:r30 + 0x08)
+  1e78: 85b1           r27 := *(r31:r30 + 0x09)
+  1e7a: 8921           r18 := *(r31:r30 + 0x11)
+_loc_1e7c:
+  1e7c: 918c           r24 := *(r27:r26)
+  1e7e: e090           r25 := 0
+  1e80: 2e02           r0 := r18
+  1e82: c002           jmp 0x1e88 <_loc_1e88>
+_loc_1e84:
+  1e84: 9595           asr r25
+  1e86: 9587           r24:C := C:r24 ; >> 1
+_loc_1e88:
+  1e88: 940a           r0 --
+  1e8a: f7e2           brpl 0x1e84 <_loc_1e84>
+  1e8c: ff80 cff6      if_not(bit(r24, 0)):jmp 0x1e7c <_loc_1e7c>
+  1e90: 8404           r0 := *(r31:r30 + 0x0c)
+  1e92: 85f5           r31 := *(r31:r30 + 0x0d)
+  1e94: 2de0           r30 := r0
+  1e96: 8360           *(r31:r30) := r22
+  1e98: 9508           ret
+
+cons1_Serial::Serial(this=0x0361):
+  1e9a: ee80 e091      r25:r24 := 0x1e0 (=Serial_vtable)
+  1e9e: 9390 0362      SRAM.Serial.vtable_H := r25
+  1ea2: 9380 0361      SRAM.Serial := r24
+  1ea6: ed8d e092      r25:r24 := 0x2dd (=HardwareSerial._rx_buffer)
+  1eaa: 9390 0364      SRAM.Serial.hwserial_mem_H := r25
+  1eae: 9380 0363      SRAM.Serial.hwserial_mem_L := r24
+  1eb2: ec85 e090      r25:r24 := 0xc5 (=UBRR0H)
+  1eb6: 9390 0366      SRAM.Serial._ubrrh_H := r25
+  1eba: 9380 0365      SRAM.Serial._ubrrh_L := r24
+  1ebe: ec84 e090      r25:r24 := 0xc4 (=UBRR0L)
+  1ec2: 9390 0368      SRAM.Serial._ubrrl_H := r25
+  1ec6: 9380 0367      SRAM.Serial._ubrrl_L := r24
+  1eca: ec80 e090      r25:r24 := 0xc0 (=UCSR0A)
+  1ece: 9390 036a      SRAM.Serial._ucsra_H := r25
+  1ed2: 9380 0369      SRAM.Serial._ucsra_L := r24
+  1ed6: ec81 e090      r25:r24 := 0xc1 (=UCSR0B)
+  1eda: 9390 036c      SRAM.Serial._ucsrb_H := r25
+  1ede: 9380 036b      SRAM.Serial._ucsrb_L := r24
+  1ee2: ec86 e090      r25:r24 := 0xc6 (=UDR0)
+  1ee6: 9390 036e      SRAM.Serial._udr_H := r25
+  1eea: 9380 036d      SRAM.Serial._udr_L := r24
+  1eee: e084           r24 := 4
+  1ef0: 9380 036f      SRAM.Serial._RXEN0 := r24
+  1ef4: e083           r24 := 3
+  1ef6: 9380 0370      SRAM.Serial._TXEN0 := r24
+  1efa: e087           r24 := 7
+  1efc: 9380 0371      SRAM.Serial._RXCIE0 := r24
+  1f00: e085           r24 := 5
+  1f02: 9380 0372      SRAM.Serial._UDRE0 := r24
+  1f06: e081           r24 := 1
+  1f08: 9380 0373      SRAM.0x0373 := r24
+  1f0c: 9508           ret
+
+main():
+  1f0e: 940e 0d16      call 0x1a2c <initialize_ports()>
+  1f12: 940e 0b2d      call 0x165a <setup()>
+_loc_1f16:
+  1f16: 940e 0bd4      call 0x17a8 <loop()>
+  1f1a: cffd           jmp 0x1f16 <_loc_1f16>
+
+Serial::write(this=r25:r24, const char *pszStr=r23:r22):
+  1f1c: 930f           push r16
+  1f1e: 931f           push r17
+  1f20: 93cf           push r28
+  1f22: 93df           push r29
+  1f24: 018c           r17:r16 := r25:r24
+  1f26: 01eb           r29:r28 := r23:r22
+  1f28: c009           jmp 0x1f3c <_loc_1f3c>
+_loc_1f2a:
+  1f2a: 9621           r29:r28 += 1
+  1f2c: 01d8           r27:r26 := r17:r16
+  1f2e: 91ed           r30 := *(r27:r26 ++)
+  1f30: 91fc           r31 := *(r27:r26)
+  1f32: 9001           r0 := *(r31:r30 ++)
+  1f34: 81f0           r31 := *(r31:r30)
+  1f36: 2de0           r30 := r0
+  1f38: 01c8           r25:r24 := r17:r16
+  1f3a: 9509           icall r31:r30
+_loc_1f3c:
+  1f3c: 8168           r22 := *(r29:r28)
+  1f3e: 2366 f7a1      if(r22):jmp 0x1f2a <_loc_1f2a>
+  1f42: 91df           pop r29
+  1f44: 91cf           pop r28
+  1f46: 911f           pop r17
+  1f48: 910f           pop r16
+  1f4a: 9508           ret
+
+Serial::write(this=r25:r24, const uint8_t *buffer=r23:r22, size_t size=r21:r20):
+  1f4c: 92ef           push r14
+  1f4e: 92ff           push r15
+  1f50: 930f           push r16
+  1f52: 931f           push r17
+  1f54: 93cf           push r28
+  1f56: 93df           push r29
+  1f58: 018c           r17:r16 := r25:r24
+  1f5a: 017b           r15:r14 := r23:r22
+  1f5c: 01ea           r29:r28 := r21:r20
+  1f5e: c00c           jmp 0x1f78 <_loc_1f78>
+_loc_1f60:
+  1f60: 01d7           r27:r26 := r15:r14
+  1f62: 916d           r22 := *(r27:r26 ++)
+  1f64: 017d           r15:r14 := r27:r26
+  1f66: 01d8           r27:r26 := r17:r16
+  1f68: 91ed           r30 := *(r27:r26 ++)
+  1f6a: 91fc           r31 := *(r27:r26)
+  1f6c: 9001           r0 := *(r31:r30 ++)
+  1f6e: 81f0           r31 := *(r31:r30)
+  1f70: 2de0           r30 := r0
+  1f72: 01c8           r25:r24 := r17:r16
+  1f74: 9509           icall r31:r30
+  1f76: 9721           r29:r28 -= 1
+_loc_1f78:
+  1f78: 9720 f791      if(r29:r28 != 0):jmp 0x1f60 <_loc_1f60>
+  1f7c: 91df           pop r29
+  1f7e: 91cf           pop r28
+  1f80: 911f           pop r17
+  1f82: 910f           pop r16
+  1f84: 90ff           pop r15
+  1f86: 90ef           pop r14
+  1f88: 9508           ret
+
+sub_1f8a:
+  1f8a: 922f           push r2
+  1f8c: 923f           push r3
+  1f8e: 924f           push r4
+  1f90: 925f           push r5
+  1f92: 926f           push r6
+  1f94: 927f           push r7
+  1f96: 928f           push r8
+  1f98: 929f           push r9
+  1f9a: 92af           push r10
+  1f9c: 92bf           push r11
+  1f9e: 92cf           push r12
+  1fa0: 92df           push r13
+  1fa2: 92ef           push r14
+  1fa4: 92ff           push r15
+  1fa6: 930f           push r16
+  1fa8: 931f           push r17
+  1faa: 93df           push r29
+  1fac: 93cf           push r28
+  1fae: b7cd           r28 := PORT.SPL
+  1fb0: b7de           r29 := PORT.SPH
+  1fb2: 97a0           r29:r28 -= 0x20
+  1fb4: b60f           r0 := PORT.SREG
+  1fb6: 94f8           Clear(I flag)
+  1fb8: bfde           PORT.SPH := r29
+  1fba: be0f           PORT.SREG := r0
+  1fbc: bfcd           PORT.SPL := r28
+  1fbe: 011c           r3:r2 := r25:r24
+  1fc0: 016a 017b      r15:r14:r13:r12 := r23:r22:r21:r20
+  1fc4: 1541 0551 0561 0571 f449 if(r23:r22:r21:r20 != 0):jmp 0x1fe0 <_loc_1fe0>
+  1fce: e340 e050 e060 e070 r23:r22:r21:r20 := 0x30
+  1fd6: e020 e030      r19:r18 := 0
+  1fda: 940e 1080      call 0x2100 <Serial.print(this=r25:r24, 4bytes-tosend=r23:r22:r21:r20, r19:r18=?)>
+  1fde: c056           jmp 0x208c <_loc_208c>
+_loc_1fe0:
+  1fe0: 2488 2499 0154 r11:r10:r9:r8 := r9:r8:0:0
+  1fe6: 2e42 2455 2466 2477 r7:r6:r5:r4 := 0:0:0:r18
+_loc_1fee:
+  1fee: e001 e010      r17:r16 := 1
+  1ff2: 0f0c 1f1d      r17:r16 += r29:r28
+  1ff6: 0d08 1d19      r17:r16 += r9:r8
+  1ffa: 01c7           r25:r24 := r15:r14
+  1ffc: 01b6           r23:r22 := r13:r12
+  1ffe: 01a3           r21:r20 := r7:r6
+  2000: 0192           r19:r18 := r5:r4
+  2002: 940e 1150      call 0x22a0 <libgcc.udivmodsi4(dividend=r25:r24:r23:r22, divisor=r21:r20:r19:r18)->r25:r24:r23:r22=r,r21:r20:r19:r18=q>
+  2006: 01f8           r31:r30 := r17:r16
+  2008: 8360           *(r31:r30) := r22
+  200a: 9408 1c81 1c91 1ca1 1cb1 r11:r10:r9:r8 += 1
+  2014: 01c7           r25:r24 := r15:r14
+  2016: 01b6           r23:r22 := r13:r12
+  2018: 01a3           r21:r20 := r7:r6
+  201a: 0192           r19:r18 := r5:r4
+  201c: 940e 1150      call 0x22a0 <libgcc.udivmodsi4(dividend=r25:r24:r23:r22, divisor=r21:r20:r19:r18)->r25:r24:r23:r22=r,r21:r20:r19:r18=q>
+  2020: 01c9 01da      r27:r26:r25:r24 := r21:r20:r19:r18
+  2024: 016c 017d      r15:r14:r13:r12 := r27:r26:r25:r24
+  2028: 14c1 04d1 04e1 04f1 f6f1 if(r15:r14:r13:r12 != 0):jmp 0x1fee <_loc_1fee>
+  2032: e081           r24 := 1
+  2034: 2ee8 2cf1      r15:r14 := 0:r24
+  2038: 0eec 1efd      r15:r14 += r29:r28
+  203c: 0ce8 1cf9      r15:r14 += r9:r8
+  2040: 013e           r7:r6 := r29:r28
+  2042: 9408 1c61 1c71 r7:r6 += 1
+  2048: 01d5           r27:r26 := r11:r10
+  204a: 01c4           r25:r24 := r9:r8
+  204c: 9701 09a1 09b1 r27:r26:r25:r24 -= 1
+  2052: 016c           r13:r12 := r25:r24
+  2054: 18c8 08d9      r13:r12 -= r9:r8
+  2058: c016           jmp 0x2086 <_loc_2086>
+_loc_205a:
+  205a: 01f6           r31:r30 := r13:r12
+  205c: 0dee 1dff      r31:r30 += r15:r14
+  2060: 8140           r20 := *(r31:r30)
+  2062: 304a f410      if(r20 >= 10):jmp 0x206a <_loc_206a>
+  2066: 5d40           r20 -= -0x30
+  2068: c001           jmp 0x206c <_loc_206c>
+_loc_206a:
+  206a: 5c49           r20 -= -0x37
+_loc_206c:
+  206c: 2755           r21 := 0
+  206e: fd47           skip_if_not(bit(r20, 7))
+  2070: 9550           r21 := 0xff - r21
+  2072: 2f65           r22 := r21
+  2074: 2f75           r23 := r21
+  2076: 01c1           r25:r24 := r3:r2
+  2078: e020 e030      r19:r18 := 0
+  207c: 940e 1080      call 0x2100 <Serial.print(this=r25:r24, 4bytes-tosend=r23:r22:r21:r20, r19:r18=?)>
+  2080: 9408 08e1 08f1 r15:r14 -= 1
+_loc_2086:
+  2086: 146e 047f f739 if(r7:r6 != r15:r14):jmp 0x205a <_loc_205a>
+_loc_208c:
+  208c: 96a0           r29:r28 += 0x20
+  208e: b60f           r0 := PORT.SREG
+  2090: 94f8           Clear(I flag)
+  2092: bfde           PORT.SPH := r29
+  2094: be0f           PORT.SREG := r0
+  2096: bfcd           PORT.SPL := r28
+  2098: 91cf           pop r28
+  209a: 91df           pop r29
+  209c: 911f           pop r17
+  209e: 910f           pop r16
+  20a0: 90ff           pop r15
+  20a2: 90ef           pop r14
+  20a4: 90df           pop r13
+  20a6: 90cf           pop r12
+  20a8: 90bf           pop r11
+  20aa: 90af           pop r10
+  20ac: 909f           pop r9
+  20ae: 908f           pop r8
+  20b0: 907f           pop r7
+  20b2: 906f           pop r6
+  20b4: 905f           pop r5
+  20b6: 904f           pop r4
+  20b8: 903f           pop r3
+  20ba: 902f           pop r2
+  20bc: 9508           ret
+
+Serial.print(this=r25:r24, 4bytes-tosend=r23:r22:r21:r20, r19:r18=0):
+  20be: 01dc           r27:r26 := r25:r24
+  20c0: 1521 0531 f441 if(r19:r18 != 0):jmp 0x20d6 <_loc_20d6>
+  20c6: 91ed           r30 := *(r27:r26 ++)
+  20c8: 91fc           r31 := *(r27:r26)
+  20ca: 9001           r0 := *(r31:r30 ++)
+  20cc: 81f0           r31 := *(r31:r30)
+  20ce: 2de0           r30 := r0
+  20d0: 2f64           r22 := r20
+  20d2: 9509           icall r31:r30
+  20d4: 9508           ret
+_loc_20d6:
+  20d6: 940e 0fc5      call 0x1f8a <sub_1f8a>
+  20da: 9508           ret
+
+Serial.print(this=r25:r24, bytetosend=r22, r21:r20=0):
+  20dc: 92ef           push r14
+  20de: 92ff           push r15
+  20e0: 930f           push r16
+  20e2: 931f           push r17
+  20e4: 019a           r19:r18 := r21:r20
+  20e6: 2ee6 24ff e000 e010 r17:r16:r15:r14 := 0:0:0:r22
+  20ee: 01b8           r23:r22 := r17:r16
+  20f0: 01a7           r21:r20 := r15:r14
+  20f2: 940e 105f      call 0x20be <Serial.print(this=r25:r24, 4bytes-tosend=r23:r22:r21:r20, r19:r18=0)>
+  20f6: 911f           pop r17
+  20f8: 910f           pop r16
+  20fa: 90ff           pop r15
+  20fc: 90ef           pop r14
+  20fe: 9508           ret
+
+Serial.print(this=r25:r24, 4bytes-tosend=r23:r22:r21:r20, r19:r18=?):
+  2100: 92ef           push r14
+  2102: 92ff           push r15
+  2104: 930f           push r16
+  2106: 931f           push r17
+  2108: 93cf           push r28
+  210a: 93df           push r29
+  210c: 01ec           r29:r28 := r25:r24
+  210e: 017a 018b      r17:r16:r15:r14 := r23:r22:r21:r20
+  2112: 1521 0531 f441 if(r19:r18 != 0):jmp 0x2128 <_loc_2128>
+  2118: 81e8           r30 := *(r29:r28)
+  211a: 81f9           r31 := *(r29:r28 + 0x01)
+  211c: 9001           r0 := *(r31:r30 ++)
+  211e: 81f0           r31 := *(r31:r30)
+  2120: 2de0           r30 := r0
+  2122: 2f64           r22 := r20
+  2124: 9509           icall r31:r30
+  2126: c01b           jmp 0x215e <_loc_215e>
+_loc_2128:
+  2128: 302a 0531 f4b1 if(r19:r18 != 10):jmp 0x215a <_loc_215a>
+  212e: ff77 c010      if_not(bit(r23, 7)):jmp 0x2152 <_loc_2152>
+  2132: e24d e050 e060 e070 r23:r22:r21:r20 := 0x2d
+  213a: e020 e030      r19:r18 := 0
+  213e: 940e 1080      call 0x2100 <Serial.print(this=r25:r24, 4bytes-tosend=r23:r22:r21:r20, r19:r18=?)>
+  2142: 9510           r17 := 0xff - r17
+  2144: 9500           r16 := 0xff - r16
+  2146: 94f0           r15 := 0xff - r15
+  2148: 94e0           r14 := 0xff - r14
+  214a: 1ce1 1cf1 1d01 1d11 r17:r16:r15:r14 += 0+C
+_loc_2152:
+  2152: 01ce           r25:r24 := r29:r28
+  2154: 01b8           r23:r22 := r17:r16
+  2156: 01a7           r21:r20 := r15:r14
+  2158: e02a           r18 := 10
+_loc_215a:
+  215a: 940e 0fc5      call 0x1f8a <sub_1f8a>
+_loc_215e:
+  215e: 91df           pop r29
+  2160: 91cf           pop r28
+  2162: 911f           pop r17
+  2164: 910f           pop r16
+  2166: 90ff           pop r15
+  2168: 90ef           pop r14
+  216a: 9508           ret
+
+Serial.print(this=r25:r24, bytetosend=r23:r22, r21:r20=0):
+  216c: 92ef           push r14
+  216e: 92ff           push r15
+  2170: 930f           push r16
+  2172: 931f           push r17
+  2174: 017b           r15:r14 := r23:r22
+  2176: 019a           r19:r18 := r21:r20
+  2178: 2700           r16 := 0          # sign-extend r23:r22 to r17:r16:r15:r14
+  217a: fcf7           skip_if_not(bit(r15, 7))
+  217c: 9500           r16 := 0xff - r16
+  217e: 2f10           r17 := r16
+  2180: 01b8           r23:r22 := r17:r16
+  2182: 01a7           r21:r20 := r15:r14
+  2184: 940e 1080      call 0x2100 <Serial.print(this=r25:r24, 4bytes-tosend=r23:r22:r21:r20, r19:r18=?)>
+  2188: 911f           pop r17
+  218a: 910f           pop r16
+  218c: 90ff           pop r15
+  218e: 90ef           pop r14
+  2190: 9508           ret
+
+map(x=r25:r24:r23:r22, in_min=r21:r20:r19:r18, in_max=r17:r16:r15:r14, out_min=r13:r12:r11:r10, out_max=sp+4:3:2:1)->r25:r24:r23:r22:
+  2192: 922f           push r2
+  2194: 923f           push r3
+  2196: 924f           push r4
+  2198: 925f           push r5
+  219a: 926f           push r6
+  219c: 927f           push r7
+  219e: 928f           push r8
+  21a0: 929f           push r9
+  21a2: 92af           push r10
+  21a4: 92bf           push r11
+  21a6: 92cf           push r12
+  21a8: 92df           push r13
+  21aa: 92ef           push r14
+  21ac: 92ff           push r15
+  21ae: 930f           push r16
+  21b0: 931f           push r17
+  21b2: 93df           push r29
+  21b4: 93cf           push r28
+  21b6: b7cd           r28 := PORT.SPL
+  21b8: b7de           r29 := PORT.SPH
+  21ba: 013b 014c      r9:r8:r7:r6 := r25:r24:r23:r22
+  21be: 0119 012a      r5:r4:r3:r2 := r21:r20:r19:r18
+  21c2: 896d           r22 := *(r29:r28 + 0x15)
+  21c4: 897e           r23 := *(r29:r28 + 0x16)
+  21c6: 898f           r24 := *(r29:r28 + 0x17)
+  21c8: 8d98           r25 := *(r29:r28 + 0x18)
+  21ca: 196a 097b 098c 099d r25:r24:r23:r22 -= r13:r12:r11:r10 # r25:r24:r23:r22 = out_max - out_min
+  21d2: 1a62 0a73 0a84 0a95 r9:r8:r7:r6 -= r21:r20:r19:r18 # r9:r8:r7:r6 = x - in_min
+  21da: 01a4           r21:r20 := r9:r8  # r25:r24:r23:r22 = (x-in_min) * (out_max-out_min)
+  21dc: 0193           r19:r18 := r7:r6
+  21de: 940e 1112      call 0x2224 <libgcc.__mulsi3(A=r25:r24:r23:r22, B=r21:r20:r19:r18)->r25:r24:r23:r22=A*B>
+  21e2: 18e2 08f3 0904 0915 r17:r16:r15:r14 -= r5:r4:r3:r2
+  21ea: 01a8           r21:r20 := r17:r16 # r21:r20:r19:r18 = in_max - in_min
+  21ec: 0197           r19:r18 := r15:r14
+  21ee: 940e 1172      call 0x22e4 <libgcc.divmodsi4(dividend=r25:r24:r23:r22, divisor=r21:r20:r19:r18)->r25:r24:r23:r22=r,r21:r20:r19:r18=q>
+  21f2: 0d2a 1d3b 1d4c 1d5d r21:r20:r19:r18 += r13:r12:r11:r10
+  21fa: 01b9 01ca      r25:r24:r23:r22 := r21:r20:r19:r18 # return (x-in_min)*(out_max-out_min)/(in_max-in_min)+out_min
+  21fe: 91cf           pop r28
+  2200: 91df           pop r29
+  2202: 911f           pop r17
+  2204: 910f           pop r16
+  2206: 90ff           pop r15
+  2208: 90ef           pop r14
+  220a: 90df           pop r13
+  220c: 90cf           pop r12
+  220e: 90bf           pop r11
+  2210: 90af           pop r10
+  2212: 909f           pop r9
+  2214: 908f           pop r8
+  2216: 907f           pop r7
+  2218: 906f           pop r6
+  221a: 905f           pop r5
+  221c: 904f           pop r4
+  221e: 903f           pop r3
+  2220: 902f           pop r2
+  2222: 9508           ret
+
+libgcc.__mulsi3(A=r25:r24:r23:r22, B=r21:r20:r19:r18)->r25:r24:r23:r22=A*B:
+  2224: 9f62           r1:r0 := r22 * r18
+  2226: 01d0           r27:r26 := r1:r0
+  2228: 9f73           r1:r0 := r23 * r19
+  222a: 01f0           r31:r30 := r1:r0
+  222c: 9f82           r1:r0 := r24 * r18
+  222e: 0de0 1df1      r31:r30 += r1:r0
+  2232: 9f64           r1:r0 := r22 * r20
+  2234: 0de0 1df1      r31:r30 += r1:r0
+  2238: 9f92           r1:r0 := r25 * r18
+  223a: 0df0           r31 += r0
+  223c: 9f83           r1:r0 := r24 * r19
+  223e: 0df0           r31 += r0
+  2240: 9f74           r1:r0 := r23 * r20
+  2242: 0df0           r31 += r0
+  2244: 9f65           r1:r0 := r22 * r21
+  2246: 0df0           r31 += r0
+  2248: 2799           r25 := 0
+  224a: 9f72           r1:r0 := r23 * r18
+  224c: 0db0           r27 += r0
+  224e: 1de1           r30 += r1+C
+  2250: 1ff9           r31 += r25+C
+  2252: 9f63           r1:r0 := r22 * r19
+  2254: 0db0           r27 += r0
+  2256: 1de1           r30 += r1+C
+  2258: 1ff9           r31 += r25+C
+  225a: 01bd           r23:r22 := r27:r26
+  225c: 01cf           r25:r24 := r31:r30
+  225e: 2411           r1 := 0
+  2260: 9508           ret
+
+libgcc.udivmodqi4(dividend=r24, divisor=r22)->r25=r,r24=q:
+  2262: 1b99           r25 -= r25
+  2264: e079           r23 := 9
+  2266: c004           jmp 0x2270 <__udivmodqi4_ep>
+__udivmodqi4_loop:
+  2268: 1f99           C:r25 := r25:C ; << 1
+  226a: 1796 f008      if(r25 < r22):jmp 0x2270 <__udivmodqi4_ep>
+  226e: 1b96           r25 -= r22
+__udivmodqi4_ep:
+  2270: 1f88           C:r24 := r24:C ; << 1
+  2272: 957a           r23 --
+  2274: f7c9           brne 0x2268 <__udivmodqi4_loop>
+  2276: 9580           r24 := 0xff - r24
+  2278: 9508           ret
+
+libgcc.divmodhi4(dividend=r25:r24, divisor=r23:r22)->25:r24=r,r23:r22=q:
+  227a: fb97           T := bit(r25, 7)
+  227c: 2e09           r0 := r25
+  227e: 2607           r0 ^= r23
+  2280: d00a           call 0x2296 <__divmodhi4_neg2(negate r25:r24)>
+  2282: fd77 d004      if(bit(r23, 7)):call 0x228e <__divmodhi4_neg1(negate r23:r22)>
+  2286: d049           call 0x231a <libgcc.udivmodhi4(dividend=r25:r24, divisor=r23:r22)->25:r24=r,r23:r22=q>
+  2288: d006           call 0x2296 <__divmodhi4_neg2(negate r25:r24)>
+  228a: 2000           r0 &= r0
+  228c: f41a           brpl 0x2294 <_loc_2294>
+__divmodhi4_neg1(negate r23:r22):
+  228e: 9570           r23 := 0xff - r23
+  2290: 9561           r22 := -r22
+  2292: 4f7f           r23 -= -1+C
+_loc_2294:
+  2294: 9508           ret
+__divmodhi4_neg2(negate r25:r24):
+  2296: f7f6           brtc 0x2294 <_loc_2294>
+  2298: 9590           r25 := 0xff - r25
+  229a: 9581           r24 := -r24
+  229c: 4f9f           r25 -= -1+C
+  229e: 9508           ret
+
+libgcc.udivmodsi4(dividend=r25:r24:r23:r22, divisor=r21:r20:r19:r18)->r25:r24:r23:r22=r,r21:r20:r19:r18=q:
+  22a0: e2a1           r26 := 0x21
+  22a2: 2e1a           r1 := r26
+  22a4: 1baa           r26 -= r26
+  22a6: 1bbb           r27 -= r27
+  22a8: 01fd           r31:r30 := r27:r26
+  22aa: c00d           jmp 0x22c6 <__udivmodsi4_ep>
+__udivmodsi4_loop:
+  22ac: 1faa 1fbb      C:r27:r26 := r27:r26:C ; << 1
+  22b0: 1fee 1fff      C:r31:r30 := r31:r30:C ; << 1
+  22b4: 17a2 07b3      cmp r27:r26, r19:r18
+  22b8: 07e4 07f5      cmp_carry r31:r30, r21:r20
+  22bc: f020           brcs 0x22c6 <__udivmodsi4_ep>
+  22be: 1ba2 0bb3      r27:r26 -= r19:r18
+  22c2: 0be4 0bf5      r31:r30 -= r21:r20+C
+__udivmodsi4_ep:
+  22c6: 1f66 1f77 1f88 1f99 C:r25:r24:r23:r22 := r25:r24:r23:r22:C ; << 1
+  22ce: 941a           r1 --
+  22d0: f769           brne 0x22ac <__udivmodsi4_loop>
+  22d2: 9560           r22 := 0xff - r22
+  22d4: 9570           r23 := 0xff - r23
+  22d6: 9580           r24 := 0xff - r24
+  22d8: 9590           r25 := 0xff - r25
+  22da: 019b 01ac 01bd r23:r22:r21:r20:r19:r18 := r27:r26:r25:r24:r23:r22
+  22e0: 01cf           r25:r24 := r31:r30
+  22e2: 9508           ret
+
+libgcc.divmodsi4(dividend=r25:r24:r23:r22, divisor=r21:r20:r19:r18)->r25:r24:r23:r22=r,r21:r20:r19:r18=q:
+  22e4: fb97           T := bit(r25, 7)
+  22e6: 2e09           r0 := r25
+  22e8: 2605           r0 ^= r21
+  22ea: d00e           call 0x2308 <__negsi2(negate 25:r24:r23:r22)>
+  22ec: fd57 d004      if(bit(r21, 7)):call 0x22f8 <__divmodsi4_neg2(negate 21:r20:r19:r18)>
+  22f0: dfd7           call 0x22a0 <libgcc.udivmodsi4(dividend=r25:r24:r23:r22, divisor=r21:r20:r19:r18)->r25:r24:r23:r22=r,r21:r20:r19:r18=q>
+  22f2: d00a           call 0x2308 <__negsi2(negate 25:r24:r23:r22)>
+  22f4: 1c00           C:r0 := r0:C ; << 1
+  22f6: f438           brcc 0x2306 <__divmodsi4_exit>
+__divmodsi4_neg2(negate 21:r20:r19:r18):
+  22f8: 9550           r21 := 0xff - r21
+  22fa: 9540           r20 := 0xff - r20
+  22fc: 9530           r19 := 0xff - r19
+  22fe: 9521           r18 := -r18
+  2300: 4f3f 4f4f 4f5f r21:r20:r19 -= -1+C
+__divmodsi4_exit:
+  2306: 9508           ret
+__negsi2(negate 25:r24:r23:r22):
+  2308: f7f6           brtc 0x2306 <__divmodsi4_exit>
+  230a: 9590           r25 := 0xff - r25
+  230c: 9580           r24 := 0xff - r24
+  230e: 9570           r23 := 0xff - r23
+  2310: 9561           r22 := -r22
+  2312: 4f7f 4f8f 4f9f r25:r24:r23 -= -1+C
+  2318: 9508           ret
+
+libgcc.udivmodhi4(dividend=r25:r24, divisor=r23:r22)->25:r24=r,r23:r22=q:
+  231a: 1baa           r26 -= r26
+  231c: 1bbb           r27 -= r27
+  231e: e151           r21 := 0x11
+  2320: c007           jmp 0x2330 <__udivmodhi4_ep>
+__udivmodhi4_loop:
+  2322: 1faa 1fbb      C:r27:r26 := r27:r26:C ; << 1
+  2326: 17a6 07b7 f010 if(r27:r26 < r23:r22):jmp 0x2330 <__udivmodhi4_ep>
+  232c: 1ba6 0bb7      r27:r26 -= r23:r22
+__udivmodhi4_ep:
+  2330: 1f88 1f99      C:r25:r24 := r25:r24:C ; << 1
+  2334: 955a           r21 --
+  2336: f7a9           brne 0x2322 <__udivmodhi4_loop>
+  2338: 9580           r24 := 0xff - r24
+  233a: 9590           r25 := 0xff - r25
+  233c: 01bc 01cd      r25:r24:r23:r22 := r27:r26:r25:r24
+  2340: 9508           ret
+  2342: 0fee 1fff      r31:r30 *= 2
+
+call_constructor(fctptr=r31:r30):
+  2346: 9005           r0 := PROG[r31:r30 ++]
+  2348: 91f4           r31 := PROG[r31:r30]
+  234a: 2de0           r30 := r0
+  234c: 9409           ijmp r31:r30
+
+exit():
+  234e: 94f8           Clear(I flag)
+_loop_forever:
+  2350: cfff           loop_forever_here
+
+".cpp":
+  2352:       2e63 7070 00                          .cpp.
+
+"Servo only on pins from 2 to 13":
+  2357:                   53 6572 766f 206f 6e6c         Servo onl
+  2360:  7920 6f6e 2070 696e 7320 6672 6f6d 2032  y on pins from 2
+  2370:  2074 6f20 3133 00                         to 13.
+
+"I2C mode not yet supported":
+  2377:                   49 3243 206d 6f64 6520         I2C mode 
+  2380:  6e6f 7420 7965 7420 7375 7070 6f72 7465  not yet supporte
+  2390:  6400                                     d.
+
+"Unknown pin mode":
+  2392:       556e 6b6e 6f77 6e20 7069 6e20 6d6f    Unknown pin mo
+  23a0:  6465 00                                  de.
+
+"Not enough data":
+  23a3:         4e 6f74 2065 6e6f 7567 6820 6461     Not enough da
+  23b0:  7461 00                                  ta.
+
+"/var/.../StandardFirmata_2_2_forUNO_0_3.cpp":
+  23b3:         2f 7661 722f 666f 6c64 6572 732f     /var/folders/
+  23c0:  714d 2f71 4d62 5253 5633 4332 5261 522d  qM/qMbRSV3C2RaR-
+  23d0:  452b 4259 7048 425a 2b2b 2b2b 544d 2f2d  E+BYpHBZ++++TM/-
+  23e0:  546d 702d 2f62 7569 6c64 3732 3132 3230  Tmp-/build721220
+  23f0:  3935 3239 3437 3336 3739 3237 322e 746d  9529473679272.tm
+  2400:  702f 5374 616e 6461 7264 4669 726d 6174  p/StandardFirmat
+  2410:  615f 325f 325f 666f 7255 4e4f 5f30 5f33  a_2_2_forUNO_0_3
+  2420:  2e63 7070 00                             .cpp.
+
+__malloc_margin_L:
+  2425:              20                                 
+
+__malloc_margin_H:
+  2426:                 00                              .
+
+__malloc_heap_start_L:
+  2427:                   78                             x
+
+__malloc_heap_start_H:
+  2428:                      03                           .
+
+__malloc_heap_end_L:
+  2429:                        00                          .
+
+__malloc_heap_end_H:
+  242a:                           0013 0001 0000            ......
+  2430:  0000                                     ..
+
+Serial_vtable:
+  2432: 0f3a addr 0x1e74 <Serial::write(this=r25:r24, uint8_t c=r22)>
+  2434: 0f8e addr 0x1f1c <Serial::write(this=r25:r24, const char *pszStr=r23:r22)>
+  2436: 0fa6 addr 0x1f4c <Serial::write(this=r25:r24, const uint8_t *buffer=r23:r22, size_t size=r21:r20)>
+  2438: 0edf addr 0x1dbe <Serial::available(this=r25:r24)->r25:r24>
+  243a: 0f0a addr 0x1e14 <Serial::read(this=r25:r24)>
+  243c: 0f2e addr 0x1e5c <Serial::get_buffer_pos(this=r25:r24)->r25:r24>
+  243e: 0ef0 addr 0x1de0 <Serial::peek(this=r25:r24)->r24>
+
+end_of_.data:
+  2440:  714d 2f71 4d62 5253 5633 4332 5261 522d  qM/qMbRSV3C2RaR-
+  2450:  452b 4259 7048 425a 2b2b 2b2b 544d 2f2d  E+BYpHBZ++++TM/-
+  2460:  546d 702d 2f62 7569 6c64 3732 3132 3230  Tmp-/build721220
+  2470:  3935 3239 3437 3336 3739 3237 322e 746d  9529473679272.tm
+  2480:  282f 30e0 c901 0895 dc01 1296 ed91 fc91  (/0.............
+  2490:  1397 df01 ae57 bf4f 2d91 3c91 1197 e058  .....W.O-.<....X
+  24a0:  ff4f 8081 9181 e058 f040 8217 9307 19f4  .O.....X.@......
+  24b0:  2fef 3fef 0bc0 e20f f31f 8081 2f5f 3f4f  /.?........./_?O
+  24c0:  2f77 3070 2d93 3c93 282f 30e0 c901 0895  /w0p-.<.(/0.....
+  24d0:  dc01 1296 ed91 fc91 1397 ee57 ff4f 8081  ...........W.O..
+  24e0:  9181 9293 8293 0895 fc01 a085 b185 2189  ..............!.
+  24f0:  8c91 90e0 022e 02c0 9595 8795 0a94 e2f7  ................
+  2500:  80ff f6cf 0484 f585 e02d 6083 0895 89e9  .........-`.....
+  2510:  94e0 9093 f806 8093 f706 83e7 96e0 9093  ................
+  2520:  fa06 8093 f906 85ec 90e0 9093 fc06 8093  ................
+  2530:  fb06 84ec 90e0 9093 fe06 8093 fd06 80ec  ................
+  2540:  90e0 9093 0007 8093 ff06 81ec 90e0 9093  ................
+  2550:  0207 8093 0107 86ec 90e0 9093 0407 8093  ................
+  2560:  0307 84e0 8093 0507 83e0 8093 0607 87e0  ................
+  2570:  8093 0707 85e0 8093 0807 81e0 8093 0907  ................
+  2580:  0895 0e94 d210 0e94 cb04 0e94 7504 fdcf  ............u...
+  2590:  0f93 1f93 cf93 df93 8c01 eb01 09c0 2196  ..............!.
+  25a0:  d801 ed91 fc91 0190 f081 e02d c801 0995  ...........-....
+  25b0:  6881 6623 a1f7 df91 cf91 1f91 0f91 0895  h.f#............
+  25c0:  ef92 ff92 0f93 1f93 cf93 df93 8c01 7b01  ..............{.
+  25d0:  ea01 0cc0 d701 6d91 7d01 d801 ed91 fc91  ......m.}.......
+  25e0:  0190 f081 e02d c801 0995 2197 2097 91f7  .....-....!. ...
+  25f0:  df91 cf91 1f91 0f91 ff90 ef90 0895 dc01  ................
+  2600:  ed91 fc91 0280 f381 e02d 0995 0895 cf92  .........-......
+  2610:  df92 ef92 ff92 0f93 1f93 cf93 df93 6c01  ..............l.
+  2620:  7b01 c0e0 d0e0 0ec0 d601 ed91 fc91 0081  {...............
+  2630:  1181 c701 be01 0e94 a714 682f c601 f801  ..........h/....
+  2640:  0995 2196 f701 8481 9581 c817 d907 60f3  ..!...........`.
+  2650:  df91 cf91 1f91 0f91 ff90 ef90 df90 cf90  ................
+  2660:  0895 2f92 3f92 4f92 5f92 6f92 7f92 8f92  ../.?.O._.o.....
+  2670:  9f92 af92 bf92 cf92 df92 ef92 ff92 0f93  ................
+  2680:  1f93 df93 cf93 cdb7 deb7 a097 0fb6 f894  ................
+  2690:  debf 0fbe cdbf 1c01 6a01 7b01 4115 5105  ........j.{.A.Q.
+  26a0:  6105 7105 49f4 40e3 50e0 60e0 70e0 20e0  a.q.I.@.P.`.p. .
+  26b0:  30e0 0e94 eb13 56c0 8824 9924 5401 422e  0.....V..$.$T.B.
+  26c0:  5524 6624 7724 01e0 10e0 0c0f 1d1f 080d  U$f$w$..........
+  26d0:  191d c701 b601 a301 9201 0e94 fe14 f801  ................
+  26e0:  6083 0894 811c 911c a11c b11c c701 b601  `...............
+  26f0:  a301 9201 0e94 fe14 c901 da01 6c01 7d01  ............l.}.
+  2700:  c114 d104 e104 f104 f1f6 81e0 e82e f12c  ...............,
+  2710:  ec0e fd1e e80c f91c 3e01 0894 611c 711c  ........>...a.q.
+  2720:  d501 c401 0197 a109 b109 6c01 c818 d908  ..........l.....
+  2730:  16c0 f601 ee0d ff1d 4081 4a30 10f4 405d  ........@.J0..@]
+  2740:  01c0 495c 5527 47fd 5095 652f 752f c101  ..I\U'G.P.e/u/..
+  2750:  20e0 30e0 0e94 eb13 0894 e108 f108 6e14   .0...........n.
+  2760:  7f04 39f7 a096 0fb6 f894 debf 0fbe cdbf  ..9.............
+  2770:  cf91 df91 1f91 0f91 ff90 ef90 df90 cf90  ................
+  2780:  bf90 af90 9f90 8f90 7f90 6f90 5f90 4f90  ..........o._.O.
+  2790:  3f90 2f90 0895 dc01 2115 3105 41f4 ed91  ?./.....!.1.A...
+  27a0:  fc91 0190 f081 e02d 642f 0995 0895 0e94  .......-d/......
+  27b0:  3113 0895 ef92 ff92 0f93 1f93 9a01 7b01  1.............{.
+  27c0:  00e0 10e0 b801 a701 0e94 cb13 1f91 0f91  ................
+  27d0:  ff90 ef90 0895 ef92 ff92 0f93 1f93 cf93  ................
+  27e0:  df93 ec01 7a01 8b01 2115 3105 41f4 e881  ....z...!.1.A...
+  27f0:  f981 0190 f081 e02d 642f 0995 1bc0 2a30  .......-d/....*0
+  2800:  3105 b1f4 77ff 10c0 4de2 50e0 60e0 70e0  1...w...M.P.`.p.
+  2810:  20e0 30e0 0e94 eb13 1095 0095 f094 e094   .0.............
+  2820:  e11c f11c 011d 111d ce01 b801 a701 2ae0  ..............*.
+  2830:  0e94 3113 df91 cf91 1f91 0f91 ff90 ef90  ..1.............
+  2840:  0895 ef92 ff92 0f93 1f93 7b01 9a01 0027  ..........{....'
+  2850:  f7fc 0095 102f b801 a701 0e94 eb13 1f91  ...../..........
+  2860:  0f91 ff90 ef90 0895 ef92 ff92 0f93 1f93  ................
+  2870:  e62e 9a01 ff24 e7fc f094 0f2d 1f2d b801  .....$.....-.-..
+  2880:  a701 0e94 eb13 1f91 0f91 ff90 ef90 0895  ................
+  2890:  0f93 1f93 8c01 4de0 50e0 60e0 70e0 20e0  ......M.P.`.p. .
+  28a0:  30e0 0e94 eb13 c801 4ae0 50e0 60e0 70e0  0.......J.P.`.p.
+  28b0:  20e0 30e0 0e94 eb13 1f91 0f91 0895 0f93   .0.............
+  28c0:  1f93 8c01 0e94 ff12 c801 0e94 4814 1f91  ............H...
+  28d0:  0f91 0895 0f93 1f93 8c01 0e94 0713 c801  ................
+  28e0:  0e94 4814 1f91 0f91 0895 cf92 df92 ef92  ..H.............
+  28f0:  ff92 0f93 1f93 8c01 c62e 9a01 dd24 c7fc  .............$..
+  2900:  d094 ed2c fd2c b701 a601 0e94 eb13 c801  ...,.,..........
+  2910:  0e94 4814 1f91 0f91 ff90 ef90 df90 cf90  ..H.............
+  2920:  0895 0895 fc01 9b01 8481 9581 6817 7907  ............h.y.
+  2930:  28f4 6081 7181 6115 7105 29f4 1092 0a07  (.`.q.a.q.).....
+  2940:  6ae0 77e0 02c0 620f 731f cb01 0895 fc01  j.w...b.s.......
+  2950:  0190 f081 e02d e60f f71f 8081 0895 cf93  .....-..........
+  2960:  df93 ec01 cb01 7b83 6a83 0196 0e94 d700  ......{.j.......
+  2970:  9983 8883 0097 21f4 1b82 1a82 1d82 1c82  ......!.........
+  2980:  df91 cf91 0895 0f93 1f93 cf93 df93 8c01  ................
+  2990:  eb01 6115 7105 11f4 cae6 d4e0 fe01 0190  ..a.q...........
+  29a0:  0020 e9f7 3197 ec1b fd0b d801 1596 fc93  . ..1...........
+  29b0:  ee93 1497 c801 bf01 0e94 af14 f801 8081  ................
+  29c0:  9181 0097 19f0 be01 0e94 1402 df91 cf91  ................
+  29d0:  1f91 0f91 0895 97fb 092e 0726 0ad0 77fd  ...........&..w.
+  29e0:  04d0 49d0 06d0 0020 1af4 7095 6195 7f4f  ..I.... ..p.a..O
+  29f0:  0895 f6f7 9095 8195 9f4f 0895 a1e2 1a2e  .........O......
+  2a00:  aa1b bb1b fd01 0dc0 aa1f bb1f ee1f ff1f  ................
+  2a10:  a217 b307 e407 f507 20f0 a21b b30b e40b  ........ .......
+  2a20:  f50b 661f 771f 881f 991f 1a94 69f7 6095  ..f.w.......i.`.
+  2a30:  7095 8095 9095 9b01 ac01 bd01 cf01 0895  p...............
+  2a40:  97fb 092e 0526 0ed0 57fd 04d0 d7df 0ad0  .....&..W.......
+  2a50:  001c 38f4 5095 4095 3095 2195 3f4f 4f4f  ..8.P.@.0.!.?OOO
+  2a60:  5f4f 0895 f6f7 9095 8095 7095 6195 7f4f  _O........p.a..O
+  2a70:  8f4f 9f4f 0895 aa1b bb1b 51e1 07c0 aa1f  .O.O......Q.....
+  2a80:  bb1f a617 b707 10f0 a61b b70b 881f 991f  ................
+  2a90:  5a95 a9f7 8095 9095 bc01 cd01 0895 ee0f  Z...............
+  2aa0:  ff1f 0590 f491 e02d 0994 11e0 c8e5 d1e0  .......-........
+  2ab0:  04c0 fe01 0e94 5115 2296 ca35 d107 c9f7  ......Q."..5....
+  2ac0:  f894 ffcf                                ....
+
+"Received SMS from ":
+  2ac4:            5265 6365 6976 6564 2053 4d53      Received SMS
+  2ad0:  2066 726f 6d20 00                         from .
+
+"(sim position: ":
+  2ad7:                   28 7369 6d20 706f 7369         (sim posi
+  2ae0:  7469 6f6e 3a20 00                        tion: .
+
+")":
+  2ae7:                   29 00                          ).
+
+"SMS deleted":
+  2ae9:                        53 4d53 2064 656c           SMS del
+  2af0:  6574 6564 00                             eted.
+
+"SMS not deleted":
+  2af5:              53 4d53 206e 6f74 2064 656c       SMS not del
+  2b00:  6574 6564 00                             eted.
+
+"no call":
+  2b05:              6e 6f20 6361 6c6c 00              no call.
+
+"incoming voice call from ":
+  2b0d:                                  69 6e63               inc
+  2b10:  6f6d 696e 6720 766f 6963 6520 6361 6c6c  oming voice call
+  2b20:  2066 726f 6d20 00                         from .
+
+"active voice call":
+  2b27:                   61 6374 6976 6520 766f         active vo
+  2b30:  6963 6520 6361 6c6c 00                   ice call.
+
+"no response":
+  2b39:                        6e 6f20 7265 7370           no resp
+  2b40:  6f6e 7365 00                             onse.
+
+"Command: ":
+  2b45:              43 6f6d 6d61 6e64 3a20 00         Command: .
+
+"Check_Protocol":
+  2b4f:                                       43                 C
+  2b50:  6865 636b 5f50 726f 746f 636f 6c00       heck_Protocol.
+
+"Answer":
+  2b5e:                                     416e                An
+  2b60:  7377 6572 00                             swer.
+
+"No incoming call":
+  2b65:              4e 6f20 696e 636f 6d69 6e67       No incoming
+  2b70:  2063 616c 6c00                            call.
+
+"Calling ":
+  2b76:                 4361 6c6c 696e 6720 00          Calling .
+
+"No number in pos ":
+  2b7f:                                       4e                 N
+  2b80:  6f20 6e75 6d62 6572 2069 6e20 706f 7320  o number in pos 
+  2b90:  00                                       .
+
+"Hang":
+  2b91:    48 616e 6700                            Hang.
+
+"Send SMS to ":
+  2b96:                 5365 6e64 2053 4d53 2074        Send SMS t
+  2ba0:  6f20 00                                  o .
+
+"SMS ERROR ":
+  2ba3:         53 4d53 2045 5252 4f52 200a 00       SMS ERROR ..
+
+"SMS OK ":
+  2baf:                                       53                 S
+  2bb0:  4d53 204f 4b20 0a00                      MS OK ..
+
+"Phone number position ":
+  2bb8:                      5068 6f6e 6520 6e75          Phone nu
+  2bc0:  6d62 6572 2070 6f73 6974 696f 6e20 00    mber position .
+
+" deleted":
+  2bcf:                                       20                  
+  2bd0:  6465 6c65 7465 6400                      deleted.
+
+"Phone Book position ":
+  2bd8:                      5068 6f6e 6520 426f          Phone Bo
+  2be0:  6f6b 2070 6f73 6974 696f 6e20 003a 2000  ok position .: .
+
+"No Phone number in position ":
+  2bf0:  4e6f 2050 686f 6e65 206e 756d 6265 7220  No Phone number 
+  2c00:  696e 2070 6f73 6974 696f 6e20 00         in position .
+
+"Number ":
+  2c0d:                                  4e 756d               Num
+  2c10:  6265 7220 00                             ber .
+
+" writed in Phone Book position ":
+  2c15:              20 7772 6974 6564 2069 6e20        writed in 
+  2c20:  5068 6f6e 6520 426f 6f6b 2070 6f73 6974  Phone Book posit
+  2c30:  696f 6e20 00                             ion .
+
+"Writing error":
+  2c35:              57 7269 7469 6e67 2065 7272       Writing err
+  2c40:  6f72 00                                  or.
+
+"system startup":
+  2c43:         73 7973 7465 6d20 7374 6172 7475     system startu
+  2c50:  7000 4154 4500 0d00 4154 4800 4154 4100  p.ATE...ATH.ATA.
+
+"AT+CPBW=":
+  2c60:  4154 2b43 5042 573d 00                   AT+CPBW=.
+
+"OK":
+  2c69:                        4f 4b00                     OK.
+
+",\".\"\r":
+  2c6c:                                2c22 0022              ,"."
+  2c70:  0d00                                     ..
+
+"AT+CPBR=":
+  2c72:       4154 2b43 5042 523d 00                AT+CPBR=.
+
+"+CPBR":
+  2c7b:                             2b 4350 4252             +CPBR
+  2c80:  00                                       .
+
+"AT+CMGD=":
+  2c81:    41 542b 434d 4744 3d00                  AT+CMGD=.
+
+"AT+CMGR=":
+  2c8a:                           4154 2b43 4d47            AT+CMG
+  2c90:  523d 00                                  R=.
+
+"+CMGR":
+  2c93:         2b 434d 4752 00                      +CMGR.
+
+""REC UNREAD"":
+  2c99:                        22 5245 4320 554e           "REC UN
+  2ca0:  5245 4144 2200                           READ".
+
+""REC READ"":
+  2ca6:                 2252 4543 2052 4541 4422        "REC READ"
+  2cb0:  00                                       .
+
+"AT+CMGS="":
+  2cb1:    41 542b 434d 4753 3d22 003e 00          AT+CMGS=".>.
+
+"+CMGS":
+  2cbd:                                  2b 434d               +CM
+  2cc0:  4753 00                                  GS.
+
+"AT+CLCC":
+  2cc3:         41 542b 434c 4343 004f 4b0d 0a00     AT+CLCC.OK...
+
+"+CLCC: 1,1,4,0,0":
+  2cd0:  2b43 4c43 433a 2031 2c31 2c34 2c30 2c30  +CLCC: 1,1,4,0,0
+  2ce0:  00                                       .
+
+"+CLCC: 1,1,4,1,0":
+  2ce1:    2b 434c 4343 3a20 312c 312c 342c 312c   +CLCC: 1,1,4,1,
+  2cf0:  3000                                     0.
+
+"+CLCC: 1,0,0,0,0":
+  2cf2:       2b43 4c43 433a 2031 2c30 2c30 2c30    +CLCC: 1,0,0,0
+  2d00:  2c30 00                                  ,0.
+
+"+CLCC: 1,1,0,0,0":
+  2d03:         2b 434c 4343 3a20 312c 312c 302c     +CLCC: 1,1,0,
+  2d10:  302c 3000                                0,0.
+
+"+CLCC: 1,1,0,1,0":
+  2d14:            2b43 4c43 433a 2031 2c31 2c30      +CLCC: 1,1,0
+  2d20:  2c31 2c30 00                             ,1,0.
+
+"+CLCC:":
+  2d25:              2b 434c 4343 3a00                 +CLCC:.
+
+"AT+VTS=":
+  2d2c:                                4154 2b56              AT+V
+  2d30:  5453 3d00                                TS=.
+
+"AT+CLVL=":
+  2d34:            4154 2b43 4c56 4c3d 00             AT+CLVL=.
+
+"ATD>"SM" ":
+  2d3d:                                  41 5444               ATD
+  2d40:  3e22 534d 2220 003b 0d00 4154 4400       >"SM" .;..ATD.
+
+"AT+CPAS":
+  2d4e:                                     4154                AT
+  2d50:  2b43 5041 5300 3000 3300 3400            +CPAS.0.3.4.
+
+"AT+CSQ":
+  2d5c:                                4154 2b43              AT+C
+  2d60:  5351 00                                  SQ.
+
+"\t+CSQ:":
+  2d63:         09 2b43 5351 3a00                    .+CSQ:.
+
+"AT+CNMI=2,0":
+  2d6a:                           4154 2b43 4e4d            AT+CNM
+  2d70:  493d 322c 3000                           I=2,0.
+
+"AT+CPMS="SM","SM","SM"":
+  2d76:                 4154 2b43 504d 533d 2253        AT+CPMS="S
+  2d80:  4d22 2c22 534d 222c 2253 4d22 00         M","SM","SM".
+
+"+CPMS:":
+  2d8d:                                  2b 4350               +CP
+  2d90:  4d53 3a00                                MS:.
+
+"AT&F":
+  2d94:            4154 2646 00                       AT&F.
+
+"AT+CLIP=1":
+  2d99:                        41 542b 434c 4950           AT+CLIP
+  2da0:  3d31 00                                  =1.
+
+"AT+CMEE=0":
+  2da3:         41 542b 434d 4545 3d30 00            AT+CMEE=0.
+
+"AT+CMGF=1":
+  2dad:                                  41 542b               AT+
+  2db0:  434d 4746 3d31 00                        CMGF=1.
+
+"AT+CPBS="SM"":
+  2db7:                   41 542b 4350 4253 3d22         AT+CPBS="
+  2dc0:  534d 2200 4154 00                        SM".AT.
+
+"AT+IPR=":
+  2dc7:                   41 542b 4950 523d 00           AT+IPR=.
+
+"AT+CREG?":
+  2dcf:                                       41                 A
+  2dd0:  542b 4352 4547 3f00                      T+CREG?.
+
+"+CREG: 0,1":
+  2dd8:                      2b43 5245 473a 2030          +CREG: 0
+  2de0:  2c31 00                                  ,1.
+
+"+CREG: 0,5":
+  2de3:         2b 4352 4547 3a20 302c 3500          +CREG: 0,5.
+
+"AT+CMGL="REC UNREAD"":
+  2dee:                                     4154                AT
+  2df0:  2b43 4d47 4c3d 2252 4543 2055 4e52 4541  +CMGL="REC UNREA
+  2e00:  4422 0d00                                D"..
+
+"AT+CMGL="REC READ"":
+  2e04:            4154 2b43 4d47 4c3d 2252 4543      AT+CMGL="REC
+  2e10:  2052 4541 4422 0d00                       READ"..
+
+"AT+CMGL="ALL"":
+  2e18:                      4154 2b43 4d47 4c3d          AT+CMGL=
+  2e20:  2241 4c4c 220d 00                        "ALL"..
+
+"+CMGL:":
+  2e27:                   2b 434d 474c 3a00 0020         +CMGL:.. 
+  2e30:  000f 0700 00                             .....
+
+"+393459932108":
+  2e35:              2b 3339 3334 3539 3933 3231       +3934599321
+  2e40:  3038 00                                  08.
+
+"hello world":
+  2e43:         68 656c 6c6f 2077 6f72 6c64 0000     hello world..
+  2e50:  0000 00d5 0ec8 12e0 1200 0000 0074 12c8  .............t..
+  2e60:  12e0 1219 1244 122a 1268 1200 3500       .....D.*.h..5.
+
+"AT+CMGL="REC UNREAD"":
+  2e6e:                                     4154                AT
+  2e70:  2b43 4d47 4c3d 2252 4543 2055 4e52 4541  +CMGL="REC UNREA
+  2e80:  4422 0d00                                D"..
+
+"AT+CMGL="ALL"":
+  2e84:            4154 2b43 4d47 4c3d 2241 4c4c      AT+CMGL="ALL
+  2e90:  220d 00                                  "..
+
+"+CMGL:":
+  2e93:         2b 434d 474c 3a00 0020 000f 0700     +CMGL:.. ....
+  2ea0:  00                                       .
+
+"+393453054796":
+  2ea1:    2b 3339 3334 3533 3035 3437 3936 00     +393453054796.
+
+"hello world":
+  2eaf:                                       68                 h
+  2eb0:  656c 6c6f 2077 6f72 6c64 0000 0000 000b  ello world......
+  2ec0:  0ffe 1216 1300 0000 00aa 12fe 1216 134f  ...............O
+  2ed0:  127a 1260 129e 1200 3500                 .z.`....5.
+
+"AT+CMGL="REC UNREAD"":
+  2eda:                           4154 2b43 4d47            AT+CMG
+  2ee0:  4c3d 2252 4543 2055 4e52 4541 4422 0d00  L="REC UNREAD"..
+
+"AT+CMGL="REC REA":
+  2ef0:  4154 2b43 4d47 4c3d 2252 4543 2052 4541  AT+CMGL="REC REA
+  2f00:  9f93 ef93 ff93 2091 ca04 3091 cb04 8091  ...... ...0.....
+  2f10:  cc04 9091 cd04 2817 3907 31f4 8091 c100  ......(.9.1.....
+  2f20:  8f7d 8093 c100 14c0 e091 cc04 f091 cd04  .}..............
+  2f30:  e657 fb4f 2081 8091 cc04 9091 cd04 0196  .W.O ...........
+  2f40:  8f73 9070 9093 cd04 8093 cc04 2093 c600  .s.p........ ...
+  2f50:  ff91 ef91 9f91 8f91 3f91 2f91 0f90 0fbe  ........?./.....
+  2f60:  0f90 1f90 1895 af92 bf92 df92 ef92 ff92  ................
+  2f70:  0f93 1f93 cf93 df93 ec01 7a01 8b01 dd24  ..........z....$
+  2f80:  4030 81ee 5807 80e0 6807 80e0 7807 11f0  @0..X...h...x...
+  2f90:  dd24 d394 91e0 a92e b12c ec89 fd89 dd20  .$.......,..... 
+  2fa0:  69f0 c501 0e8c 02c0 880f 991f 0a94 e2f7  i...............
+  2fb0:  8083 60e0 79e0 8de3 90e0 05c0 1082 60e8  ..`.y.........`.
+  2fc0:  74e8 8ee1 90e0 a801 9701 0e94 d219       t.............
+
+"!P0@@@P@V":
+  2fce:                                     2150                !P
+  2fd0:  3040 4040 5040 5695 4795 3795 2795 80e1  0@@@P@V.G.7.'...
+  2fe0:  2030 3807 20f0 dd20 11f0 dd24 d6cf e889   08. .. ...$....
+  2ff0:  f989 3083 ea89 fb89 2083 ee89 ff89 4081  ..0..... .....@.
+  3000:  21e0 30e0 c901 0a8c 02c0 880f 991f 0a94  !.0.............
+  3010:  e2f7 482b 4083 ee89 ff89 4081 c901 0b8c  ..H+@.....@.....
+  3020:  02c0 880f 991f 0a94 e2f7 482b 4083 ee89  ..........H+@...
+  3030:  ff89 4081 c901 0c8c 02c0 880f 991f 0a94  ..@.............
+  3040:  e2f7 482b 4083 ee89 ff89 8081 0d8c 02c0  ..H+@...........
+  3050:  220f 331f 0a94 e2f7 2095 2823 2083 df91  ".3..... .(# ...
+  3060:  cf91 1f91 0f91 ff90 ef90 df90 bf90 af90  ................
+  3070:  0895 dc01 1c96 ed91 fc91 1d97 e05c ff4f  .............\.O
+  3080:  2191 3191 8081 9181 281b 390b            !.1.....(.9.
+
+"/s0p":
+  308c:                                2f73 3070              /s0p
+  3090:  c901 0895 dc01 1c96 ed91 fc91 1d97 e05c  ...............\
+  30a0:  ff4f 2081 3181 e054 f040 df01 ae5b bf4f  .O .1..T.@...[.O
+  30b0:  8d91 9c91 1197 2817 3907 19f4 2fef 3fef  ......(.9.../.?.
+  30c0:  07c0 8d91 9c91 e80f f91f 8081 282f 30e0  ............(/0.
+  30d0:  c901 0895 dc01 1c96 ed91 fc91 1d97 e05c  ...............\
+  30e0:  ff4f 2081 3181 e054 f040 df01 ae5b bf4f  .O .1..T.@...[.O
+  30f0:  8d91 9c91 1197 2817 3907 19f4 2fef 3fef  ......(.9.../.?.
+  3100:  10c0 8d91 9c91 1197 e80f f91f 2081 8d91  ............ ...
+  3110:  9c91 1197 0196 8f73 9070 1196 9c93 8e93  .......s.p......
+  3120:  30e0 c901 0895 fc01 8685 9785 dc01 a05c  0..............\
+  3130:  bf4f fc01 ee5b ff4f 2d91 3c91 1197 8081  .O...[.O-.<.....
+  3140:  9181 2817 3907 c1f7 0895 cf93 df93 ec01  ..(.9...........
+  3150:  ee85 ff85 e05c ff4f 2081 3181 e054 f0    .....\.O .1..T.
+
+"@/_?O/s0p":
+  315f:                                       40                 @
+  3160:  2f5f 3f4f 2f73 3070 df01 ae5b bf4f 8d91  /_?O/s0p...[.O..
+  3170:  9c91 1197 2817 3907 d1f3 e05c ff4f 8081  ....(.9....\.O..
+  3180:  9181 e054 f040 e80f f91f 6083 ee85 ff85  ...T.@....`.....
+  3190:  e05c ff4f 3183 2083 ee89 ff89 2081 81e0  .\.O1. ..... ...
+  31a0:  90e0 0d8c 02c0 880f 991f 0a94 e2f7 282b  ..............(+
+  31b0:  2083 81e0 90e0 df91 cf91 0895 81e0 0895   ...............
+  31c0:  1092 d104 1092 d004 88ee 93e0 a0e0 b0e0  ................
+  31d0:  8093 d204 9093 d304 a093 d404 b093 d504  ................
+  31e0:  84ec 91e0 9093 cf04 8093 ce04 86e4 94e0  ................
+  31f0:  9093 db04 8093 da04 8ae8 94e0 9093 dd04  ................
+  3200:  8093 dc04 85ec 90e0 9093 df04 8093 de04  ................
+  3210:  84ec 90e0 9093 e104 8093 e004 80ec 90e0  ................
+  3220:  9093 e304 8093 e204 81ec 90e0 9093 e504  ................
+  3230:  8093 e404 86ec 90e0 9093 e704 8093 e604  ................
+  3240:  84e0 8093 e804 83e0 8093 e904 87e0 8093  ................
+  3250:  ea04 85e0 8093 eb04 81e0 8093 ec04 0895  ................
+  3260:  cf93 df93 0e94 6216 0e94 e401 c5e6 d7e1  ......b.........
+  3270:  0e94 c001 2097 e1f3 0e94 6517 f9cf cf92  .... .....e.....
+  3280:  df92 ef92 ff92 0f93 1f93 cf93 df93 7c01  ..............|.
+  3290:  6b01 8a01 c0e0 d0e0 0fc0 d601 6d91 6d01  k...........m.m.
+  32a0:  d701 ed91 fc91 0190 f081 e02d c701 0995  ...........-....
+  32b0:  c80f d91f 0150 1040 0115 1105 71f7 ce01  .....P.@....q...
+  32c0:  df91 cf91 1f91 0f91 ff90 ef90 df90 cf90  ................
+  32d0:  0895 ef92 ff92 0f93 1f93 8c01 dc01 ed91  ................
+  32e0:  fc91 0190 f081 e02d 6de0 0995 7c01 d801  .......-m...|...
+  32f0:  ed91 fc91 0190 f081 e02d c801 6ae0 0995  .........-..j...
+  3300:  9c01 2e0d 3f1d c901 1f91 0f91 ff90 ef90  ....?...........
+  3310:  0895 cf93 df93 db01 0d90 0020 e9f7 1197  ........... ....
+  3320:  a61b b70b ec01 e881 f981 0280 f381 e02d  ...............-
+  3330:  ad01 0995 df91 cf91 0895 0e94 8919 0895  ................
+  3340:  ef92 ff92 0f93 1f93 7c01 0e94 8919 8c01  ........|.......
+  3350:  c701 0e94 6919 080f 191f c801 1f91 0f91  ....i...........
+  3360:  ff90 ef90 0895 629f d001 739f f001 829f  ......b...s.....
+  3370:  e00d f11d 649f e00d f11d 929f f00d 839f  ....d...........
+  3380:  f00d 749f f00d 659f f00d 9927 729f b00d  ..t...e....'r...
+  3390:  e11d f91f 639f b00d e11d f91f bd01 cf01  ....c...........
+  33a0:  1124 0895 a1e2 1a2e aa1b bb1b fd01 0dc0  .$..............
+  33b0:  aa1f bb1f ee1f ff1f a217 b307 e407 f507  ................
+  33c0:  20f0 a21b b30b e40b f50b 661f 771f 881f   .........f.w...
+  33d0:  991f 1a94 69f7 6095 7095 8095 9095 9b01  ....i.`.p.......
+  33e0:  ac01 bd01 cf01 0895 ee0f ff1f 0590 f491  ................
+  33f0:  e02d 0994 10e0 c8ed d0e0 04c0 fe01 0e94  .-..............
+  3400:  f619 2296 ca3d d107 c9f7 f894 ffcf       .."..=........
+
+"Initializing SD card...":
+  340e:                                     496e                In
+  3410:  6974 6961 6c69 7a69 6e67 2053 4420 6361  itializing SD ca
+  3420:  7264 2e2e 2e00                           rd....
+
+"initialization failed!":
+  3426:                 696e 6974 6961 6c69 7a61        initializa
+  3430:  7469 6f6e 2066 6169 6c65 6421 00         tion failed!.
+
+"initialization done.":
+  343d:                                  69 6e69               ini
+  3440:  7469 616c 697a 6174 696f 6e20 646f 6e65  tialization done
+  3450:  2e00                                     ..
+
+"test.txt":
+  3452:       7465 7374 2e74 7874 00                test.txt.
+
+"Writing to test.txt...":
+  345b:                             57 7269 7469             Writi
+  3460:  6e67 2074 6f20 7465 7374 2e74 7874 2e2e  ng to test.txt..
+  3470:  2e00                                     ..
+
+"testing 1, 2, 3.":
+  3472:       7465 7374 696e 6720 312c 2032 2c20    testing 1, 2, 
+  3480:  332e 00                                  3..
+
+"done.":
+  3483:         64 6f6e 652e 00                      done..
+
+"error opening test.txt":
+  3489:                        65 7272 6f72 206f           error o
+  3490:  7065 6e69 6e67 2074 6573 742e 7478 7400  pening test.txt.
+
+"test.txt:":
+  34a0:  7465 7374 2e74 7874 3a00                 test.txt:.
+
+"/":
+  34aa:                           2f00                      /.
+
+" ":
+  34ac:                                2000 f104               ...
+  34b0:  0000 ffff ffff 0000 0000 f602 b303 0e03  ................
+  34c0:  5903 7703 5103 0000 0000 cb0f 3f19 0000  Y.w.Q.......?...
+  34d0:  0000 a518 3f19 3918 6a18 4a18 9318       ....?.9.j.J...
+
+"ting to test.txt...":
+  34de:                                     7469                ti
+  34e0:  6e67 2074 6f20 7465 7374 2e74 7874 2e2e  ng to test.txt..
+  34f0:  2e00                                     ..
+
+"testing 1, 2, ":
+  34f2:       7465 7374 696e 6720 312c 2032 2c20    testing 1, 2, 

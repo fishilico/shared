@@ -1,0 +1,259 @@
+
+main():
+  7e00: 2411           r1 := 0
+  7e02: b784           r24 := PORT.MCUSR
+  7e04: be14           PORT.MCUSR := 0
+  7e06: ff81 d0f0      if_not(bit(r24, 1)):call 0x7fea <appStart>
+  7e0a: e085           r24 := 5          # TCCR1B = _BV(CS12) | _BV(CS10), set up timer 1
+  7e0c: 9380 0081      SRAM.TCCR1B := r24
+  7e10: e082           r24 := 2          # UART_SRA = _BV(U2X0), double speed mode USART0
+  7e12: 9380 00c0      SRAM.UCSR0A := r24
+  7e16: e188           r24 := 0x18       # UART_SRB = _BV(RXEN0) | _BV(TXEN0), enable RX/TX
+  7e18: 9380 00c1      SRAM.UCSR0B := r24
+  7e1c: e086           r24 := 6          # UART_SRC = _BV(UCSZ00) | _BV(UCSZ01)
+  7e1e: 9380 00c2      SRAM.UCSR0C := r24
+  7e22: e180           r24 := 0x10       # Set up UART baud rate
+  7e24: 9380 00c4      SRAM.UBRR0L := r24
+  7e28: e08e           r24 := 14         # watchdogConfig(WATCHDOG_1S)
+  7e2a: d0c9           call 0x7fbe <watchdogConfig(r24)>
+  7e2c: 9a25           set_bit(PORT.LED_DDR, 5) # LED_DDR |= _BV(LED), set LED pin as output
+_flash_led(count=6):
+  7e2e: e086           r24 := 6          # Flash LED 3 times
+  7e30: e320 ef3c      r19:r18 := 0xfc30
+  7e34: e091           r25 := 1
+__loop_flashled:
+  7e36: 9330 0085      SRAM.TCNT1H := r19
+  7e3a: 9320 0084      SRAM.TCNT1L := r18
+  7e3e: bb96           PORT.TIFR1 := r25
+  7e40: 9bb0 cffe      loop_until(bit(PORT.TIFR1, 0)) # wait_for(TIFR1 & _BV(TOV1))
+  7e44: 9a1d           set_bit(PORT.LED_PIN, 5)
+  7e46: 95a8           watchdog_reset
+  7e48: 5081           r24 -= 1
+  7e4a: f7a9           brne 0x7e36 <__loop_flashled>
+  7e4c: 24cc 24dd      r13:r12 := 0
+  7e50: 2488           r8 := 0
+  7e52: 9483           r8 ++
+  7e54: e0b5           r27 := 5
+  7e56: 2eab           r10 := r27
+  7e58: e1a1           r26 := 0x11
+  7e5a: 2e9a           r9 := r26
+  7e5c: e0f3           r31 := 3
+  7e5e: 2ebf           r11 := r31
+_forever_loop:
+  7e60: d0a2           call 0x7fa6 <getch()->r24>
+  7e62: 3481 f461      if(r24 != 0x41):jmp 0x7e7e <_else...>
+_if(ch==STK_GET_PARAMETER):
+  7e66: d09f           call 0x7fa6 <getch()->r24>
+  7e68: 2f08           r16 := r24
+  7e6a: d0af           call 0x7fca <verifySpace>
+  7e6c: 3802 f011      if(r16 == 0x82):jmp 0x7e74 <__STK_GET_PARAMETER,0x82 or 0x81>
+  7e70: 3801 f411      if(r16 != 0x81):jmp 0x7e78 <__STK_GET_PARAMETER,other>
+__STK_GET_PARAMETER,0x82 or 0x81:
+  7e74: e084           r24 := 4
+  7e76: c001           jmp 0x7e7a <__STK_GET_PARAMETER:putch>
+__STK_GET_PARAMETER,other:
+  7e78: e083           r24 := 3
+__STK_GET_PARAMETER:putch:
+  7e7a: d08d           call 0x7f96 <putch(r24, r25)> # putch(optiboot version 4.4)
+  7e7c: c089           jmp 0x7f90 <_endif(ch)>
+_else...:
+  7e7e: 3482 f411      if(r24 != 0x42):jmp 0x7e86 <_else...>
+_if(ch == STK_SET_DEVICE):
+  7e82: e184           r24 := 0x14
+  7e84: c003           jmp 0x7e8c <__getNch>
+_else...:
+  7e86: 3485 f419      if(r24 != 0x45):jmp 0x7e90 <_else...>
+_if(ch == STK_SET_DEVICE_EXT):
+  7e8a: e085           r24 := 5
+__getNch:
+  7e8c: d0a6           call 0x7fda <getNch(r24=count)> # Ignore SET_DEVICE*
+  7e8e: c080           jmp 0x7f90 <_endif(ch)>
+_else...:
+  7e90: 3585 f479      if(r24 != 0x55):jmp 0x7eb2 <_else...>
+_if(ch == STK_LOAD_ADDRESS):
+  7e94: d088           call 0x7fa6 <getch()->r24>
+  7e96: 2ee8 24ff      r15:r14 := 0:r24
+  7e9a: d085           call 0x7fa6 <getch()->r24>
+  7e9c: 2f08 e010      r17:r16 := 0:r24  # r17:r16 = (read 2 bytes) * 2
+  7ea0: 2f10           r17 := r16
+  7ea2: 2700           r16 := 0
+  7ea4: 290e 291f      r17:r16 |= r15:r14
+  7ea8: 0f00 1f11      r17:r16 *= 2
+  7eac: d08e           call 0x7fca <verifySpace>
+  7eae: 0168           r13:r12 := r17:r16 # r13:r12 = new address
+  7eb0: c06f           jmp 0x7f90 <_endif(ch)>
+_else...:
+  7eb2: 3586 f421      if(r24 != 0x56):jmp 0x7ebe <_else...>
+_if(ch == STK_UNIVERSAL):
+  7eb6: e084           r24 := 4
+  7eb8: d090           call 0x7fda <getNch(r24=count)>
+  7eba: e080           r24 := 0
+  7ebc: cfde           jmp 0x7e7a <__STK_GET_PARAMETER:putch>
+_else...:
+  7ebe: 3684 f009      if(r24 == 0x64):jmp 0x7ec4 <_if(ch == STK_PROG_PAGE)>
+  7ec2: c040           jmp 0x7f44 <_else...>
+_if(ch == STK_PROG_PAGE):
+  7ec4: d070           call 0x7fa6 <getch()->r24>
+  7ec6: d06f           call 0x7fa6 <getch()->r24>
+  7ec8: 2f08           r16 := r24        # r16 = length
+  7eca: d06d           call 0x7fa6 <getch()->r24>
+  7ecc: e080           r24 := 0
+  7ece: 16c8           cmp r12, r24
+  7ed0: e780           r24 := 0x70
+  7ed2: 06d8           cmp_carry r13, r24
+  7ed4: f418           brcc 0x7edc <__endif>
+__if(r13:r12 < 0x7000):
+  7ed6: 01f6           r31:r30 := r13:r12 # Erase Flash memory at r13:r12
+  7ed8: beb7           PORT.SPMCSR := r11
+  7eda: 95e8           store_program_memory
+__endif:
+  7edc: e0c0 e0d1      r29:r28 := 0x100
+__loop_get_page:
+  7ee0: d062           call 0x7fa6 <getch()->r24> # Read bytes in 0x0100
+  7ee2: 9389           *(r29:r28 ++) := r24
+  7ee4: 170c f7e1      if(r16 != r28):jmp 0x7ee0 <__loop_get_page>
+  7ee8: e0f0           r31 := 0
+  7eea: 16cf           cmp r12, r31
+  7eec: e7f0           r31 := 0x70
+  7eee: 06df           cmp_carry r13, r31
+  7ef0: f018           brcs 0x7ef8 <__endif>
+__if(r13:r12 >= 0x7000):
+  7ef2: 01f6           r31:r30 := r13:r12 # Erase Flash memory at r13:r12
+  7ef4: beb7           PORT.SPMCSR := r11
+  7ef6: 95e8           store_program_memory
+__endif:
+  7ef8: d068           call 0x7fca <verifySpace>
+__loop_spm_busy_wait:
+  7efa: b607           r0 := PORT.SPMCSR
+  7efc: fc00 cffd      if(bit(r0, 0)):jmp 0x7efa <__loop_spm_busy_wait>
+  7f00: 01a6           r21:r20 := r13:r12
+  7f02: e0a0 e0b1      r27:r26 := 0x100
+__loop_copy:
+  7f06: 912c           r18 := *(r27:r26) # Copy SRAM@0x0100 to Flash@r13:12
+  7f08: e030           r19 := 0
+  7f0a: 9611           r27:r26 += 1
+  7f0c: 918c           r24 := *(r27:r26)
+  7f0e: 9711           r27:r26 -= 1
+  7f10: e090           r25 := 0
+  7f12: 2f98           r25 := r24
+  7f14: 2788           r24 := 0
+  7f16: 2b82 2b93      r25:r24 |= r19:r18
+  7f1a: 9612           r27:r26 += 2
+  7f1c: 01fa           r31:r30 := r21:r20 # Store r25:r24 into Programming Buffer@r21:r20
+  7f1e: 010c           r1:r0 := r25:r24
+  7f20: be87           PORT.SPMCSR := r8
+  7f22: 95e8           store_program_memory
+  7f24: 2411           r1 := 0
+  7f26: 5f4e 4f5f      r21:r20 -= -2
+  7f2a: e0f1           r31 := 1
+  7f2c: 38a0 07bf f751 if(r27:r26 != r31:0x80):jmp 0x7f06 <__loop_copy> # ... repeat until r27:r26 reaches 0x180
+  7f32: 01f6           r31:r30 := r13:r12 # Write programming buffer
+  7f34: bea7           PORT.SPMCSR := r10
+  7f36: 95e8           store_program_memory
+__loop_spm_busy_wait:
+  7f38: b607           r0 := PORT.SPMCSR
+  7f3a: fc00 cffd      if(bit(r0, 0)):jmp 0x7f38 <__loop_spm_busy_wait>
+  7f3e: be97           PORT.SPMCSR := r9 # Reable read access to the flash
+  7f40: 95e8           store_program_memory
+  7f42: c026           jmp 0x7f90 <_endif(ch)>
+_else...:
+  7f44: 3784 f4b1      if(r24 != 0x74):jmp 0x7f74 <_else...>
+_if(ch == STK_READ_PAGE):
+  7f48: d02e           call 0x7fa6 <getch()->r24>
+  7f4a: d02d           call 0x7fa6 <getch()->r24>
+  7f4c: 2ef8           r15 := r24
+  7f4e: d02b           call 0x7fa6 <getch()->r24>
+  7f50: d03c           call 0x7fca <verifySpace>
+  7f52: 01f6           r31:r30 := r13:r12
+  7f54: 2cef           r14 := r15
+__loop_read_progmem_to_uart:
+  7f56: 018f           r17:r16 := r31:r30
+  7f58: 5f0f 4f1f      r17:r16 -= -1
+  7f5c: 9184           r24 := PROG[r31:r30]
+  7f5e: d01b           call 0x7f96 <putch(r24, r25)>
+  7f60: 94ea           r14 --
+  7f62: 01f8           r31:r30 := r17:r16
+  7f64: f7c1           brne 0x7f56 <__loop_read_progmem_to_uart>
+  7f66: 9408 1cc1 1cd1 r13:r12 += 1
+  7f6c: 94fa           r15 --
+  7f6e: 0ccf 1cd1      r13:r12 += 0:r15
+  7f72: c00e           jmp 0x7f90 <_endif(ch)>
+_else...:
+  7f74: 3785 f439      if(r24 != 0x75):jmp 0x7f86 <_else...>
+_if(ch == STK_READ_SIGN):
+  7f78: d028           call 0x7fca <verifySpace>
+  7f7a: e18e           r24 := 0x1e       # "Read signature" command, putch 3 bytes
+  7f7c: d00c           call 0x7f96 <putch(r24, r25)>
+  7f7e: e985           r24 := 0x95
+  7f80: d00a           call 0x7f96 <putch(r24, r25)>
+  7f82: e08f           r24 := 15
+  7f84: cf7a           jmp 0x7e7a <__STK_GET_PARAMETER:putch>
+_else...:
+  7f86: 3581 f411      if(r24 != 0x51):jmp 0x7f8e <_else>
+_if(ch == 'Q'):
+  7f8a: e088           r24 := 8          # watchdogConfig(WATCHDOG_16MS)
+  7f8c: d018           call 0x7fbe <watchdogConfig(r24)>
+_else:
+  7f8e: d01d           call 0x7fca <verifySpace>
+_endif(ch):
+  7f90: e180           r24 := 0x10
+  7f92: d001           call 0x7f96 <putch(r24, r25)>
+  7f94: cf65           jmp 0x7e60 <_forever_loop>
+
+putch(r24, r25):
+  7f96: 2f98           r25 := r24
+_loop:
+  7f98: 9180 00c0      r24 := SRAM.UCSR0A
+  7f9c: ff85 cffc      if_not(bit(r24, 5)):jmp 0x7f98 <_loop> # loop_while(!(UCSR0A & _BV(UDRE0))
+  7fa0: 9390 00c6      SRAM.UDR0 := r25
+  7fa4: 9508           ret
+
+getch()->r24:
+  7fa6: 9180 00c0      r24 := SRAM.UCSR0A
+  7faa: ff87 cffc      if_not(bit(r24, 7)):jmp 0x7fa6 <getch()->r24> # loop_while(!(UCSR0A & _BV(RXC0)))
+  7fae: 9180 00c0      r24 := SRAM.UCSR0A
+  7fb2: fd84 c001      if(bit(r24, 4)):jmp 0x7fb8 <_endif>
+  7fb6: 95a8           watchdog_reset    # if(!(UCSR0A & _BV(FE0))) wdr (if frame error, reset)
+_endif:
+  7fb8: 9180 00c6      r24 := SRAM.UDR0
+  7fbc: 9508           ret
+
+watchdogConfig(r24):
+  7fbe: e6e0 e0f0      r31:r30 := 0x60 (=WDTCSR) # WDTCSR = _BV(WDCE) | _BV(WDE)
+  7fc2: e198           r25 := 0x18
+  7fc4: 8390           *(r31:r30) := r25
+  7fc6: 8380           *(r31:r30) := r24 # WDTCSR = r24
+  7fc8: 9508           ret
+
+verifySpace:
+  7fca: dfed           call 0x7fa6 <getch()->r24>
+  7fcc: 3280 f019      if(r24 == 0x20):jmp 0x7fd6 <_end_if(getch() != space)>
+  7fd0: e088           r24 := 8          # watchdogConfig(WATCHDOG_16MS)
+  7fd2: dff5           call 0x7fbe <watchdogConfig(r24)>
+  7fd4: cfff           loop_forever_here
+_end_if(getch() != space):
+  7fd6: e184           r24 := 0x14       # putch(STK_INSYNC)
+  7fd8: cfde           jmp 0x7f96 <putch(r24, r25)>
+
+getNch(r24=count):
+  7fda: 931f           push r17
+  7fdc: 2f18           r17 := r24
+_loop_getch:
+  7fde: dfe3           call 0x7fa6 <getch()->r24>
+  7fe0: 5011           r17 -= 1
+  7fe2: f7e9           brne 0x7fde <_loop_getch>
+  7fe4: dff2           call 0x7fca <verifySpace>
+  7fe6: 911f           pop r17
+  7fe8: 9508           ret
+
+appStart:
+  7fea: e080           r24 := 0          # watchdogConfig(WATCHDOG_OFF)
+  7fec: dfe8           call 0x7fbe <watchdogConfig(r24)>
+  7fee: 27ee 27ff      r31:r30 := 0      # Start application at 0000
+  7ff2: 9409           ijmp r31:r30
+
+padding:
+  7ff4:            ffff ffff ffff ffff ffff           ..........
+
+optiboot_version:
+  7ffe:                                     0404                ..
