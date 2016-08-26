@@ -1,5 +1,6 @@
 /**
  * Query some information to the local WMI service
+ * (Windows Management Instrumentation)
  *
  * Documentation:
  * In VisualBasic, WMI can be used like this, for example to enumerate local USB drives:
