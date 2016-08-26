@@ -1,8 +1,8 @@
     .section .shcode, "ax", @progbits
-    .globl _start
-    .hidden _start
-    .type _start, @function
-_start:
+    .globl main
+    .hidden main
+    .type main, @function
+main:
     /* 31 c0                         */  xor     %eax, %eax /* rax = 0 */
     /* 99                            */  cltd               /* rdx = 0 */
     /* 52                            */  push    %rdx

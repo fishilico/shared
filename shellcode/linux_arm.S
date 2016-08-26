@@ -1,8 +1,8 @@
     .section .shcode, "ax", %progbits
-    .globl _start
-    .type _start, %function
+    .globl main
+    .type main, %function
     .arm
-_start:
+main:
     /* e28f4001 */  add     r4, pc, #1
     /* e12fff14 */  bx      r4              /* go to thumb mode */
 

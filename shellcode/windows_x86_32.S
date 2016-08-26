@@ -3,15 +3,18 @@
  * Define symbols with storage class 2 (IMAGE_SYM_CLASS_EXTERNAL), and object
  * type 32 (function), for COFF Symbol Table.
  */
-    .globl _mainCRTStartup
-    .def _mainCRTStartup; .scl 2; .type 32; .endef
-    .set _mainCRTStartup, _start
-    .globl _WinMainCRTStartup
-    .def _WinMainCRTStartup; .scl 2; .type 32; .endef
-    .set _WinMainCRTStartup, _start
-    .globl _start
-    .def _start; .scl 2; .type 32; .endef
-_start:
+    .globl _WinMain@16
+    .def _WinMain@16; .scl 2; .type 32; .endef
+    .set _WinMain@16, _main
+    .globl _wWinMain@16
+    .def _wWinMain@16; .scl 2; .type 32; .endef
+    .set _wWinMain@16, _main
+    .globl _wmain
+    .def _wmain; .scl 2; .type 32; .endef
+    .set _wmain@16, _main
+    .globl _main
+    .def _main; .scl 2; .type 32; .endef
+_main:
     /* fc                */  cld                            /* Clear direction flag */
     /* eb 76             */  jmp    start                   /* Make relative calls negative */
 

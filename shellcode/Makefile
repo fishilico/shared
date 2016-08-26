@@ -33,7 +33,6 @@ shcdump: $(SHELLCODE_RAW) $(SHELLCODE_BIN)
 $(SHELLCODE_RAW): $(SHELLCODE_BIN)
 	$(V_OBJCOPY)$(OBJCOPY) -j .shcode -O binary $< $@ && $(CHMOD) -x $@
 
-$(SHELLCODE_BIN): LDFLAGS += -nostdlib
 %.$(BIN_EXT): .%.o
 	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
