@@ -1,5 +1,12 @@
 # Makefile definitions which are common to every projects
 
+# External commands used in this file
+GREP ?= grep
+PYTHON ?= python
+PYTHON3 ?= python3
+RM ?= rm -f
+SH ?= sh
+
 # Define "quiet" commands, with V=1, like git and systemd project
 ifneq ($(findstring $(MAKEFLAGS), s), s)
 ifndef V
@@ -19,7 +26,6 @@ endif
 endif
 
 # Clean command
-RM ?= rm -f
 CLEAN_CMD := $(V_CLEAN)$(RM) \
 	*.a *.aux *.bin *.dll *.efi *.elf *.exe *.glob *.log *.o *.out *.pdf *.so \
 	*.tmp *.toc *.vo .*.d .*.o && \
@@ -41,9 +47,6 @@ cc-disable-warning = $(call try-run,$(CC) -Werror -W$(strip $(1)) -E - < /dev/nu
 # The prefix would be "wine" for Windows applications on Linux, "qemu-arm" for
 # ARM programs on x86, etc.
 # Add a special case for Python and Shell programs
-PYTHON ?= python
-PYTHON3 ?= python3
-SH ?= sh
 RUN_TEST_PREFIX ?=
 run-test-progs = \
 	for P in $(sort $(1)); do \
@@ -58,3 +61,29 @@ run-test-progs = \
 			$(RUN_TEST_PREFIX) "./$$P" || exit $$? ; \
 		fi ; \
 	done
+
+# Get the target architecture of the compiler
+# Usage: TARGET_TRIPLET := $(get-cc-target-triplet)
+get-cc-target-triplet = $(shell $(CC) -dumpmachine)
+
+# "gcc -m32 -dumpmachine" prints x86_64-unknown-linux-gnu on x86_64, not i386, which forces this selection
+select_x86_bits = $(shell printf '\#ifdef __x86_64__\nx86_64\n\#elif defined(__i386__)\nx86_32\n\#endif' |$(CC) -E - |$(GREP) '^x86')
+
+# Usage: TARGET_ARCH := $(call cc-triplet2arch,$(TARGET_TRIPLET))
+cc-triplet2arch = \
+$(or \
+$(if $(filter arm%,$(1)),arm), \
+$(if $(filter i386-%,$(1)),x86_32), \
+$(if $(filter i486-%,$(1)),x86_32), \
+$(if $(filter i686-%,$(1)),x86_32), \
+$(if $(filter x86_64-%,$(1)),$(select_x86_bits)), \
+)
+# Get the target architecture when the target OS is not needed
+get-cc-target-arch = $(call cc-triplet2arch,$(get-cc-target-triplet))
+
+# Usage: TARGET_OS := $(call cc-triplet2os,$(TARGET_TRIPLET))
+cc-triplet2os = \
+$(or \
+$(if $(findstring -linux, $(1)),linux), \
+$(if $(findstring -mingw, $(1)),windows), \
+)

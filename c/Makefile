@@ -68,15 +68,9 @@ $(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0) --std
 endif
 
 # Use $(CC) -dumpmachine to find out the target triplet
-TARGET_TRIPLET := $(shell $(CC) -dumpmachine)
-ifneq (,$(findstring i386, $(TARGET_TRIPLET)))
-PROGRAMS += $(X86_PROGRAMS)
-else ifneq (,$(findstring i486, $(TARGET_TRIPLET)))
-PROGRAMS += $(X86_PROGRAMS)
-else ifneq (,$(findstring i686, $(TARGET_TRIPLET)))
-PROGRAMS += $(X86_PROGRAMS)
-else ifneq (,$(findstring x86_64, $(TARGET_TRIPLET)))
-PROGRAMS += $(X86_PROGRAMS)
+TARGET_ARCH := $(get-cc-target-arch)
+ifneq ($(filter x86_%,$(TARGET_ARCH)),)
+	PROGRAMS += $(X86_PROGRAMS)
 endif
 
 TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(PROGRAMS:%=%.$(BIN_EXT)) $(wildcard *.sh))

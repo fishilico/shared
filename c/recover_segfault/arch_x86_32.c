@@ -7,7 +7,7 @@
  * Intel Architectures Software Developer's Manual Volume 2: Instruction Set Reference
  * Intel Architectures Software Developer's Manual Volume 3: System Programming Guide
  */
-#include "arch_x86.h"
+#include "arch_x86_32.h"
 
 #include <assert.h>
 #include <inttypes.h>

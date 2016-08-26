@@ -8,36 +8,12 @@ SOURCES := $(wildcard *.c)
 PROGRAMS := $(filter-out arch_% os_% test_asm_%, $(SOURCES:%.c=%))
 
 # Add OS- and arch-dependent object files
-OBJECTS = .arch_common.o
-TARGET_TRIPLET := $(shell $(CC) -dumpmachine)
+TARGET_TRIPLET := $(get-cc-target-triplet)
+TARGET_ARCH := $(or $(call cc-triplet2arch,$(TARGET_TRIPLET)),unknown)
+TARGET_OS := $(or $(call cc-triplet2os,$(TARGET_TRIPLET)),unknown)
 
-ifneq (,$(filter i386-%, $(TARGET_TRIPLET)))
-OBJECTS += .arch_x86.o
-else ifneq (,$(filter i486-%, $(TARGET_TRIPLET)))
-OBJECTS += .arch_x86.o
-else ifneq (,$(filter i686-%, $(TARGET_TRIPLET)))
-OBJECTS += .arch_x86.o
-else ifneq (,$(filter x86_64-%, $(TARGET_TRIPLET)))
-# "gcc -m32 -dumpmachine" prints x86_64-unknown-linux-gnu on x86_64, not i386...
-OBJECTS += .arch_$(shell printf '\#ifdef __x86_64__\nx86_64\n\#else\nx86\n\#endif' |$(CC) -E - |$(GREP) '^x86').o
-else
-OBJECTS += .arch_unknown.o
-endif
-
-ifneq (,$(findstring .arch_x86.o, $(OBJECTS)))
-PROGRAMS += test_asm_x86
-else ifneq (,$(findstring .arch_x86_64.o, $(OBJECTS)))
-PROGRAMS += test_asm_x86_64
-endif
-
-ifneq (,$(findstring -linux, $(TARGET_TRIPLET)))
-OBJECTS += .os_linux.o
-else ifneq (,$(findstring -mingw, $(TARGET_TRIPLET)))
-OBJECTS += .os_windows.o
-else
-OBJECTS += .os_unknown.o
-endif
-
+OBJECTS := .arch_common.o .arch_$(TARGET_ARCH).o .os_$(TARGET_OS).o
+PROGRAMS += test_asm_$(TARGET_ARCH)
 BINARIES := $(PROGRAMS:%=%.$(BIN_EXT))
 
 all: $(BINARIES)

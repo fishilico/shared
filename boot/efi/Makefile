@@ -5,21 +5,9 @@ UNAME ?= uname
 
 include ../../common.mk
 
-TARGET_TRIPLET := $(shell $(CC) -dumpmachine)
-ifneq (,$(findstring i386, $(TARGET_TRIPLET)))
-ARCH := ia32
-else ifneq (,$(findstring i486, $(TARGET_TRIPLET)))
-ARCH := ia32
-else ifneq (,$(findstring i686, $(TARGET_TRIPLET)))
-ARCH := ia32
-else ifneq (,$(findstring x86_64, $(TARGET_TRIPLET)))
-# "gcc -m32 -dumpmachine" prints x86_64-unknown-linux-gnu on x86_64, not i386...
-ARCH := $(shell printf '\#ifdef __x86_64__\nx86_64\n\#else\nia32\n\#endif' |$(CC) -E - |grep '^[^\#]')
-else ifneq (,$(findstring armv, $(TARGET_TRIPLET)))
-ARCH := arm
-else
-ARCH := $(shell $(UNAME) -m | sed 's,i.86,ia32,')
-endif
+TARGET_ARCH := $(or $(get-cc-target-arch),unknown-arch)
+# Use ia32 instead of x86_32 for EFI
+ARCH := $(if $(filter x86_32,$(TARGET_ARCH)),ia32,$(TARGET_ARCH))
 
 CPPFLAGS = -Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d
 CFLAGS = -O2 -fPIC -Wall -Wextra \

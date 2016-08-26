@@ -1,7 +1,7 @@
 /**
  * Test the x86 implementation
  */
-#include "arch_x86.h"
+#include "arch_x86_32.h"
 
 #include <assert.h>
 #include <stdint.h>
