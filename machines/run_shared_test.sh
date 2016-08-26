@@ -23,7 +23,7 @@ fi
 export KERNELVER
 
 # Do not use unicode in MinGW<4.8, when "wmain" is not automatically declared
-case "$(x86_64-w64-mingw32-gcc --version | sed -n 's/^x86_64-w64-mingw32-gcc (GCC) //p')" in
+case "$(x86_64-w64-mingw32-gcc --version 2>/dev/null | sed -n 's/^x86_64-w64-mingw32-gcc (GCC) //p')" in
     [123].*|4.[0-7].*)
         export HAVE_UNICODE=n
         ;;
