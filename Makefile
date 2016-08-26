@@ -7,6 +7,7 @@ GREP ?= grep
 PDFLATEX ?= pdflatex
 LINUX32 ?= linux32
 LINUX64 ?= linux64
+PYTHON ?= python
 RM ?= rm
 SED ?= sed
 SH ?= sh
@@ -57,6 +58,11 @@ endif
 # Test PDF-LaTeX availability
 ifneq ($(call can-run,$(PDFLATEX) --version),y)
 SUBDIRS_BLACKLIST += latex%
+endif
+
+# Test python availability
+ifneq ($(call can-run,$(PYTHON) --version),y)
+SUBDIRS_BLACKLIST += arduino% python% shellcode%
 endif
 
 # Show "SUBDIR ..." only if -w and -s and V=1 are not given, and then add
