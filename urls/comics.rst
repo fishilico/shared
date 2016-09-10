@@ -21,6 +21,7 @@ French
   Donjon de Naheulbeuk
 * http://lesjoiesducode.fr/ Les joies du code
 * http://hmm-la-bd.eu/ Hmm-la-bd
+* http://reno-pixellu.com/blog/ Chez Reno, pixel en gros
 
 French editors
 --------------

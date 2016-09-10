@@ -6,6 +6,13 @@ Fun stuff
 
 * http://www.tylervigen.com/ Spurious correlations
 * http://www.norro.be/ HTTP status cats
+* http://wttr.in/ Weather for City: Paris, France
+* https://turnoff.us/geek/schrodinger-cat/
+  {turnoff.us} Schrödinger's Cat Last Declarations
+* https://turnoff.us/geek/dont-sigkill/
+  {turnoff.us} The Real Reason to Not Use SIGKILL
+* http://sigtbd.csail.mit.edu/pubs/veryconference-paper10.pdf
+  Solving the Dating Problem with the SENPAI Protocol
 
 Other
 -----
@@ -25,6 +32,15 @@ Other
 * https://github.com/fishilico.keys
   https://api.github.com/users/fishilico/keys
   SSH keys configured for a GitHub user
+* https://gist.github.com/jboner/2841832
+  Latency Numbers Every Programmer Should Know
+* https://github.com/belluzj/fantasque-sans
+  Fantasque Sans Mono, A programming font, designed with functionality in mind
+
+* https://opbeat.com/events/djangocon-eu-2016/#healthy-minds-in-a-healthy-community / https://github.com/erikr/well-being
+  Healthy Minds in a Healthy Community, DjangoCon Europe 2016
+* http://www.boredpanda.com/how-to-care-for-little-sad-person-john-saddington/
+  How To Take Care Of A Sad Person (10 Steps)
 
 Calculus
 --------
@@ -32,6 +48,9 @@ Calculus
 * http://www.wolframalpha.com/ Wolfram Alpha
 * http://magma.maths.usyd.edu.au/calc/ Magma
   (discrete logarithm: ``e := Log(GF(p)!g, GF(p)!x); # x = g^e mod p``)
+
+* http://math.ucr.edu/home/baez/rosetta.pdf
+  Physics, Topology, Logic and Computation: A Rosetta Stone
 
 Interesting hardware-related projets
 ------------------------------------

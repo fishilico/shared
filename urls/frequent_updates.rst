@@ -9,6 +9,11 @@ News
 * https://www.wired.com/ Wired News
 * http://lwn.net/ LWN.net
 
+Newsletters
+-----------
+
+* https://www.schneier.com/crypto-gram/ Crypto-Gram Newsletter
+
 Videos
 ------
 
@@ -70,6 +75,7 @@ Code repositories
   systemd
 * https://git.kernel.org/cgit/utils/util-linux/util-linux.git/log/ util-linux
 * https://github.com/wine-mirror/wine/commits/master Wine
+* http://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog Xen
 
 Other
 -----
@@ -78,3 +84,4 @@ Other
 * https://theyetee.com/ The Yetee T-shirts
 * http://theprofoundprogrammer.com/ The profound programmer
 * https://github.com/ctfs CTF write-ups
+* http://www.openwall.com/lists/kernel-hardening/ Kernel hardening mailing list

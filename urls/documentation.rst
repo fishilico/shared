@@ -1,11 +1,20 @@
 Useful documentation links
 ==========================
 
+Useful tools
+------------
+
+* https://davvil.github.io/pdfpc/ pdfpc, PDF presenter console
+* http://guake.org/ Guake, a top-down terminal for Gnome
+* https://diffoscope.org/ diffoscope, in-depth comparison of files, archives, and directories
+
 System administration
 ---------------------
 
 * http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers
   My First 5 Minutes On A Server; Or, Essential Security for Linux Servers
+* https://www.debian.org/doc/manuals/securing-debian-howto/
+  Securing Debian Manual
 * http://www.mysqlperformanceblog.com/2013/12/07/linux-performance-tuning-tips-mysql/
   Linux performance tuning tips for MySQL
 * https://www.monitoring-plugins.org/ The Monitoring Plugins Project
@@ -13,6 +22,10 @@ System administration
   Why GNU su does not support the 'wheel' group
 * https://github.com/lfit/itpol/blob/master/linux-workstation-security.md
   Linux workstation security checklist (Linux Foundation)
+* https://www.passwordstore.org/
+  pass (zx2c4 password store), the standard unix password manager
+* https://github.com/chassing/linux-sysadmin-interview-questions
+  Linux System Administrator/DevOps Interview Questions
 
 Hacking
 -------
@@ -40,6 +53,8 @@ Hacking
   An Exploration of ARM TrustZone Technology (with Genode OS as secure OS)
 * https://deathmarine.github.io/Luyten/
   Luyten, an Open Source Java Decompiler GUI
+* https://github.com/fireeye/flare-floss
+  FireEye Labs Obfuscated String Solver - Automatically extract obfuscated strings from malware
 * https://github.com/rapid7/metasploit-framework Metasploit Framework source
 * https://github.com/SecUpwN/Android-IMSI-Catcher-Detector/
   AIMSICD, Android IMSI Catcher Detector
@@ -47,6 +62,14 @@ Hacking
   USB Reverse Engineering project
 * https://github.com/cure53/HTTPLeaks
   HTTPLeaks project: enumerate all possible ways a website can leak HTTP requests
+* https://wiremask.eu/articles/free-reverse-engineering-tools/
+  Free Reverse Engineering Tools
+* https://github.com/das-labor/panopticon
+  A libre cross-platform disassembler for reverse engineering written in Rust.
+* https://github.com/secgroundzero/warberry
+  WarBerryPi - Tactical Exploitation
+* https://github.com/radareorg/r2con/blob/master/2016/trainings/02-a-to-z/r2con-AtoZ.pdf
+  Radare from A to Z - extended edition
 
 Programming
 -----------
@@ -83,6 +106,13 @@ Programming
 * http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf
   C99 standard (http://www.open-std.org/jtc1/sc22/wg14/www/standards.html)
 
+* https://github.com/berdario/pew Python Env Wrapper
+  (comparator in French: http://sametmax.com/mieux-que-python-virtualenvwrapper-pew/)
+
+* https://msys2.github.io/ msys2, POSIX system with packages on Windows
+
+* http://overapi.com/ OverAPI.com, Collecting All Cheat Sheets
+
 Packaging
 ---------
 
@@ -94,6 +124,7 @@ Packaging
 
 * https://release.debian.org/ Debian releases schedule
 * http://clang.debian.net/ Rebuild Debian packages with clang (https://wiki.debian.org/llvm-clang)
+* https://reproducible.debian.net/archlinux/archlinux.html Arch Linux Reproducible builds
 
 Internet
 --------
@@ -102,6 +133,8 @@ Internet
 
     - https://istlsfastyet.com/ Is TLS Fast Yet
     - https://www.ssllabs.com/ssltest/ Qualys SSL Labs server test
+    - https://testssl.sh/ , https://github.com/drwetter/testssl.sh
+      Testing TLS/SSL encryption (local bash script)
 
 * Maps:
 
@@ -117,7 +150,9 @@ Internet
 * http://www.dropboxwiki.com/tips-and-tricks/using-the-official-dropbox-command-line-interface-cli
   Using the Official Dropbox Command Line Interface (CLI)
 * https://labs.ripe.net/Members/gih/measuring-googles-public-dns
-  Measuring Google's Public DNS  (with interesting figures about how DNS works)
+  Measuring Google's Public DNS (with interesting figures about how DNS works)
+* https://github.com/you-dont-need/You-Dont-Need-Javascript
+  You Don't Need JavaScript
 
 Hardware products
 -----------------

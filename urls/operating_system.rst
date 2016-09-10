@@ -21,6 +21,17 @@ Windows
 * http://www.microsoft.com/security/sir/default.aspx
   Microsoft Security Intelligence Report
 
+Microkernels and unikernels
+---------------------------
+
+* https://sel4.systems/ The seL4 Microkernel
+* https://github.com/seL4/l4v seL4 specification and proofs
+* https://robigalia.org/ a robust Rust ecosystem around seL4
+
+* https://mirage.io/ MirageOS unikernel
+* http://roscidus.com/blog/blog/2016/01/01/a-unikernel-firewall-for-qubesos/
+  A Unikernel Firewall for QubesOS
+
 Other
 -----
 
