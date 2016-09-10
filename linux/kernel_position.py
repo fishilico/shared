@@ -95,7 +95,13 @@ def get_pa2va_offset(machine=None):
 
 
 def get_kernel_pos_from_iomem(machine=None):
-    """Get the position of some kernel segments using /proc/iomem"""
+    """Get the position of some kernel segments using /proc/iomem
+
+    Since Linux 4.6, access to physical addresses in /proc/iomem is restricted
+    to privileged users, cf. commit 51d7b120418e ("/proc/iomem: only expose
+    physical resource addresses to privileged users")
+    https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=51d7b120418e99d6b3bf8df9eb3cc31e8171dee4
+    """
     if not os.path.exists('/proc/iomem'):
         logger.warning("/proc/iomem does not exist")
         return
@@ -115,8 +121,12 @@ def get_kernel_pos_from_iomem(machine=None):
                     logger.warning("unknown kernel part %s in /proc/iomem",
                                    name)
                     continue
-                kernel_pos[name] = (int(start, 16) + offset,
-                                    int(end, 16) + offset)
+                start_pa = int(start, 16)
+                end_pa = int(end, 16)
+                if start_pa == end_pa == 0:
+                    logger.warning("/proc/iomem:%s address is protected", name)
+                    continue
+                kernel_pos[name] = (start_pa + offset, end_pa + offset)
     except IOError as exc:
         if exc.errno == errno.EACCES:
             logger.warning("/proc/iomem access is not permitted")
