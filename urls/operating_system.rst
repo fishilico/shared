@@ -20,6 +20,8 @@ Windows
 * http://www.acc.umu.se/~bosse/ Driver examples
 * http://www.microsoft.com/security/sir/default.aspx
   Microsoft Security Intelligence Report
+* http://copy.sh/v86/?profile=windows98
+  Windows 98 with x86 virtualization in JavaScript
 
 Microkernels and unikernels
 ---------------------------

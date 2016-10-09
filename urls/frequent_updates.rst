@@ -24,6 +24,7 @@ French News
 
 * http://www.courrierinternational.com/ Courrier International
 * http://www.france24.com/fr/ France 24
+* http://www.bvoltaire.fr/ Boulevard Voltaire
 * http://rue89.nouvelobs.com/ Rue 89
 * http://www.laquadrature.net/ La quadrature du Net
 * http://www.zdnet.fr/actualites/ ZDNet

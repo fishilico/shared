@@ -135,6 +135,8 @@ Internet
     - https://www.ssllabs.com/ssltest/ Qualys SSL Labs server test
     - https://testssl.sh/ , https://github.com/drwetter/testssl.sh
       Testing TLS/SSL encryption (local bash script)
+    - https://github.com/ioerror/duraconf
+      A collection of hardened configuration files for SSL/TLS services
 
 * Maps:
 

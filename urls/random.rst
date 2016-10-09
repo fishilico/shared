@@ -7,12 +7,16 @@ Fun stuff
 * http://www.tylervigen.com/ Spurious correlations
 * http://www.norro.be/ HTTP status cats
 * http://wttr.in/ Weather for City: Paris, France
+* https://www.ventusky.com/?p=44.4;7.4;3&l=gust&w=0xIAb9A9A
+  Ventusky - Wind, Rain and Temperature Maps
 * https://turnoff.us/geek/schrodinger-cat/
   {turnoff.us} Schrödinger's Cat Last Declarations
 * https://turnoff.us/geek/dont-sigkill/
   {turnoff.us} The Real Reason to Not Use SIGKILL
 * http://sigtbd.csail.mit.edu/pubs/veryconference-paper10.pdf
   Solving the Dating Problem with the SENPAI Protocol
+* http://www.theuselessweb.com/
+  Take me to another useless website please
 
 Other
 -----
