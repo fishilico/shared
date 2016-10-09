@@ -35,13 +35,22 @@ CLEAN_CMD := $(V_CLEAN)$(RM) \
 # The implementation of this function was copied from Linux (file scripts/Kbuild.include)
 try-run = $(shell set -e; if ($(1)) >/dev/null 2>&1; then echo "$(2)"; else echo "$(3)"; fi)
 
+# Try running the command, with a temporary file given as first parameter
+try-run-with-tmp = $(shell set -e; if ($(2)) >/dev/null 2>&1; then echo "$(3)"; else echo "$(4)"; fi; $(RM) "$(1)")
+
 # Output "y" if the specified command can be run
 can-run = $(call try-run,$(1),y,n)
+can-run-with-tmp = $(call try-run-with-tmp,$(1),$(2),y,n)
 
 # Test a C Compiler PreProcessor option
 ccpp-has-option = $(call can-run,$(CC) -Werror $(1) -E - < /dev/null)
 ccpp-option = $(call try-run,$(CC) -Werror $(1) -E - < /dev/null,$(1),$(2))
 cc-disable-warning = $(call try-run,$(CC) -Werror -W$(strip $(1)) -E - < /dev/null,-Wno-$(strip $(1)))
+
+# Test a C Compiler and linker option
+# Run the test program to detect linker bugs,
+# for example to detect broken 'musl-gcc -fsanitize=undefined'
+ccld-has-option = $(call can-run-with-tmp,.$(1).tmp,echo "int main(void){return 0;}" |$(CC) -Werror -x c -o".$(1).tmp" $(1) - && ./.$(1).tmp)
 
 # Run a command with an optional prefix to perform runtime tests.
 # The prefix would be "wine" for Windows applications on Linux, "qemu-arm" for
