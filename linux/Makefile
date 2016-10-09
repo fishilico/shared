@@ -3,7 +3,7 @@ include ../linux-flags.mk
 PKG_CONFIG ?= pkg-config
 
 # Programs which need specific options
-NETLINK_PROGRAMS := enum_link_addrs
+NETLINK_PROGRAMS := crypto_socket enum_link_addrs
 PULSE_PROGRAMS := pulseaudio_echo
 SDL_PROGRAMS := sdl_v4l_video
 SECCOMP_PROGRAMS := seccomp
