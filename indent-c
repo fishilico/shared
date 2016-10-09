@@ -111,6 +111,7 @@ exec indent \
     -T WORD \
     -T asm_instr_context \
     -T asm_instr_reg \
+    -T cairo_t \
     -T cpu_set_t \
     -T greg_t \
     -T int16_t \

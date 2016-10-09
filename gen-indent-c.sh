@@ -122,6 +122,7 @@ VARIANT
 WORD
 asm_instr_context
 asm_instr_reg
+cairo_t
 cpu_set_t
 greg_t
 int16_t

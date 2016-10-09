@@ -12,7 +12,10 @@
 #include <stdio.h>
 
 static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer user_data);
+static gboolean draw(GtkWidget *widget, cairo_t *cr);
+#if !GTK_CHECK_VERSION(3, 0, 0)
 static gboolean expose(GtkWidget *widget, GdkEventExpose *event, gpointer user_data);
+#endif
 static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data);
 
 int main(int argc, char **argv)
@@ -29,8 +32,8 @@ int main(int argc, char **argv)
 
     gtk_widget_set_app_paintable(window, TRUE);
 
-#if GTK_CHECK_VERSION (3, 0, 0)
-    g_signal_connect(G_OBJECT(window), "draw", G_CALLBACK(expose), NULL);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    g_signal_connect(G_OBJECT(window), "draw", G_CALLBACK(draw), NULL);
 #else
     g_signal_connect(G_OBJECT(window), "expose-event", G_CALLBACK(expose), NULL);
 #endif
@@ -104,21 +107,10 @@ static void screen_changed(
 #endif
 }
 
-static gboolean expose(
-    GtkWidget *widget,
-    GdkEventExpose *event __attribute__ ((unused)),
-    gpointer userdata __attribute__ ((unused)))
+static gboolean draw(
+    GtkWidget *widget __attribute__ ((unused)),
+    cairo_t *cr)
 {
-    GdkWindow *window;
-    cairo_t *cr;
-
-#if GTK_CHECK_VERSION(2, 14, 0)
-    window = gtk_widget_get_window(widget);
-#else
-    window = widget->window;
-#endif
-    cr = gdk_cairo_create(window);
-
     /* Select white color, semi-transparent if alpha is supported */
     if (supports_alpha) {
         cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 0.5);
@@ -129,10 +121,30 @@ static gboolean expose(
     /* Draw the background */
     cairo_set_operator(cr, CAIRO_OPERATOR_SOURCE);
     cairo_paint(cr);
-
-    cairo_destroy(cr);
     return FALSE;
 }
+
+#if !GTK_CHECK_VERSION(3, 0, 0)
+static gboolean expose(
+    GtkWidget *widget,
+    GdkEventExpose *event __attribute__ ((unused)),
+    gpointer userdata __attribute__ ((unused)))
+{
+    GdkWindow *window;
+    cairo_t *cr;
+    gboolean ret;
+
+#    if GTK_CHECK_VERSION(2, 14, 0)
+    window = gtk_widget_get_window(widget);
+#    else
+    window = widget->window;
+#    endif
+    cr = gdk_cairo_create(window);
+    ret = draw(widget, cr);
+    cairo_destroy(cr);
+    return ret;
+}
+#endif
 
 static void clicked(
     GtkWindow *win,
