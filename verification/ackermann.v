@@ -20,13 +20,13 @@ Fixpoint ack (m: nat) : nat -> nat :=
 .
 
 (* Display the definition in Frama-C window *)
-Check ack.
 Print ack.
+Check ack.
 
 (* Compute some values *)
-Eval compute in ack 1 0.
-Eval compute in ack 1 1.
-Eval compute in ack 2 0.
+Eval compute in ack 1 0. (* 2 *)
+Eval compute in ack 1 1. (* 3 *)
+Eval compute in ack 2 0. (* 3 *)
 
 (* Prove the 3 recursive relations of the definition *)
 Lemma ack_zero:
@@ -69,84 +69,30 @@ Proof.
   rewrite ack_one.
   rewrite IHn.
   rewrite <- mult_n_Sm.
-  rewrite <- NPeano.Nat.add_assoc.
-  rewrite <- NPeano.Nat.add_assoc.
+  rewrite <- Nat.add_assoc, <- Nat.add_assoc.
   trivial.
-Qed.
-
-
-(* Define pow function for Ackermann(3, ...) *)
-Definition pow (b: nat) : nat -> nat :=
-  fix pow_b (e: nat) : nat :=
-    match e with
-      | O => 1
-      | S e' => (pow_b e') * b
-    end
-.
-
-Lemma pow_mult_l:
-  forall b e: nat, b * (pow b e) = pow b (S e).
-Proof.
-  intros b e.
-  rewrite Nat.mul_comm.
-  trivial.
-Qed.
-
-Lemma pow_eq_exponent:
-  forall b e e': nat, e = e' -> pow b e = pow b e'.
-Proof.
-  intros b e e' H.
-  rewrite H.
-  trivial.
-Qed.
-
-Lemma pow_S_exponent:
-  forall b, 1 <= b -> forall e: nat, pow b e <= pow b (S e).
-Proof.
-  intros b Hb e.
-  rewrite <- (NPeano.Nat.mul_1_r (pow b e)).
-  apply Nat.mul_le_mono_l.
-  trivial.
-Qed.
-
-Lemma pow_increase_exponent:
-  forall b : nat, 1 <= b -> forall e e': nat, pow b e <= pow b (e + e').
-Proof.
-  intros b Hb e.
-  induction e'.
-    rewrite Nat.add_0_r. trivial.
-  rewrite <- Peano.plus_n_Sm.
-  apply (Nat.le_trans (pow b e) (pow b (e + e'))).
-    trivial.
-    apply (pow_S_exponent b Hb).
-Qed.
-
-Lemma pow_le_exponent:
-  forall b : nat, 1 <= b -> forall e e': nat, e <= e' -> pow b e <= pow b e'.
-Proof.
-  intros b Hb e e' He.
-  rewrite <- (Nat.sub_add e e'); trivial.
-  rewrite Nat.add_comm.
-  apply (pow_increase_exponent b Hb).
 Qed.
 
 (* Prove that A(3, n) = 2^(n + 3) - 3 *)
 Theorem ack_three:
-  forall n: nat, ack 3 n = pow 2 (n + 3) - 3.
+  forall n: nat, ack 3 n = Nat.pow 2 (n + 3) - 3.
 Proof.
   induction n. trivial.
   rewrite ack_recursive, ack_two, IHn.
-  rewrite NPeano.Nat.mul_sub_distr_l.
-  rewrite pow_mult_l.
+  rewrite Nat.mul_sub_distr_l.
+  rewrite <- (Nat.pow_succ_r _ _ (Nat.le_0_l (n + 3))).
   symmetry.
-  apply NPeano.Nat.add_sub_eq_l.
-  rewrite NPeano.Nat.add_comm.
-  rewrite <- NPeano.Nat.add_assoc.
-  apply NPeano.Nat.sub_add.
-  (* Now, need to prove 6 <= pow 2 (S n + 3) *)
-  apply (Nat.le_trans 6 (pow 2 3)).
+  apply Nat.add_sub_eq_l.
+  rewrite Nat.add_comm.
+  rewrite <- Nat.add_assoc.
+  apply Nat.sub_add.
+  (* Now, need to prove 3 + 3 <= Nat.pow 2 (S n + 3) *)
+  apply (Nat.le_trans _ (Nat.pow 2 3)).
     apply (Nat.le_trans 6 7 8); auto.
-    rewrite (NPeano.Nat.add_comm (S n) 3). apply pow_increase_exponent. auto.
+    rewrite (Nat.add_comm (S n) 3).
+    apply Nat.pow_le_mono_r; auto.
+    rewrite <- (Nat.add_0_r 3).
+    apply Nat.add_le_mono_l, Nat.le_0_l.
 Qed.
 
 (* A(4, 0) = A(3, 1) = 13
@@ -165,30 +111,47 @@ Proof.
 Qed.
 
 Theorem ack_4_1:
-  ack 4 1 = (pow 2 16) - 3.
+  ack 4 1 = (Nat.pow 2 16) - 3.
 Proof.
   rewrite ack_recursive, ack_4_0, ack_three.
   trivial.
 Qed.
 
+Lemma pow_eq_exponent:
+  forall b e e': nat, e = e' -> Nat.pow b e = Nat.pow b e'.
+Proof.
+  intros b e e' H.
+  rewrite H.
+  trivial.
+Qed.
+
+(* This takes too much time on Coq versions which expand numbers *)
+(*
 Theorem ack_4_2:
-  ack 4 2 = (pow 2 (pow 2 16)) - 3.
+  ack 4 2 = (Nat.pow 2 (Nat.pow 2 16)) - 3.
 Proof.
   rewrite ack_recursive, ack_4_1, ack_three.
   apply Nat.add_sub_eq_l.
-  rewrite NPeano.Nat.sub_add.
-    rewrite NPeano.Nat.add_comm.
-    rewrite NPeano.Nat.sub_add.
-      apply pow_eq_exponent. apply pow_eq_exponent. trivial.
-
-      apply (Nat.le_trans 3 (pow 2 2)).
-        simpl; auto.
-        apply pow_increase_exponent; auto.
-
-    apply (Nat.le_trans 3 (pow 2 2) (pow 2 16)).
+  rewrite Nat.sub_add.
+    Focus 2.
+    apply (Nat.le_trans 3 (Nat.pow 2 2) (Nat.pow 2 16)).
       simpl; auto.
-      apply pow_le_exponent; auto with *.
+      apply Nat.pow_le_mono_r; auto.
+      apply Nat.leb_le; auto.
+
+  rewrite Nat.add_comm.
+  rewrite Nat.sub_add.
+   apply pow_eq_exponent. apply pow_eq_exponent. trivial.
+
+  apply (Nat.le_trans 3 (Nat.pow 2 2)).
+    simpl; auto.
+  apply Nat.pow_le_mono_r; auto.
+  apply (Nat.le_trans 2 (Nat.pow 2 1) (Nat.pow 2 16)).
+    auto.
+    apply Nat.pow_le_mono_r; auto.
+    apply Nat.leb_le; auto.
 Qed.
+*)
 
 (* Enumerate everything that were just proved *)
 SearchAbout ack.
