@@ -12,6 +12,8 @@ GMP_PROGRAMS := gmp_functions
 OPENMP_PROGRAMS := openmp_matrix
 GTK_PROGRAMS := gtk_alpha_window
 X86_PROGRAMS := $(filter x86-%, $(ALL_PROGRAMS))
+X86_32_PROGRAMS := x86-read_64b_regs_in_32b_mode
+X86_ANY_PROGRAMS := $(filter-out $(X86_32_PROGRAMS), $(X86_PROGRAMS))
 
 # Programs not to test automatically, because they hang or are tested an other way
 NONTEST_PROGRAMS := antidebug gtk_alpha_window
@@ -70,8 +72,14 @@ endif
 # Use $(CC) -dumpmachine to find out the target triplet
 TARGET_ARCH := $(get-cc-target-arch)
 ifneq ($(filter x86_%,$(TARGET_ARCH)),)
-	PROGRAMS += $(X86_PROGRAMS)
+	PROGRAMS += $(X86_ANY_PROGRAMS)
+	HAVE_X86_32 := $(call ccld-has-option,-m32)
+	ifeq ($(HAVE_X86_32),y)
+		PROGRAMS += $(X86_32_PROGRAMS)
+	endif
 endif
+$(X86_32_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -m32
+$(X86_32_PROGRAMS:%=.%.o): CFLAGS += -m32
 
 TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(PROGRAMS:%=%.$(BIN_EXT)) $(wildcard *.sh))
 
