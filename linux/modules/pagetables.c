@@ -681,13 +681,23 @@ static void show_address_comp(struct seq_file *s)
  */
 static pgd_t *get_pgd_address(struct seq_file *s)
 {
+	unsigned int cpu_id;
 	pgd_t *pgd_table;
 	unsigned long pgd_phys;
 
+	/* Disable preemption while reading current CPU PGD */
+	cpu_id = get_cpu();
+
+#if defined(CONFIG_PAX_PER_CPU_PGD) && defined(CONFIG_X86_64)
+	/* PAX defines two PGD, one for usermode and one for kernelmode */
+	pgd_table = get_cpu_pgd(cpu_id, kernel);
+#else
 	/* Use current->active_mm because swapper_pg_dir is not exported */
 	pgd_table = current->active_mm->pgd;
+#endif
 	pgd_phys = __pa(pgd_table);
-	seq_printf(s, "PGD table at %pK (phys %#lx)\n", pgd_table, pgd_phys);
+	seq_printf(s, "PGD table (cpu %u) at %pK (phys %#lx)\n",
+		   cpu_id, pgd_table, pgd_phys);
 
 #ifdef CONFIG_ARM
 	/* On ARM the address of the PGD is in the 14 low bits of the
@@ -708,16 +718,22 @@ static pgd_t *get_pgd_address(struct seq_file *s)
 				"WARN: CPU uses a different PGD: %#lx != %#lx\n",
 				cpu_pgd_phys, pgd_phys);
 			/* Trust the CPU more than the kernel structures */
-			pgd_table  = cpu_pgd;
+			pgd_table = cpu_pgd;
 		}
 	}
 #elif defined(CONFIG_X86)
 	/* On x86 the address of the PGD is in cr3 */
 	{
-		unsigned long cr3;
+		unsigned long cr3_raw, cr3;
 
-		cr3 = read_cr3();
-		seq_printf(s, "  ... cr3 = %#lx\n", cr3);
+		/* Mask high bits and low bits (PCID) of CR3 register */
+		cr3_raw = read_cr3();
+		cr3 = cr3_raw & __PHYSICAL_MASK & PAGE_MASK;
+		if (cr3 == cr3_raw)
+			seq_printf(s, "  ... cr3 = %#lx\n", cr3);
+		else
+			seq_printf(s, "  ... cr3 = %#lx -> masked %lx\n",
+				   cr3_raw, cr3);
 		if (cr3 != pgd_phys) {
 			seq_printf(s,
 				"WARN: CR3 does not contains the current PGD address: %#lx != %#lx\n",
@@ -730,6 +746,7 @@ static pgd_t *get_pgd_address(struct seq_file *s)
 		}
 	}
 #endif
+	put_cpu();
 	return pgd_table;
 }
 
