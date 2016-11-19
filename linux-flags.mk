@@ -57,6 +57,15 @@ CFLAGS = -O2 -ansi -pedantic -pipe \
 # Uncomment the next line to enable debug
 #CFLAGS += -g -fvar-tracking-assignments -fno-omit-frame-pointer
 
+# Add strong stack protector if supported
+CFLAGS += $(call ccpp-option,-fstack-protector-strong)
+
+# Linker flags
+LDFLAGS = -Wl,-O1,-as-needed,-no-undefined,-z,relro,-z,now,--fatal-warnings \
+	-fPIE -pie -fstack-protector
+
+LIBS =
+
 # Add clang-specific options unknown to GCC
 ifeq ($(call ccpp-has-option,-Weverything), y)
 	CFLAGS += -Weverything \
@@ -82,15 +91,6 @@ ifeq ($(call ccpp-has-option,-Wtrampolines), y)
 	CFLAGS += $(call ccpp-option,-Wsuggest-attribute=format)
 	CFLAGS += $(call ccpp-option,-Wsuggest-attribute=noreturn)
 endif
-
-# Add strong stack protector if supported
-CFLAGS += $(call ccpp-option,-fstack-protector-strong)
-
-# Linker flags
-LDFLAGS = -Wl,-O1,-as-needed,-no-undefined,-z,relro,-z,now \
-	-fPIE -pie -fstack-protector
-
-LIBS =
 
 # Application build configuration
 BIN_EXT := $(EXT_PREFIX)bin
