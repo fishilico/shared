@@ -641,6 +641,11 @@ static bool show_cipher_info(const char *ciphername)
     /* Decode the received data */
     reply_hdr = (struct nlmsghdr *)buffer;
     if (reply_hdr->nlmsg_type == NLMSG_ERROR) {
+        /* stdrng may not be available */
+        if (!strcmp(ciphername, "stdrng")) {
+            printf("No crypto-stdrng loaded (ansi_cprng or drbg), continuing.\n");
+            return true;
+        }
         fprintf(stderr, "Netlink returned NLMSG_ERROR.\n");
         return false;
     }
