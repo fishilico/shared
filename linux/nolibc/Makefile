@@ -82,10 +82,21 @@ include/sys/syscall.h: Makefile
 	echo '#include "../asm-x86_64/unistd.h"' >> $@
 	echo '#endif' >> $@
 
-# Download ARM kernel header
-include/asm-arm/unistd.h:
+# Build ARM syscall table using script "syscallhdr.sh" from the kernel
+include/syscall-arm/%:
 	$(MKDIR) -p $(@D)
-	$(WGET) -q -O $@ $(LINUX_URL)/arch/$(@D:include/asm-%=%)/include/uapi/asm/$(@F) || (rm $@ ; false)
+	$(WGET) -q -O $@ $(LINUX_URL)/arch/arm/tools/$(@F) || (rm $@ ; false)
+
+include/asm-arm/unistd-%.h: include/syscall-arm/syscall.tbl include/syscall-arm/syscallhdr.sh
+	$(MKDIR) -p $(@D)
+	$(SH) include/syscall-arm/syscallhdr.sh '$<' '$@' '$*' '' '__NR_SYSCALL_BASE'
+
+include/asm-arm/unistd-base.h:
+	$(MKDIR) -p $(@D)
+	$(WGET) -q -O $@ $(LINUX_URL)/arch/arm/include/uapi/asm/unistd.h || (rm $@ ; false)
+
+include/asm-arm/unistd.h: include/asm-arm/unistd-base.h include/asm-arm/unistd-eabi.h include/asm-arm/unistd-oabi.h include/asm-arm/unistd-common.h
+	$(SED) 's,#include <asm/\(unistd-[a-z]*.h\)>,#include "\1",' < $< > $@
 
 # Build x86 syscall tables using script "syscallhdr.sh" from the kernel
 include/syscall-x86/%:
@@ -109,6 +120,6 @@ include/sys/utsname.h: include/sys/linux_utsname.h
 	$(SED) 's/struct new_utsname/struct utsname/' < $< > $@
 
 .PHONY: all all32 all64 clean test sync-inet create_include
-.PRECIOUS: .%.o
+.PRECIOUS: .%.o include/syscall-arm/% include/syscall-x86/%
 
 -include .*.d

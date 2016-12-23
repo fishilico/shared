@@ -17,13 +17,13 @@
 
 #if defined(__thumb__) || defined(__ARM_EABI__)
 #define __NR_SYSCALL_BASE	0
-#include "unistd-eabi.h"
+#include <asm/unistd-eabi.h>
 #else
 #define __NR_SYSCALL_BASE	__NR_OABI_SYSCALL_BASE
-#include "unistd-oabi.h"
+#include <asm/unistd-oabi.h>
 #endif
 
-#include "unistd-common.h"
+#include <asm/unistd-common.h>
 #define __NR_sync_file_range2		__NR_arm_sync_file_range
 
 /*
