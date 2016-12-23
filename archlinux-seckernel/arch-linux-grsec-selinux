@@ -97,6 +97,19 @@ rm -rf src
 # Replace the base pkgname with a custom one
 sed -i 's/^pkgbase=.*/pkgbase=linux-grsec-selinux/' PKGBUILD
 
+# Update linux.preset
+if ! grep -q linux-grsec-selinux < linux.preset
+then
+    OLD_SIG=$(sha256sum linux.preset |cut -d\  -f1)
+    sed -i 's/linux-grsec/linux-grsec-selinux/g' linux.preset
+    NEW_SIG=$(sha256sum linux.preset |cut -d\  -f1)
+    if [ "$OLD_SIG" != "$NEW_SIG" ]
+    then
+        echo >&2 "File linux.preset has been updated, updating PKGBUILD sha256sum"
+        sed "s/$OLD_SIG/$NEW_SIG/" -i PKGBUILD
+    fi
+fi
+
 # Update kernel configuration
 # Please read README.rst file for more information.
 for CONFIG_FILE in config config.x86_64
