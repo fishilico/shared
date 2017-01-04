@@ -89,12 +89,22 @@ Here are some useful BIOS interrupts:
     * ``AL = 0x03``: text resolution 80x25, pixel resolution 720x400, 16 colors, 8 pages.
     * ``AL = 0x12``: text resolution 80x30, pixel resolution 640x480, colors 16/256K, VGA.
 
-  * ``AH = 0x02``: set cursor position of page ``BH`` to `DX``.
+  * ``AH = 0x02``: set cursor position of page ``BH`` to ``DX``.
 
     * ``DH`` = row.
     * ``DL`` = column.
 
-  * ``AH = 0x03``: read cursor position of page ``BH`` in `DX``.
+  * ``AH = 0x03``: read cursor position of page ``BH`` in ``DX``.
+
+  * ``AH = 0x05``: set active display page to page number ``AL``.
+
+  * ``AH = 0x06``: scroll up window by ``AL`` lines (0 clears the entire window).
+
+    * ``BH`` = colors used to write blank lines at top of window (``0x42`` means background color red, foreground color green)
+    * ``CH``, ``CL`` = row, column of window's upper left corner
+    * ``DH``, ``DL`` = row, column of window's lower right corner
+
+  * ``AH = 0x07``: scroll down window by ``AL`` lines (0 clears the entire window). Same parameters as ``AH = 0x06``.
 
   * ``AH = 0x0B``: set background color ``BX`` (depending on video mode).
 
@@ -102,7 +112,21 @@ Here are some useful BIOS interrupts:
 
     * ``BH`` = page number, ``BL`` = foreground pixel color:
 
+      * ``BL = 0x00`` = black.
+      * ``BL = 0x01`` = blue.
+      * ``BL = 0x02`` = green.
+      * ``BL = 0x03`` = cyan.
+      * ``BL = 0x04`` = red.
+      * ``BL = 0x05`` = magenta.
+      * ``BL = 0x06`` = brown.
       * ``BL = 0x07`` = ligth gray.
+      * ``BL = 0x08`` = dark gray.
+      * ``BL = 0x09`` = light blue.
+      * ``BL = 0x0A`` = ligth green.
+      * ``BL = 0x0B`` = ligth cyan.
+      * ``BL = 0x0C`` = ligth red.
+      * ``BL = 0x0D`` = ligth magenta.
+      * ``BL = 0x0E`` = yellow.
       * ``BL = 0x0F`` = white.
 
     * Newline are done with CRLF (``\n\r = 0x0A 0x0D``).
@@ -197,6 +221,7 @@ Some websites:
 * GRUB boot record: http://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/boot/i386/pc/diskboot.S
 * Wikipedia MBR article: http://en.wikipedia.org/wiki/Master_boot_record
 * Wikipedia BIOS interrupts: http://en.wikipedia.org/wiki/BIOS_interrupt_call
+  https://en.wikipedia.org/wiki/INT_10H
 * BIOS article os OSDev wiki: http://wiki.osdev.org/BIOS
 * Interrupt Jump Table: http://www.ctyme.com/intr/int.htm
 * Linux boot sector for x86: https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/x86/boot/header.S
