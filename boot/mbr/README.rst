@@ -140,11 +140,11 @@ Here are some useful BIOS interrupts:
     * ``BH`` = page number, ``BL`` = foreground pixel color.
     * ``DX`` = cursor position.
 
-* Interrupt ``0x13`, disk I/O. On return, most commands clear ``CF`` on success
+* Interrupt ``0x13``, disk I/O. On return, most commands clear ``CF`` on success
   and set it on error, with ``AH`` being a status code. Drive numbers begins
   with ``0x00`` for floppies and ``0x80`` for hard disks.
 
-  * ``AH = 0x00``: reset disk number ``DL``. and return status in `CF, AH``.
+  * ``AH = 0x00``: reset disk number ``DL``. and return status in ``CF, AH``.
 
   * ``AH = 0x01``: get disk status in ``AL``.
 
