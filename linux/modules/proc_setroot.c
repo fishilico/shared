@@ -24,17 +24,18 @@ static inline uid_t from_kuid(struct user_namespace *to, uid_t uid)
 #endif
 
 static char *magic = "magic";
-module_param(magic, charp, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+module_param(magic, charp, 0644);
 MODULE_PARM_DESC(magic, "A magic string to become root");
 
 static char *procname = "setroot";
-module_param(procname, charp, S_IRUSR | S_IRGRP | S_IROTH);
+module_param(procname, charp, 0444);
 MODULE_PARM_DESC(procname, "File name in /proc");
 
 static ssize_t
 proc_setroot_proc_read(struct file *file, char __user *buf, size_t size, loff_t *ppos)
 {
 	size_t magiclen = strlen(magic);
+
 	if (*ppos + size <= magiclen) {
 		if (copy_to_user(buf, magic + *ppos, size))
 			return -EFAULT;
@@ -127,7 +128,7 @@ static int __init proc_setroot_init(void)
 	/* Without CONFIG_PROC_FS, compile but fail at loading time */
 	if (!IS_ENABLED(CONFIG_PROC_FS)) {
 		pr_alert("This module requires CONFIG_PROC_FS\n");
-		return -ENOSYS;
+		return -EINVAL;
 	}
 
 	procfile = proc_create(procname, 0664, NULL, &proc_setroot_proc_fops);

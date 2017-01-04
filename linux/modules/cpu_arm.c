@@ -330,7 +330,7 @@ static void show_vector_instruction(unsigned long addr)
 		/* Decode Thumb instruction */
 		if ((instr1 & 0xff00) == 0xdf00 && instr2 == 0xbf00) {
 			/* svc 0 ; nop */
-			pr_info("  ... svc %u\n", (unsigned)(instr1 & 0xff));
+			pr_info("  ... svc %u\n", (unsigned int)(instr1 & 0xff));
 		} else if (instr1 == 0xf000 && (instr2 & 0xf800) == 0xb800) {
 			/* Branch instruction */
 			br_addr = addr + 4 + ((instr2 & 0x7ff) << 1);

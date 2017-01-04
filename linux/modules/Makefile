@@ -63,6 +63,16 @@ KCFLAGS_WARN += -Wno-uninitialized
 KCFLAGS_WARN += -Wno-error=unused-but-set-variable
 
 test: clean
-	@KCFLAGS='$(KCFLAGS_WARN)' $(MAKE) all
+	@KCFLAGS='$(KCFLAGS_WARN)' $(MAKE) all checkpatch
 
-.PHONY: all clean install infos test
+# Run checkpatch on source files
+checkpatch:
+	$(KERNELPATH)/scripts/checkpatch.pl --no-tree --show-types \
+		--file $(filter-out %.mod.c, $(wildcard *.c)) \
+		--ignore CONSTANT_COMPARISON \
+		--ignore LINUX_VERSION_CODE \
+		--ignore LONG_LINE \
+		--ignore LONG_LINE_COMMENT \
+		--ignore LONG_LINE_STRING
+
+.PHONY: all clean install infos test checkpatch

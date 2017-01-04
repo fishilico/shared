@@ -18,11 +18,11 @@
 #endif
 
 static unsigned long mapsize = PAGE_SIZE << 4;
-module_param(mapsize, ulong, S_IRUSR | S_IRGRP | S_IROTH);
+module_param(mapsize, ulong, 0444);
 MODULE_PARM_DESC(mapsize, "Size of the mmap'ed data");
 
 static char *debugname = "mmap_file";
-module_param(debugname, charp, S_IRUSR | S_IRGRP | S_IROTH);
+module_param(debugname, charp, 0444);
 MODULE_PARM_DESC(debugname, "File name in debugfs (/sys/kernel/debug)");
 
 static struct dentry *debugfs_file;
@@ -58,7 +58,7 @@ static int mmap_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	return VM_FAULT_SIGBUS;
 }
 
-static struct vm_operations_struct mmap_vm_ops = {
+static const struct vm_operations_struct mmap_vm_ops = {
 	.open = mmap_open,
 	.close = mmap_close,
 	.fault = mmap_fault,
@@ -87,6 +87,7 @@ static int mmap_file_open(struct inode *inode, struct file *filp)
 
 	for (index = 1; index < (mapsize >> PAGE_SHIFT); index++) {
 		off_t offset = index << PAGE_SHIFT;
+
 		snprintf(
 			data + offset, mapsize - offset,
 			"Page #%lu begins at %pK\n",
@@ -145,9 +146,9 @@ static int __init mmap_file_init(void)
 		pr_err("Unable to create %s in debugfs.\n", debugname);
 		return -EINVAL;
 	}
-	if (debugfs_file->d_inode) {
+	if (debugfs_file->d_inode)
 		debugfs_file->d_inode->i_size = mapsize;
-	}
+
 	pr_info("Created file /sys/kernel/debug/%s\n", debugname);
 	return 0;
 }

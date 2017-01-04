@@ -10,7 +10,7 @@
 #include <linux/version.h>
 
 static int num = 42;
-module_param(num, int, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+module_param(num, int, 0664);
 MODULE_PARM_DESC(num, "A number");
 
 static int __init hello_world_init(void)

@@ -331,7 +331,7 @@ static void note_page(struct pg_state *st, unsigned long addr,
 			    st->lines < st->marker->max_lines) {
 				const char *unit = units;
 				unsigned long human_size, s;
-				unsigned shift;
+				unsigned int shift;
 
 				if (addr) {
 					seq_printf(st->seq, "%lx-%lx  ",
@@ -444,14 +444,15 @@ static void walk_pte(struct pg_state *st, pte_t *pte, unsigned long addr)
 	unsigned int i;
 
 	for (i = 0; i < PTRS_PER_PTE; i++, pte++, addr += PAGE_SIZE) {
-		/*
+#if 0
+		/* Dump PTE entries */
 		unsigned long addr_phys = __pa(addr);
 
 		if (pte_val(*pte) && addr_phys != pte_pfn(*pte) << PAGE_SHIFT) {
 			seq_printf(st->seq, "    PTE %3u @ %#lx: %lx vs %lx\n",
 				   i, addr, pte_val(*pte), addr_phys);
 		}
-		*/
+#endif
 		note_page(st, addr, 4, pte_val_nopfn(*pte));
 	}
 }
@@ -769,7 +770,7 @@ static char *ptdump_class_devnode(struct device *dev, mode_t *mode)
 {
 	/* mode is NULL when devtmpfs_delete_node calls device_get_devnode */
 	if (mode)
-		*mode = S_IRUSR;
+		*mode = 0400;
 	return kstrdup(dev_name(dev), GFP_KERNEL);
 }
 
@@ -781,7 +782,7 @@ static char *ptdump_class_devnode(struct device *dev, mode_t *mode)
  * It is also available in /proc/devices.
  */
 static int chrdev_major;
-module_param(chrdev_major, uint, S_IRUSR | S_IRGRP | S_IROTH);
+module_param(chrdev_major, uint, 0444);
 MODULE_PARM_DESC(chrdev_major, "Character device major number to use");
 
 static struct dentry *debugfs_pe;
@@ -793,7 +794,7 @@ static int __init pt_dump_init(void)
 	struct device *dev;
 
 	/* Create a debugfs file */
-	debugfs_pe = debugfs_create_file("kernel_pagetables", S_IRUSR, NULL,
+	debugfs_pe = debugfs_create_file("kernel_pagetables", 0400, NULL,
 					 NULL, &ptdump_fops);
 	if (!debugfs_pe)
 		return -ENOMEM;
