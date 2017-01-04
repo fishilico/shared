@@ -81,71 +81,6 @@ struct addr_marker {
 	unsigned long max_lines;
 };
 
-/* Address space markers hints */
-static struct addr_marker address_markers[] = {
-#ifdef CONFIG_ARM
-
-	/* { 0, "User Space" }, */
-	{ MODULES_VADDR,	"Modules" },
-	{ PAGE_OFFSET,		"Kernel Mapping" },
-	{ 0/* VMALLOC_START */,	"vmalloc() Area" },
-	{ VMALLOC_END,		"vmalloc() End" },
-	{ FIXADDR_START,	"Fixmap Area" },
-
-#elif defined(CONFIG_X86_64)
-
-	/* { 0, "User Space" }, */
-	{ 0xffff800000000000UL, "Kernel Space" },
-	{ PAGE_OFFSET,		"Low Kernel Mapping" },
-	{ VMALLOC_START,        "vmalloc() Area" },
-	{ VMEMMAP_START,        "Vmemmap" },
-# if defined(CONFIG_X86_ESPFIX64) && defined(ESPFIX_BASE_ADDR)
-	{ ESPFIX_BASE_ADDR,	"ESPfix Area", 16 },
-# endif
-# if defined(CONFIG_EFI) && defined(EFI_VA_END)
-	{ EFI_VA_END,		"EFI Runtime Services" },
-# endif
-	{ __START_KERNEL_map,   "High Kernel Mapping" },
-	{ MODULES_VADDR,        "Modules" },
-	{ MODULES_END,          "End Modules" },
-	{ FIXADDR_START,        "Fixmap Area" },
-
-#elif defined(CONFIG_X86_32)
-
-	/* { 0, "User Space" }, */
-	{ PAGE_OFFSET,          "Kernel Mapping" },
-	{ 0/* VMALLOC_START */,	"vmalloc() Area" },
-	{ 0/* VMALLOC_END */,	"vmalloc() End" },
-# ifdef CONFIG_HIGHMEM
-	{ 0/* PKMAP_BASE */,	"Persistent kmap() Area" },
-# endif
-	{ 0/* FIXADDR_START */,	"Fixmap Area" },
-#endif
-
-	{ -1UL, NULL }		/* End of list */
-};
-
-/**
- * Adjust the address markers depending on the architecture
- * This allows using markers which are not compile-time constants
- */
-static void __init adjust_address_markers(void)
-{
-#ifdef CONFIG_ARM
-	address_markers[2].address = VMALLOC_START;
-#elif defined(CONFIG_X86_32)
-	/* Not a compile-time constant on x86-32 */
-	address_markers[2].address = VMALLOC_START;
-	address_markers[3].address = VMALLOC_END;
-# ifdef CONFIG_HIGHMEM
-	address_markers[4].address = PKMAP_BASE;
-	address_markers[5].address = FIXADDR_START;
-# else
-	address_markers[4].address = FIXADDR_START;
-# endif
-#endif
-}
-
 
 /**
  * Describe the current protection flags in the pg_state structure
@@ -578,7 +513,7 @@ static void walk_pgd(struct pg_state *st, pgd_t *pgd)
 	unsigned long addr;
 
 	/* Start with the first level of markers */
-	addr = address_markers[0].address;
+	addr = st->marker->address;
 	i = pgd_index(addr);
 	for (pgd = &pgd[i]; i < PTRS_PER_PGD; i++, pgd++, addr += PGDIR_SIZE) {
 		if (pgd_none(*pgd) || pgd_large(*pgd) || !pgd_present(*pgd))
@@ -753,6 +688,50 @@ static pgd_t *get_pgd_address(struct seq_file *s)
 static int ptdump_show(struct seq_file *s, void *v)
 {
 	pgd_t *pgd_table;
+	/* Address space markers hints.
+	 * Use a local variable as some macros are not compile-time constants.
+	 */
+	struct addr_marker address_markers[] = {
+		/* { 0, "User Space" }, */
+
+#ifdef CONFIG_ARM
+
+		{ MODULES_VADDR,        "Modules" },
+		{ PAGE_OFFSET,          "Kernel Mapping" },
+		{ VMALLOC_START,        "vmalloc() Area" },
+		{ VMALLOC_END,          "vmalloc() End" },
+		{ FIXADDR_START,        "Fixmap Area" },
+
+#elif defined(CONFIG_X86_64)
+
+		{ 0xffff800000000000UL, "Kernel Space" },
+		{ PAGE_OFFSET,          "Low Kernel Mapping" },
+		{ VMALLOC_START,        "vmalloc() Area" },
+		{ VMEMMAP_START,        "Vmemmap" },
+# if defined(CONFIG_X86_ESPFIX64) && defined(ESPFIX_BASE_ADDR)
+		{ ESPFIX_BASE_ADDR,     "ESPfix Area", 16 },
+# endif
+# if defined(CONFIG_EFI) && defined(EFI_VA_END)
+		{ EFI_VA_END,           "EFI Runtime Services" },
+# endif
+		{ __START_KERNEL_map,   "High Kernel Mapping" },
+		{ MODULES_VADDR,        "Modules" },
+		{ MODULES_END,          "End Modules" },
+		{ FIXADDR_START,        "Fixmap Area" },
+
+#elif defined(CONFIG_X86_32)
+
+		{ PAGE_OFFSET,          "Kernel Mapping" },
+		{ VMALLOC_START,        "vmalloc() Area" },
+		{ VMALLOC_END,          "vmalloc() End" },
+# ifdef CONFIG_HIGHMEM
+		{ PKMAP_BASE,           "Persistent kmap() Area" },
+# endif
+		{ FIXADDR_START,        "Fixmap Area" },
+#endif
+
+		{ -1UL, NULL }		/* End of list */
+	};
 	struct pg_state st = {
 		.seq = s,
 		.marker = address_markers,
@@ -812,8 +791,6 @@ static int __init pt_dump_init(void)
 {
 	int result;
 	struct device *dev;
-
-	adjust_address_markers();
 
 	/* Create a debugfs file */
 	debugfs_pe = debugfs_create_file("kernel_pagetables", S_IRUSR, NULL,
