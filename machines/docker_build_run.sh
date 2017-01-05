@@ -58,19 +58,23 @@ get_base_name() {
 }
 
 get_available_bases() {
-    # Generated with:
-    # sed -n '/^get_base_name/,/^get_available_bases/{s/^ *\(echo \)/\1/p}' docker_build_run.sh
-    echo "archlinux"
-    echo "debian7-wheezy"
-    echo "debian8-jessie"
-    echo "debian9-stretch"
-    echo "ubuntu1204-precise"
-    echo "ubuntu1404-trusty"
-    echo "ubuntu1504-vivid"
-    echo "ubuntu1510-wily"
-    echo "fedora20-heisenbug"
-    echo "fedora21-rawhide"
-    echo "fedora22"
+    local FILENAME BASENAME
+
+    # Filter the available files with get_base_name
+    for FILENAME in $(find Dockerfile-* | sort)
+    do
+        BASENAME="$(get_base_name "$FILENAME")"
+        if [ -z "$BASENAME" ]
+        then
+            echo >&2 "Skipping unknown $FILENAME"
+        elif [ "Dockerfile-$BASENAME" != "$FILENAME" ]
+        then
+            echo >&2 "Error: unexpected base name $BASENAME for $FILENAME"
+            exit 1
+        else
+            echo "$BASENAME"
+        fi
+    done
 }
 
 while getopts "bhn:prv" OPT
