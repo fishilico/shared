@@ -63,7 +63,8 @@ KCFLAGS_WARN += -Wno-uninitialized
 KCFLAGS_WARN += -Wno-error=unused-but-set-variable
 
 test: clean
-	@KCFLAGS='$(KCFLAGS_WARN)' $(MAKE) all checkpatch
+	@KCFLAGS='$(KCFLAGS_WARN)' $(MAKE) all
+	@if [ -x $(KERNELPATH)/scripts/checkpatch.pl ]; then $(MAKE) checkpatch ; fi
 
 # Run checkpatch on source files
 checkpatch:
