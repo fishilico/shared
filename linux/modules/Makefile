@@ -15,14 +15,14 @@ obj-m += $(obj-m-y)
 #ccflags-y += -save-temps=obj
 
 all:
-	make -C $(KERNELPATH) M=$(CURDIR) modules
+	$(MAKE) -C $(KERNELPATH) M=$(CURDIR) modules
 
 clean:
-	make -C $(KERNELPATH) M=$(CURDIR) clean
+	$(MAKE) -C $(KERNELPATH) M=$(CURDIR) clean
 
 # install modules in /lib/modules/$(uname -r)/extra/
 install:
-	make -C $(KERNELPATH) M=$(CURDIR) modules_install
+	$(MAKE) -C $(KERNELPATH) M=$(CURDIR) modules_install
 
 # Some targets added to list useful commands
 infos:

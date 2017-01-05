@@ -108,7 +108,7 @@ clean-obj:
 	$(FIND) . -name '*.o' -delete
 
 test:
-	@for D in $(sort $(SUBDIRS_FINAL)); do \
+	+@for D in $(sort $(SUBDIRS_FINAL)); do \
 		($(call chdir_do,$$D,,$@)) || exit $$? ; done
 
 # List programs which are explicitly not built
