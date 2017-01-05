@@ -51,8 +51,8 @@ get_base_name() {
         *fedora20*|*heidenbug*)
             echo "fedora20-heisenbug"
             ;;
-        *fedora21*|*rawhide*)
-            echo "fedora21-rawhide"
+        *fedora21*)
+            echo "fedora21"
             ;;
         *fedora22*)
             echo "fedora22"

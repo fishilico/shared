@@ -1,5 +1,5 @@
 FROM fedora:21
-LABEL Description="Fedora 21 Rawhide with build dependencies for shared"
+LABEL Description="Fedora 21 with build dependencies for shared"
 
 RUN \
     yum update -q -y && \
