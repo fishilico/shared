@@ -1,4 +1,4 @@
-FROM ubuntu-debootstrap:14.04
+FROM ubuntu:14.04
 LABEL Description="Ubuntu 14.04 LTS Trusty Tahr with build dependencies for shared"
 
 # libnetlink (previously provided by iproute-dev) disappeared.
