@@ -47,6 +47,7 @@ KCFLAGS_WARN = -Wall -Wextra -Werror \
 	-Wno-cast-qual \
 	-Wno-conversion \
 	-Wno-missing-field-initializers \
+	-Wno-missing-include-dirs \
 	-Wno-nested-externs \
 	-Wno-packed \
 	-Wno-padded \
