@@ -41,11 +41,8 @@ get_base_name() {
         *ubuntu1404*|*trusty*)
             echo "ubuntu1404-trusty"
             ;;
-        *ubuntu1504*|*vivid*)
-            echo "ubuntu1504-vivid"
-            ;;
-        *ubuntu1510*|*wily*)
-            echo "ubuntu1510-wily"
+        *ubuntu1604*|*xenial*)
+            echo "ubuntu1604-xenial"
             ;;
 
         *fedora20*|*heidenbug*)

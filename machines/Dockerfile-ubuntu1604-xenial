@@ -1,6 +1,7 @@
-FROM ubuntu:15.10
-LABEL Description="Ubuntu 15.10 Wily Werewolf with build dependencies for shared"
+FROM ubuntu:16.04
+LABEL Description="Ubuntu 16.04 LTS Xenial Xerus with build dependencies for shared"
 
+# libnetlink (previously provided by iproute-dev) disappeared.
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
