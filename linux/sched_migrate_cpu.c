@@ -103,7 +103,7 @@ static unsigned long list_cpus_sched_affinity(cpu_set_t *set, size_t setsize)
         return 0;
     }
     count = CPU_COUNT_S(setsize, set);
-    for (i = 0, cpu_num = 0; i < count && cpu_num <= 8 * setsize; cpu_num++) {
+    for (i = cpu_num = 0; i < count && cpu_num <= 8 * setsize; cpu_num++) {
         if (CPU_ISSET_S(cpu_num, setsize, set)) {
             i++;
         }
