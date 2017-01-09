@@ -41,8 +41,7 @@ $(SDL_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs sdl2)
 $(SDL_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags sdl2)
 endif
 
-HAVE_SECCOMP := $(shell echo '\#include <linux/seccomp.h>' | \
-	$(CC) -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
+HAVE_SECCOMP := $(call ccpp-has-option,-include linux/seccomp.h)
 ifeq ($(HAVE_SECCOMP), y)
 	PROGRAMS += $(SECCOMP_PROGRAMS)
 endif
