@@ -39,6 +39,7 @@
 #    pragma GCC diagnostic push
 #endif
 #pragma GCC diagnostic ignored "-Wcast-align"
+#pragma GCC diagnostic ignored "-Wsign-compare"
 static int child1_main(const char *sockpath)
 {
     struct sockaddr_un addr;
