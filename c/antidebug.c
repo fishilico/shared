@@ -121,28 +121,28 @@ int main(void)
     for (pcode = sensitive_start; pcode < sensitive_end; pcode++) {
 #if defined(__x86_64__) || defined(__i386__)
         if (*pcode == 0xcc) {
-            printf("[-] int3 instruction detected at %p\n", pcode);
+            printf("[-] int3 instruction detected at %p\n", (void *)pcode);
             is_debugged = 1;
             break;
         }
         if (pcode + 1 < sensitive_end && *pcode == 0xcd && *(pcode + 1) == 0x03) {
-            printf("[-] int 3 instruction detected at %p\n", pcode);
+            printf("[-] int 3 instruction detected at %p\n", (void *)pcode);
             is_debugged = 1;
             break;
         }
 #elif defined(__arm__)
         if (!((uintptr_t)pcode & 3) && !memcmp(pcode, &arm_break, 4)) {
-            printf("[-] ARM break instruction detected at %p\n", pcode);
+            printf("[-] ARM break instruction detected at %p\n", (void *)pcode);
             is_debugged = 1;
             break;
         }
         if (!((uintptr_t)pcode & 1) && !memcmp(pcode, &thumb_break, 2)) {
-            printf("[-] Thumb break instruction detected at %p\n", pcode);
+            printf("[-] Thumb break instruction detected at %p\n", (void *)pcode);
             is_debugged = 1;
             break;
         }
         if (!((uintptr_t)pcode & 3) && !memcmp(pcode, &thumb2_break, 4)) {
-            printf("[-] Thumb2 break instruction detected at %p\n", pcode);
+            printf("[-] Thumb2 break instruction detected at %p\n", (void *)pcode);
             is_debugged = 1;
             break;
         }

@@ -459,6 +459,6 @@ bool run_mov_asm_instruction_p(
 
     instr = orig_instr;
     fprintf(stderr, "Unknown x86 instruction @%p: %02x %02x %02x %02x %02x %02x\n",
-            instr, instr[0], instr[1], instr[2], instr[3], instr[4], instr[5]);
+            (const void *)instr, instr[0], instr[1], instr[2], instr[3], instr[4], instr[5]);
     return false;
 }
