@@ -225,6 +225,20 @@ static bool test_sha256(void)
     return true;
 }
 
+/* clang with Musl warns about a -Wsign-compare warning in CMSG_NXTHDR:
+ * error: comparison of integers of different signs: 'unsigned long' and 'long' [-Werror,-Wsign-compare]
+ * /usr/include/sys/socket.h:286:44: note: expanded from macro 'CMSG_NXTHDR'
+ * __CMSG_LEN(cmsg) + sizeof(struct cmsghdr) >= __MHDR_END(mhdr) - (unsigned char *)(cmsg) */
+#if defined(__GNUC__)
+#    define HAVE_PRAGMA_GCC_DIAGNOSTIC_PUSH ((__GNUC__ << 16) + __GNUC_MINOR__ >= 0x40005)
+#else
+#    define HAVE_PRAGMA_GCC_DIAGNOSTIC_PUSH 1
+#endif
+#if HAVE_PRAGMA_GCC_DIAGNOSTIC_PUSH
+#    pragma GCC diagnostic push
+#endif
+#pragma GCC diagnostic ignored "-Wsign-compare"
+
 /**
  * Use AES-XTS encryption through the crypto interface
  */
@@ -499,6 +513,9 @@ static bool test_aes_cbc_dec(void)
     printf("\n");
     return true;
 }
+#if HAVE_PRAGMA_GCC_DIAGNOSTIC_PUSH
+#    pragma GCC diagnostic pop
+#endif
 
 /**
  * Retrieve informations about algorithms from the kernel using a netlink crypto socket.
