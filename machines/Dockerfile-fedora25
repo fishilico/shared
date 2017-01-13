@@ -1,0 +1,40 @@
+FROM fedora:25
+LABEL Description="Fedora 25 with build dependencies for shared"
+
+RUN \
+    dnf update -q -y --setopt=deltarpm=false && \
+    dnf install -q -y --setopt=deltarpm=false \
+        clang \
+        coq \
+        gcc \
+        gdb \
+        gmp-devel \
+        gtk3-devel \
+        kernel \
+        kernel-devel \
+        libmnl-devel \
+        make \
+        mingw64-gcc \
+        numpy \
+        perl-Getopt-Long \
+        perl-Term-ANSIColor \
+        pkgconfig \
+        pulseaudio-libs-devel \
+        python3 \
+        python3-cffi \
+        python3-devel \
+        python3-numpy \
+        python-argparse \
+        python-cffi \
+        python-devel \
+        redhat-rpm-config \
+        SDL2-devel \
+        which \
+        wine && \
+    dnf clean all
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]
