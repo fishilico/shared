@@ -3,8 +3,8 @@ language: python
 python:
   - "3.6"
 
-# Use Ubuntu 12.04 with container infrastructure so long as wine fails to install in 14.04
-dist: precise
+# Use Ubuntu 14.04 with container infrastructure
+dist: trusty
 sudo: false
 
 env:
@@ -32,10 +32,13 @@ addons:
     - libmnl-dev
     - linux-headers-generic
     - libpulse-dev
-    #- libsdl2-dev # Unavailable in Ubuntu 12.04
+    - libsdl2-dev
     - binutils-mingw-w64
     - gcc-mingw-w64
     - wine
+    - wine1.6
+    - wine1.6-amd64
+    - wine1.6-i386
 
 install:
   # pip does not behave properly when CC is somewhat weird
