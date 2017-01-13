@@ -11,9 +11,9 @@ RUN \
         gdb \
         gmp-devel \
         gtk3-devel \
-        iproute-devel \
         kernel \
         kernel-devel \
+        libmnl-devel \
         make \
         mingw64-gcc \
         numpy \

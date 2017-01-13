@@ -11,52 +11,58 @@
  *   http://git.kernel.org/cgit/linux/kernel/git/shemminger/iproute2.git/tree/lib/libnetlink.c
  * * glibc implementation of getifaddrs, using netlink:
  *   https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/unix/sysv/linux/ifaddrs.c;hb=HEAD
+ * * limnl rtnl-link-dump example:
+ *   https://git.netfilter.org/libmnl/tree/examples/rtnl/rtnl-link-dump3.c
  */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for getpagesize (MNL_SOCKET_BUFFER_SIZE) */
+#endif
+
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#include <unistd.h>
 
+#include <libmnl/libmnl.h>
+#include <linux/rtnetlink.h>
 #include <net/if_arp.h>
 
-/* linetlink.h uses "inline", which is not ISO C */
-#ifndef inline
-#    define inline __inline__
-#endif
-#include <libnetlink.h>
-
-/* libnetlink uses casts to char* to perform pointer arithmetic */
-#pragma GCC diagnostic ignored "-Wcast-align"
-
-static int print_linkaddr_filter(
-    const struct sockaddr_nl *rth __attribute__ ((unused)),
-    struct nlmsghdr *nlh,
-    void *arg __attribute__ ((unused)))
+static int print_linkaddr_cb(
+    const struct nlmsghdr *nlh,
+    void *data __attribute__ ((unused)))
 {
-    struct ifinfomsg *ifim = (struct ifinfomsg *)NLMSG_DATA(nlh);
-    size_t rtasize = IFLA_PAYLOAD(nlh);
-    struct rtattr *rta, *rta_name = NULL, *rta_addr = NULL;
+    struct ifinfomsg *ifim = mnl_nlmsg_get_payload(nlh);
+    struct nlattr *attr, *attr_name = NULL, *attr_addr = NULL;
 
     if (nlh->nlmsg_type != RTM_NEWLINK)
-        return 0;
+        return MNL_CB_OK;
 
     /* Gather information about the link */
-    for (rta = IFLA_RTA(ifim); RTA_OK(rta, rtasize); rta = RTA_NEXT(rta, rtasize)) {
-        if (rta->rta_type == IFLA_IFNAME) {
-            rta_name = rta;
-        } else if (rta->rta_type == IFLA_ADDRESS) {
-            rta_addr = rta;
+    mnl_attr_for_each(attr, nlh, sizeof(*ifim)) {
+        switch (mnl_attr_get_type(attr)) {
+            case IFLA_IFNAME:
+                attr_name = attr;
+                break;
+            case IFLA_ADDRESS:
+                attr_addr = attr;
+                break;
         }
     }
 
     /* Display it */
     printf("%d: ", ifim->ifi_index);
-    if (rta_name) {
-        printf("%*s: ", (int)RTA_PAYLOAD(rta_name) - 1, (char *)RTA_DATA(rta_name));
+    if (attr_name) {
+        if (mnl_attr_validate(attr_name, MNL_TYPE_STRING) < 0) {
+            perror("mnl_attr_validate(name)");
+            return MNL_CB_ERROR;
+        }
+        printf("%s: ", mnl_attr_get_str(attr_name));
     }
-    if (rta_addr) {
-        unsigned char *addr = RTA_DATA(rta_addr);
-        size_t len = RTA_PAYLOAD(rta_addr), pos;
+    if (attr_addr) {
+        unsigned char *addr = mnl_attr_get_payload(attr_addr);
+        uint16_t len = mnl_attr_get_payload_len(attr_addr), pos;
         for (pos = 0; pos < len; pos++) {
             if (pos)
                 printf(":");
@@ -77,35 +83,63 @@ static int print_linkaddr_filter(
             break;
     }
     printf("\n");
-    return 0;
+    return MNL_CB_OK;
 }
 
 int main(void)
 {
-    struct rtnl_handle rth;
-    struct rtnl_dump_filter_arg dump_arg_print[2];
+    struct nlmsghdr *nlh;
+    struct rtgenmsg *rt;
+    struct mnl_socket *nl;
+    unsigned int seq, portid;
+    ssize_t nbytes;
+    int ret = 0;
+    void *buffer;
+
+    buffer = malloc((size_t)MNL_SOCKET_BUFFER_SIZE);
+    if (!buffer) {
+        fprintf(stderr, "Out of memory\n");
+        exit(EXIT_FAILURE);
+    }
 
     /* Open Netlink route socket */
-    if (rtnl_open(&rth, 0) == -1) {
-        perror("rtnl_open");
+    nl = mnl_socket_open(NETLINK_ROUTE);
+    if (nl == NULL) {
+        perror("mnl_socket_open");
         exit(EXIT_FAILURE);
     }
+    if (mnl_socket_bind(nl, 0, MNL_SOCKET_AUTOPID) < 0) {
+        perror("mnl_socket_bind");
+        exit(EXIT_FAILURE);
+    }
+    portid = mnl_socket_get_portid(nl);
 
     /* Request all links */
-    if (rtnl_wilddump_request(&rth, 0, RTM_GETLINK) == -1) {
-        perror("rtnl_wilddump_request");
+    nlh = mnl_nlmsg_put_header(buffer);
+    nlh->nlmsg_type = RTM_GETLINK;
+    nlh->nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
+    nlh->nlmsg_seq = seq = (unsigned int)time(NULL);
+    rt = mnl_nlmsg_put_extra_header(nlh, sizeof(struct rtgenmsg));
+    rt->rtgen_family = AF_PACKET;
+    if (mnl_socket_sendto(nl, nlh, nlh->nlmsg_len) < 0) {
+        perror("mnl_socket_sendto");
         exit(EXIT_FAILURE);
     }
 
-    /* Process results
-     * Since iproute2 v3.2.0, rtnl_dump_filter takes 2 arguments instead of 4.
-     * To be compatible with both old and new API, use rtnl_dump_filter_l.
-     * cf. https://git.kernel.org/cgit/linux/kernel/git/shemminger/iproute2.git/commit/lib/libnetlink.c?id=cd70f3f522e04b4d2fa80ae10292379bf223a53b
-     */
-    memset(&dump_arg_print, 0, sizeof(dump_arg_print));
-    dump_arg_print[0].filter = print_linkaddr_filter;
-    rtnl_dump_filter_l(&rth, dump_arg_print);
+    /* Process results */
+    nbytes = mnl_socket_recvfrom(nl, buffer, (size_t)MNL_SOCKET_BUFFER_SIZE);
+    while (nbytes > 0) {
+        ret = mnl_cb_run(buffer, (size_t)nbytes, seq, portid, print_linkaddr_cb, NULL);
+        if (ret <= MNL_CB_STOP)
+            break;
+        nbytes = mnl_socket_recvfrom(nl, buffer, (size_t)MNL_SOCKET_BUFFER_SIZE);
+    }
+    if (nbytes == -1) {
+        perror("mnl_socket_recvfrom");
+        exit(EXIT_FAILURE);
+    }
 
-    rtnl_close(&rth);
-    return 0;
+    mnl_socket_close(nl);
+    free(buffer);
+    return (ret == MNL_CB_STOP) ? 0 : 1;
 }

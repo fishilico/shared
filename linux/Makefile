@@ -3,7 +3,8 @@ include ../linux-flags.mk
 PKG_CONFIG ?= pkg-config
 
 # Programs which need specific options
-NETLINK_PROGRAMS := crypto_socket enum_link_addrs
+LIBMNL_PROGRAMS := enum_link_addrs
+NETLINK_PROGRAMS := crypto_socket
 PULSE_PROGRAMS := pulseaudio_echo
 SDL_PROGRAMS := sdl_v4l_video
 SECCOMP_PROGRAMS := seccomp
@@ -17,14 +18,18 @@ NONTEST_BINARIES := $(NONTEST_PROGRAMS:%=%.$(BIN_EXT)) override_uname_dl.sh
 SOURCES := $(wildcard *.c)
 ALL_PROGRAMS := $(filter-out $(SHARED_OBJECTS:%.$(LIB_EXT)=%), $(SOURCES:%.c=%))
 PROGRAMS := $(filter-out \
-	$(NETLINK_PROGRAMS) $(PULSE_PROGRAMS) $(SDL_PROGRAMS) $(SECCOMP_PROGRAMS), \
-	$(ALL_PROGRAMS))
+	$(LIBMNL_PROGRAMS) $(NETLINK_PROGRAMS) $(PULSE_PROGRAMS) $(SDL_PROGRAMS) \
+	$(SECCOMP_PROGRAMS), $(ALL_PROGRAMS))
 
-# libnetlink is provided by iproute2 project
-HAVE_NETLINK := $(shell echo '\#include <libnetlink.h>' | \
-	$(CC) -E $(CPPFLAGS) - > /dev/null 2>&1 && echo 'y' || echo 'n')
+HAVE_NETLINK := $(call ccpp-has-option,-include linux/netlink.h)
+HAVE_LIBMNL := $(shell $(PKG_CONFIG) --exists libmnl && echo 'y' || echo 'n')
 ifeq ($(HAVE_NETLINK), y)
 	PROGRAMS += $(NETLINK_PROGRAMS)
+	ifeq ($(HAVE_LIBMNL), y)
+		PROGRAMS += $(LIBMNL_PROGRAMS)
+$(LIBMNL_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs libmnl)
+$(LIBMNL_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags libmnl)
+	endif
 endif
 
 HAVE_PULSE := $(shell $(PKG_CONFIG) --exists libpulse && echo 'y' || echo 'n')
@@ -63,7 +68,6 @@ test: all
 		$(call run-test-progs,eventpoll_activetty.$(BIN_EXT)) < /dev/null ; \
 	fi
 
-enum_link_addrs.$(BIN_EXT): LIBS += -lnetlink
 message_queue.$(BIN_EXT): LIBS += -lrt
 .override_uname_dl.o: CFLAGS += $(LIB_CFLAGS)
 override_uname_dl.$(LIB_EXT): LIBS += -ldl
