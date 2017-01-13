@@ -1,12 +1,11 @@
 # Use "python language" so that the C compiler can be chosen in env
 language: python
 python:
-  - "3.4"
+  - "3.6"
 
-# As of 2015-10-11, Travis container infrastructure does not support running Windows programs using wine binfmt
-# so force using the standard infrastructure.
-# https://github.com/travis-ci/travis-ci/issues/4171
-sudo: required
+# Use Ubuntu 12.04 with container infrastructure so long as wine fails to install in 14.04
+dist: precise
+sudo: false
 
 env:
   # gcc without MinGW
@@ -22,14 +21,23 @@ env:
   - OS=Windows_NT WINCC=x86_64-w64-mingw32-gcc CC=$WINCC HAVE_UNICODE=n
   - OS=Windows_NT WINCC=i686-w64-mingw32-gcc CC=$WINCC HAVE_UNICODE=n
 
+addons:
+  apt:
+    packages:
+    - gcc-multilib
+    - gdb
+    - libc6-dev-i386
+    - libgmp-dev
+    - libgtk-3-dev
+    - libmnl-dev
+    - linux-headers-generic
+    - libpulse-dev
+    #- libsdl2-dev # Unavailable in Ubuntu 12.04
+    - binutils-mingw-w64
+    - gcc-mingw-w64
+    - wine
+
 install:
-  - sudo apt-get -qq update
-  - sudo apt-get -qq install gcc-multilib libc6-dev-i386 gdb
-  - sudo apt-get -qq install libgmp-dev libgtk-3-dev libmnl-dev libpulse-dev
-  - if "${WITH_KERN:-false}" ; then sudo apt-get -qq install linux-headers-generic ; fi
-  - if [ "$OS" = "Windows_NT" ] ; then sudo apt-get -qq install binutils-mingw-w64 gcc-mingw-w64 wine ; fi
-  # Run Windows programs using binfmt_misc
-  - if [ "$OS" = "Windows_NT" ] ; then sudo update-binfmts --disable wine ; sudo update-binfmts --enable wine ; fi
   # pip does not behave properly when CC is somewhat weird
   - if [ "$CC" = "gcc" ] ; then pip install cffi numpy ; fi
 
@@ -48,6 +56,7 @@ script:
     fi
   - make list-nobuild
 
-# Disable email notifications
+# Do not spam by email so long as the build succeeds
 notifications:
-  email: false
+  email:
+    on_success: never
