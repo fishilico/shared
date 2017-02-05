@@ -313,7 +313,7 @@ static int describe_address(const void *address)
     identify_sigret_code(address);
 
     /* If the memory is a mmap-ed file, mmap it again */
-    if (name[0] == '/') {
+    if (name && name[0] == '/') {
         fd_mapped = open(name, O_RDONLY);
         if (fd_mapped == -1) {
             perror("open");
