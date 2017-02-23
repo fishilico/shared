@@ -61,10 +61,11 @@ extract_cpuid_scat_features() {
  */
 __extension__ static const char* cpuidstr_${CPUIDNUM}_$2[32] = {
 EOF
-    sed -n 's/^\t*{ X86_FEATURE_\(\S\+\),\s*CR_'"$REG_NAME_UP"',\s*\([0-9]\+\),\s*'"$1"',.*/    [\2] = "\1",/p' < "$CPU_SCATTERED_FILE" | tr '[A-Z]' '[a-z]'
+    sed -n 's/^\t*{ X86_FEATURE_\(\S\+\),\s*CPUID_'"$REG_NAME_UP"',\s*\([0-9]\+\),\s*'"$1"',.*/    [\2] = "\1",/p' < "$CPU_SCATTERED_FILE" | tr '[A-Z]' '[a-z]'
     echo '};'
 }
 extract_cpuid_scat_features 0x00000006 ecx
+extract_cpuid_scat_features 0x00000007 edx
 extract_cpuid_scat_features 0x80000007 edx
 
 # Fix things up
@@ -79,16 +80,10 @@ static void add_manual_cpuid_str(void)
     cpuidstr_6_eax[13] = "hdc";
     assert(cpuidstr_7_ebx[13] == NULL);
     cpuidstr_7_ebx[13] = "deprecate_FPU_CS_DS"; /* Deprecates FPU CS and FPU DS values */
-    assert(cpuidstr_7_ebx[15] == NULL);
-    cpuidstr_7_ebx[15] = "pqe"; /* Platform Quality of Service Enforcement */
     assert(cpuidstr_7_ebx[22] == NULL);
     cpuidstr_7_ebx[22] = "pcommit"; /* Deprecated pcommit instruction, Linux commit fd1d961dd681 ("x86/insn: remove pcommit") */
     assert(cpuidstr_7_ebx[25] == NULL);
     cpuidstr_7_ebx[25] = "Intel_processor_trace"; /* Intel Processor Trace */
-
-    /* https://en.wikipedia.org/wiki/CPUID */
-    assert(cpuidstr_7_ebx[21] == NULL);
-    cpuidstr_7_ebx[21] = "avx512ifma";
 
     /* documented in /usr/src/linux/arch/x86/kernel/cpu/{amd.c,intel.c}
      * and also /usr/src/linux/tools/power/x86/turbostat/turbostat.c

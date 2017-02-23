@@ -127,6 +127,9 @@ int main(void)
         if (ebx) {
             print_features("Features 7:0.ebx", ebx, cpuidstr_7_ebx);
         }
+        if (edx) {
+            print_features("Features 7:0.edx", edx, cpuidstr_7_edx);
+        }
         if (ecx) {
             print_features("Features 7:0.ecx", ecx, cpuidstr_7_ecx);
         }

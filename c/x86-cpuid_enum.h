@@ -116,11 +116,13 @@ __extension__ static const char* cpuidstr_7_ebx[32] = {
     [11] = "rtm",
     [12] = "cqm",
     [14] = "mpx",
+    [15] = "rdt_a",
     [16] = "avx512f",
     [17] = "avx512dq",
     [18] = "rdseed",
     [19] = "adx",
     [20] = "smap",
+    [21] = "avx512ifma",
     [23] = "clflushopt",
     [24] = "clwb",
     [26] = "avx512pf",
@@ -135,8 +137,10 @@ __extension__ static const char* cpuidstr_7_ebx[32] = {
  * cpuid 0x00000007:0, ecx register
  */
 __extension__ static const char* cpuidstr_7_ecx[32] = {
+    [1] = "avx512vbmi",
     [3] = "pku",
     [4] = "ospke",
+    [22] = "rdpid",
 };
 
 /**
@@ -196,6 +200,14 @@ __extension__ static const char* cpuidstr_6_ecx[32] = {
 };
 
 /**
+ * cpuid 0x00000007, edx register
+ */
+__extension__ static const char* cpuidstr_7_edx[32] = {
+    [2] = "avx512_4vnniw",
+    [3] = "avx512_4fmaps",
+};
+
+/**
  * cpuid 0x80000007, edx register
  */
 __extension__ static const char* cpuidstr_ext7_edx[32] = {
@@ -213,16 +225,10 @@ static void add_manual_cpuid_str(void)
     cpuidstr_6_eax[13] = "hdc";
     assert(cpuidstr_7_ebx[13] == NULL);
     cpuidstr_7_ebx[13] = "deprecate_FPU_CS_DS"; /* Deprecates FPU CS and FPU DS values */
-    assert(cpuidstr_7_ebx[15] == NULL);
-    cpuidstr_7_ebx[15] = "pqe"; /* Platform Quality of Service Enforcement */
     assert(cpuidstr_7_ebx[22] == NULL);
     cpuidstr_7_ebx[22] = "pcommit"; /* Deprecated pcommit instruction, Linux commit fd1d961dd681 ("x86/insn: remove pcommit") */
     assert(cpuidstr_7_ebx[25] == NULL);
     cpuidstr_7_ebx[25] = "Intel_processor_trace"; /* Intel Processor Trace */
-
-    /* https://en.wikipedia.org/wiki/CPUID */
-    assert(cpuidstr_7_ebx[21] == NULL);
-    cpuidstr_7_ebx[21] = "avx512ifma";
 
     /* documented in /usr/src/linux/arch/x86/kernel/cpu/{amd.c,intel.c}
      * and also /usr/src/linux/tools/power/x86/turbostat/turbostat.c
