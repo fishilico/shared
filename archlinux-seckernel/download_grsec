@@ -33,12 +33,15 @@ else
     echo "Downloading $PATCH_URL..."
     if ! [ -e "$PATCH_PATH" ]
     then
+        # Try wget then curl
+        wget -O "$PATCH_PATH.tmp" "$PATCH_URL" || \
         curl -o "$PATCH_PATH.tmp" "$PATCH_URL" || exit $?
         mv "$PATCH_PATH.tmp" "$PATCH_PATH" || exit $?
     fi
 
     # Verify the GPG signature
     echo "Downloading $PATCH_URL.sig..."
+    wget -O "$PATCH_PATH.sig" "$PATCH_URL.sig" || \
     curl -o "$PATCH_PATH.sig" "$PATCH_URL.sig" || exit $?
 
     if ! gpg --verify "$PATCH_PATH.sig"
