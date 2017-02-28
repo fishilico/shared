@@ -31,7 +31,11 @@ then
     echo "Last patch already downloaded in $PATCH_PATH"
 else
     echo "Downloading $PATCH_URL..."
-    [ -e "$PATCH_PATH" ] || curl -o "$PATCH_PATH" "$PATCH_URL" || exit $?
+    if ! [ -e "$PATCH_PATH" ]
+    then
+        curl -o "$PATCH_PATH.tmp" "$PATCH_URL" || exit $?
+        mv "$PATCH_PATH.tmp" "$PATCH_PATH" || exit $?
+    fi
 
     # Verify the GPG signature
     echo "Downloading $PATCH_URL.sig..."
