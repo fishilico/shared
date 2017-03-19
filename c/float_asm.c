@@ -230,7 +230,13 @@ static double invsqrt_d(double x)
     } while (0)
 #define ok_d(fctcall, value) _ok_d(#fctcall, (fctcall), (value))
 
-#define ok_nan(fctcall) _ok(#fctcall, isnan(fctcall), "f", (double)(fctcall), 0./0.)
+/* musl does not support isnanf and glibc isnan causes a -Wdouble-promotion
+ * warning with clang
+ */
+#if !defined(isnanf) && !defined(__GLIBC__)
+#    define isnanf(value) isnan((float)(value))
+#endif
+#define ok_nan(fctcall) _ok(#fctcall, isnanf(fctcall), "f", (double)(fctcall), NAN)
 
 static int check_constants(void)
 {
