@@ -156,6 +156,10 @@ static bool test_sha256(void)
              */
             printf("Family AF_ALG not supported by the kernel, continuing.\n");
             return true;
+        } else if (errno == EPERM) {
+            /* Docker default seccomp policy forbids socket(AF_ALG) */
+            printf("Connection to algorithm socket is denied, continuing.\n");
+            return true;
         }
         perror("socket");
         return false;
@@ -282,6 +286,10 @@ static bool test_aes_xts_enc(void)
     if (tfmfd == -1) {
         if (errno == EAFNOSUPPORT) {
             printf("Family AF_ALG not supported by the kernel, continuing.\n");
+            return true;
+        } else if (errno == EPERM) {
+            /* Docker default seccomp policy forbids socket(AF_ALG) */
+            printf("Connection to algorithm socket is denied, continuing.\n");
             return true;
         }
         perror("socket");
@@ -416,6 +424,10 @@ static bool test_aes_cbc_dec(void)
     if (tfmfd == -1) {
         if (errno == EAFNOSUPPORT) {
             printf("Family AF_ALG not supported by the kernel, continuing.\n");
+            return true;
+        } else if (errno == EPERM) {
+            /* Docker default seccomp policy forbids socket(AF_ALG) */
+            printf("Connection to algorithm socket is denied, continuing.\n");
             return true;
         }
         perror("socket");
