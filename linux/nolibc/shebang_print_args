@@ -1,0 +1,7 @@
+#!./print_args.bin my_single_option
+
+The output should be:
+argv[0] = ./print_args.bin
+argv[1] = my_single_option
+argv[2] = ./shebang_print_args
+... (other options to this file)

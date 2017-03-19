@@ -33,7 +33,7 @@ NOLIBC_CFLAGS += $(shell [ -d include ] && echo '-I./include')
 # Files
 C_SOURCES := $(wildcard *.c)
 ASM_SOURCES := $(wildcard *.S)
-BINARIES := $(C_SOURCES:%.c=%.$(BIN_EXT)) $(ASM_SOURCES:%.S=%.$(BIN_EXT))
+BINARIES := $(C_SOURCES:%.c=%.$(BIN_EXT)) $(ASM_SOURCES:%.S=%.$(BIN_EXT)) shebang_print_args
 
 all: $(BINARIES)
 	@:
