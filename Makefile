@@ -23,7 +23,7 @@ include ./linux-flags.mk
 include ./windows-flags.mk
 
 # Never build some specific sub-projects from the main Makefile
-SUBDIRS_BLACKLIST = verification/linux%
+SUBDIRS_BLACKLIST =
 
 # Linux check: filter-out linux/ on non-Linux systems, and boot/ on Windows
 # If the kernel headers are not installed, filter out linux/modules
