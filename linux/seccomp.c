@@ -157,6 +157,12 @@ static bool install_syscall_filter(bool do_kill)
         perror("prctl(NO_NEW_PRIVS)");
         return false;
     }
+#if defined(__NR_seccomp) && defined(SECCOMP_SET_MODE_FILTER)
+    /* Use seccomp syscall if available (Linux >= 3.17) */
+    if (syscall(__NR_seccomp, SECCOMP_SET_MODE_FILTER, 0, &prog) == 0) {
+        return true;
+    }
+#endif
     if (prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog) == -1) {
         if (errno == EINVAL) {
             fprintf(stderr, "Exit because the kernel does not support seccomp filters.\n");
