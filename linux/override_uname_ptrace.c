@@ -5,8 +5,8 @@
  *    $ ./override_uname_ptrace.bin -s S -n N -r R -v V -m M uname -a
  *    S N R V M GNU/Linux
  */
-#ifndef _XOPEN_SOURCE
-#    define _XOPEN_SOURCE /* for pid_t */
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for pid_t, process_vm_writev */
 #endif
 
 #include <assert.h>
@@ -21,6 +21,7 @@
 #include <sys/prctl.h>
 #include <sys/ptrace.h> /* ptrace() */
 #include <sys/syscall.h> /* __NR... */
+#include <sys/uio.h>
 #include <sys/user.h> /* struct user_regs_struct */
 #include <sys/utsname.h>
 #include <sys/wait.h>
@@ -66,6 +67,21 @@ typedef struct user_regs user_regs_type;
 #    error "Unsupported architecture"
 #endif
 
+/* process_vm_writev has been introduced in Linux 3.2 and glibc 2.15. When
+ * using old glibc with newer kernel header (e.g. Debian wheezy with glibc 2.13
+ * and Linux headers 3.2), the wrapper is not defined properly.
+ *
+ * https://sourceware.org/git/?p=glibc.git;a=commitdiff;h=78239589cd8c6667886b94c4db146109855f417a
+ */
+#if defined(__NR_process_vm_writev) && defined(__GNU_LIBRARY__) && ((__GLIBC__ << 16) + __GLIBC_MINOR__ < 0x2000f)
+static ssize_t process_vm_writev (
+    pid_t pid, const struct iovec *lvec, size_t liovcnt,
+    const struct iovec *rvec, size_t riovcnt, unsigned long int flags)
+{
+    return (ssize_t)syscall(__NR_process_vm_writev, pid, lvec, liovcnt, rvec, riovcnt, flags);
+}
+#endif
+
 /**
  * Write the buffer content into into the target pid
  */
@@ -74,6 +90,37 @@ static int memcpy_to_pid(pid_t pid, void *dst, const void *src, size_t size)
     uint8_t *pdst = (uint8_t *)dst;
     const uint8_t *psrc = (const uint8_t *)src;
     size_t i;
+
+/* use process_vm_writev when available */
+#ifdef __NR_process_vm_writev
+    ssize_t written;
+    struct iovec local_iov, remote_iov;
+
+    /* try using process_vm_writev */
+    memset(&local_iov, 0, sizeof(local_iov));
+    /* work aroung clang's -Wcast-qual warning */
+    local_iov.iov_base = (void *)(uintptr_t)src;
+    local_iov.iov_len = size;
+    memset(&remote_iov, 0, sizeof(remote_iov));
+    remote_iov.iov_base = dst;
+    remote_iov.iov_len = size;
+    written = process_vm_writev(pid, &local_iov, 1, &remote_iov, 1, 0);
+    if (written == -1) {
+        /* Ignore errors due to old kernels */
+        if (errno != ENOSYS) {
+            perror("process_vm_writev");
+        }
+        /* Try ptrace... */
+    } else if ((size_t)written != size) {
+        fprintf(
+            stderr, "process_vm_writev copied some data: %ld/%lu bytes\n",
+            (long)written, (unsigned long)size);
+        /* Try ptrace... */
+    } else {
+        /* Success */
+        return 0;
+    }
+#endif
 
     /* ptrace works with words of size a pointer. */
     for (i = 0; i + sizeof(intptr_t) <= size; i += sizeof(intptr_t)) {
