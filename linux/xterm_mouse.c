@@ -47,8 +47,8 @@
  * Global variables
  */
 static int tty_fd = -1;
-static unsigned int win_cols;
-static unsigned int win_rows;
+static volatile unsigned int win_cols;
+static volatile unsigned int win_rows;
 static struct termios tty_attr_orig;
 
 /**
