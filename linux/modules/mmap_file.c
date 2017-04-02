@@ -42,9 +42,20 @@ static int mmap_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	struct page *page;
 	off_t offset = vmf->pgoff << PAGE_SHIFT;
 
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 10, 0)
+	/* Commit 1a29d85eb0f1 ("mm: use vmf->address instead of of
+	 * vmf->virtual_address") removed virtual_address from struct vm_fault
+	 * in favor of address in Linux 4.10
+	 */
+	pr_info(
+		"Mmap fault occured on page %lu, userspace address %lx\n",
+		vmf->pgoff, vmf->address);
+#else
 	pr_info(
 		"Mmap fault occured on page %lu, userspace address %p\n",
 		vmf->pgoff, vmf->virtual_address);
+#endif
 
 	if (!vmf->page) {
 		page = vmalloc_to_page((uint8_t *)vma->vm_private_data + offset);
@@ -141,6 +152,14 @@ static const struct file_operations mmap_file_fops = {
 
 static int __init mmap_file_init(void)
 {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 7, 0)
+	/* Commit 149d200deaa68 ("debugfs: prevent access to removed files'
+	 * private data") introduced a file operation proxy which does not
+	 * support mmap(). Using an "unsafe" debugfs file is needed to make
+	 * mmap() works with Linux 4.7.
+	 */
+#define debugfs_create_file debugfs_create_file_unsafe
+#endif
 	debugfs_file = debugfs_create_file(debugname, 0644, NULL, NULL, &mmap_file_fops);
 	if (!debugfs_file) {
 		pr_err("Unable to create %s in debugfs.\n", debugname);
