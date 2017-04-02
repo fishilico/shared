@@ -236,7 +236,7 @@ static double invsqrt_d(double x)
 #if !defined(isnanf) && !defined(__GLIBC__)
 #    define isnanf(value) isnan((float)(value))
 #endif
-#define ok_nan(fctcall) _ok(#fctcall, isnanf(fctcall), "f", (double)(fctcall), NAN)
+#define ok_nan(fctcall) _ok(#fctcall, isnanf(fctcall), "f", (double)(fctcall), (double)NAN)
 
 static int check_constants(void)
 {
