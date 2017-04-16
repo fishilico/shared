@@ -60,7 +60,7 @@ static void show_malloc_metadata(void)
         addr_high = (uintptr_t)p1;
     }
     printf("Difference: %" PRIdPTR " = %u + %" PRIdPTR "\n",
-        addr_high - addr_low, allocsize, addr_high - addr_low - allocsize);
+           addr_high - addr_low, allocsize, addr_high - addr_low - allocsize);
     assert(addr_low + allocsize <= addr_high);
 
     if (addr_low + allocsize + 1024 <= addr_high) {

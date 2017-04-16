@@ -67,7 +67,8 @@ static void _print_type_size(const char *name, size_t size)
 #define print_type_size(type) _print_type_size(#type, sizeof(type))
 
 static void _print_compatibility(const char *t1, const char *t2, int exp,
-                                 int res1, int res2) {
+                                 int res1, int res2)
+{
     /* Verify that __builtin_types_compatible_p() is commutative */
     if (exp != res1) {
         printf(" ! %15s : %-15s = %d instead of expected %d\n", t1, t2, res1, exp);
@@ -79,6 +80,7 @@ static void _print_compatibility(const char *t1, const char *t2, int exp,
         printf(" * %15s : %-15s = %d\n", t1, t2, exp);
     }
 }
+
 #define print_compatibility(t1, t2, exp) \
     _print_compatibility(#t1, #t2, (exp), \
         __builtin_types_compatible_p(t1, t2), \

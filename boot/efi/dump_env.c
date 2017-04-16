@@ -87,7 +87,7 @@ EFI_STATUS efi_main(EFI_HANDLE image __attribute__ ((unused)), EFI_SYSTEM_TABLE 
 {
     EFI_STATUS status;
     CHAR16 name[256] = L"", *value, formatted_guid[37];
-    EFI_GUID vendor = {0, 0, 0, {0, 0, 0, 0, 0, 0, 0, 0}};
+    EFI_GUID vendor = { 0, 0, 0, {0, 0, 0, 0, 0, 0, 0, 0} };
     UINTN size;
     UINT32 attributes;
 

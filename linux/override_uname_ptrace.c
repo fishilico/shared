@@ -74,9 +74,8 @@ typedef struct user_regs user_regs_type;
  * https://sourceware.org/git/?p=glibc.git;a=commitdiff;h=78239589cd8c6667886b94c4db146109855f417a
  */
 #if defined(__NR_process_vm_writev) && defined(__GNU_LIBRARY__) && ((__GLIBC__ << 16) + __GLIBC_MINOR__ < 0x2000f)
-static ssize_t process_vm_writev (
-    pid_t pid, const struct iovec *lvec, size_t liovcnt,
-    const struct iovec *rvec, size_t riovcnt, unsigned long int flags)
+static ssize_t process_vm_writev(pid_t pid, const struct iovec *lvec, size_t liovcnt,
+                                 const struct iovec *rvec, size_t riovcnt, unsigned long int flags)
 {
     return (ssize_t)syscall(__NR_process_vm_writev, pid, lvec, liovcnt, rvec, riovcnt, flags);
 }
@@ -171,7 +170,7 @@ static int handle_ptrace_events(pid_t child)
             fprintf(stderr, "Child has been killed by signal %d.\n", status);
             kill(getpid(), status);
             return EXIT_FAILURE;
-        } else if ((status & 0xff) == 0x7f /* WIFSTOPPED(status) */) {
+        } else if ((status & 0xff) == 0x7f /* WIFSTOPPED(status) */ ) {
             /*
              * Musl >= 0.9.12 defines WIFSTOPPED(s) as:
              *      ((short)((((s)&0xffff)*0x10001)>>8) > 0x7f00)

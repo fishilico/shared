@@ -207,7 +207,7 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
 #endif
 
     /* Emulate getpriority */
-    if (syscall_nr ==  __NR_getpriority) {
+    if (syscall_nr == __NR_getpriority) {
         arg0 = mctx_reg_arg0(ctx->uc_mcontext);
         arg1 = mctx_reg_arg1(ctx->uc_mcontext);
         if (arg0 == PRIO_USER && arg1 == 0) {

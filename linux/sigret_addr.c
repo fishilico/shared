@@ -64,7 +64,7 @@ DEFINE_ELF_STRUCT(Verdaux);
 DEFINE_ELF_STRUCT(Versym);
 DEFINE_ELF_STRUCT(Word);
 
-static const void * volatile sigret_address;
+static const void *volatile sigret_address;
 
 static void sig_user(
     int signum __attribute__ ((unused)),

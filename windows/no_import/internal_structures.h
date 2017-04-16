@@ -151,7 +151,7 @@ static BOOL StringsCaseLenEqualsW(LPCWSTR str1, LPCWSTR str2, ULONG cbLen)
 /**
  * Get the linear address of the Thread Environment Block
  */
-static const TEB_internal* _NtCurrentTeb(VOID)
+static const TEB_internal *_NtCurrentTeb(VOID)
 {
     PTEB_internal pTeb;
 #if defined(__x86_64)
@@ -172,7 +172,7 @@ static const TEB_internal* _NtCurrentTeb(VOID)
 /**
  * Get current Process Environment Block
  */
-static const PEB* _NtCurrentPeb(VOID)
+static const PEB *_NtCurrentPeb(VOID)
 {
     PPEB pPeb;
 #if defined(__x86_64)

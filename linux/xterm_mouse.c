@@ -90,6 +90,7 @@ static int tty_write(const char *buffer, size_t count)
     }
     return 1;
 }
+
 static int tty_print(const char *string)
 {
     return tty_write(string, strlen(string));
@@ -126,9 +127,9 @@ static int tty_init(void)
         return 0;
     }
     tty_attr_orig = tty_attr;
-    tty_attr.c_lflag &= ~(unsigned)ICANON;  /* Disable canonical mode */
-    tty_attr.c_lflag &= ~(unsigned)ECHO;  /* Don't echo input characters */
-    tty_attr.c_lflag |= ISIG;  /* Convert INT and QUIT chars to signal */
+    tty_attr.c_lflag &= ~(unsigned)ICANON; /* Disable canonical mode */
+    tty_attr.c_lflag &= ~(unsigned)ECHO; /* Don't echo input characters */
+    tty_attr.c_lflag |= ISIG; /* Convert INT and QUIT chars to signal */
     if (tcsetattr(tty_fd, TCSAFLUSH, &tty_attr) == -1) {
         perror("tcsetattr");
         return 0;
@@ -169,7 +170,7 @@ static void tty_reset(void)
 /**
  * Quit nicely when handling the interrupt signal
  */
-static void __attribute__((noreturn)) handle_sigterm(int signum)
+static void __attribute__ ((noreturn)) handle_sigterm(int signum)
 {
     assert(signum == SIGINT || signum == SIGQUIT || signum == SIGTERM);
     tty_reset();

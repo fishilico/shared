@@ -25,7 +25,7 @@
  *
  * If regname is not null, write the register name to it.  Its size must be at least 4 bytes.
  */
-static asm_instr_reg* get_gp_reg(
+static asm_instr_reg *get_gp_reg(
     asm_instr_context *ctx, unsigned int regnum, unsigned int bitsize, char *regname)
 {
     const char *regs8[8] = { "al", "cl", "dl", "bl", "ah", "ch", "dh", "bh" };
@@ -196,7 +196,7 @@ static size_t decode_modrm_check(
 
         /* Check whether the computer address matches */
         if (computed_addr != data_addr) {
-            fprintf(stderr, "Error: mem parameter '%s' does not use address %"PRIxPTR"\n",
+            fprintf(stderr, "Error: mem parameter '%s' does not use address %" PRIxPTR "\n",
                     rmdesc, data_addr);
             free(rmdesc);
             return 0;

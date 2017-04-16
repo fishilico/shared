@@ -46,8 +46,8 @@ static BOOL check_base_for_full(const UNICODE_STRING *base, const UNICODE_STRING
             cchFullBase = full->Length / 2 - i - 1;
         }
     }
-    return (2 * cchFullBase <= base->Length) && \
-        StringsCaseLenEqualsW(base->Buffer, szFullBase, cchFullBase) && \
+    return (2 * cchFullBase <= base->Length) &&
+        StringsCaseLenEqualsW(base->Buffer, szFullBase, cchFullBase) &&
         (2 * cchFullBase == base->Length || base->Buffer[cchFullBase] == 0);
 }
 
@@ -73,7 +73,7 @@ int _tmain(void)
     hProcess = GetCurrentProcess();
     hNtDll = LoadLibrary(TEXT("ntdll.dll"));
     assert(hNtDll != NULL);
-    _NtQueryInformationProcess = \
+    _NtQueryInformationProcess =
         (pfnNtQueryInformationProcess) GetProcAddress(hNtDll, "NtQueryInformationProcess");
     assert(_NtQueryInformationProcess != NULL);
     sizeNeeded = sizeof(pbi);

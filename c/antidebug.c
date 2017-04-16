@@ -104,7 +104,7 @@ int main(void)
      */
     const uint32_t arm_break = 0xe7f001f0;
     const uint16_t thumb_break = 0xde01;
-    const uint16_t thumb2_break[2] = {0xf7f0, 0xa000};
+    const uint16_t thumb2_break[2] = { 0xf7f0, 0xa000 };
 #endif
 #if IS_WINDOWS
     HMODULE hKernel32, hNtDll;

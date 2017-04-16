@@ -61,7 +61,7 @@ static void *alloc_noaccess_page(size_t size, unsigned char mark)
     return ptr;
 }
 
-static void free_noaccess_page(void *ptr, size_t size __attribute__((unused)))
+static void free_noaccess_page(void *ptr, size_t size __attribute__ ((unused)))
 {
     if (ptr) {
         VirtualFree(ptr, 0, MEM_RELEASE);

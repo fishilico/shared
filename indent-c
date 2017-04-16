@@ -43,9 +43,15 @@ exec indent \
     -ts1 \
     -T BOOL \
     -T BYTE \
+    -T CHAR16 \
     -T DWORD \
     -T DWORD64 \
     -T DWORD_PTR \
+    -T EFI_GUID \
+    -T EFI_HANDLE \
+    -T EFI_LOADED_IMAGE \
+    -T EFI_STATUS \
+    -T EFI_SYSTEM_TABLE \
     -T ENUM_WIN_INFOS_LPARAM \
     -T EXCEPTION_POINTERS \
     -T Elf_Dyn \
@@ -104,9 +110,12 @@ exec indent \
     -T TCHAR \
     -T TEB_internal \
     -T UINT \
+    -T UINT32 \
+    -T UINTN \
     -T UINT_PTR \
     -T ULONG \
     -T ULONG_PTR \
+    -T UNICODE_STRING \
     -T VARIANT \
     -T WORD \
     -T asm_instr_context \

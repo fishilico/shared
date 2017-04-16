@@ -14,7 +14,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-__attribute__((noreturn))
+__attribute__ ((noreturn))
 static void perror_exit(const char *s)
 {
     perror(s);

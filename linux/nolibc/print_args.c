@@ -3,7 +3,7 @@
  */
 #include "nolibc-syscall-linux.h"
 
-static void _c_start(const void *stack) __attribute__((used, noreturn));
+static void _c_start(const void *stack) __attribute__ ((used, noreturn));
 
 static void _c_start(const void *stack)
 {

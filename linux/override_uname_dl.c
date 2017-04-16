@@ -76,7 +76,7 @@ int EXPORT_FUNC uname(struct utsname *buf)
 /**
  * Print a message if no environment variable is set
  */
-static void __attribute__((constructor)) init(int argc, char **argv, char **env)
+static void __attribute__ ((constructor)) init(int argc, char **argv, char **env)
 {
     int i;
 

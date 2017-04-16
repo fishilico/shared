@@ -48,7 +48,7 @@ static const char *const gdt_segment_index_desc[16] = {
  */
 static const char *const gdt_segment_index_desc[32] = {
     NULL, NULL, NULL, NULL, "x64 user CS32", "x64 user DS",
-    "x86 TLS1 or x64 user CS",  /* GDT_ENTRY_TLS_MIN = 6 (0x33) */
+    "x86 TLS1 or x64 user CS", /* GDT_ENTRY_TLS_MIN = 6 (0x33) */
     "TLS2",
     "x86 TLS3 or x64 TSS", /* GDT_ENTRY_TLS_MAX = 8 (0x43) */
     NULL, NULL, NULL,
