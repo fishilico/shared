@@ -49,6 +49,7 @@ EXAMPLES_UTF8 = [
     b'\xc7\x83',  # U+1C3 Latin letter retroflex click (!)
     b'\xce\xa9',  # U+3A9 Greek capital letter Omega
     b'\xe2\x80\xa2',  # U+2022 bullet
+    b'\xe2\x80\xbd',  # U+203D interrobang
     b'\xe2\x80\x8f',  # U+200F right-to-left mark (RLM)
     b'\xe2\x82\xac',  # U+20AC euro sign
     b'\xe2\x88\x9e',  # U+221E infinity
