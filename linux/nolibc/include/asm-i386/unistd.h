@@ -380,5 +380,6 @@
 #define __NR_pkey_mprotect 380
 #define __NR_pkey_alloc 381
 #define __NR_pkey_free 382
+#define __NR_statx 383
 
 #endif /* _ASM_X86_UNISTD_H */
