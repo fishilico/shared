@@ -140,6 +140,8 @@ __extension__ static const char* cpuidstr_7_ecx[32] = {
     [1] = "avx512vbmi",
     [3] = "pku",
     [4] = "ospke",
+    [14] = "avx512_vpopcntdq",
+    [16] = "la57",
     [22] = "rdpid",
 };
 
