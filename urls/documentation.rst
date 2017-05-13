@@ -7,6 +7,7 @@ Useful tools
 * https://davvil.github.io/pdfpc/ pdfpc, PDF presenter console
 * http://guake.org/ Guake, a top-down terminal for Gnome
 * https://diffoscope.org/ diffoscope, in-depth comparison of files, archives, and directories
+* https://searchcode.com/ free source code search engine
 
 System administration
 ---------------------
@@ -137,11 +138,12 @@ Internet
       Testing TLS/SSL encryption (local bash script)
     - https://github.com/ioerror/duraconf
       A collection of hardened configuration files for SSL/TLS services
+    - https://observatory.mozilla.org/
 
 * Maps:
 
-    - http://xkcdsw.com/content/img/3327.jpg
-      Map of the Internet (IPv4, 2011)
+    - https://xkcd.com/195/ and http://xkcdsw.com/content/img/3327.jpg
+      Map of the Internet (IPv4, 2006 and 2011)
     - http://media.economist.com/sites/default/files/cf_images/images-magazine/2012/12/01/FB/20121201_FBD000.png
       Map of the Realms of GAFA (The Economist, 2012)
     - http://submarine-cable-map-2014.telegeography.com/

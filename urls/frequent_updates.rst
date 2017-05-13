@@ -8,6 +8,7 @@ News
 * https://news.ycombinator.com/ Hacker News
 * https://www.wired.com/ Wired News
 * http://lwn.net/ LWN.net
+* http://mashable.com/ Mashable
 
 Newsletters
 -----------

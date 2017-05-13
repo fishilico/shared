@@ -10,7 +10,11 @@ Linux
   Kernel network parameters
 * http://lxr.free-electrons.com/ Linux Cross Reference
 * http://upstream-tracker.org/kernel/ Linux Kernel ABI Tracker
+* http://man7.org/tlpi/api_changes/ Linux and glibc API changes
 * http://llvm.linuxfoundation.org LLVMLinux project
+* https://lkml.wtf/
+  A weekly roundup of Linux Kernel Mailing List threads but with a lot more sarcasm
+* https://github.com/lkl/linux Linux Kernel Library project
 
 Windows
 -------
