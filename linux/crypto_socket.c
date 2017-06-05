@@ -547,6 +547,7 @@ static bool show_cipher_info(const char *ciphername)
     ssize_t bytes;
     uint8_t buffer[4096];
     struct nlmsghdr *reply_hdr;
+    struct nlmsgerr *reply_err;
     struct crypto_user_alg *reply_cru;
     struct rtattr *rta;
 
@@ -670,12 +671,25 @@ static bool show_cipher_info(const char *ciphername)
     /* Decode the received data */
     reply_hdr = (struct nlmsghdr *)buffer;
     if (reply_hdr->nlmsg_type == NLMSG_ERROR) {
-        /* stdrng may not be available */
-        if (!strcmp(ciphername, "stdrng")) {
-            printf("No crypto-stdrng loaded (ansi_cprng or drbg), continuing.\n");
+        /* Try to decode the error code if there is enough space for a nlmsgerr structure */
+        if (reply_hdr->nlmsg_len != (size_t)bytes || (size_t)bytes < NLMSG_SPACE(sizeof(*reply_err))) {
+            fprintf(stderr, "Netlink returned an invalid NLMSG_ERROR reply.\n");
+            return false;
+        }
+        reply_err = NLMSG_DATA(reply_hdr);
+        /* Skip ciphers which are not available */
+        if (reply_err->error == -ENOENT) {
+            /* stdrng may not be available */
+            if (!strcmp(ciphername, "stdrng")) {
+                printf("No crypto-stdrng loaded (ansi_cprng or drbg), continuing.\n");
+                return true;
+            }
+            printf("Module crypto-%s not found, continuing.\n", ciphername);
             return true;
         }
-        fprintf(stderr, "Netlink returned NLMSG_ERROR.\n");
+        fprintf(
+            stderr, "Netlink returned NLMSG_ERROR with code %d: %s.\n",
+            reply_err->error, strerror(-reply_err->error));
         return false;
     }
     if (reply_hdr->nlmsg_type != CRYPTO_MSG_GETALG) {
