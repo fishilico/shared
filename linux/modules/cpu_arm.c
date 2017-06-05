@@ -361,10 +361,11 @@ static void show_vector_instruction(unsigned long addr)
 		br_addr = *(unsigned long *)ldpc_from;
 	}
 	if (br_addr) {
-		pr_info("  ... branch to %p", (void *)br_addr);
-		if (br_addr < CONFIG_VECTORS_BASE)
-			pr_cont(" (%pS)", (void *)br_addr);
-		pr_cont("\n");
+		if (br_addr < CONFIG_VECTORS_BASE) {
+			pr_info("  ... branch to %p (%pS)", (void *)br_addr,
+				(void *)br_addr);
+		} else
+			pr_info("  ... branch to %p\n", (void *)br_addr);
 	}
 }
 

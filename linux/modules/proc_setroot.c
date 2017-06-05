@@ -15,6 +15,14 @@
 #include <linux/uaccess.h>
 #include <linux/version.h>
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
+/* Commit c3edc4010e9d ("sched/headers: Move task_struct::signal and
+ * task_struct::sighand types and accessors into <linux/sched/signal.h>")
+ * made using current->signal->tty require a new header in Linux 4.11
+ */
+#include <linux/sched/signal.h>
+#endif
+
 #if LINUX_VERSION_CODE < KERNEL_VERSION(3, 5, 0)
 /* Commit 7a4e7408c5ca introduced kuid_t and from_uid in Linux 3.5 */
 static inline uid_t from_kuid(struct user_namespace *to, uid_t uid)

@@ -580,7 +580,7 @@ static void dump_x86_tables(void)
 			if (type != 0xe)
 				pr_info("       type=0x%x%s\n", type, type_str);
 #ifdef CONFIG_X86_32
-			pr_cont(", s=%u", idt[i].s);
+			pr_info("       s=%u\n", idt[i].s);
 #else
 			if (idt[i].ist) {
 				const char *stack_str = "";

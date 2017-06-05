@@ -44,6 +44,14 @@
 #include <asm/fixmap.h>
 #include <asm/pgtable.h>
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
+/* Commit cdc75e9f7b14 ("sched/headers: Move 'init_task' and
+ * 'init_thread_union' from <linux/sched.h> to <linux/sched/task.h>")
+ * made using init_task require a new header in Linux 4.11
+ */
+#include <linux/sched/signal.h>
+#endif
+
 /* Merge large pagetables together on x86 */
 #define PAGETABLES_MERGE_LARGE 1
 
@@ -176,7 +184,7 @@ static void print_prot(struct pg_state *st)
 			else if ((pr & PMD_SECT_WB) == PMD_SECT_WB)
 				seq_puts(st->seq, ", DEV/CACHED");
 			else
-				seq_printf(st->seq, ", DEVICE?? %Lx %x %x",
+				seq_printf(st->seq, ", DEVICE?? %llx %x %x",
 					   pr & (PMD_SECT_S | PMD_SECT_WB),
 					   PMD_SECT_S, PMD_SECT_WB);
 			pr &= ~(PMD_DOMAIN(DOMAIN_IO)|PMD_SECT_S|PMD_SECT_WB);
