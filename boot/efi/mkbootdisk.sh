@@ -78,22 +78,42 @@ then
     esac
 fi
 
+OVMF_FIRMWARE=
 case "$ARCH" in
     x86_64)
         EFI_FILE_IN_PART="/EFI/BOOT/BOOTX64.efi"
         QEMU_COMMAND="qemu-system-x86_64"
-        OVMF_FIRMWARE="/usr/share/ovmf/ovmf_x64.bin"
+        for FILE in /usr/share/ovmf/ovmf_code_x64.bin /usr/share/ovmf/ovmf_x64.bin
+        do
+            if [ -e "$FILE" ]
+            then
+                OVMF_FIRMWARE="$FILE"
+                break
+            fi
+        done
         ;;
     ia32)
         EFI_FILE_IN_PART="/EFI/BOOT/BOOTIA32.efi"
         QEMU_COMMAND="qemu-system-i386"
-        OVMF_FIRMWARE="/usr/share/ovmf/ovmf_ia32.bin"
+        for FILE in /usr/share/ovmf/ovmf_code_ia32.bin /usr/share/ovmf/ovmf_ia32.bin
+        do
+            if [ -e "$FILE" ]
+            then
+                OVMF_FIRMWARE="$FILE"
+                break
+            fi
+        done
         ;;
     *)
         echo >&2 "Unknown architecture $ARCH"
         exit 1
         ;;
 esac
+if [ -z "$OVMF_FIRMWARE" ]
+then
+    echo >&2 "Unable to find OVMF firmware in /usr/share/ovmf"
+    exit 1
+fi
 
 # Compute the output disk file name
 if [ $# -ge 2 ]
@@ -153,5 +173,5 @@ rm "$PART_FILE"
 if $RUN_IMAGE
 then
     echo "Booting $DISK_PATH as an $ARCH UEFI disk"
-    exec "$QEMU_COMMAND" -bios "$OVMF_FIRMWARE" -hda "$DISK_PATH" -serial stdio -display none
+    exec "$QEMU_COMMAND" -bios "$OVMF_FIRMWARE" -drive "format=raw,file=$DISK_PATH" -serial stdio -display none
 fi
