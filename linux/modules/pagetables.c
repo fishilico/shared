@@ -41,6 +41,7 @@
 #include <linux/sched.h>
 #include <linux/version.h>
 
+#include <asm/domain.h>
 #include <asm/fixmap.h>
 #include <asm/pgtable.h>
 
@@ -107,8 +108,13 @@ static void print_prot(struct pg_state *st)
 			seq_puts(st->seq, ", USR");
 		if (pr & L_PTE_SHARED)
 			seq_puts(st->seq, ", SHD");
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 0, 0)
+		/* Commit b007ea798f5c ("arm: drop L_PTE_FILE and pte_file()-related
+		 * helpers") dropped L_PTE_FILE in Linux 4.0
+		 */
 		if (!(pr & L_PTE_PRESENT) && (pr & L_PTE_FILE))
 			seq_puts(st->seq, ", FILE");
+#endif
 		if ((pr & L_PTE_MT_MASK) == L_PTE_MT_UNCACHED)
 			seq_puts(st->seq, ", SO/UNCACHED");
 		else if ((pr & L_PTE_MT_MASK) == L_PTE_MT_BUFFERABLE)
@@ -135,7 +141,9 @@ static void print_prot(struct pg_state *st)
 		pr &= ~(
 			L_PTE_PRESENT |		/* 0, present */
 			L_PTE_YOUNG |		/* 1 */
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 0, 0)
 			L_PTE_FILE |		/* 2, file, if !present */
+#endif
 			L_PTE_MT_MASK |		/* 2-5 */
 			L_PTE_DIRTY |		/* 6 */
 			L_PTE_RDONLY |		/* 7, read only */
