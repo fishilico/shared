@@ -41,9 +41,12 @@
 #include <linux/sched.h>
 #include <linux/version.h>
 
-#include <asm/domain.h>
 #include <asm/fixmap.h>
 #include <asm/pgtable.h>
+
+#ifdef CONFIG_ARM
+#include <asm/domain.h>
+#endif
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
 /* Commit cdc75e9f7b14 ("sched/headers: Move 'init_task' and
