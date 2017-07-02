@@ -3,6 +3,7 @@ include ../linux-flags.mk
 PKG_CONFIG ?= pkg-config
 
 # Programs which need specific options
+KVM_PROGRAMS := kvm_base
 LIBMNL_PROGRAMS := enum_link_addrs
 NETLINK_PROGRAMS := crypto_socket
 PULSE_PROGRAMS := pulseaudio_echo
@@ -18,8 +19,13 @@ NONTEST_BINARIES := $(NONTEST_PROGRAMS:%=%.$(BIN_EXT)) override_uname_dl.sh
 SOURCES := $(wildcard *.c)
 ALL_PROGRAMS := $(filter-out $(SHARED_OBJECTS:%.$(LIB_EXT)=%), $(SOURCES:%.c=%))
 PROGRAMS := $(filter-out \
-	$(LIBMNL_PROGRAMS) $(NETLINK_PROGRAMS) $(PULSE_PROGRAMS) $(SDL_PROGRAMS) \
-	$(SECCOMP_PROGRAMS), $(ALL_PROGRAMS))
+	$(KVM_PROGRAMS) $(LIBMNL_PROGRAMS) $(NETLINK_PROGRAMS) $(PULSE_PROGRAMS) \
+	$(SDL_PROGRAMS) $(SECCOMP_PROGRAMS), $(ALL_PROGRAMS))
+
+HAVE_KVM := $(call ccpp-has-option,-include linux/kvm.h)
+ifeq ($(HAVE_KVM), y)
+	PROGRAMS += $(KVM_PROGRAMS)
+endif
 
 HAVE_NETLINK := $(call ccpp-has-option,-include linux/netlink.h)
 HAVE_LIBMNL := $(shell $(PKG_CONFIG) --exists libmnl && echo 'y' || echo 'n')
