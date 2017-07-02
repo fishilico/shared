@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:stretch-slim
 LABEL Description="Debian 9 Stretch with build dependencies for shared"
 
 RUN \
