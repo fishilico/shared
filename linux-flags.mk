@@ -90,6 +90,10 @@ ifeq ($(call ccpp-has-option,-Wtrampolines), y)
 	# gcc 4.6 added -Wsuggest-attribute=[const|pure|noreturn]
 	CFLAGS += $(call ccpp-option,-Wsuggest-attribute=format)
 	CFLAGS += $(call ccpp-option,-Wsuggest-attribute=noreturn)
+	# gcc 4.8 added -fstack-check=specific
+	CFLAGS += $(call ccpp-option,-fstack-check=specific)
+	# gcc 6 added -fno-plt
+	CFLAGS += $(call ccpp-option,-fno-plt)
 endif
 
 # Application build configuration
