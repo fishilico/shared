@@ -254,23 +254,33 @@ static void dump_x86_segments(void)
  *      GDT: (Global Descriptor Table)
  *        On current cpu: 0xffff88041fbc9000 limit 127
  *        CPU 0: 0xffff88041fa09000 (16 entries)
- *           1: base 0x00000000, limit 0xfffff, flags 0xc09b (Kernel32 CS)
+ *        CPU 0: 0xffff880471c09000 (16 entries)
+ *           1: <ff ff 00 00 00 9b cf 00>
+ *              base 0x00000000, limit 0xfffff, flags 0xc09b (Kernel32 CS)
  *              type=0xb (C-RA), s=1, dpl=0, p=1, avl=0, l=0, d=1, g=1
- *           2: base 0x00000000, limit 0xfffff, flags 0xa09b (Kernel CS)
+ *           2: <ff ff 00 00 00 9b af 00>
+ *              base 0x00000000, limit 0xfffff, flags 0xa09b (Kernel CS)
  *              type=0xb (C-RA), s=1, dpl=0, p=1, avl=0, l=1, d=0, g=1
- *           3: base 0x00000000, limit 0xfffff, flags 0xc093 (Kernel DS)
+ *           3: <ff ff 00 00 00 93 cf 00>
+ *              base 0x00000000, limit 0xfffff, flags 0xc093 (Kernel DS)
  *              type=0x3 (D-WA), s=1, dpl=0, p=1, avl=0, l=0, d=1, g=1
- *           4: base 0x00000000, limit 0xfffff, flags 0xc0fb (Default user32 CS)
+ *           4: <ff ff 00 00 00 fb cf 00>
+ *              base 0x00000000, limit 0xfffff, flags 0xc0fb (Default user32 CS)
  *              type=0xb (C-RA), s=1, dpl=3, p=1, avl=0, l=0, d=1, g=1
- *           5: base 0x00000000, limit 0xfffff, flags 0xc0f3 (Default user DS)
+ *           5: <ff ff 00 00 00 f3 cf 00>
+ *              base 0x00000000, limit 0xfffff, flags 0xc0f3 (Default user DS)
  *              type=0x3 (D-WA), s=1, dpl=3, p=1, avl=0, l=0, d=1, g=1
- *           6: base 0x00000000, limit 0xfffff, flags 0xa0fb (Default user CS)
+ *           6: <ff ff 00 00 00 fb af 00>
+ *              base 0x00000000, limit 0xfffff, flags 0xa0fb (Default user CS)
  *              type=0xb (C-RA), s=1, dpl=3, p=1, avl=0, l=1, d=0, g=1
- *           8: base 0x1fa12740, limit 0x2087, flags 0x008b (TSS, Task State Segment)
+ *           8: <87 20 40 27 a1 8b 00 1f>
+ *              base 0x1fa12740, limit 0x2087, flags 0x008b (TSS, Task State Segment)
  *              type=0xb (C-RA), s=0, dpl=0, p=1, avl=0, l=0, d=0, g=0
- *           9: base 0x0000ffff, limit 0x8804, flags 0x0000 (TSS+1)
+ *           9: <04 88 ff ff 00 00 00 00>
+ *              base 0x0000ffff, limit 0x8804, flags 0x0000 (TSS+1)
  *              type=0x0 (D---), s=0, dpl=0, p=0, avl=0, l=0, d=0, g=0
- *          15: base 0x00000000, limit 0x0, flags 0x40f5 (per CPU)
+ *          15: <00 00 00 00 00 f5 40 00>
+ *              base 0x00000000, limit 0x0, flags 0x40f5 (per CPU)
  *              type=0x5 (Dv-A), s=1, dpl=3, p=1, avl=0, l=0, d=1, g=0
  *      IDT: 0xffffffffff57a000 limit 4095 (Interrupt Descriptor Table, 256 entries)
  *       0x00: seg 0x10 offset ffffffff815a4810 Divide by Zero
@@ -434,8 +444,9 @@ static void dump_x86_tables(void)
 			limit = get_desc_limit(&descs[i]);
 			flags = ((descs[i].b >> 8) & 0xf0ff);
 			type = descs[i].type;
-			pr_info("    %2u: base 0x%08x, limit 0x%x, flags 0x%04x%s\n",
-				i, base, limit, flags, comment);
+			pr_info("    %2u: <%8ph>\n", i, &descs[i]);
+			pr_info("        base 0x%08x, limit 0x%x, flags 0x%04x%s\n",
+				base, limit, flags, comment);
 			/* Flags (http://wiki.osdev.org/Global_Descriptor_Table):
 			 * Type: 4 bits: Executable, Direction bit (0=grows up), RW, Accessed
 			 * DPL: Protection Level (ring 0 to 3)
