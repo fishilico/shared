@@ -1,6 +1,10 @@
-# As Arch Linux has no official Docker image, bootstrap from Debian
+# When Arch Linux had no official Docker image, bootstrap from Debian
+# Now Arch Linux provides base/archlinux:
+#    https://hub.docker.com/r/base/archlinux/
+#    https://github.com/archimg/archlinux
+#
 # Usage: docker build -t archlinux . && docker run --rm -ti archlinux
-FROM debian:sid
+FROM debian:sid-slim
 LABEL Description="Arch Linux base image"
 
 # Steps:
@@ -37,7 +41,7 @@ RUN \
     echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && \
     pacman-key --init && \
     pacman-key --populate archlinux && \
-    pacman --noconfirm -Rn arch-install-scripts dbus hwids iptables kbd kmod libelf libseccomp systemd && \
+    pacman --noconfirm -Rn arch-install-scripts dbus hwids iptables kbd kmod libelf libpcap libseccomp systemd && \
     pacman --noconfirm -Syu diffutils gawk grep procps-ng sed tar which && \
     (pkill gpg-agent ; true) && \
     pacman --noconfirm -Sc && \

@@ -1,4 +1,4 @@
-FROM archlinux
+FROM base/archlinux
 # Use https://github.com/docker/docker/blob/master/contrib/mkimage-arch.sh
 # to build a local Arch Linux image, from an Arch Linux distribution.
 # (Download https://raw.githubusercontent.com/docker/docker/master/contrib/mkimage-arch.sh
