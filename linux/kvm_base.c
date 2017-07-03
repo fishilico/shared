@@ -411,6 +411,9 @@ int main(void)
         printf("    ecx = %#llx\n", regs.rcx);
         printf("    vendor string: \"%.4s%.4s%.4s\"\n",
                (char *)&regs.rbx, (char *)&regs.rdx, (char *)&regs.rcx);
+    } else {
+        fprintf(stderr, "The CPU ended in an unexpected state.\n");
+        return 1;
     }
 #endif
 
