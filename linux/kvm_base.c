@@ -261,6 +261,11 @@ int main(void)
     /* Create a VM */
     vmfd = ioctl(kvmfd, KVM_CREATE_VM, 0);
     if (vmfd < 0) {
+        if (errno == EBUSY) {
+            /* Fail nicely when there is someone else using the VM engine (eg. VirtualBox) */
+            printf("Something is preventing from creating new VMs (VirtualBox?), exiting.\n");
+            return 0;
+        }
         perror("ioctl(KVM_CREATE_VM)");
         return 1;
     }
