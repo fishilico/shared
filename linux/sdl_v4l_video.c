@@ -24,6 +24,18 @@
 
 #define NB_BUFFER 4
 
+/* musl uses POSIX specification for ioctl(int, int, ...) instead of glibc
+ * ioctl(int, unsigned long, ...). This causes a -Woverflow to occur when
+ * using read ioctl (because they have their most significant bit set).
+ * Work around this by always casting the request to int when not using
+ * glibc.
+ */
+#ifdef __GLIBC__
+#    define ioctl_read(fd, req, ptr) ioctl((fd), (req), (ptr))
+#else
+#    define ioctl_read(fd, req, ptr) ioctl((fd), (int)(req), (ptr))
+#endif
+
 /**
  * Structure to store the capture state of V4L
  */
@@ -97,7 +109,7 @@ static bool capture_start(
 
     /* Ask for the capabilities of the device */
     memset(&cap, 0, sizeof(struct v4l2_capability));
-    if (ioctl(fd, VIDIOC_QUERYCAP, &cap) < 0) {
+    if (ioctl_read(fd, VIDIOC_QUERYCAP, &cap) < 0) {
         perror("ioctl(VIDIOC_QUERYCAP)");
         capture_stop(capst);
         return false;
@@ -110,7 +122,7 @@ static bool capture_start(
     fmt.fmt.pix.height = display_height;
     fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV;
     fmt.fmt.pix.field = V4L2_FIELD_ANY;
-    if (ioctl(fd, VIDIOC_S_FMT, &fmt) < 0) {
+    if (ioctl_read(fd, VIDIOC_S_FMT, &fmt) < 0) {
         perror("ioctl(VIDIOC_S_FMT)");
         capture_stop(capst);
         return false;
@@ -121,7 +133,7 @@ static bool capture_start(
     setfps.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     setfps.parm.capture.timeperframe.numerator = 1;
     setfps.parm.capture.timeperframe.denominator = capture_frame_rate;
-    if (ioctl(fd, VIDIOC_S_PARM, &setfps) < 0) {
+    if (ioctl_read(fd, VIDIOC_S_PARM, &setfps) < 0) {
         perror("ioctl(VIDIOC_S_PARM)");
         capture_stop(capst);
         return false;
@@ -132,7 +144,7 @@ static bool capture_start(
     rb.count = NB_BUFFER;
     rb.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     rb.memory = V4L2_MEMORY_MMAP;
-    if (ioctl(fd, VIDIOC_REQBUFS, &rb) < 0) {
+    if (ioctl_read(fd, VIDIOC_REQBUFS, &rb) < 0) {
         perror("ioctl(VIDIOC_REQBUFS)");
         capture_stop(capst);
         return false;
@@ -145,7 +157,7 @@ static bool capture_start(
         buf.index = i;
         buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
         buf.memory = V4L2_MEMORY_MMAP;
-        if (ioctl(fd, VIDIOC_QUERYBUF, &buf) < 0) {
+        if (ioctl_read(fd, VIDIOC_QUERYBUF, &buf) < 0) {
             perror("ioctl(VIDIOC_QUERYBUF)");
             capture_stop(capst);
             return false;
@@ -166,7 +178,7 @@ static bool capture_start(
         buf.index = i;
         buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
         buf.memory = V4L2_MEMORY_MMAP;
-        if (ioctl(fd, VIDIOC_QBUF, &buf) < 0) {
+        if (ioctl_read(fd, VIDIOC_QBUF, &buf) < 0) {
             perror("ioctl(VIDIOC_QBUF)");
             capture_stop(capst);
             return false;
@@ -210,7 +222,7 @@ static bool capture_get_frame(struct capture_state *capst, void *uyvy_frame)
     memset(&buf, 0, sizeof(struct v4l2_buffer));
     buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     buf.memory = V4L2_MEMORY_MMAP;
-    if (ioctl(capst->fd, VIDIOC_DQBUF, &buf) < 0) {
+    if (ioctl_read(capst->fd, VIDIOC_DQBUF, &buf) < 0) {
         if (errno == EAGAIN) {
             /* Device is busy */
             return false;
@@ -234,7 +246,7 @@ static bool capture_get_frame(struct capture_state *capst, void *uyvy_frame)
     }
 
     /* Put the buffer back */
-    if (ioctl(capst->fd, VIDIOC_QBUF, &buf) < 0) {
+    if (ioctl_read(capst->fd, VIDIOC_QBUF, &buf) < 0) {
         perror("ioctl(VIDIOC_QBUF)");
         return false;
     }
