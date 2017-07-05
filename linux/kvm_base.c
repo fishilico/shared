@@ -283,7 +283,7 @@ int main(void)
     memreg.flags = 0;
     memreg.guest_phys_addr = 0xfffff000;
     memreg.memory_size = 0x1000;
-    memreg.userspace_addr = (uint64_t)guest_mempage;
+    memreg.userspace_addr = (uint64_t)(uintptr_t)guest_mempage;
     if (ioctl(vmfd, KVM_SET_USER_MEMORY_REGION, &memreg) < 0) {
         perror("ioctl(KVM_SET_USER_MEMORY_REGION, code)");
         return 1;
