@@ -161,7 +161,7 @@ static const struct file_operations mmap_file_fops = {
 
 static int __init mmap_file_init(void)
 {
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 7, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 7, 0) && defined(CONFIG_DEBUG_FS)
 	/* Commit 149d200deaa68 ("debugfs: prevent access to removed files'
 	 * private data") introduced a file operation proxy which does not
 	 * support mmap(). Using an "unsafe" debugfs file is needed to make
@@ -169,8 +169,12 @@ static int __init mmap_file_init(void)
 	 */
 #define debugfs_create_file debugfs_create_file_unsafe
 #endif
+	if (!IS_ENABLED(CONFIG_DEBUG_FS)) {
+		pr_err("debugfs support is needed but not enabled.\n");
+		return -ENODEV;
+	}
 	debugfs_file = debugfs_create_file(debugname, 0644, NULL, NULL, &mmap_file_fops);
-	if (!debugfs_file) {
+	if (!debugfs_file || IS_ERR(debugfs_file)) {
 		pr_err("Unable to create %s in debugfs.\n", debugname);
 		return -EINVAL;
 	}
