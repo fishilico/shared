@@ -28,8 +28,8 @@ PROGRAMS := $(filter-out \
 view_sizes.o: CFLAGS += $(call cc-disable-warning,long-long)
 
 
-# Only compile GMP programs when gmp.h can be found
-HAVE_GMP := $(call ccpp-has-option,-include gmp.h)
+# Only compile GMP programs when gmp.h can be found and libgmp can be used
+HAVE_GMP := $(call ccld-has-option,-include gmp.h -lgmp)
 ifeq ($(HAVE_GMP),y)
 PROGRAMS += $(GMP_PROGRAMS)
 endif
