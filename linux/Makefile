@@ -28,7 +28,7 @@ ifeq ($(HAVE_KVM), y)
 endif
 
 HAVE_NETLINK := $(call ccpp-has-option,-include linux/netlink.h)
-HAVE_LIBMNL := $(shell $(PKG_CONFIG) --exists libmnl && echo 'y' || echo 'n')
+HAVE_LIBMNL := $(call pkg-config-with-options,libmnl,-include libmnl/libmnl.h)
 ifeq ($(HAVE_NETLINK), y)
 	PROGRAMS += $(NETLINK_PROGRAMS)
 	ifeq ($(HAVE_LIBMNL), y)
@@ -38,14 +38,14 @@ $(LIBMNL_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags libmnl)
 	endif
 endif
 
-HAVE_PULSE := $(shell $(PKG_CONFIG) --exists libpulse && echo 'y' || echo 'n')
+HAVE_PULSE := $(call pkg-config-with-options,libpulse,--std=c99 -include pulse/pulseaudio.h)
 ifeq ($(HAVE_PULSE), y)
 	PROGRAMS += $(PULSE_PROGRAMS)
 $(PULSE_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs libpulse)
 $(PULSE_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags libpulse) --std=c99
 endif
 
-HAVE_SDL2 := $(shell $(PKG_CONFIG) --exists sdl2 && echo 'y' || echo 'n')
+HAVE_SDL2 := $(call pkg-config-with-options,sdl2,-include SDL2/SDL.h)
 ifeq ($(HAVE_SDL2), y)
 	PROGRAMS += $(SDL_PROGRAMS)
 $(SDL_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs sdl2)

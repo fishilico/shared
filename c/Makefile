@@ -53,14 +53,15 @@ $(OPENMP_PROGRAMS:%=.%.o): CFLAGS += -fopenmp $(call cc-disable-warning,source-u
 
 # Only compile Gtk+ programs where $(CC) is not used for cross-compilation
 ifeq ($(filter-out cc gcc clang, $(CC)),)
-	HAVE_GTK3 := $(call can-run,$(PKG_CONFIG) --exists gtk+-3.0)
+	HAVE_GTK3 := $(call pkg-config-with-options,gtk+-3.0,-include gtk/gtk.h)
 	ifeq ($(HAVE_GTK3),y)
 		PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
 $(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0) \
 	$(call cc-disable-warning,pedantic) $(call cc-disable-warning,cast-qual)
 	else
-		HAVE_GTK2 := $(call can-run,$(PKG_CONFIG) --exists gtk+-2.0)
+		HAVE_GTK2 := $(call pkg-config-with-options,gtk+-2.0,--std=c99 \
+			$(call cc-disable-warning,strict-prototypes) $(call cc-disable-warning,cast-qual) -include gtk/gtk.h)
 		ifeq ($(HAVE_GTK2),y)
 			PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)

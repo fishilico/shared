@@ -49,7 +49,7 @@ then
     echo '******************************************'
     echo '* Building with clang                    *'
     echo '******************************************'
-    make CC=clang clean test HAVE_OPENMP=n HAVE_GTK3=n HAVE_PYTHON_CFFI=n || exit $?
+    make CC=clang clean test HAVE_OPENMP=n HAVE_PYTHON_CFFI=n || exit $?
 fi
 
 if [ -x /usr/bin/musl-gcc ] || musl-gcc --version 2>/dev/null
@@ -57,7 +57,7 @@ then
     echo '******************************************'
     echo '* Building with musl-gcc                 *'
     echo '******************************************'
-    make CC="musl-gcc -shared" clean test HAVE_LIBMNL=n HAVE_PULSE=n HAVE_SDL2=n HAVE_PYTHON_CFFI=n || exit $?
+    make CC="musl-gcc -shared" clean test HAVE_PYTHON_CFFI=n || exit $?
 fi
 
 make list-nobuild
