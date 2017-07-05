@@ -10,16 +10,28 @@ fi
 cd '/shared' || exit $?
 
 # Find installed kernel headers revision
-# * Debian package: linux-headers-amd64
-# * Ubuntu package: linux-headers-generic
-# * Fedora package: kernel-devel
-KERNELVER="$(LANG=C dpkg --status linux-headers-amd64 linux-headers-generic 2>/dev/null |
-    sed -n 's/^Depends: linux-headers-\(.*\)/\1/p' | head -n 1)"
-if [ -z "$KERNELVER" ]
-then
-    KERNELVER="$(LANG=C rpm -qi kernel-devel 2>/dev/null |
-        sed -n 's/^Source RPM *: kernel-\(.*\).src.rpm$/\1.x86_64/p' | tail -n 1)"
-fi
+case "$(sed -n 's/^ID=//p' /etc/os-release /usr/lib/os-release 2>/dev/null | head -n 1)" in
+    alpine)
+        KERNELVER="$(apk info --contents linux-grsec-dev linux-hardened-dev |
+            sed -n 's:^lib/modules/\([^/]\+\)/.*:\1:p' | head -n 1)"
+        ;;
+    arch)
+        KERNELVER="$(pacman -Qql linux-headers |
+            sed -n 's:^/usr/lib/modules/\([^/]\+\)/.*:\1:p' | head -n 1)"
+        ;;
+    debian)
+        KERNELVER="$(LANG=C dpkg --status linux-headers-amd64 2>/dev/null |
+            sed -n 's/^Depends: linux-headers-\(.*\)/\1/p' | head -n 1)"
+        ;;
+    fedora)
+        KERNELVER="$(LANG=C rpm -qi kernel-devel 2>/dev/null |
+            sed -n 's/^Source RPM *: kernel-\(.*\).src.rpm$/\1.x86_64/p' | tail -n 1)"
+        ;;
+    ubuntu)
+        KERNELVER="$(LANG=C dpkg --status linux-headers-generic 2>/dev/null |
+            sed -n 's/^Depends: linux-headers-\(.*\)/\1/p' | head -n 1)"
+        ;;
+esac
 export KERNELVER
 
 # Do not use unicode in MinGW<4.8, when "wmain" is not automatically declared
@@ -41,15 +53,12 @@ echo '* Building with gcc                      *'
 echo '******************************************'
 make CC=gcc clean test || exit $?
 
-# Do not build the kernel modules with modified compiler
-KERNELVER=
-
 if [ -x /usr/bin/clang ] || clang --version 2>/dev/null
 then
     echo '******************************************'
     echo '* Building with clang                    *'
     echo '******************************************'
-    make CC=clang clean test HAVE_OPENMP=n HAVE_PYTHON_CFFI=n || exit $?
+    make CC=clang clean test HAVE_OPENMP=n HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
 fi
 
 if [ -x /usr/bin/musl-gcc ] || musl-gcc --version 2>/dev/null
@@ -57,7 +66,7 @@ then
     echo '******************************************'
     echo '* Building with musl-gcc                 *'
     echo '******************************************'
-    make CC="musl-gcc -shared" clean test HAVE_PYTHON_CFFI=n || exit $?
+    make CC="musl-gcc -shared" clean test HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
 fi
 
 make list-nobuild

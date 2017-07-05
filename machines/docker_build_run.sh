@@ -25,6 +25,13 @@ get_base_name() {
             echo "archlinux"
             ;;
 
+        *alpine35*|*alpine3.5*)
+            echo "alpine3.5"
+            ;;
+        *alpine36*|*alpine3.6*)
+            echo "alpine3.6"
+            ;;
+
         *debian7*|*wheezy*)
             echo "debian7-wheezy"
             ;;

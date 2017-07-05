@@ -1,0 +1,32 @@
+FROM alpine:3.6
+LABEL Description="Alpine Linux 3.6 with build dependencies for shared"
+
+# Alpine does not provide coq nor mingw-w64, and pulseaudio-dev is in testing
+RUN \
+    apk --update add \
+        clang \
+        gcc \
+        gdb \
+        gmp-dev \
+        gtk+3.0-dev \
+        iproute2 \
+        libmnl-dev \
+        linux-hardened-dev \
+        linux-headers \
+        llvm-dev \
+        make \
+        musl-dev \
+        musl-utils \
+        py-numpy \
+        py2-cffi \
+        py3-cffi \
+        python2-dev \
+        python3-dev \
+        sdl2-dev && \
+    rm -rf /var/cache/apk/*
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]
