@@ -29,6 +29,13 @@ case "$(x86_64-w64-mingw32-gcc --version 2>/dev/null | sed -n 's/^x86_64-w64-min
         ;;
 esac
 
+# Use --list-nobuild to only show make list-nobuild
+if [ "${1:-}" = "--list-nobuild" ]
+then
+    make list-nobuild
+    exit $?
+fi
+
 echo '******************************************'
 echo '* Building with gcc                      *'
 echo '******************************************'
