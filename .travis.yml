@@ -50,10 +50,7 @@ before_script:
     fi
 
 script:
-# When building 32-bit programs, do not use the 64-bit installed libraries
-  - if [ "${CC%m32}" = "$CC" ] ; then make test ;
-    else make test PKG_CONFIG=false ;
-    fi
+  - make test
   - make list-nobuild
 
 # Do not spam by email so long as the build succeeds
