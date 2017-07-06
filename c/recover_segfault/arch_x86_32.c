@@ -30,6 +30,7 @@ static asm_instr_reg *get_gp_reg(
 {
     const char *regs8[8] = { "al", "cl", "dl", "bl", "ah", "ch", "dh", "bh" };
     const char *regs16[8] = { "ax", "cx", "dx", "bx", "sp", "bp", "si", "di" };
+    asm_instr_reg *base_register;
 
     assert(regnum < 8);
     assert(bitsize == 8 || bitsize == 16 || bitsize == 32);
@@ -37,10 +38,25 @@ static asm_instr_reg *get_gp_reg(
     if (regname) {
         if (bitsize == 8) {
             snprintf(regname, 4, "%s", regs8[regnum]);
-            if (regnum > 4) {
-                /* ah, ch, dh, bh are not yet supported */
-                fprintf(stderr, "warning: 8-bit registers not yet fully supported\n");
-                regnum &= 3;
+            if (regnum >= 4) {
+                /* ah, ch, dh, bh use unaligned addresses so require special handling */
+                switch (regnum) {
+                    case 4:
+                        base_register = &R_EAX(ctx);
+                        break;
+                    case 5:
+                        base_register = &R_ECX(ctx);
+                        break;
+                    case 6:
+                        base_register = &R_EDX(ctx);
+                        break;
+                    case 7:
+                        base_register = &R_EBX(ctx);
+                        break;
+                    default:
+                        abort(); /* unreachable */
+                }
+                return (asm_instr_reg *)(void *)(((uint8_t *)base_register) + 1);
             }
         } else if (bitsize == 16) {
             snprintf(regname, 4, "%s", regs16[regnum]);
@@ -219,6 +235,25 @@ static size_t decode_modrm_check(
 }
 
 /**
+ * Update the EFLAGS according to a 8-bit difference
+ */
+static asm_instr_reg update_eflags_diff8(asm_instr_reg eflags, uint8_t diff)
+{
+    eflags &= ~(X86_EFLAGS_CF | X86_EFLAGS_PF | X86_EFLAGS_AF |
+                X86_EFLAGS_ZF | X86_EFLAGS_SF | X86_EFLAGS_OF);
+    if (__builtin_parity(diff)) {
+        eflags |= X86_EFLAGS_PF;
+    }
+    if (!diff) {
+        eflags |= X86_EFLAGS_ZF;
+    }
+    if (diff & 0x80) {
+        eflags |= X86_EFLAGS_SF;
+    }
+    return eflags;
+}
+
+/**
  * Emulate an ASM instruction in the given context, with data the pseudo content at data_addr
  */
 bool run_mov_asm_instruction_p(
@@ -317,6 +352,23 @@ bool run_mov_asm_instruction_p(
         }
     }
 
+    /* 38 /r: cmp reg8, reg/mem8 */
+    if (instr[0] == 0x38) {
+        paramlen = decode_modrm_check(ctx, instr + 1, has_66_prefix, data_addr, NULL, NULL, &operand_rm);
+        if (!paramlen) {
+            return false;
+        }
+        operand_reg = malloc(5);
+        assert(operand_reg);
+        op_reg = get_gp_reg(ctx, ((instr[1] >> 3) & 7), 8, operand_reg);
+        asm_printf(asm_instr, "cmp %s, %s", operand_reg, operand_rm);
+        free(operand_rm);
+        free(operand_reg);
+        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(data[0] - *op_reg));
+        R_EIP(ctx) += 1 + paramlen;
+        return true;
+    }
+
     /* 8a /r: mov reg/mem8, reg8 */
     if (instr[0] == 0x8a) {
         paramlen = decode_modrm_check(ctx, instr + 1, 0, data_addr, NULL, NULL, &operand_rm);
@@ -355,8 +407,7 @@ bool run_mov_asm_instruction_p(
 
     /* 80 /7 ib: cmpb imm8, reg/mem8 */
     if (instr[0] == 0x80 && (instr[1] & 0x38) == 0x38) {
-        int8_t op1 = (int8_t)data[0], op2 = 0, diff;
-        asm_instr_reg eflags;
+        int8_t op1 = (int8_t)data[0], op2 = 0;
 
         paramlen = decode_modrm_check(ctx, instr + 1, has_66_prefix, data_addr, NULL, NULL, &operand_rm);
         if (!paramlen) {
@@ -365,26 +416,7 @@ bool run_mov_asm_instruction_p(
         op2 = (int8_t)instr[1 + paramlen];
         asm_printf(asm_instr, "cmpb 0x%02x, %s", op2, operand_rm);
         free(operand_rm);
-        diff = op1 - op2;
-
-        /* Update EFLAGS */
-        eflags = R_EFL(ctx) & ~(
-            X86_EFLAGS_CF |
-            X86_EFLAGS_PF |
-            X86_EFLAGS_AF |
-            X86_EFLAGS_ZF |
-            X86_EFLAGS_SF |
-            X86_EFLAGS_OF);
-        if (__builtin_parity((uint8_t)diff)) {
-            eflags |= X86_EFLAGS_PF;
-        }
-        if (!diff) {
-            eflags |= X86_EFLAGS_ZF;
-        }
-        if (diff & 0x80) {
-            eflags |= X86_EFLAGS_SF;
-        }
-        R_EFL(ctx) = eflags;
+        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(op1 - op2));
         R_EIP(ctx) += 2 + paramlen;
         return true;
     }

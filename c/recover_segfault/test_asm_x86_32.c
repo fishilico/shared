@@ -108,6 +108,9 @@ int main(void)
     test("\x80\x38\x17", "cmpb 0x17, (eax=0xda7a0000)", EFL, X86_EFLAGS_ZF);
     R_ECX(&ctx) = (asm_instr_reg)(data_addr + 1);
     test("\x80\x79\xff\x0a", "cmpb 0x0a, -0x1(ecx=0xda7a0001)", EFL, X86_EFLAGS_PF);
+    R_EAX(&ctx) = (asm_instr_reg)data_addr;
+    R_EDX(&ctx) = data8 << 8;
+    test("\x38\x30", "cmp dh, (eax=0xda7a0000)", EFL, X86_EFLAGS_ZF);
 
     /* repnz scasb, used by strlen */
     R_EDI(&ctx) = (asm_instr_reg)data_addr;

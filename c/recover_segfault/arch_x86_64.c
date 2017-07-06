@@ -32,6 +32,7 @@ static asm_instr_reg *get_gp_reg(
 {
     const char *regs8[8] = { "al", "cl", "dl", "bl", "ah", "ch", "dh", "bh" };
     const char *regs16[8] = { "ax", "cx", "dx", "bx", "sp", "bp", "si", "di" };
+    asm_instr_reg *base_register;
 
     assert(regnum < 16);
     assert(bitsize == 8 || bitsize == 16 || bitsize == 32 || bitsize == 64);
@@ -40,10 +41,25 @@ static asm_instr_reg *get_gp_reg(
         if (regnum < 8) {
             if (bitsize == 8) {
                 snprintf(regname, 3, "%s", regs8[regnum]);
-                if (regnum > 4) {
-                    /* ah, ch, dh, bh are not yet supported */
-                    fprintf(stderr, "warning: 8-bit registers not yet fully supported\n");
-                    regnum &= 3;
+                if (regnum >= 4) {
+                    /* ah, ch, dh, bh use unaligned addresses so require special handling */
+                    switch (regnum) {
+                        case 4:
+                            base_register = &R_RAX(ctx);
+                            break;
+                        case 5:
+                            base_register = &R_RCX(ctx);
+                            break;
+                        case 6:
+                            base_register = &R_RDX(ctx);
+                            break;
+                        case 7:
+                            base_register = &R_RBX(ctx);
+                            break;
+                        default:
+                            abort(); /* unreachable */
+                    }
+                    return (asm_instr_reg *)(void *)(((uint8_t *)base_register) + 1);
                 }
             } else if (bitsize == 16) {
                 snprintf(regname, 3, "%s", regs16[regnum]);
@@ -513,7 +529,7 @@ bool run_mov_asm_instruction_p(
         return true;
     }
 
-    /* 38 /r: cmpb reg8, reg/mem8 */
+    /* 38 /r: cmp reg8, reg/mem8 */
     if (instr[0] == 0x38) {
         paramlen = decode_modrm_check(ctx, instr + 1, rexprefix | X86_64_REX_FAKE_R8,
                                       data_addr, &op_reg, &operand_reg, &operand_rm);
