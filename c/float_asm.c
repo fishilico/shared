@@ -31,13 +31,13 @@ static float add_f(float x, float y)
 {
 #if defined(__x86_64__)
     /* Use XMM registers (SSE, Streaming SIMD Extensions) */
-    __asm__ ("addss %1, %0" : "+x"(x) : "x"(y));
+    __asm__ __volatile__ ("addss %1, %0" : "+x"(x) : "x"(y));
 #elif defined(__i386__)
     /* "t" is st(0) and "u" st(1) */
-    __asm__ ("fadds %1" : "+t"(x) : "fm"(y));
+    __asm__ __volatile__ ("fadds %1" : "+t"(x) : "fm"(y));
 #elif defined(__arm__) && defined(__VFP_FP__)
     /* Use VFP floating-point registers */
-    __asm__ ("vadd.f32 %0, %0, %1" : "+w"(x) : "w"(y));
+    __asm__ __volatile__ ("vadd.f32 %0, %0, %1" : "+w"(x) : "w"(y));
 #else
 #    warning "add_f not yet implemented in asm"
     x += y;
@@ -48,11 +48,11 @@ static float add_f(float x, float y)
 static double add_d(double x, double y)
 {
 #if defined(__x86_64__)
-    __asm__ ("addsd %1, %0" : "+x"(x) : "x"(y));
+    __asm__ __volatile__ ("addsd %1, %0" : "+x"(x) : "x"(y));
 #elif defined(__i386__)
-    __asm__ ("faddl %1" : "+t"(x) : "m"(y));
+    __asm__ __volatile__ ("faddl %1" : "+t"(x) : "m"(y));
 #elif defined(__arm__) && defined(__VFP_FP__)
-    __asm__ ("vadd.f64 %P0, %P0, %P1" : "+w"(x) : "w"(y));
+    __asm__ __volatile__ ("vadd.f64 %P0, %P0, %P1" : "+w"(x) : "w"(y));
 #else
 #    warning "add_d not yet implemented in asm"
     x += y;
@@ -66,13 +66,13 @@ static int toint_f(float x)
 #if defined(__x86_64__)
     /* Convert scalar single-precision floating-point value (with truncation) to signed integer */
     /* Note: "clang as" has difficulties when the output is a memory, so force it to be a reg. */
-    __asm__ ("cvttss2si %1, %0" : "=r"(i) : "x"(x));
+    __asm__ __volatile__ ("cvttss2si %1, %0" : "=r"(i) : "x"(x));
 #elif defined(__i386__)
     /* Use flds for single-precision float and fistpl for 32-bit integer (fistps would mean 16-bit) */
-    __asm__ ("flds %1 ; fistpl %0" : "=m"(i) : "m"(x));
+    __asm__ __volatile__ ("flds %1 ; fistpl %0" : "=m"(i) : "m"(x));
 #elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
     /* clang 3.5.0 fails with "error: couldn't allocate output register for constraint 'w'" */
-    __asm__ ("vcvt.s32.f32 %0, %1" : "=w"(i) : "w"(x));
+    __asm__ __volatile__ ("vcvt.s32.f32 %0, %1" : "=w"(i) : "w"(x));
 #else
 #    warning "toint_f not yet implemented in asm"
     i = (int)x;
@@ -85,11 +85,11 @@ static int toint_d(double x)
     int i;
 #if defined(__x86_64__)
     /* Convert scalar double-precision floating-point value (with truncation) to signed integer */
-    __asm__ ("cvttsd2si %1, %0" : "=r"(i) : "x"(x));
+    __asm__ __volatile__ ("cvttsd2si %1, %0" : "=r"(i) : "x"(x));
 #elif defined(__i386__)
-    __asm__ ("fldl %1 ; fistpl %0" : "=m"(i) : "m"(x));
+    __asm__ __volatile__ ("fldl %1 ; fistpl %0" : "=m"(i) : "m"(x));
 #elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
-    __asm__ ("vcvt.s32.f64 %0, %P1" : "=w"(i) : "w"(x));
+    __asm__ __volatile__ ("vcvt.s32.f64 %0, %P1" : "=w"(i) : "w"(x));
 #else
 #    warning "toint_d not yet implemented in asm"
     i = (int)x;
@@ -101,12 +101,12 @@ static float sqrt_f(float x)
 {
     float s;
 #if defined(__x86_64__)
-    __asm__ ("sqrtss %1, %0" : "=x"(s) : "x"(x));
+    __asm__ __volatile__ ("sqrtss %1, %0" : "=x"(s) : "x"(x));
 #elif defined(__i386__)
     s = x;
-    __asm__ ("fsqrt" : "+t"(s));
+    __asm__ __volatile__ ("fsqrt" : "+t"(s));
 #elif defined(__arm__) && defined(__VFP_FP__)
-    __asm__ ("vsqrt.f32 %0, %1" : "=w"(s) : "w"(x));
+    __asm__ __volatile__ ("vsqrt.f32 %0, %1" : "=w"(s) : "w"(x));
 #else
 #    warning "sqrt_f not yet implemented in asm"
     s = sqrtf(x);
@@ -118,12 +118,12 @@ static double sqrt_d(double x)
 {
     double s;
 #if defined(__x86_64__)
-    __asm__ ("sqrtsd %1, %0" : "=x"(s) : "x"(x));
+    __asm__ __volatile__ ("sqrtsd %1, %0" : "=x"(s) : "x"(x));
 #elif defined(__i386__)
     s = x;
-    __asm__ ("fsqrt": "+t"(s));
+    __asm__ __volatile__ ("fsqrt": "+t"(s));
 #elif defined(__arm__) && defined(__VFP_FP__)
-    __asm__ ("vsqrt.f64 %P0, %P1" : "=w"(s) : "w"(x));
+    __asm__ __volatile__ ("vsqrt.f64 %P0, %P1" : "=w"(s) : "w"(x));
 #else
 #    warning "sqrt_d not yet implemented in asm"
     s = sqrt(x);
@@ -146,7 +146,7 @@ static double sqrt_d(double x)
 static void sincos_f(float angle, float *s, float *c)
 {
 #if defined(__x86_64__) || defined(__i386__)
-    __asm__ ("fsincos" : "=t"(*c), "=u"(*s) : "0"(angle));
+    __asm__ __volatile__ ("fsincos" : "=t"(*c), "=u"(*s) : "0"(angle));
 #else
     /* gcc -O2 groups these calls to a single sincosf */
     *s = sinf(angle);
@@ -244,19 +244,19 @@ static int check_constants(void)
 #if defined(__x86_64__) || defined(__i386__)
     float f;
 
-    __asm__ ("fldz" : "=t"(f));
+    __asm__ __volatile__ ("fldz" : "=t"(f));
     _ok_f("fldz", f, 0);
-    __asm__ ("fld1" : "=t"(f));
+    __asm__ __volatile__ ("fld1" : "=t"(f));
     _ok_f("fld1", f, 1);
-    __asm__ ("fldpi" : "=t"(f));
+    __asm__ __volatile__ ("fldpi" : "=t"(f));
     _ok_f("fldpi", f, (float)M_PI);
-    __asm__ ("fldl2e" : "=t"(f));
+    __asm__ __volatile__ ("fldl2e" : "=t"(f));
     _ok_f("fldl2e = log_2(e)", f, (float)M_LOG2E);
-    __asm__ ("fldln2" : "=t"(f));
+    __asm__ __volatile__ ("fldln2" : "=t"(f));
     _ok_f("fldln2 = log_e(2)", f, (float)M_LN2);
-    __asm__ ("fldl2t" : "=t"(f));
+    __asm__ __volatile__ ("fldl2t" : "=t"(f));
     _ok_f("fldl2t = log_2(10)", f, (float)M_LN10 / (float)M_LN2);
-    __asm__ ("fldlg2" : "=t"(f));
+    __asm__ __volatile__ ("fldlg2" : "=t"(f));
     _ok_f("fldlg2 = log_10(2)", f, (float)M_LN2 / (float)M_LN10);
 #elif defined(__arm__)
     /* No constant loading in ARM instruction set */
