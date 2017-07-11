@@ -1,0 +1,30 @@
+FROM alpine:3.3
+LABEL Description="Alpine Linux 3.3 with build dependencies for shared"
+
+# Alpine does not provide: coq, mingw-w64, pulseaudio-dev
+# Alpine<3.5 does not provide: py-numpy, py2-cffi, py3-cffi
+# Alpine<3.4 does not provide sdl2-dev
+RUN \
+    apk --update add \
+        clang \
+        gcc \
+        gdb \
+        gmp-dev \
+        gtk+3.0-dev \
+        iproute2 \
+        libmnl-dev \
+        linux-grsec-dev \
+        linux-headers \
+        llvm-dev \
+        make \
+        musl-dev \
+        musl-utils \
+        python-dev \
+        python3-dev && \
+    rm -rf /var/cache/apk/*
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]

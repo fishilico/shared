@@ -25,6 +25,12 @@ get_base_name() {
             echo "archlinux"
             ;;
 
+        *alpine33*|*alpine3.3*)
+            echo "alpine3.3"
+            ;;
+        *alpine34*|*alpine3.4*)
+            echo "alpine3.4"
+            ;;
         *alpine35*|*alpine3.5*)
             echo "alpine3.5"
             ;;
