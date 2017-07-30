@@ -3,7 +3,7 @@ LABEL Description="Alpine Linux 3.5 with build dependencies for shared"
 
 # Alpine does not provide coq nor mingw-w64, and pulseaudio-dev is in testing
 RUN \
-    apk --update add \
+    apk --no-cache --update add \
         clang \
         gcc \
         gdb \
