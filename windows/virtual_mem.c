@@ -278,7 +278,7 @@ int _tmain(int argc, TCHAR **argv)
             }
             _tprintf(
                 _T("\n%16" PRIxPTR "..%16" PRIxPTR ": free\n"),
-                (ULONG_PTR)pStart, (ULONG_PTR)pEnd);
+                (UINT_PTR)pStart, (UINT_PTR)pEnd);
             /* Show unexpected values */
             if (MemInfo.AllocationBase) {
                 _tprintf(_T("... AllocationBase = %p\n"), MemInfo.AllocationBase);
@@ -297,7 +297,7 @@ int _tmain(int argc, TCHAR **argv)
             if (MemInfo.AllocationBase == pStart) {
                 _tprintf(
                     _T("\n%16" PRIxPTR ": allocation (%s)"),
-                    (ULONG_PTR)MemInfo.AllocationBase,
+                    (UINT_PTR)MemInfo.AllocationBase,
                     describe_protect(MemInfo.AllocationProtect));
                 if (MemInfo.Type == MEM_IMAGE &&
                     GetModuleFileNameWithAlloc(MemInfo.AllocationBase, &szFileName)) {
@@ -326,7 +326,7 @@ int _tmain(int argc, TCHAR **argv)
             }
             _tprintf(
                 _T("%16" PRIxPTR "..%16" PRIxPTR ": %s"),
-                (ULONG_PTR)pStart, (ULONG_PTR)pEnd, describe_protect(MemInfo.Protect));
+                (UINT_PTR)pStart, (UINT_PTR)pEnd, describe_protect(MemInfo.Protect));
 
             if (MemInfo.State == MEM_COMMIT) { /* 0x1000 */
                 _tprintf(_T(", commit"));
@@ -353,10 +353,10 @@ int _tmain(int argc, TCHAR **argv)
                 _tprintf(_T(" [heap]"));
             }
             if ((LPCVOID)pStart <= pTeb && pTeb <= (LPCVOID)pEnd) {
-                _tprintf(_T(" [TEB@%" PRIxPTR "]"), (ULONG_PTR)pTeb);
+                _tprintf(_T(" [TEB@%" PRIxPTR "]"), (UINT_PTR)pTeb);
             }
             if ((LPCVOID)pStart <= pPeb && pPeb <= (LPCVOID)pEnd) {
-                _tprintf(_T(" [PEB@%" PRIxPTR "]"), (ULONG_PTR)pPeb);
+                _tprintf(_T(" [PEB@%" PRIxPTR "]"), (UINT_PTR)pPeb);
             }
 
             _tprintf(_T("\n"));
