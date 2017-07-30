@@ -436,6 +436,24 @@ bool run_mov_asm_instruction_p(
         return true;
     }
 
+    /* f3 a4: rep movsb %ds:(%esi),%es:(%edi) */
+    if (has_f3_prefix && instr[0] == 0xa4) {
+        size_t len;
+        uintptr_t computed_addr = (uintptr_t)R_ESI(ctx);
+        if (computed_addr != data_addr) {
+            fprintf(stderr, "Error: mem parameter esi is not address %" PRIxPTR "\n", data_addr);
+            return false;
+        }
+        asm_printf(asm_instr, "rep movsb (esi=0x%" PRIxREG "), (edi)", R_ESI(ctx));
+        len = (size_t)R_ECX(ctx);
+        memcpy((void *)R_EDI(ctx), data, len);
+        R_ESI(ctx) += len;
+        R_EDI(ctx) += len;
+        R_ECX(ctx) = 0;
+        R_EIP(ctx) += 1;
+        return true;
+    }
+
     /* 66 a5: movsw %ds:(%esi), %es:(%edi) */
     if (has_66_prefix && instr[0] == 0xa5) {
         uintptr_t computed_addr = (uintptr_t)R_ESI(ctx);
