@@ -63,14 +63,17 @@ pkg-config-with-options = $(call ccld-has-option,$(shell $(PKG_CONFIG) --cflags 
 RUN_TEST_PREFIX ?=
 run-test-progs = \
 	for P in $(sort $(1)); do \
-		echo "./$$P" && \
 		if [ "$${P%.py}" != "$$P" ] ; then \
+			echo "$(PYTHON) ./$$P" && \
 			$(PYTHON) "./$$P" || exit $$? ; \
 		elif [ "$${P%.py3}" != "$$P" ] ; then \
+			echo "$(PYTHON) ./$$P" && \
 			$(PYTHON) "./$$P" || exit $$? ; \
 		elif [ "$${P%.sh}" != "$$P" ] ; then \
+			echo "$(SH) ./$$P" && \
 			$(SH) "./$$P" || exit $$? ; \
 		else \
+			echo $(RUN_TEST_PREFIX) "./$$P" && \
 			$(RUN_TEST_PREFIX) "./$$P" || exit $$? ; \
 		fi ; \
 	done
