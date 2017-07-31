@@ -20,6 +20,7 @@ else
 			TARGET := $(ARCH)-w32-mingw32
 		endif
 	endif
+	TARGET_ARCH := $(call cc-triplet2arch,$(TARGET))
 endif
 
 # Using "WINCC ?=" here allows disabling build in windows/ on Linux with:
@@ -80,7 +81,13 @@ LIB_LDFLAGS = -shared -Wl,--subsystem=0
 HAVE_WINE := $(call can-run,$(WINE) --version)
 ifeq ($(HAVE_WINE),y)
 	# Use wine to run programs
-	RUN_TEST_PREFIX := $(WINE)
+	ifeq ($(TARGET_ARCH), x86_64)
+		# Debian<10 separates 32-bit and 64-bit wine directories so that Wine
+		# requires WINEARCH=win64 to run 64-bit programs
+		RUN_TEST_PREFIX := WINEARCH=win64 $(WINE)
+	else
+		RUN_TEST_PREFIX := $(WINE)
+	endif
 else ifneq ($(OS), Windows_NT)
 	# Do not run anything on a non-Windows system without wine
 	RUN_TEST_PREFIX := :
