@@ -400,7 +400,15 @@ static void dump_x86_tables(void)
 	for_each_possible_cpu(cpu) {
 		struct desc_struct *descs;
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+		/* Commit 69218e47994d ("x86: Remap GDT tables in the fixmap section")
+		 * replaced get_cpu_gdt_table() with get_cpu_gdt_rw() and
+		 * get_cpu_gdt_ro() in Linux 4.12
+		 */
+		descs = get_cpu_gdt_ro(cpu);
+#else
 		descs = get_cpu_gdt_table(cpu);
+#endif
 		if (!descs)
 			continue;
 #endif
