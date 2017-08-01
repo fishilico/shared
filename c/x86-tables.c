@@ -40,7 +40,7 @@
 #    include <sched.h>
 
 static const char os_name[] = "Linux";
-static const char gdt_comment[] = "per_cpu(gdt_page, cpu)";
+static const char gdt_comment[] = "per_cpu(gdt_page, cpu) or fix_to_virt(FIX_GDT_REMAP_BEGIN + cpu) since 4.12";
 static const char idt_comment[] = "fix_to_virt(FIX_RO_IDT)";
 
 static cpu_set_t initial_cpuset;
