@@ -47,6 +47,9 @@ get_base_name() {
         *debian9*|*stretch*)
             echo "debian9-stretch"
             ;;
+        *debian10*|*buster*)
+            echo "debian10-buster"
+            ;;
 
         *ubuntu1204*|*precise*)
             echo "ubuntu1204-precise"
