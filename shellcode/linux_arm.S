@@ -1,4 +1,5 @@
     .section .shcode, "ax", %progbits
+    .align 2
     .globl main
     .type main, %function
     .arm
