@@ -205,8 +205,10 @@ def main(argv=None):
             if not reformat_shc_with_file(filename, objdumpcmd):
                 return 1
     else:
-        # By default, analyse all .bin and .exe files
+        # By default, analyze all .bin and .exe files but multiarch
         for filename in sorted(os.listdir(os.path.dirname(__file__))):
+            if filename.startswith('multiarch_'):
+                continue
             if filename.endswith(('.bin', '.exe')):
                 if not reformat_shc_with_file(filename, objdumpcmd):
                     return 1

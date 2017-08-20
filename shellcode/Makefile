@@ -5,6 +5,7 @@ GREP ?= grep
 OBJCOPY ?= objcopy
 OBJDUMP ?= objdump
 PYTHON ?= python
+SHA512SUM ?= sha512sum
 UNAME ?= uname
 
 # Find the system identifier to use
@@ -16,21 +17,22 @@ SHELLCODE_NAME := $(TARGET_OS)_$(TARGET_ARCH)
 SHELLCODE_BIN := $(SHELLCODE_NAME).$(BIN_EXT)
 SHELLCODE_RAW := $(SHELLCODE_NAME).raw.out
 
-all: $(SHELLCODE_RAW)
+all: $(SHELLCODE_RAW) multiarch_linux.raw.out
 	@:
 
 clean:
 	$(CLEAN_CMD)
 
-test: all
-	@$(call run-test-progs,$(wildcard *.py))
+test: all $(SHELLCODE_BIN) multiarch_linux.$(BIN_EXT)
+	@$(call run-test-progs,$(wildcard *.py) multiarch_linux.$(BIN_EXT))
+	$(SHA512SUM) -c sha512sums.txt
 
 # Dump of the shellcode
 shcdump: $(SHELLCODE_RAW) $(SHELLCODE_BIN)
 	$(PYTHON) -c 'print(open("$(SHELLCODE_RAW)", "rb").read())'
 	$(OBJDUMP) -d $(SHELLCODE_BIN)
 
-$(SHELLCODE_RAW): $(SHELLCODE_BIN)
+%.raw.out: %.$(BIN_EXT)
 	$(V_OBJCOPY)$(OBJCOPY) -j .shcode -O binary $< $@ && $(CHMOD) -x $@
 
 %.$(BIN_EXT): .%.o
@@ -40,4 +42,4 @@ $(SHELLCODE_RAW): $(SHELLCODE_BIN)
 	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: all clean test shcdump
-.PRECIOUS: .%.o
+.PRECIOUS: %.$(BIN_EXT) .%.o

@@ -90,6 +90,8 @@ def sync_shellcode_py():
     # Extract binary code from every .S file
     shellcodes = {}
     for filename in os.listdir(os.path.dirname(__file__)):
+        if filename == 'multiarch_linux.S':
+            continue
         if filename.endswith('.S'):
             osname, arch = filename[:-2].split('_', 1)
             osname = osname[0].upper() + osname[1:]
