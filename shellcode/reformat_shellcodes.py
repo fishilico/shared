@@ -68,6 +68,7 @@ def disassemble_shcbin(binfile, objdumpcmd):
             if asm is not None:
                 # Remove auto-generated comment
                 asm = asm.split(';')[0].strip()
+                asm = asm.split('// #')[0].strip()
                 instructions.append((hexby, asm))
             elif len(instructions) > 0:
                 # Continued instruction
@@ -159,7 +160,7 @@ def reformat_shc_with_file(filename, objdumpcmd):
             asminstr = matches.group(2).strip()
             bininstr = instructions[curinstidx]
             if not instr_match(asminstr, bininstr[1]):
-                sys.stderr.write("Instruction did not match: {} vs {}\n"
+                sys.stderr.write("Instructions did not match: {} vs {}\n"
                                  .format(repr(asminstr), repr(bininstr[1])))
                 return False
 

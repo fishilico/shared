@@ -88,6 +88,7 @@ select_x86_bits = $(shell printf '\#ifdef __x86_64__\nx86_64\n\#elif defined(__i
 # Usage: TARGET_ARCH := $(call cc-triplet2arch,$(TARGET_TRIPLET))
 cc-triplet2arch = \
 $(or \
+$(if $(filter aarch64%,$(1)),arm64), \
 $(if $(filter arm%,$(1)),arm), \
 $(if $(filter i386-%,$(1)),x86_32), \
 $(if $(filter i486-%,$(1)),x86_32), \
