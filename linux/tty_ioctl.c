@@ -127,7 +127,7 @@ int main(void)
 
     /* Linux console-specific command */
     if (ioctl(tty_fd, KDGETLED, &led_state) == -1) {
-        if (errno == ENOTTY) {
+        if (errno == ENOTTY || errno == EINVAL) {
             /* TTY is not Linux console */
             printf("Unable to get the state of keyboard LEDs\n");
         } else {
