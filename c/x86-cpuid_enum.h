@@ -189,7 +189,7 @@ __extension__ static const char* cpuidstr_ext1_ecx[32] = {
     [24] = "perfctr_nb",
     [26] = "bpext",
     [27] = "ptsc",
-    [28] = "perfctr_l2",
+    [28] = "perfctr_llc",
     [29] = "mwaitx",
 };
 
