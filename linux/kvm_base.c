@@ -1,5 +1,11 @@
 /**
  * Use KVM to run some code
+ *
+ * Related projects:
+ * * https://github.com/tandasat/SimpleSvm
+ *   A minimalistic educational hypervisor for Windows on AMD processors.
+ * * https://ionescu007.github.io/SimpleVisor/
+ *   SimpleVisor is a simple, portable, Intel VT-x hypervisor
  */
 #ifndef _GNU_SOURCE
 #    define _GNU_SOURCE /* for MAP_ANONYMOUS */
