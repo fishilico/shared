@@ -15,6 +15,7 @@ Linux
 * https://lkml.wtf/
   A weekly roundup of Linux Kernel Mailing List threads but with a lot more sarcasm
 * https://github.com/lkl/linux Linux Kernel Library project
+* https://github.com/fox-it/linux-luks-tpm-boot Boot with TrustedGRUB2, TPM and LUKS
 
 Windows
 -------

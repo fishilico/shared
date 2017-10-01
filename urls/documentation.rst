@@ -71,6 +71,8 @@ Hacking
   WarBerryPi - Tactical Exploitation
 * https://github.com/radareorg/r2con/blob/master/2016/trainings/02-a-to-z/r2con-AtoZ.pdf
   Radare from A to Z - extended edition
+* https://www.elttam.com.au/blog/intro-sdr-and-rf-analysis/
+  Intro to SDR and RF signal analysis
 
 Programming
 -----------
@@ -139,6 +141,8 @@ Internet
     - https://github.com/ioerror/duraconf
       A collection of hardened configuration files for SSL/TLS services
     - https://observatory.mozilla.org/
+    - https://www.google.com/transparencyreport/https/ct/
+      Certificate Transparency query interface
 
 * Maps:
 
