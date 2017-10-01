@@ -539,7 +539,7 @@ bool run_mov_asm_instruction_p(
         asm_printf(asm_instr, "cmp %s, %s", operand_reg, operand_rm);
         free(operand_rm);
         free(operand_reg);
-        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(data[0] - *op_reg));
+        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(data[0] - *(uint8_t *)op_reg));
         R_RIP(ctx) += 1 + paramlen;
         return true;
     }
@@ -554,7 +554,7 @@ bool run_mov_asm_instruction_p(
         asm_printf(asm_instr, "cmp %s, %s", operand_rm, operand_reg);
         free(operand_rm);
         free(operand_reg);
-        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(*op_reg - data[0]));
+        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(*(uint8_t *)op_reg - data[0]));
         R_RIP(ctx) += 1 + paramlen;
         return true;
     }

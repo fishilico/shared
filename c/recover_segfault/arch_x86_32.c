@@ -364,7 +364,7 @@ bool run_mov_asm_instruction_p(
         asm_printf(asm_instr, "cmp %s, %s", operand_reg, operand_rm);
         free(operand_rm);
         free(operand_reg);
-        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(data[0] - *op_reg));
+        R_EFL(ctx) = update_eflags_diff8(R_EFL(ctx), (uint8_t)(data[0] - *(uint8_t *)op_reg));
         R_EIP(ctx) += 1 + paramlen;
         return true;
     }
