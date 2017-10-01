@@ -116,6 +116,9 @@ Programming
 
 * http://overapi.com/ OverAPI.com, Collecting All Cheat Sheets
 
+* http://www.b-list.org/weblog/2017/sep/05/how-python-does-unicode/
+  How Python does Unicode
+
 Packaging
 ---------
 
