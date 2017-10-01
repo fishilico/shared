@@ -28,6 +28,13 @@ Windows
 * http://copy.sh/v86/?profile=windows98
   Windows 98 with x86 virtualization in JavaScript
 
+Apple
+-----
+
+* https://opensource.apple.com/ Apple Open Source
+* https://github.com/apple/darwin-xnu
+  XNU kernel is part of the Darwin operating system for use in OS X and iOS operating systems.
+
 Microkernels and unikernels
 ---------------------------
 
