@@ -126,6 +126,12 @@ def get_kernel_pos_from_iomem(machine=None):
                 if start_pa == end_pa == 0:
                     logger.warning("/proc/iomem:%s address is protected", name)
                     continue
+                # Watch for overflow
+                # On x86_64, since kernel 4.8, KASLR changed the mapping between
+                # physical and virtual addresses
+                if offset >> 32 and (start_pa + offset) >> 64:
+                    logger.warning("/proc/iomem:%s address is randomized", name)
+                    continue
                 kernel_pos[name] = (start_pa + offset, end_pa + offset)
     except IOError as exc:
         if exc.errno == errno.EACCES:
