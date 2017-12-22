@@ -6,6 +6,7 @@
 \usepackage{color}
 \usepackage{geometry}
 \usepackage{hyperref}
+\usepackage{xcolor}
 \usepackage[toc,page]{appendix}
 
 \title{Un document en français}
@@ -20,11 +21,15 @@ left=25mm,top=25mm,
 headheight=7mm,headsep=4mm,
 marginparsep=4mm,marginparwidth=5mm}
 
-% Set-up PDF properties
+% Set-up PDF properties and link colors
 \makeatletter
   \hypersetup{
     pdftitle = {\@title},
-    pdfauthor = {\@author}
+    pdfauthor = {\@author},
+    colorlinks,
+    linkcolor={blue!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
   }
 \makeatother
 
