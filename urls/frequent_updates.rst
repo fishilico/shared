@@ -51,6 +51,7 @@ Blogs
   (exploitation, reverse engineering, cryptography, lattices, liblll, knapsack)
 * http://hackaday.com/ Hackaday
 * http://labs.domipheus.com/blog/ Domipheus Labs
+* https://www.redox-os.org/news/ This Week in Redox
 
 French blogs
 ------------
@@ -87,3 +88,4 @@ Other
 * http://theprofoundprogrammer.com/ The profound programmer
 * https://github.com/ctfs CTF write-ups
 * http://www.openwall.com/lists/kernel-hardening/ Kernel hardening mailing list
+* https://www.flightradar24.com/ Live Air Traffic

@@ -11,6 +11,7 @@ English
 * http://m.webtoons.com/episodeList?titleNo=95 Tower of God
 * http://strongfemaleprotagonist.com/ Strong Female Protagonist
 * http://www.gunnerkrigg.com/ Gunnerkrigg Court
+* http://www.avasdemon.com/ Ava's Demon
 
 French
 ------

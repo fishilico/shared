@@ -73,6 +73,8 @@ Hacking
   Radare from A to Z - extended edition
 * https://www.elttam.com.au/blog/intro-sdr-and-rf-analysis/
   Intro to SDR and RF signal analysis
+* https://github.com/avast-tl/retdec
+  Retargetable machine-code decompiler based on LLVM
 
 Programming
 -----------
@@ -164,6 +166,8 @@ Internet
   Measuring Google's Public DNS (with interesting figures about how DNS works)
 * https://github.com/you-dont-need/You-Dont-Need-Javascript
   You Don't Need JavaScript
+* https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software
+  The 2018 Guide to Building Secure PHP Software
 
 Hardware products
 -----------------
