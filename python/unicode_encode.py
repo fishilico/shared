@@ -52,6 +52,8 @@ EXAMPLES_UTF8 = [
     b'\xe2\x80\xbd',  # U+203D interrobang
     b'\xe2\x80\x8f',  # U+200F right-to-left mark (RLM)
     b'\xe2\x82\xac',  # U+20AC euro sign
+    b'\xe2\x86\x92',  # U+2192 rightwards arrow
+    b'\xe2\x87\x92',  # U+21D2 rightwards double arrow
     b'\xe2\x88\x9e',  # U+221E infinity
     b'\xe2\x98\x80',  # U+2605 black sun with rays
     b'\xe2\x98\x85',  # U+2605 black star
