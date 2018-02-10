@@ -125,6 +125,7 @@ __extension__ static const char* cpuidstr_7_ebx[32] = {
     [21] = "avx512ifma",
     [23] = "clflushopt",
     [24] = "clwb",
+    [25] = "intel_pt",
     [26] = "avx512pf",
     [27] = "avx512er",
     [28] = "avx512cd",
@@ -138,8 +139,15 @@ __extension__ static const char* cpuidstr_7_ebx[32] = {
  */
 __extension__ static const char* cpuidstr_7_ecx[32] = {
     [1] = "avx512vbmi",
+    [2] = "umip",
     [3] = "pku",
     [4] = "ospke",
+    [6] = "avx512_vbmi2",
+    [8] = "gfni",
+    [9] = "vaes",
+    [10] = "vpclmulqdq",
+    [11] = "avx512_vnni",
+    [12] = "avx512_bitalg",
     [14] = "avx512_vpopcntdq",
     [16] = "la57",
     [22] = "rdpid",
@@ -229,8 +237,6 @@ static void add_manual_cpuid_str(void)
     cpuidstr_7_ebx[13] = "deprecate_FPU_CS_DS"; /* Deprecates FPU CS and FPU DS values */
     assert(cpuidstr_7_ebx[22] == NULL);
     cpuidstr_7_ebx[22] = "pcommit"; /* Deprecated pcommit instruction, Linux commit fd1d961dd681 ("x86/insn: remove pcommit") */
-    assert(cpuidstr_7_ebx[25] == NULL);
-    cpuidstr_7_ebx[25] = "Intel_processor_trace"; /* Intel Processor Trace */
 
     /* documented in /usr/src/linux/arch/x86/kernel/cpu/{amd.c,intel.c}
      * and also /usr/src/linux/tools/power/x86/turbostat/turbostat.c
