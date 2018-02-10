@@ -104,11 +104,29 @@ int main(void)
         /* CPUID 1: get family, model and features
          * Family is eax[8:11] + eax[20:27]
          * Model is (eax[16:19] << 4) + eax[4:7]
+         * Stepping is eax[0:3]
+         *
+         * Because eax bits are:
+         *  0... 3 (0x0000000f): stepping
+         *  4... 7 (0x000000f0): model
+         *  8...11 (0x00000f00): family
+         * 12...13 (0x00003000): processor type
+         * 14...15 (0x0000c000): reserved
+         * 16...19 (0x000f0000): extended model
+         * 20...27 (0x0ff00000): extended family
+         * 28...31 (0xf0000000): reserved
          */
         asm_cpuid(1, &eax, &ebx, &ecx, &edx);
-        printf("1.eax = %#x: CPU family %u, model %u\n", eax,
+        printf("1.eax = %#x: CPU family %u (%u+%u), model %u (%u+%u*16), stepping %u\n", eax,
                ((eax >> 8) & 0xf) + ((eax >> 20) & 0xff),
-               ((eax >> 4) & 0xf) + ((eax >> 12) & 0xf0));
+               (eax >> 8) & 0xf,
+               (eax >> 20) & 0xff,
+               ((eax >> 4) & 0xf) + ((eax >> 12) & 0xf0),
+               (eax >> 4) & 0xf,
+               (eax >> 16) & 0xf,
+               eax & 0xf);
+        if (eax & 0xf000c000)
+            printf("... reserved bits: %#x\n", eax & 0xf000c000);
         print_features("Features 1.edx", edx, cpuidstr_1_edx);
         print_features("Features 1.ecx", ecx, cpuidstr_1_ecx);
     }
