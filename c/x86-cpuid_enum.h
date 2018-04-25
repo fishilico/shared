@@ -148,9 +148,22 @@ __extension__ static const char* cpuidstr_7_ecx[32] = {
     [10] = "vpclmulqdq",
     [11] = "avx512_vnni",
     [12] = "avx512_bitalg",
+    [13] = "tme",
     [14] = "avx512_vpopcntdq",
     [16] = "la57",
     [22] = "rdpid",
+};
+
+/**
+ * cpuid 0x00000007:0, edx register
+ */
+__extension__ static const char* cpuidstr_7_edx[32] = {
+    [2] = "avx512_4vnniw",
+    [3] = "avx512_4fmaps",
+    [18] = "pconfig",
+    [26] = "spec_ctrl",
+    [27] = "intel_stibp",
+    [29] = "arch_capabilities",
 };
 
 /**
@@ -207,14 +220,6 @@ __extension__ static const char* cpuidstr_ext1_ecx[32] = {
 __extension__ static const char* cpuidstr_6_ecx[32] = {
     [0] = "aperfmperf",
     [3] = "epb",
-};
-
-/**
- * cpuid 0x00000007, edx register
- */
-__extension__ static const char* cpuidstr_7_edx[32] = {
-    [2] = "avx512_4vnniw",
-    [3] = "avx512_4fmaps",
 };
 
 /**
