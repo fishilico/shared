@@ -118,6 +118,7 @@ int main(void)
     print_compatibility(const char *, char *, 0);
     print_compatibility(unsigned char *, char *, 0);
     print_compatibility(void *, char *, 0);
+    print_compatibility(char *, void *, 0);
 
     return exitcode;
 }
