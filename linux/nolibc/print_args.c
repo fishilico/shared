@@ -9,7 +9,9 @@ static void _c_start(const void *stack)
 {
     const unsigned long argc = *(const unsigned long *)stack;
     const char *const *argv = ((const char *const *)stack) + 1;
-    /* const char *const *envp = argv + argc + 1; */
+#ifndef ONLY_ARGV
+    const char *const *envp = argv + argc + 1;
+#endif
 
     unsigned long i;
     for (i = 0; i < argc; i++) {
@@ -23,6 +25,16 @@ static void _c_start(const void *stack)
         write_string(1, argv[i]);
         write_cstring(1, "\n");
     }
+    /* Show envp too, if compiled without -DONLY_ARGV */
+#ifndef ONLY_ARGV
+    for (i = 0; envp[i]; i++) {
+        write_cstring(1, "envp[");
+        write_ulong(1, i);
+        write_cstring(1, "] = ");
+        write_string(1, envp[i]);
+        write_cstring(1, "\n");
+    }
+#endif
     exit(0);
 }
 
