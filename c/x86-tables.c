@@ -141,7 +141,22 @@ static void migrate_to_cpu(int cpu)
     }
 }
 #else
-#    error Unknown target OS
+#    warning Unknown target OS
+
+/* Define wome placeholders */
+static const char os_name[] = "Unknown";
+static const char gdt_comment[] = "?";
+static const char idt_comment[] = "?";
+
+static void initialize_cpu_affinity(void)
+{
+    printf("Warning: unknown target OS, assuming single CPU!\n");
+}
+static int get_next_cpu(int cpu) {
+    return -1;
+}
+static void migrate_to_cpu(int cpu) {
+}
 #endif
 
 int main(void)
