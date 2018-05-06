@@ -23,6 +23,7 @@ French
 * http://lesjoiesducode.fr/ Les joies du code
 * http://hmm-la-bd.eu/ Hmm-la-bd
 * http://reno-pixellu.com/blog/ Chez Reno, pixel en gros
+* https://www.peppercarrot.com/fr/static3/webcomics Pepper & Carrot
 
 French editors
 --------------

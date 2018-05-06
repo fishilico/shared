@@ -45,6 +45,8 @@ Microkernels and unikernels
 * https://mirage.io/ MirageOS unikernel
 * http://roscidus.com/blog/blog/2016/01/01/a-unikernel-firewall-for-qubesos/
   A Unikernel Firewall for QubesOS
+* https://github.com/nebulet/nebulet
+  A microkernel that implements a WebAssembly "usermode" that runs in Ring 0
 
 Other
 -----

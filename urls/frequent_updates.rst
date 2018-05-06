@@ -83,6 +83,7 @@ Code repositories
 Other
 -----
 
+* https://securethe.news/sites/ See which news publications have the most secure HTTPS implementation
 * http://www.qwertee.com/ Qwertee T-shirts
 * https://theyetee.com/ The Yetee T-shirts
 * http://theprofoundprogrammer.com/ The profound programmer

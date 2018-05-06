@@ -75,6 +75,36 @@ Hacking
   Intro to SDR and RF signal analysis
 * https://github.com/avast-tl/retdec
   Retargetable machine-code decompiler based on LLVM
+* https://heap-exploitation.dhavalkapil.com/ Heap Exploitation
+* https://github.com/cloudburst/libheap/blob/master/heap.png
+  Map of ptmalloc (the glibc userland heap implementation)
+* https://lief-project.github.io/ LIEF, Library to Instrument Executable Formats
+
+Debuggers
+~~~~~~~~~
+
+* https://github.com/cyrus-and/gdb-dashboard
+  Modular visual interface for GDB in Python
+* https://github.com/pwndbg/pwndbg
+  GDB plug-in that makes debugging with GDB suck less
+* https://gef.readthedocs.io/en/master/
+  GEF - GDB Enhanced Features
+* https://github.com/longld/peda
+  PEDA - Python Exploit Development Assistance for GDB
+
+Windows exploitation
+~~~~~~~~~~~~~~~~~~~~
+
+* https://www.sploitspren.com/2018-01-26-Windows-Privilege-Escalation-Guide/
+  Windows Privilege Escalation Guide
+* https://cysinfo.com/detecting-deceptive-hollowing-techniques/
+  Detecting deceptive process hollowing techniques using hollowfind volatility plugin
+* https://github.com/PowerShellMafia/PowerSploit
+  PowerSploit, with Invoke-ReflectivePEInjection.ps1
+  (Reflectively loads a Windows PE file (DLL/EXE) in to the powershell process,
+  or reflectively injects a DLL in to a remote process.)
+* https://github.com/leechristensen/UnmanagedPowerShell UnmanagedPowerShell
+* https://www.powershellempire.com Powershell Empire
 
 Programming
 -----------
@@ -121,6 +151,12 @@ Programming
 * http://www.b-list.org/weblog/2017/sep/05/how-python-does-unicode/
   How Python does Unicode
 
+* https://tinycrypt.wordpress.com/2018/03/16/aes-tiny/
+  AES-128 Block Cipher, in C
+
+* https://github.com/kamranahmedse/developer-roadmap
+  Roadmap to becoming a web developer in 2018
+
 Packaging
 ---------
 
@@ -148,6 +184,10 @@ Internet
     - https://observatory.mozilla.org/
     - https://www.google.com/transparencyreport/https/ct/
       Certificate Transparency query interface
+    - https://letsencrypt.org/
+      Let's Encrypt - free, automated, and open Certificate Authority
+    - https://alwaysonssl.com/
+      AlwaysOnSSL - free, and automated Certification Authority
 
 * Maps:
 
