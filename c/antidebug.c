@@ -72,6 +72,13 @@ __asm__ (
 #    endif
 "        xorl $42, %eax\n" /* Return value is eax */
 "        ret\n"
+#elif defined(__aarch64__)
+"        .align 2\n"
+"sensitive_computation:\n"
+"_sensitive_computation:\n"
+"        mov x1, #42\n"
+"        eor x0, x0, x1\n" /* First parameter and return value are x0 */
+"        ret\n"
 #elif defined(__arm__)
 "        .align 2\n"
 "sensitive_computation:\n"
@@ -127,6 +134,12 @@ int main(void)
         }
         if (pcode + 1 < sensitive_end && *pcode == 0xcd && *(pcode + 1) == 0x03) {
             printf("[-] int 3 instruction detected at %p\n", (void *)pcode);
+            is_debugged = 1;
+            break;
+        }
+#elif defined(__aarch64__)
+        if (!((uintptr_t)pcode & 3) && pcode[3] == 0xd4 && (pcode[2] & 0xe0) == 0x20) {
+            printf("[-] ARM64 brk instruction detected at %p\n", (void *)pcode);
             is_debugged = 1;
             break;
         }
