@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#if defined(__x86_64__)
+#if defined(__x86_64__) || defined(__aarch64__)
 #    define DEFINE_ELF_STRUCT(name) typedef Elf64_##name Elf_##name
 #    define ELF_ST_BIND(val) ELF64_ST_BIND(val)
 #    define ELF_ST_TYPE(val) ELF64_ST_TYPE(val)
