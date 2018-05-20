@@ -10,9 +10,11 @@
 #endif
 
 #include <assert.h>
+#include <elf.h>
 #include <errno.h>
 #include <getopt.h>
 #include <signal.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -63,6 +65,16 @@ typedef struct user_regs_struct user_regs_type;
 #    define REG_ARG5(regs) ((regs).uregs[5])
 #    define REG_RESULT(regs) ((regs).uregs[0])
 typedef struct user_regs user_regs_type;
+#elif defined(__aarch64__)
+#    define REG_SYSCALL(regs) ((regs).regs[8])
+#    define REG_ARG0(regs) ((regs).regs[0])
+#    define REG_ARG1(regs) ((regs).regs[1])
+#    define REG_ARG2(regs) ((regs).egs[2])
+#    define REG_ARG3(regs) ((regs).regs[3])
+#    define REG_ARG4(regs) ((regs).regs[4])
+#    define REG_ARG5(regs) ((regs).regs[5])
+#    define REG_RESULT(regs) ((regs).regs[0])
+typedef struct user_regs_struct user_regs_type;
 #else
 #    error "Unsupported architecture"
 #endif
@@ -154,6 +166,13 @@ static int handle_ptrace_events(pid_t child)
     int status = 0;
     long nsyscall;
     user_regs_type regs;
+    struct iovec regs_iovec;
+    static bool has_last_uname_syscall_arg;
+    static void *last_uname_syscall_arg;
+
+    memset(&regs_iovec, 0, sizeof(regs_iovec));
+    regs_iovec.iov_base = &regs;
+    regs_iovec.iov_len = sizeof(regs);
 
     for (;;) {
         pid = waitpid(child, &status, WUNTRACED);
@@ -187,21 +206,34 @@ static int handle_ptrace_events(pid_t child)
             } else if (status == SIGTRAP || status == (0x80 | SIGTRAP)) {
                 /* This is the expected signal for ptrace */
                 /* 0x80 is for PTRACE_O_TRACESYSGOOD options */
+#ifdef PTRACE_GETREGSET
+                if (ptrace(PTRACE_GETREGSET, pid, NT_PRSTATUS, &regs_iovec) == -1) {
+                    perror("ptrace(GETREGSET)");
+                    return EXIT_FAILURE;
+                }
+#else
+                /* Old way of getting the registers, not available on ARM64 */
                 if (ptrace(PTRACE_GETREGS, pid, NULL, &regs) == -1) {
                     perror("ptrace(GETREGS)");
                     return EXIT_FAILURE;
                 }
+#endif
                 nsyscall = (long)REG_SYSCALL(regs);
                 if (status == SIGTRAP) {
                     /* First syscall must be execve or restart_syscall.
-                     * This may happen when running a new process
+                     * This may happen when running a new process.
+                     *
+                     * For obscure reasons ARM64 does not capture the initial
+                     * execve syscall.
                      */
+#if !defined(__aarch64__)
                     if (nsyscall != __NR_execve && nsyscall != __NR_restart_syscall) {
                         fprintf(stderr,
                                 "Unexpected first syscall number: %ld != %d (execve).\n",
                                 nsyscall, __NR_execve);
                         return EXIT_FAILURE;
                     }
+#endif
                     /* Initialise ptrace options */
                     if (ptrace(PTRACE_SETOPTIONS, child, NULL,
                                (PTRACE_O_TRACESYSGOOD |
@@ -212,14 +244,29 @@ static int handle_ptrace_events(pid_t child)
                     }
                 }
                 if (nsyscall == __NR_uname) {
-                    /* Override user buffer */
-                    /* FIXME: ptrace signals two times per syscall, on entry and exit.
-                     *        Find out something to prevent poking buffer twice, and
-                     *        which manages error codes.
+                    /* Override user buffer *
+                     * As ptrace signals two times per syscall, on entry and exit,
+                     * record the buffer pointer at entry time and overwrite it
+                     * at exit time if the syscall succeeded (no memory fault).
                      */
-                    if (memcpy_to_pid(pid, (void *)REG_ARG0(regs), &fake_uname, sizeof(fake_uname)) == -1) {
-                        return EXIT_FAILURE;
+                    if (!has_last_uname_syscall_arg) {
+                        has_last_uname_syscall_arg = true;
+                        last_uname_syscall_arg = (void *)REG_ARG0(regs);
+                    } else {
+                        if (REG_ARG0(regs)) {
+                            fprintf(stderr,
+                                    "uname failed with error %ld\n",
+                                    (long)REG_ARG0(regs));
+                        } else if (memcpy_to_pid(pid, last_uname_syscall_arg, &fake_uname, sizeof(fake_uname)) == -1) {
+                            return EXIT_FAILURE;
+                        }
+                        has_last_uname_syscall_arg = false;
                     }
+                } else if (has_last_uname_syscall_arg) {
+                    fprintf(stderr,
+                            "Unexpected syscall %ld after uname syscall.\n",
+                            nsyscall);
+                    return EXIT_FAILURE;
                 }
                 if (ptrace(PTRACE_SYSCALL, pid, NULL, NULL) == -1) {
                     perror("ptrace(CONT)");
