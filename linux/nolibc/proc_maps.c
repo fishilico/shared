@@ -1,7 +1,6 @@
 /**
  * Dump self memory mappings (/proc/self/maps)
  */
-#include <fcntl.h>
 #include "nolibc-syscall-linux.h"
 
 void _start(void)

@@ -8,6 +8,8 @@
 /* Import the lists of error numbers and system calls */
 #include <errno.h>
 #include <stddef.h> /* for size_t */
+#include <linux/fcntl.h>
+#include <linux/unistd.h>
 #include <sys/syscall.h>
 #include <sys/types.h> /* for ssize_t */
 
@@ -17,10 +19,11 @@
 void _start(void) __attribute__((noreturn));
 
 /**
- * Define System Call with 3 arguments for each supported architectures
+ * Define System Call with 4 arguments for each supported architectures
  */
-static long _syscall3(
-    int number, unsigned long arg1, unsigned long arg2, unsigned long arg3)
+static long _syscall4(
+    int number, unsigned long arg1, unsigned long arg2, unsigned long arg3,
+    unsigned long arg4)
 {
     long result;
 #if defined(__x86_64__)
@@ -32,10 +35,11 @@ static long _syscall3(
      * r8  = arg5
      * r9  = arg6
      */
+    register long r10 __asm__("r10") = (long)arg4;
     __asm__ volatile ("syscall"
         : "=a" (result)
-        : "0" (number), "D" (arg1), "S" (arg2), "d" (arg3)
-        : "cc", "memory", "rcx", "r8", "r9", "r10", "r11");
+        : "0" (number), "D" (arg1), "S" (arg2), "d" (arg3), "r" (r10)
+        : "cc", "memory", "rcx", "r8", "r9", "r11");
 #elif defined(__i386__)
     /* eax = syscall number and result
      * ebx = arg1
@@ -52,14 +56,33 @@ static long _syscall3(
      */
     __asm__ volatile ("xchgl %%ebx, %2 ; int $0x80 ; xchgl %%ebx, %2"
         : "=a" (result)
-        : "0" (number), "r" (arg1), "c" (arg2), "d" (arg3)
+        : "0" (number), "r" (arg1), "c" (arg2), "d" (arg3), "S" (arg4)
         : "memory", "cc");
 #    else
     __asm__ volatile ("int $0x80"
         : "=a" (result)
-        : "0" (number), "b" (arg1), "c" (arg2), "d" (arg3)
+        : "0" (number), "b" (arg1), "c" (arg2), "d" (arg3), "S" (arg4)
         : "memory", "cc");
 #    endif
+#elif defined(__aarch64__)
+    /* x8 = syscall number
+     * x0 = arg1 and result
+     * x1 = arg2
+     * x2 = arg3
+     * x3 = arg4
+     * x4 = arg5
+     * x5 = arg6
+     */
+    register long x8 __asm__("x8") = (long)(unsigned int)number;
+    register long x0 __asm__("x0") = (long)arg1;
+    register long x1 __asm__("x1") = (long)arg2;
+    register long x2 __asm__("x2") = (long)arg3;
+    register long x3 __asm__("x3") = (long)arg4;
+    __asm__ volatile ("svc #0"
+        : "=r" (x0)
+        : "0" (x0), "r" (x1), "r" (x2), "r" (x3), "r" (x8)
+        : "memory", "cc", "x4", "x5", "x6");
+    result = x0;
 #elif defined(__arm__)
     /* r7 = syscall number
      * r0 = arg1 and result
@@ -73,9 +96,10 @@ static long _syscall3(
     register long r0 __asm__("r0") = (long)arg1;
     register long r1 __asm__("r1") = (long)arg2;
     register long r2 __asm__("r2") = (long)arg3;
+    register long r3 __asm__("r3") = (long)arg4;
     __asm__ volatile ("swi $0"
         : "=r" (r0)
-        : "0" (r0), "r" (r1), "r" (r2), "r" (r7)
+        : "0" (r0), "r" (r1), "r" (r2), "r" (r3), "r" (r7)
         : "memory", "cc", "r4", "r5", "r6");
     result = r0;
 #else
@@ -83,8 +107,10 @@ static long _syscall3(
 #endif
     return result;
 }
-#define syscall3(num, arg1, arg2, arg3) _syscall3((num), \
-    (unsigned long)(arg1), (unsigned long)(arg2), (unsigned long)(arg3))
+#define syscall4(num, arg1, arg2, arg3, arg4) _syscall4((num), \
+    (unsigned long)(arg1), (unsigned long)(arg2), (unsigned long)(arg3), \
+    (unsigned long)(arg4))
+#define syscall3(num, arg1, arg2, arg3) syscall4((num), (arg1), (arg2), (arg3), 0)
 #define syscall2(num, arg1, arg2) syscall3((num), (arg1), (arg2), 0)
 #define syscall1(num, arg1) syscall2((num), (arg1), 0)
 #define syscall0(num) syscall1((num), 0)
@@ -94,7 +120,11 @@ static long _syscall3(
  */
 static int open3(const char *pathname, int flags, mode_t mode)
 {
+#ifdef __NR_openat
+    return (int)syscall4(__NR_openat, AT_FDCWD, pathname, flags, mode);
+#else
     return (int)syscall3(__NR_open, pathname, flags, mode);
+#endif
 }
 static int open2(const char *pathname, int flags)
 {
