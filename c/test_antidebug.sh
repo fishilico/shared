@@ -3,6 +3,12 @@
 
 GDB=gdb
 
+if [ -n "$RUN_TEST_PREFIX" ]
+then
+    echo >&2 "Skipping non-native test because RUN_TEST_PREFIX is defined."
+    exit
+fi
+
 if [ "$OS" = "Windows_NT" ]
 then
     # Windows OS
