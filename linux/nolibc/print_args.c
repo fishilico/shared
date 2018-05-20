@@ -72,6 +72,13 @@ __asm__ (
 "    pushl %esp\n"
 "    pushl $0\n"
 "    jmp _c_start\n"
+#elif defined(__aarch64__)
+"    .type _start, %function\n"
+"_start:\n"
+"    mov x0, sp\n"
+"    mov x29, #0\n" /* fp */
+"    mov x30, #0\n" /* lr */
+"    b _c_start\n"
 #elif defined(__arm__)
 "    .type _start, %function\n"
 "_start:\n"
