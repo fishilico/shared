@@ -56,6 +56,12 @@ static const uint8_t CODE[] = { 0x31, 0xc0, 0xc3 };
  *     e12fff1e     bx  lr
  */
 static const uint32_t CODE[] = { 0xe3a00000, 0xe12fff1e };
+#elif defined(__aarch64__)
+/**
+ *      d2800000    mov x0, #0x0
+ *      d65f03c0    ret
+ */
+static const uint32_t CODE[] = { 0xd2800000, 0xd65f03c0 };
 #else
 #    error Unsupported architecture
 #endif

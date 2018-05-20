@@ -28,6 +28,8 @@ int main(void)
     const uint8_t code[] = { 0x31, 0xc0, 0xc3 };
 #elif defined(__arm__)
     const uint32_t code[] = { 0xe3a00000, 0xe12fff1e };
+#elif defined(__aarch64__)
+    const uint32_t code[] = { 0xd2800000, 0xd65f03c0 };
 #else
 #    error Unsupported architecture
 #endif
