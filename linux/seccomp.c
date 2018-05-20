@@ -52,6 +52,16 @@
 #    define mctx_reg_arg3(mctx) (mctx).gregs[REG_R10]
 #    define mctx_reg_arg4(mctx) (mctx).gregs[REG_R8]
 #    define mctx_reg_arg5(mctx) (mctx).gregs[REG_R9]
+#elif defined(__aarch64__)
+#    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_AARCH64
+#    define mctx_reg_result(mctx) (mctx).regs[0]
+#    define mctx_reg_syscall(mctx) (mctx).regs[8]
+#    define mctx_reg_arg0(mctx) (mctx).regs[0]
+#    define mctx_reg_arg1(mctx) (mctx).regs[1]
+#    define mctx_reg_arg2(mctx) (mctx).regs[2]
+#    define mctx_reg_arg3(mctx) (mctx).regs[3]
+#    define mctx_reg_arg4(mctx) (mctx).regs[4]
+#    define mctx_reg_arg5(mctx) (mctx).regs[5]
 #elif defined(__arm__)
 #    define SECCOMP_AUDIT_ARCH AUDIT_ARCH_ARM
 #    define mctx_reg_result(mctx) (mctx).arm_r0
@@ -203,7 +213,7 @@ static void sigsys_sigaction(int s, siginfo_t *info, void *context)
 
     /* If the libc knows info->si_syscall, use it for a sanity check */
 #ifdef si_syscall
-    assert(syscall_nr == info->si_syscall);
+    assert(syscall_nr == (greg_t)info->si_syscall);
 #endif
 
     /* Emulate getpriority */
