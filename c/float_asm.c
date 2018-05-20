@@ -35,6 +35,8 @@ static float add_f(float x, float y)
 #elif defined(__i386__)
     /* "t" is st(0) and "u" st(1) */
     __asm__ __volatile__ ("fadds %1" : "+t"(x) : "fm"(y));
+#elif defined(__aarch64__)
+    __asm__ __volatile__ ("fadd %s0, %s0, %s1" : "+w"(x) : "w"(y));
 #elif defined(__arm__) && defined(__VFP_FP__)
     /* Use VFP floating-point registers */
     __asm__ __volatile__ ("vadd.f32 %0, %0, %1" : "+w"(x) : "w"(y));
@@ -51,6 +53,8 @@ static double add_d(double x, double y)
     __asm__ __volatile__ ("addsd %1, %0" : "+x"(x) : "x"(y));
 #elif defined(__i386__)
     __asm__ __volatile__ ("faddl %1" : "+t"(x) : "m"(y));
+#elif defined(__aarch64__)
+    __asm__ __volatile__ ("fadd %d0, %d0, %d1" : "+w"(x) : "w"(y));
 #elif defined(__arm__) && defined(__VFP_FP__)
     __asm__ __volatile__ ("vadd.f64 %P0, %P0, %P1" : "+w"(x) : "w"(y));
 #else
@@ -70,6 +74,8 @@ static int toint_f(float x)
 #elif defined(__i386__)
     /* Use flds for single-precision float and fistpl for 32-bit integer (fistps would mean 16-bit) */
     __asm__ __volatile__ ("flds %1 ; fistpl %0" : "=m"(i) : "m"(x));
+#elif defined(__aarch64__)
+    __asm__ __volatile__ ("fcvtzs %0, %s1" : "=r"(i) : "w"(x));
 #elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
     /* clang 3.5.0 fails with "error: couldn't allocate output register for constraint 'w'" */
     __asm__ __volatile__ ("vcvt.s32.f32 %0, %1" : "=w"(i) : "w"(x));
@@ -88,6 +94,8 @@ static int toint_d(double x)
     __asm__ __volatile__ ("cvttsd2si %1, %0" : "=r"(i) : "x"(x));
 #elif defined(__i386__)
     __asm__ __volatile__ ("fldl %1 ; fistpl %0" : "=m"(i) : "m"(x));
+#elif defined(__aarch64__)
+    __asm__ __volatile__ ("fcvtzs %0, %d1" : "=r"(i) : "w"(x));
 #elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
     __asm__ __volatile__ ("vcvt.s32.f64 %0, %P1" : "=w"(i) : "w"(x));
 #else
@@ -105,6 +113,8 @@ static float sqrt_f(float x)
 #elif defined(__i386__)
     s = x;
     __asm__ __volatile__ ("fsqrt" : "+t"(s));
+#elif defined(__aarch64__)
+    __asm__ __volatile__ ("fsqrt %s0, %s1" : "=w"(s) : "w"(x));
 #elif defined(__arm__) && defined(__VFP_FP__)
     __asm__ __volatile__ ("vsqrt.f32 %0, %1" : "=w"(s) : "w"(x));
 #else
@@ -122,6 +132,8 @@ static double sqrt_d(double x)
 #elif defined(__i386__)
     s = x;
     __asm__ __volatile__ ("fsqrt": "+t"(s));
+#elif defined(__aarch64__)
+    __asm__ __volatile__ ("fsqrt %d0, %d1" : "=w"(s) : "w"(x));
 #elif defined(__arm__) && defined(__VFP_FP__)
     __asm__ __volatile__ ("vsqrt.f64 %P0, %P1" : "=w"(s) : "w"(x));
 #else
@@ -258,7 +270,7 @@ static int check_constants(void)
     _ok_f("fldl2t = log_2(10)", f, (float)M_LN10 / (float)M_LN2);
     __asm__ __volatile__ ("fldlg2" : "=t"(f));
     _ok_f("fldlg2 = log_10(2)", f, (float)M_LN2 / (float)M_LN10);
-#elif defined(__arm__)
+#elif defined(__aarch64__) || defined(__arm__)
     /* No constant loading in ARM instruction set */
 #else
 #    warning "no constant operation implemented yet"
