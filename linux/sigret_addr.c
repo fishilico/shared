@@ -13,11 +13,13 @@
  *   glibc implementation of the signal restorer for i386
  *
  * Results when using a simple signal handler:
+ * * aarch64, vdso: __kernel_rt_sigreturn (syscall 139 = rt_sigreturn)
  * * arm, glibc: __default_sa_restorer (syscall 119 = sigreturn)
  * * x86_32, vdso: __kernel_sigreturn (syscall 119 = sigreturn)
  * * x86_64, glibc: __restore_rt (syscall 15 = rt_sigreturn)
  *
  * Results when using sigaction with SA_INFO ("rt_sigaction"):
+ * * aarch64, vdso: __kernel_rt_sigreturn (syscall 139 = rt_sigreturn)
  * * arm, glibc: __default_rt_sa_restorer (syscall 173 = rt_sigreturn)
  * * x86_32, vdso: __kernel_rt_sigreturn (syscall 173 = rt_sigreturn)
  * * x86_64, glibc: __restore_rt (syscall 15 = rt_sigreturn), same as simple
@@ -38,7 +40,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#if defined(__x86_64__)
+#if defined(__x86_64__) || defined(__aarch64__)
 #    define DEFINE_ELF_STRUCT(name) typedef Elf64_##name Elf_##name
 #    define ELF_ST_BIND(val) ELF64_ST_BIND(val)
 #    define ELF_ST_TYPE(val) ELF64_ST_TYPE(val)
@@ -82,7 +84,14 @@ static void identify_sigret_code(const void *address)
     uint32_t i;
     const uint8_t *addr = (const uint8_t *)address;
 
-#if defined(__arm__)
+#if defined(__aarch64__)
+    if ((addr[0] & 0x1f) == 8 && (addr[2] & 0xf0) == 0x80 && !memcmp(addr + 3, "\xd2\x01\x00\x00\xd4", 5)) {
+        /* mov x8, #... ; svc #0 */
+        printf("... code: syscall_svc0(%u)\n",
+            ((addr[0] >> 5) & 7) | ((uint32_t)(addr[1]) << 3) | ((uint32_t)(addr[2] & 0xf) << 11));
+        return;
+    }
+#elif defined(__arm__)
     if ((uintptr_t)addr & 1) {
         /* Thumb code */
         addr -= 1;
