@@ -79,6 +79,8 @@ def normalize_arch(arch):
     arch = arch.lower()
     if arch == 'arm' or re.match(r'^arm(v[1-9]+)?l$', arch):
         return 'arm_l'
+    if arch == 'aarch64':
+        return 'arm64'
     if re.match(r'^i[3-6]86$', arch) or arch in ('x86', 'x86-32'):
         return 'x86_32'
     if arch in ('amd64', 'x86-64'):
