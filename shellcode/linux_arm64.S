@@ -14,7 +14,7 @@ main:
     /* d1337061 */  sub     x1, x3, #0xcdc          /* x1 = [x0, NULL] */
     /* a9bf0be0 */  stp     x0, x2, [sp,#-16]!
     /* d2801ba8 */  mov     x8, #0xdd               /* x8 = __NR_execve */
-    /* d41b4061 */  svc     #0xda03                 /* syscall(x7, x0, x1, x2) */
+    /* d41b4061 */  svc     #0xda03                 /* syscall(x8, x0, x1, x2) */
 
 
 /* Mark the stack as not executable */
