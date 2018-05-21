@@ -208,6 +208,13 @@ static int handle_ptrace_events(pid_t child)
                 /* 0x80 is for PTRACE_O_TRACESYSGOOD options */
 #ifdef PTRACE_GETREGSET
                 if (ptrace(PTRACE_GETREGSET, pid, NT_PRSTATUS, &regs_iovec) == -1) {
+                    if (errno == EINVAL) {
+                        /* This happens when compiling in x86-32 mode and running an x86-64 process */
+                        fprintf(
+                            stderr,
+                            "ptrace(GETREGSET) failed, probably because of a architecture mismatch.\n");
+                        return EXIT_SUCCESS;
+                    }
                     perror("ptrace(GETREGSET)");
                     return EXIT_FAILURE;
                 }
@@ -224,14 +231,13 @@ static int handle_ptrace_events(pid_t child)
                      * This may happen when running a new process.
                      *
                      * For obscure reasons ARM64 does not capture the initial
-                     * execve syscall.
+                     * execve syscall. This may also occur on x86-32.
                      */
 #if !defined(__aarch64__)
                     if (nsyscall != __NR_execve && nsyscall != __NR_restart_syscall) {
                         fprintf(stderr,
-                                "Unexpected first syscall number: %ld != %d (execve).\n",
+                                "Warning: unexpected first syscall number: %ld != %d (execve).\n",
                                 nsyscall, __NR_execve);
-                        return EXIT_FAILURE;
                     }
 #endif
                     /* Initialise ptrace options */
