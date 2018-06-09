@@ -152,6 +152,7 @@ __extension__ static const char* cpuidstr_7_ecx[32] = {
     [14] = "avx512_vpopcntdq",
     [16] = "la57",
     [22] = "rdpid",
+    [25] = "cldemote",
 };
 
 /**
@@ -164,6 +165,7 @@ __extension__ static const char* cpuidstr_7_edx[32] = {
     [26] = "spec_ctrl",
     [27] = "intel_stibp",
     [29] = "arch_capabilities",
+    [31] = "spec_ctrl_ssbd",
 };
 
 /**
