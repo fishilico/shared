@@ -20,7 +20,7 @@ NONTEST_BINARIES += cffi_numpy.py
 endif
 
 ifneq ($(HAVE_PYTHON_CRYPTO),y)
-NONTEST_BINARIES += crypto_rsa.py
+NONTEST_BINARIES += crypto_ec.py crypto_rsa.py
 endif
 
 ifneq ($(HAVE_PYTHON3_SOCKET_RECVMSG),y)
