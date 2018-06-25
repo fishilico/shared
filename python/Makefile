@@ -6,7 +6,7 @@ PEP8 ?= pep8
 PYLINT ?= pylint
 
 # Programs not to test automatically
-NONTEST_BINARIES := matplotlib_feed_plot3d.py unicode_norm.py
+NONTEST_BINARIES := image_lsb.py matplotlib_feed_plot3d.py unicode_norm.py
 
 HAVE_PYTHON_CFFI := $(call can-run,$(PYTHON) -c 'import cffi')
 HAVE_PYTHON_NUMPY := $(call can-run,$(PYTHON) -c 'import numpy')
