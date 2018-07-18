@@ -90,6 +90,7 @@ def modinv(a, m):
         raise ValueError
     return x % m
 
+
 def mod_sqrt(n, p):
     """Modular square root
 

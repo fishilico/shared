@@ -417,9 +417,12 @@ def run_ssh_test(bits, colorize):
         dp = key.d % (key.p - 1)
         dq = key.d % (key.q - 1)
         qinv = modinv(key.q, key.p)
-        print("  dp = d mod p-1 \"exponent1\"({}) = {}{:#x}{}".format(dp.bit_length(), color_red, dp, color_norm))
-        print("  dq = d mod q-1 \"exponent2\"({}) = {}{:#x}{}".format(dq.bit_length(), color_red, dq, color_norm))
-        print("  qInv = 1/q mod p \"coefficient\"({}) = {}{:#x}{}".format(qinv.bit_length(), color_red, qinv, color_norm))
+        print("  dp = d mod p-1 \"exponent1\"({}) = {}{:#x}{}".format(
+            dp.bit_length(), color_red, dp, color_norm))
+        print("  dq = d mod q-1 \"exponent2\"({}) = {}{:#x}{}".format(
+            dq.bit_length(), color_red, dq, color_norm))
+        print("  qInv = 1/q mod p \"coefficient\"({}) = {}{:#x}{}".format(
+            qinv.bit_length(), color_red, qinv, color_norm))
 
         # Sanity checks
         assert key.p * key.q == key.n
