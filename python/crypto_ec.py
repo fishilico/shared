@@ -149,7 +149,7 @@ def run_process_with_input(cmdline, data, color=None):
     if color:
         sys.stdout.write(color)
     sys.stdout.flush()
-    proc = subprocess.Popen(cmdline, stdin=subprocess.PIPE)
+    proc = subprocess.Popen(cmdline, stdin=subprocess.PIPE, stderr=subprocess.STDOUT)
     proc.stdin.write(data)
     proc.stdin.close()
     ret = proc.wait()

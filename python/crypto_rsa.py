@@ -233,7 +233,7 @@ def run_openssl_test(bits, colorize):
     pempubkey = pubkey.exportKey('PEM')
     print("Public key in PEM format:")
     print("{}{}{}".format(color_green, pempubkey.decode('ascii'), color_norm))
-    if not run_process_with_input(['openssl', 'asn1parse'], pempubkey, color=color_green):
+    if not run_process_with_input(['openssl', 'asn1parse', '-i'], pempubkey, color=color_green):
         return False
     if not run_process_with_input(['openssl', 'rsa', '-noout', '-text', '-pubin'], pempubkey, color=color_green):
         return False
@@ -274,7 +274,7 @@ def run_openssl_test(bits, colorize):
     cipher = Crypto.Cipher.PKCS1_OAEP.new(pubkey)
     ciphertext = cipher.encrypt(test_message)
     hexdump(ciphertext, color=color_purple)
-    print("Raw decrypted PKCS#1 OAEP RSA:")
+    print("Raw decrypted PKCS#1 OAEP RSA (00 || masked_seed || masked_data_block):")
     cipherint = checked_decode_bigint_be(ciphertext)
     decrypted_msg = checked_encode_bigint_be(pow(cipherint, key.d, key.n), bytelen=bits // 8)
     hexdump(decrypted_msg, color=color_purple)
@@ -290,7 +290,7 @@ def run_openssl_test(bits, colorize):
         data_block_mask += hashlib.sha1(seed + struct.pack('>I', idx)).digest()
         assert len(data_block_mask) == (idx + 1) * 20
     data_block = xor_bytes(masked_data_block, data_block_mask[:len(masked_data_block)])
-    print("Unmasked decrypted PKCS#1 OAEP RSA (H(L) || 000...000 || M):")
+    print("Unmasked decrypted PKCS#1 OAEP RSA (H(Label='') || 000...000 || 01 || M):")
     hexdump(data_block)
     hash_label = binascii.unhexlify('da39a3ee5e6b4b0d3255bfef95601890afd80709')
     assert hash_label == hashlib.sha1(b'').digest()
@@ -338,7 +338,7 @@ def run_openssl_test(bits, colorize):
     cipher = Crypto.Signature.PKCS1_PSS.new(key)
     signature = cipher.sign(crypto_hash.new(test_message))
     hexdump(signature, color=color_purple)
-    print("Raw decrypted PKCS#1 RSASSA-PSS:")
+    print("Raw decrypted PKCS#1 RSASSA-PSS (masked_data_block || salted_hash || 0xbc):")
     signedint = checked_decode_bigint_be(signature)
     decrypted_msg = checked_encode_bigint_be(pow(signedint, pubkey.e, pubkey.n), bytelen=bits // 8)
     hexdump(decrypted_msg, color=color_purple)
@@ -351,7 +351,7 @@ def run_openssl_test(bits, colorize):
         data_block_mask += hashlib_hash(salted_hash + struct.pack('>I', idx)).digest()
         assert len(data_block_mask) == (idx + 1) * salt_len
     data_block = xor_bytes(masked_data_block, data_block_mask[:len(masked_data_block)])
-    print("Unmasked decrypted PKCS#1 RSASSA-PSS (000...000 || 01 || salt) with hash = H(0...0 || M || salt):")
+    print("Unmasked decrypted PKCS#1 RSASSA-PSS (000...000 || 01 || salt) with salted_hash = H(0...0 || M || salt):")
     hexdump(data_block)
     assert data_block.startswith((b'\x00', b'\x80'))
     if sys.version_info >= (3,):
@@ -436,6 +436,8 @@ def run_ssh_test(bits, colorize):
         # The public key is a single line
         assert len(pubkey_lines) == 1
         assert pubkey_lines[0].startswith('ssh-rsa ')
+        print("SSH public key:")
+        print("  {}{}{}".format(color_green, pubkey_lines[0].strip(), color_norm))
         public_key = base64.b64decode(pubkey_lines[0].split(' ', 2)[1])
         print("SSH public key hexdump:")
         hexdump(public_key, color=color_green)
