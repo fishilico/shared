@@ -28,6 +28,10 @@ Documentation:
 * https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf Digital Signature Standard (DSS)
 * https://en.wikipedia.org/wiki/ElGamal_encryption ElGamal encryption system
 
+Introductions (from https://github.com/pFarb/awesome-crypto-papers):
+* http://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/
+* http://andrea.corbellini.name/2015/05/30/elliptic-curve-cryptography-ecdh-and-ecdsa/
+
 @author: Nicolas Iooss
 @license: MIT
 """
@@ -330,6 +334,8 @@ class StandardCurve(object):
         self.p = p
         self.a = a
         self.b = b
+        # Verify that the curve is not singular
+        assert (4 * (self.a ** 3) + 27 * (self.b ** 2)) % self.p != 0
         self.g = ECPoint(self, g_x, g_y, g_order)
         if seed is not None:
             self.verify_generation_from_seed(seed, seed_check)
@@ -426,6 +432,7 @@ CURVES = collections.OrderedDict((
         seed_check=0x0b48bfa5f420a34949539d2bdfc264eeeeb077688e44fbf0ad8f6d0edb37bd6b533281000518e19f1b9ffbe0fe9ed8a3c2200b8f875e523868c70c1e5bf55bad637,
     )),
     ('Certicom secp256-k1', StandardCurve(
+        # Curve from SECG (Standards for Efficient Cryptography Group)
         openssl_name='secp256k1',
         p=0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f,
         p2=2**256 - 2**32 - 2**10 + 2**6 - 2**4 - 1,
@@ -584,7 +591,7 @@ def run_curve_test(curve, colorize):
         #       = G * (z * w + privkey * r * w)
         #       = G * ((z + privkey * r) * (1/s))
         #       = G * k
-        #       = (x_1, x_2)
+        #       = (x_1, y_1)
         with open(sig_path, 'rb') as fsig:
             signature_binary = fsig.read()
         sig_asn1 = Crypto.Util.asn1.DerSequence()
