@@ -303,6 +303,20 @@ bool run_mov_asm_instruction_p(
             return true;
         }
 
+        /* f3 0f 7e /r: movq xmm2/mem, xmm1 */
+        if (has_f3_prefix && instr[1] == 0x7e) {
+            unsigned int xmmreg = (instr[2] >> 3) & 7;
+            paramlen = decode_modrm_check(ctx, instr + 2, has_66_prefix, data_addr, NULL, NULL, &operand_rm);
+            if (!paramlen) {
+                return false;
+            }
+            asm_printf(asm_instr, "movq %s, xmm%u", operand_rm, xmmreg);
+            free(operand_rm);
+            memcpy(asm_instr_ctx_xmm_addr(ctx, xmmreg), data, 8);
+            R_EIP(ctx) += 2 + paramlen;
+            return true;
+        }
+
         /* 66 0f 74 /r: pcmpeqb xmm2/mem, xmm1 ; compare bytes and set 0xff if equal, 0 if not */
         if (has_66_prefix && instr[1] == 0x74) {
             unsigned int xmmreg = (instr[2] >> 3) & 7;

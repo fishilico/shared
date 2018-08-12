@@ -151,6 +151,8 @@ int main(void)
     /* SSE2 */
     R_EDI(&ctx) = (asm_instr_reg)data_addr;
     test("\xf3\x0f\x6f\x0f", "movdqu (edi=0xda7a0000), xmm1", XMM1LL, data32);
+    R_EAX(&ctx) = (asm_instr_reg)(data_addr - 0x23);
+    test("\xf3\x0f\x7e\x40\x23", "movq 0x23(eax=0xda79ffdd), xmm0", XMM0LL, data32);
     R_EAX(&ctx) = (asm_instr_reg)(data_addr - 0x10);
     test("\x66\x0f\x74\x40\x10", "pcmpeqb 0x10(eax=0xda79fff0), xmm0", XMM0LL, 0);
     R_EAX(&ctx) = (asm_instr_reg)(data_addr - 0x20);
