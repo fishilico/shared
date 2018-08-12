@@ -30,7 +30,7 @@ static LONG NTAPI veh_handler(EXCEPTION_POINTERS *ExceptionPointers)
     EXCEPTION_RECORD *ExceptionRecord = ExceptionPointers->ExceptionRecord;
     CONTEXT *ContextRecord = ExceptionPointers->ContextRecord;
     ULONG_PTR data_addr;
-    size_t i;
+    size_t i, j;
 
     if (ExceptionRecord->ExceptionCode != EXCEPTION_ACCESS_VIOLATION) {
         fprintf(stderr, "Unhandled exception code 0x%lx\n", ExceptionRecord->ExceptionCode);
@@ -67,6 +67,7 @@ static LONG NTAPI veh_handler(EXCEPTION_POINTERS *ExceptionPointers)
     for (i = 0; i < g_memmap_len; i++) {
         ULONG_PTR memaddr = g_memmap[i].addr;
         size_t memsize = g_memmap[i].size;
+        const uint8_t *ptr_instruction;
 
         if (memaddr <= data_addr && data_addr < memaddr + memsize) {
             /* Found a memory range which contains the faulting address */
@@ -86,6 +87,12 @@ static LONG NTAPI veh_handler(EXCEPTION_POINTERS *ExceptionPointers)
                 return EXCEPTION_CONTINUE_EXECUTION;
             }
             fprintf(stderr, "Running unknown instruction. Crash!\n");
+            ptr_instruction = (uint8_t *)ExceptionRecord->ExceptionAddress;
+            fprintf(stderr, "Faulting instruction @%p:", ptr_instruction);
+            for (j = 0; j < 16; j++) {
+                fprintf(stderr, " %02x", ptr_instruction[j]);
+            }
+            fprintf(stderr, "\n");
             return EXCEPTION_CONTINUE_SEARCH;
         }
     }
