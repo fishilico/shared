@@ -37,6 +37,7 @@
  * Setting CPU affinity is an OS-dependent operation, hence the #if parts
  */
 #ifdef __linux__
+#    include <errno.h>
 #    include <sched.h>
 
 static const char os_name[] = "Linux";
@@ -78,6 +79,10 @@ static void migrate_to_cpu(int cpu)
     CPU_ZERO(&cpuset);
     CPU_SET(cpu, &cpuset);
     if (sched_setaffinity(0, sizeof(cpuset), &cpuset) == -1) {
+        if (errno == EINVAL && cpu == 0) {
+            printf("Warning: unable to migrate to CPU 0 (maybe offline). Showing current CPU...\n");
+            return;
+        }
         perror("sched_setaffinity");
         exit(1);
     }
