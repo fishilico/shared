@@ -2,7 +2,7 @@
  * Create two children and pass a file descriptor between them using a Unix socket
  */
 #ifndef _GNU_SOURCE
-#    define _GNU_SOURCE /* for accept4, mkdtemp, pipe2, snprintf */
+#    define _GNU_SOURCE /* for accept4, clock_gettime, mkdtemp, pipe2, snprintf */
 #endif
 
 #include <assert.h>
@@ -19,6 +19,7 @@
 #include <sys/types.h>
 #include <sys/un.h>
 #include <sys/wait.h>
+#include <time.h>
 #include <unistd.h>
 
 /* from Linux kernel, include/linux/net.h and include/linux/socket.h */
@@ -294,6 +295,15 @@ static int recursive_sockets(void)
     } control;
     struct msghdr msg;
     unsigned int count;
+    struct timespec tv;
+    time_t start_time;
+
+    memset(&tv, 0, sizeof(tv));
+    if (clock_gettime(CLOCK_MONOTONIC, &tv) == -1) {
+        perror("clock_gettime(MONOTONIC)");
+        return 1;
+    }
+    start_time = tv.tv_sec;
 
     memset(&iov, 0, sizeof(iov));
     iov.iov_base = buffer;
@@ -307,6 +317,7 @@ static int recursive_sockets(void)
     msg.msg_control = &control;
     msg.msg_controllen = sizeof(control);
 
+    printf("Trying to hit the recursive fd-socket sending limit...\n");
     for (count = 0; count < 65536; count++) {
         if (socketpair(AF_UNIX, SOCK_STREAM, 0, sockv) == -1) {
             perror("socketpair");
@@ -338,6 +349,20 @@ static int recursive_sockets(void)
         }
         recur_sockfd[0] = sockv[0];
         recur_sockfd[1] = sockv[1];
+
+        /* Timeout after one minute */
+        if (clock_gettime(CLOCK_MONOTONIC, &tv) == -1) {
+            perror("clock_gettime(MONOTONIC)");
+            return 1;
+        }
+        if (tv.tv_sec - start_time >= 60) {
+            printf(
+                "... sent %u socket pairs in %lu seconds, too slow! Aborting the test.\n",
+                count, (unsigned long)(tv.tv_sec - start_time));
+            close(recur_sockfd[0]);
+            close(recur_sockfd[1]);
+            return 0;
+        }
     }
     printf("Socket depth limit not reached before %u\n", count);
     if (recur_sockfd[0] >= 0) {
@@ -353,7 +378,7 @@ int main(void)
     char template[] = "/tmp/pass-fd-XXXXXX", *dirpath;
     char sockpath[sizeof(template) + sizeof(unixfile)];
     pid_t child1, child2, pid;
-    int status = 0;
+    int status = 0, return_value = 0;
 
     /* Create a dir which will contains a Unix socket */
     dirpath = mkdtemp(template);
@@ -397,17 +422,19 @@ int main(void)
         if (WIFEXITED(status)) {
             if (WEXITSTATUS(status) != EXIT_SUCCESS) {
                 fprintf(stderr, "Child %u exited with status %d\n", pid, WEXITSTATUS(status));
-                status = 1;
+                return_value = 1;
+            } else {
+                printf("[parent] Child %u successfully exited\n", pid);
             }
         } else if (WIFSIGNALED(status)) {
             fprintf(stderr, "Child %u was killed by signal %d\n", pid, WTERMSIG(status));
-            status = 1;
+            return_value = 1;
         } else if (WIFSTOPPED(status)) {
             fprintf(stderr, "Child %u has been stopped by signal %d\n", pid, WSTOPSIG(status));
-            status = 1;
+            return_value = 1;
         } else {
             fprintf(stderr, "Child %u has been waited with unexpected status %d\n", pid, status);
-            status = 1;
+            return_value = 1;
         }
     }
 
@@ -425,9 +452,9 @@ int main(void)
         return 1;
     }
 
-    if (!status) {
+    if (!return_value) {
         /* Have fun with recursive socket sending */
-        status = recursive_sockets();
+        return_value = recursive_sockets();
     }
-    return status;
+    return return_value;
 }
