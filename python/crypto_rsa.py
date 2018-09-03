@@ -166,6 +166,11 @@ def checked_encode_bigint_be(value, bytelen=None):
     return data
 
 
+def xx(data):
+    """One-line hexadecimal representation of binary data"""
+    return binascii.hexlify(data).decode('ascii')
+
+
 def xor_bytes(data1, data2):
     """XOR two arrays together"""
     assert len(data1) == len(data2)
@@ -380,6 +385,92 @@ def run_openssl_test(bits, colorize):
     return True
 
 
+def decode_openssh_private_key(private_key, colorize):
+    """Decode a binary RSA private key in OpenSSH format
+
+    https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/PROTOCOL.key
+    """
+    color_red = COLOR_RED if colorize else ''
+    color_green = COLOR_GREEN if colorize else ''
+    color_norm = COLOR_NORM if colorize else ''
+
+    if not private_key.startswith(b'openssh-key-v1\0'):
+        logger.error("Unsupported private key format")
+        return False
+
+    def pop_string(key, offset):
+        """Pop a string from the private key"""
+        field_size = struct.unpack('>I', key[offset:offset + 4])[0]
+        offset += 4
+        assert offset + field_size <= len(key)
+        value = key[offset:offset + field_size]
+        offset += field_size
+        return value, offset
+
+    print("SSH private key file:")
+    offset = len(b'openssh-key-v1\0')
+    ciphername, offset = pop_string(private_key, offset)
+    print("  * ciphername: {}".format(repr(ciphername.decode('ascii'))))
+    assert ciphername == b'none'
+    kdfname, offset = pop_string(private_key, offset)
+    print("  * kdfname: {}".format(repr(kdfname.decode('ascii'))))
+    assert kdfname == b'none'
+    kdfoptions, offset = pop_string(private_key, offset)
+    print("  * kdfoptions: {}".format(repr(kdfoptions.decode('ascii'))))
+    assert kdfoptions == b''
+    numkeys = struct.unpack('>I', private_key[offset:offset + 4])[0]
+    offset += 4
+    print("  * numkeys: {}".format(numkeys))
+    assert numkeys == 1
+    priv_pubkey, offset = pop_string(private_key, offset)
+    print("  * public key:")
+    hexdump(priv_pubkey, color=color_green)
+    priv_privkey, offset = pop_string(private_key, offset)
+    print("  * private key:")
+    # hexdump(priv_privkey, color=color_red)
+    assert offset == len(private_key)
+
+    checkint1, checkint2 = struct.unpack('<II', priv_privkey[:8])
+    offset = 8
+    print("    * checkint1 = {:#x}".format(checkint1))
+    print("    * checkint2 = {:#x}".format(checkint2))
+    assert checkint1 == checkint2
+    algorithm, offset = pop_string(priv_privkey, offset)
+    print("    * algorithm: {}".format(repr(algorithm.decode('ascii'))))
+    assert algorithm == b'ssh-rsa'
+    privkey_n_bin, offset = pop_string(priv_privkey, offset)
+    privkey_n = checked_decode_bigint_be(privkey_n_bin)
+    print("    * n({}) = {}{:#x}{}".format(privkey_n.bit_length(), color_green, privkey_n, color_norm))
+    privkey_e_bin, offset = pop_string(priv_privkey, offset)
+    privkey_e = checked_decode_bigint_be(privkey_e_bin)
+    print("    * e({}) = {}{:#x}{}".format(privkey_e.bit_length(), color_green, privkey_e, color_norm))
+    privkey_d_bin, offset = pop_string(priv_privkey, offset)
+    privkey_d = checked_decode_bigint_be(privkey_d_bin)
+    print("    * d({}) = {}{:#x}{}".format(privkey_d.bit_length(), color_red, privkey_d, color_norm))
+    privkey_qinv_bin, offset = pop_string(priv_privkey, offset)
+    privkey_qinv = checked_decode_bigint_be(privkey_qinv_bin)
+    print("    * qInv = 1/q mod p({}) = {}{:#x}{}".format(
+        privkey_qinv.bit_length(), color_red, privkey_qinv, color_norm))
+    privkey_p_bin, offset = pop_string(priv_privkey, offset)
+    privkey_p = checked_decode_bigint_be(privkey_p_bin)
+    print("    * p({}) = {}{:#x}{}".format(privkey_p.bit_length(), color_red, privkey_p, color_norm))
+    privkey_q_bin, offset = pop_string(priv_privkey, offset)
+    privkey_q = checked_decode_bigint_be(privkey_q_bin)
+    print("    * q({}) = {}{:#x}{}".format(privkey_q.bit_length(), color_red, privkey_q, color_norm))
+    comment, offset = pop_string(priv_privkey, offset)
+    print("    * comment: {}".format(repr(comment)))
+    padding = priv_privkey[offset:]
+    print("    * padding: {}".format(xx(padding)))
+    assert all(struct.unpack('B', padding[i:i + 1])[0] == i + 1 for i in range(len(padding)))
+
+    # Sanity checks
+    assert privkey_p * privkey_q == privkey_n
+    phi_n = (privkey_p - 1) * (privkey_q - 1)
+    assert (privkey_e * privkey_d) % phi_n == 1
+    assert (privkey_qinv * privkey_q) % privkey_p == 1
+    return Crypto.PublicKey.RSA.construct((privkey_n, privkey_e, privkey_d, privkey_p, privkey_q))
+
+
 def run_ssh_test(bits, colorize):
     """Perform some RSA things with OpenSSH keys"""
     color_red = COLOR_RED if colorize else ''
@@ -407,19 +498,28 @@ def run_ssh_test(bits, colorize):
         with open(id_rsa_path, 'r') as fpriv:
             privkey_lines = fpriv.readlines()
 
-        # The private key is in usual ASN.1 format
-        assert privkey_lines[0] == '-----BEGIN RSA PRIVATE KEY-----\n'
-        assert privkey_lines[-1] == '-----END RSA PRIVATE KEY-----\n'
-        private_key = base64.b64decode(''.join(privkey_lines[1:-1]))
-        print("SSH private key hexdump:")
-        hexdump(private_key, color=color_red)
-        result = run_process_with_input(
-            ['openssl', 'rsa', '-noout', '-text', '-inform', 'der'],
-            private_key, color=color_red)
-        if not result:
-            return False
+        if 'RSA' in privkey_lines[0]:
+            # The private key is in usual ASN.1 format for OpenSSH < 7.8
+            assert privkey_lines[0] == '-----BEGIN RSA PRIVATE KEY-----\n'
+            assert privkey_lines[-1] == '-----END RSA PRIVATE KEY-----\n'
+            private_key = base64.b64decode(''.join(privkey_lines[1:-1]))
+            print("SSH private key hexdump:")
+            hexdump(private_key, color=color_red)
+            result = run_process_with_input(
+                ['openssl', 'rsa', '-noout', '-text', '-inform', 'der'],
+                private_key, color=color_red)
+            if not result:
+                return False
+            key = Crypto.PublicKey.RSA.importKey(private_key)
+        else:
+            # The private key is in OpenSSH format by default since OpenSSH 7.8
+            assert privkey_lines[0] == '-----BEGIN OPENSSH PRIVATE KEY-----\n'
+            assert privkey_lines[-1] == '-----END OPENSSH PRIVATE KEY-----\n'
+            private_key = base64.b64decode(''.join(privkey_lines[1:-1]))
+            print("SSH private key hexdump:")
+            hexdump(private_key, color=color_red)
+            key = decode_openssh_private_key(private_key, colorize)
 
-        key = Crypto.PublicKey.RSA.importKey(private_key)
         print("SSH private key:")
         print("  n({}) = {}{:#x}{}".format(key.n.bit_length(), color_green, key.n, color_norm))
         print("  d({}) = {}{:#x}{}".format(key.d.bit_length(), color_red, key.d, color_norm))
