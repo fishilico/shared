@@ -1960,7 +1960,7 @@ class SimpleAES_4x32bWords(object):
 
 
 def xx(data):
-    """En bytes into an hexadecimal string"""
+    """Encode bytes into an hexadecimal string"""
     return binascii.hexlify(data).decode('ascii')
 
 
