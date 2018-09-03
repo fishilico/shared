@@ -88,6 +88,12 @@ def modinv(a, m):
     return x % m
 
 
+def lcm(x, y):
+    """Least Common Multiple"""
+    g, _, _ = extended_gcd(x, y)
+    return (x // g) * y
+
+
 def hexdump(data, color=''):
     """Show an hexdecimal dump of binary data"""
     if color:
@@ -201,7 +207,7 @@ def run_openssl_test(bits, colorize):
     print("  d({}) = {}{:#x}{}".format(key.d.bit_length(), color_red, key.d, color_norm))
     print("  e({}) = {}{:#x}{}".format(key.e.bit_length(), color_green, key.e, color_norm))
     print("  p({}) = {}{:#x}{}".format(key.p.bit_length(), color_red, key.p, color_norm))
-    print("  q({}) = {}{:#x}{}".format(key.p.bit_length(), color_red, key.q, color_norm))
+    print("  q({}) = {}{:#x}{}".format(key.q.bit_length(), color_red, key.q, color_norm))
     print("  u=1/p mod q ({}) = {}{:#x}{}".format(key.u.bit_length(), color_red, key.u, color_norm))
 
     dp = key.d % (key.p - 1)
@@ -212,12 +218,16 @@ def run_openssl_test(bits, colorize):
     print("  qInv = 1/q mod p \"coefficient\"({}) = {}{:#x}{}".format(qinv.bit_length(), color_red, qinv, color_norm))
 
     # Sanity checks
+    # Use LCM(p-1, q-1) instead of the totient function (phi(n)), as it is more
+    # generic and is used by PyCryptodome
     assert key.p * key.q == key.n
     phi_n = (key.p - 1) * (key.q - 1)
-    assert (key.e * key.d) % phi_n == 1
+    lcm_p1q1 = lcm(key.p - 1, key.q - 1)
+    assert phi_n % lcm_p1q1 == 0
+    assert (key.e * key.d) % lcm_p1q1 == 1
     assert (key.p * key.u) % key.q == 1
-    assert modinv(key.d, phi_n) == key.e
-    assert modinv(key.e, phi_n) == key.d
+    assert modinv(key.d, lcm_p1q1) == key.e
+    assert modinv(key.e, lcm_p1q1) == key.d
     assert modinv(key.p, key.q) == key.u
 
     # Export private key
@@ -242,7 +252,11 @@ def run_openssl_test(bits, colorize):
     # Test message encryption/decryption
     test_message = b'Hello, world! This is a test.'
     print("RSA_textbook_encrypt({}):".format(repr(test_message)))
-    ciphertext, = pubkey.encrypt(test_message, 0)
+    try:
+        ciphertext, = pubkey.encrypt(test_message, 0)
+    except NotImplementedError:
+        # PyCryptodome removed direct use of raw RSA
+        ciphertext = checked_encode_bigint_be(pow(checked_decode_bigint_be(test_message), key.e, key.n))
     hexdump(ciphertext, color=color_purple)
     print("Decrypted textbook RSA:")
     cipherint = checked_decode_bigint_be(ciphertext)
