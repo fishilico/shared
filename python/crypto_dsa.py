@@ -259,7 +259,7 @@ def run_openssl_test(bits, colorize):
         # Decode PEM-encoded ASN.1 parameters
         param_der = base64.b64decode(''.join(param_lines[1:-1]))
         param_asn1 = Crypto.Util.asn1.DerSequence()
-        param_asn1.decode(param_der, True)
+        param_asn1.decode(param_der, strict=True)
         assert len(param_asn1) == 3
         param_p, param_q, param_g = param_asn1
         print("DSA-{} OpenSSL-generated parameters:".format(bits))
@@ -291,7 +291,7 @@ def run_openssl_test(bits, colorize):
         # Decode PEM-encoded ASN.1 key
         sign_key_der = base64.b64decode(''.join(sign_key_lines[1:-1]))
         sign_key_asn1 = Crypto.Util.asn1.DerSequence()
-        sign_key_asn1.decode(sign_key_der, True)
+        sign_key_asn1.decode(sign_key_der, strict=True)
         assert len(sign_key_asn1) == 6
         key_zero, key_p, key_q, key_g, key_y, key_x = sign_key_asn1
         print("DSA-{} OpenSSL-generated key:".format(bits))
@@ -327,22 +327,22 @@ def run_openssl_test(bits, colorize):
         # Decode PEM-encoded ASN.1 public key
         verify_key_der = base64.b64decode(''.join(verify_key_lines[1:-1]))
         verify_key_asn1 = Crypto.Util.asn1.DerSequence()
-        verify_key_asn1.decode(verify_key_der, True)
+        verify_key_asn1.decode(verify_key_der, strict=True)
         assert len(verify_key_asn1) == 2
         verify_key_algo = Crypto.Util.asn1.DerSequence()
-        verify_key_algo.decode(verify_key_asn1[0], True)
+        verify_key_algo.decode(verify_key_asn1[0], strict=True)
         assert len(verify_key_algo) == 2
         # OID of dsaEncryption
         assert verify_key_algo[0] == b'\x06\x07\x2a\x86\x48\xce\x38\x04\x01'
         verify_key_params = Crypto.Util.asn1.DerSequence()
-        verify_key_params.decode(verify_key_algo[1], True)
+        verify_key_params.decode(verify_key_algo[1], strict=True)
         assert len(verify_key_params) == 3
         assert [param_p, param_q, param_g] == list(verify_key_params)
         verify_key_bitstring = Crypto.Util.asn1.DerObject()
-        verify_key_bitstring.decode(verify_key_asn1[1], True)
+        verify_key_bitstring.decode(verify_key_asn1[1], strict=True)
         assert verify_key_bitstring.payload[:1] == b'\0'
         verify_key_pubkey = Crypto.Util.asn1.DerInteger()
-        verify_key_pubkey.decode(verify_key_bitstring.payload[1:], True)
+        verify_key_pubkey.decode(verify_key_bitstring.payload[1:], strict=True)
         assert key_y == verify_key_pubkey.value
 
         logger.debug("Sign a message and verify its signature")
@@ -371,7 +371,7 @@ def run_openssl_test(bits, colorize):
         with open(sig_path, 'rb') as fsig:
             signature_binary = fsig.read()
         sig_asn1 = Crypto.Util.asn1.DerSequence()
-        sig_asn1.decode(signature_binary, True)
+        sig_asn1.decode(signature_binary, strict=True)
         sig_r, sig_s = sig_asn1
 
         assert 0 < sig_r < param_q
