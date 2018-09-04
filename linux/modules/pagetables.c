@@ -43,6 +43,10 @@
 
 #include <asm/fixmap.h>
 #include <asm/pgtable.h>
+#if defined(CONFIG_X86) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 0, 0)
+/* Commit ef7f0d6a6ca8 ("x86_64: add KASan support") added KASan header file */
+#include <asm/kasan.h>
+#endif
 
 #ifdef CONFIG_ARM
 #include <asm/domain.h>
@@ -728,6 +732,10 @@ static int ptdump_show(struct seq_file *s, void *v)
 		{ PAGE_OFFSET,          "Low Kernel Mapping" },
 		{ VMALLOC_START,        "vmalloc() Area" },
 		{ VMEMMAP_START,        "Vmemmap" },
+# if defined(CONFIG_KASAN) && defined(KASAN_SHADOW_START)
+		{ KASAN_SHADOW_START,   "KASAN shadow" },
+		{ KASAN_SHADOW_END,     "KASAN shadow end" },
+# endif
 # if defined(CONFIG_X86_ESPFIX64) && defined(ESPFIX_BASE_ADDR)
 		{ ESPFIX_BASE_ADDR,     "ESPfix Area", 16 },
 # endif
