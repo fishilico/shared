@@ -5,9 +5,16 @@ FROM base/archlinux
 # and https://raw.githubusercontent.com/docker/docker/master/contrib/mkimage-arch-pacman.conf)
 LABEL Description="Arch Linux with build dependencies for shared"
 
+# Arch Linux no longer provides mingw-w64-gcc in its official repositories.
+# Use Martchus ownstuff repo instead:
+#   https://wiki.archlinux.org/index.php/unofficial_user_repositories#ownstuff
+#   https://github.com/Martchus/PKGBUILDs
 RUN \
     echo '[multilib]' >> /etc/pacman.conf && \
     echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf && \
+    echo '[ownstuff]' >> /etc/pacman.conf && \
+    echo 'Server = http://martchus.no-ip.biz/repo/arch/$repo/os/$arch' >> /etc/pacman.conf && \
+    echo 'SigLevel = Optional' >> /etc/pacman.conf && \
     pacman --noconfirm -Sy && \
     pacman --noconfirm -S \
         base-devel \
