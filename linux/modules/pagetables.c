@@ -408,12 +408,12 @@ static void note_page(struct pg_state *st, unsigned long addr,
 }
 
 /**
- * Strip the page frame number from PTE, PMD, PUD
+ * Strip the page frame number from PTE, PMD, PUD, P4D
  */
 static inline u64 pte_val_nopfn(pte_t pte)
 {
 #ifdef CONFIG_X86
-	return pte_val(pte) & PTE_FLAGS_MASK;
+	return pte_flags(pte);
 #else
 	return pte_val(pte) ^ pte_val(pfn_pte(pte_pfn(pte), 0));
 #endif
@@ -421,15 +421,21 @@ static inline u64 pte_val_nopfn(pte_t pte)
 
 static inline u64 pmd_val_nopfn(pmd_t pmd)
 {
-	u64 val = pmd_val(pmd);
+
 #ifdef CONFIG_X86
+	u64 val = pmd_flags(pmd);
+
 	if (PAGETABLES_MERGE_LARGE)
 		val &= ~_PAGE_PSE;
 	return val & PTE_FLAGS_MASK;
 #elif defined(CONFIG_ARM)
+	u64 val = pmd_val(pmd);
+
 	return val ^ (((val & SECTION_MASK & PHYS_MASK) >> PAGE_SHIFT) <<
 		      PAGE_SHIFT);
 #else
+	u64 val = pmd_val(pmd);
+
 	return val ^ (((val & PMD_MASK & PHYS_MASK) >> PAGE_SHIFT) <<
 		      PAGE_SHIFT);
 #endif
@@ -438,7 +444,7 @@ static inline u64 pmd_val_nopfn(pmd_t pmd)
 static inline u64 pud_val_nopfn(pud_t pud)
 {
 #ifdef CONFIG_X86
-	u64 val = pud_val(pud) & PTE_FLAGS_MASK;
+	u64 val = pud_flags(pud);
 
 	if (PAGETABLES_MERGE_LARGE)
 		val &= ~_PAGE_PSE;
@@ -449,6 +455,35 @@ static inline u64 pud_val_nopfn(pud_t pud)
 	return pud_val(pud) ^ pud_val(pfn_pud(pud_pfn(pud), 0));
 #endif
 }
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+/* 5-level paging support has been added in Linux 4.12 */
+static inline u64 p4d_val_nopfn(p4d_t p4d)
+{
+# ifdef CONFIG_X86
+	/* There is no p4d_large yet */
+	return p4d_flags(p4d);
+# elif PTRS_PER_PUD == 1
+	return p4d_val(p4d);
+# else
+	return p4d_val(p4d) ^ p4d_val(pfn_p4d(p4d_pfn(p4d), 0));
+# endif
+}
+#elif LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
+/* 5-level paging has started been introduced in Linux 4.11, but without the
+ * functions which are needed to enumerate it
+ */
+#else
+/* Define pseudo-types for 5-level paging */
+# define p4d_t pud_t
+# define PTRS_PER_P4D 1
+# define P4D_SIZE PGDIR_SIZE
+
+static inline p4d_t *p4d_offset(pgd_t *pgd, unsigned long address)
+{
+	return pud_offset(pgd, address);
+}
+#endif
 
 static inline u64 pgd_val_nopfn(pgd_t pgd)
 {
@@ -529,6 +564,32 @@ static void walk_pud(struct pg_state *st, pud_t *pud, unsigned long addr)
 }
 
 /**
+ * Walk the level of P4D tables
+ */
+static void walk_p4d(struct pg_state *st, p4d_t *p4d, unsigned long addr)
+{
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+/* This needs the functions introduced in commit fe1e8c3e9634 ("x86/mm: Extend
+ * headers with basic definitions to support 5-level paging") in Linux 4.12
+ */
+	unsigned int i;
+
+	if (PTRS_PER_P4D == 1) {
+		walk_pud(st, (pud_t *)p4d, addr);
+	} else {
+		for (i = 0; i < PTRS_PER_P4D; i++, p4d++, addr += P4D_SIZE) {
+			if (p4d_none(*p4d) || !p4d_present(*p4d))
+				note_page(st, addr, 2, p4d_val_nopfn(*p4d));
+			else
+				walk_pud(st, pud_offset(p4d, 0), addr);
+		}
+	}
+#else
+	walk_pud(st, (pud_t *)p4d, addr);
+#endif
+}
+
+/**
  * Walk the level of PGD tables
  */
 static void walk_pgd(struct pg_state *st, pgd_t *pgd)
@@ -543,7 +604,7 @@ static void walk_pgd(struct pg_state *st, pgd_t *pgd)
 		if (pgd_none(*pgd) || pgd_large(*pgd) || !pgd_present(*pgd))
 			note_page(st, addr, 1, pgd_val_nopfn(*pgd));
 		else
-			walk_pud(st, pud_offset(pgd, 0), addr);
+			walk_p4d(st, p4d_offset(pgd, 0), addr);
 	}
 
 	/* Flush out the last page */
@@ -578,15 +639,17 @@ static void walk_pgd(struct pg_state *st, pgd_t *pgd)
 static void show_address_comp(struct seq_file *s)
 {
 	char address_bit[8 * sizeof(void *)], *p;
-	unsigned int pgd_bits, pud_bits, pmd_bits, pte_bits, page_bits, i;
+	unsigned int pgd_bits, p4d_bits, pud_bits, pmd_bits, pte_bits, page_bits, i;
 
 	seq_printf(s, "Page Global Directory pointers = %d\n", PTRS_PER_PGD);
+	seq_printf(s, "Page Level 4 Directory pointers = %d\n", PTRS_PER_P4D);
 	seq_printf(s, "Page Upper Directory pointers = %d\n", PTRS_PER_PUD);
 	seq_printf(s, "Page Middle Directory pointers = %d\n", PTRS_PER_PMD);
 	seq_printf(s, "Page Table Entry pointers = %d\n", PTRS_PER_PTE);
 	seq_printf(s, "Page size = %lu\n", (unsigned long)PAGE_SIZE);
 
 	pgd_bits = ilog2(PTRS_PER_PGD);
+	p4d_bits = ilog2(PTRS_PER_P4D);
 	pud_bits = ilog2(PTRS_PER_PUD);
 	pmd_bits = ilog2(PTRS_PER_PMD);
 	pte_bits = ilog2(PTRS_PER_PTE);
@@ -594,13 +657,14 @@ static void show_address_comp(struct seq_file *s)
 
 	BUILD_BUG_ON(PTRS_PER_PTE * PAGE_SIZE != PMD_SIZE);
 	BUILD_BUG_ON(PTRS_PER_PMD * PMD_SIZE != PUD_SIZE);
-	BUILD_BUG_ON(PTRS_PER_PUD * PUD_SIZE != PGDIR_SIZE);
+	BUILD_BUG_ON(PTRS_PER_PUD * PUD_SIZE != P4D_SIZE);
+	BUILD_BUG_ON(PTRS_PER_P4D * P4D_SIZE != PGDIR_SIZE);
 
 	seq_printf(s,
-		   "Bits per PGD, PUD, PMD, PTE, page = %u, %u, %u, %u, %u\n",
-		   pgd_bits, pud_bits, pmd_bits, pte_bits, page_bits);
+		   "Bits per PGD, P4D, PUD, PMD, PTE, page = %u, %u, %u, %u, %u, %u\n",
+		   pgd_bits, p4d_bits, pud_bits, pmd_bits, pte_bits, page_bits);
 
-	if (pgd_bits + pud_bits + pmd_bits + pte_bits + page_bits >
+	if (pgd_bits + p4d_bits + pud_bits + pmd_bits + pte_bits + page_bits >
 	    8 * sizeof(void *)) {
 		pr_err("Too many bits in page table components\n");
 		return;
@@ -616,6 +680,8 @@ static void show_address_comp(struct seq_file *s)
 		*(p--) = 'm';
 	for (i = 0; i < pud_bits; i++)
 		*(p--) = 'u';
+	for (i = 0; i < p4d_bits; i++)
+		*(p--) = '4';
 	for (i = 0; i < pgd_bits; i++)
 		*(p--) = 'g';
 	while (p >= address_bit)
