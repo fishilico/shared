@@ -7,6 +7,10 @@
 FROM debian:sid-slim
 LABEL Description="Arch Linux base image"
 
+# PGP key of Pierre Schmitz from https://pgp.mit.edu/pks/lookup?op=get&search=0x7F2D434B9741E8AC
+# cf. https://www.archlinux.org/master-keys/
+COPY 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC.asc /etc/archlinux-signing-key.asc
+
 # Steps:
 # - Install wget to be able to download and extract Arch Linux images
 # - Download bootstrap image and extract it in /arch/root (cf. https://wiki.archlinux.org/index.php/Install_from_existing_Linux)
@@ -17,9 +21,9 @@ LABEL Description="Arch Linux base image"
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
-    apt-get install -qqy gnupg wget && \
+    apt-get install -qqy bsdtar gnupg wget && \
     apt-get clean && \
-    gpg --keyserver hkp://pool.sks-keyservers.net. --recv-key 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC && \
+    gpg --import /etc/archlinux-signing-key.asc && \
     mkdir /arch && cd /arch && \
     (wget -qO- https://mirror.rackspace.com/archlinux/iso/latest/sha1sums.txt | fgrep 'x86_64.tar' > sha1sum.txt) && \
     read -r SHA1 FILE < sha1sum.txt && \
@@ -27,7 +31,7 @@ RUN \
     wget -q "https://mirror.rackspace.com/archlinux/iso/latest/$FILE.sig" && \
     gpg --verify "$FILE.sig" "$FILE" && \
     sha1sum -c sha1sum.txt && \
-    tar -xpzf "$FILE" && \
+    bsdtar -xpzf "$FILE" && \
     cd /arch/root.x86_64 && \
     rm -r /bin /lib* /opt /root /sbin /srv /usr /var && \
     LD_LIBRARY_PATH=/arch/root.x86_64/lib /arch/root.x86_64/lib/ld-linux-x86-64.so.* bin/mv bin lib* opt root sbin srv usr var / && \
