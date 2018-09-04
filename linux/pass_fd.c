@@ -82,7 +82,7 @@ static int child1_main(const char *sockpath)
     }
     umask(0777 & ~(S_IRUSR | S_IWUSR));
     addr.sun_family = AF_UNIX;
-    strncpy(addr.sun_path, sockpath, sizeof(addr.sun_path));
+    strncpy(addr.sun_path, sockpath, sizeof(addr.sun_path) - 1);
     if (bind(sockfd, (struct sockaddr *)(&addr), sizeof(addr)) == -1) {
         perror("bind");
         return 1;
@@ -219,7 +219,7 @@ static int child2_main(const char *sockpath)
             return 1;
         }
         addr.sun_family = AF_UNIX;
-        strncpy(addr.sun_path, sockpath, sizeof(addr.sun_path));
+        strncpy(addr.sun_path, sockpath, sizeof(addr.sun_path) - 1);
         if (connect(sockfd, (struct sockaddr *)(&addr), sizeof(addr)) == -1) {
             /* There is a race condition between bind() and listen() calls.
              * If connect() falls in it, it fails with ECONNREFUSED error.
