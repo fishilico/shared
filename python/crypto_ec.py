@@ -564,7 +564,7 @@ def run_curve_test(curve, colorize):
             return False
         result = run_process_with_input(
             ['openssl', 'asn1parse', '-inform', 'DER', '-i', '-dump', '-in', sig_path],
-            test_message, color=color_green)
+            b'', color=color_green)
         if not result:
             return False
 

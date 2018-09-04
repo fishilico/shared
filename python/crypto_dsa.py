@@ -199,7 +199,10 @@ def run_pycrypto_test(bits, colorize):
     # Compute the size of the key order in bytes
     # It is always 20 (160 bits) in practise
     key_order_bytes = (key.x.bit_length() + 7) // 8
-    assert key_order_bytes == 20, "Unexpected order size of {} bytes".format(key_order_bytes)
+    assert key_order_bytes in (19, 20), "Unexpected order size of {} bytes".format(key_order_bytes)
+    if key_order_bytes == 19:
+        # Some algorithm may fail here
+        logger.warning("The generated order in 19-byte long instead of 20!")
 
     # Signature mode can be 'fips-186-3' (random nonce)
     # or 'deterministic-rfc6979' (deterministic nonce)
@@ -421,7 +424,7 @@ def run_openssl_test(bits, colorize):
             return False
         result = run_process_with_input(
             ['openssl', 'asn1parse', '-inform', 'DER', '-i', '-dump', '-in', sig_path],
-            test_message, color=color_green)
+            b'', color=color_green)
         if not result:
             return False
 
