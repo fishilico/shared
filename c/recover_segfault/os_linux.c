@@ -23,7 +23,7 @@ static void sigsegv_sigaction(int s, siginfo_t *info, void *context)
 {
     ucontext_t *ctx = (ucontext_t *)context;
     uintptr_t data_addr;
-    size_t i;
+    size_t i, j;
 
     assert(g_memmap && g_memmap_len);
     assert(s == SIGSEGV);
@@ -33,6 +33,7 @@ static void sigsegv_sigaction(int s, siginfo_t *info, void *context)
     for (i = 0; i < g_memmap_len; i++) {
         uintptr_t memaddr = g_memmap[i].addr;
         size_t memsize = g_memmap[i].size;
+        const uint8_t *ptr_instruction;
 
         if (memaddr <= data_addr && data_addr < memaddr + memsize) {
             /* Found a memory range which contains the faulting address */
@@ -44,6 +45,18 @@ static void sigsegv_sigaction(int s, siginfo_t *info, void *context)
                 return;
             }
             fprintf(stderr, "Running unknown instruction. Abort!\n");
+#if defined(__x86_64__)
+            ptr_instruction = (uint8_t *)ctx->uc_mcontext.gregs[REG_RIP];
+#elif defined(__i386__)
+            ptr_instruction = (uint8_t *)ctx->uc_mcontext.gregs[REG_EIP];
+#else
+#    error "Unknown target architecture"
+#endif
+            fprintf(stderr, "Faulting instruction @%p:", (const void *)ptr_instruction);
+            for (j = 0; j < 16; j++) {
+                fprintf(stderr, " %02x", ptr_instruction[j]);
+            }
+            fprintf(stderr, "\n");
             abort();
         }
     }
