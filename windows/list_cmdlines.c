@@ -27,7 +27,7 @@ int _tmain(void)
         print_winerr(_T("GetModuleHandle(kernel32.dll)"));
         return 1;
     }
-    lpfctGetCmdLine = (LPTHREAD_START_ROUTINE)GetProcAddress(hKernel, "GetCommandLineW");
+    lpfctGetCmdLine = (LPTHREAD_START_ROUTINE)(void *)GetProcAddress(hKernel, "GetCommandLineW");
     if (!lpfctGetCmdLine) {
         print_winerr(_T("GetProcAddress(GetCommandLineW)"));
         return 1;

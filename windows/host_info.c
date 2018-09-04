@@ -88,7 +88,7 @@ int _tmain(void)
         print_winerr(_T("GetModuleHandle(kernel32.dll)"));
         return 1;
     }
-    pfnGetNativeSystemInfo = (VOID(WINAPI *)(LPSYSTEM_INFO)) GetProcAddress(hKernel, "GetNativeSystemInfo");
+    pfnGetNativeSystemInfo = (VOID(WINAPI *) (LPSYSTEM_INFO)) (void *)GetProcAddress(hKernel, "GetNativeSystemInfo");
     if (pfnGetNativeSystemInfo) {
         pfnGetNativeSystemInfo(&sysi);
     } else {

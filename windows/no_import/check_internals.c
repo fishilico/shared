@@ -74,7 +74,7 @@ int _tmain(void)
     hNtDll = LoadLibrary(TEXT("ntdll.dll"));
     assert(hNtDll != NULL);
     _NtQueryInformationProcess =
-        (pfnNtQueryInformationProcess) GetProcAddress(hNtDll, "NtQueryInformationProcess");
+        (pfnNtQueryInformationProcess) (void *)GetProcAddress(hNtDll, "NtQueryInformationProcess");
     assert(_NtQueryInformationProcess != NULL);
     sizeNeeded = sizeof(pbi);
     dwStatus = _NtQueryInformationProcess(hProcess, ProcessBasicInformation, &pbi, sizeNeeded, &sizeNeeded);

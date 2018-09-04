@@ -175,8 +175,8 @@ static LPCVOID get_peb_query_info_proc(void)
         return NULL;
     }
 
-    pfnNtQueryInformationProcess = (pfnNtQueryInformationProcess_t)GetProcAddress(
-        hModNtdll, "NtQueryInformationProcess");
+    pfnNtQueryInformationProcess =
+        (pfnNtQueryInformationProcess_t) (void *)GetProcAddress(hModNtdll, "NtQueryInformationProcess");
     if (!pfnNtQueryInformationProcess) {
         print_winerr(_T("GetProcAddress(ntdll, NtQueryInformationProcess)"));
         FreeLibrary(hModNtdll);
@@ -305,7 +305,7 @@ int _tmain(int argc, TCHAR **argv)
                     _tprintf(_T(" <%s>"), szFileName);
                     HeapFree(GetProcessHeap(), 0, szFileName);
                 } else if (MemInfo.Type == MEM_MAPPED &&
-                    GetMappedFileNameWithAlloc(MemInfo.AllocationBase, &szFileName)) {
+                           GetMappedFileNameWithAlloc(MemInfo.AllocationBase, &szFileName)) {
                     /* Show associated file for mapped allocations */
                     _tprintf(_T(" <%s>"), szFileName);
                     HeapFree(GetProcessHeap(), 0, szFileName);
