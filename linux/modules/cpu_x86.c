@@ -425,7 +425,8 @@ static void dump_x86_tables(void)
 			const char *comment = "";
 			char type_str[5];
 
-			if (!descs[i].a && !descs[i].b)
+			BUILD_BUG_ON(sizeof(descs[i]) != 8);
+			if (!memcmp(&descs[i], "\0\0\0\0\0\0\0\0", 8))
 				continue;
 			if (i == GDT_ENTRY_KERNEL_CS)
 				comment = " (Kernel CS)";
@@ -457,7 +458,7 @@ static void dump_x86_tables(void)
 #endif
 			base = get_desc_base(&descs[i]);
 			limit = get_desc_limit(&descs[i]);
-			flags = ((descs[i].b >> 8) & 0xf0ff);
+			flags = (((const u32 *)&descs[i])[1] >> 8) & 0xf0ff;
 			type = descs[i].type;
 			pr_info("    %2u: <%8ph>\n", i, &descs[i]);
 			pr_info("        base 0x%08x, limit 0x%x, flags 0x%04x%s\n",
@@ -491,7 +492,8 @@ static void dump_x86_tables(void)
 
 		idt = (gate_desc *)descp.address;
 		for (i = 0; i < NR_VECTORS && i < numentries; i++) {
-			unsigned int type;
+			unsigned int idt_type, idt_ist, idt_dpl, idt_p;
+			unsigned long idt_segment, idt_offset;
 			const char *comment = "", *type_str = "";
 
 			/* /usr/src/linux/arch/x86/include/asm/traps.h
@@ -588,57 +590,73 @@ static void dump_x86_tables(void)
 				continue;
 
 			/* http://wiki.osdev.org/Interrupts_Descriptor_Table */
-			type = idt[i].type;
-			pr_info(" 0x%02x: seg 0x%x offset %p %s\n",
-				i, gate_segment(idt[i]),
-				(void *)gate_offset(idt[i]),
-				comment);
-			if (type == 5)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
+			/* Commit 64b163fab684 ("x86/idt: Unify gate_struct
+			 * handling for 32/64-bit kernels") grouped the
+			 * bitfields into a new struct.
+			 */
+			idt_type = idt[i].bits.type;
+			idt_ist = idt[i].bits.ist;
+			idt_dpl = idt[i].bits.dpl;
+			idt_p = idt[i].bits.p;
+			idt_segment = gate_segment(&idt[i]);
+			idt_offset = gate_offset(&idt[i]);
+#else
+			idt_type = idt[i].type;
+			idt_ist = idt[i].ist;
+			idt_dpl = idt[i].dpl;
+			idt_p = idt[i].p;
+			idt_segment = gate_segment(idt[i]);
+			idt_offset = gate_offset(idt[i]);
+#endif
+			pr_info(" 0x%02x: seg 0x%lx offset %p %s\n",
+				i, idt_segment, (void *)idt_offset, comment);
+			if (idt_type == 5)
 				type_str = " (task gate)";
-			else if (type == 6)
+			else if (idt_type == 6)
 				type_str = " (16-bit interrupt gate)";
-			else if (type == 7)
+			else if (idt_type == 7)
 				type_str = " (16-bit trap gate)";
-			else if (type == 0xe)
+			else if (idt_type == 0xe)
 				type_str = " (interrupt gate)";
-			else if (type == 0xf)
+			else if (idt_type == 0xf)
 				type_str = " (trap gate)";
-			if (type != 0xe)
-				pr_info("       type=0x%x%s\n", type, type_str);
+			if (idt_type != 0xe)
+				pr_info("       type=0x%x%s\n", idt_type, type_str);
 #ifdef CONFIG_X86_32
 			pr_info("       s=%u\n", idt[i].s);
 #else
-			if (idt[i].ist) {
+			if (idt_ist) {
 				const char *stack_str = "";
 
-				if (idt[i].ist == DOUBLEFAULT_STACK)
+				if (idt_ist == DOUBLEFAULT_STACK)
 					stack_str = " (double fault stack)";
-				else if (idt[i].ist == NMI_STACK)
+				else if (idt_ist == NMI_STACK)
 					stack_str = " (non-maskable interrupt stack)";
-				else if (idt[i].ist == DEBUG_STACK)
+				else if (idt_ist == DEBUG_STACK)
 					stack_str = " (debug stack)";
-				else if (idt[i].ist == MCE_STACK)
+				else if (idt_ist == MCE_STACK)
 					stack_str = " (machine check stack)";
-				else if (idt[i].ist == N_EXCEPTION_STACKS)
+				else if (idt_ist == N_EXCEPTION_STACKS)
 					stack_str = " (N Exception stacks)";
 #ifdef STACKFAULT_STACK
-				else if (idt[i].ist == STACKFAULT_STACK)
+				else if (idt_ist == STACKFAULT_STACK)
 					stack_str = " (stack fault stack)";
 #endif
-				pr_info("       ist=%u%s", idt[i].ist, stack_str);
+				pr_info("       ist=%u%s", idt_ist, stack_str);
 			}
 #endif
-			if (idt[i].dpl != 0)
-				pr_info("       dpl=%u\n", idt[i].dpl);
-			if (idt[i].p != 1)
-				pr_info("       p=%u\n", idt[i].p);
+			if (idt_dpl != 0)
+				pr_info("       dpl=%u\n", idt_dpl);
+			if (idt_p != 1)
+				pr_info("       p=%u\n", idt_p);
 #ifdef CONFIG_KALLSYMS
 			do {
 				char sym[KSYM_SYMBOL_LEN], *plus;
 				/* Use sprint_symbol to filter out non-zero offset because
 				 * kallsyms_lookup_size_offset is not exported.
 				 */
-				sprint_symbol(sym, gate_offset(idt[i]));
+				sprint_symbol(sym, idt_offset);
 				if (sym[0] == '\0' || (sym[0] == '0' && sym[1] == 'x'))
 					break;
 				plus = strchr(sym, '+');
