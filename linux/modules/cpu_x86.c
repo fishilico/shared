@@ -104,7 +104,14 @@ static void dump_x86_cr(void)
 	cr = read_cr2();
 	pr_info("cr2 = 0x%08lx PFLA (Page Fault Linear Address)\n", cr);
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 13, 0)
+	/* Commit 6c690ee1039b ("x86/mm: Split read_cr3() into read_cr3_pa() and
+	 * __read_cr3()") renamed read_cr3() to __read_cr3() in Linux 4.13
+	 */
+	cr = __read_cr3();
+#else
 	cr = read_cr3();
+#endif
 	pr_info("cr3 = 0x%08lx\n", cr);
 	show_cr_bit(cr, 3, PWT, "Page Write Through");
 	show_cr_bit(cr, 3, PCD, "Page Cache Disable");
