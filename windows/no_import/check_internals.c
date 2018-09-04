@@ -66,7 +66,7 @@ int _tmain(void)
     const void *const *seh_entry;
     LPCVOID pModuleBase, pProcAddress, pProcAddress2;
     ULONG sizeNeeded;
-    BOOL bRet, bHasKernelBase;
+    BOOL bRet, bHasKernelBase, bHasWow64CPU = FALSE;
     int i;
 
     /* Use public API */
@@ -167,7 +167,21 @@ int _tmain(void)
         if (i == 2 && !StringsCaseLenEqualsW(L"KERNEL32.dll",
                                              CurEntry->BaseDllName.Buffer,
                                              CurEntry->BaseDllName.Length / 2)) {
-            printf("Unexpected third module: not KERNEL32.dll\n");
+            /* It may be C:\windows\system32\wow64cpu.dll */
+            if (!StringsCaseLenEqualsW(L"wow64cpu.dll",
+                                       CurEntry->BaseDllName.Buffer,
+                                       CurEntry->BaseDllName.Length / 2)) {
+                printf("Unexpected third module: not KERNEL32.dll\n");
+                return 1;
+            }
+            bHasWow64CPU = TRUE;
+        }
+        /* If wow64cpu.dll was present, the next one is KERNEL32.dll */
+        if (bHasWow64CPU && i == 3
+            && !StringsCaseLenEqualsW(L"KERNEL32.dll",
+                                      CurEntry->BaseDllName.Buffer,
+                                      CurEntry->BaseDllName.Length / 2)) {
+            printf("Unexpected fourth module: not KERNEL32.dll\n");
             return 1;
         }
     }
