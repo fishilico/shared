@@ -36,6 +36,7 @@ Documentation:
 import argparse
 import base64
 import binascii
+import errno
 import hashlib
 import logging
 import os
@@ -483,13 +484,19 @@ def run_ssh_test(bits, colorize):
     id_rsa_path = os.path.join(temporary_dir, 'id_rsa')
     id_rsa_pub_path = os.path.join(temporary_dir, 'id_rsa.pub')
     try:
-        result = run_process_with_input([
-            'ssh-keygen',
-            '-t', 'rsa',
-            '-b', str(bits),
-            '-N', '',
-            '-f', id_rsa_path,
-        ], b'', color=color_purple)
+        try:
+            result = run_process_with_input([
+                'ssh-keygen',
+                '-t', 'rsa',
+                '-b', str(bits),
+                '-N', '',
+                '-f', id_rsa_path,
+            ], b'', color=color_purple)
+        except OSError as exc:
+            if exc.errno == errno.ENOENT:
+                print("... ssh-keygen is not installed, skipping the test.")
+                return True
+            raise
         if not result:
             return False
 
