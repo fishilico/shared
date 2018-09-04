@@ -1,7 +1,9 @@
+GREP ?= grep
 UNAME ?= uname
 
 KERNELVER ?= $(shell $(UNAME) -r)
 KERNELPATH ?= /lib/modules/$(KERNELVER)/build
+CHECKPATCH ?= $(KERNELPATH)/scripts/checkpatch.pl
 
 obj-m-$(CONFIG_ARM) += cpu_arm.o
 obj-m-$(CONFIG_X86) += cpu_x86.o
@@ -63,13 +65,20 @@ KCFLAGS_WARN += -Wno-uninitialized
 # grsec adds an unused-but-set variable
 KCFLAGS_WARN += -Wno-error=unused-but-set-variable
 
+# Do not run checkpatch if it would spot SPDX license tags as "C99_COMMENTS"
 test: clean
 	@KCFLAGS='$(KCFLAGS_WARN)' $(MAKE) all
-	@if [ -x $(KERNELPATH)/scripts/checkpatch.pl ]; then $(MAKE) checkpatch ; fi
+	@if [ -x $(CHECKPATCH) ] ; then \
+		if $(GREP) SPDX_LICENSE_TAG $(CHECKPATCH) > /dev/null ; then \
+			$(MAKE) checkpatch ; \
+		else \
+			echo 'checkpatch is too old to support SPDX-License-Identifier tag, skip it.' ; \
+		fi \
+	fi
 
 # Run checkpatch on source files
 checkpatch:
-	$(KERNELPATH)/scripts/checkpatch.pl --no-tree --show-types \
+	$(CHECKPATCH) --no-tree --show-types \
 		--file $(filter-out %.mod.c, $(wildcard *.c)) \
 		--ignore CONSTANT_COMPARISON \
 		--ignore LINUX_VERSION_CODE \

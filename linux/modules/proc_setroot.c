@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0
 /**
  * Create a proc file which enable everyone able to write to it to become root
  */

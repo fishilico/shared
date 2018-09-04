@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0
 /**
  * Print the value of x86-specific CPU registers and tables
  * These registers are:

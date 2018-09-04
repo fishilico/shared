@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0
 /**
  * Print the value of ARM-specific CPU registers and tables:
  * * some system control coprocessor registers (CR),

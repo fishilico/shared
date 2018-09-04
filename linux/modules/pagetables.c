@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0
 /**
  * Show the kernel page table, with some information about how an address to
  * paged memory is resolved.

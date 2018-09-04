@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0
 /**
  * Implement the basic operations which are needed to perform a mmap
  */
