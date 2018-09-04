@@ -219,7 +219,7 @@ static void stream_update_timing_cb(pa_stream *s, int success, void *u __unused)
     static size_t s_last_bytes_read, s_last_bytes_written;
     pa_usec_t latency = 0, usec = 0;
     int negative = 0, error;
-    float byterate;
+    double byterate;
 
     assert(s);
 
@@ -235,23 +235,23 @@ static void stream_update_timing_cb(pa_stream *s, int success, void *u __unused)
     if (s == g_stream_in) {
         if (usec > s_last_usec_in) {
             byterate = PA_USEC_PER_SEC *
-                (float)(g_bytes_read - s_last_bytes_read) / (float)(usec - s_last_usec_in);
+                (double)(g_bytes_read - s_last_bytes_read) / (double)(usec - s_last_usec_in);
         } else {
             byterate = 0;
         }
         fprintf(stderr, "Recorded %10.2f Bps               latency %5.0f usec\n",
-                byterate, (float)(negative ? -latency : latency));
+                byterate, (double)(negative ? -latency : latency));
         s_last_usec_in = usec;
         s_last_bytes_read = g_bytes_read;
     } else if (s == g_stream_out) {
         if (usec > s_last_usec_out) {
             byterate = PA_USEC_PER_SEC *
-                (float)(g_bytes_written - s_last_bytes_written) / (float)(usec - s_last_usec_out);
+                (double)(g_bytes_written - s_last_bytes_written) / (double)(usec - s_last_usec_out);
         } else {
             byterate = 0;
         }
         fprintf(stderr, " Played                %10.2f Bps latency            %7.0f usec\n",
-                byterate, (negative ? -(float)latency : (float)latency));
+                byterate, (double)(negative ? -latency : latency));
         s_last_usec_out = usec;
         s_last_bytes_written = g_bytes_written;
     }
