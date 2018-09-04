@@ -233,7 +233,7 @@ def run_openssl_test(bits, colorize):
     assert (key.e * key.d) % lcm_p1q1 == 1
     assert (key.p * key.u) % key.q == 1
     assert modinv(key.d, lcm_p1q1) == key.e
-    assert modinv(key.e, lcm_p1q1) == key.d
+    assert modinv(key.e, lcm_p1q1) == key.d or modinv(key.e, phi_n) == key.d
     assert modinv(key.p, key.q) == key.u
 
     # Export private key
