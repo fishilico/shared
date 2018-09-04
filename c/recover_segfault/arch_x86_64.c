@@ -180,8 +180,8 @@ static size_t decode_modrm_check(
                 }
             }
 
-            if ((sib & 0x38) == 0x20) {
-                /* index = 100: no index */
+            if (!(rexprefix & X86_64_REX_X) && (sib & 0x38) == 0x20) {
+                /* index = 100 with no prefix: no index (do not use rsp) */
                 sibdesc = malloc(5);
                 assert(sibdesc);
                 regnum = (sib & 7) | ((rexprefix & X86_64_REX_B) ? 8 : 0);

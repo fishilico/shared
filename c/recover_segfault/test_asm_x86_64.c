@@ -141,6 +141,9 @@ int main(void)
     R_R13(&ctx) = data_addr;
     R_RBP(&ctx) = 2;
     test("\x41\x80\x7c\x2d\xfe\x17", "cmpb 0x17, -0x2(r13+1*rbp=0xda7a0002)", EFL, X86_EFLAGS_ZF);
+    R_R13(&ctx) = data_addr;
+    R_R12(&ctx) = 1;
+    test("\x43\x80\x7c\x25\xff\x0a", "cmpb 0x0a, -0x1(r13+1*r12=0xda7a0001)", EFL, X86_EFLAGS_PF);
 
     /* Load 32-bit value */
     R_RSI(&ctx) = data_addr;
