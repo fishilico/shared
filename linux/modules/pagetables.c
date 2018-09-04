@@ -60,6 +60,13 @@
 #include <linux/sched/signal.h>
 #endif
 
+#if defined(CONFIG_X86) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
+/* Commit 92a0f81d8957 ("x86/cpu_entry_area: Move it out of the fixmap")
+ * moved CPU_ENTRY_AREA_RO_IDT in asm/cpu_entry_area.h in Linux 4.14-stable
+ */
+#include <asm/cpu_entry_area.h>
+#endif
+
 /* Merge large pagetables together on x86 */
 #define PAGETABLES_MERGE_LARGE 1
 
@@ -323,10 +330,14 @@ static void print_additional_desc(struct pg_state *st, unsigned long last_addr)
 	describe_with_pointer(VSYSCALL_ADDR, "vsyscall pages (with clock)");
 #endif
 
-#if defined(CONFIG_X86) && LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
+#if defined(CONFIG_X86) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
 	/* Commit 4eefbe792bae ("x86: Use a read-only IDT alias on all CPUs")
 	 * made the IDT mapped read-only at a fixed location
+	 * Commit 92a0f81d8957 ("x86/cpu_entry_area: Move it out of the fixmap")
+	 * moved it to CPU_ENTRY_AREA_BASE
 	 */
+	describe_with_pointer(CPU_ENTRY_AREA_RO_IDT, "IDT");
+#elif defined(CONFIG_X86) && LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
 	describe_with_pointer(fix_to_virt(FIX_RO_IDT), "IDT");
 #endif
 
@@ -752,7 +763,15 @@ static pgd_t *get_pgd_address(struct seq_file *s)
 		unsigned long cr3_raw, cr3;
 
 		/* Mask high bits and low bits (PCID) of CR3 register */
+# if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 13, 0)
+		/* Commit 6c690ee1039b ("x86/mm: Split read_cr3() into
+		 * read_cr3_pa() and __read_cr3()") splitted read_cr3() in
+		 * Linux 4.13
+		 */
+		cr3_raw = __read_cr3();
+# else
 		cr3_raw = read_cr3();
+# endif
 		cr3 = cr3_raw & __PHYSICAL_MASK & PAGE_MASK;
 		if (cr3 == cr3_raw)
 			seq_printf(s, "  ... cr3 = %#lx\n", cr3);
@@ -796,11 +815,20 @@ static int ptdump_show(struct seq_file *s, void *v)
 
 		{ 0xffff800000000000UL, "Kernel Space" },
 		{ PAGE_OFFSET,          "Low Kernel Mapping" },
+# if defined(CONFIG_MODIFY_LDT_SYSCALL) && !defined(CONFIG_X86_5LEVEL) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
+		{ LDT_BASE_ADDR,        "LDT remap" },
+# endif
 		{ VMALLOC_START,        "vmalloc() Area" },
 		{ VMEMMAP_START,        "Vmemmap" },
 # if defined(CONFIG_KASAN) && defined(KASAN_SHADOW_START)
 		{ KASAN_SHADOW_START,   "KASAN shadow" },
 		{ KASAN_SHADOW_END,     "KASAN shadow end" },
+# endif
+# if defined(CONFIG_MODIFY_LDT_SYSCALL) && !defined(CONFIG_X86_5LEVEL) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
+		{ LDT_BASE_ADDR,        "LDT remap" },
+# endif
+# if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
+		{ CPU_ENTRY_AREA_BASE,  "CPU entry Area" },
 # endif
 # if defined(CONFIG_X86_ESPFIX64) && defined(ESPFIX_BASE_ADDR)
 		{ ESPFIX_BASE_ADDR,     "ESPfix Area", 16 },
