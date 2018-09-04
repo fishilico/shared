@@ -61,12 +61,6 @@ get_base_name() {
             echo "ubuntu1604-xenial"
             ;;
 
-        *fedora20*|*heidenbug*)
-            echo "fedora20-heisenbug"
-            ;;
-        *fedora21*)
-            echo "fedora21"
-            ;;
         *fedora22*)
             echo "fedora22"
             ;;
