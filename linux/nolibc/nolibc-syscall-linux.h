@@ -5,11 +5,15 @@
 #ifndef NOLIBC_SYSCALL_LINUX_H
 #define NOLIBC_SYSCALL_LINUX_H
 
+#ifndef _GNU_SOURCE
+#    define _GNU_SOURCE /* for AT_FDCWD */
+#endif
+
 /* Import the lists of error numbers and system calls */
+/*#define _GNU_SOURCE*/
 #include <errno.h>
 #include <stddef.h> /* for size_t */
-#include <linux/fcntl.h>
-#include <linux/unistd.h>
+#include <fcntl.h> /* for AT_FDCWD */
 #include <sys/syscall.h>
 #include <sys/types.h> /* for ssize_t */
 
