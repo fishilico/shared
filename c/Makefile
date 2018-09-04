@@ -58,7 +58,9 @@ ifeq ($(filter-out cc gcc clang, $(CC)),)
 		PROGRAMS += $(GTK_PROGRAMS)
 $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
 $(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0) \
-	$(call cc-disable-warning,pedantic) $(call cc-disable-warning,cast-qual)
+	$(call cc-disable-warning,pedantic) \
+	$(call cc-disable-warning,cast-qual) \
+	$(call cc-disable-warning,redundant-parens)
 	else
 		HAVE_GTK2 := $(call pkg-config-with-options,gtk+-2.0,--std=c99 \
 			$(call cc-disable-warning,strict-prototypes) $(call cc-disable-warning,cast-qual) -include gtk/gtk.h)
