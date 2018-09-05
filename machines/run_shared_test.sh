@@ -41,13 +41,6 @@ case "$(x86_64-w64-mingw32-gcc --version 2>/dev/null | sed -n 's/^x86_64-w64-min
         ;;
 esac
 
-# Use --list-nobuild to only show make list-nobuild
-if [ "${1:-}" = "--list-nobuild" ]
-then
-    make list-nobuild
-    exit $?
-fi
-
 # Temporary file to test compilation
 TMPOUT="$(mktemp -p "${TMPDIR:-/tmp}" run_shared_test_cc.out.XXXXXXXXXX)"
 if [ "$?" -ne 0 ] || [ -z "$TMPOUT" ]
@@ -57,44 +50,85 @@ then
 fi
 trap 'rm -f "$TMPOUT"' EXIT HUP INT QUIT TERM
 
-echo '******************************************'
-echo '* Building with gcc                      *'
-echo '******************************************'
-make CC=gcc clean test || exit $?
-
-# Compile 32-bit version if supported, but without any library
-if echo 'int main(void){return 0;}' | gcc -m32 -Werror -x c -o"$TMPOUT" - 2>/dev/null
+# Use --list-nobuild to only show make list-nobuild without building everything
+if [ "${1:-}" != "--list-nobuild" ]
 then
     echo '******************************************'
-    echo '* Building with gcc -m32                 *'
+    echo '* Building with gcc                      *'
     echo '******************************************'
-    # Use linux32 to build 32-bit Windows programs too (the detection uses uname -m)
-    # Do not build Python cffi modules with an architecture different from the Python interpreter
-    # Do not build kernel modules with an incompatible compiler
-    linux32 make CC='gcc -m32' clean test HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
-fi
+    make CC=gcc clean test || exit $?
 
-if [ -x /usr/bin/clang ] || clang --version 2>/dev/null
-then
-    echo '******************************************'
-    echo '* Building with clang                    *'
-    echo '******************************************'
-    make CC=clang clean test HAVE_OPENMP=n HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
-    if echo 'int main(void){return 0;}' | clang -m32 -Werror -x c -o"$TMPOUT" - 2>/dev/null
+    # Compile 32-bit version if supported, but without any library
+    if echo 'int main(void){return 0;}' | gcc -m32 -Werror -x c -o"$TMPOUT" - 2>/dev/null
     then
         echo '******************************************'
-        echo '* Building with clang -m32               *'
+        echo '* Building with gcc -m32                 *'
         echo '******************************************'
-        linux32 make CC='clang -m32' clean test HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
+        # Use linux32 to build 32-bit Windows programs too (the detection uses uname -m)
+        # Do not build Python cffi modules with an architecture different from the Python interpreter
+        # Do not build kernel modules with an incompatible compiler
+        linux32 make CC='gcc -m32' clean test HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
+    fi
+
+    if [ -x /usr/bin/clang ] || clang --version 2>/dev/null
+    then
+        echo '******************************************'
+        echo '* Building with clang                    *'
+        echo '******************************************'
+        make CC=clang clean test HAVE_OPENMP=n HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
+        if echo 'int main(void){return 0;}' | clang -m32 -Werror -x c -o"$TMPOUT" - 2>/dev/null
+        then
+            echo '******************************************'
+            echo '* Building with clang -m32               *'
+            echo '******************************************'
+            linux32 make CC='clang -m32' clean test HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
+        fi
+    fi
+
+    if [ -x /usr/bin/musl-gcc ] || musl-gcc --version 2>/dev/null
+    then
+        echo '******************************************'
+        echo '* Building with musl-gcc                 *'
+        echo '******************************************'
+        make CC="musl-gcc -shared" clean test HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
     fi
 fi
 
-if [ -x /usr/bin/musl-gcc ] || musl-gcc --version 2>/dev/null
+echo '******************************************'
+echo '* Output of make list-nobuild            *'
+echo '******************************************'
+
+# List blacklist with default compiler
+make list-nobuild || exit $?
+
+# List blacklist with 32-bit compiler
+if echo 'int main(void){return 0;}' | gcc -m32 -Werror -x c -o"$TMPOUT" - 2>/dev/null
 then
-    echo '******************************************'
-    echo '* Building with musl-gcc                 *'
-    echo '******************************************'
-    make CC="musl-gcc -shared" clean test HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
+    echo 'With gcc -m32:'
+    make CC='gcc -m32' list-nobuild | sed 's/^/   /'
 fi
 
-make list-nobuild
+# List used compilers
+echo 'Compilers:'
+for COMPILER in gcc clang
+do
+    for BITMODE in 64 32
+    do
+        if echo 'int main(void){return 0;}' | "$COMPILER" -m"$BITMODE" -Werror -x c -o"$TMPOUT" - 2>/dev/null
+        then
+            echo "   $COMPILER -m$BITMODE: ok"
+        else
+            echo "   $COMPILER -m$BITMODE: not working"
+        fi
+    done
+done
+for COMPILER in musl-gcc x86_64-w64-mingw32-gcc i686-w64-mingw32-gcc
+do
+    if echo 'int main(void){return 0;}' | "$COMPILER" -Werror -x c -o"$TMPOUT" - 2>/dev/null
+    then
+        echo "   $COMPILER: ok"
+    else
+        echo "   $COMPILER: not working"
+    fi
+done
+echo 'Done running tests.'
