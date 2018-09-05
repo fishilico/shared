@@ -20,6 +20,7 @@ RUN \
         libpulse-dev \
         linux-headers-amd64 \
         make \
+        openssh-client \
         openssl \
         pkg-config \
         python3 \

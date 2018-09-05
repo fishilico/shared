@@ -23,6 +23,7 @@ RUN \
         make \
         musl-dev \
         musl-tools \
+        openssh-client \
         openssl \
         pkg-config \
         python3 \

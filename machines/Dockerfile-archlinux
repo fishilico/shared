@@ -29,6 +29,7 @@ RUN \
         make \
         mingw-w64-gcc \
         musl \
+        openssh \
         pkg-config \
         python \
         python-cffi \

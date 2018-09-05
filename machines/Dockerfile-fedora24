@@ -20,6 +20,7 @@ RUN \
         make \
         mingw64-gcc \
         numpy \
+        openssh \
         openssl \
         pkgconfig \
         pulseaudio-libs-devel \

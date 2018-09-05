@@ -20,6 +20,7 @@ RUN \
         make \
         mingw64-gcc \
         numpy \
+        openssh \
         openssl \
         perl-Getopt-Long \
         perl-Term-ANSIColor \
