@@ -282,7 +282,9 @@ static int child2_main(const char *sockpath)
 }
 
 /**
- * Build as much sockets as possible in a "recursive" way, by sending them one into the other
+ * Build as much sockets as possible in a "recursive" way, by sending them one into the other.
+ * This may slow the system down. In order to prevent this, define a sane limit
+ * /proc/sys/fs/file-max, such as 20000.
  */
 static int recursive_sockets(void)
 {
@@ -320,6 +322,13 @@ static int recursive_sockets(void)
     printf("Trying to hit the recursive fd-socket sending limit...\n");
     for (count = 0; count < 65536; count++) {
         if (socketpair(AF_UNIX, SOCK_STREAM, 0, sockv) == -1) {
+            if (errno == ENFILE || errno == EMFILE) {
+                /* "Too many open files in system" or "Too many open files"
+                 * This occurs when /proc/sys/fs/file-nr reaches file-max
+                 */
+                printf("Reached the maximum number of open files on the system.\n");
+                break;
+            }
             perror("socketpair");
             return 1;
         }
@@ -364,7 +373,9 @@ static int recursive_sockets(void)
             return 0;
         }
     }
-    printf("Socket depth limit not reached before %u\n", count);
+    printf(
+        "Socket depth limit not reached before %u sent socket pairs in %lu seconds\n",
+        count, (unsigned long)(tv.tv_sec - start_time));
     if (recur_sockfd[0] >= 0) {
         close(recur_sockfd[0]);
         close(recur_sockfd[1]);
