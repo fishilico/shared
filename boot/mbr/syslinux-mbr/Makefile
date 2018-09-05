@@ -79,6 +79,9 @@ GCCOPT += $(call gcc_ok,-falign-labels=0,-malign-labels=0)
 GCCOPT += $(call gcc_ok,-falign-loops=0,-malign-loops=0)
 GCCOPT += $(call gcc_ok,-fvisibility=hidden)
 
+# Disable internal clang assembler
+GCCOPT += $(call gcc_ok,-no-integrated-as,)
+
 CFLAGS += $(GCCOPT) -g $(GCCWARN) -Wno-sign-compare
 SFLAGS += $(CFLAGS) -D__ASSEMBLY__
 LDFLAGS += -m elf_$(ARCH)
