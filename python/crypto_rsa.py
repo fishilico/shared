@@ -469,6 +469,11 @@ def decode_openssh_private_key(private_key, colorize):
     phi_n = (privkey_p - 1) * (privkey_q - 1)
     assert (privkey_e * privkey_d) % phi_n == 1
     assert (privkey_qinv * privkey_q) % privkey_p == 1
+
+    # Python2 requires long values
+    if sys.version_info < (3,):
+        privkey_e = long(privkey_e)
+
     return Crypto.PublicKey.RSA.construct((privkey_n, privkey_e, privkey_d, privkey_p, privkey_q))
 
 
