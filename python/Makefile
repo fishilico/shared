@@ -6,7 +6,8 @@ PEP8 ?= pep8
 PYLINT ?= pylint
 
 # Programs not to test automatically
-NONTEST_BINARIES := image_lsb.py matplotlib_feed_plot3d.py unicode_norm.py
+NEVER_TEST_BINARIES := image_lsb.py matplotlib_feed_plot3d.py unicode_norm.py
+NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
 HAVE_PYTHON_CFFI := $(call can-run,$(PYTHON) -c 'import cffi')
 HAVE_PYTHON_CRYPTO := $(call can-run,$(PYTHON) -c 'import Crypto')
@@ -54,8 +55,9 @@ lint:
 	$(PEP8) $(PEP8_PARAMS) *.py
 	$(PYLINT) $(PYLINT_PARAMS) *.py
 
+# Do not report scripts which have no chance to being tested in list-nobuild
 list-nobuild:
-	@echo $(sort $(NONTEST_BINARIES))
+	@echo $(sort $(filter-out $(NEVER_TEST_BINARIES), $(NONTEST_BINARIES)))
 
 test: all
 	@$(call run-test-progs,$(TEST_BINARIES))
