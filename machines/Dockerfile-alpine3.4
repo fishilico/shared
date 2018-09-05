@@ -2,7 +2,7 @@ FROM alpine:3.4
 LABEL Description="Alpine Linux 3.4 with build dependencies for shared"
 
 # Alpine does not provide: coq, mingw-w64, pulseaudio-dev
-# Alpine<3.5 does not provide: py-numpy, py2-cffi, py3-cffi
+# Alpine<3.5 does not provide: py-numpy, py2-cffi, py3-cffi, py2-crypto, py3-crypto
 RUN \
     apk --no-cache --update add \
         clang \

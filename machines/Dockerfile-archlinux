@@ -33,9 +33,11 @@ RUN \
         python \
         python-cffi \
         python-numpy \
+        python-pycryptodome \
         python2 \
         python2-cffi \
         python2-numpy \
+        python2-pycryptodome \
         sdl2 \
         which \
         wine && \

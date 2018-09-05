@@ -20,14 +20,17 @@ RUN \
         make \
         mingw64-gcc \
         numpy \
+        openssl \
         pkgconfig \
         pulseaudio-libs-devel \
         python3 \
         python3-cffi \
+        python3-crypto \
         python3-devel \
         python3-numpy \
         python-argparse \
         python-cffi \
+        python-crypto \
         python-devel \
         redhat-rpm-config \
         SDL2-devel \
