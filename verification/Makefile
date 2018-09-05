@@ -22,7 +22,7 @@ list-nobuild:
 	@:
 else
 list-nobuild:
-	@echo $(COQ_OUTPUT)
+	@echo $(sort $(COQ_OUTPUT))
 endif
 
 all: $(BINARIES)

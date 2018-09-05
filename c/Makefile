@@ -97,7 +97,7 @@ clean:
 	$(CLEAN_CMD)
 
 list-nobuild:
-	@echo $(filter-out $(PROGRAMS), $(ALL_PROGRAMS))
+	@echo $(sort $(filter-out $(PROGRAMS), $(ALL_PROGRAMS)))
 
 test: all
 	@$(call run-test-progs,$(TEST_BINARIES))

@@ -113,7 +113,7 @@ test:
 
 # List programs which are explicitly not built
 list-nobuild:
-	@echo "Global blacklist: $(strip $(SUBDIRS_BLACKLIST))"
+	@echo "Global blacklist: $(sort $(strip $(SUBDIRS_BLACKLIST)))"
 	@echo "In sub-directories:"
 	@for D in $(sort $(SUBDIRS_FINAL)); do \
 		$(GREP) '^$@:' "$$D/Makefile" > /dev/null || continue; \

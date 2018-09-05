@@ -55,7 +55,7 @@ lint:
 	$(PYLINT) $(PYLINT_PARAMS) *.py
 
 list-nobuild:
-	@echo $(NONTEST_BINARIES)
+	@echo $(sort $(NONTEST_BINARIES))
 
 test: all
 	@$(call run-test-progs,$(TEST_BINARIES))
