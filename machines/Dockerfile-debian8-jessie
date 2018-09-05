@@ -3,6 +3,7 @@ LABEL Description="Debian 8 Jessie with build dependencies for shared"
 
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
+    dpkg --add-architecture i386 && \
     apt-get -qq update && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
@@ -31,7 +32,9 @@ RUN \
         python-cffi \
         python-dev \
         python-numpy \
-        wine && \
+        wine \
+        wine32 \
+        wine64 && \
     apt-get clean
 
 WORKDIR /shared

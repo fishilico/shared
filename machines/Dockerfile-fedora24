@@ -8,11 +8,15 @@ RUN \
         coq \
         gcc \
         gdb \
-        gmp-devel \
+        glibc-devel.x86_64 \
+        glibc-devel.i686 \
+        gmp-devel.x86_64 \
+        gmp-devel.i686 \
         gtk3-devel \
         kernel \
         kernel-devel \
-        libmnl-devel \
+        libmnl-devel.x86_64 \
+        libmnl-devel.i686 \
         make \
         mingw64-gcc \
         numpy \

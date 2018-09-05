@@ -48,10 +48,31 @@ then
     exit $?
 fi
 
+# Temporary file to test compilation
+TMPOUT="$(mktemp -p "${TMPDIR:-/tmp}" run_shared_test_cc.out.XXXXXXXXXX)"
+if [ "$?" -ne 0 ] || [ -z "$TMPOUT" ]
+then
+    echo >&2 'Fatal error: unable to create a temporary file!'
+    exit 1
+fi
+trap 'rm -f "$TMPOUT"' EXIT HUP INT QUIT TERM
+
 echo '******************************************'
 echo '* Building with gcc                      *'
 echo '******************************************'
 make CC=gcc clean test || exit $?
+
+# Compile 32-bit version if supported, but without any library
+if echo 'int main(void){return 0;}' | gcc -m32 -Werror -x c -o"$TMPOUT" - 2>/dev/null
+then
+    echo '******************************************'
+    echo '* Building with gcc -m32                 *'
+    echo '******************************************'
+    # Use linux32 to build 32-bit Windows programs too (the detection uses uname -m)
+    # Do not build Python cffi modules with an architecture different from the Python interpreter
+    # Do not build kernel modules with an incompatible compiler
+    linux32 make CC='gcc -m32' clean test HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
+fi
 
 if [ -x /usr/bin/clang ] || clang --version 2>/dev/null
 then
@@ -59,6 +80,13 @@ then
     echo '* Building with clang                    *'
     echo '******************************************'
     make CC=clang clean test HAVE_OPENMP=n HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
+    if echo 'int main(void){return 0;}' | clang -m32 -Werror -x c -o"$TMPOUT" - 2>/dev/null
+    then
+        echo '******************************************'
+        echo '* Building with clang -m32               *'
+        echo '******************************************'
+        linux32 make CC='clang -m32' clean test HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
+    fi
 fi
 
 if [ -x /usr/bin/musl-gcc ] || musl-gcc --version 2>/dev/null
