@@ -83,6 +83,7 @@ Here is the definition of some acronyms:
 * ``MCFG``: PCI Express memory mapped configuration space base address Description Table
 * ``MPST``: Memory Power StateTable
 * ``MSCT``: Maximum System Characteristics Table
+* ``MSDM``: Microsoft Data Management (containing MS Windows license key for OEM activation)
 * ``PMTT``: Platform Memory Topology Table
 * ``PSDT``: Persistent System Description
 * ``RASF``: ACPI RAS FeatureTable
