@@ -66,6 +66,9 @@ get_base_name() {
         *ubuntu1604*|*xenial*)
             echo "ubuntu1604-xenial"
             ;;
+        *ubuntu1804*|*bionic*)
+            echo "ubuntu1804-bionic"
+            ;;
 
         *fedora22*)
             echo "fedora22"
