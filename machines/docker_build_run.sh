@@ -79,6 +79,18 @@ get_base_name() {
         *fedora25*)
             echo "fedora25"
             ;;
+        *fedora26*)
+            echo "fedora26"
+            ;;
+        *fedora27*)
+            echo "fedora27"
+            ;;
+        *fedora28*)
+            echo "fedora28"
+            ;;
+        *fedora29*)
+            echo "fedora29"
+            ;;
     esac
 }
 
