@@ -29,3 +29,19 @@ RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
 COPY . /shared/
 
 CMD ["/run_shared_test.sh"]
+
+# make list-nobuild:
+#    Global blacklist: latex% linux/modules% windows%
+#    In sub-directories:
+#       c: x86-read_64b_regs_in_32b_mode
+#       linux: pulseaudio_echo sdl_v4l_video
+#       python: cffi_example.py cffi_numpy.py crypto_dsa.py crypto_ec.py crypto_rsa.py
+#       verification: ackermann.vo
+#    Compilers:
+#       gcc -m64: ok
+#       gcc -m32: not working
+#       clang -m64: ok
+#       clang -m32: not working
+#       musl-gcc: not working
+#       x86_64-w64-mingw32-gcc: not working
+#       i686-w64-mingw32-gcc: not working

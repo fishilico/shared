@@ -36,3 +36,26 @@ RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
 COPY . /shared/
 
 CMD ["/run_shared_test.sh"]
+
+# make list-nobuild:
+#    Global blacklist: latex%
+#    In sub-directories:
+#       c:
+#       linux: sdl_v4l_video seccomp
+#       python: cffi_example.py cffi_numpy.py udp_multihome.py
+#       verification: ackermann.vo
+#    With gcc -m32:
+#       Global blacklist: latex%
+#       In sub-directories:
+#          c: gmp_functions gtk_alpha_window
+#          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video seccomp
+#          python: cffi_example.py cffi_numpy.py udp_multihome.py
+#          verification: ackermann.vo
+#    Compilers:
+#       gcc -m64: ok
+#       gcc -m32: ok
+#       clang -m64: ok
+#       clang -m32: not working
+#       musl-gcc: not working
+#       x86_64-w64-mingw32-gcc: ok
+#       i686-w64-mingw32-gcc: ok
