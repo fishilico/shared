@@ -37,6 +37,12 @@ get_base_name() {
         *alpine36*|*alpine3.6*)
             echo "alpine3.6"
             ;;
+        *alpine37*|*alpine3.7*)
+            echo "alpine3.7"
+            ;;
+        *alpine38*|*alpine3.8*)
+            echo "alpine3.8"
+            ;;
 
         *debian7*|*wheezy*)
             echo "debian7-wheezy"
