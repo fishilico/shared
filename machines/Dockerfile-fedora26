@@ -3,6 +3,7 @@ LABEL Description="Fedora 26 with build dependencies for shared"
 
 # Fedora 26 merged python-argparse into python2-libs
 # Building kernel modules now requires elfutils-libelf-devel
+# Fedora<28 does not provide python3-z3 nor python-z3
 RUN \
     dnf update -q -y --setopt=deltarpm=false && \
     dnf install -q -y --setopt=deltarpm=false \
@@ -54,14 +55,14 @@ CMD ["/run_shared_test.sh"]
 #    In sub-directories:
 #       c:
 #       linux:
-#       python:
+#       python: z3_example.py
 #       verification:
 #    With gcc -m32:
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gtk_alpha_window openmp_matrix
 #          linux: pulseaudio_echo sdl_v4l_video
-#          python:
+#          python: z3_example.py
 #          verification:
 #    Compilers:
 #       gcc -m64: ok

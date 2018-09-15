@@ -1,7 +1,7 @@
 FROM alpine:3.8
 LABEL Description="Alpine Linux 3.8 with build dependencies for shared"
 
-# Alpine does not provide coq nor mingw-w64
+# Alpine does not provide coq, mingw-w64, and py3-z3 is in testing
 RUN \
     apk --no-cache --update add \
         clang \
@@ -41,7 +41,7 @@ CMD ["/run_shared_test.sh"]
 #    In sub-directories:
 #       c: x86-read_64b_regs_in_32b_mode
 #       linux:
-#       python:
+#       python: z3_example.py
 #       verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok

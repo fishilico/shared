@@ -35,6 +35,7 @@ RUN \
         python-crypto \
         python-dev \
         python-numpy \
+        python-z3 \
         wine \
         wine32 \
         wine64 && \

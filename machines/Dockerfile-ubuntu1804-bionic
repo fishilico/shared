@@ -36,6 +36,7 @@ RUN \
         python-crypto \
         python-dev \
         python-numpy \
+        python-z3 \
         wine64 && \
     apt-get clean
 

@@ -35,10 +35,14 @@ RUN \
         python-cffi \
         python-numpy \
         python-pycryptodome \
+        python-setuptools \
+        python-z3 \
         python2 \
         python2-cffi \
         python2-numpy \
         python2-pycryptodome \
+        python2-setuptools \
+        python2-z3 \
         sdl2 \
         which \
         wine && \

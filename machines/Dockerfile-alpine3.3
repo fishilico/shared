@@ -1,7 +1,8 @@
 FROM alpine:3.3
 LABEL Description="Alpine Linux 3.3 with build dependencies for shared"
 
-# Alpine does not provide: coq, mingw-w64, pulseaudio-dev
+# Alpine does not provide: coq, mingw-w64, py3-z3
+# Alpine<3.8 does not provide pulseaudio-dev
 # Alpine<3.5 does not provide: py-numpy, py2-cffi, py3-cffi, py2-crypto, py3-crypto
 # Alpine<3.4 does not provide sdl2-dev
 RUN \
@@ -35,7 +36,7 @@ CMD ["/run_shared_test.sh"]
 #    In sub-directories:
 #       c: x86-read_64b_regs_in_32b_mode
 #       linux: pulseaudio_echo sdl_v4l_video
-#       python: cffi_example.py cffi_numpy.py crypto_dsa.py crypto_ec.py crypto_rsa.py
+#       python: cffi_example.py cffi_numpy.py crypto_dsa.py crypto_ec.py crypto_rsa.py z3_example.py
 #       verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok

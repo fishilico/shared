@@ -4,11 +4,14 @@ LABEL Description="Ubuntu 12.04 LTS Precise Pangolin with build dependencies for
 # Do not install coq because it is too old (8.3pl4) for some features
 # Do not install libmnl-dev because mnl_attr_for_each() performs arithmetics on void*
 # Do not install python-crypto nor python3-crypto because they are too old
+# Ubuntu<16.04 does not provide python-z3
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         clang \
+        binutils-mingw-w64 \
+        gcc-mingw-w64 \
         gcc-multilib \
         gdb \
         libc-dev \
@@ -21,8 +24,6 @@ RUN \
         pkg-config \
         python3 \
         python-argparse \
-        binutils-mingw-w64 \
-        gcc-mingw-w64 \
         wine && \
     apt-get clean
 
@@ -37,14 +38,14 @@ CMD ["/run_shared_test.sh"]
 #    In sub-directories:
 #       c:
 #       linux: enum_link_addrs sdl_v4l_video
-#       python: cffi_example.py cffi_numpy.py crypto_dsa.py crypto_ec.py crypto_rsa.py udp_multihome.py
+#       python: cffi_example.py cffi_numpy.py crypto_dsa.py crypto_ec.py crypto_rsa.py udp_multihome.py z3_example.py
 #       verification: ackermann.vo
 #    With gcc -m32:
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
-#          python: cffi_example.py cffi_numpy.py crypto_dsa.py crypto_ec.py crypto_rsa.py udp_multihome.py
+#          python: cffi_example.py cffi_numpy.py crypto_dsa.py crypto_ec.py crypto_rsa.py udp_multihome.py z3_example.py
 #          verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok

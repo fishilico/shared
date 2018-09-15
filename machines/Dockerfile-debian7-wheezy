@@ -2,7 +2,8 @@ FROM debian:wheezy-slim
 LABEL Description="Debian 7 Wheezy with build dependencies for shared"
 
 # Do not install coq because it is too old (8.3pl4) for some features
-# Do not install wine because it is too ols (1.4.1) to work in containers
+# Do not install wine because it is too old (1.4.1) to work in containers
+# Debian<9 does not provide python-z3
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
@@ -42,14 +43,14 @@ CMD ["/run_shared_test.sh"]
 #    In sub-directories:
 #       c:
 #       linux: sdl_v4l_video seccomp
-#       python: cffi_example.py cffi_numpy.py udp_multihome.py
+#       python: cffi_example.py cffi_numpy.py udp_multihome.py z3_example.py
 #       verification: ackermann.vo
 #    With gcc -m32:
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video seccomp
-#          python: cffi_example.py cffi_numpy.py udp_multihome.py
+#          python: cffi_example.py cffi_numpy.py udp_multihome.py z3_example.py
 #          verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok

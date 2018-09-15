@@ -3,6 +3,7 @@ LABEL Description="Ubuntu 14.04 LTS Trusty Tahr with build dependencies for shar
 
 # musl malloc does not seem to support fallback to mmap and brk fails in "make test"
 #   so do not install musl-dev and musl-tools packages
+# Ubuntu<16.04 does not provide python-z3
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -50,14 +51,14 @@ CMD ["/run_shared_test.sh"]
 #    In sub-directories:
 #       c:
 #       linux:
-#       python:
+#       python: z3_example.py
 #       verification:
 #    With gcc -m32:
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
-#          python:
+#          python: z3_example.py
 #          verification:
 #    Compilers:
 #       gcc -m64: ok

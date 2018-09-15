@@ -1,6 +1,7 @@
 FROM ubuntu:16.04
 LABEL Description="Ubuntu 16.04 LTS Xenial Xerus with build dependencies for shared"
 
+# python-z3 does not install an __init__.py file, which is required with Python 2
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -36,8 +37,10 @@ RUN \
         python-crypto \
         python-dev \
         python-numpy \
+        python-z3 \
         wine && \
-    apt-get clean
+    apt-get clean && \
+    echo 'from .z3 import *' > /usr/lib/python2.7/dist-packages/z3/__init__.py
 
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
