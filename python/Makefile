@@ -13,6 +13,7 @@ HAVE_PYTHON_CFFI := $(call can-run,$(PYTHON) -c 'import cffi')
 HAVE_PYTHON_CRYPTO := $(call can-run,$(PYTHON) -c 'import Crypto')
 HAVE_PYTHON_NUMPY := $(call can-run,$(PYTHON) -c 'import numpy')
 HAVE_PYTHON3_SOCKET_RECVMSG := $(call can-run,$(PYTHON3) -c 'import socket;socket.socket.recvmsg')
+HAVE_PYTHON_Z3 := $(call can-run,$(PYTHON) -c 'import z3')
 
 ifneq ($(HAVE_PYTHON_CFFI),y)
 NONTEST_BINARIES += cffi_example.py cffi_numpy.py
@@ -26,6 +27,10 @@ endif
 
 ifneq ($(HAVE_PYTHON3_SOCKET_RECVMSG),y)
 NONTEST_BINARIES += udp_multihome.py
+endif
+
+ifneq ($(HAVE_PYTHON_Z3),y)
+NONTEST_BINARIES += z3_example.py
 endif
 
 BINARIES := $(wildcard *.py)
