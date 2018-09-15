@@ -106,6 +106,9 @@ def hexlify_bksl(data):
 def reverse_crc32(target_crc, size, polynom=POLY_CRC32_REV):
     """Find all possible inputs of the given size that produce the given CRC32
     """
+    assert -0x80000000 <= target_crc <= 0xffffffff
+    target_crc &= 0xffffffff
+
     # Define the input
     input_data = z3.BitVec("input", size * 8)
 
@@ -131,9 +134,14 @@ def reverse_crc32(target_crc, size, polynom=POLY_CRC32_REV):
     solutions = []
     for model in get_solutions(solver):
         i_found = model[input_data].as_long()
-        solutions.append(b''.join(
+        found = b''.join(
             struct.pack('B', (i_found >> (8 * i)) & 0xff)
-            for i in range(size)))
+            for i in range(size))
+        if binascii.crc32(found) & 0xffffffff == target_crc:
+            solutions.append(found)
+        else:
+            print("Warning: false-positive '{}' for CRC target 0x{:08x} (buggy z3)".format(
+                hexlify_bksl(found), target_crc))
     return solutions
 
 
@@ -225,6 +233,9 @@ def test_alphanum_guess(verbose=False):
 
     # Find all solutions
     for model in get_solutions(solver):
+        if not all(32 <= model[c].as_long() < 127 for c in input_chars):
+            print("Skipping invalid solution because of buggy z3")
+            continue
         found = ''.join(chr(model[c].as_long()) for c in input_chars)
         if verbose:
             print("Candidate {}".format(repr(found)))
