@@ -42,7 +42,7 @@ addons:
 
 install:
   # pip does not behave properly when CC is somewhat weird
-  - if [ "$CC" = "gcc" ] ; then pip install cffi numpy pycrypto z3 ; fi
+  - if [ "$CC" = "gcc" ] ; then pip install cffi numpy pycrypto z3-solver ; fi
 
 before_script:
 # Find the version of the installed kernel headers from linux-headers-generic package
