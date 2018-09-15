@@ -41,6 +41,24 @@ case "$(x86_64-w64-mingw32-gcc --version 2>/dev/null | sed -n 's/^x86_64-w64-min
         ;;
 esac
 
+# On Ubuntu 12.04 and 14.04, wine needs CAP_SYS_RAWIO=0x20000, so the Docker
+# container needs to be executed with "docker run --cap-add SYS_RAWIO" in order
+# to run Wine.
+# Otherwise, wine shows:
+#   /usr/bin/wine: error while loading shared libraries: libwine.so.1:
+#   cannot create shared object descriptor: Operation not permitted
+# and strace:
+#   mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = -1 EPERM (Operation not permitted)
+if grep '^VERSION="1[24]\.04.* LTS' /etc/os-release > /dev/null
+then
+    if grep '^CapEff:\s*0..........[014589cd]....$' /proc/self/status > /dev/null
+    then
+        echo >&2 "CAP_SYS_RAWIO is not enabled but is needed by wine on Ubuntu<16.04, disabling wine"
+        WINE=false
+        export WINE
+    fi
+fi
+
 # Temporary file to test compilation
 TMPOUT="$(mktemp -p "${TMPDIR:-/tmp}" run_shared_test_cc.out.XXXXXXXXXX)"
 if [ "$?" -ne 0 ] || [ -z "$TMPOUT" ]
