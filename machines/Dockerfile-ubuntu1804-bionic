@@ -37,6 +37,8 @@ RUN \
         python-dev \
         python-numpy \
         python-z3 \
+        wine-stable \
+        wine32 \
         wine64 && \
     apt-get clean
 

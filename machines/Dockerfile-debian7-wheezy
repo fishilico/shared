@@ -58,5 +58,5 @@ CMD ["/run_shared_test.sh"]
 #       clang -m64: ok
 #       clang -m32: not working
 #       musl-gcc: not working
-#       x86_64-w64-mingw32-gcc: ok
-#       i686-w64-mingw32-gcc: ok
+#       x86_64-w64-mingw32-gcc: only compiling
+#       i686-w64-mingw32-gcc: only compiling

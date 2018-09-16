@@ -134,19 +134,51 @@ do
     do
         if echo 'int main(void){return 0;}' | "$COMPILER" -m"$BITMODE" -Werror -x c -o"$TMPOUT" - 2>/dev/null
         then
-            echo "   $COMPILER -m$BITMODE: ok"
+            if "$TMPOUT"
+            then
+                echo "   $COMPILER -m$BITMODE: ok"
+            else
+                echo "   $COMPILER -m$BITMODE: only compiling"
+            fi
         else
             echo "   $COMPILER -m$BITMODE: not working"
         fi
     done
 done
-for COMPILER in musl-gcc x86_64-w64-mingw32-gcc i686-w64-mingw32-gcc
-do
-    if echo 'int main(void){return 0;}' | "$COMPILER" -Werror -x c -o"$TMPOUT" - 2>/dev/null
+COMPILER=musl-gcc
+if echo 'int main(void){return 0;}' | "$COMPILER" -Werror -x c -o"$TMPOUT" - 2>/dev/null
+then
+    if "$TMPOUT"
     then
         echo "   $COMPILER: ok"
     else
-        echo "   $COMPILER: not working"
+        echo "   $COMPILER: only compiling"
     fi
-done
+else
+    echo "   $COMPILER: not working"
+fi
+COMPILER=x86_64-w64-mingw32-gcc
+if echo 'int main(void){return 0;}' | "$COMPILER" -Werror -x c -o"$TMPOUT" - 2>/dev/null
+then
+    if WINEARCH=win64 "${WINE:-wine}" "$TMPOUT" >/dev/null 2>&1
+    then
+        echo "   $COMPILER: ok"
+    else
+        echo "   $COMPILER: only compiling"
+    fi
+else
+    echo "   $COMPILER: not working"
+fi
+COMPILER=i686-w64-mingw32-gcc
+if echo 'int main(void){return 0;}' | "$COMPILER" -Werror -x c -o"$TMPOUT" - 2>/dev/null
+then
+    if "${WINE:-wine}" "$TMPOUT" >/dev/null 2>&1
+    then
+        echo "   $COMPILER: ok"
+    else
+        echo "   $COMPILER: only compiling"
+    fi
+else
+    echo "   $COMPILER: not working"
+fi
 echo 'Done running tests.'
