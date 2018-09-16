@@ -236,7 +236,7 @@ def run_pycrypto_test(bits, colorize):
     # Verification
     print("Verification:")
     if has_crypto_dss:
-        verifier.verify(h_obj, encode_bigint_be(r) + encode_bigint_be(s))
+        verifier.verify(h_obj, encode_bigint_be(r, key_order_bytes) + encode_bigint_be(s, key_order_bytes))
     w = modinv(s, pubkey.q)
     h = decode_bigint_be(hashlib.sha512(test_message).digest()[:key_order_bytes]) % pubkey.q
     u_1 = (h * w) % pubkey.q
@@ -256,7 +256,7 @@ def run_pycrypto_test(bits, colorize):
     if has_crypto_dss:
         # Test message signature using Crypto API
         signature = signer.sign(h_obj)
-        assert len(signature) % 2 == 0
+        assert len(signature) == 2 * key_order_bytes
         r = decode_bigint_be(signature[:len(signature) // 2])
         s = decode_bigint_be(signature[len(signature) // 2:])
         print("DSS-SHA512 with Crypto:")
