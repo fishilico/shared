@@ -93,7 +93,7 @@ then
         echo '******************************************'
         echo '* Building with clang                    *'
         echo '******************************************'
-        make CC=clang clean test HAVE_OPENMP=n HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
+        make CC=clang clean test HAVE_PYTHON_CFFI=n KERNELVER= || exit $?
         if echo 'int main(void){return 0;}' | clang -m32 -Werror -x c -o"$TMPOUT" - 2>/dev/null
         then
             echo '******************************************'
