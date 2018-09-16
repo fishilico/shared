@@ -6,6 +6,7 @@
 """
 from cffi import FFI
 import numpy
+import os
 import os.path
 import sys
 
@@ -23,7 +24,17 @@ elif os.name == 'posix':
     filepath += '.so'
 else:
     raise RuntimeError("Unknown OS {}".format(os.name))
-_cffi_example = ffi.dlopen(filepath)
+
+env_cc = os.environ.get('CC')
+if env_cc and (' -m32' in env_cc or ' -m64' in env_cc):
+    try:
+        _cffi_example = ffi.dlopen(filepath)
+    except OSError as exc:
+        print(exc)
+        print("... skipping the test")
+        _cffi_example = None
+else:
+    _cffi_example = ffi.dlopen(filepath)
 
 
 def get_matrix_stride(mat):
@@ -100,4 +111,5 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    if _cffi_example is not None:
+        sys.exit(main())
