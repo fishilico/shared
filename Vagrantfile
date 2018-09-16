@@ -9,6 +9,35 @@
 #    script -c "echo '/vagrant/machines/docker_test_all.sh' | vagrant ssh" dockers.log
 #    ./machines/update_list_nobuild_from_log.py dockers.log
 
+# In order to carry all possibile Docker environments, at least 60 GB of storage
+# is needed in the virtual machine. To expand a disk of a VM created using
+# packer-arch and using libvirt, perform the following steps:
+# * On the host, expand the QCow2 disk file:
+#
+#    cd /var/lib/libvirt/images
+#    qemu-img resize shared_default.img +20G
+#    qemu-img info shared_default.img |grep 'virtual size:'
+#
+# * Power on the VM.
+# * On the guest, expand the partition table:
+#
+#    fdisk /dev/vda
+#    # Delete the first (and only) partition.
+#    # Create a new partition, starting at offset 2048, without removing the
+#    # ext4 partition signature.
+#
+# * On the guest, make the partition bootable again (-i installs Syslinux, -a
+#   sets the boot flag, -m installs Syslinux MBR):
+#
+#    pacman -S gptfdisk
+#    sgdisk /dev/vda --attributes=1:set:2
+#    syslinux-install_update -i -a -m
+#
+# * Reboot the VM.
+# * Resize the ext4 filesystem on the guest to fill the new space:
+#
+#    resize2fs /dev/vda1
+
 # Provisioning script: update the system, install docker and create an Arch Linux Docker image
 $script = <<SCRIPT
 timedatectl set-timezone UTC
