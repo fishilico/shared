@@ -78,6 +78,7 @@ else:
     import Crypto.Hash.SHA256
     import Crypto.Hash.SHA384
     import Crypto.Hash.SHA512
+    import Crypto.Util.asn1
 
 
 logger = logging.getLogger(__name__)
@@ -262,6 +263,220 @@ def show_jwt(jwt, show_raw=False):
     return True
 
 
+def decode_x509_dn(asn1_der_dn):
+    """Decode a DER-encoded ASN.1 Distinguished Name (DN)
+
+    A DN is used to identify the subject and the issuer of an X.509 certificate.
+    """
+    dn_asn1 = Crypto.Util.asn1.DerSequence()
+    dn_asn1.decode(asn1_der_dn)
+    dn_parts = []
+    for dn_asn1_part in dn_asn1:
+        # Decode SET (tag 0x31 = constructed tag 0x11)
+        dn_set_item = Crypto.Util.asn1.DerObject(asn1Id=0x11, constructed=True)
+        dn_set_item.decode(dn_asn1_part)
+        dn_set_seq = Crypto.Util.asn1.DerSequence()
+        dn_set_seq.decode(dn_set_item.payload)
+        if len(dn_set_seq) != 2:
+            logger.warning("Unexpected ASN.1 DN construction %s", xx(dn_set_item.payload))
+            # Fail-over by directly inserting the ill-formated item
+            dn_parts.append(xx(dn_set_item.payload))
+            continue
+        der_oid, der_value = dn_set_seq[:]
+        der_oid_hex = xx(der_oid)
+        if der_oid_hex == '060a0992268993f22c640101':
+            # OID 0.9.2342.19200300.100.1.1
+            # itu-t(0) data(9) pss(2342) ucl(19200300) pilot(100) pilotAttributeType(1) userid(1)
+            item_key = 'UID'
+        elif der_oid_hex == '0603550403':
+            # OID 2.5.4.3
+            # joint-iso-itu-t(2) ds(5) attributeType(4) commonName(3)
+            item_key = 'CN'
+        elif der_oid_hex == '0603550405':
+            # OID 2.5.4.5
+            # joint-iso-itu-t(2) ds(5) attributeType(4) serialNumber(5)
+            item_key = 'SN'
+        elif der_oid_hex == '0603550406':
+            # OID 2.5.4.6
+            # joint-iso-itu-t(2) ds(5) attributeType(4) countryName(6)
+            item_key = 'C'
+        elif der_oid_hex == '0603550407':
+            # OID 2.5.4.7
+            # joint-iso-itu-t(2) ds(5) attributeType(4) localityName(7)
+            item_key = 'L'
+        elif der_oid_hex == '0603550408':
+            # OID 2.5.4.8
+            # joint-iso-itu-t(2) ds(5) attributeType(4) stateOrProvinceName(8)
+            item_key = 'ST'
+        elif der_oid_hex == '0603550409':
+            # OID 2.5.4.9
+            # joint-iso-itu-t(2) ds(5) attributeType(4) streetAddress(9)
+            item_key = 'STREET'
+        elif der_oid_hex == '060355040a':
+            # OID 2.5.4.10
+            # joint-iso-itu-t(2) ds(5) attributeType(4) organizationName(10)
+            item_key = 'O'
+        elif der_oid_hex == '060355040b':
+            # OID 2.5.4.11
+            # joint-iso-itu-t(2) ds(5) attributeType(4) organizationalUnitName(11)
+            item_key = 'OU'
+        else:
+            # Build the OID from der_oid
+            oid_asn1 = Crypto.Util.asn1.DerObjectId()
+            oid_asn1.decode(der_oid)
+            item_key = oid_asn1.value
+            logger.warning("Unknown DN component OID %s (%s)", item_key, der_oid_hex)
+
+        value_asn1 = Crypto.Util.asn1.DerObject()
+        value_asn1.decode(der_value)
+        item_value = value_asn1.payload.decode('utf-8', errors='replace')
+        dn_parts.append("{}={}".format(
+            item_key,
+            item_value if re.match(r'^[0-9a-zA-Z._-]+$', item_value) else repr(item_value)))
+    return '/'.join(dn_parts)
+
+
+def show_pemfile(pemfile, show_raw=False):
+    """Extract a signature from an X.509 certificate in PEM format
+
+    The format of an X.509 certificate is described in "Appendix A: ASN.1 Syntax
+    for Certificates and CRLs" for RFC 1422 "Certificate-Based Key Management":
+    https://tools.ietf.org/html/rfc1422#appendix-A
+    """
+    with open(pemfile, 'rb') as fpem:
+        pem_lines = fpem.readlines()
+    try:
+        begin_index = pem_lines.index(b'-----BEGIN CERTIFICATE-----\n')
+    except ValueError:
+        logger.error("Unable to find a certificate section in %s", pemfile)
+        return False
+    try:
+        end_index = pem_lines.index(b'-----END CERTIFICATE-----\n', begin_index)
+    except ValueError:
+        logger.error("Unable to find the end of a certificate section in %s", pemfile)
+        return False
+    der_certificate = base64.b64decode(b''.join(pem_lines[begin_index + 1:end_index]))
+    cert_asn1 = Crypto.Util.asn1.DerSequence()
+    cert_asn1.decode(der_certificate)
+    # The certificate is in 3 parts: signed information, algorithm ID, signature
+    if len(cert_asn1) != 3:
+        logger.error("Invalid ASN.1 SIGNED SEQUENCE structure in certificate %s", pemfile)
+        return False
+    der_signed_information, der_algorithm_ident, der_signature = cert_asn1[:]
+
+    # https://tools.ietf.org/html/rfc1423#section-4.2.1
+    # The ASN.1 type AlgorithmIdentifier is defined in X.509 as follows.
+    # AlgorithmIdentifier ::= SEQUENCE {
+    #     algorithm         OBJECT IDENTIFIER,
+    #     parameters        ANY DEFINED BY algorithm OPTIONAL
+    # }
+    algorithm_ident_asn1 = Crypto.Util.asn1.DerSequence()
+    algorithm_ident_asn1.decode(der_algorithm_ident)
+    if len(algorithm_ident_asn1) != 2:
+        # This may occur when using ecdsa-with-SHA256 signature (1 component)
+        logger.error("Invalid ASN.1 AlgorithmIdentifier structure in %s (%d components)",
+                     pemfile, len(algorithm_ident_asn1))
+        return False
+    algo_id, algo_params = algorithm_ident_asn1[:]
+    # AlgorithmIdentifier.parameters is NULL
+    if algo_params != b'\x05\x00':
+        logger.error("Unexpected AlgorithmIdentifier.parameters in %s: %s", pemfile, xx(algo_params))
+        return False
+    hex_algo_id = xx(algo_id)
+    if hex_algo_id == '06092a864886f70d010104':
+        # OBJECT IDENTIFIER 1.2.840.113549.1.1.4 md5WithRSAEncryption
+        # OID iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) md5WithRSAEncryption(5)
+        hash_kind = 'MD5'
+    elif hex_algo_id == '06092a864886f70d010105':
+        # OBJECT IDENTIFIER 1.2.840.113549.1.1.5 sha1WithRSAEncryption
+        # OID iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) sha1-with-rsa-signature(5)
+        hash_kind = 'SHA1'
+    elif hex_algo_id == '06092a864886f70d01010b':
+        # OBJECT IDENTIFIER 1.2.840.113549.1.1.11 sha256WithRSAEncryption
+        # OID iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) sha256WithRSAEncryption(11)
+        hash_kind = 'SHA256'
+    elif hex_algo_id == '06092a864886f70d01010c':
+        # OBJECT IDENTIFIER 1.2.840.113549.1.1.12 sha384WithRSAEncryption
+        # OID iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) sha384WithRSAEncryption(12)
+        hash_kind = 'SHA384'
+    elif hex_algo_id == '06092a864886f70d01010d':
+        # OBJECT IDENTIFIER 1.2.840.113549.1.1.13 sha512WithRSAEncryption
+        # OID iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) sha512WithRSAEncryption(13)
+        hash_kind = 'SHA512'
+    elif hex_algo_id == '06092a864886f70d01010e':
+        # OBJECT IDENTIFIER 1.2.840.113549.1.1.14 sha224WithRSAEncryption
+        # OID iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) sha224WithRSAEncryption(14)
+        hash_kind = 'SHA224'
+    else:
+        logger.error("Unknown signature algorithm identifier in %s: %s", pemfile, hex_algo_id)
+        # Show the decoded OID when an error happens
+        algo_oid = Crypto.Util.asn1.DerObjectId()
+        algo_oid.decode(algo_id)
+        logger.error("... algorithm OID is %r", algo_oid.value)
+        return False
+
+    # The signature is a BIT STRING
+    signature_asn1 = Crypto.Util.asn1.DerBitString()
+    signature_asn1.decode(der_signature)
+    signature = signature_asn1.value
+    bits = len(signature) * 8
+    logger.debug("Read a RSA-%d signature with digest %s from %s", bits, hash_kind, pemfile)
+
+    # Decode the issuer from the certificate
+    signed_info_asn1 = Crypto.Util.asn1.DerSequence()
+    signed_info_asn1.decode(der_signed_information)
+    # https://tools.ietf.org/html/rfc1422#appendix-A.1
+    # Certificate ::= SIGNED SEQUENCE{
+    #       version [0]     Version DEFAULT v1988,
+    #       serialNumber    CertificateSerialNumber,
+    #       signature       AlgorithmIdentifier,
+    #       issuer          Name,
+    #       validity        Validity,
+    #       subject         Name,
+    #       subjectPublicKeyInfo    SubjectPublicKeyInfo}
+    if len(signed_info_asn1) < 6:
+        logger.error("Not enough fields in certificate %s (%d < 6)", pemfile, len(signed_info_asn1))
+        return False
+    # Sometimes the version can be missing, in which case the second item is a sequence instead of an int
+    if isinstance(signed_info_asn1[1], bytes):
+        if isinstance(signed_info_asn1[0], bytes):
+            logger.error("Unexpected construction of X.509 certificate %s", pemfile)
+            return False
+        # Add a "fake" version field
+        signed_info_asn1 = list(signed_info_asn1)
+        signed_info_asn1.insert(0, None)
+    if len(signed_info_asn1) < 7:
+        logger.error("Not enough fields in certificate %s (%d < 7)", pemfile, len(signed_info_asn1))
+        return False
+
+    issuer_dn = decode_x509_dn(signed_info_asn1[3])
+    subject_dn = decode_x509_dn(signed_info_asn1[5])
+    if issuer_dn == subject_dn:
+        # Allow specifying a self-signed certificate in order to test the program
+        logger.info("Certificate %s is self-signed. Verifying the signature", pemfile)
+        public_key_der = signed_info_asn1[6]
+        pubkey = Crypto.PublicKey.RSA.importKey(public_key_der)
+
+        encrypted_num = decode_bigint_be(signature)
+        signed_data = encapsulate_pcks1v15_digest(hash_kind, der_signed_information, bits)
+        clear_num = decode_bigint_be(signed_data)
+        if clear_num != pow(encrypted_num, pubkey.e, pubkey.n):
+            logger.error("The signature of self-signed certificate %s is incorrect", pemfile)
+        else:
+            print("# KEY_N = {:#x}".format(pubkey.n))
+            print("# KEY_E = {:#x}".format(pubkey.e))
+
+    print("# {}+RSA-{:d} signature by {} for {}".format(hash_kind, bits, issuer_dn, subject_dn))
+    if show_raw:
+        # Encapsulate the hash into the displayed message
+        msg = encapsulate_pcks1v15_digest(hash_kind, der_signed_information, bits)
+        hash_kind = 'RAW'
+    else:
+        msg = der_signed_information
+    print("{} {} {}".format(hash_kind, xx(msg), xx(signature)))
+    return True
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Find a RSA modulus")
     parser.add_argument('file', metavar="FILEPATH", nargs='?', type=str,
@@ -276,6 +491,8 @@ def main(argv=None):
                         help="file which holds saved intermediate results")
     parser.add_argument('-j', '--jwt', type=str, action='append',
                         help="Convert JWT (JSON Web Tokens) to signatures")
+    parser.add_argument('-P', '--pem', type=str, action='append',
+                        help="Convert signed certificates in PEM format to signatures")
     parser.add_argument('-g', '--generate-count', type=int,
                         help="generate a key and sign the given number of messages")
     parser.add_argument('-b', '--bits', type=int,
@@ -297,6 +514,16 @@ def main(argv=None):
         retval = 0
         for jwt in args.jwt:
             if not show_jwt(jwt, show_raw=args.raw):
+                retval = 1
+        return retval
+
+    if args.pem:
+        if not has_crypto:
+            logger.fatal("Using --pem requires PyCrypto")
+            return 1
+        retval = 0
+        for pemfile in args.pem:
+            if not show_pemfile(pemfile, show_raw=args.raw):
                 retval = 1
         return retval
 
