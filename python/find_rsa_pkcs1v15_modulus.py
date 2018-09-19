@@ -227,6 +227,41 @@ def hash_algorithm(alg, allow_raw=False):
     raise ValueError("Unknown hash algorithm {}".format(alg))
 
 
+def show_jwt(jwt, show_raw=False):
+    """Decode a JWT according to https://tools.ietf.org/html/rfc7519"""
+    # JSON web tokens have three parts: header, payload and signature.
+    # A JWT may have only two parts if it is not signed ("alg=none").
+    jwt = jwt.strip()
+    jwt_parts = jwt.split('.')
+    if len(jwt_parts) != 3:
+        logger.error("Syntax error in JWT token: only %d parts", len(jwt_parts))
+        return False
+    jwt_header = json.loads(b64url_decode(jwt_parts[0]))
+    jwt_type = jwt_header.get('typ', '(no type)')
+    jwt_alg = jwt_header.get('alg')
+    if not jwt_alg:
+        logger.error("No signature algorithm in JWT header %r", jwt_header)
+        return False
+    m = re.match(r'^RS(256|384|512)$', jwt_alg)
+    if not m:
+        logger.error("Non-RSA JWT signature algorithm %r", jwt_alg)
+        return False
+
+    hash_kind = hash_algorithm('SHA' + m.group(1))
+    msg = jwt.rsplit('.', 1)[0].encode('ascii')
+    jwt_signature = b64url_decode(jwt_parts[2])
+    bits = len(jwt_signature) * 8
+
+    if show_raw:
+        # Encapsulate the hash into the displayed message
+        msg = encapsulate_pcks1v15_digest(hash_kind, msg, bits)
+        hash_kind = 'RAW'
+
+    print("# {} RSA-{:d} + SHA-{} {}".format(jwt_type, bits, m.group(1), jwt))
+    print("{} {} {}".format(hash_kind, xx(msg), xx(jwt_signature)))
+    return True
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Find a RSA modulus")
     parser.add_argument('file', metavar="FILEPATH", nargs='?', type=str,
@@ -247,6 +282,8 @@ def main(argv=None):
                         help="size of the generated RSA key, in bits (default 2048)")
     parser.add_argument('-H', '--hash', type=hash_algorithm, default='SHA1',
                         help="hash algorithm to use when genrating messages (default SHA1)")
+    parser.add_argument('-R', '--raw', action='store_true',
+                        help="show raw PKCS#1 v1.5 cleartextes instead of hashed messages")
     args = parser.parse_args(argv)
 
     # Log with the date, because computations can last several days
@@ -259,33 +296,8 @@ def main(argv=None):
     if args.jwt:
         retval = 0
         for jwt in args.jwt:
-            # Decode a JWT according to https://tools.ietf.org/html/rfc7519
-            # JSON web tokens have three parts: header, payload and signature.
-            # A JWT may have only two parts if it is not signed ("alg=none").
-            jwt = jwt.strip()
-            jwt_parts = jwt.split('.')
-            if len(jwt_parts) != 3:
-                logger.error("Syntax error in JWT token: only %d parts", len(jwt_parts))
+            if not show_jwt(jwt, show_raw=args.raw):
                 retval = 1
-                continue
-            jwt_header = json.loads(b64url_decode(jwt_parts[0]))
-            jwt_type = jwt_header.get('typ', '(no type)')
-            jwt_alg = jwt_header.get('alg')
-            if not jwt_alg:
-                logger.error("No signature algorithm in JWT header %r", jwt_header)
-                retval = 1
-                continue
-            m = re.match(r'^RS(256|384|512)$', jwt_alg)
-            if not m:
-                logger.error("Non-RSA JWT signature algorithm %r", jwt_alg)
-                retval = 1
-                continue
-            hash_kind = hash_algorithm('SHA' + m.group(1))
-            msg = jwt.rsplit('.', 1)[0].encode('ascii')
-            jwt_signature = b64url_decode(jwt_parts[2])
-            bits = len(jwt_signature) * 8
-            print("# {} RSA-{:d} + SHA-{} {}".format(jwt_type, bits, m.group(1), jwt))
-            print("{} {} {}".format(hash_kind, xx(msg), xx(jwt_signature)))
         return retval
 
     if args.generate_count:
@@ -321,7 +333,12 @@ def main(argv=None):
             clear_num = decode_bigint_be(pkcs1_15_digest)
             encrypted_num = pow(clear_num, key.d, key.n)
             assert signature == encode_bigint_be(encrypted_num, bits // 8)
-            print("{} {} {}".format(hash_kind, xx(msg), xx(signature)))
+
+            if args.raw:
+                print("# {} {}".format(hash_kind, xx(msg)))
+                print("RAW {} {}".format(xx(pkcs1_15_digest), xx(signature)))
+            else:
+                print("{} {} {}".format(hash_kind, xx(msg), xx(signature)))
         return 0
 
     if not args.file:
@@ -371,6 +388,17 @@ def main(argv=None):
     if not msg_and_signatures:
         logger.error("File %s is empty", args.file)
         return 1
+
+    if args.raw:
+        # Show raw PKCS#1 v1.5-encapsulated digests
+        if debug_gen_key_n:
+            # Keep the debugging N, if provided
+            print("# KEY_N = {:#x}".format(debug_gen_key_n))
+        for hash_kind, msg, signature in msg_and_signatures:
+            pkcs1_15_digest = encapsulate_pcks1v15_digest(hash_kind, msg, bits)
+            print("# {} {}".format(hash_kind, xx(msg)))
+            print("RAW {} {}".format(xx(pkcs1_15_digest), xx(signature)))
+        return 0
 
     logger.info("Loaded %d %d-bit signatures", len(msg_and_signatures), bits)
 
