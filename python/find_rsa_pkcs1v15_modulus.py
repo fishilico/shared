@@ -633,6 +633,15 @@ def main(argv=None):
 
     logger.info("Loaded %d %d-bit signatures", len(msg_and_signatures), bits)
 
+    # Verify that math.gcd is available
+    if args.math_gcd:
+        if not hasattr(math, 'gcd'):
+            if sys.version_info < (3, 5):
+                logger.error("math.gcd is not supported on Python<3.5, please remove option --math-gcd")
+            else:
+                logger.fatal("math.gcd has not been found even though it should be present!")
+            return 1
+
     # Restore a previously found modulus
     save_file = ModulusSaveFile(args.savefile)
     current_modulus = save_file.load()
