@@ -73,7 +73,7 @@ except ImportError:
 else:
     import Crypto.PublicKey.RSA
     import Crypto.Hash.MD5
-    import Crypto.Hash.SHA1
+    import Crypto.Hash.SHA
     import Crypto.Hash.SHA224
     import Crypto.Hash.SHA256
     import Crypto.Hash.SHA384
@@ -145,7 +145,7 @@ class ModulusSaveFile(object):
                         modulus = new_modulus
             logger.info("Loaded %d bits from %s", modulus.bit_length(), self.filepath)
             return modulus
-        except OSError as exc:
+        except IOError as exc:
             if exc.errno == errno.ENOENT:
                 logger.info("No saved file found. Starting from nothing")
                 return None
@@ -545,7 +545,11 @@ def main(argv=None):
 
         # Sign messages
         hash_kind = args.hash
-        hash_class = getattr(Crypto.Hash, hash_kind)
+        if hash_kind == 'SHA1':
+            # Old versions of PyCrypto use Crypto.Hash.SHA instead of Crypto.Hash.SHA1
+            hash_class = Crypto.Hash.SHA
+        else:
+            hash_class = getattr(Crypto.Hash, hash_kind)
         for i in range(args.generate_count):
             msg = struct.pack('>Q', i)
             engine = Crypto.Signature.PKCS1_v1_5.new(key)
