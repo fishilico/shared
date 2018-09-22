@@ -71,6 +71,8 @@ Hacking
   WarBerryPi - Tactical Exploitation
 * https://github.com/radareorg/r2con/blob/master/2016/trainings/02-a-to-z/r2con-AtoZ.pdf
   Radare from A to Z - extended edition
+* https://github.com/radareorg/cutter
+  A Qt and C++ GUI for radare2 reverse engineering framework
 * https://www.elttam.com.au/blog/intro-sdr-and-rf-analysis/
   Intro to SDR and RF signal analysis
 * https://github.com/avast-tl/retdec
@@ -79,6 +81,13 @@ Hacking
 * https://github.com/cloudburst/libheap/blob/master/heap.png
   Map of ptmalloc (the glibc userland heap implementation)
 * https://lief-project.github.io/ LIEF, Library to Instrument Executable Formats
+* https://github.com/bkimminich/juice-shop
+  OWASP Juice Shop is an intentionally insecure webapp for security trainings written entirely in Javascript
+* https://github.com/PowerShellMafia/PowerSploit
+  PowerSploit - A PowerShell Post-Exploitation Framework
+* https://www.powershellempire.com
+  PowerShell Empire | Building an Empire with PowerShell
+* https://retdec.com/ open-source machine-code decompiler based on LLVM.
 
 Debuggers
 ~~~~~~~~~
@@ -105,6 +114,8 @@ Windows exploitation
   or reflectively injects a DLL in to a remote process.)
 * https://github.com/leechristensen/UnmanagedPowerShell UnmanagedPowerShell
 * https://www.powershellempire.com Powershell Empire
+* https://speakerdeck.com/ropnop/fun-with-ldap-kerberos-and-msrpc-in-ad-environments
+  Fun with LDAP, Kerberos (and MSRPC) in AD Environments
 
 Programming
 -----------
@@ -196,7 +207,10 @@ Internet
     - http://media.economist.com/sites/default/files/cf_images/images-magazine/2012/12/01/FB/20121201_FBD000.png
       Map of the Realms of GAFA (The Economist, 2012)
     - http://submarine-cable-map-2014.telegeography.com/
-      Map of Submarine Internet cables
+      Map of Submarine Internet cables 2014
+    - https://submarine-cable-map-2018.telegeography.com/
+      Map of Submarine Internet cables 2018
+    - https://openinframap.org/ Map of power infrastructures
 
 * http://www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-entirely-text-based-linux-environment
   Install Dropbox In An Entirely Text-Based Linux Environment
@@ -208,6 +222,7 @@ Internet
   You Don't Need JavaScript
 * https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software
   The 2018 Guide to Building Secure PHP Software
+* https://caniuse.com/ Can I use... Support tables for HTML5, CSS3, etc
 
 Hardware products
 -----------------

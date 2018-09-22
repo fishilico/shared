@@ -16,6 +16,11 @@ Linux
   A weekly roundup of Linux Kernel Mailing List threads but with a lot more sarcasm
 * https://github.com/lkl/linux Linux Kernel Library project
 * https://github.com/fox-it/linux-luks-tpm-boot Boot with TrustedGRUB2, TPM and LUKS
+* https://github.com/m0nad/Diamorphine
+  LKM rootkit for Linux Kernels 2.6.x/3.x/4.x (x86 and x86_64)
+* https://github.com/zevv/lsofgraph
+  A small utility to convert Unix lsof output to a graph showing FIFO and UNIX interprocess communication.
+* https://www.brow.sh/ brow.sh, the modern text-based browser
 
 Windows
 -------
@@ -34,6 +39,8 @@ Apple
 * https://opensource.apple.com/ Apple Open Source
 * https://github.com/apple/darwin-xnu
   XNU kernel is part of the Darwin operating system for use in OS X and iOS operating systems.
+* https://github.com/bazad/blanket
+  Blanket is a sandbox escape targeting iOS 11.2.6 (good introduction to Apple exploitation)
 
 Microkernels and unikernels
 ---------------------------
