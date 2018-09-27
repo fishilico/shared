@@ -79,10 +79,8 @@ if _cffi_example is not None:
     print(ffi.string(_cffi_example.helloworld).decode('utf-8'))
     print("The answer is {}".format(_cffi_example.get_answer()))
 
-
     # Using stringpair requires weak references
     global_weakkeydict = weakref.WeakKeyDictionary()
-
 
     def new_stringpair(str1, str2):
         """Create a new stringpair structure"""

@@ -32,6 +32,9 @@ endif
 BINARIES := $(wildcard *.py)
 TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(BINARIES))
 
+# Some lines are large
+FLAKE8_PARAMS += --max-line-length=512
+
 # Disable too-many-instance-attributes, too-many-arguments
 PYLINT_PARAMS += --disable=R0902,R0913
 # Disable invalid-name, superfluous-parens

@@ -308,6 +308,7 @@ def main():
                 print("  => kernel .text at {:#x}".format(ktext))
     return 0
 
+
 if __name__ == '__main__':
     logging.basicConfig(format='[%(levelname)s] %(message)s',
                         level=logging.DEBUG)

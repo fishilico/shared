@@ -62,6 +62,7 @@ def check_all_shellcodes():
             retval = False
     return retval
 
+
 if __name__ == '__main__':
     import sys
     sys.exit(0 if check_all_shellcodes() else 1)

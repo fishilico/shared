@@ -187,11 +187,11 @@ class Instruction(object):
             line += ' # ' + comment
         print(line)
 
-    def show_merge(self, previous, meta):
+    def show_merge(self, prev, meta):
         """When having a previous instruction, it may be possible to merge with
         """
-        if previous is not None:
-            previous.show(meta)
+        if prev is not None:
+            prev.show(meta)
         return self
 
 
@@ -270,11 +270,11 @@ class BinOpInst(Instruction):
             return self
 
         # Merge two <<  together if no carry
-        if (prev.op == self.op and self.op in ('<<', '>>') and
-                not self.carry and not prev.carry and prev.rdest == self.rdest):
-            prev.size += self.size
-            prev.src.value += self.src.value
-            return prev
+        if prev.op == self.op and self.op in ('<<', '>>') and prev.rdest == self.rdest:
+            if not self.carry and not prev.carry:
+                prev.size += self.size
+                prev.src.value += self.src.value
+                return prev
 
         # Ignore previous if not the same op
         if prev.op != self.op:

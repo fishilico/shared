@@ -472,7 +472,7 @@ def decode_openssh_private_key(private_key, colorize):
 
     # Python2 requires long values
     if sys.version_info < (3,):
-        privkey_e = long(privkey_e)
+        privkey_e = long(privkey_e)  # noqa
 
     return Crypto.PublicKey.RSA.construct((privkey_n, privkey_e, privkey_d, privkey_p, privkey_q))
 

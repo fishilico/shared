@@ -221,9 +221,9 @@ class ECPoint(object):
 
         p = self.curve.p
         a = self.curve.a
-        l = ((3 * self.x * self.x + a) * modinv(2 * self.y, p)) % p
-        x3 = (l * l - 2 * self.x) % p
-        y3 = (l * (self.x - x3) - self.y) % p
+        slope = ((3 * self.x * self.x + a) * modinv(2 * self.y, p)) % p
+        x3 = (slope * slope - 2 * self.x) % p
+        y3 = (slope * (self.x - x3) - self.y) % p
         return ECPoint(self.curve, x3, y3)
 
     def __add__(self, other):
@@ -273,9 +273,9 @@ class ECPoint(object):
             assert self.y == other.y
             return self.mul_2()
 
-        l = ((other.y - self.y) * modinv(other.x - self.x, p)) % p
-        x3 = (l * l - self.x - other.x) % p
-        y3 = (l * (self.x - x3) - self.y) % p
+        slope = ((other.y - self.y) * modinv(other.x - self.x, p)) % p
+        x3 = (slope * slope - self.x - other.x) % p
+        y3 = (slope * (self.x - x3) - self.y) % p
         return ECPoint(self.curve, x3, y3)
 
     def __sub__(self, other):
@@ -348,11 +348,11 @@ class StandardCurve(object):
     def verify_generation_from_seed(self, seed, seed_check):
         """Verify that the generated parameters come from the given SHA-1 seed"""
         assert 152 < seed.bit_length() <= 160
-        l = self.p.bit_length()
-        w = (l - 1) % 160
+        plen = self.p.bit_length()
+        w = (plen - 1) % 160
         h = hashlib.sha1(encode_bigint_be(seed, 20)).digest()
         hh = encode_bigint_be(decode_bigint_be(h) % (2 ** w))
-        for i in range((l - 1) // 160):
+        for i in range((plen - 1) // 160):
             hh += hashlib.sha1(encode_bigint_be(seed + 1 + i)).digest()
 
         c = decode_bigint_be(hh)

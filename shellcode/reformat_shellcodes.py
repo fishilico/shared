@@ -52,11 +52,11 @@ def disassemble_shcbin(binfile, objdumpcmd):
         output = subprocess.check_output(cmd)
     except subprocess.CalledProcessError:
         print("Unable to disassemble {}, ignoring.".format(binfile))
-        return
+        return None
     except OSError as exc:
         if exc.errno == errno.ENOENT:
             print("Unable to find {} command.".format(objdumpcmd))
-            return
+            return None
         raise
 
     instructions = []
@@ -70,7 +70,7 @@ def disassemble_shcbin(binfile, objdumpcmd):
                 asm = asm.split(';')[0].strip()
                 asm = asm.split('// #')[0].strip()
                 instructions.append((hexby, asm))
-            elif len(instructions) > 0:
+            elif instructions:
                 # Continued instruction
                 lastinstr = instructions[-1]
                 instructions[-1] = (lastinstr[0] + ' ' + hexby, lastinstr[1])

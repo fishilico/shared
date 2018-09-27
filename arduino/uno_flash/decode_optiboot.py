@@ -30,8 +30,8 @@ import os.path
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), os.pardir))
-import utils
-from atmega328p import ATmega328PMeta, Label
+import utils  # noqa
+from atmega328p import ATmega328PMeta, Label  # noqa
 
 
 # Optiboot labels

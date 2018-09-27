@@ -28,8 +28,8 @@ import os.path
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), os.pardir))
-import utils
-from atmega328p import ATmega328PMeta, Label
+import utils  # noqa
+from atmega328p import ATmega328PMeta, Label  # noqa
 
 
 LABELS = [
@@ -499,6 +499,7 @@ def decode(filepath, labels):
 
     # Second pass: dump everything
     meta.show_all()
+
 
 if __name__ == '__main__':
     decode(os.path.join(os.path.dirname(__file__), 'initialflash.hex'), LABELS)

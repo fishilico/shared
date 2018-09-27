@@ -219,11 +219,10 @@ def main(argv=None):
     if args.run:
         if plat_sys == 'Linux':
             return run_code_linux(shc)
-        elif plat_sys == 'Windows':
+        if plat_sys == 'Windows':
             return run_code_windows(shc)
-        else:
-            sys.stderr.write("System {} not implemented\n".format(plat_sys))
-            return 1
+        sys.stderr.write("System {} not implemented\n".format(plat_sys))
+        return 1
 
     return 0
 

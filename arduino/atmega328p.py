@@ -30,7 +30,7 @@ http://svn.savannah.nongnu.org/viewvc/trunk/avr-libc/include/avr/iom328p.h?root=
 @license: MIT
 """
 # pylint: disable=unused-import
-from avr8bit_instructions import AVR8Meta, Label
+from avr8bit_instructions import AVR8Meta, Label  # noqa
 
 # Ports
 # sed -n "s/# *define \([^ ]*\)  *_SFR_IO8(0x\(.*\))/    0x\2: '\1',/p" \

@@ -138,5 +138,6 @@ def sync_shellcode_py():
         fsh.write(''.join(newlines))
     return True
 
+
 if __name__ == '__main__':
     sys.exit(0 if sync_shellcode_py() else 1)
