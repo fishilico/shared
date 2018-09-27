@@ -1,10 +1,10 @@
 include ../os-detect.mk
+include ../env-python.mk
 
 CHMOD ?= chmod
 GREP ?= grep
 OBJCOPY ?= objcopy
 OBJDUMP ?= objdump
-PYTHON ?= python
 SHA512SUM ?= sha512sum
 UNAME ?= uname
 
@@ -28,6 +28,10 @@ all: $(ALL_TARGETS)
 clean:
 	$(CLEAN_CMD)
 
+lint:
+	$(FLAKE8) $(FLAKE8_PARAMS) *.py
+	$(PYLINT) $(PYLINT_PARAMS) *.py
+
 test: all $(ALL_TARGETS:%.raw.out=%.$(BIN_EXT))
 	@$(call run-test-progs,$(wildcard *.py))
 ifeq ($(TARGET_OS), linux)
@@ -49,5 +53,5 @@ shcdump: $(SHELLCODE_RAW) $(SHELLCODE_BIN)
 .%.o: %.S
 	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-.PHONY: all clean test shcdump
+.PHONY: all clean lint test shcdump
 .PRECIOUS: %.$(BIN_EXT) .%.o

@@ -8,6 +8,10 @@ PYTHON3 ?= python3
 RM ?= rm -f
 SH ?= sh
 
+# Python linters
+FLAKE8 ?= flake8
+PYLINT ?= pylint
+
 # Define "quiet" commands, with V=1, like git and systemd project
 ifneq ($(findstring $(MAKEFLAGS), s), s)
 ifndef V

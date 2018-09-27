@@ -1,22 +1,15 @@
+include ../../env-python.mk
+
 OBJCOPY ?= objcopy
-PYTHON3 ?= python3
 # Use current python binary instead of system default for coverage
 COVERAGE ?= $(PYTHON3) $(shell which coverage)
 
-PEP8 ?= pep8
-PYLINT ?= pylint
-
-PEP8_PARAMS := --max-line-length=120
-
-PYLINT_PARAMS := --msg-template='L{line}: {msg_id}({symbol}) {msg}'
-PYLINT_PARAMS += --max-line-length=120
 PYLINT_PARAMS += --min-public-methods=1
 PYLINT_PARAMS += --disable=duplicate-code
 PYLINT_PARAMS += --disable=invalid-name
 PYLINT_PARAMS += --disable=locally-disabled
 PYLINT_PARAMS += --disable=too-many-lines
 
-include ../../common.mk
 
 all: initialflash.bin
 
@@ -34,7 +27,7 @@ coverage:
 	$(COVERAGE) html "--include=./*.py"
 
 lint:
-	$(PEP8) $(PEP8_PARAMS) *.py
+	$(FLAKE8) $(FLAKE8_PARAMS) *.py
 	$(PYLINT) $(PYLINT_PARAMS) *.py
 
 test: all

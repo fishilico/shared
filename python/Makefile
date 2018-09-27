@@ -1,9 +1,5 @@
 include ../os-detect.mk
-
-PYTHON ?= python
-PYTHON3 ?= python3
-PEP8 ?= pep8
-PYLINT ?= pylint
+include ../env-python.mk
 
 # Programs not to test automatically
 NEVER_TEST_BINARIES := find_rsa_pkcs1v15_modulus.py image_lsb.py matplotlib_feed_plot3d.py unicode_norm.py
@@ -36,10 +32,6 @@ endif
 BINARIES := $(wildcard *.py)
 TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(BINARIES))
 
-# Ignore line-too-long
-PEP8_PARAMS := '--ignore=E501'
-
-PYLINT_PARAMS := '--msg-template=L{line}: {msg_id}({symbol}) {msg}'
 # Disable too-many-instance-attributes, too-many-arguments
 PYLINT_PARAMS += --disable=R0902,R0913
 # Disable invalid-name, superfluous-parens
@@ -57,7 +49,7 @@ clean:
 	$(CLEAN_CMD)
 
 lint:
-	$(PEP8) $(PEP8_PARAMS) *.py
+	$(FLAKE8) $(FLAKE8_PARAMS) *.py
 	$(PYLINT) $(PYLINT_PARAMS) *.py
 
 # Do not report scripts which have no chance to being tested in list-nobuild
