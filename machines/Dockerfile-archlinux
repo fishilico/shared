@@ -60,6 +60,7 @@ CMD ["/run_shared_test.sh"]
 #       c:
 #       linux:
 #       python:
+#       python/crypto:
 #       verification:
 #    With gcc -m32:
 #       Global blacklist: latex%
@@ -67,6 +68,7 @@ CMD ["/run_shared_test.sh"]
 #          c: gmp_functions gtk_alpha_window
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
 #          python:
+#          python/crypto:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok
