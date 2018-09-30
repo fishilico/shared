@@ -43,7 +43,7 @@ $(GMP_PROGRAMS:%=%.$(BIN_EXT)): LIBS += -lgmp
 # On Debian wheezy, clang (version 3.0) uses gcc's omp.h but does not support
 # OpenMP pragmas nor library.  Therefore test the actual linking.
 HAVE_OPENMP_CPP := $(call ccpp-has-option,-fopenmp -include omp.h)
-HAVE_OPENMP_LD := $(call can-run-with-tmp,.test-openmp.tmp,echo "int main(void){return omp_get_thread_num();}" |$(CC) -Werror -fopenmp -include omp.h -x c -o".test-openmp.tmp" - && ./.test-openmp.tmp)
+HAVE_OPENMP_LD := $(call can-run-with-tmp,.test-openmp.tmp,echo "int main(void){return omp_get_thread_num();}" |$(CC) $(LDFLAGS) -Werror -fopenmp -include omp.h -x c -o".test-openmp.tmp" - && ./.test-openmp.tmp)
 HAVE_OPENMP := $(if $(filter yy,$(HAVE_OPENMP_CPP)$(HAVE_OPENMP_LD)),y,n)
 ifeq ($(HAVE_OPENMP),y)
 PROGRAMS += $(OPENMP_PROGRAMS)
