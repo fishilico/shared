@@ -30,10 +30,24 @@ purge_docker_cache() {
 }
 
 test_dockerfile() {
-    local DOCKERFILE BASE_NAME IMAGE_NAME DISK_SIZE
+    local DOCKERFILE BASE_NAME BASE_NAME_NAME IMAGE_NAME DISK_SIZE
 
     DOCKERFILE="$1"
-    BASE_NAME="${DOCKERFILE#Dockerfile-}"
+    BASE_NAME="$(./get_base_name.sh "$1")"
+    if [ -z "$BASE_NAME" ]
+    then
+        echo >&2 "Unable to get base name of $1"
+        return 1
+    fi
+
+    # Ensure get_base_name.sh is idempotent
+    BASE_NAME_NAME="$(./get_base_name.sh "$1")"
+    if [ "$BASE_NAME" != "$BASE_NAME_NAME" ]
+    then
+        echo >&2 "Fatal error: get_base_name.sh is not idempotent: $BASE_NAME => $BASE_NAME_NAME"
+        exit 1
+    fi
+
     IMAGE_NAME="shared-$BASE_NAME"
 
     # Grab the previous Docker image ID, if any
