@@ -23,6 +23,8 @@
 
 CPU Microcode repository: https://github.com/platomav/CPUMicrocodes
 """
+from __future__ import unicode_literals
+
 import argparse
 import ctypes
 import ctypes.util
@@ -1906,7 +1908,7 @@ class X86CPUInfo(CPUInfo):
             cpuid_function(regs)
             return regs
         max_code, vendor0, vendor2, vendor1 = cpuid(0)
-        vendor_id = struct.pack('<III', vendor0, vendor1, vendor2)
+        vendor_id = struct.pack(b'<III', vendor0, vendor1, vendor2)
         cpuid_1 = cpuid(1)[0] if max_code >= 1 else 0
 
         max_extcode = cpuid(0x80000000)[0]
@@ -1914,7 +1916,7 @@ class X86CPUInfo(CPUInfo):
             brand_string = b''
             for i in range(3):
                 eax, ebx, ecx, edx = cpuid(0x80000002 + i)
-                brand_string += struct.pack('<IIII', eax, ebx, ecx, edx)
+                brand_string += struct.pack(b'<IIII', eax, ebx, ecx, edx)
             model_name = brand_string.decode('ascii').rstrip('\0')
         else:
             model_name = None
