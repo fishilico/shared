@@ -1,6 +1,9 @@
 FROM debian:jessie-slim
 LABEL Description="Debian 8 Jessie with build dependencies for shared"
 
+# Override the language to force UTF-8 output
+ENV LANG C.UTF-8
+
 # Debian<9 does not provide python-z3
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \

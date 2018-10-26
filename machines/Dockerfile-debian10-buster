@@ -1,6 +1,9 @@
 FROM debian:buster-slim
 LABEL Description="Debian 10 Buster with build dependencies for shared"
 
+# Override the language to force UTF-8 output
+ENV LANG C.UTF-8
+
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \

@@ -1,6 +1,9 @@
 FROM fedora:28
 LABEL Description="Fedora 28 with build dependencies for shared"
 
+# Override the language to force UTF-8 output
+ENV LANG C.UTF-8
+
 RUN \
     dnf update -q -y --setopt=deltarpm=false && \
     dnf install -q -y --setopt=deltarpm=false \

@@ -1,6 +1,9 @@
 FROM ubuntu:14.04
 LABEL Description="Ubuntu 14.04 LTS Trusty Tahr with build dependencies for shared"
 
+# Override the language to force UTF-8 output
+ENV LANG C.UTF-8
+
 # musl malloc does not seem to support fallback to mmap and brk fails in "make test"
 #   so do not install musl-dev and musl-tools packages
 # Ubuntu<16.04 does not provide python-z3
