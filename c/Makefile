@@ -35,6 +35,16 @@ PROGRAMS += $(GMP_PROGRAMS)
 endif
 $(GMP_PROGRAMS:%=%.$(BIN_EXT)): LIBS += -lgmp
 
+# On some distributions (e.g. Sabayon with -m32), using OpenMP requires linking
+# with libatomic. On others, libatomic is not available but OpenMP still works.
+# In order to support both cases, find out whether libatomic is available.
+HAVE_LIBATOMIC := $(call ccld-has-option,-latomic)
+ifeq ($(HAVE_LIBATOMIC),y)
+LIBATOMIC_LIBS := -latomic
+else
+LIBATOMIC_LIBS :=
+endif
+
 # When gcc is not compiled with pthread, -fopenmp makes the preprocessor fails
 # clang 3.5.0 has partial support for OpenMP, omp.h is missing but gcc's omp.h
 # can be used, and can even be set up in clang include files by copying
@@ -43,12 +53,13 @@ $(GMP_PROGRAMS:%=%.$(BIN_EXT)): LIBS += -lgmp
 # On Debian wheezy, clang (version 3.0) uses gcc's omp.h but does not support
 # OpenMP pragmas nor library.  Therefore test the actual linking.
 HAVE_OPENMP_CPP := $(call ccpp-has-option,-fopenmp -include omp.h)
-HAVE_OPENMP_LD := $(call can-run-with-tmp,.test-openmp.tmp,echo "int main(void){return omp_get_thread_num();}" |$(CC) $(LDFLAGS) -Werror -fopenmp -include omp.h -x c -o".test-openmp.tmp" - && ./.test-openmp.tmp)
+HAVE_OPENMP_LD := $(call can-run-with-tmp,.test-openmp.tmp,echo "int main(void){return omp_get_thread_num();}" |$(CC) $(LDFLAGS) -Werror -fopenmp -include omp.h -x c -o".test-openmp.tmp" - $(LIBATOMIC_LIBS) && ./.test-openmp.tmp)
 HAVE_OPENMP := $(if $(filter yy,$(HAVE_OPENMP_CPP)$(HAVE_OPENMP_LD)),y,n)
 ifeq ($(HAVE_OPENMP),y)
 PROGRAMS += $(OPENMP_PROGRAMS)
 endif
 $(OPENMP_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -fopenmp
+$(OPENMP_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(LIBATOMIC_LIBS)
 $(OPENMP_PROGRAMS:%=.%.o): CFLAGS += -fopenmp $(call cc-disable-warning,source-uses-openmp)
 
 # Only compile Gtk+ programs where $(CC) is not used for cross-compilation
