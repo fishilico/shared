@@ -27,6 +27,14 @@ case "$(sed -n 's/^ID=//p' /etc/os-release /usr/lib/os-release 2>/dev/null | hea
         KERNELVER="$(LANG=C rpm -qi kernel-devel 2>/dev/null |
             sed -n 's/^Source RPM *: kernel-\(.*\).src.rpm$/\1.x86_64/p' | tail -n 1)"
         ;;
+    gentoo)
+        KERNELVER="$(LANG=C eselect --brief kernel show 2>/dev/null |
+            sed -n 's:^\s*/usr/src/linux-::p' | head -n 1)"
+        ;;
+    sabayon)
+        KERNELVER="$(LC_ALL=en_US.UTF-8 equo query files linux-sabayon 2>/dev/null |
+            sed -n 's:^.* /lib/modules/\([^/]\+\)/.*:\1:p' | head -n 1)"
+        ;;
     ubuntu)
         KERNELVER="$(LANG=C dpkg --status linux-headers-generic 2>/dev/null |
             sed -n 's/^Depends: linux-headers-\(.*\)/\1/p' | head -n 1)"
@@ -56,6 +64,17 @@ then
         echo >&2 "CAP_SYS_RAWIO is not enabled but is needed by wine on Ubuntu<16.04, disabling wine"
         WINE=false
         export WINE
+    fi
+fi
+
+# Gentoo and Sabayon install clang in /usr/lib/llvm/$VERSION/bin/clang
+# Add this directory to $PATH if clang does not exist in current $PATH.
+if ! clang --version 2>/dev/null
+then
+    LLVM_DIR="$(ls -1 -d /usr/lib/llvm/*/bin 2> /dev/null | head -n1)"
+    if [ -n "$LLVM_DIR" ]
+    then
+        PATH="$LLVM_DIR:$PATH"
     fi
 fi
 
