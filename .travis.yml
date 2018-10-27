@@ -7,19 +7,27 @@ python:
 dist: xenial
 sudo: false
 
-env:
-  # gcc without MinGW
-  - CC=gcc WINCC=false WITH_KERN=true
-  - CC="gcc -m32" WINCC=false
-  # clang without MinGW
-  - CC=clang WINCC=false
-  - CC="clang -m32" WINCC=false
-  # MinGW compilation
-  - OS=Windows_NT WINCC=x86_64-w64-mingw32-gcc CC=$WINCC
-  - OS=Windows_NT WINCC=i686-w64-mingw32-gcc CC=$WINCC
-  # MinGW compilation with ANSI function instead of the wide-character ones
-  - OS=Windows_NT WINCC=x86_64-w64-mingw32-gcc CC=$WINCC HAVE_UNICODE=n
-  - OS=Windows_NT WINCC=i686-w64-mingw32-gcc CC=$WINCC HAVE_UNICODE=n
+matrix:
+  include:
+    # gcc without MinGW
+    - env: CC=gcc WINCC=false WITH_KERN=true
+    - env: CC="gcc -m32" WINCC=false
+    # clang without MinGW
+    - env: CC=clang WINCC=false
+    - env: CC="clang -m32" WINCC=false
+    # MinGW compilation
+    # In a container, wine fails to load with the following error:
+    # /usr/bin/wine: error while loading shared libraries: libwine.so.1: cannot create shared object descriptor: Operation not permitted
+    # Because of this, use "sudo: true" for Wine-based builds.
+    - env: OS=Windows_NT WINCC=x86_64-w64-mingw32-gcc CC=$WINCC
+      sudo: true
+    - env: OS=Windows_NT WINCC=i686-w64-mingw32-gcc CC=$WINCC
+      sudo: true
+    # MinGW compilation with ANSI function instead of the wide-character ones
+    - env: OS=Windows_NT WINCC=x86_64-w64-mingw32-gcc CC=$WINCC HAVE_UNICODE=n
+      sudo: true
+    - env: OS=Windows_NT WINCC=i686-w64-mingw32-gcc CC=$WINCC HAVE_UNICODE=n
+      sudo: true
 
 addons:
   apt:
