@@ -119,7 +119,7 @@ AES_INV_SBOX = (
 )
 assert len(AES_INV_SBOX) == 256
 
-# Rcon, round constant for key expansion
+# Rcon, round constants for key expansion
 AES_RCON = (0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36)
 assert len(AES_RCON) == 10
 
@@ -1661,7 +1661,7 @@ class SimpleAES_4x4Bytes(object):
         self.expanded_dec_key[0:self.nb] = w[self.nb * self.nr:]
         self.expanded_dec_key[self.nb * self.nr:] = w[0:self.nb]
         for i in range(4, self.nb * self.nr):
-            # j = 4 * self.nr - (i & ~3) + (i & 3)]
+            # j = 4 * self.nr - (i & ~3) + (i & 3)
             j = self.nb * self.nr - ((i // self.nb) * self.nb) + (i % self.nb)
             temp = w[j]
             temp = mult_4term_polynoms(temp, (0xe, 0x9, 0xd, 0xb))
@@ -1874,7 +1874,7 @@ class SimpleAES_4x32bWords(object):
         self.expanded_dec_key[0:self.nb] = w[self.nb * self.nr:]
         self.expanded_dec_key[self.nb * self.nr:] = w[0:self.nb]
         for i in range(4, self.nb * self.nr):
-            # j = 4 * self.nr - (i & ~3) + (i & 3)]
+            # j = 4 * self.nr - (i & ~3) + (i & 3)
             j = self.nb * self.nr - ((i // self.nb) * self.nb) + (i % self.nb)
             self.expanded_dec_key[i] = self.invmixcolumn(w[j])
 
