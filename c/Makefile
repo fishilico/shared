@@ -100,6 +100,12 @@ endif
 $(X86_32_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -m32
 $(X86_32_PROGRAMS:%=.%.o): CFLAGS += -m32
 
+# Try compiling find_aes_key with AES-NI extension
+HAVE_AESNI := $(call ccld-has-option,-maes -msse4.1)
+ifeq ($(HAVE_AESNI), y)
+.find_aes_key.o: CFLAGS += -maes -msse4.1
+endif
+
 TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(PROGRAMS:%=%.$(BIN_EXT)) $(wildcard *.sh))
 
 all: $(PROGRAMS:%=%.$(BIN_EXT))
