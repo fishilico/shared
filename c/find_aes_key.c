@@ -69,7 +69,6 @@
  *     cryptsetup luksAddKey --master-key-file=master_key.bin /dev/part.crypt
  */
 #include <assert.h>
-#include <byteswap.h>
 #include <errno.h>
 #include <inttypes.h>
 #include <stdbool.h>
@@ -81,6 +80,18 @@
 
 /* Suppose that the round keys are aligned on 32-bit boundary */
 #define ROUND_KEYS_ALIGNED_32BITS 1
+
+/* Define 32-bit swap operation */
+#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+/* Windows SDK provides _byteswap_ulong in stdlib.h */
+static uint32_t bswap_32(uint32_t x)
+{
+    return _byteswap_ulong(x);
+}
+#else
+/* bswap_32 is defined in byteswap.h */
+# include <byteswap.h>
+#endif
 
 /* Define 32-bit rotate-right operation */
 #if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
