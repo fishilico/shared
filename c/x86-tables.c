@@ -32,6 +32,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "x86-umip-recovery.h"
 
 /**
  * Setting CPU affinity is an OS-dependent operation, hence the #if parts
@@ -164,7 +165,7 @@ static void migrate_to_cpu(int cpu) {
 }
 #endif
 
-int main(void)
+static void show_gdt(int cpu)
 {
     /* Linux kernel defines a structure for a table descriptor:
      * * arch/x86/include/asm/desc_defs.h:
@@ -176,31 +177,59 @@ int main(void)
     uint8_t descriptor[2 + sizeof(uintptr_t)];
     uint16_t size;
     void *address;
-    int cpu;
 
     assert(sizeof(size) == 2);
+    assert(sizeof(descriptor) == sizeof(size) + sizeof(address));
 
+    migrate_to_cpu(cpu);
+
+    UMIP_SECTION_START("SGDT")
+    __asm__ volatile ("sgdt %0" : "=m"(descriptor) : : "memory");
+    memcpy(&size, descriptor, 2);
+    memcpy(&address, descriptor + 2, sizeof(void *));
+    printf("CPU %2d GDT @%p, size %u (%u 8-byte entries)\n", cpu, address, size, (size + 1) / 8);
+    UMIP_SECTION_END
+}
+
+static void show_idt(int cpu)
+{
+    uint8_t descriptor[2 + sizeof(uintptr_t)];
+    uint16_t size;
+    void *address;
+
+    assert(sizeof(size) == 2);
+    assert(sizeof(descriptor) == sizeof(size) + sizeof(address));
+
+    migrate_to_cpu(cpu);
+    UMIP_SECTION_START("SIDT")
+    __asm__ volatile ("sidt %0" : "=m"(descriptor) : : "memory");
+    memcpy(&size, descriptor, 2);
+    memcpy(&address, descriptor + 2, sizeof(void *));
+    printf("CPU %2d IDT @%p, size %u (256 %u-byte vectors)\n", cpu, address, size, (size + 1) / 256);
+    UMIP_SECTION_END
+}
+
+int main(void)
+{
+    int cpu;
+
+    configure_umip_recovery();
     initialize_cpu_affinity();
 
     /* Get GDT */
     printf("GDT (%s: %s):\n", os_name, gdt_comment);
     for (cpu = 0; cpu >= 0; cpu = get_next_cpu(cpu)) {
-        migrate_to_cpu(cpu);
-        __asm__ volatile ("sgdt %0" : "=m"(descriptor) : : "memory");
-        memcpy(&size, descriptor, 2);
-        memcpy(&address, descriptor + 2, sizeof(void *));
-        printf("CPU %2d GDT @%p, size %u (%u 8-byte entries)\n", cpu, address, size, (size + 1) / 8);
+        /* Work around -Wclobbered false positive with old gcc by moving the
+         * UMIP section into a dedicated function.
+         */
+        show_gdt(cpu);
     }
     printf("\n");
 
     /* Get IDT */
     printf("IDT (%s: %s):\n", os_name, idt_comment);
     for (cpu = 0; cpu >= 0; cpu = get_next_cpu(cpu)) {
-        migrate_to_cpu(cpu);
-        __asm__ volatile ("sidt %0" : "=m"(descriptor) : : "memory");
-        memcpy(&size, descriptor, 2);
-        memcpy(&address, descriptor + 2, sizeof(void *));
-        printf("CPU %2d IDT @%p, size %u (256 %u-byte vectors)\n", cpu, address, size, (size + 1) / 256);
+        show_idt(cpu);
     }
     return 0;
 }

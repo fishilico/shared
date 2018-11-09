@@ -124,7 +124,9 @@ float_asm.$(BIN_EXT): LIBS += -lm
 %.$(BIN_EXT): .%.o
 	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
-x86-cpuid.o: x86-cpuid_enum.h
+.x86-cpuid.o: x86-cpuid_enum.h
+.x86-segments.o: x86-umip-recovery.h
+.x86-tables.o: x86-umip-recovery.h
 .%.o: %.c
 	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 

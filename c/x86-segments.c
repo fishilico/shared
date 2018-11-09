@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include "x86-umip-recovery.h"
 
 #ifdef __linux__
 #    include <sys/syscall.h>
@@ -203,11 +204,16 @@ static void print_segments(void)
 #undef analyze_segment
 
     /* Show the Local Descriptor Table Register segment selector */
+    UMIP_SECTION_START("SLDT")
     __asm__ ("sldt %0" : "=r" (segment));
     print_segment_desc("ldt", segment);
+    UMIP_SECTION_END
+
     /* Show the Task Register segment selector */
+    UMIP_SECTION_START("STR")
     __asm__ ("str %0" : "=r" (segment));
     print_segment_desc("tr", segment);
+    UMIP_SECTION_END
 }
 
 static void print_segment_bases(void)
@@ -292,11 +298,21 @@ static void print_gdt_limits(void)
     uint8_t gdt_descriptor[2 + sizeof(uintptr_t)];
     uint16_t gdt_size, segment;
 
-    /* Read GDT size to get the number of entries */
-    __asm__ ("sgdt %0" : "=m" (gdt_descriptor) : : "memory");
-    memcpy(&gdt_size, gdt_descriptor, 2);
+    memset(gdt_descriptor, 0, sizeof(gdt_descriptor));
 
-    printf("GDT limits and access rights (%u entries):\n", (gdt_size + 1) / 8);
+    /* Read GDT size to get the number of entries */
+    UMIP_SECTION_START("SGDT")
+    __asm__ ("sgdt %0" : "=m" (gdt_descriptor) : : "memory");
+    UMIP_SECTION_END
+
+    memcpy(&gdt_size, gdt_descriptor, 2);
+    if (gdt_size) {
+        printf("GDT limits and access rights (%u entries):\n", (gdt_size + 1) / 8);
+    } else {
+        /* Try 64 entries */
+        printf("GDT limits and access rights (? entries):\n");
+        gdt_size = 64;
+    }
     for (segment = 3; segment < gdt_size; segment += 8) {
         print_segment_desc(NULL, segment);
     }
@@ -314,6 +330,7 @@ static void print_cr0(void)
     (cr0 & (1U << (bitnum))) ? '+' : '-', desc);
 
     /* smsw = Save Machine Status Word */
+    UMIP_SECTION_START("SMSW")
     __asm__ ("smsw %0" : "=r" (cr0));
     printf("cr0 = 0x%08x\n", cr0);
     print_cr0_bit(0, "PE (Protection Enable)");
@@ -327,11 +344,14 @@ static void print_cr0(void)
     print_cr0_bit(29, "NW (Not Write-through)");
     print_cr0_bit(30, "CD (Cache Disable)");
     print_cr0_bit(31, "PG (Paging)");
+    UMIP_SECTION_END
 #undef print_cr0_bit
 }
 
 int main(void)
 {
+    configure_umip_recovery();
+
     print_segments();
     printf("\n");
     print_segment_bases();
