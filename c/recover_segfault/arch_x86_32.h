@@ -21,16 +21,16 @@
 #define X86_EFLAGS_OF 0x0800 /* Overflow Flag */
 
 /* Get registers from a context */
-#define R_EAX(ctx) asm_instr_ctx_reg((ctx), EAX, Eax)
-#define R_EBX(ctx) asm_instr_ctx_reg((ctx), EBX, Ebx)
-#define R_ECX(ctx) asm_instr_ctx_reg((ctx), ECX, Ecx)
-#define R_EDX(ctx) asm_instr_ctx_reg((ctx), EDX, Edx)
-#define R_ESP(ctx) asm_instr_ctx_reg((ctx), ESP, Esp)
-#define R_EBP(ctx) asm_instr_ctx_reg((ctx), EBP, Ebp)
-#define R_ESI(ctx) asm_instr_ctx_reg((ctx), ESI, Esi)
-#define R_EDI(ctx) asm_instr_ctx_reg((ctx), EDI, Edi)
-#define R_EIP(ctx) asm_instr_ctx_reg((ctx), EIP, Eip)
-#define R_EFL(ctx) asm_instr_ctx_reg((ctx), EFL, EFlags)
+#define R_EAX(ctx) asm_instr_ctx_reg_with_gregs((ctx), EAX, Eax)
+#define R_EBX(ctx) asm_instr_ctx_reg_with_gregs((ctx), EBX, Ebx)
+#define R_ECX(ctx) asm_instr_ctx_reg_with_gregs((ctx), ECX, Ecx)
+#define R_EDX(ctx) asm_instr_ctx_reg_with_gregs((ctx), EDX, Edx)
+#define R_ESP(ctx) asm_instr_ctx_reg_with_gregs((ctx), ESP, Esp)
+#define R_EBP(ctx) asm_instr_ctx_reg_with_gregs((ctx), EBP, Ebp)
+#define R_ESI(ctx) asm_instr_ctx_reg_with_gregs((ctx), ESI, Esi)
+#define R_EDI(ctx) asm_instr_ctx_reg_with_gregs((ctx), EDI, Edi)
+#define R_EIP(ctx) asm_instr_ctx_reg_with_gregs((ctx), EIP, Eip)
+#define R_EFL(ctx) asm_instr_ctx_reg_with_gregs((ctx), EFL, EFlags)
 
 typedef asm_instr_ctx_regtype(EAX, Eax) asm_instr_reg;
 

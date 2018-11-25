@@ -23,7 +23,7 @@ struct segfault_memcontent {
 #    include <ucontext.h>
 
 typedef mcontext_t asm_instr_context;
-#    define asm_instr_ctx_reg(ctx, upper, ucfirst) ((ctx)->gregs[REG_##upper])
+#    define asm_instr_ctx_reg_lw(ctx, linux, windows) ((ctx)->linux)
 #    define asm_instr_ctx_regtype(upper, ucfirst) greg_t
 
 #    if defined(__x86_64__)
@@ -40,7 +40,7 @@ typedef mcontext_t asm_instr_context;
 #    include <windows.h>
 
 typedef CONTEXT asm_instr_context;
-#    define asm_instr_ctx_reg(ctx, upper, ucfirst) ((ctx)->ucfirst)
+#    define asm_instr_ctx_reg_lw(ctx, linux, windows) ((ctx)->windows)
 #    define asm_instr_ctx_regtype(upper, ucfirst) __typeof__(((CONTEXT*)0)->ucfirst)
 
 #    if defined(__x86_64__)
@@ -54,6 +54,9 @@ typedef CONTEXT asm_instr_context;
 #else
 #    error "Unknown target OS"
 #endif
+
+#define asm_instr_ctx_reg_with_gregs(ctx, upper, ucfirst) \
+   asm_instr_ctx_reg_lw((ctx), gregs[REG_##upper], ucfirst)
 
 #ifndef asm_instr_ctx_xmm_addr
 #    define asm_instr_ctx_xmm_addr(ctx, num) asm_instr_ctx_xmm_addr_dyn(ctx, num)

@@ -45,7 +45,9 @@ static void sigsegv_sigaction(int s, siginfo_t *info, void *context)
                 return;
             }
             fprintf(stderr, "Running unknown instruction. Abort!\n");
-#if defined(__x86_64__)
+#if defined(__aarch64__)
+            ptr_instruction = (uint8_t *)ctx->uc_mcontext.pc;
+#elif defined(__x86_64__)
             ptr_instruction = (uint8_t *)ctx->uc_mcontext.gregs[REG_RIP];
 #elif defined(__i386__)
             ptr_instruction = (uint8_t *)ctx->uc_mcontext.gregs[REG_EIP];
@@ -64,7 +66,7 @@ static void sigsegv_sigaction(int s, siginfo_t *info, void *context)
     abort();
 }
 
-int run_with_segfault_handler(const struct segfault_memcontent *memmap, size_t len, int (*fct) (void *), void *data)
+int run_with_segfault_handler(const struct segfault_memcontent *memmap, size_t len, int (*fct)(void *), void *data)
 {
     sigset_t mask;
     struct sigaction act, oldact;
