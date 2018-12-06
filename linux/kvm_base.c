@@ -239,6 +239,11 @@ int main(void)
             printf("/dev/kvm does not exist, exiting.\n");
             return 0;
         }
+        if (errno == EACCES) {
+            /* Fail nicely when the user is not allowed to use KVM */
+            printf("/dev/kvm is not accessible, exiting.\n");
+            return 0;
+        }
         perror("open(/dev/kvm)");
         return 1;
     }
