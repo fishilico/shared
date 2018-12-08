@@ -22,6 +22,7 @@ V_COQC      = @echo '  COQC      $<';
 V_FRAMAC    = @echo '  FRAMA-C   $^';
 V_LD        = @echo '  LD        $@';
 V_OBJCOPY   = @echo '  OBJCOPY   $@';
+V_PANDOC    = @echo '  PANDOC    $<';
 V_PDFLATEX  = @echo '  PDFLATEX  $<';
 V_WINCC     = @echo '  WINCC     $<';
 V_WINCCLD   = @echo '  WINCCLD   $@';
@@ -32,8 +33,8 @@ endif
 
 # Clean command
 CLEAN_CMD := $(V_CLEAN)$(RM) \
-	*.a *.aux *.bin *.dll *.efi *.elf *.exe *.glob *.log *.o *.out *.pdf *.so \
-	*.tmp *.toc *.vo .*.d .*.o && \
+	*.a *.aux *.bin *.dll *.efi *.elf *.exe *.glob *.log *.o *.out *.pdf \
+	*.rst.tex *.so *.tmp *.toc *.vo .*.d .*.o && \
 	$(RM) -r __pycache__
 
 # Try running a command and output the second or third parameter accordingly.
