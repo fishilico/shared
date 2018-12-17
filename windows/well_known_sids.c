@@ -7,10 +7,15 @@
  *   * https://msdn.microsoft.com/en-us/library/windows/desktop/aa379649(v=vs.85).aspx "Well-known SIDs"
  *   * https://msdn.microsoft.com/en-us/library/cc980032.aspx "Well-Known SID Structures"
  *   * https://msdn.microsoft.com/en-us/library/cc237940.aspx "SID Filtering and Claims Transformation"
+ *   * https://support.microsoft.com/en-us/help/243330/well-known-security-identifiers-in-windows-operating-systems
  * * CreateWellKnownSid function
  * * Wine: http://source.winehq.org/git/wine.git/blob/HEAD:/dlls/advapi32/security.c
  * * Mimikatz protection with Protected Users group, S-1-5-21-<domain>-525:
  *   https://jimshaver.net/2016/02/14/defending-against-mimikatz/
+ * * winnt.h from Windows SDK:
+ *   https://www.codemachine.com/downloads/win10rs3/winnt.h
+ * * Found SACL "Trust Label ACE: S-1-19-512-4096 (WINDOWS LITE)"
+ *   https://github.com/ionescu007/lxss (Black Hat 2016)
  *
  * To regenarate comments in main, use the following command:
  *    well_known_sids.exe > a.txt
@@ -145,6 +150,10 @@ static void _show_sid(
 #define show_nonunique_sid(desc, placeholder, rid) \
     _show_sid_ifdef(desc, &SIDAuthNt, 5, SECURITY_NT_NON_UNIQUE, 0, 0, 0, _dwSa, 0, 0, 0, placeholder, 4, 3, #rid, rid)
 
+/* Details S-1-9-TYPE-LEVEL SIDs, with placeholder */
+#define show_ppl_sid(desc, level) \
+    _show_sid_ifdef(desc, &SIDAuthProcessTrust, 2, 0, level, 0, 0, _dwSa, 0, 0, 0, _T("type"), 3, 1, #level, level)
+
 int _tmain(void)
 {
     SID_IDENTIFIER_AUTHORITY SIDAuthNull = { SECURITY_NULL_SID_AUTHORITY };
@@ -197,6 +206,8 @@ int _tmain(void)
     show_nonunique_sid(_T("Administrator"), _T("machine domain"), DOMAIN_USER_RID_ADMIN); /* S-1-5-21-<machine domain>-500 */
     show_nonunique_sid(_T("Guest"), _T("machine domain"), DOMAIN_USER_RID_GUEST); /* S-1-5-21-<machine domain>-501 */
     show_nonunique_sid(_T("Krbtgt"), _T("machine domain"), DOMAIN_USER_RID_KRBTGT); /* S-1-5-21-<machine domain>-502 */
+    show_nonunique_sid(_T("Default Account"), _T("machine domain"), DOMAIN_USER_RID_DEFAULT_ACCOUNT); /* S-1-5-21-<machine domain>-503 */
+    show_nonunique_sid(_T("WDAG (Windows Defender Application Guard) Account"), _T("machine domain"), DOMAIN_USER_RID_WDAG_ACCOUNT); /* S-1-5-21-<machine domain>-504 */
     show_nonunique_sid(_T("Domain Admins"), _T("domain"), DOMAIN_GROUP_RID_ADMINS); /* S-1-5-21-<domain>-512 */
     show_nonunique_sid(_T("Domain Users"), _T("domain"), DOMAIN_GROUP_RID_USERS); /* S-1-5-21-<domain>-513 */
     show_nonunique_sid(_T("Domain Guests"), _T("domain"), DOMAIN_GROUP_RID_GUESTS); /* S-1-5-21-<domain>-514 */
@@ -208,7 +219,9 @@ int _tmain(void)
     show_nonunique_sid(_T("Group Policy Creator Owners"), _T("domain"), DOMAIN_GROUP_RID_POLICY_ADMINS); /* S-1-5-21-<domain>-520 */
     show_nonunique_sid(_T("Read-Only Domain Controllers"), _T("domain"), DOMAIN_GROUP_RID_READONLY_CONTROLLERS); /* S-1-5-21-<domain>-521 */
     show_nonunique_sid(_T("Clonable Domain Controllers"), _T("domain"), DOMAIN_GROUP_RID_CLONEABLE_CONTROLLERS); /* S-1-5-21-<domain>-522 */
-    show_nonunique_sid(_T("Protected Users"), _T("domain"), 0x20d); /* S-1-5-21-<domain>-525 */
+    show_nonunique_sid(_T("Protected Users"), _T("domain"), DOMAIN_GROUP_RID_PROTECTED_USERS); /* S-1-5-21-<domain>-525 */
+    show_nonunique_sid(_T("Key Admins"), _T("domain"), DOMAIN_GROUP_RID_KEY_ADMINS); /* S-1-5-21-<domain>-526 */
+    show_nonunique_sid(_T("Enterprise Key Admins"), _T("domain"), DOMAIN_GROUP_RID_ENTERPRISE_KEY_ADMINS); /* S-1-5-21-<domain>-527 */
     show_nonunique_sid(_T("RAS (Remote Access Services) Servers"), _T("domain"), DOMAIN_ALIAS_RID_RAS_SERVERS); /* S-1-5-21-<domain>-553 */
 
     show_sid1(_T("Enterprise Read-Only Controllers"), &SIDAuthNt, SECURITY_ENTERPRISE_READONLY_CONTROLLERS_RID); /* S-1-5-22 */
@@ -283,6 +296,8 @@ int _tmain(void)
     show_sid1(_T("DAS Host ID prefix"), &SIDAuthNt, SECURITY_DASHOST_ID_BASE_RID); /* S-1-5-92 */
 
     show_sid1(_T("Windows Mobile ID prefix"), &SIDAuthNt, SECURITY_WINDOWSMOBILE_ID_BASE_RID); /* S-1-5-112 */
+    show_sid1(_T("Local Accounts Group"), &SIDAuthNt, SECURITY_LOCAL_ACCOUNT_RID); /* S-1-5-113 */
+    show_sid1(_T("Local Accounts Members of the Administrators Group"), &SIDAuthNt, SECURITY_LOCAL_ACCOUNT_AND_ADMIN_RID); /* S-1-5-114 */
 
     show_sid1(_T("Other Organization"), &SIDAuthNt, SECURITY_OTHER_ORGANIZATION_RID); /* S-1-5-1000 */
 
@@ -297,6 +312,7 @@ int _tmain(void)
         SID_IDENTIFIER_AUTHORITY SIDAuthAppPackage = { SECURITY_APP_PACKAGE_AUTHORITY };
         show_sid0(_T("App Package Authority"), &SIDAuthAppPackage); /* S-1-15 */
         show_sid2(_T("All App Packages"), &SIDAuthAppPackage, SECURITY_APP_PACKAGE_BASE_RID, SECURITY_BUILTIN_PACKAGE_ANY_PACKAGE); /* S-1-15-2-1 */
+        show_sid2(_T("Any Restricted App Packages"), &SIDAuthAppPackage, SECURITY_APP_PACKAGE_BASE_RID, SECURITY_BUILTIN_PACKAGE_ANY_RESTRICTED_PACKAGE); /* S-1-15-2-2 */
     }
 #endif
 #ifdef SECURITY_MANDATORY_LABEL_AUTHORITY
@@ -306,10 +322,11 @@ int _tmain(void)
         show_sid1(_T("Untrusted Integrity Level"), &SIDAuthMandatoryLabel, SECURITY_MANDATORY_UNTRUSTED_RID); /* S-1-16-0 */
         show_sid1(_T("Low Integrity Level"), &SIDAuthMandatoryLabel, SECURITY_MANDATORY_LOW_RID); /* S-1-16-4096 */
         show_sid1(_T("Medium Integrity Level"), &SIDAuthMandatoryLabel, SECURITY_MANDATORY_MEDIUM_RID); /* S-1-16-8192 */
-        show_sid1(_T("Medium Plus Integrity Level"), &SIDAuthMandatoryLabel, 8448); /* S-1-16-8448 */
+        show_sid1(_T("Medium Plus Integrity Level"), &SIDAuthMandatoryLabel, SECURITY_MANDATORY_MEDIUM_PLUS_RID); /* S-1-16-8448 */
         show_sid1(_T("High Integrity Level"), &SIDAuthMandatoryLabel, SECURITY_MANDATORY_HIGH_RID); /* S-1-16-12288 */
         show_sid1(_T("System Integrity Level"), &SIDAuthMandatoryLabel, SECURITY_MANDATORY_SYSTEM_RID); /* S-1-16-16384 */
-        show_sid1(_T("Protected-process Integrity Level"), &SIDAuthMandatoryLabel, SECURITY_MANDATORY_PROTECTED_PROCESS_RID); /* S-1-16-20480 */
+        show_sid1(_T("Protected Process Integrity Level"), &SIDAuthMandatoryLabel, SECURITY_MANDATORY_PROTECTED_PROCESS_RID); /* S-1-16-20480 */
+        show_sid1(_T("Secure Process Integrity Level"), &SIDAuthMandatoryLabel, 0x7000); /* S-1-16-28672 */
     }
 #endif
 #ifdef SECURITY_SCOPED_POLICY_ID_AUTHORITY
@@ -324,6 +341,25 @@ int _tmain(void)
         show_sid0(_T("Authentication Authority"), &SIDAuthAuthentication); /* S-1-18 */
         show_sid1(_T("Authentication Authority Asserted Identity"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_AUTHORITY_ASSERTED_RID); /* S-1-18-1 */
         show_sid1(_T("Service Asserted Identity"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_SERVICE_ASSERTED_RID); /* S-1-18-2 */
+        show_sid1(_T("Fresh Key Auth"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_FRESH_KEY_AUTH_RID); /* S-1-18-3 */
+        show_sid1(_T("Key Trust"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_KEY_TRUST_RID); /* S-1-18-4 */
+        show_sid1(_T("Key Property MFA"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_KEY_PROPERTY_MFA_RID); /* S-1-18-5 */
+        show_sid1(_T("Key Property Attestation"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_KEY_PROPERTY_ATTESTATION_RID); /* S-1-18-6 */
+    }
+#endif
+#ifdef SECURITY_PROCESS_TRUST_AUTHORITY
+    {
+        SID_IDENTIFIER_AUTHORITY SIDAuthProcessTrust = { SECURITY_PROCESS_TRUST_AUTHORITY };
+        show_sid0(_T("Process Trust Authority"), &SIDAuthProcessTrust); /* S-1-19 */
+        show_sid1(_T("Process Protection Type None prefix"), &SIDAuthProcessTrust, SECURITY_PROCESS_PROTECTION_TYPE_NONE_RID); /* S-1-19-0 */
+        show_sid1(_T("Process Protection Type Lite prefix"), &SIDAuthProcessTrust, SECURITY_PROCESS_PROTECTION_TYPE_LITE_RID); /* S-1-19-512 */
+        show_sid1(_T("Process Protection Type Full prefix"), &SIDAuthProcessTrust, SECURITY_PROCESS_PROTECTION_TYPE_FULL_RID); /* S-1-19-1024 */
+        show_ppl_sid(_T("Process Protection Level None"), SECURITY_PROCESS_PROTECTION_LEVEL_NONE_RID); /* S-1-19-<type>-0 */
+        show_ppl_sid(_T("Process Protection Level Authenticode"), SECURITY_PROCESS_PROTECTION_LEVEL_AUTHENTICODE_RID); /* S-1-19-<type>-1024 */
+        show_ppl_sid(_T("Process Protection Level App"), SECURITY_PROCESS_PROTECTION_LEVEL_APP_RID); /* S-1-19-<type>-2048 */
+        show_ppl_sid(_T("Process Protection Level Windows"), SECURITY_PROCESS_PROTECTION_LEVEL_WINDOWS_RID); /* S-1-19-<type>-4096 */
+        show_ppl_sid(_T("Process Protection Level Windows TCB"), SECURITY_PROCESS_PROTECTION_LEVEL_WINTCB_RID); /* S-1-19-<type>-8192 */
+        show_sid2(_T("Process Protection Windows Lite"), &SIDAuthProcessTrust, SECURITY_PROCESS_PROTECTION_TYPE_LITE_RID, SECURITY_PROCESS_PROTECTION_LEVEL_WINDOWS_RID); /* S-1-19-512-4096 */
     }
 #endif
     return 0;
