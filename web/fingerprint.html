@@ -16,7 +16,7 @@ Related websites:
  * http://net.ipcalf.com/
  */
 function get_local_ips() {
-    var RTCPeerConnection = window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+    var RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
     if (!RTCPeerConnection) {
         console.warn("No WebRTC connection available");
         return;
@@ -104,6 +104,8 @@ function create_list_item(name, text) {
 
     if (typeof text === 'undefined') {
         elem.innerHTML += '<i>undefined</i>';
+    } else if (text === null) {
+        elem.innerHTML += '<i>null</i>';
     } else {
         elem.appendChild(create_code_text(text));
     }
@@ -187,6 +189,59 @@ function fill_fingerprint_infos() {
     container.innerHTML += '<h2>Local IP addresses</h2>';
     container.innerHTML += '<div id="local-ip-addrs">None found</div>';
     get_local_ips();
+
+    // Show Geolocation
+    container.innerHTML += '<h2>Geolocation</h2>';
+    if (!('geolocation' in navigator)) {
+        container.innerHTML += '<i>navigator.geolocation is not defined.</i>';
+    } else {
+        container.innerHTML += '<div id="geolocation-result">No geolocation information</div>';
+        function geo_success(position) {
+            console.log('Geolocation position: ', position);
+            var elem = document.getElementById('geolocation-result');
+            e_list = document.createElement('ul');
+            e_list.appendChild(create_list_item('Latitude', position.coords.latitude));
+            e_list.appendChild(create_list_item('Longitude', position.coords.longitude));
+            e_list.appendChild(create_list_item('Altitude', position.coords.altitude));
+            e_list.appendChild(create_list_item('Speed', position.coords.speed));
+            e_list.appendChild(create_list_item('Accuracy', position.coords.accuracy));
+            e_list.appendChild(create_list_item('Altitude accuracy', position.coords.altitudeAccuracy));
+
+            var osm_url = 'https://www.openstreetmap.org/?mlat=' + position.coords.latitude + '&mlon=' + position.coords.longitude + '&zoom=14';
+            var osm_li = document.createElement('li');
+            osm_li.innerHTML = 'OpenStreetMap: <a href="' + osm_url + '">' + osm_url + '</a>'
+            e_list.appendChild(osm_li);
+
+            var gmaps_url = 'https://maps.google.com/?q=' + position.coords.latitude+' '+position.coords.longitude;
+            var gmaps_li = document.createElement('li');
+            gmaps_li.innerHTML = 'Google Maps: <a href="' + gmaps_url + '">' + gmaps_url + '</a>'
+            e_list.appendChild(gmaps_li);
+
+            elem.innerHTML = '';
+            elem.appendChild(e_list);
+        }
+        function geo_error(error) {
+            var msg = '???';
+            switch (error.code) {
+                case error.TIMEOUT:
+                    msg = 'Timeout';
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    msg = 'Position unavailable';
+                    break;
+                case error.PERMISSION_DENIED:
+                    msg = 'Permission denied (the user chose to block the request)';
+                    break;
+                case error.UNKNOWN_ERROR:
+                    msg = 'Unknown error';
+                    break;
+            }
+            var elem = document.getElementById('geolocation-result');
+            elem.innerHTML = 'Geolocation error ' + error.code + ': ' + msg;
+        }
+        // Timeout is in milliseconds
+        navigator.geolocation.getCurrentPosition(geo_success, geo_error, {maximumAge:Infinity, timeout:600000});
+    }
 
     // Show WebGL information
     container.innerHTML += '<h2>WebGL information</h2>';
