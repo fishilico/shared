@@ -51,7 +51,7 @@ Common z3 pitfalls:
 
 Some publications of z3 users:
 
-* https://doar-e.github.io/blog/2014/10/11/taiming-a-wild-nanomite-protected-mips-binary-with-symbolic-execution-no-such-crackme/  # noqa
+* https://doar-e.github.io/blog/2014/10/11/taiming-a-wild-nanomite-protected-mips-binary-with-symbolic-execution-no-such-crackme/  # noqa, pylint:disable=line-too-long
   Taming a wild nanomite-protected MIPS binary with symbolic execution: No Such Crackme
 * http://www.phrack.org/issues/69/4.html#article
   Phrak Volume 0x0f, Issue 0x45, Phile #0x04 of 0x10 Linenoise
@@ -245,6 +245,29 @@ def test_alphanum_guess(verbose=False):
             return
 
 
+def test_boolean_add():
+    """Prove that x+y = x xor y + 2*(x&y)
+
+    http://www.hackersdelight.org/basics2.pdf
+    https://stackoverflow.com/questions/28280041/use-z3-to-prove-identity-of-boolean-arithmetic-formula?rq=1
+    """
+    x = z3.BitVec('x', 128)  # pylint: disable=invalid-name
+    y = z3.BitVec('y', 128)  # pylint: disable=invalid-name
+    formulas = (
+        x | y == (x ^ y) + (x & y),
+        x + y == (x ^ y) + 2 * (x & y),
+        x + y == (x | y) + (x & y),
+        x + y == 2 * (x | y) - (x ^ y),
+        -~x == x + 1,
+        ~-x == x - 1,
+    )
+    for formula in formulas:
+        solver = z3.Solver()
+        solver.add(z3.Not(formula))
+        assert solver.check() == z3.unsat
+
+
 if __name__ == '__main__':
     test_reverse_crc32()
     test_alphanum_guess()
+    test_boolean_add()
