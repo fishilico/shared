@@ -1,0 +1,405 @@
+% Ce document contient un résumé des principaux théorèmes uilisés en MP*.
+% Nicolas Iooss, 2009-2010
+
+% Abréviations:
+% CVU = converge uniformément
+% CVS = converge simplement
+% int. /I =  intégrable sur l'intervalle I
+% Cpm = Continue par morceaux
+% ev = espace vectoriel
+
+% Les théorèmes que je n'ai pas mis car simple à s'en souvenir :
+% Factorisation du noyau des applications linéaires et isomorphisme
+% Détermination des applications linéaires et bilinéaires par l'image d'une base
+% Théorème du rang
+% Formules relatives au déterminant, à l'inversion de matrices, aux opérations élémentaires sur les matrices, ...
+% Sommation des relations de comparaison, séries alternées
+% Définitions des normes, équivalentes dans un ev normé de dimension finie
+% Fonctions lipschitziennes, uniforméments continue, théorème de Heine
+% Applications linéaires continues, caractérisation en terme de borne sup, applications bilinéaires continues
+% Théorème de Bolzano Weierstrass, caractérisation des compacts en dim. finie comme les fermés bornés
+% Théorème de Riesz : B(0,1) compact ssi E evn de dimension finie (idée: Construction d'une suite sans valeur d'adhérence)
+% Théorème des valeurs intermédiaires, direct par connexité par arcs
+% Parties complètes, théorème du point fixe de Banach-Picard : X complet, f:X->X contractante, alors f a un unique point fixe.
+% Théorèmes sur les séries entières
+% Théorème du relèvement
+% Toute l'arithmétique et la théorie des groupes (dont indicatrice d'Euler, théorème chinois, Théorème de Lagrange, ...)
+% Les résultats matriciels comme la continuité de det, GLn ouvert dense dans Mn, centre de Mn et de On, écriture des rotations et réflexions, ...
+% Réductions de Jordan et de Donford
+% Théorie des espaces préhilbertiens réels et complexes, dont l'étude des supplémentaires orthogonaux, procédé de Schmidt, ...
+% Théorie des espaces euclidiens (lemme de Riesz, formes quadratiques dans une base, adjoint, ...), SAUF le théorème spectral vu comme étude des endomorphismes autoadjoints.
+% Théorème de Schwarz pour les fonction C2 sur R2
+% Méthodes de variation de la constante et des constantes pour résoudre les équations différentielles
+
+\documentclass[a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{geometry}
+\usepackage{bbm}
+\usepackage{color}
+\usepackage{amsmath}
+
+\geometry{%
+a4paper,
+body={160mm,250mm},
+left=25mm,top=25mm,
+headheight=7mm,headsep=4mm,
+marginparsep=4mm,marginparwidth=5mm}
+
+% Header
+\title{Théorèmes fondamentaux de mathématiques en MP*}
+\author{Nicolas Iooss}
+\date{Année 2009-2010}
+
+% My commands
+\newcommand{\todo}[1]{\fcolorbox{red}{yellow}{A FAIRE: #1}}
+\newcommand{\nock}{\protect{\fcolorbox{blue}{cyan}{à vérifier}}}
+\newcommand{\fctclass}[1]{\ensuremath{\mathcal{C}^{#1}}}
+\newcommand{\arrowtext}[1]{\ensuremath \stackrel{\scriptscriptstyle #1}{\longrightarrow}}
+%\newcommand{\arrowtext}[1]{\ensuremath \stackrel{\longrightarrow}{\scriptscriptstyle #1}}
+%\newcommand{\arrowtext}[1]{\ensuremath\,\overrightarrow{\scriptscriptstyle #1}\,}
+\newcommand{\deriv}[2]{\ensuremath\frac{\partial\!#1}{\partial\!#2}}%Dérivée partielle
+\newcommand{\normbase}[1]{\ensuremath{\left|\!\left|#1\right|\!\right|}}% Norme simple
+\newcommand{\norminfty}[1]{\ensuremath{\normbase{#1}_{\infty}}}% Norme infinie
+\newcommand{\normun}[1]{\ensuremath{\normbase{#1}_{1}}}% Norme 1
+\newcommand{\normdeux}[1]{\ensuremath{\normbase{#1}_{2}}}% Norme 2
+\newcommand{\enspolynom}[1]{\ensuremath{\mathbbm{#1}\!\left[\text{X}\right]}}% \enspolynom{K} pour K[X]
+
+\let\sssectORIG\subsubsection
+\renewcommand{\subsubsection}[1]{\sssectORIG{#1}}
+
+% Document
+\begin{document}
+\maketitle
+
+\tableofcontents
+\clearpage
+\setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algèbre}
+\subsection{Théorème de décomposition des noyaux ($E$ $\mathbbm{K}$-ev)}
+\begin{displaymath}
+    u\in \mathcal{L}(E), P,Q\in\enspolynom{K}, P \wedge Q = 1 \Rightarrow \text{Ker}(PQ)(u) = \text{Ker}(P)(u)\oplus\text{Ker}(Q)(u)
+\end{displaymath}
+
+\subsection{Théorème de Cayley-Hamilton ($E$ $\mathbbm{K}$-ev de dimension finie)}
+\begin{displaymath}
+    \forall u\in \mathcal{L}(E), \chi_{u}(u) = 0\text{ et }\forall A\in \mathcal{M}_n(\mathbbm{K}), \chi_{A}(A) = 0
+\end{displaymath}
+
+\subsection{Caractérisation des endomorphismes diagonalisables}
+$u$ diagonalisable $\Leftrightarrow$ $\chi_u$ scindé et $\forall\lambda\in\text{Sp}(u), \text{dim }E_\lambda(u) = m_\lambda$ (ordre de multiplicité de $\lambda$) \par
+$u$ diagonalisable $\Leftrightarrow$ $u$ admet un polynôme annulateur scindé à racines simples \par
+$u$ diagonalisable $\Leftrightarrow$ $u$ annulé par $\prod_{\lambda\in\text{Sp}(u)}(\text{X}-\lambda)$ \par
+$u$ diagonalisable $\Leftarrow$ $\chi_u$ scindé à racines simples
+
+\subsection{Caractérisation des endomorphismes trigonalisables}
+$u$ trigonalisable $\Leftrightarrow$ $\chi_u$ scindé \par
+$u$ trigonalisable $\Leftrightarrow$ $u$ admet un polynôme annulateur scindé \par
+
+\subsection{Théorème spectral}
+\begin{displaymath}
+    u\in \mathcal{L}(E)\text{ autoadjoint } \Rightarrow \exists \mathcal{B}\text{ base orthonormée de vecteurs propres de $u$}.
+\end{displaymath}
+\begin{displaymath}
+    A\in S_n(\mathbbm{R}) \Rightarrow \exists O \in O_n(\mathbbm{R}), \exists D \in \mathcal{D}_n(\mathbbm{R}), A = ^{t}\!ODO
+\end{displaymath}
+\begin{displaymath}
+    q, \phi\text{ formes quadratiques sur }E, q > 0 \Rightarrow \exists \mathcal{B}\text{ base de $E$ $q$-orthonormée et $\phi$-orthogonale}
+\end{displaymath}
+\begin{displaymath}
+    A, B\in S_n(\mathbbm{R}), A>0 \Rightarrow \exists P \in GL_n(\mathbbm{R}), \exists D \in \mathcal{D}_n(\mathbbm{R}), A = ^{t}\!PP\text{ et }B = ^{t}\!PDP
+\end{displaymath}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Formules fondamentales de l'analyse}
+\subsection{Théorème des accroissements finis pour les fonctions à valeurs vectorielles}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        \sigma = (a_1, ..., a_n)\text{ subdivision de }[a,b] \\
+        f:[a,b] \rightarrow F, g:[a,b] \rightarrow \mathbbm{R} \\
+        f, g\text{ continues sur }[a,b] \\
+        f, g\text{ dérivables en tout point de }[a,b]\backslash \{a_1, ..., a_n\} \\
+        \forall t\in [a,b]\backslash \{a_1, ..., a_n\}, \normbase{f'(t)} \le g'(t)
+    \end{array}\right.
+    \Rightarrow \normbase{f(b) - f(a)} \le g(b) - g(a)
+\end{displaymath}
+
+\subsection{Formule de Taylor-Laplace avec reste intégral}
+\begin{displaymath}
+    f\in\fctclass{n+1}(I,F), (a,b)\in I^2, f(b) = \sum_{k=0}^{n}\frac{(b-a)^k}{k!}f^{(k)}(a) + \int_{a}^{b}\frac{(b-t)^n}{n!}f^{(n+1)}(t)dt
+\end{displaymath}
+
+\subsection{Inégalité de Taylor-Lagrange}
+\begin{displaymath}
+    f\in\fctclass{n+1}(I,F), (a,b)\in I^2, \normbase{f(b) - \sum_{k=0}^{n}\frac{(b-a)^k}{k!}f^{(k)}(a)} \le \frac{|b-a|^{n+1}}{(n+1)!}\sup_{t\in[a,b]} \normbase{f^{(n+1)}(t)}
+\end{displaymath}
+
+
+\subsection{Formule de Taylor-Young}
+\begin{displaymath}
+    f\text{ dérivable à l'ordre $n$ en $a$}, f(t) = \sum_{k=0}^{n}\frac{(t-a)^k}{k!}f^{(k)}(a) + o_{t\rightarrow a}\left((t-a)^n\right)
+\end{displaymath}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Théorèmes d'interversion de limites}
+
+\subsection{Cas de limite uniforme}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        f_n\ \arrowtext{CVU}f \text{ sur $A$, }a\in \bar{A} \\
+        \forall n \in \mathbbm{N}, \lim_{t\rightarrow a}f_n(t) = b_n
+    \end{array}\right.
+    \Rightarrow
+    \left\{\begin{array}{l}
+        \lim_{t\rightarrow a}f(t) \text{ existe }\Leftrightarrow \lim_{n\rightarrow \infty}b_n \text{ existe} \\
+        \lim_{t\rightarrow a}f(t) = \lim_{n\rightarrow \infty}b_n \text{ si existence} \\
+    \end{array}\right.
+\end{displaymath}
+\begin{displaymath}
+    f_n\ \fctclass{0}\arrowtext{CVU}f \text{ sur $A$} \Rightarrow f\ \fctclass{0}\text{ sur $A$}
+\end{displaymath}
+\begin{displaymath}
+    \text{I segment, }f_n\in\fctclass{pm}\arrowtext{CVU}f\in\fctclass{pm} \Rightarrow \lim_{n\rightarrow\infty} \int_{I}f_n = \int_{I}f
+%    f_n\text{ CVU vers }f \Rightarrow \int_{I}f_n \stackrel{\longrightarrow}{\scriptscriptstyle n\rightarrow\infty} \int_{I}f
+\end{displaymath}
+\begin{displaymath}
+    \left\{\begin{array}{r}
+        f_n\ \fctclass{1} \arrowtext{CVS} f \\
+        f_n' \arrowtext{CVU} g\text{ sur tout segment}
+    \end{array}\right.
+    \Rightarrow
+    \left\{\begin{array}{l}
+        f\in\fctclass{1}, f' = g \\
+        f_n \arrowtext{CVU} f\text{ sur tout segment}
+    \end{array}\right.
+\end{displaymath}
+
+\subsection{Théorèmes d'approximation de Weierstrass, polynômial et trigonométrique}
+\subsubsection{Weierstrass polynômial}
+Toute fonction continue de $[a,b]$ dans $\mathbbm{C}$ (ou $\mathbbm{R}$) est limite uniforme d'une suite de fonctions polynomiales à valeurs dans $\mathbbm{C}$ (ou $\mathbbm{R}$).
+
+\subsubsection{Weierstrass trigonométrique}
+L'ensemble $\mathcal{P}$ des polynômes trigonométriques est dense dans $\fctclass{0}_{2\pi}(\mathbbm{R}, \mathbbm{C})$ au sens de \norminfty{-}, et donc de \normun{-} et de \normdeux{-}, car $\normun{-}\le\normdeux{-}\le\norminfty{-}$.
+\begin{displaymath}
+    \forall f \in \fctclass{0}_{2\pi}(\mathbbm{R}, \mathbbm{C}), \forall\epsilon > 0, \exists g\in\mathcal{P}, \norminfty{f-g} \le \epsilon
+\end{displaymath}
+
+
+\subsection{Convergence dominée}
+\subsubsection{Théorème de convergence dominée pour les suites de fonction}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        f_n\in\fctclass{pm}(I,\mathbbm{C})\arrowtext{CVS}f\in\fctclass{pm}(I,\mathbbm{C}) \\
+        \varphi\in\fctclass{pm}(I,\mathbbm{R}_{+})\text{ int. }/I \\
+        \forall n\in\mathbbm{N},|f_n| \le \varphi\text{ (domination)}
+    \end{array}\right.
+    \Rightarrow \lim_{n\rightarrow\infty} \int_{I}f_n = \int_{I}f
+\end{displaymath}
+
+\subsubsection{Théorème de convergence dominée pour les intégrales à paramètre}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        f: A \times I \rightarrow \mathbbm{C}, A \subset \mathbbm{R}^m \text{ et }a\in \bar{A} \\
+        \forall x \in A, f(x,-)\in\fctclass{pm}(I) \\
+        \forall t \in I, \lim_{x \rightarrow a} f(x,t) = h(t) \text{ et }h\in\fctclass{pm}(I) \\
+        \varphi\in\fctclass{pm}(I,\mathbbm{R}_{+})\text{ int. }/I \\
+        \forall (x,t), |f(x,t)| \le \varphi(t)\text{ (domination globale ou locale)}
+    \end{array}\right.
+    \Rightarrow \lim_{x \rightarrow a} \int_{I}f(x,t)dt = \int_{I}h(t)dt
+\end{displaymath}
+La domination peut être locale, sur un voisinage $V$ pour tout point $a\in A$.
+
+\subsubsection{Théorème de continuité sous l'intégrale}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        f: A \times I \rightarrow \mathbbm{C} \\
+        \forall x \in A, f(x,-)\in\fctclass{pm}(I) \\
+        \forall t \in I, f(-,t)\ \fctclass{0}\text{ (en a)} \\
+        \varphi\in\fctclass{pm}(I,\mathbbm{R}_{+})\text{ int. }/I \\
+        \forall (x,t), |f(x,t)| \le \varphi(t)\text{ (domination globale ou locale)}
+    \end{array}\right.
+    \Rightarrow x\mapsto\int_{I}f(x,t)dt\ \fctclass{0}\text{ (en a)}
+\end{displaymath}
+
+
+\subsubsection{Théorème de dérivabilité sous l'intégrale}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        f: A \times I \rightarrow \mathbbm{C}, A \text{ intervalle de }\mathbbm{R} \\
+        \forall x \in A, f(x,-)\in\fctclass{pm}(I)\text{\textbf{ intégrable sur $I$}} \\
+        \forall t \in I, f(-,t)\in\fctclass{1}(A) \\
+        \forall x \in A, \deriv{f}{x}(x,-)\in\fctclass{pm}(I) \\
+        \varphi\in\fctclass{pm}(I,\mathbbm{R}_{+})\text{ int. }/I \\
+        \forall (x,t), |\deriv{f}{x}(x,t)| \le \varphi(t)\text{ (domination)}
+    \end{array}\right.
+    \Rightarrow
+    \left\{\begin{array}{l}
+        F: x\mapsto\int_{I}f(x,t)dt\in\fctclass{1}(A) \\
+        F'(x) = \int_{I}\deriv{f}{x}(x,t)dt
+    \end{array}\right.
+\end{displaymath}
+
+\subsection{Théorème d'intégration terme à terme}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        f_n\text{ int.}/I,\ \sum{f_n} CVS,\\
+        \sum_{n=0}^{\infty}{f_n}\in\fctclass{pm} \\
+        \sum \int_{I}|f_n|\text{ converge}
+    \end{array}\right.
+    \Rightarrow
+    \left\{\begin{array}{l}
+        \sum_{n=0}^{\infty}{f_n}\text{ intégrable sur }I \\
+        \sum \int_{I}f_n \text{ converge} \\
+        \int_{I}\sum_{n=0}^{\infty}{f_n} = \sum_{n=0}^{\infty}\int_{I}{f_n}
+    \end{array}\right.
+\end{displaymath}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analyse de Fourier}
+\subsection{Coefficients et série de Fourier de $f\in\fctclass{pm}_{2\pi}$}
+\begin{displaymath}
+    \left\{\begin{array}{rl}
+        \forall n\in\mathbbm{Z} & c_n(f) = \frac{1}{2\pi}\int_{0}^{2\pi}f(t)e^{-int}dt \\
+        \forall n\in\mathbbm{N}^* & a_n(f) = \frac{1}{\pi}\int_{0}^{2\pi}f(t)\cos(nt)dt \\
+        \forall n\in\mathbbm{N}^* & b_n(f) = \frac{1}{\pi}\int_{0}^{2\pi}f(t)\sin(nt)dt
+    \end{array}\right.
+    \left\{\begin{array}{l}
+        S_n(f):t\mapsto \sum_{k=-n}^{n}c_k(f)e^{ikt} \\
+        S_n(f):t\mapsto c_0(f) + \sum_{k=1}^{n}\left(a_k(f)\cos(kt) + b_k(f)\sin(kt)\right) \\
+    \end{array}\right.
+\end{displaymath}
+
+\subsection{Théorème de Parseval-Bessel}
+\begin{displaymath}
+    f\in\fctclass{pm}_{2\pi}(\mathbbm{R}, \mathbbm{C}),\text{ alors }S_n(f)\arrowtext{\normdeux{-}}f\text{ et donc }
+\end{displaymath}
+\begin{displaymath}
+    \normdeux{f} = \frac{1}{2\pi}\int_{0}^{2\pi}\left|f(t)\right|^2dt = \sum_{n=-\infty}^{+\infty}|c_n(f)|^2 = |c_0(f)|^2 + \frac{1}{2}\sum_{n=1}^{+\infty}|a_n(f)|^2 + \frac{1}{2}\sum_{n=1}^{+\infty}|b_n(f)|^2
+\end{displaymath}
+
+\subsection{Cas des fonctions \fctclass{1pm}}
+\begin{displaymath}
+    f\in\fctclass{0,1pm}_{2\pi}(\mathbbm{R}, \mathbbm{C}) \Rightarrow S_n(f) \arrowtext{CVN} f
+\end{displaymath}
+\begin{displaymath}
+    \text{Théorème de Dirichlet : }f\in\fctclass{1pm}_{2\pi}(\mathbbm{R}, \mathbbm{C}) \Rightarrow \forall x\in\mathbbm{R}, \lim_{n\rightarrow\infty}S_n(f)(x) = \frac{f(x^{+})+f(x^{-})}{2}
+\end{displaymath}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Théorèmes de Fubini}
+
+\subsection{Théorème de Fubini pour les séries doubles}
+\begin{displaymath}
+    \sum_{n,p}a_{n,p}\text{ sommable} \Leftrightarrow \sum_{n=0}^{+\infty}\sum_{p=0}^{+\infty}\normbase{a_{n,p}}\text{ existe}
+    \Rightarrow \sum_{n=0}^{+\infty}\sum_{p=0}^{+\infty}a_{n,p} = \sum_{p=0}^{+\infty}\sum_{n=0}^{+\infty}a_{n,p}
+\end{displaymath}
+
+\subsection{Théorème de Fubini pour les intégrales doubles}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        f\in\fctclass{pm}(I\times J,\mathbbm{C})\text{ int.}/I\times J\\
+        x\mapsto\int_{J}f(x,y)dy \in\fctclass{pm}(I)\\
+        y\mapsto\int_{I}f(x,y)dx \in\fctclass{pm}(J)
+    \end{array}\right.
+    \Rightarrow
+    \left\{\begin{array}{l}
+        \text{Ces fonctions sont intégrables sur }I\text{ et }J \\
+        \int_{I}\left(\int_{J}f(x,y)dy\right)dx = \int_{J}\left(\int_{I}f(x,y)dx\right)dy
+    \end{array}\right.
+\end{displaymath}
+Par exemple, $x\mapsto\int_{J}\left|f(x,y)\right|dy$ intégrable sur $I$ $\Rightarrow f$ int. sur $I\times J$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calcul différentiel}
+\subsection{Théorème d'inversion locale}
+Si $U$ et $V$ ouverts de $\mathbbm{R}^n$, $f\in\fctclass{1}(U, V)$, $a\in U$, $df(a)$ inversible, alors\\
+il existe $U_0$ ouvert de $U$ contenant $a$ et $V_0$ ouvert de $V$ contenant $f(a)$ tels que:
+\begin{displaymath}
+    \left\{\begin{array}{ccl}
+        U_0 & \rightarrow & V_0 \\
+        x & \mapsto & f(x)
+    \end{array}\right.\ \fctclass{1}\text{-difféomorphisme}
+\end{displaymath}
+
+\subsection{Théorème d'inversion globale}
+$E$ et $F$ de dimension finie (dim. égales), $f:U\rightarrow F$ injection \fctclass{1}, $\forall a \in U, df(a)$ inversible, alors\\
+$f(U)$ ouvert de $F$ et $f^{-1}:f(U)\rightarrow U$ de classe \fctclass{1}.
+
+\subsection{Théorème de Cauchy-Lipschitz linéaire}
+dim $E$ < $\infty$, $I$ intervalle, $a:I\rightarrow\mathcal{L}(E)$ et $b:I\rightarrow E$ \textbf{continues}, $t_0\in I$, $y_0 \in E$, alors le problème de Cauchy $y = a(t) . y + b(t)$, $y(t_0) = y_0$ a une unique solution sur $I$.
+
+\subsection{Théorème de Cauchy-Lipschitz non-linéaire}
+dim $E$ < $\infty$, $U$ ouvert de $\mathbbm{R}\times E$, $F:U\rightarrow E$ \textbf{de classe \fctclass{1}}, $(t_0,y_0) \in U$, et $(\mathcal{P})$ le problème de Cauchy : $y' = F(t,y)$ et $y(t_0) = y_0$, alors il existe un voisinage $I$ de $t_0$ et une solution $(f, I)$ de $(\mathcal{P})$. Si $(f,I)$ $(g, J)$ sont deux solutions, alors $\forall t \in I \cap J, f(t) = g(t)$.
+
+\subsection{Théorème de Gronwall}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        a\in\fctclass{0}(I,\mathbbm{R}_{+}), A(t) = \int_{t_0}^{t}a(s)ds\\
+        b\in\fctclass{0}(I,\mathbbm{R}_{+})\\
+        y\in\fctclass{1}(I,E)\\
+        \forall t\in I, \normbase{y'(t)} \le a(t)\normbase{y(t)} + b(t)
+    \end{array}\right.
+    \Rightarrow
+    \forall t\in I\cap\left[t_0,+\infty\right[, \normbase{y(t)} \le \normbase{y(t_0)}e^{A(t)} + e^{A(t)}\int_{t_0}^{t}b(s)e^{-A(s)}ds
+\end{displaymath}
+
+\subsection{Théorème des fonctions implicites dans $\mathbbm{R}^2$ et $\mathbbm{R}^3$}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        U\text{ ouvert de }\mathbbm{R}^2, F\in\fctclass{1}(U,\mathbbm{R})\\
+        \mathcal{C}: F(x,y) = \lambda \in \mathbbm{R}\\
+        a \in \mathcal{C}, \deriv{F}{y}(a) \ne 0
+    \end{array}\right.
+    \Rightarrow
+    \left\{\begin{array}{l}
+        \exists I, J \text{ intervalles }, a \in I\times J \subset U\\
+        \forall x\in I, \exists! y\in J : F(x,y) = \lambda\\
+        \phi : x \mapsto y \in \fctclass{1}
+    \end{array}\right.
+\end{displaymath}
+\begin{displaymath}
+    \left\{\begin{array}{l}
+        U\text{ ouvert de }\mathbbm{R}^3, F\in\fctclass{1}(U,\mathbbm{R})\\
+        \mathcal{S}: F(x,y,z) = \lambda \in \mathbbm{R}\\
+        a = (x_0, y_0, z_0) \in \mathcal{S}, \deriv{F}{z}(a) \ne 0
+    \end{array}\right.
+    \Rightarrow
+    \left\{\begin{array}{l}
+        \exists U_0 \text{ voisinage de } (x_0, y_0) \text{ dans }\mathbbm{R}^2,\\
+        \exists V_0 \text{ voisinage de } (z_0) \text{ dans }\mathbbm{R},\text{ tq. }U_0 \times V_0 \subset U,\\
+        \phi : (x,y) \mapsto z\text{ tq. }F(x,y,z) = \lambda, \phi \in \fctclass{1}
+    \end{array}\right.
+\end{displaymath}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Définitions et formules générales}
+\begin{center}
+    \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            Constante gamma d'Euler & $\sum_{k=1}^{n}\frac{1}{k} = \ln(n) + \gamma + \frac{1}{2n} + \text{o}\left(\frac{1}{n}\right)$ \\
+            \hline
+            Formule de Stirling & $n! \sim \sqrt{2\pi n}\,n^n\,e^{-n}$ \\
+            \hline
+            Intégrale de Gauss & $\int_{-\infty}^{+\infty} e^{-t^2}dt = \sqrt{\pi}$ \\
+            \hline
+            Fonction Gamma $\Gamma$ d'Euler & $t\in\mathbbm{R}_{+}^{*}, \Gamma(x) = \int_{0}^{+\infty} t^{x-1}e^{-t}dt$ \\
+                & $\Gamma(x+1) = x\Gamma(x)$\\
+                & $\Gamma(n+1) = n!$\\
+                & $\Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}$\\
+            \hline
+            Fonction Zeta $\zeta$ de Riemann & $\forall\alpha > 1, \zeta(\alpha) = \sum_{n=1}^{+\infty}\frac{1}{n^\alpha}$ \\
+                & $\zeta(2) = \sum_{n=1}^{+\infty}\frac{1}{n^2} = \frac{\pi^2}{6}$\\
+                & $\zeta(4) = \sum_{n=1}^{+\infty}\frac{1}{n^4} = \frac{\pi^4}{90}$\\
+            \hline
+        \end{tabular}
+\end{center}
+
+\end{document}
