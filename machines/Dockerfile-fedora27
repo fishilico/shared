@@ -57,6 +57,7 @@ CMD ["/run_shared_test.sh"]
 #       linux:
 #       python: z3_example.py
 #       python/crypto:
+#       python/dnssec:
 #       verification:
 #    With gcc -m32:
 #       Global blacklist: latex%
@@ -65,6 +66,7 @@ CMD ["/run_shared_test.sh"]
 #          linux: pulseaudio_echo sdl_v4l_video
 #          python: z3_example.py
 #          python/crypto:
+#          python/dnssec:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok
