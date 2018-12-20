@@ -514,15 +514,7 @@ static void walk_pte(struct pg_state *st, pte_t *pte, unsigned long addr)
 	unsigned int i;
 
 	for (i = 0; i < PTRS_PER_PTE; i++, pte++, addr += PAGE_SIZE) {
-#if 0
 		/* Dump PTE entries */
-		unsigned long addr_phys = __pa(addr);
-
-		if (pte_val(*pte) && addr_phys != pte_pfn(*pte) << PAGE_SHIFT) {
-			seq_printf(st->seq, "    PTE %3u @ %#lx: %lx vs %lx\n",
-				   i, addr, pte_val(*pte), addr_phys);
-		}
-#endif
 		note_page(st, addr, 4, pte_val_nopfn(*pte));
 	}
 }
