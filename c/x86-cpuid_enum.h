@@ -153,6 +153,8 @@ __extension__ static const char* cpuidstr_7_ecx[32] = {
     [16] = "la57",
     [22] = "rdpid",
     [25] = "cldemote",
+    [27] = "movdiri",
+    [28] = "movdir64b",
 };
 
 /**
