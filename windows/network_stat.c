@@ -149,7 +149,7 @@ static void dump_if_table(void)
 static void dump_ipv4addr_table(void)
 {
     MIB_IPADDRTABLE *pIpAddrTable;
-    const MIB_IPADDRROW *pIpAddrRow;
+    MIB_IPADDRROW *pIpAddrRow;
     DWORD i;
     TCHAR szAddrBuffer[16], szMaskBuffer[16], szBCastBuffer[16];
 
@@ -177,7 +177,7 @@ static void dump_ipv4addr_table(void)
 static void dump_ipv4fwd_table(void)
 {
     MIB_IPFORWARDTABLE *pIpForwardTable;
-    const MIB_IPFORWARDROW *pIpForwardRow;
+    MIB_IPFORWARDROW *pIpForwardRow;
     DWORD i;
     TCHAR szDestBuffer[16], szMaskBuffer[16], szNextHopBuffer[16];
 
@@ -251,7 +251,7 @@ static void dump_ipv4fwd_table(void)
 static void dump_tcp4_table(void)
 {
     MIB_TCPTABLE *pTcpTable;
-    const MIB_TCPROW *pTcpRow;
+    MIB_TCPROW *pTcpRow;
     DWORD i;
     TCHAR szLocalAddrBuffer[16], szRemoteAddrBuffer[16];
 
@@ -295,7 +295,7 @@ static void dump_tcp4_table(void)
 static void dump_udp4_table(void)
 {
     MIB_UDPTABLE *pUdpTable;
-    const MIB_UDPROW *pUdpRow;
+    MIB_UDPROW *pUdpRow;
     DWORD i;
     TCHAR szLocalAddrBuffer[16];
 
