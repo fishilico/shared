@@ -203,7 +203,7 @@ int main(void)
 #if IS_WINDOWS
     /* Use Windows API, if available */
     hKernel32 = GetModuleHandleW(L"kernel32.dll");
-    pfnIsDebuggerPresent = (BOOL (WINAPI *)(VOID))GetProcAddress(hKernel32, "IsDebuggerPresent");
+    pfnIsDebuggerPresent = (BOOL (WINAPI *)(VOID))(void *)GetProcAddress(hKernel32, "IsDebuggerPresent");
     if (!pfnIsDebuggerPresent) {
         printf("[ ] Kernel32!IsDebuggerPresent does not exist.\n");
     } else if (pfnIsDebuggerPresent()) {
@@ -248,13 +248,14 @@ int main(void)
 
     /* Use NtQueryInformationProcess directly, with class 7 for ProcessDebugPort */
     hNtDll = GetModuleHandleW(L"ntdll.dll");
-    pfnNtQueryInformationProcess = \
-        (LONG (WINAPI *)(HANDLE, int, PVOID, ULONG, PULONG)) \
-        GetProcAddress(hNtDll, "NtQueryInformationProcess");
+    pfnNtQueryInformationProcess =
+        (LONG (WINAPI *)(HANDLE, int, PVOID, ULONG, PULONG))
+        (void *)GetProcAddress(hNtDll, "NtQueryInformationProcess");
     if (!pfnNtQueryInformationProcess) {
         printf("[ ] ntdll!NtQueryInformationProcess does not exist.\n");
     } else {
-        status = pfnNtQueryInformationProcess(GetCurrentProcess(), 7, &dwpDebuggerPresent, sizeof(dwpDebuggerPresent), NULL);
+        status =
+            pfnNtQueryInformationProcess(GetCurrentProcess(), 7, &dwpDebuggerPresent, sizeof(dwpDebuggerPresent), NULL);
         if (status) {
             fprintf(stderr, "[!] NtQueryInformationProcess failed with error %lu.\n", GetLastError());
             return 1;
