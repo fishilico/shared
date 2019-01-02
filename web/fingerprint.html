@@ -63,7 +63,9 @@ function get_local_ips() {
     }
 
     var rtc = new RTCPeerConnection({iceServers: []});
-    rtc.createDataChannel('', {reliable: false});
+    if (typeof rtc.createDataChannel !== 'undefined') { /* Microsoft Edge does not have rtc.createDataChannel */
+        rtc.createDataChannel('', {reliable: false});
+    }
 
     rtc.onicecandidate = function (evt) {
         // convert the candidate to SDP so we can run it through our general parser
@@ -268,6 +270,5 @@ window.onload = fill_fingerprint_infos;
     <body>
         <h1>Browser fingerprint</h1>
         <div id="fingerprint-result">Loading...</div>
-        </ul>
     </body>
 </html>
