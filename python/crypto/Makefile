@@ -7,7 +7,7 @@ NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 HAVE_PYTHON_CRYPTO := $(call can-run,$(PYTHON) -c 'import Crypto')
 
 ifneq ($(HAVE_PYTHON_CRYPTO),y)
-NONTEST_BINARIES += chacha20_poly1350_tests.py dsa_tests.py ec_tests.py rsa_tests.py
+NONTEST_BINARIES += chacha20_poly1350_tests.py dhparam_tests.py dsa_tests.py ec_tests.py rsa_tests.py
 endif
 
 BINARIES := $(wildcard *.py)
