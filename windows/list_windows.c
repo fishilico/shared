@@ -2,6 +2,7 @@
  * List the current windows
  */
 #include "common.h"
+#include <inttypes.h>
 
 typedef struct _WINDOW_INFORMATIONS {
     HWND hwnd;
@@ -19,12 +20,83 @@ typedef struct _ENUM_WIN_INFOS_LPARAM {
     WINDOW_INFORMATIONS *infos;
 } ENUM_WIN_INFOS_LPARAM;
 
+/**
+ * Collect information about a window into the given WINDOW_INFORMATIONS structure */
+static BOOL CollectWindowInformation(HWND hwnd, WINDOW_INFORMATIONS *pInfo)
+{
+    UINT cchSize, cchLen;
+
+    ZeroMemory(pInfo, sizeof(*pInfo));
+
+    pInfo->hwnd = hwnd;
+    pInfo->bVisible = IsWindowVisible(hwnd);
+
+    cchSize = MAX_PATH;
+    pInfo->szClass = HeapAlloc(GetProcessHeap(), 0, cchSize * sizeof(TCHAR));
+    if (!pInfo->szClass) {
+        print_winerr(_T("HeapAlloc(szClass)"));
+        return FALSE;
+    }
+    cchLen = GetClassName(hwnd, pInfo->szClass, cchSize);
+    assert(cchLen + 1 < cchSize && pInfo->szClass[cchLen] == 0);
+
+    cchSize = GetWindowTextLength(hwnd) + 2;
+    pInfo->szTitle = HeapAlloc(GetProcessHeap(), 0, cchSize * sizeof(TCHAR));
+    if (!pInfo->szTitle) {
+        print_winerr(_T("HeapAlloc(szTitle)"));
+        HeapFree(GetProcessHeap(), 0, pInfo->szClass);
+        return FALSE;
+    }
+    cchLen = GetWindowText(hwnd, pInfo->szTitle, cchSize);
+    assert(cchLen + 1 < cchSize && pInfo->szTitle[cchLen] == 0);
+
+    pInfo->dwThreadId = GetWindowThreadProcessId(hwnd, &pInfo->dwProcessId);
+    pInfo->hModule = (HMODULE)GetClassLongPtr(hwnd, GCLP_HMODULE);
+    pInfo->hInstance = (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE);
+    return TRUE;
+}
+
+static void PrintWindowInfo(const WINDOW_INFORMATIONS *pInfo)
+{
+    _tprintf(_T("[%#" PRIxPTR "] %c"), (UINT_PTR)pInfo->hwnd, pInfo->bVisible ? _T('V') : _T('-'));
+    if (pInfo->szClass) {
+        _tprintf(_T(" (%s)"), pInfo->szClass);
+    }
+    if (pInfo->szTitle) {
+        _tprintf(_T(" \"%s\""), pInfo->szTitle);
+    }
+    _tprintf(_T(" PID %lu TID %lu"), pInfo->dwProcessId, pInfo->dwThreadId);
+    if (pInfo->hModule) {
+        _tprintf(_T(" module @%p"), pInfo->hModule);
+    }
+    if (pInfo->hInstance && pInfo->hInstance != pInfo->hModule) {
+        _tprintf(_T(" instance @%p"), pInfo->hInstance);
+    }
+    if (pInfo->hwnd == GetDesktopWindow()) {
+        _tprintf(_T(" (Desktop Window)"));
+    }
+    if (pInfo->hwnd == GetShellWindow()) {
+        _tprintf(_T(" (Shell Window)"));
+    }
+    _tprintf(_T("\n"));
+}
+
+static void DestroyWindowInformation(WINDOW_INFORMATIONS *pInfo)
+{
+    HeapFree(GetProcessHeap(), 0, pInfo->szClass);
+    HeapFree(GetProcessHeap(), 0, pInfo->szTitle);
+    CloseHandle(pInfo->hModule);
+    CloseHandle(pInfo->hInstance);
+}
+
+/**
+ * Callback for EnumWindows
+ */
 static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam)
 {
     ENUM_WIN_INFOS_LPARAM *pWininfos = (ENUM_WIN_INFOS_LPARAM *)lParam;
     WINDOW_INFORMATIONS *pInfo;
     DWORD i;
-    int cchSize, cchLen;
 
     assert(pWininfos);
 
@@ -42,35 +114,8 @@ static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam)
         print_winerr(_T("HeapRealloc"));
         return FALSE;
     }
-    pInfo = &pInfo[i];
-    ZeroMemory(pInfo, sizeof(*pInfo));
-
     /* Fill WINDOW_INFORMATIONS structure */
-    pInfo->hwnd = hwnd;
-    pInfo->bVisible = IsWindowVisible(hwnd);
-
-    cchSize = MAX_PATH;
-    pInfo->szClass = HeapAlloc(GetProcessHeap(), 0, cchSize * sizeof(TCHAR));
-    if (!pInfo->szClass) {
-        print_winerr(_T("HeapAlloc(szClass)"));
-        return FALSE;
-    }
-    cchLen = GetClassName(hwnd, pInfo->szClass, cchSize);
-    assert(cchLen + 1 < cchSize && pInfo->szClass[cchLen] == 0);
-
-    cchSize = GetWindowTextLength(hwnd) + 2;
-    pInfo->szTitle = HeapAlloc(GetProcessHeap(), 0, cchSize * sizeof(TCHAR));
-    if (!pInfo->szTitle) {
-        print_winerr(_T("HeapAlloc(szTitle)"));
-        return FALSE;
-    }
-    cchLen = GetWindowText(hwnd, pInfo->szTitle, cchSize);
-    assert(cchLen + 1 < cchSize && pInfo->szTitle[cchLen] == 0);
-
-    pInfo->dwThreadId = GetWindowThreadProcessId(hwnd, &pInfo->dwProcessId);
-    pInfo->hModule = (HMODULE)GetClassLongPtr(hwnd, GCLP_HMODULE);
-    pInfo->hInstance = (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE);
-    return TRUE;
+    return CollectWindowInformation(hwnd, &pInfo[i]);
 }
 
 static int CompareWinInfosList(const void *arg1, const void *arg2)
@@ -134,21 +179,7 @@ static BOOL ListWindowsRec(HWND hwndParent, DWORD nIndent)
         for (j = 0; j < nIndent; j++) {
             _tprintf(_T("  "));
         }
-        _tprintf(_T("[%p] %c"), pInfo->hwnd, pInfo->bVisible ? _T('V') : _T('-'));
-        if (pInfo->szClass) {
-            _tprintf(_T(" (%s)"), pInfo->szClass);
-        }
-        if (pInfo->szTitle) {
-            _tprintf(_T(" \"%s\""), pInfo->szTitle);
-        }
-        _tprintf(_T(" PID %lu TID %lu"), pInfo->dwProcessId, pInfo->dwThreadId);
-        if (pInfo->hModule) {
-            _tprintf(_T(" module @%p"), pInfo->hModule);
-        }
-        if (pInfo->hInstance && pInfo->hInstance != pInfo->hModule) {
-            _tprintf(_T(" instance @%p"), pInfo->hInstance);
-        }
-        _tprintf(_T("\n"));
+        PrintWindowInfo(pInfo);
         if (!ListWindowsRec(pInfo->hwnd, nIndent + 1)) {
             bRet = FALSE;
             goto cleanup;
@@ -159,10 +190,7 @@ cleanup:
     if (wininfos.infos) {
         assert(wininfos.nCount > 0);
         for (i = 0; i < wininfos.nCount; i++) {
-            HeapFree(GetProcessHeap(), 0, wininfos.infos[i].szClass);
-            HeapFree(GetProcessHeap(), 0, wininfos.infos[i].szTitle);
-            CloseHandle(wininfos.infos[i].hModule);
-            CloseHandle(wininfos.infos[i].hInstance);
+            DestroyWindowInformation(&wininfos.infos[i]);
         }
         HeapFree(GetProcessHeap(), 0, wininfos.infos);
     }
@@ -171,5 +199,22 @@ cleanup:
 
 int _tmain(void)
 {
+    HWND hwnd;
+    WINDOW_INFORMATIONS winInfo;
+
+    hwnd = GetDesktopWindow();
+    _tprintf(_T("Current Desktop Window: hwnd = %#" PRIxPTR "\n"), (UINT_PTR)hwnd);
+    if (hwnd && CollectWindowInformation(hwnd, &winInfo)) {
+        _tprintf(_T("-> "));
+        PrintWindowInfo(&winInfo);
+        DestroyWindowInformation(&winInfo);
+    }
+    hwnd = GetShellWindow();
+    _tprintf(_T("Current Shell Window: hwnd = %#" PRIxPTR "\n"), (UINT_PTR)hwnd);
+    if (hwnd && CollectWindowInformation(hwnd, &winInfo)) {
+        _tprintf(_T("-> "));
+        PrintWindowInfo(&winInfo);
+        DestroyWindowInformation(&winInfo);
+    }
     return ListWindowsRec(NULL, 0) ? 0 : 1;
 }
