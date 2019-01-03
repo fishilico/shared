@@ -75,6 +75,38 @@ When the function which maps items to their equivalence class is a morphism, thi
 Here, the addition maps naturally to the set of equivalence classes, and the said kernel is :latex:`$b\Z$`.
 This is why :latex:`$\Z/\mathcal{R}_b$` is often written as :latex:`$\Z/b\Z$`.
 
+Greatest common divisor
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: latex
+
+    \begin{definition}[Greatest common divisor]
+      The greatest common divisor between two integers $a$ and $b$ which are not both zero is the greatest positive integer which divides both $a$ and $b$.
+      It is written $\gcd(a, b)$.
+    \end{definition}
+
+    \begin{theorem}[Bézout's identity]
+      For two integers $a$ and $b$ which are not both zero,
+      \begin{displaymath}
+        \exists x, y \in \Z, ax + by = \gcd(a, b)
+      \end{displaymath}
+    \end{theorem}
+
+    The extended Euclidean algorithm is an algorithm which produces such $x$ and $y$.
+
+    \begin{theorem}[Euclid's lemma]
+      If $p$ is a prime number and $a$ and $b$ two integers,
+      \begin{displaymath}
+        p | ab \Leftrightarrow p | a \lor p | b
+      \end{displaymath}
+    \end{theorem}
+    \begin{theorem}[Generalization of Euclid's lemma]
+      If $n$, $a$ and $b$ are integers,
+      \begin{displaymath}
+        \gcd(n, a) = 1 \land n | ab \Rightarrow n | b
+      \end{displaymath}
+    \end{theorem}
+
 
 Chinese remainder theorem
 -------------------------
@@ -95,7 +127,7 @@ Chinese remainder theorem
 
     Proof of existence:
 
-    As $n_1$ and $n_2$ are coprime, Bezout identity (and the Extended Euclidean algorithm) gives two integers $u_1$ and $u_2$ such that:
+    As $n_1$ and $n_2$ are coprime, Bézout's identity (and the Extended Euclidean algorithm) gives two integers $u_1$ and $u_2$ such that:
     \begin{equation}
       u_1 n_1 + u_2 n_2 = 1
     \end{equation}
@@ -125,9 +157,9 @@ Modular inverse
 ---------------
 
 Let :latex:`$n \in \N$`.
-:latex:`$x \in \Z/n\Z$` is inversible if there exists :latex:`$y \in \Z/n\Z$` such that :latex:`$xy = \bar{1}$`.
+:latex:`$x \in \Z/n\Z$` is invertible if there exists :latex:`$y \in \Z/n\Z$` such that :latex:`$xy = \bar{1}$`.
 As the multiplication is commutative, this implies that :latex:`$yx = \bar{1}$` too.
-The set of inversible items of :latex:`$\Z/n\Z$` is written :latex:`$(\Z/n\Z)^\times$`.
+The set of invertible items of :latex:`$\Z/n\Z$` is written :latex:`$(\Z/n\Z)^\times$`.
 
 This :latex:`$y$` is unique. Indeed, if there exists :latex:`$y_1$` and :latex:`$y_2$` with this property,
 
@@ -141,11 +173,11 @@ This :latex:`$y$` is called the inverse of :latex:`$x$` and is written :latex:`$
 
 When talking about integers instead of equivalence classes, the definitions become:
 
-* :latex:`$x \in \Z$` is inversible modulo :latex:`$n$` if there exists :latex:`$y \in \Z$` such that :latex:`$xy \equiv 1 [n]$`.
+* :latex:`$x \in \Z$` is invertible modulo :latex:`$n$` if there exists :latex:`$y \in \Z$` such that :latex:`$xy \equiv 1 [n]$`.
 * The inverse of such :latex:`$x$` modulo :latex:`$n$` is the integer :latex:`$y \in \llbracket 0, n \llbracket$` such that :latex:`$xy \equiv 1 [n]$`.
-* The set of integers inversible modulo :latex:`$n$` is also written :latex:`$(\Z/n\Z)^\times$`, in a kind of langage abuse.
+* The set of integers invertible modulo :latex:`$n$` is also written :latex:`$(\Z/n\Z)^\times$`, in a kind of langage abuse.
 
-When :latex:`$x \in \Z$` is inversible modulo :latex:`$n$`:
+When :latex:`$x \in \Z$` is invertible modulo :latex:`$n$`:
 
 .. raw:: latex
 
@@ -154,7 +186,7 @@ When :latex:`$x \in \Z$` is inversible modulo :latex:`$n$`:
       \exists (u, v) \in \Z^2, ux + vn = 1
     \end{eqnarray}
 
-This last equation can be used to show that there is no common divisor except 1 between :latex:`$x$` and :latex:`$n$` (this is Bezout identity).
+This last equation can be used to show that there is no common divisor except 1 between :latex:`$x$` and :latex:`$n$` (this is Bézout's identity).
 Moreover, for any :latex:`$x \in \Z$` the Extended Euclidean algorithm builds two integers :latex:`$u$` and :latex:`$v$` such that:
 
 .. raw:: latex
@@ -235,14 +267,14 @@ Euler totient function
     \end{equation}
 
 
-Galois fields other prime numbers
----------------------------------
+Galois fields over prime numbers
+--------------------------------
 
-When a set is provided with addition and multiplication operations, like :latex:`$(\Z/n\Z, +, .)$`, it is called a field when every non-zero item is inversible.
+When a set is provided with addition and multiplication operations, like :latex:`$(\Z/n\Z, +, .)$`, it is called a field when every non-zero item is invertible.
 
-If :latex:`$n$` is a prime number, no integer between 1 and :latex:`$n - 1$` shares no divisors except 1 with :latex:`$n$`, so every equivalence class of :latex:`$\Z/n\Z$` which is not :latex:`$\bar 0 = n\Z$` is inversible.
+If :latex:`$n$` is a prime number, no integer between 1 and :latex:`$n - 1$` shares any divisor except 1 with :latex:`$n$`, so every equivalence class of :latex:`$\Z/n\Z$` which is not :latex:`$\bar 0 = n\Z$` is invertible.
 
-Otherwise (if :latex:`$n$` is not a prime number), there exists :latex:`$d \in \llbracket 2, n - 1 \rrbracket$` which divides :latex:`$n$`, and this :latex:`$d$` is therefore not inversible modulo :latex:`$n$`.
+Otherwise (if :latex:`$n$` is not a prime number), there exists :latex:`$d \in \llbracket 2, n - 1 \rrbracket$` which divides :latex:`$n$`, and this :latex:`$d$` is therefore not invertible modulo :latex:`$n$`.
 
 .. raw:: latex
 
@@ -276,9 +308,9 @@ Let's write down here a proof using modular arithmetic.
 Proof of Fermat's little theorem using modular arithmetic
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-First, let's reduce the set of :latex:`$a$` to the positive integers.
+First, let's reduce the set of :latex:`$a$` to the positive integers between 1 and :latex:`$p - 1$`.
 
-* If :latex:`$p$` is odd, :latex:`$(-1)^p = -1$` so :latex:`$(-1)^p \equiv -1 [p]$`. Otherwise :latex:`$p$` is an even prime number, so :latex:`$p = 2$` and :latex:`$(-1)^p = 1 \equiv -1 [2]$`. The theorem is therefore true for :latex:`$a = -1$`. 
+* If :latex:`$p$` is odd, :latex:`$(-1)^p = -1$` so :latex:`$(-1)^p \equiv -1 [p]$`. Otherwise :latex:`$p$` is an even prime number, so :latex:`$p = 2$` and :latex:`$(-1)^p = 1 \equiv -1 [2]$`. The theorem is therefore true for :latex:`$a = -1$`.
 * If Fermat's little theorem is true for :latex:`$a \in \N$`, it is true of negative integers as well, because :latex:`$(-a)^p = (-1)^p a^p \equiv -1 . a = -a [p]$`
 * If Fermat's little theorem is true for :latex:`$a \in \llbracket 0, p - 1 \rrbracket$`, it can be extended for :latex:`$a \in \N$` because every operation is modulo :latex:`$p$`.
 * The theorem is trivially true for :latex:`$a = 0$`, because :latex:`$a^p = 0$` (:latex:`$p$` cannot be null).
@@ -293,7 +325,7 @@ With :latex:`$a \in \llbracket 1, p - 1 \rrbracket$`, let's study the sequence :
       \forall i \in \N, u_i := i a \mod p
     \end{equation}
 
-    As $a$ is inversible modulo $p$,
+    As $a$ is invertible modulo $p$,
 
     \begin{equation}
       \forall i \in \N, u_i = 0 \iff ia = 0 \mod p \iff i = 0 \mod p \\
@@ -323,7 +355,7 @@ With :latex:`$a \in \llbracket 1, p - 1 \rrbracket$`, let's study the sequence :
       \left(\prod_{i=1}^{p-1} i\right)\left(\prod_{i=1}^{p-1} a\right) &\equiv& \prod_{i=1}^{p-1} i [p]
     \end{eqnarray}
 
-    As every integer from 1 to $p - 1$ is inversible,
+    As every integer from 1 to $p - 1$ is invertible,
 
     \begin{eqnarray}
       a^{p - 1} &\equiv& 1 [p] \\
@@ -396,7 +428,7 @@ Proof of Euler's theorem
     In order to prove Euler's theorem, let's apply it to $G = (\Z/n\Z)^\times$ and $H = {a^i, i \in \N}$ with $a \in \Z$ such that $\gcd(a, n) = 1$.
     $(H, \times)$ is a subgroup of $G$ ($H$ is the orbit of $a$) and is finite.
     Therefore there exists $(i, j) \in \N^2$ such that $i < j$ and $a^i \equiv a^j [n]$.
-    As $a$ is inversible modulo $n$, $a^{j-i} \equiv 1 [n]$, with $j - i > 0$.
+    As $a$ is invertible modulo $n$, $a^{j-i} \equiv 1 [n]$, with $j - i > 0$.
     This allows to define the order of $a$ in $(\Z/n\Z)^\times$:
     \begin{equation}
       \ord_n(a) := \min\left(i \in \Ns, a^i \equiv 1 [n]\right)
@@ -411,9 +443,9 @@ Proof of Euler's theorem
     \begin{equation}
       \ord_n(a) \text{ divides } |G| = |(\Z/n\Z)^\times| = \phi(n)
     \end{equation}
-    Let $m \in \Z$ such that $\phi(n) = m\ord_n(a)$.
+    Let $m \in \Z$ such that $\phi(n) = m . \ord_n(a)$.
     \begin{equation}
-      a^{\phi(n)} = a^{m\ord_n(a)} = \left(a^{\ord_n(a)}\right)^m \equiv 1^m = 1 [n]
+      a^{\phi(n)} = a^{m.\ord_n(a)} = \left(a^{\ord_n(a)}\right)^m \equiv 1^m = 1 [n]
     \end{equation}
 
 QED.
@@ -427,8 +459,8 @@ In modular arithmetic, some numbers to not have a square root, :latex:`$-1$` may
 
 The values :latex:`$n = 1$` and :latex:`$n = 2$` are not very interesting:
 
-* :latex:`$\Z/1Z$` contains a single element, 0, which is its own square root.
-* :latex:`$\Z/2Z$` contains two elements (0 and 1), which squares are themselves. So their square roots are themselves too.
+* :latex:`$\Z/1\Z$` contains a single element, 0, which is its own square root.
+* :latex:`$\Z/2\Z$` contains two elements (0 and 1), which squares are themselves. So their square roots are themselves too.
 
 Things become more interesting with :latex:`$n \geq 3$`.
 
@@ -458,7 +490,7 @@ Euler's criterion
     \end{eqnarray}
 
     Therefore $a^\frac{p-1}{2}$ is a root of $X^2 - 1 = (X - 1)(X + 1)$ in the finitie field $\F{p}$, which leads to $a^\frac{p-1}{2} \equiv \pm 1 [p]$.
-    (This comes from the fact that $xy = 0 \Rightarrow x = 0 \lor y = 0$ in a field because every non-null element is inversible.)
+    (This comes from the fact that $xy = 0 \Rightarrow x = 0 \lor y = 0$ in a field because every non-null element is invertible.)
 
     By grouping the numbers in $\llbracket 1, p - 1 \rrbracket$ by pairs $(x, p-x)$ with $x$ being odd, each pair matches a unique quadratic residue (because $(p-x)^2 \equiv x^2 [p]$) and every matched residue is distinct (because $X^2 - x^2$ has at most two roots).
     Therefore there are at least $\frac{p-1}{2}$ quadratic residues.
