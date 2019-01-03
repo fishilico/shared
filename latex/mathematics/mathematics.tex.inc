@@ -2,6 +2,7 @@
 \usepackage{stmaryrd}
 
 % Define math shortcuts
+\renewcommand{\C}[0]{\ensuremath{\mathbbm{C}}}
 \newcommand{\N}[0]{\ensuremath{\mathbbm{N}}}
 \newcommand{\Ns}[0]{\ensuremath{\mathbbm{N^{*}}}}
 \newcommand{\Z}[0]{\ensuremath{\mathbbm{Z}}}

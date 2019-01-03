@@ -831,3 +831,311 @@ Cipolla's algorithm
     This is why $r \in \Z/p\Z$.
 
     To conclude, this algorithm built a square root ($r$) of $x$ modulo $p$.
+
+
+Arithmetic modulo a power of 2
+-------------------------------
+
+Basic properties
+~~~~~~~~~~~~~~~~
+
+.. raw:: latex
+
+    When working with numbers on a computer, it is quite common to work modulo a power of 2, like $2^{16}$, $2^{32}$ or $2^{64}$.
+    There are some interesting properties in such computations, that can be used in several algorithms.
+
+    Let $N \in \Ns$ be the number of bits which is considered.
+    The remaining of this part will focus on working in $\Z/2^N\Z$.
+    \begin{itemize}
+      \item If $N = 1$, $\Z/2\Z$ is a field containing to items, $\{0, 1\}$, and it is not much interesting.
+      \item If $N = 2$, $\Z/4\Z$ is a ring that contains two invertible items, $1$ and $3 = -1$.
+    \end{itemize}
+    It becomes more generic when $N$ is larger, for example when $N \in \{16, 32, 64\}$.
+
+    Let's begin with a theorem which comes from the fact that 2 is the only prime divisor of $2^N$.
+    \begin{theorem}[invertible items modulo $2^N$]
+      The set of the numbers invertible modulo $2^N$ is the set of odd numbers.
+    \end{theorem}
+
+    As there are $2^{N-1}$ odd numbers in $\Z/2^N\Z$, the Euler totient function on $2^N$ is:
+    \begin{eqnarray}
+      \phi(2^N) = 2^{N-1}
+    \end{eqnarray}
+    This can also be computed thanks to the formula $\phi(p^k) = p^k - p^{k-1} = p^{k-1}(p - 1)$.
+
+    Then using Euler's theorem,
+    \begin{theorem}[Euler's theorem in $\Z/2^N\Z$]
+      \begin{eqnarray}
+        \forall x \text{ odd number }, x^{2^{N-1}} \equiv 1 [2^N]
+      \end{eqnarray}
+    \end{theorem}
+
+Quadratic residues modulo a power of 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: latex
+
+    When analyzing the squares, here is a formula which has some consequences, when $N \ge 2$:
+    \begin{eqnarray}
+      \forall r \in \Z, (2^{N-1} + r)^2 = 2^{2N-2} + 2^N r + r^2 \equiv r^2 [2^N]
+    \end{eqnarray}
+    This means that if $r$ is a square root of $a$ modulo $2^N$, $2^{N-1} + r$ is also a square root, and so is its opposites $2^N - (2^{N-1} + r) = 2^{N-1} - r$.
+    Moreover when $a$ is odd, $r$ must be too, so $r$ cannot be $0$ nor $2^{N-1}$.
+    Therefore an odd quadratic residue has at least 4 roots modulo $2^N$ when $N \ge 3$ (the three that where given and $-r$).
+
+    Another formula is:
+    \begin{eqnarray}
+      \forall x \in \Z, (2x + 1)^2 = 4x^2 + 4x + 1 = 4x(x + 1) + 1 \equiv 1 [8]
+    \end{eqnarray}
+    Moreover 8 divides $2^N$ if $N \ge 3$ and the result is trivial for $N < 3$.
+    Therefore all odd quadratic residues in $\Z/2^N\Z$ are congruent to 1 modulo 8.
+
+    From now on, let's consider $N \ge 3$.
+    Let $f$ be the square function restricted to the invertible items of $\Z/2^N\Z$ (which are the odd numbers $(2\Z+1)/2^N\Z$):
+    \begin{eqnarray}
+        f: (\Z/2^N\Z)^\times &\rightarrow& (8\Z+1)/2^N\Z = \{x \in \Z/2^N\Z, x \equiv 1 [8]\} \\
+        r &\mapsto& r^2
+    \end{eqnarray}
+
+    As it was shown that $f(r) = f(2^{N-1} - r) = f(2^{N-1} + r) = f(2^N - r)$, it is possible to restrict further $f$ to the set of odd numbers between $0$ and $2^{N-2}$ (i.e. $(2\Z+1) \cap \llbracket 1, 2^{N-2}-1\rrbracket$).
+    Let's prove that this restricted $f$ is injective.
+    If $r_1$ and $r_2$ are two numbers such that $0 < r_2 < r_1 < 2^{N-2}$ and $f(r_1) = f(r_2)$.
+    $r_1^2 \equiv r_2^2 [2^N]$ so:
+    \begin{eqnarray}
+      (r_1 - r_2)(r_1 + r_2) \equiv 0 [2^N]
+    \end{eqnarray}
+    As $r_1 - r_2 \neq 0 [2^N]$, let $p$ be the power of $2$ of the prime decomposition of $r_1 - r_2$.
+    This means that $0 \le p \le N - 1$, $2^p$ divides $(r_1 - r_2)$ and $2^{p+1}$ does not.
+    As $r_1$ and $r_2$ are odd, $p \ge 1$.
+    As $0 < r_2 < r_1 < 2^{N-2}$, $0 < r_1 - r_2 < 2^{N-2}$ so $p < N-2$.
+    Let $\alpha$ be the odd number such that $r_1 - r_2 = \alpha 2^p$.
+    \begin{eqnarray}
+      2^N & \text{divides} & (r_1 - r_2)(r_1 + r_2) = \alpha 2^p(2r_2 + \alpha 2^p) \\
+      2^{N - p} &\text{divides}& \alpha \times 2(r_2 + \alpha 2^{p - 1}) \\
+      2^{N - p - 1} &\text{divides}& r_2 + \alpha 2^{p - 1}
+    \end{eqnarray}
+    As $p < N - 2$, $2^{N - p - 1}$ is even and the only way for the right member to be even (with $r_2$ and $\alpha$ being odd) is when $2^{p - 1} = 1$.
+    Therefore $p$ must be $1$, which means that $2^{N-2}$ divides $r_2 + \alpha \neq 0$ and $0 < r_1 = r_2 + 2\alpha < 2^{N-2}$, which is impossible.
+
+    Therefore the hypothesis leading to the definition of $r_1$ and $r_2$ is absurd and $f$ is injective from the set of odd numbers between $0$ and $2^{N-2}$.
+    There are $\frac{2^{N-2}}{2} = 2^{N-3}$ such numbers.
+    This is also the cardinality of $(8\Z+1)/2^N\Z$.
+    Therefore the restricted $f$ is bijective, which means that every number in $(8\Z+1)/2^N\Z$ is a square residue.
+
+    \begin{theorem}[Odd quadartic residues modulo $2^N$]\label{odd-quad-resid-mod-2n}
+      An odd number $x$ is a quadratic residue modulo $2^N$ if and only if $x \equiv 1 [8]$.
+      It then has four square roots that can be computed from one (modulo $2^N$): $r$, $2^{N-1} - r$, $2^{N-1} + r$ and $2^N - r$.
+    \end{theorem}
+
+    For example, the square roots of 1 are $1$, $2^{N-1} - 1$, $2^{N-1} + 1$ and $2^N - 1$.
+
+    It would be nice to have something like the Legendre symbol to characterize quadratic residues, which only works when the modulus is a prime number, but it does not work for example with $N = 4$: modulo 16, 1 and 9 are the only odd quadratic residues and the order of the group is 4 ($x^4 \equiv 1 [16]$ for $x$ odd).
+
+    Nevertheless the last result can be used to refine the equation given by Euler's theorem.
+    As the set of quadratic residues modulo $2^N$ (written $(8\Z+1)/2^N\Z$) is stable through multiplication and inversion, it is a commutative group.
+    Its cardinal is $2^{N - 3}$, therefore the Lagrange theorem gives:
+    \begin{theorem}[Refined Euler's theorem modulo $2^N$]
+      With $N \ge 3$,
+      \begin{eqnarray}
+        \forall x \in \Z, x \equiv 1 [8] &\Rightarrow& x^{2^{N - 3}} \equiv 1 [2^N] \\
+        \forall r \in \Z, r \equiv 1 [2] &\Rightarrow& r^{2^{N - 2}} \equiv 1 [2^N]
+      \end{eqnarray}
+    \end{theorem}
+
+    When studying an even number, its decomposition as a product of an odd number and a power of two $\alpha 2^p$ allows to work out a simple rule about even quadratic residues.
+    If $2$ is a quadratic residue modulo $2^N$, there exists $r \in \Z$ such that
+    \begin{eqnarray}
+      r^2 &\equiv& 2 [2^N] \\
+      2^N &\text{divides}& r^2 - 2 \\
+      2 \text{ divides } r^2 &\text{and}& 2^{N-1} \text{ divides } \frac{r^2}{2} - 1 \\
+      2 \text{ divides } r &\text{and}& 2^{N-1} \text{ divides } 2\left(\frac{r}{2}\right)^2 - 1 \\
+    \end{eqnarray}
+    This would only be possible with $2^{N-1} = 1$, i.e. $N = 1$ and $2^N = 2$ (and then the square root of 2 is 0).
+    When $N \ge 2$, $2$ is not a quadratic residue, so there is a simple rule:
+    \begin{theorem}[Generic quadartic residues modulo $2^N$]
+      A number decomposed as $\alpha 2^p$ with $\alpha$ odd and $p \in \N$ is a quadratic residue modulo $2^N$ if and only if either $p \ge N$ or $\alpha \equiv 1 [8]$ and $p$ is even.
+    \end{theorem}
+
+Square roots modulo a power of 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: latex
+
+    Theorem \ref{odd-quad-resid-mod-2n} can be used to design an algorithm that computes square roots of odd numbers.
+    For all $x \in 8\Z + 1$ (i.e. such that $x \equiv 1 [8]$), $x$ has a square root modulo $2^N$ whatever $N$ is.
+    \begin{itemize}
+      \item If $N \le 3$, $2^N \in \{1, 2, 4, 8\}$ and $x \equiv 1 [2^N]$ therefore the square roots of $x$ modulo $2^N$ are 1, 3, 5 and 7 (some of these numbers being equivalent modulo $2^N$ when $N < 3$).
+      \item When $N \ge 3$, $x$ has 4 distinct square roots modulo $2^N$, one of them lying between 0 and $2^{N-2}$ (excluded).
+        Let $sqrt_N(x)$ be this value.
+    \end{itemize}
+    \begin{definition}[Square root function modulo $2^N$]
+      For all $N \ge 3$, the square root function modulo $2^N$ is defined as:
+      \begin{eqnarray}
+        sqrt_N: 8\Z + 1 &\rightarrow& \Z \\
+        x &\mapsto& r : 0 < r < 2^{N-2} \land r^2 \equiv x [2^N]
+      \end{eqnarray}
+      This definition can be extended to $N \le 2$ with $sqrt_1(x) = sqrt_2(x) = 1$
+    \end{definition}
+
+    It is trivial to compute $sqrt_N(1) = 1$.
+
+    With $N \ge 3$, $x$ has four square roots modulo $N$: $sqrt_N(x$), $2^{N-1}-sqrt_N(x)$, $2^{N-1}+sqrt_N(x)$ and $2^N-sqrt_N(x)$.
+    These roots are sorted:
+    \begin{eqnarray}
+      0 < sqrt_N(x) < 2^{N-2} < 2^{N-1}-sqrt_N(x) < 2^{N-1} \\
+      2^{N-1} < 2^{N-1}+sqrt_N(x) < 3\times2^{N-2} < 2^N-sqrt_N(x) < 2^N
+    \end{eqnarray}
+
+    When $sqrt_N(x)$ is known, how could $sqrt_{N+1}(x)$ be computed?
+    There exist some relationships:
+    \begin{eqnarray}
+      sqrt_{N+1}(x)^2 &\equiv& x [2^{N+1}] \\
+      sqrt_{N+1}(x)^2 &\equiv& x [2^N]
+    \end{eqnarray}
+    \begin{eqnarray}
+      sqrt_{N+1}(x) \in \left\{\pm sqrt_N(x), 2^{N-1} \pm sqrt_N(x)\right\}\text{ modulo $2^N$}
+    \end{eqnarray}
+    As $0 < sqrt_{N+1}(x) < 2^{N+1-2} = 2^{N-1}$, this leads to:
+    \begin{eqnarray}
+      sqrt_{N+1}(x) \in \left\{sqrt_N(x), 2^{N-1}-sqrt_N(x)\right\}\text{ (in $\Z$)}
+    \end{eqnarray}
+
+    Moreover, using that $sqrt_N(x)$ is odd,
+    \begin{eqnarray}
+      \left(2^{N-1}-sqrt_N(x)\right)^2 &=& 2^{2N-2} - 2^N sqrt_N(x) + sqrt_N(x)^2 \\
+      \left(2^{N-1}-sqrt_N(x)\right)^2 &\equiv& -2^N + sqrt_N(x)^2 [2^{N+1}] \\
+      \left(2^{N-1}-sqrt_N(x)\right)^2 + 2^N &\equiv& sqrt_N(x)^2 [2^{N+1}]
+    \end{eqnarray}
+
+    Therefore:
+    \begin{itemize}
+      \item If $sqrt_{N+1}(x) = sqrt_N(x)$, $sqrt_N(x)^2 = sqrt_{N+1}(x)^2 \equiv x [2^{N+1}]$.
+      \item Otherwise $sqrt_{N+1}(x) = 2^{N-1} - sqrt_N(x)$ and
+        \begin{eqnarray}
+          sqrt_N(x)^2 &\equiv& 2^N + \left(2^{N-1}-sqrt_N(x)\right)^2 [2^{N+1}] \\
+          sqrt_N(x)^2 &\equiv& 2^N + x [2^{N+1}]
+        \end{eqnarray}
+    \end{itemize}
+
+    By reversing the conditions, the following theorem is proven
+    \begin{theorem}[Recursive computation of the square root function $2^N$]
+      The square root function modulo $2^N$ can be recursively defined on $x \in 8\Z+1$ by:
+      \begin{equation}
+        \forall N \le 3, sqrt_N(x) = 1
+      \end{equation}
+      \begin{equation}
+        \forall N \ge 4, sqrt_N(x) = \left\{\begin{array}{ccl}
+          sqrt_{N-1}(x) &\text{if}& sqrt_{N-1}(x)^2 \equiv x [2^N] \\
+          2^{N-2} - sqrt_{N-1}(x) &\text{if}& sqrt_{N-1}(x)^2 \equiv 2^{N-1} + x [2^N]
+          \end{array}\right.
+      \end{equation}
+      There is no third case.
+    \end{theorem}
+
+    Here are some values in hexadecimal:
+    \begin{itemize}
+      \item $\forall N \ge 4, sqrt_N(9) = 3$
+      \item $sqrt_{64}(17) =$ 0x5a241f333d326e9
+      \item $\forall N \ge 5, sqrt_N(25) = 5$
+      \item $sqrt_{64}(33) =$ 0x3289350725bd6791
+      \item $sqrt_{64}(41) =$ 0x1b226bfe00cc66cd
+    \end{itemize}
+
+Quadratic equation modulo a power of 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: latex
+
+    Let's consider the following equation ($N \in \N, a, b, c, x \in \Z)$:
+    \begin{eqnarray}
+      ax^2 + bx + c \equiv 0 [2^N]
+    \end{eqnarray}
+
+    If $N = 0$, every number is a solution.
+    Let's suppose that $N \ge 1$.
+    If $x$ is a solution, $x + 2^N$ too.
+    Therefore the set of solutions can be written as a set of items from $\Z/2^N\Z$.
+
+    Depending on the parity of $a$, $b$ and $c$, the result is different:
+    \begin{itemize}
+      \item If $a$, $b$ and $c$ are even, the equation is equivalent to one with each term divided by 2 and $N$ replaced by $N - 1$.
+      \item If $a$ and $b$ are even but not $c$, there is no solution when $N \ge 1$.
+      \item If $a$ is odd, $a$ is invertible modulo $2^N$ so the equation is equivalent to one with $a = 1$.
+        \begin{itemize}
+          \item If $a = 1$ and $b = 0$, the solutions are the 4 square roots of $-c$ if $-c \equiv 1 [8]$, otherwise there is no solution.
+          \item If $b$ is even, the equation can be factorized as $\left(x + \frac{b}{2a}\right)^2 \equiv \frac{b^2 - 4ac}{4a^2} [2^N]$ (the divisions hold because the values have the right parity or are invertible), which goes back to the previous case.
+            Depending on the values, there may be 0 or 4 solutions to the equation.
+          \item If $b$ is odd too, the analysis becomes quite complex.
+        \end{itemize}
+      \item If $a$ and even and $b$ is odd, let's prove there is only one solution.
+        If $x_1$ and $x_2$ are two solutions,
+        \begin{eqnarray}
+          ax_1^2 + bx_1 &\equiv& ax_2^2 + bx_2 [2^N] \\
+          (a(x_1 + x_2) + b)(x_1 - x_2) &\equiv& 0 [2^N] \\
+        \end{eqnarray}
+        \begin{eqnarray}
+          2^N &\text{divides}& (a(x_1 + x_2) + b)(x_1 - x_2) \\
+          2^N &\text{divides}& (x_1 - x_2) \text{ (as $a(x_1 + x_2) + b$ is odd)} \\
+          x_1 &\equiv& x_2 [2^N]
+        \end{eqnarray}
+        Therefore there is at most one solution.
+        By studying the function $x \mapsto ax^2 + bx$ from and to $\Z/2^N\Z$, this function is injective so it is bijective.
+        This means that the initial equation has one and only one solution, which is the preimage of $-c$ by the function.
+    \end{itemize}
+
+    If the working set was the set of complex numbers $\C$, the equation would always have two solutions defined by:
+    \begin{eqnarray}
+      \Delta &=& b^2 - 4ac \\
+      x_1, x_2 &=& \frac{-b \pm \sqrt{\Delta}}{2a}
+    \end{eqnarray}
+    This is because the equation would be factorized as:
+    \begin{eqnarray}
+      a(x - x_1)(x - x_2) = 0
+    \end{eqnarray}
+
+    Here, this way of solving the equation cannot be applied exactly as it is, at least because the equation may have 4 solutions, or none, or one...
+
+    If $a$ is odd and $b$ is even, changing variable to $y \equiv x + \frac{b}{2}a^{-1} [2^N]$ and defining $\Delta$, the equation becomes $y^2 \equiv \frac{\Delta}{4}(a^{-1})^2 [2^N]$, or $(ay)^2 \equiv \frac{\Delta}{4} [2^N]$.
+    \begin{itemize}
+      \item If $\frac{\Delta}{4} \equiv 1 [8]$, $\frac{\Delta}{4}$ has 4 roots and if $r$ is one, $x \equiv \left(r - \frac{b}{2}\right)a^{-1} [2^N]$ is a solution of the equation $ax^2 + bx + c \equiv 0 [2^N]$.
+      It can be shown that the equation only has these 4 solutions.
+
+      \item Otherwise, $\frac{\Delta}{4}$ is not a quadratic residue and the equation does not have any solution.
+    \end{itemize}
+
+    If $a$ is even and $b$ is odd, it has been shown that the equation has a unique solution.
+    Moreover,
+    \begin{eqnarray}
+      4a &\equiv& 0 [8] \\
+      \Delta = b^2 - 4ac &\equiv& b^2 \equiv 1 [8]
+    \end{eqnarray}
+    Therefore $\Delta$ is a quadratic residue (whatever the value of $c$) and has 4 square roots modulo $2^N$ which are all odd.
+    With $\delta$ being one of them, the square roots of $\Delta$ are $\pm\delta$ and $2^{N-1} \pm \delta$.
+    $-b + \delta$ is even so can be divided by 2.
+    In order to ``divide it by $a$ too'', which is even, $\delta$ needs to be such that $-b + \delta \equiv 0 [4]$.
+    If it is not the case, it will be the case with using $-\delta$.
+    \begin{eqnarray}
+      0 &\equiv& ax^2 + bx + c [2^N] \\
+      4a \times 2^N &\text{divides}& (2ax)^2 + 4abx + 4ac \\
+      4a \times 2^N &\text{divides}& (2ax + b)^2 - (b^2 - 4ac) \\
+      4a \times 2^N &\text{divides}& (2ax + b)^2 - \delta^2 \\
+      4a \times 2^N &\text{divides}& (2ax + b - \delta)(2ax + b + \delta) \\
+      a2^N &\text{divides}& \left(ax - \frac{-b + \delta}{2}\right)\left(ax - \frac{-b - \delta}{2}\right)
+    \end{eqnarray}
+    Let's define $\alpha$ and $p$ such that $a = \alpha 2^{p + 1}$ with $\alpha$ odd.
+    Let $\alpha^{-1}$ be the inverse of $\alpha$ modulo $2^{N + p + 1}$.
+    \begin{eqnarray}
+      \alpha 2^{N + p + 1} &\text{divides}& \left(\alpha 2^{p + 1}x - \frac{-b + \delta}{2}\right)\left(\alpha 2^{p + 1}x - \frac{-b - \delta}{2}\right) \\
+      2^{N + p + 1} &\text{divides}& \left(2^{p + 1}x - \frac{-b + \delta}{2}\alpha^{-1}\right)\left(2^{p + 1}x - \frac{-b - \delta}{2}\alpha^{-1}\right)
+    \end{eqnarray}
+    As $-b + \delta \equiv 0 [4]$, $-b - \delta \equiv 2 [4]$, so the right factor is odd.
+    The equation becomes:
+    \begin{eqnarray}
+      2^{N + p + 1} &\text{divides}& 2^{p + 1}x - 2\frac{-b + \delta}{4}\alpha^{-1} \\
+      2^{N + p} &\text{divides}& 2^p x - \frac{-b + \delta}{4}\alpha^{-1}
+    \end{eqnarray}
+    As there is always a solution, there has to be a $\delta$ such that $2^p$ divides $\frac{-b + \delta}{4}\alpha^{-1}$.
+    \begin{eqnarray}
+      x &\equiv& \frac{-b + \delta}{4 \times 2^p}\alpha^{-1} [2^N]
+    \end{eqnarray}
+    This is indeed a way to write $\frac{-b \pm \sqrt{\Delta}}{2a}$ which is possible to compute modulo $2^N$ in this case.
