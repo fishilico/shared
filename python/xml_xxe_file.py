@@ -21,6 +21,29 @@
 # THE SOFTWARE.
 """Show the content of a file with an XML external entity (XXE)
 
+For information, PHP uses libxml when opening XML documents through creating a
+SimpleXMLElement object. Therefore the following instantiation performs an XXE:
+
+    $xml = SimpleXMLElement(
+        'http://127.0.0.1/x.xml',
+        LIBXML_BIGLINES|LIBXML_DTDLOAD|LIBXML_NOENT|LIBXML_PARSEHUGE,
+        true); // $data_is_url=true
+
+    // Doc from https://secure.php.net/manual/en/libxml.constants.php :
+    // LIBXML_BIGLINES: Allows line numbers greater than 65535 to be reported
+    //   correctly (Only available as of PHP 7.0.0 with Libxml >= 2.9.0)
+    // LIBXML_DTDLOAD: Load the external subset
+    // LIBXML_NOENT: substitute XML entities
+    // LIBXML_PARSEHUGE: This affects limits like maximum depth of a document
+    //   or the entity recursion, as well as limits of the size of text nodes.
+    //   (Only available in Libxml >= 2.7.0 (as of PHP >= 5.3.2 and
+    //   PHP >= 5.2.12))
+
+cf. https://php.net/manual/en/class.simplexmlelement.php
+
+This construction can be used in PHP serialization vulnerabilities, as
+described on https://gist.github.com/paul-axe/2a384bb5f2d430dd3b63b2484af960f4
+
 @author: Nicolas Iooss
 @license: MIT
 """
