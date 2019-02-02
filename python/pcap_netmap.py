@@ -752,6 +752,7 @@ class AnalysisContext(object):
                 'router': None,
                 'subnet_mask': None,
                 'hostname': None,
+                'client_FQDN': None,
             }
             for opt in dhcppkt.options:
                 if opt in ('pad', 'end'):
@@ -780,11 +781,21 @@ class AnalysisContext(object):
                                            dhcp_options['hostname'], opt_val)
                         else:
                             dhcp_options['hostname'] = opt_val.decode('utf-8', 'replace')
+                if opt[0] == 'client_FQDN':
+                    for opt_val in opt[1:]:
+                        if dhcp_options['client_FQDN'] is not None:
+                            logger.warning("Duplicate DHCP client_FQDN option: %r and %r",
+                                           dhcp_options['client_FQDN'], opt_val)
+                        else:
+                            dhcp_options['client_FQDN'] = opt_val.decode('utf-8', 'replace')
 
-            if ippkt.haslayer(BOOTP) and dhcp_options['hostname'] is not None:
+            if ippkt.haslayer(BOOTP):
                 client_addr = ippkt[BOOTP].ciaddr
                 if client_addr != '0.0.0.0':
-                    self.ipaddrdb.add_option(client_addr, 'DHCP_hostname', dhcp_options['hostname'])
+                    if dhcp_options['hostname'] is not None:
+                        self.ipaddrdb.add_option(client_addr, 'DHCP_hostname', dhcp_options['hostname'])
+                    if dhcp_options['client_FQDN'] is not None:
+                        self.ipaddrdb.add_option(client_addr, 'DHCP_client_FQDN', dhcp_options['client_FQDN'])
 
             dhcp_desc = ''
             if dhcp_options['router'] is not None:
