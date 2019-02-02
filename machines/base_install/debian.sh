@@ -220,6 +220,7 @@ then
     pkg apt-listbugs
 fi
 pkg apt-listchanges
+pkg apt-transport-https
 pkg apt-utils
 pkg debian-keyring
 pkg debsums
