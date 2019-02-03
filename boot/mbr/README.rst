@@ -77,7 +77,7 @@ Bootstrap code
 --------------
 
 The MBR bootstrap code is loaded by the BIOS in real mode (16-bits operations
-and addressing mode) at adress ``0000:7C00`` (which is also ``07C0:0000``).
+and addressing mode) at address ``0000:7C00`` (which is also ``07C0:0000``).
 
 Here are some useful BIOS interrupts:
 
@@ -119,13 +119,13 @@ Here are some useful BIOS interrupts:
       * ``BL = 0x04`` = red.
       * ``BL = 0x05`` = magenta.
       * ``BL = 0x06`` = brown.
-      * ``BL = 0x07`` = ligth gray.
+      * ``BL = 0x07`` = light gray.
       * ``BL = 0x08`` = dark gray.
       * ``BL = 0x09`` = light blue.
-      * ``BL = 0x0A`` = ligth green.
-      * ``BL = 0x0B`` = ligth cyan.
-      * ``BL = 0x0C`` = ligth red.
-      * ``BL = 0x0D`` = ligth magenta.
+      * ``BL = 0x0A`` = light green.
+      * ``BL = 0x0B`` = light cyan.
+      * ``BL = 0x0C`` = light red.
+      * ``BL = 0x0D`` = light magenta.
       * ``BL = 0x0E`` = yellow.
       * ``BL = 0x0F`` = white.
 
@@ -207,7 +207,7 @@ To extract the MBR from ``/dev/sda`` with ``dd`` you may do::
 
     dd bs=512 count=1 if=/dev/sda of=mbr.bin
 
-To flash the bootstrap code of a MBR without overwritting the partition table::
+To flash the bootstrap code of a MBR without overwriting the partition table::
 
     dd bs=440 count=1 conv=notrunc if=mbr.bin of=/dev/sda
 

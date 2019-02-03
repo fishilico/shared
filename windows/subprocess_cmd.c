@@ -138,7 +138,7 @@ int _tmain(void)
         return 1;
     }
 
-    /* Send some commands with ugly sleeps becase cmd drop commands sent too fast */
+    /* Send some commands with ugly sleeps because cmd drop commands sent too fast */
     if (!write_text(hPipeWrIn, "echo off\n")) {
         ret = 1;
     }

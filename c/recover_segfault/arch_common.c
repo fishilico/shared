@@ -1,5 +1,5 @@
 /**
- * Common helper accross architectures
+ * Common helper across architectures
  */
 #include "recover_segfault.h"
 

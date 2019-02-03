@@ -115,7 +115,7 @@ class FeedPlot3d(object):
             thread.daemon = True
             thread.start()
         else:
-            raise Exception("Unkown method {}".format(self.method))
+            raise Exception("Unknown method {}".format(self.method))
 
     def setup_draw(self):
         """Setup the drawing"""
@@ -128,7 +128,7 @@ class FeedPlot3d(object):
             elif self.draw == DRAW_PLOT:
                 self.plt = self.ax.plot([], [], [], self.color + self.marker)[0]
             else:
-                raise Exception("Unkown drawing {}".format(self.draw))
+                raise Exception("Unknown drawing {}".format(self.draw))
         return self.plt,
 
     def _animate_update_plot(self, iframe, start_tic_ptr):
@@ -140,7 +140,7 @@ class FeedPlot3d(object):
         xyz = next(self.rw)
         if self.draw == DRAW_SCATTER:
             # 3D projection is overwriting 2D properties, which needs to be
-            # reseted before each drawing
+            # reset before each drawing
             self.plt.set_alpha(1)
             self.plt.set_facecolors(self.color)
             self.plt.set_offsets(xyz[:2])
@@ -167,7 +167,7 @@ class FeedPlot3d(object):
             if self.draw == DRAW_SCATTER:
                 # Use mpl_toolkits.mplot3d.art3d.Patch3DCollection to
                 # update everything. As do_3d_projection changes alpha and
-                # offsets, they need to be reseted beforehand.
+                # offsets, they need to be reset beforehand.
                 #
                 # Note: self.plt.set_array(xyz[2]) may be used to only update
                 #       z coordinates without changing (x, y)

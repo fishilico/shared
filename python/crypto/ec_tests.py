@@ -279,7 +279,7 @@ class ECPoint(object):
         return ECPoint(self.curve, x3, y3)
 
     def __sub__(self, other):
-        """Substract a point with another"""
+        """Subtract a point with another"""
         return self + other.negate()
 
     def __mul__(self, other):

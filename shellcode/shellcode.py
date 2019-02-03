@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-"""Print or run a shellcode accoring to the OS currently running
+"""Print or run a shellcode according to the OS currently running
 
 @author: Nicolas Iooss
 @license: MIT

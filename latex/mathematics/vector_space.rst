@@ -45,7 +45,7 @@ Properties:
       \end{displaymath}
     \end{definition}
 
-An almost empty sequence allows writing infinite sums and products accross :latex:`$\N$` which are in fact finite.
+An almost empty sequence allows writing infinite sums and products across :latex:`$\N$` which are in fact finite.
 Among other things, it allows writing the following definition.
 
 .. raw:: latex
@@ -308,7 +308,7 @@ Linear map
 
     \begin{theorem}[Basis representation of finite dimension vector spaces]
       If $B = (b_i)$ is a basis of $V$ and $B' = (b'_i)$ one of $V'$, the coordinates of $f(b_i)$ over $B'$ define a matrix of $\dim(V)$ lines over $\dim(V')$ columns.
-      This matrix defines $f$ in a unique way, according to the choosen bases $B$ and $B'$.
+      This matrix defines $f$ in a unique way, according to the chosen bases $B$ and $B'$.
     \end{theorem}
 
 

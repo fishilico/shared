@@ -52,7 +52,7 @@ typedef struct user_regs_struct user_regs_type;
 #    define REG_RESULT(regs) ((regs).rax)
 typedef struct user_regs_struct user_regs_type;
 #elif defined(__arm__)
-/* As musl is missing asm/ptrace.h from Linux kernel, harcode offsets in
+/* As musl is missing asm/ptrace.h from Linux kernel, hardcode offsets in
  * user_regs struct, like ARM_r* macros in
  * https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/arm/include/uapi/asm/ptrace.h
  */
@@ -109,7 +109,7 @@ static int memcpy_to_pid(pid_t pid, void *dst, const void *src, size_t size)
 
     /* try using process_vm_writev */
     memset(&local_iov, 0, sizeof(local_iov));
-    /* work aroung clang's -Wcast-qual warning */
+    /* work around clang's -Wcast-qual warning */
     local_iov.iov_base = (void *)(uintptr_t)src;
     local_iov.iov_len = size;
     memset(&remote_iov, 0, sizeof(remote_iov));

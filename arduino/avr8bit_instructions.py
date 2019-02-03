@@ -1057,5 +1057,5 @@ class AVR8Meta(object):
             return CondSkipInst(addr, 2, bitdesc, bval != 0)
 
         else:
-            raise Exception("Unknow instruction class of {:04x}".format(opcode))
+            raise Exception("Unknown instruction class of {:04x}".format(opcode))
         raise Exception("Oops, missing a return somewhere")

@@ -145,7 +145,7 @@ static void dump_arm_cp15_c0(void)
 			pr_info("  This is %s\n", known_cpu_parts[i].name);
 	}
 
-	/* c0, Extention Registers */
+	/* c0, Extension Registers */
 	/* mrc p15, 0, %[ext_reg], c0, c1, 0..1 */
 	ext_reg = read_cpuid_ext(CPUID_EXT_PFR0);
 	pr_info("Processor Feature Register 0 = 0x%08x\n", ext_reg);

@@ -149,7 +149,7 @@ def run_openssl_test(bits, generator, colorize):
         # If p mod 8 = 5, (p-1)/2 mod 4 = 2 so (p-1)/2 is not prime.
         # Therefore for 2 to be a generator, p mod 8 = 3.
         # With p mod 12 = 11, the CRT gives: p mod 24 = 11
-        print("p mod 24 = {} (expected 11 for g=2, maybe 23 overwise)".format(param_p % 24))
+        print("p mod 24 = {} (expected 11 for g=2, maybe 23 otherwise)".format(param_p % 24))
         if generator == 2:
             assert param_p % 24 == 11
 
@@ -162,7 +162,7 @@ def run_openssl_test(bits, generator, colorize):
         # With p mod 12 = 11, the CRT gives: p mod 60 = 47 or 23.
         # If g is not 5, p mod 5 cannot be 0 nor 1 (in order for (p-1)/2 to be
         # prime), so the only other possible value for p mod 5 is 4.
-        print("p mod 60 = {} (expected 23 or 47 for g=5, maybe 59 overwise)".format(param_p % 60))
+        print("p mod 60 = {} (expected 23 or 47 for g=5, maybe 59 otherwise)".format(param_p % 60))
         if generator == 5:
             assert param_p % 60 in (23, 47)
     finally:

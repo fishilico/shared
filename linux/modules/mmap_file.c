@@ -59,11 +59,11 @@ static int mmap_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	 * in favor of address in Linux 4.10
 	 */
 	pr_info(
-		"Mmap fault occured on page %lu, userspace address %lx\n",
+		"Mmap fault occurred on page %lu, userspace address %lx\n",
 		vmf->pgoff, vmf->address);
 #else
 	pr_info(
-		"Mmap fault occured on page %lu, userspace address %p\n",
+		"Mmap fault occurred on page %lu, userspace address %p\n",
 		vmf->pgoff, vmf->virtual_address);
 #endif
 

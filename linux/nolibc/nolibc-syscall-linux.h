@@ -175,7 +175,7 @@ static ssize_t read_buffer(int fd, const void *buf, size_t count)
 
 /**
  * Write all count bytes from buf to file descriptor fd
- * Return value: 0 if an error occured, 1 if successful
+ * Return value: 0 if an error occurred, 1 if successful
  */
 static int write_all(int fd, const char *buf, size_t count)
 {

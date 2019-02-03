@@ -29,7 +29,7 @@ In a Qemu virtual machine the output is quite short::
     ACPI: APIC 0x00000000BFFE16C4 000090 (v01 BOCHS  BXPCAPIC 00000001 BXPC 00000001)
     ACPI: HPET 0x00000000BFFE1754 000038 (v01 BOCHS  BXPCHPET 00000001 BXPC 00000001)
 
-On a real system it is sligthly bigger::
+On a real system it is slightly bigger::
 
     # acpidump -s
     ACPI: RSDP 0x00000000DB960000 000024 (v02 ALASKA)

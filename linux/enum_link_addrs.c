@@ -1,7 +1,7 @@
 /**
  * Gather the link addresses from all interfaces, using netlink route socket.
  *
- * The link address is also called "hardward address", "link-level address" and
+ * The link address is also called "hardware address", "link-level address" and
  * can be found in getifaddrs results with family AF_PACKET.
  *
  * Documentation:

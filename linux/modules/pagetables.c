@@ -259,7 +259,7 @@ static void print_prot(struct pg_state *st)
 		_PAGE_PCD |		/* 4, Page Cache Disabled */
 		_PAGE_ACCESSED |	/* 5, was accessed */
 		_PAGE_DIRTY |		/* 6, was written to */
-		_PAGE_PSE |		/* 7, Page Size Extented 4 MB */
+		_PAGE_PSE |		/* 7, Page Size Extended 4 MB */
 		_PAGE_PAT |	/* on 4KB: 7, Page Table Atttibute Index */
 		_PAGE_GLOBAL |		/* 8, Global TLB entry */
 		_PAGE_PAT_LARGE |	/* 12, on 2MB or 1GB pages */
@@ -758,7 +758,7 @@ static pgd_t *get_pgd_address(struct seq_file *s)
 		/* Mask high bits and low bits (PCID) of CR3 register */
 # if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 13, 0)
 		/* Commit 6c690ee1039b ("x86/mm: Split read_cr3() into
-		 * read_cr3_pa() and __read_cr3()") splitted read_cr3() in
+		 * read_cr3_pa() and __read_cr3()") split read_cr3() in
 		 * Linux 4.13
 		 */
 		cr3_raw = __read_cr3();

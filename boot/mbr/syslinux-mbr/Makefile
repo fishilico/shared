@@ -11,7 +11,7 @@
 ##
 ## -----------------------------------------------------------------------
 
-# Orginal file from Syslinux
+# Original file from Syslinux
 # Modified by: Nicolas Iooss
 
 #

@@ -175,7 +175,7 @@ When talking about integers instead of equivalence classes, the definitions beco
 
 * :latex:`$x \in \Z$` is invertible modulo :latex:`$n$` if there exists :latex:`$y \in \Z$` such that :latex:`$xy \equiv 1 [n]$`.
 * The inverse of such :latex:`$x$` modulo :latex:`$n$` is the integer :latex:`$y \in \llbracket 0, n \llbracket$` such that :latex:`$xy \equiv 1 [n]$`.
-* The set of integers invertible modulo :latex:`$n$` is also written :latex:`$(\Z/n\Z)^\times$`, in a kind of langage abuse.
+* The set of integers invertible modulo :latex:`$n$` is also written :latex:`$(\Z/n\Z)^\times$`, in a kind of language abuse.
 
 When :latex:`$x \in \Z$` is invertible modulo :latex:`$n$`:
 
@@ -637,7 +637,7 @@ Quadratic reciprocity
       \prod_{e \in E} e = \left((p-1)!^\frac{q-1}{2}\left(\frac{q}{p}\right), (q-1)!^\frac{p-1}{2}\left(\frac{p}{q}\right)\right)U
     \end{equation}
 
-    Second, $E$ can also be splitted as $(\Z/p\Z)^\times \times \left\llbracket 1, \frac{q-1}{2}\right\rrbracket$:
+    Second, $E$ can also be split as $(\Z/p\Z)^\times \times \left\llbracket 1, \frac{q-1}{2}\right\rrbracket$:
     \begin{equation}
       \prod_{e \in E} e = \left((p-1)!^\frac{q-1}{2}, \left(\frac{q-1}{2}\right)!^{p-1}\right) U
     \end{equation}

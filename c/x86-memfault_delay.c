@@ -40,7 +40,7 @@ static void sigsegv_readtsc(int s, siginfo_t *info, void *context)
     uint32_t low, high;
     ucontext_t *ctx;
 
-    /* Read the TSC after a segfault occured */
+    /* Read the TSC after a segfault occurred */
     __asm__ volatile ("rdtsc" : "=a" (low), "=d" (high));
     g_tsc_end = ((uint64_t)high) << 32 | low;
 
@@ -93,7 +93,7 @@ static LONG WINAPI vectored_handler_readtsc(EXCEPTION_POINTERS *ExceptionInfo)
     EXCEPTION_RECORD *ExceptionRecord = ExceptionInfo->ExceptionRecord;
     CONTEXT *ContextRecord = ExceptionInfo->ContextRecord;
 
-    /* Read the TSC after a access violation occured */
+    /* Read the TSC after a access violation occurred */
     __asm__ volatile ("rdtsc" : "=a" (low), "=d" (high));
     g_tsc_end = ((uint64_t)high) << 32 | low;
 
@@ -148,7 +148,7 @@ static bool show_fault_delay(uintptr_t addr, const char *desc)
             : [rsi_or_esi] "S" (addr));
     }
 
-    /* Measure only if some faults occured */
+    /* Measure only if some faults occurred */
     if (g_num_segfault) {
         /* Now, do the measure for real */
         g_num_segfault = 0;

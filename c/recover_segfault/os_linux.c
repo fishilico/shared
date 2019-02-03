@@ -41,7 +41,7 @@ static void sigsegv_sigaction(int s, siginfo_t *info, void *context)
                                         data_addr,
                                         &(g_memmap[i].data[data_addr - memaddr]),
                                         memsize - (data_addr - memaddr))) {
-                /* Intruction pointer has been updated. Resume execution */
+                /* Instruction pointer has been updated. Resume execution */
                 return;
             }
             fprintf(stderr, "Running unknown instruction. Abort!\n");

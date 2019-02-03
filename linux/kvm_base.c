@@ -328,7 +328,7 @@ int main(void)
     }
     vcpu = (struct kvm_run *)mem_vcpu;
 
-    /* Show inital register values */
+    /* Show initial register values */
     printf("Initial VCPU registers:\n");
     dump_registers(cpufd);
 
@@ -420,7 +420,7 @@ int main(void)
     }
     printf("... final rip is %#llx.\n", regs.rip);
     if (vcpu->exit_reason == KVM_EXIT_HLT && regs.rip == 0xfff6) {
-        printf("CPUID(0) has been exectued. Result:\n");
+        printf("CPUID(0) has been executed. Result:\n");
         printf("    eax (max code) = %#llx\n", regs.rax);
         printf("    ebx = %#llx\n", regs.rbx);
         printf("    edx = %#llx\n", regs.rdx);

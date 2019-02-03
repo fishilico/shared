@@ -95,7 +95,7 @@ __asm__ (
 /**
  * Return values:
  * * 0: everything went fine, the program is not being debugged.
- * * 1: something went wrong, an error occured.
+ * * 1: something went wrong, an error occurred.
  * * 2: the program is being lightly debugged/traced.
  * * 3: all anti-debug tests were triggered (useful for testing purposes).
  */
@@ -175,7 +175,7 @@ int main(void)
 
 #if IS_POSIX
     /* Use ptrace syscall to detect tracers
-     * Don't use ptrace(PTRACE_TRACEME, 0, NULL, NULL) as this could be overrided.
+     * Don't use ptrace(PTRACE_TRACEME, 0, NULL, NULL) as this could be overridden.
      */
     if (syscall(__NR_ptrace, PTRACE_TRACEME, 0, NULL, NULL) == -1) {
         if (errno == EPERM) {
@@ -222,7 +222,7 @@ int main(void)
 #    elif defined(__i386__)
     __asm__ ("movl %%fs:48, %0" : "=r" (pPeb));
 #    else
-#        warning "Unknwon way to get the PEB on this architecture"
+#        warning "Unknown way to get the PEB on this architecture"
 #    endif
     if (!pPeb) {
         printf("[ ] Unable to get the PEB.\n");

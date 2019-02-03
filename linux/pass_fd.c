@@ -93,7 +93,7 @@ static int child1_main(const char *sockpath)
     }
     printf("[%u] Created Unix socket %s\n", getpid(), sockpath);
 
-    /* Wait for an incomming connection */
+    /* Wait for an incoming connection */
     clientfd = accept4(sockfd, (struct sockaddr *)&addr, &addrlen, SOCK_CLOEXEC);
     if (clientfd == -1) {
         perror("accept");
@@ -419,7 +419,7 @@ int main(void)
         exit(child2_main(sockpath));
     }
 
-    /* Wait for the childs */
+    /* Wait for the children */
     for (;;) {
         pid = waitpid(-1, &status, 0);
         if (pid == -1) {

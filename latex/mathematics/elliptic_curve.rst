@@ -75,7 +75,7 @@ Weierstrass curves
 
     \begin{definition}[Group law]
       With $A$ and $B$ two points of an elliptic curve, the line $(AB)$ (which is the tangent line if $A = B$) either crosses the curve in a third point, $C$, or not.
-      If it crosses, $A + B$ is defined to $-C$. Overwise, $A + B = O$.
+      If it crosses, $A + B$ is defined to $-C$. Otherwise, $A + B = O$.
       This definition is extended to the point at infinity with $A + O = A = O + A$ and $O + O = O$.
     \end{definition}
 
@@ -214,7 +214,7 @@ Montgomery curves
       &=& \frac{4 - a^2}{b^6} \\
       4A^3 + 27B^2 &=& \frac{(2 - a)(2 + a)}{b^6} \neq 0
     \end{eqnarray*}
-    As the transformation $(x, y) \mapsto (X, Y)$ is affine, the alignment of points is kept accross it, which is why the group law shares the same definition between Montgomery and Weierstrass curves.
+    As the transformation $(x, y) \mapsto (X, Y)$ is affine, the alignment of points is kept across it, which is why the group law shares the same definition between Montgomery and Weierstrass curves.
 
     One specific feature of a Weierstrass curve is that the origin $(0, 0)$ always belong to the curve and has itself as opposite. This also means that adding the origin to itself leads to the point at infinity (like $(-1)^2 = 1$ leads to the neutral item of the multiplication).
 

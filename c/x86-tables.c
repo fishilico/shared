@@ -91,7 +91,7 @@ static void migrate_to_cpu(int cpu)
 #elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
 #    include <windows.h>
 
-/* The addresses of GDT and IDT changed a lot accross Windows versions:
+/* The addresses of GDT and IDT changed a lot across Windows versions:
  * https://code.google.com/p/corkami/wiki/InitialValues?wl=en
  */
 static const char os_name[] = "Windows";

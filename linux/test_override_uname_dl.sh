@@ -15,11 +15,11 @@ fi
 # This can fail when the libc (eg. library built with musl and uname with glibc).
 if ! FAKEUNAME_S='' LD_PRELOAD="$OVERRIDE_UNAME_SO" "$UNAME" > /dev/null
 then
-    echo "An error occured in the compatibility check. Skipping test."
+    echo "An error occurred in the compatibility check. Skipping test."
     exit
 fi
 
-# If the ELF class differs, the above check actually succeded. Check ELF Magic.
+# If the ELF class differs, the above check actually succeeded. Check ELF Magic.
 # This happens when the architecture differs (eg. when the library has been
 # built in 32-bit mode but uname is 64-bit)
 OVER_MAGIC="$(readelf --file-header "$OVERRIDE_UNAME_SO" | grep '^ *Magic')"
@@ -30,7 +30,7 @@ then
     exit
 fi
 
-# Set overrided variables to markers
+# Set overridden variables to markers
 FAKEUNAME_S="FakeLinux"
 FAKEUNAME_N="fakehostname"
 FAKEUNAME_R="3.0.42-fake-kernel-release"

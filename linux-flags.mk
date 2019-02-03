@@ -21,7 +21,7 @@ CC ?= cc
 # C preprocessor flags
 # Gentoo Hardened already defines _FORTIFY_SOURCE in the compiler and warns
 # about possible redefinition, so detect these warnings.
-# Generate dependencies files targetting $@ in a .$@.d file
+# Generate dependencies files targeting $@ in a .$@.d file
 # ... while allowing using CPPFLAGS outside of a target (where $@ is empty)
 CPPFLAGS = $(call ccpp-option,-D_FORTIFY_SOURCE=2) $(@:%=-Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d)
 

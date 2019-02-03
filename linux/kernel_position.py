@@ -48,7 +48,7 @@ KERNEL_SYMNAMES = list(itertools.chain(*KERNEL_SECTIONS.values()))
 
 
 def symbols2positions(symbols):
-    """Convert a symbols dict to section postions"""
+    """Convert a symbols dict to section positions"""
     def dec_or_none(value):
         return value - 1 if value is not None else None
     return dict((

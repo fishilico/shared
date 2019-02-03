@@ -5,7 +5,7 @@ LABEL Description="Ubuntu 12.04 LTS Precise Pangolin with build dependencies for
 ENV LANG C.UTF-8
 
 # Do not install coq because it is too old (8.3pl4) for some features
-# Do not install libmnl-dev because mnl_attr_for_each() performs arithmetics on void*
+# Do not install libmnl-dev because mnl_attr_for_each() performs arithmetic on void*
 # Do not install python-crypto nor python3-crypto because they are too old
 # Ubuntu<16.04 does not provide python-z3
 RUN \

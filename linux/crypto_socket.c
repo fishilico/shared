@@ -530,7 +530,7 @@ static bool test_aes_cbc_dec(void)
 #endif
 
 /**
- * Retrieve informations about algorithms from the kernel using a netlink crypto socket.
+ * Retrieve information about algorithms from the kernel using a netlink crypto socket.
  * Such information may also be available through /proc/crypto.
  */
 static bool show_cipher_info(const char *ciphername)

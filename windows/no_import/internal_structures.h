@@ -57,7 +57,7 @@ typedef struct _RTL_USER_PROCESS_PARAMETERS {
 } RTL_USER_PROCESS_PARAMETERS, *PRTL_USER_PROCESS_PARAMETERS;
 
 /* Offsets are written for 32- and 64-bit systems.
- * For comparaison with several Windows versions, see:
+ * For comparison with several Windows versions, see:
  * http://blog.rewolf.pl/blog/?p=573 Evolution of Process Environment Block
  */
 typedef struct _PEB {

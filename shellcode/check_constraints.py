@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-"""Check some contraints of the shellcodes written in shellcode.py
+"""Check some constraints of the shellcodes written in shellcode.py
 
 More precisely, check the scanf" constraints: no \r, \n, \0 nor space in any
 shellcode sequence.

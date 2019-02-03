@@ -18,7 +18,7 @@ as parameter.
 
 At the entry points, the stack contains the arguments and environment of the
 program. If ``sp`` is the stack pointer (``esp`` on x86, ``rsp`` on x86_64 and
-``sp`` on ARM), and ``n`` the size in bytes of a pointer (4 on a 32-bits adress
+``sp`` on ARM), and ``n`` the size in bytes of a pointer (4 on a 32-bits address
 architecture, 8 on a 64-bits one), then ``argc``, ``argv`` and ``envp`` are
 organised as follows.
 

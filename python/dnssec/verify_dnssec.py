@@ -85,7 +85,7 @@ MOST_USED_TOP_LEVEL_DOMAINS = load_tld_list(MOST_USED_TLD_LIST_PATH)
 
 
 def update_tld_list():
-    # The certificat declares *.icann.org, which does not match stats.research.icann.org
+    # The certificate declares *.icann.org, which does not match stats.research.icann.org
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
     if sys.version_info >= (3,):

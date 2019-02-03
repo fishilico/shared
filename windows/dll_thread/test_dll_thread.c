@@ -42,7 +42,7 @@ int _tmain(void)
 
     hello_world();
 
-    printf("Spawing %u threads.\n", NUM_THREADS);
+    printf("Spawning %u threads.\n", NUM_THREADS);
     for (i = 0; i < NUM_THREADS; i++) {
         hThreads[i] = CreateThread(
             NULL,                   /* default security attributes */

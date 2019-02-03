@@ -27,7 +27,7 @@ umip_sigsegv_sigaction(int s, siginfo_t *info, void *context __attribute__ ((unu
     assert(s == SIGSEGV);
     assert(info != NULL && info->si_signo == SIGSEGV);
 
-    /* Crash if SIGSEGV occured outside of an UMIP section */
+    /* Crash if SIGSEGV occurred outside of an UMIP section */
     if (!g_umip_in_section) {
         fprintf(stderr, "Error: got SIGSEGV outside of UMIP section\n");
         abort();

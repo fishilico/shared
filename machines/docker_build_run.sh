@@ -62,7 +62,7 @@ do
             echo "  -b       only build an image"
             echo "  -h       display this help and exit"
             echo "  -n IMG   define the tag name of the built image"
-            echo "  -p       pretend mode, do not do anyting"
+            echo "  -p       pretend mode, do not do anything"
             echo "  -r       only run a pre-built image"
             echo "  -v       use a volume when running, to link to git code"
             exit

@@ -83,7 +83,7 @@ static LONG NTAPI veh_handler(EXCEPTION_POINTERS *ExceptionPointers)
                                         data_addr,
                                         &(g_memmap[i].data[data_addr - memaddr]),
                                         memsize - (data_addr - memaddr))) {
-                /* Intruction pointer has been updated. Resume execution */
+                /* Instruction pointer has been updated. Resume execution */
                 return EXCEPTION_CONTINUE_EXECUTION;
             }
             fprintf(stderr, "Running unknown instruction. Crash!\n");

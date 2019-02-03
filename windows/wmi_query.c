@@ -186,9 +186,9 @@ static void dump_object_properties(IWbemClassObject *pclsObj, LPCTSTR szLinePref
 }
 
 /**
- * Dump information about running proccesses
+ * Dump information about running processes
  *
- * Example of outputed item with wine:
+ * Example of outputted item with wine:
  *     - Process "services.exe":
  *       * Caption = services.exe
  *       * CommandLine = services.exe

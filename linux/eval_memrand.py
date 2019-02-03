@@ -4,7 +4,7 @@
 
 This program uses "cat /proc/self/maps" to retrieve the addresses of
 interesting memory regions like stack, vDSO...
-It agregates the addresses to evaluate their randomness.
+It aggregates the addresses to evaluate their randomness.
 """
 import argparse
 import re
@@ -101,7 +101,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(
         description="Evaluate the randomness of memory addresses")
     parser.add_argument('-n', '--num', type=int, default=1000,
-                        help="number of execution to perfom")
+                        help="number of execution to perform")
     args = parser.parse_args(argv)
 
     cmdline = ['cat', '/proc/self/maps']

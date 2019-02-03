@@ -3,7 +3,7 @@ Linux kernel special pages
 
 Linux kernel maps some special pages to user process.  A process can view these
 pages in ``/proc/self/maps`` as memory ranges with a description in brackets,
-like ``[stack]`` and ``[heap]``.  Apart from containg data, some memory pages
+like ``[stack]`` and ``[heap]``.  Apart from containing data, some memory pages
 can be used to:
 
 * run arbitrairy system calls (``[vsyscall]``, on i386),

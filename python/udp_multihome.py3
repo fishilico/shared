@@ -84,7 +84,7 @@ def main(argv=None):
     anyaddr = '0.0.0.0' if args.ipv4 else '::'
     port = args.port if args.port > 0 else 4242
 
-    # Create and configure socket fro multihoming
+    # Create and configure socket for multihoming
     skserver = socket.socket(af, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     if not args.ipv6:
         if hasattr(socket, 'IP_PKTINFO'):
@@ -124,7 +124,7 @@ def main(argv=None):
         skclient = socket.socket(clientaf, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         skclient.sendto(b'Hello, world!', (clientdstaddr, port))
 
-    # Receive an incomming packet
+    # Receive an incoming packet
     (msg, ancdata, _, clientaddrport) = skserver.recvmsg(1024, socket.CMSG_SPACE(100))
     assert args.wait or msg == b'Hello, world!'  # Check the socket channel
     dst_addr = None
@@ -141,7 +141,7 @@ def main(argv=None):
             dst_addr = socket.inet_ntop(socket.AF_INET6, cmsg_data[:16])
             ifindex = struct.unpack('I', cmsg_data[16:20])[0]
         else:
-            logger.warning("Unknown ancilliary data: {}, {}, {}".format(cmsg_level, cmsg_type, cmsg_data))
+            logger.warning("Unknown anciliary data: {}, {}, {}".format(cmsg_level, cmsg_type, cmsg_data))
         # TODO: decode IP_RECVDSTADDR/IPV6_RECVDSTADDR
     text = "Received UDP packet from {0[0]} port {0[1]}".format(clientaddrport)
     if dst_addr is not None:

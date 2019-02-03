@@ -140,7 +140,7 @@ class ModulusSaveFile(object):
                         raise ValueError("Invalid saved file")
                     if modulus and modulus % new_modulus:
                         logger.warning("Modulus on line %d does not divide the previous ones", lineno + 1)
-                        # Skip the invalide modulus
+                        # Skip the invalid modulus
                     else:
                         modulus = new_modulus
             logger.info("Loaded %d bits from %s", modulus.bit_length(), self.filepath)
@@ -219,7 +219,7 @@ def encapsulate_pcks1v15_digest(kind, message, bits):
 
 def hash_algorithm(alg, allow_raw=False):
     """Parse an hash algorithm"""
-    # canonical name: only alpha-numeric uppercase characters
+    # canonical name: only alphanumeric uppercase characters
     alg = re.sub(r'[^0-9A-Z]', '', alg.upper())
     if alg in DIGEST_ASN1_PREFIXES:
         return alg
@@ -498,7 +498,7 @@ def main(argv=None):
     parser.add_argument('-b', '--bits', type=int,
                         help="size of the generated RSA key, in bits (default 2048)")
     parser.add_argument('-H', '--hash', type=hash_algorithm, default='SHA1',
-                        help="hash algorithm to use when genrating messages (default SHA1)")
+                        help="hash algorithm to use when generating messages (default SHA1)")
     parser.add_argument('-R', '--raw', action='store_true',
                         help="show raw PKCS#1 v1.5 cleartextes instead of hashed messages")
     args = parser.parse_args(argv)
@@ -676,7 +676,7 @@ def main(argv=None):
                     logger.info("Reduced N by %d, %d bits remaining", factor, current_modulus.bit_length())
 
         else:
-            # Processing new mesage
+            # Processing new message
             new_n = pow(encrypted_num, args.exponent, current_modulus) - clear_num
             if new_n == 0:
                 logger.info(

@@ -406,6 +406,7 @@ then
     pkg arm-none-eabi-binutils
     pkg arm-none-eabi-gcc
     pkg binwalk
+    pkg codespell
     pkg cppcheck
     #pkg docker-compose
     pkg flake8

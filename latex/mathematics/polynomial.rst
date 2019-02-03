@@ -29,7 +29,7 @@ Operations on :latex:`$P, Q, R \in F[X]$`:
 
 To conclude, :latex:`$(F[X], +, \times)$` is an commutative ring.
 
-There is nontheless a useful property of the multiplication:
+There is nonetheless a useful property of the multiplication:
 
 .. raw:: latex
 
@@ -79,12 +79,12 @@ By definition, :latex:`$F[X]$` is also a :latex:`$F$`-vector space spanned from 
     \end{itemize}
 
     To simplify computations, $\deg(0)$ can be defined.
-    Its value needs to satify:
+    Its value needs to satisfy:
     \begin{itemize}
       \item $\deg(0) = \deg(1 + (-1)) \leq \max(\deg(1), \deg(-1)) = 0$
       \item $\forall P \in F[X], \deg(0) = \deg(0P) = \deg(0) + \deg(P)$
     \end{itemize}
-    These two relationships are compatible when extending the defition of $\deg$ with:
+    These two relationships are compatible when extending the definition of $\deg$ with:
     \begin{equation}
       \deg(0) = -\infty
     \end{equation}
@@ -124,7 +124,7 @@ Euclidean division
     $X$ is not invertible in $F[X]$ (this can be show using $\deg(PQ) = \deg(P) + \deg(Q)$ and $\deg(1) = 0$).
     This looks like the set of natural integers ($\N$), where numbers are not invertible.
     By similarity it is possible to define an Euclidean division between $A$ and $B$.
-    This division is substracting from $A$ several multiples of $B$ until it is no longer possible.
+    This division is subtracting from $A$ several multiples of $B$ until it is no longer possible.
     So long that the remainder has a degree greater of equal to those of $B$, the degree of the remainder can be decreased.
 
     \begin{theorem}[Euclidean division]
@@ -183,9 +183,9 @@ Greatest common divisor
 
     The Euclidean algorithm can be used for polynomials to compute the GCD, starting by dividing $P$ and $Q$ by their respective greatest coefficient.
 
-    The extented Euclidean algorithm can then be used in order to prove Bézout's identity for polynoms.
+    The extended Euclidean algorithm can then be used in order to prove Bézout's identity for polynoms.
 
-    \begin{theorem}[Bézout's identity (extented Euclidean algorithm)]
+    \begin{theorem}[Bézout's identity (extended Euclidean algorithm)]
       \begin{eqnarray*}
         \forall P, Q \in F[X]\backslash\{0\}, \exists U, V \in F[X], UP + VQ = \gcd(P, Q)
       \end{eqnarray*}

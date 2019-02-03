@@ -4,7 +4,7 @@
  * These registers are:
  *  * the control registers (CR),
  *  * the model-specific registers (MSR),
- *  * interrupt and global descriptior tables,
+ *  * interrupt and global descriptor tables,
  *  * ...
  */
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt

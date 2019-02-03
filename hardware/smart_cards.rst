@@ -221,7 +221,7 @@ Some commands:
 Connection
 ----------
 
-A smart card component (chipset, USB key, physical card like a SIM card...) can use several busses for connections between a card and a reader and between a reader and a host/client:
+A smart card component (chipset, USB key, physical card like a SIM card...) can use several buses for connections between a card and a reader and between a reader and a host/client:
 
 * USB (usually with CCID protocol)
 * SPI Serial Interface
@@ -743,7 +743,7 @@ The status word consist in two bytes, ``SW1`` and ``SW2``. ``SW1`` can only be e
 +---+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``6283`` | Invalid DF ; Selected file invalidated.                                                                      |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
-|   |``6284`` | Selected file is not valid. File descriptor error. FCI not formated according to ISO.                        |
+|   |``6284`` | Selected file is not valid. File descriptor error. FCI not formatted according to ISO.                       |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``6285`` | Selected file in termination state.                                                                          |
 |   |         | EMV: No input data available from a sensor on the card. No Purse Engine enslaved for R3bc.                   |
@@ -770,7 +770,7 @@ The status word consist in two bytes, ``SW1`` and ``SW2``. ``SW1`` can only be e
 +-+-+---------+--------------------------------------------------------------------------------------------------------------+
 | |  ``63 xx``| Process completed with warning (State of non-volatile memory has changed).                                   |
 +-+-+---------+--------------------------------------------------------------------------------------------------------------+
-|   |``6300`` | Authentification failed. Invalid secret code or forbidden value.                                             |
+|   |``6300`` | Authentication failed. Invalid secret code or forbidden value.                                               |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``6381`` | File filled up by the last write. Loading/updating is not allowed.                                           |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
@@ -798,7 +798,7 @@ The status word consist in two bytes, ``SW1`` and ``SW2``. ``SW1`` can only be e
 +-------------+--------------------------------------------------------------------------------------------------------------+
 | ``SW1-SW2`` | Error message (``SW1=64..6F``)                                                                               |
 +=+===========+==============================================================================================================+
-|``64-6F xx`` | En error occured and no data shall be in the response                                                        |
+|``64-6F xx`` | En error occurred and no data shall be in the response                                                       |
 +-+-----------+--------------------------------------------------------------------------------------------------------------+
 | |  ``64 xx``| Execution error (State of non-volatile memory is unchanged).                                                 |
 +-+-+---------+--------------------------------------------------------------------------------------------------------------+
@@ -946,7 +946,7 @@ The status word consist in two bytes, ``SW1`` and ``SW2``. ``SW1`` can only be e
 +-+-+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``9000`` | Command executed without error (success).                                                                    |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
-|   |``9004`` | EMV: PIN not succesfully verified, 3 or more PIN tries left.                                                 |
+|   |``9004`` | EMV: PIN not successfully verified, 3 or more PIN tries left.                                                |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``9008`` | EMV: Key/file not found.                                                                                     |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
@@ -1092,7 +1092,7 @@ The status word consist in two bytes, ``SW1`` and ``SW2``. ``SW1`` can only be e
 +---+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``9702`` | EMV: Main keys are blocked.                                                                                  |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
-|   |``9704`` | EMV: PIN not succesfully verified, 3 or more PIN tries left.                                                 |
+|   |``9704`` | EMV: PIN not successfully verified, 3 or more PIN tries left.                                                |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``9784`` | EMV: Base key.                                                                                               |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
@@ -1134,7 +1134,7 @@ The status word consist in two bytes, ``SW1`` and ``SW2``. ``SW1`` can only be e
 +-+-+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``9900`` | EMV: 1 PIN try left.                                                                                         |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
-|   |``9904`` | EMV: PIN not succesfully verified, 1 PIN try left.                                                           |
+|   |``9904`` | EMV: PIN not successfully verified, 1 PIN try left.                                                          |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``9985`` | EMV: Wrong status - Cardholder lock.                                                                         |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
@@ -1148,7 +1148,7 @@ The status word consist in two bytes, ``SW1`` and ``SW2``. ``SW1`` can only be e
 +-+-+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``9A00`` | EMV: 2 PIN try left.                                                                                         |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
-|   |``9A04`` | EMV: PIN not succesfully verified, 2 PIN try left.                                                           |
+|   |``9A04`` | EMV: PIN not successfully verified, 2 PIN try left.                                                          |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``9A71`` | EMV: Wrong parameter value - Double agent AID.                                                               |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
@@ -1246,11 +1246,11 @@ The status word consist in two bytes, ``SW1`` and ``SW2``. ``SW1`` can only be e
 +-+-+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``9E00`` | EMV: PIN not installed.                                                                                      |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
-|   |``9E04`` | EMV: PIN not succesfully verified, PIN not installed.                                                        |
+|   |``9E04`` | EMV: PIN not successfully verified, PIN not installed.                                                       |
 +-+-+---------+--------------------------------------------------------------------------------------------------------------+
 | |  ``9F xx``| Success, XX bytes of data available to be read using ``GET RESPONSE``.                                       |
 +-+-+---------+--------------------------------------------------------------------------------------------------------------+
 |   |``9F00`` | EMV: PIN blocked and Unblock Try Counter is 3.                                                               |
 +---+---------+--------------------------------------------------------------------------------------------------------------+
-|   |``9F04`` | EMV: PIN not succesfully verified, PIN blocked and Unblock Try Counter is 3.                                 |
+|   |``9F04`` | EMV: PIN not successfully verified, PIN blocked and Unblock Try Counter is 3.                                |
 +---+---------+--------------------------------------------------------------------------------------------------------------+

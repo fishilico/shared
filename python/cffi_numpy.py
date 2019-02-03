@@ -66,7 +66,7 @@ def check_double_matrix(mat):
                          .format(mat.strides))
         return False
 
-    # If itemsize couln't divide the stride, nothing would work...
+    # If itemsize couldn't divide the stride, nothing would work...
     assert (mat.strides[0] % mat.itemsize) == 0
 
     if mat.strides[0] < mat.shape[1] * mat.strides[1]:
