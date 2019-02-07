@@ -63,7 +63,7 @@ CMD ["/run_shared_test.sh"]
 #    With gcc -m32:
 #       Global blacklist: latex%
 #       In sub-directories:
-#          c: gtk_alpha_window openmp_matrix
+#          c: gtk_alpha_window
 #          linux: pulseaudio_echo sdl_v4l_video
 #          python:
 #          python/crypto:
