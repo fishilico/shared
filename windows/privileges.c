@@ -14,7 +14,7 @@ _ParamStringBufInOutSizeToAlloc2(LookupPrivilegeName, LPCTSTR, lpSystemName, PLU
 static void DumpProccessToken(VOID)
 {
     HANDLE hToken;
-    DWORD i, dwAttr;
+    DWORD i, dwAttr, dwRetLen;
     TOKEN_USER *pTokenUser;
     TOKEN_GROUPS *pTokenGroups;
     TOKEN_PRIVILEGES *pTokenPrivileges;
@@ -30,13 +30,14 @@ static void DumpProccessToken(VOID)
     TCHAR szTokenSourceName[TOKEN_SOURCE_LENGTH + 1];
     const LUID *pLuid;
 
-    if (!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken)) {
+    if (!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY | TOKEN_QUERY_SOURCE, &hToken)) {
         print_winerr(_T("OpenProcessToken"));
         return;
     }
     _tprintf(_T("Tokens of current process:\n"));
 
-    pTokenUser = (PTOKEN_USER)GetTokenInformation_a(hToken, TokenUser, NULL);
+    dwRetLen = 0;
+    pTokenUser = (PTOKEN_USER)GetTokenInformation_a(hToken, TokenUser, &dwRetLen);
     if (pTokenUser) {
         assert(pTokenUser->User.Sid);
         if (!ConvertSidToStringSid(pTokenUser->User.Sid, &szSid)) {
@@ -53,7 +54,8 @@ static void DumpProccessToken(VOID)
         HeapFree(GetProcessHeap(), 0, pTokenUser);
     }
 
-    pTokenGroups = (PTOKEN_GROUPS)GetTokenInformation_a(hToken, TokenGroups, NULL);
+    dwRetLen = 0;
+    pTokenGroups = (PTOKEN_GROUPS)GetTokenInformation_a(hToken, TokenGroups, &dwRetLen);
     if (pTokenGroups) {
         _tprintf(_T("- Groups (%ld):\n"), pTokenGroups->GroupCount);
         for (i = 0; i < pTokenGroups->GroupCount; i++) {
@@ -95,11 +97,13 @@ static void DumpProccessToken(VOID)
         HeapFree(GetProcessHeap(), 0, pTokenGroups);
     }
 
-    pTokenPrivileges = (PTOKEN_PRIVILEGES)GetTokenInformation_a(hToken, TokenPrivileges, NULL);
+    dwRetLen = 0;
+    pTokenPrivileges = (PTOKEN_PRIVILEGES)GetTokenInformation_a(hToken, TokenPrivileges, &dwRetLen);
     if (pTokenPrivileges) {
         _tprintf(_T("- Privileges (%ld):\n"), pTokenPrivileges->PrivilegeCount);
         for (i = 0; i < pTokenPrivileges->PrivilegeCount; i++) {
-            szPriv = LookupPrivilegeName_a(NULL, &pTokenPrivileges->Privileges[i].Luid, NULL);
+            dwRetLen = 0;
+            szPriv = LookupPrivilegeName_a(NULL, &pTokenPrivileges->Privileges[i].Luid, &dwRetLen);
             if (!szPriv) {
                 pLuid = &pTokenPrivileges->Privileges[i].Luid;
                 szPriv = HeapAlloc(GetProcessHeap(), 0, 20 * sizeof(TCHAR));
@@ -133,7 +137,8 @@ static void DumpProccessToken(VOID)
         HeapFree(GetProcessHeap(), 0, pTokenPrivileges);
     }
 
-    pTokenOwner = (PTOKEN_OWNER)GetTokenInformation_a(hToken, TokenOwner, NULL);
+    dwRetLen = 0;
+    pTokenOwner = (PTOKEN_OWNER)GetTokenInformation_a(hToken, TokenOwner, &dwRetLen);
     if (pTokenOwner) {
         assert(pTokenOwner->Owner);
         if (!ConvertSidToStringSid(pTokenOwner->Owner, &szSid)) {
@@ -146,7 +151,8 @@ static void DumpProccessToken(VOID)
         HeapFree(GetProcessHeap(), 0, pTokenOwner);
     }
 
-    pTokenPrimaryGroup = (PTOKEN_PRIMARY_GROUP)GetTokenInformation_a(hToken, TokenPrimaryGroup, NULL);
+    dwRetLen = 0;
+    pTokenPrimaryGroup = (PTOKEN_PRIMARY_GROUP)GetTokenInformation_a(hToken, TokenPrimaryGroup, &dwRetLen);
     if (pTokenPrimaryGroup) {
         assert(pTokenPrimaryGroup->PrimaryGroup);
         if (!ConvertSidToStringSid(pTokenPrimaryGroup->PrimaryGroup, &szSid)) {
@@ -159,7 +165,8 @@ static void DumpProccessToken(VOID)
         HeapFree(GetProcessHeap(), 0, pTokenPrimaryGroup);
     }
 
-    pTokenSource = (PTOKEN_SOURCE)GetTokenInformation_a(hToken, TokenSource, NULL);
+    dwRetLen = 0;
+    pTokenSource = (PTOKEN_SOURCE)GetTokenInformation_a(hToken, TokenSource, &dwRetLen);
     if (pTokenSource) {
 #if defined(UNICODE)
         if (!MultiByteToWideChar(CP_ACP, 0,
@@ -173,12 +180,13 @@ static void DumpProccessToken(VOID)
 #endif
         szTokenSourceName[TOKEN_SOURCE_LENGTH] = 0;
         pLuid = &pTokenSource->SourceIdentifier;
-        _tprintf(_T("- Source: %s {%08lx-%08lx}\n"), szTokenSourceName,
+        _tprintf(_T("- Source: \"%s\" {%08lx-%08lx}\n"), szTokenSourceName,
                  pLuid->LowPart, pLuid->HighPart);
         HeapFree(GetProcessHeap(), 0, pTokenSource);
     }
 
-    pTokenType = (PTOKEN_TYPE)GetTokenInformation_a(hToken, TokenType, NULL);
+    dwRetLen = 0;
+    pTokenType = (PTOKEN_TYPE)GetTokenInformation_a(hToken, TokenType, &dwRetLen);
     if (pTokenType) {
         _tprintf(_T("- Type: "));
         switch (*pTokenType) {
@@ -196,13 +204,15 @@ static void DumpProccessToken(VOID)
     }
 
 #if (_WIN32_WINNT >= _WIN32_WINNT_VISTA)
-    pTokenElevation = (PTOKEN_ELEVATION)GetTokenInformation_a(hToken, TokenElevation, NULL);
+    dwRetLen = 0;
+    pTokenElevation = (PTOKEN_ELEVATION)GetTokenInformation_a(hToken, TokenElevation, &dwRetLen);
     if (pTokenElevation) {
         _tprintf(_T("- Elevation: %d\n"), *pTokenElevation);
         HeapFree(GetProcessHeap(), 0, pTokenElevation);
     }
 
-    pTokenElevationType = (PTOKEN_ELEVATION_TYPE)GetTokenInformation_a(hToken, TokenElevationType, NULL);
+    dwRetLen = 0;
+    pTokenElevationType = (PTOKEN_ELEVATION_TYPE)GetTokenInformation_a(hToken, TokenElevationType, &dwRetLen);
     if (pTokenElevationType) {
         _tprintf(_T("- Elevation type: "));
         switch (*pTokenElevationType) {
