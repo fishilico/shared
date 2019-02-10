@@ -1,7 +1,15 @@
 /**
  * Dump process token information (user, groups, privileges...) and enable SeDebugPrivilege
+ *
+ * From a command line console, it is possible to enumerate the privileges of the current user with:
+ *    whoami /priv
+ *
+ * Privileges can also be dumped from a PowerShell script such as:
+ * https://github.com/FuzzySecurity/PowerShell-Suite/blob/master/Get-TokenPrivs.ps1
  */
 #include "common.h"
+#include <inttypes.h>
+#include <ntsecapi.h>
 #include <sddl.h>
 
 /* Wrap GetTokenInformation to allocate memory */
@@ -265,11 +273,175 @@ static BOOL EnableDebugPrivilege(VOID)
     return TRUE;
 }
 
+/**
+ * Enumerate the users through LSA API (Local Security Authority)
+ */
+static void EnumerateLsaUsers(VOID)
+{
+    WCHAR wszSystemName[] = L"";
+    LSA_UNICODE_STRING lusSystemName, *plusUserRights = NULL;
+    LSA_OBJECT_ATTRIBUTES ObjectAttributes;
+    LSA_HANDLE lsahPolicyHandle = NULL;
+    LSA_ENUMERATION_INFORMATION *pLsaEnumInfo = NULL;
+    LSA_REFERENCED_DOMAIN_LIST *pLsaReferencedDomains;
+    LSA_TRANSLATED_NAME *pLsaName;
+    NTSTATUS ntsResult;
+    ULONG ulWinError, ulCount = 0, ulIndex, ulCountOfRights, index;
+    LPTSTR szSid = NULL;
+
+    lusSystemName.Buffer = wszSystemName;
+    lusSystemName.Length = wcslen(wszSystemName) * sizeof(WCHAR);
+    lusSystemName.MaximumLength = lusSystemName.Length + sizeof(WCHAR);
+    ZeroMemory(&ObjectAttributes, sizeof(ObjectAttributes));
+
+    ntsResult = LsaOpenPolicy(
+        &lusSystemName,
+        &ObjectAttributes,
+        POLICY_LOOKUP_NAMES | POLICY_VIEW_LOCAL_INFORMATION,
+        &lsahPolicyHandle);
+    if (ntsResult != 0) {
+        ulWinError = LsaNtStatusToWinError(ntsResult);
+        _tprintf(_T("LsaOpenPolicy returned error %#lx = %#lx\n"), ntsResult, ulWinError);
+        SetLastError(ulWinError);
+        print_winerr(_T("LsaOpenPolicy"));
+        return;
+    }
+
+    ntsResult = LsaEnumerateAccountsWithUserRight(
+        lsahPolicyHandle, NULL, (VOID **)&pLsaEnumInfo, &ulCount);
+    if (ntsResult != 0) {
+        ulWinError = LsaNtStatusToWinError(ntsResult);
+        _tprintf(_T("LsaEnumerateAccountsWithUserRight returned error %#lx = %#lx\n"),
+                 ntsResult, ulWinError);
+        SetLastError(ulWinError);
+        print_winerr(_T("LsaEnumerateAccountsWithUserRight"));
+        goto cleanup;
+    }
+    _tprintf(_T("LSA handle %#" PRIxPTR ", got %lu accounts at %p\n"),
+             (UINT_PTR)lsahPolicyHandle, ulCount, pLsaEnumInfo);
+    for (ulIndex = 0; ulIndex < ulCount; ulIndex++) {
+        if (!ConvertSidToStringSid(pLsaEnumInfo[ulIndex].Sid, &szSid)) {
+            print_winerr(_T("ConvertSidToStringSid"));
+            szSid = NULL;
+        }
+
+        ulCountOfRights = 0;
+        ntsResult = LsaEnumerateAccountRights(
+            lsahPolicyHandle, pLsaEnumInfo[ulIndex].Sid, &plusUserRights, &ulCountOfRights);
+        if (ntsResult != 0) {
+            ulWinError = LsaNtStatusToWinError(ntsResult);
+            _tprintf(_T("LsaEnumerateAccountRights returned error %#lx = %#lx\n"), ntsResult, ulWinError);
+            SetLastError(ulWinError);
+            print_winerr(_T("LsaEnumerateAccountRights"));
+            plusUserRights = NULL;
+        }
+        _tprintf(_T("- Account %s (%lu %s):\n"), szSid, ulCountOfRights,
+                 (ulCountOfRights >= 2) ? _T("rights") : _T("right"));
+
+        /* Lookup the name of the user from the given SID */
+        pLsaReferencedDomains = NULL;
+        pLsaName = NULL;
+        ntsResult = LsaLookupSids(
+            lsahPolicyHandle, 1, &pLsaEnumInfo[ulIndex].Sid,
+            &pLsaReferencedDomains, &pLsaName);
+        if (ntsResult != 0) {
+            ulWinError = LsaNtStatusToWinError(ntsResult);
+            _tprintf(_T("LsaLookupSids returned error %#lx = %#lx\n"), ntsResult, ulWinError);
+            SetLastError(ulWinError);
+            print_winerr(_T("LsaLookupSids"));
+        } else if (pLsaName) {
+            _tprintf(_T("  - Name: "));
+            if (pLsaName->DomainIndex >= 0) {
+                index = pLsaName->DomainIndex;
+                /* Note: there is also a Sid field, which is not displayed */
+                _tprintf(_T("%.*" PRIsW "\\"),
+                         (int)pLsaReferencedDomains->Domains[index].Name.Length / 2,
+                         pLsaReferencedDomains->Domains[index].Name.Buffer);
+            }
+            _tprintf(_T("%.*" PRIsW " ("), (int)pLsaName->Name.Length / 2, pLsaName->Name.Buffer);
+            switch ((int)pLsaName->Use) { /* Cast to integer in ordre to prevent warnings about enum */
+                case SidTypeUser: /* 1 */
+                    _tprintf(_T("user"));
+                    break;
+                case SidTypeGroup:
+                    _tprintf(_T("group"));
+                    break;
+                case SidTypeDomain:
+                    _tprintf(_T("domain"));
+                    break;
+                case SidTypeAlias:
+                    _tprintf(_T("alias"));
+                    break;
+                case SidTypeWellKnownGroup:
+                    _tprintf(_T("well-known group"));
+                    break;
+                case SidTypeDeletedAccount:
+                    _tprintf(_T("deleted account"));
+                    break;
+                case SidTypeInvalid:
+                    _tprintf(_T("invalid"));
+                    break;
+                case SidTypeUnknown:
+                    _tprintf(_T("unknown type"));
+                    break;
+                case SidTypeComputer:
+                    _tprintf(_T("computer"));
+                    break;
+                case 10 /* SidTypeLabel */:
+                    _tprintf(_T("mandatory integrity label"));
+                    break;
+                case 11 /* SidTypeLogonSession */:
+                    _tprintf(_T("logon session"));
+                    break;
+                default:
+                    _tprintf(_T("Unknown use %d"), pLsaName->Use);
+            }
+            _tprintf(_T(")\n"));
+        }
+
+        /* Enumerate the rights */
+        if (plusUserRights) {
+            for (index = 0; index < ulCountOfRights; index++) {
+                _tprintf(
+                    _T("  * %.*" PRIsW "\n"),
+                    (int)plusUserRights[index].Length / 2,
+                    plusUserRights[index].Buffer);
+            }
+        } else {
+            _tprintf(_T("    (no user right)\n"));
+        }
+
+        if (pLsaReferencedDomains) {
+            LsaFreeMemory(pLsaReferencedDomains);
+            pLsaReferencedDomains = NULL;
+        }
+        if (pLsaName) {
+            LsaFreeMemory(pLsaName);
+            pLsaName = NULL;
+        }
+        if (plusUserRights) {
+            LsaFreeMemory(plusUserRights);
+            plusUserRights = NULL;
+        }
+        if (szSid) {
+            LocalFree(szSid);
+            szSid = NULL;
+        }
+    }
+
+cleanup:
+    if (pLsaEnumInfo)
+        LsaFreeMemory(pLsaEnumInfo);
+    LsaClose(lsahPolicyHandle);
+}
+
 int _tmain(void)
 {
     DumpProccessToken();
     if (EnableDebugPrivilege()) {
         _tprintf(_T("Successfully enabled SeDebugPrivilege\n"));
     }
+    _tprintf(_T("\n"));
+    EnumerateLsaUsers();
     return 0;
 }
