@@ -445,6 +445,8 @@ then
     pkg python2-yara
     pkg qemu
     pkg qemu-arch-extra
+    pkg radare2
+    pkg radare2-cutter
     pkg ropgadget
     pkg sagemath
     pkg volatility
