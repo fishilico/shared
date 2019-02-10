@@ -69,10 +69,9 @@ logger = logging.getLogger(__name__)
 GRAPH_COLORS = {
     'hwmanuf': 'cyan',
     'hwaddr': 'lightblue',
-    'ipaddr': 'yellow',
+    'ipaddr': '#eeeeee',
     'publicipaddr': 'orange',
     'ipnet': 'green',
-    'ipopt': '#eeeeee',
 }
 
 
@@ -157,6 +156,13 @@ def get_mac_manuf_desc(mac_addr, default='?'):
     return manufacturer[1] or manufacturer[0]
 
 
+def graphviz_records(records):
+    """Escape record label according to https://www.graphviz.org/doc/info/shapes.html#record"""
+    return ' | '.join(
+        r.replace('\\', '\\\\').replace('{', '\\{').replace('}', '\\}').replace('<', '\\<').replace('>', '\\>')
+        for r in records)
+
+
 class Graph(object):
     """Graph of node and directed edges"""
     def __init__(self):
@@ -170,8 +176,10 @@ class Graph(object):
         """Add a node to the graph and return a unique ID to it"""
         full_key = '{}_{}'.format(node_type, base_key)
         if full_key not in self.nodes:
+            if value is None:
+                value = base_key
             self.nodes[full_key] = (node_type, value)
-        elif self.nodes[full_key] != (node_type, value):
+        elif value is not None and self.nodes[full_key] != (node_type, value):
             logger.warning("Graph node %r has two values: %r and %r",
                            full_key, self.nodes[full_key], (node_type, value))
         return full_key
@@ -192,10 +200,10 @@ class Graph(object):
         """Add an hardware address"""
         return self.add_node('hwaddr', hw_addr, description)
 
-    def add_ip_addr(self, ip_addr):
+    def add_ip_addr(self, ip_addr, label=None):
         """Add an IP address"""
         node_type = 'publicipaddr' if is_public_ip_address(ip_addr) else 'ipaddr'
-        ip_addr_node = self.add_node(node_type, ip_addr, ip_addr)
+        ip_addr_node = self.add_node(node_type, ip_addr, label)
         # Add the node to a network, if it is a new one
         if ip_addr_node not in self.already_added_ipaddr_nodes:
             self.already_added_ipaddr_nodes.add(ip_addr_node)
@@ -204,7 +212,7 @@ class Graph(object):
             possible_nets = [(node, obj) for node, obj in self.ip_networks.items() if addr_obj in obj]
             if possible_nets:
                 possible_nets.sort(key=lambda x: x[1].prefixlen)
-                self.add_edge(possible_nets[-1][0], ip_addr_node, 'member')
+                self.add_edge(possible_nets[-1][0], ip_addr_node, 'member-net')
                 # Add edges between subnets
                 for idx in range(len(possible_nets) - 1):
                     self.add_edge(possible_nets[idx][0], possible_nets[idx + 1][0], 'subnet')
@@ -218,15 +226,12 @@ class Graph(object):
             self.ip_networks[net_node] = net_obj
         return net_node
 
-    def add_ip_options(self, ip_addr, kind, values):
-        """Add options related to an IP address"""
-        return self.add_node('ipopt', '{}_{}'.format(kind, ip_addr), '\n'.join(values))
-
     def dump_dot(self, stream):
         """Produce a graph in dot format to the given stream"""
         stream.write('digraph {\n')
         stream.write('    overlap=prism;\n')
-        stream.write('    node [shape=box,style=filled];\n')
+        stream.write('    rankdir=LR;\n')
+        stream.write('    node [shape=record,style=filled];\n')
 
         # Dump nodes
         for key, type_value in sorted(self.nodes.items()):
@@ -239,8 +244,12 @@ class Graph(object):
             stream.write('];\n')
 
         # Dump edges
-        for key in sorted(self.edges.keys()):
-            stream.write('    "{0[0]}" -> "{0[1]}";\n'.format(key))
+        for key, edge_label in sorted(self.edges.items()):
+            if edge_label in ('member-net', 'subnet'):
+                # Reverse the rank for ip-subnet link
+                stream.write('    "{0[1]}" -> "{0[0]}" [dir="back"];\n'.format(key))
+            else:
+                stream.write('    "{0[0]}" -> "{0[1]}";\n'.format(key))
         stream.write('}\n')
 
 
@@ -380,14 +389,13 @@ class HwAddrDatabase(object):
         """Populate the given graph with information"""
         dict_data = self.to_dict()
         for hw_addr, hw_data in dict_data.items():
-            desc_fields = []
+            desc_fields = [hw_addr]
             if hw_data.get('is_bridge'):
                 desc_fields.append('bridge')
             manuf = hw_data.get('manufacturer') or hw_data.get('manuf')
             if manuf:
                 desc_fields.append(manuf)
-            desc = '{} ({})'.format(hw_addr, ', '.join(desc_fields)) if desc_fields else hw_addr
-            hw_addr_node = graph.add_hw_addr(hw_addr, desc)
+            hw_addr_node = graph.add_hw_addr(hw_addr, graphviz_records(desc_fields))
             # if manuf:
             #     manuf_node = graph.add_hw_manuf(manuf)
             #     graph.add_edge(manuf_node, hw_addr_node, 'manufacturer')
@@ -475,10 +483,12 @@ class IpAddrDatabase(object):
         """Populate the given graph with information"""
         dict_data = self.to_dict()
         for ip_addr, options in dict_data.items():
-            ip_addr_node = graph.add_ip_addr(ip_addr)
+            # Build a Graphviz record node
+            records = [ip_addr]
             for kind, values in options.items():
-                ip_options_node = graph.add_ip_options(ip_addr, kind, values)
-                graph.add_edge(ip_addr_node, ip_options_node, kind)
+                for val in values:
+                    records.append("{}: {}".format(kind, val))
+            graph.add_ip_addr(ip_addr, graphviz_records(records))
 
 
 class IpNetworkDatabase(object):
@@ -545,7 +555,7 @@ class AnalysisContext(object):
         self.seen_eth_fortinet = False
         self.seen_eth_802_11 = False
 
-    def post_processing(self, add_local_networks=True):
+    def post_processing(self, add_local_networks=False):
         """Perform some post-processing operations on the data"""
         self.ipaddrdb.post_processing()
 
@@ -587,8 +597,8 @@ class AnalysisContext(object):
     def populate_graph(self, graph):
         """Populate the given graph with information"""
         self.ipnetdb.populate_graph(graph)
-        self.hwaddrdb.populate_graph(graph)
         self.ipaddrdb.populate_graph(graph)
+        self.hwaddrdb.populate_graph(graph)
 
     def remove_multicast_addresses(self):
         """Remove multicast addresses from the databases"""
@@ -951,8 +961,8 @@ def main(argv=None):
                         help="output file in JSON format")
     parser.add_argument('-n', '--known-networks', action='store_true',
                         help="only include IP addresses which belong to known networks (in JSON and graph)")
-    parser.add_argument('-N', '--no-add-local-networks', action='store_true',
-                        help="do not automatically add local IP networks (in JSON and graph)")
+    parser.add_argument('-L', '--add-local-networks', action='store_true',
+                        help="automatically add local IP networks (in JSON and graph)")
     parser.add_argument('-A', '--all', action='store_true',
                         help="graph all the collected data without any filter")
     parser.add_argument('-M', '--with-multicast', action='store_true',
@@ -993,7 +1003,7 @@ def main(argv=None):
         for pkt in PcapReader(filepath):  # pylint: disable=no-value-for-parameter
             ctx.analyze_read_packet(pkt)
 
-    ctx.post_processing(add_local_networks=not args.no_add_local_networks)
+    ctx.post_processing(add_local_networks=args.add_local_networks)
     if args.known_networks:
         ctx.filter_by_known_networks()
 
