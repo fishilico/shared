@@ -74,6 +74,7 @@ Elf_Verdaux
 Elf_Verdef
 Elf_Word
 Elf_auxv_t
+FILE_NOTIFY_INFORMATION
 GdkEventButton
 GdkEventExpose
 GdkScreen

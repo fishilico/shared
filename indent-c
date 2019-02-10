@@ -63,6 +63,7 @@ exec indent \
     -T Elf_Verdef \
     -T Elf_Word \
     -T Elf_auxv_t \
+    -T FILE_NOTIFY_INFORMATION \
     -T GdkEventButton \
     -T GdkEventExpose \
     -T GdkScreen \
