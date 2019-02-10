@@ -205,6 +205,7 @@ pkg dosfstools
 pkg exfat-utils
 pkg extundelete
 pkg lvm2
+pkg lzop
 pkg mdadm
 pkg mtools
 pkg ntfs-3g
@@ -232,6 +233,7 @@ pkg links
 pkg mariadb-clients
 pkg mutt
 pkg ndisc6
+pkg net-snmp
 pkg net-tools
 pkg nftables
 pkg nmap
@@ -243,6 +245,7 @@ pkg smbclient
 pkg socat
 pkg sqlmap
 pkg sshfs
+pkg stubby
 pkg tcpdump
 pkg unbound
 pkg wget
@@ -251,6 +254,7 @@ pkg wireshark-cli
 
 # Development
 grouppkg base-devel
+grouppkg multilib-devel
 pkg clang
 pkg cmake
 pkg fakeroot
@@ -290,6 +294,7 @@ aurpkg gti
 
 # Arch Linux-specific packages
 pkg asp
+pkg aurphan
 
 if "$INSTALL_DESKTOP"
 then
@@ -305,11 +310,11 @@ then
     pkg ttf-bitstream-vera
     pkg ttf-dejavu
     pkg ttf-droid
+    pkg ttf-fantasque-sans-mono
     pkg ttf-freefont
     pkg ttf-inconsolata
     pkg ttf-liberation
     pkg ttf-ubuntu-font-family
-    aurpkg ttf-fantasque-sans-mono
     aurpkg ttf-vlgothic
 
     # Sound
@@ -356,6 +361,7 @@ then
     pkg remmina
     pkg sdl2
     pkg simple-scan
+    pkg sqlitebrowser
     pkg tk
     pkg udisks2
     pkg vinagre
@@ -411,6 +417,7 @@ then
     #pkg docker-compose
     pkg flake8
     pkg ipcalc
+    pkg ipv6calc
     pkg jre10-openjdk
     #pkg lxc
     #pkg mariadb
@@ -439,6 +446,7 @@ then
     pkg qemu
     pkg qemu-arch-extra
     pkg ropgadget
+    pkg sagemath
     pkg volatility
     pkg wabt
 
