@@ -73,6 +73,8 @@ Hacking
   Radare from A to Z - extended edition
 * https://github.com/radareorg/cutter
   A Qt and C++ GUI for radare2 reverse engineering framework
+* https://www.hex-rays.com/products/ida/support/freefiles/IDA_Pro_Shortcuts.pdf
+  Datarescue Interactive Disassembler (IDA) Pro Quick Reference Sheet
 * https://www.elttam.com.au/blog/intro-sdr-and-rf-analysis/
   Intro to SDR and RF signal analysis
 * https://github.com/avast-tl/retdec
@@ -88,6 +90,12 @@ Hacking
 * https://www.powershellempire.com
   PowerShell Empire | Building an Empire with PowerShell
 * https://retdec.com/ open-source machine-code decompiler based on LLVM.
+* https://github.com/JusticeRage/freedomfighting
+  A collection of scripts which may come in handy during your freedom fighting activities
+  (log cleaner, SSL reverse shell, etc.)
+* https://github.com/epinna/weevely3
+  Weaponized web shell
+
 
 Debuggers
 ~~~~~~~~~
@@ -199,6 +207,8 @@ Internet
       Let's Encrypt - free, automated, and open Certificate Authority
     - https://alwaysonssl.com/
       AlwaysOnSSL - free, and automated Certification Authority
+    - https://github.com/FiloSottile/mkcert
+      Create a TLS certificate for Localhost
 
 * Maps:
 

@@ -32,6 +32,13 @@ Windows
   Microsoft Security Intelligence Report
 * http://copy.sh/v86/?profile=windows98
   Windows 98 with x86 virtualization in JavaScript
+* https://www.microsoft.com/en-us/research/wp-content/uploads/2017/03/SevenPropertiesofHighlySecureDevices.pdf
+  The Seven Properties of Highly Secure Devices
+  (http://aka.ms/7properties from https://twitter.com/jongallant/status/995068710997016578)
+* https://www.vergiliusproject.com/
+  Vergilius, Take a look into the depths of Windows kernels and reveal more than 60000 undocumented structures
+* http://ntoskrnl.org/
+  Dans les coulisses de Microsoft Windows (in French)
 
 Apple
 -----
