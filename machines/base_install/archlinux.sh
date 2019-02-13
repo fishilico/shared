@@ -295,6 +295,7 @@ aurpkg gti
 # Arch Linux-specific packages
 pkg asp
 pkg aurphan
+pkg pacman-contrib
 
 if "$INSTALL_DESKTOP"
 then
