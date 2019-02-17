@@ -883,8 +883,8 @@ class AnalysisContext(object):
                 if opt_type == 'ICMPv6NDOptPrefixInfo':
                     self.ipaddrdb.add_role(option.prefix, 'IPv6 Router' + ra_desc)
                 elif opt_type == 'ICMPv6NDOptRDNSS':
-                    logger.fatal("Not yet implemented DNS record in NDP RA: %r", ippkt)
-                    raise NotImplementedError("DNS server parsing in Router Advertisement is not yet implemented")
+                    for opt_addr in option.dns:
+                        self.ipaddrdb.add_role(opt_addr, 'DNS server in RA' + ra_desc)
                 option = option.payload
 
         self.analyze_generic_ip_packet(ippkt)
