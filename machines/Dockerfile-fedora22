@@ -22,6 +22,7 @@ RUN \
         libmnl-devel.x86_64 \
         libmnl-devel.i686 \
         make \
+        mingw32-gcc \
         mingw64-gcc \
         numpy \
         openssh \
@@ -73,4 +74,4 @@ CMD ["/run_shared_test.sh"]
 #       clang -m32: ok
 #       musl-gcc: not working
 #       x86_64-w64-mingw32-gcc: ok
-#       i686-w64-mingw32-gcc: not working
+#       i686-w64-mingw32-gcc: ok
