@@ -59,7 +59,7 @@ try:
     HAVE_SCAPY_TLS = True
 except ImportError:
     # TLS support has been introduced in scapy 2.4.0
-    HAVE_SCAPY_TLS = True
+    HAVE_SCAPY_TLS = False
 
 
 # pylint: disable=invalid-name
