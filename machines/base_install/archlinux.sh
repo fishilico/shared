@@ -453,6 +453,7 @@ then
     pkg volatility
     pkg wabt
 
+    aurpkg android-apktool
     aurpkg dex2jar
     aurpkg ilspymono-git
     aurpkg jd-gui
