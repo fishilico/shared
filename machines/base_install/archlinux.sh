@@ -199,11 +199,13 @@ pkg wpa_supplicant
 
 # Archives and filesystems
 pkg btrfs-progs
+pkg cabextract
 pkg cpio
 pkg cryptsetup
 pkg dosfstools
 pkg exfat-utils
 pkg extundelete
+pkg innoextract
 pkg lvm2
 pkg lzop
 pkg mdadm
