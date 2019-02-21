@@ -290,6 +290,7 @@ pkg cmatrix
 pkg john
 pkg lolcat
 pkg sl
+aurpkg earlyoom
 aurpkg gti
 
 # Arch Linux-specific packages
