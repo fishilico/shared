@@ -35,6 +35,23 @@ Documentation:
     (ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192)
 * https://github.com/openssl/openssl/blob/OpenSSL_1_1_1a/crypto/dh/dh_gen.c#L31-L57
     OpenSSL description of its DH parameters generation
+* https://wiki.openssl.org/index.php/Diffie-Hellman_parameters
+    Diffie-Hellman parameters
+
+Some groups have been standardized:
+* https://tools.ietf.org/html/rfc2409
+    The Internet Key Exchange (IKE)
+    * 1st Oakley Default Group (768 bits): p = 2^768 - 2 ^704 - 1 + 2^64 * { [2^638 pi] + 149686 }, g = 2
+    * 2nd Oakley Group (1024 bits): p = 2^1024 - 2^960 - 1 + 2^64 * { [2^894 pi] + 129093 }, g = 2
+
+* https://tools.ietf.org/html/rfc3526
+    More Modular Exponential (MODP) Diffie-Hellman groups for Internet Key Exchange (IKE):
+    * 1536-bit MODP Group (group 5): p = 2^1536 - 2^1472 - 1 + 2^64 * { [2^1406 pi] + 741804 }, g = 2
+    * 2048-bit MODP Group (group 14): p = 2^2048 - 2^1984 - 1 + 2^64 * { [2^1918 pi] + 124476 }, g = 2
+    * 3072-bit MODP Group (group 15): p = 2^3072 - 2^3008 - 1 + 2^64 * { [2^2942 pi] + 1690314 }, g = 2
+    * 4096-bit MODP Group (group 16): p = 2^4096 - 2^4032 - 1 + 2^64 * { [2^3966 pi] + 240904 }, g = 2
+    * 6144-bit MODP Group (group 17): p = 2^6144 - 2^6080 - 1 + 2^64 * { [2^6014 pi] + 929484 }, g = 2
+    * 8192-bit MODP Group (group 18): p = 2^8192 - 2^8128 - 1 + 2^64 * { [2^8062 pi] + 4743158 }, g = 2
 """
 import argparse
 import base64
