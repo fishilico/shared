@@ -53,6 +53,8 @@ Documentation:
 * https://en.wikipedia.org/wiki/Curve25519
 * https://ed25519.cr.yp.to/
 * https://ed25519.cr.yp.to/python/ed25519.py
+* https://linux-audit.com/using-ed25519-openssh-keys-instead-of-dsa-rsa-ecdsa/
+  Using Ed25519 for OpenSSH keys (instead of DSA/RSA/ECDSA)
 """
 import argparse
 import base64
