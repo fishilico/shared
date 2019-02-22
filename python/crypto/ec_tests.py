@@ -39,6 +39,7 @@ import argparse
 import base64
 import binascii
 import collections
+import errno
 import logging
 import hashlib
 import os.path
@@ -132,6 +133,28 @@ def test_mod_sqrt():
 
 
 test_mod_sqrt()
+
+
+def hexdump(data, color=''):
+    """Show an hexdecimal dump of binary data"""
+    if color:
+        sys.stdout.write(color)
+    for iline in range(0, len(data), 16):
+        hexline = ''
+        ascline = ''
+        for i in range(16):
+            if iline + i >= len(data):
+                hexline += '  '
+            else:
+                # pylint: disable=invalid-name
+                x = data[iline + i] if sys.version_info >= (3,) else ord(data[iline + i])
+                hexline += '{:02x}'.format(x)
+                ascline += chr(x) if 32 <= x < 127 else '.'
+            if i % 2:
+                hexline += ' '
+        print(" {:06x}:  {} {}".format(iline, hexline, ascline))
+    if color:
+        sys.stdout.write(COLOR_NORM)
 
 
 def decode_bigint_be(data):
@@ -664,6 +687,217 @@ def run_curve_test(curve, colorize):
     return True
 
 
+def run_ssh_test(curve, colorize):
+    """Parse ECDSA OpenSSH keys"""
+    color_red = COLOR_RED if colorize else ''
+    color_green = COLOR_GREEN if colorize else ''
+    color_norm = COLOR_NORM if colorize else ''
+    color_purple = COLOR_PURPLE if colorize else ''
+
+    # Find out a matching key type for the specified curve
+    if curve.openssl_name == 'prime256v1':  # NIST P-256
+        openssh_key_type = 'ecdsa-sha2-nistp256'
+    elif curve.openssl_name == 'secp384r1':  # NIST P-384
+        openssh_key_type = 'ecdsa-sha2-nistp384'
+    elif curve.openssl_name == 'secp521r1':  # NIST P-521
+        openssh_key_type = 'ecdsa-sha2-nistp521'
+    else:
+        # Skip this test
+        logger.warning("Curve %r is not supported by OpenSSH", curve)
+        return True
+
+    temporary_dir = tempfile.mkdtemp(suffix='_ssh-test')
+    logger.debug("Created temporary directory %s/", temporary_dir)
+    id_key_path = os.path.join(temporary_dir, 'id_ecdsa')
+    id_pub_path = os.path.join(temporary_dir, 'id_ecdsa.pub')
+    try:
+        try:
+            result = run_process_with_input([
+                'ssh-keygen',
+                '-t', 'ecdsa',
+                '-b', str(curve.g.order.bit_length()),
+                '-N', '',
+                '-f', id_key_path,
+            ], b'', color=color_purple)
+        except OSError as exc:
+            if exc.errno == errno.ENOENT:
+                print("... ssh-keygen is not installed, skipping the test.")
+                return True
+            raise
+        if not result:
+            logger.error("ssh-keygen failed, probably because ECDSA keytype is not supported. Skipping the test.")
+            return True
+
+        with open(id_pub_path, 'r') as fpub:
+            pubkey_lines = fpub.readlines()
+        with open(id_key_path, 'r') as fpriv:
+            privkey_lines = fpriv.readlines()
+
+        def pop_string(key, offset):
+            """Pop a string from the private key"""
+            field_size = struct.unpack('>I', key[offset:offset + 4])[0]
+            offset += 4
+            assert offset + field_size <= len(key)
+            value = key[offset:offset + field_size]
+            offset += field_size
+            return value, offset
+
+        # The public key is a single line, with base64-encoded data
+        assert len(pubkey_lines) == 1
+        print("SSH public key: {}{}{}".format(color_green, pubkey_lines[0].strip(), color_norm))
+        assert pubkey_lines[0].startswith(openssh_key_type + ' ')
+        public_key = base64.b64decode(pubkey_lines[0].split(' ', 2)[1])
+        print("SSH public key hexdump:")
+        hexdump(public_key, color=color_green)
+        print("SSH public key fingerprint: {}SHA256:{}{}".format(
+            color_green,
+            base64.b64encode(hashlib.sha256(public_key).digest()).decode('ascii').rstrip('='),
+            color_norm))
+        print("SSH public key:")
+        algorithm, offset = pop_string(public_key, offset=0)
+        print("* algorithm: {}".format(repr(algorithm.decode('ascii'))))
+        assert algorithm == openssh_key_type.encode('ascii')
+        curve_name, offset = pop_string(public_key, offset)
+        print("* curve: {}".format(repr(curve_name.decode('ascii'))))
+        assert curve_name == openssh_key_type.split('-')[-1].encode('ascii')
+        pubkey_pt_bin, offset = pop_string(public_key, offset)
+        coord_size = curve.coord_size()
+        assert len(pubkey_pt_bin) == 1 + 2 * coord_size
+        compress_mode, = struct.unpack('B', pubkey_pt_bin[:1])
+        if compress_mode != 4:
+            logger.error("Unsupported compressed key (mode %d)", compress_mode)
+            return False
+        pubkey_x = decode_bigint_be(pubkey_pt_bin[1:1 + coord_size])
+        pubkey_y = decode_bigint_be(pubkey_pt_bin[1 + coord_size:])
+        pubkey_pt = ECPoint(curve, pubkey_x, pubkey_y)
+        print("* public key point: {}{}{}".format(color_green, pubkey_pt, color_norm))
+        assert offset == len(public_key)
+
+        print("")
+
+        # The private key is base64-encoded
+        if 'EC PRIVATE KEY' in privkey_lines[0]:
+            # The private key is in usual ASN.1 format for OpenSSH < 7.8
+            assert privkey_lines[0] == '-----BEGIN EC PRIVATE KEY-----\n'
+            assert privkey_lines[-1] == '-----END EC PRIVATE KEY-----\n'
+            private_key = base64.b64decode(''.join(privkey_lines[1:-1]))
+            print("SSH private key hexdump:")
+            hexdump(private_key, color=color_red)
+            result = run_process_with_input(
+                ['openssl', 'asn1parse', '-i', '-dump'],
+                ''.join(privkey_lines[1:-1]).encode('ascii'), color=color_red)
+            if not result:
+                return False
+
+            privkey_asn1 = Crypto.Util.asn1.DerSequence()
+            privkey_asn1.decode(private_key)
+            assert len(privkey_asn1) == 4
+            assert privkey_asn1[0] == 1
+            privkey_asn1_obj = Crypto.Util.asn1.DerObject()
+            privkey_asn1_obj.decode(privkey_asn1[1])
+            private_key_secret = decode_bigint_be(privkey_asn1_obj.payload)
+            print("* private key({}): {}{:#x}{}".format(
+                len(privkey_asn1_obj.payload) * 8, color_red, private_key_secret, color_norm))
+
+            privkey_asn1_curvecont = Crypto.Util.asn1.DerObject()
+            privkey_asn1_curvecont.decode(privkey_asn1[2])
+            privkey_asn1_curve = Crypto.Util.asn1.DerObject()
+            privkey_asn1_curve.decode(privkey_asn1_curvecont.payload)
+            print("* hexadecimal curve OID: {}".format(
+                binascii.hexlify(privkey_asn1_curve.payload).decode('ascii')))
+
+            privkey_asn1_pubcont = Crypto.Util.asn1.DerObject()
+            privkey_asn1_pubcont.decode(privkey_asn1[3])
+            privkey_asn1_pub = Crypto.Util.asn1.DerObject()
+            privkey_asn1_pub.decode(privkey_asn1_pubcont.payload)
+            priv_pubkey = privkey_asn1_pub.payload
+            print("* public key:")
+            hexdump(priv_pubkey, color=color_green)
+            assert priv_pubkey == b'\0' + pubkey_pt_bin
+
+        else:
+            assert privkey_lines[0] == '-----BEGIN OPENSSH PRIVATE KEY-----\n'
+            assert privkey_lines[-1] == '-----END OPENSSH PRIVATE KEY-----\n'
+            private_key = base64.b64decode(''.join(privkey_lines[1:-1]))
+            print("SSH private key hexdump:")
+            hexdump(private_key, color=color_red)
+
+            # https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/PROTOCOL.key
+            if not private_key.startswith(b'openssh-key-v1\0'):
+                logger.error("Unsupported private key format")
+                return False
+
+            print("SSH private key:")
+            offset = len(b'openssh-key-v1\0')
+            ciphername, offset = pop_string(private_key, offset)
+            print("* ciphername: {}".format(repr(ciphername.decode('ascii'))))
+            assert ciphername == b'none'
+            kdfname, offset = pop_string(private_key, offset)
+            print("* kdfname: {}".format(repr(kdfname.decode('ascii'))))
+            assert kdfname == b'none'
+            kdfoptions, offset = pop_string(private_key, offset)
+            print("* kdfoptions: {}".format(repr(kdfoptions.decode('ascii'))))
+            assert kdfoptions == b''
+            numkeys = struct.unpack('>I', private_key[offset:offset + 4])[0]
+            offset += 4
+            print("* numkeys: {}".format(numkeys))
+            assert numkeys == 1
+            priv_pubkey, offset = pop_string(private_key, offset)
+            print("* public key:")
+            hexdump(priv_pubkey, color=color_green)
+            assert priv_pubkey == public_key
+            priv_privkey, offset = pop_string(private_key, offset)
+            print("* private key:")
+            hexdump(priv_privkey, color=color_red)
+            assert offset == len(private_key)
+
+            checkint1, checkint2 = struct.unpack('<II', priv_privkey[:8])
+            offset = 8
+            print("  * checkint1 = {:#x}".format(checkint1))
+            print("  * checkint2 = {:#x}".format(checkint2))
+            assert checkint1 == checkint2
+            algorithm, offset = pop_string(priv_privkey, offset)
+            print("  * algorithm: {}".format(repr(algorithm.decode('ascii'))))
+            assert algorithm == openssh_key_type.encode('ascii')
+            curve_name, offset = pop_string(priv_privkey, offset)
+            print("  * curve: {}".format(repr(curve_name.decode('ascii'))))
+            assert curve_name == openssh_key_type.split('-')[-1].encode('ascii')
+            priv_pubkey_pt_bin, offset = pop_string(priv_privkey, offset)
+            compress_mode, = struct.unpack('B', priv_pubkey_pt_bin[:1])
+            if compress_mode != 4:
+                logger.error("Unsupported compressed key (mode %d)", compress_mode)
+                return False
+            priv_pubkey_x = decode_bigint_be(priv_pubkey_pt_bin[1:1 + coord_size])
+            priv_pubkey_y = decode_bigint_be(priv_pubkey_pt_bin[1 + coord_size:])
+            priv_pubkey_pt = ECPoint(curve, priv_pubkey_x, priv_pubkey_y)
+            print("  * public key point: {}{}{}".format(color_green, priv_pubkey_pt, color_norm))
+            assert len(priv_pubkey_pt_bin) == 1 + 2 * coord_size
+            assert priv_pubkey_pt_bin == pubkey_pt_bin
+            assert priv_pubkey_pt == pubkey_pt
+            privkey_bin, offset = pop_string(priv_privkey, offset)
+            private_key_secret = decode_bigint_be(privkey_bin)
+            print("  * private key({}): {}{:#x}{}".format(
+                len(privkey_bin) * 8, color_red, private_key_secret, color_norm))
+            comment, offset = pop_string(priv_privkey, offset)
+            print("  * comment: {}".format(repr(comment)))
+            padding = priv_privkey[offset:]
+            print("  * padding: {}".format(binascii.hexlify(padding).decode('ascii')))
+            assert all(struct.unpack('B', padding[i:i + 1])[0] == i + 1 for i in range(len(padding)))
+
+        # Ensure consistency between public and private keys
+        assert curve.g * private_key_secret == pubkey_pt
+
+    finally:
+        try:
+            os.remove(id_key_path)
+            os.remove(id_pub_path)
+        except OSError as exc:
+            # If removing the files failed, the error will appear in rmdir
+            logger.debug("Error while removing files: %r", exc)
+        os.rmdir(temporary_dir)
+    return True
+
+
 def main(argv=None):
     """Program entry point"""
     parser = argparse.ArgumentParser(
@@ -704,6 +938,8 @@ def main(argv=None):
         curve = possible_curves[0]
 
     if not run_curve_test(curve, args.color):
+        return 1
+    if not run_ssh_test(curve, args.color):
         return 1
     return 0
 
