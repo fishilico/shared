@@ -149,6 +149,7 @@ static int get_symbol_name_elf(uintptr_t elf_base, const void *addr, int is_file
     const Elf_Sym *symtab = NULL, *dynsymtab = NULL;
     const char *symstrings = NULL;
     uintptr_t elf_load_offset = 0;
+    uint32_t symtab_strtab_id = -1U;
 
     /* In a file, find section header and retrieve the symbol table */
     if (is_file && elf_hdr->e_shoff && elf_hdr->e_shnum) {
@@ -157,15 +158,17 @@ static int get_symbol_name_elf(uintptr_t elf_base, const void *addr, int is_file
             if (sect_hdr[i].sh_type == SHT_SYMTAB) {
                 symtab = (Elf_Sym *)(elf_base + sect_hdr[i].sh_offset);
                 symtab_length = sect_hdr[i].sh_size / sizeof(Elf_Sym);
-            } else if (sect_hdr[i].sh_type == SHT_STRTAB) {
-                symstrings = (char *)(elf_base + sect_hdr[i].sh_offset);
+                symtab_strtab_id = sect_hdr[i].sh_link;
             } else if (sect_hdr[i].sh_type == SHT_DYNSYM) {
                 /* Grab a pointer and size of .dynsym section */
                 dynsymtab = (Elf_Sym *)(elf_base + sect_hdr[i].sh_offset);
                 dynsymtab_length = sect_hdr[i].sh_size / sizeof(Elf_Sym);
             }
         }
-        if (symtab_length && symstrings) {
+        if (symtab_length && symtab_strtab_id < elf_hdr->e_shnum) {
+            /* Get the associated string table */
+            symstrings = (char *)(elf_base + sect_hdr[symtab_strtab_id].sh_offset);
+
             for (i = 0; i < symtab_length; i++) {
                 const Elf_Sym *sym = &symtab[i];
                 if (ELF_ST_TYPE(sym->st_info) != STT_FUNC || sym->st_shndx == SHN_UNDEF) {
@@ -254,7 +257,7 @@ static int describe_address(const void *address)
     FILE *fmaps;
     char line[4096], *endchar = NULL;
     const char *name = NULL;
-    unsigned long start = 0, end = 0;
+    unsigned long start = 0, end = 0, offset_in_maps = 0;
     const uint8_t *elf_ident;
     int fd_mapped, ret;
     void *mfile;
@@ -287,17 +290,27 @@ static int describe_address(const void *address)
             continue;
         }
         if (start <= (uintptr_t)sigret_address && (uintptr_t)sigret_address < end) {
-            /* Get the name of the mapping */
-            endchar = strchr(endchar + 1, ' ');
+            /* Skip the mapping rights */
             if (endchar) {
                 endchar = strchr(endchar + 1, ' ');
             }
+            /* Get the offset from the start of the file */
+            if (endchar) {
+                offset_in_maps = strtoul(endchar + 1, &endchar, 16);
+                if (!endchar || *endchar != ' ') {
+                    fprintf(stderr, "Unable to read the mapping offset of line: %.42s\n", line);
+                    offset_in_maps = 0;
+                }
+            }
+            /* Skip the device ID */
             if (endchar) {
                 endchar = strchr(endchar + 1, ' ');
             }
+            /* Skip the inode number */
             if (endchar) {
                 endchar = strchr(endchar + 1, ' ');
             }
+            /* Get the name of the mapping (which may be a special name or a file name) */
             if (endchar) {
                 while (*(++endchar) == ' ') {
                 }
@@ -314,7 +327,7 @@ static int describe_address(const void *address)
     if (!start || !end) {
         return 1;
     }
-    offset = ((uintptr_t)address) - start;
+    offset = ((uintptr_t)address) - start + offset_in_maps;
     printf("Memory range %lx..%lx is %s\n", start, end, name);
     printf("... offset %#lx\n", (unsigned long)offset);
 
