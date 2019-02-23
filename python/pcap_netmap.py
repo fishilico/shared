@@ -777,6 +777,7 @@ class AnalysisContext(object):
 
     def analyze_ipv4_packet(self, ippkt):
         """Analyze an IPv4 packet"""
+        bootp_client_addr = None
         if ippkt.haslayer(BOOTP):
             bootppkt = ippkt[BOOTP]
             hex_mac_addr = binascii.hexlify(bootppkt.chaddr).decode('ascii')
@@ -786,9 +787,11 @@ class AnalysisContext(object):
                 # The MAC address is not empty
                 mac_addr = ':'.join(hex_mac_addr[i:i + 2] for i in range(0, 12, 2))
 
-                client_addr = bootppkt.ciaddr
-                if client_addr != '0.0.0.0':
-                    self.hwaddrdb.add_ipv4(client_addr, mac_addr, 'BOOTP packet from {}'.format(ippkt.src))
+                bootp_client_addr = bootppkt.ciaddr
+                if bootp_client_addr == '0.0.0.0':
+                    bootp_client_addr = None
+                else:
+                    self.hwaddrdb.add_ipv4(bootp_client_addr, mac_addr, 'BOOTP packet from {}'.format(ippkt.src))
 
                 # Find out the client hostname
                 if bootppkt.haslayer(DHCP):
@@ -845,13 +848,16 @@ class AnalysisContext(object):
                         else:
                             dhcp_options['client_FQDN'] = opt_val.decode('utf-8', 'replace').strip('\0')
 
-            if ippkt.haslayer(BOOTP):
-                client_addr = ippkt[BOOTP].ciaddr
-                if client_addr != '0.0.0.0':
-                    if dhcp_options['hostname'] is not None:
-                        self.ipaddrdb.add_option(client_addr, 'DHCP_hostname', dhcp_options['hostname'])
-                    if dhcp_options['client_FQDN'] is not None:
-                        self.ipaddrdb.add_option(client_addr, 'DHCP_client_FQDN', dhcp_options['client_FQDN'])
+            if bootp_client_addr is not None:
+                if dhcp_options['hostname'] is not None:
+                    self.ipaddrdb.add_option(bootp_client_addr, 'DHCP_hostname', dhcp_options['hostname'])
+                if dhcp_options['client_FQDN'] is not None:
+                    self.ipaddrdb.add_option(bootp_client_addr, 'DHCP_client_FQDN', dhcp_options['client_FQDN'])
+                # Add the network for the client
+                if dhcp_options['subnet_mask'] is not None:
+                    iface_addr = '{}/{}'.format(bootp_client_addr, dhcp_options['subnet_mask'])
+                    ip_iface = ipaddress.ip_interface(unicode_ip_addr(iface_addr))
+                    self.ipnetdb.add_network(ip_iface.network.with_prefixlen)
 
             dhcp_desc = ''
             if dhcp_options['router'] is not None:
