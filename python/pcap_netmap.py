@@ -263,6 +263,8 @@ class HwAddrDatabase(object):
         self.known_ip_addresses = set(self.IGNORED_IP_ADDRESSES)
         # MAC addresses of bridges
         self.bridges = set()
+        # DHCP names associated with MAC addresses
+        self.names_for_hw = {}
 
     @staticmethod
     def is_ignored(addr):
@@ -320,6 +322,14 @@ class HwAddrDatabase(object):
             logger.info("Found a potential bridge with address %s (%s)", addr, get_mac_manuf_desc(addr))
             self.bridges.add(addr)
 
+    def add_name(self, addr, name, description):
+        """Add a name from a DHCP request"""
+        if addr not in self.names_for_hw:
+            self.names_for_hw[addr] = set()
+        if name not in self.names_for_hw[addr]:
+            logger.info("Adding name for %s: %r (%s)", addr, name, description)
+            self.names_for_hw[addr].add(name)
+
     def remove_multicast_addresses(self):
         """Remove multicast hardware addresses from the database"""
         keys_to_remove = set()
@@ -347,6 +357,10 @@ class HwAddrDatabase(object):
             ))
             for hwaddr, ips in self.ip_for_hw.items()
         }
+        for hwaddr, names in sorted(self.names_for_hw.items()):
+            if hwaddr not in result:
+                result[hwaddr] = collections.OrderedDict()
+            result[hwaddr]['names'] = sorted(names)
         for hwaddr in self.bridges:
             if hwaddr not in result:
                 result[hwaddr] = collections.OrderedDict()
@@ -384,6 +398,11 @@ class HwAddrDatabase(object):
                             return
                     self.ip_for_hw[hw_addr].add(ip_addr)
                     self.known_ip_addresses.add(ip_addr)
+            names = hw_data.get('names')
+            if names:
+                if hw_addr not in self.names_for_hw:
+                    self.names_for_hw[hw_addr] = set()
+                self.names_for_hw[hw_addr].update(names)
 
     def populate_graph(self, graph):
         """Populate the given graph with information"""
@@ -395,6 +414,8 @@ class HwAddrDatabase(object):
             manuf = hw_data.get('manufacturer') or hw_data.get('manuf')
             if manuf:
                 desc_fields.append(manuf)
+            for name in hw_data.get('names', []):
+                desc_fields.append('Name: {}'.format(name))
             hw_addr_node = graph.add_hw_addr(hw_addr, graphviz_records(desc_fields))
             # if manuf:
             #     manuf_node = graph.add_hw_manuf(manuf)
@@ -758,15 +779,27 @@ class AnalysisContext(object):
         """Analyze an IPv4 packet"""
         if ippkt.haslayer(BOOTP):
             bootppkt = ippkt[BOOTP]
-            client_addr = bootppkt.ciaddr
-            if client_addr != '0.0.0.0':
-                hex_mac_addr = binascii.hexlify(bootppkt.chaddr).decode('ascii')
-                if any(c != '0' for c in hex_mac_addr[12:]):
-                    logger.warning("Ignoring BOOTP packet with invalid MAC address %r", hex_mac_addr)
-                elif any(c != '0' for c in hex_mac_addr[:12]):
-                    # The MAC address is not empty
-                    mac_addr = ':'.join(hex_mac_addr[i:i + 2] for i in range(0, 12, 2))
+            hex_mac_addr = binascii.hexlify(bootppkt.chaddr).decode('ascii')
+            if any(c != '0' for c in hex_mac_addr[12:]):
+                logger.warning("Ignoring BOOTP packet with invalid MAC address %r", hex_mac_addr)
+            elif any(c != '0' for c in hex_mac_addr[:12]):
+                # The MAC address is not empty
+                mac_addr = ':'.join(hex_mac_addr[i:i + 2] for i in range(0, 12, 2))
+
+                client_addr = bootppkt.ciaddr
+                if client_addr != '0.0.0.0':
                     self.hwaddrdb.add_ipv4(client_addr, mac_addr, 'BOOTP packet from {}'.format(ippkt.src))
+
+                # Find out the client hostname
+                if bootppkt.haslayer(DHCP):
+                    dhcppkt = ippkt[DHCP]
+                    for opt in dhcppkt.options:
+                        if opt[0] in ('hostname', 'client_FQDN'):
+                            for opt_val in opt[1:]:
+                                name = opt_val.decode('utf-8', 'replace').strip('\0')
+                                self.hwaddrdb.add_name(mac_addr, name,
+                                                       'DHCP option {} from {}'.format(opt[0], mac_addr))
+
         if ippkt.haslayer(DHCP):
             dhcppkt = ippkt[DHCP]
             # Collect options to describe the DHCP server
@@ -810,7 +843,7 @@ class AnalysisContext(object):
                             logger.warning("Duplicate DHCP client_FQDN option: %r and %r",
                                            dhcp_options['client_FQDN'], opt_val)
                         else:
-                            dhcp_options['client_FQDN'] = opt_val.decode('utf-8', 'replace')
+                            dhcp_options['client_FQDN'] = opt_val.decode('utf-8', 'replace').strip('\0')
 
             if ippkt.haslayer(BOOTP):
                 client_addr = ippkt[BOOTP].ciaddr
