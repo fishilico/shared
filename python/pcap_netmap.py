@@ -51,7 +51,7 @@ import subprocess
 import sys
 
 from scapy.all import ARP, BOOTP, CookedLinux, DHCP, DNS, Dot1Q, Dot3, Ether, \
-    ICMPv6ND_NA, ICMPv6ND_RA, IP, IPv6, NBTDatagram, PcapReader, STP, UDP
+    ICMPv6ND_NA, ICMPv6ND_RA, IP, IPv6, NBTDatagram, PcapReader, Raw, STP, UDP
 from scapy.all import conf as scapy_conf
 
 try:
@@ -702,6 +702,19 @@ class AnalysisContext(object):
                 self.hwaddrdb.add_ipv4(arppkt.pdst, arppkt.hwdst, 'ARP is-at destination')
             else:
                 logger.warning("Unknown ARP packet %r", arppkt)
+        elif pkt_type == 0x8035:  # Reverse ARP (https://tools.ietf.org/html/rfc903)
+            rarppkt = base_pkt[1]
+            assert isinstance(rarppkt, Raw)
+            # Ignore RARP request for IPv4 address:
+            # - hardware type: Ethernet (1)
+            # - protocol type: IPv4 (0x0800)
+            # - hardware size: 6
+            # - protocol size: 4
+            # - opcode: reverse request (3) or reverse response (4)
+            if rarppkt.load.startswith(b'\x00\x01\x08\x00\x06\x04\x00\x03'):
+                pass
+            else:
+                logger.warning("Unknown RARP packet: %r", ethpkt)
         elif pkt_type == 0x86dd:  # IPv6
             ippkt = base_pkt[1]
             assert isinstance(ippkt, IPv6)
