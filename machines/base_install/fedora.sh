@@ -193,6 +193,9 @@ pkg sl
 pkg libselinux-utils
 pkg policycoreutils-newrole
 pkg policycoreutils-python-utils
+pkg rpm-build
+pkg rpm-sign
+pkg rpmdevtools
 pkg setools-console
 
 if "$INSTALL_DESKTOP"
