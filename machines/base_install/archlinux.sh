@@ -267,6 +267,7 @@ pkg go
 pkg ipython
 pkg libcap-ng
 pkg linux-headers
+pkg linux-hardened-headers
 pkg ltrace
 pkg php
 pkg pkgconf
