@@ -41,8 +41,8 @@ import base64
 import binascii
 import collections
 import errno
-import logging
 import hashlib
+import logging
 import os.path
 import random
 import struct
@@ -902,10 +902,10 @@ def run_ssh_test(curve, colorize):
 def main(argv=None):
     """Program entry point"""
     parser = argparse.ArgumentParser(
-        description="Perform operations related to RSA",
+        description="Perform operations related to Elliptic Curves",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-C', '--curve', type=str, default='prime256v1',
-                        help="curve to use (default: prime256v1)")
+                        help="curve to use")
     parser.add_argument('-c', '--color', action='store_true',
                         help="colorize the output")
     parser.add_argument('-d', '--debug', action='store_true',
