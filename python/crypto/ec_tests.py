@@ -27,6 +27,7 @@ Documentation:
 * https://github.com/warner/python-ecdsa Pure-Python ECDSA
 * https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf Digital Signature Standard (DSS)
 * https://en.wikipedia.org/wiki/ElGamal_encryption ElGamal encryption system
+* https://eprint.iacr.org/2015/659.pdf Diversity and Transparency for ECC (from ANSSI's crypto team)
 
 Introductions (from https://github.com/pFarb/awesome-crypto-papers):
 * http://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/
