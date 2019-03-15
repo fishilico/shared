@@ -461,6 +461,8 @@ then
     pkg volatility
     pkg wabt
 
+    grouppkg texlive-most
+
     aurpkg android-apktool
     aurpkg dex2jar
     aurpkg ilspymono-git
