@@ -163,6 +163,7 @@ pkg dos2unix
 pkg file
 pkg fortune-mod
 pkg gnupg
+pkg highlight
 pkg htop
 pkg iotop
 pkg jq
@@ -263,7 +264,6 @@ pkg fakeroot
 pkg gdb
 pkg git
 pkg go
-pkg highlight
 pkg ipython
 pkg libcap-ng
 pkg linux-headers
