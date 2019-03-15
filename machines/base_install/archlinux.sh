@@ -424,6 +424,7 @@ then
     pkg ipcalc
     pkg ipv6calc
     pkg jre10-openjdk
+    pkg libvirt
     #pkg lxc
     #pkg mariadb
     pkg metasploit
@@ -454,6 +455,7 @@ then
     pkg radare2-cutter
     pkg ropgadget
     pkg sagemath
+    pkg vagrant
     pkg volatility
     pkg wabt
 
