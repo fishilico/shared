@@ -210,9 +210,11 @@ pkg innoextract
 pkg lvm2
 pkg lzop
 pkg mdadm
+pkg mtd-utils
 pkg mtools
 pkg ntfs-3g
 pkg p7zip
+pkg squashfs-tools
 pkg unrar
 pkg unzip
 pkg zip
@@ -440,6 +442,7 @@ then
     pkg python-pyflakes
     pkg python-pylint
     pkg python-pyopenssl
+    pkg python-pyqtgraph
     pkg python-pyusb
     pkg python-qrcode
     pkg python-scapy
