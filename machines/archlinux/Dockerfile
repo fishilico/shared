@@ -45,7 +45,7 @@ RUN \
     echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && \
     pacman-key --init && \
     pacman-key --populate archlinux && \
-    pacman --noconfirm -Rn arch-install-scripts dbus hwids iptables kbd kmod libelf libpcap libseccomp systemd && \
+    pacman --noconfirm -Rn arch-install-scripts && \
     pacman --noconfirm -Syu diffutils gawk grep procps-ng sed tar which && \
     (pkill gpg-agent ; true) && \
     pacman --noconfirm -Sc && \
