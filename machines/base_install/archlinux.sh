@@ -434,6 +434,7 @@ then
     pkg python-numpy
     pkg python-pew
     pkg python-pillow
+    pkg python-pipenv
     pkg python-pycryptodome
     pkg python-pyelftools
     pkg python-pyflakes
@@ -466,6 +467,7 @@ then
     aurpkg jd-gui
     aurpkg kaitai-struct-compiler
     aurpkg kaitai-struct-visualizer
+    aurpkg msodbcsql
     aurpkg openocd
     aurpkg python-roca-detect
     aurpkg python-uncompyle6
