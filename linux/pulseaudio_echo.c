@@ -309,7 +309,7 @@ int main(void)
     };
 
     /* Have 1 second of latency */
-    uint32_t latency = (uint32_t)pa_usec_to_bytes(PA_USEC_PER_SEC, &sample_spec);;
+    uint32_t latency = (uint32_t)pa_usec_to_bytes(PA_USEC_PER_SEC, &sample_spec);
     const pa_buffer_attr buffer_attr = {
         .tlength = latency,
         .minreq = 0,

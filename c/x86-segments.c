@@ -326,8 +326,8 @@ static void print_cr0(void)
     uint32_t cr0;
 
 #define print_cr0_bit(bitnum, desc) \
-    printf("  %2d (0x%08x) = %c %s\n", bitnum, 1U << (bitnum), \
-    (cr0 & (1U << (bitnum))) ? '+' : '-', desc);
+    printf("  %2d (0x%08x) = %c %s\n", \
+           bitnum, 1U << (bitnum), (cr0 & (1U << (bitnum))) ? '+' : '-', desc)
 
     /* smsw = Save Machine Status Word */
     UMIP_SECTION_START("SMSW")

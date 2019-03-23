@@ -57,7 +57,7 @@ int main(void)
         do { \
             memset(&ctx_fpregs, 0, sizeof(ctx_fpregs)); \
             ctx.fpregs = &ctx_fpregs; \
-        } while (0);
+        } while (0)
 #else
 #    define reset_ctx_fpregs() (void)0
 #endif
