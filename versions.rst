@@ -4,7 +4,7 @@ Some versions of Software
 Microsoft Windows
 -----------------
 
-The version information can be obtained through ``winver.exe`` (popup window) or ``systeminfo.exe`` (CLI).
+The version information can be obtained through ``winver.exe`` (popup window) or ``systeminfo.exe`` (CLI) or ``msinfo32.exe`` (GUI).
 
 * https://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions
 * https://answers.microsoft.com/en-us/insider/forum/all/complete-list-of-windows-insider-build-numbers/d1583f70-8e7f-45b9-8bf7-bfa5ae673303
