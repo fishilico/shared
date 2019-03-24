@@ -799,6 +799,9 @@ class AnalysisContext(object):
                     for opt in dhcppkt.options:
                         if opt[0] in ('hostname', 'client_FQDN'):
                             for opt_val in opt[1:]:
+                                if opt[0] == 'client_FQDN' and opt_val == b'\x00\xff\xff':
+                                    # Ignore client FQDN with "flags=0, A-RR result=\xff, PTR-R result=\xff"
+                                    continue
                                 name = opt_val.decode('utf-8', 'replace').strip('\0')
                                 self.hwaddrdb.add_name(mac_addr, name,
                                                        'DHCP option {} from {}'.format(opt[0], mac_addr))
@@ -842,6 +845,8 @@ class AnalysisContext(object):
                             dhcp_options['hostname'] = opt_val.decode('utf-8', 'replace')
                 if opt[0] == 'client_FQDN':
                     for opt_val in opt[1:]:
+                        if opt_val == b'\x00\xff\xff':
+                            continue
                         if dhcp_options['client_FQDN'] is not None:
                             logger.warning("Duplicate DHCP client_FQDN option: %r and %r",
                                            dhcp_options['client_FQDN'], opt_val)
