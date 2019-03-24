@@ -2,6 +2,8 @@
 
 # External commands used in this file
 GREP ?= grep
+JAVA ?= java
+JAVAC ?= javac
 PKG_CONFIG ?= pkg-config
 PYTHON ?= python
 PYTHON3 ?= python3
@@ -20,6 +22,7 @@ V_CCAS      = @echo '  CCAS      $<';
 V_CCLD      = @echo '  CCLD      $@';
 V_COQC      = @echo '  COQC      $<';
 V_FRAMAC    = @echo '  FRAMA-C   $^';
+V_JAVAC     = @echo '  JAVAC     $<';
 V_LD        = @echo '  LD        $@';
 V_OBJCOPY   = @echo '  OBJCOPY   $@';
 V_PANDOC    = @echo '  PANDOC    $<';
@@ -33,8 +36,8 @@ endif
 
 # Clean command
 CLEAN_CMD := $(V_CLEAN)$(RM) \
-	*.a *.aux *.bin *.dll *.efi *.elf *.exe *.glob *.log *.o *.out *.pdf \
-	*.rst.tex *.so *.tmp *.toc *.vo .*.d .*.o && \
+	*.a *.aux *.bin *.class *.dll *.efi *.elf *.exe *.glob *.log *.o *.out \
+	*.pdf *.pyc *.rst.tex *.so *.tmp *.toc *.vo .*.d .*.o && \
 	$(RM) -r __pycache__
 
 # Try running a command and output the second or third parameter accordingly.

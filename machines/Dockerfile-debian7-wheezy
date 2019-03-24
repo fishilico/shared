@@ -10,6 +10,7 @@ ENV LANG C.UTF-8
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
+    mkdir -p /usr/share/man/man1 && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         clang \
@@ -24,6 +25,7 @@ RUN \
         libpulse-dev \
         linux-headers-amd64 \
         make \
+        openjdk-7-jdk \
         openssh-client \
         openssl \
         pkg-config \
@@ -45,6 +47,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex%
 #    In sub-directories:
 #       c:
+#       java/keystore:
 #       linux: sdl_v4l_video seccomp
 #       python: cffi_example.py cffi_numpy.py udp_multihome.py z3_example.py
 #       python/crypto:
@@ -54,6 +57,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
+#          java/keystore:
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video seccomp
 #          python: cffi_example.py cffi_numpy.py udp_multihome.py z3_example.py
 #          python/crypto:

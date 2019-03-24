@@ -24,6 +24,7 @@ RUN \
         libpulse-dev \
         linux-headers-generic \
         make \
+        openjdk-7-jdk \
         pkg-config \
         python3 \
         python-argparse \
@@ -40,6 +41,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex%
 #    In sub-directories:
 #       c:
+#       java/keystore: parse_jceks.py parse_pkcs12.py util_asn1.py
 #       linux: enum_link_addrs sdl_v4l_video
 #       python: cffi_example.py cffi_numpy.py udp_multihome.py z3_example.py
 #       python/crypto: chacha20_poly1350_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py
@@ -49,6 +51,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
+#          java/keystore: parse_jceks.py parse_pkcs12.py util_asn1.py
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
 #          python: cffi_example.py cffi_numpy.py udp_multihome.py z3_example.py
 #          python/crypto: chacha20_poly1350_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py

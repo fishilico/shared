@@ -4,10 +4,12 @@ LABEL Description="Debian 9 Stretch with build dependencies for shared"
 # Override the language to force UTF-8 output
 ENV LANG C.UTF-8
 
+# Installing openjdk-8-jre-headless requires /usr/share/man/man1 to exist
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
     apt-get -qq update && \
+    mkdir -p /usr/share/man/man1 && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         clang \
@@ -26,6 +28,7 @@ RUN \
         make \
         musl-dev \
         musl-tools \
+        openjdk-8-jdk \
         openssh-client \
         openssl \
         pkg-config \
@@ -54,6 +57,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex%
 #    In sub-directories:
 #       c:
+#       java/keystore:
 #       linux:
 #       python:
 #       python/crypto:
@@ -63,6 +67,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
+#          java/keystore:
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
 #          python:
 #          python/crypto:

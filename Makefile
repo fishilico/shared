@@ -55,6 +55,11 @@ else ifneq ($(call ccpp-has-option,-falign-functions=0),y)
 SUBDIRS_BLACKLIST += boot/mbr/syslinux-mbr
 endif
 
+# Test Java compiler and runtime availability
+ifneq ($(call can-run,$(JAVAC) -version)$(call can-run,$(JAVA) -version),yy)
+SUBDIRS_BLACKLIST += java%
+endif
+
 # Test PDF-LaTeX availability
 ifneq ($(call can-run,$(PDFLATEX) --version),y)
 SUBDIRS_BLACKLIST += latex%

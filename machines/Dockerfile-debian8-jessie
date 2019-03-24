@@ -5,10 +5,12 @@ LABEL Description="Debian 8 Jessie with build dependencies for shared"
 ENV LANG C.UTF-8
 
 # Debian<9 does not provide python-z3
+# Installing openjdk-7-jre-headless requires /usr/share/man/man1 to exist
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
     apt-get -qq update && \
+    mkdir -p /usr/share/man/man1 && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         clang \
@@ -27,6 +29,7 @@ RUN \
         make \
         musl-dev \
         musl-tools \
+        openjdk-7-jdk \
         openssh-client \
         openssl \
         pkg-config \
@@ -55,6 +58,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex%
 #    In sub-directories:
 #       c:
+#       java/keystore:
 #       linux:
 #       python: z3_example.py
 #       python/crypto:
@@ -64,6 +68,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
+#          java/keystore:
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
 #          python: z3_example.py
 #          python/crypto:

@@ -5,6 +5,7 @@ LABEL Description="Ubuntu 16.04 LTS Xenial Xerus with build dependencies for sha
 ENV LANG C.UTF-8
 
 # python-z3 does not install an __init__.py file, which is required with Python 2
+# Install OpenJDK 8 because OpenJDK 9 package is buggy: https://bugs.launchpad.net/ubuntu/+source/openjdk-9/+bug/1593191
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -27,6 +28,7 @@ RUN \
         make \
         musl-dev \
         musl-tools \
+        openjdk-8-jdk \
         openssh-client \
         openssl \
         pkg-config \
@@ -55,6 +57,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex%
 #    In sub-directories:
 #       c:
+#       java/keystore:
 #       linux:
 #       python:
 #       python/crypto:
@@ -64,6 +67,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
+#          java/keystore:
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
 #          python:
 #          python/crypto:

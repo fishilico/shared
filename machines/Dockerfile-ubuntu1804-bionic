@@ -26,6 +26,7 @@ RUN \
         make \
         musl-dev \
         musl-tools \
+        openjdk-11-jdk \
         openssh-client \
         openssl \
         pkg-config \
@@ -55,6 +56,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex%
 #    In sub-directories:
 #       c:
+#       java/keystore:
 #       linux:
 #       python:
 #       python/crypto:
@@ -64,6 +66,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
+#          java/keystore:
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
 #          python:
 #          python/crypto:

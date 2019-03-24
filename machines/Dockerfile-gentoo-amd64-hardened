@@ -12,6 +12,7 @@ ENV LANG en_US.UTF-8
 RUN \
     echo 'USE="$USE python wayland"' >> /etc/portage/make.conf && \
     echo '>=x11-libs/cairo-1.14.12 X' >> /etc/portage/package.use/cairo && \
+    echo '>=app-text/ghostscript-gpl-9.26 cups' >> /etc/portage/package.use/ghostscript-gpl && \
     echo '>=sys-devel/llvm-3.5.0 clang' >> /etc/portage/package.use/clang && \
     echo '>=media-libs/libsdl2-2.0.8 gles' >> /etc/portage/package.use/libsdl2 && \
     echo '>=media-libs/mesa-18.1.9 gles2' >> /etc/portage/package.use/mesa && \
@@ -43,6 +44,7 @@ RUN \
         media-sound/pulseaudio \
         sci-mathematics/coq \
         sys-kernel/genkernel \
+        virtual/jdk \
         x11-libs/gtk+ && \
     genkernel all && \
     rm -r /usr/portage/distfiles/ /var/tmp/portage/
@@ -66,6 +68,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex% windows%
 #    In sub-directories:
 #       c:
+#       java/keystore:
 #       linux:
 #       python: z3_example.py
 #       python/crypto:
@@ -75,6 +78,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex% windows%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
+#          java/keystore:
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
 #          python: z3_example.py
 #          python/crypto:

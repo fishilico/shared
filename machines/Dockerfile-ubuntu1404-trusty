@@ -27,6 +27,7 @@ RUN \
         libsdl2-dev \
         linux-headers-generic \
         make \
+        openjdk-7-jdk \
         openssh-client \
         openssl \
         pkg-config \
@@ -53,6 +54,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex%
 #    In sub-directories:
 #       c:
+#       java/keystore:
 #       linux:
 #       python: z3_example.py
 #       python/crypto:
@@ -62,6 +64,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
+#          java/keystore:
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
 #          python: z3_example.py
 #          python/crypto:

@@ -26,6 +26,7 @@ RUN \
         gcc \
         gdb \
         gtk3 \
+        jdk10-openjdk \
         kernel-headers-musl \
         libpulse \
         linux-headers \
@@ -60,6 +61,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex%
 #    In sub-directories:
 #       c:
+#       java/keystore:
 #       linux:
 #       python:
 #       python/crypto:
@@ -69,6 +71,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
+#          java/keystore:
 #          linux: enum_link_addrs pulseaudio_echo
 #          python:
 #          python/crypto:

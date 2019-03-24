@@ -18,6 +18,7 @@ RUN \
         gmp-devel.x86_64 \
         gmp-devel.i686 \
         gtk3-devel \
+        java-11-openjdk-devel \
         kernel \
         kernel-devel \
         libmnl-devel.x86_64 \
@@ -56,6 +57,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex%
 #    In sub-directories:
 #       c:
+#       java/keystore:
 #       linux:
 #       python: z3_example.py
 #       python/crypto:
@@ -65,6 +67,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gtk_alpha_window
+#          java/keystore:
 #          linux: pulseaudio_echo sdl_v4l_video
 #          python: z3_example.py
 #          python/crypto:

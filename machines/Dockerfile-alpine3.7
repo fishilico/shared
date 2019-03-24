@@ -20,6 +20,7 @@ RUN \
         make \
         musl-dev \
         musl-utils \
+        openjdk8 \
         openssh \
         py-numpy \
         py2-cffi \
@@ -31,6 +32,10 @@ RUN \
         sdl2-dev && \
     rm -rf /var/cache/apk/*
 
+# Add OpenJDK to $PATH
+ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
 COPY . /shared/
@@ -41,6 +46,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex% windows%
 #    In sub-directories:
 #       c: x86-read_64b_regs_in_32b_mode
+#       java/keystore:
 #       linux: pulseaudio_echo
 #       python: z3_example.py
 #       python/crypto:
