@@ -4,9 +4,9 @@
 CHMOD ?= chmod
 FIND ?= find
 GREP ?= grep
-PDFLATEX ?= pdflatex
 LINUX32 ?= linux32
 LINUX64 ?= linux64
+PDFLATEX ?= pdflatex
 PYTHON ?= python
 RM ?= rm
 SED ?= sed

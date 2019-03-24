@@ -4,6 +4,7 @@
 GREP ?= grep
 JAVA ?= java
 JAVAC ?= javac
+LATEXMK ?= latexmk
 PKG_CONFIG ?= pkg-config
 PYTHON ?= python
 PYTHON3 ?= python3
@@ -23,6 +24,7 @@ V_CCLD      = @echo '  CCLD      $@';
 V_COQC      = @echo '  COQC      $<';
 V_FRAMAC    = @echo '  FRAMA-C   $^';
 V_JAVAC     = @echo '  JAVAC     $<';
+V_LATEXMK   = @echo '  LATEXMK   $<';
 V_LD        = @echo '  LD        $@';
 V_OBJCOPY   = @echo '  OBJCOPY   $@';
 V_PANDOC    = @echo '  PANDOC    $<';

@@ -1,5 +1,4 @@
 PANDOC ?= pandoc
-PDFLATEX = pdflatex -interaction batchmode > /dev/null
 
 include $(dir $(lastword $(MAKEFILE_LIST)))../common.mk
 
@@ -20,9 +19,8 @@ clean:
 test: all
 	@:
 
-# Compile 2 times each TeX file
 %.pdf: %.tex
-	$(V_PDFLATEX)($(PDFLATEX) $< && $(PDFLATEX) $<) || ($(RM) $@ && false)
+	$(V_LATEXMK)$(LATEXMK) -pdf -interaction=batchmode -use-make $<
 
 %.pdf: %.rst $(PANDOCFLAGS_DEPS)
 	$(V_PANDOC)$(PANDOC) -s $(PANDOCFLAGS) -o $@ $<

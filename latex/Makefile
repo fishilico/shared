@@ -1,5 +1,3 @@
-PDFLATEX = pdflatex -interaction batchmode > /dev/null
-
 include ../common.mk
 
 TEXFILES := $(wildcard *.tex)
@@ -10,12 +8,12 @@ all: $(PDFS)
 
 clean:
 	$(CLEAN_CMD)
+	$(LATEXMK) -C
 
 test: all
 	@:
 
-# Compile 2 times each TeX file
 %.pdf: %.tex
-	$(V_PDFLATEX)($(PDFLATEX) $< && $(PDFLATEX) $<) || ($(RM) $@ && false)
+	$(V_LATEXMK)$(LATEXMK) -pdf -interaction=batchmode -use-make $<
 
 .PHONY: all clean test
