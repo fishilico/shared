@@ -1,4 +1,4 @@
-FROM base/archlinux
+FROM archlinux/base
 # Use https://github.com/docker/docker/blob/master/contrib/mkimage-arch.sh
 # to build a local Arch Linux image, from an Arch Linux distribution.
 # (Download https://raw.githubusercontent.com/docker/docker/master/contrib/mkimage-arch.sh
@@ -9,6 +9,9 @@ LABEL Description="Arch Linux with build dependencies for shared"
 # Use Martchus ownstuff repo instead:
 #   https://wiki.archlinux.org/index.php/unofficial_user_repositories#ownstuff
 #   https://github.com/Martchus/PKGBUILDs
+
+# Arch Linux no longer provides python2-z3, since 2019-03-19:
+#   https://git.archlinux.org/svntogit/community.git/commit/?h=packages/z3&id=ce606b542b80ae8af30beda4c3838bd14818e51f
 RUN \
     echo '[multilib]' >> /etc/pacman.conf && \
     echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf && \
@@ -42,11 +45,10 @@ RUN \
         python2-numpy \
         python2-pycryptodome \
         python2-setuptools \
-        python2-z3 \
         sdl2 \
         which \
         wine && \
-    pacman --noconfirm -Sc && rm -rf /var/cache/pacman/pkg/*
+    (pacman --noconfirm -Sc ; rm -rf /var/cache/pacman/pkg/* )
 
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
@@ -67,7 +69,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
-#          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
+#          linux: enum_link_addrs pulseaudio_echo
 #          python:
 #          python/crypto:
 #          python/dnssec:
