@@ -1,5 +1,7 @@
 \usepackage{bbm}
 \usepackage{stmaryrd}
+\usepackage{tikz}
+\usetikzlibrary{angles,quotes}
 
 % Define math shortcuts
 \renewcommand{\C}[0]{\ensuremath{\mathbbm{C}}}
