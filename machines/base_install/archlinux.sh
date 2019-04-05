@@ -375,7 +375,7 @@ then
     pkg udisks2
     pkg vinagre
     pkg vlc
-    pkg wireshark-gtk
+    pkg wireshark-qt
     pkg xdg-utils
     pkg xsensors
     pkg xterm
