@@ -225,6 +225,7 @@ pkg arptables
 pkg bind-tools
 pkg bridge-utils
 pkg curl
+pkg dhclient
 pkg dnsmasq
 pkg ebtables
 pkg hping
