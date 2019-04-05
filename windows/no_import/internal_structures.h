@@ -1,5 +1,8 @@
 /**
  * Windows internal structure
+ *
+ * Online documentation:
+ * * https://github.com/maldevel/Peteb/blob/master/src/SystemTypes.h
  */
 #ifndef INTERNAL_STRUCTURES_H
 #define INTERNAL_STRUCTURES_H
@@ -24,29 +27,31 @@ typedef LONG NTSTATUS, *PNTSTATUS;
 #ifndef __UNICODE_STRING_DEFINED
 #    define __UNICODE_STRING_DEFINED
 typedef struct _UNICODE_STRING {
-    USHORT Length;
-    USHORT MaximumLength;
-    PWSTR Buffer;
+    USHORT Length; /* offset 0 */
+    USHORT MaximumLength; /* offset 2 */
+    PWSTR Buffer; /* offset 4 on 32-bit, 8 on 64-bit */
 } UNICODE_STRING;
 #endif
 
 typedef struct _PEB_LDR_DATA {
-    BYTE Reserved1[8];
-    PVOID Reserved2;
-    LIST_ENTRY InLoadOrderModuleList; /* Undocumented */
-    LIST_ENTRY InMemoryOrderModuleList;
-    LIST_ENTRY InInitializationOrderModuleList; /* Undocumented */
+    DWORD Length; /* offset 0x00 */
+    UCHAR Initialized; /* offset 0x04 */
+    BYTE Reserved1[3];
+    PVOID SsHandle; /* offset 0x08 */
+    LIST_ENTRY InLoadOrderModuleList; /* Undocumented, offset 0x0c or 0x10 */
+    LIST_ENTRY InMemoryOrderModuleList; /* offset 0x14 or 0x20 */
+    LIST_ENTRY InInitializationOrderModuleList; /* Undocumented, offset 0x1c or 0x30 */
 } PEB_LDR_DATA, *PPEB_LDR_DATA;
 
 typedef struct _LDR_DATA_TABLE_ENTRY {
-    LIST_ENTRY InLoadOrderLinks; /* Undocumented */
-    LIST_ENTRY InMemoryOrderLinks;
-    LIST_ENTRY InInitializationOrderLinks; /* Undocumented */
-    PVOID DllBase;
-    PVOID EntryPoint;
+    LIST_ENTRY InLoadOrderLinks; /* Undocumented, offset 0 */
+    LIST_ENTRY InMemoryOrderLinks; /* offset 0x08 or 0x10 */
+    LIST_ENTRY InInitializationOrderLinks; /* Undocumented, offset 0x10 or 0x20 */
+    PVOID DllBase; /* offset 0x18 or 0x30 */
+    PVOID EntryPoint; /* offset 0x1c or 0x38 */
     PVOID Reserved1;
-    UNICODE_STRING FullDllName;
-    UNICODE_STRING BaseDllName; /* Undocumented */
+    UNICODE_STRING FullDllName; /* offset 0x20 or 0x40 */
+    UNICODE_STRING BaseDllName; /* Undocumented, offset 0x28 or 0x50 */
 } LDR_DATA_TABLE_ENTRY, *PLDR_DATA_TABLE_ENTRY;
 
 typedef struct _RTL_USER_PROCESS_PARAMETERS {
@@ -66,10 +71,10 @@ typedef struct _PEB {
     BYTE Reserved2[1];
     PVOID Reserved3;
     PVOID ImageBaseAddress; /* 0x008 0x010 */
-    PPEB_LDR_DATA Ldr; /* 0x00C 0x018 */
+    PPEB_LDR_DATA Ldr; /* 0x00c 0x018 */
     PRTL_USER_PROCESS_PARAMETERS ProcessParameters; /* 0x010 0x020 */
     PVOID SubSystemData; /* 0x014 0x028 */
-    PVOID ProcessHeap; /* Ox018 0x030 */
+    PVOID ProcessHeap; /* 0x018 0x030 */
     BYTE Reserved4[16];
     PVOID Reserved5[14];
     DWORD NumberOfProcessors; /* 0x064 0x0b8 */
@@ -96,28 +101,31 @@ typedef struct _CLIENT_ID {
 
 /* NT_TIB conflicts with a definition in winnt.h header from MinGW */
 typedef struct _NT_TIB_redef {
-    struct _EXCEPTION_REGISTRATION_RECORD *ExceptionList;
-    PVOID StackBase;
-    PVOID StackLimit;
-    PVOID SubSystemTib;
+    struct _EXCEPTION_REGISTRATION_RECORD *ExceptionList; /* 0x00 0x00 */
+    PVOID StackBase; /* 0x04 0x08 */
+    PVOID StackLimit; /* 0x08 0x10 */
+    PVOID SubSystemTib; /* 0x0c 0x18 */
     union {
-        PVOID FiberData;
+        PVOID FiberData; /* 0x10 0x20 */
         DWORD Version;
     };
-    PVOID ArbitraryUserPointer;
-    struct _NT_TIB *Self;
+    PVOID ArbitraryUserPointer; /* 0x14 0x28 */
+    struct _NT_TIB *Self; /* 0x18 0x30 */
 } NT_TIB_redef, *PNT_TIB_redef;
 #define NT_TIB NT_TIB_redef
 
 #pragma pack(push,1)
 typedef struct _TEB_internal {
-    NT_TIB NtTib;
-    PVOID EnvironmentPointer;
-    CLIENT_ID ClientId;
-    PVOID ActiveRpcHandle;
-    PVOID ThreadLocalStoragePointer;
-    PPEB ProcessEnvironmentBlock;
-    ULONG LastErrorValue;
+    NT_TIB NtTib; /* 0x00 0x00 */
+    PVOID EnvironmentPointer; /* 0x1c 0x38 */
+    CLIENT_ID ClientId; /* 0x20 0x40 */
+    PVOID ActiveRpcHandle; /* 0x28 0x50 */
+    PVOID ThreadLocalStoragePointer; /* 0x2c 0x58 */
+    PPEB ProcessEnvironmentBlock; /* 0x30 0x60 */
+    ULONG LastErrorValue; /* 0x38 0x68 */
+    /* On WoW64, there is a function pointer to an x86-64 syscall wrapper
+     * at offset 0xc0 (defined as "void* WOW32Reserved").
+     */
 } TEB_internal, *PTEB_internal;
 #pragma pack(pop)
 
