@@ -433,6 +433,7 @@ then
     pkg metasploit
     pkg python-kaitaistruct
     pkg python-lxml
+    pkg python-matplotlib
     pkg python-numpy
     pkg python-pew
     pkg python-pillow
