@@ -418,13 +418,21 @@ fi
 
 if "$INSTALL_PRGANALYSIS_TOOLS"
 then
+    pkg aarch64-linux-gnu-binutils
+    pkg aarch64-linux-gnu-gcc
+    pkg aarch64-linux-gnu-gdb
+    pkg aarch64-linux-gnu-glibc
+    pkg aarch64-linux-gnu-linux-api-headers
+    pkg ansible
+    pkg ansible-lint
     pkg arduino-avr-core
     pkg arm-none-eabi-binutils
     pkg arm-none-eabi-gcc
+    pkg arm-none-eabi-gdb
     pkg binwalk
     pkg codespell
     pkg cppcheck
-    #pkg docker-compose
+    pkg docker-compose
     pkg flake8
     pkg ipcalc
     pkg ipv6calc
@@ -433,10 +441,12 @@ then
     #pkg lxc
     #pkg mariadb
     pkg metasploit
+    pkg openocd
     pkg python-kaitaistruct
     pkg python-lxml
     pkg python-matplotlib
     pkg python-numpy
+    pkg python-passlib
     pkg python-pew
     pkg python-pillow
     pkg python-pipenv
@@ -463,6 +473,7 @@ then
     pkg radare2-cutter
     pkg ropgadget
     pkg sagemath
+    pkg sshpass
     pkg vagrant
     pkg volatility
     pkg wabt
@@ -476,7 +487,6 @@ then
     aurpkg kaitai-struct-compiler
     aurpkg kaitai-struct-visualizer
     aurpkg msodbcsql
-    aurpkg openocd
     aurpkg python-roca-detect
     aurpkg python-uncompyle6
     aurpkg setools
