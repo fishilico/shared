@@ -228,6 +228,7 @@ pkg curl
 pkg dhclient
 pkg dnsmasq
 pkg ebtables
+pkg firejail
 pkg hping
 pkg iftop
 pkg inetutils
