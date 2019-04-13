@@ -958,14 +958,15 @@ class AnalysisContext(object):
 
         if ippkt.haslayer(DNS):  # DNS and MDNS
             dnspkt = ippkt[DNS]
-            for answer_idx in range(dnspkt.ancount):
-                try:
-                    dns_record = dnspkt.an[answer_idx]
-                except IndexError:
-                    # This occurs when the DNS packet has been truncated by Wireshark
-                    pass
-                else:
-                    self.analyze_dns_record(dns_record)
+            if dnspkt.an is not None:
+                for answer_idx in range(dnspkt.ancount):
+                    try:
+                        dns_record = dnspkt.an[answer_idx]
+                    except IndexError:
+                        # This occurs when the DNS packet has been truncated by Wireshark
+                        pass
+                    else:
+                        self.analyze_dns_record(dns_record)
 
         if HAVE_SCAPY_TLS and ippkt.haslayer(TLS_Ext_ServerName):  # TLS Server Name Indication Extension
             tls_sni = ippkt[TLS_Ext_ServerName]
