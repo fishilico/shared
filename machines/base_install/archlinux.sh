@@ -283,6 +283,7 @@ pkg python
 pkg python2
 pkg ruby
 pkg ruby-irb
+pkg ruby-rake
 pkg rustup
 pkg sbt
 pkg shellcheck
