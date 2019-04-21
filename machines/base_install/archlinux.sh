@@ -262,12 +262,14 @@ pkg wireshark-cli
 # Development
 grouppkg base-devel
 grouppkg multilib-devel
+pkg bat
 pkg clang
 pkg cmake
 pkg fakeroot
 pkg gdb
 pkg git
 pkg go
+pkg hexyl
 pkg ipython
 pkg libcap-ng
 pkg linux-headers
