@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+    <head>
+        <title>JavaScript File Creator</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script language="javascript"><!--
+function download(filename) {
+    file_name = document.getElementById('file_name').value;
+    file_type = document.getElementById('file_type').value;
+    file_content = document.getElementById('file_textarea').value;
+
+    var blob = new Blob([file_content], {type: file_type});
+
+    // Microsoft Internet Explorer / Edge provides functions to trigger download
+    if (typeof window.navigator.msSaveOrOpenBlob !== 'undefined') {
+        console.log("Using window.navigator.msSaveOrOpenBlob(blob, name)");
+        window.navigator.msSaveOrOpenBlob(blob, file_name);
+        return;
+    }
+    if (typeof window.navigator.msSaveBlob !== 'undefined') {
+        console.log("Using window.navigator.msSaveBlob(blob, name)");
+        window.navigator.msSaveBlob(blob, file_name);
+        return;
+    }
+
+    // Create a link element
+    a_elem = document.createElement("a");
+    a_elem.style = "display: none;";
+    document.body.appendChild(a_elem);
+
+    // Other browser may provide an URL factory object
+    var url_factory = null;
+    if (typeof window.URL !== 'undefined') {
+        console.log("Using window.URL.createObjectURL(blob)");
+        url_factory = window.URL;
+    } else if (typeof window.webkitURL !== 'undefined') {
+        console.log("Using window.webkitURL.createObjectURL(blob)");
+        url_factory = window.webkitURL;
+    }
+    if (url_factory != null) {
+        url = url_factory.createObjectURL(blob);
+        a_elem.href = url;
+        a_elem.download = file_name;
+    } else {
+        console.log("Using href + encodeURIComponent");
+        a_elem.setAttribute('href', 'data: ' + file_type + ',' + encodeURIComponent(file_content));
+        a_elem.setAttribute('download', file_name);
+    }
+    if (document.createEvent) {
+        console.log("Cliking with document.createEvent('MouseEvents')");
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        a_elem.dispatchEvent(event);
+    } else if (document.createEventObject) {
+        console.log("Cliking with document.createEventObject()");
+        var event_obj = document.createEventObject();
+        a_elem.fireEvent('onclick', event_obj);
+    } else {
+        console.log("Cliking with element.click()");
+        a_elem.click();
+    }
+    if (url_factory != null) {
+        window.setTimeout(function () {
+            url_factory.revokeObjectURL(url);
+        }, 500);
+    }
+}
+        --></script>
+    </head>
+    <body>
+        <h1>JavaScript File Creator</h1>
+        <form action="javascript:void(0);" onsubmit="download();">
+            <p>File name and type:
+                <input id="file_name" type="text" value="newfile.txt">
+                <select id="file_type">
+                    <option value="octet/stream" selected>Binary (octet/stream)</option>
+                    <option value="text/plain;charset=utf-8">Text (text/plain;charset=utf-8)</option>
+                </select>
+                <input type="button" onclick="download();" value="Download!">
+            </p>
+            <p><textarea id="file_textarea" style="width: 100%;height: 100%;" rows="20">File content</textarea></p>
+        </form>
+    </body>
+</html>
