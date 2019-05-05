@@ -412,6 +412,8 @@ def main(argv=None):
                         help="directory where DNS results are cached")
     parser.add_argument('-D', '--hide-dnssec', action='store_true',
                         help="hide entries related to DNSSEC")
+    parser.add_argument('-F', '--filter-exist', action='store_true',
+                        help="filter-out non-existing domains from the input file")
     parser.add_argument('-g', '--use-google', action='store_true',
                         help="use https://dns.google.com/ API")
     parser.add_argument('-o', '--output', type=Path,
@@ -486,6 +488,15 @@ def main(argv=None):
 
     # Reload the cache, if needed
     resolver.load_cache(if_dirty=True)
+
+    # Filter-out non-existing domains from the input file
+    if args.filter_exist:
+        found_domains = set(x[0].rstrip('.') for x in resolver.dns_records)
+        sorted_domains = sorted(set(domains).intersection(found_domains), key=dns_sortkey)
+        if sorted_domains != domains:
+            # Write the sorted list back
+            with open(args.file, 'w') as fout:
+                fout.write(''.join((d + '\n') for d in sorted_domains))
 
     # Produce the output
     if args.output:
