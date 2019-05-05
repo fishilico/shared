@@ -140,6 +140,35 @@ DNS_RESPONSE_CODES = {
 }
 
 
+def get_comment_for_record(domain, rtype, data):
+    """Decribe a DNS record to produce a comment"""
+    if rtype == 'PTR':
+        # produce the same comment as for the reverse-PTR record
+        return get_comment_for_record(data, 'rPTR', domain)
+
+    if rtype in ('A', 'AAAA', 'rPTR'):
+        if domain == 'webredir.vip.gandi.net.':
+            return 'Gandi web forwarding hosting'
+        if domain.endswith('.hosting.ovh.net.'):
+            return 'OVH shared hosting'
+        if domain.endswith('.amazonaws.com.'):
+            return 'Amazon AWS'
+
+    elif rtype == 'MX':
+        data = data.lower()
+        if data.endswith(('.google.com.', '.googlemail.com.')):
+            return 'Google mail server'
+        if data.endswith('.ovh.net.'):
+            return 'OVH mail server'
+
+    elif rtype == 'NS':
+        if data.endswith('.gandi.net.'):
+            return 'Gandi DNS server'
+        if data.endswith('.ovh.net.'):
+            return 'OVH DNS server'
+    return None
+
+
 def dns_sortkey(name):
     """Get the sort key of a domain name"""
     return name.split('.')[::-1]
@@ -374,18 +403,9 @@ class Resolver:
             if rtype != 'PTR' and max_domain_len < len(domain):
                 # Ignore long PTR records in max_domain_len computation
                 max_domain_len = len(domain)
-            if rtype in ('A', 'AAAA', 'rPTR'):
-                if domain.endswith('.hosting.ovh.net.'):
-                    add_comment(data, 'OVH shared hosting')
-            if rtype == 'MX':
-                if data.endswith('.ovh.net.'):
-                    add_comment(data, 'OVH mail server')
-            if rtype == 'NS':
-                if data.endswith('.ovh.net.'):
-                    add_comment(data, 'OVH DNS server')
-            if rtype == 'PTR':
-                if data.endswith('.hosting.ovh.net.'):
-                    add_comment(data, 'OVH shared hosting')
+            comment = get_comment_for_record(domain, rtype, data)
+            if comment:
+                add_comment(data, comment)
 
         # Describe known providers.
         # Sort by domain name, and place rPTR entries right after A and AAAA ones.
