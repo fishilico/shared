@@ -207,9 +207,17 @@ class Resolver:
 
         self.is_cache_dirty = False
 
-    def resolve_in_cache(self, domain, rtype):
-        """Resolve a domain name, writing the result in a cache file"""
+    def resolve_in_cache(self, domain, rtype, skip_if_loaded=False):
+        """Resolve a domain name, writing the result in a cache file
+
+        skip_if_loaded: skip the resolution if the domain is already loaded,
+            even when there is no matching file in the cache directory.
+        """
         domain = domain.strip('.')
+        if skip_if_loaded:
+            if any(x[1] == rtype and x[0] == domain for x in self.dns_records):
+                return
+
         cache_file = self.cache_directory / '{}_{}.json'.format(domain, rtype)
         if cache_file.exists():
             return
@@ -232,6 +240,34 @@ class Resolver:
         # Sleep after the DNS query
         if self.time_sleep:
             time.sleep(self.time_sleep)
+
+    @staticmethod
+    def get_ptr_name_for_ip(ip_addr, version=None):
+        """Get the PTR domain name matching an IP address"""
+        if hasattr(ip_addr, 'reverse_pointer'):
+            # Python 3.5 introduced a property to compute the PTR name
+            return ip_addr.reverse_pointer
+        if isinstance(ip_addr, ipaddress.IPv4Address):
+            return '{0[3]}.{0[2]}.{0[1]}.{0[0]}.in-addr.arpa.'.format(struct.unpack('BBBB', ip_addr.packed))
+        if isinstance(ip_addr, ipaddress.IPv6Address):
+            addr_hex = binascii.hexlify(ip_addr.packed).decode('ascii')
+            return '{}.ip6.arpa.'.format('.'.join(addr_hex[::-1]))
+
+        # Here, ip_addr has to be a string.
+        if version is None:
+            # Guess the version from the IP address
+            version = 6 if ':' in ip_addr else 4
+        if version == 4:
+            return '{0[3]}.{0[2]}.{0[1]}.{0[0]}.in-addr.arpa.'.format(ip_addr.split('.'))
+        if version == 6:
+            addr_hex = binascii.hexlify(ipaddress.IPv6Address(ip_addr).packed).decode('ascii')
+            return '{}.ip6.arpa.'.format('.'.join(addr_hex[::-1]))
+        raise ValueError("Unknown IP version {}".format(repr(version)))
+
+    def resolve_ip(self, ip_addr, version=None):
+        """Resolve an IP address by querying a PTR record"""
+        domain = self.get_ptr_name_for_ip(ip_addr, version)
+        return self.resolve_in_cache(domain, 'PTR', skip_if_loaded=True)
 
     def query_dns(self, domain, rdtype_text):
         if not HAVE_DNSPYTHON:
@@ -382,6 +418,9 @@ def main(argv=None):
                         help="file where the DNS entries are written")
     parser.add_argument('-O', '--stdout', action='store_true',
                         help="print the results, when a file is also written")
+    parser.add_argument('-i', '--ipaddr', metavar="IP_NETWORK",
+                        nargs='*', type=ipaddress.ip_network,
+                        help="resolve reverse (PTR) records for the IP addresses")
     parser.add_argument('-s', '--sort', action='store_true',
                         help="sort the domains of the input file")
     parser.add_argument('-S', '--no-ssl', action='store_true',
@@ -425,22 +464,25 @@ def main(argv=None):
     # Load the cache
     resolver.load_cache()
 
+    # Resolve PTR records given on the command line
+    if args.ipaddr:
+        for ip_net in args.ipaddr:
+            resolver.resolve_ip(ip_net.network_address)
+            if ip_net.num_addresses >= 2:
+                for ip_addr in ip_net.hosts():
+                    resolver.resolve_ip(ip_addr)
+                resolver.resolve_ip(ip_net.broadcast_address)
+        resolver.load_cache(if_dirty=True)
+
     # Get all the A records, in order to get PTR
     all_ipv4_addresses = set(x[2] for x in resolver.dns_records if x[1] == 'A')
     for ip_addr in all_ipv4_addresses:
-        ptr_addr = '{0[3]}.{0[2]}.{0[1]}.{0[0]}.in-addr.arpa.'.format(ip_addr.split('.'))
-        if any(x[1] == 'PTR' and x[0] == ptr_addr for x in resolver.dns_records):
-            continue
-        resolver.resolve_in_cache(ptr_addr, 'PTR')
+        resolver.resolve_ip(ip_addr, version=4)
 
     # Get all the AAAA records, in order to get PTR
     all_ipv6_addresses = set(x[2] for x in resolver.dns_records if x[1] == 'AAAA')
     for ip_addr in all_ipv6_addresses:
-        addr_hex = binascii.hexlify(ipaddress.IPv6Address(ip_addr).packed).decode('ascii')
-        ptr_addr = '{}.ip6.arpa.'.format('.'.join(addr_hex[::-1]))
-        if any(x[1] == 'PTR' and x[0] == ptr_addr for x in resolver.dns_records):
-            continue
-        resolver.resolve_in_cache(ptr_addr, 'PTR')
+        resolver.resolve_ip(ip_addr, version=6)
 
     # Reload the cache, if needed
     resolver.load_cache(if_dirty=True)
