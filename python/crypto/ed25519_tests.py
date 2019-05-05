@@ -79,6 +79,7 @@ COLOR_NORM = '\033[m'
 
 
 ED25519_PRIME = 2**255 - 19
+ED25519_I = pow(2, (ED25519_PRIME - 1) // 4, ED25519_PRIME)  # sqrt(-1) in F_q
 
 
 def run_process_with_input(cmdline, data, color=None):
@@ -180,7 +181,7 @@ def modsqrt25519(x2):
     """
     x = pow(x2, (ED25519_PRIME + 3) // 8, ED25519_PRIME)
     if (x * x - x2) % ED25519_PRIME != 0:
-        x = (x * Ed25519.i) % ED25519_PRIME
+        x = (x * ED25519_I) % ED25519_PRIME
         assert (x * x - x2) % ED25519_PRIME == 0
     # Choose the even value
     if x % 2:
@@ -191,7 +192,9 @@ def modsqrt25519(x2):
 class Ed25519Point(object):
     """Point on Ed25519 curve"""
     def __init__(self, x, y):
-        assert Ed25519.has_point(x, y)
+        assert 0 <= x < ED25519_PRIME
+        assert 0 <= y < ED25519_PRIME
+        assert (-x * x + y * y - 1 - ED25519_D * x * x * y * y) % ED25519_PRIME == 0
         self.x = x
         self.y = y
 
@@ -208,7 +211,7 @@ class Ed25519Point(object):
         x^2 = (y^2 - 1) / (dy^2 + 1)
         x = sqrt(x^2) in F_q
         """
-        x = modsqrt25519((y * y - 1) * modinv(Ed25519.d * y * y + 1, Ed25519.q))
+        x = modsqrt25519((y * y - 1) * modinv(ED25519_D * y * y + 1, ED25519_PRIME))
         return cls(x, y)
 
     def __eq__(self, other):
@@ -282,7 +285,7 @@ class Ed25519Point(object):
 
 
 class Montgomery25519Point(object):
-    """Point on Montgomery curve for Ed25519"""
+    """Point on Montgomery curve for Ed25519 (Curve25519)"""
     def __init__(self, x, y):
         if x is not None or y is not None:
             y2 = (y * y) % ED25519_PRIME
@@ -304,6 +307,18 @@ class Montgomery25519Point(object):
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
+
+    @classmethod
+    def from_x(cls, x):
+        """Compute y from x and return a point on Curve25519
+
+        y**2 = x**3 + 486662 x**2 + x
+        """
+        x2 = (x * x) % ED25519_PRIME
+        x3 = (x2 * x) % ED25519_PRIME
+        y2 = (x3 + 486662 * x2 + x) % ED25519_PRIME
+        y = modsqrt25519(y2)
+        return cls(x, y)
 
     def mul_2(self):
         """Compute the double of the point on curve y^2 = x^3 + 486662*x^2 + x mod q
@@ -425,31 +440,29 @@ class Montgomery25519Point(object):
         return Ed25519Point(x, y)
 
 
+# Define base points
+ED25519_D = (-121665 * modinv(121666, ED25519_PRIME)) % ED25519_PRIME
+ED25519_BASE = Ed25519Point.from_y((4 * modinv(5, ED25519_PRIME)) % ED25519_PRIME)
+CURVE25519_BASE = Montgomery25519Point.from_x(9)
+BASE_ORDER = 2**252 + 27742317777372353535851937790883648493  # order of B
+
+
 class Ed25519(object):
     """Ed25519 curve"""
     bits = 256  # size of messages, in bits
     q = ED25519_PRIME  # prime number
-    i = pow(2, (q - 1) // 4, q)  # sqrt(-1) in F_q
+    b = ED25519_BASE  # base point
+    ordb = BASE_ORDER  # order of B
 
     # twisted Edwards curve -x^2 + y^2 = 1 + dx^2y^2
-    d = (-121665 * modinv(121666, q)) % q
+    d = ED25519_D
 
-    def __init__(self):
-        # base point
-        self.b = Ed25519Point.from_y((4 * modinv(5, self.q)) % self.q)
-        assert (5 * self.b.y) % self.q == 4
-
-        # order of B
-        self.ordb = 2**252 + 27742317777372353535851937790883648493
-        pt = self.b * self.ordb
-        assert pt.x == 0 and pt.y == 1
-
-    @classmethod
-    def has_point(cls, x, y):
+    @staticmethod
+    def has_point(x, y):
         """Check whether (x, y) belongs to the curve"""
-        assert 0 <= x < cls.q
-        assert 0 <= y < cls.q
-        return (- x * x + y * y - 1 - cls.d * x * x * y * y) % cls.q == 0
+        assert 0 <= x < ED25519_PRIME
+        assert 0 <= y < ED25519_PRIME
+        return (-x * x + y * y - 1 - ED25519_D * x * x * y * y) % ED25519_PRIME == 0
 
     @staticmethod
     def hash(message):
@@ -505,15 +518,14 @@ class Ed25519(object):
             raise ValueError("invalid signature")
 
 
-# Ensure that i^2 = -1 in F_q
-assert (Ed25519.i * Ed25519.i) % Ed25519.q == Ed25519.q - 1
-
-
 def run_test(colorize):
     """Test operations on Ed25519"""
     color_red = COLOR_RED if colorize else ''
     color_green = COLOR_GREEN if colorize else ''
     color_norm = COLOR_NORM if colorize else ''
+
+    # Ensure that i^2 = -1 in F_q
+    assert (ED25519_I * ED25519_I) % ED25519_PRIME == ED25519_PRIME - 1
 
     curve = Ed25519()
 
@@ -521,17 +533,19 @@ def run_test(colorize):
     print("* bits: {}".format(curve.bits))
     print("* q({}): {:#x}".format(curve.q.bit_length(), curve.q))
     print("* d({}): {:#x}".format(curve.d.bit_length(), curve.d))
-    print("* i({}): {:#x}".format(curve.i.bit_length(), curve.i))
+    print("* i({}): {:#x}".format(ED25519_I.bit_length(), ED25519_I))
     print("* B: {}".format(curve.b))
+    assert (5 * curve.b.y) % curve.q == 4
     print("* order of B, l({}): {:#x}".format(curve.ordb.bit_length(), curve.ordb))
-    assert (curve.i * curve.i + 1) % curve.q == 0
+    assert curve.ordb == BASE_ORDER
     assert curve.b * curve.ordb == Ed25519Point(0, 1)
 
-    montgomery_b = curve.b.to_montgomery()
-    print("* B on Montgomery curve: {}".format(montgomery_b))
-    assert montgomery_b.x == 9
-    assert montgomery_b.to_edwards() == curve.b
-    assert montgomery_b * curve.ordb == Montgomery25519Point(None, None)
+    # Test that the base point of Curve25519 maps well to the one of Ed25519
+    print("* B on Montgomery curve: {}".format(CURVE25519_BASE))
+    assert CURVE25519_BASE.x == 9
+    assert CURVE25519_BASE * BASE_ORDER == Montgomery25519Point(None, None)
+    assert CURVE25519_BASE.to_edwards() == curve.b
+    assert CURVE25519_BASE == curve.b.to_montgomery()
 
     print("")
 
