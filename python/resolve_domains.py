@@ -398,7 +398,7 @@ def main(argv=None):
         domains = [l.strip().rstrip('.') for l in fdomains.readlines()]
 
     if args.sort:
-        sorted_domains = sorted(domains, key=dns_sortkey)
+        sorted_domains = sorted(set(domains), key=dns_sortkey)
         if sorted_domains != domains:
             # Write the sorted list back
             with open(args.file, 'w') as fout:
