@@ -356,6 +356,7 @@ int _tmain(void)
         show_sid1(_T("Process Protection Type Full prefix"), &SIDAuthProcessTrust, SECURITY_PROCESS_PROTECTION_TYPE_FULL_RID); /* S-1-19-1024 */
         show_ppl_sid(_T("Process Protection Level None"), SECURITY_PROCESS_PROTECTION_LEVEL_NONE_RID); /* S-1-19-<type>-0 */
         show_ppl_sid(_T("Process Protection Level Authenticode"), SECURITY_PROCESS_PROTECTION_LEVEL_AUTHENTICODE_RID); /* S-1-19-<type>-1024 */
+        show_ppl_sid(_T("Process Protection Level Anti-Malware"), 1536); /* S-1-19-<type>-1536 */
         show_ppl_sid(_T("Process Protection Level App"), SECURITY_PROCESS_PROTECTION_LEVEL_APP_RID); /* S-1-19-<type>-2048 */
         show_ppl_sid(_T("Process Protection Level Windows"), SECURITY_PROCESS_PROTECTION_LEVEL_WINDOWS_RID); /* S-1-19-<type>-4096 */
         show_ppl_sid(_T("Process Protection Level Windows TCB"), SECURITY_PROCESS_PROTECTION_LEVEL_WINTCB_RID); /* S-1-19-<type>-8192 */
