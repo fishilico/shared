@@ -43,7 +43,7 @@ Equivalence equations from Montgomery curve (u, v) to Twisted Edwards curve (x, 
 * x = u/v * sqrt(-486664)
 * y = (u - 1) / (u + 1)
 
-Inverse equation:
+Inverse equation ("birational maps"):
 * u = (1 + y) / (1 - y)
 * v = u/x * sqrt(-486664)
 
@@ -55,6 +55,8 @@ Documentation:
 * https://ed25519.cr.yp.to/python/ed25519.py
 * https://linux-audit.com/using-ed25519-openssh-keys-instead-of-dsa-rsa-ecdsa/
   Using Ed25519 for OpenSSH keys (instead of DSA/RSA/ECDSA)
+* https://tools.ietf.org/html/rfc7748
+  Elliptic Curves for Security
 """
 import argparse
 import base64
@@ -79,6 +81,7 @@ COLOR_NORM = '\033[m'
 
 
 ED25519_PRIME = 2**255 - 19
+ED25519_BITS = 256
 ED25519_I = pow(2, (ED25519_PRIME - 1) // 4, ED25519_PRIME)  # sqrt(-1) in F_q
 
 
@@ -248,18 +251,18 @@ class Ed25519Point(object):
 
     def encode(self):
         """Encode a point in a compressed binary form"""
-        bits = Ed25519.bits
+        bits = ED25519_BITS
         if self.x & 1:
             y = self.y | 1 << (bits - 1)
         else:
             y = self.y & ~(1 << (bits - 1))
-        return encode_bigint_le(y, Ed25519.bits // 8)
+        return encode_bigint_le(y, bits // 8)
 
     @classmethod
     def decode(cls, compressed):
         """Decode a point in a compressed binary form"""
         y = decode_bigint_le(compressed)
-        bits = Ed25519.bits
+        bits = ED25519_BITS
         parity = y >> (bits - 1)
         assert parity in (0, 1)
         pt = cls.from_y(y & ~(1 << (bits - 1)))
@@ -319,6 +322,23 @@ class Montgomery25519Point(object):
         y2 = (x3 + 486662 * x2 + x) % ED25519_PRIME
         y = modsqrt25519(y2)
         return cls(x, y)
+
+    @classmethod
+    def decode(cls, binary_x):
+        """Decode a point from the x (or u) coordinate"""
+        x = decode_bigint_le(binary_x)
+        bits = ED25519_BITS
+        parity = x >> (bits - 1)
+        assert parity in (0, 1)
+        pt = cls.from_x(x & ~(1 << (bits - 1)))
+        if pt.y & 1 != parity:
+            assert pt.y != 0
+            pt.y = ED25519_PRIME - pt.y
+        return pt
+
+    def encode_x25519(self):
+        """Encode the x coordinate, for X25519"""
+        return encode_bigint_le(self.x, ED25519_BITS // 8)
 
     def mul_2(self):
         """Compute the double of the point on curve y^2 = x^3 + 486662*x^2 + x mod q
@@ -449,7 +469,7 @@ BASE_ORDER = 2**252 + 27742317777372353535851937790883648493  # order of B
 
 class Ed25519(object):
     """Ed25519 curve"""
-    bits = 256  # size of messages, in bits
+    bits = ED25519_BITS  # size of messages, in bits
     q = ED25519_PRIME  # prime number
     b = ED25519_BASE  # base point
     ordb = BASE_ORDER  # order of B
@@ -469,16 +489,25 @@ class Ed25519(object):
         """Used hash function, SHA-512"""
         return hashlib.sha512(message).digest()
 
-    @classmethod
-    def hash_int(cls, message):
+    def hash_int(self, message):
         """Used hash function with conversion to an integer"""
-        return decode_bigint_le(cls.hash(message)[:cls.bits // 4])
+        return decode_bigint_le(self.hash(message)[:ED25519_BITS // 4])
+
+    @staticmethod
+    def decode_scalar(scalar):
+        """Decode an X25519 scalar according to RFC7748
+
+        This function can also be implemented by modifying its argument:
+            scalar[0] &= 248  # = ~7
+            scalar[31] &= 127  # = ~0x80
+            scalar[31] |= 64  # = 0x40
+        """
+        value = decode_bigint_le(scalar[:ED25519_BITS // 8])
+        return (value | (1 << (ED25519_BITS - 2))) & ~(7 | (1 << (ED25519_BITS - 1)))
 
     def private_key(self, secret):
         """Get the private key associated with the secret"""
-        bits = self.bits
-        privkey = decode_bigint_le(self.hash(secret)[:bits // 8])
-        return (privkey | (1 << (bits - 2))) & ~(7 | (1 << (bits - 1)))
+        return self.decode_scalar(self.hash(secret))
 
     def public_key(self, secret):
         """Get the public key associated with the secret"""
@@ -546,6 +575,10 @@ def run_test(colorize):
     assert CURVE25519_BASE * BASE_ORDER == Montgomery25519Point(None, None)
     assert CURVE25519_BASE.to_edwards() == curve.b
     assert CURVE25519_BASE == curve.b.to_montgomery()
+
+    # Try encoding then decoding the base point
+    encoded_b = CURVE25519_BASE.encode_x25519()
+    assert Montgomery25519Point.decode(encoded_b) == CURVE25519_BASE
 
     print("")
 
