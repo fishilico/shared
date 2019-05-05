@@ -24,7 +24,7 @@
 Usage example to resolve domains using Google's DNS-over-HTTPS API, a list in
 domains.txt, a cache in directory dns/, writing results in results.out.txt:
 
-    ./resolve_all_domains.py -gsSO -o results.out.txt -d dns domains.txt
+    ./resolve_domains.py -gsO -o dns_resolutions.out.txt -d cache_dns domains.txt
 
 @author: Nicolas Iooss
 @license: MIT
@@ -32,8 +32,10 @@ domains.txt, a cache in directory dns/, writing results in results.out.txt:
 import argparse
 import binascii
 import ipaddress
+import itertools
 import json
 from pathlib import Path
+import random
 import re
 import ssl
 import struct
@@ -140,6 +142,62 @@ DNS_RESPONSE_CODES = {
 }
 
 
+# Well-known prefixes seen on domain names
+WELLKNOWN_PREFIXES = (
+    'a',
+    'admin',
+    'b',
+    'blog',
+    'business',
+    'c',
+    'cdn',
+    'data',
+    'dc1',
+    'dc2',
+    'dns1',
+    'dns2',
+    'extra',
+    'extranet',
+    'files',
+    'ftp',
+    'icinga',
+    'intra',
+    'intranet',
+    'login',
+    'mail',
+    'mail1',
+    'mail2',
+    'mx1',
+    'mx2',
+    'my',
+    'nagios',
+    'ns1',
+    'ns2',
+    'pdns',
+    'phpmyadmin',
+    'proxy',
+    'public',
+    'sap',
+    'search',
+    'secure',
+    'share',
+    'shop',
+    'smtp',
+    'smtp1',
+    'smtp2',
+    'sql',
+    'static',
+    'vpn',
+    'web',
+    'webmail',
+    'wildcard',
+    'wiki',
+    'www',
+    'www1',
+    'zimbra',
+)
+
+
 def get_comment_for_record(domain, rtype, data):
     """Decribe a DNS record to produce a comment"""
     if rtype == 'PTR':
@@ -232,7 +290,7 @@ class Resolver:
                         self.dns_records.add((answer['data'], 'rPTR', ip_addr))
                         continue
 
-                    raise ValueError("Invalid PTR record name {}".format(repr(answer['name'])))
+                    print("Warning: invalid PTR record name {}".format(repr(answer['name'])))
 
         self.is_cache_dirty = False
 
@@ -443,6 +501,8 @@ def main(argv=None):
     parser.add_argument('-i', '--ipaddr', metavar="IP_NETWORK",
                         nargs='*', type=ipaddress.ip_network,
                         help="resolve reverse (PTR) records for the IP addresses")
+    parser.add_argument('-p', '--prefixes', action='store_true',
+                        help="add some well-known prefixes to the domains")
     parser.add_argument('-s', '--sort', action='store_true',
                         help="sort the domains of the input file")
     parser.add_argument('-S', '--no-ssl', action='store_true',
@@ -464,7 +524,6 @@ def main(argv=None):
             # Write the sorted list back
             with open(args.file, 'w') as fout:
                 fout.write(''.join((d + '\n') for d in sorted_domains))
-        domains = sorted_domains
 
     # Create the cache directory, if it does not exist
     args.directory.mkdir(exist_ok=True)
@@ -477,11 +536,23 @@ def main(argv=None):
     )
 
     # Fill the cache
+    random.shuffle(domains)  # Do not be predictable
     for domain in domains:
         for rtype in DNS_TYPES:
             # Do not resolve PTR for normal domains
             if rtype != 'PTR':
                 resolver.resolve_in_cache(domain, rtype)
+
+    # Resolve with well-known prefixes
+    if args.prefixes:
+        domains_with_prefixes = list(
+            '{}.{}'.format(p, d)
+            for p, d in itertools.product(WELLKNOWN_PREFIXES, domains))
+        random.shuffle(domains_with_prefixes)  # Do not be predictable
+        for domain in domains_with_prefixes:
+            for rtype in DNS_TYPES:
+                if rtype != 'PTR':
+                    resolver.resolve_in_cache(domain, rtype)
 
     # Load the cache
     resolver.load_cache()
