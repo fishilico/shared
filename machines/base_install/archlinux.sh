@@ -275,6 +275,8 @@ pkg libcap-ng
 pkg linux-headers
 pkg linux-hardened-headers
 pkg ltrace
+pkg nodejs
+pkg npm
 pkg php
 pkg pkgconf
 pkg pypy
@@ -287,6 +289,7 @@ pkg ruby-rake
 pkg rustup
 pkg sbt
 pkg shellcheck
+pkg yarn
 aurpkg libcgroup
 
 # Intel x86 CPU
