@@ -163,6 +163,7 @@ __extension__ static const char* cpuidstr_7_ecx[32] = {
 __extension__ static const char* cpuidstr_7_edx[32] = {
     [2] = "avx512_4vnniw",
     [3] = "avx512_4fmaps",
+    [13] = "tsx_force_abort",
     [18] = "pconfig",
     [26] = "spec_ctrl",
     [27] = "intel_stibp",
