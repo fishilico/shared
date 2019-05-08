@@ -1,15 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
         <title>JavaScript File Creator</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <script language="javascript"><!--
-function download(filename) {
-    file_name = document.getElementById('file_name').value;
-    file_type = document.getElementById('file_type').value;
-    file_content = document.getElementById('file_textarea').value;
+        <meta charset="utf-8">
+        <script><!--
+"use strict";
 
-    var blob = new Blob([file_content], {type: file_type});
+function download() {
+    const file_name = document.getElementById('file_name').value;
+    const file_type = document.getElementById('file_type').value;
+    const file_content = document.getElementById('file_textarea').value;
+
+    const blob = new Blob([file_content], {type: file_type});
 
     // Microsoft Internet Explorer / Edge provides functions to trigger download
     if (typeof window.navigator.msSaveOrOpenBlob !== 'undefined') {
@@ -24,12 +26,13 @@ function download(filename) {
     }
 
     // Create a link element
-    a_elem = document.createElement("a");
+    const a_elem = document.createElement("a");
     a_elem.style = "display: none;";
     document.body.appendChild(a_elem);
 
     // Other browser may provide an URL factory object
     var url_factory = null;
+    var url;
     if (typeof window.URL !== 'undefined') {
         console.log("Using window.URL.createObjectURL(blob)");
         url_factory = window.URL;
@@ -48,12 +51,12 @@ function download(filename) {
     }
     if (document.createEvent) {
         console.log("Cliking with document.createEvent('MouseEvents')");
-        var event = document.createEvent('MouseEvents');
+        const event = document.createEvent('MouseEvents');
         event.initEvent('click', true, true);
         a_elem.dispatchEvent(event);
     } else if (document.createEventObject) {
         console.log("Cliking with document.createEventObject()");
-        var event_obj = document.createEventObject();
+        const event_obj = document.createEventObject();
         a_elem.fireEvent('onclick', event_obj);
     } else {
         console.log("Cliking with element.click()");
