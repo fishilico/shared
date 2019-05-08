@@ -24,7 +24,7 @@
 Usage example to resolve domains using Google's DNS-over-HTTPS API, a list in
 domains.txt, a cache in directory dns/, writing results in results.out.txt:
 
-    ./resolve_domains.py -gsO -o dns_resolutions.out.txt -d cache_dns domains.txt
+    ./resolve_domains.py -gMOs -o dns_resolutions.out.txt -d cache_dns domains.txt
 
 @author: Nicolas Iooss
 @license: MIT
@@ -57,7 +57,8 @@ else:
 
 
 # Types of DNS records that are resolved
-DNS_TYPES = ('A', 'AAAA', 'MX', 'ANY', 'TXT', 'NS', 'PTR')
+DNS_TYPES = ('A', 'AAAA', 'MX', 'NS', 'PTR', 'TXT', 'ANY')
+DNS_SRV_TYPES = ('NS', 'SRV', 'TXT', 'ANY')
 
 # Identifiers of record data types
 DNS_RDATA_TYPES = {
@@ -130,6 +131,7 @@ DNS_RDATA_TYPES = {
     'AVC': 258,
     'TA': 32768,
     'DLV': 32769,
+    'RESERVED-65534': 65534,
 }
 DNS_TYPE_ITOA = dict((v, k) for k, v in DNS_RDATA_TYPES.items())
 
@@ -144,92 +146,291 @@ DNS_RESPONSE_CODES = {
 
 # Well-known prefixes seen on domain names
 WELLKNOWN_PREFIXES = (
+    '_domainkey',
+    '_ipp._tcp',
+    '_kerberos._tcp',
+    '_kerberos._tcp.dc._msdcs',
+    '_ldap._tcp',
+    '_ldap._tcp.dc._msdcs',
+    '_ldap._tcp.gc._msdcs',
+    '_ldap._tcp.pdc._msdcs',
+    '_ldaps._tcp',
+    '_msdcs',
     'a',
+    'about',
+    'account',
     'admin',
+    'agent',
+    'alpha',
+    'api',
+    'app',
+    'app1',
+    'archive',
+    'auth',
+    'autodiscover',
     'b',
+    'back',
+    'backup',
+    'bck',
+    'beta',
+    'bit',
+    'bits',
     'blog',
+    'bot',
     'business',
     'c',
+    'cache',
+    'calendar',
     'cdn',
+    'chat',
+    'code',
+    'collect',
+    'collectd',
+    'com',
+    'commute',
+    'connect',
+    'console',
+    'corp',
+    'cpanel',
+    'cvs',
     'data',
+    'database',
+    'db',
     'dc1',
     'dc2',
+    'dev',
+    'developer',
+    'dmz',
     'dns1',
     'dns2',
+    'doc',
+    'docs',
+    'en',
+    'eu',
+    'euro',
+    'ext',
     'extra',
     'extranet',
     'files',
+    'fr',
+    'free',
     'ftp',
+    'gc._msdcs',
+    'geo',
+    'git',
+    'gitlab',
+    'google._domainkey',
+    'grafana',
+    'graph',
+    'group',
+    'help',
+    'helpdesk',
+    'hg',
     'icinga',
+    'icingaweb',
+    'identity',
+    'idp',
+    'imap',
+    'ins',
+    'inside',
+    'int',
     'intra',
     'intranet',
+    'irc',
+    'jenkins',
+    'job',
+    'join',
+    'list',
+    'lists',
+    'log',
     'login',
+    'lyncdiscover',
     'mail',
     'mail1',
     'mail2',
+    'master',
+    'matrix',
+    'mattermost',
+    'mf1',
+    'mfa',
+    'mobility',
+    'msoid',
+    'mssql',
     'mx1',
     'mx2',
     'my',
+    'mysql',
     'nagios',
+    'name',
+    'net',
+    'new',
+    'news',
     'ns1',
     'ns2',
+    'ntp',
+    'oauth',
+    'old',
+    'open',
+    'opensource',
+    'org',
+    'outlook',
+    'pass',
     'pdns',
+    'phone',
     'phpmyadmin',
+    'pki',
+    'pop',
+    'pop3',
+    'pop3s',
+    'portal',
+    'prod',
+    'product',
+    'products',
     'proxy',
     'public',
+    'publish',
+    'qat',
+    'qual',
+    'queue',
+    'rabbitmq',
+    'random',
+    'redis',
+    'redmine',
+    'register',
+    'registry',
+    'release',
+    'releases',
+    'repo',
+    'rest',
+    'rsa',
+    'rss',
     'sap',
     'search',
     'secure',
     'share',
+    'sharing',
     'shop',
+    'sip',
     'smtp',
     'smtp1',
     'smtp2',
+    'smtps',
+    'sonar',
+    'spf',
+    'splunk',
     'sql',
+    'ssl',
+    'sso',
+    'staff',
+    'stat',
     'static',
+    'stats',
+    'sts',
+    'subversion',
+    'support',
+    'svn',
+    'test',
+    'tls',
+    'token',
+    'tool',
+    'tools',
+    'torrent',
+    'tracker',
+    'uat',
+    'uk',
+    'us',
+    'voip',
     'vpn',
     'web',
+    'webchat',
     'webmail',
-    'wildcard',
+    'wifi',
     'wiki',
+    'wildcard',
+    'wireless',
     'www',
     'www1',
+    'www3',
+    'xyz',
+    'zammad',
+    'zero',
+    'zeromq',
     'zimbra',
 )
+
+
+def get_comment_for_domain(domain):
+    """Decribe a domain name to produce a comment"""
+    if domain.endswith((
+            '.akamaiedge.net.',
+            '.akamaized.net',
+            '.edgekey.net.',
+            '.static.akamaitechnologies.com.')):
+        return 'Akamai CDN'
+    if domain.endswith('.amazonaws.com.'):
+        return 'Amazon AWS'
+    if domain.endswith('.cdn.cloudflare.net.'):
+        return 'Cloudflare CDN'
+    if domain.endswith('.mail.gandi.net.') or domain == 'webmail.gandi.net.':
+        return 'Gandi mail hosting'
+    if domain == 'webredir.vip.gandi.net.':
+        return 'Gandi web forwarding hosting'
+    if domain.endswith('.lync.com.'):
+        return 'Microsoft Lync'
+    if domain == 'clientconfig.microsoftonline-p.net.':
+        # https://docs.microsoft.com/en-gb/office365/enterprise/external-domain-name-system-records
+        return 'Microsoft Office 365 tenant'
+    if domain.endswith(('.office.com.', '.office365.com.')):
+        return 'Microsoft Office 365'
+    if domain.endswith('.outlook.com.'):
+        return 'Microsoft Outlook mail'
+    if domain == 'redirect.ovh.net.':
+        return 'OVH mail provider'
+    if domain.endswith('.hosting.ovh.net.'):
+        return 'OVH shared web hosting'
+    if domain.endswith('.rev.sfr.net.'):
+        return 'SFR provider'
+    return None
 
 
 def get_comment_for_record(domain, rtype, data):
     """Decribe a DNS record to produce a comment"""
     if rtype == 'PTR':
         # produce the same comment as for the reverse-PTR record
-        return get_comment_for_record(data, 'rPTR', domain)
+        return get_comment_for_domain(data)
 
-    if rtype in ('A', 'AAAA', 'rPTR'):
-        if domain == 'webredir.vip.gandi.net.':
-            return 'Gandi web forwarding hosting'
-        if domain.endswith('.hosting.ovh.net.'):
-            return 'OVH shared hosting'
-        if domain.endswith('.amazonaws.com.'):
-            return 'Amazon AWS'
+    if rtype == 'CNAME':
+        # Try describing the alias target
+        return get_comment_for_domain(domain) or get_comment_for_domain(data)
 
-    elif rtype == 'MX':
+    if rtype == 'MX':
         data = data.lower()
         if data.endswith(('.google.com.', '.googlemail.com.')):
             return 'Google mail server'
-        if data.endswith('.ovh.net.'):
-            return 'OVH mail server'
+        if data.endswith('.outlook.com.'):
+            return 'Microsoft Outlook mail server'
+        if data.endswith('.outlook.com.'):
+            return 'Microsoft Outlook mail server'
+        if data.endswith('.pphosted.com.'):
+            return 'Proofpoint mail server'
 
-    elif rtype == 'NS':
+        # Try matching the name of MX servers
+        matches = re.match(r'^[0-9]+\s+(\S+)$', data)
+        if matches:
+            return get_comment_for_domain(matches.group(1))
+
+    if rtype == 'NS':
         if data.endswith('.gandi.net.'):
             return 'Gandi DNS server'
         if data.endswith('.ovh.net.'):
             return 'OVH DNS server'
-    return None
+
+    return get_comment_for_domain(domain)
 
 
 def dns_sortkey(name):
     """Get the sort key of a domain name"""
-    return name.split('.')[::-1]
+    return name.lower().split('.')[::-1]
 
 
 class Resolver:
@@ -238,8 +439,11 @@ class Resolver:
         self.time_sleep = time_sleep
         self.use_google = use_google
         self.no_ssl = no_ssl
+        self.dns_questions = None
         self.dns_records = None
         self.is_cache_dirty = True
+        self.has_show_dnspython_any_warning = False
+        self.load_cache(if_dirty=False)
 
     def load_cache(self, if_dirty=True):
         """Load cached DNS results from the cache directory"""
@@ -247,67 +451,91 @@ class Resolver:
             # Do not reload the cache if it has not been modified
             return
 
+        self.dns_questions = set()
         self.dns_records = set()
         for filepath in self.cache_directory.glob('*.json'):
             with open(filepath, 'r') as fjson:
-                json_data = json.load(fjson)
+                for line in fjson:
+                    json_data = json.loads(line)
 
-            # Ignore failed responses
-            rcode_name = DNS_RESPONSE_CODES.get(json_data['Status'])
-            if rcode_name in ('SERVFAIL', 'NXDOMAIN', 'REFUSED'):
-                continue
-            if rcode_name != 'NOERROR':
-                raise ValueError("Invalid status {} ({}) in {}".format(
-                    json_data['Status'], rcode_name, repr(filepath)))
+                    # Add the question to the list of asked ones
+                    for question in json_data['Question']:
+                        self.dns_questions.add(
+                            (question['name'].lower().strip('.'), DNS_TYPE_ITOA[question['type']])
+                        )
 
-            # Ignore empty responses
-            if 'Answer' not in json_data:
-                continue
+                    # Ignore failed responses
+                    rcode_name = DNS_RESPONSE_CODES.get(json_data['Status'])
+                    if rcode_name in ('SERVFAIL', 'NXDOMAIN', 'REFUSED'):
+                        continue
+                    if rcode_name != 'NOERROR':
+                        raise ValueError("Invalid status {} ({}) in {}".format(
+                            json_data['Status'], rcode_name, repr(filepath)))
 
-            for answer in json_data['Answer']:
-                asc_type = DNS_TYPE_ITOA[answer['type']]
-                self.dns_records.add((answer['name'], asc_type, answer['data']))
+                    # Ignore empty responses
+                    if 'Answer' not in json_data:
+                        continue
 
-                # Add fake reverse-PTR entry
-                if asc_type == 'PTR':
-                    matches = re.match(r'^([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)\.in-addr\.arpa\.$', answer['name'])
-                    if matches:
-                        # IPv4 PTR record
-                        # Filter-out useless reverse names that include the IP address
-                        if answer['data'].endswith('.rev.sfr.net.'):
-                            if answer['data'] == answer['name'][:-len('.in-addr.arpa.')] + '.rev.sfr.net.':
+                    for answer in json_data['Answer']:
+                        asc_type = DNS_TYPE_ITOA[answer['type']]
+                        self.dns_records.add((answer['name'], asc_type, answer['data']))
+
+                        # Add fake reverse-PTR entry
+                        if asc_type == 'PTR':
+                            matches = re.match(
+                                r'^([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)\.in-addr\.arpa\.$',
+                                answer['name'])
+                            if matches:
+                                # IPv4 PTR record
+                                ip_addr = '.'.join(matches.groups()[::-1])
+                                self.dns_records.add((answer['data'], 'rPTR', ip_addr))
                                 continue
-                        ip_addr = '.'.join(matches.groups()[::-1])
-                        self.dns_records.add((answer['data'], 'rPTR', ip_addr))
-                        continue
 
-                    matches = re.match(r'^(([0-9a-f]+\.){32})ip6\.arpa\.$', answer['name'])
-                    if matches:
-                        packed_addr = binascii.unhexlify(matches.group(1).replace('.', '')[::-1])
-                        ip_addr_expanded = ':'.join(
-                            '{:04x}'.format(x) for x in struct.unpack('>8H', packed_addr))
-                        ip_addr = ipaddress.IPv6Address(ip_addr_expanded).compressed
-                        self.dns_records.add((answer['data'], 'rPTR', ip_addr))
-                        continue
+                            matches = re.match(r'^(([0-9a-f]+\.){32})ip6\.arpa\.$', answer['name'])
+                            if matches:
+                                # IPv6 PTR record
+                                packed_addr = binascii.unhexlify(matches.group(1).replace('.', '')[::-1])
+                                ip_addr_expanded = ':'.join(
+                                    '{:04x}'.format(x) for x in struct.unpack('>8H', packed_addr))
+                                ip_addr = ipaddress.IPv6Address(ip_addr_expanded).compressed
+                                self.dns_records.add((answer['data'], 'rPTR', ip_addr))
+                                continue
 
-                    print("Warning: invalid PTR record name {}".format(repr(answer['name'])))
+                            print("Warning: invalid PTR record name {}".format(repr(answer['name'])))
 
         self.is_cache_dirty = False
 
-    def resolve_in_cache(self, domain, rtype, skip_if_loaded=False):
-        """Resolve a domain name, writing the result in a cache file
+    def merge_cache_files(self):
+        """Merge all cache files into one"""
+        # Load all the JSON records, and deduplicate them
+        all_files = set()
+        all_lines = set()
+        for filepath in self.cache_directory.glob('*.json'):
+            all_files.add(filepath)
+            with open(filepath, 'r') as fjson:
+                for line in fjson:
+                    all_lines.add(line.strip() + '\n')
 
-        skip_if_loaded: skip the resolution if the domain is already loaded,
-            even when there is no matching file in the cache directory.
-        """
+        merged_file = self.cache_directory / 'all.json'
+        with open(merged_file, 'w') as fout:
+            fout.write(''.join(sorted(all_lines)))
+        for filepath in all_files:
+            if filepath != merged_file:
+                filepath.unlink()
+
+    def resolve_in_cache(self, domain, rtype):
+        """Resolve a domain name, writing the result in a cache file"""
         domain = domain.strip('.')
-        if skip_if_loaded:
-            if any(x[1] == rtype and x[0] == domain for x in self.dns_records):
-                return
+        # NB. use dns_questions instead of dns_records in order to perform
+        # specific queries (A, AAAA, TXT, etc.) even after an ANY query.
+        if (domain, rtype) in self.dns_questions:
+            return
 
         cache_file = self.cache_directory / '{}_{}.json'.format(domain, rtype)
         if cache_file.exists():
+            print("Warning: cache file exists for {} <{}> but was not loaded".format(domain, rtype))
             return
+
         if self.use_google:
             response = self.query_google(domain, rtype)
         else:
@@ -354,7 +582,7 @@ class Resolver:
     def resolve_ip(self, ip_addr, version=None):
         """Resolve an IP address by querying a PTR record"""
         domain = self.get_ptr_name_for_ip(ip_addr, version)
-        return self.resolve_in_cache(domain, 'PTR', skip_if_loaded=True)
+        return self.resolve_in_cache(domain, 'PTR')
 
     def query_dns(self, domain, rdtype_text):
         if not HAVE_DNSPYTHON:
@@ -362,7 +590,9 @@ class Resolver:
 
         # dnspython does not like DNS metaqueries such as ANY requests
         if rdtype_text == 'ANY':
-            print("Refusing to query DNS for {} <{}> (dnspython does not like it)".format(domain, rdtype_text))
+            if not self.has_show_dnspython_any_warning:
+                print("Warning: refusing to query DNS for type ANY (dnspython does not like it)")
+                self.has_show_dnspython_any_warning = True
             return None
 
         print("Querying DNS for {} <{}>...".format(domain, rdtype_text))
@@ -454,21 +684,79 @@ class Resolver:
                 comments_for_data[key] = set()
             comments_for_data[key].add(comment)
 
-        max_domain_len = 0
+        # Find out wildcard domains using resolutions for "b.domain",
+        # "random.domain" and "xyz.domain"
+        wildcard_detectors = ('b.', 'random.', 'xyz.')
+        wildcard_witness = {}
+
+        # Describe known providers
         for domain, rtype, data in self.dns_records:
             if hide_dnssec and rtype in ('DNSKEY', 'NSEC3PARAM', 'NSEC3', 'RRSIG'):
                 continue
-            if rtype != 'PTR' and max_domain_len < len(domain):
-                # Ignore long PTR records in max_domain_len computation
-                max_domain_len = len(domain)
             comment = get_comment_for_record(domain, rtype, data)
             if comment:
                 add_comment(data, comment)
 
-        # Describe known providers.
+            if domain.startswith(wildcard_detectors):
+                wild_suffix = domain.split('.', 1)[1]
+                if wild_suffix not in wildcard_witness:
+                    wildcard_witness[wild_suffix] = {}
+                if rtype not in wildcard_witness[wild_suffix]:
+                    wildcard_witness[wild_suffix][rtype] = {}
+                if domain not in wildcard_witness[wild_suffix][rtype]:
+                    wildcard_witness[wild_suffix][rtype][domain] = set()
+                wildcard_witness[wild_suffix][rtype][domain].add(data)
+
+        # Compute wildcard records
+        all_records = self.dns_records.copy()
+        wildcard_records_by_data = {}
+        for wild_suffix, suffix_types_witnesses in wildcard_witness.items():
+            for rtype, witnesses in suffix_types_witnesses.items():
+                if len(witnesses) != len(wildcard_detectors):
+                    continue
+                wild_several_data = None
+                try:
+                    for several_data in witnesses.values():
+                        if wild_several_data is None:
+                            wild_several_data = several_data
+                        if wild_several_data != several_data:
+                            raise ValueError
+                except ValueError:
+                    # Not a wildcard
+                    break
+                assert wild_several_data is not None
+                # Add a wildcard record and filter-out existing ones
+                for data in wild_several_data:
+                    all_records.add(('*.' + wild_suffix, rtype, data))
+                    # Identify wildcard records by their data
+                    if (rtype, data) not in wildcard_records_by_data:
+                        wildcard_records_by_data[(rtype, data)] = set()
+                    wildcard_records_by_data[(rtype, data)].add(wild_suffix)
+
+        # Filter-out wildcard records and compute the maximum length of a domain name
+        max_domain_len = 0
+        deleted_records = set()
+        for domain, rtype, data in all_records:
+            is_deleted = False
+            for possible_wild_suffix in wildcard_records_by_data.get((rtype, data), []):
+                if domain != '*.' + possible_wild_suffix and domain.endswith('.' + possible_wild_suffix):
+                    deleted_records.add((domain, rtype, data))
+                    is_deleted = True
+                    continue
+            if is_deleted:
+                continue
+            if rtype == 'PTR':
+                # Ignore long PTR records in max_domain_len computation
+                continue
+            if max_domain_len < len(domain):
+                max_domain_len = len(domain)
+
+        for rec in deleted_records:
+            all_records.remove(rec)
+
         # Sort by domain name, and place rPTR entries right after A and AAAA ones.
         items = sorted(
-            self.dns_records,
+            all_records,
             key=lambda x: (dns_sortkey(x[0]), x[1].replace('rPTR', 'ArPTR'), x[2]))
         for domain, rtype, data in items:
             if hide_dnssec and rtype in ('DNSKEY', 'NSEC3PARAM', 'NSEC3', 'RRSIG'):
@@ -501,6 +789,8 @@ def main(argv=None):
     parser.add_argument('-i', '--ipaddr', metavar="IP_NETWORK",
                         nargs='*', type=ipaddress.ip_network,
                         help="resolve reverse (PTR) records for the IP addresses")
+    parser.add_argument('-M', '--merge-cache', action='store_true',
+                        help="merge cache files together")
     parser.add_argument('-p', '--prefixes', action='store_true',
                         help="add some well-known prefixes to the domains")
     parser.add_argument('-s', '--sort', action='store_true',
@@ -516,11 +806,15 @@ def main(argv=None):
 
     # Load the list of domains
     with open(args.file, 'r') as fdomains:
-        domains = [l.strip().rstrip('.') for l in fdomains.readlines()]
+        raw_domains = [l.rstrip('\n') for l in fdomains.readlines()]
+    domains = [l.strip().rstrip('.').lower() for l in raw_domains]
 
     if args.sort:
-        sorted_domains = sorted(set(domains), key=dns_sortkey)
-        if sorted_domains != domains:
+        domains_set = set(domains)
+        if '' in domains_set:
+            domains_set.remove('')
+        sorted_domains = sorted(domains_set, key=dns_sortkey)
+        if sorted_domains != raw_domains:
             # Write the sorted list back
             with open(args.file, 'w') as fout:
                 fout.write(''.join((d + '\n') for d in sorted_domains))
@@ -538,7 +832,9 @@ def main(argv=None):
     # Fill the cache
     random.shuffle(domains)  # Do not be predictable
     for domain in domains:
-        for rtype in DNS_TYPES:
+        # Treat SRV records in a special way, to restrict the requested record type
+        resolving_types = DNS_SRV_TYPES if '._tcp.' in domain or '._udp.' in domain else DNS_TYPES
+        for rtype in resolving_types:
             # Do not resolve PTR for normal domains
             if rtype != 'PTR':
                 resolver.resolve_in_cache(domain, rtype)
@@ -550,12 +846,13 @@ def main(argv=None):
             for p, d in itertools.product(WELLKNOWN_PREFIXES, domains))
         random.shuffle(domains_with_prefixes)  # Do not be predictable
         for domain in domains_with_prefixes:
-            for rtype in DNS_TYPES:
+            resolving_types = DNS_SRV_TYPES if '._tcp.' in domain or '._udp.' in domain else DNS_TYPES
+            for rtype in resolving_types:
                 if rtype != 'PTR':
                     resolver.resolve_in_cache(domain, rtype)
 
     # Load the cache
-    resolver.load_cache()
+    resolver.load_cache(if_dirty=True)
 
     # Resolve PTR records given on the command line
     if args.ipaddr:
@@ -598,6 +895,10 @@ def main(argv=None):
     if args.stdout or not args.output:
         for line in resolver.dump_records(hide_dnssec=args.hide_dnssec):
             print(line)
+
+    # Merge all cache files together
+    if args.merge_cache:
+        resolver.merge_cache_files()
 
 
 if __name__ == '__main__':
