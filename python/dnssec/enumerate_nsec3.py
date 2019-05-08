@@ -392,11 +392,11 @@ class Nsec3ForZone(object):
                 self.known_nsec3_keys.add(nsec3.domain_hash)
                 self.known_nsec3.append((nsec3.domain_hash, nsec3.next_hashed))
         self.known_nsec3.sort()
-        print(self.known_nsec3[-1], domain_hash)
         if not self.is_looping:
             self.is_looping = self.known_nsec3[-1][0] > self.known_nsec3[-1][1]
         assert all(tup[0] < tup[1] for tup in self.known_nsec3[:-1])
-        assert self.find_interval_for_hash(domain_hash), "The NSEC3 for {} has not been cached.".format(domain_name)
+        if not self.find_interval_for_hash(domain_hash):
+            logger.warning("The NSEC3 record for %r has not been cached.", domain_name)
 
 
 def enumerate_nsec3(domain, dns_cache, output_format):
