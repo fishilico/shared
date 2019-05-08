@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>JavaScript Hash Computer</title>
+        <meta charset="utf-8">
+        <style><!--
+            body {
+                text-align: center;
+            }
+            #drag-area {
+                margin: 1em 20%;
+                padding: 100px 20px;
+                text-align: center;
+                font-size: 1.25em;
+                background-color: white;
+                border: 2px dashed #ccc;
+                border-radius: 25px;
+            }
+
+            #drag-area.is-dragover {
+                background-color: white;
+                border: 2px solid #bbb;
+                color: gray;
+            }
+
+            #results * {
+                text-align: left;
+            }
+        --></style>
+        <script><!--
+"use strict";
+
+function setup_drag_and_drop_area(dnd_div) {
+    const has_dnd_upload = (
+        (('draggable' in dnd_div) || ('ondragstart' in dnd_div && 'ondrop' in dnd_div)) &&
+        'FormData' in window &&
+        'FileReader' in window);
+    if (!has_dnd_upload) {
+        // Hide the Drag-and-Drop feature
+        dnd_div.style.display = 'none';
+        return;
+    }
+    ['drag', 'dragend', 'dragenter', 'dragleave', 'dragover', 'dragstart', 'drop'].forEach(function(event_name) {
+        dnd_div.addEventListener(event_name, function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+    ['dragover', 'dragenter'].forEach(function(event_name) {
+        dnd_div.addEventListener(event_name, function(e) {
+            dnd_div.classList.add('is-dragover');
+        });
+    });
+    ['dragleave', 'dragend', 'drop'].forEach(function(event_name) {
+        dnd_div.addEventListener(event_name, function(e) {
+           dnd_div.classList.remove('is-dragover');
+        });
+    });
+    dnd_div.addEventListener('drop', function(e) {
+        compute_hash(e.dataTransfer.files[0]);
+    });
+}
+window.onload = function() {
+    setup_drag_and_drop_area(document.getElementById('drag-area'));
+    if (typeof window.crypto.subtle === 'undefined') {
+        document.forms[0].innerHTML =
+            '<div style="color: red;font-weight: bold;">Error: no <code>window.crypto.subtle</code> API!</div>';
+    }
+};
+
+function hexlify(array_buffer) {
+    const byte_array = new Uint8Array(array_buffer);
+    const hex_codes = Array.prototype.map.call(byte_array, function(x) {
+        return x.toString(16).padStart(2, '0');
+    });
+    return hex_codes.join('');
+}
+function b64encode(array_buffer) {
+    const byte_array = new Uint8Array(array_buffer);
+    const binary = Array.prototype.map.call(byte_array, function(x) {
+        return String.fromCharCode(x);
+    });
+    return window.btoa(binary.join(''));
+}
+
+function compute_hash(file) {
+    // Show the loaded file in JavaScript console
+    console.log(file);
+
+    const e_list = document.createElement('ul');
+
+    const file_elem = document.createElement('li');
+    file_elem.innerText = 'File: ' + file.name + ' (' + file.type + ', ' + file.size + ' bytes)';
+    e_list.appendChild(file_elem);
+
+    const loading_progress_bar = document.createElement('div');
+    loading_progress_bar.style.fontFamily = 'monospace';
+    loading_progress_bar.style.textAlign = 'center';
+    loading_progress_bar.style.width = '100%';
+    loading_progress_bar.innerText = 'Loading...';
+
+    const e_results = document.getElementById('results');
+    e_results.innerHTML = '';
+    e_results.appendChild(e_list);
+    e_results.appendChild(loading_progress_bar);
+
+    const reader = new FileReader();
+    reader.addEventListener('load', function(e) {
+        var hash_elems = {};
+        ['SHA-1', 'SHA-256', 'SHA-384', 'SHA-512'].forEach(function(hash_name) {
+            hash_elems[hash_name] = [document.createElement('code'), document.createElement('code')];
+            hash_elems[hash_name][0].innerText = 'computing...';
+            hash_elems[hash_name][1].innerText = 'computing...';
+
+            var elem = document.createElement('li');
+            elem.innerText = hash_name + ' hex: ';
+            elem.appendChild(hash_elems[hash_name][0]);
+            e_list.appendChild(elem);
+
+            elem = document.createElement('li');
+            elem.innerText = hash_name + ' base64: ';
+            elem.appendChild(hash_elems[hash_name][1]);
+            e_list.appendChild(elem);
+        });
+
+        e_results.innerHTML = '';
+        e_results.appendChild(e_list);
+
+        const data = e.target.result;
+        Object.keys(hash_elems).forEach(function(hash_name) {
+            // Compute hashes using SubtleCrypto.digest() API
+            // https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest
+            window.crypto.subtle.digest(hash_name, data).then(function(digest) {
+                hash_elems[hash_name][0].innerText = hexlify(digest);
+                hash_elems[hash_name][1].innerText = b64encode(digest);
+            }, function(error) {
+                hash_elems[hash_name][0].innerText = "Errored (" + error + ")";
+                hash_elems[hash_name][1].innerText = "Errored";
+            });
+        });
+    });
+    reader.addEventListener('progress', function(e) {
+        if (!e.total)
+            return;
+        const progress = Math.floor(e.loaded * 200 / e.total);
+        var pbar = Math.floor(e.loaded * 100 / e.total) + '% ';
+        for (var i = 0; i < 200; i += 8) {
+            if (i + 8 <= progress) { // ie. progress - i >= 8
+                pbar += '█';
+            } else if (progress <= i) { // ie. progress - i <= 0
+                pbar += '⠀';
+            } else {
+                pbar += ['⠀','▏','▎','▍','▌','▋','▊','▉'][progress - i];
+            }
+        }
+        loading_progress_bar.innerText = pbar;
+    });
+    reader.addEventListener('loadend', function(e) {
+        // Do not change e_results, as this will be done in "load" handler
+        loading_progress_bar.innerText = 'Loaded.';
+    });
+    reader.readAsArrayBuffer(file);
+}
+        --></script>
+    </head>
+    <body>
+        <h1>JavaScript Hash Computer</h1>
+        <form action="javascript:void(0);">
+            <label for="file">Browse your filesystem:</label>
+            <input type="file" id="file" onchange="compute_hash(this.files[0]);">
+            <div id="drag-area">... or drop a file here.</div>
+        </form>
+        <div id="results"></div>
+    </body>
+</html>
