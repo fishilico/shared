@@ -101,6 +101,7 @@ pkg file
 pkg fortune-mod
 pkg fortunes
 pkg gnupg
+pkg highlight
 pkg htop
 pkg iotop
 pkg jq
@@ -121,6 +122,7 @@ pkg vim
 pkg zsh
 
 # Hardware and TTY
+pkg acpica-tools
 pkg console-data
 pkg gpm
 pkg iw
@@ -135,15 +137,22 @@ pkg wpasupplicant
 
 # Archives and filesystems
 pkg btrfs-progs
+pkg cabextract
+pkg cpio
 pkg cryptsetup
 pkg dosfstools
 pkg eject
 pkg exfat-utils
+pkg extundelete
+pkg innoextract
 pkg lvm2
+pkg lzop
 pkg mdadm
+pkg mtd-utils
 pkg mtools
 pkg ntfs-3g
 pkg p7zip-full
+pkg squashfs-tools
 pkg unzip
 pkg zip
 
@@ -162,11 +171,14 @@ pkg dnsmasq-base
 pkg dnsutils
 pkg ebtables
 pkg ftp
+pkg hping3
 pkg iftop
 pkg iptables-persistent
+pkg ldap-utils
 pkg ldnsutils
 pkg lftp
 pkg links
+pkg mariadb-client
 pkg mutt
 pkg ndisc6
 pkg net-tools
@@ -175,7 +187,9 @@ pkg nftables
 pkg nmap
 pkg rsync
 pkg smbclient
+pkg snmp
 pkg socat
+pkg sqlmap
 pkg ssh
 pkg sshfs
 pkg tcpdump
@@ -195,6 +209,9 @@ pkg git
 pkg highlight
 pkg ipython
 pkg libcap-ng-utils
+pkg ltrace
+pkg nodejs
+pkg php
 pkg pkg-config
 pkg pypy
 pkg python
@@ -205,12 +222,15 @@ pkg python3
 pkg python3-dev
 pkg python3-venv
 pkg python3-setuptools
+pkg rake
 pkg ruby
 pkg shellcheck
 
 # Other
 pkg cmatrix
+pkg figlet
 pkg john
+pkg lolcat
 pkg sl
 
 # Debian-specific packages
@@ -261,6 +281,7 @@ then
     pkg bleachbit
     pkg eog
     pkg evince
+    pkg firejail
     pkg ffmpeg
     pkg file-roller
     pkg filezilla

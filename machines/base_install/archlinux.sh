@@ -185,6 +185,7 @@ pkg zsh
 
 # Hardware and TTY
 pkg acpi
+pkg acpica
 pkg efibootmgr
 pkg gpm
 pkg iw
@@ -301,6 +302,7 @@ fi
 
 # Other
 pkg cmatrix
+pkg figlet
 pkg john
 pkg lolcat
 pkg sl
