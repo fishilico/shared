@@ -454,7 +454,7 @@ class Resolver:
         self.dns_questions = set()
         self.dns_records = set()
         for filepath in self.cache_directory.glob('*.json'):
-            with open(filepath, 'r') as fjson:
+            with filepath.open(mode='r') as fjson:
                 for line in fjson:
                     json_data = json.loads(line)
 
@@ -512,12 +512,12 @@ class Resolver:
         all_lines = set()
         for filepath in self.cache_directory.glob('*.json'):
             all_files.add(filepath)
-            with open(filepath, 'r') as fjson:
+            with filepath.open(mode='r') as fjson:
                 for line in fjson:
                     all_lines.add(line.strip() + '\n')
 
         merged_file = self.cache_directory / 'all.json'
-        with open(merged_file, 'w') as fout:
+        with merged_file.open(mode='w') as fout:
             fout.write(''.join(sorted(all_lines)))
         for filepath in all_files:
             if filepath != merged_file:
@@ -546,7 +546,7 @@ class Resolver:
 
         # Write the cache file
         response = response.strip(b'\n')
-        with open(cache_file, 'wb') as fout:
+        with cache_file.open(mode='wb') as fout:
             fout.write(response)
             fout.write(b'\n')
 
@@ -805,7 +805,7 @@ def main(argv=None):
         parser.error("please provide a cache directory with option -d/--directory")
 
     # Load the list of domains
-    with open(args.file, 'r') as fdomains:
+    with args.file.open(mode='r') as fdomains:
         raw_domains = [l.rstrip('\n') for l in fdomains.readlines()]
     domains = [l.strip().rstrip('.').lower() for l in raw_domains]
 
@@ -816,7 +816,7 @@ def main(argv=None):
         sorted_domains = sorted(domains_set, key=dns_sortkey)
         if sorted_domains != raw_domains:
             # Write the sorted list back
-            with open(args.file, 'w') as fout:
+            with args.file.open(mode='w') as fout:
                 fout.write(''.join((d + '\n') for d in sorted_domains))
 
     # Create the cache directory, if it does not exist
@@ -883,12 +883,12 @@ def main(argv=None):
         sorted_domains = sorted(set(domains).intersection(found_domains), key=dns_sortkey)
         if sorted_domains != domains:
             # Write the sorted list back
-            with open(args.file, 'w') as fout:
+            with args.file.open(mode='w') as fout:
                 fout.write(''.join((d + '\n') for d in sorted_domains))
 
     # Produce the output
     if args.output:
-        with open(args.output, 'w') as fout:
+        with args.output.open(mode='w') as fout:
             for line in resolver.dump_records(hide_dnssec=args.hide_dnssec):
                 fout.write(line + '\n')
 
