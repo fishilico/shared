@@ -369,6 +369,7 @@ then
     pkg meld
     pkg modemmanager
     pkg mupdf
+    pkg mupdf-tools
     pkg network-manager-applet
     pkg networkmanager
     pkg pandoc
@@ -450,6 +451,7 @@ then
     #pkg mariadb
     pkg metasploit
     pkg openocd
+    pkg php-sqlite
     pkg python-kaitaistruct
     pkg python-lxml
     pkg python-matplotlib
@@ -464,6 +466,7 @@ then
     pkg python-pylint
     pkg python-pyopenssl
     pkg python-pyqtgraph
+    pkg python-pyserial
     pkg python-pyusb
     pkg python-qrcode
     pkg python-scapy
@@ -490,6 +493,7 @@ then
 
     aurpkg android-apktool
     aurpkg dex2jar
+    aurpkg ghidra
     aurpkg ilspymono-git
     aurpkg jd-gui
     aurpkg kaitai-struct-compiler
