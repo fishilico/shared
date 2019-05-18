@@ -16,6 +16,8 @@ System administration
   My First 5 Minutes On A Server; Or, Essential Security for Linux Servers
 * https://www.debian.org/doc/manuals/securing-debian-howto/
   Securing Debian Manual
+* https://github.com/imthenachoman/How-To-Secure-A-Linux-Server
+  How To Secure A Linux Server
 * http://www.mysqlperformanceblog.com/2013/12/07/linux-performance-tuning-tips-mysql/
   Linux performance tuning tips for MySQL
 * https://www.monitoring-plugins.org/ The Monitoring Plugins Project
@@ -67,6 +69,8 @@ Hacking
   Free Reverse Engineering Tools
 * https://github.com/das-labor/panopticon
   A libre cross-platform disassembler for reverse engineering written in Rust.
+* https://github.com/fr0gger/awesome-ida-x64-olly-plugin
+  A curated list of IDA x64DBG and OllyDBG plugins.
 * https://github.com/secgroundzero/warberry
   WarBerryPi - Tactical Exploitation
 * https://github.com/radareorg/r2con/blob/master/2016/trainings/02-a-to-z/r2con-AtoZ.pdf
