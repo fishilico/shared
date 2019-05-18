@@ -318,6 +318,7 @@ if "$INSTALL_DESKTOP"
 then
     # X11 server
     grouppkg xorg
+    grouppkg xorg-drivers
     pkg rxvt-unicode
     pkg wmctrl
     pkg xscreensaver
