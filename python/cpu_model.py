@@ -2054,7 +2054,7 @@ class X86CPUInfo(CPUInfo):
             for i in range(3):
                 eax, ebx, ecx, edx = cpuid(0x80000002 + i)
                 brand_string += struct.pack(b'<IIII', eax, ebx, ecx, edx)
-            model_name = brand_string.decode('ascii').rstrip('\0')
+            model_name = brand_string.decode('ascii').rstrip('\0').lstrip(' ')
         else:
             model_name = None
         return X86CPUInfo(vendor_id.decode('ascii'), model_name, cpuid_1)
