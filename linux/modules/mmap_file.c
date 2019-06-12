@@ -38,10 +38,17 @@ static void mmap_close(struct vm_area_struct *vma)
 	pr_info("Mmap closing for %pK\n", vma->vm_private_data);
 }
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 1, 0)
+/* Commit 3d3539018d2c ("mm: create the new vm_fault_t type") made vm_fault_t
+ * unsigned, which is incompatible with previous versions
+ */
+static vm_fault_t mmap_fault(struct vm_fault *vmf)
+{
+	struct vm_area_struct *vma = vmf->vma;
+#elif LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
 /* Commit 11bac8000449 ("mm, fs: reduce fault, page_mkwrite, and pfn_mkwrite to
  * take only vmf") remove vma parameter in Linux 4.11
  */
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
 static int mmap_fault(struct vm_fault *vmf)
 {
 	struct vm_area_struct *vma = vmf->vma;
