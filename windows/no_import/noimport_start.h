@@ -12,8 +12,8 @@
  * reading the code of the set_entry_point() function in ld/emultempl/pe.em:
  * https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=blob;f=ld/emultempl/pe.em
  */
-void __cdecl WinMainCRTStartup(void) __attribute__ ((alias("_start")));
-void __cdecl mainCRTStartup(void) __attribute__ ((alias("_start")));
+void __cdecl WinMainCRTStartup(void) __attribute__ ((alias("_start"), noreturn));
+void __cdecl mainCRTStartup(void) __attribute__ ((alias("_start"), noreturn));
 void __cdecl _start(void) __attribute__ ((noreturn));
 static int _main(void);
 
