@@ -280,6 +280,8 @@ Apple Mac OS
 * https://www.macworld.co.uk/feature/mac/mac-os-x-macos-version-code-names-3662757/
 * https://en.wikipedia.org/wiki/MacOS_version_history
 * Security updates: https://support.apple.com/en-us/HT201222
+* The version information can be obtained through ``sw_vers``
+  (https://opensource.apple.com/source/DarwinTools/DarwinTools-1/sw_vers.c.auto.html)
 
 +-----------------+---------------------------+--------------+
 | Version         | Code name                 | Release date |
