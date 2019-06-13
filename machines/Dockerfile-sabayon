@@ -36,6 +36,7 @@ RUN \
         echo 'gsm' && \
         echo 'inner-net' && \
         echo 'libpng' && \
+        echo 'libpng2' && \
         echo 'libtiff' && \
         echo 'linux-firmware' && \
         echo 'no-source-code' && \
