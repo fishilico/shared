@@ -17,7 +17,8 @@ RUN \
     echo '>=media-libs/libsdl2-2.0.8 gles' >> /etc/portage/package.use/libsdl2 && \
     echo '>=media-libs/mesa-18.1.9 gles2' >> /etc/portage/package.use/mesa && \
     echo '>=media-plugins/alsa-plugins-1.0.29 pulseaudio' >> /etc/portage/package.use/pulseaudio && \
-    echo '>=sys-apps/util-linux-2.32-r4 static-libs' >> /etc/portage/package.use/util-linux
+    echo '>=sys-apps/util-linux-2.32-r4 static-libs' >> /etc/portage/package.use/util-linux && \
+    echo '>=sys-kernel/linux-firmware-20190514 linux-fw-redistributable no-source-code' >> /etc/portage/package.license
 
 # llvm requires kernel sources in /usr/src/linux
 # Merge llvm with MAKEOPTS="-j1", but its dependency "cmake" faster
