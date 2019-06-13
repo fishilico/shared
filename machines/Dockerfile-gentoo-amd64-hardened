@@ -48,6 +48,7 @@ RUN \
         x11-libs/pango && \
     emerge \
         dev-python/cffi \
+        dev-python/gmpy \
         dev-python/numpy \
         dev-python/pycrypto \
         media-libs/libsdl2 \

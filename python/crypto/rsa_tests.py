@@ -53,6 +53,12 @@ import Crypto.Hash.SHA512
 import Crypto.Signature.PKCS1_PSS
 import Crypto.Signature.PKCS1_v1_5
 
+try:
+    import gmpy2.mpz
+    HAVE_GMPY2 = True
+except ImportError:
+    HAVE_GMPY2 = False
+
 
 logger = logging.getLogger(__name__)
 
@@ -68,6 +74,15 @@ def extended_gcd(aa, bb):
     """Extended greatest common divisor
 
     from https://rosettacode.org/wiki/Modular_inverse#Python
+
+    NB. This implementation is quite inefficient, compared to optimized implementations
+    such as libTomMath (https://www.libtom.net/LibTomMath/). The author of this
+    library described in a book (http://manual.freeshell.org/ltm/tommath.pdf)
+    how inefficient an Euclidean division is and how to avoid it.
+
+    In Python, it would be counter-productive to implement the same algorithm as
+    libTomMath. Instead, advertise for native implementations such as gmpy2.mpz.invert
+    (https://gmpy2.readthedocs.io/en/latest/mpz.html#mpz-functions).
     """
     lastremainder, remainder = abs(aa), abs(bb)
     x, lastx, y, lasty = 0, 1, 1, 0
@@ -87,7 +102,11 @@ def modinv(a, m):
     g, x, y = extended_gcd(a, m)
     if g != 1:
         raise ValueError
-    return x % m
+    x %= m
+    if HAVE_GMPY2:
+        # Ensure that the algorithm is correct
+        assert x == gmpy2.mpz.invert(a, m)
+    return x
 
 
 def lcm(x, y):

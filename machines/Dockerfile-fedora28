@@ -36,11 +36,13 @@ RUN \
         python3-cffi \
         python3-crypto \
         python3-devel \
+        python3-gmpy2 \
         python3-numpy \
         python3-z3 \
         python2-cffi \
         python2-crypto \
         python2-devel \
+        python2-gmpy2 \
         python2-z3 \
         SDL2-devel \
         which \

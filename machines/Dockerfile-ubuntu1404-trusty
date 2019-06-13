@@ -35,11 +35,13 @@ RUN \
         python3-cffi \
         python3-crypto \
         python3-dev \
+        python3-gmpy2 \
         python3-numpy \
         python-argparse \
         python-cffi \
         python-crypto \
         python-dev \
+        python-gmpy2 \
         python-numpy \
         wine && \
     apt-get clean

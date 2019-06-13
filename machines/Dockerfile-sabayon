@@ -46,6 +46,7 @@ RUN \
     equo update && \
     equo install \
         dev-python/cffi \
+        dev-python/gmpy \
         dev-python/pycrypto \
         dev-python/numpy \
         media-libs/libsdl2 \

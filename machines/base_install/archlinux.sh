@@ -454,6 +454,7 @@ then
     pkg metasploit
     pkg openocd
     pkg php-sqlite
+    pkg python-gmpy2
     pkg python-kaitaistruct
     pkg python-lxml
     pkg python-matplotlib
@@ -471,6 +472,7 @@ then
     pkg python-pyserial
     pkg python-pyusb
     pkg python-qrcode
+    pkg python-requests
     pkg python-scapy
     pkg python-scipy
     pkg python-sphinx
