@@ -24,7 +24,7 @@ RUN \
 # Merge llvm with MAKEOPTS="-j1", but its dependency "cmake" faster
 # cf. https://forums.gentoo.org/viewtopic-t-1062974-start-0.html
 
-# Installing dev-libs/gobject-introspection fails with:
+# Installing dev-libs/gobject-introspection and x11-libs/gdk-pixbuf and some other packages fails with:
 #  * ISE:_do_ptrace: ptrace(PTRACE_TRACEME, ..., 0x0000000000000000, 0x0000000000000000): Operation not permitted
 # ERROR: can't resolve libraries to shared libraries: glib-2.0, gobject-2.0
 # This is because Gentoo's build sandbox (sys-apps/sandbox) ptraces ldd (because it can't LDPRELOAD into it).
@@ -36,7 +36,16 @@ RUN \
     emerge --quiet --sync && \
     emerge dev-util/cmake sys-kernel/gentoo-sources && \
     MAKEOPTS='-j1' emerge sys-devel/llvm sys-devel/clang && \
-    FEATURES='-usersandbox -sandbox' emerge dev-libs/gobject-introspection && \
+    FEATURES='-usersandbox -sandbox' emerge \
+        app-accessibility/at-spi2-core \
+        dev-libs/atk \
+        dev-libs/gobject-introspection \
+        gnome-base/librsvg \
+        media-libs/harfbuzz \
+        x11-libs/gdk-pixbuf \
+        x11-libs/gtk+:2 \
+        x11-libs/gtk+:3 \
+        x11-libs/pango && \
     emerge \
         dev-python/cffi \
         dev-python/numpy \
@@ -45,8 +54,7 @@ RUN \
         media-sound/pulseaudio \
         sci-mathematics/coq \
         sys-kernel/genkernel \
-        virtual/jdk \
-        x11-libs/gtk+ && \
+        virtual/jdk && \
     genkernel all && \
     rm -r /usr/portage/distfiles/ /var/tmp/portage/
 
