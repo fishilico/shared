@@ -323,6 +323,7 @@ then
     pkg wmctrl
     pkg xscreensaver
     pkg xsel
+    pkg xpra
     pkg xterm
 
     # Fonts
