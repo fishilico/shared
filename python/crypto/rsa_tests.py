@@ -38,6 +38,7 @@ import base64
 import binascii
 import errno
 import hashlib
+import itertools
 import logging
 import os
 import subprocess
@@ -93,6 +94,131 @@ def lcm(x, y):
     """Least Common Multiple"""
     g, _, _ = extended_gcd(x, y)
     return (x // g) * y
+
+
+def get_privexp_from_npe(n, p, e, q=None, use_lcm=False):
+    """Get the private exponent from a public key (n, e) and a prime of n, p"""
+    if q is None:
+        q = n // p
+    assert p * q == n
+    order_mod_n = lcm(p - 1, q - 1) if use_lcm else (p - 1) * (q - 1)
+    return modinv(e, order_mod_n)
+
+
+def get_primes_from_ned(n, e, d, verbose=False):
+    """Get primes (p, q) from a public key (n, e) and the private exponent d
+
+    How does it work?
+    - d*e - 1 is a multiple of lcm(p - 1, q - 1), which is the order of the
+      group of invertible items of Z/nZ
+    - By finding low factors of this number, it is likely to obtain the order
+      or a number close to it, because p and q should be strong primes
+      (ie. p-1 and q-1 should not have many small factors)
+    - (p - 1)*(q - 1) is a multiple of the order, and is equal to:
+      (p * q) - p - q + 1 = (n + 1) - (p + q)
+    - Therefore (p + q) mod order = (n + 1) mod order
+    - As p and q should be strong primes, the order (which is lcm(p - 1, q - 1))
+      has much more bits that p and q, so (p + q) < order.
+    - This leads to: p + q = (n + 1) mod order. With p * q = n, p and q are the
+      roots of (X - p)*(X - q) = X*X - ((n + 1) mod order)*X + n
+    - Finding the roots of this polynom in the usual set of integers is easy.
+    """
+    current_order = d * e - 1
+
+    # Ensure that d and e are private and public keys
+    assert pow(2, current_order, n) == 1
+    assert pow(3, current_order, n) == 1
+    assert pow(5, current_order, n) == 1
+
+    if verbose:
+        print("* d*e - 1 ({}) = {:#x}".format(current_order.bit_length(), current_order))
+
+    # Reduce the order using small factors
+    for factor in itertools.chain([2], range(3, 100000, 2)):
+        while current_order % factor == 0:
+            new_order = current_order // factor
+            # The factor could be a factor of the real order, in which case
+            # new_order is no longer an order. Perform basic checks in order
+            # to keep an order after the reduction
+            if pow(2, new_order, n) != 1 or pow(3, new_order, n) != 1 or pow(5, new_order, n) != 1:
+                print("* Not reducing by {}".format(factor))
+                break
+            current_order = new_order
+            if verbose:
+                print("* Reducing by {} => {} bits".format(factor, current_order.bit_length()))
+
+            # Try to factorize as soon as the order is small enough
+            if current_order < n:
+                sum_p_q = (n + 1) % current_order
+                if verbose:
+                    print("* Order({}) = {:#x}".format(current_order.bit_length(), current_order))
+                    print("* p + q ({}) = {:#x}".format(sum_p_q.bit_length(), sum_p_q))
+
+                delta = (sum_p_q ** 2) - 4 * n
+
+                # Compute the precise root by dichotomy, because math.sqrt operates on floats
+                sqrt_min = 0
+                sqrt_max = delta
+                while sqrt_min < sqrt_max - 1:
+                    testing = (sqrt_min + sqrt_max) // 2
+                    if testing * testing > delta:
+                        sqrt_max = testing
+                    elif testing * testing < delta:
+                        sqrt_min = testing
+                    else:
+                        sqrt_min = sqrt_max = testing
+                while sqrt_min < sqrt_max and sqrt_min * sqrt_min < delta:
+                    sqrt_min += 1
+                if sqrt_min * sqrt_min != delta:
+                    # This may happen when the order has not been simplified enough
+                    if verbose:
+                        print("* ... Unable to find a square root for the discriminant of the polynom")
+                        continue
+
+                p = (sum_p_q - sqrt_min) // 2
+                q = (sum_p_q + sqrt_min) // 2
+                if verbose:
+                    print("* Found p({}): {:#x}".format(p.bit_length(), p))
+                    print("* Found q({}): {:#x}".format(q.bit_length(), q))
+                    real_order = lcm(p - 1, q - 1)
+                    print("* LCM(p-1, q-1)({}): {:#x}".format(real_order.bit_length(), real_order))
+                    if current_order > real_order:
+                        assert current_order % real_order == 0
+                        print("* Missing factor from the order: {}".format(current_order // real_order))
+                    elif current_order < real_order:
+                        assert real_order % current_order == 0
+                        print("* The order has been factorized too much, by: {}".format(real_order // current_order))
+                assert p * q == n
+                return p, q
+
+    if current_order > n:
+        # If the current order is too big, (n + 1) % current_order = n + 1 and the "p and q" will be n and 1
+        raise ValueError("Unable to reduce the order enough for factorization")
+
+
+def privkey_from_npe(n, p, e, q=None, use_lcm=False):
+    """Craft a private RSA key from a public key (n, e) and a prime of n, p"""
+    if q is None:
+        q = n // p
+    assert p * q == n
+    d = get_privexp_from_npe(n, p, e, q=q, use_lcm=use_lcm)
+    return Crypto.PublicKey.RSA.construct((n, e, d, p, q))
+
+
+def privkey_from_pub_p(pubkey, p, use_lcm=False):
+    """Craft a private RSA key from a public key and a prime of n, p"""
+    return privkey_from_npe(pubkey.n, p, pubkey.e, use_lcm=use_lcm)
+
+
+def privkey_from_ned(n, e, d, verbose=False):
+    """Craft a private RSA key from a public key (n, e) and a private exponent, d"""
+    p, q = get_primes_from_ned(n, e, d, verbose=verbose)
+    return Crypto.PublicKey.RSA.construct((n, e, d, p, q))
+
+
+def privkey_from_pub_d(pubkey, d, verbose=False):
+    """Craft a private RSA key from a public key and a private exponent, d"""
+    return privkey_from_ned(pubkey.n, pubkey.e, d, verbose=verbose)
 
 
 def hexdump(data, color=''):
@@ -180,6 +306,13 @@ def xor_bytes(data1, data2):
     return b''.join([chr(ord(x) ^ ord(y)) for x, y in zip(data1, data2)])
 
 
+def save_as_pem(key, filename):
+    """Save a RSA public or private key as PEM format"""
+    with open(filename, 'wb') as fout:
+        fout.write(key.exportKey('PEM'))
+        fout.write('\n')
+
+
 def run_process_with_input(cmdline, data, color=None):
     """Run the given command with the given data and show its output in colors"""
     print("Output of \"{}\":".format(' '.join(cmdline)))
@@ -254,6 +387,29 @@ def run_openssl_test(bits, colorize):
     if not run_process_with_input(['openssl', 'rsa', '-noout', '-text', '-pubin'], pempubkey, color=color_green):
         return False
     print("")
+
+    # Recover the private key from a prime
+    decoded_pubkey = Crypto.PublicKey.RSA.importKey(pempubkey)
+    recovered_privkey_nolcm = privkey_from_pub_p(decoded_pubkey, key.p, use_lcm=False)
+    recovered_privkey_lcm = privkey_from_pub_p(decoded_pubkey, key.p, use_lcm=True)
+    assert recovered_privkey_nolcm.n == pubkey.n
+    assert recovered_privkey_nolcm.e == pubkey.e
+    assert recovered_privkey_nolcm.p == key.p
+    assert recovered_privkey_nolcm.q == key.q
+    assert recovered_privkey_lcm.n == pubkey.n
+    assert recovered_privkey_lcm.e == pubkey.e
+    assert recovered_privkey_lcm.p == key.p
+    assert recovered_privkey_lcm.q == key.q
+    assert key.d in (recovered_privkey_nolcm.d, recovered_privkey_lcm.d)
+
+    # Recover the private key from the private exponent
+    decoded_pubkey = Crypto.PublicKey.RSA.importKey(pempubkey)
+    recovered_privkey = privkey_from_pub_d(decoded_pubkey, key.d, verbose=True)
+    assert recovered_privkey.n == pubkey.n
+    assert recovered_privkey.e == pubkey.e
+    assert recovered_privkey.p == key.p
+    assert recovered_privkey.q == key.q
+    assert recovered_privkey.d == key.d
 
     # Test message encryption/decryption
     test_message = b'Hello, world! This is a test.'
