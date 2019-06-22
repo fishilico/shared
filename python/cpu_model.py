@@ -39,7 +39,7 @@ import sys
 logger = logging.getLogger(__name__)
 
 
-# Database of "model, stepping: accronym, product name, public names" from:
+# Database of "model, stepping: acronym, product name, public names" from:
 # * https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h
 # * https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/power/x86/turbostat/turbostat.c
 # * https://newsroom.intel.com/wp-content/uploads/sites/11/2018/01/microcode-update-guidance.pdf
@@ -52,7 +52,15 @@ logger = logging.getLogger(__name__)
 # * https://www.intel.com/content/dam/www/public/us/en/documents/corporate-information/SA00233-microcode-update-guidance_05132019.pdf
 #   (2019-05-15, after RIDL and Fallout, Intel-SA-00233)
 # * https://en.wikipedia.org/wiki/Intel_Core
-# * http://users.atw.hu/instlatx64/
+# * http://users.atw.hu/instlatx64/ and https://github.com/InstLatx64/InstLatx64/blob/master/ChangeLog.htm
+# * https://en.wikichip.org/wiki/intel/microarchitectures/cascade_lake
+#
+# To confirm: Cascade Lake {X,W,SP,AP} (CSL-X, CSL-W, CSL-SP, CSL-AP) for (0x55, {5,6,7})
+# Future:
+# * in 2020 Cooper Lake {X,W,SP,AP} (CPL-X,W,SP,AP)
+# * in 2020 Tiger Lake (TGL)
+# * in 2021 Sapphire Rapids (SPR)
+# * ACF ?
 INTEL_FAM6_MODELS = {
     (0x01, 1): (None, '?'),
     (0x01, 2): (None, '?'),
@@ -309,9 +317,11 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i3-530, 540',
         'Intel® Pentium® Processor G6950, G6951, G6960',
     )),
+    (0x26, -1): (None, 'Atom Bonnell Mid ( Silverthorne, Lincroft)'),
     (0x26, 1): (None, 'Atom Lincroft', (
         'Intel® Atom® Z670 (Tunnel Creek)',
     )),
+    (0x27, -1): (None, 'Atom Saltwell (Penwell)'),
     (0x27, 2): (None, 'Atom Penwell', (
         'Intel® Atom® Z2460 1.6GHz (Medfield platform, Penwell SoC, Saltwell core)',
     )),
@@ -399,10 +409,12 @@ INTEL_FAM6_MODELS = {
         '4x 10-Core Intel® Xeon® MP E7-4870, 2400 MHz (18 x 133) (Eagleton, Westmere-EX)',
         'Intel® Xeon® Processor E7-2803, 2820, 2830, 2850, 2860, 2870, 4807, 4820, 4830, 4850, 4860, 4870, 8830, 8837, 8850, 8860, 8867L, 8870',
     )),
+    (0x35, -1): (None, 'Atom Saltwell Tablet (Cloverview)'),
     (0x35, 0): (None, '?'),
     (0x35, 1): (None, 'Atom Cloverview', (
         'DualCore Intel® Atom® Z2760, 1800MHz (Cloverview, Saltwell core)',
     )),
+    (0x36, -1): (None, 'Atom Saltwell (Cedarview)'),
     (0x36, 0): (None, '?'),
     (0x36, 1): (None, 'Atom Cedarview', (
         'DualCore Intel® Atom® D2700, 2133 MHz (16 x 133) (Cedarview, Saltwell core) Bonnell vs. Saltwell',
@@ -586,7 +598,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i5-5575R, i5-5675C, i5-5675R, i7-5775C, i7-5775R',
 
     )),
-    (0x4a, -1): (None, 'Atom Merrifield (Tangier)'),
+    (0x4a, -1): (None, 'Atom Merrifield (Tangier), Atom Silvermont Mid'),
     (0x4a, 8): (None, 'Tangier (SLM)', (
         'Intel® Atom™ Processor Z Series',
         'Intel® Atom® Processor Z34XX',
@@ -708,6 +720,7 @@ INTEL_FAM6_MODELS = {
         '72-Core Intel® Xeon® Phi™ 7290 (Knights Landing, 288 threads)',
         'Intel® Xeon Phi™ 7210, 7210F, 7230, 7230F, 7250, 7250F, 7290, 7290F',
     )),
+    (0x5a, -1): (None, 'Atom Airmont Mid (Moorefield)'),
     (0x5a, 0): (None, 'Atom Moorefield (Anniedale)', (
         'Intel® Atom® Processor Z Series',
         'Intel® Atom® 1.0GHz (Moorefield)',
@@ -768,7 +781,9 @@ INTEL_FAM6_MODELS = {
         'Intel® Mobile Communications Platforms',
         'Intel® XMM™ 7272 Modem',
     )),
-    (0x66, -1): (None, 'Cannon Lake Mobile'),
+    (0x66, -1): ('CNL', 'Cannon Lake Mobile'),
+    (0x6a, -1): ('ICL', 'Icelake'),
+    (0x6c, -1): ('ICXD', 'Icelake Xeon D'),
     (0x6e, 1): (None, 'Cougar Mountain (AMT)', (
         'Intel® Puma™ 7 Home Gateway',
     )),
@@ -782,11 +797,16 @@ INTEL_FAM6_MODELS = {
         'Intel® Celeron® Processor J4005, J4105',
         'Intel® Celeron® Processor N4000, N4100',
     )),
+    (0x7d, -1): ('ICL', 'Icelake Desktop'),
+    (0x7e, -1): ('ICL', 'Icelake Mobile'),
+    (0x7e, 0): ('ICL', 'Icelake A0'),
+    (0x7e, 1): ('ICL', 'Icelake B0'),
     (0x85, 0): ('PHI KNM', 'Xeon Phi Knights Mill', (
         'Intel® Xeon® Phi™ Processor Family',
         'Intel® Xeon Phi™ 72x5 Processor Family',
         'Intel® Xeon Phi™ 7235, 7285, 7295',
     )),
+    (0x86, -1): (None, 'Atom Tremont X (Jacobsville)'),
     (0x8e, 9): ('KBL', 'Kaby Lake Mobile (Kaby Lake U/Y, U23e), Amber Lake Y', (
         '7th Generation Intel® Core™ Mobile Processors',
         'DualCore Intel® Core™ i5-7200U, 3100 MHz (31 x 100) (KabyLake-U/Y)',
@@ -821,14 +841,14 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i5-8250U, i5-8350U',
         'Intel® Core™ Processor i3-7020U, i3-8130U',
     )),
-    (0x8e, 11): (None, 'Whiskey Lake U', (
+    (0x8e, 11): ('WHL-U', 'Whiskey Lake U', (
         '8th Generation Intel® Core™ Processors',
         'Intel® Core™ Processor i7-8565U',
         'Intel® Core™ Processor i5-8265U',
         'Intel® Core™ Processor i3-8145U',
         'Intel® Core™ Processor 4205U, 5405U',
     )),
-    (0x8e, 12): (None, 'Whiskey Lake U', (
+    (0x8e, 12): ('WHL-U', 'Whiskey Lake U', (
         '8th Generation Intel® Core™ Processors',
         'Intel® Core™ Processor i7-8565U, i7-8665U',
         'Intel® Core™ Processor i5-8365U, i5-8265U',
@@ -877,7 +897,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Pentium® Gold G5400, G5400T, G5400T, G5420, G5420T, G5420T, G5500, G5500T, G5600',
         'Intel® Celeron® Processor G4900, G4900T, G4920',
     )),
-    (0x9e, 12): (None, 'Coffee Lake H (8+2), Coffee Lake S (8+2)', (
+    (0x9e, 12): ('CFL', 'Coffee Lake H (8+2), Coffee Lake S (8+2)', (
         '9th Generation Intel® Core™ Processor Family',
         'Intel® Core™ Processor i9-9980HK, 9880H',
         'Intel® Core™ Processor i7-9850H, 9750HF',
@@ -886,6 +906,10 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i7-9700K, i7-9700KF',
         'Intel® Core™ Processor i5-9600K, i5-9600KF, i5-9400, i5-9400F',
     )),
+    (0xa5, 0): ('CML', 'Comet Lake H S 6 2 P0'),
+    (0xa5, 1): ('CML', 'Comet Lake H S 10 2 P0'),
+    (0xa6, 0): ('CML', 'Comet Lake U A0'),
+    (0xa6, 1): ('CML', 'Comet Lake U K0 S0'),
 }
 INTEL_FAM15_MODELS = {
     (0x00, -1): (None, '?'),
