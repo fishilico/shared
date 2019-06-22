@@ -146,6 +146,8 @@ DNS_RESPONSE_CODES = {
 
 # Well-known prefixes seen on domain names
 WELLKNOWN_PREFIXES = (
+    '_amazonses',
+    '_dmarc',
     '_domainkey',
     '_ipp._tcp',
     '_kerberos._tcp',
@@ -156,16 +158,22 @@ WELLKNOWN_PREFIXES = (
     '_ldap._tcp.pdc._msdcs',
     '_ldaps._tcp',
     '_msdcs',
+    '_sip._tcp',
+    '_sip._udp',
+    '_sips._tcp',
     'a',
     'about',
     'account',
+    'adm',
     'admin',
     'agent',
     'alpha',
+    'answers',
     'api',
     'app',
     'app1',
     'archive',
+    'assets',
     'auth',
     'autodiscover',
     'b',
@@ -182,7 +190,9 @@ WELLKNOWN_PREFIXES = (
     'cache',
     'calendar',
     'cdn',
+    'center',
     'chat',
+    'cloud',
     'code',
     'collect',
     'collectd',
@@ -192,29 +202,39 @@ WELLKNOWN_PREFIXES = (
     'console',
     'corp',
     'cpanel',
+    'crl',
     'cvs',
     'data',
     'database',
     'db',
     'dc1',
     'dc2',
+    'demo',
     'dev',
     'developer',
     'dmz',
+    'dns',
     'dns1',
     'dns2',
     'doc',
     'docs',
+    'domains',
     'en',
+    'esxi',
     'eu',
     'euro',
+    'exchange',
     'ext',
+    'external',
     'extra',
     'extranet',
+    'faq',
     'files',
+    'forum',
     'fr',
     'free',
     'ftp',
+    'fw',
     'gc._msdcs',
     'geo',
     'git',
@@ -223,6 +243,7 @@ WELLKNOWN_PREFIXES = (
     'grafana',
     'graph',
     'group',
+    'gw',
     'help',
     'helpdesk',
     'hg',
@@ -239,20 +260,28 @@ WELLKNOWN_PREFIXES = (
     'irc',
     'jenkins',
     'job',
+    'jobs',
     'join',
+    'ldap',
+    'ldaps',
+    'learn',
     'list',
     'lists',
     'log',
     'login',
     'lyncdiscover',
+    'm',
     'mail',
     'mail1',
     'mail2',
     'master',
     'matrix',
     'mattermost',
+    'mdm',
+    'media',
     'mf1',
     'mfa',
+    'mobile',
     'mobility',
     'msoid',
     'mssql',
@@ -262,9 +291,11 @@ WELLKNOWN_PREFIXES = (
     'mysql',
     'nagios',
     'name',
+    'nas',
     'net',
     'new',
     'news',
+    'ng',
     'ns1',
     'ns2',
     'ntp',
@@ -283,24 +314,30 @@ WELLKNOWN_PREFIXES = (
     'pop3',
     'pop3s',
     'portal',
+    'prd',
+    'preprod',
     'prod',
     'product',
     'products',
+    'proxmox',
     'proxy',
     'public',
     'publish',
     'qat',
     'qual',
+    'qualification',
     'queue',
     'rabbitmq',
     'random',
     'redis',
     'redmine',
     'register',
+    'registration',
     'registry',
     'release',
     'releases',
     'repo',
+    'research',
     'rest',
     'rsa',
     'rss',
@@ -310,18 +347,24 @@ WELLKNOWN_PREFIXES = (
     'share',
     'sharing',
     'shop',
+    'sign-in',
+    'signin',
     'sip',
     'smtp',
+    'smtp-in',
+    'smtp-out',
     'smtp1',
     'smtp2',
     'smtps',
     'sonar',
     'spf',
     'splunk',
+    'spot',
     'sql',
     'ssl',
     'sso',
     'staff',
+    'staging',
     'stat',
     'static',
     'stats',
@@ -329,16 +372,20 @@ WELLKNOWN_PREFIXES = (
     'subversion',
     'support',
     'svn',
+    'sync',
     'test',
+    'test1',
     'tls',
     'token',
     'tool',
     'tools',
     'torrent',
     'tracker',
+    'tv',
     'uat',
     'uk',
     'us',
+    'v2',
     'voip',
     'vpn',
     'web',
@@ -350,6 +397,7 @@ WELLKNOWN_PREFIXES = (
     'wireless',
     'www',
     'www1',
+    'www2',
     'www3',
     'xyz',
     'zammad',
@@ -360,7 +408,7 @@ WELLKNOWN_PREFIXES = (
 
 
 def get_comment_for_domain(domain):
-    """Decribe a domain name to produce a comment"""
+    """Describe a domain name to produce a comment"""
     if domain.endswith((
             '.akamaiedge.net.',
             '.akamaized.net',
@@ -375,6 +423,8 @@ def get_comment_for_domain(domain):
         return 'Gandi mail hosting'
     if domain == 'webredir.vip.gandi.net.':
         return 'Gandi web forwarding hosting'
+    if domain.endswith('.azurewebsites.net.'):
+        return 'Microsoft Azure hosting'
     if domain.endswith('.lync.com.'):
         return 'Microsoft Lync'
     if domain == 'clientconfig.microsoftonline-p.net.':
@@ -384,7 +434,7 @@ def get_comment_for_domain(domain):
         return 'Microsoft Office 365'
     if domain.endswith('.outlook.com.'):
         return 'Microsoft Outlook mail'
-    if domain == 'redirect.ovh.net.':
+    if domain in ('redirect.ovh.net.', 'ssl0.ovh.net.'):
         return 'OVH mail provider'
     if domain.endswith('.hosting.ovh.net.'):
         return 'OVH shared web hosting'
@@ -394,7 +444,7 @@ def get_comment_for_domain(domain):
 
 
 def get_comment_for_record(domain, rtype, data):
-    """Decribe a DNS record to produce a comment"""
+    """Describe a DNS record to produce a comment"""
     if rtype == 'PTR':
         # produce the same comment as for the reverse-PTR record
         return get_comment_for_domain(data)
@@ -430,7 +480,10 @@ def get_comment_for_record(domain, rtype, data):
 
 def dns_sortkey(name):
     """Get the sort key of a domain name"""
-    return name.lower().split('.')[::-1]
+    reversed_parts = name.lower().split('.')[::-1]
+    # Make sure the uppercase domain got before the lowercase one, for two same domains
+    # BUT a.tld stays before subdomain.a.tld, so do not append to the list
+    return (reversed_parts, name)
 
 
 class Resolver:
@@ -554,6 +607,8 @@ class Resolver:
 
         # Sleep after the DNS query
         if self.time_sleep:
+            # Inform the user that we are sleeping with a small sign
+            print('-', end='\r')
             time.sleep(self.time_sleep)
 
     @staticmethod
@@ -808,11 +863,11 @@ def main(argv=None):
     with args.file.open(mode='r') as fdomains:
         raw_domains = [l.rstrip('\n') for l in fdomains.readlines()]
     domains = [l.strip().rstrip('.').lower() for l in raw_domains]
+    domains_set = set(domains)
+    if '' in domains_set:
+        domains_set.remove('')
 
     if args.sort:
-        domains_set = set(domains)
-        if '' in domains_set:
-            domains_set.remove('')
         sorted_domains = sorted(domains_set, key=dns_sortkey)
         if sorted_domains != raw_domains:
             # Write the sorted list back
@@ -830,6 +885,7 @@ def main(argv=None):
     )
 
     # Fill the cache
+    domains = list(domains_set)
     random.shuffle(domains)  # Do not be predictable
     for domain in domains:
         # Treat SRV records in a special way, to restrict the requested record type
