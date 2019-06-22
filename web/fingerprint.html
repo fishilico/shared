@@ -4,7 +4,7 @@ Related websites:
 * https://amiunique.org/
 * https://www.browserleaks.com/javascript
 -->
-<html>
+<html lang="en">
     <head>
         <title>Fingerprint a browser using Javascript</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -136,7 +136,14 @@ function fill_fingerprint_infos() {
     e_list.appendChild(create_list_item('navigator.cpuClass', navigator.cpuClass));
     e_list.appendChild(create_list_item('navigator.onLine', navigator.onLine));
     e_list.appendChild(create_list_item('navigator.cookieEnabled', navigator.cookieEnabled));
+    // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/doNotTrack
+    // On Chrome, Opera, and other Blink-based browsers, navigator.doNotTrack = "1" or "0"
+    // On Firefox >= 32, navigator.doNotTrack = "1" or "0"
+    // On Firefox < 32 (Gecko < 32), navigator.doNotTrack = "yes" or "no" or "unspecified"
+    // Safari < 7.1.3 uses navigator.doNotTrack
+    // On Microsoft Internet Explorer <= 10, navigator.msDoNotTrack = "1" or "0"
     e_list.appendChild(create_list_item('navigator.doNotTrack', navigator.doNotTrack));
+    e_list.appendChild(create_list_item('navigator.msDoNotTrack', navigator.msDoNotTrack));
     container.appendChild(e_list);
 
     // Gather information from window
@@ -147,6 +154,10 @@ function fill_fingerprint_infos() {
     e_list.appendChild(create_list_item('window.outerWidth', window.outerWidth));
     e_list.appendChild(create_list_item('window.outerHeight', window.outerHeight));
     e_list.appendChild(create_list_item('window.defaultStatus', window.defaultStatus));
+    // Safari >= 7.1.3 uses window.doNotTrack
+    // On Microsoft Internet Explorer 11, window.doNotTrack = "1" or null
+    // On Microsoft Edge, window.doNotTrack = "1" or "unspecified"
+    e_list.appendChild(create_list_item('window.doNotTrack', window.doNotTrack));
     container.appendChild(e_list);
 
     // Gather information from screen
