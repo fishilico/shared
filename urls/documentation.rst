@@ -29,6 +29,8 @@ System administration
   pass (zx2c4 password store), the standard unix password manager
 * https://github.com/chassing/linux-sysadmin-interview-questions
   Linux System Administrator/DevOps Interview Questions
+* https://github.com/microsoft/AttackSurfaceAnalyzer
+  Microsoft Attack Surface Analyzer (for analyzing changes during software installation)
 
 Hacking
 -------
