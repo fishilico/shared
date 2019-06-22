@@ -390,6 +390,7 @@ then
     pkg vlc
     pkg wireshark-qt
     pkg xdg-utils
+    pkg xdot
     pkg xsensors
     pkg xterm
 
@@ -510,6 +511,8 @@ then
     aurpkg selinux-python
     aurpkg stegsolve
     aurpkg tpm-tools
+    aurpkg uefitool-git
+    aurpkg uefitool-ng-git
 
     # Web analysis
     pkg sslscan
