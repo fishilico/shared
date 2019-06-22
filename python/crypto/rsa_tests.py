@@ -40,6 +40,7 @@ import errno
 import hashlib
 import itertools
 import logging
+import math
 import os
 import subprocess
 import struct
@@ -141,6 +142,10 @@ def get_primes_from_ned(n, e, d, verbose=False):
     - This leads to: p + q = (n + 1) mod order. With p * q = n, p and q are the
       roots of (X - p)*(X - q) = X*X - ((n + 1) mod order)*X + n
     - Finding the roots of this polynom in the usual set of integers is easy.
+
+    Another possibility consists in using a number, x, and its order:
+    - In the order is even, (x^order) mod n = 1, so n divides (x^order)-1 = (x^(order/2)-1)*(x^(order/2)+1)
+    - Therefore two GCD computations may give factors of n, but it may not work.
     """
     current_order = d * e - 1
 
@@ -168,6 +173,25 @@ def get_primes_from_ned(n, e, d, verbose=False):
 
             # Try to factorize as soon as the order is small enough
             if current_order < n:
+                # Acceleration: use the fact that n divides (x^order)-1 = (x^(order/2)-1)*(x^(order/2)+1)
+                if not (current_order & 1):
+                    for x in (2, 3, 5, 7):
+                        if sys.version_info >= (3, 5):  # math.gcd has been introduced in Python 3.5
+                            p = math.gcd(pow(x, current_order >> 1, n) - 1, n)
+                        else:
+                            p = extended_gcd(pow(x, current_order >> 1, n) - 1, n)[0]
+                        if 1 < p < n:
+                            q = n // p
+                            if q < p:
+                                p, q = q, p
+                            assert q > 1
+                            assert p * q == n
+                            if verbose:
+                                print("* Used ({}**(order/2) - 1) mod n".format(x))
+                                print("* Found p({}): {:#x}".format(p.bit_length(), p))
+                                print("* Found q({}): {:#x}".format(q.bit_length(), q))
+                            return p, q
+
                 sum_p_q = (n + 1) % current_order
                 if verbose:
                     print("* Order({}) = {:#x}".format(current_order.bit_length(), current_order))
