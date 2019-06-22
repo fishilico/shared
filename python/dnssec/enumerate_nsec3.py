@@ -399,7 +399,7 @@ class Nsec3ForZone(object):
             logger.warning("The NSEC3 record for %r has not been cached.", domain_name)
 
 
-def enumerate_nsec3(domain, dns_cache, output_format):
+def enumerate_nsec3(domain, dns_cache, output_format, wordlist=None):
     """Enumerate the NSEC3 entries of a domain"""
     if not domain.endswith('.'):
         domain += '.'
@@ -487,6 +487,17 @@ def enumerate_nsec3(domain, dns_cache, output_format):
                 known_hashes[guessed_hash] = guessed_name
     logger.debug("Guessed %d/%d names", len(known_hashes), len(nsec3zone))
 
+    # Use the provided wordlist to recover names
+    if wordlist:
+        for word in wordlist:
+            if len(known_hashes) == len(nsec3zone):
+                break
+            guessed_name = word + '.' + zone_name
+            guessed_hash = nsec3param.hash(guessed_name)
+            if guessed_hash in nsec3zone.known_nsec3_keys:
+                known_hashes[guessed_hash] = guessed_name
+        logger.debug("Found %d/%d names after wordlist", len(known_hashes), len(nsec3zone))
+
     if output_format == 'john':
         # Format the output in a format suitable for John The Ripper
         for hashes in nsec3zone.known_nsec3:
@@ -516,6 +527,8 @@ def main(argv=None):
                         help="use a file to cache DNS responses")
     parser.add_argument('-j', '--john', action='store_true',
                         help="output hashes in John The Ripper format")
+    parser.add_argument('-w', '--wordlist', type=str,
+                        help="list of domains to use to crack NSEC3 hashes")
     args = parser.parse_args(argv)
 
     logging.basicConfig(format='[%(levelname)-5s] %(message)s',
@@ -527,8 +540,20 @@ def main(argv=None):
     if args.john:
         output_format = 'john'
 
+    wordlist = None
+    if args.wordlist:
+        wordlist_entries = set()
+        with open(args.wordlist, 'r') as fd:
+            for line in fd:
+                # For "a.b.c", add all possible sub-combinations to the wordlist
+                line_parts = line.strip().split('.')
+                for i_start in range(len(line_parts) - 1):
+                    for i_end in range(i_start + 1, len(line_parts)):
+                        wordlist_entries.add('.'.join(line_parts[i_start:i_end]))
+        wordlist = sorted(wordlist_entries)
+
     for domain in args.domains:
-        if not enumerate_nsec3(domain, dns_cache, output_format):
+        if not enumerate_nsec3(domain, dns_cache, output_format, wordlist=wordlist):
             return 1
 
     return 0
