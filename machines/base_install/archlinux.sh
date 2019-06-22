@@ -195,6 +195,7 @@ pkg lshw
 pkg pciutils
 pkg picocom
 pkg smartmontools
+pkg tpm2-tools
 pkg usbutils
 pkg wireless_tools
 pkg wpa_supplicant
@@ -508,6 +509,7 @@ then
     aurpkg setools
     aurpkg selinux-python
     aurpkg stegsolve
+    aurpkg tpm-tools
 
     # Web analysis
     pkg sslscan
