@@ -2,7 +2,7 @@ include ../os-detect.mk
 include ../env-python.mk
 
 # Programs not to test automatically
-NEVER_TEST_BINARIES := image_lsb.py matplotlib_feed_plot3d.py pcap_netmap.py resolve_domains.py unicode_norm.py
+NEVER_TEST_BINARIES := image_lsb.py matplotlib_feed_plot3d.py pcap_netmap.py resolve_domains.py unicode_norm.py web_api.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
 HAVE_PYTHON_CFFI := $(call can-run,$(PYTHON) -c 'import cffi')
