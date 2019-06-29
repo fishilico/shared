@@ -448,12 +448,14 @@ then
     pkg cppcheck
     pkg docker-compose
     pkg flake8
+    pkg hydra
     pkg ipcalc
     pkg ipv6calc
     pkg jre10-openjdk
     pkg libvirt
     #pkg lxc
     #pkg mariadb
+    pkg medusa
     pkg metasploit
     pkg openocd
     pkg php-sqlite
@@ -506,6 +508,7 @@ then
     aurpkg kaitai-struct-compiler
     aurpkg kaitai-struct-visualizer
     aurpkg msodbcsql
+    aurpkg patator
     aurpkg python-roca-detect
     aurpkg python-uncompyle6
     aurpkg setools
