@@ -54,15 +54,18 @@ CFLAGS = -O2 -ansi -pedantic -pipe \
 	-fstack-protector --param=ssp-buffer-size=4 \
 	-fvisibility=hidden
 
+# Linker flags
+LDFLAGS = -Wl,-O1,-as-needed,-no-undefined,-z,relro,-z,now,--fatal-warnings \
+	-fPIE -pie -fstack-protector
+
 # Uncomment the next line to enable debug
 #CFLAGS += -g -fvar-tracking-assignments -fno-omit-frame-pointer
 
 # Add strong stack protector if supported
 CFLAGS += $(call ccpp-option,-fstack-protector-strong)
 
-# Linker flags
-LDFLAGS = -Wl,-O1,-as-needed,-no-undefined,-z,relro,-z,now,--fatal-warnings \
-	-fPIE -pie -fstack-protector
+# Disable lazy binding (from gcc 6 and clang 6)
+CFLAGS += $(call ccpp-option,-fno-plt)
 
 LIBS =
 
@@ -92,8 +95,6 @@ ifeq ($(call ccpp-has-option,-Wtrampolines), y)
 	CFLAGS += $(call ccpp-option,-Wsuggest-attribute=noreturn)
 	# gcc 4.8 added -fstack-check=specific
 	CFLAGS += $(call ccpp-option,-fstack-check=specific)
-	# gcc 6 added -fno-plt
-	CFLAGS += $(call ccpp-option,-fno-plt)
 endif
 
 # Application build configuration
