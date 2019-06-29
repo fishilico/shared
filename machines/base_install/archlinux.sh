@@ -369,6 +369,7 @@ then
     pkg keepass
     pkg kismet
     pkg libreoffice-fresh
+    pkg libvncserver
     pkg meld
     pkg modemmanager
     pkg mupdf
