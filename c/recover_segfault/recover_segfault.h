@@ -24,13 +24,19 @@ struct segfault_memcontent {
 
 typedef mcontext_t asm_instr_context;
 #    define asm_instr_ctx_reg_lw(ctx, linux, windows) ((ctx)->linux)
-#    define asm_instr_ctx_regtype(upper, ucfirst) greg_t
 
-#    if defined(__x86_64__)
+#    if defined(__aarch64__)
+#        define asm_instr_ctx_regtype(upper, ucfirst) greg_t
+#    elif defined(__arm__)
+#        define asm_instr_ctx_regtype(upper, ucfirst) unsigned long
+#        define asm_instr_ctx_reg_bynum(ctx, num) ((&(ctx)->arm_r0)[(num)])
+#    elif defined(__x86_64__)
+#        define asm_instr_ctx_regtype(upper, ucfirst) greg_t
 #        define asm_instr_ctx_xmm_addr(ctx, num) (&((ctx)->fpregs->_xmm[(num)]))
 #        define CONTEXT_FPREGS_TYPE __typeof__(*(fpregset_t)NULL)
 #        define CONTEXT_FPREGS_PTYPE fpregset_t
 #    elif defined(__i386__)
+#        define asm_instr_ctx_regtype(upper, ucfirst) greg_t
 #        define asm_instr_ctx_xmm_addr(ctx, num) (&(((struct _fpstate*)(ctx)->fpregs)->_xmm[(num)]))
 #        define CONTEXT_FPREGS_TYPE struct _fpstate
 #        define CONTEXT_FPREGS_PTYPE fpregset_t

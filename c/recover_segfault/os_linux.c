@@ -47,6 +47,8 @@ static void sigsegv_sigaction(int s, siginfo_t *info, void *context)
             fprintf(stderr, "Running unknown instruction. Abort!\n");
 #if defined(__aarch64__)
             ptr_instruction = (uint8_t *)ctx->uc_mcontext.pc;
+#elif defined(__arm__)
+            ptr_instruction = (uint8_t *)ctx->uc_mcontext.arm_pc;
 #elif defined(__x86_64__)
             ptr_instruction = (uint8_t *)ctx->uc_mcontext.gregs[REG_RIP];
 #elif defined(__i386__)
