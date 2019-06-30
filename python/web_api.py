@@ -133,38 +133,38 @@ class WebSiteContext(object):
         return json.loads(data)
 
     def get(self, uri, **get_params):
-        """Perfrom a GET request with GET parameters"""
+        """Perform a GET request with GET parameters"""
         data = urllib.parse.urlencode(get_params)
         if data:
             uri += '?' + data
         return self.http_request('GET', uri)
 
     def get_and_json(self, uri, **get_params):
-        """Perfrom a GET request and expect a JSON response"""
+        """Perform a GET request and expect a JSON response"""
         resp, data = self.get(uri, **get_params)
         return self.decode_http_json_response(resp, data)
 
     def post(self, uri, **post_params):
-        """Perfrom a POST request with POST parameters"""
+        """Perform a POST request with POST parameters"""
         data = urllib.parse.urlencode(post_params).encode('utf-8')
         return self.http_request('POST', uri, data=data, headers={
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         })
 
     def post_json(self, uri, json_data):
-        """Perfrom a POST request with JSON parameters"""
+        """Perform a POST request with JSON parameters"""
         data = json.dumps(json_data).encode('utf-8')
         return self.http_request('POST', uri, data=data, headers={
             'Content-Type': 'application/json',
         })
 
     def post_and_json(self, uri, **post_params):
-        """Perfrom a POST request and expect a JSON response"""
+        """Perform a POST request and expect a JSON response"""
         resp, data = self.post(uri, **post_params)
         return self.decode_http_json_response(resp, data)
 
     def post_json_and_json(self, uri, json_data):
-        """Perfrom a POST-JSON request and expect a JSON response"""
+        """Perform a POST-JSON request and expect a JSON response"""
         resp, data = self.post_json(uri, json_data)
         return self.decode_http_json_response(resp, data)
 
