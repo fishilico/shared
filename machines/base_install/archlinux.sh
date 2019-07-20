@@ -241,6 +241,7 @@ pkg ldns
 pkg lftp
 pkg links
 pkg mariadb-clients
+pkg mtr
 pkg mutt
 pkg ndisc6
 pkg net-snmp
@@ -257,9 +258,12 @@ pkg sqlmap
 pkg sshfs
 pkg stubby
 pkg tcpdump
+pkg traceroute
 pkg unbound
 pkg wget
 pkg whois
+pkg wireguard-dkms
+pkg wireguard-tools
 pkg wireshark-cli
 
 # Development
@@ -275,8 +279,8 @@ pkg go
 pkg hexyl
 pkg ipython
 pkg libcap-ng
-pkg linux-headers
 pkg linux-hardened-headers
+pkg linux-headers
 pkg ltrace
 pkg nodejs
 pkg npm
@@ -323,9 +327,9 @@ then
     grouppkg xorg-drivers
     pkg rxvt-unicode
     pkg wmctrl
+    pkg xpra
     pkg xscreensaver
     pkg xsel
-    pkg xpra
     pkg xterm
 
     # Fonts
@@ -385,16 +389,20 @@ then
     pkg remmina
     pkg sdl2
     pkg simple-scan
+    pkg sox
     pkg sqlitebrowser
     pkg tk
     pkg udisks2
     pkg vinagre
     pkg vlc
     pkg wireshark-qt
+    pkg x11vnc
     pkg xdg-utils
     pkg xdot
     pkg xsensors
     pkg xterm
+    pkg youtube-dl
+    pkg zenity
 
     aurpkg burpsuite
     aurpkg restview
@@ -438,18 +446,25 @@ then
     pkg aarch64-linux-gnu-gdb
     pkg aarch64-linux-gnu-glibc
     pkg aarch64-linux-gnu-linux-api-headers
+    pkg aircrack-ng
     pkg ansible
     pkg ansible-lint
     pkg arduino-avr-core
     pkg arm-none-eabi-binutils
     pkg arm-none-eabi-gcc
     pkg arm-none-eabi-gdb
+    pkg beignet
     pkg binwalk
+    pkg bochs
+    pkg clinfo
     pkg codespell
     pkg cppcheck
     pkg docker-compose
     pkg flake8
+    pkg hashcat
+    pkg hashcat-utils
     pkg hydra
+    pkg impacket
     pkg ipcalc
     pkg ipv6calc
     pkg jre10-openjdk
@@ -459,9 +474,11 @@ then
     pkg medusa
     pkg metasploit
     pkg openocd
+    pkg perl-net-dns
     pkg php-sqlite
     pkg python-gmpy2
     pkg python-kaitaistruct
+    pkg python-keystone
     pkg python-lxml
     pkg python-matplotlib
     pkg python-numpy
@@ -482,10 +499,14 @@ then
     pkg python-scapy
     pkg python-scipy
     pkg python-sphinx
+    pkg python-sympy
     pkg python-unicorn
     pkg python-yaml
     pkg python-z3
+    pkg python2-netaddr
     pkg python2-pillow
+    pkg python2-pycryptodome
+    pkg python2-pycryptodomex
     pkg python2-scapy
     pkg python2-yara
     pkg qemu
@@ -494,7 +515,11 @@ then
     pkg radare2-cutter
     pkg ropgadget
     pkg sagemath
+    pkg samba
+    pkg sleuthkit
+    pkg smbnetfs
     pkg sshpass
+    pkg upx
     pkg vagrant
     pkg volatility
     pkg wabt
@@ -502,7 +527,9 @@ then
     grouppkg texlive-most
 
     aurpkg android-apktool
+    aurpkg coccinelle
     aurpkg dex2jar
+    aurpkg ffdec
     aurpkg ghidra
     aurpkg ilspymono-git
     aurpkg jd-gui
@@ -510,10 +537,13 @@ then
     aurpkg kaitai-struct-visualizer
     aurpkg msodbcsql
     aurpkg patator
+    aurpkg pngcheck
     aurpkg python-roca-detect
     aurpkg python-uncompyle6
-    aurpkg setools
+    #aurpkg python-pwntools-git
+    aurpkg python2-pwntools
     aurpkg selinux-python
+    aurpkg setools
     aurpkg stegsolve
     aurpkg tpm-tools
     aurpkg uefitool-git
