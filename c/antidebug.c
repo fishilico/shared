@@ -7,6 +7,8 @@
  * Other links:
  * * http://pferrie.host22.com/papers/antidebug.pdf
  *   The "Ultimate" Anti-Debugging Reference
+ * * https://github.com/LordNoteworthy/al-khaser/wiki/Anti-Debugging-Tricks
+ *   Anti Debugging Tricks
  */
 #if !defined(_GNU_SOURCE) && (defined(__linux__) || defined(__unix__) || defined(__posix__))
 #    define _GNU_SOURCE /* for syscall */
@@ -121,6 +123,8 @@ int main(void)
     BOOL bDebuggerPresent = TRUE;
     LONG status;
     DWORD_PTR dwpDebuggerPresent = 1;
+    HANDLE hDebuggerObject = NULL;
+    DWORD dwDebugFlags = 0;
 #endif
 
     /* Check the sensitive function for breakpoints */
@@ -254,16 +258,50 @@ int main(void)
     if (!pfnNtQueryInformationProcess) {
         printf("[ ] ntdll!NtQueryInformationProcess does not exist.\n");
     } else {
+        /* Use ProcessDebugPort = 7 */
         status =
             pfnNtQueryInformationProcess(GetCurrentProcess(), 7, &dwpDebuggerPresent, sizeof(dwpDebuggerPresent), NULL);
         if (status) {
-            fprintf(stderr, "[!] NtQueryInformationProcess failed with error %lu.\n", GetLastError());
+            fprintf(stderr, "[!] NtQueryInformationProcess(ProcessDebugPort) failed with error %lu.\n", GetLastError());
             return 1;
         } else if (dwpDebuggerPresent) {
             printf("[-] NtQueryInformationProcess(ProcessDebugPort) returned true.\n");
             is_debugged = 1;
         } else {
             printf("[+] NtQueryInformationProcess(ProcessDebugPort) returned false.\n");
+            is_all_triggered = 0;
+        }
+
+        /* Use ProcessDebugObjectHandle = 30 */
+        status =
+            pfnNtQueryInformationProcess(GetCurrentProcess(), 30, &hDebuggerObject, sizeof(hDebuggerObject), NULL);
+        if ((ULONG)status == 0xc0000353U) { /* STATUS_PORT_NOT_SET */
+            printf("[+] NtQueryInformationProcess(ProcessDebugObjectHandle) returned STATUS_PORT_NOT_SET.\n");
+            is_all_triggered = 0;
+        } else if (status) {
+            fprintf(stderr, "[!] NtQueryInformationProcess(ProcessDebugObjectHandle) failed with error %#lx.\n",
+                    status);
+            return 1;
+        } else if (hDebuggerObject) {
+            printf("[-] NtQueryInformationProcess(ProcessDebugObjectHandle) returned %p.\n", hDebuggerObject);
+            is_debugged = 1;
+        } else {
+            printf("[+] NtQueryInformationProcess(ProcessDebugObjectHandle) returned NULL.\n");
+            is_all_triggered = 0;
+        }
+
+        /* Use ProcessDebugFlags = 31 */
+        status =
+            pfnNtQueryInformationProcess(GetCurrentProcess(), 31, &dwDebugFlags, sizeof(dwDebugFlags), NULL);
+        if (status) {
+            fprintf(stderr, "[!] NtQueryInformationProcess(ProcessDebugFlags) failed with error %#lx.\n",
+                    status);
+            return 1;
+        } else if (dwDebugFlags != 1) {
+            printf("[-] NtQueryInformationProcess(ProcessDebugFlags) returned %#lx.\n", dwDebugFlags);
+            is_debugged = 1;
+        } else {
+            printf("[+] NtQueryInformationProcess(ProcessDebugFlags) returned %#lx == 1.\n", dwDebugFlags);
             is_all_triggered = 0;
         }
     }
