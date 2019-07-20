@@ -140,6 +140,7 @@ DNS_RESPONSE_CODES = {
     1: 'FORMERR',  # DNS Query Format Error
     2: 'SERVFAIL',  # Server failed to complete the DNS request
     3: 'NXDOMAIN',  # Domain name does not exist
+    4: 'NOTIMP',  # Function not implemented
     5: 'REFUSED',  # The server refused to answer for the query
 }
 
@@ -487,10 +488,12 @@ def dns_sortkey(name):
 
 
 class Resolver:
-    def __init__(self, cache_directory, time_sleep=1, use_google=False, no_ssl=False):
+    def __init__(self, cache_directory, time_sleep=1, use_google=False, use_cloudflare=False, no_ssl=False):
         self.cache_directory = cache_directory
         self.time_sleep = time_sleep
+        assert not (use_google and use_cloudflare)
         self.use_google = use_google
+        self.use_cloudflare = use_cloudflare
         self.no_ssl = no_ssl
         self.dns_questions = None
         self.dns_records = None
@@ -519,7 +522,7 @@ class Resolver:
 
                     # Ignore failed responses
                     rcode_name = DNS_RESPONSE_CODES.get(json_data['Status'])
-                    if rcode_name in ('SERVFAIL', 'NXDOMAIN', 'REFUSED'):
+                    if rcode_name in ('SERVFAIL', 'NXDOMAIN', 'NOTIMP', 'REFUSED'):
                         continue
                     if rcode_name != 'NOERROR':
                         raise ValueError("Invalid status {} ({}) in {}".format(
@@ -591,6 +594,8 @@ class Resolver:
 
         if self.use_google:
             response = self.query_google(domain, rtype)
+        elif self.use_cloudflare:
+            response = self.query_cloudflare(domain, rtype)
         else:
             response = self.query_dns(domain, rtype)
 
@@ -730,6 +735,39 @@ class Resolver:
             raise ValueError("No data in response to {}".format(url))
         return data
 
+    def query_cloudflare(self, domain, rtype):
+        """Perform a DNS query using https://cloudflare-dns.com/ API"""
+        print("Querying cloudflare-dns.com for {} <{}>...".format(domain, rtype))
+        params = {
+            'name': domain,
+            'type': rtype,
+        }
+        url = 'https://cloudflare-dns.com/dns-query?' + urllib.parse.urlencode(params)
+        ctx = ssl.create_default_context()
+        if self.no_ssl:
+            # Disable HTTPS certificate verification, for example when recording
+            # the requests using a HTTPS proxy such as BurpSuite.
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+        opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=ctx))
+        req = urllib.request.Request(
+            url,
+            headers={
+                'Accept': 'application/dns-json',
+                'Connection': 'close',
+            })
+        with opener.open(req) as resp:
+            if resp.status not in (200, 204):
+                raise ValueError("Request to {} returned HTTP status {}".format(url, resp.status))
+            content_length = resp.getheader('Content-Length')
+            if content_length:
+                data = resp.read(int(content_length))
+            else:
+                data = resp.read()
+        if not data:
+            raise ValueError("No data in response to {}".format(url))
+        return data
+
     def dump_records(self, hide_dnssec=False):
         """Enumerate the DNS records"""
         comments_for_data = {}
@@ -837,6 +875,8 @@ def main(argv=None):
                         help="filter-out non-existing domains from the input file")
     parser.add_argument('-g', '--use-google', action='store_true',
                         help="use https://dns.google.com/ API")
+    parser.add_argument('-C', '--use-cloudflare', action='store_true',
+                        help="use https://cloudflare-dns.com/ API")
     parser.add_argument('-o', '--output', type=Path,
                         help="file where the DNS entries are written")
     parser.add_argument('-O', '--stdout', action='store_true',
@@ -858,6 +898,9 @@ def main(argv=None):
 
     if args.directory is None:
         parser.error("please provide a cache directory with option -d/--directory")
+
+    if args.use_google and args.use_cloudflare:
+        parser.error("options to use a DNS-JSON provider are mutually exclusive")
 
     # Load the list of domains
     with args.file.open(mode='r') as fdomains:
@@ -881,6 +924,7 @@ def main(argv=None):
         cache_directory=args.directory,
         time_sleep=args.time_sleep,
         use_google=args.use_google,
+        use_cloudflare=args.use_cloudflare,
         no_ssl=args.no_ssl,
     )
 
