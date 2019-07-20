@@ -110,6 +110,7 @@ pkg lsb-release
 pkg lsof
 pkg moreutils
 pkg most
+pkg progress
 pkg psmisc
 pkg pv
 pkg rlwrap
