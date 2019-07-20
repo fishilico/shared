@@ -26,6 +26,22 @@ Some links:
 * http://apps.timwhitlock.info/emoji/tables/unicode Emoji Unicode Tables
 * https://github.com/reinderien/mimic [ab]using Unicode to create tragedy
 
+Example of decoding the flipping table emoticon:
+
+    $ ./unicode_encode.py '(╯°□°）╯︵ ┻━┻'
+    U+  28 = UTF-8 \x28             ( (left parenthesis)
+    U+256F = UTF-8 \xe2\x95\xaf     ╯ (box drawings light arc up and left)
+    U+  B0 = UTF-8 \xc2\xb0         ° (degree sign)
+    U+25A1 = UTF-8 \xe2\x96\xa1     □ (white square)
+    U+  B0 = UTF-8 \xc2\xb0         ° (degree sign)
+    U+FF09 = UTF-8 \xef\xbc\x89     ） (fullwidth right parenthesis)
+    U+256F = UTF-8 \xe2\x95\xaf     ╯ (box drawings light arc up and left)
+    U+FE35 = UTF-8 \xef\xb8\xb5     ︵ (presentation form for vertical left parenthesis)
+    U+  20 = UTF-8 \x20               (space)
+    U+253B = UTF-8 \xe2\x94\xbb     ┻ (box drawings heavy up and horizontal)
+    U+2501 = UTF-8 \xe2\x94\x81     ━ (box drawings heavy horizontal)
+    U+253B = UTF-8 \xe2\x94\xbb     ┻ (box drawings heavy up and horizontal)
+
 @author: Nicolas Iooss
 @license: MIT
 """
