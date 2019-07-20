@@ -333,11 +333,11 @@ then
     pkg xterm
 
     # Fonts
+    pkg gnu-free-fonts
     pkg ttf-bitstream-vera
     pkg ttf-dejavu
     pkg ttf-droid
     pkg ttf-fantasque-sans-mono
-    pkg ttf-freefont
     pkg ttf-inconsolata
     pkg ttf-liberation
     pkg ttf-ubuntu-font-family
