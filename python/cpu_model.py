@@ -853,6 +853,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i7-8565U, i7-8665U',
         'Intel® Core™ Processor i5-8365U, i5-8265U',
     )),
+    (0x9d, -1): ('ICL-NNPI', 'Ice Lake Neural Network Processor for Deep Learning Inference'),
     (0x9e, 9): ('KBL', 'Kaby Lake Desktop (Kaby Lake H/S/X/G, Xeon E3), Greenlow', (
         '7th Generation Intel® Core™ Processor Family',
         '8th Generation Intel® Core™ Processor Family',
