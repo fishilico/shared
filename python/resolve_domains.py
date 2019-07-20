@@ -540,7 +540,7 @@ class Resolver:
                         if asc_type == 'PTR':
                             matches = re.match(
                                 r'^([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)\.in-addr\.arpa\.$',
-                                answer['name'])
+                                answer['name'], re.I)
                             if matches:
                                 # IPv4 PTR record
                                 ip_addr = '.'.join(matches.groups()[::-1])
