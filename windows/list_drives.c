@@ -67,7 +67,7 @@ static BOOL enum_logical_drives(void)
         }
     }
     if (dwLogicalDrives >> i) {
-        _tprintf(_T(" and x%lx"), dwLogicalDrives >> i);
+        _tprintf(_T(" and %#lx"), dwLogicalDrives >> i);
     }
     _tprintf(_T("\n"));
 
@@ -102,10 +102,10 @@ static BOOL enum_logical_drives(void)
             }
         } else {
             _tprintf(_T("  - Volume Name: %s\n"), szVolumeName);
-            _tprintf(_T("  - Volume Serial Number: x%08lx\n"), dwVolumeSerialNumber);
+            _tprintf(_T("  - Volume Serial Number: 0x%08lx\n"), dwVolumeSerialNumber);
             _tprintf(_T("  - Maximum Component Length: %lu\n"), dwMaximumComponentLength);
             _tprintf(_T("  - FS Name: %s\n"), szFileSystemNameBuffer);
-            _tprintf(_T("  - FS Flags: x%08lx\n"), dwFileSystemFlags);
+            _tprintf(_T("  - FS Flags: 0x%08lx\n"), dwFileSystemFlags);
 #define print_flag(mask, name) do { if (dwFileSystemFlags&(mask)) _tprintf(_T("      "#name"\n"));} while (0)
             print_flag(0x00000001, FILE_CASE_SENSITIVE_SEARCH);
             print_flag(0x00000002, FILE_CASE_PRESERVED_NAMES);
