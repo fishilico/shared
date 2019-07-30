@@ -183,7 +183,7 @@ static LPCTSTR StringListNext(LPCTSTR str, LPCTSTR base, DWORD cchMax)
     _ParamBufSizeToAlloc_EPILOG(fctname, cchLength, pcchReturnLength)
 
 #define _ParamStringBufInOutSizeToAlloc0(f) \
-    static LPTSTR f##_a(PDWORD pcchReturnLength) \
+    static LPTSTR f##_stra(PDWORD pcchReturnLength) \
     { \
         _ParamStringBufInOutSizeToAlloc_PROLOG() \
         bSuccess = f(NULL, &cchLength); \
@@ -193,7 +193,7 @@ static LPCTSTR StringListNext(LPCTSTR str, LPCTSTR base, DWORD cchMax)
     }
 
 #define _ParamStringBufInOutSizeToAlloc1(f, type1, param1) \
-    static LPTSTR f##_a(type1 param1, PDWORD pcchReturnLength) \
+    static LPTSTR f##_stra(type1 param1, PDWORD pcchReturnLength) \
     { \
         _ParamStringBufInOutSizeToAlloc_PROLOG() \
         bSuccess = f(param1, NULL, &cchLength); \
@@ -203,7 +203,7 @@ static LPCTSTR StringListNext(LPCTSTR str, LPCTSTR base, DWORD cchMax)
     }
 
 #define _ParamStringBufInOutSizeToAlloc2(f, type1, param1, type2, param2) \
-    static LPTSTR f##_a(type1 param1, type2 param2, PDWORD pcchReturnLength) \
+    static LPTSTR f##_stra(type1 param1, type2 param2, PDWORD pcchReturnLength) \
     { \
         _ParamStringBufInOutSizeToAlloc_PROLOG() \
         bSuccess = f(param1, param2, NULL, &cchLength); \

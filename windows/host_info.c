@@ -16,12 +16,12 @@ int _tmain(void)
     VOID (WINAPI *pfnGetNativeSystemInfo)(LPSYSTEM_INFO lpSystemInfo);
 
     /* Computer name */
-    szComputerName = GetComputerName_a(NULL);
+    szComputerName = GetComputerName_stra(NULL);
     _tprintf(_T("Computer name: %s\n"), szComputerName ? : _T("?"));
     HeapFree(GetProcessHeap(), 0, szComputerName);
 
     /* User name */
-    szUserName = GetUserName_a(NULL);
+    szUserName = GetUserName_stra(NULL);
     _tprintf(_T("User name: %s\n"), szUserName ? : _T("?"));
     HeapFree(GetProcessHeap(), 0, szUserName);
 

@@ -111,7 +111,7 @@ static void DumpProccessToken(VOID)
         _tprintf(_T("- Privileges (%ld):\n"), pTokenPrivileges->PrivilegeCount);
         for (i = 0; i < pTokenPrivileges->PrivilegeCount; i++) {
             dwRetLen = 0;
-            szPriv = LookupPrivilegeName_a(NULL, &pTokenPrivileges->Privileges[i].Luid, &dwRetLen);
+            szPriv = LookupPrivilegeName_stra(NULL, &pTokenPrivileges->Privileges[i].Luid, &dwRetLen);
             if (!szPriv) {
                 pLuid = &pTokenPrivileges->Privileges[i].Luid;
                 szPriv = HeapAlloc(GetProcessHeap(), 0, 20 * sizeof(TCHAR));
