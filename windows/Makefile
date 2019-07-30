@@ -1,6 +1,6 @@
 include ../windows-flags.mk
 
-NONTEST_PROGRAMS := check_winmain_params console_attr helloworld watch_directory
+NONTEST_PROGRAMS := check_winmain_params console_attr helloworld log_keys_raw_input watch_directory
 
 SOURCES := $(wildcard *.c)
 BINARIES := $(SOURCES:%.c=%.$(BIN_EXT))
