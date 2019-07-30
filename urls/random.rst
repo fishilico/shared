@@ -17,6 +17,8 @@ Fun stuff
   Solving the Dating Problem with the SENPAI Protocol
 * http://www.theuselessweb.com/
   Take me to another useless website please
+* https://www.windy.com/
+  Windy: Wind map & weather forecast
 
 Other
 -----

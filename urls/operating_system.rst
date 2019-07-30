@@ -39,6 +39,8 @@ Windows
   Vergilius, Take a look into the depths of Windows kernels and reveal more than 60000 undocumented structures
 * http://ntoskrnl.org/
   Dans les coulisses de Microsoft Windows (in French)
+* https://github.com/Zer0Mem0ry/ntoskrnl
+  The Windows Research Kernel (WRK)
 
 Apple
 -----

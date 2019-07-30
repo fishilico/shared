@@ -101,6 +101,8 @@ Hacking
   (log cleaner, SSL reverse shell, etc.)
 * https://github.com/epinna/weevely3
   Weaponized web shell
+* https://blog.ropnop.com/docker-for-pentesters/
+  Docker for Pentesters
 
 
 Debuggers
@@ -182,6 +184,9 @@ Programming
 * https://github.com/kamranahmedse/developer-roadmap
   Roadmap to becoming a web developer in 2018
 
+* https://github.com/veorq/cryptocoding
+  This page lists "coding rules" for implementations of cryptographic operations
+
 Packaging
 ---------
 
@@ -239,6 +244,13 @@ Internet
 * https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software
   The 2018 Guide to Building Secure PHP Software
 * https://caniuse.com/ Can I use... Support tables for HTML5, CSS3, etc
+
+* Free Web development reverse proxies:
+
+    - https://ngrok.com/ ngrok, public URLs (domain https://example.ngrok.io)
+    - https://www.heroku.com/ Heroku Cloud Application Platform (domain http://example.herokuap.com), and can be linked with Dropbox sync
+    - https://www.openshift.com/products/online/ Red Hat OpenShift Online (Free with renewal every 60 days)
+    - https://aws.amazon.com/free/ Amazon Web Service Free Tier - one Amazon Elastic Compute Cloud (EC2) Micro Instance free for one year
 
 Hardware products
 -----------------
