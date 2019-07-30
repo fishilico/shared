@@ -37,6 +37,9 @@ do
         *alpine39*|*alpine3.9*)
             echo "alpine3.9"
             ;;
+        *alpine310*|*alpine3.10*)
+            echo "alpine3.10"
+            ;;
 
         *debian7*|*wheezy*)
             echo "debian7-wheezy"
