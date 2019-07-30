@@ -41,9 +41,6 @@ do
             echo "alpine3.10"
             ;;
 
-        *debian7*|*wheezy*)
-            echo "debian7-wheezy"
-            ;;
         *debian8*|*jessie*)
             echo "debian8-jessie"
             ;;
