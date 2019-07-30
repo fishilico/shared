@@ -53,6 +53,9 @@ do
         *debian10*|*buster*)
             echo "debian10-buster"
             ;;
+        *debian11*|*bullseye*)
+            echo "debian11-bullseye"
+            ;;
 
         *ubuntu1204*|*ubuntu12.04*|*precise*)
             echo "ubuntu1204-precise"
