@@ -176,6 +176,7 @@ pkg progress
 pkg psmisc
 pkg pv
 pkg rlwrap
+pkg rng-tools
 pkg screen
 pkg strace
 pkg sudo
@@ -272,6 +273,7 @@ grouppkg multilib-devel
 pkg bat
 pkg clang
 pkg cmake
+pkg ed
 pkg fakeroot
 pkg gdb
 pkg git
@@ -371,6 +373,7 @@ then
     pkg gtk-recordmydesktop
     pkg gtk3
     pkg gvfs
+    pkg imagemagick
     pkg keepass
     pkg kismet
     pkg libreoffice-fresh
@@ -523,6 +526,7 @@ then
     pkg vagrant
     pkg volatility
     pkg wabt
+    pkg zbar
 
     grouppkg texlive-most
 
@@ -538,10 +542,12 @@ then
     aurpkg msodbcsql
     aurpkg patator
     aurpkg pngcheck
+    aurpkg python-dlint
     aurpkg python-roca-detect
     aurpkg python-uncompyle6
     #aurpkg python-pwntools-git
     aurpkg python2-pwntools
+    aurpkg pyzbar
     aurpkg selinux-python
     aurpkg setools
     aurpkg stegsolve
