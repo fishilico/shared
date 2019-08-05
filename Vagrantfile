@@ -52,14 +52,16 @@ then
 fi
 pacman --noconfirm -Su
 
-# Make sure Python is installed
-pacman -Qqi python > /dev/null || pacman --noconfirm -S python
+# Make sure Python, Docker and other needed packages are installed
+for PKG in docker gcc make pkgconf python
+do
+    pacman -Qqi "$PKG" > /dev/null || pacman --noconfirm -S "$PKG"
+done
 
 # Install Docker and build Arch Linux Docker image
-pacman -Qqi docker > /dev/null || pacman --noconfirm -S docker
 systemctl enable --now docker
 gpasswd -a vagrant docker
-(docker images |grep -q '^archlinux ') || docker build -t archlinux /vagrant/machines/archlinux
+(docker images |grep -q '^archlinux ') || su vagrant -c 'docker build -t archlinux /vagrant/machines/archlinux'
 
 # Use vsyscall=emulate on the command line, for Debian 7 Wheezy
 if [ -e /boot/syslinux/syslinux.cfg ] && ! grep vsyscall=emulate /boot/syslinux/syslinux.cfg > /dev/null
