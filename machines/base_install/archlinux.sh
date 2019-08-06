@@ -352,6 +352,14 @@ then
     pkg pavucontrol
     pkg pulseaudio
 
+    # Smartcard and YubiKey
+    pkg ccid
+    pkg opensc
+    pkg pcsc-tools
+    pkg yubikey-manager
+    pkg yubikey-personalization
+    pkg yubikey-personalization-gui
+
     # Applications
     pkg arandr
     pkg baobab
