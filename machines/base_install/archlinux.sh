@@ -474,6 +474,7 @@ then
     pkg libvirt
     #pkg lxc
     #pkg mariadb
+    pkg maven
     pkg medusa
     pkg metasploit
     pkg openocd
