@@ -980,7 +980,7 @@ class AnalysisContext(object):
     def analyze_dns_record(self, dns_record):
         """Analyze a packet with a DNS record"""
         dns_type = dns_record.get_field('type').i2repr(dns_record, dns_record.type)
-        rrname = dns_record.rrname.decode('utf-8')
+        rrname = dns_record.rrname.decode('utf-8', errors='replace')
         if dns_type == 'A':
             self.ipaddrdb.add_name(dns_record.rdata, rrname)
             return
