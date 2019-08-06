@@ -237,6 +237,9 @@ class Graph(object):
         for key, type_value in sorted(self.nodes.items()):
             node_type, value = type_value
             color = GRAPH_COLORS.get(node_type)
+            if any(ord(c) < 32 for c in value):
+                # Escape values
+                value = repr(value)
             value = value.replace('\\', '\\\\').replace('"', '\\"')
             stream.write('    "{}" [label="{}"'.format(key, value))
             if color is not None:
