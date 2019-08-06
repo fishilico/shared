@@ -42,6 +42,7 @@ RUN \
         dev-libs/gobject-introspection \
         gnome-base/librsvg \
         media-libs/harfbuzz \
+        sys-libs/glibc \
         x11-libs/gdk-pixbuf \
         x11-libs/gtk+:2 \
         x11-libs/gtk+:3 \
