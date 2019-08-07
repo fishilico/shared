@@ -286,7 +286,6 @@ pkg linux-headers
 pkg ltrace
 pkg nodejs
 pkg npm
-pkg php
 pkg pkgconf
 pkg pypy
 pkg pypy3
@@ -487,6 +486,7 @@ then
     pkg metasploit
     pkg openocd
     pkg perl-net-dns
+    pkg php
     pkg php-sqlite
     pkg python-gmpy2
     pkg python-kaitaistruct

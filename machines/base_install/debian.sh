@@ -213,7 +213,7 @@ pkg ipython
 pkg libcap-ng-utils
 pkg ltrace
 pkg nodejs
-pkg php
+#pkg php
 pkg pkg-config
 pkg pypy
 pkg python
