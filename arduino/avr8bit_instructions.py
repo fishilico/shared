@@ -1043,9 +1043,6 @@ class AVR8Meta(object):
                 return Instruction(addr, 2, 'T := bit({}, {})'.format(rd, bitnum))
             else:  # BLD (Bit Load from the T Flag)
                 return Instruction(addr, 2, 'bit({}, {}) := T'.format(rd, bitnum))
-            raise Exception(
-                "Not implemented 'BLD/BST register bit to STATUS.T' {:04x}"
-                .format(opcode))
 
         elif opcode & 0xfc08 == 0xfc00:
             bitnum = opcode & 7
