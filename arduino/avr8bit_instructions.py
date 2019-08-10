@@ -62,6 +62,9 @@ class IntVal(object):
         return '<IntVal({:#x}, {}, {})>'.format(
             self.value, self.nbits, 'S' if self.signed else 'U')
 
+    def __hash__(self):
+        return hash(self.value, self.nbits, self.signed)
+
     def __eq__(self, other):
         selfval = self.normalized_val
         if isinstance(other, IntVal):
@@ -99,6 +102,9 @@ class VarReg(object):
     def __repr__(self):
         return '<VarReg({})>'.format(str(self))
 
+    def __hash__(self):
+        return hash(self.firstreg, self.numregs)
+
     def __eq__(self, other):
         if not isinstance(other, VarReg):
             return False
@@ -135,9 +141,12 @@ class SRegBit(object):
     def __repr__(self):
         return '<SRegBit({})>'.format(self.flag)
 
+    def __hash__(self):
+        return hash(self.flag)
+
     def __eq__(self, other):
         if isinstance(other, SRegBit):
-            return self.flag == other.flags
+            return self.flag == other.flag
         elif isinstance(other, str):
             # Allow comparing to a raw string
             return self.flag == other
