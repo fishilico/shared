@@ -168,7 +168,6 @@ def generate_keystore(store_type, password):
             # If removing the files failed, the error will appear in rmdir
             logger.debug("Error while removing files: %r", exc)
         os.rmdir(temporary_dir)
-    return True
 
 
 def read_prelen_string(data, offset):

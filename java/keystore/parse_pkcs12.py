@@ -127,7 +127,6 @@ def generate_p12_keystore(password):
             # If removing the files failed, the error will appear in rmdir
             logger.debug("Error while removing files: %r", exc)
         os.rmdir(temporary_dir)
-    return True
 
 
 def pkcs12_derivation(alg, id_byte, password, salt, iterations, result_size=None):
