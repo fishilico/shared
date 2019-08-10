@@ -207,8 +207,14 @@ class ECPoint(object):
         if order is not None:
             assert self * order == INFINITY
 
+    def __hash__(self):
+        return hash((self.curve, self.x, self.y))
+
     def __eq__(self, other):
         return self.curve == other.curve and self.x == other.x and self.y == other.y
+
+    def __ne__(self, other):
+        return self.curve != other.curve or self.x != other.x or self.y != other.y
 
     def negate(self):
         """Return the opposite value of the point"""

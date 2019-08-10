@@ -217,8 +217,14 @@ class Ed25519Point(object):
         x = modsqrt25519((y * y - 1) * modinv(ED25519_D * y * y + 1, ED25519_PRIME))
         return cls(x, y)
 
+    def __hash__(self):
+        return hash((self.x, self.y))
+
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
+
+    def __ne__(self, other):
+        return self.x != other.x or self.y != other.y
 
     def __add__(self, other):
         """Add two points together, on the twisted Edwards curve"""
@@ -308,8 +314,14 @@ class Montgomery25519Point(object):
             return '{}.INFINITY'.format(self.__class__.__name__)
         return '{}({:#x},{:#x})'.format(self.__class__.__name__, self.x, self.y)
 
+    def __hash__(self):
+        return hash((self.x, self.y))
+
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
+
+    def __ne__(self, other):
+        return self.x != other.x or self.y != other.y
 
     @classmethod
     def from_x(cls, x):
