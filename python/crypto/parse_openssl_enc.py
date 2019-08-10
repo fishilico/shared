@@ -80,8 +80,8 @@ CIPHER_KEY_IV_SIZES = {
 }
 
 HASHES = {
-    'md5': hashlib.md5,
-    'sha1': hashlib.sha1,
+    'md5': hashlib.md5,  # noqa
+    'sha1': hashlib.sha1,  # noqa
     'sha256': hashlib.sha256,
     'sha384': hashlib.sha384,
     'sha512': hashlib.sha512,

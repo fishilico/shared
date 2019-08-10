@@ -104,8 +104,9 @@ def mod_sqrt(n, p):
     """
     assert pow(n, (p - 1) // 2, p) == 1
     # Find a random "a" which is a quadratic non-residue in F_p
+    rnd = random.SystemRandom()
     while True:
-        a = random.randint(1, p - 1)
+        a = rnd.randint(1, p - 1)
         not_square = (a * a - n) % p
         legendre_symbol = pow(not_square, (p - 1) // 2, p)
         if legendre_symbol == p - 1:
@@ -646,8 +647,9 @@ def run_curve_test(curve, colorize):
         # Implement ElGamal encryption
         test_message = b'Hello, world!'
         print("Encrypting the test message (ElGamal):")
+        rnd = random.SystemRandom()
         while True:
-            msgpoint_x = decode_bigint_be(test_message + struct.pack('<BI', 0, random.randint(0, 0xffffffff)))
+            msgpoint_x = decode_bigint_be(test_message + struct.pack('<BI', 0, rnd.randint(0, 0xffffffff)))
             assert msgpoint_x % curve.p == msgpoint_x
             msgpoint_y2 = (msgpoint_x * msgpoint_x * msgpoint_x + curve.a * msgpoint_x + curve.b) % curve.p
             # break if y^2 is a square residue modulo p
@@ -658,7 +660,7 @@ def run_curve_test(curve, colorize):
         msgpoint_y = mod_sqrt(msgpoint_y2, curve.p)
         assert (msgpoint_y * msgpoint_y) % curve.p == msgpoint_y2
         msgpoint = ECPoint(curve, msgpoint_x, msgpoint_y)
-        k = random.randint(1 << 32, curve.g.order - (1 << 32))
+        k = rnd.randint(1 << 32, curve.g.order - (1 << 32))
         print("  k({}) = {}{:#x}{}".format(k.bit_length(), color_red, k, color_norm))
         c_1 = curve.g * k
         c_2 = pubkey * k

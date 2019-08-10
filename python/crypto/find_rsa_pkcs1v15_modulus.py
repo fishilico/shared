@@ -196,8 +196,8 @@ DIGEST_ASN1_PREFIXES = {
 }
 
 DIGEST_HASHLIB = {
-    'MD5': hashlib.md5,
-    'SHA1': hashlib.sha1,
+    'MD5': hashlib.md5,  # noqa
+    'SHA1': hashlib.sha1,  # noqa
     'SHA224': hashlib.sha224,
     'SHA256': hashlib.sha256,
     'SHA384': hashlib.sha384,

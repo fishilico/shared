@@ -547,7 +547,7 @@ def run_openssl_test(bits, colorize):
     # Use SHA512 but with 1024-bit keys (not enough room), which uses SHA-1 (the default algorithm)
     if bits == 1024:
         crypto_hash = Crypto.Hash.SHA
-        hashlib_hash = hashlib.sha1
+        hashlib_hash = hashlib.sha1  # noqa
         salt_len = 20
     else:
         crypto_hash = Crypto.Hash.SHA512
