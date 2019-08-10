@@ -1763,7 +1763,7 @@ class Aarch64CPUInfo(CPUInfo):
         return self.architecture, self.implementer, self.architecture, self.variant, self.part, self.revision
 
     def __repr__(self):
-        return '{}({}, {}, {}, {})'.format(
+        return '{}({}, {}, {}, {}, {})'.format(
             self.__class__.__name__,
             hex(self.implementer),
             hex(self.architecture),
