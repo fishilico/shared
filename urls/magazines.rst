@@ -8,6 +8,7 @@ English
 * http://www.phrack.org/ Phrack
 * https://www.alchemistowl.org/pocorgtfo/
   PoC||GTFO - International Journal of Proof-of-Concept or Get The Fuck Out
+* https://pagedout.institute/ Paged Out!
 
 French
 ------
