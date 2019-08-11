@@ -28,5 +28,5 @@ Some commands
     pkcs15-tool --list-certificates
 
     # Add OpenSC module to .pki/nssdb database, for Chromium
-    modutil -dbdir "sql:$HOME/.pki/nssdb/" -add "opensc" -libfile  /usr/lib/pkcs11/opensc-pkcs11.so
+    modutil -dbdir "sql:$HOME/.pki/nssdb/" -add "opensc" -libfile /usr/lib/pkcs11/opensc-pkcs11.so
     modutil -dbdir "sql:$HOME/.pki/nssdb/" -list
