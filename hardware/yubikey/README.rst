@@ -30,3 +30,11 @@ Some commands
     # Add OpenSC module to .pki/nssdb database, for Chromium
     modutil -dbdir "sql:$HOME/.pki/nssdb/" -add "opensc" -libfile /usr/lib/pkcs11/opensc-pkcs11.so
     modutil -dbdir "sql:$HOME/.pki/nssdb/" -list
+
+    # Use the PIV certificate from the YubiKey with OpenSC-PKCS#11 library to connect to a SSH server
+    ssh -I /usr/lib/pkcs11/opensc-pkcs11.so ssh-server
+    ssh -o PKCS11Provider=/usr/lib/pkcs11/opensc-pkcs11.so ssh-server
+
+    # List available SSH keys (with the ones provided by YubiKey's PGP applet too)
+    # cf. https://www.linode.com/docs/security/authentication/gpg-key-for-ssh-authentication/
+    ssh-add -L
