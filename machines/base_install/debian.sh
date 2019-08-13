@@ -141,6 +141,7 @@ pkg wpasupplicant
 pkg btrfs-progs
 pkg cabextract
 pkg cpio
+pkg cryfs
 pkg cryptsetup
 pkg dosfstools
 pkg eject

@@ -206,6 +206,7 @@ pkg wpa_supplicant
 pkg btrfs-progs
 pkg cabextract
 pkg cpio
+pkg cryfs
 pkg cryptsetup
 pkg dosfstools
 pkg exfat-utils
