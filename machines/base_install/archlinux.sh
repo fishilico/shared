@@ -232,6 +232,7 @@ pkg curl
 pkg dhclient
 pkg dnsmasq
 pkg ebtables
+pkg fail2ban
 pkg firejail
 pkg hping
 pkg iftop
@@ -259,6 +260,7 @@ pkg sqlmap
 pkg sshfs
 pkg stubby
 pkg tcpdump
+#pkg tor
 pkg traceroute
 pkg unbound
 pkg wget

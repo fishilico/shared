@@ -172,6 +172,7 @@ pkg curl
 pkg dnsmasq-base
 pkg dnsutils
 pkg ebtables
+pkg fail2ban
 pkg ftp
 pkg hping3
 pkg iftop
@@ -196,6 +197,7 @@ pkg ssh
 pkg sshfs
 pkg tcpdump
 pkg telnet
+#tor tor-geoipdb torsocks
 pkg tshark
 pkg unbound
 pkg wget
