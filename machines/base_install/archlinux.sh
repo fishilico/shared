@@ -163,6 +163,7 @@ pkg dos2unix
 pkg file
 pkg fortune-mod
 pkg gnupg
+pkg haveged
 pkg highlight
 pkg htop
 pkg iotop
@@ -378,6 +379,7 @@ then
     pkg gedit
     pkg gedit-plugins
     pkg gimp
+    pkg gnome-mahjongg
     pkg gnome-system-monitor
     pkg gparted
     pkg graphviz

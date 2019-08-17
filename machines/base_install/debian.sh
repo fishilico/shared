@@ -102,6 +102,7 @@ pkg file
 pkg fortune-mod
 pkg fortunes
 pkg gnupg
+pkg haveged
 pkg highlight
 pkg htop
 pkg iotop
@@ -202,6 +203,7 @@ pkg tcpdump
 pkg telnet
 #tor tor-geoipdb torsocks
 pkg tshark
+pkg ulogd2
 pkg unbound
 pkg wget
 pkg whois
