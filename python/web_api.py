@@ -170,7 +170,7 @@ class WebSiteContext(object):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Dump mem")
+    parser = argparse.ArgumentParser(description="Connect to a website")
     parser.add_argument('url', metavar="URL", type=str,
                         help="HTTP(S) URL of the used website")
     parser.add_argument('-S', '--disable-ssl', action='store_true',
