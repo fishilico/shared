@@ -86,6 +86,7 @@ then
 fi
 
 # Essential packages
+pkg acl
 pkg attr
 pkg auditd
 pkg bash-completion
