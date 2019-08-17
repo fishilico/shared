@@ -28,12 +28,12 @@ RUN \
 #  * ISE:_do_ptrace: ptrace(PTRACE_TRACEME, ..., 0x0000000000000000, 0x0000000000000000): Operation not permitted
 # ERROR: can't resolve libraries to shared libraries: glib-2.0, gobject-2.0
 # This is because Gentoo's build sandbox (sys-apps/sandbox) ptraces ldd (because it can't LDPRELOAD into it).
-# Install it without the sandbox.
+# Install them without the sandbox.
 # cf. https://forums-web2.gentoo.org/viewtopic-t-1051762-view-next.html?sid=850e5ab46d3b0ba7b5b8ec32fa1566ba
 
 # Clean-up downloaded distfiles in the end.
 RUN \
-    emerge --quiet --sync && \
+    emerge-webrsync --quiet && \
     emerge dev-util/cmake sys-kernel/gentoo-sources && \
     MAKEOPTS='-j1' emerge sys-devel/llvm sys-devel/clang && \
     FEATURES='-usersandbox -sandbox' emerge \
@@ -58,7 +58,7 @@ RUN \
         sys-kernel/genkernel \
         virtual/jdk && \
     genkernel all && \
-    rm -r /usr/portage/distfiles/ /var/tmp/portage/
+    rm -rf /usr/portage/distfiles/ /var/tmp/portage/
 
 #RUN emerge sys-libs/musl
 
