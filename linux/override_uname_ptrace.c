@@ -361,6 +361,11 @@ int main(int argc, char **argv)
                 printf("ptrace(TRACEME) is not permitted here.\n");
                 exit(0);
             }
+            if (errno == ENOSYS) {
+                /* Qemu-user does not support ptrace */
+                printf("ptrace(TRACEME) is not implemented by the kernel here.\n");
+                exit(0);
+            }
             perror("ptrace(TRACEME)");
             exit(EXIT_FAILURE);
         }
