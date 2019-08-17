@@ -252,6 +252,18 @@ Internet
     - https://www.openshift.com/products/online/ Red Hat OpenShift Online (Free with renewal every 60 days)
     - https://aws.amazon.com/free/ Amazon Web Service Free Tier - one Amazon Elastic Compute Cloud (EC2) Micro Instance free for one year
 
+* Free Continuous Integration (CI) systems for Open-Source projects:
+
+    - https://travis-ci.org/ Travis CI, Test and Deploy with Confidence
+    - https://circleci.com/ Circle CI, Continuous Integration and Delivery
+    - https://www.appveyor.com/ Appveyor, CI solution for Windows and Linux
+
+* Free Static Analysis tools for Open-Source projects:
+
+    - https://lgtm.com/ Semmle's LGTM Continuous security analysis  (online; C, C++, C#, COBOL, Java, JavaScript, Python)
+    - https://scan.coverity.com/ Coverity Scan Static Analysis (online; Java, C/C++, C#, JavaScript, Ruby, Python)
+    - https://fbinfer.com/ Facebook's infer (Java, C, C++, Objective-C)
+
 Hardware products
 -----------------
 
