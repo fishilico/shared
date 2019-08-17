@@ -114,6 +114,7 @@ pkg procps
 pkg progress
 pkg psmisc
 pkg pv
+pkg ripgrep
 pkg rlwrap
 pkg screen
 pkg strace

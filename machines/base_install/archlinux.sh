@@ -175,6 +175,7 @@ pkg most
 pkg progress
 pkg psmisc
 pkg pv
+pkg ripgrep
 pkg rlwrap
 pkg rng-tools
 pkg screen
