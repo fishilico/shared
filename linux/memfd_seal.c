@@ -182,6 +182,11 @@ static bool test_memfd(void)
 
     fd = memfd_create("my-memfd", MFD_CLOEXEC | MFD_ALLOW_SEALING);
     if (fd < 0) {
+        if (errno == ENOSYS) {
+            /* Qemu-user does not support memfd_create */
+            printf("Exit because the kernel does not support memfd_create.\n");
+            exit(0);
+        }
         perror("memfd_create");
         return false;
     }
