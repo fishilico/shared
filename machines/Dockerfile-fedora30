@@ -39,11 +39,13 @@ RUN \
         python3-devel \
         python3-gmpy2 \
         python3-numpy \
+        python3-pillow \
         python3-z3 \
         python2-cffi \
         python2-crypto \
         python2-devel \
         python2-gmpy2 \
+        python2-pillow \
         SDL2-devel \
         which \
         wine && \
@@ -64,6 +66,7 @@ CMD ["/run_shared_test.sh"]
 #       python: z3_example.py
 #       python/crypto:
 #       python/dnssec:
+#       python/qrcode:
 #       verification:
 #    With gcc -m32:
 #       Global blacklist: latex%
@@ -74,6 +77,7 @@ CMD ["/run_shared_test.sh"]
 #          python: z3_example.py
 #          python/crypto:
 #          python/dnssec:
+#          python/qrcode:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok

@@ -3,7 +3,7 @@ LABEL Description="Alpine Linux 3.4 with build dependencies for shared"
 
 # Alpine does not provide coq, mingw-w64, py3-z3
 # Alpine<3.8 does not provide pulseaudio-dev
-# Alpine<3.5 does not provide py-numpy, py2-cffi, py3-cffi, py2-crypto, py3-crypto
+# Alpine<3.5 does not provide py-numpy, py2-cffi, py3-cffi, py2-crypto, py3-crypto, py2-pillow, py3-pillow
 RUN \
     apk --no-cache --update add \
         clang \
@@ -46,6 +46,7 @@ CMD ["/run_shared_test.sh"]
 #       python: cffi_example.py cffi_numpy.py z3_example.py
 #       python/crypto: chacha20_poly1350_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py
 #       python/dnssec: verify_dnssec.py
+#       python/qrcode: hello_qr_decode.py
 #       verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok

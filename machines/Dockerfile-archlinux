@@ -39,12 +39,14 @@ RUN \
         python-cffi \
         python-gmpy2 \
         python-numpy \
+        python-pillow \
         python-pycryptodome \
         python-setuptools \
         python-z3 \
         python2 \
         python2-cffi \
         python2-numpy \
+        python2-pillow \
         python2-pycryptodome \
         python2-setuptools \
         sdl2 \
@@ -67,6 +69,7 @@ CMD ["/run_shared_test.sh"]
 #       python:
 #       python/crypto:
 #       python/dnssec:
+#       python/qrcode:
 #       verification:
 #    With gcc -m32:
 #       Global blacklist: latex%
@@ -77,6 +80,7 @@ CMD ["/run_shared_test.sh"]
 #          python:
 #          python/crypto:
 #          python/dnssec:
+#          python/qrcode:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok

@@ -36,12 +36,14 @@ RUN \
         python3-dev \
         python3-gmpy2 \
         python3-numpy \
+        python3-pil \
         python-argparse \
         python-cffi \
         python-crypto \
         python-dev \
         python-gmpy2 \
         python-numpy \
+        python-pil \
         python-z3 \
         wine-stable \
         wine32 \
@@ -63,6 +65,7 @@ CMD ["/run_shared_test.sh"]
 #       python:
 #       python/crypto:
 #       python/dnssec:
+#       python/qrcode:
 #       verification:
 #    With gcc -m32:
 #       Global blacklist: latex%
@@ -73,6 +76,7 @@ CMD ["/run_shared_test.sh"]
 #          python:
 #          python/crypto:
 #          python/dnssec:
+#          python/qrcode:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok

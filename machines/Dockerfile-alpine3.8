@@ -26,8 +26,10 @@ RUN \
         py-numpy \
         py2-cffi \
         py2-crypto \
+        py2-pillow \
         py3-cffi \
         py3-crypto \
+        py3-pillow \
         python2-dev \
         python3-dev \
         sdl2-dev && \
@@ -52,6 +54,7 @@ CMD ["/run_shared_test.sh"]
 #       python: z3_example.py
 #       python/crypto:
 #       python/dnssec:
+#       python/qrcode:
 #       verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok

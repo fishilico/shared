@@ -38,11 +38,13 @@ RUN \
         python3-devel \
         python3-gmpy2 \
         python3-numpy \
+        python3-pillow \
         python-argparse \
         python-cffi \
         python-crypto \
         python-devel \
         python-gmpy2 \
+        python-pillow \
         redhat-rpm-config \
         SDL2-devel \
         which \
@@ -64,6 +66,7 @@ CMD ["/run_shared_test.sh"]
 #       python: z3_example.py
 #       python/crypto:
 #       python/dnssec:
+#       python/qrcode:
 #       verification:
 #    With gcc -m32:
 #       Global blacklist: latex%
@@ -74,6 +77,7 @@ CMD ["/run_shared_test.sh"]
 #          python: z3_example.py
 #          python/crypto:
 #          python/dnssec:
+#          python/qrcode:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok

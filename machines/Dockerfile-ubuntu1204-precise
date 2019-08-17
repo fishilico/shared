@@ -8,6 +8,7 @@ ENV LANG C.UTF-8
 # Do not install libmnl-dev because mnl_attr_for_each() performs arithmetic on void*
 # Do not install python-crypto nor python3-crypto because they are too old
 # Ubuntu<16.04 does not provide python-z3
+# Ubuntu<14.04 does not provide python-pil nor python3-pil
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
@@ -46,6 +47,7 @@ CMD ["/run_shared_test.sh"]
 #       python: cffi_example.py cffi_numpy.py udp_multihome.py z3_example.py
 #       python/crypto: chacha20_poly1350_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py
 #       python/dnssec: verify_dnssec.py
+#       python/qrcode: hello_qr_decode.py
 #       verification: ackermann.vo
 #    With gcc -m32:
 #       Global blacklist: latex%
@@ -56,6 +58,7 @@ CMD ["/run_shared_test.sh"]
 #          python: cffi_example.py cffi_numpy.py udp_multihome.py z3_example.py
 #          python/crypto: chacha20_poly1350_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py
 #          python/dnssec: verify_dnssec.py
+#          python/qrcode: hello_qr_decode.py
 #          verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok

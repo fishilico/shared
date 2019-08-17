@@ -52,6 +52,7 @@ RUN \
         dev-python/gmpy \
         dev-python/numpy \
         dev-python/pycrypto \
+        dev-python/pillow \
         media-libs/libsdl2 \
         media-sound/pulseaudio \
         sci-mathematics/coq \
@@ -84,6 +85,7 @@ CMD ["/run_shared_test.sh"]
 #       python: z3_example.py
 #       python/crypto:
 #       python/dnssec:
+#       python/qrcode:
 #       verification:
 #    With gcc -m32:
 #       Global blacklist: latex% windows%
@@ -94,6 +96,7 @@ CMD ["/run_shared_test.sh"]
 #          python: z3_example.py
 #          python/crypto:
 #          python/dnssec:
+#          python/qrcode:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok
