@@ -62,7 +62,7 @@ int main(void)
         struct stat st;
         int new_dirfd;
         DIR *dir = NULL;
-        struct dirent *entry;
+        struct dirent64 *entry;
 
         /* Start with the root directory */
         if (!path_part) {
@@ -98,7 +98,7 @@ int main(void)
             dir = fdopendir(dir_fd);
             while (true) {
                 errno = 0;
-                entry = readdir(dir);
+                entry = readdir64(dir);
                 if (!entry) {
                     if (errno) {
                         perror("readdir");
@@ -111,7 +111,7 @@ int main(void)
                     if (entry->d_ino != st.st_ino) {
                         /* direntry inode number of mountpoints comes from the parent filesystem,
                          * and stat inode number comes from the mounted filesystem. */
-                        printf("  dir entry inode: %ld (0x%08lx)\n", entry->d_ino, entry->d_ino);
+                        printf("  dir entry inode: %" PRId64 " (0x%08" PRIx64 ")\n", entry->d_ino, entry->d_ino);
                     }
                     assert(entry->d_type == DT_DIR || entry->d_type == DT_UNKNOWN);
                     break;
