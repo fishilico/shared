@@ -76,7 +76,8 @@ CMD ["/run_shared_test.sh"]
 #       linux:
 #       python: z3_example.py
 #       python/crypto:
-#       python/dnssec:
+#       python/network:
+#       python/network/dnssec:
 #       python/qrcode:
 #       verification:
 #    With gcc -m32:
@@ -87,7 +88,8 @@ CMD ["/run_shared_test.sh"]
 #          linux: enum_link_addrs
 #          python: z3_example.py
 #          python/crypto:
-#          python/dnssec:
+#          python/network:
+#          python/network/dnssec:
 #          python/qrcode:
 #          verification:
 #    Compilers:
