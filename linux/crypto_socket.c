@@ -302,8 +302,15 @@ static bool test_aes_xts_enc(void)
     }
 
     if (setsockopt(tfmfd, SOL_ALG, ALG_SET_KEY, key, sizeof(key)) == -1) {
-        perror("setsockopt");
+        int err = errno;
+        perror("setsockopt(ALG_SET_KEY)");
         close(tfmfd);
+        /* Qemu-user requires a build-time option to use AF_ALG:
+         * https://github.com/qemu/qemu/blob/0266c739abbed804deabb4ccde2aa449466ac3b4/configure#L452
+         */
+        if (err == ENOPROTOOPT) {
+            return true;
+        }
         return false;
     }
 
@@ -440,8 +447,13 @@ static bool test_aes_cbc_dec(void)
     }
 
     if (setsockopt(tfmfd, SOL_ALG, ALG_SET_KEY, key, sizeof(key)) == -1) {
-        perror("setsockopt");
+        int err = errno;
+        perror("setsockopt(ALG_SET_KEY)");
         close(tfmfd);
+        /* Qemu-user requires a build-time option to use AF_ALG */
+        if (err == ENOPROTOOPT) {
+            return true;
+        }
         return false;
     }
 
@@ -559,6 +571,11 @@ static bool show_cipher_info(const char *ciphername)
              * GRKERNSEC_MODHARDEN option
              */
             printf("Module crypto_user not found, continuing.\n");
+            return true;
+        }
+        if (errno == EPFNOSUPPORT) {
+            /* Qemu-user does not support the protocol family */
+            printf("Protocol family not supported, continuing.\n");
             return true;
         }
         perror("socket");
