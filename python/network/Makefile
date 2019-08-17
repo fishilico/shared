@@ -1,12 +1,12 @@
 include ../../env-python.mk
 
-NEVER_TEST_BINARIES := enumerate_nsec.py enumerate_nsec3.py
+NEVER_TEST_BINARIES := pcap_netmap.py resolve_domains.py web_api.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
-HAVE_PYTHON_CRYPTO := $(call can-run,$(PYTHON) -c 'import Crypto')
+HAVE_PYTHON3_SOCKET_RECVMSG := $(call can-run,$(PYTHON3) -c 'import socket;socket.socket.recvmsg')
 
-ifneq ($(HAVE_PYTHON_CRYPTO),y)
-NONTEST_BINARIES += verify_dnssec.py
+ifneq ($(HAVE_PYTHON3_SOCKET_RECVMSG),y)
+NONTEST_BINARIES += udp_multihome.py
 endif
 
 BINARIES := $(wildcard *.py)
@@ -29,9 +29,6 @@ list-nobuild:
 test: all
 	@$(call run-test-progs,$(TEST_BINARIES))
 
-sync-inet:
-	$(PYTHON) verify_dnssec.py --update-tld-list --refresh
-
-.PHONY: all clean lint list-nobuild test sync-inet
+.PHONY: all clean lint list-nobuild test
 
 -include .*.d

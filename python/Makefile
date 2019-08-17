@@ -2,22 +2,17 @@ include ../os-detect.mk
 include ../env-python.mk
 
 # Programs not to test automatically
-NEVER_TEST_BINARIES := image_lsb.py matplotlib_feed_plot3d.py pcap_netmap.py resolve_domains.py unicode_norm.py web_api.py
+NEVER_TEST_BINARIES := image_lsb.py matplotlib_feed_plot3d.py unicode_norm.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
 HAVE_PYTHON_CFFI := $(call can-run,$(PYTHON) -c 'import cffi')
 HAVE_PYTHON_NUMPY := $(call can-run,$(PYTHON) -c 'import numpy')
-HAVE_PYTHON3_SOCKET_RECVMSG := $(call can-run,$(PYTHON3) -c 'import socket;socket.socket.recvmsg')
 HAVE_PYTHON_Z3 := $(call can-run,$(PYTHON) -c 'import z3')
 
 ifneq ($(HAVE_PYTHON_CFFI),y)
 NONTEST_BINARIES += cffi_example.py cffi_numpy.py
 else ifneq ($(HAVE_PYTHON_NUMPY),y)
 NONTEST_BINARIES += cffi_numpy.py
-endif
-
-ifneq ($(HAVE_PYTHON3_SOCKET_RECVMSG),y)
-NONTEST_BINARIES += udp_multihome.py
 endif
 
 ifneq ($(HAVE_PYTHON_Z3),y)
