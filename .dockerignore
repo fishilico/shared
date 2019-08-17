@@ -2,6 +2,7 @@
 .git
 
 # .gitignore patterns expanded with wildcards
+.vagrant/
 archlinux-seckernel/grsec/
 linux/modules/*.mod.c
 linux/modules/Module.symvers
@@ -62,6 +63,14 @@ verification/*.script
 */*.exe
 */*/*.exe
 */*/*/*.exe
+*.fdb_latexmk
+*/*.fdb_latexmk
+*/*/*.fdb_latexmk
+*/*/*/*.fdb_latexmk
+*.fls
+*/*.fls
+*/*/*.fls
+*/*/*/*.fls
 *.glob
 */*.glob
 */*/*.glob

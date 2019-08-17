@@ -38,7 +38,7 @@ endif
 
 # Clean command
 CLEAN_CMD := $(V_CLEAN)$(RM) \
-	*.a *.aux *.bin *.class *.dll *.efi *.elf *.exe *.glob *.log *.o *.out \
+	*.a *.aux *.bin *.class *.dll *.efi *.elf *.exe *.fdb_latexmk *.fls *.glob *.log *.o *.out \
 	*.pdf *.pyc *.rst.tex *.so *.tmp *.toc *.vo .*.d .*.o && \
 	$(RM) -r __pycache__
 
