@@ -10,11 +10,14 @@
 
 /* ARM and x86 gas has unfortunately different syntax to declare "main" */
 #if defined(__x86_64__) || defined(__i386__)
+    /* Mark the stack as not executable */
+    .section .note.GNU-stack, "", @progbits
     .section .shcode, "ax", @progbits
     .globl main
     .hidden main
     .type main, @function
 #elif defined(__aarch64__) || defined(__arm__)
+    .section .note.GNU-stack, "", %progbits
     .section .shcode, "ax", %progbits
     .globl main
     .hidden main
