@@ -75,6 +75,85 @@ fi
 echo 'fs.file-max = 10000' > /etc/sysctl.d/99-sane-open-files-limit.conf
 SCRIPT
 
+# Install an ARM chroot with Debian sid
+$arm_chroot_script = <<SCRIPT
+# Install Qemu static, in order to run foreign architures on Arch Linux
+if ! pacman -Qqi qemu-user-static > /dev/null
+then
+    pacman -Qqi git > /dev/null || pacman --noconfirm -S git
+    sudo -u vagrant git clone https://aur.archlinux.org/qemu-user-static.git AUR_qemu-user-static
+    (cd AUR_qemu-user-static && sudo -u vagrant makepkg -i --noconfirm)
+fi
+
+# Install a binfmt handler for ARM
+# cf. https://aur.archlinux.org/cgit/aur.git/tree/qemu-static.conf?h=binfmt-qemu-static
+if ! [ -f /etc/binfmt.d/qemu-arm.conf ]
+then
+    echo ':qemu-arm:M::\\x7fELF\\x01\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x28\\x00:\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\x00\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xfe\\xff\\xff\\xff:/usr/bin/qemu-arm-static:' > /etc/binfmt.d/qemu-arm.conf
+    systemctl restart systemd-binfmt.service
+fi
+
+# Install debootstrap and Debian keyring
+pacman -Qqi debootstrap > /dev/null || pacman --noconfirm -S debootstrap
+pacman -Qqi debian-archive-keyring > /dev/null || pacman --noconfirm -S debian-archive-keyring
+# Install arch-install-scripts for "arch-chroot"
+pacman -Qqi arch-install-scripts > /dev/null || pacman --noconfirm -S arch-install-scripts
+if ! [ -d arm-debian ]
+then
+    # Bootstrap the ARM-Debian chroot, copying qemu-arm-static inside too
+    mkdir -p arm-debian/usr/bin
+    cp -v /usr/bin/qemu-arm-static arm-debian/usr/bin/
+    debootstrap --arch=armel --force-check-gpg sid arm-debian
+
+    # Add a helper to enter the chroot
+    [ -d bin ] || sudo -u vagrant mkdir bin
+    sudo -u vagrant tee bin/enter-arm-debian > /dev/null << EOF
+#!/bin/bash
+if [ "\\\$(id -u)" != 0 ]
+then
+    # Change to vagrant user inside the chroot
+    if [ "\\\$#" -eq 0 ]
+    then
+        set su vagrant
+    else
+        set su vagrant -c "\\\$*"
+    fi
+elif [ "\\\$#" -eq 0 ]
+then
+    # Run bash by default, as root
+    set bash
+fi
+exec sudo arch-chroot /home/vagrant/arm-debian /usr/bin/env PATH=/usr/sbin:/usr/bin:/sbin:/bin "\\\$@"
+EOF
+    chmod +x bin/enter-arm-debian
+
+    # Install the same packages as the last Debian machine, but without the x86-specific packages
+    sed -n '/^RUN \\\\/,/[^\\\\]\$/{p}' /vagrant/machines/Dockerfile-debian10-buster | \\
+        tail -n +2 | \\
+        sed 's/dpkg --add-architecture i386/true/' | \\
+        sed 's/ gcc-multilib / gcc /g' | \\
+        sed 's/ libc6-dev-i386 / /g' | \\
+        sed 's/ linux-headers-amd64 / /g' | \\
+        sed 's/ wine64 / /g' | \\
+        arch-chroot arm-debian /usr/bin/env PATH=/usr/sbin:/usr/bin:/sbin:/bin DEBIAN_FRONTEND=noninteractive sh -x
+
+    # Add vagrant user
+    arch-chroot arm-debian /usr/bin/env PATH=/usr/sbin:/usr/bin:/sbin:/bin useradd -m --uid 1000 --user-group --shell /bin/bash vagrant
+fi
+
+# Bind-mount /vagrant
+if ! grep -q '^/vagrant /home/vagrant/arm-debian ' /etc/fstab
+then
+    echo '/vagrant /home/vagrant/arm-debian/vagrant none bind 0 0' >> /etc/fstab
+    mkdir -p arm-debian/vagrant
+    mount arm-debian/vagrant
+fi
+
+# Upgrade Debian
+arch-chroot arm-debian apt-get update
+arch-chroot arm-debian /usr/bin/env PATH=/usr/sbin:/usr/bin:/sbin:/bin apt-get -y dist-upgrade
+SCRIPT
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -93,8 +172,9 @@ Vagrant.configure(2) do |config|
     v.memory = 4096
   end
 
-  # Run the provisioning script
+  # Run the provisioning scripts
   config.vm.provision :shell, inline: $script
+  config.vm.provision :shell, inline: $arm_chroot_script
 
   # Ensure the build system works fine, and show what would run
   config.vm.provision :shell, inline: "make -C /vagrant list-nobuild"
