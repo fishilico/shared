@@ -401,7 +401,7 @@ static void dump_x86_tables(void)
 	if (true) {
 		struct desc_struct *descs;
 
-		cpu = smp_processor_id();
+		cpu = raw_smp_processor_id();
 		descs = (struct desc_struct *)descp.address;
 #else
 	for_each_possible_cpu(cpu) {
@@ -691,7 +691,7 @@ static void dump_x86_tables(void)
 
 static int __init cpu_x86_init(void)
 {
-	pr_info("Current CPU: %u\n", smp_processor_id());
+	pr_info("Current CPU: %u\n", raw_smp_processor_id());
 	dump_x86_cr();
 	dump_x86_msr();
 	dump_x86_segments();

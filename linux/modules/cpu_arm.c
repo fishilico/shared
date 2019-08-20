@@ -455,7 +455,7 @@ static void dump_arm_vectors(void)
 
 static int __init cpu_arm_init(void)
 {
-	pr_info("Current CPU: %u\n", smp_processor_id());
+	pr_info("Current CPU: %u\n", raw_smp_processor_id());
 	dump_arm_cp15_c0();
 	dump_arm_cp15_c1();
 	dump_arm_vectors();
