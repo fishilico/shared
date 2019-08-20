@@ -71,8 +71,11 @@ class struct_sockaddr_in(ctypes.Structure):
     def str_addr(self):
         assert self.sin_family == socket.AF_INET
         assert self.sin_port == 0
-        addr = array.array('B', self.sin_addr)
-        return socket.inet_ntop(socket.AF_INET, addr.tostring())
+        if sys.version_info >= (3,):
+            addr_bytes = bytes(self.sin_addr)
+        else:
+            addr_bytes = array.array('B', self.sin_addr).tostring()
+        return socket.inet_ntop(socket.AF_INET, addr_bytes)
 
 
 class struct_sockaddr_in6(ctypes.Structure):
@@ -86,8 +89,11 @@ class struct_sockaddr_in6(ctypes.Structure):
     def str_addr(self):
         assert self.sin6_family == socket.AF_INET6
         assert self.sin6_port == 0
-        addr = array.array('B', self.sin6_addr)
-        text = socket.inet_ntop(socket.AF_INET6, addr.tostring())
+        if sys.version_info >= (3,):
+            addr_bytes = bytes(self.sin6_addr)
+        else:
+            addr_bytes = array.array('B', self.sin6_addr).tostring()
+        text = socket.inet_ntop(socket.AF_INET6, addr_bytes)
         if self.sin6_scope_id:
             text += '%{0:d}'.format(self.sin6_scope_id)
         return text
