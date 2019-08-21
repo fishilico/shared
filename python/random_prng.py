@@ -224,7 +224,7 @@ class CSharpRandom(object):
         """Test things"""
         # https://www.fireeye.com/blog/threat-research/2018/10/2018-flare-on-challenge-solutions.html
         # Level 2 (Minesweeper)
-        expected = binascii.unhexlify('b62372ef302216ca153e52f5d3f88dac4b0b09f35a37a2a503bcf57517849e3b')
+        expected = binascii.unhexlify(b'b62372ef302216ca153e52f5d3f88dac4b0b09f35a37a2a503bcf57517849e3b')
         prng = cls(0xee97f60)
         assert prng.next_bytes(32) == expected
 
