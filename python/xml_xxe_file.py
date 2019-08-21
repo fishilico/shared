@@ -50,7 +50,7 @@ described on https://gist.github.com/paul-axe/2a384bb5f2d430dd3b63b2484af960f4
 import argparse
 import os.path
 import sys
-import xml.sax
+import xml.sax  # noqa
 import xml.sax.saxutils
 
 
@@ -90,7 +90,7 @@ def main(argv=None):
     if args.raw:
         print(xmlstring)
     elif args.lxml:
-        from lxml import etree
+        from lxml import etree  # noqa
         if args.noxxe:
             parser = etree.XMLParser(resolve_entities=False)
             root = etree.XML(xmlbytes, parser)
