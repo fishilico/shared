@@ -41,7 +41,7 @@ def disable_ssl_cert_check_opener():
     """
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
-    ctx.verify_mode = ssl.CERT_NONE
+    ctx.verify_mode = ssl.CERT_NONE  # noqa
     return urllib.request.HTTPSHandler(context=ctx)
 
 

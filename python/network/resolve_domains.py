@@ -715,7 +715,7 @@ class Resolver:
             # Disable HTTPS certificate verification, for example when recording
             # the requests using a HTTPS proxy such as BurpSuite.
             ctx.check_hostname = False
-            ctx.verify_mode = ssl.CERT_NONE
+            ctx.verify_mode = ssl.CERT_NONE  # noqa
         opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=ctx))
         req = urllib.request.Request(
             url,
@@ -748,7 +748,7 @@ class Resolver:
             # Disable HTTPS certificate verification, for example when recording
             # the requests using a HTTPS proxy such as BurpSuite.
             ctx.check_hostname = False
-            ctx.verify_mode = ssl.CERT_NONE
+            ctx.verify_mode = ssl.CERT_NONE  # noqa
         opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=ctx))
         req = urllib.request.Request(
             url,
@@ -930,7 +930,7 @@ def main(argv=None):
 
     # Fill the cache
     domains = list(domains_set)
-    random.shuffle(domains)  # Do not be predictable
+    random.SystemRandom().shuffle(domains)  # Do not be predictable
     for domain in domains:
         # Treat SRV records in a special way, to restrict the requested record type
         resolving_types = DNS_SRV_TYPES if '._tcp.' in domain or '._udp.' in domain else DNS_TYPES
@@ -944,7 +944,7 @@ def main(argv=None):
         domains_with_prefixes = list(
             '{}.{}'.format(p, d)
             for p, d in itertools.product(WELLKNOWN_PREFIXES, domains))
-        random.shuffle(domains_with_prefixes)  # Do not be predictable
+        random.SystemRandom().shuffle(domains_with_prefixes)  # Do not be predictable
         for domain in domains_with_prefixes:
             resolving_types = DNS_SRV_TYPES if '._tcp.' in domain or '._udp.' in domain else DNS_TYPES
             for rtype in resolving_types:
