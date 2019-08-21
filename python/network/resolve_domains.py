@@ -585,9 +585,20 @@ class Resolver:
                 for line in fjson:
                     all_lines.add(line.strip() + '\n')
 
+        all_lines = sorted(all_lines)
         merged_file = self.cache_directory / 'all.json'
-        with merged_file.open(mode='w') as fout:
-            fout.write(''.join(sorted(all_lines)))
+        new_merged_file = self.cache_directory / 'all.json.new'
+        try:
+            with new_merged_file.open(mode='w') as fout:
+                fout.write(''.join(all_lines))
+        except MemoryError:
+            # This can occur with too many domains.
+            # In such as situation, do not join the lines
+            with new_merged_file.open(mode='w') as fout:
+                for line in all_lines:
+                    fout.write(line)
+
+        new_merged_file.rename(merged_file)
         for filepath in all_files:
             if filepath != merged_file:
                 filepath.unlink()
