@@ -81,8 +81,22 @@ $arm_chroot_script = <<SCRIPT
 if ! pacman -Qqi qemu-user-static > /dev/null
 then
     pacman -Qqi git > /dev/null || pacman --noconfirm -S git
+    pacman -Qqi patch > /dev/null || pacman --noconfirm -S patch
+    pacman -Qqi fakeroot > /dev/null || pacman --noconfirm -S fakeroot
+
+    # Install its dependencies
+    if ! pacman -Qqi glib2-static > /dev/null
+    then
+        sudo -u vagrant git clone https://aur.archlinux.org/glib2-static.git AUR_glib2-static
+        (cd AUR_glib2-static && sudo -u vagrant makepkg -si --noconfirm --nocheck) && rm -rf AUR_glib2-static
+    fi
+    if ! pacman -Qqi pcre-static > /dev/null
+    then
+        sudo -u vagrant git clone https://aur.archlinux.org/pcre-static.git AUR_pcre-static
+        (cd AUR_pcre-static && sudo -u vagrant makepkg -si --noconfirm --skippgpcheck) && rm -rf AUR_pcre-static
+    fi
     sudo -u vagrant git clone https://aur.archlinux.org/qemu-user-static.git AUR_qemu-user-static
-    (cd AUR_qemu-user-static && sudo -u vagrant makepkg -i --noconfirm)
+    (cd AUR_qemu-user-static && sudo -u vagrant makepkg -si --noconfirm --skippgpcheck) && rm -rf AUR_qemu-user-static
 fi
 
 # Install a binfmt handler for ARM
