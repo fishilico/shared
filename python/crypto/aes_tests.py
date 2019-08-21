@@ -1966,7 +1966,7 @@ def xx(data):
 
 def unxx(hexvalue):
     """Decode an hexadecimal string into bytes"""
-    return binascii.unhexlify(hexvalue)
+    return binascii.unhexlify(hexvalue.encode('ascii'))
 
 
 TEST_VECTORS = {
