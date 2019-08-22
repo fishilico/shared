@@ -422,6 +422,7 @@ then
 
     aurpkg burpsuite
     aurpkg restview
+    aurpkg trickle
 
     # Language
     pkg hunspell-en_GB
