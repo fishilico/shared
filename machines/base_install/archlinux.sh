@@ -524,7 +524,6 @@ then
     pkg python2-netaddr
     pkg python2-pillow
     pkg python2-pycryptodome
-    pkg python2-pycryptodomex
     pkg python2-scapy
     pkg python2-yara
     pkg qemu
@@ -561,6 +560,7 @@ then
     aurpkg python-roca-detect
     aurpkg python-uncompyle6
     #aurpkg python-pwntools-git
+    aurpkg python2-pycryptodomex
     aurpkg python2-pwntools
     aurpkg pyzbar
     aurpkg selinux-python
