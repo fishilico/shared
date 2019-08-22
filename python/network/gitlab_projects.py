@@ -132,7 +132,7 @@ def main(argv=None):
         # Do not print the path if it is expected
         if not prj_url.endswith('/{}.git'.format(prj_pathname)):
             logger.warning("Unexpected URL %r for path %r", prj_url, prj_pathname)
-            print("{} {}".format(prj_name, prj_pathname, prj_url))
+            print("{} {} {}".format(prj_name, prj_pathname, prj_url))
         else:
             path_from_name = prj_name.lower()
             if prj_pathname == path_from_name:
