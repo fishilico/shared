@@ -9,6 +9,7 @@ linux/modules/Module.symvers
 linux/modules/modules.order
 linux/modules/.tmp_versions/
 linux/nolibc/include/syscall-x86/
+rust/*/target/
 verification/.frama-c/
 verification/*.script
 *~
@@ -147,6 +148,10 @@ verification/*.script
 */.coverage
 */*/.coverage
 */*/*/.coverage
+Cargo.lock
+*/Cargo.lock
+*/*/Cargo.lock
+*/*/*/Cargo.lock
 htmlcov/
 */htmlcov/
 */*/htmlcov/
