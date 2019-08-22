@@ -77,7 +77,7 @@ static char *handle_ldr(
                 sprintf(sz_operand, "[%s=%#" PRIxPTR ", #-%#x]", sz_reg, address, -offset);
             }
         }
-        address += offset;
+        address = (uintptr_t)((intptr_t)address + offset);
     }
 
     /* Check the computed address */
@@ -99,7 +99,7 @@ static char *handle_ldr(
 
     if (postindex) {
         assert(!writeback); /* post-index and writeback bits are exclusive */
-        asm_instr_ctx_reg_bynum(ctx, reg) = address + offset;
+        asm_instr_ctx_reg_bynum(ctx, reg) =  (uintptr_t)((intptr_t)address + offset);
     } else if (writeback) {
         asm_instr_ctx_reg_bynum(ctx, reg) = address;
     }
