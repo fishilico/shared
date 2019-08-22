@@ -37,9 +37,14 @@ static float add_f(float x, float y)
     __asm__ __volatile__ ("fadds %1" : "+t"(x) : "fm"(y));
 #elif defined(__aarch64__)
     __asm__ __volatile__ ("fadd %s0, %s0, %s1" : "+w"(x) : "w"(y));
-#elif defined(__arm__) && defined(__VFP_FP__)
+#elif defined(__arm__)
+#    if defined(__VFP_FP__) && !defined(__SOFTFP__)
     /* Use VFP floating-point registers */
     __asm__ __volatile__ ("vadd.f32 %0, %0, %1" : "+w"(x) : "w"(y));
+#    else
+    /* arm-linux-gnueabi uses built-in __addsf3 or __aeabi_fadd */
+    x += y;
+#    endif
 #else
 #    warning "add_f not yet implemented in asm"
     x += y;
@@ -55,8 +60,13 @@ static double add_d(double x, double y)
     __asm__ __volatile__ ("faddl %1" : "+t"(x) : "m"(y));
 #elif defined(__aarch64__)
     __asm__ __volatile__ ("fadd %d0, %d0, %d1" : "+w"(x) : "w"(y));
-#elif defined(__arm__) && defined(__VFP_FP__)
+#elif defined(__arm__)
+#    if defined(__VFP_FP__) && !defined(__SOFTFP__)
     __asm__ __volatile__ ("vadd.f64 %P0, %P0, %P1" : "+w"(x) : "w"(y));
+#    else
+    /* arm-linux-gnueabi uses built-in __adddf3 or __aeabi_dadd */
+    x += y;
+#    endif
 #else
 #    warning "add_d not yet implemented in asm"
     x += y;
@@ -76,9 +86,14 @@ static int toint_f(float x)
     __asm__ __volatile__ ("flds %1 ; fistpl %0" : "=m"(i) : "m"(x));
 #elif defined(__aarch64__)
     __asm__ __volatile__ ("fcvtzs %0, %s1" : "=r"(i) : "w"(x));
-#elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
+#elif defined(__arm__)
+#    if defined(__VFP_FP__) && !defined(__SOFTFP__) && !defined(__clang__)
     /* clang 3.5.0 fails with "error: couldn't allocate output register for constraint 'w'" */
     __asm__ __volatile__ ("vcvt.s32.f32 %0, %1" : "=w"(i) : "w"(x));
+#    else
+    /* arm-linux-gnueabi uses built-in __fixsfsi or __aeabi_f2iz */
+    i = (int)x;
+#    endif
 #else
 #    warning "toint_f not yet implemented in asm"
     i = (int)x;
@@ -96,8 +111,13 @@ static int toint_d(double x)
     __asm__ __volatile__ ("fldl %1 ; fistpl %0" : "=m"(i) : "m"(x));
 #elif defined(__aarch64__)
     __asm__ __volatile__ ("fcvtzs %0, %d1" : "=r"(i) : "w"(x));
-#elif defined(__arm__) && defined(__VFP_FP__) && !defined(__clang__)
+#elif defined(__arm__)
+#    if defined(__VFP_FP__) && !defined(__SOFTFP__) && !defined(__clang__)
     __asm__ __volatile__ ("vcvt.s32.f64 %0, %P1" : "=w"(i) : "w"(x));
+#    else
+    /* arm-linux-gnueabi uses built-in __fixdfsi or __aeabi_d2iz */
+    i = (int)x;
+#    endif
 #else
 #    warning "toint_d not yet implemented in asm"
     i = (int)x;
@@ -115,8 +135,12 @@ static float sqrt_f(float x)
     __asm__ __volatile__ ("fsqrt" : "+t"(s));
 #elif defined(__aarch64__)
     __asm__ __volatile__ ("fsqrt %s0, %s1" : "=w"(s) : "w"(x));
-#elif defined(__arm__) && defined(__VFP_FP__)
+#elif defined(__arm__)
+#    if defined(__VFP_FP__) && !defined(__SOFTFP__)
     __asm__ __volatile__ ("vsqrt.f32 %0, %1" : "=w"(s) : "w"(x));
+#    else
+    s = sqrtf(x);
+#endif
 #else
 #    warning "sqrt_f not yet implemented in asm"
     s = sqrtf(x);
@@ -134,8 +158,12 @@ static double sqrt_d(double x)
     __asm__ __volatile__ ("fsqrt": "+t"(s));
 #elif defined(__aarch64__)
     __asm__ __volatile__ ("fsqrt %d0, %d1" : "=w"(s) : "w"(x));
-#elif defined(__arm__) && defined(__VFP_FP__)
+#elif defined(__arm__)
+#    if defined(__VFP_FP__) && !defined(__SOFTFP__)
     __asm__ __volatile__ ("vsqrt.f64 %P0, %P1" : "=w"(s) : "w"(x));
+#    else
+    s = sqrt(x);
+#endif
 #else
 #    warning "sqrt_d not yet implemented in asm"
     s = sqrt(x);
