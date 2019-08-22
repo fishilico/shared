@@ -117,6 +117,7 @@ def generate_keystore(store_type, password):
                 '-storetype', store_type,
                 '-keystore', ks_path,
                 '-storepass', password,
+                '-keypass', password,
                 '-alias', 'mykeypair',
                 '-dname', 'CN=example',
             ],
@@ -128,6 +129,7 @@ def generate_keystore(store_type, password):
                 '-storetype', store_type,
                 '-keystore', ks_path,
                 '-storepass', password,
+                '-keypass', password,
                 '-alias', 'mykeypair_rsa_sha256sig',
                 '-dname', 'CN=example',
             ],
@@ -142,6 +144,7 @@ def generate_keystore(store_type, password):
                     '-storetype', store_type,
                     '-keystore', ks_path,
                     '-storepass', password,
+                    '-keypass', password,
                     '-alias', 'mysecret_key',
                 ],
                 None, fatal=True)
@@ -152,6 +155,7 @@ def generate_keystore(store_type, password):
                     '-storetype', store_type,
                     '-keystore', ks_path,
                     '-storepass', password,
+                    '-keypass', password,
                     '-alias', 'mysecret_aes192key',
                 ],
                 None, fatal=True)
