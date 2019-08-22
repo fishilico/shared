@@ -1,0 +1,14 @@
+[package]
+name = "check_linux_pass"
+version = "0.1.0"
+authors = ["Nicolas Iooss <nicolas.iooss_git@polytechnique.org>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = "~2.33"
+error-chain = "0.12"
+pwhash = "0.3"
+termios = "0.3"
+users = "0.9"
