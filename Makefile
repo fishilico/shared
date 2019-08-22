@@ -70,6 +70,11 @@ ifneq ($(call can-run,$(PYTHON) --version),y)
 SUBDIRS_BLACKLIST += arduino% python% shellcode%
 endif
 
+# Test rust/cargo availability
+ifneq ($(call can-run,$(CARGO) --version),y)
+SUBDIRS_BLACKLIST += rust%
+endif
+
 # Show "SUBDIR ..." only if -w and -s and V=1 are not given, and then add
 # --no-print-directory to invoked make
 ifneq ($(findstring $(MAKEFLAGS), w), w)

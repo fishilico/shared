@@ -57,7 +57,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex%
+#    Global blacklist: latex% rust%
 #    In sub-directories:
 #       c:
 #       java/keystore:
@@ -69,7 +69,7 @@ CMD ["/run_shared_test.sh"]
 #       python/qrcode:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex%
+#       Global blacklist: latex% rust%
 #       In sub-directories:
 #          c: gtk_alpha_window openmp_matrix
 #          java/keystore:

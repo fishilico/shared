@@ -39,7 +39,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex%
+#    Global blacklist: latex% rust%
 #    In sub-directories:
 #       c:
 #       java/keystore: parse_jceks.py parse_pkcs12.py util_asn1.py
@@ -51,7 +51,7 @@ CMD ["/run_shared_test.sh"]
 #       python/qrcode: hello_qr_decode.py
 #       verification: ackermann.vo
 #    With gcc -m32:
-#       Global blacklist: latex%
+#       Global blacklist: latex% rust%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
 #          java/keystore: parse_jceks.py parse_pkcs12.py util_asn1.py

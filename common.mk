@@ -1,6 +1,7 @@
 # Makefile definitions which are common to every projects
 
 # External commands used in this file
+CARGO ?= cargo
 GREP ?= grep
 JAVA ?= java
 JAVAC ?= javac
@@ -18,6 +19,8 @@ PYLINT ?= pylint
 # Define "quiet" commands, with V=1, like git and systemd project
 ifneq ($(findstring $(MAKEFLAGS), s), s)
 ifndef V
+V_CARGO_BUILD= @echo '  CARGO BUILD';
+V_CARGO_CLEAN= @echo '  CARGO CLEAN';
 V_CC        = @echo '  CC        $<';
 V_CCAS      = @echo '  CCAS      $<';
 V_CCLD      = @echo '  CCLD      $@';
