@@ -1,12 +1,16 @@
 //! Download a web page using the `curl` crate
+//! Use RUST_LOG=info cargo run to see INFO messages
 
 extern crate clap;
 extern crate curl;
+extern crate env_logger;
+extern crate log;
 
 #[macro_use]
 extern crate error_chain;
 
 use clap::{Arg, App};
+use log::{info, error};
 use std::fs::File;
 use std::io::prelude::*;
 
@@ -52,7 +56,7 @@ fn download_web(url: &str, output_file: Option<&str>) -> Result<()> {
     if let Some(out_file_path) = output_file {
         let mut file = File::create(out_file_path)?;
         file.write_all(&data)?;
-        println!("{} bytes written to {}", data.len(), out_file_path);
+        info!("{} bytes written to {}", data.len(), out_file_path);
     } else {
         let body = String::from_utf8(data).map_err(
             |_| "data is not valid UTF8!",
@@ -63,6 +67,8 @@ fn download_web(url: &str, output_file: Option<&str>) -> Result<()> {
 }
 
 fn main() {
+    env_logger::init();
+
     let matches = App::new("DownloadWeb")
         .version("0.1.0")
         .author("Nicolas Iooss")
@@ -84,8 +90,8 @@ fn main() {
 
     if let Err(err) = download_web(matches.value_of("url").unwrap(), matches.value_of("output")) {
         match err {
-            Error(ErrorKind::Curl(e), _) => eprintln!("Error in Curl: {}", e),
-            _ => eprintln!("Error: {}", err),
+            Error(ErrorKind::Curl(e), _) => error!("Error in Curl: {}", e),
+            _ => error!("Error: {}", err),
         }
         std::process::exit(1);
     }
