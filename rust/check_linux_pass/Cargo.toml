@@ -7,8 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = "~2.33"
-error-chain = "0.12"
+clap = {version = "2.33", default-features = false}
 pwhash = "0.3"
 termios = "0.3"
 users = "0.9"
