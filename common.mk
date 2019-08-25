@@ -43,7 +43,8 @@ endif
 CLEAN_CMD := $(V_CLEAN)$(RM) \
 	*.a *.aux *.bin *.class *.dll *.efi *.elf *.exe *.fdb_latexmk *.fls *.glob *.log *.o *.out \
 	*.pdf *.pyc *.rst.tex *.so *.tmp *.toc *.vo .*.d .*.o && \
-	$(RM) -r __pycache__
+	$(RM) -r __pycache__ && \
+	$(RM) -r target
 
 # Try running a command and output the second or third parameter accordingly.
 # The implementation of this function was copied from Linux (file scripts/Kbuild.include)

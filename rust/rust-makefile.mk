@@ -5,8 +5,8 @@ all:
 	$(V_CARGO_BUILD)$(CARGO) build
 
 clean:
-	$(CLEAN_CMD)
 	$(V_CARGO_CLEAN)$(CARGO) clean
+	$(CLEAN_CMD)
 
 doc:
 	$(CARGO) doc --document-private-items

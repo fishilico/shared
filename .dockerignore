@@ -10,6 +10,7 @@ linux/modules/modules.order
 linux/modules/.tmp_versions/
 linux/nolibc/include/syscall-x86/
 rust/*/target/
+rust/target/
 verification/.frama-c/
 verification/*.script
 *~
