@@ -38,7 +38,7 @@ RUN \
         echo 'libpng' && \
         echo 'libpng2' && \
         echo 'libtiff' && \
-        echo 'linux-firmware' && \
+        echo 'linux-fw-redistributable' && \
         echo 'no-source-code' && \
         echo 'rc' && \
         echo 'rdisc' && \
