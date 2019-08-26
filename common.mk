@@ -7,7 +7,7 @@ JAVA ?= java
 JAVAC ?= javac
 LATEXMK ?= latexmk
 PKG_CONFIG ?= pkg-config
-PYTHON ?= python
+PYTHON ?= python3
 PYTHON3 ?= python3
 RM ?= rm -f
 SH ?= sh
@@ -78,9 +78,6 @@ RUN_TEST_PREFIX ?=
 run-test-progs = \
 	for P in $(sort $(1)); do \
 		if [ "$${P%.py}" != "$$P" ] ; then \
-			echo "$(PYTHON) ./$$P" && \
-			$(PYTHON) "./$$P" || exit $$? ; \
-		elif [ "$${P%.py3}" != "$$P" ] ; then \
 			echo "$(PYTHON) ./$$P" && \
 			$(PYTHON) "./$$P" || exit $$? ; \
 		elif [ "$${P%.sh}" != "$$P" ] ; then \

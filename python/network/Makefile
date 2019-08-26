@@ -3,9 +3,9 @@ include ../../env-python.mk
 NEVER_TEST_BINARIES := gitlab_projects.py pcap_netmap.py resolve_domains.py web_api.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
-HAVE_PYTHON3_SOCKET_RECVMSG := $(call can-run,$(PYTHON3) -c 'import socket;socket.socket.recvmsg')
+HAVE_PYTHON_SOCKET_RECVMSG := $(call can-run,$(PYTHON) -c 'import socket;socket.socket.recvmsg')
 
-ifneq ($(HAVE_PYTHON3_SOCKET_RECVMSG),y)
+ifneq ($(HAVE_PYTHON_SOCKET_RECVMSG),y)
 NONTEST_BINARIES += udp_multihome.py
 endif
 

@@ -62,7 +62,7 @@ CMD ["/run_shared_test.sh"]
 #       c:
 #       java/keystore:
 #       linux:
-#       python:
+#       python: z3_example.py
 #       python/crypto:
 #       python/network:
 #       python/network/dnssec:
@@ -74,7 +74,7 @@ CMD ["/run_shared_test.sh"]
 #          c: gmp_functions gtk_alpha_window
 #          java/keystore:
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
-#          python:
+#          python: z3_example.py
 #          python/crypto:
 #          python/network:
 #          python/network/dnssec:
