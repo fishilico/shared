@@ -127,7 +127,7 @@ then
         echo '******************************************'
         echo '* Building with musl-gcc                 *'
         echo '******************************************'
-        make CC="musl-gcc -shared" clean test KERNELVER= || exit $?
+        make CC='musl-gcc -shared -fPIE -pie' clean test KERNELVER= || exit $?
     fi
 fi
 
