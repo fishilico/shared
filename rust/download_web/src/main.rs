@@ -12,7 +12,7 @@ extern crate error_chain;
 use clap::{Arg, App};
 use log::{info, error};
 use std::fs::File;
-use std::io::prelude::*;
+use std::io::Write;
 
 
 // Declare errors
