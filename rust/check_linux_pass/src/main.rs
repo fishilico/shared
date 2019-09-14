@@ -9,7 +9,7 @@ use std::fmt;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader, Write};
 use std::path::Path;
-use termios::{Termios, tcsetattr};
+use termios::{tcsetattr, Termios};
 
 #[derive(Debug)]
 enum Error {
@@ -81,20 +81,18 @@ fn prompt_password() -> Result<String, Error> {
 
     let mut password_line = String::new();
     eprint!("Password: ");
-    let result = io::stderr().flush().and_then(|_| {
-        io::stdin().read_line(&mut password_line)
-    });
+    let result = io::stderr()
+        .flush()
+        .and_then(|_| io::stdin().read_line(&mut password_line));
 
     // Reset the initial terminal before returning a failure
     tcsetattr(0, termios::TCSANOW, &initial_term)?;
 
     result?;
 
-    Ok(
-        password_line
-            .trim_end_matches(|c| c == '\r' || c == '\n')
-            .to_string(),
-    )
+    Ok(password_line
+        .trim_end_matches(|c| c == '\r' || c == '\n')
+        .to_string())
 }
 
 /// Check a password using a `/etc/shadow` file
@@ -158,9 +156,7 @@ fn check_password_with_helper(user: &str, password_opt: Option<&str>) -> Result<
             break;
         }
     }
-    let unix_chkpwd_path = unix_chkpwd_path_opt.ok_or(
-        "unable to find unix_chkpwd helper",
-    )?;
+    let unix_chkpwd_path = unix_chkpwd_path_opt.ok_or("unable to find unix_chkpwd helper")?;
     println!("Using helper {}", unix_chkpwd_path);
 
     let prompted_password;
@@ -199,9 +195,11 @@ fn main_with_result() -> Result<(), Error> {
         .version("0.1.0")
         .author("Nicolas Iooss")
         .about("Check a password on a Linux system")
-        .arg(Arg::with_name("user").takes_value(true).help(
-            "name of the user to check the password",
-        ))
+        .arg(
+            Arg::with_name("user")
+                .takes_value(true)
+                .help("name of the user to check the password"),
+        )
         .arg(
             Arg::with_name("password")
                 .short("p")
@@ -222,12 +220,11 @@ fn main_with_result() -> Result<(), Error> {
     let username: &str = match matches.value_of("user") {
         Some(u) => u,
         None => {
-            current_username = users::get_current_username().ok_or(
-                "unable to get the current user name",
-            )?;
-            current_username.to_str().ok_or(
-                "unable to convert the current user name to str",
-            )?
+            current_username =
+                users::get_current_username().ok_or("unable to get the current user name")?;
+            current_username
+                .to_str()
+                .ok_or("unable to convert the current user name to str")?
         }
     };
     let password_opt = matches.value_of("password");

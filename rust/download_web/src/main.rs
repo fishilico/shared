@@ -9,11 +9,10 @@ extern crate log;
 #[macro_use]
 extern crate error_chain;
 
-use clap::{Arg, App};
-use log::{info, error};
+use clap::{App, Arg};
+use log::{error, info};
 use std::fs::File;
 use std::io::Write;
-
 
 // Declare errors
 error_chain! {
@@ -49,7 +48,6 @@ fn download_binary(url: &str) -> Result<Vec<u8>> {
     Ok(buf)
 }
 
-
 /// Download a URL, optionally to an output file
 fn download_web(url: &str, output_file: Option<&str>) -> Result<()> {
     let data = download_binary(url)?;
@@ -58,9 +56,7 @@ fn download_web(url: &str, output_file: Option<&str>) -> Result<()> {
         file.write_all(&data)?;
         info!("{} bytes written to {}", data.len(), out_file_path);
     } else {
-        let body = String::from_utf8(data).map_err(
-            |_| "data is not valid UTF8!",
-        )?;
+        let body = String::from_utf8(data).map_err(|_| "data is not valid UTF8!")?;
         println!("{}", body);
     }
     Ok(())
