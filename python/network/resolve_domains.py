@@ -148,18 +148,19 @@ DNS_RESPONSE_CODES = {
 # Well-known prefixes seen on domain names
 WELLKNOWN_PREFIXES = (
     '_amazonses',
-    '_dmarc',
-    '_domainkey',
-    '_ipp._tcp',
+    '_dmarc',  # DMARC, Domain-based Message Authentication, Reporting & Conformance
+    '_domainkey',  # DKIM, DomainKeys Identified Email
+    '_ipp._tcp',  # IPP, Internet Printing Protocol
     '_kerberos._tcp',
     '_kerberos._tcp.dc._msdcs',
-    '_ldap._tcp',
+    '_ldap._tcp',  # LDAP, Lightweight Directory Access Protocol
     '_ldap._tcp.dc._msdcs',
     '_ldap._tcp.gc._msdcs',
     '_ldap._tcp.pdc._msdcs',
     '_ldaps._tcp',
-    '_msdcs',
-    '_psl',
+    '_msdcs',  # Microsoft Domain Controller Server
+    '_mta-sts',  # MTA-STS, SMTP Mail Transfer Agent Strict Transport Security
+    '_psl',  # PSL, Public Suffix List
     '_sip._tcp',
     '_sip._udp',
     '_sips._tcp',
