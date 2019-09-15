@@ -2,6 +2,7 @@ FROM alpine:3.8
 LABEL Description="Alpine Linux 3.8 with build dependencies for shared"
 
 # Alpine does not provide coq, mingw-w64, and py3-z3 is in testing
+# Alpine 3.8 provides a version of Rust (1.26.2) which is too old
 RUN \
     apk --no-cache --update add \
         clang \

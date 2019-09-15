@@ -7,6 +7,7 @@ ENV LANG C.UTF-8
 RUN \
     dnf update -q -y --setopt=deltarpm=false && \
     dnf install -q -y --setopt=deltarpm=false \
+        cargo \
         clang \
         coq \
         elfutils-libelf-devel \
@@ -28,6 +29,7 @@ RUN \
         numpy \
         openssh \
         openssl \
+        openssl-devel \
         perl-Getopt-Long \
         perl-Term-ANSIColor \
         pkgconfig \
@@ -58,7 +60,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust%
+#    Global blacklist: latex%
 #    In sub-directories:
 #       c:
 #       java/keystore:
@@ -68,9 +70,10 @@ CMD ["/run_shared_test.sh"]
 #       python/network:
 #       python/network/dnssec:
 #       python/qrcode:
+#       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex% rust%
+#       Global blacklist: latex%
 #       In sub-directories:
 #          c: gtk_alpha_window
 #          java/keystore:
@@ -80,6 +83,7 @@ CMD ["/run_shared_test.sh"]
 #          python/network:
 #          python/network/dnssec:
 #          python/qrcode:
+#          rust:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok

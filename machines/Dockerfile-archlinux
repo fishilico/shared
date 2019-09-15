@@ -49,6 +49,7 @@ RUN \
         python2-pillow \
         python2-pycryptodome \
         python2-setuptools \
+        rust \
         sdl2 \
         which \
         wine && \
@@ -61,7 +62,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust%
+#    Global blacklist: latex%
 #    In sub-directories:
 #       c:
 #       java/keystore:
@@ -71,9 +72,10 @@ CMD ["/run_shared_test.sh"]
 #       python/network:
 #       python/network/dnssec:
 #       python/qrcode:
+#       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex% rust%
+#       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
 #          java/keystore:
@@ -83,6 +85,7 @@ CMD ["/run_shared_test.sh"]
 #          python/network:
 #          python/network/dnssec:
 #          python/qrcode:
+#          rust:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok

@@ -5,6 +5,7 @@ LABEL Description="Fedora 22 with build dependencies for shared"
 ENV LANG C.UTF-8
 
 # Fedora<28 does not provide python3-z3 nor python-z3
+# Fedora<24 does not provide cargo
 RUN \
     dnf update -q -y --setopt=deltarpm=false && \
     dnf install -q -y --setopt=deltarpm=false \

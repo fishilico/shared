@@ -7,6 +7,7 @@ ENV LANG C.UTF-8
 # Fedora 26 merged python-argparse into python2-libs
 # Building kernel modules now requires elfutils-libelf-devel
 # Fedora<28 does not provide python3-z3 nor python-z3
+# Fedora 26 provides a version of Rust (1.26.0) which is too old
 RUN \
     dnf update -q -y --setopt=deltarpm=false && \
     dnf install -q -y --setopt=deltarpm=false \

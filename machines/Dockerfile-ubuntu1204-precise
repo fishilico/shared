@@ -8,13 +8,13 @@ ENV LANG C.UTF-8
 # Do not install libmnl-dev because mnl_attr_for_each() performs arithmetic on void*
 # Do not install python-crypto nor python3-crypto because they are too old
 # Ubuntu<16.04 does not provide python-z3
-# Ubuntu<14.04 does not provide python-pil nor python3-pil
+# Ubuntu<14.04 does not provide cargo, python-pil nor python3-pil
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
-        clang \
         binutils-mingw-w64 \
+        clang \
         gcc-mingw-w64 \
         gcc-multilib \
         gdb \

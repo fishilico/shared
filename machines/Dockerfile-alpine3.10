@@ -4,6 +4,7 @@ LABEL Description="Alpine Linux 3.10 with build dependencies for shared"
 # Alpine does not provide coq, mingw-w64
 RUN \
     apk --no-cache --update add \
+        cargo \
         clang \
         clang-dev \
         gcc \
@@ -22,6 +23,7 @@ RUN \
         nss \
         openjdk8 \
         openssh \
+        openssl-dev \
         pulseaudio-dev \
         py-numpy \
         py2-cffi \
@@ -48,7 +50,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust% windows%
+#    Global blacklist: latex% windows%
 #    In sub-directories:
 #       c: x86-read_64b_regs_in_32b_mode
 #       java/keystore:
@@ -58,6 +60,7 @@ CMD ["/run_shared_test.sh"]
 #       python/network:
 #       python/network/dnssec:
 #       python/qrcode:
+#       rust:
 #       verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok

@@ -7,6 +7,7 @@ ENV LANG C.UTF-8
 # musl malloc does not seem to support fallback to mmap and brk fails in "make test"
 #   so do not install musl-dev and musl-tools packages
 # Ubuntu<16.04 does not provide python-z3
+# Ubuntu 14.04 provides a version of Rust (1.31.0) which is too old
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \

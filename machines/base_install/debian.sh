@@ -210,6 +210,7 @@ pkg whois
 
 # Development
 pkg build-essential
+pkg cargo
 pkg clang
 pkg cmake
 pkg fakeroot
@@ -233,6 +234,7 @@ pkg python3-venv
 pkg python3-setuptools
 pkg rake
 pkg ruby
+pkg rust
 pkg shellcheck
 
 # Other

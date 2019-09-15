@@ -6,6 +6,7 @@ ENV LANG C.UTF-8
 
 # Debian<9 does not provide python-z3
 # Installing openjdk-7-jre-headless requires /usr/share/man/man1 to exist
+# Debian 8 provides a version of Rust (1.24.1) which is too old
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \

@@ -5,6 +5,7 @@ LABEL Description="Debian 9 Stretch with build dependencies for shared"
 ENV LANG C.UTF-8
 
 # Installing openjdk-8-jre-headless requires /usr/share/man/man1 to exist
+# Debian 9 provides a version of Rust (1.24.1) which is too old
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \

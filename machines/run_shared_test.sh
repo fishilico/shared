@@ -102,9 +102,9 @@ then
         echo '* Building with gcc -m32                 *'
         echo '******************************************'
         # Use linux32 to build 32-bit Windows programs too (the detection uses uname -m)
-        # Do not build Python cffi modules with an architecture different from the Python interpreter
         # Do not build kernel modules with an incompatible compiler
-        linux32 make CC='gcc -m32' clean test KERNELVER= || exit $?
+        # Do not build Rust projects, that have C dependencies
+        linux32 make CC='gcc -m32' CARGO=false clean test KERNELVER= || exit $?
     fi
 
     if [ -x /usr/bin/clang ] || clang --version 2>/dev/null
@@ -118,7 +118,7 @@ then
             echo '******************************************'
             echo '* Building with clang -m32               *'
             echo '******************************************'
-            linux32 make CC='clang -m32' clean test KERNELVER= || exit $?
+            linux32 make CC='clang -m32' CARGO=false clean test KERNELVER= || exit $?
         fi
     fi
 
@@ -127,7 +127,7 @@ then
         echo '******************************************'
         echo '* Building with musl-gcc                 *'
         echo '******************************************'
-        make CC='musl-gcc -shared -fPIE -pie' clean test KERNELVER= || exit $?
+        make CC='musl-gcc -shared -fPIE -pie' CARGO=false clean test KERNELVER= || exit $?
     fi
 fi
 

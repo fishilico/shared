@@ -3,6 +3,7 @@ LABEL Description="Alpine Linux 3.5 with build dependencies for shared"
 
 # Alpine does not provide coq, mingw-w64, py3-z3
 # Alpine<3.8 does not provide pulseaudio-dev
+# Alpine<3.6 does not provide cargo
 RUN \
     apk --no-cache --update add \
         clang \

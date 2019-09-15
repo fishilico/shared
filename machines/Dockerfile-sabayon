@@ -13,6 +13,7 @@ ENV LANG en_US.UTF-8
 RUN \
     ( \
         echo 'AGPL-3' && \
+        echo 'BSD-1' && \
         echo 'BSD-with-attribution' && \
         echo 'CC0-1.0' && \
         echo 'CC-BY-SA-3.0' && \
@@ -57,6 +58,7 @@ RUN \
         sys-devel/gcc \
         sys-kernel/linux-sabayon \
         sys-kernel/sabayon-sources \
+        virtual/cargo \
         virtual/jdk \
         x11-libs/gtk+ && \
     equo cleanup && \
@@ -69,7 +71,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust% windows%
+#    Global blacklist: latex% windows%
 #    In sub-directories:
 #       c:
 #       java/keystore:
@@ -79,9 +81,10 @@ CMD ["/run_shared_test.sh"]
 #       python/network:
 #       python/network/dnssec:
 #       python/qrcode:
+#       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex% rust% windows%
+#       Global blacklist: latex% windows%
 #       In sub-directories:
 #          c: gtk_alpha_window
 #          java/keystore:
@@ -91,6 +94,7 @@ CMD ["/run_shared_test.sh"]
 #          python/network:
 #          python/network/dnssec:
 #          python/qrcode:
+#          rust:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok
