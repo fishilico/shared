@@ -78,8 +78,6 @@ static void add_manual_cpuid_str(void)
     cpuidstr_6_eax[5] = "emcd"; /* Clock modulation duty cycle extension */
     assert(cpuidstr_6_eax[13] == NULL);
     cpuidstr_6_eax[13] = "hdc";
-    assert(cpuidstr_7_ebx[13] == NULL);
-    cpuidstr_7_ebx[13] = "deprecate_FPU_CS_DS"; /* Deprecates FPU CS and FPU DS values */
     assert(cpuidstr_7_ebx[22] == NULL);
     cpuidstr_7_ebx[22] = "pcommit"; /* Deprecated pcommit instruction, Linux commit fd1d961dd681 ("x86/insn: remove pcommit") */
 
