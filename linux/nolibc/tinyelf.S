@@ -4,6 +4,7 @@
  * Sizes:
  * * ARM, x86: 45 bytes non-respectful, 76 if respectful of ELF specification
  * * x86_64: 112 bytes
+ * * ARM64: 120 bytes
  *
  * Documentation:
  * * http://man7.org/linux/man-pages/man5/elf.5.html man 5 elf
@@ -20,7 +21,23 @@
 #    define RESPECT_ELF_SPEC 01
 #endif
 
-#if defined(__arm__)
+#if defined(__aarch64__)
+
+#    define USE_ELF64 1
+#    define ELF_MACHINE 0xb7 /* EM_AARCH64 */
+#    define USE_POST_HEADER_CODE 1
+.macro STARTCODE_8A
+_start:
+    .int 0xd2800540    /* mov x0, #0x2a */
+    .int (0x14 << 24) + ((_post_header_code - .) / 4) /* b _post_header_code */
+.endm
+.macro POST_HEADER_CODE
+_post_header_code:
+    .int 0xd2800ba8    /* mov x8, #0x5d */
+    .int 0xd4000001    /* svc #0x0 */
+.endm
+
+#elif defined(__arm__)
 
 #    define USE_ELF32 1
 #    define ELF_MACHINE 0x28 /* EM_ARM */
@@ -193,6 +210,10 @@ phdr_size = . - phdr    /*      -- end of Elf64_Phdr -- */
 
 #else
 #    error BUG! Neither USE_ELF32 nor USE_ELF64 is defined
+#endif
+
+#ifdef USE_POST_HEADER_CODE
+    POST_HEADER_CODE
 #endif
 
 file_size = . - file_start
