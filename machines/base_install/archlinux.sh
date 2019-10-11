@@ -225,7 +225,6 @@ pkg squashfs-tools
 pkg unrar
 pkg unzip
 pkg zip
-aurpkg sasquatch
 
 # Network
 pkg arptables
@@ -303,7 +302,6 @@ pkg rustup
 pkg sbt
 pkg shellcheck
 pkg yarn
-aurpkg libcgroup
 
 # Intel x86 CPU
 if [ "$(uname -m)" = 'x86_64' ]
@@ -318,8 +316,6 @@ pkg figlet
 pkg john
 pkg lolcat
 pkg sl
-aurpkg earlyoom
-aurpkg gti
 
 # Arch Linux-specific packages
 pkg asp
@@ -548,12 +544,14 @@ then
     aurpkg android-apktool
     aurpkg coccinelle
     aurpkg dex2jar
+    aurpkg earlyoom
     aurpkg ffdec
     aurpkg ghidra
     aurpkg ilspymono-git
     aurpkg jd-gui
     aurpkg kaitai-struct-compiler
     aurpkg kaitai-struct-visualizer
+    aurpkg libcgroup
     aurpkg msodbcsql
     aurpkg patator
     aurpkg pngcheck
@@ -564,12 +562,16 @@ then
     aurpkg python2-pycryptodomex
     aurpkg python2-pwntools
     aurpkg pyzbar
+    aurpkg sasquatch
     aurpkg selinux-python
     aurpkg setools
     aurpkg stegsolve
     aurpkg tpm-tools
     aurpkg uefitool-git
     aurpkg uefitool-ng-git
+
+    # Humour
+    aurpkg gti
 
     # Web analysis
     pkg sslscan
