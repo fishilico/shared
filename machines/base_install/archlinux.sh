@@ -151,6 +151,7 @@ fi
 # Essential packages
 pkg attr
 pkg audit
+pkg base
 pkg bash-completion
 pkg bc
 pkg binutils
@@ -231,6 +232,7 @@ pkg arptables
 pkg bind-tools
 pkg bridge-utils
 pkg curl
+pkg cyrus-sasl-gssapi
 pkg dhclient
 pkg dnsmasq
 pkg ebtables
@@ -393,6 +395,8 @@ then
     pkg mupdf-tools
     pkg network-manager-applet
     pkg networkmanager
+    pkg networkmanager-openvpn
+    pkg networkmanager-strongswan
     pkg pandoc
     pkg parted
     pkg pdfpc
@@ -491,6 +495,7 @@ then
     pkg perl-net-dns
     pkg php
     pkg php-sqlite
+    pkg python-argon2_cffi
     pkg python-gmpy2
     pkg python-kaitaistruct
     pkg python-keystone
