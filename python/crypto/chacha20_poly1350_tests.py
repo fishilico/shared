@@ -93,7 +93,7 @@ def chacha_quarter_round(a, b, c, d):
 def chacha_initial_state(key, block_count, nonce):
     """Initialize a 4x4 32-bit state matrix from parameters
 
-    The resulting matrix is a 16-integer list:
+    The resulting matrix is a list of 16 integer of 32 bits each:
 
         0   1   2   3
         4   5   6   7
@@ -102,7 +102,7 @@ def chacha_initial_state(key, block_count, nonce):
     """
     assert len(key) == 32  # key is 256-bit wide
     assert 0 <= block_count <= 0xffffffff  # block count is 32-byte wide
-    assert len(nonce) == 12  # nonce is 96-byte wide
+    assert len(nonce) == 12  # nonce is 96-bit wide
 
     key_l = struct.unpack('<IIIIIIII', key)
     nonce_l = struct.unpack('<III', nonce)
@@ -131,7 +131,7 @@ def chacha_diagonal_round(st):
 
 
 def chacha20_block(key, block_count, nonce):
-    """Compute a ChaCha20 block from parameters"""
+    """Compute a ChaCha20 block (64 bytes = 512 bits) from parameters"""
     initial_state = chacha_initial_state(key, block_count, nonce)
     state = [x for x in initial_state]
     for i_round in range(10):
