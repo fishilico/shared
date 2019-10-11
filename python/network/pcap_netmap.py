@@ -98,7 +98,7 @@ def canonical_ipv6_address_with_version(ip_addr):
     """Return the IPv6 address in a canonical format"""
     ip_addr = socket.inet_ntop(socket.AF_INET6, socket.inet_pton(socket.AF_INET6, ip_addr))
     # V4MAPPED addresses in hybrid notation
-    m = re.match(r'^::ffff:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)$', ip_addr)
+    m = re.match(r'^::ffff:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)$', ip_addr, re.I)
     if m is not None:
         return 4, m.group(1)
     return 6, ip_addr
@@ -125,7 +125,7 @@ def is_public_ip_address(ip_addr):
         return False
     if ip_addr.startswith('fe80::'):  # fe80::/16
         return False
-    if re.match(r'^f[cd][0-9a-f][0-9a-f]:', ip_addr):  # fc00::/7
+    if re.match(r'^f[cd][0-9a-f][0-9a-f]:', ip_addr, re.I):  # fc00::/7
         return False
     return True
 
@@ -344,7 +344,7 @@ class HwAddrDatabase(object):
                         ips.remove(ip)
             if hw_addr.startswith('33:33:'):  # IPv6 multicast, ff00::/12
                 for ip in list(ips):
-                    if re.match(r'^ff0[0-9a-f]:', ip):
+                    if re.match(r'^ff0[0-9a-f]:', ip, re.I):
                         logger.debug("Removing IPv6 multicast address %s (%s)", ip, hw_addr)
                         ips.remove(ip)
             if not ips:
@@ -596,7 +596,7 @@ class AnalysisContext(object):
             if any(re.match(r'^2(2[456789]|3[0123456789])\.', ip_addr) for ip_addr in self.hwaddrdb.known_ip_addresses):
                 self.ipnetdb.add_network('224.0.0.0/4', 'IPv4 multicast')
             # If there are IPv6 multicast addresses, show then in the network
-            if any(re.match(r'^ff0[0-9a-f]:', ip_addr) for ip_addr in self.hwaddrdb.known_ip_addresses):
+            if any(re.match(r'^ff0[0-9a-f]:', ip_addr, re.I) for ip_addr in self.hwaddrdb.known_ip_addresses):
                 self.ipnetdb.add_network('ff00::/12', 'IPv6 multicast')
 
     def to_dict(self):
@@ -1002,12 +1002,12 @@ class AnalysisContext(object):
         if dns_type == 'PTR':
             if rrname.endswith(('._tcp.local.', '._udp.local.')):
                 return
-            match = re.match(r'^([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)\.in-addr\.arpa\.$', rrname)
+            match = re.match(r'^([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)\.in-addr\.arpa\.$', rrname, re.I)
             if match:
                 ip_addr = '.'.join(match.groups()[::-1])
                 self.ipaddrdb.add_name(ip_addr, dns_record.rdata.decode('utf-8'))
                 return
-            match = re.match(r'^' + (r'([0-9a-fA-F])\.' * 32) + r'ip6\.arpa\.$', rrname)
+            match = re.match(r'^' + (r'([0-9a-f])\.' * 32) + r'ip6\.arpa\.$', rrname, re.I)
             if match:
                 bin_ipv6 = binascii.unhexlify(''.join(match.groups()[::-1]))
                 ip_addr = socket.inet_ntop(socket.AF_INET6, bin_ipv6)
