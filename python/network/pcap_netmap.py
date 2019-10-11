@@ -1013,7 +1013,13 @@ class AnalysisContext(object):
                 ip_addr = socket.inet_ntop(socket.AF_INET6, bin_ipv6)
                 self.ipaddrdb.add_name(ip_addr, dns_record.rdata.decode('utf-8'))
                 return
-        if dns_type in ('CNAME', 'DNSKEY', 'DS', 'HINFO', 'MX', 'NS', 'RRSIG', 'SRV', 'SSHFP', 'TKEY', 'TSIG', 'TXT'):
+        if dns_type in ('DNSKEY', 'DS', 'RRSIG'):  # Ignore DNSSEC records
+            return
+        if dns_type in ('TKEY', 'TSIG'):  # Ignore DNS transfers and updates
+            return
+        if dns_type in ('NS', 'SOA'):  # Ignore DNS infrastructure records
+            return
+        if dns_type in ('CNAME', 'HINFO', 'MX', 'SRV', 'SSHFP', 'TXT'):
             return
 
         logger.warning("Unknown DNS packet type %r for %r: %r", dns_type, rrname, dns_record)
