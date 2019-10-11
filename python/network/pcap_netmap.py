@@ -575,6 +575,7 @@ class AnalysisContext(object):
         self.hwaddrdb = HwAddrDatabase()
         self.ipaddrdb = IpAddrDatabase()
         self.ipnetdb = IpNetworkDatabase()
+        self.seen_eth_dec_mop_dna_rc = False
         self.seen_eth_lldp = False
         self.seen_eth_fortinet = False
         self.seen_eth_802_11 = False
@@ -726,6 +727,14 @@ class AnalysisContext(object):
                 self.hwaddrdb.add_ipv4(arppkt.pdst, arppkt.hwdst, 'ARP is-at destination')
             else:
                 logger.warning("Unknown ARP packet %r", arppkt)
+        elif pkt_type == 0x6002:  # DNA_RC, for Decnet Maintenance Operation Protocol (MOP) Remote Console (RC)
+            if hw_dst != 'ab:00:00:02:00:00':
+                logger.warning("Unexpected Ethernet destination for DEC MOP DNA_RC packet: %r", ethpkt)
+            elif not self.seen_eth_dec_mop_dna_rc:
+                logger.info(
+                    "DEC MOP DNA_RC packet found in capture. This may signal a Cisco router (%r)",
+                    ethpkt)
+                self.seen_eth_dec_mop_dna_rc = True
         elif pkt_type == 0x8035:  # Reverse ARP (https://tools.ietf.org/html/rfc903)
             rarppkt = base_pkt[1]
             assert isinstance(rarppkt, Raw)
