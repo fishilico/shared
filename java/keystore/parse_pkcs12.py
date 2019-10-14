@@ -356,7 +356,7 @@ def print_p12_safe_contents(safe_contents_der, password, show_pem=False, list_on
                     if m:
                         # Parse the timestamp from the local key ID
                         timestamp = int(m.group(1))
-                        attr_descs.append("date='{}'".format(datetime.datetime.fromtimestamp(timestamp / 1000)))
+                        attr_descs.append("date='{}'".format(datetime.datetime.fromtimestamp(timestamp / 1000.)))
         print("{}  [{}] {} ({})".format(indent, idx_safe_bag + 1, bag_id, ', '.join(attr_descs)))
 
         if bag_id == 'keyBag':
