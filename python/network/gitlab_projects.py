@@ -139,7 +139,7 @@ def main(argv=None):
                 print("{} {}".format(prj_name, prj_url))
             else:
                 logger.warning("Unexpected path %r for name %r", prj_pathname, prj_name)
-                print("{} {}".format(prj_name, prj_pathname, prj_url))
+                print("{} {} {}".format(prj_name, prj_pathname, prj_url))
 
         # Check that the path is sane enough for an actual path component
         if not re.match(r'^[0-9A-Za-z_-]+$', prj_pathname):
