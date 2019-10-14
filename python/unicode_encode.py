@@ -52,7 +52,7 @@ import sys
 
 try:
     import unicodedata
-except ImportError:
+except ImportError:  # lgtm[py/unreachable-statement]
     unicodedata = None
 
 
