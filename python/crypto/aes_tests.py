@@ -1667,7 +1667,7 @@ class SimpleAES_4x4Bytes(object):
             temp = mult_4term_polynoms(temp, (0xe, 0x9, 0xd, 0xb))
             self.expanded_dec_key[i] = temp
 
-    def encrypt(self, block):
+    def encrypt(self, block):  # lgtm[py/similar-function]
         """Encrypt a 16-byte block using AES"""
         # Convert the block into a 4x4 state matrix
         state = [list(struct.unpack('BBBB', block[i:i + 4])) for i in range(0, 16, 4)]
@@ -1707,7 +1707,7 @@ class SimpleAES_4x4Bytes(object):
         # Convert the state back to a 16-byte block
         return b''.join(struct.pack('B', state[i // 4][i % 4]) for i in range(16))
 
-    def decrypt_using_keydec(self, block):
+    def decrypt_using_keydec(self, block):  # lgtm[py/similar-function]
         """Decrypt a 16-byte block using AES, and the expanded decryption key"""
         # Convert the block into a 4x4 state matrix
         state = [list(struct.unpack('BBBB', block[i:i + 4])) for i in range(0, 16, 4)]
