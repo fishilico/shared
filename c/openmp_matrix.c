@@ -51,7 +51,7 @@ static void *malloc_nofail(size_t size)
  */
 static void fill_square_matrix(double *matrix, size_t size, double value)
 {
-    size_t i, j;
+    size_t i = 0, j;
     /* Use static schedule (default) */
     #pragma omp parallel for private(i, j)
     for (i = 0; i < size; i++) {
@@ -66,7 +66,7 @@ static void fill_square_matrix(double *matrix, size_t size, double value)
  */
 static void init_vector_list(double *vectors, size_t size, size_t dim)
 {
-    size_t i, j;
+    size_t i = 0, j;
     #pragma omp parallel for private(i, j)
     for (i = 0; i < size; i++) {
         for (j = 0; j < dim; j++) {
@@ -80,7 +80,7 @@ static void init_vector_list(double *vectors, size_t size, size_t dim)
  */
 static double sum_square_matrix(const double *matrix, size_t size)
 {
-    size_t i_j;
+    size_t i_j = 0;
     double sum = 0;
     #pragma omp parallel for private(i_j) reduction(+:sum)
     for (i_j = 0; i_j < size * size; i_j++) {
@@ -98,7 +98,7 @@ static double sum_square_matrix(const double *matrix, size_t size)
 static void sq_euclidean_distance1(
     double *matrix, const double *vectors, size_t size, size_t dim)
 {
-    size_t i_j;
+    size_t i_j = 0;
     #pragma omp parallel for private(i_j)
     for (i_j = 0; i_j < size * size; i_j++) {
         size_t i = i_j / size;
@@ -116,7 +116,7 @@ static void sq_euclidean_distance1(
 static void sq_euclidean_distance2(
     double *matrix, const double *vectors, size_t size, size_t dim)
 {
-    size_t i;
+    size_t i = 0;
     #pragma omp parallel for private(i)
     for (i = 0; i < size; i++) {
         size_t j;
