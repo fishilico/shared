@@ -102,8 +102,8 @@ static uint32_t bswap_32(uint32_t x)
 #  include <x86intrin.h>
 #  define USE_X86INTRIN_H 1
 # endif
-/* gcc provides _rotr in x86intrin.h, but not clang */
-# if defined(__GNUC__) && !defined(__clang__)
+/* gcc provides _rotr in x86intrin.h, but not clang until version 9.0.0 */
+# if defined(__GNUC__) && !(defined(__clang__) && __clang_major__ < 9)
 # else
 /* Use assembler */
 static uint32_t _rotr(uint32_t x, int n)
