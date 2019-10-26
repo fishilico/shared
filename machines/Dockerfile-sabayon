@@ -13,6 +13,7 @@ ENV LANG en_US.UTF-8
 RUN \
     ( \
         echo 'AGPL-3' && \
+        echo 'Apache-2.0-with-LLVM-exceptions' && \
         echo 'BSD-1' && \
         echo 'BSD-with-attribution' && \
         echo 'CC0-1.0' && \
