@@ -309,9 +309,9 @@ static void print_gdt_limits(void)
     if (gdt_size) {
         printf("GDT limits and access rights (%u entries):\n", (gdt_size + 1) / 8);
     } else {
-        /* Try 64 entries */
+        /* Try 256 entries */
         printf("GDT limits and access rights (? entries):\n");
-        gdt_size = 64;
+        gdt_size = 256;
     }
     for (segment = 3; segment < gdt_size; segment += 8) {
         print_segment_desc(NULL, segment);

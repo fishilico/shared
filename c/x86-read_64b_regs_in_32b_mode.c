@@ -34,10 +34,14 @@
  *      r15 = 0x52b83560         -- Address of wow64cpu.dll's .rdata exported jump table.
  * Source: https://www.duosecurity.com/static/pdf/wow-64-and-so-can-you.pdf
  */
+#if !defined(_GNU_SOURCE) && defined(__linux__)
+#    define _GNU_SOURCE /* for sigaction, sigsetjmp... */
+#endif
 #include <inttypes.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include "x86-umip-recovery.h"
 
 #ifdef __x86_64__
 #    error This program needs to be compiled in 32-bit mode
@@ -85,8 +89,18 @@ static uint32_t get_code64_segment(void)
     uint32_t access_rights;
 
     /* Retrieve the size of the GDT */
+    memset(&gdt_descriptor, 0, sizeof(gdt_descriptor));
+    UMIP_SECTION_START("SGDT")
     __asm__ ("sgdt %0" : "=m" (gdt_descriptor) : : "memory");
+    UMIP_SECTION_END
     memcpy(&gdt_size, gdt_descriptor, 2);
+    if (gdt_size == 0) {
+        /* Use a default value if sgdt failed, for example because of UMIP
+         *(User-Mode Instruction Prevention)
+         */
+        gdt_size = 256;
+        printf("Warning: unable to read the size of GDT, using a default number of entries.\n");
+    }
     for (segment = 3; segment < gdt_size; segment += 8) {
         /* Load access right associated with the segment */
         __asm__ ("larl %[seg], %[ar] ; setz %[ok]"
