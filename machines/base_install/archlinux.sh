@@ -191,6 +191,8 @@ pkg zsh
 # Hardware and TTY
 pkg acpi
 pkg acpica
+pkg bluez
+pkg bluez-utils
 pkg efibootmgr
 pkg gpm
 pkg iw
@@ -265,6 +267,7 @@ pkg sshfs
 pkg stubby
 pkg tcpdump
 #pkg tor
+pkg torsocks
 pkg traceroute
 pkg unbound
 pkg wget
@@ -279,7 +282,9 @@ grouppkg multilib-devel
 pkg bat
 pkg clang
 pkg cmake
+pkg devtools
 pkg ed
+pkg fakechroot
 pkg fakeroot
 pkg gdb
 pkg git
@@ -384,6 +389,7 @@ then
     pkg gtk-recordmydesktop
     pkg gtk3
     pkg gvfs
+    pkg gvfs-smb
     pkg imagemagick
     pkg keepass
     pkg kismet
@@ -547,6 +553,9 @@ then
     grouppkg texlive-most
 
     aurpkg android-apktool
+    aurpkg bluez-hcitool
+    aurpkg bluez-rfcomm
+    aurpkg bluez-utils-compat
     aurpkg coccinelle
     aurpkg dex2jar
     aurpkg earlyoom
@@ -560,6 +569,7 @@ then
     aurpkg msodbcsql
     aurpkg patator
     aurpkg pngcheck
+    aurpkg proot
     aurpkg python-dlint
     aurpkg python-roca-detect
     aurpkg python-uncompyle6
