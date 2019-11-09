@@ -94,6 +94,9 @@ do
         *fedora30*)
             echo "fedora30"
             ;;
+        *fedora31*)
+            echo "fedora31"
+            ;;
 
         *gentoo*)
             echo "gentoo-amd64-hardened"
