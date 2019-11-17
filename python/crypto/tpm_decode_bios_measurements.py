@@ -30,6 +30,7 @@ The events are specified in https://trustedcomputinggroup.org/resource/tcg-efi-p
 """
 import argparse
 import binascii
+import collections
 import hashlib
 import struct
 import sys
@@ -56,6 +57,22 @@ PCR_DESCRIPTIONS = {
     5: "IPL (Initial Program Load) Data",
     6: "State Transition and Wake Events",
     7: "Host Platform Manufacturer Control",
+    8: "Operating System [8]",
+    9: "Operating System [9]",
+    10: "Operating System [10]",
+    11: "Operating System [11]",
+    12: "Operating System [12]",
+    13: "Operating System [13]",
+    14: "Operating System [14]",
+    15: "Operating System [15]",
+    16: "Debug",
+    17: "Localities, Trusted OS [17]",
+    18: "Localities, Trusted OS [18]",
+    19: "Localities, Trusted OS [19]",
+    20: "Localities, Trusted OS [20]",
+    21: "Localities, Trusted OS [21]",
+    22: "Localities, Trusted OS [22]",
+    23: "Applications specific",
 }
 
 
@@ -103,9 +120,88 @@ class TcgEventType(enum.IntEnum):
             return "{}({:#x} = ?)".format(cls.__name__, value)
 
 
+@enum.unique
+class TpmAlgId(enum.IntEnum):
+    """TPM_ALG_ID constants"""
+    TPM_ALG_ERROR = 0x0000
+    TPM_ALG_RSA = 0x0001
+    TPM_ALG_SHA1 = 0x0004
+    TPM_ALG_HMAC = 0x0005
+    TPM_ALG_AES = 0x0006
+    TPM_ALG_MGF1 = 0x0007
+    TPM_ALG_KEYEDHASH = 0x0008
+    TPM_ALG_XOR = 0x000a
+    TPM_ALG_SHA256 = 0x000b
+    TPM_ALG_SHA384 = 0x000c
+    TPM_ALG_SHA512 = 0x000d
+    TPM_ALG_NULL = 0x0010
+    TPM_ALG_SM3_256 = 0x0012
+    TPM_ALG_SM4 = 0x0013
+    TPM_ALG_RSASSA = 0x0014
+    TPM_ALG_RSAES = 0x0015
+    TPM_ALG_RSAPSS = 0x0016
+    TPM_ALG_OAEP = 0x0017
+    TPM_ALG_ECDSA = 0x0018
+    TPM_ALG_ECDH = 0x0019
+    TPM_ALG_ECDAA = 0x001a
+    TPM_ALG_SM2 = 0x001b
+    TPM_ALG_ECSCHNORR = 0x001c
+    TPM_ALG_ECMQV = 0x001d
+    TPM_ALG_KDF1_SP800_56a = 0x0020
+    TPM_ALG_KDF2 = 0x0021
+    TPM_ALG_KDF1_SP800_108 = 0x0022
+    TPM_ALG_ECC = 0x0023
+    TPM_ALG_SYMCIPHER = 0x0025
+    TPM_ALG_CTR = 0x0040
+    TPM_ALG_OFB = 0x0041
+    TPM_ALG_CBC = 0x0042
+    TPM_ALG_CFB = 0x0043
+    TPM_ALG_ECB = 0x0044
+
+    @classmethod
+    def get_name(cls, value):
+        """Get the algorithm from the ID value"""
+        try:
+            name = cls(value).name
+        except ValueError:
+            return "{}({:#x} = ?)".format(cls.__name__, value)
+        else:
+            assert name.startswith('TPM_ALG_')
+            return name[8:]
+
+    def digest(self, data):
+        """Compute the digest of the data"""
+        if self == TpmAlgId.TPM_ALG_SHA1:
+            return hashlib.sha1(data).digest()
+        if self == TpmAlgId.TPM_ALG_SHA256:
+            return hashlib.sha256(data).digest()
+        raise NotImplementedError("Hash algorithm {} is not yet implemented".format(self))
+
+
 def xx(data):
     """One-line hexadecimal representation of binary data"""
     return binascii.hexlify(data).decode('ascii')
+
+
+class ComputedDigest:
+    """Store a computed digest"""
+    def __init__(self, alg_id, computed):
+        self.alg_id = alg_id
+        self.computed = computed
+
+    def to_str(self, data_desc):
+        """Generate a string with the description of the data"""
+        return "{}({}) = {}".format(TpmAlgId.get_name(self.alg_id), data_desc, xx(self.computed))
+
+    def matches(self, data, verbose=False):
+        """Verify that the data matches with the digest"""
+        data_digest = TpmAlgId(self.alg_id).digest(data)
+        if data_digest == self.computed:
+            return True
+        if verbose:
+            print("Warning: unexpected {} digest, computed {}".format(
+                TpmAlgId.get_name(self.alg_id), xx(data_digest)))
+        return False
 
 
 class BinStream:
@@ -119,7 +215,11 @@ class BinStream:
         return self.pos >= len(self.data)
 
     def read_bytes(self, count):
+        """Read a sequence of bytes from the input data"""
         assert count >= 0
+        if self.pos + count > len(self.data):
+            raise ValueError("Unable to read {} bytes ({}/{} remaining)".format(
+                count, len(self.data) - self.pos, len(self.data)))
         value = self.data[self.pos:self.pos + count]
         self.pos += count
         return value
@@ -141,6 +241,7 @@ class BinStream:
         return struct.unpack('<Q', self.read_bytes(8))[0]
 
     def read_uuid(self):
+        """Read a 128-bit universally unique identifier"""
         return uuid.UUID(bytes_le=self.read_bytes(0x10))
 
 
@@ -156,27 +257,111 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
         print("Non-fatal error: {}".format(exc))
         return
 
-    pcr_states = []
+    pcr_states = collections.OrderedDict()
+
+    is_first_event = True
+    is_event03 = False  # Are the structures following tdTCG_PCR_EVENT2 format?
+    spec_digest_sizes = {TpmAlgId.TPM_ALG_SHA1: 20}
 
     print("{}:".format(bin_path))
     while not stream.is_end():
-        # Read a tdTCG_PCR_EVENT structure
-        pcr_index = stream.read_u32()
-        event_type = stream.read_u32()
-        digest = stream.read_bytes(20)  # SHA-1 digest
-        event_size = stream.read_u32()
-        event_data = stream.read_bytes(event_size)
+        if is_first_event or not is_event03:
+            # Read a tdTCG_PCR_EVENT structure
+            pcr_index = stream.read_u32()
+            event_type = stream.read_u32()
+            sha1_digest = stream.read_bytes(20)  # SHA-1 digest
+            digests = [ComputedDigest(TpmAlgId.TPM_ALG_SHA1, sha1_digest)]
+            event_size = stream.read_u32()
+            event_data = stream.read_bytes(event_size)
+        else:
+            # Read a tdTCG_PCR_EVENT2 structure
+            pcr_index = stream.read_u32()
+            event_type = stream.read_u32()
+            # Read field "TPML_DIGEST_VALUES Digest"
+            digest_count = stream.read_u32()
+            digests = []
+            for _ in range(digest_count):
+                hash_alg = stream.read_u16()
+                try:
+                    hash_size = spec_digest_sizes[hash_alg]
+                except KeyError:
+                    raise ValueError("Unexpected hash algorithm {:#x} ({})".format(
+                        hash_alg, TpmAlgId.get_name(hash_alg)))
+                hash_digest = stream.read_bytes(hash_size)
+                digests.append(ComputedDigest(hash_alg, hash_digest))
+            event_size = stream.read_u32()
+            event_data = stream.read_bytes(event_size)
+
+        # Detect TCG_EfiSpecIdEventStruct
+        if is_first_event and pcr_index == 0 and event_type == TcgEventType.EV_NO_ACTION:
+            if sha1_digest == b'\0' * 20 and event_data.startswith(b'Spec ID Event03\0'):
+                is_event03 = True
+                data_stream = BinStream(event_data)
+                spec_signature = data_stream.read_bytes(16)
+                spec_platform_class = data_stream.read_u32()
+                spec_version_minor = data_stream.read_u8()
+                spec_version_major = data_stream.read_u8()
+                spec_errata = data_stream.read_u8()
+                spec_uintn_size = data_stream.read_u8()
+                spec_num_algs = data_stream.read_u32()
+                spec_digest_sizes = collections.OrderedDict()
+                for _ in range(spec_num_algs):
+                    hash_alg = data_stream.read_u16()
+                    digest_size = data_stream.read_u16()
+                    spec_digest_sizes[hash_alg] = digest_size
+                    pcr_states[hash_alg] = []
+                spec_vendor_info_size = data_stream.read_u8()
+                spec_vendor_info = data_stream.read_bytes(spec_vendor_info_size)
+                if not data_stream.is_end():
+                    print("Warning: the spec has not been fully decoded ({}/{})".format(
+                        data_stream.pos, len(data_stream.data)))
+
+                print("[Header] {} class={:#x} version={}.{}.{}".format(
+                    repr(spec_signature.decode().rstrip('\0')),
+                    spec_platform_class,
+                    spec_version_minor,
+                    spec_version_major,
+                    spec_errata))
+                print("  * UINTN size: {}".format(spec_uintn_size))
+                print("  * {} hash alorithms:".format(spec_num_algs))
+                for hash_alg, digest_size in spec_digest_sizes.items():
+                    print("    * {}: {} bytes".format(TpmAlgId.get_name(hash_alg), digest_size))
+                if spec_vendor_info_size:
+                    print("  * Vendor info: {}".format(repr(spec_vendor_info)))
+                print("")
+
+                is_first_event = False
+                continue
+        elif is_first_event:
+            pcr_states[TpmAlgId.TPM_ALG_SHA1] = []
+
+        is_first_event = False
 
         # Extend existing PCRs
-        if len(pcr_states) <= pcr_index < 256:
-            pcr_states += [bytes(20)] * (pcr_index + 1 - len(pcr_states))
-        pcr_states[pcr_index] = hashlib.sha1(pcr_states[pcr_index] + digest).digest()
+        for computed_digest in digests:
+            alg_id = computed_digest.alg_id
+            alg_obj = TpmAlgId(alg_id)
+            if len(pcr_states[alg_id]) <= pcr_index < 256:
+                empty_digest = b'\0' * spec_digest_sizes[alg_id]
+                pcr_states[alg_id] += [empty_digest] * (pcr_index + 1 - len(pcr_states[alg_id]))
+            pcr_states[alg_id][pcr_index] = alg_obj.digest(
+                pcr_states[alg_id][pcr_index] + computed_digest.computed)
 
-        computed = hashlib.sha1(event_data).digest()
+        is_digest_of_data = all(computed_digest.matches(event_data) for computed_digest in digests)
+
         digest_desc = None
         data_desc = []
-        if computed == digest:
-            digest_desc = "SHA1(data)"
+
+        # Handle EV_IPL from systemd, that only adds a single NUL byte instead of two
+        # https://github.com/systemd/systemd/blob/v243/src/boot/efi/measure.c
+        if is_digest_of_data:
+            digest_desc = "event data"
+        elif pcr_index == 8 and event_type == TcgEventType.EV_IPL:
+            is_digest_of_data = all(computed_digest.matches(event_data + b'\0') for computed_digest in digests)
+            if is_digest_of_data:
+                digest_desc = "event data + '\\0'"
+
+        if is_digest_of_data:
             if pcr_index == 0 and event_type == TcgEventType.EV_S_CRTM_VERSION:
                 data_desc.append("(Version string of the CRTM)")
 
@@ -193,10 +378,10 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
             # TCG_PCR_EVENT.digest = SHA-1 Hash of the POST CODE
             # TCG_PCR_EVENT.Event[1] = EFI_PLATFORM_FIRMWARE_BLOB structure (base + length)
             if event_data == b'ACPI DATA':
-                digest_desc = "SHA1(ACPI DATA)"
+                digest_desc = "ACPI DATA"
             elif len(event_data) == 0x10:
                 post_physaddr, post_length = struct.unpack('<QQ', event_data)
-                digest_desc = "SHA1(POST code)"
+                digest_desc = "POST code"
                 data_desc.append("* POST start: {:#x}".format(post_physaddr))
                 data_desc.append("* POST length: {:#x} = {} kB".format(post_length, post_length / 1024.))
                 data_desc.append("* (POST end: {:#x})".format(post_physaddr + post_length))
@@ -206,7 +391,7 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
             # TCG_PCR_EVENT.Event[1] = EFI_PLATFORM_FIRMWARE_BLOB structure (base + length)
             if len(event_data) == 0x10:
                 crtm_physaddr, crtm_length = struct.unpack('<QQ', event_data)
-                digest_desc = "SHA1(CRTM Contents)"
+                digest_desc = "CRTM Contents"
                 data_desc.append("* CRTM start: {:#x}".format(crtm_physaddr))
                 data_desc.append("* CRTM length: {:#x} = {} kB".format(crtm_length, crtm_length / 1024.))
                 data_desc.append("* (CRTM end: {:#x})".format(crtm_physaddr + crtm_length))
@@ -214,7 +399,7 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
         elif pcr_index == 5 and event_type == TcgEventType.EV_EFI_VARIABLE_BOOT:
             # EFI_VARIABLE_DATA structure => compute name for /sys/firmware/efi/efivars/
             if len(event_data) >= 0x20:
-                digest_desc = "SHA1(Boot variables)"
+                digest_desc = "Boot variables"
                 var_uuid = uuid.UUID(bytes_le=event_data[:0x10])
                 var_unicode_name_len, var_data_len = struct.unpack('<QQ', event_data[0x10:0x20])
                 var_name = event_data[0x20:0x20 + 2 * var_unicode_name_len].decode('utf-16le')
@@ -232,7 +417,7 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
                 image_linktime_addr = data_stream.read_u64()
                 devpath_len = data_stream.read_u64()
                 if len(event_data) == 0x20 + devpath_len:
-                    digest_desc = "SHA1(normalized code)"
+                    digest_desc = "normalized code"
                     data_desc.append("* ImageLocationInMemory: {:#x}".format(image_addr))
                     data_desc.append("* ImageLengthInMemory: {:#x}".format(image_len))
                     data_desc.append("* (Image end in memory: {:#x})".format(image_addr + image_len))
@@ -314,7 +499,7 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
         elif pcr_index == 0and event_type == TcgEventType.EV_EFI_PLATFORM_FIRMWARE_BLOB:
             if len(event_data) == 0x10:
                 platfw_physaddr, platfw_length = struct.unpack('<QQ', event_data)
-                digest_desc = "SHA1(Plat FW Blob)"
+                digest_desc = "Plat FW Blob"
                 data_desc.append("* FW start: {:#x}".format(platfw_physaddr))
                 data_desc.append("* FW length: {:#x} = {} kB".format(platfw_length, platfw_length / 1024.))
                 data_desc.append("* (FW end: {:#x})".format(platfw_physaddr + platfw_length))
@@ -325,7 +510,7 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
             data_stream = BinStream(event_data)
             num_tables = data_stream.read_u64()
             if len(event_data) == 8 + num_tables * 0x18:
-                digest_desc = "SHA1(SystemTable.ConfigurationTable)"
+                digest_desc = "SystemTable.ConfigurationTable"
                 while not data_stream.is_end():
                     # Decode a configuration table as EFI_CONFIGURATION_TABLE
                     tbl_guid = data_stream.read_uuid()
@@ -334,16 +519,20 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
 
         if digest_desc is None:
             digest_desc = '?'
-            print("Warning: unexpected digest, computed {}".format(xx(computed)))
+            for computed_digest in digests:
+                computed_digest.matches(event_data, verbose=True)
 
-        print("[PCR {:2d}] {:#x}={}, {}={}".format(
+        print("[PCR {:2d}] {:#x}={}".format(
             pcr_index,
             event_type, TcgEventType.describe(event_type),
-            digest_desc, xx(digest),
         ))
+
         pcr_desc = PCR_DESCRIPTIONS.get(pcr_index)
         if pcr_desc:
             print("  Register: {}".format(pcr_desc))
+
+        for computed_digest in digests:
+            print("  {}".format(computed_digest.to_str(digest_desc)))
 
         # Dump the data
         for iline in range(0, len(event_data), 16):
@@ -353,13 +542,12 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
                 if iline + i >= len(event_data):
                     hexline += '  '
                 else:
-                    # pylint: disable=invalid-name
-                    x = event_data[iline + i]
-                    hexline += '{:02x}'.format(x)
-                    ascline += chr(x) if 32 <= x < 127 else '.'
+                    val = event_data[iline + i]
+                    hexline += '{:02x}'.format(val)
+                    ascline += chr(val) if 32 <= val < 127 else '.'
                 if i % 2:
                     hexline += ' '
-            print("  {:04x}: {} {}".format(iline, hexline, ascline))
+            print("      {:04x}: {} {}".format(iline, hexline, ascline))
 
         # Display the description of the data
         for line in data_desc:
@@ -369,9 +557,11 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
 
     if not pcr_states:
         return
-    print("Final state of PCRs:")
-    for pcr_index, value in enumerate(pcr_states):
-        print("  PCR {:2d} = {}".format(pcr_index, xx(value)))
+
+    for alg_id, pcrs in pcr_states.items():
+        print("Final state of PCRs with {}:".format(TpmAlgId.get_name(alg_id)))
+        for pcr_index, value in enumerate(pcrs):
+            print("  PCR {:2d} = {}".format(pcr_index, xx(value)))
 
 
 def main(argv=None):
