@@ -49,8 +49,10 @@ logger = logging.getLogger(__name__)
 #   (2018-05-21, after L1 Terminal Fault attack (L1TF),
 #   CVE-2018-3639 – Speculative Store Bypass (SSB) - also known as Variant 4 and
 #   CVE-2018-3640 - Rogue System Register Read (RSRE) - also known as Variant 3a)
-# * https://www.intel.com/content/dam/www/public/us/en/documents/corporate-information/SA00233-microcode-update-guidance_05132019.pdf
+# * https://www.intel.com/content/dam/www/public/us/en/documents/corporate-information/SA00233-microcode-update-guidance.pdf
 #   (2019-05-15, after RIDL and Fallout, Intel-SA-00233)
+# * https://www.intel.com/content/dam/www/public/us/en/security-advisory/documents/IPU-2019.2-microcode-update-guidance-v1.0.pdf
+#   (2019-11-12, after TAA = TSX Asynchronous Abort INTEL-SA-00270)
 # * https://en.wikipedia.org/wiki/Intel_Core
 # * http://users.atw.hu/instlatx64/ and https://github.com/InstLatx64/InstLatx64/blob/master/ChangeLog.htm
 # * https://en.wikichip.org/wiki/intel/microarchitectures/cascade_lake
@@ -354,7 +356,7 @@ INTEL_FAM6_MODELS = {
         'DuadCore Intel® Pentium® G840 (Sandy Bridge, 3MB L3, no AVX)',
         'Intel® Core™ Processor Extreme Edition i7-2920XM, i7-2960XM',
         'Intel® Core™ Processor i7-2600, i7-2600K, i7-2600S, i7-2610UE, i7-2617M, i7-2620M, i7-2629M, i7-2630QM, i7-2635QM, i7-2637M, i7-2640M, i7-2649M, i7-2655LE, i7-2657M, i7-2670QM, i7-2675QM, i7-2677M, i7-2700K, i7-2710QE, i7-2715QE, i7-2720QM, i7-2760QM, i7-2820QM, i7-2860QM',
-        'Intel® Core™ Processor i5-2300, i5-2310,i5-2320, i5-2380P, i5-2390T, i5-2400, i5-2400S, i5-2405S, i5-2410M, i5-2430M, i5-2435M, i5-2450M, i5-2450P, i5-2467M, i5-2500, i5-2500K, i5-2500S, i5-2500T, i5-2510E, i5-2515E, i5-2520M, i5-2537M, i5-2540M, i5-2550K, i5-2557M',
+        'Intel® Core™ Processor i5-2300, i5-2310, i5-2320, i5-2380P, i5-2390T, i5-2400, i5-2400S, i5-2405S, i5-2410M, i5-2430M, i5-2435M, i5-2450M, i5-2450P, i5-2467M, i5-2500, i5-2500K, i5-2500S, i5-2500T, i5-2510E, i5-2515E, i5-2520M, i5-2537M, i5-2540M, i5-2550K, i5-2557M',
         'Intel® Core™ Processor i3-2100, i3-2100T, i3-2102, i3-2105, i3-2120, i3-2120T, i3-2125, i3-2130, i3-2310E, i3-2310M, i3-2312M, i3-2328M, i3-2330E, i3-2330M, i3-2332M, i3-2340UE, i3-2348M, i3-2350M, i3-2357M, i3-2365M, i3-2367M, i3-2370M, i3-2375M, i3-2377M',
         'Intel® Pentium® Processor 957, 967, 977, 987, 997, B940, B950, B960, B970, B980, G620, G620T, G622, G630, G630T, G632, G640, G640T, G645, G645T, G840, G850, G860, G860T, G870',
         'Intel® Celeron® Processor 787, 797, 807, 807UE, 827E, 847, 847E, 857, 867, 877, 887, B710, B720, B800, B810, B810E, B815, B820, B830, B840, G440, G460, G465, G470, G530, G530T, G540, G540T, G550, G550T, G555',
@@ -519,8 +521,8 @@ INTEL_FAM6_MODELS = {
         'DualCore Intel® Core™ M-5Y70, 2600 MHz (26 x 100) (Broadwell) Haswell vs. Broadwell',
         'Mobile DualCore Intel® Core™ i7-5500U (Broadwell-ULT)',
         'Mobile DualCore Intel® Core™ i5-5250U, 1600 MHz (16 x 100) (Broadwell-U)',
-        'Intel® Core™ Processor i7-5650U,i7-5600U, i7-5557U, i7-5550U, i7-5500U',
-        'Intel® Core™ Processor i5-5350U, i5-5350,i5-5300U, i5-5287U,i5-5257U, i5-5250U, i5-5200U',
+        'Intel® Core™ Processor i7-5650U, i7-5600U, i7-5557U, i7-5550U, i7-5500U',
+        'Intel® Core™ Processor i5-5350U, i5-5350, i5-5300U, i5-5287U, i5-5257U, i5-5250U, i5-5200U',
         'Intel® Core™ Processor i3-5157U, i3-5020U, i3-5015U, i3-5010U, i3-5006U, i3-5005U, i3-5010U, i5-5350U, i7-5650U',
         'Intel® Core™ Processor M-5Y71, M-5Y70, M-5Y51, M-5Y3, M-5Y10c, M -5Y10a, M-5Y10',
         'Intel® Pentium® Processor 3805U, 3825U, 3765U, 3755U, 3215U, 3205U',
@@ -668,7 +670,10 @@ INTEL_FAM6_MODELS = {
         'Intel® Xeon® Processor v4 E5-2603, E5-2608L, E5-2609, E5-2618L, E5-2620, E5-2623, E5-2628L, E5-2630L, E5-2630, E5-2637, E5-2640, E5-2643, E5-2648L, E5-2650L, E5-2650, E5-2658, E5-2660, E5-2667, E5-2679, E5-2680, E5-2683, E5-2690, E5-2695, E5-2697A, E5-2697, E5-2698, E5-2699A, E5-2699, E5-2699R, E5-4628L',
         'Intel® Xeon® Processor v4 E7-4809, E7-4820, E7-4830, E7-4850, E7-8855, E7-8860, E7-8867, E7-8870, E7-8880, E7-8890, E7-8891, E7-8893, E7-8894',
     )),
-    (0x55, 3): (None, '?'),
+    (0x55, 3): ('SKL', 'Skylake Server', (
+        'Intel® Xeon® Scalable Processors',
+        'Intel® Xeon® Platinum Processor P-8124, P-8136',
+    )),
     (0x55, 4): ('SKX', 'Skylake X (Skylake SP, Basin Falls ; Skylake D, Bakerville ; W)', (
         'Intel® Core™ i9 79xxX, 78xxX',
         'Intel® Xeon® Scalable Processor Family',
@@ -695,6 +700,15 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ X-series Processor i9-7900X, i9-7920X, i9-7940X, i9-7960X',
         'Intel® Core™ X-series Processor i7-7800X, i7-7820X',
     )),
+    (0x55, 7): ('CSL', 'Cascade Lake Server, Cascade Lake W', (
+        '2nd Generation Intel® Xeon® Scalable Processors',
+        'Intel® Xeon® W Processor Family',
+        'Intel® Xeon® Platinum Processor 8253, 8256, 8260, 8260L, 8260M, 8260Y, 8268, 8270, 8276, 8276L, 8276M, 8280, 8280L, 8280M, 9220, 9221, 9222, 9242, 9282',
+        'Intel® Xeon® Gold Processor 5215, 5215L, 5215M, 5215R, 5217, 5218, 5218B, 5218N, 5218T, 5220, 5220R, 5220S, 5220T, 5222, 6222V, 6226, 6230, 6230N, 6230T, 6234, 6238, 6238L, 6238M, 6238T, 6240, 6240L, 6240M, 6240Y, 6242, 6244, 6246, 6248, 6252, 6252N, 6254, 6262V',
+        'Intel® Xeon® Silver Processor 4208, 4208R, 4209T, 4210, 4210R, 4214, 4214C, 4214R, 4214Y, 4215, 4216, 4216R',
+        'Intel® Xeon® Bronze Processor 3204, 3206R',
+        'Intel® Xeon® Processor W-3275M, W-3275, W-3265M, W-3265, W-3245M, W-3245, W-3235, W-3225, W-3223, W-2295, W-2275, W-2265, W-2255, W-2245, W-2235, W-2225, W-2223',
+    )),
     (0x56, 2): ('BDX-DE', 'Broadwell Xeon D (Broadwell DE V1)', (
         'Intel® Xeon® Processor D-1500 Product Family',
         'OctalCore Intel® Xeon® D-1540, 2000 MHz (20 x 100) (Broadwell-DE)',
@@ -709,9 +723,11 @@ INTEL_FAM6_MODELS = {
         'Intel® Xeon® Processor D-1500 Product Family',
         'Intel® Xeon® Processor D-1557, D-1559, D-1567, D-1571, D-1577, D-1581, D-1587',
     )),
-    (0x56, 5): ('BDX-DE', 'Broadwell Xeon D (Broadwell NS, Broadwell DE A1)', (
+    (0x56, 5): ('BDX-DE', 'Broadwell Xeon D (Broadwell NS, Broadwell DE A1), Hewitt Lake', (
         'Intel® Xeon® Processor D-1500 NS Product Family',
+        'Intel® Xeon® D Processor Family',
         'Intel® Xeon® Processor D-1513N, D-1523N, D-1533N, D1543N, D1553N',
+        'Intel® Xeon® Processor D-1602, D-1622, D-1623N, D-1627 , D-1633N, D-1637, D-1649N, D-1653N',
     )),
     (0x57, 1): ('PHI KNL', 'Xeon Phi Knights Landing', (
         'Intel® Xeon® Phi™ Processor 72xx',
@@ -764,7 +780,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i7-6700HQ, i7-6770HQ, i7-6820HK, i7-6820HQ, i7-6870HQ, i7-6920HQ, i7-6970HQ',
         'Intel® Core™ Processor i5-6300HQ, i5-6350HQ, i5-6440HQ',
         'Intel® Core™ Processor i3-6100H',
-        'Intel® Core™ Processor i7-6700, i7-6700K, i7-6700T',
+        'Intel® Core™ Processor i7-6700, i7-6700K, i7-6700T, i7-6700TE, i7-6820EQ, i7-6822EQ',
         'Intel® Core™ Processor i5-6400, i5-6400T, i5-6500, i5-6500T , i5-6600, i5-6600K, i5-6600T',
         'Intel® Core™ Processor i3-6100, i3-6100T, i3-6120, i3-6120T, i3-6300, i3-6300T, i3-6320, i3-6320T',
         'Intel® Pentium® Processor G4400, G4400T, G4420, G4420T, G4500, G4500T, G4520, G4520T, G4540',
@@ -787,7 +803,7 @@ INTEL_FAM6_MODELS = {
     (0x6e, 1): (None, 'Cougar Mountain (AMT)', (
         'Intel® Puma™ 7 Home Gateway',
     )),
-    (0x7a, 1): (None, 'Atom Gemini Lake', (
+    (0x7a, 1): (None, 'Gemini Lake', (
         'Intel® Pentium® Processor Silver Series',
         'Intel® Celeron® Processor J Series',
         'Intel® Celeron® Processor N Series',
@@ -797,10 +813,26 @@ INTEL_FAM6_MODELS = {
         'Intel® Celeron® Processor J4005, J4105',
         'Intel® Celeron® Processor N4000, N4100',
     )),
+    (0x7a, 8): (None, 'Gemini Lake', (
+        'Inteli LakeeddedmbeddedProcessor J5005, N5000 Intel® CelProcessor J Series',
+        'Intel® Celeron® Processor N Series',
+        'Intel® Pentium® Silver J5040 Processor',
+        'Intel® Pentium® Silver N5030 Processor',
+        'Intel® Celeron® Processor J4125',
+        'Intel® Celeron® Processor J4025',
+        'Intel® Celeron® Processor N4020',
+        'Intel® Celeron® Processor N4120',
+    )),
     (0x7d, -1): ('ICL', 'Icelake Desktop'),
     (0x7e, -1): ('ICL', 'Icelake Mobile'),
     (0x7e, 0): ('ICL', 'Icelake A0'),
     (0x7e, 1): ('ICL', 'Icelake B0'),
+    (0x7e, 5): ('ICL', 'Ice Lake', (
+        '10th Generation Intel® Core™ Processor Family',
+        'Intel® Core™ Processor i7-1060G7, i7-1065G7',
+        'Intel® Core™ Processor i5-1030G4, i5-1030G7, i5-1035G1, i5-1035G4, i5-1035G7',
+        'Intel® Core™ Processor i3-1000G1, i3-1000G4, i3-1005G1',
+    )),
     (0x85, 0): ('PHI KNM', 'Xeon Phi Knights Mill', (
         'Intel® Xeon® Phi™ Processor Family',
         'Intel® Xeon Phi™ 72x5 Processor Family',
@@ -848,15 +880,28 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i3-8145U',
         'Intel® Core™ Processor 4205U, 5405U',
     )),
-    (0x8e, 12): ('WHL-U', 'Whiskey Lake U', (
+    (0x8e, 12): ('WHL-U', 'Whiskey Lake U, Amber Lake Y', (
         '8th Generation Intel® Core™ Processors',
+        '10th Generation Intel® Core™ Processor Family',
+        'Intel® Pentium® Gold Processor Series',
+        'Intel® Celeron® Processor 5000 Series',
         'Intel® Core™ Processor i7-8565U, i7-8665U',
         'Intel® Core™ Processor i5-8365U, i5-8265U',
+        'Intel® CoreTM Processor i7-10510Y, i5-10310Y',
+        'Intel® CoreTM Processor i5-10210Y, i5-10110Y',
+        'Intel® CoreTM Processor i7-8500Y',
+        'Intel® CoreTM Processor i5-8310Y, i5-8210Y, i5-8200Y',
+        'Intel® CoreTM Processor m3-8100Y',
+        'Intel® CoreTM Processor i7-10510U'
+        'Intel® CoreTM Processor i5-10210U',
+        'Intel® Pentium® Gold Processor 6405U',
+        'Intel® Celeron® Processor 5305U',
     )),
     (0x9d, -1): ('ICL-NNPI', 'Ice Lake Neural Network Processor for Deep Learning Inference'),
     (0x9e, 9): ('KBL', 'Kaby Lake Desktop (Kaby Lake H/S/X/G, Xeon E3), Greenlow', (
         '7th Generation Intel® Core™ Processor Family',
         '8th Generation Intel® Core™ Processor Family',
+        'Intel® Xeon® Processor E3 v6 Family',
         'QuadCore Intel® Core™ i5-7600K, 3800 MHz (Kaby Lake-H/S)',
         'QuadCore Intel® Core™ i7-7700K, 4500 MHz (45 x 100) (Kaby Lake-S)',
         'DualCore Intel® Pentium® G4600 3600 MHz (Kaby Lake-S)',
@@ -874,6 +919,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i7-7740X',
         'Intel® Core™ Processor i5-7640X',
         'Intel® Xeon® Processor v6 E3-1220, E3-1225, E3-1230, E3-1240, E3-1245, E3-1270, E3-1275, E3-1280, E3-1501L, E3-1501M, E3-1505L, E3-1505M, E3-1535M',
+        'Intel® Xeon® Processor v6 E3-1535M, E3-1505M, E3-1505L, E3-1501L, E3-1501M, E3-1285, E3-1280, E3-1275, E3-1270, E3-1245, E3-1240, E3-1230, E3-1225, E3-1220',
     )),
     (0x9e, 10): ('KBL', 'Kaby Lake Desktop, Coffee Lake H (6+2), Coffee Lake S (6+2), Coffee Lake S (6+2) Xeon E3, Coffee Lake S (4+2) Xeon E, Coffee Lake S (6+2) x/KBP', (
         '8th Generation Intel® Core™ Processor Family',
@@ -907,9 +953,23 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i7-9700K, i7-9700KF',
         'Intel® Core™ Processor i5-9600K, i5-9600KF, i5-9400, i5-9400F',
     )),
+    (0x9e, 13): ('CFL', 'Coffee Lake H (8+2), Coffee Lake S (8+2)', (
+        '9th Generation Intel® Core™ Processor Family',
+        'Intel® Xeon® Processor E Family',
+        'Intel® Core™ Processor i9-9980HK, i9-9880H',
+        'Intel® Core™ Processor i7-9850H, i7-9750HF',
+        'Intel® Core™ Processor i5-9400H, i5-9300H',
+        'Intel® Core™ Processor i9-9900K, i9-9900KF',
+        'Intel® Core™ Processor i7-9700K, i7-9700KF',
+        'Intel® Core™ Processor i5-9600K, i5-9600KF, i5-9400, i5-9400F',
+        'Intel® Xeon® Processor E-2288G, E-2286M, E-2278GEL, E-2278GE, E-2278G',
+    )),
     (0xa5, 0): ('CML', 'Comet Lake H S 6 2 P0'),
     (0xa5, 1): ('CML', 'Comet Lake H S 10 2 P0'),
-    (0xa6, 0): ('CML', 'Comet Lake U A0'),
+    (0xa6, 0): ('CML', 'Comet Lake U A0', (
+        '10th Generation Intel® Core™ Processor Family',
+        'Intel® Core™ Processor i7-10710U',
+    )),
     (0xa6, 1): ('CML', 'Comet Lake U K0 S0'),
 }
 INTEL_FAM15_MODELS = {
