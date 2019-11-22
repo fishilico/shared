@@ -193,7 +193,9 @@ pkg acpi
 pkg acpica
 pkg bluez
 pkg bluez-utils
+pkg dmidecode
 pkg efibootmgr
+pkg fwupd
 pkg gpm
 pkg iw
 pkg kbd
@@ -347,6 +349,9 @@ then
     pkg ttf-dejavu
     pkg ttf-droid
     pkg ttf-fantasque-sans-mono
+    pkg ttf-fira-code
+    pkg ttf-fira-mono
+    pkg ttf-fira-sans
     pkg ttf-inconsolata
     pkg ttf-liberation
     pkg ttf-ubuntu-font-family
@@ -427,6 +432,7 @@ then
     pkg zenity
 
     aurpkg burpsuite
+    aurpkg fontawesome.sty
     aurpkg restview
     aurpkg trickle
 
@@ -476,6 +482,7 @@ then
     pkg arm-none-eabi-binutils
     pkg arm-none-eabi-gcc
     pkg arm-none-eabi-gdb
+    pkg arm-none-eabi-newlib
     pkg beignet
     pkg binwalk
     pkg bochs
@@ -532,7 +539,7 @@ then
     pkg python2-netaddr
     pkg python2-pillow
     pkg python2-pycryptodome
-    pkg python2-scapy
+    pkg python2-pycryptodomex
     pkg python2-yara
     pkg qemu
     pkg qemu-arch-extra
@@ -553,9 +560,12 @@ then
     grouppkg texlive-most
 
     aurpkg android-apktool
+    aurpkg arm-linux-gnueabihf-binutils
+    aurpkg arm-linux-gnueabihf-gcc
+    aurpkg arm-linux-gnueabihf-glibc
+    aurpkg arm-linux-gnueabihf-linux-api-headers
     aurpkg bluez-hcitool
     aurpkg bluez-rfcomm
-    aurpkg bluez-utils-compat
     aurpkg coccinelle
     aurpkg dex2jar
     aurpkg earlyoom
@@ -574,7 +584,6 @@ then
     aurpkg python-roca-detect
     aurpkg python-uncompyle6
     #aurpkg python-pwntools-git
-    aurpkg python2-pycryptodomex
     aurpkg python2-pwntools
     aurpkg pyzbar
     aurpkg sasquatch
