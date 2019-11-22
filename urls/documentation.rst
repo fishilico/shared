@@ -103,6 +103,15 @@ Hacking
   Weaponized web shell
 * https://blog.ropnop.com/docker-for-pentesters/
   Docker for Pentesters
+* https://github.com/naworkcaj/bdvl
+  LD_PRELOAD Linux rootkit (x86 & ARM)
+
+* Lists of programs that can be used for local privilege escalation:
+
+  * https://github.com/TH3xACE/SUDO_KILLER
+    A tool to identify and exploit sudo rules' misconfigurations and vulnerabilities within sudo
+  * https://gtfobins.github.io/ GTFOBins
+  * https://github.com/mzfr/gtfo Search gtfobins and lolbas files from your terminal
 
 
 Debuggers
@@ -187,6 +196,9 @@ Programming
 * https://github.com/veorq/cryptocoding
   This page lists "coding rules" for implementations of cryptographic operations
 
+* https://github.com/RustSec/advisory-db
+  Security advisory database for Rust crates published through crates.io
+
 Packaging
 ---------
 
@@ -244,6 +256,8 @@ Internet
 * https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software
   The 2018 Guide to Building Secure PHP Software
 * https://caniuse.com/ Can I use... Support tables for HTML5, CSS3, etc
+* https://github.com/qdm12/private-internet-access-docker
+  Private internet access openvpn client in a lightweight Docker container
 
 * Free Web development reverse proxies:
 

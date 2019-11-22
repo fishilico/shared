@@ -21,6 +21,8 @@ Linux
 * https://github.com/zevv/lsofgraph
   A small utility to convert Unix lsof output to a graph showing FIFO and UNIX interprocess communication.
 * https://www.brow.sh/ brow.sh, the modern text-based browser
+* http://www.brendangregg.com/Perf/linux_observability_tools.png
+  Linux Performance Observability tools
 
 Windows
 -------
@@ -41,6 +43,8 @@ Windows
   Dans les coulisses de Microsoft Windows (in French)
 * https://github.com/Zer0Mem0ry/ntoskrnl
   The Windows Research Kernel (WRK)
+* https://www.microsoft.com/en-us/securityengineering/sdl/practices
+  Microsoft Security Development Lifecycle Practices
 
 Apple
 -----

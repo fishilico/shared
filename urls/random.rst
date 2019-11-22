@@ -48,6 +48,11 @@ Other
 * http://www.boredpanda.com/how-to-care-for-little-sad-person-john-saddington/
   How To Take Care Of A Sad Person (10 Steps)
 
+Games
+-----
+
+* https://ncase.me/trust/ The evolution of trust
+
 Calculus
 --------
 
