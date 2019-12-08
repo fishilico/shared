@@ -282,6 +282,7 @@ pkg wireshark-cli
 # Development
 grouppkg base-devel
 grouppkg multilib-devel
+grouppkg linux-tools
 pkg bat
 pkg clang
 pkg cmake
