@@ -579,6 +579,7 @@ class AnalysisContext(object):
         self.seen_eth_lldp = False
         self.seen_eth_fortinet = False
         self.seen_eth_802_11 = False
+        self.seen_eth_aerohive = False
 
     def post_processing(self, add_local_networks=False):
         """Perform some post-processing operations on the data"""
@@ -692,6 +693,8 @@ class AnalysisContext(object):
             hex_hw_src = binascii.hexlify(base_pkt.src).decode('ascii')
             hw_src = ':'.join(hex_hw_src[i:i + 2] for i in range(0, 12, 2))
             hw_dst = None
+            if base_pkt.pkttype == 1:  # Broadcast
+                hw_dst = 'ff:ff:ff:ff:ff:ff'
         else:
             pkt_type = base_pkt.type
             hw_src = ethpkt.src
@@ -707,17 +710,18 @@ class AnalysisContext(object):
             # but it is not parsed well by scapy.
             # In order to get it: configure a bridge on a Linux machine and
             # capture traffic on interface "any".
-            pass
-        elif pkt_type == 8:  # LLC (Logical Link Control)
-            pass
-        elif pkt_type == 0x800:  # IPv4
+            return
+        if pkt_type == 8:  # LLC (Logical Link Control)
+            return
+        if pkt_type == 0x800:  # IPv4
             ippkt = base_pkt[1]
             assert isinstance(ippkt, IP)
             self.hwaddrdb.add_ipv4(ippkt.src, hw_src, 'IPv4 packet source')
             if hw_dst is not None:
                 self.hwaddrdb.add_ipv4(ippkt.dst, hw_dst, 'IPv4 packet destination')
             self.analyze_ipv4_packet(ippkt)
-        elif pkt_type == 0x806:  # ARP
+            return
+        if pkt_type == 0x806:  # ARP
             arppkt = base_pkt[1]
             assert isinstance(arppkt, ARP)
             if arppkt.op == 1:  # ARP who-has?
@@ -727,7 +731,19 @@ class AnalysisContext(object):
                 self.hwaddrdb.add_ipv4(arppkt.pdst, arppkt.hwdst, 'ARP is-at destination')
             else:
                 logger.warning("Unknown ARP packet %r", arppkt)
-        elif pkt_type == 0x6002:  # DNA_RC, for Decnet Maintenance Operation Protocol (MOP) Remote Console (RC)
+            return
+        if pkt_type == 0x2600 and hw_dst == 'ff:ff:ff:ff:ff:ff' and isinstance(base_pkt[1], Raw):
+            # AeroHive LLC messages (filter in Wireshark with "eth.type == 0x2600")
+            aerohive_data = base_pkt[1].load
+            if aerohive_data.startswith(b'\x00\x00\xaf\x81\x01\x00aerohive gratuitous arp'):
+                logger.debug("Seen AeroHive[%s] %r", hw_src, aerohive_data[15:].rstrip(b'\0'))
+                if not self.seen_eth_aerohive:
+                    logger.info(
+                        "Broadcast AeroHive Gratuitous ARP found in capture. Maybe an AeroHive WiFi network (%r)",
+                        ethpkt)
+                    self.seen_eth_aerohive = True
+                return
+        if pkt_type == 0x6002:  # DNA_RC, for Decnet Maintenance Operation Protocol (MOP) Remote Console (RC)
             if hw_dst != 'ab:00:00:02:00:00':
                 logger.warning("Unexpected Ethernet destination for DEC MOP DNA_RC packet: %r", ethpkt)
             elif not self.seen_eth_dec_mop_dna_rc:
@@ -735,7 +751,8 @@ class AnalysisContext(object):
                     "DEC MOP DNA_RC packet found in capture. This may signal a Cisco router (%r)",
                     ethpkt)
                 self.seen_eth_dec_mop_dna_rc = True
-        elif pkt_type == 0x8035:  # Reverse ARP (https://tools.ietf.org/html/rfc903)
+            return
+        if pkt_type == 0x8035:  # Reverse ARP (https://tools.ietf.org/html/rfc903)
             rarppkt = base_pkt[1]
             assert isinstance(rarppkt, Raw)
             # Ignore RARP request for IPv4 address:
@@ -748,16 +765,18 @@ class AnalysisContext(object):
                 pass
             else:
                 logger.warning("Unknown RARP packet: %r", ethpkt)
-        elif pkt_type == 0x86dd:  # IPv6
+            return
+        if pkt_type == 0x86dd:  # IPv6
             ippkt = base_pkt[1]
             assert isinstance(ippkt, IPv6)
             self.hwaddrdb.add_ipv6(ippkt.src, hw_src, 'IPv6 packet source')
             if hw_dst is not None:
                 self.hwaddrdb.add_ipv6(ippkt.dst, hw_dst, 'IPv6 packet destination')
             self.analyze_ipv6_packet(ippkt)
-        elif pkt_type == 0x888e:  # EAPOL (IEEE 802.1X)
-            pass
-        elif pkt_type == 0x88cc:  # LLDP
+            return
+        if pkt_type == 0x888e:  # EAPOL (IEEE 802.1X)
+            return
+        if pkt_type == 0x88cc:  # LLDP
             # Scapy does not understand LLDP, but Wireshark does.
             # These packets may given VLAN IDs and network names.
             if not self.seen_eth_lldp:
@@ -766,7 +785,8 @@ class AnalysisContext(object):
                     ethpkt)
                 # logger.debug("Skipping LLDP packet %r", ethpkt)
                 self.seen_eth_lldp = True
-        elif pkt_type in (0x8890, 0x8891, 0x8893):
+            return
+        if pkt_type in (0x8890, 0x8891, 0x8893):
             # Fortinet hardware uses these special ethernet types
             # https://help.fortinet.com/fos50hlp/56/Content/FortiOS/fortigate-high-availability/HA_failoverHeartbeat.htm
             if not self.seen_eth_fortinet:
@@ -774,7 +794,8 @@ class AnalysisContext(object):
                     "Fortinet Heartbit found in capture. This may give useful information about the network (%r)",
                     ethpkt)
                 self.seen_eth_fortinet = True
-        elif pkt_type == 0x890d:  # IEEE 802.11 data encapsulation (WiFi)
+            return
+        if pkt_type == 0x890d:  # IEEE 802.11 data encapsulation (WiFi)
             # The source MAC address is probably a WiFi access point on a wired network
             self.hwaddrdb.add_bridge(hw_src)
             if not self.seen_eth_802_11:
@@ -782,10 +803,12 @@ class AnalysisContext(object):
                     "Encapsulated 802.11 data found, probably emitted by a WiFi access point (%r)",
                     ethpkt)
                 self.seen_eth_802_11 = True
-        elif pkt_type == 0x9000:  # Configuration Test Protocol (loopback), from a Cisco switch
+            return
+        if pkt_type == 0x9000:  # Configuration Test Protocol (loopback), from a Cisco switch
             self.hwaddrdb.add_bridge(hw_src)
-        else:
-            logger.warning("Unknown Ethernet packet type %#x: %r", pkt_type, ethpkt)
+            return
+
+        logger.warning("Unknown Ethernet packet type %#x: %r", pkt_type, ethpkt)
 
     def analyze_ipv4_packet(self, ippkt):
         """Analyze an IPv4 packet"""
