@@ -125,6 +125,39 @@ def get_privexp_from_npe(n, p, e, q=None, use_lcm=False):
     return modinv(e, order_mod_n)
 
 
+def get_primes_from_nsum(n, sum_p_q):
+    """Get primes (p, q) from their product n and their sum sum_p_q
+
+    Do so by solving a polynom of degree 2:
+        (X - p)(X - q) = X^2 - sum_p_q * X + n
+    """
+    delta = (sum_p_q ** 2) - 4 * n
+
+    if sys.version_info >= (3, 8):  # math.isqrt has been introduced in Python 3.8
+        sqrt_min = math.isqrt(delta)
+    else:
+        # Compute the precise root by dichotomy, because math.sqrt operates on floats
+        sqrt_min = 0
+        sqrt_max = delta
+        while sqrt_min < sqrt_max - 1:
+            testing = (sqrt_min + sqrt_max) // 2
+            if testing * testing > delta:
+                sqrt_max = testing
+            elif testing * testing < delta:
+                sqrt_min = testing
+            else:
+                sqrt_min = sqrt_max = testing
+        while sqrt_min < sqrt_max and sqrt_min * sqrt_min < delta:
+            sqrt_min += 1
+    if sqrt_min * sqrt_min != delta:
+        # This may happen when the order has not been simplified enough
+        raise ValueError
+
+    p = (sum_p_q - sqrt_min) // 2
+    q = (sum_p_q + sqrt_min) // 2
+    return p, q
+
+
 def get_primes_from_ned(n, e, d, verbose=False):
     """Get primes (p, q) from a public key (n, e) and the private exponent d
 
@@ -174,7 +207,7 @@ def get_primes_from_ned(n, e, d, verbose=False):
             # Try to factorize as soon as the order is small enough
             if current_order < n:
                 # Acceleration: use the fact that n divides (x^order)-1 = (x^(order/2)-1)*(x^(order/2)+1)
-                if not (current_order & 1):
+                if (current_order & 1) == 0:
                     for x in (2, 3, 5, 7):
                         if sys.version_info >= (3, 5):  # math.gcd has been introduced in Python 3.5
                             p = math.gcd(pow(x, current_order >> 1, n) - 1, n)
@@ -197,29 +230,13 @@ def get_primes_from_ned(n, e, d, verbose=False):
                     print("* Order({}) = {:#x}".format(current_order.bit_length(), current_order))
                     print("* p + q ({}) = {:#x}".format(sum_p_q.bit_length(), sum_p_q))
 
-                delta = (sum_p_q ** 2) - 4 * n
-
-                # Compute the precise root by dichotomy, because math.sqrt operates on floats
-                sqrt_min = 0
-                sqrt_max = delta
-                while sqrt_min < sqrt_max - 1:
-                    testing = (sqrt_min + sqrt_max) // 2
-                    if testing * testing > delta:
-                        sqrt_max = testing
-                    elif testing * testing < delta:
-                        sqrt_min = testing
-                    else:
-                        sqrt_min = sqrt_max = testing
-                while sqrt_min < sqrt_max and sqrt_min * sqrt_min < delta:
-                    sqrt_min += 1
-                if sqrt_min * sqrt_min != delta:
-                    # This may happen when the order has not been simplified enough
+                try:
+                    p, q = get_primes_from_nsum(n, sum_p_q)
+                except ValueError:
                     if verbose:
                         print("* ... Unable to find a square root for the discriminant of the polynom")
-                        continue
+                    continue
 
-                p = (sum_p_q - sqrt_min) // 2
-                q = (sum_p_q + sqrt_min) // 2
                 if verbose:
                     print("* Found p({}): {:#x}".format(p.bit_length(), p))
                     print("* Found q({}): {:#x}".format(q.bit_length(), q))
