@@ -193,6 +193,7 @@ pkg acpi
 pkg acpica
 pkg bluez
 pkg bluez-utils
+pkg crda
 pkg dmidecode
 pkg efibootmgr
 pkg fwupd

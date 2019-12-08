@@ -120,6 +120,8 @@ pkg vim-enhanced
 pkg zsh
 
 # Hardware and TTY
+pkg crda
+pkg fwupd
 pkg gpm
 pkg kbd
 pkg iw

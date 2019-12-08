@@ -129,6 +129,8 @@ pkg zsh
 # Hardware and TTY
 pkg acpica-tools
 pkg console-data
+pkg crda
+pkg fwupd
 pkg gpm
 pkg iw
 pkg lm-sensors
