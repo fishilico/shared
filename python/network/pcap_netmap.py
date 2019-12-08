@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding:UTF-8 -*-
 # Copyright (c) 2019 Nicolas Iooss
 #
@@ -156,11 +156,22 @@ def get_mac_manuf_desc(mac_addr, default='?'):
     return manufacturer[1] or manufacturer[0]
 
 
+class GraphvizSafeLabel(str):
+    @classmethod
+    def escape(cls, value):
+        return cls((repr(value) if any(ord(c) < 32 for c in value) else value)
+                   .replace('\\', '\\\\')
+                   .replace('{', '\\{')
+                   .replace('}', '\\}')
+                   .replace('<', '\\<')
+                   .replace('>', '\\>')
+                   .replace('"', '\\"')
+                   .replace("'", "\\'"))
+
+
 def graphviz_records(records):
     """Escape record label according to https://www.graphviz.org/doc/info/shapes.html#record"""
-    return ' | '.join(
-        r.replace('\\', '\\\\').replace('{', '\\{').replace('}', '\\}').replace('<', '\\<').replace('>', '\\>')
-        for r in records)
+    return GraphvizSafeLabel(' | '.join(GraphvizSafeLabel.escape(r) for r in records))
 
 
 class Graph(object):
@@ -177,7 +188,7 @@ class Graph(object):
         full_key = '{}_{}'.format(node_type, base_key)
         if full_key not in self.nodes:
             if value is None:
-                value = base_key
+                value = GraphvizSafeLabel.escape(base_key)
             self.nodes[full_key] = (node_type, value)
         elif value is not None and self.nodes[full_key] != (node_type, value):
             logger.warning("Graph node %r has two values: %r and %r",
@@ -237,10 +248,10 @@ class Graph(object):
         for key, type_value in sorted(self.nodes.items()):
             node_type, value = type_value
             color = GRAPH_COLORS.get(node_type)
-            if any(ord(c) < 32 for c in value):
-                # Escape values
-                value = repr(value)
-            value = value.replace('\\', '\\\\').replace('"', '\\"')
+            if not isinstance(value, GraphvizSafeLabel):
+                logger.error("A label has been added without passing through the sanitizer: (%r, %r, %r)",
+                             key, node_type, value)
+                continue
             stream.write('    "{}" [label="{}"'.format(key, value))
             if color is not None:
                 stream.write(',fillcolor="{}"'.format(color))
@@ -565,7 +576,7 @@ class IpNetworkDatabase(object):
         """Populate the given graph with information"""
         for net_cidr, net_obj in itertools.chain(self.ipv4_networks.items(), self.ipv6_networks.items()):
             name = self.network_names.get(net_cidr, '')
-            desc = '{} ({})'.format(net_cidr, name) if name else net_cidr
+            desc = GraphvizSafeLabel.escape('{} ({})'.format(net_cidr, name) if name else net_cidr)
             graph.add_ip_network(net_obj, desc)
 
 
