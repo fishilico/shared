@@ -55,7 +55,7 @@ import Crypto.Signature.PKCS1_PSS
 import Crypto.Signature.PKCS1_v1_5
 
 try:
-    import gmpy2.mpz
+    import gmpy2
     HAVE_GMPY2 = True
 except ImportError:
     HAVE_GMPY2 = False
@@ -82,7 +82,7 @@ def extended_gcd(aa, bb):
     how inefficient an Euclidean division is and how to avoid it.
 
     In Python, it would be counter-productive to implement the same algorithm as
-    libTomMath. Instead, advertise for native implementations such as gmpy2.mpz.invert
+    libTomMath. Instead, advertise for native implementations such as gmpy2.invert
     (https://gmpy2.readthedocs.io/en/latest/mpz.html#mpz-functions).
     """
     lastremainder, remainder = abs(aa), abs(bb)
@@ -106,7 +106,7 @@ def modinv(a, m):
     x %= m
     if HAVE_GMPY2:
         # Ensure that the algorithm is correct
-        assert x == gmpy2.mpz.invert(a, m)
+        assert x == gmpy2.invert(a, m)
     return x
 
 
