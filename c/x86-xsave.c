@@ -123,9 +123,9 @@ __extension__ static struct xstate_metadata xstate_desc[65] = {
     [2] = {"AVX YMM (Advanced Vector Extension)", 0, 256},
     [3] = {"MPX BNDREGS (Memory Protection Extension Bound Registers)", 0, 64},
     [4] = {"MPX BNDCSR (Memory Protection Extension CSR)", 0, 64},
-    [5] = {"AVX-512 opmask (k0-k7 registers)", 0, 0},
-    [6] = {"AVX-512 ZMM_Hi256 (upper 256 bits of ZMM0-ZMM15)", 0, 0},
-    [7] = {"AVX-512 Hi_ZMM256 (ZMM16-ZMM31)", 0, 0},
+    [5] = {"AVX-512 opmask (k0-k7 registers)", 0, 64},
+    [6] = {"AVX-512 ZMM_Hi256 (upper 256 bits of ZMM0-ZMM15)", 0, 512},
+    [7] = {"AVX-512 Hi_ZMM256 (ZMM16-ZMM31)", 0, 1024},
     [8] = {"PT (Intel Processor Trace MSRs)", 0, 0},
     [9] = {"PKRU (Protection Keys Rights for User Pages)", 0, 0},
 };
@@ -177,7 +177,7 @@ static void xsave(void *dest, uint64_t mask)
 
 static void hexdump_both(const uint8_t *data1, const uint8_t *data2, unsigned int size)
 {
-    unsigned int i, j, idx;
+    unsigned int i, j, idx, bit_offset;
     bool is_empty;
     uint8_t d1, d2;
     uint32_t xstate_offset, xstate_relative, xstate_size;
@@ -253,21 +253,44 @@ static void hexdump_both(const uint8_t *data1, const uint8_t *data2, unsigned in
                         printf("  (XSTATE header reserved)");
                     }
                     is_empty = false;
-                } else if (j == 2) {
+                } else if (j == 2 && xstate_offset > 0) {
                     printf("  YMM%u[255:128]", xstate_relative >> 4);
                     is_empty = false;
-                } else if (j == 3) {
+                } else if (j == 3 && xstate_offset > 0) {
                     idx = xstate_relative >> 4;
                     printf("  MPX BNDREG%u_lower, BNDREG%u_upper", idx, idx);
                     is_empty = false;
-                } else if (j == 4) {
+                } else if (j == 4 && xstate_offset > 0) {
                     if (xstate_relative == 0) {
                         printf("  MPX BNDCFGU, BNDSTATUS");
                     } else {
                         printf("  (MPX BNDCSR padding)");
                     }
                     is_empty = false;
-                } else {
+                } else if (j == 5 && xstate_offset > 0) {
+                    if (xstate_relative == 0) {
+                        printf("  AVX-512 opmask (registers k0, k1)");
+                    } else if (xstate_relative == 0x10) {
+                        printf("  AVX-512 opmask (registers k2, k3)");
+                    } else if (xstate_relative == 0x20) {
+                        printf("  AVX-512 opmask (registers k4, k5)");
+                    } else if (xstate_relative == 0x30) {
+                        printf("  AVX-512 opmask (registers k6, k7)");
+                    } else {
+                        printf("  (unexpected AVX-512 opmask padding)");
+                    }
+                    is_empty = false;
+                } else if (j == 6 && xstate_offset > 0) {
+                    idx = xstate_relative >> 5;
+                    bit_offset = 128 * ((xstate_relative >> 4) & 1) + 256;
+                    printf("  AVX-512 ZMM%u[%u:%u]", idx, bit_offset + 127, bit_offset);
+                    is_empty = false;
+                } else if (j == 7 && xstate_offset > 0) {
+                    idx = (xstate_relative >> 6) + 16;
+                    bit_offset = 128 * ((xstate_relative >> 4) & 3);
+                    printf("  AVX-512 ZMM%u[%u:%u]", idx, bit_offset + 127, bit_offset);
+                    is_empty = false;
+                } else if (xstate_offset > 0) {
                     /* TODO add more data structures when the program is tested on compatible hardware */
                     printf("  (data for XCR0 bit %u)", j);
                 }
