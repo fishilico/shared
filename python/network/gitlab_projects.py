@@ -117,7 +117,7 @@ def main(argv=None):
 
     if args.json_out:
         with args.json_out.open('w') as fout:
-            json.dump(projects, fout)
+            json.dump(projects, fout, indent=2)
         logger.info("Project list saved to %r", str(args.json_out))
 
     retval = 0

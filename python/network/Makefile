@@ -1,6 +1,6 @@
 include ../../env-python.mk
 
-NEVER_TEST_BINARIES := gitlab_projects.py pcap_netmap.py resolve_domains.py web_api.py
+NEVER_TEST_BINARIES := github_repos.py gitlab_projects.py pcap_netmap.py resolve_domains.py web_api.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
 HAVE_PYTHON_SOCKET_RECVMSG := $(call can-run,$(PYTHON) -c 'import socket;socket.socket.recvmsg')
