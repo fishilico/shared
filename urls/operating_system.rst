@@ -77,3 +77,5 @@ Other
   Microsoft Malware Encyclopedia
 * http://seclists.org/fulldisclosure/
   Full Disclosure Mailing List
+* https://blogs.gnome.org/hughsie/2019/11/18/google-and-fwupd/
+  Google and fwupd sitting in a tree

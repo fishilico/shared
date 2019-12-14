@@ -212,6 +212,14 @@ Packaging
 * http://clang.debian.net/ Rebuild Debian packages with clang (https://wiki.debian.org/llvm-clang)
 * https://reproducible.debian.net/archlinux/archlinux.html Arch Linux Reproducible builds
 
+Graphic User Interface Design
+-----------------------------
+
+* https://github.com/ocornut/imgui
+  Dear ImGui: Bloat-free Immediate Mode Graphical User interface for C++ with minimal dependencies
+* https://www.anishathalye.com/2019/12/12/constraint-based-graphic-design/
+  Experiments in Constraint-based Graphic Design: Basalt
+
 Internet
 --------
 
@@ -277,6 +285,10 @@ Internet
     - https://lgtm.com/ Semmle's LGTM Continuous security analysis  (online; C, C++, C#, COBOL, Java, JavaScript, Python)
     - https://scan.coverity.com/ Coverity Scan Static Analysis (online; Java, C/C++, C#, JavaScript, Ruby, Python)
     - https://fbinfer.com/ Facebook's infer (Java, C, C++, Objective-C)
+    - https://clang-analyzer.llvm.org/ Clang Static Analyzer (C, C++, and Objective-C)
+    - http://smatch.sourceforge.net/ Smatch (C)
+    - http://coccinelle.lip6.fr/ Coccinelle: A Program Matching and Transformation Tool for Systems Code (C)
+
 
 Hardware products
 -----------------
