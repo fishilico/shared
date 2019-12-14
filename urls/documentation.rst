@@ -204,9 +204,9 @@ Packaging
 
 * Debian packaging with Git:
 
-    - https://wiki.debian.org/PackagingWithGit
-    - http://www.eyrie.org/~eagle/notes/debian/git.html
-    - http://www.debian.org/devel/#packaging
+  - https://wiki.debian.org/PackagingWithGit
+  - http://www.eyrie.org/~eagle/notes/debian/git.html
+  - http://www.debian.org/devel/#packaging
 
 * https://release.debian.org/ Debian releases schedule
 * http://clang.debian.net/ Rebuild Debian packages with clang (https://wiki.debian.org/llvm-clang)
@@ -225,33 +225,33 @@ Internet
 
 * SSL/TLS:
 
-    - https://istlsfastyet.com/ Is TLS Fast Yet
-    - https://www.ssllabs.com/ssltest/ Qualys SSL Labs server test
-    - https://testssl.sh/ , https://github.com/drwetter/testssl.sh
-      Testing TLS/SSL encryption (local bash script)
-    - https://github.com/ioerror/duraconf
-      A collection of hardened configuration files for SSL/TLS services
-    - https://observatory.mozilla.org/
-    - https://www.google.com/transparencyreport/https/ct/
-      Certificate Transparency query interface
-    - https://letsencrypt.org/
-      Let's Encrypt - free, automated, and open Certificate Authority
-    - https://alwaysonssl.com/
-      AlwaysOnSSL - free, and automated Certification Authority
-    - https://github.com/FiloSottile/mkcert
-      Create a TLS certificate for Localhost
+  - https://istlsfastyet.com/ Is TLS Fast Yet
+  - https://www.ssllabs.com/ssltest/ Qualys SSL Labs server test
+  - https://testssl.sh/ , https://github.com/drwetter/testssl.sh
+    Testing TLS/SSL encryption (local bash script)
+  - https://github.com/ioerror/duraconf
+    A collection of hardened configuration files for SSL/TLS services
+  - https://observatory.mozilla.org/
+  - https://www.google.com/transparencyreport/https/ct/
+    Certificate Transparency query interface
+  - https://letsencrypt.org/
+    Let's Encrypt - free, automated, and open Certificate Authority
+  - https://alwaysonssl.com/
+    AlwaysOnSSL - free, and automated Certification Authority
+  - https://github.com/FiloSottile/mkcert
+    Create a TLS certificate for Localhost
 
 * Maps:
 
-    - https://xkcd.com/195/ and http://xkcdsw.com/content/img/3327.jpg
-      Map of the Internet (IPv4, 2006 and 2011)
-    - http://media.economist.com/sites/default/files/cf_images/images-magazine/2012/12/01/FB/20121201_FBD000.png
-      Map of the Realms of GAFA (The Economist, 2012)
-    - http://submarine-cable-map-2014.telegeography.com/
-      Map of Submarine Internet cables 2014
-    - https://submarine-cable-map-2018.telegeography.com/
-      Map of Submarine Internet cables 2018
-    - https://openinframap.org/ Map of power infrastructures
+  - https://xkcd.com/195/ and http://xkcdsw.com/content/img/3327.jpg
+    Map of the Internet (IPv4, 2006 and 2011)
+  - http://media.economist.com/sites/default/files/cf_images/images-magazine/2012/12/01/FB/20121201_FBD000.png
+    Map of the Realms of GAFA (The Economist, 2012)
+  - http://submarine-cable-map-2014.telegeography.com/
+    Map of Submarine Internet cables 2014
+  - https://submarine-cable-map-2018.telegeography.com/
+    Map of Submarine Internet cables 2018
+  - https://openinframap.org/ Map of power infrastructures
 
 * http://www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-entirely-text-based-linux-environment
   Install Dropbox In An Entirely Text-Based Linux Environment
@@ -269,25 +269,25 @@ Internet
 
 * Free Web development reverse proxies:
 
-    - https://ngrok.com/ ngrok, public URLs (domain https://example.ngrok.io)
-    - https://www.heroku.com/ Heroku Cloud Application Platform (domain http://example.herokuap.com), and can be linked with Dropbox sync
-    - https://www.openshift.com/products/online/ Red Hat OpenShift Online (Free with renewal every 60 days)
-    - https://aws.amazon.com/free/ Amazon Web Service Free Tier - one Amazon Elastic Compute Cloud (EC2) Micro Instance free for one year
+  - https://ngrok.com/ ngrok, public URLs (domain https://example.ngrok.io)
+  - https://www.heroku.com/ Heroku Cloud Application Platform (domain http://example.herokuap.com), and can be linked with Dropbox sync
+  - https://www.openshift.com/products/online/ Red Hat OpenShift Online (Free with renewal every 60 days)
+  - https://aws.amazon.com/free/ Amazon Web Service Free Tier - one Amazon Elastic Compute Cloud (EC2) Micro Instance free for one year
 
 * Free Continuous Integration (CI) systems for Open-Source projects:
 
-    - https://travis-ci.org/ Travis CI, Test and Deploy with Confidence
-    - https://circleci.com/ Circle CI, Continuous Integration and Delivery
-    - https://www.appveyor.com/ Appveyor, CI solution for Windows and Linux
+  - https://travis-ci.org/ Travis CI, Test and Deploy with Confidence
+  - https://circleci.com/ Circle CI, Continuous Integration and Delivery
+  - https://www.appveyor.com/ Appveyor, CI solution for Windows and Linux
 
 * Free Static Analysis tools for Open-Source projects:
 
-    - https://lgtm.com/ Semmle's LGTM Continuous security analysis  (online; C, C++, C#, COBOL, Java, JavaScript, Python)
-    - https://scan.coverity.com/ Coverity Scan Static Analysis (online; Java, C/C++, C#, JavaScript, Ruby, Python)
-    - https://fbinfer.com/ Facebook's infer (Java, C, C++, Objective-C)
-    - https://clang-analyzer.llvm.org/ Clang Static Analyzer (C, C++, and Objective-C)
-    - http://smatch.sourceforge.net/ Smatch (C)
-    - http://coccinelle.lip6.fr/ Coccinelle: A Program Matching and Transformation Tool for Systems Code (C)
+  - https://lgtm.com/ Semmle's LGTM Continuous security analysis  (online; C, C++, C#, COBOL, Java, JavaScript, Python)
+  - https://scan.coverity.com/ Coverity Scan Static Analysis (online; Java, C/C++, C#, JavaScript, Ruby, Python)
+  - https://fbinfer.com/ Facebook's infer (Java, C, C++, Objective-C)
+  - https://clang-analyzer.llvm.org/ Clang Static Analyzer (C, C++, and Objective-C)
+  - http://smatch.sourceforge.net/ Smatch (C)
+  - http://coccinelle.lip6.fr/ Coccinelle: A Program Matching and Transformation Tool for Systems Code (C)
 
 
 Hardware products
