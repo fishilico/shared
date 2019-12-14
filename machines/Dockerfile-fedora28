@@ -63,6 +63,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex%
 #    In sub-directories:
 #       c:
+#       glossaries:
 #       java/keystore:
 #       linux:
 #       python:
@@ -76,6 +77,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex%
 #       In sub-directories:
 #          c: gtk_alpha_window openmp_matrix
+#          glossaries:
 #          java/keystore:
 #          linux: pulseaudio_echo sdl_v4l_video
 #          python:

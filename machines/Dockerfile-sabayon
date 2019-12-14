@@ -75,6 +75,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex% windows%
 #    In sub-directories:
 #       c:
+#       glossaries:
 #       java/keystore:
 #       linux:
 #       python: z3_example.py
@@ -88,6 +89,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex% windows%
 #       In sub-directories:
 #          c: gtk_alpha_window
+#          glossaries:
 #          java/keystore:
 #          linux: enum_link_addrs
 #          python: z3_example.py

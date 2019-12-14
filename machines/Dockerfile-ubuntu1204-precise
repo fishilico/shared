@@ -42,6 +42,7 @@ CMD ["/run_shared_test.sh"]
 #    Global blacklist: latex% rust%
 #    In sub-directories:
 #       c:
+#       glossaries: check_sort_order.py
 #       java/keystore: parse_jceks.py parse_pkcs12.py util_asn1.py
 #       linux: enum_link_addrs sdl_v4l_video
 #       python: cffi_example.py cffi_numpy.py z3_example.py
@@ -54,6 +55,7 @@ CMD ["/run_shared_test.sh"]
 #       Global blacklist: latex% rust%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
+#          glossaries: check_sort_order.py
 #          java/keystore: parse_jceks.py parse_pkcs12.py util_asn1.py
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
 #          python: cffi_example.py cffi_numpy.py z3_example.py
