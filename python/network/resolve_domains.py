@@ -270,6 +270,7 @@ WELLKNOWN_PREFIXES = (
     'job',
     'jobs',
     'join',
+    'k1._domainkey',  # Mailchimp DKIM key
     'ldap',
     'ldaps',
     'learn',
@@ -438,6 +439,8 @@ def get_comment_for_domain(domain):
         return 'Gandi mail hosting'
     if domain == 'webredir.vip.gandi.net.':
         return 'Gandi web forwarding hosting'
+    if domain == 'dkim.mcsv.net.':
+        return 'Mailchimp mail sender'
     if domain.endswith('.azurewebsites.net.'):
         return 'Microsoft Azure hosting'
     if domain.endswith('.lync.com.'):
