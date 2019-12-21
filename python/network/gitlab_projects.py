@@ -102,7 +102,7 @@ def main(argv=None):
     parser.add_argument('-s', '--ssh', action='store_true',
                         help="use SSH instead of HTTPS to access the projects")
     parser.add_argument('-u', '--url', type=str, default='https://gitlab.com',
-                        help="base URL of the targetted gitlab instance")
+                        help="base URL of the targeted gitlab instance")
     args = parser.parse_args(argv)
 
     logging.basicConfig(format='[%(levelname)s] %(message)s', level=logging.DEBUG)

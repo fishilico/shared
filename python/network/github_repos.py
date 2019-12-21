@@ -46,7 +46,7 @@ def parse_link_headers(link_header):
     while link_header:
         matches = re.match(r'^<([^>]+)>; rel="([a-z]+)"(?:|, (.*))$', link_header)
         if not matches:
-            logger.error("Unsable to parse Link header: %r", original_link_header)
+            logger.error("Unable to parse Link header: %r", original_link_header)
             raise ValueError("Unable to parse remaining Link header {}".format(repr(link_header)))
         url, rel, link_header = matches.groups()
         obj = urllib.parse.urlparse(url)
@@ -152,7 +152,7 @@ def main(argv=None):
     parser.add_argument('-s', '--ssh', action='store_true',
                         help="use SSH instead of HTTPS to access the repositories")
     parser.add_argument('-u', '--url', type=str, default='https://api.github.com',
-                        help="base URL of the targetted GitHub instance")
+                        help="base URL of the targeted GitHub instance")
     args = parser.parse_args(argv)
 
     logging.basicConfig(format='[%(levelname)s] %(message)s', level=logging.DEBUG)
