@@ -12,7 +12,7 @@ cd '/shared' || exit $?
 # Find installed kernel headers revision
 case "$(sed -n 's/^ID=//p' /etc/os-release /usr/lib/os-release 2>/dev/null | head -n 1)" in
     alpine)
-        KERNELVER="$(apk info --contents linux-grsec-dev linux-hardened-dev linux-vanilla-dev 2>/dev/null |
+        KERNELVER="$(apk info --contents linux-grsec-dev linux-hardened-dev linux-lts-dev linux-vanilla-dev 2>/dev/null |
             sed -n 's:^lib/modules/\([^/]\+\)/.*:\1:p' | head -n 1)"
         ;;
     arch)
