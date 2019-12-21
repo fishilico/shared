@@ -44,6 +44,19 @@
 #define show_cr_bit(cr, crnum, bitname, desc) \
 	show_reg_bit((cr), #bitname, X86_CR##crnum##_##bitname, (desc))
 
+#if defined(CONFIG_X86_64) && LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
+	/* Commit 83b584d9c6a1 ("x86/paravirt: Drop {read,write}_cr8() hooks")
+	 * removed read_cr8() in Linux 5.4
+	 */
+	static inline unsigned long read_cr8(void)
+	{
+		unsigned long cr8;
+
+		asm volatile("movq %%cr8,%0" : "=r" (cr8));
+		return cr8;
+	}
+#endif
+
 /**
  * Output example on x86_64:
  *      cr0 = 0x8005003b
