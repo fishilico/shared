@@ -287,7 +287,7 @@ Otherwise (if :latex:`$n$` is not a prime number), there exists :latex:`$d \in \
 He showed that the finite fields with a prime number of items can be mapped to :latex:`$\Z/n\Z$`, with :latex:`$n$` being this number of items.
 
 As a prime number is usually written :latex:`$p \in \Primes$`, this leads to using :latex:`$\Z/p\Z$` to speak of the finite field with :latex:`$p$` items.
-This field can also be written :latex:`\F{p}` or :latex:`GF($p$)` in the litterature.
+This field can also be written :latex:`\F{p}` or :latex:`GF($p$)` in the literature.
 
 
 Fermat's little theorem
