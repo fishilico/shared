@@ -209,6 +209,7 @@ Low-level computer architecture
 * DMA = Direct Memory Access
     A way for peripherals to read and write data in the main memory (RAM) of a computer.
 
+* EBR = Extended Boot Record (Extended Partition Record)
 * EC = Embedded Controller
 * FLOG = Flash Log (Apple's T2)
 * FPGA = Field-Programmable Gate Array
@@ -224,15 +225,18 @@ Low-level computer architecture
 * KVM = Keyboard-Video-Mouse interface
 * LPC = Low Pin Count bus
 * LUT = Lookup tables
+* MBR = Master Boot Record
 * ME = Management Engine (Intel's)
 * MFS = ME Flash Filesystem
 * MISO = Master In Slave Out (SPI bus)
 * MOSI = Master Out Slave In (SPI bus)
+* MTD = Memory Technology Device
 * NIC = Network Interface Controller
 * PCH = Platform Controller Hub (Intel)
 * PCIe = Peripheral Component Interconnect Express
 * PFAT = Platform Flash Armoring Technology (Intel BIOS Guard)
 * POST = Power-On Self-Test
+* PSP = Platform Specific Package
 * QAT = Quick Assist Technology (Intel)
 * RTL = Register-Transfer Level
 * SAF = Slave Attached Flash (Flash memory attached to the Chipset of some Xeon systems using eSPI bus)
@@ -248,6 +252,16 @@ Low-level computer architecture
 * UEP = Unified Emulation Partition (Apple's T2)
 * UTOK = Debug Unlock Token (Apple's T2)
 * VHDL = VHSIC-HDL = Very High Speed Integrated Circuit Hardware Description Language
+
+
+Filesystems
+-----------
+
+* FAT = File Allocation Table
+* HPFS = High Performance File System
+* LVM = Logical Volume Manager
+* NTFS = New Technology File System
+* UBIFS = Unsorted Block Image File System
 
 
 UEFI-specific words
