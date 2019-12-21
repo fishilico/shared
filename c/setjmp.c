@@ -71,7 +71,7 @@ static const struct known_libc *g_current_libc;
 static uintptr_t glibc_unmangle_value(unsigned long idx, uintptr_t value)
 {
 #if defined(__aarch64__) && defined(sigsetjmp_symbol)
-    uint64_t sigsetjmp_addr, got_addr, p_guard_addr;
+    uint64_t sigsetjmp_addr, got_addr, guard_offset, p_guard_addr;
 
     /* Unmangle pc, sp */
     if (idx == 11 || idx == 13) {
@@ -83,8 +83,15 @@ static uintptr_t glibc_unmangle_value(unsigned long idx, uintptr_t value)
             ((g_current_libc->sigsetjmp_code[0x14] & 0xe0) << (12 + 2 - 5)) +
             (g_current_libc->sigsetjmp_code[0x15] << (12 + 5)) +
             (g_current_libc->sigsetjmp_code[0x16] << (12 + 13));
-        /* f9471042  ldr x2, [x2, #3616] */
-        p_guard_addr = got_addr + 0xe20;
+        /* Decode:
+         *   f9470442  ldr x2, [x2, #3592]
+         *   f9471042  ldr x2, [x2, #3616]
+         * Format: 1xx1 1001 01ii iiii iiii iinn nnnt tttt  -  ldr Rt ADDR_UIMM12
+         * The immediate is multiplied by 8
+         */
+        guard_offset = ((g_current_libc->sigsetjmp_code[0x19] & 0xfc) << (3 - 2)) +
+            ((g_current_libc->sigsetjmp_code[0x1a] & 0x3f) << (3 + 6));
+        p_guard_addr = got_addr + guard_offset;
         value = value ^ **(const uint64_t *const *)p_guard_addr;
     }
 #elif defined(__arm__) && defined(sigsetjmp_symbol)
@@ -290,10 +297,20 @@ static const char *const windows_x86_64_jmp_buf_desc[32] = {
 };
 
 static const struct known_libc libc_database[] = {
-    /* https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/aarch64/setjmp.S;hb=refs/tags/glibc-2.30 */
-    DEFINE_KNOWN_LIBC("Linux", "glibc", "ARM64 (aarch64)",
+    /* https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/aarch64/setjmp.S;hb=refs/tags/glibc-2.30:
+     * * Arch Linux with aarch64-linux-gnu-glibc 2.30
+     */
+    DEFINE_KNOWN_LIBC("Linux", "glibc (guard loader f0000942;f9471042)", "ARM64 (aarch64)",
         "!\0\x80\xd2\x07\0\0\x14",
         "\x13P\0\xa9\x15X\x01\xa9\x17`\x02\xa9\x19h\x03\xa9\x1bp\x04\xa9\x42\t\0\xf0\x42\x10G\xf9\x43\0@\xf9\xc4\x03\x03\xca\x1d\x10\x05\xa9\x08$\x07m\n,\x08m\x0c\x34\tm\x0e<\nm\xe4\x03\0\x91\x42\t\0\xf0\x42\x10G\xf9\x43\0@\xf9\x85\0\x03\xca\x05\x34\0\xf9",
+        linux_glibc_aarch64_sigjmp_buf_desc, linux_glibc_aarch64_sigjmp_buf_desc,
+        glibc_unmangle_value, glibc_unmangle_value),
+    /* This has been seen on:
+     * * Debian 10 with libc6:arm64 2.28-10
+     */
+    DEFINE_KNOWN_LIBC("Linux", "glibc (guard loader b00009c2;f9470442)", "ARM64 (aarch64)",
+        "!\0\x80\xd2\x07\0\0\x14",
+        "\x13P\0\xa9\x15X\x01\xa9\x17`\x02\xa9\x19h\x03\xa9\x1bp\x04\xa9\xc2\t\0\xb0\x42\x04G\xf9\x43\0@\xf9\xc4\x03\x03\xca\x1d\x10\x05\xa9\x08$\x07m\n,\x08m\x0c\x34\tm\x0e<\nm\xe4\x03\0\x91\xc2\t\0\xb0\x42\x04G\xf9\x43\0@\xf9\x85\0\x03\xca\x05\x34\0\xf9",
         linux_glibc_aarch64_sigjmp_buf_desc, linux_glibc_aarch64_sigjmp_buf_desc,
         glibc_unmangle_value, glibc_unmangle_value),
 
