@@ -1,7 +1,7 @@
 include ../../env-python.mk
 
 # Programs not to test automatically
-NEVER_TEST_BINARIES := find_rsa_pkcs1v15_modulus.py
+NEVER_TEST_BINARIES := find_rsa_pkcs1v15_modulus.py keepass_decode.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
 HAVE_PYTHON_CRYPTO := $(call can-run,$(PYTHON) -c 'import Crypto')
