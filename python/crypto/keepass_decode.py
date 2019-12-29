@@ -399,7 +399,7 @@ class KeePassDB:
             offset += block_size
 
             if hashlib.sha256(block_data).digest() != block_hash:
-                raise ValueError("Mismatched block digest")
+                raise ValueError("Mismatched block digest for block {}".format(block_id))
             all_blocks.append(block_data)
 
         data = b''.join(all_blocks)
