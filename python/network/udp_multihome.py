@@ -110,13 +110,13 @@ def main(argv=None):
         try:
             skserver.setsockopt(socket.SOL_SOCKET, socket.SO_BINDTODEVICE, b'lo\0')
         except PermissionError as exc:
-            logger.warn("Unable to bind to loopback interface: {}".format(exc))
+            logger.warning("Unable to bind to loopback interface: %s", exc)
 
     ainfos = socket.getaddrinfo(listenaddr, port, af, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     skserver.bind(ainfos[0][4])
 
     if args.wait:
-        logger.info("Waiting for a connection on UDP port {}.".format(port))
+        logger.info("Waiting for a connection on UDP port %d.", port)
     else:
         # Create a client socket, which uses IPv4-in-IPv6 if enabled
         clientaf = socket.AF_INET if not args.ipv6 else socket.AF_INET6
@@ -141,7 +141,7 @@ def main(argv=None):
             dst_addr = socket.inet_ntop(socket.AF_INET6, cmsg_data[:16])
             ifindex = struct.unpack('I', cmsg_data[16:20])[0]
         else:
-            logger.warning("Unknown anciliary data: {}, {}, {}".format(cmsg_level, cmsg_type, cmsg_data))
+            logger.warning("Unknown anciliary data: %s, %s, %r", cmsg_level, cmsg_type, cmsg_data)
         # TODO: decode IP_RECVDSTADDR/IPV6_RECVDSTADDR
     text = "Received UDP packet from {0[0]} port {0[1]}".format(clientaddrport)
     if dst_addr is not None:
