@@ -1,0 +1,291 @@
+$ proxmark3 --help
+
+syntax: proxmark3 [-h|-t|-m]
+        proxmark3 [[-p] <port>] [-b] [-w] [-f] [-c <command>]|[-l <lua_script_file>]|[-s <cmd_script_file>] [-i] [-d <0|1|2>]
+        proxmark3 [-p] <port> --flash [--unlock-bootloader] [--image <imagefile>]+ [-w] [-f] [-d <0|1|2>]
+
+Common options:
+      -h/--help                           this help
+      -v/--version                        print client version
+      -p/--port                           serial port to connect to
+      -w/--wait                           20sec waiting the serial port to appear in the OS
+      -f/--flush                          output will be flushed after every print
+      -d/--debug <0|1|2>                  set debugmode
+
+Options in client mode:
+      -t/--text                           dump all interactive command's help at once
+      -m/--markdown                       dump all interactive help at once in markdown syntax
+      -b/--baud                           serial port speed (only needed for physical UART, not for USB-CDC or BT)
+      -c/--command <command>              execute one Proxmark3 command (or several separated by ';').
+      -l/--lua <lua script file>          execute lua script.
+      -s/--script-file <cmd_script_file>  script file with one Proxmark3 command per line
+      -i/--interactive                    enter interactive mode after executing the script or the command
+
+Options in flasher mode:
+      --flash                             flash Proxmark3, requires at least one --image
+      --unlock-bootloader                 Enable flashing of bootloader area *DANGEROUS* (need --flash or --flash-info)
+      --image <imagefile>                 image to flash. Can be specified several times.
+
+Examples:
+
+  to run Proxmark3 client:
+
+      proxmark3 /dev/ttyACM0                       -- runs the pm3 client
+      proxmark3 /dev/ttyACM0 -f                    -- flush output every time
+      proxmark3 /dev/ttyACM0 -w                    -- wait for serial port
+      proxmark3                                    -- runs the pm3 client in OFFLINE mode
+
+  to execute different commands from terminal:
+
+      proxmark3 /dev/ttyACM0 -c "hf mf chk 1* ?"   -- execute cmd and quit client
+      proxmark3 /dev/ttyACM0 -l hf_read            -- execute lua script `hf_read` and quit client
+      proxmark3 /dev/ttyACM0 -s mycmds.txt         -- execute each pm3 cmd in file and quit client
+
+  to flash fullimage and bootloader:
+
+      proxmark3 /dev/ttyACM0 --flash --unlock-bootloader --image bootrom.elf --image fullimage.elf
+
+Note (Linux):
+if the flasher gets stuck in 'Waiting for Proxmark3 to reappear on <DEVICE>',
+you need to blacklist Proxmark3 for modem-manager - see documentation for more details:
+* https://github.com/RfidResearchGroup/proxmark3/blob/master/doc/md/Installation_Instructions/ModemManager-Must-Be-Discarded.md
+
+More info on flashing procedure from the official Proxmark3 wiki:
+* https://github.com/Proxmark/proxmark3/wiki/Gentoo%20Linux
+* https://github.com/Proxmark/proxmark3/wiki/Ubuntu%20Linux
+* https://github.com/Proxmark/proxmark3/wiki/OSX
+
+$ proxmark3 /dev/ttyACM0 --flash --image armsrc/obj/fullimage.elf
+[=] Session log /home/me/.proxmark3/log_20191115.txt
+[+] About to use the following file:
+[+]     armsrc/obj/fullimage.elf
+[+] Waiting for Proxmark3 to appear on /dev/ttyACM0
+.Found
+[+] Entering bootloader...
+[+] (Press and release the button only to abort )
+[+] Waiting for Proxmark3 to appear on /dev/ttyACM0
+........... Found
+[!!] ====================== OBS ! ===========================================
+[!!] Note: Your bootloader does not understand the new CMD_BL_VERSION command
+[!!] It is recommended that you first update your bootloader alone,
+[!!] reboot the Proxmark3 then only update the main firmware
+
+[=] Available memory on this board: UNKNOWN
+
+[!!] ====================== OBS ! ======================================
+[!!] Note: Your bootloader does not understand the new CHIP_INFO command
+[!!] It is recommended that you first update your bootloader alone,
+[!!] reboot the Proxmark3 then only update the main firmware
+
+[=] Permitted flash range: 0x00102000-0x00140000
+[+] Loading ELF file armsrc/obj/fullimage.elf
+[+] Loading usable ELF segments:
+[+]    0 : V 0x00102000 P 0x00102000 (0x00037d98->0x00037d98) [R X] @0x94
+[+]    1 : V 0x00200000 P 0x00139d98 (0x00001474->0x00001474) [RW ] @0x37e2c
+[=] Note: Extending previous segment from 0x37d98 to 0x3920c bytes
+
+
+[+] Flashing...
+
+[+] Writing segments for file: armsrc/obj/fullimage.elf
+[+]  0x00102000..0x0013b20b [0x3920c / 458 blocks]
+.......................................................................................................................................................................................................................................................................................................................................................................................................................................................................... OK
+
+
+[+] All done.
+
+Have a nice day!
+
+$ proxmark3 /dev/ttyACM0 --flash --unlock-bootloader --image bootrom/obj/bootrom.elf
+[=] Session log /home/me/.proxmark3/log_20191115.txt
+[+] About to use the following file:
+[+]     bootrom/obj/bootrom.elf
+[+] Waiting for Proxmark3 to appear on /dev/ttyACM0
+.Found
+[+] Entering bootloader...
+[+] (Press and release the button only to abort )
+[+] Waiting for Proxmark3 to appear on /dev/ttyACM0
+........... Found
+[!!] ====================== OBS ! ===========================================
+[!!] Note: Your bootloader does not understand the new CMD_BL_VERSION command
+[!!] It is recommended that you first update your bootloader alone,
+[!!] reboot the Proxmark3 then only update the main firmware
+
+[=] Available memory on this board: UNKNOWN
+
+[!!] ====================== OBS ! ======================================
+[!!] Note: Your bootloader does not understand the new CHIP_INFO command
+[!!] It is recommended that you first update your bootloader alone,
+[!!] reboot the Proxmark3 then only update the main firmware
+
+[=] Permitted flash range: 0x00100000-0x00140000
+[+] Loading ELF file bootrom/obj/bootrom.elf
+[+] Loading usable ELF segments:
+[+]    0 : V 0x00100000 P 0x00100000 (0x00000200->0x00000200) [R X] @0x94
+[+]    1 : V 0x00200000 P 0x00100200 (0x00000e28->0x00000e28) [R X] @0x298
+
+
+[+] Flashing...
+
+[+] Writing segments for file: bootrom/obj/bootrom.elf
+[+]  0x00100000..0x001001ff [0x200 / 1 blocks]
+. OK
+[+]  0x00100200..0x00101027 [0xe28 / 8 blocks]
+........ OK
+
+
+[+] All done.
+
+Have a nice day!
+
+$ proxmark3 /dev/ttyACM0 --flash --image armsrc/obj/fullimage.elf
+[=] Session log /home/me/.proxmark3/log_20191115.txt
+[+] About to use the following file:
+[+]     armsrc/obj/fullimage.elf
+[+] Waiting for Proxmark3 to appear on /dev/ttyACM0
+.Found
+[+] Entering bootloader...
+[+] (Press and release the button only to abort )
+[+] Waiting for Proxmark3 to appear on /dev/ttyACM0
+........... Found
+[=] Available memory on this board: 512K bytes
+
+[=] Permitted flash range: 0x00102000-0x00180000
+[+] Loading ELF file armsrc/obj/fullimage.elf
+[+] Loading usable ELF segments:
+[+]    0 : V 0x00102000 P 0x00102000 (0x00037d98->0x00037d98) [R X] @0x94
+[+]    1 : V 0x00200000 P 0x00139d98 (0x00001474->0x00001474) [RW ] @0x37e2c
+[=] Note: Extending previous segment from 0x37d98 to 0x3920c bytes
+
+
+[+] Flashing...
+
+[+] Writing segments for file: armsrc/obj/fullimage.elf
+[+]  0x00102000..0x0013b20b [0x3920c / 458 blocks]
+.......................................................................................................................................................................................................................................................................................................................................................................................................................................................................... OK
+
+
+[+] All done.
+
+Have a nice day!
+
+$ pm3
+[=] Waiting for Proxmark3 to appear...
+
+
+██████╗ ███╗   ███╗ ████╗      ...iceman fork
+██╔══██╗████╗ ████║   ══█║       ...dedicated to RDV40
+██████╔╝██╔████╔██║ ████╔╝
+██╔═══╝ ██║╚██╔╝██║   ══█║     iceman@icesql.net
+██║     ██║ ╚═╝ ██║ ████╔╝    https://github.com/rfidresearchgroup/proxmark3/
+╚═╝     ╚═╝     ╚═╝ ╚═══╝  pre-release v4.0
+
+Support iceman on patreon - https://www.patreon.com/iceman1001/
+                 on paypal - https://www.paypal.me/iceman1001
+
+
+[=] Session log /home/me/.proxmark3/log_20191115.txt
+[=] Using UART port /dev/ttyACM0
+[=] Communicating with PM3 over USB-CDC
+
+ [ Proxmark3 RFID instrument ]
+
+
+ [ CLIENT ]
+  client: RRG/Iceman
+  compiled with GCC 9.2.0 OS:Linux ARCH:x86_64
+
+ [ PROXMARK3 ]
+
+ [ ARM ]
+  bootrom: RRG/Iceman/master/e0d4e69cb9c2 2019-11-15 19:14:24
+       os: RRG/Iceman/master/e0d4e69cb9c2 2019-11-15 19:14:34
+  compiled with GCC 9.2.0
+
+ [ FPGA ]
+  LF image built for 2s30vq100 on 2019-07-31 at 15:57:16
+  HF image built for 2s30vq100 on 2018-09-03 at 21:40:23
+
+ [ Hardware ]
+  --= uC: AT91SAM7S512 Rev B
+  --= Embedded Processor: ARM7TDMI
+  --= Nonvolatile Program Memory Size: 512K bytes, Used: 242185 bytes (46%) Free: 282103 bytes (54%)
+  --= Second Nonvolatile Program Memory Size: None
+  --= Internal SRAM Size: 64K bytes
+  --= Architecture Identifier: AT91SAM7Sxx Series
+  --= Nonvolatile Program Memory Type: Embedded Flash Memory
+
+
+[usb] pm3 -->
+
+$ dmesg
+
+19:17:14 test kernel: usb 1-2: new full-speed USB device number 6 using xhci_hcd
+19:17:15 test kernel: usb 1-2: device descriptor read/64, error -71
+19:17:20 test kernel: usb 1-2: New USB device found, idVendor=2d2d, idProduct=504d, bcdDevice= 0.01
+19:17:20 test kernel: usb 1-2: New USB device strings: Mfr=1, Product=0, SerialNumber=0
+19:17:20 test kernel: usb 1-2: Manufacturer: proxmark.org
+19:17:20 test kernel: cdc_acm 1-2:1.0: ttyACM0: USB ACM device
+19:17:20 test kernel: usbcore: registered new interface driver cdc_acm
+19:17:20 test kernel: cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+
+19:22:56 test kernel: usb 1-2: USB disconnect, device number 6
+19:22:56 test systemd-udevd[4717]: 1-2: Failed to process device, ignoring: No such file or directory
+19:22:59 test kernel: usb 1-2: new full-speed USB device number 7 using xhci_hcd
+19:23:04 test kernel: usb 1-2: New USB device found, idVendor=2d2d, idProduct=504d, bcdDevice= 0.01
+19:23:04 test kernel: usb 1-2: New USB device strings: Mfr=1, Product=0, SerialNumber=0
+19:23:04 test kernel: usb 1-2: Manufacturer: proxmark.org
+19:23:04 test kernel: cdc_acm 1-2:1.0: ttyACM0: USB ACM device
+
+19:29:14 test kernel: usb 1-2: USB disconnect, device number 7
+19:29:14 test systemd-udevd[17904]: 1-2: Failed to process device, ignoring: No such file or directory
+19:29:15 test kernel: usb 1-2: new full-speed USB device number 8 using xhci_hcd
+19:29:20 test kernel: usb 1-2: New USB device found, idVendor=2d2d, idProduct=504d, bcdDevice= 0.01
+19:29:20 test kernel: usb 1-2: New USB device strings: Mfr=1, Product=0, SerialNumber=0
+19:29:20 test kernel: usb 1-2: Manufacturer: proxmark.org
+19:29:20 test kernel: cdc_acm 1-2:1.0: ttyACM0: USB ACM device
+19:29:31 test kernel: usb 1-2: USB disconnect, device number 8
+19:29:31 test systemd-udevd[17942]: 1-2: Failed to process device, ignoring: No such file or directory
+19:29:32 test kernel: usb 1-2: new full-speed USB device number 9 using xhci_hcd
+19:29:33 test kernel: usb 1-2: New USB device found, idVendor=9ac4, idProduct=4b8f, bcdDevice= 1.00
+19:29:33 test kernel: usb 1-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+19:29:33 test kernel: usb 1-2: Product: proxmark3
+19:29:33 test kernel: usb 1-2: Manufacturer: proxmark.org
+19:29:33 test kernel: usb 1-2: SerialNumber: iceman
+19:29:33 test kernel: cdc_acm 1-2:1.0: ttyACM0: USB ACM device
+19:29:58 test kernel: cdc_acm 1-2:1.0: failed to set dtr/rts
+19:29:58 test kernel: usb 1-2: USB disconnect, device number 9
+19:29:58 test systemd-udevd[17983]: 1-2: Failed to process device, ignoring: No such file or directory
+19:29:59 test kernel: usb 1-2: new full-speed USB device number 10 using xhci_hcd
+19:30:04 test kernel: usb 1-2: New USB device found, idVendor=2d2d, idProduct=504d, bcdDevice= 0.01
+19:30:04 test kernel: usb 1-2: New USB device strings: Mfr=1, Product=0, SerialNumber=0
+19:30:04 test kernel: usb 1-2: Manufacturer: proxmark.org
+19:30:04 test kernel: cdc_acm 1-2:1.0: ttyACM0: USB ACM device
+19:30:05 test kernel: usb 1-2: USB disconnect, device number 10
+19:30:05 test systemd-udevd[17990]: 1-2: Failed to process device, ignoring: No such file or directory
+19:30:07 test kernel: usb 1-2: new full-speed USB device number 11 using xhci_hcd
+19:30:07 test kernel: usb 1-2: New USB device found, idVendor=9ac4, idProduct=4b8f, bcdDevice= 1.00
+19:30:07 test kernel: usb 1-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+19:30:07 test kernel: usb 1-2: Product: proxmark3
+19:30:07 test kernel: usb 1-2: Manufacturer: proxmark.org
+19:30:07 test kernel: usb 1-2: SerialNumber: iceman
+19:30:07 test kernel: cdc_acm 1-2:1.0: ttyACM0: USB ACM device
+19:30:13 test kernel: usb 1-2: USB disconnect, device number 11
+19:30:13 test kernel: cdc_acm 1-2:1.0: failed to set dtr/rts
+19:30:13 test systemd-udevd[18055]: 1-2: Failed to process device, ignoring: No such file or directory
+19:30:13 test kernel: usb 1-2: new full-speed USB device number 12 using xhci_hcd
+19:30:18 test kernel: usb 1-2: New USB device found, idVendor=9ac4, idProduct=4b8f, bcdDevice= 1.00
+19:30:18 test kernel: usb 1-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+19:30:18 test kernel: usb 1-2: Product: proxmark3
+19:30:18 test kernel: usb 1-2: Manufacturer: proxmark.org
+19:30:18 test kernel: usb 1-2: SerialNumber: iceman
+19:30:18 test kernel: cdc_acm 1-2:1.0: ttyACM0: USB ACM device
+19:30:30 test kernel: usb 1-2: USB disconnect, device number 12
+19:30:30 test systemd-udevd[18093]: 1-2: Failed to process device, ignoring: No such file or directory
+19:30:31 test kernel: usb 1-2: new full-speed USB device number 13 using xhci_hcd
+19:30:31 test kernel: usb 1-2: New USB device found, idVendor=9ac4, idProduct=4b8f, bcdDevice= 1.00
+19:30:31 test kernel: usb 1-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+19:30:31 test kernel: usb 1-2: Product: proxmark3
+19:30:31 test kernel: usb 1-2: Manufacturer: proxmark.org
+19:30:31 test kernel: usb 1-2: SerialNumber: iceman
+19:30:31 test kernel: cdc_acm 1-2:1.0: ttyACM0: USB ACM device
