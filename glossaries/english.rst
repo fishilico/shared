@@ -66,6 +66,16 @@ USA institutions
 * FBI = Federal Bureau of Investigation
 * FIPS = Federal Information Processing Standards
 * ISO = International Organization for Standardization
+
+  * ISO/IEC  7810 = Identification cards - Physical characteristics
+  * ISO/IEC 14443 = Identification cards - Contactless integrated circuit cards - Proximity cards
+
+    * PCD = Proximity Coupling Device (the card reader)
+    * PICC = Proximity Integrated Circuit Card
+
+  * ISO/IEC 18092 = Information technology - Telecommunications and information exchange between systems - Near Field Communication - Interface and Protocol (NFCIP-1)
+  * ISO/IEC 21481 = Information technology - Telecommunications and information exchange between systems - Near Field Communication Interface and Protocol -2 (NFCIP-2)
+
 * NACA = National Advisory Committee for Aeronautics
 * NASA = National Aeronautics and Space Administration
 * NATA = National Air Transportation Association
@@ -132,6 +142,10 @@ IT systems
 Networks and the Internet
 -------------------------
 
+* ATT = Low Energy Attribute Protocol (Bluetooth protocol, like SDP)
+* AVCTP = Audio/Video Control Transport Protocol (Bluetooth protocol)
+* AVDTP = Audio/Video Data Transport Protocol (Bluetooth protocol)
+* BNEP = Bluetooth Network Encapsulation Protocol (Bluetooth protocol, L2CAP channel to transmit IP packets)
 * CGI = Common Gateway Interface
 * CSS = Cascading Style Sheets
 * DNS = Domain Name System (TCP and UDP port 53)
@@ -165,16 +179,27 @@ Networks and the Internet
 
 * JS = JavaScript
 * JSON = JavaScript Object Notation
+* L2CAP = Logical Link Control and Adaptation Protocol (Bluetooth protocol)
 * LAN = Local Area Network
+* LLCP = Logical Link Control Protocol (OSI layer-2 protocol to support peer-to-peer communication between two NFC-enabled devices)
+* NDEF = NFC Data Exchange Format
+* NFC = Near-Field Communication
+* OBEX = Object Exchange (on Bluetooth or NFC)
 * POP = Post Office Protocol
 * REST = Representational State Transfer
 * RFC = Request For Comments
+* RFCOMM = Radio Frequency Communication (Bluetooth protocol)
+* RFID = Radio-Frequency Identification
 * SATCOM = Satellite Communications
+* SDP = Service discovery protocol (Bluetooth protocol)
+* SMP = Low Energy Security Manager Protocol (Bluetooth protocol)
 * SMTP = Simple Mail Transfer Protocol (TCP port 25)
+* SNEP = Simple NDEF Exchange Protocol (on top of LLCP/NFC)
 * SNMP = Simple Network Management Protocol (UDP port 161)
 * SSH = Secure Shell (TCP port 22)
 * SSL = Secure Socket Layer (before TLS)
 * TCP = Transmission Control Protocol
+* TCS = Telephony Control Protocol (Bluetooth protocol)
 * TFTP = Trivial File Transfer Protocol (UDP port 69)
 * TLS = Transport Layer Security (after SSL)
 * UDP = User Datagram Protocol
