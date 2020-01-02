@@ -167,6 +167,33 @@ Here are some useful BIOS interrupts:
     * ``DL`` = number of drives attached
     * ``ES:DI`` = ?
 
+  * ``AH = 0x41``, ``BX = 0x55aa``, ``DL`` = drive number: check extension present. Returns:
+
+    * ``CF`` = clear if extensions are not present
+    * ``AH`` = error code or major version number
+    * ``BX = 0xaa55``
+    * ``CX`` = Interface support bitmal (1 for Device Access using the packet structure, 2 for Drive Locking and Ejecting, 4 for Enhanced Disk Drive Support (EDD))
+
+  * ``AH = 0x42``: extended read sectors (IBM/MS Extension). Parameters:
+
+    * ``DL`` = drive number
+    * ``DS:SI`` = pointer to Disk Address Packet (DAP) of sectors to be read:
+
+      * 1 byte at offset ``0x00``: size of DAP (``0x10``)
+      * 1 byte at offset ``0x01``: zero
+      * 2 bytes at offset ``0x02``: number of sectors to read (16-bit Little Endian)
+      * 4 bytes at offset ``0x04``: segment:offset pointer to a memory buffer
+      * 8 bytes at offset ``0x08``: Logiciel Block Address (LBA) for the first sector (the first sector of the disk has LBA=0)
+
+    * Returns status in ``CF, AH``
+
+  * ``AH = 0x43``: extended write sectors (IBM/MS Extension). Parameters:
+
+    * ``AL`` = 0 if close write check, 1 if open write check
+    * ``DL`` = drive number
+    * ``DS:SI`` = pointer to Disk Address Packet (DAP) of sectors to be written (same as with ``AH = 0x42``)
+    * Returns status in ``CF, AH``
+
 * Interrupt ``0x16``, keyboard services:
 
   * ``AH = 0x00``: read a character from keyboard (wait key). Returns:
