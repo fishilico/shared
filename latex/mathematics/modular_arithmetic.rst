@@ -1097,7 +1097,7 @@ Quadratic equation modulo a power of 2
 
     If $a$ is odd and $b$ is even, changing variable to $y \equiv x + \frac{b}{2}a^{-1} [2^N]$ and defining $\Delta$, the equation becomes $y^2 \equiv \frac{\Delta}{4}(a^{-1})^2 [2^N]$, or $(ay)^2 \equiv \frac{\Delta}{4} [2^N]$.
     \begin{itemize}
-      \item If $\frac{\Delta}{4} \equiv 1 [8]$, $\frac{\Delta}{4}$ has 4 roots and if $r$ is one, $x \equiv \left(r - \frac{b}{2}\right)a^{-1} [2^N]$ is a solution of the equation $ax^2 + bx + c \equiv 0 [2^N]$.
+      \item If $\frac{\Delta}{4} \equiv 1 [8]$, $\frac{\Delta}{4}$ has 4 roots modulo $2^N$ and if $r$ is one of them, $x \equiv \left(r - \frac{b}{2}\right)a^{-1} [2^N]$ is a solution of the equation $ax^2 + bx + c \equiv 0 [2^N]$.
       It can be shown that the equation only has these 4 solutions.
 
       \item Otherwise, $\frac{\Delta}{4}$ is not a quadratic residue and the equation does not have any solution.
@@ -1110,32 +1110,42 @@ Quadratic equation modulo a power of 2
       \Delta = b^2 - 4ac &\equiv& b^2 \equiv 1 [8]
     \end{eqnarray}
     Therefore $\Delta$ is a quadratic residue (whatever the value of $c$) and has 4 square roots modulo $2^N$ which are all odd.
-    With $\delta$ being one of them, the square roots of $\Delta$ are $\pm\delta$ and $2^{N-1} \pm \delta$.
-    $-b + \delta$ is even so can be divided by 2.
-    In order to ``divide it by $a$ too'', which is even, $\delta$ needs to be such that $-b + \delta \equiv 0 [4]$.
-    If it is not the case, it will be the case with using $-\delta$.
+    Nevertheless, these roots are not those which will be needed.
+    Here is what the equation becomes:
     \begin{eqnarray}
       0 &\equiv& ax^2 + bx + c [2^N] \\
       4a \times 2^N &\text{divides}& (2ax)^2 + 4abx + 4ac \\
       4a \times 2^N &\text{divides}& (2ax + b)^2 - (b^2 - 4ac) \\
-      4a \times 2^N &\text{divides}& (2ax + b)^2 - \delta^2 \\
-      4a \times 2^N &\text{divides}& (2ax + b - \delta)(2ax + b + \delta) \\
-      a2^N &\text{divides}& \left(ax - \frac{-b + \delta}{2}\right)\left(ax - \frac{-b - \delta}{2}\right)
+      4a \times 2^N &\text{divides}& (2ax + b)^2 - \Delta
     \end{eqnarray}
+    In order to transform $\Delta$ to $\delta^2$, the squaring root operation could need to be done modulo $4a \times 2^N$, which is quite inconvenient.
+    It is nonetheless possible to reduce this equation to a squaring root modulo a power of two.
     Let's define $\alpha$ and $p$ such that $a = \alpha 2^{p + 1}$ with $\alpha$ odd.
-    Let $\alpha^{-1}$ be the inverse of $\alpha$ modulo $2^{N + p + 1}$.
-    \begin{eqnarray}
-      \alpha 2^{N + p + 1} &\text{divides}& \left(\alpha 2^{p + 1}x - \frac{-b + \delta}{2}\right)\left(\alpha 2^{p + 1}x - \frac{-b - \delta}{2}\right) \\
-      2^{N + p + 1} &\text{divides}& \left(2^{p + 1}x - \frac{-b + \delta}{2}\alpha^{-1}\right)\left(2^{p + 1}x - \frac{-b - \delta}{2}\alpha^{-1}\right)
-    \end{eqnarray}
-    As $-b + \delta \equiv 0 [4]$, $-b - \delta \equiv 2 [4]$, so the right factor is odd.
+    Let $\alpha^{-1}$ be the inverse of $\alpha$ modulo $2^{N + p + 3}$.
     The equation becomes:
     \begin{eqnarray}
-      2^{N + p + 1} &\text{divides}& 2^{p + 1}x - 2\frac{-b + \delta}{4}\alpha^{-1} \\
-      2^{N + p} &\text{divides}& 2^p x - \frac{-b + \delta}{4}\alpha^{-1}
+      4a \times 2^N &\text{divides}& (2ax + b)^2 - \Delta \\
+      4\alpha 2^{p + 1} \times 2^N &\text{divides}& (2ax + b)^2 - \Delta \\
+      \left(\alpha^{-1}\right)^2 \alpha \times 2^{N+p+3} &\text{divides}& \left(\alpha^{-1}\right)^2 (2ax + b)^2 - \left(\alpha^{-1}\right)^2\Delta \\
+      2^{N+p+3} &\text{divides}& \left(2 \times 2^{p + 1} x + \alpha^{-1}b\right)^2 - \left(\alpha^{-1}\right)^2\Delta
     \end{eqnarray}
-    As there is always a solution, there has to be a $\delta$ such that $2^p$ divides $\frac{-b + \delta}{4}\alpha^{-1}$.
+    Let $\delta$ be a square root of $\Delta$ modulo $2^{N+p+3}$.
+    The four square roots of $\Delta$ are then $\pm\delta$ and $2^{N-1} \pm \delta$.
+    With $\delta$ being one of these roots:
     \begin{eqnarray}
-      x &\equiv& \frac{-b + \delta}{4 \times 2^p}\alpha^{-1} [2^N]
+      2^{N+p+3} &\text{divides}& \left(2 \times 2^{p + 1} x + \alpha^{-1}b\right)^2 - \left(\alpha^{-1}\right)^2\Delta \\
+      2^{N+p+3} &\text{divides}& \left(2^{p+2} x - \alpha^{-1}(-b)\right)^2 - \left(\alpha^{-1}\right)^2\delta^2 \\
+      2^{N+p+3} &\text{divides}& \left(2^{p+2} x - \alpha^{-1}(-b + \delta)\right)\left(2^{p+2} x - \alpha^{-1}(-b - \delta)\right)
     \end{eqnarray}
-    This is indeed a way to write $\frac{-b \pm \sqrt{\Delta}}{2a}$ which is possible to compute modulo $2^N$ in this case.
+    $-b \pm \delta$ are even so can be divided by 2.
+    In order to ``divide it by $2^{p+1}$ too'', let's choose $\delta$ such that $-b + \delta \equiv 0 [4]$.
+    If it is not the case, it will be the case with using $-\delta$ (because $b$ and $\delta$ are both odd).
+    \begin{eqnarray}
+      2^{N+p+3} &\text{divides}& \left(2^{p+2} x - \alpha^{-1}(-b + \delta)\right)\left(2^{p+2} x - \alpha^{-1}(-b - \delta)\right) \\
+      2^{N+p+1} &\text{divides}& \left(2^{p+1} x - \frac{-b + \delta}{2}\alpha^{-1}\right)\left(2^{p+1} x - \frac{-b - \delta}{2}\alpha^{-1}\right) \\
+      2^{N+p+1} &\text{divides}& 2^{p+1} x - \frac{-b + \delta}{2}\alpha^{-1} \\
+      & & \text{because $\frac{-b - \delta}{2}$ and $\alpha^{-1}$ are odd} \\
+      2^N &\text{divides}& x - \frac{-b + \delta}{2^{p+2}}\alpha^{-1} \\
+      x &\equiv& \frac{-b + \delta}{2^{p+2}}\alpha^{-1} [2^N] \\
+    \end{eqnarray}
+    This is indeed a way to write $\frac{-b \pm \sqrt{\Delta}}{2a}$ which is possible to compute modulo $2^N$ in this case ($\pm\sqrt{\Delta}$ being a square root of $\Delta$ modulo $2^{N+p+3}$ such that $\delta \equiv b [4]$).
