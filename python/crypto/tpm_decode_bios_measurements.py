@@ -496,7 +496,7 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
 
                         data_desc.append("  * {:02x}-{:02x}: {}".format(devpath_type, devpath_subtype, dev_desc))
 
-        elif pcr_index == 0and event_type == TcgEventType.EV_EFI_PLATFORM_FIRMWARE_BLOB:
+        elif pcr_index == 0 and event_type == TcgEventType.EV_EFI_PLATFORM_FIRMWARE_BLOB:
             if len(event_data) == 0x10:
                 platfw_physaddr, platfw_length = struct.unpack('<QQ', event_data)
                 digest_desc = "Plat FW Blob"
