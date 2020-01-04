@@ -34,6 +34,7 @@ RUN \
         echo 'RSA' && \
         echo 'SGI-B-2.0' && \
         echo 'SMAIL' && \
+        echo 'Unlicense' && \
         echo 'UoI-NCSA' && \
         echo 'gsm' && \
         echo 'inner-net' && \
@@ -49,7 +50,7 @@ RUN \
     equo install \
         dev-python/cffi \
         dev-python/gmpy \
-        dev-python/pycrypto \
+        dev-python/pycryptodome \
         dev-python/numpy \
         dev-python/pillow \
         media-libs/libsdl2 \
