@@ -190,6 +190,7 @@ pkg zsh
 
 # Hardware and TTY
 pkg acpi
+pkg acpi_call
 pkg acpica
 pkg bluez
 pkg bluez-utils
@@ -262,6 +263,7 @@ pkg nmap
 pkg openbsd-netcat
 pkg openldap
 pkg openssh
+pkg proxychains-ng
 pkg rsync
 pkg smbclient
 pkg socat
@@ -284,12 +286,14 @@ grouppkg base-devel
 grouppkg multilib-devel
 grouppkg linux-tools
 pkg bat
+pkg bison
 pkg clang
 pkg cmake
 pkg devtools
 pkg ed
 pkg fakechroot
 pkg fakeroot
+pkg flex
 pkg gdb
 pkg git
 pkg go
@@ -319,6 +323,7 @@ if [ "$(uname -m)" = 'x86_64' ]
 then
     pkg intel-ucode
     pkg iucode-tool
+    pkg x86_energy_perf_policy
 fi
 
 # Other
@@ -368,6 +373,7 @@ then
 
     # Smartcard and YubiKey
     pkg ccid
+    pkg libu2f-host
     pkg opensc
     pkg pcsc-tools
     pkg yubikey-manager
@@ -393,7 +399,6 @@ then
     pkg gnome-system-monitor
     pkg gparted
     pkg graphviz
-    pkg gtk-recordmydesktop
     pkg gtk3
     pkg gvfs
     pkg gvfs-smb
@@ -415,6 +420,7 @@ then
     pkg pdfpc
     pkg qpdf
     pkg rdesktop
+    pkg recordmydesktop
     pkg remmina
     pkg sdl2
     pkg simple-scan
@@ -445,8 +451,12 @@ then
     pkg mythes-en
     pkg mythes-fr
 
+    # Power management for laptops
+    pkg tlp
+    pkg tp_smapi
+
     # Multilib repo
-    pkg wine wine_gecko wine-mono winetricks
+    pkg wine wine-gecko wine-mono winetricks
 
     # MinGW64
     aurpkg mingw-w64-binutils mingw-w64-gcc
@@ -500,6 +510,7 @@ then
     pkg ipcalc
     pkg ipv6calc
     pkg jre10-openjdk
+    pkg libnfc
     pkg libvirt
     #pkg lxc
     #pkg mariadb
