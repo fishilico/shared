@@ -183,13 +183,13 @@ def analyze_pcap_for_tcp(pcap_file):
         tcpip_tuple = (ipdst, ipsrc, tcpdst, tcpsrc)
         if tcpip_tuple in tcp_streams:
             client_to_server = False
-            if (tcppkt.flags & 0x12) == 0x12:  # SYN=2 + ACK=0x10
+            if tcppkt.flags.SA:  # SYN=2 + ACK=0x10
                 tcp_streams[tcpip_tuple].got_synack(tcppkt.seq, tcppkt.ack)
         else:
             tcpip_tuple = (ipsrc, ipdst, tcpsrc, tcpdst)
             if tcpip_tuple in tcp_streams:
                 client_to_server = True
-            elif tcppkt.flags & 2:  # SYN
+            elif tcppkt.flags.S:  # SYN
                 tcp_streams[tcpip_tuple] = TcpStream(ipsrc, ipdst, tcpsrc, tcpdst)
                 client_to_server = True
             else:
