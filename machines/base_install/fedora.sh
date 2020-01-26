@@ -59,9 +59,9 @@ pkg() {
         then
             if ! is_root
             then
-                echo "dnf install -y $PKGNAME"
+                echo "dnf --setopt=install_weak_deps=False install -y $PKGNAME"
             else
-                dnf install -y "$PKGNAME"
+                dnf --setopt=install_weak_deps=False install -y "$PKGNAME"
             fi
         fi
     done
@@ -77,9 +77,9 @@ grouppkg() {
         then
             if ! is_root
             then
-                echo "dnf install -y @$GROUPNAME"
+                echo "dnf --setopt=install_weak_deps=False install -y @$GROUPNAME"
             else
-                dnf install -y "@$GROUPNAME"
+                dnf --setopt=install_weak_deps=False install -y "@$GROUPNAME"
             fi
         fi
     done
