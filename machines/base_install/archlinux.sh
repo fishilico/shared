@@ -506,6 +506,7 @@ then
     pkg cppcheck
     pkg docker-compose
     pkg flake8
+    pkg ghidra
     pkg hashcat
     pkg hashcat-utils
     pkg hydra
@@ -586,7 +587,6 @@ then
     aurpkg dex2jar
     aurpkg earlyoom
     aurpkg ffdec
-    aurpkg ghidra
     aurpkg ilspymono-git
     aurpkg jd-gui
     aurpkg kaitai-struct-compiler
