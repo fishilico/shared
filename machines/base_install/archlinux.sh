@@ -174,6 +174,7 @@ pkg lsb-release
 pkg lsof
 pkg moreutils
 pkg most
+pkg neovim
 pkg progress
 pkg psmisc
 pkg pv
@@ -185,7 +186,6 @@ pkg strace
 pkg sudo
 pkg time
 pkg tmux
-pkg vim
 pkg zsh
 
 # Hardware and TTY

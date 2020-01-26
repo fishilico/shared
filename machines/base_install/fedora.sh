@@ -106,6 +106,7 @@ pkg jq
 pkg less
 pkg lsof
 pkg most
+pkg neovim
 pkg progress
 pkg psmisc
 pkg pv
