@@ -285,8 +285,10 @@ pkg wireshark-cli
 grouppkg base-devel
 grouppkg multilib-devel
 grouppkg linux-tools
+pkg autoconf-archive
 pkg bat
 pkg bison
+pkg check
 pkg clang
 pkg cmake
 pkg devtools
@@ -297,6 +299,7 @@ pkg flex
 pkg gdb
 pkg git
 pkg go
+pkg help2man
 pkg hexyl
 pkg ipython
 pkg libcap-ng
