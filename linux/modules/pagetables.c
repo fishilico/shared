@@ -662,10 +662,10 @@ static void show_address_comp(struct seq_file *s)
 	BUILD_BUG_ON(PTRS_PER_PTE * PAGE_SIZE != PMD_SIZE);
 	BUILD_BUG_ON(PTRS_PER_PMD * PMD_SIZE != PUD_SIZE);
 	BUILD_BUG_ON(PTRS_PER_PUD * PUD_SIZE != P4D_SIZE);
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 17, 0)
 	/* Commit c65e774fb3f6 ("x86/mm: Make PGDIR_SHIFT and PTRS_PER_P4D
 	 * variable") made PTRS_PER_P4D and PGDIR_SIZE global variables in
-	 * Linux 5.4
+	 * Linux 4.17
 	 */
 	BUG_ON(PTRS_PER_P4D * P4D_SIZE != PGDIR_SIZE);
 #else
