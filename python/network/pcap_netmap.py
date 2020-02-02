@@ -591,6 +591,7 @@ class AnalysisContext(object):
         self.seen_eth_fortinet = False
         self.seen_eth_802_11 = False
         self.seen_eth_aerohive = False
+        self.seen_eth_0x9001 = False
 
     def post_processing(self, add_local_networks=False):
         """Perform some post-processing operations on the data"""
@@ -802,7 +803,7 @@ class AnalysisContext(object):
             # https://help.fortinet.com/fos50hlp/56/Content/FortiOS/fortigate-high-availability/HA_failoverHeartbeat.htm
             if not self.seen_eth_fortinet:
                 logger.info(
-                    "Fortinet Heartbit found in capture. This may give useful information about the network (%r)",
+                    "Fortinet Heartbeat found in capture. This may give useful information about the network (%r)",
                     ethpkt)
                 self.seen_eth_fortinet = True
             return
@@ -819,6 +820,15 @@ class AnalysisContext(object):
             self.hwaddrdb.add_bridge(hw_src)
             return
 
+        if pkt_type == 0x9001:  # 3Com (Formerly Bridge Communications), XNS Systems Management
+            # Unknown frame, broadcasted
+            if hw_dst == 'ff:ff:ff:ff:ff:ff':
+                if not self.seen_eth_0x9001:
+                    logger.info(
+                        "Broadcasted Ethernet 0x9001 data found, probably emitted by a switch (%r)",
+                        ethpkt)
+                    self.seen_eth_0x9001 = True
+                return
         logger.warning("Unknown Ethernet packet type %#x: %r", pkt_type, ethpkt)
 
     def analyze_ipv4_packet(self, ippkt):
