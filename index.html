@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Tiny shared web projects</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="utf-8" />
+  <style><!--
+      html {
+        background-attachment: fixed;
+        background-color: white;
+        background-image: url('web/ascii_background.svg');
+        background-position: bottom left;
+        background-repeat: no-repeat;
+        background-size: 70%;
+      }
+
+      body {
+        background: white; /* Fallback */
+        background: rgba(255, 255, 255, 0.5);
+        border: double #ddd 3px;
+        display: block;
+        margin: 10px 10% 100px 10%;
+        padding: 10px;
+        width: 80%;
+      }
+
+      a {
+          color: #285f84;
+          text-decoration: none;
+      }
+
+      a:hover {
+        color: #3989bd;
+        text-decoration: underline;
+      }
+
+      a:focus, a:active {
+        color: #34ad99;
+      }
+
+      ul {
+        list-style: none;
+        margin: 1em;
+        padding: 0px;
+      }
+
+      #content {
+        border-bottom: 1px solid gray;
+        margin-bottom: 1em;
+        padding-bottom: 1em;
+      }
+
+      /* Back link */
+      a.back {
+        display: block;
+      }
+
+      a.back:before {
+        content: "< ";
+        font-family: monospace;
+      }
+
+      h1 {
+        font-family: sans-serif;
+        font-size: x-large;
+        font-variant: small-caps;
+      }
+
+      /* A short quote */
+      .quote {
+        font-style: italic;
+        text-align: right;
+      }
+
+      .quote a {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <h1>Welcome !</h1>
+      <p>This website presents some HTML/JavaScript pages that belongs to a project that shares tiny projects in a single GitHub repository, <a href="https://github.com/fishilico/shared">https://github.com/fishilico/shared</a></p>
+      <ul>
+        <li><a href="web/compute_hash_js.html">compute_hash_js.html</a> - compute hash digests using JavaScript's Crypto Subtle API</li>
+        <li><a href="web/download_file_js.html">download_file_js.html</a> - write some text and download it as a file</li>
+        <li><a href="web/fingerprint.html">fingerprint.html</a> - show fingerprinting information from the browser</li>
+        <li><a href="web/gpu/webgl_triangle.html">gpu/webgl_triangle.html</a> - draw a rotating triangle using WebGL</li>
+      </ul>
+    </div>
+    <a class="back" href="..">Back</a>
+    <div class="quote">
+      Real programmers use butterflies
+      <a href="http://xkcd.com/378/" title="xkcd #378">xkcd #378</a>
+    </div>
+  </body>
+</html>
