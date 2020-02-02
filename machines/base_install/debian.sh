@@ -124,6 +124,7 @@ pkg strace
 pkg sudo
 pkg time
 pkg tmux
+pkg vim
 pkg zsh
 
 # Hardware and TTY
