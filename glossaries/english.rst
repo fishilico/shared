@@ -228,14 +228,17 @@ Low-level computer architecture
 * BIST = Built-In Self-Test
 * BITE = Built-In Test Equipment
 * BMC = Baseboard Management Controller
+* CISC = Complex Instruction Set Computing
 * CPLD = Complex Programmable Logic Device
 * CS = Chip Select
 * CSME = Converged Security and Management Engine (Intel's Management Engine version 11+)
 * DMA = Direct Memory Access
     A way for peripherals to read and write data in the main memory (RAM) of a computer.
 
+* DSP = Digital Signal Processor
 * EBR = Extended Boot Record (Extended Partition Record)
 * EC = Embedded Controller
+* FIQ = Fast Interrupt Request
 * FLOG = Flash Log (Apple's T2)
 * FPGA = Field-Programmable Gate Array
 * GPIO = General Purpose Input Output
@@ -246,6 +249,7 @@ Low-level computer architecture
 * iLO = integrated Lights Out (HP's BMC)
 * ILOM = Integrated Lights Out Manager (Sun's and Oracle's)
 * IPMI = Intelligent Platform Management Interface
+* IRQ = Interrupt Request
 * IVBP = Bring-up cache (Apple's T2)
 * KVM = Keyboard-Video-Mouse interface
 * LPC = Low Pin Count bus
@@ -263,6 +267,7 @@ Low-level computer architecture
 * POST = Power-On Self-Test
 * PSP = Platform Specific Package
 * QAT = Quick Assist Technology (Intel)
+* RISC = Reduced Instruction Set Computing
 * RTL = Register-Transfer Level
 * SAF = Slave Attached Flash (Flash memory attached to the Chipset of some Xeon systems using eSPI bus)
 * SGX = Software Guard Extensions (Intel)
@@ -270,6 +275,8 @@ Low-level computer architecture
 * SMBus = System Management Bus
     A simple two-wire bus derived from I²C.
 
+* SoC = System on Chip
+* SoM = System on Module
 * SPI = Serial Peripheral Interface
 * UART = Universal Asynchronous Receiver-Transmitter
 * UDC = USB Device Controller
@@ -277,6 +284,33 @@ Low-level computer architecture
 * UEP = Unified Emulation Partition (Apple's T2)
 * UTOK = Debug Unlock Token (Apple's T2)
 * VHDL = VHSIC-HDL = Very High Speed Integrated Circuit Hardware Description Language
+
+ARM systems
+~~~~~~~~~~~
+
+* ARM = Advanced RISC Machine, originally Acorn RISC Machine
+
+  - ARM Cortex-A = Application profile
+  - ARM Cortex-R = Real-time profile
+  - ARM Cortex-M = Microcontroller profile
+
+* BTI = Branch Target Indicators (ARMv8)
+* CPSR = Current Program Status Register
+* DLP = Data Level Parallelism
+* HTM = Hardware Transactional Memory
+* LPAE = Large Physical Address Extension
+* LR = Link Register
+* MPAM = Memory Partitioning and Monitoring (ARMv8)
+* MPE = Media Processing Engine (ARM)
+* MTE = Memory Tagging Extension (ARMv8)
+* PC = Program Counter
+* PSA = Platform Security Architecture
+* SP = Stack Pointer
+* SVE = Scalable Vector Extension (ARMv8)
+* TLE = Transactional Synchronization Extensions
+* TLP = Thread Level Parallelism
+* TME = Transactional Memory Extension (ARMv8)
+* VFP = Vector Floating Point (ARM)
 
 
 Filesystems
@@ -336,7 +370,7 @@ Avionics
 * AD = Airworthiness Directive
 * ADIRU = Air Data Inertial Reference Unit
 * ADRF = Air Data Reference Function
-* ADS–B = Automatic Dependent Surveillance - Broadcast (1090 MHz and 978 MHz)
+* ADS-B = Automatic Dependent Surveillance - Broadcast (1090 MHz and 978 MHz)
 * AFDX = Avionics Full-Duplex Switched Ethernet
 * AID = Aircraft Interface Device
 * AMOC = Alternative Methods of Compliance
@@ -367,8 +401,8 @@ Avionics
 * CDN = Common Data Network
 * CIS/MS = Crew Information Service/Maintenance System
 * CMCF = Central Maintenance Computer Function
-* CPDL = Controller–Pilot Data Link
-* CPDLC = Controller–Pilot Data Link Communication
+* CPDL = Controller-Pilot Data Link
+* CPDLC = Controller-Pilot Data Link Communication
 * CSS = Cabin Services System
 * CTS = Clear To Send (ARINC 429)
 * CVR = Cockpit Voice Recorder
