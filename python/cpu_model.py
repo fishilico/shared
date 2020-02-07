@@ -53,6 +53,8 @@ logger = logging.getLogger(__name__)
 #   (2019-05-15, after RIDL and Fallout, Intel-SA-00233)
 # * https://www.intel.com/content/dam/www/public/us/en/security-advisory/documents/IPU-2019.2-microcode-update-guidance-v1.0.pdf
 #   (2019-11-12, after TAA = TSX Asynchronous Abort INTEL-SA-00270)
+# * https://software.intel.com/security-software-guidance/insights/processors-affected-l1d-eviction-sampling
+#   (2020-01-27, after CacheOut, L1D Eviction Sampling, CVE-2020-0549, INTEL-SA-00329)
 # * https://en.wikipedia.org/wiki/Intel_Core
 # * http://users.atw.hu/instlatx64/ and https://github.com/InstLatx64/InstLatx64/blob/master/ChangeLog.htm
 # * https://en.wikichip.org/wiki/intel/microarchitectures/cascade_lake
@@ -327,18 +329,21 @@ INTEL_FAM6_MODELS = {
     (0x27, 2): (None, 'Atom Penwell', (
         'Intel® Atom® Z2460 1.6GHz (Medfield platform, Penwell SoC, Saltwell core)',
     )),
-    (0x2a, 2): ('SNB', 'Sandy Bridge', (
-        'Sandy Bridge ES',
-    )),
     (0x2a, 0): (None, '?'),
     (0x2a, 1): (None, '?'),
+    (0x2a, 2): ('SNB', 'Sandy Bridge', (
+        '2nd Generation Intel® Core™ Processor Family',
+        'Sandy Bridge ES',
+    )),
     (0x2a, 3): (None, '?'),
     (0x2a, 4): (None, '?'),
     (0x2a, 5): (None, '?'),
     (0x2a, 6): ('SNB', 'Sandy Bridge', (
+        '2nd Generation Intel® Core™ Processor Family',
         'QuadCore Intel® Core™ i7-2600K, 3400 MHz (Sandy Bridge)',
     )),
     (0x2a, 7): ('SNB', 'Sandy Bridge (Xeon E3)', (
+        '2nd Generation Intel® Core™ Processor Family',
         'Intel® Xeon® Processor E3 Family',
         'Intel® Core™ i3-21xx/23xx-T/M/E/UE Processor',
         'Intel® Core™ i5-23xx/24xx/25xx-T/S/M/K Processor',
@@ -897,6 +902,9 @@ INTEL_FAM6_MODELS = {
         'Intel® Pentium® Gold Processor 6405U',
         'Intel® Celeron® Processor 5305U',
     )),
+    # FIXME: maybe (0x9e, 13) from
+    # https://software.intel.com/security-software-guidance/insights/processors-affected-l1d-eviction-sampling
+    (0x8e, 13): ('WHL', 'Whiskey Lake (Desktop)'),
     (0x9d, -1): ('ICL-NNPI', 'Ice Lake Neural Network Processor for Deep Learning Inference'),
     (0x9e, 9): ('KBL', 'Kaby Lake Desktop (Kaby Lake H/S/X/G, Xeon E3), Greenlow', (
         '7th Generation Intel® Core™ Processor Family',
