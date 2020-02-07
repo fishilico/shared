@@ -49,7 +49,8 @@ CFLAGS = -O2 -ansi -pedantic -pipe \
 	-Wwrite-strings \
 	-Wno-long-long \
 	-Wno-unused-function \
-	-fPIE  \
+	-fPIE \
+	-fno-common \
 	-fno-exceptions \
 	-fstack-protector --param=ssp-buffer-size=4 \
 	-fvisibility=hidden
