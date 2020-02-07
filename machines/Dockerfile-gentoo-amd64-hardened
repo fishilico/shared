@@ -43,7 +43,7 @@ RUN \
         gnome-base/librsvg \
         media-libs/harfbuzz \
         sys-libs/glibc \
-        virtual/cargo \
+        virtual/rust \
         x11-libs/gdk-pixbuf \
         x11-libs/gtk+:2 \
         x11-libs/gtk+:3 \
