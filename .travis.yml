@@ -3,8 +3,8 @@ language: python
 python:
   - "3.6"
 
-# Use Ubuntu 16.04 Xenial Xerus with container infrastructure
-dist: xenial
+# Use Ubuntu 18.04 bionic with container infrastructure
+dist: bionic
 sudo: false
 
 matrix:
@@ -43,10 +43,9 @@ addons:
     - libsdl2-dev
     - binutils-mingw-w64
     - gcc-mingw-w64
-    - wine
-    - wine1.6
-    - wine1.6-amd64
-    - wine1.6-i386
+    - wine-stable
+    - wine32
+    - wine64
 
 install:
   # pip does not behave properly when CC is somewhat weird
