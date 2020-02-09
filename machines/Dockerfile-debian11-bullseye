@@ -7,6 +7,8 @@ ENV LANG C.UTF-8
 # Installing openjdk-11-jre-headless requires /usr/share/man/man1 to exist
 # Install apt-utils first, in order to apply package configuration tasks
 # Install wine last, because otherwise apt fails to configure it
+# Create directory /usr/include/SDL2 because "pkg-config --cflags sdl2" specifies
+# "-I/usr/include/x86_64-linux-gnu/SDL2 -I/usr/include/SDL2" without creating it.
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -55,7 +57,8 @@ RUN \
         wine \
         wine32 \
         wine64 && \
-    apt-get clean
+    apt-get clean && \
+    mkdir /usr/include/SDL2
 
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
