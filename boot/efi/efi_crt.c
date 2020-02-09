@@ -178,24 +178,31 @@ __asm__ (
  *    } IMAGE_BASE_RELOCATION;
  *
  * Dump with: winedump -j reloc dump BOOTX64.efi
+ *
+ * Documentation:
+ * * https://docs.microsoft.com/en-us/windows/win32/debug/pe-format#the-reloc-section-image-only
  */
 __asm__ (
 "    .data\n"
 "    .hidden _crt_dummy_reloc\n"
-"_crt_dummy_reloc: .long 0\n"
+/* Stash enough aligned bytes in order for a relocation to be applied */
+"    .align 8\n"
+"_crt_dummy_reloc: .byte 0, 0, 0, 0, 0, 0, 0, 0\n"
 
 #if defined(__x86_64__)
-"    .section .reloc, \"a\"\n"
+"    .pushsection .reloc, \"a\"\n"
 "    .hidden _crt_base_reloc\n"
 "_crt_base_reloc:\n"
 "    .long _crt_dummy_reloc - _crt_base_reloc\n" /* RVA */
 "    .long 10\n" /* SizeOfBlock: 8 of structure + 2 of data */
 "    .word 0\n" /* IMAGE_REL_BASED_ABSOLUTE << 12 | 0 */
+"    .popsection\n"
 #elif defined(__i386__) || defined(__arm__)
-"    .section .reloc\n"
+"    .pushsection .reloc\n"
 "    .long _crt_dummy_reloc\n" /* RVA */
 "    .long 10\n" /* SizeOfBlock: 8 of structure + 2 of data */
 "    .word 0\n" /* IMAGE_REL_BASED_ABSOLUTE << 12 | 0 */
+"    .popsection\n"
 #else
 #    error Unsupported architecture
 #endif
