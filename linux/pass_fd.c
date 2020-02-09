@@ -302,6 +302,16 @@ static int recursive_sockets(void)
 
     memset(&tv, 0, sizeof(tv));
     if (clock_gettime(CLOCK_MONOTONIC, &tv) == -1) {
+        /* In Fedora 32 Docker environment, clock_gettime() uses
+         * syscall clock_gettime64(), which is denied:
+         *    clock_gettime64(CLOCK_MONOTONIC, 0xffdd20ec) = -1 EPERM (Operation not permitted)
+         */
+#ifdef __i386__
+        if (errno == EPERM) {
+            printf("Unable to get the Monotonic clock, probably due to 32-bit/64-bit compatibility issues.\n");
+            return 0;
+        }
+#endif
         perror("clock_gettime(MONOTONIC)");
         return 1;
     }
