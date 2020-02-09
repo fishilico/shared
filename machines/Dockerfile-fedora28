@@ -74,7 +74,7 @@ CMD ["/run_shared_test.sh"]
 #       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex%
+#       Global blacklist: boot/efi% latex%
 #       In sub-directories:
 #          c: gtk_alpha_window openmp_matrix
 #          glossaries:

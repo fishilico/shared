@@ -55,6 +55,18 @@ else ifneq ($(call ccpp-has-option,-falign-functions=0),y)
 SUBDIRS_BLACKLIST += boot/mbr/syslinux-mbr
 endif
 
+# Fedora 26 to 28 has trouble linking 32-bit EFI applications:
+# * F26: ld: BFD version 2.27-28.fc26 assertion fail elf32-i386.c:5545
+# * F27: ld: BFD version 2.29-13.fc27 assertion fail elf32-i386.c:5831
+# * F28: ld: BFD version 2.29.1-23.fc28 assertion fail elf32-i386.c:5819
+TARGET_ARCH := $(call get-cc-target-arch)
+ifeq ($(TARGET_ARCH), x86_32)
+HAVE_LD_FAILURE := $(call can-run,grep '^CPE_NAME="cpe:/o:fedoraproject:fedora:2[678]"$$' /etc/os-release)
+ifeq ($(HAVE_LD_FAILURE), y)
+SUBDIRS_BLACKLIST += boot/efi%
+endif
+endif
+
 # Test Java compiler and runtime availability
 ifneq ($(call can-run,$(JAVAC) -version)$(call can-run,$(JAVA) -version),yy)
 SUBDIRS_BLACKLIST += java%
