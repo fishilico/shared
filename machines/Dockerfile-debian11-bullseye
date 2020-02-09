@@ -5,11 +5,14 @@ LABEL Description="Debian 11 Bullseye with build dependencies for shared"
 ENV LANG C.UTF-8
 
 # Installing openjdk-11-jre-headless requires /usr/share/man/man1 to exist
+# Install apt-utils first, in order to apply package configuration tasks
+# Install wine last, because otherwise apt fails to configure it
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
     apt-get -qq update && \
     mkdir -p /usr/share/man/man1 && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy apt-utils && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         cargo \
@@ -47,7 +50,8 @@ RUN \
         python-crypto \
         python-dev \
         python-numpy \
-        python-pil \
+        python-pil && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
         wine \
         wine32 \
         wine64 && \
