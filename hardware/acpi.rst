@@ -60,6 +60,7 @@ Here is the definition of some acronyms:
 
 * ``APIC``: Advanced Programmable Interrupt Controller
 * ``ASF!``: Alert Standard Format
+* ``BATB``: ?
 * ``BGRT``: Boot Graphics Resource Table
 * ``CPEP``: Corrected Platform Error Polling Table
 * ``CSRT``: Core System Resource Table
@@ -79,12 +80,13 @@ Here is the definition of some acronyms:
 * ``HEST``: Hardware Error Source Table
 * ``HPET``: High Precision Event Timer Table
 * ``LPIT``: Low Power Idle Table
-* ``MADT``: Multiple APIC Description Table
+* ``MADT`` (also called ``MAPIC``): Multiple APIC Description Table
 * ``MCFG``: PCI Express memory mapped configuration space base address Description Table
 * ``MPST``: Memory Power StateTable
 * ``MSCT``: Maximum System Characteristics Table
 * ``MSDM``: Microsoft Data Management (containing MS Windows license key for OEM activation)
 * ``PMTT``: Platform Memory Topology Table
+* ``POAT``: ?
 * ``PSDT``: Persistent System Description
 * ``RASF``: ACPI RAS FeatureTable
 * ``RSDP``: Root System Description Pointer
@@ -274,6 +276,7 @@ Web links
 * http://www.acpi.info/ Official website with the latest specification.
 * https://www.acpica.org/ ACPI Component Architectures
 * https://github.com/acpica/acpica ACPICA code
+* https://uefi.org/acpi UEFI: links to ACPI-related documents
 * https://wiki.archlinux.org/index.php/DSDT Arch Linux wiki article on DSDT
 * http://forum.osdev.org/viewtopic.php?t=16990 ACPI poweroff
   (from http://wiki.osdev.org/Shutdown)
