@@ -31,7 +31,7 @@ static LPTSTR GetUserObjectInformation_name(HANDLE hObj)
 /**
  * Callback for EnumDesktopWindows
  */
-static BOOL CALLBACK EnumDestktopWindowsProc(HWND hwnd, LPARAM lParam __attribute__((unused)))
+static BOOL CALLBACK EnumDesktopWindowsProc(HWND hwnd, LPARAM lParam __attribute__((unused)))
 {
     BOOL bVisible;
     UINT cchSize, cchLen;
@@ -136,7 +136,7 @@ static BOOL CALLBACK EnumDesktopProc(LPTSTR lpszDesktop, LPARAM lParam)
     HeapFree(GetProcessHeap(), 0, lpszType);
     HeapFree(GetProcessHeap(), 0, lpszName);
 
-    bResult = EnumDesktopWindows(hDesktop, EnumDestktopWindowsProc, (LPARAM)pCtx);
+    bResult = EnumDesktopWindows(hDesktop, EnumDesktopWindowsProc, (LPARAM)pCtx);
     if (!bResult) {
         print_winerr(_T("EnumDesktopWindows"));
     }
