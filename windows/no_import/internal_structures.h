@@ -3,6 +3,7 @@
  *
  * Online documentation:
  * * https://github.com/maldevel/Peteb/blob/master/src/SystemTypes.h
+ * * https://ntdiff.github.io/
  */
 #ifndef INTERNAL_STRUCTURES_H
 #define INTERNAL_STRUCTURES_H
@@ -54,33 +55,88 @@ typedef struct _LDR_DATA_TABLE_ENTRY {
     UNICODE_STRING BaseDllName; /* Undocumented, offset 0x28 or 0x50 */
 } LDR_DATA_TABLE_ENTRY, *PLDR_DATA_TABLE_ENTRY;
 
+typedef struct _CURDIR {
+    UNICODE_STRING DosPath; /* offset 0 */
+    HANDLE Handle; /* offset 8 or 0x10 */
+} CURDIR, *PCURDIR;
+
 typedef struct _RTL_USER_PROCESS_PARAMETERS {
-    BYTE Reserved1[16];
-    PVOID Reserved2[10];
-    UNICODE_STRING ImagePathName;
-    UNICODE_STRING CommandLine;
+    DWORD MaximumLength; /* 0x000 0x000 */
+    DWORD Length; /* 0x004 0x004 */
+    DWORD Flags; /* 0x008 0x008 */
+    DWORD DebugFlags; /* 0x00c 0x00c */
+    HANDLE ConsoleHandle; /* 0x010 0x010 */
+    DWORD onsoleFlags; /* 0x014 0x018 */
+    HANDLE StandardInput; /* 0x018 0x020 */
+    HANDLE StandardOutput; /* 0x01c 0x028 */
+    HANDLE StandardError; /* 0x020 0x030 */
+    CURDIR CurrentDirectory; /* 0x024 0x038 */
+    UNICODE_STRING DllPath; /* 0x030 0x050 */
+    UNICODE_STRING ImagePathName; /* 0x038 0x060 */
+    UNICODE_STRING CommandLine; /* 0x040 0x070 */
+    PVOID Environment; /* 0x048 0x080 */
+    DWORD StartingX; /* 0x04c 0x088 */
+    DWORD StartingY; /* 0x050 0x08c */
+    DWORD CountX; /* 0x054 0x090 */
+    DWORD CountY; /* 0x058 0x094 */
+    DWORD CountCharsX; /* 0x05c 0x098 */
+    DWORD CountCharsY; /* 0x060 0x09c */
+    DWORD FillAttribute; /* 0x064 0x0a0 */
+    DWORD WindowFlags; /* 0x068 0x0a4 */
+    DWORD ShowWindowFlags; /* 0x06c 0x0a8 */
+    UNICODE_STRING WindowTitle; /* 0x070 0x0b0 */
+    UNICODE_STRING DesktopInfo; /* 0x078 0x0c0 */
+    UNICODE_STRING ShellInfo; /* 0x080 0x0d0 */
+    UNICODE_STRING RuntimeData; /* 0x088 0x0e0 */
 } RTL_USER_PROCESS_PARAMETERS, *PRTL_USER_PROCESS_PARAMETERS;
 
 /* Offsets are written for 32- and 64-bit systems.
  * For comparison with several Windows versions, see:
  * http://blog.rewolf.pl/blog/?p=573 Evolution of Process Environment Block
+ * https://ntdiff.github.io/#versionLeft=WinVista_SP1%2Fx86%2FSystem32&filenameLeft=ntoskrnl.exe&typeLeft=Standalone%2F_PEB&versionRight=Win10_20H1_19037%2Fx86%2FSystem32&filenameRight=ntoskrnl.exe&typeRight=Standalone%2F_PEB
  */
 typedef struct _PEB {
-    BYTE Reserved1[2];
+    BYTE InheritedAddressSpace; /* 0x000 0x000 */
+    BYTE ReadImageFileExecOptions; /* 0x001 0x001 */
     BYTE BeingDebugged; /* 0x002 0x002 */
-    BYTE Reserved2[1];
-    PVOID Reserved3;
+    BYTE BitField; /* 0x003 0x003 */
+    PVOID Mutant; /* 0x004 0x008 */
     PVOID ImageBaseAddress; /* 0x008 0x010 */
     PPEB_LDR_DATA Ldr; /* 0x00c 0x018 */
     PRTL_USER_PROCESS_PARAMETERS ProcessParameters; /* 0x010 0x020 */
     PVOID SubSystemData; /* 0x014 0x028 */
     PVOID ProcessHeap; /* 0x018 0x030 */
-    BYTE Reserved4[16];
-    PVOID Reserved5[14];
+    void *FastPebLock; /* 0x01c 0x038 */
+    void *AtlThunkSListPtr; /* 0x020 0x040 */
+    void *IFEOKey; /* 0x024 0x048 */
+    DWORD CrossProcessFlags; /* 0x028 0x050 */
+    PVOID UserSharedInfoPtr; /* 0x02c 0x058 */
+    DWORD SystemReserved; /* 0x030 0x060 */
+    DWORD Reserved1; /* 0x034 0x064 */
+    PVOID Reserved2; /* 0x038 0x068 */
+    DWORD TlsExpansionCounter; /* 0x03c 0x070 */
+    PVOID TlsBitmap; /* 0x040 0x078 */
+    DWORD TlsBitmapBits[2]; /* 0x044 0x080 */
+    void *ReadOnlySharedMemoryBase; /* 0x04c 0x088 */
+    void *SharedData; /* 0x050 0x090 */
+    void **ReadOnlyStaticServerData; /* 0x054 0x098 */
+    void *AnsiCodePageData; /* 0x058 0x0a0 */
+    void *OemCodePageData; /* 0x05c 0x0a8 */
+    void *UnicodeCaseTableData; /* 0x060 0x0b0 */
     DWORD NumberOfProcessors; /* 0x064 0x0b8 */
     DWORD NtGlobalFlag; /* 0x068 0x0bc */
-    BYTE Reserved6[24];
-    PVOID Reserved7[8];
+    LARGE_INTEGER CriticalSectionTimeout; /* 0x070 0xc0 */
+    UINT_PTR HeapSegmentReserve; /* 0x078 0xc8 */
+    UINT_PTR HeapSegmentCommit; /* 0x07c 0x0d0 */
+    UINT_PTR HeapDeCommitTotalFreeThreshold; /* 0x080 0x0d8 */
+    UINT_PTR HeapDeCommitFreeBlockThreshold; /* 0x084 0x0e0 */
+    DWORD NumberOfHeaps; /* 0x088 0x0e8 */
+    DWORD MaximumNumberOfHeaps; /* 0x08c 0x0ec */
+    void **ProcessHeaps; /* 0x090 0x0f0 */
+    void *GdiSharedHandleTable; /* 0x094 0x0f8 */
+    void *ProcessStarterHelper; /* 0x098 0x100 */
+    DWORD GdiDCAttributeList; /* 0x09c 0x108 */
+    void *LoaderLock; /* 0x0a0 0x110 RTL_CRITICAL_SECTION* */
     DWORD OSMajorVersion; /* 0x0a4 0x118 */
     DWORD OSMinorVersion; /* 0x0a8 0x11c */
     WORD OSBuildNumber; /* 0x0ac 0x120 */
@@ -89,8 +145,17 @@ typedef struct _PEB {
     DWORD ImageSubsystem; /* 0x0b4 0x128 */
     DWORD ImageSubsystemMajorVersion; /* 0x0b8 0x12c */
     DWORD ImageSubsystemMinorVersion; /* 0x0bc 0x130 */
-    BYTE Reserved8[156];
-    PVOID Reserved9[30];
+    UINT_PTR ActiveProcessAffinityMask; /* 0x0c0 0x138 */
+#if defined(__x86_64)
+    DWORD GdiHandleBuffer[60]; /* 0x0c4 0x140 */
+#elif defined(__i386__)
+    DWORD GdiHandleBuffer[34]; /* 0x0c4 0x140 */
+#else
+#    warning Unsupported architecture
+#endif
+    void *PostProcessInitRoutine; /* 0x014c 0x230 */
+    void *TlsExpansionBitmap; /* 0x150 0x238 */
+    DWORD TlsExpansionBitmapBits[32]; /* 0x154 0x240 */
     ULONG SessionId; /* 0x1d4 0x2c0 */
 } PEB, *PPEB;
 
@@ -116,16 +181,21 @@ typedef struct _NT_TIB_redef {
 
 #pragma pack(push,1)
 typedef struct _TEB_internal {
-    NT_TIB NtTib; /* 0x00 0x00 */
-    PVOID EnvironmentPointer; /* 0x1c 0x38 */
-    CLIENT_ID ClientId; /* 0x20 0x40 */
-    PVOID ActiveRpcHandle; /* 0x28 0x50 */
-    PVOID ThreadLocalStoragePointer; /* 0x2c 0x58 */
-    PPEB ProcessEnvironmentBlock; /* 0x30 0x60 */
-    ULONG LastErrorValue; /* 0x38 0x68 */
-    /* On WoW64, there is a function pointer to an x86-64 syscall wrapper
-     * at offset 0xc0 (defined as "void* WOW32Reserved").
-     */
+    NT_TIB NtTib; /* 0x000 0x000 */
+    PVOID EnvironmentPointer; /* 0x01c 0x038 */
+    CLIENT_ID ClientId; /* 0x020 0x040 */
+    PVOID ActiveRpcHandle; /* 0x028 0x050 */
+    PVOID ThreadLocalStoragePointer; /* 0x02c 0x058 */
+    PPEB ProcessEnvironmentBlock; /* 0x030 0x060 */
+    ULONG LastErrorValue; /* 0x034 0x068 */
+    DWORD CountOfOwnedCriticalSections; /* 0x038 0x06c */
+    void *CsrClientThread; /* 0x03c 0x070 */
+    void *Win32ThreadInfo; /* 0x040 0x078 */
+    DWORD User32Reserved[26]; /* 0x044 0x080 */
+    DWORD UserReserved[5]; /* 0x0ac 0x0e8 */
+    void *WOW32Reserved; /* 0x0c0 0x100 On WoW64, this is a function pointer to an x86-64 syscall wrapper */
+    DWORD CurrentLocale; /* 0x0c4 0x108 */
+    DWORD FpSoftwareStatusRegister; /* 0x0c8 0x10c */
 } TEB_internal, *PTEB_internal;
 #pragma pack(pop)
 

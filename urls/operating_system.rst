@@ -51,6 +51,8 @@ Windows
   Credentials gathering tool automating remote procdump and parse of lsass process
 * https://live.sysinternals.com/
   File share allowing access to all Sysinternals utilities
+* https://ntdiff.github.io/ and https://github.com/ntdiff
+  Compare Windows kernel structures across versions
 
 Apple
 -----

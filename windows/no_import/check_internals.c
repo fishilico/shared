@@ -69,6 +69,27 @@ int _tmain(void)
     BOOL bRet, bHasKernelBase, bHasWow64CPU = FALSE;
     int i;
 
+    /* Check internal structure offsets */
+#if defined(__x86_64)
+    BUILTTIME_ASSERT(FIELD_OFFSET(PEB, ProcessHeap) == 0x30);
+    BUILTTIME_ASSERT(FIELD_OFFSET(PEB, UserSharedInfoPtr) == 0x58);
+    BUILTTIME_ASSERT(FIELD_OFFSET(PEB, OSMajorVersion) == 0x118);
+    BUILTTIME_ASSERT(FIELD_OFFSET(PEB, ImageSubsystem) == 0x128);
+    BUILTTIME_ASSERT(FIELD_OFFSET(PEB, SessionId) == 0x2c0);
+    BUILTTIME_ASSERT(FIELD_OFFSET(NT_TIB, Self) == 0x30);
+    BUILTTIME_ASSERT(FIELD_OFFSET(TEB_internal, ProcessEnvironmentBlock) == 0x60);
+#elif defined(__i386__)
+    BUILTTIME_ASSERT(FIELD_OFFSET(PEB, ProcessHeap) == 0x18);
+    BUILTTIME_ASSERT(FIELD_OFFSET(PEB, UserSharedInfoPtr) == 0x2c);
+    BUILTTIME_ASSERT(FIELD_OFFSET(PEB, OSMajorVersion) == 0xa4);
+    BUILTTIME_ASSERT(FIELD_OFFSET(PEB, ImageSubsystem) == 0xb4);
+    BUILTTIME_ASSERT(FIELD_OFFSET(PEB, SessionId) == 0x1d4);
+    BUILTTIME_ASSERT(FIELD_OFFSET(NT_TIB, Self) == 0x18);
+    BUILTTIME_ASSERT(FIELD_OFFSET(TEB_internal, ProcessEnvironmentBlock) == 0x30);
+#else
+#    warning Unsupported architecture
+#endif
+
     /* Use public API */
     hProcess = GetCurrentProcess();
     hNtDll = LoadLibrary(TEXT("ntdll.dll"));
@@ -308,6 +329,8 @@ int _tmain(void)
     printf("Process heap is at %p\n", pPeb->ProcessHeap);
 
     printf("Number of processors: %lu\n", pPeb->NumberOfProcessors);
+
+    printf("User32 shared info: %p\n", pPeb->UserSharedInfoPtr);
 
     /* Check OS version info */
     printf("OS version %lu.%lu build %u CSD %u\n",
