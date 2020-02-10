@@ -3,10 +3,10 @@
  *
  * Documentation:
  * * MSDN articles:
- *   * https://msdn.microsoft.com/en-us/library/windows/desktop/aa379597(v=vs.85).aspx "SID Components"
- *   * https://msdn.microsoft.com/en-us/library/windows/desktop/aa379649(v=vs.85).aspx "Well-known SIDs"
- *   * https://msdn.microsoft.com/en-us/library/cc980032.aspx "Well-Known SID Structures"
- *   * https://msdn.microsoft.com/en-us/library/cc237940.aspx "SID Filtering and Claims Transformation"
+ *   * https://docs.microsoft.com/en-us/windows/win32/secauthz/sid-components "SID Components"
+ *   * https://docs.microsoft.com/en-us/windows/win32/secauthz/well-known-sids "Well-known SIDs"
+ *   * https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/81d92bba-d22b-4a8c-908a-554ab29148ab "Well-Known SID Structures"
+ *   * https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/55fc19f2-55ba-4251-8a6a-103dd7c66280 "SID Filtering and Claims Transformation"
  *   * https://support.microsoft.com/en-us/help/243330/well-known-security-identifiers-in-windows-operating-systems
  * * CreateWellKnownSid function
  * * Wine: http://source.winehq.org/git/wine.git/blob/HEAD:/dlls/advapi32/security.c
@@ -22,6 +22,12 @@
  *    sed -n 's,^\(S-[^ =]\+\( [^ =]\+\)*\) *= *\([^\r]*\),s!\\(show_[0-9a-zA-Z_]*sid.*"\3".*;\\).*!\\1 /''* \1 *''/!,p' < a.txt > b.sed
  *    sed -f b.sed -i well_known_sids.c
  */
+
+/* Use Windows 10 compatibility by default in order to get more macros */
+#if !defined(_WIN32_WINNT) && defined(_WIN32_WINNT_WIN10)
+#    define _WIN32_WINNT _WIN32_WINNT_WIN10
+#endif
+
 #include "common.h"
 #include <sddl.h>
 
@@ -163,12 +169,16 @@ int _tmain(void)
     SID_IDENTIFIER_AUTHORITY SIDAuthNonUnique = { SECURITY_NON_UNIQUE_AUTHORITY };
     SID_IDENTIFIER_AUTHORITY SIDAuthNt = { SECURITY_NT_AUTHORITY };
 
-    show_sid1(_T("Null"), &SIDAuthNull, SECURITY_NULL_RID); /* S-1-0-0 */
+    show_sid0(_T("Null Authority"), &SIDAuthNull); /* S-1-0 */
+    show_sid1(_T("Null/Nobody"), &SIDAuthNull, SECURITY_NULL_RID); /* S-1-0-0 */
+    show_sid0(_T("World Authority"), &SIDAuthWorld); /* S-1-1 */
     show_sid1(_T("World/Everyone"), &SIDAuthWorld, SECURITY_WORLD_RID); /* S-1-1-0 */
 
+    show_sid0(_T("Local Authority"), &SIDAuthLocal); /* S-1-2 */
     show_sid1(_T("Local"), &SIDAuthLocal, SECURITY_LOCAL_RID); /* S-1-2-0 */
-    show_sid1(_T("Local Logon"), &SIDAuthLocal, SECURITY_LOCAL_LOGON_RID); /* S-1-2-1 */
+    show_sid1(_T("Local Logon (Console Logon)"), &SIDAuthLocal, SECURITY_LOCAL_LOGON_RID); /* S-1-2-1 */
 
+    show_sid0(_T("Creator Authority"), &SIDAuthCreator); /* S-1-3 */
     show_sid1(_T("Creator Owner"), &SIDAuthCreator, SECURITY_CREATOR_OWNER_RID); /* S-1-3-0 */
     show_sid1(_T("Creator Group"), &SIDAuthCreator, SECURITY_CREATOR_GROUP_RID); /* S-1-3-1 */
     show_sid1(_T("Creator Owner Server"), &SIDAuthCreator, SECURITY_CREATOR_OWNER_SERVER_RID); /* S-1-3-2 */
@@ -182,16 +192,16 @@ int _tmain(void)
     show_sid1(_T("Network"), &SIDAuthNt, SECURITY_NETWORK_RID); /* S-1-5-2 */
     show_sid1(_T("Batch"), &SIDAuthNt, SECURITY_BATCH_RID); /* S-1-5-3 */
     show_sid1(_T("Interactive"), &SIDAuthNt, SECURITY_INTERACTIVE_RID); /* S-1-5-4 */
-    show_sid1(_T("Logon IDs prefix"), &SIDAuthNt, SECURITY_LOGON_IDS_RID); /* S-1-5-5 */
+    show_sid1(_T("Logon Session IDs prefix"), &SIDAuthNt, SECURITY_LOGON_IDS_RID); /* S-1-5-5 */
     show_sid1(_T("Service"), &SIDAuthNt, SECURITY_SERVICE_RID); /* S-1-5-6 */
     show_sid1(_T("Anonymous Logon"), &SIDAuthNt, SECURITY_ANONYMOUS_LOGON_RID); /* S-1-5-7 */
     show_sid1(_T("Proxy"), &SIDAuthNt, SECURITY_PROXY_RID); /* S-1-5-8 */
-    show_sid1(_T("Enterprise Controllers"), &SIDAuthNt, SECURITY_ENTERPRISE_CONTROLLERS_RID); /* S-1-5-9 */
+    show_sid1(_T("Enterprise Domain Controllers (EDC)"), &SIDAuthNt, SECURITY_ENTERPRISE_CONTROLLERS_RID); /* S-1-5-9 */
     show_sid1(_T("Principal Self"), &SIDAuthNt, SECURITY_PRINCIPAL_SELF_RID); /* S-1-5-10 */
     show_sid1(_T("Authenticated User"), &SIDAuthNt, SECURITY_AUTHENTICATED_USER_RID); /* S-1-5-11 */
     show_sid1(_T("Restricted Code"), &SIDAuthNt, SECURITY_RESTRICTED_CODE_RID); /* S-1-5-12 */
-    show_sid1(_T("Terminal Server"), &SIDAuthNt, SECURITY_TERMINAL_SERVER_RID); /* S-1-5-13 */
-    show_sid1(_T("Remote Logon"), &SIDAuthNt, SECURITY_REMOTE_LOGON_RID); /* S-1-5-14 */
+    show_sid1(_T("Terminal Server Users"), &SIDAuthNt, SECURITY_TERMINAL_SERVER_RID); /* S-1-5-13 */
+    show_sid1(_T("Remote Interactive Logon"), &SIDAuthNt, SECURITY_REMOTE_LOGON_RID); /* S-1-5-14 */
     show_sid1(_T("This Organization"), &SIDAuthNt, SECURITY_THIS_ORGANIZATION_RID); /* S-1-5-15 */
     show_sid1(_T("IUser"), &SIDAuthNt, SECURITY_IUSER_RID); /* S-1-5-17 */
     show_sid1(_T("Local System"), &SIDAuthNt, SECURITY_LOCAL_SYSTEM_RID); /* S-1-5-18 */
@@ -202,7 +212,7 @@ int _tmain(void)
     /* Details S-1-5-21-a-b-c-RID SIDs */
     show_sid5(_T("Compounded Authentication"), &SIDAuthNt, SECURITY_NT_NON_UNIQUE, 0, 0, 0, DOMAIN_GROUP_RID_AUTHORIZATION_DATA_IS_COMPOUNDED); /* S-1-5-21-0-0-0-496 */
     show_sid5(_T("Claims Valid"), &SIDAuthNt, SECURITY_NT_NON_UNIQUE, 0, 0, 0, DOMAIN_GROUP_RID_AUTHORIZATION_DATA_CONTAINS_CLAIMS); /* S-1-5-21-0-0-0-497 */
-    show_nonunique_sid(_T("Read-Only Domain Controllers Group"), _T("root domain"), DOMAIN_GROUP_RID_ENTERPRISE_READONLY_DOMAIN_CONTROLLERS); /* S-1-5-21-<root domain>-498 */
+    show_nonunique_sid(_T("Enterprise Read-Only Domain Controllers Group"), _T("root domain"), DOMAIN_GROUP_RID_ENTERPRISE_READONLY_DOMAIN_CONTROLLERS); /* S-1-5-21-<root domain>-498 */
     show_nonunique_sid(_T("Administrator"), _T("machine domain"), DOMAIN_USER_RID_ADMIN); /* S-1-5-21-<machine domain>-500 */
     show_nonunique_sid(_T("Guest"), _T("machine domain"), DOMAIN_USER_RID_GUEST); /* S-1-5-21-<machine domain>-501 */
     show_nonunique_sid(_T("Krbtgt"), _T("machine domain"), DOMAIN_USER_RID_KRBTGT); /* S-1-5-21-<machine domain>-502 */
@@ -223,6 +233,8 @@ int _tmain(void)
     show_nonunique_sid(_T("Key Admins"), _T("domain"), DOMAIN_GROUP_RID_KEY_ADMINS); /* S-1-5-21-<domain>-526 */
     show_nonunique_sid(_T("Enterprise Key Admins"), _T("domain"), DOMAIN_GROUP_RID_ENTERPRISE_KEY_ADMINS); /* S-1-5-21-<domain>-527 */
     show_nonunique_sid(_T("RAS (Remote Access Services) Servers"), _T("domain"), DOMAIN_ALIAS_RID_RAS_SERVERS); /* S-1-5-21-<domain>-553 */
+    show_nonunique_sid(_T("Allowed RODC Password Replication Group"), _T("domain"), DOMAIN_ALIAS_RID_CACHEABLE_PRINCIPALS_GROUP); /* S-1-5-21-<domain>-571 */
+    show_nonunique_sid(_T("Denied RODC Password Replication Group"), _T("domain"), DOMAIN_ALIAS_RID_NON_CACHEABLE_PRINCIPALS_GROUP); /* S-1-5-21-<domain>-572 */
 
     show_sid1(_T("Enterprise Read-Only Controllers"), &SIDAuthNt, SECURITY_ENTERPRISE_READONLY_CONTROLLERS_RID); /* S-1-5-22 */
     show_sid1(_T("Built-in System Domain"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID); /* S-1-5-32 */
@@ -245,7 +257,7 @@ int _tmain(void)
     show_sid2(_T("Built-in Guests"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_GUESTS); /* S-1-5-32-546 */
     show_sid2(_T("Built-in Power Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_POWER_USERS); /* S-1-5-32-547 */
     show_sid2(_T("Built-in Account Operators"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ACCOUNT_OPS); /* S-1-5-32-548 */
-    show_sid2(_T("Built-in System Operators"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_SYSTEM_OPS); /* S-1-5-32-549 */
+    show_sid2(_T("Built-in System Operators (Server Operators)"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_SYSTEM_OPS); /* S-1-5-32-549 */
     show_sid2(_T("Built-in Printer Operators"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_PRINT_OPS); /* S-1-5-32-550 */
     show_sid2(_T("Built-in Backup Operators"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_BACKUP_OPS); /* S-1-5-32-551 */
     show_sid2(_T("Built-in Replicator"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_REPLICATOR); /* S-1-5-32-552 */
@@ -254,26 +266,30 @@ int _tmain(void)
     show_sid2(_T("Built-in Remote Desktop Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_REMOTE_DESKTOP_USERS); /* S-1-5-32-555 */
     show_sid2(_T("Built-in Network Configuration Operators"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_NETWORK_CONFIGURATION_OPS); /* S-1-5-32-556 */
     show_sid2(_T("Built-in Incoming Forest Trust Builders"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_INCOMING_FOREST_TRUST_BUILDERS); /* S-1-5-32-557 */
-    show_sid2(_T("Built-in Perf Monitoring Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_MONITORING_USERS); /* S-1-5-32-558 */
-    show_sid2(_T("Built-in Perf Logging Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_LOGGING_USERS); /* S-1-5-32-559 */
-    show_sid2(_T("Built-in Authorization Access"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_AUTHORIZATIONACCESS); /* S-1-5-32-560 */
+    show_sid2(_T("Built-in Performance Monitoring Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_MONITORING_USERS); /* S-1-5-32-558 */
+    show_sid2(_T("Built-in Performance Logging Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_LOGGING_USERS); /* S-1-5-32-559 */
+    show_sid2(_T("Built-in Authorization Access Group"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_AUTHORIZATIONACCESS); /* S-1-5-32-560 */
     show_sid2(_T("Built-in Terminal Server License Servers"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_TS_LICENSE_SERVERS); /* S-1-5-32-561 */
-    show_sid2(_T("Built-in DCOM Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_DCOM_USERS); /* S-1-5-32-562 */
+    show_sid2(_T("Built-in DCOM (Distributed COM) Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_DCOM_USERS); /* S-1-5-32-562 */
     show_sid2(_T("Built-in Internet Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_IUSERS); /* S-1-5-32-568 */
     show_sid2(_T("Built-in Cryptographic Operators"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_CRYPTO_OPERATORS); /* S-1-5-32-569 */
     show_sid2(_T("Built-in Cacheable Principals Group"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_CACHEABLE_PRINCIPALS_GROUP); /* S-1-5-32-571 */
     show_sid2(_T("Built-in Non-Cacheable Principals Group"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_NON_CACHEABLE_PRINCIPALS_GROUP); /* S-1-5-32-572 */
     show_sid2(_T("Built-in Event Log Readers Group"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_EVENT_LOG_READERS_GROUP); /* S-1-5-32-573 */
-    show_sid2(_T("Built-in CertSVC DCOM Access Group"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_CERTSVC_DCOM_ACCESS_GROUP); /* S-1-5-32-574 */
-    show_sid2(_T("Built-in Remote Access Servers"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_RDS_REMOTE_ACCESS_SERVERS); /* S-1-5-32-575 */
-    show_sid2(_T("Built-in Endpoint Servers"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_RDS_ENDPOINT_SERVERS); /* S-1-5-32-576 */
-    show_sid2(_T("Built-in Management Servers"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_RDS_MANAGEMENT_SERVERS); /* S-1-5-32-577 */
+    show_sid2(_T("Built-in CertSVC (Certificate Service) DCOM Access Group"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_CERTSVC_DCOM_ACCESS_GROUP); /* S-1-5-32-574 */
+    show_sid2(_T("Built-in RDS Remote Access Servers"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_RDS_REMOTE_ACCESS_SERVERS); /* S-1-5-32-575 */
+    show_sid2(_T("Built-in RDS Endpoint Servers"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_RDS_ENDPOINT_SERVERS); /* S-1-5-32-576 */
+    show_sid2(_T("Built-in RDS Management Servers"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_RDS_MANAGEMENT_SERVERS); /* S-1-5-32-577 */
     show_sid2(_T("Built-in Hyper V Admins"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_HYPER_V_ADMINS); /* S-1-5-32-578 */
-    show_sid2(_T("Built-in Access Control Assistance Ops"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ACCESS_CONTROL_ASSISTANCE_OPS); /* S-1-5-32-579 */
+    show_sid2(_T("Built-in Access Control Assistance Operators"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ACCESS_CONTROL_ASSISTANCE_OPS); /* S-1-5-32-579 */
     show_sid2(_T("Built-in Remote Management Users"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_REMOTE_MANAGEMENT_USERS); /* S-1-5-32-580 */
+    show_sid2(_T("Built-in Default Account"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_DEFAULT_ACCOUNT); /* S-1-5-32-581 */
+    show_sid2(_T("Built-in Storage Replica Admins"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_STORAGE_REPLICA_ADMINS); /* S-1-5-32-582 */
+    show_sid2(_T("Built-in Device Owners"), &SIDAuthNt, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_DEVICE_OWNERS); /* S-1-5-32-583 */
 
     show_sid1(_T("Write Restricted Code"), &SIDAuthNt, SECURITY_WRITE_RESTRICTED_CODE_RID); /* S-1-5-33 */
 
+    show_sid1(_T("Security Providers"), &SIDAuthNt, SECURITY_PACKAGE_BASE_RID); /* S-1-5-64 */
     show_sid2(_T("NTLM Authentication"), &SIDAuthNt, SECURITY_PACKAGE_BASE_RID, SECURITY_PACKAGE_NTLM_RID); /* S-1-5-64-10 */
     show_sid2(_T("SChannel Authentication"), &SIDAuthNt, SECURITY_PACKAGE_BASE_RID, SECURITY_PACKAGE_SCHANNEL_RID); /* S-1-5-64-14 */
     show_sid2(_T("Digest Authentication"), &SIDAuthNt, SECURITY_PACKAGE_BASE_RID, SECURITY_PACKAGE_DIGEST_RID); /* S-1-5-64-21 */
@@ -284,7 +300,7 @@ int _tmain(void)
 
     show_sid1(_T("NT Service Account prefix"), &SIDAuthNt, SECURITY_SERVICE_ID_BASE_RID); /* S-1-5-80 */
     show_sid1(_T("App Pool ID prefix"), &SIDAuthNt, SECURITY_APPPOOL_ID_BASE_RID); /* S-1-5-82 */
-    show_sid1(_T("Virtual Service ID prefix"), &SIDAuthNt, SECURITY_VIRTUALSERVER_ID_BASE_RID); /* S-1-5-83 */
+    show_sid1(_T("Virtual Service (Virtual Machine) ID prefix"), &SIDAuthNt, SECURITY_VIRTUALSERVER_ID_BASE_RID); /* S-1-5-83 */
     show_sid1(_T("User Mode Driver ID prefix"), &SIDAuthNt, SECURITY_USERMODEDRIVERHOST_ID_BASE_RID); /* S-1-5-84 */
     show_sid1(_T("Cloud Infrastructure Services ID prefix"), &SIDAuthNt, SECURITY_CLOUD_INFRASTRUCTURE_SERVICES_ID_BASE_RID); /* S-1-5-85 */
     show_sid1(_T("WMI Host ID prefix"), &SIDAuthNt, SECURITY_WMIHOST_ID_BASE_RID); /* S-1-5-86 */
@@ -294,6 +310,7 @@ int _tmain(void)
     show_sid1(_T("Window Manager ID prefix"), &SIDAuthNt, SECURITY_WINDOW_MANAGER_BASE_RID); /* S-1-5-90 */
     show_sid1(_T("RDV GFX ID prefix"), &SIDAuthNt, SECURITY_RDV_GFX_BASE_RID); /* S-1-5-91 */
     show_sid1(_T("DAS Host ID prefix"), &SIDAuthNt, SECURITY_DASHOST_ID_BASE_RID); /* S-1-5-92 */
+/* TODO: FontDrvHost.exe SID: S-1-5-96-0-3 is "Font Driver Host\UMFD-3" */
 
     show_sid1(_T("Windows Mobile ID prefix"), &SIDAuthNt, SECURITY_WINDOWSMOBILE_ID_BASE_RID); /* S-1-5-112 */
     show_sid1(_T("Local Accounts Group"), &SIDAuthNt, SECURITY_LOCAL_ACCOUNT_RID); /* S-1-5-113 */
@@ -301,18 +318,51 @@ int _tmain(void)
 
     show_sid1(_T("Other Organization"), &SIDAuthNt, SECURITY_OTHER_ORGANIZATION_RID); /* S-1-5-1000 */
 
+    /* From Microsoft documentation, without macros */
+    {
+        SID_IDENTIFIER_AUTHORITY SIDAuthSiteServer = { {0, 0, 0, 0, 0, 6} };
+        SID_IDENTIFIER_AUTHORITY SIDAuthInternetSite = { {0, 0, 0, 0, 0, 7} };
+        SID_IDENTIFIER_AUTHORITY SIDAuthExchange = { {0, 0, 0, 0, 0, 8} };
+        show_sid0(_T("Site Server Authority"), &SIDAuthSiteServer); /* S-1-6 */
+        show_sid0(_T("Internet Site Authority"), &SIDAuthInternetSite); /* S-1-7 */
+        show_sid0(_T("Exchange Authority"), &SIDAuthExchange); /* S-1-8 */
+    }
+
 #ifdef SECURITY_RESOURCE_MANAGER_AUTHORITY
     {
         SID_IDENTIFIER_AUTHORITY SIDAuthRsrcMan = { SECURITY_RESOURCE_MANAGER_AUTHORITY };
         show_sid0(_T("Resource Manager Authority"), &SIDAuthRsrcMan); /* S-1-9 */
     }
 #endif
+
+    /* From Microsoft documentation, without macros */
+    {
+        SID_IDENTIFIER_AUTHORITY SIDAuthPassport = { {0, 0, 0, 0, 0, 10} };
+        show_sid0(_T("Passport Authority"), &SIDAuthPassport); /* S-1-10 */
+    }
+
 #ifdef SECURITY_APP_PACKAGE_AUTHORITY
     {
         SID_IDENTIFIER_AUTHORITY SIDAuthAppPackage = { SECURITY_APP_PACKAGE_AUTHORITY };
         show_sid0(_T("App Package Authority"), &SIDAuthAppPackage); /* S-1-15 */
         show_sid2(_T("All App Packages"), &SIDAuthAppPackage, SECURITY_APP_PACKAGE_BASE_RID, SECURITY_BUILTIN_PACKAGE_ANY_PACKAGE); /* S-1-15-2-1 */
         show_sid2(_T("Any Restricted App Packages"), &SIDAuthAppPackage, SECURITY_APP_PACKAGE_BASE_RID, SECURITY_BUILTIN_PACKAGE_ANY_RESTRICTED_PACKAGE); /* S-1-15-2-2 */
+
+        /* Capability SIDs introduced by Windows 8 */
+        show_sid1(_T("Capability SID Prefix"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID); /* S-1-15-3 */
+        show_sid2(_T("Internet Client Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_INTERNET_CLIENT); /* S-1-15-3-1 */
+        show_sid2(_T("Internet Client Server Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_INTERNET_CLIENT_SERVER); /* S-1-15-3-2 */
+        show_sid2(_T("Private Network Client Server Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_PRIVATE_NETWORK_CLIENT_SERVER); /* S-1-15-3-3 */
+        show_sid2(_T("Pictures Library Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_PICTURES_LIBRARY); /* S-1-15-3-4 */
+        show_sid2(_T("Videos Library Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_VIDEOS_LIBRARY); /* S-1-15-3-5 */
+        show_sid2(_T("Music Library Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_MUSIC_LIBRARY); /* S-1-15-3-6 */
+        show_sid2(_T("Documents Library Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_DOCUMENTS_LIBRARY); /* S-1-15-3-7 */
+        show_sid2(_T("Enterprise Authentication Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_ENTERPRISE_AUTHENTICATION); /* S-1-15-3-8 */
+        show_sid2(_T("Shared User Certificates Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_SHARED_USER_CERTIFICATES); /* S-1-15-3-9 */
+        show_sid2(_T("Removable Storage Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_REMOVABLE_STORAGE); /* S-1-15-3-10 */
+        show_sid2(_T("Appointments Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_APPOINTMENTS); /* S-1-15-3-11 */
+        show_sid2(_T("Contacts Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_CONTACTS); /* S-1-15-3-12 */
+        show_sid2(_T("Internet Explorer Capability"), &SIDAuthAppPackage, SECURITY_CAPABILITY_BASE_RID, SECURITY_CAPABILITY_INTERNET_EXPLORER); /* S-1-15-3-4096 */
     }
 #endif
 #ifdef SECURITY_MANDATORY_LABEL_AUTHORITY
@@ -341,9 +391,9 @@ int _tmain(void)
         show_sid0(_T("Authentication Authority"), &SIDAuthAuthentication); /* S-1-18 */
         show_sid1(_T("Authentication Authority Asserted Identity"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_AUTHORITY_ASSERTED_RID); /* S-1-18-1 */
         show_sid1(_T("Service Asserted Identity"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_SERVICE_ASSERTED_RID); /* S-1-18-2 */
-        show_sid1(_T("Fresh Key Auth"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_FRESH_KEY_AUTH_RID); /* S-1-18-3 */
-        show_sid1(_T("Key Trust"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_KEY_TRUST_RID); /* S-1-18-4 */
-        show_sid1(_T("Key Property MFA"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_KEY_PROPERTY_MFA_RID); /* S-1-18-5 */
+        show_sid1(_T("Fresh Public Key Identity"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_FRESH_KEY_AUTH_RID); /* S-1-18-3 */
+        show_sid1(_T("Key Trust Identity"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_KEY_TRUST_RID); /* S-1-18-4 */
+        show_sid1(_T("Key Property MFA (Multifactor Authentication)"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_KEY_PROPERTY_MFA_RID); /* S-1-18-5 */
         show_sid1(_T("Key Property Attestation"), &SIDAuthAuthentication, SECURITY_AUTHENTICATION_KEY_PROPERTY_ATTESTATION_RID); /* S-1-18-6 */
     }
 #endif
