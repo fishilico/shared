@@ -45,6 +45,12 @@ Windows
   The Windows Research Kernel (WRK)
 * https://www.microsoft.com/en-us/securityengineering/sdl/practices
   Microsoft Security Development Lifecycle Practices
+* https://github.com/LOLBAS-Project/LOLBAS
+  Living Off The Land Binaries And Scripts - (LOLBins and LOLScripts)
+* https://github.com/aas-n/spraykatz
+  Credentials gathering tool automating remote procdump and parse of lsass process
+* https://live.sysinternals.com/
+  File share allowing access to all Sysinternals utilities
 
 Apple
 -----
@@ -67,6 +73,8 @@ Microkernels and unikernels
   A Unikernel Firewall for QubesOS
 * https://github.com/nebulet/nebulet
   A microkernel that implements a WebAssembly "usermode" that runs in Ring 0
+* https://github.com/cetic/unikernels
+  Unikernel and immutable infrastructures
 
 Other
 -----
@@ -77,5 +85,7 @@ Other
   Microsoft Malware Encyclopedia
 * http://seclists.org/fulldisclosure/
   Full Disclosure Mailing List
+* https://jvns.ca/blog/2013/12/04/day-37-how-a-keyboard-works/
+  Day 37: After 5 days, my OS doesn't crash when I press a key
 * https://blogs.gnome.org/hughsie/2019/11/18/google-and-fwupd/
   Google and fwupd sitting in a tree

@@ -19,6 +19,8 @@ Fun stuff
   Take me to another useless website please
 * https://www.windy.com/
   Windy: Wind map & weather forecast
+* https://0ver.org/
+  ZeroVer: 0-based Versioning, Software's most popular versioning scheme!
 
 Other
 -----

@@ -105,6 +105,8 @@ Hacking
   Docker for Pentesters
 * https://github.com/naworkcaj/bdvl
   LD_PRELOAD Linux rootkit (x86 & ARM)
+* https://bitvijays.github.io/LFC-VulnerableMachines.html#unprivileged-shell-to-privileged-shell
+  CTF Series : Vulnerable Machines
 
 * Lists of programs that can be used for local privilege escalation:
 
@@ -149,6 +151,7 @@ Programming
   Google coding rules
 * http://mywiki.wooledge.org/BashFAQ Bash pitfalls
 * http://hyperpolyglot.org/unix-shells Unix Shells: Bash, Fish, Ksh, Tcsh, Zsh
+* http://www.etalabs.net/sh_tricks.html Rich’s sh (POSIX shell) tricks
 
 * https://wiki.debian.org/Hardening Debian hardening options
 
