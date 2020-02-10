@@ -199,6 +199,73 @@ typedef struct _TEB_internal {
 } TEB_internal, *PTEB_internal;
 #pragma pack(pop)
 
+typedef struct _KSYSTEM_TIME {
+    ULONG LowPart; /* 0 */
+    LONG High1Time; /* 4 */
+    LONG High2Time; /* 8 */
+} KSYSTEM_TIME, *PKSYSTEM_TIME; /* size: 0x000c */
+
+/* Shared user data at 0x7ffe0000, defined as MM_SHARED_USER_DATA_VA in Windows SDK.
+ * http://terminus.rewolf.pl/terminus/structures/ntdll/_KUSER_SHARED_DATA_combined.html
+ */
+typedef struct _KUSER_SHARED_DATA {
+    DWORD TickCountLowDeprecated; /* 0x000 */
+    DWORD TickCountMultiplier; /* 0x004 */
+    volatile KSYSTEM_TIME InterruptTime; /* 0x008 */
+    volatile KSYSTEM_TIME SystemTime; /* 0x014 time in units of 100 ns since January 1, 1601 */
+    volatile KSYSTEM_TIME TimeZoneBias; /* 0x020 */
+    WORD ImageNumberLow; /* 0x02c */
+    WORD ImageNumberHigh; /* 0x02e */
+    WCHAR NtSystemRoot[260]; /* 0x030 */
+    DWORD MaxStackTraceDepth; /* 0x238 */
+    DWORD CryptoExponent; /* 0x23c */
+    DWORD TimeZoneId; /* 0x240 */
+    DWORD LargePageMinimum; /* 0x244 */
+    DWORD AitSamplingValue; /* 0x248 */
+    DWORD AppCompatFlag; /* 0x24c */
+    unsigned __int64 RNGSeedVersion; /* 0x250 */
+    DWORD GlobalValidationRunlevel; /* 0x258 */
+    volatile DWORD TimeZoneBiasStamp; /* 0x25c */
+    DWORD NtBuildNumber; /* 0x260 */
+    DWORD NtProductType; /* 0x264 */
+    BYTE ProductTypeIsValid; /* 0x268 */
+    BYTE Reserved0[1]; /* 0x269 */
+    WORD NativeProcessorArchitecture; /* 0x26a */
+    DWORD NtMajorVersion; /* 0x26c */
+    DWORD NtMinorVersion; /* 0x270 */
+    BYTE ProcessorFeatures[64]; /* 0x274 */
+    DWORD Reserved1; /* 0x2b4 */
+    DWORD Reserved3; /* 0x2b8 */
+    volatile DWORD TimeSlip; /* 0x2bc */
+    DWORD AlternativeArchitecture; /* 0x2c0 */
+    DWORD BootId; /* 0x2c4 */
+    LARGE_INTEGER SystemExpirationDate; /* 0x2c8 */
+    DWORD SuiteMask; /* 0x2d0 */
+    BYTE KdDebuggerEnabled; /* 0x2d4 */
+    BYTE MitigationPolicies; /* 0x2d5 */
+    WORD CyclesPerYield; /* 0x2d6 */
+    volatile DWORD ActiveConsoleId; /* 0x2d8 */
+    volatile DWORD DismountCount; /* 0x2dc */
+    DWORD ComPlusPackage; /* 0x2e0 */
+    DWORD LastSystemRITEventTickCount; /* 0x2e4 */
+    DWORD NumberOfPhysicalPages; /* 0x2e8 */
+    BYTE SafeBootMode; /* 0x2ec */
+    BYTE VirtualizationFlags; /* 0x2ed */
+    BYTE Reserved12[2]; /* 0x2ee */
+    DWORD SharedDataFlags; /* 0x2f0 */
+    DWORD DataFlagsPad[1]; /* 0x2f4 */
+    unsigned __int64 TestRetInstruction; /* 0x2f8 */
+    unsigned __int64 QpcFrequency; /* 0x300 */
+    DWORD SystemCall; /* 0x308 */
+    DWORD UserCetAvailableEnvironments; /* 0x30c */
+    unsigned __int64 SystemCallPad[2]; /* 0x310 */
+    volatile KSYSTEM_TIME TickCount; /* 0x320 */
+    DWORD TickCountPad[1]; /* 0x32c */
+    DWORD Cookie; /* 0x330 for EncodeSystemPointer/DecodeSystemPointer */
+    DWORD CookiePad[1]; /* 0x334 */
+    unsigned __int64 ConsoleSessionForegroundProcessId; /* 0x338 */
+} KUSER_SHARED_DATA, *PKUSER_SHARED_DATA;
+
 static BOOL StringsEqualsA(LPCSTR str1, LPCSTR str2)
 {
     while (*str1 && *str1 == *str2) {

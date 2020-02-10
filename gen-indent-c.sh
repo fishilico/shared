@@ -89,6 +89,8 @@ IEnumWbemClassObject
 IUnknown
 IWbemClassObject
 IWbemServices
+KSYSTEM_TIME
+KUSER_SHARED_DATA
 LONG
 LPARAM
 LPCSTR

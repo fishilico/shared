@@ -78,6 +78,8 @@ exec indent \
     -T IUnknown \
     -T IWbemClassObject \
     -T IWbemServices \
+    -T KSYSTEM_TIME \
+    -T KUSER_SHARED_DATA \
     -T LONG \
     -T LPARAM \
     -T LPCSTR \
