@@ -5,6 +5,9 @@ LABEL Description="Gentoo Hardened with build dependencies for shared"
 #    https://gitweb.gentoo.org/repo/gentoo.git/tree/sci-mathematics/z3/z3-4.5.0.ebuild#n6
 #    contains: PYTHON_COMPAT=( python2_7 )
 
+# Compiling Rust requires more than 4GB of memory, which is unsuitable for small VMs/containers.
+# Therefore do not use Rust.
+
 # Override the language to force UTF-8 output
 ENV LANG en_US.UTF-8
 
@@ -43,7 +46,6 @@ RUN \
         gnome-base/librsvg \
         media-libs/harfbuzz \
         sys-libs/glibc \
-        virtual/rust \
         x11-libs/gdk-pixbuf \
         x11-libs/gtk+:2 \
         x11-libs/gtk+:3 \
