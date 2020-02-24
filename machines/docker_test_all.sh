@@ -69,14 +69,19 @@ test_dockerfile() {
         if [ "$NEW_IMAGE_ID" != "$PREVIOUS_IMAGE_ID" ]
         then
             PREV_IMAGE_LINE="$(docker images --format '{{.ID}} {{.Repository}}:{{.Tag}}' |grep "$PREVIOUS_IMAGE_ID")"
-            if [ "$PREV_IMAGE_LINE" != "$PREVIOUS_IMAGE_ID <none>:<none>" ]
+            if [ -z "$PREV_IMAGE_LINE" ]
+            then
+                # The previous image has been removed
+                echo "The previous image of $IMAGE_NAME ($PREVIOUS_IMAGE_ID) has already been removed"
+            elif [ "$PREV_IMAGE_LINE" != "$PREVIOUS_IMAGE_ID <none>:<none>" ]
             then
                 echo >&2 "Unexpected docker image line for previous image of $IMAGE_NAME ($PREVIOUS_IMAGE_ID):"
                 echo >&2 "    $PREV_IMAGE_LINE"
                 return 1
+            else
+                echo "Removing previous image of $IMAGE_NAME ($PREVIOUS_IMAGE_ID)"
+                docker rmi "$PREVIOUS_IMAGE_ID"
             fi
-            echo "Removing previous image of $IMAGE_NAME ($PREVIOUS_IMAGE_ID)"
-            docker rmi "$PREVIOUS_IMAGE_ID"
         fi
     fi
 
