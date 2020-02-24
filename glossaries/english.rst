@@ -131,12 +131,92 @@ IT systems
 * OEM = Original Equipment Manufacturer
 * OOB = Out-of-Band
 * OS = Operating System
+* PKI = Public Key Infrastructure
 * POSIX = Portable Operating System Interface
 * RAM = Random Access Memory
 * ROM = Read-Only Memory
 * SW = Software
 * USB = Universal Serial Bus
 * USB HID = Universal Serial Bus - Human Interface Device class
+
+Smart Cards
+~~~~~~~~~~~
+
+* ATR = Answer To Reset (response of a smartcard when powered on)
+* PC/SC = Personal Computer/Smart Card
+
+Microsoft Windows
+~~~~~~~~~~~~~~~~~
+
+* ALPC = Asynchronous Local Inter-Process Communication
+* AMSI = Anti Malware Scan Interface (scanning scripts such as PowerShell, JavaScript, etc.)
+* APC = Asynchronous Procedure Call (IRQL 1)
+* AS = Authentication Service (Kerberos protocol, an AS Request is used to request a TGT)
+* BCD = Boot Configuration Data
+* CLR = Common Language Runtime
+* CLSID = Class ID
+* COM = Component Object Model
+* CPL = Code Privilege Level
+* CS = Client/Server (Kerberos protocol)
+* CSP = Cryptographic Service Provider
+* CSRSS = Client/Server Runtime Subsystem (process that provides the user mode side of the Win32 subsystem)
+* DC = Domain Controller
+* DEP = Data Execution Prevention
+* DLL = Dynamic-Link Library
+* DPC = Deferred Procedure Call (IRQL 2)
+* ELAM = Early Launch Anti Malware
+* ETW = Event Tracing for Windows
+* FCL = Framework Class Library
+* GRL = Global Revocation List
+* IRQL = Interrupt Request Level
+* IUM = Isolated User Mode
+* KD = Kernel Debugger
+* KDC = Key Distribution Center (domain service that provides Authentication Service (AS) and Ticket-Granting Service (TGS), its security principal is ``krbtgt``)
+* KMCS = Kernel-Mode Code Signing
+* KMDF = Kernel-Mode Driver Framework
+* KRA = Key Recovery Agent
+* LANMAN = LAN Manager
+* LINQ = Language INtegrated Query
+* LM = LAN Manager (network operating system from 1987-1994 using weak password hashing algorithms, with 2 halves of 7 characters that encrypts using DES the string ``KGS!@#$%``)
+* LPC = Local Inter-Process Communication
+* LSA = Local Security Authority
+* LSASS = Local Security Authority Subsystem Service (process responsible for enforcing the security policy on the system)
+* MMC = Microsoft Management Console
+* MSGINA = Microsoft Graphical Identification And Authentication (DLL handling the graphical user interface of session login)
+* MSI = Microsoft Installer (file format)
+* NLA = Network Level Authentication (RDP with TLS)
+* NTLM = New Technology LAN Manager (series of protocol using the MD4 of the little endian UTF-16 Unicode password as hashing algorithm)
+* NTLM SSP = NTLM Security Support Provider (network protocol to authenticate users and establish cryptographic keys, before Kerberos)
+* PAC = Privilege Attribute Certificate (Kerberos protocol)
+* PDB = Program Database (file with debug symbols)
+* PDC = Primary Domain Controller
+* PE = Portable Executable (file format)
+* PG = PatchGuard
+* PKINIT = Public Key Cryptography for Initial Authentication in Kerberos (RFC 4556)
+* PPL = Protected Process Light
+* RDP = Remote Desktop Protocol
+* RPC = Remote Procedure Call
+* RPL = Ring Privilege Level
+* SAM = Security Account Manager (database file that stores users' passwords, in ``%SystemRoot%/system32/config/SAM`` and monted on ``registry:HKLM\SAM``)
+* SGRB = Windows Defender System Guard Runtime Broker (previously "Octagon")
+* SID = User Security ID
+* SMSS = Session Manager Subsystem (process that creates environment variables, starts the Win32 subsystem, starts ``winlogon.exe``, etc.)
+* SSP = Security Support Provider
+* SUA = Windows Subsystem for Unix Architecture (deprecated)
+* TGS = Ticket-Granting Service (Kerberos protocol)
+* TGT = Ticket-Granting Ticket (Kerberos protocol)
+* TSC = Terminal Server Client (``mstsc.exe``)
+* TSE = Terminal Server Edition (RDP server)
+* TSG = Terminal Server Gateway (RDP proxy)
+* UMCI = User-Mode Code Integrity
+* UMDF = User-Mode Driver Framework
+* VSM = Virtual Secure Mode
+* VTL = Virtual Trust Level
+* WDF = Windows Driver Frameworks
+* WMI = Windows Management Instrumentation
+* WSL = Windows Subsystem for Linux
+* WSUS = Windows Server Update Services
+* XAML = Extensible Application Markup Language
 
 
 Networks and the Internet
@@ -181,6 +261,7 @@ Networks and the Internet
 * JSON = JavaScript Object Notation
 * L2CAP = Logical Link Control and Adaptation Protocol (Bluetooth protocol)
 * LAN = Local Area Network
+* LDAP = Lightweight Directory Access Protocol
 * LLCP = Logical Link Control Protocol (OSI layer-2 protocol to support peer-to-peer communication between two NFC-enabled devices)
 * NDEF = NFC Data Exchange Format
 * NFC = Near-Field Communication
@@ -214,6 +295,9 @@ Cryptography
 ------------
 
 * AES = Advanced Encryption Standard
+* CDP = CRL Distribution Point
+* CRL = Certificate Revocation List
+* EKU = Extended Key Usage (X.509 certificate field)
 * HMAC = Hash-based Message Authentication Code
 * MIC = Message Integrity Check
 * SHA = Secure Hash Algorithm
@@ -261,6 +345,9 @@ Low-level computer architecture
 * MOSI = Master Out Slave In (SPI bus)
 * MTD = Memory Technology Device
 * NIC = Network Interface Controller
+* NUMA = Non-Uniform Memory Access
+* NVDIMM = Non-Volatile Dual In-line Memory Module
+* PAE = Physical Address Extension/Page Address Extension (x86 32-bit)
 * PCH = Platform Controller Hub (Intel)
 * PCIe = Peripheral Component Interconnect Express
 * PFAT = Platform Flash Armoring Technology (Intel BIOS Guard)
@@ -275,6 +362,8 @@ Low-level computer architecture
 * SMBus = System Management Bus
     A simple two-wire bus derived from I²C.
 
+* SMP = Symmetric Multiprocessing (CPU)
+* SMT = Simultaneous Multithreading (CPU)
 * SoC = System on Chip
 * SoM = System on Module
 * SPI = Serial Peripheral Interface
