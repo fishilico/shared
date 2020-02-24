@@ -202,6 +202,7 @@ pkg fwupd
 pkg gpm
 pkg iw
 pkg kbd
+pkg libfido2
 pkg lm_sensors
 pkg lshw
 pkg pciutils
@@ -363,6 +364,7 @@ then
     pkg ttf-fira-code
     pkg ttf-fira-mono
     pkg ttf-fira-sans
+    pkg ttf-font-awesome
     pkg ttf-inconsolata
     pkg ttf-liberation
     pkg ttf-ubuntu-font-family
@@ -444,7 +446,6 @@ then
     pkg zenity
 
     aurpkg burpsuite
-    aurpkg fontawesome.sty
     aurpkg restview
     aurpkg trickle
 
@@ -537,6 +538,7 @@ then
     pkg python-pew
     pkg python-pillow
     pkg python-pipenv
+    pkg python-pwntools
     pkg python-pycryptodome
     pkg python-pyelftools
     pkg python-pyflakes
@@ -554,7 +556,6 @@ then
     pkg python-unicorn
     pkg python-yaml
     pkg python-z3
-    pkg python2-netaddr
     pkg python2-pillow
     pkg python2-pycryptodome
     pkg python2-pycryptodomex
@@ -601,7 +602,6 @@ then
     aurpkg python-roca-detect
     aurpkg python-uncompyle6
     #aurpkg python-pwntools-git
-    aurpkg python2-pwntools
     aurpkg pyzbar
     aurpkg sasquatch
     aurpkg selinux-python
