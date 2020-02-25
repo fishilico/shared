@@ -1,0 +1,753 @@
+{
+  "shell32.dll.x86": {
+    "versions": {
+      "6.0.2900.5512_4802a111_817000_811c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208131857,
+          "timestamp_iso": "2008-04-14 02:10:57",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2090598400,
+          "size_of_image": 8482816,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 8461312,
+        "file_version": "6.0.2900.5512",
+        "product_version": "6.0.2900.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "6.00.2900.5512 (xpsp.080413-2105)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.00.2900.5512"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "69b3829b-b688-4926-a5b9-7bf04e812c6b",
+          "age": 2,
+          "path": "shell32.pdb"
+        }
+      },
+      "6.0.2900.5853_4a6e2673_817000_812200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1248732787,
+          "timestamp_iso": "2009-07-28 00:13:07",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2090598400,
+          "size_of_image": 8482816,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 8462848,
+        "file_version": "6.0.2900.5853",
+        "product_version": "6.0.2900.5853",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "6.00.2900.5853 (xpsp_sp3_qfe.090727-1747)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.00.2900.5853"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "9fc7c848-eae5-4ec7-8d36-2b106d23b297",
+          "age": 2,
+          "path": "shell32.pdb"
+        }
+      },
+      "6.0.2900.5853_4a6e3592_817000_811e00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1248736658,
+          "timestamp_iso": "2009-07-28 01:17:38",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2090598400,
+          "size_of_image": 8482816,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 8461824,
+        "file_version": "6.0.2900.5853",
+        "product_version": "6.0.2900.5853",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "6.00.2900.5853 (xpsp_sp3_gdr.090727-1736)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.00.2900.5853"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "661ab84b-91f6-4716-b4c9-6dff51522cf8",
+          "age": 2,
+          "path": "shell32.pdb"
+        }
+      },
+      "6.0.2900.6072_4d399b51_818000_812400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1295620945,
+          "timestamp_iso": "2011-01-21 15:42:25",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2090598400,
+          "size_of_image": 8486912,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 8463360,
+        "file_version": "6.0.2900.6072",
+        "product_version": "6.0.2900.6072",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "6.00.2900.6072 (xpsp_sp3_qfe.110121-1719)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.00.2900.6072"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "0ab38f10-a51d-45b5-9160-2b4442d8d623",
+          "age": 2,
+          "path": "shell32.pdb"
+        }
+      },
+      "6.0.2900.6072_4d399bd5_817000_812000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1295621077,
+          "timestamp_iso": "2011-01-21 15:44:37",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2090598400,
+          "size_of_image": 8482816,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 8462336,
+        "file_version": "6.0.2900.6072",
+        "product_version": "6.0.2900.6072",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "6.00.2900.6072 (xpsp_sp3_gdr.110121-1719)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.00.2900.6072"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "df59c75c-a10b-4bf8-9b44-7bb924c4292c",
+          "age": 2,
+          "path": "shell32.pdb"
+        }
+      },
+      "6.0.2900.6242_4fd20b10_818000_812600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1339165456,
+          "timestamp_iso": "2012-06-08 16:24:16",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2090598400,
+          "size_of_image": 8486912,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 8463872,
+        "file_version": "6.0.2900.6242",
+        "product_version": "6.0.2900.6242",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "6.00.2900.6242 (xpsp_sp3_qfe.120608-1644)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.00.2900.6242"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "2ec2e4b7-f5a4-463e-8fe4-0919465ca756",
+          "age": 2,
+          "path": "shell32.pdb"
+        }
+      },
+      "6.0.2900.6242_4fd20b8c_817000_812200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1339165580,
+          "timestamp_iso": "2012-06-08 16:26:20",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2090598400,
+          "size_of_image": 8482816,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 8462848,
+        "file_version": "6.0.2900.6242",
+        "product_version": "6.0.2900.6242",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "6.00.2900.6242 (xpsp_sp3_gdr.120608-1638)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.00.2900.6242"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "d0ddbcd6-30b1-41b6-9246-aa5b2446c84c",
+          "age": 2,
+          "path": "shell32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bdb01_c49000_c45400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533825,
+          "timestamp_iso": "2009-07-14 03:10:25",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 1937768448,
+          "size_of_image": 12881920,
+          "subsystem": 2,
+          "dll_characteristics": 320
+        },
+        "file_size": 12866560,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "e15423f5-efc0-4e29-9a66-39090e93fcd9",
+          "age": 2,
+          "path": "shell32.pdb"
+        }
+      },
+      "10.0.14393.206_57dad0a4_13d7000_13fe780": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1473958052,
+          "timestamp_iso": "2016-09-15 18:47:32",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1769996288,
+          "size_of_image": 20803584,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20965248,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "1b609e80-3430-40b3-b594-67c66bbf820d",
+          "age": 1,
+          "path": "shell32.pdb"
+        }
+      },
+      "10.0.14393.447_5819c0e0_13d9000_13ff9c8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1478082784,
+          "timestamp_iso": "2016-11-02 11:33:04",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1769996288,
+          "size_of_image": 20811776,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20969928,
+        "file_version": "10.0.14393.447",
+        "product_version": "10.0.14393.447",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.14393.447 (rs1_release_inmarket.161102-0100)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.447"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "7fade35a-1a9b-4ce2-b967-9d23816daee7",
+          "age": 1,
+          "path": "shell32.pdb"
+        }
+      },
+      "10.0.14393.693_585a0536_13d9000_13ff9c8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1482294582,
+          "timestamp_iso": "2016-12-21 05:29:42",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1769996288,
+          "size_of_image": 20811776,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20969928,
+        "file_version": "10.0.14393.693",
+        "product_version": "10.0.14393.693",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.14393.693 (rs1_release.161220-1747)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.693"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "6350d937-a601-4653-8d02-a82227d5df44",
+          "age": 1,
+          "path": "shell32.pdb"
+        }
+      },
+      "10.0.14393.1198_59028686_13d8000_13ff1a0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1493337734,
+          "timestamp_iso": "2017-04-28 02:02:14",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1769996288,
+          "size_of_image": 20807680,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20967840,
+        "file_version": "10.0.14393.1198",
+        "product_version": "10.0.14393.1198",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.14393.1198 (rs1_release_sec.170427-1353)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1198"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "8aaf22cf-c6cf-4ae0-895d-bcaef45b431a",
+          "age": 1,
+          "path": "shell32.pdb"
+        }
+      },
+      "10.0.14393.1480_595f3165_13d8000_13ff1a0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1499410789,
+          "timestamp_iso": "2017-07-07 08:59:49",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1769996288,
+          "size_of_image": 20807680,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20967840,
+        "file_version": "10.0.14393.1480",
+        "product_version": "10.0.14393.1480",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.14393.1480 (rs1_release.170706-2004)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1480"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "a32e5392-6711-4cdf-82c6-8bd6f9cae403",
+          "age": 1,
+          "path": "shell32.pdb"
+        }
+      },
+      "10.0.14393.1715_59b0dc20_13d8000_13ff1a0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1504762912,
+          "timestamp_iso": "2017-09-07 07:41:52",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1769996288,
+          "size_of_image": 20807680,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20967840,
+        "file_version": "10.0.14393.1715",
+        "product_version": "10.0.14393.1715",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.14393.1715 (rs1_release_inmarket.170906-1810)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1715"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "85df1b86-0d8f-4d7e-9705-f7645e8a36f0",
+          "age": 1,
+          "path": "shell32.pdb"
+        }
+      },
+      "10.0.14393.1794_59dad634_13d8000_13ff198": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1507513908,
+          "timestamp_iso": "2017-10-09 03:51:48",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1769996288,
+          "size_of_image": 20807680,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20967832,
+        "file_version": "10.0.14393.1794",
+        "product_version": "10.0.14393.1794",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.14393.1794 (rs1_release.171008-1615)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1794"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "1ca79385-c969-4255-926f-3df5d595627f",
+          "age": 1,
+          "path": "shell32.pdb"
+        }
+      },
+      "10.0.14393.2007_5a49bcaf_13d8000_13ff598": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1514781871,
+          "timestamp_iso": "2018-01-01 05:44:31",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1769996288,
+          "size_of_image": 20807680,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20968856,
+        "file_version": "10.0.14393.2007",
+        "product_version": "10.0.14393.2007",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.14393.2007 (rs1_release.171231-1800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2007"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "571bf0b5-82ef-4967-8047-d25ee3566877",
+          "age": 1,
+          "path": "shell32.pdb"
+        }
+      },
+      "10.0.16299.15_de73b2ad_1333000_1358b30": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3732124333,
+          "timestamp_iso": "2088-04-06 23:12:13",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1769996288,
+          "size_of_image": 20131840,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20286256,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "9507a260-5a6f-1f8d-69f9-0b929c999a01",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.192_98bb49b3_1333000_1358aa8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2562410931,
+          "timestamp_iso": "2051-03-14 13:48:51",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1769996288,
+          "size_of_image": 20131840,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20286120,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "5fc37e41-ae69-c371-d4b6-b321d85331b0",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_c16bc940_134a000_13707e8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3245066560,
+          "timestamp_iso": "2072-10-30 16:22:40",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1769996288,
+          "size_of_image": 20226048,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20383720,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "f90254ef-b998-c289-2e5d-c285f43ff77f",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.441_9756f2d9_134a000_1370858": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2539057881,
+          "timestamp_iso": "2050-06-17 07:51:21",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1769996288,
+          "size_of_image": 20226048,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20383832,
+        "file_version": "10.0.17134.441",
+        "product_version": "10.0.17134.441",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.17134.441 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.441"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "41851c37-5c53-02d4-6ccc-7e134228d58b",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.885_c5b4d07b_134a000_1370980": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3316961403,
+          "timestamp_iso": "2075-02-09 19:10:03",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1769996288,
+          "size_of_image": 20226048,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20384128,
+        "file_version": "10.0.17134.885",
+        "product_version": "10.0.17134.885",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.17134.885 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.885"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "7c73fe36-3463-5df6-b87c-d7d7c2ca120e",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.950_2c4c3d0e_134a000_1370a58": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 743193870,
+          "timestamp_iso": "1993-07-20 20:44:30",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1769996288,
+          "size_of_image": 20226048,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 20384344,
+        "file_version": "10.0.17134.950",
+        "product_version": "10.0.17134.950",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.17134.950 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.950"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "08e3e9d7-9856-13ab-74e3-cb346dafb091",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_864d0b95_574000_57ac30": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2253196181,
+          "timestamp_iso": "2041-05-26 17:49:41",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1769996288,
+          "size_of_image": 5718016,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 5745712,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "b0520a40-4ea0-4a5d-8aae-bf41fe4507ff",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "b0520a40-4ea0-4a5d-8aae-bf41fe4507ff",
+          "unknown": "8295e4d5c7ab6a5e755ad7f2",
+          "timestamp": 2253196181
+        }
+      }
+    }
+  }
+}

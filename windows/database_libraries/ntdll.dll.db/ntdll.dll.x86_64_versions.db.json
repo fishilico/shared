@@ -1,0 +1,465 @@
+{
+  "ntdll.dll.x86_64": {
+    "versions": {
+      "6.1.7600.16385_4a5be02b_1ab000_1a8058": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1247535147,
+          "timestamp_iso": "2009-07-14 03:32:27",
+          "coff_characteristics": 8226,
+          "linker_version": "9.0",
+          "image_base": 2028273664,
+          "size_of_image": 1748992,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 1736792,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "cff40300-fd80-4691-b73e-12cf2a150ee0",
+          "age": 2,
+          "path": "ntdll.pdb"
+        }
+      },
+      "10.0.9926.0_54be0015_1bd000_1b9610": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1421738005,
+          "timestamp_iso": "2015-01-20 08:13:25",
+          "coff_characteristics": 8226,
+          "linker_version": "12.10",
+          "image_base": 6442450944,
+          "size_of_image": 1822720,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1807888,
+        "file_version": "10.0.9926.0",
+        "product_version": "10.0.9926.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.9926.0 (fbl_awesome1501.150119-1648)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.9926.0"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "53b3a8d9-d724-4a19-a32c-4f2244d4848d",
+          "age": 1,
+          "path": "ntdll.pdb"
+        }
+      },
+      "10.0.14393.206_57dac931_1d1000_1cbe88": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1473956145,
+          "timestamp_iso": "2016-09-15 18:15:45",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1904640,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1883784,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "41c94dd5-45bd-4fcb-a2e8-f404185b97dc",
+          "age": 1,
+          "path": "ntdll.pdb"
+        }
+      },
+      "10.0.14393.447_5819bc32_1d1000_1cbe88": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1478081586,
+          "timestamp_iso": "2016-11-02 11:13:06",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1904640,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1883784,
+        "file_version": "10.0.14393.447",
+        "product_version": "10.0.14393.447",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.447 (rs1_release_inmarket.161102-0100)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.447"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "bc08e2b7-ebb3-49a1-8dce-18be9aa6660e",
+          "age": 1,
+          "path": "ntdll.pdb"
+        }
+      },
+      "10.0.14393.479_5825887f_1d1000_1cc888": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1478854783,
+          "timestamp_iso": "2016-11-11 09:59:43",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1904640,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1886344,
+        "file_version": "10.0.14393.479",
+        "product_version": "10.0.14393.479",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.479 (rs1_release.161110-2025)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.479"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "4e0ac1e0-213f-4db5-be3d-07b0a54565c0",
+          "age": 1,
+          "path": "ntdll.pdb"
+        }
+      },
+      "10.0.14393.1378_594a1350_1d1000_1cc888": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1498026832,
+          "timestamp_iso": "2017-06-21 08:33:52",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1904640,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1886344,
+        "file_version": "10.0.14393.1378",
+        "product_version": "10.0.14393.1378",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.1378 (rs1_release.170620-2008)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1378"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "a0a33e76-c1cc-49a4-914d-0b2dc8f9255a",
+          "age": 1,
+          "path": "ntdll.pdb"
+        }
+      },
+      "10.0.14393.1715_59b0d03e_1d2000_1cccb0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1504759870,
+          "timestamp_iso": "2017-09-07 06:51:10",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1908736,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1887408,
+        "file_version": "10.0.14393.1715",
+        "product_version": "10.0.14393.1715",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.1715 (rs1_release_inmarket.170906-1810)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1715"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "9e47088a-3275-4925-b127-035e16e949c4",
+          "age": 1,
+          "path": "ntdll.pdb"
+        }
+      },
+      "10.0.16299.15_493793ea_1e0000_1dd100": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1228379114,
+          "timestamp_iso": "2008-12-04 09:25:14",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 1966080,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1954048,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "13b64b55-3003-fa22-ab7c-cd36a3a5431f",
+          "age": 1,
+          "path": "ntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.192_6dead514_1e0000_1dd100": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1844106516,
+          "timestamp_iso": "2028-06-08 21:48:36",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 1966080,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1954048,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "f8aa6dfa-a14f-fc67-aee6-5817d8f51b9c",
+          "age": 1,
+          "path": "ntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_207580e2_1e1000_1db2c0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 544571618,
+          "timestamp_iso": "1987-04-04 23:53:38",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1970176,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1946304,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "f9789e1d-4e09-2949-dd25-d0783f2d17e9",
+          "age": 1,
+          "path": "ntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.471_7e614c22_1e1000_1da720": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2120305698,
+          "timestamp_iso": "2037-03-10 14:48:18",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1970176,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1943328,
+        "file_version": "10.0.17134.471",
+        "product_version": "10.0.17134.471",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.471 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.471"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "338c83b3-1707-66b1-728d-0b2ff2f39588",
+          "age": 1,
+          "path": "ntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.556_74bed8b0_1e1000_1da658": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1958664368,
+          "timestamp_iso": "2032-01-25 18:26:08",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1970176,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1943128,
+        "file_version": "10.0.17134.556",
+        "product_version": "10.0.17134.556",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.556 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.556"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "95927c40-b68e-505c-d227-42795247114c",
+          "age": 1,
+          "path": "ntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.799_7f828745_1e1000_1da660": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2139260741,
+          "timestamp_iso": "2037-10-16 01:05:41",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1970176,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1943136,
+        "file_version": "10.0.17134.799",
+        "product_version": "10.0.17134.799",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.799 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.799"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "439d1c7f-cb31-8947-1fa4-6ffa7b873c9f",
+          "age": 1,
+          "path": "ntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_a52b7c6a_1f0000_1e8320": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2771090538,
+          "timestamp_iso": "2057-10-23 21:22:18",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 2031616,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1999648,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "b54f3499-813e-bcf1-39ae-fdd664e98fdd",
+          "age": 1,
+          "path": "ntdll.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "b54f3499-813e-bcf1-39ae-fdd664e98fdd",
+          "unknown": "f3be19b8216323ef80038f88",
+          "timestamp": 2771090538
+        }
+      }
+    }
+  }
+}

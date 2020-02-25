@@ -1,0 +1,619 @@
+{
+  "ntkrnlmp.exe.x86_64": {
+    "versions": {
+      "6.1.7600.16385_4a5bc600_5dd000_541850": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1247528448,
+          "timestamp_iso": "2009-07-14 01:40:48",
+          "coff_characteristics": 34,
+          "linker_version": "9.0",
+          "image_base": 5368709120,
+          "size_of_image": 6148096,
+          "subsystem": 1,
+          "dll_characteristics": 0
+        },
+        "file_size": 5511248,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "f8e2a8b5-c9b7-4bf4-a6e4-a48f18009994",
+          "age": 2,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.14393.206_57dacaa7_81f000_773760": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1473956519,
+          "timestamp_iso": "2016-09-15 18:21:59",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 8515584,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 7812960,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "d530e1d3-9e02-4eff-82ed-b50767c75fba",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.14393.447_5819bd1f_820000_774560": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1478081823,
+          "timestamp_iso": "2016-11-02 11:17:03",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 8519680,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 7816544,
+        "file_version": "10.0.14393.447",
+        "product_version": "10.0.14393.447",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.14393.447 (rs1_release_inmarket.161102-0100)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.447"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "4dac3b58-2a91-47ec-aed2-644cb165222b",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.14393.693_585a2651_820000_774360": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1482303057,
+          "timestamp_iso": "2016-12-21 07:50:57",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 8519680,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 7816032,
+        "file_version": "10.0.14393.693",
+        "product_version": "10.0.14393.693",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.14393.693 (rs1_release.161220-1747)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.693"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "3dfc5f72-2830-4c26-859e-55e481700385",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.14393.1198_59028118_818000_76c760": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1493336344,
+          "timestamp_iso": "2017-04-28 01:39:04",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 8486912,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 7784288,
+        "file_version": "10.0.14393.1198",
+        "product_version": "10.0.14393.1198",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.14393.1198 (rs1_release_sec.170427-1353)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1198"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "0d18d0fd-87c0-4eb1-91f4-e363f3977a9a",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.14393.1480_595f2981_817000_76bd58": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1499408769,
+          "timestamp_iso": "2017-07-07 08:26:09",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 8482816,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 7781720,
+        "file_version": "10.0.14393.1480",
+        "product_version": "10.0.14393.1480",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.14393.1480 (rs1_release.170706-2004)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1480"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "3f52ae27-7bf9-429a-a46f-8e93f346a8f9",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.14393.1715_59b0d121_816000_76b960": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1504760097,
+          "timestamp_iso": "2017-09-07 06:54:57",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 8478720,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 7780704,
+        "file_version": "10.0.14393.1715",
+        "product_version": "10.0.14393.1715",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.14393.1715 (rs1_release_inmarket.170906-1810)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1715"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "3f2ce2b9-7e6b-45cb-8b54-039825558a38",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.14393.1794_59dad4c8_816000_76b758": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1507513544,
+          "timestamp_iso": "2017-10-09 03:45:44",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 8478720,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 7780184,
+        "file_version": "10.0.14393.1794",
+        "product_version": "10.0.14393.1794",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.14393.1794 (rs1_release.171008-1615)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1794"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "35b4fd54-9b8d-4779-beef-22e3e2bf3984",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.14393.2007_5a49bb2b_822000_773758": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1514781483,
+          "timestamp_iso": "2018-01-01 05:38:03",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 8527872,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 7812952,
+        "file_version": "10.0.14393.2007",
+        "product_version": "10.0.14393.2007",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.14393.2007 (rs1_release.171231-1800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2007"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "7ab68adc-ad1b-42eb-801e-2fa797886393",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.16299.15_59cda780_8d2000_831b98": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1506649984,
+          "timestamp_iso": "2017-09-29 03:53:04",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 9248768,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 8592280,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "83db4240-4efd-4ab6-afb6-fa864b700cb3",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.16299.192_5a4a1659_8d5000_834d98": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1514804825,
+          "timestamp_iso": "2018-01-01 12:07:05",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 9261056,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 8605080,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "9378084e-8dbd-4ab1-a155-099bce693e34",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.17134.1_5acd8966_965000_8bc1a0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1523419494,
+          "timestamp_iso": "2018-04-11 06:04:54",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 9850880,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9159072,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "039281e5-f80d-4711-8581-94c121c9d89d",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.17134.472_5c135351_953000_8a9d38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1544770385,
+          "timestamp_iso": "2018-12-14 07:53:05",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 9777152,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9084216,
+        "file_version": "10.0.17134.472",
+        "product_version": "10.0.17134.472",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.17134.472 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.472"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "b9e27947-758c-4572-a2d6-d8ac91e55aa8",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.17134.523_5c2b0c3d_953000_8a9d38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1546325053,
+          "timestamp_iso": "2019-01-01 07:44:13",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 9777152,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9084216,
+        "file_version": "10.0.17134.523",
+        "product_version": "10.0.17134.523",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.17134.523 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.523"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "70e00afd-d91a-4141-a2eb-d2a459533d65",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.17134.590_5c5a45ab_953000_8a9e10": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1549419947,
+          "timestamp_iso": "2019-02-06 03:25:47",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 9777152,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9084432,
+        "file_version": "10.0.17134.590",
+        "product_version": "10.0.17134.590",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.17134.590 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.590"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "cf49bb63-d8a2-49d7-9d97-a5f33c8712b5",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.17134.648_5c7f858f_953000_8a9d38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1551861135,
+          "timestamp_iso": "2019-03-06 09:32:15",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 9777152,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9084216,
+        "file_version": "10.0.17134.648",
+        "product_version": "10.0.17134.648",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.17134.648 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.648"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "d7d1ad92-569b-497a-82fa-84ef208b096c",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.17134.885_5d1d7f6c_954000_8a9d38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1562214252,
+          "timestamp_iso": "2019-07-04 06:24:12",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 9781248,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9084216,
+        "file_version": "10.0.17134.885",
+        "product_version": "10.0.17134.885",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.17134.885 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.885"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "c34b1b2b-9cd3-404c-a2d6-8eaeebf17242",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.17134.950_5d4a7ef8_954000_8a9e10": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1565163256,
+          "timestamp_iso": "2019-08-07 09:34:16",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 9781248,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9084432,
+        "file_version": "10.0.17134.950",
+        "product_version": "10.0.17134.950",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.17134.950 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.950"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "b59794ab-20de-41b8-a843-3cd1b851cd89",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.18362.30_e2f1a52b_ab2000_975538": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3807487275,
+          "timestamp_iso": "2090-08-27 05:21:15",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 11214848,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9917752,
+        "file_version": "10.0.18362.30",
+        "product_version": "10.0.18362.30",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.18362.30 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.30"
+        },
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "35a038b1-f6e2-e8ca-f642-111e6ec66f57",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "35a038b1-f6e2-e8ca-f642-111e6ec66f57",
+          "unknown": "885403275255029b95117efb",
+          "timestamp": 3807487275
+        }
+      }
+    }
+  }
+}

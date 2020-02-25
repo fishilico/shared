@@ -1,0 +1,205 @@
+{
+  "ws2_32.dll.x86": {
+    "versions": {
+      "5.1.2600.5512_4802a163_17000_14200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208131939,
+          "timestamp_iso": "2008-04-14 02:12:19",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 1907032064,
+          "size_of_image": 94208,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 82432,
+        "file_version": "5.1.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "5.1.2600.5512 (xpsp.080413-0852)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "a7605f86-95a3-4329-b38d-db8421a004ca",
+          "age": 2,
+          "path": "ws2_32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bdb4a_35000_32600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533898,
+          "timestamp_iso": "2009-07-14 03:11:38",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 1101791232,
+          "size_of_image": 217088,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 206336,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "05b47564-705b-4bb0-bfd2-3eedd3909192",
+          "age": 2,
+          "path": "ws2_32.pdb"
+        }
+      },
+      "10.0.14393.206_57dad27d_63000_623b0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1473958525,
+          "timestamp_iso": "2016-09-15 18:55:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1333264384,
+          "size_of_image": 405504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 402352,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "ec49255a-7c17-45e5-8081-6aff78ea7238",
+          "age": 1,
+          "path": "ws2_32.pdb"
+        }
+      },
+      "10.0.16299.15_efe92f55_66000_63e50": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4025036629,
+          "timestamp_iso": "2097-07-19 03:43:49",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1333264384,
+          "size_of_image": 417792,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 409168,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "92aaaceb-64bb-34a6-84ee-60bd3985f597",
+          "age": 1,
+          "path": "ws2_32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_9898b9e1_67000_64c78": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2560145889,
+          "timestamp_iso": "2051-02-16 08:38:09",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1333264384,
+          "size_of_image": 421888,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 412792,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "c5c0ffbc-d64c-9a5f-4185-23a51e43ec29",
+          "age": 1,
+          "path": "ws2_32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_ada56a7a_5e000_5c8e8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2913299066,
+          "timestamp_iso": "2062-04-26 19:44:26",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1333264384,
+          "size_of_image": 385024,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 379112,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "1bc1b088-b134-a687-4e3d-72d3f81a90b9",
+          "age": 1,
+          "path": "ws2_32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "1bc1b088-b134-a687-4e3d-72d3f81a90b9",
+          "unknown": "595f642cb4463746406de471",
+          "timestamp": 2913299066
+        }
+      }
+    }
+  }
+}

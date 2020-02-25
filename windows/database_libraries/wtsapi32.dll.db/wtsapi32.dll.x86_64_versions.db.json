@@ -1,0 +1,238 @@
+{
+  "wtsapi32.dll.x86_64": {
+    "versions": {
+      "6.1.7600.16385_4a5be09c_11000_d400": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1247535260,
+          "timestamp_iso": "2009-07-14 03:34:20",
+          "coff_characteristics": 8226,
+          "linker_version": "9.0",
+          "image_base": 8793682870272,
+          "size_of_image": 69632,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 54272,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Remote Desktop Session Host Server SDK APIs",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "664648c9-6f37-4fd2-a0b0-eee228423877",
+          "age": 2,
+          "path": "wtsapi32.pdb"
+        }
+      },
+      "10.0.14393.0_578997c1_13000_fa70": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468635073,
+          "timestamp_iso": "2016-07-16 04:11:13",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 5100273664,
+          "size_of_image": 77824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 64112,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Remote Desktop Session Host Server SDK APIs",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "fd40a8df-51a0-4fdf-b2af-5b77cffbecfd",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        }
+      },
+      "10.0.14393.0_57899b41_a000_3c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468635969,
+          "timestamp_iso": "2016-07-16 04:26:09",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 15360,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "b6a13b31-10b9-4480-b7e3-45b96ce426b5",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        }
+      },
+      "10.0.16299.15_5b02f505_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1526920453,
+          "timestamp_iso": "2018-05-21 18:34:13",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "02c2a7c0-2c7f-09aa-90ef-1cb9c26518eb",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.15_d029ef98_13000_faa8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3492409240,
+          "timestamp_iso": "2080-09-01 11:40:40",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 5100273664,
+          "size_of_image": 77824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 64168,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Remote Desktop Session Host Server SDK APIs",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "b7f3698e-f54c-cbdf-b5e9-3ee14b067ede",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_1edbfc5f_13000_faa8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 517733471,
+          "timestamp_iso": "1986-05-29 08:51:11",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 5100273664,
+          "size_of_image": 77824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 64168,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Remote Desktop Session Host Server SDK APIs",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "641d94d9-a59e-afc5-e0e3-1426b19f1b97",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_416eeff6_13000_fd18": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1097789430,
+          "timestamp_iso": "2004-10-14 23:30:30",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 5100273664,
+          "size_of_image": 77824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 64792,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Remote Desktop Session Host Server SDK APIs",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "2da85aef-00d2-fb45-8a9b-73ac39198539",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "2da85aef-00d2-fb45-8a9b-73ac39198539",
+          "unknown": "b1f67323da33e6e9feebefd1",
+          "timestamp": 1097789430
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "msvcrt.dll.x86_64": {
+    "versions": {
+      "7.0.7600.16385_4a5bdfbe_9f000_9b000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1247535038,
+          "timestamp_iso": "2009-07-14 03:30:38",
+          "coff_characteristics": 8226,
+          "linker_version": "9.0",
+          "image_base": 8793767936000,
+          "size_of_image": 651264,
+          "subsystem": 2,
+          "dll_characteristics": 320
+        },
+        "file_size": 634880,
+        "file_version": "7.0.7600.16385",
+        "product_version": "6.1.8638.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT CRT DLL",
+          "FileVersion": "7.0.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "msvcrt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "7.0.7600.16385"
+        },
+        "export_dll_name": "msvcrt.dll",
+        "debug_codeview": {
+          "guid": "047eacb4-c8fa-442b-baef-06ce45cc1a78",
+          "age": 2,
+          "path": "msvcrt.pdb"
+        }
+      },
+      "7.0.14393.0_57899b47_9e000_9afc8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468635975,
+          "timestamp_iso": "2016-07-16 04:26:15",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 4564451328,
+          "size_of_image": 647168,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 634824,
+        "file_version": "7.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT CRT DLL",
+          "FileVersion": "7.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "msvcrt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "7.0.14393.0"
+        },
+        "export_dll_name": "msvcrt.dll",
+        "debug_codeview": {
+          "guid": "4a088ec0-6e01-435f-a64a-606ea9cd624b",
+          "age": 1,
+          "path": "msvcrt.pdb"
+        }
+      },
+      "7.0.16299.15_20688290_9d000_99fe0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 543720080,
+          "timestamp_iso": "1987-03-26 02:21:20",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 4564451328,
+          "size_of_image": 643072,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 630752,
+        "file_version": "7.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT CRT DLL",
+          "FileVersion": "7.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "msvcrt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "7.0.16299.15"
+        },
+        "export_dll_name": "msvcrt.dll",
+        "debug_codeview": {
+          "guid": "92d35601-e618-3c93-f1eb-3a15be720bbc",
+          "age": 1,
+          "path": "msvcrt.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "7.0.16299.125_20688290_9d000_99fe0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 543720080,
+          "timestamp_iso": "1987-03-26 02:21:20",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 4564451328,
+          "size_of_image": 643072,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 630752,
+        "file_version": "7.0.16299.125",
+        "product_version": "10.0.16299.125",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT CRT DLL",
+          "FileVersion": "7.0.16299.125 (WinBuild.160101.0800)",
+          "InternalName": "msvcrt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "7.0.16299.125"
+        },
+        "export_dll_name": "msvcrt.dll",
+        "debug_codeview": {
+          "guid": "92d35601-e618-3c93-f1eb-3a15be720bbc",
+          "age": 1,
+          "path": "msvcrt.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "7.0.17134.1_5cbba6fd_9e000_9b808": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1555801853,
+          "timestamp_iso": "2019-04-21 01:10:53",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 4564451328,
+          "size_of_image": 647168,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 636936,
+        "file_version": "7.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT CRT DLL",
+          "FileVersion": "7.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "msvcrt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "7.0.17134.1"
+        },
+        "export_dll_name": "msvcrt.dll",
+        "debug_codeview": {
+          "guid": "d6265247-309a-824b-989b-0487e235d743",
+          "age": 1,
+          "path": "msvcrt.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "7.0.18362.1_f5bdefd7_9e000_9bc78": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4122865623,
+          "timestamp_iso": "2100-08-25 10:27:03",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 4564451328,
+          "size_of_image": 647168,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 638072,
+        "file_version": "7.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT CRT DLL",
+          "FileVersion": "7.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "msvcrt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "7.0.18362.1"
+        },
+        "export_dll_name": "msvcrt.dll",
+        "debug_codeview": {
+          "guid": "1fea8db6-b57f-5fbf-a935-e090243420d0",
+          "age": 1,
+          "path": "msvcrt.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "1fea8db6-b57f-5fbf-a935-e090243420d0",
+          "unknown": "b96c26ed2169685c92274f42",
+          "timestamp": 4122865623
+        }
+      }
+    }
+  }
+}

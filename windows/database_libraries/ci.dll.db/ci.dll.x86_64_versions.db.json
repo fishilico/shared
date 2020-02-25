@@ -1,0 +1,369 @@
+{
+  "ci.dll.x86_64": {
+    "versions": {
+      "6.1.7600.16385_4a5be01d_c0000_be7c0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1247535133,
+          "timestamp_iso": "2009-07-14 03:32:13",
+          "coff_characteristics": 8226,
+          "linker_version": "9.0",
+          "image_base": 8792876777472,
+          "size_of_image": 786432,
+          "subsystem": 1,
+          "dll_characteristics": 0
+        },
+        "file_size": 780224,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "5f1bdc22-05ac-402c-b0f0-9fc7cf17a370",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.206_57dacee8_a0000_9b040": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1473957608,
+          "timestamp_iso": "2016-09-15 18:40:08",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 634944,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "663cf6eb-f0d8-4de7-aca9-b9682d5ee497",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.953_58ba5f50_a0000_9b240": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1488609104,
+          "timestamp_iso": "2017-03-04 07:31:44",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 635456,
+        "file_version": "10.0.14393.953",
+        "product_version": "10.0.14393.953",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.953 (rs1_release_inmarket.170303-1614)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.953"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "5dd045be-324d-486f-995e-7b4fc7be146e",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.1884_59fa4574_a0000_9b240": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1509574004,
+          "timestamp_iso": "2017-11-01 23:06:44",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 635456,
+        "file_version": "10.0.14393.1884",
+        "product_version": "10.0.14393.1884",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.1884 (rs1_release.171101-1233)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1884"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "1f6ba2a6-8c69-49c6-96b8-60997eefd3f5",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.16299.15_bdac4d02_b2000_ad900": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3182185730,
+          "timestamp_iso": "2070-11-02 21:28:50",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 7516192768,
+          "size_of_image": 729088,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 710912,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "e287c09f-6895-3952-34e4-a0b3a3ebf887",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.125_79adc1ec_b2000_ad900": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2041430508,
+          "timestamp_iso": "2034-09-09 18:01:48",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 7516192768,
+          "size_of_image": 729088,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 710912,
+        "file_version": "10.0.16299.125",
+        "product_version": "10.0.16299.125",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.16299.125 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.125"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "cb8d7c89-44a4-489b-74ea-3ec043b5a08f",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_eb1ec6ac_b5000_b0570": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3944662700,
+          "timestamp_iso": "2094-12-31 20:38:20",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 741376,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 722288,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "2f1c8acb-a727-464e-0e3b-52b042d6d5b6",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.441_e9f895f0_b5000_b09d8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3925382640,
+          "timestamp_iso": "2094-05-22 18:04:00",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 741376,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 723416,
+        "file_version": "10.0.17134.441",
+        "product_version": "10.0.17134.441",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.441 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.441"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "64366ab4-bf5a-bc04-60ce-e0e0bf663530",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.885_0d01ccf6_b5000_b0b10": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 218221814,
+          "timestamp_iso": "1976-11-30 18:10:14",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 741376,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 723728,
+        "file_version": "10.0.17134.885",
+        "product_version": "10.0.17134.885",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.885 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.885"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "ba429b47-26cd-4364-82c7-c8059b9216b0",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.950_bda22a46_b5000_b0910": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3181521478,
+          "timestamp_iso": "2070-10-26 04:57:58",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 741376,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 723216,
+        "file_version": "10.0.17134.950",
+        "product_version": "10.0.17134.950",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.950 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.950"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "f3777d99-b468-8db1-326c-bcef6f91d638",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_ca73d753_dc000_d9068": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3396589395,
+          "timestamp_iso": "2077-08-19 11:03:15",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 7516192768,
+          "size_of_image": 901120,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 888936,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "b03cb569-e454-b6a9-300f-c77ab8bfe9fe",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "b03cb569-e454-b6a9-300f-c77ab8bfe9fe",
+          "unknown": "bf5fe33a59104b0896828453",
+          "timestamp": 3396589395
+        }
+      }
+    }
+  }
+}

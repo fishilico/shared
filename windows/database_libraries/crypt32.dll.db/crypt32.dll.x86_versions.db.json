@@ -1,0 +1,301 @@
+{
+  "crypt32.dll.x86": {
+    "versions": {
+      "5.131.2600.5512_4802a0d7_95000_92400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208131799,
+          "timestamp_iso": "2008-04-14 02:09:59",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2007498752,
+          "size_of_image": 610304,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 599040,
+        "file_version": "5.131.2600.5512",
+        "product_version": "5.131.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "5.131.2600.5512 (xpsp.080413-2113)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.131.2600.5512"
+        },
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "3d2e43bf-4ff5-446b-8395-7512615fd094",
+          "age": 2,
+          "path": "crypt32.pdb"
+        }
+      },
+      "5.131.2600.6459_52529409_97000_93400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1381143561,
+          "timestamp_iso": "2013-10-07 12:59:21",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2007498752,
+          "size_of_image": 618496,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 603136,
+        "file_version": "5.131.2600.6459",
+        "product_version": "5.131.2600.6459",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "5.131.2600.6459 (xpsp_sp3_qfe.131005-0434)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.131.2600.6459"
+        },
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "eb4261bf-a046-46b3-9d99-9b18dde03a57",
+          "age": 2,
+          "path": "crypt32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bda39_11c000_119200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533625,
+          "timestamp_iso": "2009-07-14 03:07:05",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 1905983488,
+          "size_of_image": 1163264,
+          "subsystem": 2,
+          "dll_characteristics": 320
+        },
+        "file_size": 1151488,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "34f927a5-a572-45b5-ae51-b87da23fa4ac",
+          "age": 2,
+          "path": "crypt32.pdb"
+        }
+      },
+      "10.0.14393.0_57898e1f_17d000_17bee8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468632607,
+          "timestamp_iso": "2016-07-16 03:30:07",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1559232512,
+          "size_of_image": 1560576,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1556200,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "5062c1cc-931c-4c2d-b4db-0b0804c95104",
+          "age": 1,
+          "path": "crypt32.pdb"
+        }
+      },
+      "10.0.14393.351_5801a49e_17d000_17c0e8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1476502686,
+          "timestamp_iso": "2016-10-15 05:38:06",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1559232512,
+          "size_of_image": 1560576,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1556712,
+        "file_version": "10.0.14393.351",
+        "product_version": "10.0.14393.351",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.14393.351 (rs1_release_inmarket.161014-1755)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.351"
+        },
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "2bc81fd4-d23a-4873-bf75-06ac5f62c46f",
+          "age": 1,
+          "path": "crypt32.pdb"
+        }
+      },
+      "10.0.14393.1198_5902878e_17d000_17c2e8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1493337998,
+          "timestamp_iso": "2017-04-28 02:06:38",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1559232512,
+          "size_of_image": 1560576,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1557224,
+        "file_version": "10.0.14393.1198",
+        "product_version": "10.0.14393.1198",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.14393.1198 (rs1_release_sec.170427-1353)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1198"
+        },
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "4168b57e-5028-4916-a105-dcd0fce1448f",
+          "age": 1,
+          "path": "crypt32.pdb"
+        }
+      },
+      "10.0.16299.15_edb6beda_182000_180bd8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3988176602,
+          "timestamp_iso": "2096-05-18 12:50:02",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1559232512,
+          "size_of_image": 1581056,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1575896,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "d9f3c0f5-254f-2c33-fc34-a868ff4c4d7e",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_3344533c_196000_194ca8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 860115772,
+          "timestamp_iso": "1997-04-04 03:02:52",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1559232512,
+          "size_of_image": 1662976,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1658024,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "4b585c8a-dc27-7ce1-574b-aa7e38da02f6",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_82360a9e_fb000_f8680": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2184579742,
+          "timestamp_iso": "2039-03-24 12:42:22",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1559232512,
+          "size_of_image": 1028096,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1017472,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "e0e7a025-dfc0-c969-0a24-cf2f21178d36",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "e0e7a025-dfc0-c969-0a24-cf2f21178d36",
+          "unknown": "3ac217ff1d456e489f49f966",
+          "timestamp": 2184579742
+        }
+      }
+    }
+  }
+}

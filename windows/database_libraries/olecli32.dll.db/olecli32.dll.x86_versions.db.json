@@ -1,0 +1,140 @@
+{
+  "olecli32.dll.x86": {
+    "versions": {
+      "5.1.2600.5512_4802a113_15000_12400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208131859,
+          "timestamp_iso": "2008-04-14 02:10:59",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 1910571008,
+          "size_of_image": 86016,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 74752,
+        "file_version": "5.1.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Object Linking and Embedding Client Library",
+          "FileVersion": "1.07 (xpsp.080413-2108)",
+          "InternalName": "OLECLI",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLECLI32.DLL",
+          "ProductName": "Microsoft Object Linking and Embedding Libraries for Windows",
+          "ProductVersion": "3.10.0.061"
+        },
+        "export_dll_name": "OLECLI32.dll",
+        "debug_codeview": {
+          "guid": "7654fab1-cf1c-4378-a3fe-bfc74f832576",
+          "age": 1,
+          "path": "olecli32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bdacb_16000_13a00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533771,
+          "timestamp_iso": "2009-07-14 03:09:31",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 1084358656,
+          "size_of_image": 90112,
+          "subsystem": 2,
+          "dll_characteristics": 320
+        },
+        "file_size": 80384,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Object Linking and Embedding Client Library",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "OLECLI32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLECLI32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "OLECLI32.dll",
+        "debug_codeview": {
+          "guid": "3a64c0d7-4d99-4c46-94f6-41e0e0e6b78d",
+          "age": 2,
+          "path": "olecli32.pdb"
+        }
+      },
+      "10.0.17134.1_304519e8_1f000_1a600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 809834984,
+          "timestamp_iso": "1995-08-31 04:09:44",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1334837248,
+          "size_of_image": 126976,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 108032,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Object Linking and Embedding Client Library",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "OLECLI32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLECLI32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "OLECLI32.dll",
+        "debug_codeview": {
+          "guid": "17b20f97-6304-412b-7198-d14a46128127",
+          "age": 1,
+          "path": "olecli32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_75cedc6a_1f000_1a400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1976491114,
+          "timestamp_iso": "2032-08-19 03:18:34",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1334837248,
+          "size_of_image": 126976,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 107520,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Object Linking and Embedding Client Library",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "OLECLI32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLECLI32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "OLECLI32.dll",
+        "debug_codeview": {
+          "guid": "639742b9-7e7e-1084-5c8a-642696925589",
+          "age": 1,
+          "path": "olecli32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "639742b9-7e7e-1084-5c8a-642696925589",
+          "unknown": "b811e07c6b36144cddbb8c0d",
+          "timestamp": 1976491114
+        }
+      }
+    }
+  }
+}

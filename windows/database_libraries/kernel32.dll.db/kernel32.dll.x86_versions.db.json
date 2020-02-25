@@ -1,0 +1,432 @@
+{
+  "kernel32.dll.x86": {
+    "versions": {
+      "5.1.2600.5512_4802a12c_f6000_f1a00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208131884,
+          "timestamp_iso": "2008-04-14 02:11:24",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2088763392,
+          "size_of_image": 1007616,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 989696,
+        "file_version": "5.1.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "5.1.2600.5512 (xpsp.080413-2111)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "34560e80-f5c5-4175-b208-848ef863c5bd",
+          "age": 2,
+          "path": "kernel32.pdb"
+        }
+      },
+      "5.1.2600.5781_49c4f2bb_f6000_f2200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1237643963,
+          "timestamp_iso": "2009-03-21 14:59:23",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2088763392,
+          "size_of_image": 1007616,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 991744,
+        "file_version": "5.1.2600.5781",
+        "product_version": "5.1.2600.5781",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "5.1.2600.5781 (xpsp_sp3_qfe.090321-1341)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5781"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "f3f783a5-0da6-4dd2-aa93-57ed6daf9a25",
+          "age": 2,
+          "path": "kernel32.pdb"
+        }
+      },
+      "5.1.2600.5781_49c4f482_f6000_f1a00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1237644418,
+          "timestamp_iso": "2009-03-21 15:06:58",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2088763392,
+          "size_of_image": 1007616,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 989696,
+        "file_version": "5.1.2600.5781",
+        "product_version": "5.1.2600.5781",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "5.1.2600.5781 (xpsp_sp3_gdr.090321-1317)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5781"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "072ff0eb-54d2-4dfa-ae9d-13885486ee09",
+          "age": 2,
+          "path": "kernel32.pdb"
+        }
+      },
+      "5.1.2600.6532_53203b92_f6000_f2800": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1394621330,
+          "timestamp_iso": "2014-03-12 11:48:50",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2088763392,
+          "size_of_image": 1007616,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 993280,
+        "file_version": "5.1.2600.6532",
+        "product_version": "5.1.2600.6532",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "5.1.2600.6532 (xpsp_sp3_qfe.140312-0419)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.6532"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "a02fc3ec-19b4-474f-b756-41af4c5b031c",
+          "age": 2,
+          "path": "kernel32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bdbde_100000_cc400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247534046,
+          "timestamp_iso": "2009-07-14 03:14:06",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 2111176704,
+          "size_of_image": 1048576,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 836608,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "247c9009-e69b-43ab-95e8-dda34622320a",
+          "age": 2,
+          "path": "wkernel32.pdb"
+        }
+      },
+      "10.0.14393.0_57898ef6_e0000_96670": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468632822,
+          "timestamp_iso": "2016-07-16 03:33:42",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1803550720,
+          "size_of_image": 917504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 616048,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "e88980d9-5f99-41fb-ae72-8782d05d8c5b",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        }
+      },
+      "10.0.14393.1198_590285e9_e0000_96670": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1493337577,
+          "timestamp_iso": "2017-04-28 01:59:37",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1803550720,
+          "size_of_image": 917504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 616048,
+        "file_version": "10.0.14393.1198",
+        "product_version": "10.0.14393.1198",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.1198 (rs1_release_sec.170427-1353)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1198"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "d3474559-96f7-47d6-bf43-c176b2171e68",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        }
+      },
+      "10.0.16299.15_744765ce_d0000_91278": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1950836174,
+          "timestamp_iso": "2031-10-27 03:56:14",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1803550720,
+          "size_of_image": 851968,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 594552,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "ff9f9f78-41db-88f0-cded-a9e1e9bff3b5",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_ae0a74bf_e0000_94660": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2919920831,
+          "timestamp_iso": "2062-07-12 11:07:11",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1803550720,
+          "size_of_image": 917504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 607840,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "cc28e591-2506-4f95-16db-a8ad3d6420a5",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.556_b65166a3_e0000_94600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3058788003,
+          "timestamp_iso": "2066-12-05 16:20:03",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1803550720,
+          "size_of_image": 917504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 607744,
+        "file_version": "10.0.17134.556",
+        "product_version": "10.0.17134.556",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17134.556 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.556"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "5750c571-6182-83b3-03e6-a8fe22426179",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.648_4ae4cfa3_e0000_94600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1256509347,
+          "timestamp_iso": "2009-10-25 23:22:27",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1803550720,
+          "size_of_image": 917504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 607744,
+        "file_version": "10.0.17134.648",
+        "product_version": "10.0.17134.648",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17134.648 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.648"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "0839c6da-5c59-f5a0-4609-ee3ab0b77497",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.753_34d9a309_e0000_946d8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 886678281,
+          "timestamp_iso": "1998-02-05 12:31:21",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1803550720,
+          "size_of_image": 917504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 607960,
+        "file_version": "10.0.17134.753",
+        "product_version": "10.0.17134.753",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17134.753 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.753"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "570af900-8dcf-8aed-463a-90390318cd44",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_ead83e2e_e0000_9a6d8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3940040238,
+          "timestamp_iso": "2094-11-08 08:37:18",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1803550720,
+          "size_of_image": 917504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 632536,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "d9f85cdd-0d4b-5609-0be7-ffb0bec70eca",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "d9f85cdd-0d4b-5609-0be7-ffb0bec70eca",
+          "unknown": "e60a794fc020fba40a44c98a",
+          "timestamp": 3940040238
+        }
+      }
+    }
+  }
+}

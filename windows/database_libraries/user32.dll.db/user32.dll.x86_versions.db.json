@@ -1,0 +1,367 @@
+{
+  "user32.dll.x86": {
+    "versions": {
+      "5.1.2600.5512_4802a11b_91000_8d400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208131867,
+          "timestamp_iso": "2008-04-14 02:11:07",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2118189056,
+          "size_of_image": 593920,
+          "subsystem": 2,
+          "dll_characteristics": 0
+        },
+        "file_size": 578560,
+        "file_version": "5.1.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows XP USER API Client DLL",
+          "FileVersion": "5.1.2600.5512 (xpsp.080413-2105)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "d18a41b7-4e7f-458c-aaac-1847e2d8bf02",
+          "age": 2,
+          "path": "user32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bdb3c_100000_cb600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533884,
+          "timestamp_iso": "2009-07-14 03:11:24",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 2110062592,
+          "size_of_image": 1048576,
+          "subsystem": 2,
+          "dll_characteristics": 320
+        },
+        "file_size": 833024,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Multi-User Windows USER API Client DLL",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "438bb768-e243-4151-ba04-e6929c010052",
+          "age": 2,
+          "path": "wuser32.pdb"
+        }
+      },
+      "10.0.14393.5_57916e3b_15f000_15e8f8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1469148731,
+          "timestamp_iso": "2016-07-22 02:52:11",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1806172160,
+          "size_of_image": 1437696,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1435896,
+        "file_version": "10.0.14393.5",
+        "product_version": "10.0.14393.5",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Multi-User Windows USER API Client DLL",
+          "FileVersion": "10.0.14393.5 (rs1_release_inmarket.160721-1505)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.5"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "002b6cb5-b9d4-4649-8df8-0dc22a41e316",
+          "age": 1,
+          "path": "wuser32.pdb"
+        }
+      },
+      "10.0.14393.351_5801a7bf_15f000_15e8f8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1476503487,
+          "timestamp_iso": "2016-10-15 05:51:27",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1806172160,
+          "size_of_image": 1437696,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1435896,
+        "file_version": "10.0.14393.351",
+        "product_version": "10.0.14393.351",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Multi-User Windows USER API Client DLL",
+          "FileVersion": "10.0.14393.351 (rs1_release_inmarket.161014-1755)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.351"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "0e55a846-e65e-429b-a94f-ce195c6a5810",
+          "age": 1,
+          "path": "wuser32.pdb"
+        }
+      },
+      "10.0.14393.576_584a7a33_15f000_15e8f8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1481275955,
+          "timestamp_iso": "2016-12-09 10:32:35",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1806172160,
+          "size_of_image": 1437696,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1435896,
+        "file_version": "10.0.14393.576",
+        "product_version": "10.0.14393.576",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Multi-User Windows USER API Client DLL",
+          "FileVersion": "10.0.14393.576 (rs1_release_inmarket.161208-2252)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.576"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "b4191117-c94c-48f4-9e8d-0d7e428fe239",
+          "age": 1,
+          "path": "wuser32.pdb"
+        }
+      },
+      "10.0.14393.1770_59bf2ebc_15f000_15e8f8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1505701564,
+          "timestamp_iso": "2017-09-18 04:26:04",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1806172160,
+          "size_of_image": 1437696,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1435896,
+        "file_version": "10.0.14393.1770",
+        "product_version": "10.0.14393.1770",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Multi-User Windows USER API Client DLL",
+          "FileVersion": "10.0.14393.1770 (rs1_release.170917-1700)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1770"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "75689838-46ad-4d82-baa1-c2f181b4a999",
+          "age": 1,
+          "path": "wuser32.pdb"
+        }
+      },
+      "10.0.16299.15_126d5195_175000_175448": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 309154197,
+          "timestamp_iso": "1979-10-19 05:09:57",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1776287744,
+          "size_of_image": 1527808,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1528904,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Multi-User Windows USER API Client DLL",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "02420b25-b222-0574-84d9-935cb5764515",
+          "age": 1,
+          "path": "wuser32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.125_b8f77b3a_175000_175448": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3103226682,
+          "timestamp_iso": "2068-05-03 01:24:42",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1776287744,
+          "size_of_image": 1527808,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1528904,
+        "file_version": "10.0.16299.125",
+        "product_version": "10.0.16299.125",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Multi-User Windows USER API Client DLL",
+          "FileVersion": "10.0.16299.125 (WinBuild.160101.0800)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.125"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "b8d43fd8-5e20-4635-27a6-8faf2fba7479",
+          "age": 1,
+          "path": "wuser32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_6813b639_18d000_18d1a8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1746122297,
+          "timestamp_iso": "2025-05-01 19:58:17",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1776287744,
+          "size_of_image": 1626112,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1626536,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Multi-User Windows USER API Client DLL",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "7c44d08a-4bd4-30da-1c65-814d29a91013",
+          "age": 1,
+          "path": "wuser32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.376_beaa4463_18d000_18d220": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3198829667,
+          "timestamp_iso": "2071-05-14 13:47:47",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1776287744,
+          "size_of_image": 1626112,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1626656,
+        "file_version": "10.0.17134.376",
+        "product_version": "10.0.17134.376",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Multi-User Windows USER API Client DLL",
+          "FileVersion": "10.0.17134.376 (WinBuild.160101.0800)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.376"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "c74a887e-270c-d891-807e-5a7a8219dff0",
+          "age": 1,
+          "path": "wuser32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_8ffe0f7f_195000_195a70": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2415791999,
+          "timestamp_iso": "2046-07-21 15:19:59",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1776287744,
+          "size_of_image": 1658880,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1661552,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Multi-User Windows USER API Client DLL",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "user32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "user32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "USER32.dll",
+        "debug_codeview": {
+          "guid": "93cadfab-3e4b-2858-6767-5fd3e067df2c",
+          "age": 1,
+          "path": "wuser32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "93cadfab-3e4b-2858-6767-5fd3e067df2c",
+          "unknown": "f64d6889614cee0870e39572",
+          "timestamp": 2415791999
+        }
+      }
+    }
+  }
+}

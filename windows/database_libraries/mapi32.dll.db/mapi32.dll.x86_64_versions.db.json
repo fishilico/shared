@@ -1,0 +1,108 @@
+{
+  "mapi32.dll.x86_64": {
+    "versions": {
+      "1.0.2536.0_4a5bdf52_1b000_16400": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1247534930,
+          "timestamp_iso": "2009-07-14 03:28:50",
+          "coff_characteristics": 8226,
+          "linker_version": "9.0",
+          "image_base": 8792489066496,
+          "size_of_image": 110592,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 91136,
+        "file_version": "1.0.2536.0",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Extended MAPI 1.0 for Windows NT",
+          "FileVersion": "1.0.2536.0 (win7_rtm.090713-1255)",
+          "InternalName": "MAPI32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "MAPI32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "MAPI32.dll",
+        "debug_codeview": {
+          "guid": "a45add30-91d8-46e6-a5f1-dfc2a1ba2da0",
+          "age": 1,
+          "path": "mapistub.pdb"
+        }
+      },
+      "1.0.2536.0_7873f0ad_29000_23c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2020864173,
+          "timestamp_iso": "2034-01-14 16:09:33",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 167936,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 146432,
+        "file_version": "1.0.2536.0",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Extended MAPI 1.0 for Windows NT",
+          "FileVersion": "1.0.2536.0 (WinBuild.160101.0800)",
+          "InternalName": "MAPI32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "MAPI32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "MAPI32.dll",
+        "debug_codeview": {
+          "guid": "c1ea1794-776c-e0b7-e767-6b8b4dfb6e04",
+          "age": 1,
+          "path": "mapistub.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "1.0.2536.0_85d8ed1d_22000_1d200": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2245586205,
+          "timestamp_iso": "2041-02-27 14:56:45",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 139264,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 119296,
+        "file_version": "1.0.2536.0",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Extended MAPI 1.0 for Windows NT",
+          "FileVersion": "1.0.2536.0 (WinBuild.160101.0800)",
+          "InternalName": "MAPI32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "MAPI32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "MAPI32.dll",
+        "debug_codeview": {
+          "guid": "0e5cb883-ba61-8aef-74ac-ffbba3fa62e3",
+          "age": 1,
+          "path": "mapistub.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "0e5cb883-ba61-8aef-74ac-ffbba3fa62e3",
+          "unknown": "5527f1359709ea8acdb68674",
+          "timestamp": 2245586205
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "wsock32.dll.x86": {
+    "versions": {
+      "5.1.2600.5512_4802a170_9000_5800": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208131952,
+          "timestamp_iso": "2008-04-14 02:12:32",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 1907163136,
+          "size_of_image": 36864,
+          "subsystem": 3,
+          "dll_characteristics": 1024
+        },
+        "file_size": 22528,
+        "file_version": "5.1.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 32-Bit DLL",
+          "FileVersion": "5.1.2600.5512 (xpsp.080413-0852)",
+          "InternalName": "wsock32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wsock32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "export_dll_name": "WSOCK32.dll",
+        "debug_codeview": {
+          "guid": "2b38fe8f-8414-4dac-b8a4-fd07c05e49fc",
+          "age": 2,
+          "path": "wsock32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bdb63_7000_3c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533923,
+          "timestamp_iso": "2009-07-14 03:12:03",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 1070661632,
+          "size_of_image": 28672,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 15360,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 32-Bit DLL",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "wsock32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wsock32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "WSOCK32.dll",
+        "debug_codeview": {
+          "guid": "0aae6683-a7f5-40df-b265-dcd12b7bd0fb",
+          "age": 2,
+          "path": "wsock32.pdb"
+        }
+      },
+      "10.0.14393.0_5789915e_8000_4000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468633438,
+          "timestamp_iso": "2016-07-16 03:43:58",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1390936064,
+          "size_of_image": 32768,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 16384,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 32-Bit DLL",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "wsock32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wsock32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "WSOCK32.dll",
+        "debug_codeview": {
+          "guid": "88f54861-02b2-457c-8410-dc0b14d3d2fa",
+          "age": 1,
+          "path": "wsock32.pdb"
+        }
+      },
+      "10.0.16299.15_3e71643d_8000_4000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1047618621,
+          "timestamp_iso": "2003-03-14 06:10:21",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1390936064,
+          "size_of_image": 32768,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 16384,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 32-Bit DLL",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "wsock32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wsock32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "WSOCK32.dll",
+        "debug_codeview": {
+          "guid": "68834f68-c7bd-8942-3b1b-62960adf11d4",
+          "age": 1,
+          "path": "wsock32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_3ca3b2d0_8000_4000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1017361104,
+          "timestamp_iso": "2002-03-29 01:18:24",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1390936064,
+          "size_of_image": 32768,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 16384,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 32-Bit DLL",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "wsock32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wsock32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "WSOCK32.dll",
+        "debug_codeview": {
+          "guid": "af1ba69d-09a7-5dea-68d4-7397d6c77aec",
+          "age": 1,
+          "path": "wsock32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_3b5489df_8000_4000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 995396063,
+          "timestamp_iso": "2001-07-17 20:54:23",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1390936064,
+          "size_of_image": 32768,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 16384,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 32-Bit DLL",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "wsock32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wsock32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "WSOCK32.dll",
+        "debug_codeview": {
+          "guid": "c88330c0-c16e-2487-2251-827373804dfc",
+          "age": 1,
+          "path": "wsock32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "c88330c0-c16e-2487-2251-827373804dfc",
+          "unknown": "86eb0ad071fec032329f16a5",
+          "timestamp": 995396063
+        }
+      }
+    }
+  }
+}

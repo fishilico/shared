@@ -1,0 +1,174 @@
+{
+  "kernel.appcore.dll.x86": {
+    "versions": {
+      "10.0.14393.0_5789916f_d000_a998": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468633455,
+          "timestamp_iso": "2016-07-16 03:44:15",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 53248,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 43416,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "AppModel API Host",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "kernel.appcore.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel.appcore.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "AppCore.dll",
+        "debug_codeview": {
+          "guid": "f153f70e-5b49-49d2-98a6-76105044a538",
+          "age": 1,
+          "path": "Kernel.Appcore.pdb"
+        }
+      },
+      "10.0.16299.15_6ed3f6d7_e000_b9f0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1859385047,
+          "timestamp_iso": "2028-12-02 16:50:47",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 268435456,
+          "size_of_image": 57344,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 47600,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "AppModel API Host",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "kernel.appcore.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel.appcore.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "AppCore.dll",
+        "debug_codeview": {
+          "guid": "e809c8b1-302b-9976-e49a-0476e5d62749",
+          "age": 1,
+          "path": "Kernel.Appcore.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_5da38d03_f000_c418": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1570999555,
+          "timestamp_iso": "2019-10-13 22:45:55",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 268435456,
+          "size_of_image": 61440,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 50200,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "AppModel API Host",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel.appcore.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel.appcore.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "AppCore.dll",
+        "debug_codeview": {
+          "guid": "6941c0a7-43db-e8a1-4b43-d578db15e509",
+          "age": 1,
+          "path": "Kernel.Appcore.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.112_f69b6516_f000_c420": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4137379094,
+          "timestamp_iso": "2101-02-09 08:58:14",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 268435456,
+          "size_of_image": 61440,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 50208,
+        "file_version": "10.0.17134.112",
+        "product_version": "10.0.17134.112",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "AppModel API Host",
+          "FileVersion": "10.0.17134.112 (WinBuild.160101.0800)",
+          "InternalName": "kernel.appcore.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel.appcore.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.112"
+        },
+        "export_dll_name": "AppCore.dll",
+        "debug_codeview": {
+          "guid": "3fe02f84-23be-6210-1ba4-96e7b2a16c67",
+          "age": 1,
+          "path": "Kernel.Appcore.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_6203ca74_f000_c888": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1644415604,
+          "timestamp_iso": "2022-02-09 15:06:44",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 61440,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 51336,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "AppModel API Host",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel.appcore.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel.appcore.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "AppCore.dll",
+        "debug_codeview": {
+          "guid": "fc4e4ab7-9ba2-a34f-9db5-d029ff1ae0e9",
+          "age": 1,
+          "path": "Kernel.Appcore.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "fc4e4ab7-9ba2-a34f-9db5-d029ff1ae0e9",
+          "unknown": "58a503c8751a3b93b3e88709",
+          "timestamp": 1644415604
+        }
+      }
+    }
+  }
+}

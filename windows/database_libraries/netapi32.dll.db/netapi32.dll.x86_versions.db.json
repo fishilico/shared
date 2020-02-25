@@ -1,0 +1,269 @@
+{
+  "netapi32.dll.x86": {
+    "versions": {
+      "5.1.2600.5512_4802a0fa_55000_52600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208131834,
+          "timestamp_iso": "2008-04-14 02:10:34",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 1535508480,
+          "size_of_image": 348160,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 337408,
+        "file_version": "5.1.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Win32 API DLL",
+          "FileVersion": "5.1.2600.5512 (xpsp.080413-2113)",
+          "InternalName": "NetApi32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "NetApi32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "export_dll_name": "NETAPI32.dll",
+        "debug_codeview": {
+          "guid": "fb9eef3b-11c9-49ba-95fb-d378260a07b0",
+          "age": 2,
+          "path": "netapi32.pdb"
+        }
+      },
+      "5.1.2600.6260_4ff6eef2_56000_53000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1341583090,
+          "timestamp_iso": "2012-07-06 15:58:10",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 1535508480,
+          "size_of_image": 352256,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 339968,
+        "file_version": "5.1.2600.6260",
+        "product_version": "5.1.2600.6260",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Win32 API DLL",
+          "FileVersion": "5.1.2600.6260 (xpsp_sp3_qfe.120706-1617)",
+          "InternalName": "NetApi32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "NetApi32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.6260"
+        },
+        "export_dll_name": "NETAPI32.dll",
+        "debug_codeview": {
+          "guid": "3188f58d-d8c4-4b4a-a474-af8f2778ef7e",
+          "age": 2,
+          "path": "netapi32.pdb"
+        }
+      },
+      "5.1.2600.6260_4ff6ef1c_55000_52800": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1341583132,
+          "timestamp_iso": "2012-07-06 15:58:52",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 1535508480,
+          "size_of_image": 348160,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 337920,
+        "file_version": "5.1.2600.6260",
+        "product_version": "5.1.2600.6260",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Win32 API DLL",
+          "FileVersion": "5.1.2600.6260 (xpsp_sp3_gdr.120706-1619)",
+          "InternalName": "NetApi32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "NetApi32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.6260"
+        },
+        "export_dll_name": "NETAPI32.dll",
+        "debug_codeview": {
+          "guid": "68e6838c-f580-4fcb-9f8c-4cc97337c5ec",
+          "age": 2,
+          "path": "netapi32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bda83_11000_de00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533699,
+          "timestamp_iso": "2009-07-14 03:08:19",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 1085014016,
+          "size_of_image": 69632,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 56832,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Win32 API DLL",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "NetApi32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "NetApi32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "NETAPI32.dll",
+        "debug_codeview": {
+          "guid": "3523cf0f-73f5-4b4e-811c-ba20325f0882",
+          "age": 2,
+          "path": "netapi32.pdb"
+        }
+      },
+      "10.0.14393.0_57899132_13000_10e70": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468633394,
+          "timestamp_iso": "2016-07-16 03:43:14",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1285554176,
+          "size_of_image": 77824,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 69232,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Win32 API DLL",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "NetApi32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "NetApi32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "NETAPI32.dll",
+        "debug_codeview": {
+          "guid": "d6f58cef-75d0-4e52-83fc-c394ee74dd4f",
+          "age": 1,
+          "path": "netapi32.pdb"
+        }
+      },
+      "10.0.16299.15_25cd61c0_13000_10ca8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 634216896,
+          "timestamp_iso": "1990-02-05 12:21:36",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1285554176,
+          "size_of_image": 77824,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 68776,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Win32 API DLL",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "NetApi32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "NetApi32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "NETAPI32.dll",
+        "debug_codeview": {
+          "guid": "671a934e-6d00-80a2-6536-e805d6363ca1",
+          "age": 1,
+          "path": "netapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_171b77b1_13000_10ea8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 387676081,
+          "timestamp_iso": "1982-04-15 01:48:01",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1285554176,
+          "size_of_image": 77824,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 69288,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Win32 API DLL",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "NetApi32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "NetApi32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "NETAPI32.dll",
+        "debug_codeview": {
+          "guid": "8cb9909f-75d1-407a-266c-f68807486fbb",
+          "age": 1,
+          "path": "netapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_ae8bf99c_13000_10c48": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2928408988,
+          "timestamp_iso": "2062-10-18 16:56:28",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1285554176,
+          "size_of_image": 77824,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 68680,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Win32 API DLL",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "NetApi32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "NetApi32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "NETAPI32.dll",
+        "debug_codeview": {
+          "guid": "0fbf70f9-85f3-065a-46c8-c90693010eaf",
+          "age": 1,
+          "path": "netapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "0fbf70f9-85f3-065a-46c8-c90693010eaf",
+          "unknown": "6f850fc73207727434bbb975",
+          "timestamp": 2928408988
+        }
+      }
+    }
+  }
+}

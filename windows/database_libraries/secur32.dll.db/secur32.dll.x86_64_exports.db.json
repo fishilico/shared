@@ -1,0 +1,1642 @@
+{
+  "secur32.dll.x86_64": {
+    "exports": {
+      "SECUR32.dll": {
+        "AcceptSecurityContext": {
+          "1 SSPICLI.AcceptSecurityContext": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "AcquireCredentialsHandleA": {
+          "2 SSPICLI.AcquireCredentialsHandleA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "AcquireCredentialsHandleW": {
+          "3 SSPICLI.AcquireCredentialsHandleW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "AddCredentialsA": {
+          "4 SSPICLI.AddCredentialsA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "AddCredentialsW": {
+          "5 SSPICLI.AddCredentialsW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "AddSecurityPackageA": {
+          "6 SSPICLI.AddSecurityPackageA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "AddSecurityPackageW": {
+          "7 SSPICLI.AddSecurityPackageW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "ApplyControlToken": {
+          "8 SSPICLI.ApplyControlToken": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "ChangeAccountPasswordA": {
+          "9 SSPICLI.ChangeAccountPasswordA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "ChangeAccountPasswordW": {
+          "10 SSPICLI.ChangeAccountPasswordW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "CompleteAuthToken": {
+          "11 SSPICLI.CompleteAuthToken": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "CredMarshalTargetInfo": {
+          "12 SSPICLI.CredMarshalTargetInfo": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "CredUnmarshalTargetInfo": {
+          "13 SSPICLI.CredUnmarshalTargetInfo": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "DecryptMessage": {
+          "14 SSPICLI.DecryptMessage": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "DeleteSecurityContext": {
+          "15 SSPICLI.DeleteSecurityContext": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "DeleteSecurityPackageA": {
+          "16 SSPICLI.DeleteSecurityPackageA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "DeleteSecurityPackageW": {
+          "17 SSPICLI.DeleteSecurityPackageW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "EncryptMessage": {
+          "18 SSPICLI.EncryptMessage": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "EnumerateSecurityPackagesA": {
+          "19 SSPICLI.EnumerateSecurityPackagesA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "EnumerateSecurityPackagesW": {
+          "20 SSPICLI.EnumerateSecurityPackagesW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "ExportSecurityContext": {
+          "21 SSPICLI.ExportSecurityContext": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "FreeContextBuffer": {
+          "22 SSPICLI.FreeContextBuffer": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "FreeCredentialsHandle": {
+          "23 SSPICLI.FreeCredentialsHandle": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "GetSecurityUserInfo": {
+          "24 SSPICLI.GetSecurityUserInfo": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "GetUserNameExA": {
+          "25 SSPICLI.GetUserNameExA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "GetUserNameExW": {
+          "26 SSPICLI.GetUserNameExW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "ImpersonateSecurityContext": {
+          "27 SSPICLI.ImpersonateSecurityContext": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "ImportSecurityContextA": {
+          "28 SSPICLI.ImportSecurityContextA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "ImportSecurityContextW": {
+          "29 SSPICLI.ImportSecurityContextW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "InitSecurityInterfaceA": {
+          "30 SSPICLI.InitSecurityInterfaceA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "InitSecurityInterfaceW": {
+          "31 SSPICLI.InitSecurityInterfaceW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "InitializeSecurityContextA": {
+          "32 SSPICLI.InitializeSecurityContextA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "InitializeSecurityContextW": {
+          "33 SSPICLI.InitializeSecurityContextW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaCallAuthenticationPackage": {
+          "34 SSPICLI.LsaCallAuthenticationPackage": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaConnectUntrusted": {
+          "35 SSPICLI.LsaConnectUntrusted": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaDeregisterLogonProcess": {
+          "36 SSPICLI.LsaDeregisterLogonProcess": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaEnumerateLogonSessions": {
+          "37 SSPICLI.LsaEnumerateLogonSessions": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaFreeReturnBuffer": {
+          "38 SSPICLI.LsaFreeReturnBuffer": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaGetLogonSessionData": {
+          "39 SSPICLI.LsaGetLogonSessionData": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaLogonUser": {
+          "40 SSPICLI.LsaLogonUser": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaLookupAuthenticationPackage": {
+          "41 SSPICLI.LsaLookupAuthenticationPackage": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaRegisterLogonProcess": {
+          "42 SSPICLI.LsaRegisterLogonProcess": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaRegisterPolicyChangeNotification": {
+          "43 SSPICLI.LsaRegisterPolicyChangeNotification": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "LsaUnregisterPolicyChangeNotification": {
+          "44 SSPICLI.LsaUnregisterPolicyChangeNotification": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "MakeSignature": {
+          "45 SSPICLI.MakeSignature": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "QueryContextAttributesA": {
+          "46 SSPICLI.QueryContextAttributesA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "QueryContextAttributesW": {
+          "47 SSPICLI.QueryContextAttributesW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "QueryCredentialsAttributesA": {
+          "48 SSPICLI.QueryCredentialsAttributesA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "QueryCredentialsAttributesW": {
+          "49 SSPICLI.QueryCredentialsAttributesW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "QuerySecurityContextToken": {
+          "50 SSPICLI.QuerySecurityContextToken": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "QuerySecurityPackageInfoA": {
+          "51 SSPICLI.QuerySecurityPackageInfoA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "QuerySecurityPackageInfoW": {
+          "52 SSPICLI.QuerySecurityPackageInfoW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "RevertSecurityContext": {
+          "53 SSPICLI.RevertSecurityContext": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslAcceptSecurityContext": {
+          "54 SSPICLI.SaslAcceptSecurityContext": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslEnumerateProfilesA": {
+          "55 SSPICLI.SaslEnumerateProfilesA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslEnumerateProfilesW": {
+          "56 SSPICLI.SaslEnumerateProfilesW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslGetContextOption": {
+          "57 SSPICLI.SaslGetContextOption": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslGetProfilePackageA": {
+          "58 SSPICLI.SaslGetProfilePackageA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslGetProfilePackageW": {
+          "59 SSPICLI.SaslGetProfilePackageW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslIdentifyPackageA": {
+          "60 SSPICLI.SaslIdentifyPackageA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslIdentifyPackageW": {
+          "61 SSPICLI.SaslIdentifyPackageW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslInitializeSecurityContextA": {
+          "62 SSPICLI.SaslInitializeSecurityContextA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslInitializeSecurityContextW": {
+          "63 SSPICLI.SaslInitializeSecurityContextW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SaslSetContextOption": {
+          "64 SSPICLI.SaslSetContextOption": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SealMessage": {
+          "65 SSPICLI.SealMessage": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SeciAllocateAndSetCallFlags": {
+          "66 SSPICLI.SeciAllocateAndSetCallFlags": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SeciAllocateAndSetIPAddress": {
+          "67 SSPICLI.SeciAllocateAndSetIPAddress": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SeciFreeCallContext": {
+          "68 SSPICLI.SeciFreeCallContext": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SetContextAttributesA": {
+          "69 SSPICLI.SetContextAttributesA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SetContextAttributesW": {
+          "70 SSPICLI.SetContextAttributesW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SetCredentialsAttributesA": {
+          "71 SSPICLI.SetCredentialsAttributesA": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SetCredentialsAttributesW": {
+          "72 SSPICLI.SetCredentialsAttributesW": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiCompareAuthIdentities": {
+          "73 SSPICLI.SspiCompareAuthIdentities": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiCopyAuthIdentity": {
+          "74 SSPICLI.SspiCopyAuthIdentity": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiDecryptAuthIdentity": {
+          "75 SSPICLI.SspiDecryptAuthIdentity": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiEncodeAuthIdentityAsStrings": {
+          "76 SSPICLI.SspiEncodeAuthIdentityAsStrings": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiEncodeStringsAsAuthIdentity": {
+          "77 SSPICLI.SspiEncodeStringsAsAuthIdentity": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiEncryptAuthIdentity": {
+          "78 SSPICLI.SspiEncryptAuthIdentity": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiExcludePackage": {
+          "79 SSPICLI.SspiExcludePackage": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiFreeAuthIdentity": {
+          "80 SSPICLI.SspiFreeAuthIdentity": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiGetTargetHostName": {
+          "81 SSPICLI.SspiGetTargetHostName": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiIsAuthIdentityEncrypted": {
+          "82 SSPICLI.SspiIsAuthIdentityEncrypted": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiLocalFree": {
+          "83 SSPICLI.SspiLocalFree": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiMarshalAuthIdentity": {
+          "84 SSPICLI.SspiMarshalAuthIdentity": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiPrepareForCredRead": {
+          "85 SSPICLI.SspiPrepareForCredRead": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiPrepareForCredWrite": {
+          "86 SSPICLI.SspiPrepareForCredWrite": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiUnmarshalAuthIdentity": {
+          "87 SSPICLI.SspiUnmarshalAuthIdentity": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiValidateAuthIdentity": {
+          "88 SSPICLI.SspiValidateAuthIdentity": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "SspiZeroAuthIdentity": {
+          "89 SSPICLI.SspiZeroAuthIdentity": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "UnsealMessage": {
+          "90 SSPICLI.UnsealMessage": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        },
+        "VerifySignature": {
+          "91 SSPICLI.VerifySignature": [
+            "10.0.14393.0_57899b71_9000_3e00",
+            "10.0.16299.15_9b090d38_9000_3c00"
+          ]
+        }
+      },
+      "Secur32.dll": {
+        "AcceptSecurityContext": {
+          "4 SSPICLI.AcceptSecurityContext": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "AcquireCredentialsHandleA": {
+          "5 SSPICLI.AcquireCredentialsHandleA": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "AcquireCredentialsHandleW": {
+          "6 SSPICLI.AcquireCredentialsHandleW": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "AddCredentialsA": {
+          "7 SSPICLI.AddCredentialsA": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "AddCredentialsW": {
+          "8 SSPICLI.AddCredentialsW": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "AddSecurityPackageA": {
+          "9 SSPICLI.AddSecurityPackageA": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "AddSecurityPackageW": {
+          "10 SSPICLI.AddSecurityPackageW": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "ApplyControlToken": {
+          "11 SSPICLI.ApplyControlToken": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "ChangeAccountPasswordA": {
+          "12 SSPICLI.ChangeAccountPasswordA": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "ChangeAccountPasswordW": {
+          "13 SSPICLI.ChangeAccountPasswordW": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "CloseLsaPerformanceData": {
+          "1": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "CollectLsaPerformanceData": {
+          "2": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "CompleteAuthToken": {
+          "14 SSPICLI.CompleteAuthToken": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "CredMarshalTargetInfo": {
+          "15 SSPICLI.CredMarshalTargetInfo": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "CredParseUserNameWithType": {
+          "16": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "CredUnmarshalTargetInfo": {
+          "16 SSPICLI.CredUnmarshalTargetInfo": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "17 SSPICLI.CredUnmarshalTargetInfo": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "DecryptMessage": {
+          "17 SSPICLI.DecryptMessage": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "18 SSPICLI.DecryptMessage": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "DeleteSecurityContext": {
+          "18 SSPICLI.DeleteSecurityContext": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "19 SSPICLI.DeleteSecurityContext": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "DeleteSecurityPackageA": {
+          "19 SSPICLI.DeleteSecurityPackageA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "20 SSPICLI.DeleteSecurityPackageW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "DeleteSecurityPackageW": {
+          "20 SSPICLI.DeleteSecurityPackageW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "21 SSPICLI.DeleteSecurityPackageW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "EncryptMessage": {
+          "21 SSPICLI.EncryptMessage": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "22 SSPICLI.EncryptMessage": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "EnumerateSecurityPackagesA": {
+          "22 SSPICLI.EnumerateSecurityPackagesA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "23 SSPICLI.EnumerateSecurityPackagesA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "EnumerateSecurityPackagesW": {
+          "23 SSPICLI.EnumerateSecurityPackagesW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "24 SSPICLI.EnumerateSecurityPackagesW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "ExportSecurityContext": {
+          "24 SSPICLI.ExportSecurityContext": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "25 SSPICLI.ExportSecurityContext": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "FreeContextBuffer": {
+          "25 SSPICLI.FreeContextBuffer": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "26 SSPICLI.FreeContextBuffer": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "FreeCredentialsHandle": {
+          "26 SSPICLI.FreeCredentialsHandle": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "27 SSPICLI.FreeCredentialsHandle": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "GetComputerObjectNameA": {
+          "27": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "28": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "GetComputerObjectNameW": {
+          "28": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "29": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "GetSecurityUserInfo": {
+          "29 SSPICLI.GetSecurityUserInfo": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "30 SSPICLI.GetSecurityUserInfo": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "GetUserNameExA": {
+          "30 SSPICLI.GetUserNameExA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "31 SSPICLI.GetUserNameExA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "GetUserNameExW": {
+          "31 SSPICLI.GetUserNameExW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "32 SSPICLI.GetUserNameExW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "ImpersonateSecurityContext": {
+          "32 SSPICLI.ImpersonateSecurityContext": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "33 SSPICLI.ImpersonateSecurityContext": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "ImportSecurityContextA": {
+          "33 SSPICLI.ImportSecurityContextA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "34 SSPICLI.ImportSecurityContextA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "ImportSecurityContextW": {
+          "34 SSPICLI.ImportSecurityContextW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "35 SSPICLI.ImportSecurityContextW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "InitSecurityInterfaceA": {
+          "35 SSPICLI.InitSecurityInterfaceA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "36 SSPICLI.InitSecurityInterfaceA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "InitSecurityInterfaceW": {
+          "36 SSPICLI.InitSecurityInterfaceW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "37 SSPICLI.InitSecurityInterfaceW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "InitializeSecurityContextA": {
+          "37 SSPICLI.InitializeSecurityContextA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "38 SSPICLI.InitializeSecurityContextA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "InitializeSecurityContextW": {
+          "38 SSPICLI.InitializeSecurityContextW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "39 SSPICLI.InitializeSecurityContextW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaCallAuthenticationPackage": {
+          "39 SSPICLI.LsaCallAuthenticationPackage": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "40 SSPICLI.LsaCallAuthenticationPackage": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaConnectUntrusted": {
+          "40 SSPICLI.LsaConnectUntrusted": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "41 SSPICLI.LsaConnectUntrusted": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaDeregisterLogonProcess": {
+          "41 SSPICLI.LsaDeregisterLogonProcess": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "42 SSPICLI.LsaDeregisterLogonProcess": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaEnumerateLogonSessions": {
+          "42 SSPICLI.LsaEnumerateLogonSessions": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "43 SSPICLI.LsaEnumerateLogonSessions": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaFreeReturnBuffer": {
+          "43 SSPICLI.LsaFreeReturnBuffer": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "44 SSPICLI.LsaFreeReturnBuffer": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaGetLogonSessionData": {
+          "44 SSPICLI.LsaGetLogonSessionData": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "45 SSPICLI.LsaGetLogonSessionData": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaLogonUser": {
+          "45 SSPICLI.LsaLogonUser": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "46 SSPICLI.LsaLogonUser": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaLookupAuthenticationPackage": {
+          "46 SSPICLI.LsaLookupAuthenticationPackage": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "47 SSPICLI.LsaLookupAuthenticationPackage": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaRegisterLogonProcess": {
+          "47 SSPICLI.LsaRegisterLogonProcess": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "48 SSPICLI.LsaRegisterLogonProcess": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaRegisterPolicyChangeNotification": {
+          "48 SSPICLI.LsaRegisterPolicyChangeNotification": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "49 SSPICLI.LsaRegisterPolicyChangeNotification": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "LsaUnregisterPolicyChangeNotification": {
+          "49 SSPICLI.LsaUnregisterPolicyChangeNotification": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "50 SSPICLI.LsaUnregisterPolicyChangeNotification": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "MakeSignature": {
+          "50 SSPICLI.MakeSignature": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "51 SSPICLI.MakeSignature": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "OpenLsaPerformanceData": {
+          "3": [
+            "6.1.7600.16385_4a5be066_b000_6e00",
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "QueryContextAttributesA": {
+          "51 SSPICLI.QueryContextAttributesA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "52 SSPICLI.QueryContextAttributesA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "QueryContextAttributesW": {
+          "52 SSPICLI.QueryContextAttributesW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "53 SSPICLI.QueryContextAttributesW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "QueryCredentialsAttributesA": {
+          "53 SSPICLI.QueryCredentialsAttributesA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "54 SSPICLI.QueryCredentialsAttributesA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "QueryCredentialsAttributesW": {
+          "54 SSPICLI.QueryCredentialsAttributesW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "55 SSPICLI.QueryCredentialsAttributesW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "QuerySecurityContextToken": {
+          "55 SSPICLI.QuerySecurityContextToken": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "56 SSPICLI.QuerySecurityContextToken": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "QuerySecurityPackageInfoA": {
+          "56 SSPICLI.QuerySecurityPackageInfoA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "57 SSPICLI.QuerySecurityPackageInfoA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "QuerySecurityPackageInfoW": {
+          "57 SSPICLI.QuerySecurityPackageInfoW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "58 SSPICLI.QuerySecurityPackageInfoW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "RevertSecurityContext": {
+          "58 SSPICLI.RevertSecurityContext": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "59 SSPICLI.RevertSecurityContext": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslAcceptSecurityContext": {
+          "59 SSPICLI.SaslAcceptSecurityContext": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "60 SSPICLI.SaslAcceptSecurityContext": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslEnumerateProfilesA": {
+          "60 SSPICLI.SaslEnumerateProfilesA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "61 SSPICLI.SaslEnumerateProfilesA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslEnumerateProfilesW": {
+          "61 SSPICLI.SaslEnumerateProfilesW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "62 SSPICLI.SaslEnumerateProfilesW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslGetContextOption": {
+          "62 SSPICLI.SaslGetContextOption": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "63 SSPICLI.SaslGetContextOption": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslGetProfilePackageA": {
+          "63 SSPICLI.SaslGetProfilePackageA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "64 SSPICLI.SaslGetProfilePackageA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslGetProfilePackageW": {
+          "64 SSPICLI.SaslGetProfilePackageW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "65 SSPICLI.SaslGetProfilePackageA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslIdentifyPackageA": {
+          "65 SSPICLI.SaslIdentifyPackageA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "66 SSPICLI.SaslIdentifyPackageA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslIdentifyPackageW": {
+          "66 SSPICLI.SaslIdentifyPackageW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "67 SSPICLI.SaslIdentifyPackageW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslInitializeSecurityContextA": {
+          "67 SSPICLI.SaslInitializeSecurityContextA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "68 SSPICLI.SaslInitializeSecurityContextA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslInitializeSecurityContextW": {
+          "68 SSPICLI.SaslInitializeSecurityContextW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "69 SSPICLI.SaslInitializeSecurityContextW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SaslSetContextOption": {
+          "69 SSPICLI.SaslSetContextOption": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "70 SSPICLI.SaslSetContextOption": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SealMessage": {
+          "70 SSPICLI.SealMessage": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "71 SSPICLI.SealMessage": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SeciAllocateAndSetCallFlags": {
+          "71 SSPICLI.SeciAllocateAndSetCallFlags": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "72 SSPICLI.SeciAllocateAndSetCallFlags": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SeciAllocateAndSetIPAddress": {
+          "72 SSPICLI.SeciAllocateAndSetIPAddress": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "73 SSPICLI.SeciAllocateAndSetIPAddress": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SeciFreeCallContext": {
+          "73 SSPICLI.SeciFreeCallContext": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "74 SSPICLI.SeciFreeCallContext": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SecpFreeMemory": {
+          "74": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "75": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SecpTranslateName": {
+          "75": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "76": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SecpTranslateNameEx": {
+          "76": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "77": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SetContextAttributesA": {
+          "77 SSPICLI.SetContextAttributesA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "78 SSPICLI.SetContextAttributesA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SetContextAttributesW": {
+          "78 SSPICLI.SetContextAttributesW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "79 SSPICLI.SetContextAttributesW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SetCredentialsAttributesA": {
+          "79 SSPICLI.SetCredentialsAttributesA": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "80 SSPICLI.SetCredentialsAttributesA": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SetCredentialsAttributesW": {
+          "80 SSPICLI.SetCredentialsAttributesW": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "81 SSPICLI.SetCredentialsAttributesW": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiCompareAuthIdentities": {
+          "81 SSPICLI.SspiCompareAuthIdentities": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "82 SSPICLI.SspiCompareAuthIdentities": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiCopyAuthIdentity": {
+          "82 SSPICLI.SspiCopyAuthIdentity": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "83 SSPICLI.SspiCopyAuthIdentity": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiDecryptAuthIdentity": {
+          "83 SSPICLI.SspiDecryptAuthIdentity": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "84 SSPICLI.SspiDecryptAuthIdentity": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiEncodeAuthIdentityAsStrings": {
+          "84 SSPICLI.SspiEncodeAuthIdentityAsStrings": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "85 SSPICLI.SspiEncodeAuthIdentityAsStrings": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiEncodeStringsAsAuthIdentity": {
+          "85 SSPICLI.SspiEncodeStringsAsAuthIdentity": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "86 SSPICLI.SspiEncodeStringsAsAuthIdentity": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiEncryptAuthIdentity": {
+          "86 SSPICLI.SspiEncryptAuthIdentity": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "87 SSPICLI.SspiEncryptAuthIdentity": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiExcludePackage": {
+          "87 SSPICLI.SspiExcludePackage": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "88 SSPICLI.SspiExcludePackage": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiFreeAuthIdentity": {
+          "88 SSPICLI.SspiFreeAuthIdentity": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "89 SSPICLI.SspiFreeAuthIdentity": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiGetTargetHostName": {
+          "89 SSPICLI.SspiGetTargetHostName": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "90 SSPICLI.SspiGetTargetHostName": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiIsAuthIdentityEncrypted": {
+          "90 SSPICLI.SspiIsAuthIdentityEncrypted": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "91 SSPICLI.SspiIsAuthIdentityEncrypted": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiLocalFree": {
+          "91 SSPICLI.SspiLocalFree": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "92 SSPICLI.SspiLocalFree": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiMarshalAuthIdentity": {
+          "92 SSPICLI.SspiMarshalAuthIdentity": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "93 SSPICLI.SspiMarshalAuthIdentity": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiPrepareForCredRead": {
+          "93 SSPICLI.SspiPrepareForCredRead": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "94 SSPICLI.SspiPrepareForCredRead": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiPrepareForCredWrite": {
+          "94 SSPICLI.SspiPrepareForCredWrite": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "95 SSPICLI.SspiPrepareForCredWrite": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiUnmarshalAuthIdentity": {
+          "95 SSPICLI.SspiUnmarshalAuthIdentity": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "96 SSPICLI.SspiUnmarshalAuthIdentity": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiValidateAuthIdentity": {
+          "96 SSPICLI.SspiValidateAuthIdentity": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "97 SSPICLI.SspiValidateAuthIdentity": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "SspiZeroAuthIdentity": {
+          "97 SSPICLI.SspiZeroAuthIdentity": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "98 SSPICLI.SspiZeroAuthIdentity": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "TranslateNameA": {
+          "98": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "99": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "TranslateNameW": {
+          "100": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ],
+          "99": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ]
+        },
+        "UnsealMessage": {
+          "100 SSPICLI.UnsealMessage": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "101 SSPICLI.UnsealMessage": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        },
+        "VerifySignature": {
+          "101 SSPICLI.VerifySignature": [
+            "10.0.14393.0_57899b81_c000_6e00",
+            "10.0.16299.15_d3cc901d_c000_6c00",
+            "10.0.17134.1_4a6316a3_c000_6c00",
+            "10.0.18362.1_71bb8e7a_c000_6c00"
+          ],
+          "102 SSPICLI.VerifySignature": [
+            "6.1.7600.16385_4a5be066_b000_6e00"
+          ]
+        }
+      }
+    }
+  }
+}

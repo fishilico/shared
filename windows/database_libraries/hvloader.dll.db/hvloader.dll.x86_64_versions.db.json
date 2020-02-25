@@ -1,0 +1,340 @@
+{
+  "hvloader.dll.x86_64": {
+    "versions": {
+      "10.0.16299.15_aa029d56_56000_12d98": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2852298070,
+          "timestamp_iso": "2060-05-20 19:01:10",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 352256,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 77208,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "b4bcf08f-8494-85ec-02b4-590c084c3ea3",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.192_4040fb59_56000_12d98": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1078000473,
+          "timestamp_iso": "2004-02-28 21:34:33",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 352256,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 77208,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "5041f64a-9f89-60f8-e78a-b9850c51b2e8",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_501a715f_64000_20da0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1343910239,
+          "timestamp_iso": "2012-08-02 14:23:59",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 409600,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 134560,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "124611bc-4849-86d8-1165-acbe461513c4",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.472_c4dc373f_64000_20f38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3302766399,
+          "timestamp_iso": "2074-08-29 13:06:39",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 409600,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 134968,
+        "file_version": "10.0.17134.472",
+        "product_version": "10.0.17134.472",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.17134.472 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.472"
+        },
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "59ebf901-9f8c-23b7-ffb4-4a0edfa56300",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.523_c4dc373f_64000_20f38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3302766399,
+          "timestamp_iso": "2074-08-29 13:06:39",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 409600,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 134968,
+        "file_version": "10.0.17134.523",
+        "product_version": "10.0.17134.523",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.17134.523 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.523"
+        },
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "59ebf901-9f8c-23b7-ffb4-4a0edfa56300",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.590_c4dc373f_64000_20f38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3302766399,
+          "timestamp_iso": "2074-08-29 13:06:39",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 409600,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 134968,
+        "file_version": "10.0.17134.590",
+        "product_version": "10.0.17134.590",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.17134.590 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.590"
+        },
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "59ebf901-9f8c-23b7-ffb4-4a0edfa56300",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.648_c4dc373f_64000_20f38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3302766399,
+          "timestamp_iso": "2074-08-29 13:06:39",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 409600,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 134968,
+        "file_version": "10.0.17134.648",
+        "product_version": "10.0.17134.648",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.17134.648 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.648"
+        },
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "59ebf901-9f8c-23b7-ffb4-4a0edfa56300",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.885_8042ca7a_64000_20f38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2151860858,
+          "timestamp_iso": "2038-03-10 20:07:38",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 409600,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 134968,
+        "file_version": "10.0.17134.885",
+        "product_version": "10.0.17134.885",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.17134.885 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.885"
+        },
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "44b4a94f-4c16-b270-5446-712d23fc5dc4",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.950_2b52e4a2_64000_20f38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 726852770,
+          "timestamp_iso": "1993-01-12 16:32:50",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 409600,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 134968,
+        "file_version": "10.0.17134.950",
+        "product_version": "10.0.17134.950",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.17134.950 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.950"
+        },
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "010ad022-7bfc-98da-750c-923d78fdbccf",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_4955230c_59000_16d38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1230316300,
+          "timestamp_iso": "2008-12-26 19:31:40",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 364544,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 93496,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "2dda09a4-8543-04fe-dfd6-831d734de4a5",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "2dda09a4-8543-04fe-dfd6-831d734de4a5",
+          "unknown": "bf4a9e6bd1d363007e878f49",
+          "timestamp": 1230316300
+        }
+      }
+    }
+  }
+}

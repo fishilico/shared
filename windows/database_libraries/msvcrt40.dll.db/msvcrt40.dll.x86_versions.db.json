@@ -1,0 +1,205 @@
+{
+  "msvcrt40.dll.x86": {
+    "versions": {
+      "5.1.2600.5512_48025155_11000_f000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208111445,
+          "timestamp_iso": "2008-04-13 20:30:45",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2013790208,
+          "size_of_image": 69632,
+          "subsystem": 1,
+          "dll_characteristics": 1024
+        },
+        "file_size": 61440,
+        "file_version": "5.1.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "VC 4.x CRT DLL (Forwarded to msvcrt.dll)",
+          "FileVersion": "5.1.2600.5512 (xpsp.080413-2111)",
+          "InternalName": "msvcrt40.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt40.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "export_dll_name": "MSVCRT40.dll",
+        "debug_codeview": {
+          "guid": "7ab93d6f-c1f1-4d7a-a743-4601d9c8495b",
+          "age": 1,
+          "path": "msvcrt40.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bda71_11000_ee00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533681,
+          "timestamp_iso": "2009-07-14 03:08:01",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 4194304,
+          "size_of_image": 69632,
+          "subsystem": 1,
+          "dll_characteristics": 1344
+        },
+        "file_size": 60928,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "VC 4.x CRT DLL (Forwarded to msvcrt.dll)",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "msvcrt40.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt40.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "MSVCRT40.dll",
+        "debug_codeview": {
+          "guid": "b0da8ce9-18e7-48c8-8152-d32477331ffc",
+          "age": 1,
+          "path": "msvcrt40.pdb"
+        }
+      },
+      "10.0.14393.0_578991b7_11000_ee00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468633527,
+          "timestamp_iso": "2016-07-16 03:45:27",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 2013790208,
+          "size_of_image": 69632,
+          "subsystem": 1,
+          "dll_characteristics": 17728
+        },
+        "file_size": 60928,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "VC 4.x CRT DLL (Forwarded to msvcrt.dll)",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "msvcrt40.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt40.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "MSVCRT40.dll",
+        "debug_codeview": {
+          "guid": "c3a34068-7abb-4dbf-949b-e17c8a328e64",
+          "age": 1,
+          "path": "msvcrt40.pdb"
+        }
+      },
+      "10.0.16299.15_25428848_11000_ee00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 625117256,
+          "timestamp_iso": "1989-10-23 04:40:56",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 2013790208,
+          "size_of_image": 69632,
+          "subsystem": 1,
+          "dll_characteristics": 17728
+        },
+        "file_size": 60928,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "VC 4.x CRT DLL (Forwarded to msvcrt.dll)",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "msvcrt40.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt40.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "MSVCRT40.dll",
+        "debug_codeview": {
+          "guid": "e72651db-1562-26d4-6667-e6388ff42733",
+          "age": 1,
+          "path": "msvcrt40.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_0ae1826c_11000_ee00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 182551148,
+          "timestamp_iso": "1975-10-14 21:39:08",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 2013790208,
+          "size_of_image": 69632,
+          "subsystem": 1,
+          "dll_characteristics": 17728
+        },
+        "file_size": 60928,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "VC 4.x CRT DLL (Forwarded to msvcrt.dll)",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "msvcrt40.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt40.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "MSVCRT40.dll",
+        "debug_codeview": {
+          "guid": "e48b99d0-e8e3-68a7-7d73-b4272a86da58",
+          "age": 1,
+          "path": "msvcrt40.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_acf3c627_11000_ee00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2901657127,
+          "timestamp_iso": "2061-12-13 00:52:07",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 2013790208,
+          "size_of_image": 69632,
+          "subsystem": 1,
+          "dll_characteristics": 17728
+        },
+        "file_size": 60928,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "VC 4.x CRT DLL (Forwarded to msvcrt.dll)",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "msvcrt40.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt40.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "MSVCRT40.dll",
+        "debug_codeview": {
+          "guid": "7abf6d3c-7483-c8db-a904-383cc22c067e",
+          "age": 1,
+          "path": "msvcrt40.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "7abf6d3c-7483-c8db-a904-383cc22c067e",
+          "unknown": "60f5446d8ded7f9badba055a",
+          "timestamp": 2901657127
+        }
+      }
+    }
+  }
+}

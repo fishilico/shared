@@ -1,0 +1,270 @@
+{
+  "msvcirt.dll.x86": {
+    "versions": {
+      "7.0.2600.0_3b7dfe38_10000_c600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 998112824,
+          "timestamp_iso": "2001-08-18 07:33:44",
+          "coff_characteristics": 8462,
+          "linker_version": "7.0",
+          "image_base": 1889861632,
+          "size_of_image": 65536,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 50688,
+        "file_version": "7.0.2600.0",
+        "product_version": "5.1.2600.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT IOStreams DLL",
+          "FileVersion": "7.0.2600.0 (xpclient.010817-1148)",
+          "InternalName": "msvcirt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcirt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.0"
+        },
+        "export_dll_name": "msvcirt.dll",
+        "debug_codeview_timed": {
+          "timestamp": 998081202,
+          "timestamp_iso": "2001-08-17 22:46:42",
+          "age": 1,
+          "path": "msvcirt.pdb"
+        }
+      },
+      "7.0.2600.5512_48025164_11000_e000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208111460,
+          "timestamp_iso": "2008-04-13 20:31:00",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 4194304,
+          "size_of_image": 69632,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 57344,
+        "file_version": "7.0.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT IOStreams DLL",
+          "FileVersion": "7.0.2600.5512 (xpsp.080413-2111)",
+          "InternalName": "msvcirt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcirt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "export_dll_name": "msvcirt.dll",
+        "debug_codeview": {
+          "guid": "bc303bbd-8b94-4dc8-b1fc-dcd735f1d63c",
+          "age": 1,
+          "path": "msvcirt.pdb"
+        }
+      },
+      "7.0.2600.5512_4802a094_11000_e000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208131732,
+          "timestamp_iso": "2008-04-14 02:08:52",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 1618739200,
+          "size_of_image": 69632,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 57344,
+        "file_version": "7.0.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT IOStreams DLL",
+          "FileVersion": "7.0.2600.5512 (xpsp.080413-2111)",
+          "InternalName": "msvcirt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcirt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "export_dll_name": "msvcirt.dll",
+        "debug_codeview": {
+          "guid": "bc303bbd-8b94-4dc8-b1fc-dcd735f1d63c",
+          "age": 1,
+          "path": "msvcirt.pdb"
+        }
+      },
+      "7.0.7600.16385_4a5bda6d_11000_ea00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533677,
+          "timestamp_iso": "2009-07-14 03:07:57",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 55705600,
+          "size_of_image": 69632,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 59904,
+        "file_version": "7.0.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT IOStreams DLL",
+          "FileVersion": "7.0.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "msvcirt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcirt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "msvcirt.dll",
+        "debug_codeview": {
+          "guid": "94241778-bf1c-4bd2-89ac-6a6ea7733e9d",
+          "age": 2,
+          "path": "msvcirt.pdb"
+        }
+      },
+      "7.0.14393.0_57898d80_14000_10200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468632448,
+          "timestamp_iso": "2016-07-16 03:27:28",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 81920,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 66048,
+        "file_version": "7.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT IOStreams DLL",
+          "FileVersion": "7.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "msvcirt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcirt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "msvcirt.dll",
+        "debug_codeview": {
+          "guid": "09203dc1-1cac-479b-b8b0-ecbdd42684e6",
+          "age": 1,
+          "path": "msvcirt.pdb"
+        }
+      },
+      "7.0.16299.15_d530336c_14000_10000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3576705900,
+          "timestamp_iso": "2083-05-05 03:25:00",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 268435456,
+          "size_of_image": 81920,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 65536,
+        "file_version": "7.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT IOStreams DLL",
+          "FileVersion": "7.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "msvcirt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcirt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "msvcirt.dll",
+        "debug_codeview": {
+          "guid": "5c44ebc6-cf35-ff5b-fd4f-2f3775e96b61",
+          "age": 1,
+          "path": "msvcirt.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "7.0.17134.1_f2a12baf_14000_10200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4070648751,
+          "timestamp_iso": "2098-12-29 00:45:51",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 268435456,
+          "size_of_image": 81920,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 66048,
+        "file_version": "7.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT IOStreams DLL",
+          "FileVersion": "7.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "msvcirt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcirt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "msvcirt.dll",
+        "debug_codeview": {
+          "guid": "649d3e84-d090-30b2-f835-ffb284bbbd37",
+          "age": 1,
+          "path": "msvcirt.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "7.0.18362.1_7c589b87_13000_fa00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2086181767,
+          "timestamp_iso": "2036-02-09 15:56:07",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 77824,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 64000,
+        "file_version": "7.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT IOStreams DLL",
+          "FileVersion": "7.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "msvcirt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcirt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "msvcirt.dll",
+        "debug_codeview": {
+          "guid": "980252d8-2e93-ea5f-4a73-95465119b01b",
+          "age": 1,
+          "path": "msvcirt.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "980252d8-2e93-ea5f-4a73-95465119b01b",
+          "unknown": "28ce4f3e5a3cb86d9de340f3",
+          "timestamp": 2086181767
+        }
+      }
+    }
+  }
+}

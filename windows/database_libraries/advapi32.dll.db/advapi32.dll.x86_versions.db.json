@@ -1,0 +1,399 @@
+{
+  "advapi32.dll.x86": {
+    "versions": {
+      "5.1.2600.5512_4802a0b2_9b000_96c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208131762,
+          "timestamp_iso": "2008-04-14 02:09:22",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2010972160,
+          "size_of_image": 634880,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 617472,
+        "file_version": "5.1.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "5.1.2600.5512 (xpsp.080413-2113)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "5efb9bf4-2cc6-4024-ab64-802e46739464",
+          "age": 2,
+          "path": "advapi32.pdb"
+        }
+      },
+      "5.1.2600.5755_49900be3_9b000_96c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1234176995,
+          "timestamp_iso": "2009-02-09 11:56:35",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2010972160,
+          "size_of_image": 634880,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 617472,
+        "file_version": "5.1.2600.5755",
+        "product_version": "5.1.2600.5755",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "5.1.2600.5755 (xpsp_sp3_qfe.090206-1316)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5755"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "8f800aae-5255-4123-9e41-10b8821f5ecd",
+          "age": 2,
+          "path": "advapi32.pdb"
+        }
+      },
+      "5.1.2600.5755_49901d48_9b000_96c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1234181448,
+          "timestamp_iso": "2009-02-09 13:10:48",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2010972160,
+          "size_of_image": 634880,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 617472,
+        "file_version": "5.1.2600.5755",
+        "product_version": "5.1.2600.5755",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "5.1.2600.5755 (xpsp_sp3_gdr.090206-1234)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5755"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "f759d3f1-c661-4313-b07c-84bc33f02e4d",
+          "age": 2,
+          "path": "advapi32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bd97e_a0000_9c400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533438,
+          "timestamp_iso": "2009-07-14 03:03:58",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 2009464832,
+          "size_of_image": 655360,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 640000,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "8215e338-5be6-4c70-ad23-0b20f032b940",
+          "age": 2,
+          "path": "advapi32.pdb"
+        }
+      },
+      "10.0.14393.0_57898faf_77000_75c58": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468633007,
+          "timestamp_iso": "2016-07-16 03:36:47",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1278214144,
+          "size_of_image": 487424,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 482392,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "c402b2ee-60d8-415f-9748-c25cd8ca595c",
+          "age": 1,
+          "path": "advapi32.pdb"
+        }
+      },
+      "10.0.14393.1794_59dad55d_77000_75c50": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1507513693,
+          "timestamp_iso": "2017-10-09 03:48:13",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1278214144,
+          "size_of_image": 487424,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 482384,
+        "file_version": "10.0.14393.1794",
+        "product_version": "10.0.14393.1794",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.14393.1794 (rs1_release.171008-1615)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1794"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "7813c862-b382-4d34-be82-835c5ba2824a",
+          "age": 1,
+          "path": "advapi32.pdb"
+        }
+      },
+      "10.0.14393.2007_5a49bb76_77000_75c50": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1514781558,
+          "timestamp_iso": "2018-01-01 05:39:18",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1278214144,
+          "size_of_image": 487424,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 482384,
+        "file_version": "10.0.14393.2007",
+        "product_version": "10.0.14393.2007",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.14393.2007 (rs1_release.171231-1800)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2007"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "0c799483-b549-417d-8433-4331852031fe",
+          "age": 1,
+          "path": "advapi32.pdb"
+        }
+      },
+      "10.0.16299.15_90205c2c_78000_758b8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2418039852,
+          "timestamp_iso": "2046-08-16 15:44:12",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1278214144,
+          "size_of_image": 491520,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 481464,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "f52219c5-1235-d466-8b87-d594059e4bb1",
+          "age": 1,
+          "path": "advapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.192_4db88c66_78000_758b8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1303940198,
+          "timestamp_iso": "2011-04-27 23:36:38",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1278214144,
+          "size_of_image": 491520,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 481464,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "a05046ad-8c8f-4518-64c8-f25cba1248b2",
+          "age": 1,
+          "path": "advapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_6872a1be_78000_75ab8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1752342974,
+          "timestamp_iso": "2025-07-12 19:56:14",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1278214144,
+          "size_of_image": 491520,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 481976,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "944ca888-db0c-6802-6a0d-b65584becd07",
+          "age": 1,
+          "path": "advapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.471_6e913f2e_78000_75a58": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1855012654,
+          "timestamp_iso": "2028-10-13 03:17:34",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1278214144,
+          "size_of_image": 491520,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 481880,
+        "file_version": "10.0.17134.471",
+        "product_version": "10.0.17134.471",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.17134.471 (WinBuild.160101.0800)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.471"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "eab56fe9-c6fd-de2d-0616-058b109408cd",
+          "age": 1,
+          "path": "advapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_56b38228_79000_77280": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1454604840,
+          "timestamp_iso": "2016-02-04 17:54:00",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1278214144,
+          "size_of_image": 495616,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 488064,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "6c7e21fd-0ec7-e1ab-4fb1-f331f9302765",
+          "age": 1,
+          "path": "advapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "6c7e21fd-0ec7-e1ab-4fb1-f331f9302765",
+          "unknown": "2408dc6ccedd321875e3b682",
+          "timestamp": 1454604840
+        }
+      }
+    }
+  }
+}

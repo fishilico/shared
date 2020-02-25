@@ -1,0 +1,3311 @@
+{
+  "netapi32.dll.x86_64": {
+    "exports": {
+      "NETAPI32.dll": {
+        "DavAddConnection": {
+          "1 DAVHLPR.DavAddConnection": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "1 ext-ms-win-rdr-davhlpr-l1-1-0.DavAddConnection": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DavDeleteConnection": {
+          "2 DAVHLPR.DavDeleteConnection": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "2 ext-ms-win-rdr-davhlpr-l1-1-0.DavDeleteConnection": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DavFlushFile": {
+          "3 DAVHLPR.DavFlushFile": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "3 ext-ms-win-rdr-davhlpr-l1-1-0.DavFlushFile": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DavGetExtendedError": {
+          "4 DAVHLPR.DavGetExtendedError": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "4 ext-ms-win-rdr-davhlpr-l1-1-0.DavGetExtendedError": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DavGetHTTPFromUNCPath": {
+          "5 DAVHLPR.DavGetHTTPFromUNCPath": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "5 ext-ms-win-rdr-davhlpr-l1-1-0.DavGetHTTPFromUNCPath": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DavGetUNCFromHTTPPath": {
+          "6 DAVHLPR.DavGetUNCFromHTTPPath": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "6 ext-ms-win-rdr-davhlpr-l1-1-0.DavGetUNCFromHTTPPath": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsAddressToSiteNamesA": {
+          "7 LOGONCLI.DsAddressToSiteNamesA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsAddressToSiteNamesExA": {
+          "8 LOGONCLI.DsAddressToSiteNamesExA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsAddressToSiteNamesExW": {
+          "9 LOGONCLI.DsAddressToSiteNamesExW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsAddressToSiteNamesW": {
+          "10 LOGONCLI.DsAddressToSiteNamesW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsDeregisterDnsHostRecordsA": {
+          "11 LOGONCLI.DsDeregisterDnsHostRecordsA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsDeregisterDnsHostRecordsW": {
+          "12 LOGONCLI.DsDeregisterDnsHostRecordsW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsEnumerateDomainTrustsA": {
+          "13 LOGONCLI.DsEnumerateDomainTrustsA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsEnumerateDomainTrustsW": {
+          "14 LOGONCLI.DsEnumerateDomainTrustsW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcCloseW": {
+          "15 LOGONCLI.DsGetDcCloseW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcNameA": {
+          "16 LOGONCLI.DsGetDcNameA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcNameW": {
+          "17 LOGONCLI.DsGetDcNameW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcNameWithAccountA": {
+          "18 LOGONCLI.DsGetDcNameWithAccountA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcNameWithAccountW": {
+          "19 LOGONCLI.DsGetDcNameWithAccountW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcNextA": {
+          "20 LOGONCLI.DsGetDcNextA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcNextW": {
+          "21 LOGONCLI.DsGetDcNextW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcOpenA": {
+          "22 LOGONCLI.DsGetDcOpenA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcOpenW": {
+          "23 LOGONCLI.DsGetDcOpenW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcSiteCoverageA": {
+          "24 LOGONCLI.DsGetDcSiteCoverageA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetDcSiteCoverageW": {
+          "25 LOGONCLI.DsGetDcSiteCoverageW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetForestTrustInformationW": {
+          "26 LOGONCLI.DsGetForestTrustInformationW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetSiteNameA": {
+          "27 LOGONCLI.DsGetSiteNameA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsGetSiteNameW": {
+          "28 LOGONCLI.DsGetSiteNameW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsMergeForestTrustInformationW": {
+          "29 LOGONCLI.DsMergeForestTrustInformationW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00",
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "DsRoleAbortDownlevelServerUpgrade": {
+          "30 DSROLE.DsRoleAbortDownlevelServerUpgrade": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleCancel": {
+          "31 DSROLE.DsRoleCancel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleDcAsDc": {
+          "32 DSROLE.DsRoleDcAsDc": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleDcAsReplica": {
+          "33 DSROLE.DsRoleDcAsReplica": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleDemoteDc": {
+          "34 DSROLE.DsRoleDemoteDc": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleDnsNameToFlatName": {
+          "35 DSROLE.DsRoleDnsNameToFlatName": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleFreeMemory": {
+          "30 DSROLE.DsRoleFreeMemory": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "36 DSROLE.DsRoleFreeMemory": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleGetDatabaseFacts": {
+          "37 DSROLE.DsRoleGetDatabaseFacts": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleGetDcOperationProgress": {
+          "38 DSROLE.DsRoleGetDcOperationProgress": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleGetDcOperationResults": {
+          "39 DSROLE.DsRoleGetDcOperationResults": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleGetPrimaryDomainInformation": {
+          "31 DSROLE.DsRoleGetPrimaryDomainInformation": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "40 DSROLE.DsRoleGetPrimaryDomainInformation": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleIfmHandleFree": {
+          "41 DSROLE.DsRoleIfmHandleFree": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleServerSaveStateForUpgrade": {
+          "42 DSROLE.DsRoleServerSaveStateForUpgrade": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsRoleUpgradeDownlevelServer": {
+          "43 DSROLE.DsRoleUpgradeDownlevelServer": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsValidateSubnetNameA": {
+          "32 LOGONCLI.DsValidateSubnetNameA": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "44 LOGONCLI.DsValidateSubnetNameA": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "DsValidateSubnetNameW": {
+          "33 LOGONCLI.DsValidateSubnetNameW": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "45 LOGONCLI.DsValidateSubnetNameW": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_BrowserDebugCall": {
+          "46 BROWCLI.I_BrowserDebugCall": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_BrowserDebugTrace": {
+          "47 BROWCLI.I_BrowserDebugTrace": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_BrowserQueryEmulatedDomains": {
+          "48 BROWCLI.I_BrowserQueryEmulatedDomains": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_BrowserQueryOtherDomains": {
+          "49 BROWCLI.I_BrowserQueryOtherDomains": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_BrowserQueryStatistics": {
+          "50 BROWCLI.I_BrowserQueryStatistics": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_BrowserResetNetlogonState": {
+          "51 BROWCLI.I_BrowserResetNetlogonState": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_BrowserResetStatistics": {
+          "52 BROWCLI.I_BrowserResetStatistics": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_BrowserServerEnum": {
+          "53 BROWCLI.I_BrowserServerEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_BrowserSetNetlogonState": {
+          "34": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "54 BROWCLI.I_BrowserSetNetlogonState": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_DsUpdateReadOnlyServerDnsRecords": {
+          "35 LOGONCLI.I_DsUpdateReadOnlyServerDnsRecords": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "55 LOGONCLI.I_DsUpdateReadOnlyServerDnsRecords": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetAccountDeltas": {
+          "36 LOGONCLI.I_NetAccountDeltas": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "56 LOGONCLI.I_NetAccountDeltas": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetAccountSync": {
+          "37 LOGONCLI.I_NetAccountSync": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "57 LOGONCLI.I_NetAccountSync": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetChainSetClientAttributes": {
+          "38 LOGONCLI.I_NetChainSetClientAttributes": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "58 LOGONCLI.I_NetChainSetClientAttributes": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetChainSetClientAttributes2": {
+          "39 LOGONCLI.I_NetChainSetClientAttributes2": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "59 LOGONCLI.I_NetChainSetClientAttributes2": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetDatabaseDeltas": {
+          "40 LOGONCLI.I_NetDatabaseDeltas": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "60 LOGONCLI.I_NetDatabaseDeltas": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetDatabaseRedo": {
+          "41 LOGONCLI.I_NetDatabaseRedo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "61 LOGONCLI.I_NetDatabaseRedo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetDatabaseSync": {
+          "42 LOGONCLI.I_NetDatabaseSync": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "62 LOGONCLI.I_NetDatabaseSync": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetDatabaseSync2": {
+          "43 LOGONCLI.I_NetDatabaseSync2": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "63 LOGONCLI.I_NetDatabaseSync2": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetDfsGetVersion": {
+          "44 SRVCLI.I_NetDfsGetVersion": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "64 SRVCLI.I_NetDfsGetVersion": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetDfsIsThisADomainName": {
+          "45 DFSCLI.I_NetDfsIsThisADomainName": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "65 DFSCLI.I_NetDfsIsThisADomainName": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetGetDCList": {
+          "46 LOGONCLI.I_NetGetDCList": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "66 LOGONCLI.I_NetGetDCList": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetGetForestTrustInformation": {
+          "47 LOGONCLI.I_NetGetForestTrustInformation": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "67 LOGONCLI.I_NetGetForestTrustInformation": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetLogonControl": {
+          "48 LOGONCLI.I_NetLogonControl": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "68 LOGONCLI.I_NetLogonControl": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetLogonControl2": {
+          "49 LOGONCLI.I_NetLogonControl2": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "69 LOGONCLI.I_NetLogonControl2": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetLogonGetDomainInfo": {
+          "50 LOGONCLI.I_NetLogonGetDomainInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "70 LOGONCLI.I_NetLogonGetDomainInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetLogonSamLogoff": {
+          "51 LOGONCLI.I_NetLogonSamLogoff": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "71 LOGONCLI.I_NetLogonSamLogoff": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetLogonSamLogon": {
+          "52 LOGONCLI.I_NetLogonSamLogon": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "72 LOGONCLI.I_NetLogonSamLogon": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetLogonSamLogonEx": {
+          "53 LOGONCLI.I_NetLogonSamLogonEx": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "73 LOGONCLI.I_NetLogonSamLogonEx": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetLogonSamLogonWithFlags": {
+          "54 LOGONCLI.I_NetLogonSamLogonWithFlags": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "74 LOGONCLI.I_NetLogonSamLogonWithFlags": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetLogonSendToSam": {
+          "55 LOGONCLI.I_NetLogonSendToSam": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "75 LOGONCLI.I_NetLogonSendToSam": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetLogonUasLogoff": {
+          "56 LOGONCLI.I_NetLogonUasLogoff": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "76 LOGONCLI.I_NetLogonUasLogoff": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetLogonUasLogon": {
+          "57 LOGONCLI.I_NetLogonUasLogon": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "77 LOGONCLI.I_NetLogonUasLogon": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerAuthenticate": {
+          "58 LOGONCLI.I_NetServerAuthenticate": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "78 LOGONCLI.I_NetServerAuthenticate": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerAuthenticate2": {
+          "59 LOGONCLI.I_NetServerAuthenticate2": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "79 LOGONCLI.I_NetServerAuthenticate2": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerAuthenticate3": {
+          "60 LOGONCLI.I_NetServerAuthenticate3": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "80 LOGONCLI.I_NetServerAuthenticate3": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerGetTrustInfo": {
+          "61 LOGONCLI.I_NetServerGetTrustInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "81 LOGONCLI.I_NetServerGetTrustInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerPasswordGet": {
+          "62 LOGONCLI.I_NetServerPasswordGet": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "82 LOGONCLI.I_NetServerPasswordGet": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerPasswordSet": {
+          "63 LOGONCLI.I_NetServerPasswordSet": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "83 LOGONCLI.I_NetServerPasswordSet": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerPasswordSet2": {
+          "64 LOGONCLI.I_NetServerPasswordSet2": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "84 LOGONCLI.I_NetServerPasswordSet2": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerReqChallenge": {
+          "65 LOGONCLI.I_NetServerReqChallenge": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "85 LOGONCLI.I_NetServerReqChallenge": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerSetServiceBits": {
+          "66 SRVCLI.I_NetServerSetServiceBits": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "86 SRVCLI.I_NetServerSetServiceBits": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerSetServiceBitsEx": {
+          "67 SRVCLI.I_NetServerSetServiceBitsEx": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "87 SRVCLI.I_NetServerSetServiceBitsEx": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetServerTrustPasswordsGet": {
+          "68 LOGONCLI.I_NetServerTrustPasswordsGet": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "88 LOGONCLI.I_NetServerTrustPasswordsGet": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetlogonComputeClientDigest": {
+          "69 LOGONCLI.I_NetlogonComputeClientDigest": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "89 LOGONCLI.I_NetlogonComputeClientDigest": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "I_NetlogonComputeServerDigest": {
+          "70 LOGONCLI.I_NetlogonComputeServerDigest": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "90 LOGONCLI.I_NetlogonComputeServerDigest": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetAccessAdd": {
+          "71": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "91": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetAccessDel": {
+          "72": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "92": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetAccessEnum": {
+          "73": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "93": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetAccessGetInfo": {
+          "74": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "94": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetAccessGetUserPerms": {
+          "75": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "95": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetAccessSetInfo": {
+          "76": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "96": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetAddAlternateComputerName": {
+          "77 WKSCLI.NetAddAlternateComputerName": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "97 WKSCLI.NetAddAlternateComputerName": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetAddServiceAccount": {
+          "78 LOGONCLI.NetAddServiceAccount": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "98 LOGONCLI.NetAddServiceAccount": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetAlertRaise": {
+          "79": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "99": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetAlertRaiseEx": {
+          "100": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "80": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetApiBufferAllocate": {
+          "101 NETUTILS.NetApiBufferAllocate": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "81 NETUTILS.NetApiBufferAllocate": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetApiBufferFree": {
+          "102 NETUTILS.NetApiBufferFree": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "82 NETUTILS.NetApiBufferFree": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetApiBufferReallocate": {
+          "103 NETUTILS.NetApiBufferReallocate": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "83 NETUTILS.NetApiBufferReallocate": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetApiBufferSize": {
+          "104 NETUTILS.NetApiBufferSize": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "84 NETUTILS.NetApiBufferSize": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetAuditClear": {
+          "105": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "85": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetAuditRead": {
+          "106": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "86": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetAuditWrite": {
+          "107": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "87": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetBrowserStatisticsGet": {
+          "108 BROWCLI.NetBrowserStatisticsGet": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetConfigGet": {
+          "109": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "88": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetConfigGetAll": {
+          "110": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "89": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetConfigSet": {
+          "111": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "90": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetConnectionEnum": {
+          "112 SRVCLI.NetConnectionEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "91 SRVCLI.NetConnectionEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetCreateProvisioningPackage": {
+          "92 NETJOIN.NetCreateProvisioningPackage": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetDfsAdd": {
+          "113 DFSCLI.NetDfsAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "93 DFSCLI.NetDfsAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetDfsAddFtRoot": {
+          "114 DFSCLI.NetDfsAddFtRoot": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "94 DFSCLI.NetDfsAddFtRoot": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetDfsAddRootTarget": {
+          "115 DFSCLI.NetDfsAddRootTarget": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "95 DFSCLI.NetDfsAddRootTarget": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetDfsAddStdRoot": {
+          "116 DFSCLI.NetDfsAddStdRoot": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "96 DFSCLI.NetDfsAddStdRoot": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetDfsAddStdRootForced": {
+          "117 DFSCLI.NetDfsAddStdRootForced": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "97 DFSCLI.NetDfsAddStdRootForced": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetDfsEnum": {
+          "118 DFSCLI.NetDfsEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "98 DFSCLI.NetDfsEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetDfsGetClientInfo": {
+          "119 DFSCLI.NetDfsGetClientInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ],
+          "99 DFSCLI.NetDfsGetClientInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetDfsGetDcAddress": {
+          "100 DFSCLI.NetDfsGetDcAddress": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "120 DFSCLI.NetDfsGetDcAddress": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsGetFtContainerSecurity": {
+          "101 DFSCLI.NetDfsGetFtContainerSecurity": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "121 DFSCLI.NetDfsGetFtContainerSecurity": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsGetInfo": {
+          "102 DFSCLI.NetDfsGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "122 DFSCLI.NetDfsGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsGetSecurity": {
+          "103 DFSCLI.NetDfsGetSecurity": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "123 DFSCLI.NetDfsGetSecurity": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsGetStdContainerSecurity": {
+          "104 DFSCLI.NetDfsGetStdContainerSecurity": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "124 DFSCLI.NetDfsGetStdContainerSecurity": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsGetSupportedNamespaceVersion": {
+          "105 DFSCLI.NetDfsGetSupportedNamespaceVersion": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "125 DFSCLI.NetDfsGetSupportedNamespaceVersion": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsManagerGetConfigInfo": {
+          "106 DFSCLI.NetDfsManagerGetConfigInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "126 DFSCLI.NetDfsManagerGetConfigInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsManagerInitialize": {
+          "107 DFSCLI.NetDfsManagerInitialize": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "127 DFSCLI.NetDfsManagerInitialize": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsManagerSendSiteInfo": {
+          "108 DFSCLI.NetDfsManagerSendSiteInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "128 DFSCLI.NetDfsManagerSendSiteInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsMove": {
+          "109 DFSCLI.NetDfsMove": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "129 DFSCLI.NetDfsMove": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsRemove": {
+          "110 DFSCLI.NetDfsRemove": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "130 DFSCLI.NetDfsRemove": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsRemoveFtRoot": {
+          "111 DFSCLI.NetDfsRemoveFtRoot": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "131 DFSCLI.NetDfsRemoveFtRoot": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsRemoveFtRootForced": {
+          "112 DFSCLI.NetDfsRemoveFtRootForced": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "132 DFSCLI.NetDfsRemoveFtRootForced": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsRemoveRootTarget": {
+          "113 DFSCLI.NetDfsRemoveRootTarget": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "133 DFSCLI.NetDfsRemoveRootTarget": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsRemoveStdRoot": {
+          "114 DFSCLI.NetDfsRemoveStdRoot": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "134 DFSCLI.NetDfsRemoveStdRoot": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsRename": {
+          "115 DFSCLI.NetDfsRename": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "135 DFSCLI.NetDfsRename": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsSetClientInfo": {
+          "116 DFSCLI.NetDfsSetClientInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "136 DFSCLI.NetDfsSetClientInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsSetFtContainerSecurity": {
+          "117 DFSCLI.NetDfsSetFtContainerSecurity": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "137 DFSCLI.NetDfsSetFtContainerSecurity": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsSetInfo": {
+          "118 DFSCLI.NetDfsSetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "138 DFSCLI.NetDfsSetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsSetSecurity": {
+          "119 DFSCLI.NetDfsSetSecurity": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "139 DFSCLI.NetDfsSetSecurity": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetDfsSetStdContainerSecurity": {
+          "120 DFSCLI.NetDfsSetStdContainerSecurity": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "140 DFSCLI.NetDfsSetStdContainerSecurity": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetEnumerateComputerNames": {
+          "121 WKSCLI.NetEnumerateComputerNames": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "141 WKSCLI.NetEnumerateComputerNames": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetEnumerateServiceAccounts": {
+          "122 LOGONCLI.NetEnumerateServiceAccounts": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "142 LOGONCLI.NetEnumerateServiceAccounts": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetEnumerateTrustedDomains": {
+          "123 LOGONCLI.NetEnumerateTrustedDomains": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "143 LOGONCLI.NetEnumerateTrustedDomains": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetErrorLogClear": {
+          "124": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "144": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetErrorLogRead": {
+          "125": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "145": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetErrorLogWrite": {
+          "126": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "146": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetFileClose": {
+          "127 SRVCLI.NetFileClose": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "147 SRVCLI.NetFileClose": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetFileEnum": {
+          "128 SRVCLI.NetFileEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "148 SRVCLI.NetFileEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetFileGetInfo": {
+          "129 SRVCLI.NetFileGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "149 SRVCLI.NetFileGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetFreeAadJoinInformation": {
+          "130 DSREG.DsrFreeJoinInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetGetAadJoinInformation": {
+          "131 DSREG.DsrGetJoinInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetGetAnyDCName": {
+          "132 LOGONCLI.NetGetAnyDCName": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "150 LOGONCLI.NetGetAnyDCName": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGetDCName": {
+          "133 LOGONCLI.NetGetDCName": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "151 LOGONCLI.NetGetDCName": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGetDisplayInformationIndex": {
+          "134 SAMCLI.NetGetDisplayInformationIndex": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "152 SAMCLI.NetGetDisplayInformationIndex": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGetJoinInformation": {
+          "135 WKSCLI.NetGetJoinInformation": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "153 WKSCLI.NetGetJoinInformation": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGetJoinableOUs": {
+          "136 WKSCLI.NetGetJoinableOUs": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "154 WKSCLI.NetGetJoinableOUs": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGroupAdd": {
+          "137 SAMCLI.NetGroupAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "155 SAMCLI.NetGroupAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGroupAddUser": {
+          "138 SAMCLI.NetGroupAddUser": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "156 SAMCLI.NetGroupAddUser": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGroupDel": {
+          "139 SAMCLI.NetGroupDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "157 SAMCLI.NetGroupDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGroupDelUser": {
+          "140 SAMCLI.NetGroupDelUser": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "158 SAMCLI.NetGroupDelUser": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGroupEnum": {
+          "141 SAMCLI.NetGroupEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "159 SAMCLI.NetGroupEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGroupGetInfo": {
+          "142 SAMCLI.NetGroupGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "160 SAMCLI.NetGroupGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGroupGetUsers": {
+          "143 SAMCLI.NetGroupGetUsers": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "161 SAMCLI.NetGroupGetUsers": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGroupSetInfo": {
+          "144 SAMCLI.NetGroupSetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "162 SAMCLI.NetGroupSetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetGroupSetUsers": {
+          "145 SAMCLI.NetGroupSetUsers": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "163 SAMCLI.NetGroupSetUsers": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetIsServiceAccount": {
+          "146 LOGONCLI.NetIsServiceAccount": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "164 LOGONCLI.NetIsServiceAccount": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetJoinDomain": {
+          "147 WKSCLI.NetJoinDomain": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "165 WKSCLI.NetJoinDomain": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupAdd": {
+          "148 SAMCLI.NetLocalGroupAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "166 SAMCLI.NetLocalGroupAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupAddMember": {
+          "149 SAMCLI.NetLocalGroupAddMember": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "167 SAMCLI.NetLocalGroupAddMember": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupAddMembers": {
+          "150 SAMCLI.NetLocalGroupAddMembers": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "168 SAMCLI.NetLocalGroupAddMembers": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupDel": {
+          "151 SAMCLI.NetLocalGroupDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "169 SAMCLI.NetLocalGroupDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupDelMember": {
+          "152 SAMCLI.NetLocalGroupDelMember": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "170 SAMCLI.NetLocalGroupDelMember": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupDelMembers": {
+          "153 SAMCLI.NetLocalGroupDelMembers": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "171 SAMCLI.NetLocalGroupDelMembers": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupEnum": {
+          "154 SAMCLI.NetLocalGroupEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "172 SAMCLI.NetLocalGroupEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupGetInfo": {
+          "155 SAMCLI.NetLocalGroupGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "173 SAMCLI.NetLocalGroupGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupGetMembers": {
+          "156 SAMCLI.NetLocalGroupGetMembers": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "174 SAMCLI.NetLocalGroupGetMembers": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupSetInfo": {
+          "157 SAMCLI.NetLocalGroupSetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "175 SAMCLI.NetLocalGroupSetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLocalGroupSetMembers": {
+          "158 SAMCLI.NetLocalGroupSetMembers": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "176 SAMCLI.NetLocalGroupSetMembers": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLogonGetTimeServiceParentDomain": {
+          "159 LOGONCLI.NetLogonGetTimeServiceParentDomain": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "177 LOGONCLI.NetLogonGetTimeServiceParentDomain": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetLogonSetServiceBits": {
+          "160 LOGONCLI.NetLogonSetServiceBits": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "178 LOGONCLI.NetLogonSetServiceBits": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetMessageBufferSend": {
+          "161": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "179": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetMessageNameAdd": {
+          "162": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "180": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetMessageNameDel": {
+          "163": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "181": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetMessageNameEnum": {
+          "164": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "182": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetMessageNameGetInfo": {
+          "165": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "183": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetProvisionComputerAccount": {
+          "166 NETJOIN.NetProvisionComputerAccount": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "184 NETJOIN.NetProvisionComputerAccount": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetQueryDisplayInformation": {
+          "167 SAMCLI.NetQueryDisplayInformation": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "185 SAMCLI.NetQueryDisplayInformation": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetQueryServiceAccount": {
+          "168 LOGONCLI.NetQueryServiceAccount": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "186 LOGONCLI.NetQueryServiceAccount": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetRegisterDomainNameChangeNotification": {
+          "169": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "187": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetRemoteComputerSupports": {
+          "170 NETUTILS.NetRemoteComputerSupports": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "188 NETUTILS.NetRemoteComputerSupports": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetRemoteTOD": {
+          "171 SRVCLI.NetRemoteTOD": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "189 SRVCLI.NetRemoteTOD": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetRemoveAlternateComputerName": {
+          "172 WKSCLI.NetRemoveAlternateComputerName": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "190 WKSCLI.NetRemoveAlternateComputerName": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetRemoveServiceAccount": {
+          "173 LOGONCLI.NetRemoveServiceAccount": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "191 LOGONCLI.NetRemoveServiceAccount": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetRenameMachineInDomain": {
+          "174 WKSCLI.NetRenameMachineInDomain": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "192 WKSCLI.NetRenameMachineInDomain": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplExportDirAdd": {
+          "175": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "193": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplExportDirDel": {
+          "176": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "194": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplExportDirEnum": {
+          "177": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "195": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplExportDirGetInfo": {
+          "178": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "196": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplExportDirLock": {
+          "179": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "197": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplExportDirSetInfo": {
+          "180": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "198": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplExportDirUnlock": {
+          "181": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "199": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplGetInfo": {
+          "182": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "200": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplImportDirAdd": {
+          "183": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "201": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplImportDirDel": {
+          "184": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "202": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplImportDirEnum": {
+          "185": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "203": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplImportDirGetInfo": {
+          "186": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "204": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplImportDirLock": {
+          "187": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "205": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplImportDirUnlock": {
+          "188": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "206": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetReplSetInfo": {
+          "189": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "207": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetRequestOfflineDomainJoin": {
+          "190 NETJOIN.NetRequestOfflineDomainJoin": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "208 NETJOIN.NetRequestOfflineDomainJoin": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetRequestProvisioningPackageInstall": {
+          "191 NETJOIN.NetRequestProvisioningPackageInstall": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ]
+        },
+        "NetScheduleJobAdd": {
+          "192 SCHEDCLI.NetScheduleJobAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "209 SCHEDCLI.NetScheduleJobAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetScheduleJobDel": {
+          "193 SCHEDCLI.NetScheduleJobDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "210 SCHEDCLI.NetScheduleJobDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetScheduleJobEnum": {
+          "194 SCHEDCLI.NetScheduleJobEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "211 SCHEDCLI.NetScheduleJobEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetScheduleJobGetInfo": {
+          "195 SCHEDCLI.NetScheduleJobGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "212 SCHEDCLI.NetScheduleJobGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerAliasAdd": {
+          "196 SRVCLI.NetServerAliasAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "213 SRVCLI.NetServerAliasAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerAliasDel": {
+          "197 SRVCLI.NetServerAliasDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "214 SRVCLI.NetServerAliasDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerAliasEnum": {
+          "198 SRVCLI.NetServerAliasEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "215 SRVCLI.NetServerAliasEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerComputerNameAdd": {
+          "199 SRVCLI.NetServerComputerNameAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "216 SRVCLI.NetServerComputerNameAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerComputerNameDel": {
+          "200 SRVCLI.NetServerComputerNameDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "217 SRVCLI.NetServerComputerNameDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerDiskEnum": {
+          "201 SRVCLI.NetServerDiskEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "218 SRVCLI.NetServerDiskEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerEnum": {
+          "202": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "219 BROWCLI.NetServerEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerEnumEx": {
+          "203": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "220 BROWCLI.NetServerEnumEx": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerGetInfo": {
+          "204 SRVCLI.NetServerGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "221 SRVCLI.NetServerGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerSetInfo": {
+          "205 SRVCLI.NetServerSetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "222 SRVCLI.NetServerSetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerTransportAdd": {
+          "206 SRVCLI.NetServerTransportAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "223 SRVCLI.NetServerTransportAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerTransportAddEx": {
+          "207 SRVCLI.NetServerTransportAddEx": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "224 SRVCLI.NetServerTransportAddEx": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerTransportDel": {
+          "208 SRVCLI.NetServerTransportDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "225 SRVCLI.NetServerTransportDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServerTransportEnum": {
+          "209 SRVCLI.NetServerTransportEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "226 SRVCLI.NetServerTransportEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServiceControl": {
+          "210": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "227": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServiceEnum": {
+          "211": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "228": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServiceGetInfo": {
+          "212": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "229": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetServiceInstall": {
+          "213": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "230": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetSessionDel": {
+          "214 SRVCLI.NetSessionDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "231 SRVCLI.NetSessionDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetSessionEnum": {
+          "215 SRVCLI.NetSessionEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "232 SRVCLI.NetSessionEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetSessionGetInfo": {
+          "216 SRVCLI.NetSessionGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "233 SRVCLI.NetSessionGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetSetPrimaryComputerName": {
+          "217 WKSCLI.NetSetPrimaryComputerName": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "234 WKSCLI.NetSetPrimaryComputerName": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetShareAdd": {
+          "218 SRVCLI.NetShareAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "235 SRVCLI.NetShareAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetShareCheck": {
+          "219 SRVCLI.NetShareCheck": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "236 SRVCLI.NetShareCheck": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetShareDel": {
+          "220 SRVCLI.NetShareDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "237 SRVCLI.NetShareDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetShareDelEx": {
+          "221 SRVCLI.NetShareDelEx": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "238 SRVCLI.NetShareDelEx": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetShareDelSticky": {
+          "222 SRVCLI.NetShareDelSticky": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "239 SRVCLI.NetShareDelSticky": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetShareEnum": {
+          "223 SRVCLI.NetShareEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "240 SRVCLI.NetShareEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetShareEnumSticky": {
+          "224 SRVCLI.NetShareEnumSticky": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "241 SRVCLI.NetShareEnumSticky": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetShareGetInfo": {
+          "225 SRVCLI.NetShareGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "242 SRVCLI.NetShareGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetShareSetInfo": {
+          "226 SRVCLI.NetShareSetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "243 SRVCLI.NetShareSetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetStatisticsGet": {
+          "227": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "244": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUnjoinDomain": {
+          "228 WKSCLI.NetUnjoinDomain": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "245 WKSCLI.NetUnjoinDomain": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUnregisterDomainNameChangeNotification": {
+          "229": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "246": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUseAdd": {
+          "230 WKSCLI.NetUseAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "247 WKSCLI.NetUseAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUseDel": {
+          "231 WKSCLI.NetUseDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "248 WKSCLI.NetUseDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUseEnum": {
+          "232 WKSCLI.NetUseEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "249 WKSCLI.NetUseEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUseGetInfo": {
+          "233 WKSCLI.NetUseGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "250 WKSCLI.NetUseGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserAdd": {
+          "234 SAMCLI.NetUserAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "251 SAMCLI.NetUserAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserChangePassword": {
+          "235 SAMCLI.NetUserChangePassword": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "252 SAMCLI.NetUserChangePassword": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserDel": {
+          "236 SAMCLI.NetUserDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "253 SAMCLI.NetUserDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserEnum": {
+          "237 SAMCLI.NetUserEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "254 SAMCLI.NetUserEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserGetGroups": {
+          "238 SAMCLI.NetUserGetGroups": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "255 SAMCLI.NetUserGetGroups": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserGetInfo": {
+          "239 SAMCLI.NetUserGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "256 SAMCLI.NetUserGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserGetLocalGroups": {
+          "240 SAMCLI.NetUserGetLocalGroups": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "257 SAMCLI.NetUserGetLocalGroups": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserModalsGet": {
+          "241 SAMCLI.NetUserModalsGet": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "258 SAMCLI.NetUserModalsGet": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserModalsSet": {
+          "242 SAMCLI.NetUserModalsSet": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "259 SAMCLI.NetUserModalsSet": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserSetGroups": {
+          "243 SAMCLI.NetUserSetGroups": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "260 SAMCLI.NetUserSetGroups": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetUserSetInfo": {
+          "244 SAMCLI.NetUserSetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "261 SAMCLI.NetUserSetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetValidateName": {
+          "245 WKSCLI.NetValidateName": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "262 WKSCLI.NetValidateName": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetValidatePasswordPolicy": {
+          "246 SAMCLI.NetValidatePasswordPolicy": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "263 SAMCLI.NetValidatePasswordPolicy": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetValidatePasswordPolicyFree": {
+          "247 SAMCLI.NetValidatePasswordPolicyFree": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "264 SAMCLI.NetValidatePasswordPolicyFree": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetWkstaGetInfo": {
+          "248": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "265": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetWkstaSetInfo": {
+          "249": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "266": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetWkstaTransportAdd": {
+          "250 WKSCLI.NetWkstaTransportAdd": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "267 WKSCLI.NetWkstaTransportAdd": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetWkstaTransportDel": {
+          "251 WKSCLI.NetWkstaTransportDel": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "268 WKSCLI.NetWkstaTransportDel": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetWkstaTransportEnum": {
+          "252 WKSCLI.NetWkstaTransportEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "269 WKSCLI.NetWkstaTransportEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetWkstaUserEnum": {
+          "253 WKSCLI.NetWkstaUserEnum": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "270 WKSCLI.NetWkstaUserEnum": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetWkstaUserGetInfo": {
+          "254 WKSCLI.NetWkstaUserGetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "271 WKSCLI.NetWkstaUserGetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetWkstaUserSetInfo": {
+          "255 WKSCLI.NetWkstaUserSetInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "272 WKSCLI.NetWkstaUserSetInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetapipBufferAllocate": {
+          "256 NETUTILS.NetapipBufferAllocate": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "273 NETUTILS.NetapipBufferAllocate": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "Netbios": {
+          "257": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "274": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpAddTlnFtinfoEntry": {
+          "258": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "275": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpAllocFtinfoEntry": {
+          "259": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "276": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpAssertFailed": {
+          "260": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "277": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpCleanFtinfoContext": {
+          "261": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "278": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpCloseConfigData": {
+          "262": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "279": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpCopyFtinfoContext": {
+          "263": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "280": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpDbgPrint": {
+          "264": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "281": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpGetConfigBool": {
+          "265": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "282": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpGetConfigDword": {
+          "266": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "283": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpGetConfigTStrArray": {
+          "267": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "284": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpGetConfigValue": {
+          "268": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "285": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpGetFileSecurity": {
+          "269": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "286": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpHexDump": {
+          "270": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "287": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpInitFtinfoContext": {
+          "271": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "288": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpIsRemote": {
+          "272 NETUTILS.NetpIsRemote": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "289 NETUTILS.NetpIsRemote": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpIsUncComputerNameValid": {
+          "273": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "290": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpMergeFtinfo": {
+          "274": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "291": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpNetBiosReset": {
+          "275": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "292": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpNetBiosStatusToApiStatus": {
+          "276": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "293": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpOpenConfigData": {
+          "277": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "294": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpSetFileSecurity": {
+          "278": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "295": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpwNameCanonicalize": {
+          "279 NETUTILS.NetpwNameCanonicalize": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "296 NETUTILS.NetpwNameCanonicalize": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpwNameCompare": {
+          "280 NETUTILS.NetpwNameCompare": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "297 NETUTILS.NetpwNameCompare": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpwNameValidate": {
+          "281 NETUTILS.NetpwNameValidate": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "298 NETUTILS.NetpwNameValidate": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpwPathCanonicalize": {
+          "282 NETUTILS.NetpwPathCanonicalize": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "299 NETUTILS.NetpwPathCanonicalize": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpwPathCompare": {
+          "283 NETUTILS.NetpwPathCompare": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "300 NETUTILS.NetpwPathCompare": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NetpwPathType": {
+          "284 NETUTILS.NetpwPathType": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "301 NETUTILS.NetpwPathType": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NlBindingAddServerToCache": {
+          "285 LOGONCLI.NlBindingAddServerToCache": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "302 LOGONCLI.NlBindingAddServerToCache": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NlBindingRemoveServerFromCache": {
+          "286 LOGONCLI.NlBindingRemoveServerFromCache": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "303 LOGONCLI.NlBindingRemoveServerFromCache": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "NlBindingSetAuthInfo": {
+          "287 LOGONCLI.NlBindingSetAuthInfo": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "304 LOGONCLI.NlBindingSetAuthInfo": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "RxNetAccessAdd": {
+          "288": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "305": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "RxNetAccessDel": {
+          "289": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "306": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "RxNetAccessEnum": {
+          "290": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "307": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "RxNetAccessGetInfo": {
+          "291": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "308": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "RxNetAccessGetUserPerms": {
+          "292": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "309": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "RxNetAccessSetInfo": {
+          "293": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "310": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "RxNetServerEnum": {
+          "294": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "311": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "RxNetUserPasswordSet": {
+          "295": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "312": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        },
+        "RxRemoteApi": {
+          "296": [
+            "10.0.14393.0_57899b4f_18000_13d20",
+            "10.0.16299.15_58bf58ed_17000_13938",
+            "10.0.17134.1_6f9f5579_17000_13938",
+            "10.0.18362.1_b288e076_17000_13ad8"
+          ],
+          "313": [
+            "6.1.7600.16385_4a5bdfe1_16000_11c00"
+          ]
+        }
+      }
+    }
+  }
+}

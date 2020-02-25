@@ -1,0 +1,564 @@
+{
+  "hvax64.exe.x86_64": {
+    "versions": {
+      "10.0.14393.206_57dace2b_1600000_f1560": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1473957419,
+          "timestamp_iso": "2016-09-15 18:36:59",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 352
+        },
+        "file_size": 988512,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "6943c698-16f9-4d7a-a9dd-0dabefc3a78f",
+          "age": 1,
+          "path": "hvax64.pdb"
+        }
+      },
+      "10.0.14393.576_584a7b94_1600000_f1760": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1481276308,
+          "timestamp_iso": "2016-12-09 10:38:28",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 352
+        },
+        "file_size": 989024,
+        "file_version": "10.0.14393.576",
+        "product_version": "10.0.14393.576",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.576 (rs1_release_inmarket.161208-2252)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.576"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "73d8d71f-3857-437b-82ed-936a2c563c6a",
+          "age": 1,
+          "path": "hvax64.pdb"
+        }
+      },
+      "10.0.14393.1066_58d9f4b3_1600000_f1760": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1490678963,
+          "timestamp_iso": "2017-03-28 07:29:23",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 352
+        },
+        "file_size": 989024,
+        "file_version": "10.0.14393.1066",
+        "product_version": "10.0.14393.1066",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.1066 (rs1_release_sec.170327-1835)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1066"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "f4de1978-e058-4a63-99ef-ae3367e6c7aa",
+          "age": 1,
+          "path": "hvax64.pdb"
+        }
+      },
+      "10.0.14393.1358_59327c90_1600000_f1760": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1496480912,
+          "timestamp_iso": "2017-06-03 11:08:32",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 352
+        },
+        "file_size": 989024,
+        "file_version": "10.0.14393.1358",
+        "product_version": "10.0.14393.1358",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.1358 (rs1_release.170602-2252)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1358"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "4b894f7a-705f-478a-8b09-9a4c55083c76",
+          "age": 1,
+          "path": "hvax64.pdb"
+        }
+      },
+      "10.0.14393.1715_59b0d602_1600000_f1760": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1504761346,
+          "timestamp_iso": "2017-09-07 07:15:46",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 352
+        },
+        "file_size": 989024,
+        "file_version": "10.0.14393.1715",
+        "product_version": "10.0.14393.1715",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.1715 (rs1_release_inmarket.170906-1810)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1715"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "c677f145-a2aa-470f-8c25-07365c8bfe09",
+          "age": 1,
+          "path": "hvax64.pdb"
+        }
+      },
+      "10.0.14393.1884_59fa450b_1600000_f0360": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1509573899,
+          "timestamp_iso": "2017-11-01 23:04:59",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 983904,
+        "file_version": "10.0.14393.1884",
+        "product_version": "10.0.14393.1884",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.1884 (rs1_release.171101-1233)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1884"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "0818d6eb-93aa-4737-bb61-3f87bf3cc069",
+          "age": 1,
+          "path": "hvax64.pdb"
+        }
+      },
+      "10.0.14393.2007_5a49bbdd_1600000_f1158": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1514781661,
+          "timestamp_iso": "2018-01-01 05:41:01",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 987480,
+        "file_version": "10.0.14393.2007",
+        "product_version": "10.0.14393.2007",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.2007 (rs1_release.171231-1800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2007"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "3a1d3fdf-e231-427b-b550-2380d144e478",
+          "age": 1,
+          "path": "hvax64.pdb"
+        }
+      },
+      "10.0.16299.15_0f26474f_1600000_101398": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 254166863,
+          "timestamp_iso": "1978-01-20 18:54:23",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1053592,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "4d049b0a-515c-9033-d10b-428f46e82cf3",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.192_3f88f2a8_1600000_101998": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1065939624,
+          "timestamp_iso": "2003-10-12 08:20:24",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1055128,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "d9f24bc7-3261-7914-dcc7-71fd2ad90027",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_88738f9a_1600000_f71a0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2289274778,
+          "timestamp_iso": "2042-07-18 07:39:38",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1012128,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "f15e2ef4-8743-7777-b36a-f82fba565c54",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.472_7a5ea99a_1600000_fb738": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2053024154,
+          "timestamp_iso": "2035-01-21 21:29:14",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1029944,
+        "file_version": "10.0.17134.472",
+        "product_version": "10.0.17134.472",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.472 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.472"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "87cdc96e-e733-7530-3951-d42ba2e24955",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.523_c6642823_1600000_fb738": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3328452643,
+          "timestamp_iso": "2075-06-22 20:10:43",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1029944,
+        "file_version": "10.0.17134.523",
+        "product_version": "10.0.17134.523",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.523 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.523"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "931ad0b9-eee9-5873-d1ee-1c00536a4bb8",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.590_fa7e01dd_1600000_fb738": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4202562013,
+          "timestamp_iso": "2103-03-05 19:20:13",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1029944,
+        "file_version": "10.0.17134.590",
+        "product_version": "10.0.17134.590",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.590 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.590"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "d31b2234-56b8-6e25-dbe4-02065f4abe2d",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.648_7b316e07_1600000_f9f38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2066836999,
+          "timestamp_iso": "2035-06-30 19:23:19",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1023800,
+        "file_version": "10.0.17134.648",
+        "product_version": "10.0.17134.648",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.648 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.648"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "ed641419-a5ea-d113-a88c-0e8c9746b65b",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.885_672d8a9f_1600000_fad38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1731037855,
+          "timestamp_iso": "2024-11-08 04:50:55",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1027384,
+        "file_version": "10.0.17134.885",
+        "product_version": "10.0.17134.885",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.885 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.885"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "718b368a-d34b-fbd9-7485-92ccc52fed75",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.950_1bbf4afc_1600000_fad38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 465521404,
+          "timestamp_iso": "1984-10-02 00:30:04",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1027384,
+        "file_version": "10.0.17134.950",
+        "product_version": "10.0.17134.950",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.950 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.950"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "663bbe5b-70ed-6d66-3be8-4f415a87fa89",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.30_12abf7e5_1800000_105e10": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 313260005,
+          "timestamp_iso": "1979-12-05 17:40:05",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1072656,
+        "file_version": "10.0.18362.30",
+        "product_version": "10.0.18362.30",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.18362.30 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.30"
+        },
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "e4189c1e-bca1-6a70-0ce8-d6214cb5fdb7",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "e4189c1e-bca1-6a70-0ce8-d6214cb5fdb7",
+          "unknown": "0900a482c3451fe770da8d13",
+          "timestamp": 313260005
+        }
+      }
+    }
+  }
+}

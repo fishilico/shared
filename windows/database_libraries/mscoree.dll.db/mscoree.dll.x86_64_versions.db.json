@@ -1,0 +1,174 @@
+{
+  "mscoree.dll.x86_64": {
+    "versions": {
+      "2.0.50727.4927_4a274530_66000_62740": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1244087600,
+          "timestamp_iso": "2009-06-04 05:53:20",
+          "coff_characteristics": 8226,
+          "linker_version": "8.0",
+          "image_base": 6882666545152,
+          "size_of_image": 417792,
+          "subsystem": 2,
+          "dll_characteristics": 320
+        },
+        "file_size": 403264,
+        "file_version": "2.0.50727.4927",
+        "product_version": "2.0.50727.4927",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft .NET Runtime Execution Engine",
+          "FileVersion": "2.0.50727.4927 (NetFXspW7.050727-4900)",
+          "InternalName": "mscoree.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+          "OriginalFilename": "mscoree.dll",
+          "ProductName": "Microsoft\u00ae .NET Framework",
+          "ProductVersion": "2.0.50727.4927",
+          "Comments": "Flavor=Retail"
+        },
+        "export_dll_name": "mscoree.dll",
+        "debug_codeview": {
+          "guid": "09e3fb3c-ad7a-4797-bbdc-f92370644546",
+          "age": 1,
+          "path": "mscoree.pdb"
+        }
+      },
+      "10.0.14393.0_578999e5_66000_5e800": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468635621,
+          "timestamp_iso": "2016-07-16 04:20:21",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 417792,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 387072,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft .NET Runtime Execution Engine",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "mscoree.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "mscoree.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "mscoree.dll",
+        "debug_codeview": {
+          "guid": "ee1ad4af-ac14-4c76-91f5-5e1b9b8be0c6",
+          "age": 1,
+          "path": "mscoree.pdb"
+        }
+      },
+      "10.0.16299.15_626aca6d_63000_5b000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1651165805,
+          "timestamp_iso": "2022-04-28 19:10:05",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 405504,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 372736,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft .NET Runtime Execution Engine",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "mscoree.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "mscoree.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "mscoree.dll",
+        "debug_codeview": {
+          "guid": "63dd62d6-892c-47ad-0f3c-125f4c5997ea",
+          "age": 1,
+          "path": "mscoree.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_0807523a_64000_5c000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 134697530,
+          "timestamp_iso": "1974-04-09 00:58:50",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 409600,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 376832,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft .NET Runtime Execution Engine",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "mscoree.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "mscoree.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "mscoree.dll",
+        "debug_codeview": {
+          "guid": "02e66277-c518-120a-967a-3bfbc1850c94",
+          "age": 1,
+          "path": "mscoree.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_a5f86a8b_64000_5c600": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2784520843,
+          "timestamp_iso": "2058-03-28 07:00:43",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 409600,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 378368,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft .NET Runtime Execution Engine",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "mscoree.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "mscoree.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "mscoree.dll",
+        "debug_codeview": {
+          "guid": "fc180fe5-c4e4-c85c-f8d5-1b70f7894da4",
+          "age": 1,
+          "path": "mscoree.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "fc180fe5-c4e4-c85c-f8d5-1b70f7894da4",
+          "unknown": "5cf58465a7818dadb18631d3",
+          "timestamp": 2784520843
+        }
+      }
+    }
+  }
+}

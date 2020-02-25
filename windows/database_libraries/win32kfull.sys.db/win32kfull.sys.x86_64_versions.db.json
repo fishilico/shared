@@ -1,0 +1,563 @@
+{
+  "win32kfull.sys.x86_64": {
+    "versions": {
+      "10.0.14393.206_57daca18_388000_373400": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1473956376,
+          "timestamp_iso": "2016-09-15 18:19:36",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 3702784,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3617792,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "6a0683af-e35c-4b2b-9e60-9b0eb5217c3c",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        }
+      },
+      "10.0.14393.447_5819bcb5_388000_373000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1478081717,
+          "timestamp_iso": "2016-11-02 11:15:17",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 3702784,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3616768,
+        "file_version": "10.0.14393.447",
+        "product_version": "10.0.14393.447",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.14393.447 (rs1_release_inmarket.161102-0100)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.447"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "a792b492-0355-40d3-97d6-6128f30037b0",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        }
+      },
+      "10.0.14393.594_5850c8c5_388000_373000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1481689285,
+          "timestamp_iso": "2016-12-14 05:21:25",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 3702784,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3616768,
+        "file_version": "10.0.14393.594",
+        "product_version": "10.0.14393.594",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.14393.594 (rs1_release_inmarket.161213-1754)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.594"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "b99011a9-a71a-47d6-9dc3-c17180c57b57",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        }
+      },
+      "10.0.14393.1198_59028088_387000_372200": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1493336200,
+          "timestamp_iso": "2017-04-28 01:36:40",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 3698688,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3613184,
+        "file_version": "10.0.14393.1198",
+        "product_version": "10.0.14393.1198",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.14393.1198 (rs1_release_sec.170427-1353)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1198"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "5753f160-0e4d-4b6c-8a85-fb24988c010b",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        }
+      },
+      "10.0.14393.1480_595f2913_388000_372c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1499408659,
+          "timestamp_iso": "2017-07-07 08:24:19",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 3702784,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3615744,
+        "file_version": "10.0.14393.1480",
+        "product_version": "10.0.14393.1480",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.14393.1480 (rs1_release.170706-2004)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1480"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "74d1085b-956d-4975-860d-c776fb4115fd",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        }
+      },
+      "10.0.14393.1715_59b0d150_388000_372e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1504760144,
+          "timestamp_iso": "2017-09-07 06:55:44",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 3702784,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3616256,
+        "file_version": "10.0.14393.1715",
+        "product_version": "10.0.14393.1715",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.14393.1715 (rs1_release_inmarket.170906-1810)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1715"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "a819e83e-9167-4731-b2bd-e4ca704b5daf",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        }
+      },
+      "10.0.14393.1884_59fa439d_387000_372e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1509573533,
+          "timestamp_iso": "2017-11-01 22:58:53",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 3698688,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3616256,
+        "file_version": "10.0.14393.1884",
+        "product_version": "10.0.14393.1884",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.14393.1884 (rs1_release.171101-1233)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1884"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "0620a939-2a41-4f92-88d1-71ae92ca3687",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        }
+      },
+      "10.0.14393.2007_5a49ba96_387000_372e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1514781334,
+          "timestamp_iso": "2018-01-01 05:35:34",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 3698688,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3616256,
+        "file_version": "10.0.14393.2007",
+        "product_version": "10.0.14393.2007",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.14393.2007 (rs1_release.171231-1800)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2007"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "c361bf0d-448a-47c9-a8c8-d125c5961a62",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        }
+      },
+      "10.0.16299.15_86123a74_394000_380200": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2249341556,
+          "timestamp_iso": "2041-04-12 03:05:56",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 7516192768,
+          "size_of_image": 3751936,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3670528,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "5a798fc2-e400-ff08-bc05-4e397f6fb2d3",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.192_65a17228_394000_37fa00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1705079336,
+          "timestamp_iso": "2024-01-12 18:08:56",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 7516192768,
+          "size_of_image": 3751936,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3668480,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "f35148a4-c7a2-b9d5-fad6-445bda2c319a",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_e81d2719_392000_37c800": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3894224665,
+          "timestamp_iso": "2093-05-27 03:04:25",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 3743744,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3655680,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "ddbe8910-81c4-676e-ccfc-b3756bf9dab4",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.471_5e8a9eba_38f000_37ae00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1586142906,
+          "timestamp_iso": "2020-04-06 05:15:06",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 3731456,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3649024,
+        "file_version": "10.0.17134.471",
+        "product_version": "10.0.17134.471",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.17134.471 (WinBuild.160101.0800)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.471"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "f01f88b8-e7d6-c955-fe58-594743239dba",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.590_d2f658af_38f000_37ac00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3539359919,
+          "timestamp_iso": "2082-02-26 20:31:59",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 3731456,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3648512,
+        "file_version": "10.0.17134.590",
+        "product_version": "10.0.17134.590",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.17134.590 (WinBuild.160101.0800)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.590"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "79cfe5b7-9f9f-91c7-66dc-389956af2f00",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.619_d2f9d787_38f000_37a600": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3539588999,
+          "timestamp_iso": "2082-03-01 12:09:59",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 3731456,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3646976,
+        "file_version": "10.0.17134.619",
+        "product_version": "10.0.17134.619",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.17134.619 (WinBuild.160101.0800)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.619"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "bb93e192-8028-37c6-70ee-3cb13b79f06e",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.885_91e9ac48_387000_372600": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2448010312,
+          "timestamp_iso": "2047-07-29 12:51:52",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 3698688,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3614208,
+        "file_version": "10.0.17134.885",
+        "product_version": "10.0.17134.885",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.17134.885 (WinBuild.160101.0800)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.885"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "22fc5f62-251b-1876-27fb-997aad027eb5",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.950_db47ee08_387000_372600": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3678924296,
+          "timestamp_iso": "2086-07-31 05:24:56",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 3698688,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3614208,
+        "file_version": "10.0.17134.950",
+        "product_version": "10.0.17134.950",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.17134.950 (WinBuild.160101.0800)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.950"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "b4d50f0b-9ec8-c862-fc9d-2b59bc1b51d4",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_fc4b6d01_3a7000_394000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4232801537,
+          "timestamp_iso": "2104-02-18 19:12:17",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 7516192768,
+          "size_of_image": 3829760,
+          "subsystem": 1,
+          "dll_characteristics": 49504
+        },
+        "file_size": 3751936,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Win32k Kernel Driver",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "win32kfull.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32kfull.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "win32kfull.sys",
+        "debug_codeview": {
+          "guid": "ba2cd535-4b5c-10b4-8cef-0f6bf43c085e",
+          "age": 1,
+          "path": "win32kfull.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ba2cd535-4b5c-10b4-8cef-0f6bf43c085e",
+          "unknown": "ecbd866be3d8081ea9cade55",
+          "timestamp": 4232801537
+        }
+      }
+    }
+  }
+}

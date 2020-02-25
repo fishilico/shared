@@ -1,0 +1,141 @@
+{
+  "win32u.dll.x86_64": {
+    "versions": {
+      "10.0.14393.51_57a05800_1e000_1be10": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1470126080,
+          "timestamp_iso": "2016-08-02 10:21:20",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 122880,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 114192,
+        "file_version": "10.0.14393.51",
+        "product_version": "10.0.14393.51",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.14393.51 (rs1_release_inmarket.160801-1836)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.51"
+        },
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "d746baf2-f0c0-4d5e-9781-c9cc9b12a2ed",
+          "age": 1,
+          "path": "win32u.pdb"
+        }
+      },
+      "10.0.16299.15_1900dcc9_20000_1d290": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 419486921,
+          "timestamp_iso": "1983-04-18 06:08:41",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 131072,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 119440,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "b3e4be89-ca7f-b42a-2ac1-e1c475284ca1",
+          "age": 1,
+          "path": "win32u.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_b8eb0e32_20000_1e490": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3102412338,
+          "timestamp_iso": "2068-04-23 15:12:18",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 131072,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 124048,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "e7b63b3d-79e4-637f-1d13-d11edafb4c15",
+          "age": 1,
+          "path": "win32u.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_5343f4fb_21000_1f128": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1396962555,
+          "timestamp_iso": "2014-04-08 15:09:15",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 135168,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 127272,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "bc2e49ab-e46d-2e93-b278-b4decfca62a8",
+          "age": 1,
+          "path": "win32u.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "bc2e49ab-e46d-2e93-b278-b4decfca62a8",
+          "unknown": "5efb22bd2b8ea75aae72811b",
+          "timestamp": 1396962555
+        }
+      }
+    }
+  }
+}

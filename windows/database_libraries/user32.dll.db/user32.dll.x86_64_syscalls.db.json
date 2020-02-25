@@ -1,0 +1,911 @@
+{
+  "user32.dll.x86_64": {
+    "syscalls": {
+      "#1500": {
+        "4863": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "#1501": {
+        "4770": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "#2005": {
+        "4865": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ActivateKeyboardLayout": {
+        "4382": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "AddClipboardFormatListener": {
+        "4737": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "AttachThreadInput": {
+        "4332": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "BeginPaint": {
+        "4119": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "BlockInput": {
+        "4739": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CalcMenuBar": {
+        "4247": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CalculatePopupWindowPosition": {
+        "4742": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ChangeClipboardChain": {
+        "4377": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ChangeWindowMessageFilterEx": {
+        "4745": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CheckDesktopByThreadId": {
+        "4747": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CheckWindowThreadDesktop": {
+        "4748": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ChildWindowFromPointEx": {
+        "4749": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ClipCursor": {
+        "4750": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CloseClipboard": {
+        "4302": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CloseDesktop": {
+        "4262": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CloseWindowStation": {
+        "4277": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ControlMagnification": {
+        "4831": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CopyAcceleratorTableW": {
+        "4140": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CountClipboardFormats": {
+        "4367": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CreateAcceleratorTableW": {
+        "4337": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "CreateCaret": {
+        "4146": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DeferWindowPos": {
+        "4179": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DeleteMenu": {
+        "4284": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DestroyMenu": {
+        "4317": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DestroyWindow": {
+        "4253": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DoSoundConnect": {
+        "4759": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DoSoundDisconnect": {
+        "4760": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DragDetect": {
+        "4761": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DragObject": {
+        "4762": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DrawAnimatedRects": {
+        "4763": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DwmStartRedirection": {
+        "4767": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "DwmStopRedirection": {
+        "4768": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "EmptyClipboard": {
+        "4344": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "EndMenu": {
+        "4769": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "EndPaint": {
+        "4121": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "EnumDisplayMonitors": {
+        "4170": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ExcludeUpdateRgn": {
+        "4176": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "FlashWindowEx": {
+        "4772": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "FrostCrashedWindow": {
+        "4773": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetAncestor": {
+        "4274": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetCaretBlinkTime": {
+        "4340": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetCaretPos": {
+        "4775": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetClipCursor": {
+        "4776": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetClipboardOwner": {
+        "4297": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetClipboardSequenceNumber": {
+        "4182": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetClipboardViewer": {
+        "4777": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetComboBoxInfo": {
+        "4778": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetCursorInfo": {
+        "4779": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetDC": {
+        "4106": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetDCEx": {
+        "4242": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetDoubleClickTime": {
+        "4278": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetForegroundWindow": {
+        "4156": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetGUIThreadInfo": {
+        "4351": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetGestureConfig": {
+        "4781": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetGuiResources": {
+        "4784": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetInputLocaleInfo": {
+        "4787": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetInternalWindowPos": {
+        "4788": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetKeyboardLayoutList": {
+        "4185": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetKeyboardState": {
+        "4216": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetLayeredWindowAttributes": {
+        "4791": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetListBoxInfo": {
+        "4792": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetMagnificationLensCtxInformation": {
+        "4832": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetMenuBarInfo": {
+        "4289": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetMenuItemRect": {
+        "4794": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetMouseMovePointsEx": {
+        "4795": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetOpenClipboardWindow": {
+        "4312": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetPriorityClipboardFormat": {
+        "4796": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetProcessWindowStation": {
+        "4130": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetRawInputData": {
+        "4798": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetRawInputDeviceList": {
+        "4800": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetRegisteredRawInputDevices": {
+        "4801": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetScrollBarInfo": {
+        "4243": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetSystemMenu": {
+        "4193": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetThreadDesktop": {
+        "4227": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetTitleBarInfo": {
+        "4239": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetTopLevelWindow": {
+        "4802": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetUpdatedClipboardFormats": {
+        "4804": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetUserObjectInformationW": {
+        "4204": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetWindowCompositionAttribute": {
+        "4806": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetWindowCompositionInfo": {
+        "4807": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetWindowDC": {
+        "4196": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetWindowDisplayAffinity": {
+        "4808": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetWindowMinimizeRect": {
+        "4809": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetWindowPlacement": {
+        "4309": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GetWindowRgnEx": {
+        "4810": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "GhostWindowFromHungWindow": {
+        "4811": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "HideCaret": {
+        "4127": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "HiliteMenuItem": {
+        "4813": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "HungWindowFromGhostWindow": {
+        "4814": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ImpersonateDdeClientWindow": {
+        "4817": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "InvalidateRect": {
+        "4100": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "InvalidateRgn": {
+        "4296": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "IsClipboardFormatAvailable": {
+        "4143": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "IsTopLevelWindow": {
+        "4823": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "IsTouchWindow": {
+        "4824": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "KillTimer": {
+        "4123": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "LockWindowStation": {
+        "4826": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "LockWindowUpdate": {
+        "4358": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "LockWorkStation": {
+        "4827": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "LogicalToPhysicalPoint": {
+        "4828": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "MenuItemFromPoint": {
+        "4835": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "MoveWindow": {
+        "4190": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "OpenInputDesktop": {
+        "4839": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "OpenThreadDesktop": {
+        "4840": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "PaintDesktop": {
+        "4373": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "PaintMenuBar": {
+        "4334": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "PaintMonitor": {
+        "4841": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "PhysicalToLogicalPoint": {
+        "4842": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "PrintWindow": {
+        "4843": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "QuerySendMessage": {
+        "4847": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "RealChildWindowFromPoint": {
+        "4848": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "RedrawWindow": {
+        "4115": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "RegisterErrorReportingDialog": {
+        "4850": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "RegisterHotKey": {
+        "4851": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "RegisterRawInputDevices": {
+        "4852": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "RegisterServicesProcess": {
+        "4853": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "RegisterSessionPort": {
+        "4854": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "RegisterTasklist": {
+        "4855": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "RemoveClipboardFormatListener": {
+        "4861": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "RemoveMenu": {
+        "4346": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ResolveDesktopForWOW": {
+        "4862": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SendInput": {
+        "4226": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetActiveWindow": {
+        "4320": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetCapture": {
+        "4169": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetClassWord": {
+        "4866": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetClipboardViewer": {
+        "4378": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetCursor": {
+        "4122": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetCursorContents": {
+        "4867": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetFocus": {
+        "4177": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetGestureConfig": {
+        "4869": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetInternalWindowPos": {
+        "4873": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetKeyboardState": {
+        "4335": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetLayeredWindowAttributes": {
+        "4874": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetMagnificationLensCtxInformation": {
+        "4833": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetMenuContextHelpId": {
+        "4876": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetMenuDefaultItem": {
+        "4354": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetMirrorRendering": {
+        "4878": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetParent": {
+        "4215": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetProcessWindowStation": {
+        "4264": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetShellWindowEx": {
+        "4881": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetSystemMenu": {
+        "4359": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetThreadDesktop": {
+        "4241": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetTimer": {
+        "4120": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetUserObjectInformationA": {
+        "4879": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetUserObjectInformationW": {
+        "4879": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetWindowCompositionAttribute": {
+        "4886": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetWindowDisplayAffinity": {
+        "4887": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetWindowPlacement": {
+        "4322": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetWindowPos": {
+        "4132": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SetWindowWord": {
+        "4328": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SfmDxBindSwapChain": {
+        "4891": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SfmDxGetSwapChainStats": {
+        "4892": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SfmDxOpenSwapChain": {
+        "4893": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SfmDxQuerySwapChainBindingStatus": {
+        "4894": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SfmDxReleaseSwapChain": {
+        "4895": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SfmDxReportPendingBindingsToDwm": {
+        "4896": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SfmDxSetSwapChainBindingStatus": {
+        "4897": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SfmDxSetSwapChainStats": {
+        "4898": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ShowCaret": {
+        "4133": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ShowScrollBar": {
+        "4157": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ShowSystemCursor": {
+        "4900": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ShowWindow": {
+        "4184": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ShowWindowAsync": {
+        "4379": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "SoundSentry": {
+        "4901": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "TrackMouseEvent": {
+        "4315": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "TrackPopupMenuEx": {
+        "4904": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "UnhookWinEvent": {
+        "4357": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "UnhookWindowsHookEx": {
+        "4208": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "UnlockWindowStation": {
+        "4906": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "UnregisterHotKey": {
+        "4907": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "UnregisterSessionPort": {
+        "4908": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "UnregisterUserApiHook": {
+        "4909": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "UpdateWindowTransform": {
+        "4914": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "UserHandleGrantAccess": {
+        "4915": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "ValidateRect": {
+        "4301": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "WaitMessage": {
+        "4108": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "WindowFromPhysicalPoint": {
+        "4919": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      },
+      "WindowFromPoint": {
+        "4116": [
+          "6.1.7600.16385_4a5be088_fa000_f6400"
+        ]
+      }
+    }
+  }
+}

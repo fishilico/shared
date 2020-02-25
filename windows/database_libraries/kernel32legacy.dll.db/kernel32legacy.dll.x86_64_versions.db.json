@@ -1,0 +1,103 @@
+{
+  "kernel32legacy.dll.x86_64": {
+    "versions": {
+      "10.0.14393.0_5789994b_45000_43d78": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468635467,
+          "timestamp_iso": "2016-07-16 04:17:47",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 282624,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 277880,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "57f12b60-b281-4039-8039-837fb8ebbc5f",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        }
+      },
+      "10.0.14393.1198_590284c2_45000_43d70": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1493337282,
+          "timestamp_iso": "2017-04-28 01:54:42",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 282624,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 277872,
+        "file_version": "10.0.14393.1198",
+        "product_version": "10.0.14393.1198",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.1198 (rs1_release_sec.170427-1353)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1198"
+        },
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "c3e5217d-64b4-4d50-94b9-94d1a3a0d98c",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        }
+      },
+      "10.0.16299.15_fbfaf447_45000_441b0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4227527751,
+          "timestamp_iso": "2103-12-19 18:15:51",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 282624,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 278960,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "e3084ad5-7c62-e511-3961-2202e9fc8985",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "logoncli.dll.x86": {
+    "versions": {
+      "6.1.7600.16385_4a5bda16_22000_1f200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533590,
+          "timestamp_iso": "2009-07-14 03:06:30",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 141033472,
+          "size_of_image": 139264,
+          "subsystem": 2,
+          "dll_characteristics": 320
+        },
+        "file_size": 127488,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Logon Client DLL",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "LOGONCLI.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "LOGONCLI.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "logoncli.dll",
+        "debug_codeview": {
+          "guid": "7bc5649a-6c67-418c-aa33-e9662ac7c1f0",
+          "age": 2,
+          "path": "logoncli.pdb"
+        }
+      },
+      "10.0.14393.0_57899122_2f000_2ce38": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468633378,
+          "timestamp_iso": "2016-07-16 03:42:58",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 192512,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 183864,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Logon Client DLL",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "LOGONCLI.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "LOGONCLI.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "logoncli.dll",
+        "debug_codeview": {
+          "guid": "a91b1a9f-3726-47f0-8557-13d115f34d55",
+          "age": 1,
+          "path": "logoncli.pdb"
+        }
+      },
+      "10.0.14393.2007_5a49bde1_2f000_2ce30": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1514782177,
+          "timestamp_iso": "2018-01-01 05:49:37",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 192512,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 183856,
+        "file_version": "10.0.14393.2007",
+        "product_version": "10.0.14393.2007",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Logon Client DLL",
+          "FileVersion": "10.0.14393.2007 (rs1_release.171231-1800)",
+          "InternalName": "LOGONCLI.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "LOGONCLI.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2007"
+        },
+        "export_dll_name": "logoncli.dll",
+        "debug_codeview": {
+          "guid": "ad803316-081c-45d2-b061-5caefefe8950",
+          "age": 1,
+          "path": "logoncli.pdb"
+        }
+      },
+      "10.0.16299.15_9323a111_30000_2d898": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2468585745,
+          "timestamp_iso": "2048-03-23 15:15:45",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 268435456,
+          "size_of_image": 196608,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 186520,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Logon Client DLL",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "LOGONCLI.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "LOGONCLI.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "logoncli.dll",
+        "debug_codeview": {
+          "guid": "ffc095dd-4876-02f8-9160-cd10be7a6579",
+          "age": 1,
+          "path": "logoncli.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.192_9323a111_30000_2d898": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2468585745,
+          "timestamp_iso": "2048-03-23 15:15:45",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 268435456,
+          "size_of_image": 196608,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 186520,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Logon Client DLL",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "LOGONCLI.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "LOGONCLI.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "export_dll_name": "logoncli.dll",
+        "debug_codeview": {
+          "guid": "ffc095dd-4876-02f8-9160-cd10be7a6579",
+          "age": 1,
+          "path": "logoncli.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_23a8677f_30000_2d698": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 598239103,
+          "timestamp_iso": "1988-12-16 02:31:43",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 268435456,
+          "size_of_image": 196608,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 186008,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Logon Client DLL",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "LOGONCLI.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "LOGONCLI.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "logoncli.dll",
+        "debug_codeview": {
+          "guid": "19fe58b4-0cac-a6cd-8c4a-9d891ee851bf",
+          "age": 1,
+          "path": "logoncli.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_5d3faa4e_31000_2e660": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1564453454,
+          "timestamp_iso": "2019-07-30 04:24:14",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 200704,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 190048,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Logon Client DLL",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "LOGONCLI.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "LOGONCLI.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "logoncli.dll",
+        "debug_codeview": {
+          "guid": "b0235647-afe9-70ce-8f03-819f960c9b99",
+          "age": 1,
+          "path": "logoncli.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "b0235647-afe9-70ce-8f03-819f960c9b99",
+          "unknown": "4b596155d763be6841114807",
+          "timestamp": 1564453454
+        }
+      }
+    }
+  }
+}

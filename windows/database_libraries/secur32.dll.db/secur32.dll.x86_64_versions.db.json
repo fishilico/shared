@@ -1,0 +1,238 @@
+{
+  "secur32.dll.x86_64": {
+    "versions": {
+      "6.1.7600.16385_4a5be066_b000_6e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1247535206,
+          "timestamp_iso": "2009-07-14 03:33:26",
+          "coff_characteristics": 8226,
+          "linker_version": "9.0",
+          "image_base": 8793679200256,
+          "size_of_image": 45056,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 28160,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "Secur32.dll",
+        "debug_codeview": {
+          "guid": "bbce0095-01b6-4e2a-9fb5-bba9150f43a2",
+          "age": 2,
+          "path": "secur32.pdb"
+        }
+      },
+      "10.0.14393.0_57899b71_9000_3e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468636017,
+          "timestamp_iso": "2016-07-16 04:26:57",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 36864,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 15872,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "17bdae69-c600-4c85-bdd4-ab30b67e027d",
+          "age": 1,
+          "path": "secur32.pdb"
+        }
+      },
+      "10.0.14393.0_57899b81_c000_6e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468636033,
+          "timestamp_iso": "2016-07-16 04:27:13",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 49152,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 28160,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "export_dll_name": "Secur32.dll",
+        "debug_codeview": {
+          "guid": "4b1771fc-c6a4-4736-bef7-81f64e2c66e4",
+          "age": 1,
+          "path": "secur32.pdb"
+        }
+      },
+      "10.0.16299.15_9b090d38_9000_3c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2601061688,
+          "timestamp_iso": "2052-06-03 23:08:08",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 36864,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 15360,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "97e3478e-e3dd-4ba5-b4a2-dcd80eff9d88",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.15_d3cc901d_c000_6c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3553398813,
+          "timestamp_iso": "2082-08-08 09:13:33",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 49152,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 27648,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "Secur32.dll",
+        "debug_codeview": {
+          "guid": "08f04580-c77e-5b1f-6ae1-76e530474a1a",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_4a6316a3_c000_6c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1248007843,
+          "timestamp_iso": "2009-07-19 14:50:43",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 49152,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 27648,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "Secur32.dll",
+        "debug_codeview": {
+          "guid": "0e9c96fc-b77c-77cd-8111-32607bb2b7d2",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_71bb8e7a_c000_6c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1908117114,
+          "timestamp_iso": "2030-06-19 18:31:54",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 49152,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 27648,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "Secur32.dll",
+        "debug_codeview": {
+          "guid": "4a3a7640-7d4e-89ff-5ddb-13891699f941",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "4a3a7640-7d4e-89ff-5ddb-13891699f941",
+          "unknown": "97bfe33c87b4c2bf5a7ba358",
+          "timestamp": 1908117114
+        }
+      }
+    }
+  }
+}

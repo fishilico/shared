@@ -1,0 +1,498 @@
+{
+  "gdi32full.dll.x86_64": {
+    "versions": {
+      "10.0.14393.206_57dacebd_182000_17ffa0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1473957565,
+          "timestamp_iso": "2016-09-15 18:39:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1581056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1572768,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "b6ca1d74-27b2-4b2e-ac37-1e27bccbb4ef",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        }
+      },
+      "10.0.14393.447_5819c03e_182000_17ffa0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1478082622,
+          "timestamp_iso": "2016-11-02 11:30:22",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1581056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1572768,
+        "file_version": "10.0.14393.447",
+        "product_version": "10.0.14393.447",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.447 (rs1_release_inmarket.161102-0100)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.447"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "edd3b562-c327-437e-a507-398dd6f37a67",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        }
+      },
+      "10.0.14393.576_584a7c3b_182000_17ffa0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1481276475,
+          "timestamp_iso": "2016-12-09 10:41:15",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1581056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1572768,
+        "file_version": "10.0.14393.576",
+        "product_version": "10.0.14393.576",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.576 (rs1_release_inmarket.161208-2252)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.576"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "e109b8c8-9e4f-4b7e-a033-563bc41d90f9",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        }
+      },
+      "10.0.14393.1198_590285c9_182000_17f1a0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1493337545,
+          "timestamp_iso": "2017-04-28 01:59:05",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1581056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1569184,
+        "file_version": "10.0.14393.1198",
+        "product_version": "10.0.14393.1198",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.1198 (rs1_release_sec.170427-1353)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1198"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "3cf430fe-f99a-4a13-ad88-d664e9876a44",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        }
+      },
+      "10.0.14393.1358_59327d2b_180000_17e758": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1496481067,
+          "timestamp_iso": "2017-06-03 11:11:07",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1572864,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1566552,
+        "file_version": "10.0.14393.1358",
+        "product_version": "10.0.14393.1358",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.1358 (rs1_release.170602-2252)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1358"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "5b3cc585-8efc-47c6-90b3-76faf1f8cef5",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        }
+      },
+      "10.0.14393.1715_59b0d6ad_180000_17e758": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1504761517,
+          "timestamp_iso": "2017-09-07 07:18:37",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1572864,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1566552,
+        "file_version": "10.0.14393.1715",
+        "product_version": "10.0.14393.1715",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.1715 (rs1_release_inmarket.170906-1810)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1715"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "92c4ee7b-31f4-4968-a591-4a66f3a5d6f9",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        }
+      },
+      "10.0.14393.1770_59bf2f7a_180000_17e758": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1505701754,
+          "timestamp_iso": "2017-09-18 04:29:14",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1572864,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1566552,
+        "file_version": "10.0.14393.1770",
+        "product_version": "10.0.14393.1770",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.1770 (rs1_release.170917-1700)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1770"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "6cf7acd2-0e32-4fee-9d33-2a25eb435a16",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        }
+      },
+      "10.0.16299.15_06ed72f9_191000_18e458": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 116224761,
+          "timestamp_iso": "1973-09-07 05:39:21",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 1642496,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1631320,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "15c933ee-6306-f87d-1f28-3a621026ce9f",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.98_4ee89f99_193000_18f818": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1323868057,
+          "timestamp_iso": "2011-12-14 14:07:37",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 1650688,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1636376,
+        "file_version": "10.0.16299.98",
+        "product_version": "10.0.16299.98",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.16299.98 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.98"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "06d4fbe9-15ce-bf33-5fa3-0f068a069ced",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_8d288f45_192000_18f1f0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2368245573,
+          "timestamp_iso": "2045-01-17 06:59:33",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1646592,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1634800,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "aa7bcbef-525a-4cb5-430c-8186545f30c2",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.471_20809c92_192000_18f280": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 545299602,
+          "timestamp_iso": "1987-04-13 10:06:42",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1646592,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1634944,
+        "file_version": "10.0.17134.471",
+        "product_version": "10.0.17134.471",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.17134.471 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.471"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "a6d07fa9-fd0c-d5bc-0305-a99291ff62eb",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.590_4ce50f61_192000_18f190": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1290080097,
+          "timestamp_iso": "2010-11-18 12:34:57",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1646592,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1634704,
+        "file_version": "10.0.17134.590",
+        "product_version": "10.0.17134.590",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.17134.590 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.590"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "0ad53f5e-1570-2192-8dd3-df1402f16873",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.885_64b25002_191000_18e640": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1689407490,
+          "timestamp_iso": "2023-07-15 09:51:30",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1642496,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1631808,
+        "file_version": "10.0.17134.885",
+        "product_version": "10.0.17134.885",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.17134.885 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.885"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "b958b6e8-61dd-eb9b-3f0b-2565bbbf50ee",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.950_d8d87695_191000_18e770": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3638064789,
+          "timestamp_iso": "2085-04-14 07:33:09",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1642496,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1632112,
+        "file_version": "10.0.17134.950",
+        "product_version": "10.0.17134.950",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.17134.950 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.950"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "d749ff77-274b-569f-e570-bda0d1c35429",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_6f5e3067_194000_1926b0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1868443751,
+          "timestamp_iso": "2029-03-17 13:09:11",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 1654784,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1648304,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "gdi32full.dll",
+        "debug_codeview": {
+          "guid": "e5a785df-0333-6a66-65b8-dd4a759a9c45",
+          "age": 1,
+          "path": "gdi32full.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "e5a785df-0333-6a66-65b8-dd4a759a9c45",
+          "unknown": "32dd015757a58b9720b874eb",
+          "timestamp": 1868443751
+        }
+      }
+    }
+  }
+}

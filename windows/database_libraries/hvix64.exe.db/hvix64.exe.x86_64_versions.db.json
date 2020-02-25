@@ -1,0 +1,564 @@
+{
+  "hvix64.exe.x86_64": {
+    "versions": {
+      "10.0.14393.206_57dace3f_1600000_10c960": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1473957439,
+          "timestamp_iso": "2016-09-15 18:37:19",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 352
+        },
+        "file_size": 1100128,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "e0efffe8-d261-4298-8dad-a6f4db57a107",
+          "age": 1,
+          "path": "hvix64.pdb"
+        }
+      },
+      "10.0.14393.576_584a7bb4_1600000_10c960": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1481276340,
+          "timestamp_iso": "2016-12-09 10:39:00",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 352
+        },
+        "file_size": 1100128,
+        "file_version": "10.0.14393.576",
+        "product_version": "10.0.14393.576",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.576 (rs1_release_inmarket.161208-2252)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.576"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "3ed04c1b-a07e-4c35-a933-c3d15ef3b21f",
+          "age": 1,
+          "path": "hvix64.pdb"
+        }
+      },
+      "10.0.14393.1066_58d9f4db_1600000_10c960": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1490679003,
+          "timestamp_iso": "2017-03-28 07:30:03",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 352
+        },
+        "file_size": 1100128,
+        "file_version": "10.0.14393.1066",
+        "product_version": "10.0.14393.1066",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.1066 (rs1_release_sec.170327-1835)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1066"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "928a9a90-4a3e-49da-93cf-e17264f60468",
+          "age": 1,
+          "path": "hvix64.pdb"
+        }
+      },
+      "10.0.14393.1358_59327c9b_1600000_10c960": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1496480923,
+          "timestamp_iso": "2017-06-03 11:08:43",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 352
+        },
+        "file_size": 1100128,
+        "file_version": "10.0.14393.1358",
+        "product_version": "10.0.14393.1358",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.1358 (rs1_release.170602-2252)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1358"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "ec19ac5c-9f44-4dae-916f-16c7df5c45e0",
+          "age": 1,
+          "path": "hvix64.pdb"
+        }
+      },
+      "10.0.14393.1715_59b0d620_1600000_10c960": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1504761376,
+          "timestamp_iso": "2017-09-07 07:16:16",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 352
+        },
+        "file_size": 1100128,
+        "file_version": "10.0.14393.1715",
+        "product_version": "10.0.14393.1715",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.1715 (rs1_release_inmarket.170906-1810)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1715"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "8bcddb83-1e30-4db3-afab-e9d43f577f57",
+          "age": 1,
+          "path": "hvix64.pdb"
+        }
+      },
+      "10.0.14393.1884_59fa450f_1600000_10a560": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1509573903,
+          "timestamp_iso": "2017-11-01 23:05:03",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1090912,
+        "file_version": "10.0.14393.1884",
+        "product_version": "10.0.14393.1884",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.1884 (rs1_release.171101-1233)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1884"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "081268ac-c540-49c5-b3c1-7061ecf5474e",
+          "age": 1,
+          "path": "hvix64.pdb"
+        }
+      },
+      "10.0.14393.2007_5a49bbfe_1600000_10b558": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1514781694,
+          "timestamp_iso": "2018-01-01 05:41:34",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1095000,
+        "file_version": "10.0.14393.2007",
+        "product_version": "10.0.14393.2007",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.2007 (rs1_release.171231-1800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2007"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "2fc7d297-eb95-47c0-8e6a-3f81a21a6994",
+          "age": 1,
+          "path": "hvix64.pdb"
+        }
+      },
+      "10.0.16299.15_bdc819d6_1600000_125198": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3184007638,
+          "timestamp_iso": "2070-11-23 23:33:58",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1200536,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "2bf4c8ec-a06c-4b50-8312-b477f941c35e",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.192_af61af90_1600000_126998": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2942414736,
+          "timestamp_iso": "2063-03-29 19:25:36",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1206680,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "3db3274d-85df-27df-5e22-73de779d3168",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_6124f918_1600000_11eba0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1629813016,
+          "timestamp_iso": "2021-08-24 15:50:16",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1174432,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "fd87032e-fc2f-f368-885e-cf3c03c0b3a8",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.472_ea0bf02a_1600000_12a338": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3926650922,
+          "timestamp_iso": "2094-06-06 10:22:02",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1221432,
+        "file_version": "10.0.17134.472",
+        "product_version": "10.0.17134.472",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.472 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.472"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "127f84f8-2c88-41a7-2722-cb7944bf933f",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.523_b4657ab9_1600000_12a338": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3026549433,
+          "timestamp_iso": "2065-11-27 13:10:33",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1221432,
+        "file_version": "10.0.17134.523",
+        "product_version": "10.0.17134.523",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.523 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.523"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "c65bafa5-f9d7-e0b5-e3de-c307b08fbcb2",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.590_23ecb18d_1600000_12a338": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 602714509,
+          "timestamp_iso": "1989-02-05 21:41:49",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1221432,
+        "file_version": "10.0.17134.590",
+        "product_version": "10.0.17134.590",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.590 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.590"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "12475447-ee42-eda6-94b2-164d961913ff",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.648_ba11e194_1600000_129d38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3121734036,
+          "timestamp_iso": "2068-12-03 05:20:36",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1219896,
+        "file_version": "10.0.17134.648",
+        "product_version": "10.0.17134.648",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.648 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.648"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "44abe2c9-e59b-3765-008a-d0bd7c8750c6",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.885_1088e3a2_1600000_129d38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 277406626,
+          "timestamp_iso": "1978-10-16 18:23:46",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1219896,
+        "file_version": "10.0.17134.885",
+        "product_version": "10.0.17134.885",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.885 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.885"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "cafb1953-d150-6786-3dbd-b16c68e2d8ac",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.950_ae2c77d6_1600000_129d38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2922149846,
+          "timestamp_iso": "2062-08-07 06:17:26",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1219896,
+        "file_version": "10.0.17134.950",
+        "product_version": "10.0.17134.950",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17134.950 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.950"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "6a7ab1f8-757b-854b-648b-4ed5082bb0fa",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.30_bb87295c_1800000_155b38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3146197340,
+          "timestamp_iso": "2069-09-12 09:42:20",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1399608,
+        "file_version": "10.0.18362.30",
+        "product_version": "10.0.18362.30",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.18362.30 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.30"
+        },
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "de0b8fd1-fa50-e86a-dd55-f0722ec0c3df",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "de0b8fd1-fa50-e86a-dd55-f0722ec0c3df",
+          "unknown": "f8ecab1ed38e2c3a0730a8b4",
+          "timestamp": 3146197340
+        }
+      }
+    }
+  }
+}

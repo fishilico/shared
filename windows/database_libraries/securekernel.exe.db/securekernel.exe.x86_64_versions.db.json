@@ -1,0 +1,400 @@
+{
+  "securekernel.exe.x86_64": {
+    "versions": {
+      "10.0.14393.206_57dac917_7f000_6f360": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1473956119,
+          "timestamp_iso": "2016-09-15 18:15:19",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 520192,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 455520,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "0103672a-bd02-4d47-83c4-7f04f4d93337",
+          "age": 1,
+          "path": "securekernel.pdb"
+        }
+      },
+      "10.0.14393.693_585a2530_7f000_6f360": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1482302768,
+          "timestamp_iso": "2016-12-21 07:46:08",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 520192,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 455520,
+        "file_version": "10.0.14393.693",
+        "product_version": "10.0.14393.693",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.14393.693 (rs1_release.161220-1747)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.693"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "6e0c27c6-5c58-4059-af16-f638785d6002",
+          "age": 1,
+          "path": "securekernel.pdb"
+        }
+      },
+      "10.0.14393.1198_59027fc3_7f000_6f360": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1493336003,
+          "timestamp_iso": "2017-04-28 01:33:23",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 520192,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 455520,
+        "file_version": "10.0.14393.1198",
+        "product_version": "10.0.14393.1198",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.14393.1198 (rs1_release_sec.170427-1353)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1198"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "3bc3b46b-44e6-4395-880c-cd18427a2214",
+          "age": 1,
+          "path": "securekernel.pdb"
+        }
+      },
+      "10.0.14393.1358_593276f3_7f000_6f360": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1496479475,
+          "timestamp_iso": "2017-06-03 10:44:35",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 520192,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 455520,
+        "file_version": "10.0.14393.1358",
+        "product_version": "10.0.14393.1358",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.14393.1358 (rs1_release.170602-2252)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1358"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "969aaa7b-e2d8-4fed-a57c-e029bea6595f",
+          "age": 1,
+          "path": "securekernel.pdb"
+        }
+      },
+      "10.0.14393.1884_59fa4373_7f000_6f358": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1509573491,
+          "timestamp_iso": "2017-11-01 22:58:11",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 520192,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 455512,
+        "file_version": "10.0.14393.1884",
+        "product_version": "10.0.14393.1884",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.14393.1884 (rs1_release.171101-1233)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1884"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "bf908357-4d5b-497f-925a-33dbf0a79dba",
+          "age": 1,
+          "path": "securekernel.pdb"
+        }
+      },
+      "10.0.14393.2007_5a49ba57_7f000_6f558": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1514781271,
+          "timestamp_iso": "2018-01-01 05:34:31",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 520192,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 456024,
+        "file_version": "10.0.14393.2007",
+        "product_version": "10.0.14393.2007",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.14393.2007 (rs1_release.171231-1800)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2007"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "0fc8aab2-799d-41c5-8163-86e558d0725e",
+          "age": 1,
+          "path": "securekernel.pdb"
+        }
+      },
+      "10.0.16299.15_bf67d096_a5000_92398": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3211251862,
+          "timestamp_iso": "2071-10-05 08:24:22",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 675840,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 598936,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "155c259f-e0b0-5ad6-fe28-20a2fce40ba5",
+          "age": 1,
+          "path": "securekernel.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.192_f8210c0c_a5000_92598": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4162915340,
+          "timestamp_iso": "2101-12-01 22:22:20",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 675840,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 599448,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "e28e536f-0e89-9104-cdcc-9d1aae1c5695",
+          "age": 1,
+          "path": "securekernel.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_c1a6daa3_a6000_937a0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3248937635,
+          "timestamp_iso": "2072-12-14 11:40:35",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 679936,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 604064,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "beab8062-b9f1-18cb-bd0c-04003f8ca6ac",
+          "age": 1,
+          "path": "securekernel.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.471_728a4eed_a7000_93b38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1921666797,
+          "timestamp_iso": "2030-11-23 13:19:57",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 684032,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 604984,
+        "file_version": "10.0.17134.471",
+        "product_version": "10.0.17134.471",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.17134.471 (WinBuild.160101.0800)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.471"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "9a27e341-03b5-4cf4-07a8-98bd4bf0bbbc",
+          "age": 1,
+          "path": "securekernel.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.885_68150cd0_a7000_93b38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1746210000,
+          "timestamp_iso": "2025-05-02 20:20:00",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 684032,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 604984,
+        "file_version": "10.0.17134.885",
+        "product_version": "10.0.17134.885",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.17134.885 (WinBuild.160101.0800)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.885"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "8af4a2d0-4eb3-0a53-877e-8d6c84b53aa5",
+          "age": 1,
+          "path": "securekernel.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_fb232778_f3000_bd228": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4213385080,
+          "timestamp_iso": "2103-07-09 02:44:40",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 995328,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 774696,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "71bc7259-3746-5986-1021-b5f2b23186ff",
+          "age": 1,
+          "path": "securekernel.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "71bc7259-3746-5986-1021-b5f2b23186ff",
+          "unknown": "2ac26565ccf55419ab8c0706",
+          "timestamp": 4213385080
+        }
+      }
+    }
+  }
+}

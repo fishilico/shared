@@ -1,0 +1,312 @@
+{
+  "wintrust.dll.x86_64": {
+    "versions": {
+      "6.1.7600.16385_4a5be0c7_39000_35c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1247535303,
+          "timestamp_iso": "2009-07-14 03:35:03",
+          "coff_characteristics": 8226,
+          "linker_version": "9.0",
+          "image_base": 8793706201088,
+          "size_of_image": 233472,
+          "subsystem": 2,
+          "dll_characteristics": 320
+        },
+        "file_size": 220160,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385",
+          "OleSelfRegister": ""
+        },
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "161c027b-4073-4802-89f9-fdeba4bd9761",
+          "age": 2,
+          "path": "wintrust.pdb"
+        }
+      },
+      "10.0.14393.206_57dace66_55000_537b0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1473957478,
+          "timestamp_iso": "2016-09-15 18:37:58",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 348160,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 341936,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206",
+          "OleSelfRegister": ""
+        },
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "d176d1a6-27ea-4fbb-85c8-1c4aa3911d67",
+          "age": 1,
+          "path": "wintrust.pdb"
+        }
+      },
+      "10.0.14393.351_5801a848_55000_537b0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1476503624,
+          "timestamp_iso": "2016-10-15 05:53:44",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 348160,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 341936,
+        "file_version": "10.0.14393.351",
+        "product_version": "10.0.14393.351",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.14393.351 (rs1_release_inmarket.161014-1755)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.351",
+          "OleSelfRegister": ""
+        },
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "b7988963-6335-4cc6-a0f8-b488592c0585",
+          "age": 1,
+          "path": "wintrust.pdb"
+        }
+      },
+      "10.0.14393.953_58ba5eb7_55000_539b8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1488608951,
+          "timestamp_iso": "2017-03-04 07:29:11",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 348160,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 342456,
+        "file_version": "10.0.14393.953",
+        "product_version": "10.0.14393.953",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.14393.953 (rs1_release_inmarket.170303-1614)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.953",
+          "OleSelfRegister": ""
+        },
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "33d44954-a42b-4ed4-babe-bfad0388d1e0",
+          "age": 1,
+          "path": "wintrust.pdb"
+        }
+      },
+      "10.0.16299.15_df667c70_58000_57058": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3748035696,
+          "timestamp_iso": "2088-10-08 03:01:36",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 360448,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 356440,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15",
+          "OleSelfRegister": ""
+        },
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "8f13a1de-91c0-39a3-4ee8-5b5409ef5dfa",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_33c050c9_57000_54e38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 868241609,
+          "timestamp_iso": "1997-07-07 04:13:29",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 356352,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 347704,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1",
+          "OleSelfRegister": ""
+        },
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "753836dd-a29e-39b2-9110-8bfe0b5739d7",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.81_faeb3ef3_57000_54e38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4209721075,
+          "timestamp_iso": "2103-05-27 16:57:55",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 356352,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 347704,
+        "file_version": "10.0.17134.81",
+        "product_version": "10.0.17134.81",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.17134.81 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.81",
+          "OleSelfRegister": ""
+        },
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "3636bbea-bfad-3477-c54d-8acee02fe97c",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.556_648d787e_57000_555d8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1686993022,
+          "timestamp_iso": "2023-06-17 11:10:22",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 356352,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 349656,
+        "file_version": "10.0.17134.556",
+        "product_version": "10.0.17134.556",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.17134.556 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.556",
+          "OleSelfRegister": ""
+        },
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "9d7da48b-3ce9-7b68-0fac-ec9884b8e0a8",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_63919884_5c000_58d38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1670486148,
+          "timestamp_iso": "2022-12-08 08:55:48",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 376832,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 363832,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1",
+          "OleSelfRegister": ""
+        },
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "ef819cd6-e971-2b01-03bd-5c01094e9942",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ef819cd6-e971-2b01-03bd-5c01094e9942",
+          "unknown": "23a8919bbce169139f910d09",
+          "timestamp": 1670486148
+        }
+      }
+    }
+  }
+}

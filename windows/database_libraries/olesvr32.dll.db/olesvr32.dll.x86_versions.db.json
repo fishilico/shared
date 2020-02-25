@@ -1,0 +1,141 @@
+{
+  "olesvr32.dll.x86": {
+    "versions": {
+      "5.1.2600.0_3b7dfe32_9000_5600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 998112818,
+          "timestamp_iso": "2001-08-18 07:33:38",
+          "coff_characteristics": 8462,
+          "linker_version": "7.0",
+          "image_base": 1910439936,
+          "size_of_image": 36864,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 22016,
+        "file_version": "5.1.2600.0",
+        "product_version": "5.1.2600.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Object Linking and Embedding Server Library",
+          "FileVersion": "1.09 (XPClient.010817-1148)",
+          "InternalName": "OLESVR",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLESVR32.DLL",
+          "ProductName": "Microsoft Object Linking and Embedding Libraries for Windows",
+          "ProductVersion": "3.10.0.071"
+        },
+        "export_dll_name": "OLESVR32.dll",
+        "debug_codeview_timed": {
+          "timestamp": 998081352,
+          "timestamp_iso": "2001-08-17 22:49:12",
+          "age": 1,
+          "path": "olesvr32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bdad2_a000_7000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533778,
+          "timestamp_iso": "2009-07-14 03:09:38",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 1074921472,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 28672,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Object Linking and Embedding Server Library",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "OLESVR32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLESVR32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "OLESVR32.dll",
+        "debug_codeview": {
+          "guid": "b99f1074-1fdf-436c-80d1-6992cde87f64",
+          "age": 2,
+          "path": "olesvr32.pdb"
+        }
+      },
+      "10.0.17134.1_f92e0ed5_11000_dc00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4180545237,
+          "timestamp_iso": "2102-06-24 00:33:57",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1334312960,
+          "size_of_image": 69632,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 56320,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Object Linking and Embedding Server Library",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "OLESVR32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLESVR32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "OLESVR32.dll",
+        "debug_codeview": {
+          "guid": "8d1dfb8c-91f5-2010-c632-f4e2dd0f4646",
+          "age": 1,
+          "path": "olesvr32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_ddf9afad_11000_e000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3724128173,
+          "timestamp_iso": "2088-01-05 09:02:53",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1334312960,
+          "size_of_image": 69632,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 57344,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Object Linking and Embedding Server Library",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "OLESVR32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLESVR32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "OLESVR32.dll",
+        "debug_codeview": {
+          "guid": "9ec30ab7-cfa7-e824-4312-c9bf2db3c812",
+          "age": 1,
+          "path": "olesvr32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "9ec30ab7-cfa7-e824-4312-c9bf2db3c812",
+          "unknown": "05fccaa5238672f8851012f6",
+          "timestamp": 3724128173
+        }
+      }
+    }
+  }
+}

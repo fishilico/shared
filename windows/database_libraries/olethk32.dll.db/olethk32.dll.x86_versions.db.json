@@ -1,0 +1,141 @@
+{
+  "olethk32.dll.x86": {
+    "versions": {
+      "5.1.2600.0_3b7dfe30_14000_10e00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 998112816,
+          "timestamp_iso": "2001-08-18 07:33:36",
+          "coff_characteristics": 8462,
+          "linker_version": "7.0",
+          "image_base": 1910702080,
+          "size_of_image": 81920,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 69120,
+        "file_version": "5.1.2600.0",
+        "product_version": "5.1.2600.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft OLE for Windows",
+          "FileVersion": "5.1.2600.0 (XPClient.010817-1148)",
+          "InternalName": "OLETHK32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLETHK32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.0"
+        },
+        "export_dll_name": "OLETHK32.dll",
+        "debug_codeview_timed": {
+          "timestamp": 998081341,
+          "timestamp_iso": "2001-08-17 22:49:01",
+          "age": 1,
+          "path": "olethk32.pdb"
+        }
+      },
+      "6.1.7600.16385_4a5bdad3_16000_12e00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1247533779,
+          "timestamp_iso": "2009-07-14 03:09:39",
+          "coff_characteristics": 8450,
+          "linker_version": "9.0",
+          "image_base": 1084096512,
+          "size_of_image": 90112,
+          "subsystem": 3,
+          "dll_characteristics": 320
+        },
+        "file_size": 77312,
+        "file_version": "6.1.7600.16385",
+        "product_version": "6.1.7600.16385",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft OLE for Windows",
+          "FileVersion": "6.1.7600.16385 (win7_rtm.090713-1255)",
+          "InternalName": "OLETHK32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLETHK32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "6.1.7600.16385"
+        },
+        "export_dll_name": "OLETHK32.dll",
+        "debug_codeview": {
+          "guid": "82f07885-b690-4bc0-8a98-792f03df6b4b",
+          "age": 1,
+          "path": "olethk32.pdb"
+        }
+      },
+      "10.0.17134.1_553742f2_1e000_1aa00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1429684978,
+          "timestamp_iso": "2015-04-22 08:42:58",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 268435456,
+          "size_of_image": 122880,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 109056,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft OLE for Windows",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "OLETHK32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLETHK32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "OLETHK32.dll",
+        "debug_codeview": {
+          "guid": "e6c1126c-b9da-9642-2459-47cc765c52b2",
+          "age": 1,
+          "path": "olethk32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_30b7e76a_1b000_17400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 817358698,
+          "timestamp_iso": "1995-11-26 05:04:58",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 110592,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 95232,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft OLE for Windows",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "OLETHK32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLETHK32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "OLETHK32.dll",
+        "debug_codeview": {
+          "guid": "4c4d6a09-3c80-28e7-e402-09e79fbc260d",
+          "age": 1,
+          "path": "olethk32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "4c4d6a09-3c80-28e7-e402-09e79fbc260d",
+          "unknown": "6877725ebfc16a87ed9ef5c8",
+          "timestamp": 817358698
+        }
+      }
+    }
+  }
+}
