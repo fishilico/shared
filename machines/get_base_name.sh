@@ -69,6 +69,9 @@ do
         *ubuntu1804*|*ubuntu18.04*|*bionic*)
             echo "ubuntu1804-bionic"
             ;;
+        *ubuntu2004*|*ubuntu20.04*|*focal*)
+            echo "ubuntu2004-focal"
+            ;;
 
         *fedora22*)
             echo "fedora22"
