@@ -72,6 +72,7 @@ $(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0) \
 	$(call cc-disable-warning,pedantic) \
 	$(call cc-disable-warning,cast-qual) \
 	$(call cc-disable-warning,redundant-parens) \
+	$(call cc-disable-warning,typedef-redefinition) \
 	$(call cc-disable-warning,used-but-marked-unused)
 	else
 		HAVE_GTK2 := $(call pkg-config-with-options,gtk+-2.0,--std=c99 \
