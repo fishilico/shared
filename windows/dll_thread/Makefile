@@ -8,6 +8,7 @@ clean:
 
 test: all
 	@$(call run-test-progs,test_dll_thread.$(BIN_EXT))
+	$(SLEEP_AFTER_WINE_IF_NEEDED)
 
 # Either "dll_thread.dll" or "-L. -ldll_thread" are available to the linker
 test_dll_thread.$(BIN_EXT): .test_dll_thread.o dll_thread.$(LIB_EXT)

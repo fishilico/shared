@@ -88,7 +88,17 @@ ifeq ($(HAVE_WINE),y)
 	else
 		RUN_TEST_PREFIX := $(WINE)
 	endif
+	# On Fedora 32, wine spends too much time terminating, which triggers
+	# "wine: a wine server seems to be running, but I cannot connect to it."
+	# between some tests
+	NEED_WINE_SLEEP := $(call can-run,grep '^CPE_NAME="cpe:/o:fedoraproject:fedora:32"$$' /etc/os-release)
 else ifneq ($(OS), Windows_NT)
 	# Do not run anything on a non-Windows system without wine
 	RUN_TEST_PREFIX := :
+endif
+
+ifeq ($(NEED_WINE_SLEEP), y)
+	SLEEP_AFTER_WINE_IF_NEEDED := sleep 3
+else
+	SLEEP_AFTER_WINE_IF_NEEDED := :
 endif
