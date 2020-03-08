@@ -275,11 +275,14 @@ class DockerRegistry:
                         headers={'Accept': config_type},
                         allow_redirects=True)
                     if response.status_code != 200:
-                        logger.error("Unable to retrieve the manifest v2 config of %r:%r: HTTP error %d",
-                                     image_name, tag_name, response.status_code)
-                        logger.error("... Response JSON: %r", response.json())
-                        raise ValueError("HTTP error {}".format(response.status_code))
-                    result['config'] = response.json()
+                        # This may happen, for example with the following error:
+                        # {'errors': [{'code': 'MANIFEST_INVALID', 'message': 'manifest invalid', 'detail': {}}]}
+                        # In this case, the v2 manifest is still valid, even though it does not have a config
+                        logger.warning("Unable to retrieve the manifest v2 config of %r:%r: HTTP error %d",
+                                       image_name, tag_name, response.status_code)
+                        logger.warning("... Response JSON: %r", response.json())
+                    else:
+                        result['config'] = response.json()
                 else:
                     raise ValueError("Unimplemented manifest v2 config type {}".format(repr(config_type)))
             return result
@@ -343,11 +346,19 @@ class DockerRegistry:
                     stream=True)
                 if response.status_code == 200:
                     break
-                logger.warning("Unable to retrieve layer %r:%r: HTTP error %d",
-                               image_name, digest_name, response.status_code)
-                logger.warning("... Response JSON: %r", response.json())
-                logger.warning("... continuing other foreign URL...")
+                logger.warning("Unable to retrieve layer %r:%r from %r: HTTP error %d",
+                               image_name, digest_name, foreign_url, response.status_code)
+                try:
+                    logger.warning("... Response JSON: %r", response.json())
+                except json.JSONDecodeError:
+                    # Some HTTP 404 errors do not provide a JSON response
+                    logger.warning("... Response (not JSON): %r", response.content)
+                # Continuing with other foreign URL...
                 continue
+            if response.status_code != 200:
+                logger.error("Unable to retrieve layer %r:%r using foreign URL: HTTP error %d",
+                             image_name, digest_name, response.status_code)
+                raise ValueError("HTTP error {}".format(response.status_code))
 
         if response.status_code != 200:
             logger.error("Unable to retrieve layer %r:%r: HTTP error %d",
