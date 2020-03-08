@@ -100,7 +100,7 @@ def split_auth_header(header):
 
 class DockerRegistry:
     """Handle information about a connection to a docker registry"""
-    def __init__(self, url):
+    def __init__(self, url, trust_filesystem=False):
         url = url.rstrip('/')
         # Prepend https:// automatically
         if '://' not in url:
@@ -109,6 +109,11 @@ class DockerRegistry:
         self.url = url
         self.headers = {}
         self.last_auth_scope = None
+        self.trust_filesystem = trust_filesystem
+
+        # Set of layer digests that have already been validated in cache
+        # Dictionary of "sha256:xxxxx" -> size of layer
+        self.cached_layer_digests = {}
 
         # Authenticate with the registry, using /v2/ ping response
         # cf. https://github.com/containers/image/blob/v5.1.0/docker/docker_client.go#L508
@@ -283,8 +288,22 @@ class DockerRegistry:
 
     def download_layer(self, image_name, digest_name, output_path, urls=None):
         """Download a layer according to the specified digest"""
+        # If the layer is already known, return its size
+        cached_layer_size = self.cached_layer_digests.get(digest_name)
+        if cached_layer_size:
+            logger.info("Using already-validated %d bytes from %s",
+                        cached_layer_size, output_path)
+            return cached_layer_size
+
         # If the output already exists, checks its content
         if output_path.exists():
+            if self.trust_filesystem:
+                # Trust that the file holds the right content
+                total_size = output_path.stat().st_size
+                logger.info("Trusting cached %d bytes from %s", total_size, output_path)
+                self.cached_layer_digests[digest_name] = total_size
+                return total_size
+
             computed_digest = hashlib.sha256()
             total_size = 0
             with output_path.open('rb') as fout:
@@ -299,6 +318,7 @@ class DockerRegistry:
                 raise ValueError("Invalid file {} with mismatched SHA256 digest: {} != {}".format(
                     output_path, repr(resulting_name), repr(digest_name)))
             logger.info("Validated cached %d bytes from %s", total_size, output_path)
+            self.cached_layer_digests[digest_name] = total_size
             return total_size
 
         image_name = self.normalize_name_if_needed(image_name)
@@ -352,6 +372,7 @@ class DockerRegistry:
                 repr(resulting_name), repr(digest_name)))
         os.replace(output_part_path, output_path)
         logger.info("Downloaded %d bytes to %s", total_size, output_path)
+        self.cached_layer_digests[digest_name] = total_size
         return total_size
 
     def download_image(self, image_name, tag_name, output_path):
@@ -434,12 +455,14 @@ def main(argv=None):
                         help="Docker registry to use (default: {})".format(DOCKER_REGISTRY))
     parser.add_argument('-t', '--tag', nargs='+', type=str,
                         help="Tags to use (default: latest)")
+    parser.add_argument('-T', '--trust-filesystem', action='store_true',
+                        help="Blindly trust layer files that are already present in the output directory")
     args = parser.parse_args(argv)
 
     logging.basicConfig(format='[%(levelname)s] %(message)s',
                         level=logging.DEBUG if args.debug else logging.INFO)
 
-    registry = DockerRegistry(args.registry)
+    registry = DockerRegistry(args.registry, trust_filesystem=args.trust_filesystem)
     if args.list_tags:
         for image in args.image:
             tags = registry.list_tags(image)
