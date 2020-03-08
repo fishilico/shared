@@ -508,6 +508,7 @@ then
     pkg codespell
     pkg cppcheck
     pkg docker-compose
+    pkg earlyoom
     pkg flake8
     pkg ghidra
     pkg hashcat
@@ -588,7 +589,6 @@ then
     aurpkg bluez-rfcomm
     aurpkg coccinelle
     aurpkg dex2jar
-    aurpkg earlyoom
     aurpkg ffdec
     aurpkg ilspymono-git
     aurpkg jd-gui
