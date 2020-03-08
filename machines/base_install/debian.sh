@@ -223,6 +223,7 @@ pkg highlight
 pkg ipython
 pkg libcap-ng-utils
 pkg ltrace
+pkg mypy
 pkg nodejs
 #pkg php
 pkg pkg-config

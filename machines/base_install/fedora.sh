@@ -186,6 +186,7 @@ pkg make
 pkg pkgconf-pkg-config
 pkg python2
 pkg python3
+pkg python3-mypy
 pkg ShellCheck
 
 # Other

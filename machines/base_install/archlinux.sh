@@ -308,6 +308,7 @@ pkg libcap-ng
 pkg linux-hardened-headers
 pkg linux-headers
 pkg ltrace
+pkg mypy
 pkg nodejs
 pkg npm
 pkg pkgconf
