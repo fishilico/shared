@@ -80,7 +80,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% windows%
+#    Global blacklist: latex% rust% windows%
 #    In sub-directories:
 #       c:
 #       glossaries:
@@ -91,10 +91,9 @@ CMD ["/run_shared_test.sh"]
 #       python/network:
 #       python/network/dnssec:
 #       python/qrcode:
-#       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex% windows%
+#       Global blacklist: latex% rust% windows%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
 #          glossaries:
@@ -105,7 +104,6 @@ CMD ["/run_shared_test.sh"]
 #          python/network:
 #          python/network/dnssec:
 #          python/qrcode:
-#          rust:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok
