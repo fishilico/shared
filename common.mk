@@ -94,7 +94,8 @@ run-test-progs = \
 get-cc-target-triplet = $(shell $(CC) -dumpmachine)
 
 # "gcc -m32 -dumpmachine" prints x86_64-unknown-linux-gnu on x86_64, not i386, which forces this selection
-select_x86_bits = $(shell printf '\#ifdef __x86_64__\nx86_64\n\#elif defined(__i386__)\nx86_32\n\#endif' |$(CC) -E - |$(GREP) '^x86')
+hash_sign := \#
+select_x86_bits = $(shell printf '$(hash_sign)ifdef __x86_64__\nx86_64\n$(hash_sign)elif defined(__i386__)\nx86_32\n$(hash_sign)endif' |$(CC) -E - |$(GREP) '^x86')
 
 # Usage: TARGET_ARCH := $(call cc-triplet2arch,$(TARGET_TRIPLET))
 cc-triplet2arch = \

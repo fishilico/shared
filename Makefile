@@ -47,7 +47,8 @@ endif
 # boot/ check: only x86 is currently supported
 # MBR check: $(CC) needs to support ".code16" asm directive while compiling for x86
 # Syslinux MBR check: $(CC) needs to support some flags
-ifneq ($(shell printf '\#if defined(__x86_64__)||defined(__i386__)\ny\n\#endif' |$(CC) -Werror -E - |grep '^[^\#]'),y)
+hash_sign := \#
+ifneq ($(shell printf '$(hash_sign)if defined(__x86_64__)||defined(__i386__)\ny\n$(hash_sign)endif' |$(CC) -Werror -E - |grep '^[^$(hash_sign)]'),y)
 SUBDIRS_BLACKLIST += boot%
 else ifneq ($(call can-run,echo '__asm__(".code16");' |$(CC) -Werror -m32 -march=i386 -xc -c /dev/stdin -o /dev/null),y)
 SUBDIRS_BLACKLIST += boot/mbr%
