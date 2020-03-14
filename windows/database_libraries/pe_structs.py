@@ -414,7 +414,7 @@ def dump_struct(obj, indent=''):
                 # Add the decoded timestamp, from 1970-01-01 00:00:00
                 # NB: since Windows 10, Microsoft uses reproducible builds that randomize the timestamp:
                 # https://devblogs.microsoft.com/oldnewthing/?p=97705
-                repr_value += " ({})".format(datetime.datetime.fromtimestamp(value))
+                repr_value += " ({})".format(datetime.datetime.utcfromtimestamp(value))
             elif key == 'Machine' and value != 0:
                 with contextlib.suppress(ValueError):
                     repr_value += " ({} = {})".format(MachineType(value).name, MACHINE_TYPE_NAME.get(value))
@@ -1190,7 +1190,7 @@ class PEFile:
                 print("  * CODEVIEW PDB 2.0 data:")
                 print("    * signature (timestamp) = {:#x} ({})".format(
                     self.debug_codeview_timestamp,
-                    datetime.datetime.fromtimestamp(self.debug_codeview_timestamp)))
+                    datetime.datetime.utcfromtimestamp(self.debug_codeview_timestamp)))
                 print("    * age = {}".format(self.debug_codeview_age))
                 print("    * path = {}".format(repr(self.debug_codeview_path)))
 

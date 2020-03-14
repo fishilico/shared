@@ -291,7 +291,7 @@ class Database:
             ('pe_header', collections.OrderedDict((
                 ('machine', pe_file.pe_header.FileHeader.Machine),
                 ('timestamp', timestamp),
-                ('timestamp_iso', str(datetime.datetime.fromtimestamp(timestamp))),
+                ('timestamp_iso', str(datetime.datetime.utcfromtimestamp(timestamp))),
                 ('coff_characteristics', pe_file.pe_header.FileHeader.Characteristics),
                 ('linker_version', '{}.{}'.format(
                     pe_file.pe_header.OptionalHeader.MajorLinkerVersion,
@@ -320,7 +320,7 @@ class Database:
         if pe_file.debug_codeview_timestamp is not None:
             version_info['debug_codeview_timed'] = collections.OrderedDict((
                 ('timestamp', pe_file.debug_codeview_timestamp),
-                ('timestamp_iso', str(datetime.datetime.fromtimestamp(pe_file.debug_codeview_timestamp))),
+                ('timestamp_iso', str(datetime.datetime.utcfromtimestamp(pe_file.debug_codeview_timestamp))),
                 ('age', pe_file.debug_codeview_age),
                 ('path', pe_file.debug_codeview_path),
             ))
