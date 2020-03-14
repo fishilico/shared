@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1468633455,
-          "timestamp_iso": "2016-07-16 03:44:15",
+          "timestamp_iso": "2016-07-16 01:44:15",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 268435456,
@@ -26,9 +26,81 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.0"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ce824d260787f9ac56b28c9a74a3c40a3501a045877feec6ac266da3612eacd2",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468634672.448,
+              "timestamp_iso": "2016-07-16 02:04:32.448000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005833235779859560460664320270954135688,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "AppCore.dll",
         "debug_codeview": {
           "guid": "f153f70e-5b49-49d2-98a6-76105044a538",
+          "age": 1,
+          "path": "Kernel.Appcore.pdb"
+        }
+      },
+      "10.0.14393.2312_5b1a1010_d000_a998": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1528434704,
+          "timestamp_iso": "2018-06-08 05:11:44",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 53248,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 43416,
+        "file_version": "10.0.14393.2312",
+        "product_version": "10.0.14393.2312",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "AppModel API Host",
+          "FileVersion": "10.0.14393.2312 (rs1_release.180607-1919)",
+          "InternalName": "kernel.appcore.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel.appcore.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2312"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c8a547f8bb8d22d0ca4c4d43f466cfa883100f73e2a321017f065b1b7fc8688c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528436026.383,
+              "timestamp_iso": "2018-06-08 05:33:46.383000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006061038740404971435211883170444083380,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "AppCore.dll",
+        "debug_codeview": {
+          "guid": "8ba5c1c4-cb7a-4572-9e1b-01cc295a6b3d",
           "age": 1,
           "path": "Kernel.Appcore.pdb"
         }
@@ -37,7 +109,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1859385047,
-          "timestamp_iso": "2028-12-02 16:50:47",
+          "timestamp_iso": "2028-12-02 15:50:47",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 268435456,
@@ -58,9 +130,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9b9834a0bee9a4988102938568f875ff7a22135c2f484273442243fe1247978b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506657154.273,
+              "timestamp_iso": "2017-09-29 03:52:34.273000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005983252952945386114569575244197003429,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "AppCore.dll",
         "debug_codeview": {
           "guid": "e809c8b1-302b-9976-e49a-0476e5d62749",
+          "age": 1,
+          "path": "Kernel.Appcore.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.492_0668424d_e000_b9f8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 107496013,
+          "timestamp_iso": "1973-05-29 04:00:13",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 268435456,
+          "size_of_image": 57344,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 47608,
+        "file_version": "10.0.16299.492",
+        "product_version": "10.0.16299.492",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "AppModel API Host",
+          "FileVersion": "10.0.16299.492 (WinBuild.160101.0800)",
+          "InternalName": "kernel.appcore.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel.appcore.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.492"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "18ae2f1eab8dd7c2ecb183e085bb4337ca868e0b04fc9a1e1bb10b288c59b577",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528438072.985,
+              "timestamp_iso": "2018-06-08 06:07:52.985000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005967766594069328071360617029667127458,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "AppCore.dll",
+        "debug_codeview": {
+          "guid": "342b8ad6-963e-2378-31e6-aa923ecbad66",
           "age": 1,
           "path": "Kernel.Appcore.pdb"
         },
@@ -70,7 +215,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1570999555,
-          "timestamp_iso": "2019-10-13 22:45:55",
+          "timestamp_iso": "2019-10-13 20:45:55",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 268435456,
@@ -91,6 +236,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e3adc03855ebc8f33fb5a92399006d03d863b7b70ba3a404fbe9715f13649ee5",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523420779.237,
+              "timestamp_iso": "2018-04-11 04:26:19.237000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006004272612577052131129751449999769769,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "AppCore.dll",
         "debug_codeview": {
           "guid": "6941c0a7-43db-e8a1-4b43-d578db15e509",
@@ -103,7 +268,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 4137379094,
-          "timestamp_iso": "2101-02-09 08:58:14",
+          "timestamp_iso": "2101-02-09 07:58:14",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 268435456,
@@ -124,9 +289,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.112"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "dfc0c9b4714dc94be79b62fe544e8729adedc989f4f775f2336d65075bc01058",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528448979.868,
+              "timestamp_iso": "2018-06-08 09:09:39.868000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006050366017140420079089350382838612146,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "AppCore.dll",
         "debug_codeview": {
           "guid": "3fe02f84-23be-6210-1ba4-96e7b2a16c67",
+          "age": 1,
+          "path": "Kernel.Appcore.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_1640e548_f000_c888": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 373351752,
+          "timestamp_iso": "1981-10-31 04:49:12",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 268435456,
+          "size_of_image": 61440,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 51336,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "AppModel API Host",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel.appcore.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel.appcore.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9d584976482ac92057c5ff73b5c28d860b93836d8d55d58a6651960e69bb2520",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536973365.818,
+              "timestamp_iso": "2018-09-15 01:02:45.818000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006205635862276441701340022307085615312,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "AppCore.dll",
+        "debug_codeview": {
+          "guid": "3cb63fe5-9b9b-1387-cd3a-a9925883c71e",
           "age": 1,
           "path": "Kernel.Appcore.pdb"
         },
@@ -136,7 +374,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1644415604,
-          "timestamp_iso": "2022-02-09 15:06:44",
+          "timestamp_iso": "2022-02-09 14:06:44",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 268435456,
@@ -157,6 +395,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a082503a95bd744a04e55aee3f0c75559c66597f2553f89dc0fa16f72b62b40b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552948048.25,
+              "timestamp_iso": "2019-03-18 22:27:28.250000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006205635862276441701340022307085615312,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "AppCore.dll",
         "debug_codeview": {
           "guid": "fc4e4ab7-9ba2-a34f-9db5-d029ff1ae0e9",

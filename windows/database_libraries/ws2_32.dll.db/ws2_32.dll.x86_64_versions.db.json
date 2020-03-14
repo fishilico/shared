@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535253,
-          "timestamp_iso": "2009-07-14 03:34:13",
+          "timestamp_iso": "2009-07-14 01:34:13",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8793715769344,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1473957284,
-          "timestamp_iso": "2016-09-15 18:34:44",
+          "timestamp_iso": "2016-09-15 16:34:44",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -58,9 +58,81 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.206"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c31f10e3d39024b1879328ddf27238bc779178bfec6eeb4d4a8d4481a94ffb3b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006164897239981080551761366122451960008,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1473960585.568,
+              "timestamp_iso": "2016-09-15 17:29:45.568000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005930554193287737188107124894997676187,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WS2_32.dll",
         "debug_codeview": {
           "guid": "c10549d4-6f60-4c06-97bf-8a1527f13b47",
+          "age": 1,
+          "path": "ws2_32.pdb"
+        }
+      },
+      "10.0.14393.3241_5d786d1a_6a000_67a60": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1568173338,
+          "timestamp_iso": "2019-09-11 03:42:18",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 434176,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 424544,
+        "file_version": "10.0.14393.3241",
+        "product_version": "10.0.14393.3241",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "10.0.14393.3241 (rs1_release_inmarket.190910-1801)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3241"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "361f52fc6fddd72b81ab9952a454859b857f9a5624675b7f18d87067cf8b7b6b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1568176348.293,
+              "timestamp_iso": "2019-09-11 04:32:28.293000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006395889933744958830011870553003000052,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "88345c10-081e-4da7-bc99-42e4ddcba06c",
           "age": 1,
           "path": "ws2_32.pdb"
         }
@@ -69,7 +141,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 2596923417,
-          "timestamp_iso": "2052-04-17 01:36:57",
+          "timestamp_iso": "2052-04-16 23:36:57",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -90,6 +162,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1bc1a7eb5922c935dc4337d0de3ef3420a2b9c490f640d44d288b8dbe92189be",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006959303205190478915959131686872023393,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506660413.835,
+              "timestamp_iso": "2017-09-29 04:46:53.835000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006028822366486431458344729467831713966,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WS2_32.dll",
         "debug_codeview": {
           "guid": "cf4c0101-147e-bd22-2bac-40066d789722",
@@ -102,7 +194,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 721506699,
-          "timestamp_iso": "1992-11-11 19:31:39",
+          "timestamp_iso": "1992-11-11 18:31:39",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -123,9 +215,188 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "efd5b2b707d85b521cd6853f4a76a5c312b292ed465ce68b1e5fe7aecbdba74b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006965260811807912526108339212017205602,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421351.729,
+              "timestamp_iso": "2018-04-11 04:35:51.729000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006034800106972072239421993029828870319,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WS2_32.dll",
         "debug_codeview": {
           "guid": "2ff28a44-df18-b872-a8b2-05684df1da28",
+          "age": 1,
+          "path": "ws2_32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1098_d4c7135b_6c000_690e0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3569816411,
+          "timestamp_iso": "2083-02-14 07:40:11",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 442368,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 430304,
+        "file_version": "10.0.17134.1098",
+        "product_version": "10.0.17134.1098",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "10.0.17134.1098 (WinBuild.160101.0800)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1098"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a55b3af6dfc996a5bb8d294babb39e96947068e1b12733413ecb1ac7d7625aae",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569991701.026,
+              "timestamp_iso": "2019-10-02 04:48:21.026000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006410621141498778959725553674937696503,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "bee3073b-582c-19fa-b2b1-81ee80dbec46",
+          "age": 1,
+          "path": "ws2_32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_4ee4fbbf_6d000_6a308": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1323629503,
+          "timestamp_iso": "2011-12-11 18:51:43",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 446464,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 434952,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "0343a6b9aeb302981aa9303a9d0669c5e969e8bec51ee425853bf2bad0fcf2c8",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974949.105,
+              "timestamp_iso": "2018-09-15 01:29:09.105000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006291748499475722860244241771436966112,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "c25caef3-f7a6-a4b7-c67a-429fc9597162",
+          "age": 1,
+          "path": "ws2_32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.771_19b2d7cc_6d000_6a308": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 431151052,
+          "timestamp_iso": "1983-08-31 04:10:52",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 446464,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 434952,
+        "file_version": "10.0.17763.771",
+        "product_version": "10.0.17763.771",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "10.0.17763.771 (WinBuild.160101.0800)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.771"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "762ae2edbe829c755854b3bb292887c128af4b27e443436b1d6c73ee8edd922f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1568353578.339,
+              "timestamp_iso": "2019-09-13 05:46:18.339000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006399529427969807648829806295430201589,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "bf90cd8a-b6b3-06e4-49a4-2d9c33a954b3",
           "age": 1,
           "path": "ws2_32.pdb"
         },
@@ -135,7 +406,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 252347079,
-          "timestamp_iso": "1977-12-30 17:24:39",
+          "timestamp_iso": "1977-12-30 16:24:39",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 6442450944,
@@ -156,6 +427,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "0c8abe7e51310234e62854a47f048431c5cbe7814cba276f6e858f7737d898b4",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949189.148,
+              "timestamp_iso": "2019-03-18 22:46:29.148000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006192866884723374027414499660635570381,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WS2_32.dll",
         "debug_codeview": {
           "guid": "94268932-d2c5-c3db-4922-27c50e3f46fb",
@@ -166,6 +457,63 @@
           "guid": "94268932-d2c5-c3db-4922-27c50e3f46fb",
           "unknown": "5e0534b2faf6144ffa5aee81",
           "timestamp": 252347079
+        }
+      },
+      "10.0.18362.387_50866107_6f000_6c150": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1350983943,
+          "timestamp_iso": "2012-10-23 09:19:03",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 454656,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 442704,
+        "file_version": "10.0.18362.387",
+        "product_version": "10.0.18362.387",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 2.0 32-Bit DLL",
+          "FileVersion": "10.0.18362.387 (WinBuild.160101.0800)",
+          "InternalName": "ws2_32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ws2_32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.387"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c7e77458989aa935e7967cd43285ae6f07d6ba12f258f8b8c28bb2806b599889",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569298590.004,
+              "timestamp_iso": "2019-09-24 04:16:30.004000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006365874153968721933633195170043265262,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WS2_32.dll",
+        "debug_codeview": {
+          "guid": "a2bdfaa4-631b-2679-bd34-bb6670bfa69c",
+          "age": 1,
+          "path": "ws2_32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "a2bdfaa4-631b-2679-bd34-bb6670bfa69c",
+          "unknown": "85932e1da266da5ba972c686",
+          "timestamp": 1350983943
         }
       }
     }

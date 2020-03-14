@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535133,
-          "timestamp_iso": "2009-07-14 03:32:13",
+          "timestamp_iso": "2009-07-14 01:32:13",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8792876777472,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1473957608,
-          "timestamp_iso": "2016-09-15 18:40:08",
+          "timestamp_iso": "2016-09-15 16:40:08",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 7516192768,
@@ -58,6 +58,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.206"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "f54beb8041fde7b6f815ced6fcd2a62175793a6a4d97d8f62c3caedaf5c1331d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1473960001.316,
+              "timestamp_iso": "2016-09-15 17:20:01.316000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005925946554353115990238755445687713946,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CI.dll",
         "debug_codeview": {
           "guid": "663cf6eb-f0d8-4de7-aca9-b9682d5ee497",
@@ -69,7 +89,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1488609104,
-          "timestamp_iso": "2017-03-04 07:31:44",
+          "timestamp_iso": "2017-03-04 06:31:44",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 7516192768,
@@ -90,6 +110,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.953"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "6e9cc23e881bd8437e2ad3e48d5ce033345af52b4a78d59e3629f04eefb0cafe",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006487690083390668365393298609651319046,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1488611603.547,
+              "timestamp_iso": "2017-03-04 07:13:23.547000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006055653896543131424439373582817034419,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CI.dll",
         "debug_codeview": {
           "guid": "5dd045be-324d-486f-995e-7b4fc7be146e",
@@ -101,7 +141,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1509574004,
-          "timestamp_iso": "2017-11-01 23:06:44",
+          "timestamp_iso": "2017-11-01 22:06:44",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 7516192768,
@@ -122,9 +162,653 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.1884"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3318852862b03401078d1b0e587e56bf4382f725002a2baa7ce59e7c24a582c6",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1509576365.695,
+              "timestamp_iso": "2017-11-01 22:46:05.695000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005994211025790091665443654607388541095,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CI.dll",
         "debug_codeview": {
           "guid": "1f6ba2a6-8c69-49c6-96b8-60997eefd3f5",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.2189_5abdb084_a0000_9b240": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1522380932,
+          "timestamp_iso": "2018-03-30 03:35:32",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 635456,
+        "file_version": "10.0.14393.2189",
+        "product_version": "10.0.14393.2189",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.2189 (rs1_release.180329-1711)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2189"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "295b55d82c6d728ab86a30f353c270ddb5eb58c5e97b9c611db23539f9075097",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1522383529.52,
+              "timestamp_iso": "2018-03-30 04:18:49.520000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006020938485272644246149794457748242604,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "4385a754-5808-4a26-ae20-be0a42b9f428",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.2248_5ae3fa0a_a0000_9b240": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1524890122,
+          "timestamp_iso": "2018-04-28 04:35:22",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 635456,
+        "file_version": "10.0.14393.2248",
+        "product_version": "10.0.14393.2248",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.2248 (rs1_release.180427-1804)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2248"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "68f4afdd058e2a40fe9505ac0ce934fd187909fc2353420e6919205a40a23e90",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1524892946.536,
+              "timestamp_iso": "2018-04-28 05:22:26.536000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006072884709557757365460179650388951222,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "54c653be-18c7-416f-aa80-1bd0d41ab7a0",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.2312_5b1a1827_a0000_9b640": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1528436775,
+          "timestamp_iso": "2018-06-08 05:46:15",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 636480,
+        "file_version": "10.0.14393.2312",
+        "product_version": "10.0.14393.2312",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.2312 (rs1_release.180607-1919)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2312"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "20fdc8676c013640062c335109275b92568480a463b438036b09e1b4d3fe351b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528439697.979,
+              "timestamp_iso": "2018-06-08 06:34:57.979000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005964388274295391971824395501449511073,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "bf345a7f-6f8b-4d61-9fac-55c67c34644c",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.2339_5b1f1802_a0000_9b640": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1528764418,
+          "timestamp_iso": "2018-06-12 00:46:58",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 636480,
+        "file_version": "10.0.14393.2339",
+        "product_version": "10.0.14393.2339",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.2339 (rs1_release_inmarket.180611-1502)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2339"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3c624a2fd8bc8b41870e657c84816c98d9ee357cb38d9cb2d67715bb933195f0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528767152.048,
+              "timestamp_iso": "2018-06-12 01:32:32.048000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005964388274295391971824395501449511073,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "c2292007-96b2-46aa-a668-4b58a02d3501",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.2395_5b4adb73_a0000_9b638": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1531632499,
+          "timestamp_iso": "2018-07-15 05:28:19",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 636472,
+        "file_version": "10.0.14393.2395",
+        "product_version": "10.0.14393.2395",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.2395 (rs1_release_inmarket.180714-1932)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2395"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "24bca75c9b689f0657486b1c921480d1c365601298d62d2ed6083e0d53eec659",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1531635368.973,
+              "timestamp_iso": "2018-07-15 06:16:08.973000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005992121074566940565467069433526616230,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "4b044292-0564-4111-a895-80a4dc2c75ed",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.2485_5b84c6f1_a0000_9b648": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1535428337,
+          "timestamp_iso": "2018-08-28 03:52:17",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 636488,
+        "file_version": "10.0.14393.2485",
+        "product_version": "10.0.14393.2485",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.2485 (rs1_release.180827-1809)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2485"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8ddd1aeeb993f549478b1a5f9ec796f6532e76022a94fdfd163dfe29c939070d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1535430709.272,
+              "timestamp_iso": "2018-08-28 04:31:49.272000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006055653896543131424439373582817034419,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "a48b78ae-4dc3-430e-8a3b-76c343c29d3e",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.2636_5bda807c_a0000_9b5e0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1541046396,
+          "timestamp_iso": "2018-11-01 04:26:36",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 636384,
+        "file_version": "10.0.14393.2636",
+        "product_version": "10.0.14393.2636",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.2636 (rs1_release_1.181031-1836)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2636"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "47ffc0208fabca77aad6274f6ca197dcf93f8b9f9b5abbdddea19fd607c0fba6",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1541048767.321,
+              "timestamp_iso": "2018-11-01 05:06:07.321000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006278845327953670265891896693119516894,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "4a72a621-149d-4453-8386-531d4f2fad55",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.3053_5d01d1a3_a0000_9b7e0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1560400291,
+          "timestamp_iso": "2019-06-13 04:31:31",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 636896,
+        "file_version": "10.0.14393.3053",
+        "product_version": "10.0.14393.3053",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.3053 (rs1_release_inmarket.190612-1836)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3053"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4051cef1843d5dc7249789857f2911104b93a705fe770be3d0026239def07a31",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1560403052.745,
+              "timestamp_iso": "2019-06-13 05:17:32.745000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006255250095571111745631542615402873049,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "89cbb2e2-c4c0-42cc-b933-e3c5b1c1788d",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.3115_5d24071e_a0000_9b7d8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1562642206,
+          "timestamp_iso": "2019-07-09 03:16:46",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 636888,
+        "file_version": "10.0.14393.3115",
+        "product_version": "10.0.14393.3115",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.3115 (rs1_release_1.190708-1703)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3115"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1786d78c5eea1c84192f1fb59c052896b09da05adf17ae6e7c9636dbe9f30c81",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1562645023.763,
+              "timestamp_iso": "2019-07-09 04:03:43.763000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006405871818669909035022975445745271030,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "b7394c6d-a231-41f8-a31a-5814cf26fad3",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.3269_5d91358e_a0000_9b8b0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1569797518,
+          "timestamp_iso": "2019-09-29 22:51:58",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 655360,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 637104,
+        "file_version": "10.0.14393.3269",
+        "product_version": "10.0.14393.3269",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.3269 (rs1_release.190929-1234)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3269"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ce838d505f48419b3018e3c575822f4fb0ec95cf3d71114e508e48a1fe700228",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569800259.707,
+              "timestamp_iso": "2019-09-29 23:37:39.707000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006450063303566776419683477421161447679,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "b8bf951e-c383-4149-a5a9-c416d337069b",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.3323_5db259b0_a2000_9c6f0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1571969456,
+          "timestamp_iso": "2019-10-25 02:10:56",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 663552,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 640752,
+        "file_version": "10.0.14393.3323",
+        "product_version": "10.0.14393.3323",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.3323 (rs1_release.191024-1909)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3323"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ffc6ad5d57811aaf359f11c2d428cf42e569d99e0bcada6a6af69d1224d2d4fd",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008038958621238808792023937920828178993,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1571969703.373,
+              "timestamp_iso": "2019-10-25 02:15:03.373000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006467623191412556535549339364036182274,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "f02c68d1-9339-4e28-a2cf-e9920e427ea1",
+          "age": 1,
+          "path": "ci.pdb"
+        }
+      },
+      "10.0.14393.3383_5ddcbb8e_a2000_9c628": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1574747022,
+          "timestamp_iso": "2019-11-26 05:43:42",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 7516192768,
+          "size_of_image": 663552,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 640552,
+        "file_version": "10.0.14393.3383",
+        "product_version": "10.0.14393.3383",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.14393.3383 (rs1_release.191125-1816)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3383"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "221e719fc8fa7e34148fdabcbcdbb98e6c04ff863ca1489d295516e84937dd5e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1574749941.143,
+              "timestamp_iso": "2019-11-26 06:32:21.143000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006520054889628057278485313779031605516,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "91a0dec9-1d75-40a5-bea1-7993b02a3beb",
           "age": 1,
           "path": "ci.pdb"
         }
@@ -133,7 +817,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3182185730,
-          "timestamp_iso": "2070-11-02 21:28:50",
+          "timestamp_iso": "2070-11-02 20:28:50",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 7516192768,
@@ -154,9 +838,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a869c1298917f355e979c0b87a84a1057f2cd3236f0517709e7d29ad5f8fc7c9",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506659927.47,
+              "timestamp_iso": "2017-09-29 04:38:47.470000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005992121074566940565467069433526616230,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CI.dll",
         "debug_codeview": {
           "guid": "e287c09f-6895-3952-34e4-a0b3a3ebf887",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.64_f4192337_b2000_ad908": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4095288119,
+          "timestamp_iso": "2099-10-10 04:01:59",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 7516192768,
+          "size_of_image": 729088,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 710920,
+        "file_version": "10.0.16299.64",
+        "product_version": "10.0.16299.64",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.16299.64 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.64"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "09e3c4345441f39cd628d66880f65d72777111aff2a785f89d65ec027e43c1e8",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1508906094.241,
+              "timestamp_iso": "2017-10-25 04:34:54.241000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005992121074566940565467069433526616230,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "27ea98e1-a4a8-4016-04dd-27f5fda16936",
           "age": 1,
           "path": "ci.pdb"
         },
@@ -166,7 +923,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 2041430508,
-          "timestamp_iso": "2034-09-09 18:01:48",
+          "timestamp_iso": "2034-09-09 16:01:48",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 7516192768,
@@ -187,9 +944,294 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.125"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3d9560ecfb494e1f928d8a2a170b7572dd74d90acb750de528616f7925f27174",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1512689317.674,
+              "timestamp_iso": "2017-12-07 23:28:37.674000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005994211025790091665443654607388541095,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CI.dll",
         "debug_codeview": {
           "guid": "cb8d7c89-44a4-489b-74ea-3ec043b5a08f",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.248_e6ae4633_b2000_adb08": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3870180915,
+          "timestamp_iso": "2092-08-21 18:15:15",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 7516192768,
+          "size_of_image": 729088,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 711432,
+        "file_version": "10.0.16299.248",
+        "product_version": "10.0.16299.248",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.16299.248 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.248"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9a170c52a45e3eb9089d1868a9f315e6164bf4bdfa3663956f887b123190d3f9",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1518243098.023,
+              "timestamp_iso": "2018-02-10 06:11:38.023000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005983252952945386114569575244197003429,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "c8509bf7-51bd-7e93-b09c-4587cf128531",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.371_aa2e4b4f_b2000_add08": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2855160655,
+          "timestamp_iso": "2060-06-22 20:10:55",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 7516192768,
+          "size_of_image": 729088,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 711944,
+        "file_version": "10.0.16299.371",
+        "product_version": "10.0.16299.371",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.16299.371 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.371"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4ddb7c268e6494179f8154df1412bc2426c95d9e13770ab79a2ab72d4f6cbe67",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1522385843.491,
+              "timestamp_iso": "2018-03-30 04:57:23.491000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006011477359085519567498317751679713450,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "9096b205-0906-704e-42ec-7a7a602062fc",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.431_5e981a94_b2000_add00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1587026580,
+          "timestamp_iso": "2020-04-16 08:43:00",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 7516192768,
+          "size_of_image": 729088,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 711936,
+        "file_version": "10.0.16299.431",
+        "product_version": "10.0.16299.431",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.16299.431 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.431"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "20923f6a4f43e7894968c2faa66f16e25ac0595c96fce6d69238ecb6dd9a3978",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1525333523.596,
+              "timestamp_iso": "2018-05-03 07:45:23.596000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006080284843010256923719239130071171255,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "9f67697a-a7b5-cda7-ed5b-e20a96699596",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.492_36290e68_b2000_adf08": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 908660328,
+          "timestamp_iso": "1998-10-17 21:38:48",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 7516192768,
+          "size_of_image": 729088,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 712456,
+        "file_version": "10.0.16299.492",
+        "product_version": "10.0.16299.492",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.16299.492 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.492"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "74cf9d7f37a0d58855340ba65426c4cc09b4bab63d12e5540a7816b282653a27",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528442807.592,
+              "timestamp_iso": "2018-06-08 07:26:47.592000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006050366017140420079089350382838612146,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "968ba356-49a0-9a91-cdd1-677690acafcd",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.665_adebe654_b2000_adf50": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2917918292,
+          "timestamp_iso": "2062-06-19 04:51:32",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 7516192768,
+          "size_of_image": 729088,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 712528,
+        "file_version": "10.0.16299.665",
+        "product_version": "10.0.16299.665",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.16299.665 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.665"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ffd6ffa06a5be98627fdfff53a32137f28fa50b4e7c4da0f52f3cad537f9b1fb",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1535435083.338,
+              "timestamp_iso": "2018-08-28 05:44:43.338000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006305076177059195676549332690437931235,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "f10ae2d6-ee76-0a7b-68c2-fbf3187597d8",
           "age": 1,
           "path": "ci.pdb"
         },
@@ -199,7 +1241,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3944662700,
-          "timestamp_iso": "2094-12-31 20:38:20",
+          "timestamp_iso": "2094-12-31 19:38:20",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 7516192768,
@@ -220,9 +1262,188 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "52de24a26bc867a4e001a805af66089f0b0aa234904d1af8a753158db73ce768",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421531.599,
+              "timestamp_iso": "2018-04-11 04:38:51.599000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005992121074566940565467069433526616230,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CI.dll",
         "debug_codeview": {
           "guid": "2f1c8acb-a727-464e-0e3b-52b042d6d5b6",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.112_cfb9e6df_b5000_b0778": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3485066975,
+          "timestamp_iso": "2080-06-08 10:09:35",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 741376,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 722808,
+        "file_version": "10.0.17134.112",
+        "product_version": "10.0.17134.112",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.112 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.112"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "42da78c95a3662832efe30265290dc543c52c5caa6e2814cf6a7442935c247dc",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528450215.105,
+              "timestamp_iso": "2018-06-08 09:30:15.105000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005967766594069328071360617029667127458,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "a04cec90-80e7-ce9c-6ed2-aee31be1595b",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.191_83e466dd_b5000_b0788": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2212783837,
+          "timestamp_iso": "2040-02-13 22:10:37",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 741376,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 722824,
+        "file_version": "10.0.17134.191",
+        "product_version": "10.0.17134.191",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.191 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.191"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b89a1be5dc48ddb0d9f96cf08773a9346a15e377c7de8c00d0d9989ab86928d0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1531542047.155,
+              "timestamp_iso": "2018-07-14 04:20:47.155000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005940913810468936980230840501709832349,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "38157c61-4931-3a99-8d2f-757934c036ed",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.285_c10ef719_b5000_b07c0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3238983449,
+          "timestamp_iso": "2072-08-21 05:37:29",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 741376,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 722880,
+        "file_version": "10.0.17134.285",
+        "product_version": "10.0.17134.285",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.285 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.285"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "317a43b116a5b6e7b786998f02aa11f37956216fb1b0322bd496c69f2744c415",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1535687000.716,
+              "timestamp_iso": "2018-08-31 03:43:20.716000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006170231341100506952321592272550363337,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "49b13e9c-d6ac-f1be-41e7-a32c557e8a6a",
           "age": 1,
           "path": "ci.pdb"
         },
@@ -232,7 +1453,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3925382640,
-          "timestamp_iso": "2094-05-22 18:04:00",
+          "timestamp_iso": "2094-05-22 16:04:00",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 7516192768,
@@ -253,9 +1474,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.441"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "fb35be964b85af6a5827ca660892b9a6acf180504c08129722c28157d335d2f6",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1541731727.733,
+              "timestamp_iso": "2018-11-09 02:48:47.733000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006170231341100506952321592272550363337,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CI.dll",
         "debug_codeview": {
           "guid": "64366ab4-bf5a-bc04-60ce-e0e0bf663530",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.799_fad4fe73_b5000_b09e8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4208262771,
+          "timestamp_iso": "2103-05-10 17:52:51",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 741376,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 723432,
+        "file_version": "10.0.17134.799",
+        "product_version": "10.0.17134.799",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.799 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.799"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a7ae086bcfcadd74b2446759a6d9e628ce987a267c196fb2d8afc648a223744a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1558073297.544,
+              "timestamp_iso": "2019-05-17 06:08:17.544000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006192866884723374027414499660635570381,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "96782f23-9de3-8735-e82d-818fbae6457c",
           "age": 1,
           "path": "ci.pdb"
         },
@@ -265,7 +1559,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 218221814,
-          "timestamp_iso": "1976-11-30 18:10:14",
+          "timestamp_iso": "1976-11-30 17:10:14",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 7516192768,
@@ -286,6 +1580,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.885"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "767ae48fefb616732e0655d2c19eda2affb09edeb891bdde7807db7d7544db34",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1562216226.617,
+              "timestamp_iso": "2019-07-04 04:57:06.617000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006405871818669909035022975445745271030,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CI.dll",
         "debug_codeview": {
           "guid": "ba429b47-26cd-4364-82c7-c8059b9216b0",
@@ -298,7 +1612,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3181521478,
-          "timestamp_iso": "2070-10-26 04:57:58",
+          "timestamp_iso": "2070-10-26 03:57:58",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 7516192768,
@@ -319,9 +1633,824 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.950"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "60de920ea75e8326b0ce1502644bd6ddcd38c073b0fdeac9e673598a5beb12f0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1565165318.463,
+              "timestamp_iso": "2019-08-07 08:08:38.463000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006405871818669909035022975445745271030,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CI.dll",
         "debug_codeview": {
           "guid": "f3777d99-b468-8db1-326c-bcef6f91d638",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.982_edf5b660_b5000_b0910": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3992303200,
+          "timestamp_iso": "2096-07-05 05:06:40",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 741376,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 723216,
+        "file_version": "10.0.17134.982",
+        "product_version": "10.0.17134.982",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.982 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.982"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ac07041d2eaac663bc1f7c1b47a4953b4198e8f7f68c5f361d46558a0bc3c4bd",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1565671519.061,
+              "timestamp_iso": "2019-08-13 04:45:19.061000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006299012123045852398368710328328388834,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "16af0410-b014-459f-664c-d52467ebecdb",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1067_acb7e5e0_b5000_b0b10": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2897733088,
+          "timestamp_iso": "2061-10-28 13:51:28",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 741376,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 723728,
+        "file_version": "10.0.17134.1067",
+        "product_version": "10.0.17134.1067",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.1067 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1067"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "2dd3ae19c001f3bf5bb82c6fb7754e15478108ecc3e3275a3a927ac49231509c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569992506.587,
+              "timestamp_iso": "2019-10-02 05:01:46.587000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006299012123045852398368710328328388834,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "8cfb28d5-971f-ecf9-84be-333bec566406",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1130_65f197cd_b6000_b1a20": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1710331853,
+          "timestamp_iso": "2024-03-13 12:10:53",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 7516192768,
+          "size_of_image": 745472,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 727584,
+        "file_version": "10.0.17134.1130",
+        "product_version": "10.0.17134.1130",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17134.1130 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1130"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c162bc3b1ee6c5bfb58ee67afaf01666247f7ed7ee70b8585eee7a32e4826ca0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1573180759.051,
+              "timestamp_iso": "2019-11-08 02:39:19.051000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006432883281896596520303285579915723003,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "1aac94ab-03a4-1966-1f6a-7317526c101c",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_d951308e_d3000_cfb48": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3645976718,
+          "timestamp_iso": "2085-07-14 19:18:38",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 864256,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 850760,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a94190f62eada23da1db167e3cb31a2b8be61a9ad8d03af3e852466bc36d6959",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974989.408,
+              "timestamp_iso": "2018-09-15 01:29:49.408000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006286484351334364513552117212125331679,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "3bf7aef4-2355-62d5-b0a4-eddd457aafd3",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.55_317a1abb_d3000_cfc10": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 830085819,
+          "timestamp_iso": "1996-04-21 11:23:39",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 864256,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 850960,
+        "file_version": "10.0.17763.55",
+        "product_version": "10.0.17763.55",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.55 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.55"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "da988d2b378bbff23efeac8cecd580772a8e7f223088ef0622b0d55f68975457",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1538888103.131,
+              "timestamp_iso": "2018-10-07 04:55:03.131000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006305076177059195676549332690437931235,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "aadd764d-3a4b-ee4b-d1c5-0d9958f13a62",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.292_f2318608_d3000_cfc18": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4063331848,
+          "timestamp_iso": "2098-10-05 07:17:28",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 864256,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 850968,
+        "file_version": "10.0.17763.292",
+        "product_version": "10.0.17763.292",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.292 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.292"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "f8a718b4faa2a005b84094ab39981c86f6338f3631c8aec2cb991293d465acd1",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547619836.276,
+              "timestamp_iso": "2019-01-16 06:23:56.276000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006219194096656949141909507585173618898,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "2608ea58-a29a-ad2b-1605-147e1f333117",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.348_721568c8_d3000_cfb48": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1914005704,
+          "timestamp_iso": "2030-08-26 20:15:04",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 864256,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 850760,
+        "file_version": "10.0.17763.348",
+        "product_version": "10.0.17763.348",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.348 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.348"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "90597217b992dd3ff3ae407dd94822c098b516d4419278de46cd4ac7bb13f896",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1551087386.959,
+              "timestamp_iso": "2019-02-25 09:36:26.959000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006405871818669909035022975445745271030,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "42f21673-58c4-8c45-2fc3-91872fc43403",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.404_684b7093_d3000_cfb48": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1749774483,
+          "timestamp_iso": "2025-06-13 00:28:03",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 864256,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 850760,
+        "file_version": "10.0.17763.404",
+        "product_version": "10.0.17763.404",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.404 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.404"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9b5684eb781069a7179c78c11b47fb1cd3c66e066448588fc682b6e089e3dc95",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1553837267.868,
+              "timestamp_iso": "2019-03-29 05:27:47.868000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006399529427969807648829806295430201589,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "a136e363-41c8-c388-dc68-2a237a2b388b",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.529_876b7c3e_d3000_cfb48": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2271968318,
+          "timestamp_iso": "2041-12-29 22:18:38",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 864256,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 850760,
+        "file_version": "10.0.17763.529",
+        "product_version": "10.0.17763.529",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.529 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.529"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e3d986acb9560505ea49fb643dc93e3998887602481321b6c47781201e11636c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1558074813.432,
+              "timestamp_iso": "2019-05-17 06:33:33.432000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006286484351334364513552117212125331679,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "31c9a34e-787e-9d2f-aa97-e7a90e81cb4f",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.615_f717f22f_d3000_cfc30": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4145541679,
+          "timestamp_iso": "2101-05-14 19:21:19",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 864256,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 850992,
+        "file_version": "10.0.17763.615",
+        "product_version": "10.0.17763.615",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.615 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.615"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d6507d4e326acc088e282b2ecdf12e6e9cb2700e20bdf48a271d98189cd03e7e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1561938368.162,
+              "timestamp_iso": "2019-06-30 23:46:08.162000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006181034441660578512511571782260490443,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "16afeaf1-0ce1-b5ad-ccb5-7f96b6fa2e4f",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.678_71370732_d3000_cfc20": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1899431730,
+          "timestamp_iso": "2030-03-11 03:55:30",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 864256,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 850976,
+        "file_version": "10.0.17763.678",
+        "product_version": "10.0.17763.678",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.678 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.678"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4428d1d3f18269950c90ddb8c92633930d290c673b906aa8a1e38700c651597a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1565169979.565,
+              "timestamp_iso": "2019-08-07 09:26:19.565000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006201410012045501241472821465121292495,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "f94640a7-2777-6c89-4723-09bb1ea13e86",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.719_d2e0c05c_d3000_cfd48": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3537944668,
+          "timestamp_iso": "2082-02-10 10:24:28",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 864256,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 851272,
+        "file_version": "10.0.17763.719",
+        "product_version": "10.0.17763.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.719 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.719"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "271d0abe1ddc9a541487417e77efd333a8da0a6a70dbd649f097356d62fcb03f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1565674901.111,
+              "timestamp_iso": "2019-08-13 05:41:41.111000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006395889933744958830011870553003000052,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "a29efa2a-48e5-56ce-ddd2-a0f70d6daee6",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.802_2fe621ad_d3000_cfd48": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 803611053,
+          "timestamp_iso": "1995-06-20 01:17:33",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 864256,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 851272,
+        "file_version": "10.0.17763.802",
+        "product_version": "10.0.17763.802",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.802 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.802"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "81253a5b453ec367156ce077d84d44f98b7d20dcfd2326ffa5ac090542f4097e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569995110.112,
+              "timestamp_iso": "2019-10-02 05:45:10.112000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006299012123045852398368710328328388834,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "ef14c421-ffd9-aace-db8f-7a0b242f0980",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.831_7f85c7bf_d4000_d1168": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2139473855,
+          "timestamp_iso": "2037-10-18 10:17:35",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 868352,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 856424,
+        "file_version": "10.0.17763.831",
+        "product_version": "10.0.17763.831",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.831 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.831"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "f3a55396df4580178683639de215acfa6c8242245d577e86913b7e4103f38adb",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1570153035.91,
+              "timestamp_iso": "2019-10-04 01:37:15.910000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006365874153968721933633195170043265262,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "39de56fc-eafb-804d-91a3-2055a265bd84",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1039_7f85c7bf_d4000_d1170": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2139473855,
+          "timestamp_iso": "2037-10-18 10:17:35",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 868352,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 856432,
+        "file_version": "10.0.17763.1039",
+        "product_version": "10.0.17763.1039",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.1039 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1039"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a84246710ea31d0bc5ac6e35ec3ecda01d1d58415e6726e97baf4ffc31e2119d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1581141143.095,
+              "timestamp_iso": "2020-02-08 05:52:23.095000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006520054889628057278485313779031605516,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "39de56fc-eafb-804d-91a3-2055a265bd84",
           "age": 1,
           "path": "ci.pdb"
         },
@@ -331,7 +2460,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3396589395,
-          "timestamp_iso": "2077-08-19 11:03:15",
+          "timestamp_iso": "2077-08-19 09:03:15",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 7516192768,
@@ -352,6 +2481,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8f2c062e7f68b64066be5ff65331657e9ba4bde9b60b6d38ee6c84791e7e5da1",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949261.653,
+              "timestamp_iso": "2019-03-18 22:47:41.653000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006291748499475722860244241771436966112,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CI.dll",
         "debug_codeview": {
           "guid": "b03cb569-e454-b6a9-300f-c77ab8bfe9fe",
@@ -362,6 +2511,348 @@
           "guid": "b03cb569-e454-b6a9-300f-c77ab8bfe9fe",
           "unknown": "bf5fe33a59104b0896828453",
           "timestamp": 3396589395
+        }
+      },
+      "10.0.18362.145_bff35b48_dc000_d9068": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3220396872,
+          "timestamp_iso": "2072-01-19 02:41:12",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 7516192768,
+          "size_of_image": 901120,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 888936,
+        "file_version": "10.0.18362.145",
+        "product_version": "10.0.18362.145",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.18362.145 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.145"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "39125e2ef25ef175443b661735189fab0a0245c3b2312aef628b08ed9191fbca",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1558500943.794,
+              "timestamp_iso": "2019-05-22 04:55:43.794000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006258449564004396144229146648146608346,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "e0bd394e-f048-a4c5-8c7d-b45dd01b4bf2",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "e0bd394e-f048-a4c5-8c7d-b45dd01b4bf2",
+          "unknown": "35fd257c714215a1f7d9fe26",
+          "timestamp": 3220396872
+        }
+      },
+      "10.0.18362.239_8581dc0d_dc000_d9338": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2239880205,
+          "timestamp_iso": "2040-12-23 12:56:45",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 7516192768,
+          "size_of_image": 901120,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 889656,
+        "file_version": "10.0.18362.239",
+        "product_version": "10.0.18362.239",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.18362.239 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.239"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4243fbcf896b78522e4dae687f609bcd8c771bd0d86c4b341493ab6a55cb1df3",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1561778424.49,
+              "timestamp_iso": "2019-06-29 03:20:24.490000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006227433065901788421989137400637423828,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "c5cd3c79-8661-6376-beeb-d5f3c9c2df81",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "c5cd3c79-8661-6376-beeb-d5f3c9c2df81",
+          "unknown": "642315af49863ef9b1b78226",
+          "timestamp": 2239880205
+        }
+      },
+      "10.0.18362.295_8d6fde01_dc000_d9340": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2372918785,
+          "timestamp_iso": "2045-03-12 08:06:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 7516192768,
+          "size_of_image": 901120,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 889664,
+        "file_version": "10.0.18362.295",
+        "product_version": "10.0.18362.295",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.18362.295 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.295"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b50770b6303fc14fa1d4a5401faa7d59460c55968500d21f8a944041e7ad4164",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1565168010.961,
+              "timestamp_iso": "2019-08-07 08:53:30.961000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006213351220777337113178139318827352273,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "3a88dc2f-0fa3-415e-008a-c49e0ac3b326",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "3a88dc2f-0fa3-415e-008a-c49e0ac3b326",
+          "unknown": "afab2ef4d27d2dfaa176bf1d",
+          "timestamp": 2372918785
+        }
+      },
+      "10.0.18362.329_64b700c8_dc000_d9468": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1689714888,
+          "timestamp_iso": "2023-07-18 21:14:48",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 7516192768,
+          "size_of_image": 901120,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 889960,
+        "file_version": "10.0.18362.329",
+        "product_version": "10.0.18362.329",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.18362.329 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.329"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b48dfb0baee326d4ee01d3bd1393d02730a9026fa108f9d53ddd2cdc779c8316",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1566951868.596,
+              "timestamp_iso": "2019-08-28 00:24:28.596000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006365874153968721933633195170043265262,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "e81824ef-86de-9742-6b53-f8c082efb272",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "e81824ef-86de-9742-6b53-f8c082efb272",
+          "unknown": "fb2292dc27483bbb8788741b",
+          "timestamp": 1689714888
+        }
+      },
+      "10.0.18362.418_e1af0052_dc000_d9668": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3786342482,
+          "timestamp_iso": "2089-12-25 09:48:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 7516192768,
+          "size_of_image": 901120,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 890472,
+        "file_version": "10.0.18362.418",
+        "product_version": "10.0.18362.418",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.18362.418 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.418"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9cd3728a401893ade8bb0497d34d834cb5a6bfa6cb9f5719afdd80621edbdef8",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1570332170.206,
+              "timestamp_iso": "2019-10-06 03:22:50.206000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006278845327953670265891896693119516894,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "28fe4a29-e771-2b44-39d2-9681e03174db",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "28fe4a29-e771-2b44-39d2-9681e03174db",
+          "unknown": "51991a240d07bee99ca889dd",
+          "timestamp": 3786342482
+        }
+      },
+      "10.0.18362.628_f0003704_dd000_d9b58": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4026545924,
+          "timestamp_iso": "2097-08-05 12:58:44",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 7516192768,
+          "size_of_image": 905216,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 891736,
+        "file_version": "10.0.18362.628",
+        "product_version": "10.0.18362.628",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.18362.628 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.628"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7dc4b2740f08fb0219c7a602a4efb4fabeca698cf42605b0d8400910850e2016",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1579667685.682,
+              "timestamp_iso": "2020-01-22 04:34:45.682000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006487425312414537563639298973612638470,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "12597334-64a9-6de1-95a5-9e62d45c7d17",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "12597334-64a9-6de1-95a5-9e62d45c7d17",
+          "unknown": "52f51b39ef00cbdb0139db58",
+          "timestamp": 4026545924
         }
       }
     }

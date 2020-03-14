@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1208111445,
-          "timestamp_iso": "2008-04-13 20:30:45",
+          "timestamp_iso": "2008-04-13 18:30:45",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 2013790208,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1247533681,
-          "timestamp_iso": "2009-07-14 03:08:01",
+          "timestamp_iso": "2009-07-14 01:08:01",
           "coff_characteristics": 8450,
           "linker_version": "9.0",
           "image_base": 4194304,
@@ -69,7 +69,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1468633527,
-          "timestamp_iso": "2016-07-16 03:45:27",
+          "timestamp_iso": "2016-07-16 01:45:27",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 2013790208,
@@ -101,7 +101,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 625117256,
-          "timestamp_iso": "1989-10-23 04:40:56",
+          "timestamp_iso": "1989-10-23 03:40:56",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 2013790208,
@@ -134,7 +134,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 182551148,
-          "timestamp_iso": "1975-10-14 21:39:08",
+          "timestamp_iso": "1975-10-14 20:39:08",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 2013790208,
@@ -163,11 +163,44 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1_7de06895_11000_ee00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2111858837,
+          "timestamp_iso": "2036-12-02 19:27:17",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 2013790208,
+          "size_of_image": 69632,
+          "subsystem": 1,
+          "dll_characteristics": 17728
+        },
+        "file_size": 60928,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "VC 4.x CRT DLL (Forwarded to msvcrt.dll)",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "msvcrt40.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt40.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "MSVCRT40.dll",
+        "debug_codeview": {
+          "guid": "67537f20-ff31-4253-c3e6-ffbf3ddaa446",
+          "age": 1,
+          "path": "msvcrt40.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_acf3c627_11000_ee00": {
         "pe_header": {
           "machine": 332,
           "timestamp": 2901657127,
-          "timestamp_iso": "2061-12-13 00:52:07",
+          "timestamp_iso": "2061-12-12 23:52:07",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 2013790208,

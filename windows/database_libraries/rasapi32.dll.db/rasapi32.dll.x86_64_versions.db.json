@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535150,
-          "timestamp_iso": "2009-07-14 03:32:30",
+          "timestamp_iso": "2009-07-14 01:32:30",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8793740345344,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635205,
-          "timestamp_iso": "2016-07-16 04:13:25",
+          "timestamp_iso": "2016-07-16 02:13:25",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -69,7 +69,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1478854989,
-          "timestamp_iso": "2016-11-11 10:03:09",
+          "timestamp_iso": "2016-11-11 09:03:09",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -101,7 +101,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1499835564,
-          "timestamp_iso": "2017-07-12 06:59:24",
+          "timestamp_iso": "2017-07-12 04:59:24",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -129,11 +129,107 @@
           "path": "rasapi32.pdb"
         }
       },
+      "10.0.14393.2097_5a820ab9_b8000_b0a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1518471865,
+          "timestamp_iso": "2018-02-12 21:44:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 753664,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 723456,
+        "file_version": "10.0.14393.2097",
+        "product_version": "10.0.14393.2097",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.14393.2097 (rs1_release_1.180212-1105)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2097"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "dd01ce9c-40a6-478c-8a27-cbdfc9a5ead4",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        }
+      },
+      "10.0.14393.2155_5a9e226e_b8000_b0a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1520312942,
+          "timestamp_iso": "2018-03-06 05:09:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 753664,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 723456,
+        "file_version": "10.0.14393.2155",
+        "product_version": "10.0.14393.2155",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.14393.2155 (rs1_release_1.180305-1842)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2155"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "eb493b2c-6661-4b87-bbde-67a70a0d24aa",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        }
+      },
+      "10.0.14393.2608_5bd13493_b8000_b0a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1540437139,
+          "timestamp_iso": "2018-10-25 03:12:19",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 753664,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 723456,
+        "file_version": "10.0.14393.2608",
+        "product_version": "10.0.14393.2608",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.14393.2608 (rs1_release.181024-1742)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2608"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "77a6dde6-085e-4202-bfd5-4295438814bf",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        }
+      },
       "10.0.16299.15_7ab44d5e_d7000_cf800": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 2058636638,
-          "timestamp_iso": "2035-03-27 21:30:38",
+          "timestamp_iso": "2035-03-27 19:30:38",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -162,11 +258,77 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.16299.248_f6927333_ec000_e5600": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4136792883,
+          "timestamp_iso": "2101-02-02 13:08:03",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 966656,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 939520,
+        "file_version": "10.0.16299.248",
+        "product_version": "10.0.16299.248",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.16299.248 (WinBuild.160101.0800)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.248"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "77e28ee7-0a56-6762-b476-0543ffeb5a18",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.334_b081ad54_ec000_e5600": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2961288532,
+          "timestamp_iso": "2063-11-03 04:08:52",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 966656,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 939520,
+        "file_version": "10.0.16299.334",
+        "product_version": "10.0.16299.334",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.16299.334 (WinBuild.160101.0800)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.334"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "07d8bca1-3f4f-4296-46f7-852d7a5846ab",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.17134.1_8fd9147d_eb000_e3e00": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 2413368445,
-          "timestamp_iso": "2046-06-23 14:07:25",
+          "timestamp_iso": "2046-06-23 12:07:25",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -195,11 +357,44 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17134.48_68450acc_eb000_e3e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1749355212,
+          "timestamp_iso": "2025-06-08 04:00:12",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 962560,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 933376,
+        "file_version": "10.0.17134.48",
+        "product_version": "10.0.17134.48",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.17134.48 (WinBuild.160101.0800)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.48"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "94d60b86-5a5e-a09c-c384-ca27085d61d1",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.17134.81_e7ce2bc9_eb000_e3e00": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 3889048521,
-          "timestamp_iso": "2093-03-28 04:15:21",
+          "timestamp_iso": "2093-03-28 03:15:21",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -228,11 +423,143 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17134.1276_b3070269_eb000_e4000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3003581033,
+          "timestamp_iso": "2065-03-06 16:03:53",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 962560,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 933888,
+        "file_version": "10.0.17134.1276",
+        "product_version": "10.0.17134.1276",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.17134.1276 (WinBuild.160101.0800)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1276"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "7cbcb4d8-6877-1ceb-a652-a79b461c32d2",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_c6c27c0d_ef000_e9000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3334634509,
+          "timestamp_iso": "2075-09-02 07:21:49",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 978944,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 954368,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "4980fbc2-7800-0042-a5f1-cee652b640aa",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.292_e650273c_ef000_e9000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3864012604,
+          "timestamp_iso": "2092-06-11 08:50:04",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 978944,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 954368,
+        "file_version": "10.0.17763.292",
+        "product_version": "10.0.17763.292",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.17763.292 (WinBuild.160101.0800)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.292"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "ab4be77c-fef3-b973-7bdc-e358169f7c09",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1007_c23d544e_ef000_e9000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3258799182,
+          "timestamp_iso": "2073-04-07 13:59:42",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 978944,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 954368,
+        "file_version": "10.0.17763.1007",
+        "product_version": "10.0.17763.1007",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.17763.1007 (WinBuild.160101.0800)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1007"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "0dd1e06a-c0d7-2426-ab5d-75f18f1a9e38",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_52a30795_ef000_e8800": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 1386416021,
-          "timestamp_iso": "2013-12-07 12:33:41",
+          "timestamp_iso": "2013-12-07 11:33:41",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 6442450944,
@@ -263,6 +590,117 @@
           "guid": "e7a5dae3-7316-1eec-b473-ac99246f8ef9",
           "unknown": "bea0a80f388bc61355787c36",
           "timestamp": 1386416021
+        }
+      },
+      "10.0.18362.145_4ef9a0aa_ef000_e8000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1324982442,
+          "timestamp_iso": "2011-12-27 10:40:42",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 978944,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 950272,
+        "file_version": "10.0.18362.145",
+        "product_version": "10.0.18362.145",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.18362.145 (WinBuild.160101.0800)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.145"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "cf106a1b-bdba-da09-e415-508ef01cf0fd",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "cf106a1b-bdba-da09-e415-508ef01cf0fd",
+          "unknown": "8d560b597e5208a2c025adad",
+          "timestamp": 1324982442
+        }
+      },
+      "10.0.18362.207_48063826_ef000_e8200": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1208367142,
+          "timestamp_iso": "2008-04-16 17:32:22",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 978944,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 950784,
+        "file_version": "10.0.18362.207",
+        "product_version": "10.0.18362.207",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.18362.207 (WinBuild.160101.0800)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.207"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "9854a89e-2c58-14dd-2973-b689200891a4",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "9854a89e-2c58-14dd-2973-b689200891a4",
+          "unknown": "e748e2565f170a7062e9d4a4",
+          "timestamp": 1208367142
+        }
+      },
+      "10.0.18362.387_733f3f82_ef000_e8200": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1933524866,
+          "timestamp_iso": "2031-04-09 18:14:26",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 978944,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 950784,
+        "file_version": "10.0.18362.387",
+        "product_version": "10.0.18362.387",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Remote Access API",
+          "FileVersion": "10.0.18362.387 (WinBuild.160101.0800)",
+          "InternalName": "rasapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "rasapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.387"
+        },
+        "export_dll_name": "RASAPI32.dll",
+        "debug_codeview": {
+          "guid": "fac2d8d6-c4c8-a5cc-d805-e8fe87f32154",
+          "age": 1,
+          "path": "rasapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "fac2d8d6-c4c8-a5cc-d805-e8fe87f32154",
+          "unknown": "a18e3e0543e83c09bcd2e62d",
+          "timestamp": 1933524866
         }
       }
     }

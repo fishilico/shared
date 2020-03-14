@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1208131884,
-          "timestamp_iso": "2008-04-14 02:11:24",
+          "timestamp_iso": "2008-04-14 00:11:24",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 2089811968,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1234176995,
-          "timestamp_iso": "2009-02-09 11:56:35",
+          "timestamp_iso": "2009-02-09 10:56:35",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 2089811968,
@@ -65,11 +65,43 @@
           "path": "ntdll.pdb"
         }
       },
+      "5.1.2600.5755_49901d48_b2000_ae800": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1234181448,
+          "timestamp_iso": "2009-02-09 12:10:48",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2089811968,
+          "size_of_image": 729088,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 714752,
+        "file_version": "5.1.2600.5755",
+        "product_version": "5.1.2600.5755",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "5.1.2600.5755 (xpsp_sp3_gdr.090206-1234)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5755"
+        },
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "6992f4da-f4b1-4406-8d78-669d6cb5d207",
+          "age": 2,
+          "path": "ntdll.pdb"
+        }
+      },
       "5.1.2600.6055_4d00f27d_b2000_af600": {
         "pe_header": {
           "machine": 332,
           "timestamp": 1291907709,
-          "timestamp_iso": "2010-12-09 16:15:09",
+          "timestamp_iso": "2010-12-09 15:15:09",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 2089811968,
@@ -101,7 +133,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1291907741,
-          "timestamp_iso": "2010-12-09 16:15:41",
+          "timestamp_iso": "2010-12-09 15:15:41",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 2089811968,
@@ -133,7 +165,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1247533883,
-          "timestamp_iso": "2009-07-14 03:11:23",
+          "timestamp_iso": "2009-07-14 01:11:23",
           "coff_characteristics": 8450,
           "linker_version": "9.0",
           "image_base": 2112290816,
@@ -165,7 +197,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1377741084,
-          "timestamp_iso": "2013-08-29 03:51:24",
+          "timestamp_iso": "2013-08-29 01:51:24",
           "coff_characteristics": 8450,
           "linker_version": "9.0",
           "image_base": 2011955200,
@@ -186,6 +218,17 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "6.1.7601.18247"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA1",
+            "digest": "50929f41c33f16e8ba869cf91e6d0f8a98ebfd16",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Verification PCA",
+              "serial_number": 1137338005295290264201636577698611999350456352,
+              "digest_enc_alg": "RSA"
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "cd4062a2-3115-4a17-a18d-ae7d1a0fbacc",
@@ -197,7 +240,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1421733463,
-          "timestamp_iso": "2015-01-20 06:57:43",
+          "timestamp_iso": "2015-01-20 05:57:43",
           "coff_characteristics": 8450,
           "linker_version": "12.10",
           "image_base": 1260912640,
@@ -218,6 +261,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.9926.0"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "14c1caff8465178cf348db2e872ea9e53235fb52240adad89b8942db6551576a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows PCA 2010",
+              "serial_number": 1137338006947512288090989139610793112177213790,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1421738900.068,
+              "timestamp_iso": "2015-01-20 07:28:20.068000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005538780496014957372866114103608868943,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "bec7bd3c-4bc1-45cd-b74c-ba3802e08ad6",
@@ -229,7 +292,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1456215797,
-          "timestamp_iso": "2016-02-23 09:23:17",
+          "timestamp_iso": "2016-02-23 08:23:17",
           "coff_characteristics": 8450,
           "linker_version": "12.10",
           "image_base": 1260912640,
@@ -250,6 +313,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.10586.122"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "5ef90d3820a90e45fb00baa334ee52855aae2741d6e439999ba9165c1917de13",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1456223671.922,
+              "timestamp_iso": "2016-02-23 10:34:31.922000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005806065776919979223861856434386894979,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "39814cfb-d1a7-4710-a3f8-fcad3d7ec566",
@@ -261,7 +344,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1473957345,
-          "timestamp_iso": "2016-09-15 18:35:45",
+          "timestamp_iso": "2016-09-15 16:35:45",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1260912640,
@@ -282,6 +365,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.206"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c06b44b4e3d362e6484b6a4cf83279c70489003448daefc69bbbc90facedac64",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1473960921.673,
+              "timestamp_iso": "2016-09-15 17:35:21.673000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005925946554353115990238755445687713946,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "153d3ce3-4ecb-4034-86ee-55326e717aaa",
@@ -293,7 +396,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1478082197,
-          "timestamp_iso": "2016-11-02 11:23:17",
+          "timestamp_iso": "2016-11-02 10:23:17",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1260912640,
@@ -314,6 +417,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.447"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a941060455a3ccd36fe20bd205487c3d60bf02838abdb3e03fd0260bb54d36a7",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1478085777.659,
+              "timestamp_iso": "2016-11-02 11:22:57.659000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006061038740404971435211883170444083380,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "f999943d-f7fb-4b8e-b6d9-9f2b047bc310",
@@ -325,7 +448,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1478847648,
-          "timestamp_iso": "2016-11-11 08:00:48",
+          "timestamp_iso": "2016-11-11 07:00:48",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1260912640,
@@ -346,6 +469,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.479"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7eb3af3c207a12bb749fefbebd3cdfed80d4358336fca6cd8ff86bc80b37a019",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006487690083390668365393298609651319046,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1478851197.969,
+              "timestamp_iso": "2016-11-11 07:59:57.969000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005967766594069328071360617029667127458,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "9d5ebb42-7b34-49c0-ba16-0009a9070625",
@@ -357,7 +500,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1498026645,
-          "timestamp_iso": "2017-06-21 08:30:45",
+          "timestamp_iso": "2017-06-21 06:30:45",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1260912640,
@@ -378,9 +521,81 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.1378"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "75b8a11baaf1830087f3eefda6079af78750143c49a7d5b56a324e144403f68f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006487690083390668365393298609651319046,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1498030939.871,
+              "timestamp_iso": "2017-06-21 07:42:19.871000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005967766594069328071360617029667127458,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "0e332e69-172b-4e58-8f2f-81bed2149825",
+          "age": 1,
+          "path": "wntdll.pdb"
+        }
+      },
+      "10.0.14393.1532_5965ad6c_183000_1801a0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1499835756,
+          "timestamp_iso": "2017-07-12 05:02:36",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1260912640,
+          "size_of_image": 1585152,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1573280,
+        "file_version": "10.0.14393.1532",
+        "product_version": "10.0.14393.1532",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.1532 (rs1_release_d.170711-1840)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1532"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "0467428e386e51c43d3a646769e22b96f94c3fb7407e36d171912eba1bb5ac38",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006487690083390668365393298609651319046,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1499839957.641,
+              "timestamp_iso": "2017-07-12 06:12:37.641000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005964388274295391971824395501449511073,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "44a9e6c6-1da9-45a5-9d70-64dc50c11930",
           "age": 1,
           "path": "wntdll.pdb"
         }
@@ -389,7 +604,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1504762099,
-          "timestamp_iso": "2017-09-07 07:28:19",
+          "timestamp_iso": "2017-09-07 05:28:19",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1260912640,
@@ -410,9 +625,497 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.1715"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "2537996481d3ddadaaa365be21a358a647d73a2d0ca8bc1a190d269634516745",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006487690083390668365393298609651319046,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1504765967.52,
+              "timestamp_iso": "2017-09-07 06:32:47.520000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006046391779517120236744985585857331377,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "971f98e5-ce60-41ff-b2d7-235bbeb34578",
+          "age": 1,
+          "path": "wntdll.pdb"
+        }
+      },
+      "10.0.14393.2214_5ac3006c_183000_180398": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1522729068,
+          "timestamp_iso": "2018-04-03 04:17:48",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1260912640,
+          "size_of_image": 1585152,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1573784,
+        "file_version": "10.0.14393.2214",
+        "product_version": "10.0.14393.2214",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.2214 (rs1_release_1.180402-1758)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2214"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "319e8f3e671b598899aec20eb98ab1b771019d926bfdbdbd8f492390c451a8c2",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1522732894.623,
+              "timestamp_iso": "2018-04-03 05:21:34.623000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006014856209010126895819358618454589611,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "ce0ebe2a-c57f-4325-8be4-7fed195469a8",
+          "age": 1,
+          "path": "wntdll.pdb"
+        }
+      },
+      "10.0.14393.2312_5b1a0c4d_183000_17fdb8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1528433741,
+          "timestamp_iso": "2018-06-08 04:55:41",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1260912640,
+          "size_of_image": 1585152,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1572280,
+        "file_version": "10.0.14393.2312",
+        "product_version": "10.0.14393.2312",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.2312 (rs1_release.180607-1919)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2312"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "afc3334349039086c39b053da621ec94dde58922f47faee937d5fb1c3827e93f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528436186.588,
+              "timestamp_iso": "2018-06-08 05:36:26.588000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005940913810468936980230840501709832349,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "d993fb72-4810-4e13-a67c-25b9354f0738",
+          "age": 1,
+          "path": "wntdll.pdb"
+        }
+      },
+      "10.0.14393.2339_5b1f165a_183000_17fda0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1528763994,
+          "timestamp_iso": "2018-06-12 00:39:54",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1260912640,
+          "size_of_image": 1585152,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1572256,
+        "file_version": "10.0.14393.2339",
+        "product_version": "10.0.14393.2339",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.2339 (rs1_release_inmarket.180611-1502)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2339"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "803db969c9859a1c011c8940e4baf048580ad67aa3c417c0d8f8a1f0571f3fad",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528766395.866,
+              "timestamp_iso": "2018-06-12 01:19:55.866000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005964388274295391971824395501449511073,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "5f92fde0-68c9-4252-913a-873b089cddd7",
+          "age": 1,
+          "path": "wntdll.pdb"
+        }
+      },
+      "10.0.14393.2430_5b691925_183000_17fd98": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1533614373,
+          "timestamp_iso": "2018-08-07 03:59:33",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1260912640,
+          "size_of_image": 1585152,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1572248,
+        "file_version": "10.0.14393.2430",
+        "product_version": "10.0.14393.2430",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.2430 (rs1_release_inmarket_aim.180806-1810)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2430"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "5ac1fcb650d5640cb850a9300a4b117d1540af3a8606b602e2a2629501265c0d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007467185747103657701035153531196146115,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1533616847.026,
+              "timestamp_iso": "2018-08-07 04:40:47.026000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006061038740404971435211883170444083380,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "08c3dfa0-5ff2-46e8-8434-6d2ccccc8010",
+          "age": 1,
+          "path": "wntdll.pdb"
+        }
+      },
+      "10.0.14393.2485_5b84c286_183000_17fda0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1535427206,
+          "timestamp_iso": "2018-08-28 03:33:26",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1260912640,
+          "size_of_image": 1585152,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1572256,
+        "file_version": "10.0.14393.2485",
+        "product_version": "10.0.14393.2485",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.2485 (rs1_release.180827-1809)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2485"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "453b39301780e396978e343e7b08226efba5790921f9eab157a573773ef06cc3",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1535429301.966,
+              "timestamp_iso": "2018-08-28 04:08:21.966000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005967766594069328071360617029667127458,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "d88a986a-0474-4596-b54a-93463b8f9adf",
+          "age": 1,
+          "path": "wntdll.pdb"
+        }
+      },
+      "10.0.14393.2608_5bd1345f_183000_17fdf8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1540437087,
+          "timestamp_iso": "2018-10-25 03:11:27",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1260912640,
+          "size_of_image": 1585152,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1572344,
+        "file_version": "10.0.14393.2608",
+        "product_version": "10.0.14393.2608",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.2608 (rs1_release.181024-1742)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2608"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "fd56ab48381c189c961af49438e26e6e02a943563d02836877796963be3e58ee",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1540439407.267,
+              "timestamp_iso": "2018-10-25 03:50:07.267000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006164253362406456786752143661637566664,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "ca776be5-0093-4758-b7fa-3d54fd7175dc",
+          "age": 1,
+          "path": "wntdll.pdb"
+        }
+      },
+      "10.0.14393.2969_5ccd12bb_183000_17fe08": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1556943547,
+          "timestamp_iso": "2019-05-04 04:19:07",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1260912640,
+          "size_of_image": 1585152,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1572360,
+        "file_version": "10.0.14393.2969",
+        "product_version": "10.0.14393.2969",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.2969 (rs1_release.190503-1820)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2969"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "5c131ef19ccfca1db00fcdd060a99a195c17e3f9e74d81af137ba6492033377b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007467185747103657701035153531196146115,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1556946050.662,
+              "timestamp_iso": "2019-05-04 05:00:50.662000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006219194096656949141909507585173618898,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "602c55b2-b48c-4573-a131-56be7e9a80ce",
+          "age": 1,
+          "path": "wntdll.pdb"
+        }
+      },
+      "10.0.14393.3241_5d786bcf_182000_17fb18": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1568173007,
+          "timestamp_iso": "2019-09-11 03:36:47",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1260912640,
+          "size_of_image": 1581056,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1571608,
+        "file_version": "10.0.14393.3241",
+        "product_version": "10.0.14393.3241",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.3241 (rs1_release_inmarket.190910-1801)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3241"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "2beab7355890b46f3fee99573ec7f5578bb246f47158f0e37435bd005234aa52",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1568175499.046,
+              "timestamp_iso": "2019-09-11 04:18:19.046000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006395889933744958830011870553003000052,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "d870d66a-94ea-44ef-8a41-24640e0245f3",
+          "age": 1,
+          "path": "wntdll.pdb"
+        }
+      },
+      "10.0.14393.3503_5e344dc4_182000_17fb18": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1580486084,
+          "timestamp_iso": "2020-01-31 15:54:44",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1260912640,
+          "size_of_image": 1581056,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1571608,
+        "file_version": "10.0.14393.3503",
+        "product_version": "10.0.14393.3503",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.14393.3503 (rs1_release.200131-0410)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3503"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d359ad03c806dd4209b1e6c132856676a959f337715ca50d738ee91b087c2012",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1580488435.146,
+              "timestamp_iso": "2020-01-31 16:33:55.146000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006493195827542816622927440104967373063,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "c47fc48b-f464-4ba2-b9c4-775ac3de003f",
           "age": 1,
           "path": "wntdll.pdb"
         }
@@ -421,7 +1124,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 2894789761,
-          "timestamp_iso": "2061-09-24 14:16:01",
+          "timestamp_iso": "2061-09-24 12:16:01",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 1260912640,
@@ -442,6 +1145,79 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "327d4df5beb32a444197f2694412822a64997ec340ccb8e4034593e02e84649a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506658993.808,
+              "timestamp_iso": "2017-09-29 04:23:13.808000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006011477359085519567498317751679713450,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "2d9b893f-b55d-6ff9-cd33-db170bed48e9",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.64_ac8afc81_18d000_18a768": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2894789761,
+          "timestamp_iso": "2061-09-24 12:16:01",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1260912640,
+          "size_of_image": 1626112,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1615720,
+        "file_version": "10.0.16299.64",
+        "product_version": "10.0.16299.64",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.64 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.64"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c39fdca1e46cf6936c5bdc84f44a6b539073a7a2b2b4df961b8327215c3d2584",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1508903544.601,
+              "timestamp_iso": "2017-10-25 03:52:24.601000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006011477359085519567498317751679713450,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "2d9b893f-b55d-6ff9-cd33-db170bed48e9",
@@ -454,7 +1230,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 384302975,
-          "timestamp_iso": "1982-03-06 23:49:35",
+          "timestamp_iso": "1982-03-06 22:49:35",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 1260912640,
@@ -475,9 +1251,506 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.192"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "15c4a007dd738d6ed9dabadc70673165e160ad7b028e593380955bcbfa93d8c0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1514808179.824,
+              "timestamp_iso": "2018-01-01 12:02:59.824000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006004272612577052131129751449999769769,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "30d581a7-8028-b9e4-a0bf-83ee93b38bd3",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.248_3a21d961_18d000_18a760": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 975296865,
+          "timestamp_iso": "2000-11-27 03:47:45",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1260912640,
+          "size_of_image": 1626112,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1615712,
+        "file_version": "10.0.16299.248",
+        "product_version": "10.0.16299.248",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.248 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.248"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "737a24524bf023ff44e0449efa728f0955b9b7d822e1858bd5bb7c19c565410d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1518240098.962,
+              "timestamp_iso": "2018-02-10 05:21:38.962000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006028822366486431458344729467831713966,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "e1572c30-a539-ed2b-7ecf-a7a1054e6373",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.334_71be8751_18d000_18a760": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1908311889,
+          "timestamp_iso": "2030-06-21 22:38:09",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1260912640,
+          "size_of_image": 1626112,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1615712,
+        "file_version": "10.0.16299.334",
+        "product_version": "10.0.16299.334",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.334 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.334"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3009e72853ee50b7cf03d4e5cf65f1d17f3d12d4b3c4200bfbf656607045911d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1520918348.523,
+              "timestamp_iso": "2018-03-13 05:19:08.523000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006025928075304506519251440873651568813,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "c7762de2-e6e9-b5c0-4fe0-f40de4d2c84e",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.402_b257a0c2_18d000_18a760": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2992087234,
+          "timestamp_iso": "2064-10-24 15:20:34",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1260912640,
+          "size_of_image": 1626112,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1615712,
+        "file_version": "10.0.16299.402",
+        "product_version": "10.0.16299.402",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.402 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.402"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "22a70fc4f4b7a502830498076673600e03985081e24841c53ffb43f670a046a0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523825250.064,
+              "timestamp_iso": "2018-04-15 20:47:30.064000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006004272612577052131129751449999769769,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "8e70109e-7629-f360-5423-d538352eeae1",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.492_aeec4354_18c000_18a158": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2934719316,
+          "timestamp_iso": "2062-12-30 15:48:36",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1260912640,
+          "size_of_image": 1622016,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1614168,
+        "file_version": "10.0.16299.492",
+        "product_version": "10.0.16299.492",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.492 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.492"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e3b17cdd744239ee8789a35b22f4fd3db1d5306cf8277d827c0b30a9c4403bf1",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528438860.614,
+              "timestamp_iso": "2018-06-08 06:21:00.614000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005940913810468936980230840501709832349,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "bfd4b1fc-8100-cf4b-9092-e5ba946853b3",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.547_aeec4354_18c000_18a140": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2934719316,
+          "timestamp_iso": "2062-12-30 15:48:36",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1260912640,
+          "size_of_image": 1622016,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1614144,
+        "file_version": "10.0.16299.547",
+        "product_version": "10.0.16299.547",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.547 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.547"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "945bd3db55a5c90471831c139a86c1835af1c7e424abfb4eccc2ced84065adf8",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1530262397.619,
+              "timestamp_iso": "2018-06-29 08:53:17.619000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006004272612577052131129751449999769769,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "bfd4b1fc-8100-cf4b-9092-e5ba946853b3",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.611_0fcf8c71_18c000_18a8d0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 265260145,
+          "timestamp_iso": "1978-05-29 03:22:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1260912640,
+          "size_of_image": 1622016,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1616080,
+        "file_version": "10.0.16299.611",
+        "product_version": "10.0.16299.611",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.611 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.611"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "39409d9a408c135557228e74085c7d1d56e141ab030568eca0c59bed4cdbd59d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1533618299.671,
+              "timestamp_iso": "2018-08-07 05:04:59.671000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006117175618346534027923486445664207039,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "8a5a1345-e9d5-7baf-d7da-6350caf14bca",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.665_a06372a8_18c000_18a348": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2690871976,
+          "timestamp_iso": "2055-04-09 08:26:16",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1260912640,
+          "size_of_image": 1622016,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1614664,
+        "file_version": "10.0.16299.665",
+        "product_version": "10.0.16299.665",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.665 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.665"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "74af7d6b1977680a61069fd8765f55deb6bb7630f023ad64f27be379229af734",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1535433569.83,
+              "timestamp_iso": "2018-08-28 05:19:29.830000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006055653896543131424439373582817034419,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "69ca2e6e-538d-985e-8baa-56872036a364",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.785_e9b724ac_18c000_18a2e0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3921093804,
+          "timestamp_iso": "2094-04-03 00:43:24",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1260912640,
+          "size_of_image": 1622016,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1614560,
+        "file_version": "10.0.16299.785",
+        "product_version": "10.0.16299.785",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.785 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.785"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "cb015749ea925352da7957abe1e1993b7d0e94b3c1e26b8132094aecbb070957",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1540876740.856,
+              "timestamp_iso": "2018-10-30 05:19:00.856000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006270086489318507512702959215762735324,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "3a9acc42-c432-af01-28c4-f370240c0dac",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.936_7b4896c1_18c000_18a2e0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2068354753,
+          "timestamp_iso": "2035-07-18 06:59:13",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1260912640,
+          "size_of_image": 1622016,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1614560,
+        "file_version": "10.0.16299.936",
+        "product_version": "10.0.16299.936",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.16299.936 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.936"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3c5fc2b51b200f4046bc4092543b78741aa6b5f622bbe1f32d6da730468c2ddf",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1546669725.222,
+              "timestamp_iso": "2019-01-05 06:28:45.222000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006416693731309555622055525374131962104,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "e04b1148-40c9-b587-e2e3-33aed97d8c9a",
           "age": 1,
           "path": "wntdll.pdb"
         },
@@ -487,7 +1760,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 3362995315,
-          "timestamp_iso": "2076-07-26 15:21:55",
+          "timestamp_iso": "2076-07-26 13:21:55",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 1260912640,
@@ -508,9 +1781,347 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "40b25b41b939c64b5d5188ab8e81443af1d02f994459a962c33930eddd13be9c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523420647.617,
+              "timestamp_iso": "2018-04-11 04:24:07.617000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006080284843010256923719239130071171255,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "0aa1eff9-b3e5-6d03-3a06-a83458b97570",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.112_cfe5bd82_190000_18bb90": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3487939970,
+          "timestamp_iso": "2080-07-11 16:12:50",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1260912640,
+          "size_of_image": 1638400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1620880,
+        "file_version": "10.0.17134.112",
+        "product_version": "10.0.17134.112",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.112 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.112"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "23e29613fbf57bc5aaf219ef260c3dd3d3741c76d4be12b2f4a98c525e22cb03",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528448973.772,
+              "timestamp_iso": "2018-06-08 09:09:33.772000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005967766594069328071360617029667127458,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "7e6fab33-1579-f0f0-3f8b-0c209d92e5e5",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.165_845de87a_190000_18bb88": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2220746874,
+          "timestamp_iso": "2040-05-16 02:07:54",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1260912640,
+          "size_of_image": 1638400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1620872,
+        "file_version": "10.0.17134.165",
+        "product_version": "10.0.17134.165",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.165 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.165"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "6801981c78bb574c51bb0a4051a5f784910acc12bf6c3928023c629ee633309c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1530861229.909,
+              "timestamp_iso": "2018-07-06 07:13:49.909000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005967766594069328071360617029667127458,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "60ac221b-504a-4f5f-9fbb-7d206ceb7c6c",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.228_2c71c7b8_190000_18c118": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 745654200,
+          "timestamp_iso": "1993-08-18 06:10:00",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1260912640,
+          "size_of_image": 1638400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1622296,
+        "file_version": "10.0.17134.228",
+        "product_version": "10.0.17134.228",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.228 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.228"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1f51f4cb91dc76591c7abba85eef65f3894f5a87bd9e0205b142be532db44eda",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1533266723.933,
+              "timestamp_iso": "2018-08-03 03:25:23.933000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006136566351740920289120780351535317186,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "8be2b22b-71aa-c2f6-c405-82ddce4b8715",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.254_bf2f8c99_190000_18bb90": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3207564441,
+          "timestamp_iso": "2071-08-23 14:07:21",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1260912640,
+          "size_of_image": 1638400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1620880,
+        "file_version": "10.0.17134.254",
+        "product_version": "10.0.17134.254",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.254 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.254"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "0cab8ff35be00ba542e6e3f8b27a59df4bd721095bd2ff413baa738b4d76aea4",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1533788976.515,
+              "timestamp_iso": "2018-08-09 04:29:36.515000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005967766594069328071360617029667127458,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "d3ae91ce-dd93-09ef-777f-2fd5120010be",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.376_4358e406_190000_18bb28": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1129899014,
+          "timestamp_iso": "2005-10-21 12:50:14",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1260912640,
+          "size_of_image": 1638400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1620776,
+        "file_version": "10.0.17134.376",
+        "product_version": "10.0.17134.376",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.376 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.376"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "61a84719f2227ab8af70399dafd24f44b89ba9de36ffb31fd68509c6739d634d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1540106325.727,
+              "timestamp_iso": "2018-10-21 07:18:45.727000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006247143371544273385941052987352809688,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "d39d3179-d081-7858-f7ff-528b4ff7f0b3",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.469_fe852bc4_190000_18b9e8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4270140356,
+          "timestamp_iso": "2105-04-25 22:05:56",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1260912640,
+          "size_of_image": 1638400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1620456,
+        "file_version": "10.0.17134.469",
+        "product_version": "10.0.17134.469",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.469 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.469"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "f88dc2732b07ff6d010f3f1955716349845099c4cab56c392f26bdf3795b0f36",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1543900924.258,
+              "timestamp_iso": "2018-12-04 05:22:04.258000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006305076177059195676549332690437931235,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "14e4b266-8272-369f-6e9f-a2be32418064",
           "age": 1,
           "path": "wntdll.pdb"
         },
@@ -520,7 +2131,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 4270140356,
-          "timestamp_iso": "2105-04-26 00:05:56",
+          "timestamp_iso": "2105-04-25 22:05:56",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 1260912640,
@@ -541,6 +2152,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.471"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c5f77f204ab9caed3caa3d4aae1a620b69e67725721b74f260ac18ccb2c68587",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1544255120.352,
+              "timestamp_iso": "2018-12-08 07:45:20.352000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006195341994069031519038158839776018638,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "14e4b266-8272-369f-6e9f-a2be32418064",
@@ -553,7 +2184,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 832440949,
-          "timestamp_iso": "1996-05-18 19:35:49",
+          "timestamp_iso": "1996-05-18 17:35:49",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 1260912640,
@@ -574,6 +2205,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.556"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "97f162daee77bb973db374d7c8e78d2756dfe045f67b2e43cb9f50eae2ebae1a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007467185747103657701035153531196146115,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547012574.415,
+              "timestamp_iso": "2019-01-09 05:42:54.415000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006422224213048211980367725193529917689,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "c8ec5819-b3ba-1fe9-851d-c993d16c9741",
@@ -586,7 +2237,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1668008771,
-          "timestamp_iso": "2022-11-09 16:46:11",
+          "timestamp_iso": "2022-11-09 15:46:11",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 1260912640,
@@ -607,9 +2258,559 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.799"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "783cf4133290112b6f3fc6d4cc21028f4384d09fd181ded8ead054783757a599",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1558075334.425,
+              "timestamp_iso": "2019-05-17 06:42:14.425000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006258449564004396144229146648146608346,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "7b9e17e4-4959-a680-97d1-498582908f7b",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1304_5fb61f04_190000_18b9f8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1605771012,
+          "timestamp_iso": "2020-11-19 07:30:12",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 1260912640,
+          "size_of_image": 1638400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1620472,
+        "file_version": "10.0.17134.1304",
+        "product_version": "10.0.17134.1304",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17134.1304 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1304"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d7e543153d9f8b143f09439ac3f6565bc35ae8dc0fccad41447deeb93fdcf4db",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1580887151.27,
+              "timestamp_iso": "2020-02-05 07:19:11.270000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006440095625129037045773517305489129725,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "d2369105-47cf-eb99-1ed9-699e68d108f0",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_b5be830e_19c000_198cf0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3049161486,
+          "timestamp_iso": "2066-08-16 05:18:06",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1260912640,
+          "size_of_image": 1687552,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1674480,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e2e7c304bb861c1267d09b74b46474a31e4e1459cfec2a8737232c82e2cf06a0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536973370.584,
+              "timestamp_iso": "2018-09-15 01:02:50.584000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006265631508034585128434772706355839195,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "b97ef365-0949-bf58-7037-25b7e13957ee",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.194_f3450dbf_19c000_198dc0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4081388991,
+          "timestamp_iso": "2099-05-02 07:09:51",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1260912640,
+          "size_of_image": 1687552,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1674688,
+        "file_version": "10.0.17763.194",
+        "product_version": "10.0.17763.194",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17763.194 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.194"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d15153da5ddb220e89a222ccdad3a6b5041df2f83e33e21adb3b0b66279756ee",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1543904169.853,
+              "timestamp_iso": "2018-12-04 06:16:09.853000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006192866884723374027414499660635570381,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "06265607-d3aa-b293-f808-11d978f5f5b3",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.292_f3450dbf_19c000_198cf0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4081388991,
+          "timestamp_iso": "2099-05-02 07:09:51",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1260912640,
+          "size_of_image": 1687552,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1674480,
+        "file_version": "10.0.17763.292",
+        "product_version": "10.0.17763.292",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17763.292 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.292"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "5f49d48cfc1a744880f02bb9df80b64ca0cd49e0d5928b506712f142985eb6f1",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547619198.235,
+              "timestamp_iso": "2019-01-16 06:13:18.235000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006286484351334364513552117212125331679,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "06265607-d3aa-b293-f808-11d978f5f5b3",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.404_e1cce3af_19c000_198cf0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3788301231,
+          "timestamp_iso": "2090-01-17 01:53:51",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1260912640,
+          "size_of_image": 1687552,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1674480,
+        "file_version": "10.0.17763.404",
+        "product_version": "10.0.17763.404",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17763.404 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.404"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d33af3dd54bb08ee44977d44aa97a24b6e735da7cae7984c3f981ca2eeb13b7b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007422403364399690823907118500160733626,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1553836727.788,
+              "timestamp_iso": "2019-03-29 05:18:47.788000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006422224213048211980367725193529917689,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "6b2bd108-307b-dd8e-c619-aea4fb75e833",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.475_1ddde673_19c000_198dc8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 501081715,
+          "timestamp_iso": "1985-11-17 13:21:55",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1260912640,
+          "size_of_image": 1687552,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1674696,
+        "file_version": "10.0.17763.475",
+        "product_version": "10.0.17763.475",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17763.475 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.475"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3d0a0d6e3296dbe29b6ba3b964cf6e1ae448368e76a74ae49c5a0c1671be9d65",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1554961721.59,
+              "timestamp_iso": "2019-04-11 05:48:41.590000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006185481711636851350395440858077855948,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "50d4edaa-6b13-688d-234f-3e853c20e0a3",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.737_d7315be6_19c000_198cf0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3610336230,
+          "timestamp_iso": "2084-05-28 07:10:30",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1260912640,
+          "size_of_image": 1687552,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1674480,
+        "file_version": "10.0.17763.737",
+        "product_version": "10.0.17763.737",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17763.737 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.737"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "5675e0e5ee45cc4e465cc89c97ff3c7b846ac886e901e7363637be69ccb19137",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1567575795.494,
+              "timestamp_iso": "2019-09-04 05:43:15.494000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006296505950700641569240494447876112609,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "04c33e30-5fe1-7b2c-0c5a-04b44d6f983e",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.802_6071cf9d_19c000_198cf0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1618071453,
+          "timestamp_iso": "2021-04-10 16:17:33",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1260912640,
+          "size_of_image": 1687552,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1674480,
+        "file_version": "10.0.17763.802",
+        "product_version": "10.0.17763.802",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17763.802 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.802"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b125dc12a1716ca14794a1d4eed04cb412976ac532d5aaaf1aed59ba5021f4e8",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569993965.665,
+              "timestamp_iso": "2019-10-02 05:26:05.665000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006265631508034585128434772706355839195,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "f9ea7a7f-4120-6c21-d2ed-4e99993a9ef4",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.831_6071cf9d_19c000_198cf0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1618071453,
+          "timestamp_iso": "2021-04-10 16:17:33",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1260912640,
+          "size_of_image": 1687552,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1674480,
+        "file_version": "10.0.17763.831",
+        "product_version": "10.0.17763.831",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17763.831 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.831"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ede8ac48e99e48889f6eb3adab01ef18214b51b634496fdb52c2e1431620098e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1570151274.107,
+              "timestamp_iso": "2019-10-04 01:07:54.107000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006244962191294843678316232850330878167,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "f9ea7a7f-4120-6c21-d2ed-4e99993a9ef4",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1039_5c18dfc8_19c000_198dc0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1545134024,
+          "timestamp_iso": "2018-12-18 11:53:44",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1260912640,
+          "size_of_image": 1687552,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1674688,
+        "file_version": "10.0.17763.1039",
+        "product_version": "10.0.17763.1039",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.17763.1039 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1039"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "f3ff9f77379c0ff0f599657c179c72a0a1115be41b924f79b334d91d551e0305",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1581140166.42,
+              "timestamp_iso": "2020-02-08 05:36:06.420000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006462103426455033798114803425914913025,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "591fd2b0-a129-8d19-c6b3-d4f2b1cec66d",
           "age": 1,
           "path": "wntdll.pdb"
         },
@@ -619,7 +2820,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 2612835497,
-          "timestamp_iso": "2052-10-18 05:38:17",
+          "timestamp_iso": "2052-10-18 03:38:17",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 1260912640,
@@ -640,6 +2841,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c99b85f7da6c3efeeddfa5de28a8aa5c47d802c80971a2b7a87f1bfda7954975",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552948042.218,
+              "timestamp_iso": "2019-03-18 22:27:22.218000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006224866911140363727416942500769693907,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ntdll.dll",
         "debug_codeview": {
           "guid": "6756b5d7-a114-31f8-5ea1-f03d2ce3e309",
@@ -650,6 +2871,177 @@
           "guid": "6756b5d7-a114-31f8-5ea1-f03d2ce3e309",
           "unknown": "a4bd3eb2b5f405bf661d8e84",
           "timestamp": 2612835497
+        }
+      },
+      "10.0.18362.356_8de1c53a_19a000_1964a8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2380383546,
+          "timestamp_iso": "2045-06-06 17:39:06",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1260912640,
+          "size_of_image": 1679360,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1664168,
+        "file_version": "10.0.18362.356",
+        "product_version": "10.0.18362.356",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.18362.356 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.356"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "17dd8cfd613cb8b518ab41c1b9067cc2b338dae210736596f053284f830ebc0a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1567573380.793,
+              "timestamp_iso": "2019-09-04 05:03:00.793000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006299012123045852398368710328328388834,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "5fc6f426-37c5-5fbb-94c4-2798fea8af6f",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "5fc6f426-37c5-5fbb-94c4-2798fea8af6f",
+          "unknown": "44bb60c1d46c333e96927ed1",
+          "timestamp": 2380383546
+        }
+      },
+      "10.0.18362.387_a4208572_19a000_196578": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2753594738,
+          "timestamp_iso": "2057-04-04 07:25:38",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1260912640,
+          "size_of_image": 1679360,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1664376,
+        "file_version": "10.0.18362.387",
+        "product_version": "10.0.18362.387",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.18362.387 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.387"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "eda9646a3ed7701df956b2f370e2d7fc4f05c06a041a270aac94f4369896813f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569298139.77,
+              "timestamp_iso": "2019-09-24 04:08:59.770000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006462103426455033798114803425914913025,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "d85fce08-d560-38e2-c69b-69f29e11b5ee",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "d85fce08-d560-38e2-c69b-69f29e11b5ee",
+          "unknown": "9a85071347808a36ffad994b",
+          "timestamp": 2753594738
+        }
+      },
+      "10.0.18362.657_832e7bce_19a000_1966a8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2200861646,
+          "timestamp_iso": "2039-09-28 22:27:26",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1260912640,
+          "size_of_image": 1679360,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1664680,
+        "file_version": "10.0.18362.657",
+        "product_version": "10.0.18362.657",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Layer DLL",
+          "FileVersion": "10.0.18362.657 (WinBuild.160101.0800)",
+          "InternalName": "ntdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.657"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "874a5ac5d6a7443331e9ee1b2c5850188a4c9b34f13fbbfe5c81f96aed197572",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1581137258.413,
+              "timestamp_iso": "2020-02-08 04:47:38.413000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006520054889628057278485313779031605516,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntdll.dll",
+        "debug_codeview": {
+          "guid": "c426b34e-4a17-c490-b9c8-608c500f9f8a",
+          "age": 1,
+          "path": "wntdll.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "c426b34e-4a17-c490-b9c8-608c500f9f8a",
+          "unknown": "efc39010972022b74e47e76a",
+          "timestamp": 2200861646
         }
       }
     }

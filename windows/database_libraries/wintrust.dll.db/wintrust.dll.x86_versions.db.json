@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1208131882,
-          "timestamp_iso": "2008-04-14 02:11:22",
+          "timestamp_iso": "2008-04-14 00:11:22",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 1992491008,
@@ -38,7 +38,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1330524529,
-          "timestamp_iso": "2012-02-29 15:08:49",
+          "timestamp_iso": "2012-02-29 14:08:49",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 1992491008,
@@ -71,7 +71,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1345816359,
-          "timestamp_iso": "2012-08-24 15:52:39",
+          "timestamp_iso": "2012-08-24 13:52:39",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 1992491008,
@@ -104,7 +104,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1345816402,
-          "timestamp_iso": "2012-08-24 15:53:22",
+          "timestamp_iso": "2012-08-24 13:53:22",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 1992491008,
@@ -137,7 +137,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1247533906,
-          "timestamp_iso": "2009-07-14 03:11:46",
+          "timestamp_iso": "2009-07-14 01:11:46",
           "coff_characteristics": 8450,
           "linker_version": "9.0",
           "image_base": 1090584576,
@@ -170,7 +170,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1473958749,
-          "timestamp_iso": "2016-09-15 18:59:09",
+          "timestamp_iso": "2016-09-15 16:59:09",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1197473792,
@@ -192,6 +192,26 @@
           "ProductVersion": "10.0.14393.206",
           "OleSelfRegister": ""
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "84e6464dc307817b467c79200f2818aa421014750e84c14799c52d11197d4303",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1473960099.753,
+              "timestamp_iso": "2016-09-15 17:21:39.753000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005916283203235976082467375558497927320,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WINTRUST.dll",
         "debug_codeview": {
           "guid": "ff076116-07f7-4ba3-a3a3-8577af5fc379",
@@ -203,7 +223,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1476503778,
-          "timestamp_iso": "2016-10-15 05:56:18",
+          "timestamp_iso": "2016-10-15 03:56:18",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1197473792,
@@ -225,6 +245,26 @@
           "ProductVersion": "10.0.14393.351",
           "OleSelfRegister": ""
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "64b85c83f19f0151d37e82410b5fca63f652ec63a7e71dd0118e46e26ff0e0b9",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1476505140.865,
+              "timestamp_iso": "2016-10-15 04:19:00.865000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006046391779517120236744985585857331377,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WINTRUST.dll",
         "debug_codeview": {
           "guid": "7ba7fcb0-582d-420e-80ab-ac69775b75e0",
@@ -236,7 +276,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1488608705,
-          "timestamp_iso": "2017-03-04 07:25:05",
+          "timestamp_iso": "2017-03-04 06:25:05",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1197473792,
@@ -258,9 +298,294 @@
           "ProductVersion": "10.0.14393.953",
           "OleSelfRegister": ""
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3e7dd90b9373b110f11ef417c29cf3c32bfa771764f573928373b5a0e054359e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006487690083390668365393298609651319046,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1488610321.372,
+              "timestamp_iso": "2017-03-04 06:52:01.372000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005952745298349915514322722057632088223,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WINTRUST.dll",
         "debug_codeview": {
           "guid": "e232dc8d-fd67-4117-b310-e0411432c32b",
+          "age": 1,
+          "path": "wintrust.pdb"
+        }
+      },
+      "10.0.14393.2068_5a7e714e_44000_42948": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1518235982,
+          "timestamp_iso": "2018-02-10 04:13:02",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1197473792,
+          "size_of_image": 278528,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 272712,
+        "file_version": "10.0.14393.2068",
+        "product_version": "10.0.14393.2068",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.14393.2068 (rs1_release.180209-1727)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2068",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8422b37c9a4b83658675a21c840de09e04a9681d81b448108df5507145cfb9e2",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1518237004.997,
+              "timestamp_iso": "2018-02-10 04:30:04.997000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006025928075304506519251440873651568813,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "12df49b6-7a41-41f9-a3cf-a2396c34308b",
+          "age": 1,
+          "path": "wintrust.pdb"
+        }
+      },
+      "10.0.14393.2125_5a990ade_44000_42950": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1519979230,
+          "timestamp_iso": "2018-03-02 08:27:10",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1197473792,
+          "size_of_image": 278528,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 272720,
+        "file_version": "10.0.14393.2125",
+        "product_version": "10.0.14393.2125",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.14393.2125 (rs1_release.180301-2139)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2125",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a1bbec77bbaf7b9f6903eacf27a3fabb100dc86090fc78b377af5970ad43da8c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1519980637.492,
+              "timestamp_iso": "2018-03-02 08:50:37.492000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005992121074566940565467069433526616230,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "288b18db-b296-487c-a3f5-d4ce83a3ad78",
+          "age": 1,
+          "path": "wintrust.pdb"
+        }
+      },
+      "10.0.14393.2248_5ae3f05b_44000_42d50": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1524887643,
+          "timestamp_iso": "2018-04-28 03:54:03",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1197473792,
+          "size_of_image": 278528,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 273744,
+        "file_version": "10.0.14393.2248",
+        "product_version": "10.0.14393.2248",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.14393.2248 (rs1_release.180427-1804)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2248",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "80ab2971dce4f32ee1a9a26c8f5f8289ac9eab711ed8feb7387c5c9af4fea535",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1524889170.387,
+              "timestamp_iso": "2018-04-28 04:19:30.387000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006080284843010256923719239130071171255,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "0b5567ce-795f-431a-a427-5a68f07d2768",
+          "age": 1,
+          "path": "wintrust.pdb"
+        }
+      },
+      "10.0.14393.2273_5ae3f4e4_44000_42d48": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1524888804,
+          "timestamp_iso": "2018-04-28 04:13:24",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1197473792,
+          "size_of_image": 278528,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 273736,
+        "file_version": "10.0.14393.2273",
+        "product_version": "10.0.14393.2273",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.14393.2273 (rs1_release_1.180427-1811)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2273",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8d290ec8609a538e321577eac03e98feeabe3928cf39c34f733b7c42c0d61781",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1524890178.82,
+              "timestamp_iso": "2018-04-28 04:36:18.820000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005983252952945386114569575244197003429,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "cb0d9cde-0cb3-4685-a52a-899f85f77e85",
+          "age": 1,
+          "path": "wintrust.pdb"
+        }
+      },
+      "10.0.14393.2791_5c5a467e_44000_432e8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1549420158,
+          "timestamp_iso": "2019-02-06 02:29:18",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1197473792,
+          "size_of_image": 278528,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 275176,
+        "file_version": "10.0.14393.2791",
+        "product_version": "10.0.14393.2791",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.14393.2791 (rs1_release.190205-1511)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2791",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "706b8861ac7c494d40bbf94559d0f5ea9b7542bd60d9985134c06732145c5d8a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1549421807.066,
+              "timestamp_iso": "2019-02-06 02:56:47.066000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006378773755481047253127761656536891633,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "573b00fe-0182-4159-b2fa-b42f6dbb5945",
           "age": 1,
           "path": "wintrust.pdb"
         }
@@ -269,7 +594,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 584856080,
-          "timestamp_iso": "1988-07-14 06:01:20",
+          "timestamp_iso": "1988-07-14 04:01:20",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 1197473792,
@@ -291,9 +616,245 @@
           "ProductVersion": "10.0.16299.15",
           "OleSelfRegister": ""
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4dac6d06d536dd921b73f5385a0b29c4e4ad7f612316cac3d4d03e5ab37f5819",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506657193.796,
+              "timestamp_iso": "2017-09-29 03:53:13.796000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005994211025790091665443654607388541095,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WINTRUST.dll",
         "debug_codeview": {
           "guid": "73706b43-bd07-d70c-2cec-023c49a9cfd9",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.248_f273bd78_46000_455d0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4067671416,
+          "timestamp_iso": "2098-11-24 12:43:36",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1197473792,
+          "size_of_image": 286720,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 284112,
+        "file_version": "10.0.16299.248",
+        "product_version": "10.0.16299.248",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.16299.248 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.248",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8daf61959d3e12ff1856d0d11cef4ad1ee4a53d22a8dc6c25832ccced8878f3f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1518239269.752,
+              "timestamp_iso": "2018-02-10 05:07:49.752000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006072884709557757365460179650388951222,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "38144cd7-2bde-458f-2533-a2da03f33d5f",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.309_f273bd78_46000_455d0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4067671416,
+          "timestamp_iso": "2098-11-24 12:43:36",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1197473792,
+          "size_of_image": 286720,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 284112,
+        "file_version": "10.0.16299.309",
+        "product_version": "10.0.16299.309",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.16299.309 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.309",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "baaf4e1beb2ffe893136b658c7379bcef6f7c6362b318228f4008e56ca4075da",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1519885658.379,
+              "timestamp_iso": "2018-03-01 06:27:38.379000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006034800106972072239421993029828870319,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "38144cd7-2bde-458f-2533-a2da03f33d5f",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.431_fd693424_46000_459d8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4251530276,
+          "timestamp_iso": "2104-09-22 12:37:56",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1197473792,
+          "size_of_image": 286720,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 285144,
+        "file_version": "10.0.16299.431",
+        "product_version": "10.0.16299.431",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.16299.431 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.431",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "6cc744217cce026e5b6794e2e6a4240d5fc38522351f19b69591082a51e7a294",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1525328960.876,
+              "timestamp_iso": "2018-05-03 06:29:20.876000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006028822366486431458344729467831713966,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "1106faf2-f4e9-1a01-f157-2f5133b8e30b",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.936_1220ad00_47000_46468": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 304131328,
+          "timestamp_iso": "1979-08-22 00:55:28",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1197473792,
+          "size_of_image": 290816,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 287848,
+        "file_version": "10.0.16299.936",
+        "product_version": "10.0.16299.936",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.16299.936 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.936",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "88462d03525769be635b5541f5b06624493c1674ddceafd9f9c7c8666be2c1dd",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1546668708.5,
+              "timestamp_iso": "2019-01-05 06:11:48.500000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006195341994069031519038158839776018638,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "fb8b67ee-4152-84f6-9afb-c396acb58576",
           "age": 1,
           "path": "wintrust.pdb"
         },
@@ -303,7 +864,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 941272312,
-          "timestamp_iso": "1999-10-30 10:31:52",
+          "timestamp_iso": "1999-10-30 08:31:52",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 1197473792,
@@ -325,6 +886,26 @@
           "ProductVersion": "10.0.17134.1",
           "OleSelfRegister": ""
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8ed484a7061f2e84350743ff3691eaff40ea4b518c5eaed4833a71b561d94b55",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523420725.777,
+              "timestamp_iso": "2018-04-11 04:25:25.777000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005992121074566940565467069433526616230,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WINTRUST.dll",
         "debug_codeview": {
           "guid": "0c83269c-5bb0-b14c-96df-3b7426581f65",
@@ -337,7 +918,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1039672271,
-          "timestamp_iso": "2002-12-12 06:51:11",
+          "timestamp_iso": "2002-12-12 05:51:11",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 1197473792,
@@ -359,6 +940,26 @@
           "ProductVersion": "10.0.17134.81",
           "OleSelfRegister": ""
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a0b317deb53f93846a0eca2af408b984b4064f573af7d67be301c729186134cf",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1526815964.292,
+              "timestamp_iso": "2018-05-20 11:32:44.292000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006004272612577052131129751449999769769,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WINTRUST.dll",
         "debug_codeview": {
           "guid": "e356a6af-e444-4ba9-e390-9b0c2f798abb",
@@ -371,7 +972,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 2724470143,
-          "timestamp_iso": "2056-05-02 07:15:43",
+          "timestamp_iso": "2056-05-02 05:15:43",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 1197473792,
@@ -393,9 +994,191 @@
           "ProductVersion": "10.0.17134.556",
           "OleSelfRegister": ""
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3b6ea5c666ec4889359c67bd2e570803f4d7336c59c3c71ade975a015f8e5613",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007467185747103657701035153531196146115,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547012573.794,
+              "timestamp_iso": "2019-01-09 05:42:53.794000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006365874153968721933633195170043265262,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WINTRUST.dll",
         "debug_codeview": {
           "guid": "d62c160c-6ea4-1bec-a765-5233735b7504",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_f75972a6_45000_43c38": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4149834406,
+          "timestamp_iso": "2101-07-03 11:46:46",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1197473792,
+          "size_of_image": 282624,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 277560,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "fcc7a3e094a99879ac0eac4e2312be34eb22890aa8816799661d938b439cf0ff",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536973366.941,
+              "timestamp_iso": "2018-09-15 01:02:46.941000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006181034441660578512511571782260490443,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "cbaa2ecf-9a3b-dc49-5c78-e5b1909c7c2e",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.292_0988c172_45000_43c20": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 159957362,
+          "timestamp_iso": "1975-01-26 08:36:02",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1197473792,
+          "size_of_image": 282624,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 277536,
+        "file_version": "10.0.17763.292",
+        "product_version": "10.0.17763.292",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.17763.292 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.292",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "072ade47c19d8fa335ff44b60558b4d13a8e348526cbaa7c8fe773f65b51f2e2",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547619197.659,
+              "timestamp_iso": "2019-01-16 06:13:17.659000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006185481711636851350395440858077855948,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "e9a6b041-f84b-ace8-d129-116c28382e45",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.348_4e5be2ed_45000_44350": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1314644717,
+          "timestamp_iso": "2011-08-29 19:05:17",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1197473792,
+          "size_of_image": 282624,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 279376,
+        "file_version": "10.0.17763.348",
+        "product_version": "10.0.17763.348",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.17763.348 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.348",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "df163f93005718a687f88b60d7e36867cef7d90e46b9ce64ab179e3e429b7b43",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1551088447.606,
+              "timestamp_iso": "2019-02-25 09:54:07.606000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006383992052285640962377209724945826034,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "e9d13afd-e1be-eea4-3065-2f8a0cdda026",
           "age": 1,
           "path": "wintrust.pdb"
         },
@@ -405,7 +1188,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 3576326138,
-          "timestamp_iso": "2083-04-30 17:55:38",
+          "timestamp_iso": "2083-04-30 15:55:38",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 1197473792,
@@ -427,6 +1210,26 @@
           "ProductVersion": "10.0.18362.1",
           "OleSelfRegister": ""
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4801afeefedc35594cf53966ef173a638828b2c11c41abba1315a6b8e37a75f1",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552948044.455,
+              "timestamp_iso": "2019-03-18 22:27:24.455000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006195341994069031519038158839776018638,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WINTRUST.dll",
         "debug_codeview": {
           "guid": "5e980f64-1832-8689-02fd-6154554b016d",
@@ -437,6 +1240,122 @@
           "guid": "5e980f64-1832-8689-02fd-6154554b016d",
           "unknown": "67d8b2ae9048ab4cd44f220a",
           "timestamp": 3576326138
+        }
+      },
+      "10.0.18362.145_3c6910c7_46000_45778": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1013518535,
+          "timestamp_iso": "2002-02-12 12:55:35",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1197473792,
+          "size_of_image": 286720,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 284536,
+        "file_version": "10.0.18362.145",
+        "product_version": "10.0.18362.145",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.18362.145 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.145",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "33a247029f7f561354c9cc7060b065de1ae7f712ef8457a20e319a2f20e9b3e5",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1558500790.914,
+              "timestamp_iso": "2019-05-22 04:53:10.914000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006265631508034585128434772706355839195,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "327317ac-a12e-356f-5229-80a78c5675fb",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "327317ac-a12e-356f-5229-80a78c5675fb",
+          "unknown": "34742e4850e8e4f5a5110e2b",
+          "timestamp": 1013518535
+        }
+      },
+      "10.0.18362.387_701f7291_46000_45a48": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1881109137,
+          "timestamp_iso": "2029-08-11 02:18:57",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1197473792,
+          "size_of_image": 286720,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 285256,
+        "file_version": "10.0.18362.387",
+        "product_version": "10.0.18362.387",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft Trust Verification APIs",
+          "FileVersion": "10.0.18362.387 (WinBuild.160101.0800)",
+          "InternalName": "WINTRUST.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WINTRUST.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.387",
+          "OleSelfRegister": ""
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "5ee920bc4edad791d896a259c73014b6e744628b7d3d6ffd0257ea6cfa7f49a1",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569298143.535,
+              "timestamp_iso": "2019-09-24 04:09:03.535000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006474618943676559360178350755718103299,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WINTRUST.dll",
+        "debug_codeview": {
+          "guid": "d4263d1d-bec3-b0ac-2d6b-03befc8020c5",
+          "age": 1,
+          "path": "wintrust.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "d4263d1d-bec3-b0ac-2d6b-03befc8020c5",
+          "unknown": "ca175b95348af0c793945d35",
+          "timestamp": 1881109137
         }
       }
     }

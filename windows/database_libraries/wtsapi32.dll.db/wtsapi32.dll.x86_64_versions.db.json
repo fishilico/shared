@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535260,
-          "timestamp_iso": "2009-07-14 03:34:20",
+          "timestamp_iso": "2009-07-14 01:34:20",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8793682870272,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635073,
-          "timestamp_iso": "2016-07-16 04:11:13",
+          "timestamp_iso": "2016-07-16 02:11:13",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 5100273664,
@@ -58,6 +58,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.0"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8a58446369b93125c45a523b0ead467130f6117fecf218bbe6b9b77a925fb2eb",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468637739.613,
+              "timestamp_iso": "2016-07-16 02:55:39.613000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005813437433842179757424496005382930564,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WTSAPI32.dll",
         "debug_codeview": {
           "guid": "fd40a8df-51a0-4fdf-b2af-5b77cffbecfd",
@@ -69,7 +89,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635969,
-          "timestamp_iso": "2016-07-16 04:26:09",
+          "timestamp_iso": "2016-07-16 02:26:09",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -101,7 +121,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1526920453,
-          "timestamp_iso": "2018-05-21 18:34:13",
+          "timestamp_iso": "2018-05-21 16:34:13",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -134,7 +154,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3492409240,
-          "timestamp_iso": "2080-09-01 11:40:40",
+          "timestamp_iso": "2080-09-01 09:40:40",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 5100273664,
@@ -155,6 +175,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c2f36b91f3203cf02b2d4068fedd4aeb3c166c099f73b360bde7068809092e6a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506659223.909,
+              "timestamp_iso": "2017-09-29 04:27:03.909000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005994211025790091665443654607388541095,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WTSAPI32.dll",
         "debug_codeview": {
           "guid": "b7f3698e-f54c-cbdf-b5e9-3ee14b067ede",
@@ -167,7 +207,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 517733471,
-          "timestamp_iso": "1986-05-29 08:51:11",
+          "timestamp_iso": "1986-05-29 06:51:11",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 5100273664,
@@ -188,9 +228,148 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e5b94e9dd7dcea21b22bb2649cbb0fe9f451d9ec98f7cc53c9a748f0995a690e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523455383.671,
+              "timestamp_iso": "2018-04-11 14:03:03.671000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006080284843010256923719239130071171255,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WTSAPI32.dll",
         "debug_codeview": {
           "guid": "641d94d9-a59e-afc5-e0e3-1426b19f1b97",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_617533e3_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1635070947,
+          "timestamp_iso": "2021-10-24 10:22:27",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "6aaea1ed-da82-cee7-3290-20d857bfd05f",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_4fd2c0c9_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1339211977,
+          "timestamp_iso": "2012-06-09 03:19:37",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "0fd77fa7-c947-fc31-f138-df1c34732533",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_645d63a8_13000_fd18": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1683841960,
+          "timestamp_iso": "2023-05-11 21:52:40",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 5100273664,
+          "size_of_image": 77824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 64792,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Remote Desktop Session Host Server SDK APIs",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "349474dc328168e67256e57d71b203509a2d302374adb2521513bac6bdddc740",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536987230.4,
+              "timestamp_iso": "2018-09-15 04:53:50.400000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006192866884723374027414499660635570381,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "ccf42567-326b-35a9-415c-dbafbbe00dc9",
           "age": 1,
           "path": "wtsapi32.pdb"
         },
@@ -200,7 +379,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1097789430,
-          "timestamp_iso": "2004-10-14 23:30:30",
+          "timestamp_iso": "2004-10-14 21:30:30",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 5100273664,
@@ -221,6 +400,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7ba5c74421a1e56d0b669a8379ff485fa05f495242f87ac6fe3864ad2ebbd328",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552962692.129,
+              "timestamp_iso": "2019-03-19 02:31:32.129000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006227433065901788421989137400637423828,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WTSAPI32.dll",
         "debug_codeview": {
           "guid": "2da85aef-00d2-fb45-8a9b-73ac39198539",
@@ -231,6 +430,228 @@
           "guid": "2da85aef-00d2-fb45-8a9b-73ac39198539",
           "unknown": "b1f67323da33e6e9feebefd1",
           "timestamp": 1097789430
+        }
+      },
+      "10.0.18362.1_e487da06_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3834108422,
+          "timestamp_iso": "2091-07-01 06:07:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "unknown": "96625691d6e98433c8edbdab",
+          "timestamp": 3834108422
+        }
+      },
+      "10.0.18362.418_e487da06_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3834108422,
+          "timestamp_iso": "2091-07-01 06:07:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.18362.418",
+        "product_version": "10.0.18362.418",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.418 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.418"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "unknown": "96625691d6e98433c8edbdab",
+          "timestamp": 3834108422
+        }
+      },
+      "10.0.18362.476_e487da06_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3834108422,
+          "timestamp_iso": "2091-07-01 06:07:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.18362.476",
+        "product_version": "10.0.18362.476",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.476 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.476"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "unknown": "96625691d6e98433c8edbdab",
+          "timestamp": 3834108422
+        }
+      },
+      "10.0.18362.535_e487da06_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3834108422,
+          "timestamp_iso": "2091-07-01 06:07:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.18362.535",
+        "product_version": "10.0.18362.535",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.535 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.535"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "unknown": "96625691d6e98433c8edbdab",
+          "timestamp": 3834108422
+        }
+      },
+      "10.0.18362.592_e487da06_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3834108422,
+          "timestamp_iso": "2091-07-01 06:07:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.18362.592",
+        "product_version": "10.0.18362.592",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.592 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.592"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "unknown": "96625691d6e98433c8edbdab",
+          "timestamp": 3834108422
+        }
+      },
+      "10.0.18362.657_e487da06_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3834108422,
+          "timestamp_iso": "2091-07-01 06:07:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.18362.657",
+        "product_version": "10.0.18362.657",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.657 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.657"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "unknown": "96625691d6e98433c8edbdab",
+          "timestamp": 3834108422
         }
       }
     }

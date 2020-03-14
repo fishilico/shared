@@ -1013,6 +1013,9 @@ class PEFile:
                     self.debug_codeview_path = debug_data[0x18:].decode('utf-8').rstrip('\0')
                 elif debug_data.startswith(b'NB10'):  # PDB 2.0 files
                     offset, timestamp, age = struct.unpack('<III', debug_data[0x4:0x10])
+                    if offset != 0:
+                        # Usually the offset is zero because the PDB file is outside
+                        logger.warning("PDB file offset in not zero in NB10 info: %#x", offset)
                     self.debug_codeview_timestamp = timestamp
                     self.debug_codeview_age = age
                     self.debug_codeview_path = debug_data[0x10:].decode('utf-8').rstrip('\0')

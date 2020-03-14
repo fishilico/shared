@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535071,
-          "timestamp_iso": "2009-07-14 03:31:11",
+          "timestamp_iso": "2009-07-14 01:31:11",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 2027028480,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635689,
-          "timestamp_iso": "2016-07-16 04:21:29",
+          "timestamp_iso": "2016-07-16 02:21:29",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -58,6 +58,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.0"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "48301b360508fe38783895d03707ed9d72f97a24b8b23e65ae35890b281c4620",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006164897239981080551761366122451960008,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468638251.735,
+              "timestamp_iso": "2016-07-16 03:04:11.735000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005925946554353115990238755445687713946,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "KERNEL32.dll",
         "debug_codeview": {
           "guid": "4fa6ed6a-61a9-4bf0-ab62-8cf4d1c518cb",
@@ -69,7 +89,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468636101,
-          "timestamp_iso": "2016-07-16 04:28:21",
+          "timestamp_iso": "2016-07-16 02:28:21",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -101,7 +121,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1493336936,
-          "timestamp_iso": "2017-04-28 01:48:56",
+          "timestamp_iso": "2017-04-27 23:48:56",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -122,9 +142,553 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.1198"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "6219ffff357672f6cc2e841ba3998c2ae64559b776bbb01cf51945f46c5b9b30",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006600164316480563895892330806096429340,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1493340582.661,
+              "timestamp_iso": "2017-04-28 00:49:42.661000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005976256130689596214337794142600429731,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "KERNEL32.dll",
         "debug_codeview": {
           "guid": "73ab6fcc-d8af-423e-b7b5-df504bba64fd",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2155_5a9e271c_1d000_18c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1520314140,
+          "timestamp_iso": "2018-03-06 05:29:00",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 118784,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 101376,
+        "file_version": "10.0.14393.2155",
+        "product_version": "10.0.14393.2155",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.14393.2155 (rs1_release_1.180305-1842)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2155"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "f68a1aee-8e5f-4590-9f9a-f63bd07dce26",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2189_5abdafe8_ac000_ab208": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1522380776,
+          "timestamp_iso": "2018-03-30 03:32:56",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 704512,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 700936,
+        "file_version": "10.0.14393.2189",
+        "product_version": "10.0.14393.2189",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2189 (rs1_release.180329-1711)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2189"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "012962eafb83b3be3e53431b281e8b282715b1f97e8c288e6497dd6a191ab882",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006965260811807912526108339212017205602,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1522383697.6,
+              "timestamp_iso": "2018-03-30 04:21:37.600000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006014856209010126895819358618454589611,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "5b64edef-13db-478b-b6f5-572d786417e3",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2214_5ac2f8e6_ac000_ab208": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1522727142,
+          "timestamp_iso": "2018-04-03 03:45:42",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 704512,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 700936,
+        "file_version": "10.0.14393.2214",
+        "product_version": "10.0.14393.2214",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2214 (rs1_release_1.180402-1758)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2214"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "06487f077f949261ee359878fd4abbb936280a0d7e91d442e5a4305b23358d6d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006965260811807912526108339212017205602,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1522729601.736,
+              "timestamp_iso": "2018-04-03 04:26:41.736000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006014856209010126895819358618454589611,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "996833d4-6fc4-412d-a9de-305e863a2b34",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2608_5bd136d7_ac000_ab1a8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1540437719,
+          "timestamp_iso": "2018-10-25 03:21:59",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 704512,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 700840,
+        "file_version": "10.0.14393.2608",
+        "product_version": "10.0.14393.2608",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2608 (rs1_release.181024-1742)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2608"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c3c7cdcb18a1aa5ba32c9edf240898e7d06a6b93965464917e6de21c83988ffe",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1540440121.692,
+              "timestamp_iso": "2018-10-25 04:02:01.692000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006277201382232487817802877555127091421,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "dce0a022-1b1a-449e-9668-7affb0153c54",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2758_5c304b05_1d000_18c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1546668805,
+          "timestamp_iso": "2019-01-05 06:13:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 118784,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 101376,
+        "file_version": "10.0.14393.2758",
+        "product_version": "10.0.14393.2758",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.14393.2758 (rs1_release_1.190104-1904)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2758"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "c0c7d289-27ae-4088-b475-f43e60d2fbaa",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2758_5c304c52_ac000_ab278": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1546669138,
+          "timestamp_iso": "2019-01-05 06:18:58",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 704512,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 701048,
+        "file_version": "10.0.14393.2758",
+        "product_version": "10.0.14393.2758",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2758 (rs1_release_1.190104-1904)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2758"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3dc4532662746795d05cbd98afe3ecbabf87cd4445cbdfdbb73cf5a99ceca33b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1546671521.664,
+              "timestamp_iso": "2019-01-05 06:58:41.664000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006234411017493581681117567214623391957,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "e8d9bdc8-1c8a-4b89-a2c9-c3b1e99c7b36",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2848_5c7f646c_1d000_18c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1551852652,
+          "timestamp_iso": "2019-03-06 06:10:52",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 118784,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 101376,
+        "file_version": "10.0.14393.2848",
+        "product_version": "10.0.14393.2848",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.14393.2848 (rs1_release.190305-1856)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2848"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "ea555767-7348-4ac7-924e-6e5f1b3f7e63",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2848_5c7f65be_ac000_ab278": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1551852990,
+          "timestamp_iso": "2019-03-06 06:16:30",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 704512,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 701048,
+        "file_version": "10.0.14393.2848",
+        "product_version": "10.0.14393.2848",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2848 (rs1_release.190305-1856)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2848"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e890b1c38f80341d53e5b66c26865e14b3937d7894ebfdabcd5b3f31edd2956a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1551855574.177,
+              "timestamp_iso": "2019-03-06 06:59:34.177000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006234411017493581681117567214623391957,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "8ff195ca-44c1-4163-911e-632b74630fa2",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2906_5ca2e27a_1d000_18c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1554178682,
+          "timestamp_iso": "2019-04-02 04:18:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 118784,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 101376,
+        "file_version": "10.0.14393.2906",
+        "product_version": "10.0.14393.2906",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.14393.2906 (rs1_release_inmarket.190401-1809)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2906"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "31d8c05f-7b9d-4435-a81b-9de1d00e463f",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2906_5ca2e3c1_ab000_aaf80": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1554179009,
+          "timestamp_iso": "2019-04-02 04:23:29",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 700416,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 700288,
+        "file_version": "10.0.14393.2906",
+        "product_version": "10.0.14393.2906",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2906 (rs1_release_inmarket.190401-1809)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2906"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ae430af5e17a4ca97215e2a23ebb6c7f1f5eeb641d3a0cba038d1ae953d76602",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1554181427.665,
+              "timestamp_iso": "2019-04-02 05:03:47.665000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006395889933744958830011870553003000052,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "1ef6668c-cb90-4705-916a-873ef950aa07",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2969_5ccd16e9_1d000_18c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1556944617,
+          "timestamp_iso": "2019-05-04 04:36:57",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 118784,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 101376,
+        "file_version": "10.0.14393.2969",
+        "product_version": "10.0.14393.2969",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.14393.2969 (rs1_release.190503-1820)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2969"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "e2167ee5-524d-456e-a635-6b7797241456",
+          "age": 1,
+          "path": "kernel32.pdb"
+        }
+      },
+      "10.0.14393.2969_5ccd17c9_ac000_ab3a8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1556944841,
+          "timestamp_iso": "2019-05-04 04:40:41",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 704512,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 701352,
+        "file_version": "10.0.14393.2969",
+        "product_version": "10.0.14393.2969",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2969 (rs1_release.190503-1820)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2969"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3b906896155e5724496ea9b09311624dd18394aef6bacd0f24bf2c33f94dc33d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1556947239.559,
+              "timestamp_iso": "2019-05-04 05:20:39.559000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006405871818669909035022975445745271030,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "fcb817ed-2b68-41c1-8f93-2cb4593be1b7",
           "age": 1,
           "path": "kernel32.pdb"
         }
@@ -133,7 +697,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 204273920,
-          "timestamp_iso": "1976-06-22 08:45:20",
+          "timestamp_iso": "1976-06-22 06:45:20",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -154,6 +718,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "adca41d392adc2f4351ec2d5274a5708c25f67b77db610ecab84b0006282b74c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006959303205190478915959131686872023393,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506660179.663,
+              "timestamp_iso": "2017-09-29 04:42:59.663000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005992121074566940565467069433526616230,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "KERNEL32.dll",
         "debug_codeview": {
           "guid": "1bccd94c-5154-86e0-3396-c7e89525227e",
@@ -166,7 +750,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 397702048,
-          "timestamp_iso": "1982-08-09 02:47:28",
+          "timestamp_iso": "1982-08-09 00:47:28",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -195,11 +779,269 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.16299.431_17b473a0_25000_1f200": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 397702048,
+          "timestamp_iso": "1982-08-09 00:47:28",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 151552,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 127488,
+        "file_version": "10.0.16299.431",
+        "product_version": "10.0.16299.431",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.16299.431 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.431"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "4aef64ec-4d40-05b4-0f2e-57d754561c76",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.431_309fae94_ae000_ab868": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 815771284,
+          "timestamp_iso": "1995-11-07 19:08:04",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 712704,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 702568,
+        "file_version": "10.0.16299.431",
+        "product_version": "10.0.16299.431",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.16299.431 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.431"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "51f309b8ce1f713e8573ef0bdd62db67c42e653b0df84b808ba2dfab56a549be",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006965260811807912526108339212017205602,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1525333410.24,
+              "timestamp_iso": "2018-05-03 07:43:30.240000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006020938485272644246149794457748242604,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "a6821f9e-3c02-1511-29ef-499b31e6b430",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.1029_17b473a0_25000_1f200": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 397702048,
+          "timestamp_iso": "1982-08-09 00:47:28",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 151552,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 127488,
+        "file_version": "10.0.16299.1029",
+        "product_version": "10.0.16299.1029",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.16299.1029 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.1029"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "4aef64ec-4d40-05b4-0f2e-57d754561c76",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.1029_2da562ed_ae000_ab808": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 765813485,
+          "timestamp_iso": "1994-04-08 13:58:05",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 712704,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 702472,
+        "file_version": "10.0.16299.1029",
+        "product_version": "10.0.16299.1029",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.16299.1029 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.1029"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "84663e3e4051fdedb3c96603d8dfd7f33ae2e9e181e475941d3a8392d196daa2",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1551869212.652,
+              "timestamp_iso": "2019-03-06 10:46:52.652000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006416693731309555622055525374131962104,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "d943f612-8539-e832-0bc0-d3d07f03207e",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.1087_17b473a0_25000_1f200": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 397702048,
+          "timestamp_iso": "1982-08-09 00:47:28",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 151552,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 127488,
+        "file_version": "10.0.16299.1087",
+        "product_version": "10.0.16299.1087",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.16299.1087 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.1087"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "4aef64ec-4d40-05b4-0f2e-57d754561c76",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.1087_b6363421_ae000_ab808": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3057005601,
+          "timestamp_iso": "2066-11-15 00:13:21",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 712704,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 702472,
+        "file_version": "10.0.16299.1087",
+        "product_version": "10.0.16299.1087",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.16299.1087 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.1087"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "564ac6924fe5c2ffdd3dfbd4065c362e7024df642331760eda3afe11ab140e6f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1554185342.92,
+              "timestamp_iso": "2019-04-02 06:09:02.920000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006365874153968721933633195170043265262,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "8a890fe6-e912-c648-c3b2-4a1f14b64b00",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.17134.1_5f488a51_b2000_afef8": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 1598589521,
-          "timestamp_iso": "2020-08-28 06:38:41",
+          "timestamp_iso": "2020-08-28 04:38:41",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -220,9 +1062,95 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3f2176cf0cc0815ccdc92b36fe2dd2a2c839e51f72561e92a0c799d151a1a778",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006965260811807912526108339212017205602,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523455729.477,
+              "timestamp_iso": "2018-04-11 14:08:49.477000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006080284843010256923719239130071171255,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "KERNEL32.dll",
         "debug_codeview": {
           "guid": "63816243-ec70-4dc0-91bc-31470bac48a3",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_6c068f9e_25000_1fc00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1812369310,
+          "timestamp_iso": "2027-06-07 11:55:10",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 151552,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 130048,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "6169ed91-37d0-2a0f-52e3-a9f254707fa1",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.556_6c068f9e_25000_1fc00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1812369310,
+          "timestamp_iso": "2027-06-07 11:55:10",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 151552,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 130048,
+        "file_version": "10.0.17134.556",
+        "product_version": "10.0.17134.556",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17134.556 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.556"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "6169ed91-37d0-2a0f-52e3-a9f254707fa1",
           "age": 1,
           "path": "kernel32.pdb"
         },
@@ -232,7 +1160,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 2162569034,
-          "timestamp_iso": "2038-07-12 19:37:14",
+          "timestamp_iso": "2038-07-12 17:37:14",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -253,9 +1181,62 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.556"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "43dd0e0cce0136e641bcdb89cce89f45c3518c6e9d9c6249b4b756744009d9d2",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007422403364399690823907118500160733626,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547056638.815,
+              "timestamp_iso": "2019-01-09 17:57:18.815000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006395889933744958830011870553003000052,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "KERNEL32.dll",
         "debug_codeview": {
           "guid": "f219a01c-b33f-405a-2ad0-2310284cbb69",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.648_6c068f9e_25000_1fc00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1812369310,
+          "timestamp_iso": "2027-06-07 11:55:10",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 151552,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 130048,
+        "file_version": "10.0.17134.648",
+        "product_version": "10.0.17134.648",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17134.648 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.648"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "6169ed91-37d0-2a0f-52e3-a9f254707fa1",
           "age": 1,
           "path": "kernel32.pdb"
         },
@@ -265,7 +1246,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 2678313584,
-          "timestamp_iso": "2054-11-15 00:59:44",
+          "timestamp_iso": "2054-11-14 23:59:44",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -286,9 +1267,148 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.648"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "12ab91f5f6abab3159c59c5e5fd33b2cea29ebcbf63855bd449ee94cca4769fa",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1551886773.992,
+              "timestamp_iso": "2019-03-06 15:39:33.992000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006255250095571111745631542615402873049,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "KERNEL32.dll",
         "debug_codeview": {
           "guid": "3c2aaa02-0c3c-4c31-f56c-bbfaedae94ac",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.706_6c068f9e_25000_1fc00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1812369310,
+          "timestamp_iso": "2027-06-07 11:55:10",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 151552,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 130048,
+        "file_version": "10.0.17134.706",
+        "product_version": "10.0.17134.706",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17134.706 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.706"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "6169ed91-37d0-2a0f-52e3-a9f254707fa1",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.706_73ec03a9_b1000_afc70": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1944847273,
+          "timestamp_iso": "2031-08-18 19:21:13",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 724992,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 719984,
+        "file_version": "10.0.17134.706",
+        "product_version": "10.0.17134.706",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17134.706 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.706"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "54ad74989ace676073b84828c084a1a8e3aa0fbc3afe846ba9109b907596e295",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1554208408.9,
+              "timestamp_iso": "2019-04-02 12:33:28.900000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006405871818669909035022975445745271030,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "ca130beb-f44e-36ea-c20c-5e95752843f6",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.753_6c068f9e_25000_1fc00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1812369310,
+          "timestamp_iso": "2027-06-07 11:55:10",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 151552,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 130048,
+        "file_version": "10.0.17134.753",
+        "product_version": "10.0.17134.753",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17134.753 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.753"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "6169ed91-37d0-2a0f-52e3-a9f254707fa1",
           "age": 1,
           "path": "kernel32.pdb"
         },
@@ -298,7 +1418,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3660411206,
-          "timestamp_iso": "2085-12-28 21:53:26",
+          "timestamp_iso": "2085-12-28 20:53:26",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -319,9 +1439,426 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.753"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "af3b71ac4dcf7fbba0b33ba2eea92ca2c17e14b86cb9ac60026440d99756a7b0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1555671282.024,
+              "timestamp_iso": "2019-04-19 10:54:42.024000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006219194096656949141909507585173618898,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "KERNEL32.dll",
         "debug_codeview": {
           "guid": "548caa89-f1fc-f019-3d12-d2dc02f8920e",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_076b2f79_2b000_25400": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 124465017,
+          "timestamp_iso": "1973-12-11 13:36:57",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 152576,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "4e2af4f8-6cf1-8b69-9260-2ae83c047015",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_65614da1_b3000_b1380": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1700875681,
+          "timestamp_iso": "2023-11-25 01:28:01",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 733184,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 725888,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "f7d6b39cb66f99b40f0de32db2a4942bf3aec10e02b5e0a0746bb8c659804cc9",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536987177.07,
+              "timestamp_iso": "2018-09-15 04:52:57.070000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006174124268290832653895967923123519690,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "7c073461-bc41-eea8-f242-ad876c2f4a9f",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.292_7c9c19c8_b3000_b14c0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2090605000,
+          "timestamp_iso": "2036-03-31 19:36:40",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 733184,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 726208,
+        "file_version": "10.0.17763.292",
+        "product_version": "10.0.17763.292",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.292 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.292"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a930fd3844eb58a92b0c95c3392e386e7a2d114d989e17a1c9df7b8459cf529a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547630629.274,
+              "timestamp_iso": "2019-01-16 09:23:49.274000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006278845327953670265891896693119516894,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "e5e9eefd-6d80-5f16-3d5c-9c500712ecc1",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.379_076b2f79_2b000_25400": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 124465017,
+          "timestamp_iso": "1973-12-11 13:36:57",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 152576,
+        "file_version": "10.0.17763.379",
+        "product_version": "10.0.17763.379",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17763.379 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.379"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "4e2af4f8-6cf1-8b69-9260-2ae83c047015",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.379_b9780d03_b3000_b1590": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3111652611,
+          "timestamp_iso": "2068-08-08 11:56:51",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 733184,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 726416,
+        "file_version": "10.0.17763.379",
+        "product_version": "10.0.17763.379",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.379 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.379"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c6b3cf66dc667d066e4d6381e22d93be58689b0400fb9241c1d1f2942d1a4230",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1551966629.652,
+              "timestamp_iso": "2019-03-07 13:50:29.652000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006219194096656949141909507585173618898,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "0c5d9c23-b42d-deb9-33ff-48c9a62bea0d",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.437_076b2f79_2b000_25400": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 124465017,
+          "timestamp_iso": "1973-12-11 13:36:57",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 152576,
+        "file_version": "10.0.17763.437",
+        "product_version": "10.0.17763.437",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17763.437 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.437"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "4e2af4f8-6cf1-8b69-9260-2ae83c047015",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.437_a9e3d878_b3000_b13a8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2850281592,
+          "timestamp_iso": "2060-04-27 08:53:12",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 733184,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 725928,
+        "file_version": "10.0.17763.437",
+        "product_version": "10.0.17763.437",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.437 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.437"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e017b6d0cc99f9b6884f5f39a9a5a451fe67707e9496c546567a1b97da3d273f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1554208042.23,
+              "timestamp_iso": "2019-04-02 12:27:22.230000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006181034441660578512511571782260490443,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "3b92ded9-912d-874a-2bd0-8735bc0199a3",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.475_076b2f79_2b000_25400": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 124465017,
+          "timestamp_iso": "1973-12-11 13:36:57",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 152576,
+        "file_version": "10.0.17763.475",
+        "product_version": "10.0.17763.475",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17763.475 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.475"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "4e2af4f8-6cf1-8b69-9260-2ae83c047015",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.475_250a0626_b3000_b12c0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 621413926,
+          "timestamp_iso": "1989-09-10 06:58:46",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 733184,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 725696,
+        "file_version": "10.0.17763.475",
+        "product_version": "10.0.17763.475",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.475 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.475"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7e6f01e446a92a20cc2d110417b7b068a20c7d86068fddd3d7ae6cc445737718",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1554999829.344,
+              "timestamp_iso": "2019-04-11 16:23:49.344000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006258449564004396144229146648146608346,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "07efa046-5afb-4214-cbd5-328b0b5ed084",
           "age": 1,
           "path": "kernel32.pdb"
         },
@@ -331,7 +1868,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 2950605874,
-          "timestamp_iso": "2063-07-02 14:44:34",
+          "timestamp_iso": "2063-07-02 12:44:34",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 6442450944,
@@ -352,6 +1889,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "342af009dd8b9d1b7788fb508d09280af51c409e9895448d4d3bb30ee471a082",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552962641.181,
+              "timestamp_iso": "2019-03-19 02:30:41.181000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006227433065901788421989137400637423828,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "KERNEL32.dll",
         "debug_codeview": {
           "guid": "ed45f433-c2c7-1171-3d0d-a1053eb5d867",
@@ -362,6 +1919,342 @@
           "guid": "ed45f433-c2c7-1171-3d0d-a1053eb5d867",
           "unknown": "400a55783752943a7ef9fef4",
           "timestamp": 2950605874
+        }
+      },
+      "10.0.18362.1_ddfc1912_29000_23a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3724286226,
+          "timestamp_iso": "2088-01-07 03:57:06",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 167936,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 145920,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "7b5e2f10-bf63-ab7f-fb6a-93e38e6125aa",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "7b5e2f10-bf63-ab7f-fb6a-93e38e6125aa",
+          "unknown": "f783450cdfc22556cd38aa9a",
+          "timestamp": 3724286226
+        }
+      },
+      "10.0.18362.86_d12f214a_b2000_b0498": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3509526858,
+          "timestamp_iso": "2081-03-18 12:34:18",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 729088,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 722072,
+        "file_version": "10.0.18362.86",
+        "product_version": "10.0.18362.86",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.18362.86 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.86"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8618a8ca093a1566bed7a25eb447174b0223d24e688c830025755c2c3b742872",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007422403364399690823907118500160733626,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1556083665.278,
+              "timestamp_iso": "2019-04-24 05:27:45.278000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006422224213048211980367725193529917689,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "b6f0e183-c96d-92a6-97ef-a1f4b153b815",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "b6f0e183-c96d-92a6-97ef-a1f4b153b815",
+          "unknown": "ec73e99cabb153a83a841ba2",
+          "timestamp": 3509526858
+        }
+      },
+      "10.0.18362.329_d0cecc10_b2000_b0570": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3503213584,
+          "timestamp_iso": "2081-01-04 10:53:04",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 729088,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 722288,
+        "file_version": "10.0.18362.329",
+        "product_version": "10.0.18362.329",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.18362.329 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.329"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3d007bb1dd131efa32c0b2e0711b4a976ae64669bfa938f8c51dbf7384e0576d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1566965060.748,
+              "timestamp_iso": "2019-08-28 04:04:20.748000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006227433065901788421989137400637423828,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "5a77de8c-e8d5-8731-f0ea-38f1c92f48d8",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "5a77de8c-e8d5-8731-f0ea-38f1c92f48d8",
+          "unknown": "5fb7738bd9f3b72a596b6f09",
+          "timestamp": 3503213584
+        }
+      },
+      "10.0.18362.418_ddfc1912_29000_23a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3724286226,
+          "timestamp_iso": "2088-01-07 03:57:06",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 167936,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 145920,
+        "file_version": "10.0.18362.418",
+        "product_version": "10.0.18362.418",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.418 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.418"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "7b5e2f10-bf63-ab7f-fb6a-93e38e6125aa",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "7b5e2f10-bf63-ab7f-fb6a-93e38e6125aa",
+          "unknown": "f783450cdfc22556cd38aa9a",
+          "timestamp": 3724286226
+        }
+      },
+      "10.0.18362.476_ddfc1912_29000_23a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3724286226,
+          "timestamp_iso": "2088-01-07 03:57:06",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 167936,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 145920,
+        "file_version": "10.0.18362.476",
+        "product_version": "10.0.18362.476",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.476 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.476"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "7b5e2f10-bf63-ab7f-fb6a-93e38e6125aa",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "7b5e2f10-bf63-ab7f-fb6a-93e38e6125aa",
+          "unknown": "f783450cdfc22556cd38aa9a",
+          "timestamp": 3724286226
+        }
+      },
+      "10.0.18362.535_ddfc1912_29000_23a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3724286226,
+          "timestamp_iso": "2088-01-07 03:57:06",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 167936,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 145920,
+        "file_version": "10.0.18362.535",
+        "product_version": "10.0.18362.535",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.535 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.535"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "7b5e2f10-bf63-ab7f-fb6a-93e38e6125aa",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "7b5e2f10-bf63-ab7f-fb6a-93e38e6125aa",
+          "unknown": "f783450cdfc22556cd38aa9a",
+          "timestamp": 3724286226
+        }
+      },
+      "10.0.18362.592_ddfc1912_29000_23a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3724286226,
+          "timestamp_iso": "2088-01-07 03:57:06",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 167936,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 145920,
+        "file_version": "10.0.18362.592",
+        "product_version": "10.0.18362.592",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.592 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.592"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "7b5e2f10-bf63-ab7f-fb6a-93e38e6125aa",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "7b5e2f10-bf63-ab7f-fb6a-93e38e6125aa",
+          "unknown": "f783450cdfc22556cd38aa9a",
+          "timestamp": 3724286226
+        }
+      },
+      "10.0.18362.657_1102fbeb_29000_23a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 285408235,
+          "timestamp_iso": "1979-01-17 08:03:55",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 167936,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 145920,
+        "file_version": "10.0.18362.657",
+        "product_version": "10.0.18362.657",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.657 (WinBuild.160101.0800)",
+          "InternalName": "kernel32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.657"
+        },
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "45ce7968-b5f5-9428-2398-d23b17d95701",
+          "age": 1,
+          "path": "kernel32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "45ce7968-b5f5-9428-2398-d23b17d95701",
+          "unknown": "2b42799f778792b6aae0601f",
+          "timestamp": 285408235
         }
       }
     }

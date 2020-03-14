@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1470112706,
-          "timestamp_iso": "2016-08-02 06:38:26",
+          "timestamp_iso": "2016-08-02 04:38:26",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 268435456,
@@ -26,6 +26,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.51"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b749dcb28230a96f0371c6f4ca67583ef9df81f8626f0dab94f11f2d29b07c27",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1470113239.434,
+              "timestamp_iso": "2016-08-02 04:47:19.434000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005820177221817502588499287232122716293,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "win32u.dll",
         "debug_codeview": {
           "guid": "4253c2d4-c64b-485e-ae88-5c92fa9f1489",
@@ -37,7 +57,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 3606618245,
-          "timestamp_iso": "2084-04-15 08:24:05",
+          "timestamp_iso": "2084-04-15 06:24:05",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 268435456,
@@ -58,6 +78,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "48c82d38a42c7c14e260bbe9a7660772ce2d0bf6dc26464e588803fa0e5cd30a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506658847.78,
+              "timestamp_iso": "2017-09-29 04:20:47.780000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005983252952945386114569575244197003429,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "win32u.dll",
         "debug_codeview": {
           "guid": "62db2ad7-c5e9-6713-ae1f-bd51cadfaa6e",
@@ -70,7 +110,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1227256772,
-          "timestamp_iso": "2008-11-21 09:39:32",
+          "timestamp_iso": "2008-11-21 08:39:32",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 268435456,
@@ -91,9 +131,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "baef7f780cce99234ef6440105c9dd4d7b04c5ca1d8f74c92b28fd2f24c68c36",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523449549.409,
+              "timestamp_iso": "2018-04-11 12:25:49.409000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006028822366486431458344729467831713966,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "win32u.dll",
         "debug_codeview": {
           "guid": "1d9ee40f-f390-553d-00e8-4f961239eca0",
+          "age": 1,
+          "path": "wwin32u.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_89df7d6c_17000_158f0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2313125228,
+          "timestamp_iso": "2043-04-20 06:47:08",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 268435456,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 17728
+        },
+        "file_size": 88304,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9cc16d8b5f939af508b00f0c002624c26abb19ff6e4abac564ded5b621ccd986",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536984322.267,
+              "timestamp_iso": "2018-09-15 04:05:22.267000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006255250095571111745631542615402873049,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "daeeb706-c311-5165-1a44-6cc6c57051ef",
           "age": 1,
           "path": "wwin32u.pdb"
         },
@@ -103,7 +216,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 2935654225,
-          "timestamp_iso": "2063-01-10 12:30:25",
+          "timestamp_iso": "2063-01-10 11:30:25",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 268435456,
@@ -124,6 +237,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "cfc93c77befe14491fa7a8ad8818c1baf817ddbbc75d13a6f791cbec17c07f9f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552958649.349,
+              "timestamp_iso": "2019-03-19 01:24:09.349000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006277201382232487817802877555127091421,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "win32u.dll",
         "debug_codeview": {
           "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
@@ -134,6 +267,519 @@
           "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
           "unknown": "af2700e617cd0c0db3d82ef5",
           "timestamp": 2935654225
+        }
+      },
+      "10.0.18362.175_aefa8751_17000_15cf0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2935654225,
+          "timestamp_iso": "2063-01-10 11:30:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 17728
+        },
+        "file_size": 89328,
+        "file_version": "10.0.18362.175",
+        "product_version": "10.0.18362.175",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.18362.175 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.175"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "52e6064733258a2f78b11881389f0652c26e314b929f0697a156ee5a7b38e14a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1559895358.08,
+              "timestamp_iso": "2019-06-07 08:15:58.080000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006277201382232487817802877555127091421,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "age": 1,
+          "path": "wwin32u.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "unknown": "af2700e617cd0c0db3d82ef5",
+          "timestamp": 2935654225
+        }
+      },
+      "10.0.18362.239_aefa8751_17000_15dc8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2935654225,
+          "timestamp_iso": "2063-01-10 11:30:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 17728
+        },
+        "file_size": 89544,
+        "file_version": "10.0.18362.239",
+        "product_version": "10.0.18362.239",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.18362.239 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.239"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "17e49726d008f20d75c70fbc8aa20b77c7ec6490464f300ea8c949d4d7c89502",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1561790277.108,
+              "timestamp_iso": "2019-06-29 06:37:57.108000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006227433065901788421989137400637423828,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "age": 1,
+          "path": "wwin32u.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "unknown": "af2700e617cd0c0db3d82ef5",
+          "timestamp": 2935654225
+        }
+      },
+      "10.0.18362.295_aefa8751_17000_15cf0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2935654225,
+          "timestamp_iso": "2063-01-10 11:30:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 17728
+        },
+        "file_size": 89328,
+        "file_version": "10.0.18362.295",
+        "product_version": "10.0.18362.295",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.18362.295 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.295"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "25e1948101876123de47d75ac42455adec9f7018aad8d36bd6633e945a24b39b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1565177677.35,
+              "timestamp_iso": "2019-08-07 11:34:37.350000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006422224213048211980367725193529917689,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "age": 1,
+          "path": "wwin32u.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "unknown": "af2700e617cd0c0db3d82ef5",
+          "timestamp": 2935654225
+        }
+      },
+      "10.0.18362.356_aefa8751_17000_15cf0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2935654225,
+          "timestamp_iso": "2063-01-10 11:30:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 17728
+        },
+        "file_size": 89328,
+        "file_version": "10.0.18362.356",
+        "product_version": "10.0.18362.356",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.18362.356 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.356"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9e517e167501ad43aef4a3d6865e75ea44af549ea18e69bf4273adcf0c6b1071",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1567584643.489,
+              "timestamp_iso": "2019-09-04 08:10:43.489000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006383992052285640962377209724945826034,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "age": 1,
+          "path": "wwin32u.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "unknown": "af2700e617cd0c0db3d82ef5",
+          "timestamp": 2935654225
+        }
+      },
+      "10.0.18362.387_aefa8751_17000_15dc8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2935654225,
+          "timestamp_iso": "2063-01-10 11:30:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 17728
+        },
+        "file_size": 89544,
+        "file_version": "10.0.18362.387",
+        "product_version": "10.0.18362.387",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.18362.387 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.387"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "2b2b252456874e34af173b311a0b95c08260b2f042257afb49c657c3af329c88",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569308302.699,
+              "timestamp_iso": "2019-09-24 06:58:22.699000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006443944535509037996450692236922847486,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "age": 1,
+          "path": "wwin32u.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "unknown": "af2700e617cd0c0db3d82ef5",
+          "timestamp": 2935654225
+        }
+      },
+      "10.0.18362.476_aefa8751_17000_15de0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2935654225,
+          "timestamp_iso": "2063-01-10 11:30:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 17728
+        },
+        "file_size": 89568,
+        "file_version": "10.0.18362.476",
+        "product_version": "10.0.18362.476",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.18362.476 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.476"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "80888f2ca29d181aa157754566ad0d8632241b4cdd3b11158f27b705feb8474d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1572675078.218,
+              "timestamp_iso": "2019-11-02 06:11:18.218000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006432883281896596520303285579915723003,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "age": 1,
+          "path": "wwin32u.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "unknown": "af2700e617cd0c0db3d82ef5",
+          "timestamp": 2935654225
+        }
+      },
+      "10.0.18362.535_aefa8751_17000_15dc0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2935654225,
+          "timestamp_iso": "2063-01-10 11:30:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 17728
+        },
+        "file_size": 89536,
+        "file_version": "10.0.18362.535",
+        "product_version": "10.0.18362.535",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.18362.535 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.535"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "cd756ba514f1ab694ed8ced7a7a2b0ef484f1d5bbe7b2dc4f5de6662d3998cd9",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1574928594.793,
+              "timestamp_iso": "2019-11-28 08:09:54.793000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006440095625129037045773517305489129725,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "age": 1,
+          "path": "wwin32u.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "unknown": "af2700e617cd0c0db3d82ef5",
+          "timestamp": 2935654225
+        }
+      },
+      "10.0.18362.592_aefa8751_17000_15dc0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2935654225,
+          "timestamp_iso": "2063-01-10 11:30:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 17728
+        },
+        "file_size": 89536,
+        "file_version": "10.0.18362.592",
+        "product_version": "10.0.18362.592",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.18362.592 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.592"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "90caf176070053ce026ecc2d159c68206b7bce11d13a9a9dadc364f302cc1c34",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1578037384.748,
+              "timestamp_iso": "2020-01-03 07:43:04.748000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006454958411117438441908337201136009472,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "age": 1,
+          "path": "wwin32u.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "cf6d6c9c-1d66-836c-529e-375fef89d5ca",
+          "unknown": "af2700e617cd0c0db3d82ef5",
+          "timestamp": 2935654225
+        }
+      },
+      "10.0.18362.657_6b5c1b19_17000_15cf0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1801198361,
+          "timestamp_iso": "2027-01-29 04:52:41",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 17728
+        },
+        "file_size": 89328,
+        "file_version": "10.0.18362.657",
+        "product_version": "10.0.18362.657",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Win32u",
+          "FileVersion": "10.0.18362.657 (WinBuild.160101.0800)",
+          "InternalName": "Win32u",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Win32u.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.657"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "be3ad7c7ee8e084d41b012d558be40ee4c287726a2fd4329b2c508d975f8adfe",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1581147591.54,
+              "timestamp_iso": "2020-02-08 07:39:51.540000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006534779485525121749671785204537098511,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "win32u.dll",
+        "debug_codeview": {
+          "guid": "c09ddfc9-6d57-a1cf-40f8-04df931a3c0c",
+          "age": 1,
+          "path": "wwin32u.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "c09ddfc9-6d57-a1cf-40f8-04df931a3c0c",
+          "unknown": "2d3750b89661484dc9508a26",
+          "timestamp": 1801198361
         }
       }
     }

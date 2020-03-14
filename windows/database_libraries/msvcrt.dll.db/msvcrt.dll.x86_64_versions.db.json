@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535038,
-          "timestamp_iso": "2009-07-14 03:30:38",
+          "timestamp_iso": "2009-07-14 01:30:38",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8793767936000,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635975,
-          "timestamp_iso": "2016-07-16 04:26:15",
+          "timestamp_iso": "2016-07-16 02:26:15",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 4564451328,
@@ -58,9 +58,81 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "7.0.14393.0"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7804304d5980081a93cbd51d92e349a6bd2c571ed9e0ecd607a220266b323dae",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006164897239981080551761366122451960008,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468638301.295,
+              "timestamp_iso": "2016-07-16 03:05:01.295000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005907799478196276915062834926962344086,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "msvcrt.dll",
         "debug_codeview": {
           "guid": "4a088ec0-6e01-435f-a64a-606ea9cd624b",
+          "age": 1,
+          "path": "msvcrt.pdb"
+        }
+      },
+      "7.0.14393.2457_5b7e2c5b_9e000_9b1c8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1534995547,
+          "timestamp_iso": "2018-08-23 03:39:07",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 4564451328,
+          "size_of_image": 647168,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 635336,
+        "file_version": "7.0.14393.2457",
+        "product_version": "10.0.14393.2457",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT CRT DLL",
+          "FileVersion": "7.0.14393.2457 (rs1_release_inmarket.180822-1743)",
+          "InternalName": "msvcrt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "7.0.14393.2457"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b916ed64549d227425e0c34bd2c0265fbc0b7eb381839f0cbb7400719a5ee469",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1534998232.861,
+              "timestamp_iso": "2018-08-23 04:23:52.861000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006004272612577052131129751449999769769,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "msvcrt.dll",
+        "debug_codeview": {
+          "guid": "bafc8c0a-0a76-48e0-a6c2-fc97b72a04b1",
           "age": 1,
           "path": "msvcrt.pdb"
         }
@@ -69,7 +141,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 543720080,
-          "timestamp_iso": "1987-03-26 02:21:20",
+          "timestamp_iso": "1987-03-26 01:21:20",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 4564451328,
@@ -90,6 +162,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "7.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b185c1ff352cf7cd0d5f176691df08f5a45e27a69c6666c990269062ddba75c9",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006959303205190478915959131686872023393,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506660024.458,
+              "timestamp_iso": "2017-09-29 04:40:24.458000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006004272612577052131129751449999769769,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "msvcrt.dll",
         "debug_codeview": {
           "guid": "92d35601-e618-3c93-f1eb-3a15be720bbc",
@@ -102,7 +194,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 543720080,
-          "timestamp_iso": "1987-03-26 02:21:20",
+          "timestamp_iso": "1987-03-26 01:21:20",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 4564451328,
@@ -123,6 +215,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "7.0.16299.125"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1761ab46da79fe12c778a5d84dac50f8d0279f405c9d5aff08b9d157d926ab51",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006959303205190478915959131686872023393,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1512689288.549,
+              "timestamp_iso": "2017-12-07 23:28:08.549000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005983252952945386114569575244197003429,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "msvcrt.dll",
         "debug_codeview": {
           "guid": "92d35601-e618-3c93-f1eb-3a15be720bbc",
@@ -135,7 +247,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1555801853,
-          "timestamp_iso": "2019-04-21 01:10:53",
+          "timestamp_iso": "2019-04-20 23:10:53",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 4564451328,
@@ -156,9 +268,135 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "7.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3d714014300edb22a14d5ea655db196f7c25d8f36c7d5f1fdac97ad8e7de61d5",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006965260811807912526108339212017205602,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421619.677,
+              "timestamp_iso": "2018-04-11 04:40:19.677000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006014856209010126895819358618454589611,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "msvcrt.dll",
         "debug_codeview": {
           "guid": "d6265247-309a-824b-989b-0487e235d743",
+          "age": 1,
+          "path": "msvcrt.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "7.0.17763.1_05c26c69_9e000_9bc68": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 96627817,
+          "timestamp_iso": "1973-01-23 09:03:37",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 4564451328,
+          "size_of_image": 647168,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 638056,
+        "file_version": "7.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT CRT DLL",
+          "FileVersion": "7.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "msvcrt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "7.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "30b969c96352c536c697cd39f567fcc6faeea12bd5cd7f4556d973bdbe3f3fff",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974905.905,
+              "timestamp_iso": "2018-09-15 01:28:25.905000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006344639187383471318282967299108372714,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "msvcrt.dll",
+        "debug_codeview": {
+          "guid": "97e165a3-e28a-5645-bb9a-295d9dbfbe90",
+          "age": 1,
+          "path": "msvcrt.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "7.0.17763.475_f362c2f9_9e000_9bda8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4083335929,
+          "timestamp_iso": "2099-05-24 19:58:49",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 4564451328,
+          "size_of_image": 647168,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 638376,
+        "file_version": "7.0.17763.475",
+        "product_version": "10.0.17763.475",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT CRT DLL",
+          "FileVersion": "7.0.17763.475 (WinBuild.160101.0800)",
+          "InternalName": "msvcrt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcrt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "7.0.17763.475"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a03813e0ec451135d40c63d3334352b2859af77b93f0bc30fdcff1e5d53801e6",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1554962877.046,
+              "timestamp_iso": "2019-04-11 06:07:57.046000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006416693731309555622055525374131962104,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "msvcrt.dll",
+        "debug_codeview": {
+          "guid": "b40d63cf-4e05-ff62-bddf-63550f5fbef5",
           "age": 1,
           "path": "msvcrt.pdb"
         },
@@ -168,7 +406,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 4122865623,
-          "timestamp_iso": "2100-08-25 10:27:03",
+          "timestamp_iso": "2100-08-25 08:27:03",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 4564451328,
@@ -189,6 +427,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "7.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9acf4a6ca31399777fc2c33da6f2e1451837f251988899d9210cb57d31c1ea3d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949185.231,
+              "timestamp_iso": "2019-03-18 22:46:25.231000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006227433065901788421989137400637423828,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "msvcrt.dll",
         "debug_codeview": {
           "guid": "1fea8db6-b57f-5fbf-a935-e090243420d0",

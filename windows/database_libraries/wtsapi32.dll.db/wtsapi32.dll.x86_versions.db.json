@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1208131956,
-          "timestamp_iso": "2008-04-14 02:12:36",
+          "timestamp_iso": "2008-04-14 00:12:36",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 1995767808,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1247533891,
-          "timestamp_iso": "2009-07-14 03:11:31",
+          "timestamp_iso": "2009-07-14 01:11:31",
           "coff_characteristics": 8450,
           "linker_version": "9.0",
           "image_base": 1070596096,
@@ -69,7 +69,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1468632456,
-          "timestamp_iso": "2016-07-16 03:27:36",
+          "timestamp_iso": "2016-07-16 01:27:36",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 805306368,
@@ -90,6 +90,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.0"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8bf58d6b7c22a2d40d487c79cd99e7183ca04cb396a3831ccbda6d09cacd31f8",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468634166.243,
+              "timestamp_iso": "2016-07-16 01:56:06.243000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005822715470823236671338026449219092614,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WTSAPI32.dll",
         "debug_codeview": {
           "guid": "4e42ee17-3029-485c-adb4-d927c209ab6b",
@@ -101,7 +121,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 711292153,
-          "timestamp_iso": "1992-07-16 15:09:13",
+          "timestamp_iso": "1992-07-16 13:09:13",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 805306368,
@@ -122,6 +142,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "54c00af8ceff4f2f4af84763b2a3a95fec42ddd118ffa9f2273e406a147b2d0f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506657096.601,
+              "timestamp_iso": "2017-09-29 03:51:36.601000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006034800106972072239421993029828870319,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WTSAPI32.dll",
         "debug_codeview": {
           "guid": "a269cfb9-dcd3-0329-dc73-df5d02b0d11d",
@@ -134,7 +174,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 2122975383,
-          "timestamp_iso": "2037-04-10 13:23:03",
+          "timestamp_iso": "2037-04-10 11:23:03",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 805306368,
@@ -155,9 +195,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "39c9501220287d29fbc75cdb19c1228fcefa4abce1e040cd668a6313483b7877",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523449666.875,
+              "timestamp_iso": "2018-04-11 12:27:46.875000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006072884709557757365460179650388951222,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WTSAPI32.dll",
         "debug_codeview": {
           "guid": "90d31687-da9b-0f3f-d598-9682abfa8605",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_bdc47eb4_f000_ce80": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3183771316,
+          "timestamp_iso": "2070-11-21 04:55:16",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 805306368,
+          "size_of_image": 61440,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 52864,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Remote Desktop Session Host Server SDK APIs",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7dcebaac63e410b40c6a2fa8fbb5c21927b950e27c87df9aff867820add56294",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536984223.338,
+              "timestamp_iso": "2018-09-15 04:03:43.338000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006315685287520738126567422446538850533,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "12c7d7c7-ca60-d313-bd1b-c57697247dff",
           "age": 1,
           "path": "wtsapi32.pdb"
         },
@@ -167,7 +280,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 3292935951,
-          "timestamp_iso": "2074-05-07 18:25:51",
+          "timestamp_iso": "2074-05-07 16:25:51",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 805306368,
@@ -188,6 +301,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3c23879ca1cc5f3a77f6b49253d3ca890da3c04262472a098fabd1f1f47f5513",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552958520.454,
+              "timestamp_iso": "2019-03-19 01:22:00.454000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006185481711636851350395440858077855948,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "WTSAPI32.dll",
         "debug_codeview": {
           "guid": "d2903f19-e0f3-3118-a7ad-6f88fa6fee73",

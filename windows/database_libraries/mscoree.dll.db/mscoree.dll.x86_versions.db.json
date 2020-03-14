@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1244092569,
-          "timestamp_iso": "2009-06-04 07:16:09",
+          "timestamp_iso": "2009-06-04 05:16:09",
           "coff_characteristics": 8450,
           "linker_version": "8.0",
           "image_base": 2030043136,
@@ -38,7 +38,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1468632824,
-          "timestamp_iso": "2016-07-16 03:33:44",
+          "timestamp_iso": "2016-07-16 01:33:44",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 268435456,
@@ -70,7 +70,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 3385113924,
-          "timestamp_iso": "2077-04-08 15:25:24",
+          "timestamp_iso": "2077-04-08 13:25:24",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 268435456,
@@ -103,7 +103,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 950012516,
-          "timestamp_iso": "2000-02-08 13:21:56",
+          "timestamp_iso": "2000-02-08 12:21:56",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 268435456,
@@ -132,11 +132,44 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1_d7e800e0_53000_4d200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3622306016,
+          "timestamp_iso": "2084-10-13 20:06:56",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 268435456,
+          "size_of_image": 339968,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 315904,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft .NET Runtime Execution Engine",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "mscoree.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "mscoree.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "mscoree.dll",
+        "debug_codeview": {
+          "guid": "cf94d095-29e2-a784-72a1-21a7a397dc86",
+          "age": 1,
+          "path": "mscoree.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_2cd14f73_52000_4d000": {
         "pe_header": {
           "machine": 332,
           "timestamp": 751914867,
-          "timestamp_iso": "1993-10-29 18:14:27",
+          "timestamp_iso": "1993-10-29 17:14:27",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 268435456,

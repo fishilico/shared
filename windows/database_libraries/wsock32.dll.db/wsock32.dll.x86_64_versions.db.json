@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535297,
-          "timestamp_iso": "2009-07-14 03:34:57",
+          "timestamp_iso": "2009-07-14 01:34:57",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8793677234176,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635991,
-          "timestamp_iso": "2016-07-16 04:26:31",
+          "timestamp_iso": "2016-07-16 02:26:31",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -69,7 +69,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 2835210108,
-          "timestamp_iso": "2059-11-04 23:21:48",
+          "timestamp_iso": "2059-11-04 22:21:48",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -102,7 +102,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1539204828,
-          "timestamp_iso": "2018-10-10 22:53:48",
+          "timestamp_iso": "2018-10-10 20:53:48",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -131,11 +131,44 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1_d425d79c_9000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3559249820,
+          "timestamp_iso": "2082-10-15 00:30:20",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 36864,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 32-Bit DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "wsock32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wsock32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "WSOCK32.dll",
+        "debug_codeview": {
+          "guid": "764e274f-4041-551b-940b-2d6bd6bbbf56",
+          "age": 1,
+          "path": "wsock32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_1f6dda6b_9000_4a00": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 527293035,
-          "timestamp_iso": "1986-09-17 00:17:15",
+          "timestamp_iso": "1986-09-16 22:17:15",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 6442450944,

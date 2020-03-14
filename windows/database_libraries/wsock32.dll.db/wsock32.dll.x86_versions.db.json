@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1208131952,
-          "timestamp_iso": "2008-04-14 02:12:32",
+          "timestamp_iso": "2008-04-14 00:12:32",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 1907163136,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1247533923,
-          "timestamp_iso": "2009-07-14 03:12:03",
+          "timestamp_iso": "2009-07-14 01:12:03",
           "coff_characteristics": 8450,
           "linker_version": "9.0",
           "image_base": 1070661632,
@@ -69,7 +69,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1468633438,
-          "timestamp_iso": "2016-07-16 03:43:58",
+          "timestamp_iso": "2016-07-16 01:43:58",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1390936064,
@@ -101,7 +101,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1047618621,
-          "timestamp_iso": "2003-03-14 06:10:21",
+          "timestamp_iso": "2003-03-14 05:10:21",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 1390936064,
@@ -134,7 +134,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1017361104,
-          "timestamp_iso": "2002-03-29 01:18:24",
+          "timestamp_iso": "2002-03-29 00:18:24",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 1390936064,
@@ -163,11 +163,44 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1_17a6f44d_8000_4000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 396817485,
+          "timestamp_iso": "1982-07-29 19:04:45",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1390936064,
+          "size_of_image": 32768,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 16384,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Socket 32-Bit DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "wsock32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wsock32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "WSOCK32.dll",
+        "debug_codeview": {
+          "guid": "b3d306e8-fe8d-c524-c1eb-d6d5f157a475",
+          "age": 1,
+          "path": "wsock32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_3b5489df_8000_4000": {
         "pe_header": {
           "machine": 332,
           "timestamp": 995396063,
-          "timestamp_iso": "2001-07-17 20:54:23",
+          "timestamp_iso": "2001-07-17 18:54:23",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 1390936064,

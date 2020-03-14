@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535206,
-          "timestamp_iso": "2009-07-14 03:33:26",
+          "timestamp_iso": "2009-07-14 01:33:26",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8793679200256,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468636017,
-          "timestamp_iso": "2016-07-16 04:26:57",
+          "timestamp_iso": "2016-07-16 02:26:57",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -69,7 +69,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468636033,
-          "timestamp_iso": "2016-07-16 04:27:13",
+          "timestamp_iso": "2016-07-16 02:27:13",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -97,11 +97,75 @@
           "path": "secur32.pdb"
         }
       },
+      "10.0.14393.2273_5ae40b73_9000_3e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1524894579,
+          "timestamp_iso": "2018-04-28 05:49:39",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 36864,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 15872,
+        "file_version": "10.0.14393.2273",
+        "product_version": "10.0.14393.2273",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.14393.2273 (rs1_release_1.180427-1811)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2273"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "5b32a90c-ff15-4f7b-adeb-2ee6e98b5e7a",
+          "age": 1,
+          "path": "secur32.pdb"
+        }
+      },
+      "10.0.14393.2273_5ae40b88_c000_6e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1524894600,
+          "timestamp_iso": "2018-04-28 05:50:00",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 49152,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 28160,
+        "file_version": "10.0.14393.2273",
+        "product_version": "10.0.14393.2273",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.14393.2273 (rs1_release_1.180427-1811)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2273"
+        },
+        "export_dll_name": "Secur32.dll",
+        "debug_codeview": {
+          "guid": "87895e7d-d867-4452-b1a0-8a2413f34ef7",
+          "age": 1,
+          "path": "secur32.pdb"
+        }
+      },
       "10.0.16299.15_9b090d38_9000_3c00": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 2601061688,
-          "timestamp_iso": "2052-06-03 23:08:08",
+          "timestamp_iso": "2052-06-03 21:08:08",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -134,7 +198,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3553398813,
-          "timestamp_iso": "2082-08-08 09:13:33",
+          "timestamp_iso": "2082-08-08 07:13:33",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -163,11 +227,77 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.16299.461_30f97ce7_c000_6c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 821656807,
+          "timestamp_iso": "1996-01-14 22:00:07",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 49152,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 27648,
+        "file_version": "10.0.16299.461",
+        "product_version": "10.0.16299.461",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.16299.461 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.461"
+        },
+        "export_dll_name": "Secur32.dll",
+        "debug_codeview": {
+          "guid": "c0274638-111b-7200-e872-e54c152bfc04",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.461_9b090d38_9000_3c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2601061688,
+          "timestamp_iso": "2052-06-03 21:08:08",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 36864,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 15360,
+        "file_version": "10.0.16299.461",
+        "product_version": "10.0.16299.461",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.16299.461 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.461"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "97e3478e-e3dd-4ba5-b4a2-dcd80eff9d88",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.17134.1_4a6316a3_c000_6c00": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 1248007843,
-          "timestamp_iso": "2009-07-19 14:50:43",
+          "timestamp_iso": "2009-07-19 12:50:43",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -196,11 +326,147 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17134.1_8de0d199_9000_3c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2380321177,
+          "timestamp_iso": "2045-06-06 00:19:37",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 36864,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 15360,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "9653f2f8-659d-ec32-6da7-3011d9f8035d",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_33ea9baa_c000_6c00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 871013290,
+          "timestamp_iso": "1997-08-08 04:08:10",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 49152,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 27648,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "Secur32.dll",
+        "debug_codeview": {
+          "guid": "691e94a6-edbf-6109-b658-5d524d6ae749",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_94a62229_b000_4e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2493915689,
+          "timestamp_iso": "2049-01-10 18:21:29",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 19968,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "932cc2f4-3294-0080-c311-8f061dab145b",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_4b50b225_b000_5000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1263579685,
+          "timestamp_iso": "2010-01-15 18:21:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 20480,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "unknown": "84757ca869c2b18450bd8409",
+          "timestamp": 1263579685
+        }
+      },
       "10.0.18362.1_71bb8e7a_c000_6c00": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 1908117114,
-          "timestamp_iso": "2030-06-19 18:31:54",
+          "timestamp_iso": "2030-06-19 16:31:54",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 6442450944,
@@ -231,6 +497,191 @@
           "guid": "4a3a7640-7d4e-89ff-5ddb-13891699f941",
           "unknown": "97bfe33c87b4c2bf5a7ba358",
           "timestamp": 1908117114
+        }
+      },
+      "10.0.18362.418_4b50b225_b000_5000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1263579685,
+          "timestamp_iso": "2010-01-15 18:21:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 20480,
+        "file_version": "10.0.18362.418",
+        "product_version": "10.0.18362.418",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.418 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.418"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "unknown": "84757ca869c2b18450bd8409",
+          "timestamp": 1263579685
+        }
+      },
+      "10.0.18362.476_4b50b225_b000_5000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1263579685,
+          "timestamp_iso": "2010-01-15 18:21:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 20480,
+        "file_version": "10.0.18362.476",
+        "product_version": "10.0.18362.476",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.476 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.476"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "unknown": "84757ca869c2b18450bd8409",
+          "timestamp": 1263579685
+        }
+      },
+      "10.0.18362.535_4b50b225_b000_5000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1263579685,
+          "timestamp_iso": "2010-01-15 18:21:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 20480,
+        "file_version": "10.0.18362.535",
+        "product_version": "10.0.18362.535",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.535 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.535"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "unknown": "84757ca869c2b18450bd8409",
+          "timestamp": 1263579685
+        }
+      },
+      "10.0.18362.592_4b50b225_b000_5000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1263579685,
+          "timestamp_iso": "2010-01-15 18:21:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 20480,
+        "file_version": "10.0.18362.592",
+        "product_version": "10.0.18362.592",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.592 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.592"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "unknown": "84757ca869c2b18450bd8409",
+          "timestamp": 1263579685
+        }
+      },
+      "10.0.18362.657_4b50b225_b000_5000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1263579685,
+          "timestamp_iso": "2010-01-15 18:21:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 20480,
+        "file_version": "10.0.18362.657",
+        "product_version": "10.0.18362.657",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.657 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.657"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "unknown": "84757ca869c2b18450bd8409",
+          "timestamp": 1263579685
         }
       }
     }

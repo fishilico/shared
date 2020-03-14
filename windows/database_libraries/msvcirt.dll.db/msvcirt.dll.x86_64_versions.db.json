@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535036,
-          "timestamp_iso": "2009-07-14 03:30:36",
+          "timestamp_iso": "2009-07-14 01:30:36",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8792483954688,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635038,
-          "timestamp_iso": "2016-07-16 04:10:38",
+          "timestamp_iso": "2016-07-16 02:10:38",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -69,7 +69,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3138328961,
-          "timestamp_iso": "2069-06-13 08:02:41",
+          "timestamp_iso": "2069-06-13 06:02:41",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -102,7 +102,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3240003749,
-          "timestamp_iso": "2072-09-02 03:02:29",
+          "timestamp_iso": "2072-09-02 01:02:29",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -131,11 +131,44 @@
         },
         "debug_reproducible": {}
       },
+      "7.0.17763.1_1b69297e_18000_14800": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 459876734,
+          "timestamp_iso": "1984-07-28 15:32:14",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 98304,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 83968,
+        "file_version": "7.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT IOStreams DLL",
+          "FileVersion": "7.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "msvcirt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcirt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "msvcirt.dll",
+        "debug_codeview": {
+          "guid": "fed41666-058f-1432-ba55-aa68a2e4eeb2",
+          "age": 1,
+          "path": "msvcirt.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "7.0.18362.1_f8191a82_18000_14800": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 4162394754,
-          "timestamp_iso": "2101-11-25 21:45:54",
+          "timestamp_iso": "2101-11-25 20:45:54",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 6442450944,

@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1208131774,
-          "timestamp_iso": "2008-04-14 02:09:34",
+          "timestamp_iso": "2008-04-14 00:09:34",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 2012282880,
@@ -33,11 +33,75 @@
           "path": "gdi32.pdb"
         }
       },
+      "5.1.2600.5698_49006fbe_49000_46000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1224765374,
+          "timestamp_iso": "2008-10-23 12:36:14",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2012282880,
+          "size_of_image": 299008,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 286720,
+        "file_version": "5.1.2600.5698",
+        "product_version": "5.1.2600.5698",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "5.1.2600.5698 (xpsp_sp3_gdr.081022-1932)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5698"
+        },
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "372c0f0e-08fb-456e-ab7b-4cb2b53e2795",
+          "age": 2,
+          "path": "gdi32.pdb"
+        }
+      },
+      "5.1.2600.5698_4900717e_49000_46000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1224765822,
+          "timestamp_iso": "2008-10-23 12:43:42",
+          "coff_characteristics": 8462,
+          "linker_version": "7.10",
+          "image_base": 2012282880,
+          "size_of_image": 299008,
+          "subsystem": 3,
+          "dll_characteristics": 0
+        },
+        "file_size": 286720,
+        "file_version": "5.1.2600.5698",
+        "product_version": "5.1.2600.5698",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "5.1.2600.5698 (xpsp_sp3_qfe.081022-1941)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5698"
+        },
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "00500219-4fa3-45b5-9574-93744a01376e",
+          "age": 2,
+          "path": "gdi32.pdb"
+        }
+      },
       "5.1.2600.6460_52555650_49000_46400": {
         "pe_header": {
           "machine": 332,
           "timestamp": 1381324368,
-          "timestamp_iso": "2013-10-09 15:12:48",
+          "timestamp_iso": "2013-10-09 13:12:48",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 2012282880,
@@ -69,7 +133,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1247533880,
-          "timestamp_iso": "2009-07-14 03:11:20",
+          "timestamp_iso": "2009-07-14 01:11:20",
           "coff_characteristics": 8450,
           "linker_version": "9.0",
           "image_base": 2108358656,
@@ -101,7 +165,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1473958602,
-          "timestamp_iso": "2016-09-15 18:56:42",
+          "timestamp_iso": "2016-09-15 16:56:42",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1297088512,
@@ -122,6 +186,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.206"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c47d91d095a5046c79b4b642719856d052783ba48c6983eb40e21c3577c6cb3c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1473960197.808,
+              "timestamp_iso": "2016-09-15 17:23:17.808000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005820177221817502588499287232122716293,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "GDI32.dll",
         "debug_codeview": {
           "guid": "e04d9aeb-7e31-40ca-8bd0-a75eedaa0e9f",
@@ -133,7 +217,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1498028116,
-          "timestamp_iso": "2017-06-21 08:55:16",
+          "timestamp_iso": "2017-06-21 06:55:16",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 1297088512,
@@ -154,9 +238,393 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.1378"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "35bd43419f162e036a02bb7aae464eb18a0ebadc5071da26bd8990f146bd51d2",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006487690083390668365393298609651319046,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1498030096.307,
+              "timestamp_iso": "2017-06-21 07:28:16.307000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005952745298349915514322722057632088223,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "GDI32.dll",
         "debug_codeview": {
           "guid": "f856c3de-1e80-472c-a080-ca02e3e50836",
+          "age": 1,
+          "path": "wgdi32.pdb"
+        }
+      },
+      "10.0.14393.2125_5a990a6e_2b000_29bc8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1519979118,
+          "timestamp_iso": "2018-03-02 08:25:18",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1297088512,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 17728
+        },
+        "file_size": 170952,
+        "file_version": "10.0.14393.2125",
+        "product_version": "10.0.14393.2125",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.2125 (rs1_release.180301-2139)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2125"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "27f9aa20f6011d5bc6a395d9542906d5c9a62caf97903267929310d29d2ca15d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1519980718.482,
+              "timestamp_iso": "2018-03-02 08:51:58.482000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005994211025790091665443654607388541095,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "d68f9884-7bde-4546-a40e-87f026ba7258",
+          "age": 1,
+          "path": "wgdi32.pdb"
+        }
+      },
+      "10.0.14393.2155_5a9e288d_2b000_29bc8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1520314509,
+          "timestamp_iso": "2018-03-06 05:35:09",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1297088512,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 17728
+        },
+        "file_size": 170952,
+        "file_version": "10.0.14393.2155",
+        "product_version": "10.0.14393.2155",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.2155 (rs1_release_1.180305-1842)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2155"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "61766658788d3a5e780f9360f3e2578b6832d011f461fdc70491f01a258273ea",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1520316271.281,
+              "timestamp_iso": "2018-03-06 06:04:31.281000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006072884709557757365460179650388951222,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "fd34e4ce-c484-4ff9-980c-e64b8e9c4743",
+          "age": 1,
+          "path": "wgdi32.pdb"
+        }
+      },
+      "10.0.14393.2312_5b1a0f0b_2b000_29bd0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1528434443,
+          "timestamp_iso": "2018-06-08 05:07:23",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1297088512,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 17728
+        },
+        "file_size": 170960,
+        "file_version": "10.0.14393.2312",
+        "product_version": "10.0.14393.2312",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.2312 (rs1_release.180607-1919)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2312"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "5c4677592d8fe221b5297ca9341e0b46a27a1aa3d5f6cbdf30bdd3099f908216",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1528435819.491,
+              "timestamp_iso": "2018-06-08 05:30:19.491000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005956368700127931421646078684015100064,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "028b6d0a-abd5-4a94-b8f8-03a66e460774",
+          "age": 1,
+          "path": "wgdi32.pdb"
+        }
+      },
+      "10.0.14393.2430_5b691be5_2b000_29bc8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1533615077,
+          "timestamp_iso": "2018-08-07 04:11:17",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1297088512,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 17728
+        },
+        "file_size": 170952,
+        "file_version": "10.0.14393.2430",
+        "product_version": "10.0.14393.2430",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.2430 (rs1_release_inmarket_aim.180806-1810)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2430"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "963951edf52987e7aa2af9902ba5284189c92f8a8bed6f76351cfd35d28fa98a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007467185747103657701035153531196146115,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1533616480.713,
+              "timestamp_iso": "2018-08-07 04:34:40.713000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006014856209010126895819358618454589611,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "6c06d85d-7072-4d38-a55f-47be440f82d8",
+          "age": 1,
+          "path": "wgdi32.pdb"
+        }
+      },
+      "10.0.14393.2485_5b84c5a0_2b000_29c18": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1535428000,
+          "timestamp_iso": "2018-08-28 03:46:40",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1297088512,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 17728
+        },
+        "file_size": 171032,
+        "file_version": "10.0.14393.2485",
+        "product_version": "10.0.14393.2485",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.2485 (rs1_release.180827-1809)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2485"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3784716d9f865348141c86ed6806b2bcd79edf8531b9a082f66d94f834faa289",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1535429103.859,
+              "timestamp_iso": "2018-08-28 04:05:03.859000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006174124268290832653895967923123519690,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "cb155345-8a99-4d76-85d9-fdb1ed7a9f4e",
+          "age": 1,
+          "path": "wgdi32.pdb"
+        }
+      },
+      "10.0.14393.2608_5bd13744_2b000_29b68": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1540437828,
+          "timestamp_iso": "2018-10-25 03:23:48",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1297088512,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 17728
+        },
+        "file_size": 170856,
+        "file_version": "10.0.14393.2608",
+        "product_version": "10.0.14393.2608",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.2608 (rs1_release.181024-1742)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2608"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "53f8a43efebe097eb957ccba9e47e810bb2c44c45d8a12d37697364761921a0c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1540439207.998,
+              "timestamp_iso": "2018-10-25 03:46:47.998000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006291748499475722860244241771436966112,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "32c7a811-cbed-45d6-8568-01696a9c8f5f",
+          "age": 1,
+          "path": "wgdi32.pdb"
+        }
+      },
+      "10.0.14393.2848_5c7f63e7_2b000_29b68": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1551852519,
+          "timestamp_iso": "2019-03-06 06:08:39",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1297088512,
+          "size_of_image": 176128,
+          "subsystem": 3,
+          "dll_characteristics": 17728
+        },
+        "file_size": 170856,
+        "file_version": "10.0.14393.2848",
+        "product_version": "10.0.14393.2848",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.14393.2848 (rs1_release.190305-1856)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2848"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8f413ca1d510ccf3bec11b8efe242693ccbf02fa5fb1d3dc0027db5a41fa3320",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1551854040.369,
+              "timestamp_iso": "2019-03-06 06:34:00.369000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006405871818669909035022975445745271030,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "b67d9b4c-61f5-46b5-b790-7251eb32b3bb",
           "age": 1,
           "path": "wgdi32.pdb"
         }
@@ -165,7 +633,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 3212535344,
-          "timestamp_iso": "2071-10-20 04:55:44",
+          "timestamp_iso": "2071-10-20 02:55:44",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 1297088512,
@@ -186,9 +654,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7796276a8574321c72dfdbccd80154652482f7fbaca008fe789a77c6466d19bf",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506658860.676,
+              "timestamp_iso": "2017-09-29 04:21:00.676000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005992121074566940565467069433526616230,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "GDI32.dll",
         "debug_codeview": {
           "guid": "c983ef7e-9623-121d-effb-ee2099716636",
+          "age": 1,
+          "path": "wgdi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.665_d1f1153b_22000_20b10": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3522237755,
+          "timestamp_iso": "2081-08-12 15:22:35",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 1297088512,
+          "size_of_image": 139264,
+          "subsystem": 3,
+          "dll_characteristics": 17728
+        },
+        "file_size": 133904,
+        "file_version": "10.0.16299.665",
+        "product_version": "10.0.16299.665",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.16299.665 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.665"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "30d2811b177829d7a33152dc272401353399c92e864ccd0312096c7e8c70b192",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1535433553.513,
+              "timestamp_iso": "2018-08-28 05:19:13.513000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006315685287520738126567422446538850533,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "73ca6d72-e3bd-60f8-1d2c-77140e14df56",
           "age": 1,
           "path": "wgdi32.pdb"
         },
@@ -198,7 +739,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 3904342144,
-          "timestamp_iso": "2093-09-21 05:29:04",
+          "timestamp_iso": "2093-09-21 03:29:04",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 1297088512,
@@ -219,6 +760,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "f50ccf53cfbdbccddf70916f240c3bf2c355ba1ae9900006e2288c01fbe3cf9b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523420736.707,
+              "timestamp_iso": "2018-04-11 04:25:36.707000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005994211025790091665443654607388541095,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "GDI32.dll",
         "debug_codeview": {
           "guid": "ffa1c1ca-4d46-eaa1-a7aa-91abc0305f3b",
@@ -231,7 +792,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1089524925,
-          "timestamp_iso": "2004-07-11 07:48:45",
+          "timestamp_iso": "2004-07-11 05:48:45",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 1297088512,
@@ -252,9 +813,135 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.285"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "bbe2ea8b29f3599c2f677a0ba3a4aa92fedb3cd5866ac0ff05bcae088c1c8d40",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1535686108.2,
+              "timestamp_iso": "2018-08-31 03:28:28.200000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006219194096656949141909507585173618898,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "GDI32.dll",
         "debug_codeview": {
           "guid": "b66867e9-415c-3efd-6e7b-732438b9fc40",
+          "age": 1,
+          "path": "wgdi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_1c1f7575_23000_21c88": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 471823733,
+          "timestamp_iso": "1984-12-13 22:08:53",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1297088512,
+          "size_of_image": 143360,
+          "subsystem": 3,
+          "dll_characteristics": 17728
+        },
+        "file_size": 138376,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b8b9b8c735184daf77300d94bd8932e3aa91f3f9142045469ab4a964436ab6a5",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536973388.53,
+              "timestamp_iso": "2018-09-15 01:03:08.530000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006286484351334364513552117212125331679,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "8728f1f8-3c4c-c9ef-465e-d23333a38e53",
+          "age": 1,
+          "path": "wgdi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.592_abe94558_23000_21a88": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2884191576,
+          "timestamp_iso": "2061-05-24 20:19:36",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1297088512,
+          "size_of_image": 143360,
+          "subsystem": 3,
+          "dll_characteristics": 17728
+        },
+        "file_size": 137864,
+        "file_version": "10.0.17763.592",
+        "product_version": "10.0.17763.592",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "GDI Client DLL",
+          "FileVersion": "10.0.17763.592 (WinBuild.160101.0800)",
+          "InternalName": "gdi32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.592"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "00db621a701e2b291c728ddb18f49c0087b4ed48215b54561128b68431ce93cb",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1560591563.084,
+              "timestamp_iso": "2019-06-15 09:39:23.084000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006378773755481047253127761656536891633,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "274c409a-e7cd-0ad8-cb01-8f9aa53dbb17",
           "age": 1,
           "path": "wgdi32.pdb"
         },
@@ -264,7 +951,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1384099711,
-          "timestamp_iso": "2013-11-10 17:08:31",
+          "timestamp_iso": "2013-11-10 16:08:31",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 1297088512,
@@ -285,6 +972,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "571d22156e6c1efed2070fbdaff1156881c3c61a1860eff17aa38917ca06d460",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552948069.668,
+              "timestamp_iso": "2019-03-18 22:27:49.668000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006299012123045852398368710328328388834,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "GDI32.dll",
         "debug_codeview": {
           "guid": "ec26b172-19af-25a2-5315-08809fb3c882",

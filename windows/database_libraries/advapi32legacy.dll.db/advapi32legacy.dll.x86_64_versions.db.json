@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635863,
-          "timestamp_iso": "2016-07-16 04:24:23",
+          "timestamp_iso": "2016-07-16 02:24:23",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -26,6 +26,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.0"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "62494a095bef64f6516600e6122a84b89db4d02f577fedbb0afd3cd4460c6d95",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468638054.137,
+              "timestamp_iso": "2016-07-16 03:00:54.137000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005828960897895665892946494512961683591,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ADVAPI32LEGACY.dll",
         "debug_codeview": {
           "guid": "569f84ac-e9e7-40fb-b8ab-f1ba6bd3c0fa",
@@ -37,7 +57,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1507513981,
-          "timestamp_iso": "2017-10-09 03:53:01",
+          "timestamp_iso": "2017-10-09 01:53:01",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -58,9 +78,81 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.1794"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "117ff60ea5c5cb27b0032615a10adfdb6b1701f9fbded520b4df157603a71c44",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1507516450.211,
+              "timestamp_iso": "2017-10-09 02:34:10.211000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005983252952945386114569575244197003429,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ADVAPI32LEGACY.dll",
         "debug_codeview": {
           "guid": "17634092-60fc-4b6f-a5c2-c522ee208749",
+          "age": 1,
+          "path": "advapi32legacy.pdb"
+        }
+      },
+      "10.0.14393.2515_5b885518_5b000_57288": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1535661336,
+          "timestamp_iso": "2018-08-30 20:35:36",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 372736,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 357000,
+        "file_version": "10.0.14393.2515",
+        "product_version": "10.0.14393.2515",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.14393.2515 (rs1_release_1.180830-1044)",
+          "InternalName": "advapi32legacy.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32legacy.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2515"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ee14318b33c1a38e073284182ab928147662ad60a3f095792498ca3457b29ed0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1535664005.605,
+              "timestamp_iso": "2018-08-30 21:20:05.605000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006313329502312636893723982272946766052,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ADVAPI32LEGACY.dll",
+        "debug_codeview": {
+          "guid": "4e00c6df-7ada-4808-9558-06b5d46402c4",
           "age": 1,
           "path": "advapi32legacy.pdb"
         }
@@ -69,7 +161,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 2581007610,
-          "timestamp_iso": "2051-10-15 20:33:30",
+          "timestamp_iso": "2051-10-15 18:33:30",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -90,6 +182,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "f54376a7db34c6427c290f20232be6a7ba29389fb309b1e3622e9385733ae71b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506659446.6,
+              "timestamp_iso": "2017-09-29 04:30:46.600000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006011477359085519567498317751679713450,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "ADVAPI32LEGACY.dll",
         "debug_codeview": {
           "guid": "a36b407e-e075-d26c-3d41-808897420cb7",
@@ -97,6 +209,275 @@
           "path": "advapi32legacy.pdb"
         },
         "debug_reproducible": {}
+      },
+      "10.0.16299.696_be4421c2_62000_5e7f8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3192136130,
+          "timestamp_iso": "2071-02-26 00:28:50",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 401408,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 387064,
+        "file_version": "10.0.16299.696",
+        "product_version": "10.0.16299.696",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.16299.696 (WinBuild.160101.0800)",
+          "InternalName": "advapi32legacy.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32legacy.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.696"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "bfbe88880c7c602c1a1584bec0249870f22f365ddd6122baf28f037e49c435c7",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1535677407.357,
+              "timestamp_iso": "2018-08-31 01:03:27.357000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006213351220777337113178139318827352273,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ADVAPI32LEGACY.dll",
+        "debug_codeview": {
+          "guid": "43a5dab8-a247-308f-6a12-61e22ccdb6b9",
+          "age": 1,
+          "path": "advapi32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_787d8849_62000_5f7a0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2021492809,
+          "timestamp_iso": "2034-01-21 21:46:49",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 401408,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 391072,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "advapi32legacy.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32legacy.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "0aa4cca0b464e7aced1f3968dd3c850f127f50dcabfc0740a9897b4c1080351d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421567.363,
+              "timestamp_iso": "2018-04-11 04:39:27.363000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006034800106972072239421993029828870319,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ADVAPI32LEGACY.dll",
+        "debug_codeview": {
+          "guid": "290156d8-2c47-8499-97ed-524ea5b5a196",
+          "age": 1,
+          "path": "advapi32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.319_48793b50_62000_5f740": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1215904592,
+          "timestamp_iso": "2008-07-12 23:16:32",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 401408,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 390976,
+        "file_version": "10.0.17134.319",
+        "product_version": "10.0.17134.319",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.17134.319 (WinBuild.160101.0800)",
+          "InternalName": "advapi32legacy.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32legacy.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.319"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3a75a75cf445154519bf7f1dc2975501ec4ad13ffafa5643709de7c4c6e1f542",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536379056.687,
+              "timestamp_iso": "2018-09-08 03:57:36.687000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006258449564004396144229146648146608346,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ADVAPI32LEGACY.dll",
+        "debug_codeview": {
+          "guid": "d790afa2-5e95-9b45-171a-04b049c166fa",
+          "age": 1,
+          "path": "advapi32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_0b352bf3_63000_60d68": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 188034035,
+          "timestamp_iso": "1975-12-17 07:40:35",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 405504,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 396648,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "advapi32legacy.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32legacy.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d00586386a44432b7ef8697a4b4fb3af51c538a4b6f9f3f500bbf61db4527492",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974973.823,
+              "timestamp_iso": "2018-09-15 01:29:33.823000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006296505950700641569240494447876112609,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ADVAPI32LEGACY.dll",
+        "debug_codeview": {
+          "guid": "32a69d3c-789b-477a-453b-533338f1310d",
+          "age": 1,
+          "path": "advapi32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_edb24946_63000_60f68": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3987884358,
+          "timestamp_iso": "2096-05-15 01:39:18",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 405504,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 397160,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "advapi32legacy.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32legacy.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e842a20dd9e9c7a0ac6f04828c57119b8e4877f3ec735a24a7ecb636d9a943e7",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949247.793,
+              "timestamp_iso": "2019-03-18 22:47:27.793000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006291748499475722860244241771436966112,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ADVAPI32LEGACY.dll",
+        "debug_codeview": {
+          "guid": "4f4ab683-601c-bb5b-271b-82faca34c5a2",
+          "age": 1,
+          "path": "advapi32legacy.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "4f4ab683-601c-bb5b-271b-82faca34c5a2",
+          "unknown": "3027aa8ff557dd636ff39591",
+          "timestamp": 3987884358
+        }
       }
     }
   }

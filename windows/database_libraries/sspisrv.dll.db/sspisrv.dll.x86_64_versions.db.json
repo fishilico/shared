@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535254,
-          "timestamp_iso": "2009-07-14 03:34:14",
+          "timestamp_iso": "2009-07-14 01:34:14",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8792423727104,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468636102,
-          "timestamp_iso": "2016-07-16 04:28:22",
+          "timestamp_iso": "2016-07-16 02:28:22",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -69,7 +69,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1505701951,
-          "timestamp_iso": "2017-09-18 04:32:31",
+          "timestamp_iso": "2017-09-18 02:32:31",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -97,11 +97,75 @@
           "path": "sspisrv.pdb"
         }
       },
+      "10.0.14393.2363_5b31b0cc_c000_7000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1529983180,
+          "timestamp_iso": "2018-06-26 03:19:40",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 49152,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 28672,
+        "file_version": "10.0.14393.2363",
+        "product_version": "10.0.14393.2363",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "LSA SSPI RPC interface DLL",
+          "FileVersion": "10.0.14393.2363 (rs1_release.180625-1741)",
+          "InternalName": "SspiSrv.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SspiSrv.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2363"
+        },
+        "export_dll_name": "SspiSrv.dll",
+        "debug_codeview": {
+          "guid": "304c3f3f-3cf9-433a-8e58-d367cf6aa9f0",
+          "age": 1,
+          "path": "sspisrv.pdb"
+        }
+      },
+      "10.0.14393.2580_5bbdaf58_c000_7000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1539157848,
+          "timestamp_iso": "2018-10-10 07:50:48",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 49152,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 28672,
+        "file_version": "10.0.14393.2580",
+        "product_version": "10.0.14393.2580",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "LSA SSPI RPC interface DLL",
+          "FileVersion": "10.0.14393.2580 (rs1_release_inmarket.181009-1745)",
+          "InternalName": "SspiSrv.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SspiSrv.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2580"
+        },
+        "export_dll_name": "SspiSrv.dll",
+        "debug_codeview": {
+          "guid": "45c2912e-8fea-4f06-88bf-eed2574ffd3f",
+          "age": 1,
+          "path": "sspisrv.pdb"
+        }
+      },
       "10.0.16299.15_57fdf4b9_b000_7000": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 1476261049,
-          "timestamp_iso": "2016-10-12 10:30:49",
+          "timestamp_iso": "2016-10-12 08:30:49",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -130,11 +194,77 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.16299.19_57fdf4b9_b000_7000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1476261049,
+          "timestamp_iso": "2016-10-12 08:30:49",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 28672,
+        "file_version": "10.0.16299.19",
+        "product_version": "10.0.16299.19",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "LSA SSPI RPC interface DLL",
+          "FileVersion": "10.0.16299.19 (WinBuild.160101.0800)",
+          "InternalName": "SspiSrv.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SspiSrv.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.19"
+        },
+        "export_dll_name": "SspiSrv.dll",
+        "debug_codeview": {
+          "guid": "70669533-3682-b13c-95c5-cba8fc078a26",
+          "age": 1,
+          "path": "sspisrv.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.755_96286c21_b000_7000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2519231521,
+          "timestamp_iso": "2049-10-30 18:32:01",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 28672,
+        "file_version": "10.0.16299.755",
+        "product_version": "10.0.16299.755",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "LSA SSPI RPC interface DLL",
+          "FileVersion": "10.0.16299.755 (WinBuild.160101.0800)",
+          "InternalName": "SspiSrv.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SspiSrv.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.755"
+        },
+        "export_dll_name": "SspiSrv.dll",
+        "debug_codeview": {
+          "guid": "1c0e2b29-a09d-df22-9862-7045ec311234",
+          "age": 1,
+          "path": "sspisrv.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.17134.1_5815e9c7_b000_7000": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 1477831111,
-          "timestamp_iso": "2016-10-30 13:38:31",
+          "timestamp_iso": "2016-10-30 12:38:31",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -167,7 +297,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247730570,
-          "timestamp_iso": "2009-07-16 09:49:30",
+          "timestamp_iso": "2009-07-16 07:49:30",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -196,11 +326,44 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1_c9a01a51_c000_7200": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3382712913,
+          "timestamp_iso": "2077-03-11 18:28:33",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 49152,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 29184,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "LSA SSPI RPC interface DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "SspiSrv.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SspiSrv.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "SspiSrv.dll",
+        "debug_codeview": {
+          "guid": "f66ffcb7-71c6-1ac7-b369-f68227131322",
+          "age": 1,
+          "path": "sspisrv.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_c788bc32_c000_7200": {
         "pe_header": {
           "machine": 34404,
           "timestamp": 3347627058,
-          "timestamp_iso": "2076-01-30 17:24:18",
+          "timestamp_iso": "2076-01-30 16:24:18",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 6442450944,

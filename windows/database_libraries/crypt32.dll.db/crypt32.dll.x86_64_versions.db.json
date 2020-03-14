@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247534992,
-          "timestamp_iso": "2009-07-14 03:29:52",
+          "timestamp_iso": "2009-07-14 01:29:52",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8793941344256,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635212,
-          "timestamp_iso": "2016-07-16 04:13:32",
+          "timestamp_iso": "2016-07-16 02:13:32",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -58,6 +58,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.0"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "bb83890c92b59b732f90d44f5ad67fd90f7ee48dee938ecc6d177d8323fbd75e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468637841.274,
+              "timestamp_iso": "2016-07-16 02:57:21.274000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005828960897895665892946494512961683591,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CRYPT32.dll",
         "debug_codeview": {
           "guid": "ece6af07-f876-4f26-9811-d7cb3e43dd53",
@@ -69,7 +89,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1476502553,
-          "timestamp_iso": "2016-10-15 05:35:53",
+          "timestamp_iso": "2016-10-15 03:35:53",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -90,6 +110,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.351"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "92253bcf41f9d90b90a73bc9b3090696acb8d80356da499d142e9f1307559c7d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1476505804.683,
+              "timestamp_iso": "2016-10-15 04:30:04.683000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006055653896543131424439373582817034419,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CRYPT32.dll",
         "debug_codeview": {
           "guid": "3f7a1da4-7fde-4dc0-a914-1e2e8fafb231",
@@ -101,7 +141,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1493336273,
-          "timestamp_iso": "2017-04-28 01:37:53",
+          "timestamp_iso": "2017-04-27 23:37:53",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -122,9 +162,185 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.1198"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "66cac6a07b7c8fe191912ec3d04f081bebc176206dcd12b32735a227ce2dfbea",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006487690083390668365393298609651319046,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1493339923.311,
+              "timestamp_iso": "2017-04-28 00:38:43.311000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006061038740404971435211883170444083380,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CRYPT32.dll",
         "debug_codeview": {
           "guid": "a8bb5e5c-7cf5-4259-8127-9dadf2c8a6af",
+          "age": 1,
+          "path": "crypt32.pdb"
+        }
+      },
+      "10.0.14393.2214_5ac2f665_1c9000_1c4328": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1522726501,
+          "timestamp_iso": "2018-04-03 03:35:01",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1871872,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1852200,
+        "file_version": "10.0.14393.2214",
+        "product_version": "10.0.14393.2214",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.14393.2214 (rs1_release_1.180402-1758)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2214"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1142f63c6bf83c06e51089efd132483879eab4fabcc93d90bf017cd15610128e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1522729308.87,
+              "timestamp_iso": "2018-04-03 04:21:48.870000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006072884709557757365460179650388951222,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "378eaee6-7cc7-4a2a-9c02-507df6dc089f",
+          "age": 1,
+          "path": "crypt32.pdb"
+        }
+      },
+      "10.0.14393.3324_5dbb7de5_1c9000_1c4398": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1572568549,
+          "timestamp_iso": "2019-11-01 00:35:49",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1871872,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1852312,
+        "file_version": "10.0.14393.3324",
+        "product_version": "10.0.14393.3324",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.14393.3324 (rs1_release.191031-1734)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3324"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a0032bd03293d3b7045e73cd51e61f3d5f09efc56cff0944c0519743cd96136c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008038958621238808792023937920828178993,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1572568572.49,
+              "timestamp_iso": "2019-11-01 00:36:12.490000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006462103426455033798114803425914913025,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "707e5327-c080-48e1-9dab-853a3e6306ff",
+          "age": 1,
+          "path": "crypt32.pdb"
+        }
+      },
+      "10.0.14393.3442_5dfc4ba7_1c9000_1c50c8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1576815527,
+          "timestamp_iso": "2019-12-20 04:18:47",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 1871872,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1855688,
+        "file_version": "10.0.14393.3442",
+        "product_version": "10.0.14393.3442",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.14393.3442 (rs1_release.191219-1727)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3442"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "584c7db5c7d13212bcffe1aa01a5bd79b98c475b1cda0dcb8c9c413bf83a9c20",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1576818617.255,
+              "timestamp_iso": "2019-12-20 05:10:17.255000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006493195827542816622927440104967373063,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "1cfeb418-e404-4d2f-bae0-1f87728dbeda",
           "age": 1,
           "path": "crypt32.pdb"
         }
@@ -133,7 +349,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 47253515,
-          "timestamp_iso": "1971-07-01 22:58:35",
+          "timestamp_iso": "1971-07-01 21:58:35",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -154,9 +370,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ce80c56d18f4ee1a7de0bf1c5ee58969967dd89c2ef2fcc1fe142c246b485c48",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506659320.879,
+              "timestamp_iso": "2017-09-29 04:28:40.879000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006011477359085519567498317751679713450,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CRYPT32.dll",
         "debug_codeview": {
           "guid": "9c887dac-587e-ce2d-99c3-fda23f8739a3",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.402_bb1a53fb_1ce000_1c9818": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3139064827,
+          "timestamp_iso": "2069-06-21 18:27:07",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 1892352,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1873944,
+        "file_version": "10.0.16299.402",
+        "product_version": "10.0.16299.402",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.16299.402 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.402"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7fa38f11834835db9d3be3dcd52d15eb052427f37409af231223d3a04d4945f8",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523827755.56,
+              "timestamp_iso": "2018-04-15 21:29:15.560000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006025928075304506519251440873651568813,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "bd9b51a6-4401-fd5c-fe1c-cdc61de13260",
           "age": 1,
           "path": "crypt32.pdb"
         },
@@ -166,7 +455,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 30622050,
-          "timestamp_iso": "1970-12-21 11:07:30",
+          "timestamp_iso": "1970-12-21 10:07:30",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -187,9 +476,294 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ce99dc0c6b679e43afaa2df0d773e78fe498fe57105d06fe3b629f8d005d8a46",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421468.938,
+              "timestamp_iso": "2018-04-11 04:37:48.938000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006034800106972072239421993029828870319,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CRYPT32.dll",
         "debug_codeview": {
           "guid": "dbacdb16-5ed5-ce5d-b420-234acae574db",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1130_fd1eab48_1e2000_1deb60": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4246645576,
+          "timestamp_iso": "2104-07-27 23:46:16",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1974272,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1960800,
+        "file_version": "10.0.17134.1130",
+        "product_version": "10.0.17134.1130",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.17134.1130 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1130"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "846171b70013b45f11a695c0e7ed16fb18eb525f624f1119ba1c64b647486aa4",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1573180738.638,
+              "timestamp_iso": "2019-11-08 02:38:58.638000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006467623191412556535549339364036182274,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "16f870cb-efdf-1856-b836-a46ce30c1f80",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1246_a38d07ff_1e2000_1df890": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2743928831,
+          "timestamp_iso": "2056-12-13 10:27:11",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 1974272,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1964176,
+        "file_version": "10.0.17134.1246",
+        "product_version": "10.0.17134.1246",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.17134.1246 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1246"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c1b3bb23b8b1a00b952c2e00f5dca9fb4aff64242237c4d6759b311ad0561d5e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1578369568.789,
+              "timestamp_iso": "2020-01-07 03:59:28.789000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006493195827542816622927440104967373063,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "cfc1070e-0b48-8573-75bd-b87ea144adcd",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_b2fbbe58_1db000_1d7f90": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3002842712,
+          "timestamp_iso": "2065-02-26 02:58:32",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 1945600,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1933200,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "cb3103cfc4100eff26fcca80f051adb0be490f071402266108887829783ba943",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974990.185,
+              "timestamp_iso": "2018-09-15 01:29:50.185000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006244962191294843678316232850330878167,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "1490dce1-c79b-d455-aaee-84ae422e772f",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.864_b2fbbe58_1db000_1d8060": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3002842712,
+          "timestamp_iso": "2065-02-26 02:58:32",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 1945600,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1933408,
+        "file_version": "10.0.17763.864",
+        "product_version": "10.0.17763.864",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.17763.864 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.864"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9cda97d9c29a25b1efdb01baa3f535e86d23691a1f40c4ef62ad5bddf0e1e9a0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1573183904.785,
+              "timestamp_iso": "2019-11-08 03:31:44.785000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006450063303566776419683477421161447679,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "1490dce1-c79b-d455-aaee-84ae422e772f",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.973_5546f275_1dc000_1d8c88": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1430712949,
+          "timestamp_iso": "2015-05-04 04:15:49",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 1949696,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1936520,
+        "file_version": "10.0.17763.973",
+        "product_version": "10.0.17763.973",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.17763.973 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.973"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d1ce7390f8008e9d1ceead02c6eec76f2edec4d5f4ad3c6629567094bb593085",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1578099464.385,
+              "timestamp_iso": "2020-01-04 00:57:44.385000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006467623191412556535549339364036182274,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "e62273dc-5e98-5747-d4fc-ac32a04b666e",
           "age": 1,
           "path": "crypt32.pdb"
         },
@@ -199,7 +773,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 135099696,
-          "timestamp_iso": "1974-04-13 16:41:36",
+          "timestamp_iso": "1974-04-13 15:41:36",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 6442450944,
@@ -220,6 +794,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "998315c5a4d0a929652ee642d5d4aced05f254bfc03a7e8e364c0bc43e743b61",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949267.559,
+              "timestamp_iso": "2019-03-18 22:47:47.559000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006244962191294843678316232850330878167,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "CRYPT32.dll",
         "debug_codeview": {
           "guid": "8c840cbc-1c63-bfb7-6d5f-915d330d5166",
@@ -230,6 +824,120 @@
           "guid": "8c840cbc-1c63-bfb7-6d5f-915d330d5166",
           "unknown": "7b38ccd289730e163d0ca04e",
           "timestamp": 135099696
+        }
+      },
+      "10.0.18362.476_080d7530_149000_143fd8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 135099696,
+          "timestamp_iso": "1974-04-13 15:41:36",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 1347584,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1327064,
+        "file_version": "10.0.18362.476",
+        "product_version": "10.0.18362.476",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.18362.476 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.476"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "118bb36cb97c78e93fdc10530fe97bccf94ac25f17d2bb5ad3114cc5db4fd1ea",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1572666831.212,
+              "timestamp_iso": "2019-11-02 03:53:51.212000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006474618943676559360178350755718103299,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "8c840cbc-1c63-bfb7-6d5f-915d330d5166",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "8c840cbc-1c63-bfb7-6d5f-915d330d5166",
+          "unknown": "7b38ccd289730e163d0ca04e",
+          "timestamp": 135099696
+        }
+      },
+      "10.0.18362.592_0e128cc8_149000_144f08": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 236096712,
+          "timestamp_iso": "1977-06-25 14:25:12",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 1347584,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1330952,
+        "file_version": "10.0.18362.592",
+        "product_version": "10.0.18362.592",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Crypto API32",
+          "FileVersion": "10.0.18362.592 (WinBuild.160101.0800)",
+          "InternalName": "CRYPT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "CRYPT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.592"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4dbe1de2d86f8ed8280d6d7368509888f91c251fe859e5b8fbd202bec7212699",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1578028485.952,
+              "timestamp_iso": "2020-01-03 05:14:45.952000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006507891765450833654085412261965332746,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CRYPT32.dll",
+        "debug_codeview": {
+          "guid": "214cdcf5-653c-044b-e169-5042e80de6ed",
+          "age": 1,
+          "path": "crypt32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "214cdcf5-653c-044b-e169-5042e80de6ed",
+          "unknown": "c9f845cf366b7892723b5e1a",
+          "timestamp": 236096712
         }
       }
     }

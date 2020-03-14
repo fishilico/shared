@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535253,
-          "timestamp_iso": "2009-07-14 03:34:13",
+          "timestamp_iso": "2009-07-14 01:34:13",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8792546082816,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1473224369,
-          "timestamp_iso": "2016-09-07 06:59:29",
+          "timestamp_iso": "2016-09-07 04:59:29",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -58,6 +58,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.187"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "077a9a7bb3b81ea1a533cd1752a042181f86599185ebdd9889192dc201e03db3",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1473226902.135,
+              "timestamp_iso": "2016-09-07 05:41:42.135000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005923269635981731922479693574715736217,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "SspiCli.dll",
         "debug_codeview": {
           "guid": "9ac2d9a4-91e2-44e8-acb4-e07c1710c391",
@@ -69,7 +89,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1481276585,
-          "timestamp_iso": "2016-12-09 10:43:05",
+          "timestamp_iso": "2016-12-09 09:43:05",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -90,6 +110,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.576"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "dde4a022e5d473e1587d095f99b55707f1db3fa6565ac7a7cb7facb3cd5925d3",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006487690083390668365393298609651319046,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1481279257.09,
+              "timestamp_iso": "2016-12-09 10:27:37.090000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005967766594069328071360617029667127458,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "SspiCli.dll",
         "debug_codeview": {
           "guid": "99ff92cf-8bac-47a5-81c3-71967c575bb8",
@@ -101,7 +141,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1505701836,
-          "timestamp_iso": "2017-09-18 04:30:36",
+          "timestamp_iso": "2017-09-18 02:30:36",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -122,9 +162,133 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.1770"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9537a7ec296c6f93e77b36e5bb2d4a050a5e4e2bd7075db75bfeec65a66214b4",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1505703915.509,
+              "timestamp_iso": "2017-09-18 03:05:15.509000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005940913810468936980230840501709832349,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "SspiCli.dll",
         "debug_codeview": {
           "guid": "a7d55fde-8e75-4c3f-88ed-afce8c8540ae",
+          "age": 1,
+          "path": "sspicli.pdb"
+        }
+      },
+      "10.0.14393.2363_5b31af7a_2c000_2a1f0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1529982842,
+          "timestamp_iso": "2018-06-26 03:14:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 180224,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 172528,
+        "file_version": "10.0.14393.2363",
+        "product_version": "10.0.14393.2363",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.14393.2363 (rs1_release.180625-1741)",
+          "InternalName": "sspicli.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "sspicli.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2363"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ede3549a5e080e211b97f271f29f938bd445120945540da65fd0ce0f9ff94eb5",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1529985360.993,
+              "timestamp_iso": "2018-06-26 03:56:00.993000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006055653896543131424439373582817034419,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SspiCli.dll",
+        "debug_codeview": {
+          "guid": "beef2b81-0f42-4abd-81e8-c99a1ad32f9c",
+          "age": 1,
+          "path": "sspicli.pdb"
+        }
+      },
+      "10.0.14393.2580_5bbdaed2_2c000_2a478": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1539157714,
+          "timestamp_iso": "2018-10-10 07:48:34",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 180224,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 173176,
+        "file_version": "10.0.14393.2580",
+        "product_version": "10.0.14393.2580",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.14393.2580 (rs1_release_inmarket.181009-1745)",
+          "InternalName": "sspicli.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "sspicli.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2580"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9957d80cffb4e55f17a021099982aa1bc756ee7943e673a40e945168b9bc7b71",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1539160213.507,
+              "timestamp_iso": "2018-10-10 08:30:13.507000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006181034441660578512511571782260490443,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SspiCli.dll",
+        "debug_codeview": {
+          "guid": "f234a3b7-60ac-43c8-a7cd-0980ca73578b",
           "age": 1,
           "path": "sspicli.pdb"
         }
@@ -133,7 +297,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 400534426,
-          "timestamp_iso": "1982-09-10 21:33:46",
+          "timestamp_iso": "1982-09-10 19:33:46",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -154,9 +318,188 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b381fafef8d1fb1e031ee1ba4bbb642810b9d8064c903331c521134e4b0a62d5",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506659762.153,
+              "timestamp_iso": "2017-09-29 04:36:02.153000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006034800106972072239421993029828870319,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "SspiCli.dll",
         "debug_codeview": {
           "guid": "d19dae22-38a5-43b6-8bdf-7f285162e6ac",
+          "age": 1,
+          "path": "sspicli.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.19_17dfab9a_30000_2d298": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 400534426,
+          "timestamp_iso": "1982-09-10 19:33:46",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 196608,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 184984,
+        "file_version": "10.0.16299.19",
+        "product_version": "10.0.16299.19",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.16299.19 (WinBuild.160101.0800)",
+          "InternalName": "sspicli.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "sspicli.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.19"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d2a8f60b582b076215eab3e5d53a96b5a2ebdfbaf8bf9d2603fda660ae54567f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1507618609.952,
+              "timestamp_iso": "2017-10-10 06:56:49.952000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006004272612577052131129751449999769769,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SspiCli.dll",
+        "debug_codeview": {
+          "guid": "d19dae22-38a5-43b6-8bdf-7f285162e6ac",
+          "age": 1,
+          "path": "sspicli.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.98_a7849cb8_30000_2d298": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2810485944,
+          "timestamp_iso": "2059-01-22 18:32:24",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 196608,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 184984,
+        "file_version": "10.0.16299.98",
+        "product_version": "10.0.16299.98",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.16299.98 (WinBuild.160101.0800)",
+          "InternalName": "sspicli.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "sspicli.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.98"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "dfdf80c26d1e387eea64c70d150750f325dccf340928b394bb9b96a1d37450f8",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1511703125.427,
+              "timestamp_iso": "2017-11-26 13:32:05.427000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006025928075304506519251440873651568813,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SspiCli.dll",
+        "debug_codeview": {
+          "guid": "84fb0963-de6d-3eab-c154-615668fa489e",
+          "age": 1,
+          "path": "sspicli.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.125_a7849cb8_30000_2d298": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2810485944,
+          "timestamp_iso": "2059-01-22 18:32:24",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 196608,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 184984,
+        "file_version": "10.0.16299.125",
+        "product_version": "10.0.16299.125",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.16299.125 (WinBuild.160101.0800)",
+          "InternalName": "sspicli.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "sspicli.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.125"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8f2d430cf1ef5b87815f9e1a05c81ee3a280b59cf010263a6b46400ec17c60a7",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1512689237.999,
+              "timestamp_iso": "2017-12-07 23:27:17.999000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005980436734501164110551909556100792484,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SspiCli.dll",
+        "debug_codeview": {
+          "guid": "84fb0963-de6d-3eab-c154-615668fa489e",
           "age": 1,
           "path": "sspicli.pdb"
         },
@@ -166,7 +509,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 2810485944,
-          "timestamp_iso": "2059-01-22 19:32:24",
+          "timestamp_iso": "2059-01-22 18:32:24",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -187,9 +530,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.192"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9b8444aad9c45f3501e80283ab6c4b29b250d4249288ea5aa7c4ee54cf37fad4",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1514810551.584,
+              "timestamp_iso": "2018-01-01 12:42:31.584000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006004272612577052131129751449999769769,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "SspiCli.dll",
         "debug_codeview": {
           "guid": "84fb0963-de6d-3eab-c154-615668fa489e",
+          "age": 1,
+          "path": "sspicli.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.755_57483333_30000_2d320": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1464349491,
+          "timestamp_iso": "2016-05-27 11:44:51",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 196608,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 185120,
+        "file_version": "10.0.16299.755",
+        "product_version": "10.0.16299.755",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.16299.755 (WinBuild.160101.0800)",
+          "InternalName": "sspicli.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "sspicli.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.755"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e55e9fd5009f230eb40f542002d4160be1b62104b0dfa7b9b7ad3448c3c6fa16",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1539148299.728,
+              "timestamp_iso": "2018-10-10 05:11:39.728000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006181034441660578512511571782260490443,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SspiCli.dll",
+        "debug_codeview": {
+          "guid": "2a4b5f2c-2218-f30b-c7f8-6b7936657530",
           "age": 1,
           "path": "sspicli.pdb"
         },
@@ -199,7 +615,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 3143604628,
-          "timestamp_iso": "2069-08-13 09:30:28",
+          "timestamp_iso": "2069-08-13 07:30:28",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -220,6 +636,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "41cf1191a28d827b16aa3eb8309c4c5809f3eb2258374c6cbbb6dcdad58aadc0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421390.161,
+              "timestamp_iso": "2018-04-11 04:36:30.161000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006011477359085519567498317751679713450,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "SspiCli.dll",
         "debug_codeview": {
           "guid": "bc37ee21-0f8e-69f6-970e-92357d7a54fd",
@@ -232,7 +668,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 87484490,
-          "timestamp_iso": "1972-10-09 14:14:50",
+          "timestamp_iso": "1972-10-09 13:14:50",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -253,9 +689,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.376"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "209696b0cda2418e629d5922e88a191f6f6db5d990d48294c1d18da9610cd910",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1540107931.745,
+              "timestamp_iso": "2018-10-21 07:45:31.745000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006181034441660578512511571782260490443,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "SspiCli.dll",
         "debug_codeview": {
           "guid": "267b5165-a686-733a-689f-6e911a8c1fca",
+          "age": 1,
+          "path": "sspicli.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_ebd3b7f6_2f000_2b818": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3956520950,
+          "timestamp_iso": "2095-05-18 01:35:50",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 192512,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 178200,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Security Support Provider Interface",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "sspicli.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "sspicli.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "11d24e546e27decdcc0798e7ef40ef864c1f860b7e72b2d63d70f77aab4a0f19",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974932.927,
+              "timestamp_iso": "2018-09-15 01:28:52.927000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006258449564004396144229146648146608346,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SspiCli.dll",
+        "debug_codeview": {
+          "guid": "638ba48d-49f4-465d-f48e-4fd95f3d6229",
           "age": 1,
           "path": "sspicli.pdb"
         },
@@ -265,7 +774,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 621642292,
-          "timestamp_iso": "1989-09-13 00:24:52",
+          "timestamp_iso": "1989-09-12 22:24:52",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 6442450944,
@@ -286,6 +795,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "cc50226db9cd205498a54704ad0d7186c7f4523181e4460e893dde57eac832ef",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949185.832,
+              "timestamp_iso": "2019-03-18 22:46:25.832000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006224866911140363727416942500769693907,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "SspiCli.dll",
         "debug_codeview": {
           "guid": "823d5a41-e0d7-02a7-9c98-a0a257924f9e",

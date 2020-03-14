@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1247535073,
-          "timestamp_iso": "2009-07-14 03:31:13",
+          "timestamp_iso": "2009-07-14 01:31:13",
           "coff_characteristics": 8226,
           "linker_version": "9.0",
           "image_base": 8793689030656,
@@ -37,7 +37,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635983,
-          "timestamp_iso": "2016-07-16 04:26:23",
+          "timestamp_iso": "2016-07-16 02:26:23",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -58,6 +58,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.0"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b879c523ff978aa5308aab6fe27cf6b2d2a83d914c8a8b31c1927642c1885f47",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468637817.817,
+              "timestamp_iso": "2016-07-16 02:56:57.817000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005813437433842179757424496005382930564,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "NETAPI32.dll",
         "debug_codeview": {
           "guid": "2c19b8cc-88ff-43bf-b455-fab913b82181",
@@ -69,7 +89,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1488935149,
-          "timestamp_iso": "2017-03-08 02:05:49",
+          "timestamp_iso": "2017-03-08 01:05:49",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -90,6 +110,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ce1241e2bf80b28f99ecc790396c3f7ffa0b15d280a8a97218f216f9628fd939",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506659295.708,
+              "timestamp_iso": "2017-09-29 04:28:15.708000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006028822366486431458344729467831713966,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "NETAPI32.dll",
         "debug_codeview": {
           "guid": "4d55a490-d0a5-8c41-cda6-93bbe1dde99d",
@@ -102,7 +142,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1872713081,
-          "timestamp_iso": "2029-05-06 00:04:41",
+          "timestamp_iso": "2029-05-05 22:04:41",
           "coff_characteristics": 8226,
           "linker_version": "14.12",
           "image_base": 6442450944,
@@ -123,9 +163,82 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.17134.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "6e2cbdf5ed3dec11260f1ba84995c776c56a239e531e001d37e57fbd673b88d1",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421697.976,
+              "timestamp_iso": "2018-04-11 04:41:37.976000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005983252952945386114569575244197003429,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "NETAPI32.dll",
         "debug_codeview": {
           "guid": "95868917-911a-1282-e821-2777042c68a3",
+          "age": 1,
+          "path": "netapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_7d10a2eb_17000_13ad8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2098242283,
+          "timestamp_iso": "2036-06-28 05:04:43",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 94208,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 80600,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Win32 API DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "NetApi32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "NetApi32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "f1bee5af1cd3c2b7b10d8e81090980bea3d342badab7e6713098f8abe93334e6",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974994.922,
+              "timestamp_iso": "2018-09-15 01:29:54.922000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006270086489318507512702959215762735324,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "NETAPI32.dll",
+        "debug_codeview": {
+          "guid": "e8589591-096f-d79d-bf8b-ce4dc03ed07b",
           "age": 1,
           "path": "netapi32.pdb"
         },
@@ -135,7 +248,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 2995314806,
-          "timestamp_iso": "2064-12-01 00:53:26",
+          "timestamp_iso": "2064-11-30 23:53:26",
           "coff_characteristics": 8226,
           "linker_version": "14.15",
           "image_base": 6442450944,
@@ -156,6 +269,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.1"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d39751374595a389c918ce185413e6c883462a2435749049f3b1dc5095ddab01",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949267.121,
+              "timestamp_iso": "2019-03-18 22:47:47.121000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006244962191294843678316232850330878167,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "NETAPI32.dll",
         "debug_codeview": {
           "guid": "c3a76a36-87ef-d47c-3ffe-e98657b196bf",

@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1468635467,
-          "timestamp_iso": "2016-07-16 04:17:47",
+          "timestamp_iso": "2016-07-16 02:17:47",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -26,6 +26,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.0"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b9887aefad98ebdd038036fe5067dd6cda411b8771eba37c4d5a2d0794f94144",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006105779745639062495276140166222184636,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468637830.283,
+              "timestamp_iso": "2016-07-16 02:57:10.283000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005813437433842179757424496005382930564,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "kernel32legacy.dll",
         "debug_codeview": {
           "guid": "57f12b60-b281-4039-8039-837fb8ebbc5f",
@@ -37,7 +57,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 1493337282,
-          "timestamp_iso": "2017-04-28 01:54:42",
+          "timestamp_iso": "2017-04-27 23:54:42",
           "coff_characteristics": 8226,
           "linker_version": "14.0",
           "image_base": 6442450944,
@@ -58,9 +78,237 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.14393.1198"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4baf369fb54ffcfe29eb820b16e6c149dca16acbaa771d12f81200b394b4a79e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006487690083390668365393298609651319046,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1493339896.01,
+              "timestamp_iso": "2017-04-28 00:38:16.010000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006041642375592752458241260536108941488,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "kernel32legacy.dll",
         "debug_codeview": {
           "guid": "c3e5217d-64b4-4d50-94b9-94d1a3a0d98c",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        }
+      },
+      "10.0.14393.2189_5abdaeaa_45000_43d78": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1522380458,
+          "timestamp_iso": "2018-03-30 03:27:38",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 282624,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 277880,
+        "file_version": "10.0.14393.2189",
+        "product_version": "10.0.14393.2189",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2189 (rs1_release.180329-1711)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2189"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1b966fae2be7647a5e7167a38de45df9f95b4cc0194ec8c137daa28f7dea6b19",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1522383260.855,
+              "timestamp_iso": "2018-03-30 04:14:20.855000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005992121074566940565467069433526616230,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "4a56673a-f5b5-44e5-a190-b5bad81c940b",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        }
+      },
+      "10.0.14393.2214_5ac2f780_45000_43d70": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1522726784,
+          "timestamp_iso": "2018-04-03 03:39:44",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 282624,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 277872,
+        "file_version": "10.0.14393.2214",
+        "product_version": "10.0.14393.2214",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2214 (rs1_release_1.180402-1758)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2214"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3b5c256b037f240ba9902d8acfab884466a8e88d5bacea48476a546568015842",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007058743458373801553307728047813689716,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1522729292.694,
+              "timestamp_iso": "2018-04-03 04:21:32.694000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005983252952945386114569575244197003429,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "37f0e52e-0dc2-492a-b237-25a2d965e7f4",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        }
+      },
+      "10.0.14393.2758_5c304a10_46000_43f38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1546668560,
+          "timestamp_iso": "2019-01-05 06:09:20",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 286720,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 278328,
+        "file_version": "10.0.14393.2758",
+        "product_version": "10.0.14393.2758",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2758 (rs1_release_1.190104-1904)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2758"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "22603a5f409fda9e205cdb4d6e37cf3d7226bdbedf814cf4f18a80e845cc9734",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1546671342.441,
+              "timestamp_iso": "2019-01-05 06:55:42.441000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006247143371544273385941052987352809688,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "ee0885ea-d68b-4491-8399-ce9b28ee7435",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        }
+      },
+      "10.0.14393.2969_5ccd15de_46000_44008": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1556944350,
+          "timestamp_iso": "2019-05-04 04:32:30",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 286720,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 278536,
+        "file_version": "10.0.14393.2969",
+        "product_version": "10.0.14393.2969",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.2969 (rs1_release.190503-1820)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2969"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7d5ac72628c0cf8d812ce356bd6cca3ec24a95dfe120d4876cc7a63b84327e6c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1556947059.441,
+              "timestamp_iso": "2019-05-04 05:17:39.441000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006234411017493581681117567214623391957,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "b7d2baef-bf20-49af-83e4-0a6d4a0ad47a",
           "age": 1,
           "path": "kernel32legacy.pdb"
         }
@@ -69,7 +317,7 @@
         "pe_header": {
           "machine": 34404,
           "timestamp": 4227527751,
-          "timestamp_iso": "2103-12-19 18:15:51",
+          "timestamp_iso": "2103-12-19 17:15:51",
           "coff_characteristics": 8226,
           "linker_version": "14.10",
           "image_base": 6442450944,
@@ -90,6 +338,26 @@
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.16299.15"
         },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "28a00872ab7336f54957aca2a1c0fa76b21be48fb405b189253406d41c0e621b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007052381354788495777714261830945210739,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506659467.378,
+              "timestamp_iso": "2017-09-29 04:31:07.378000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006014856209010126895819358618454589611,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
         "export_dll_name": "kernel32legacy.dll",
         "debug_codeview": {
           "guid": "e3084ad5-7c62-e511-3961-2202e9fc8985",
@@ -97,6 +365,597 @@
           "path": "kernel32legacy.pdb"
         },
         "debug_reproducible": {}
+      },
+      "10.0.16299.1004_93476690_45000_44350": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2470930064,
+          "timestamp_iso": "2048-04-19 17:27:44",
+          "coff_characteristics": 8226,
+          "linker_version": "14.10",
+          "image_base": 6442450944,
+          "size_of_image": 282624,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 279376,
+        "file_version": "10.0.16299.1004",
+        "product_version": "10.0.16299.1004",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.16299.1004 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.1004"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "47653f13037c3887c35a6433afc3f85c2f574587b6680aa31ae9a3224bb24959",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007472683741446268887799680575811355076,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1550371795.861,
+              "timestamp_iso": "2019-02-17 02:49:55.861000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006383992052285640962377209724945826034,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "259bf990-1332-4b97-e3d4-8d681117a84a",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_177bf318_47000_44c10": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 393999128,
+          "timestamp_iso": "1982-06-27 04:12:08",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 290816,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 281616,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b1ecfcbd673991b18edccc577acd159996a41f0c3d89913ad95f3312a9c299f3",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006965260811807912526108339212017205602,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421532.156,
+              "timestamp_iso": "2018-04-11 04:38:52.156000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006025928075304506519251440873651568813,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "9dad03e6-a86e-6ae5-4f78-128d091eb2c3",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.556_93e2dae1_47000_44db0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2481117921,
+          "timestamp_iso": "2048-08-15 15:25:21",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 290816,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 282032,
+        "file_version": "10.0.17134.556",
+        "product_version": "10.0.17134.556",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17134.556 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.556"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1b5a19bd084b9ab55b77a020cc0de44bc287480916bb17b303f8703be8330a0c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007422403364399690823907118500160733626,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547012347.428,
+              "timestamp_iso": "2019-01-09 05:39:07.428000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006247143371544273385941052987352809688,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "da57d480-80c9-36c2-0ade-5aaf4056c9f9",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.753_587525ed_47000_44db0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1484072429,
+          "timestamp_iso": "2017-01-10 18:20:29",
+          "coff_characteristics": 8226,
+          "linker_version": "14.12",
+          "image_base": 6442450944,
+          "size_of_image": 290816,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 282032,
+        "file_version": "10.0.17134.753",
+        "product_version": "10.0.17134.753",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17134.753 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.753"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ab03d8a397dc51cb91eedaa269bcd6f01c0699b207168a10ce99e91c56c6d09d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1555650376.344,
+              "timestamp_iso": "2019-04-19 05:06:16.344000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006378773755481047253127761656536891633,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "54ed1a0e-ddbf-21c6-9aed-e25cdfc82bb7",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_61ad05dd_47000_453b0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1638729181,
+          "timestamp_iso": "2021-12-05 18:33:01",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 290816,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 283568,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "664a4212178854b7ed778fe2388d3eb44c90b23b539ec2bd28ca854b3ba43c63",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974987.434,
+              "timestamp_iso": "2018-09-15 01:29:47.434000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006296505950700641569240494447876112609,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "1888e097-c172-3bf6-5aa8-f2b7104d6ea9",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.292_0d710331_47000_45480": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 225510193,
+          "timestamp_iso": "1977-02-23 01:43:13",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 290816,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 283776,
+        "file_version": "10.0.17763.292",
+        "product_version": "10.0.17763.292",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.292 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.292"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "20ce3ea96c3d096bfd801a4a75e96ec639341093e3cbe58989082a58984a3e44",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547619834.536,
+              "timestamp_iso": "2019-01-16 06:23:54.536000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006219194096656949141909507585173618898,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "d8e7d6a4-8ff0-5d3c-62f2-ed4a52f8a4f0",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.404_0bd30c25_47000_453b0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 198380581,
+          "timestamp_iso": "1976-04-15 01:43:01",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 290816,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 283568,
+        "file_version": "10.0.17763.404",
+        "product_version": "10.0.17763.404",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.404 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.404"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "95fbbb2cddc7fb2bbf6db3e380ba9facfe0f34918d283d0d0cb5b96acee44fdd",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1553837267.752,
+              "timestamp_iso": "2019-03-29 05:27:47.752000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006383992052285640962377209724945826034,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "f2987667-6f21-1728-068f-02faa72b8bd3",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.439_c63e8f90_47000_45488": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3325988752,
+          "timestamp_iso": "2075-05-25 05:45:52",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 290816,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 283784,
+        "file_version": "10.0.17763.439",
+        "product_version": "10.0.17763.439",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.439 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.439"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ceeba3446e532690b7eabd346b282ee347424e553a88659d606827284dd347c0",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1556348353.682,
+              "timestamp_iso": "2019-04-27 06:59:13.682000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006224866911140363727416942500769693907,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "6d1f7a78-6f30-4bfd-6ff6-9a0a78e112b0",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.557_c63e8f90_47000_453b0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3325988752,
+          "timestamp_iso": "2075-05-25 05:45:52",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 290816,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 283568,
+        "file_version": "10.0.17763.557",
+        "product_version": "10.0.17763.557",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.557 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.557"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "73b697d93412dbd91835bd1af99b99f14963a9329624b6ee826da8e081fc81c7",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1559884062.699,
+              "timestamp_iso": "2019-06-07 05:07:42.699000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006410621141498778959725553674937696503,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "6d1f7a78-6f30-4bfd-6ff6-9a0a78e112b0",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_8800cb7b_47000_44fb0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2281753467,
+          "timestamp_iso": "2042-04-22 04:24:27",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 290816,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 282544,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "09e76eaadb13ee92421fd961bc5e91eb4caf1fc07bf91e7cc21407a546352c93",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949251.598,
+              "timestamp_iso": "2019-03-18 22:47:31.598000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006299012123045852398368710328328388834,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "4402819b-5dd0-fbae-e802-4962e138bd9c",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "4402819b-5dd0-fbae-e802-4962e138bd9c",
+          "unknown": "30a55f73819e536908ed9bd0",
+          "timestamp": 2281753467
+        }
+      },
+      "10.0.18362.86_0822ff21_47000_44fb0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 136511265,
+          "timestamp_iso": "1974-04-29 23:47:45",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 290816,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 282544,
+        "file_version": "10.0.18362.86",
+        "product_version": "10.0.18362.86",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.18362.86 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.86"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "2840aaa7a3a77d2e7f150b6d6edc4c363e83f3ac045bf53087f078b76e152509",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1556070902.596,
+              "timestamp_iso": "2019-04-24 01:55:02.596000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006247143371544273385941052987352809688,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "kernel32legacy.dll",
+        "debug_codeview": {
+          "guid": "665847ac-81c0-5012-b0bc-02bb347282f8",
+          "age": 1,
+          "path": "kernel32legacy.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "665847ac-81c0-5012-b0bc-02bb347282f8",
+          "unknown": "72c5e68b00b63a083fe19589",
+          "timestamp": 136511265
+        }
       }
     }
   }

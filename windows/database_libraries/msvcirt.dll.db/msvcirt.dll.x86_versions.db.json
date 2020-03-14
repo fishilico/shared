@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 998112824,
-          "timestamp_iso": "2001-08-18 07:33:44",
+          "timestamp_iso": "2001-08-18 05:33:44",
           "coff_characteristics": 8462,
           "linker_version": "7.0",
           "image_base": 1889861632,
@@ -29,7 +29,7 @@
         "export_dll_name": "msvcirt.dll",
         "debug_codeview_timed": {
           "timestamp": 998081202,
-          "timestamp_iso": "2001-08-17 22:46:42",
+          "timestamp_iso": "2001-08-17 20:46:42",
           "age": 1,
           "path": "msvcirt.pdb"
         }
@@ -38,7 +38,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1208111460,
-          "timestamp_iso": "2008-04-13 20:31:00",
+          "timestamp_iso": "2008-04-13 18:31:00",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 4194304,
@@ -70,7 +70,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1208131732,
-          "timestamp_iso": "2008-04-14 02:08:52",
+          "timestamp_iso": "2008-04-14 00:08:52",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 1618739200,
@@ -102,7 +102,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1247533677,
-          "timestamp_iso": "2009-07-14 03:07:57",
+          "timestamp_iso": "2009-07-14 01:07:57",
           "coff_characteristics": 8450,
           "linker_version": "9.0",
           "image_base": 55705600,
@@ -134,7 +134,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1468632448,
-          "timestamp_iso": "2016-07-16 03:27:28",
+          "timestamp_iso": "2016-07-16 01:27:28",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 268435456,
@@ -166,7 +166,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 3576705900,
-          "timestamp_iso": "2083-05-05 03:25:00",
+          "timestamp_iso": "2083-05-05 01:25:00",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 268435456,
@@ -199,7 +199,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 4070648751,
-          "timestamp_iso": "2098-12-29 00:45:51",
+          "timestamp_iso": "2098-12-28 23:45:51",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 268435456,
@@ -228,11 +228,44 @@
         },
         "debug_reproducible": {}
       },
+      "7.0.17763.1_b0ac2224_14000_fc00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2964070948,
+          "timestamp_iso": "2063-12-05 09:02:28",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 268435456,
+          "size_of_image": 81920,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 64512,
+        "file_version": "7.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT IOStreams DLL",
+          "FileVersion": "7.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "msvcirt.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "msvcirt.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "msvcirt.dll",
+        "debug_codeview": {
+          "guid": "8d0f2dff-92bd-9aac-1c91-a165dbe53d09",
+          "age": 1,
+          "path": "msvcirt.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "7.0.18362.1_7c589b87_13000_fa00": {
         "pe_header": {
           "machine": 332,
           "timestamp": 2086181767,
-          "timestamp_iso": "2036-02-09 15:56:07",
+          "timestamp_iso": "2036-02-09 14:56:07",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 268435456,

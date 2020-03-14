@@ -5,7 +5,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1208131865,
-          "timestamp_iso": "2008-04-14 02:11:05",
+          "timestamp_iso": "2008-04-14 00:11:05",
           "coff_characteristics": 8462,
           "linker_version": "7.10",
           "image_base": 1591541760,
@@ -35,7 +35,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1247533776,
-          "timestamp_iso": "2009-07-14 03:09:36",
+          "timestamp_iso": "2009-07-14 01:09:36",
           "coff_characteristics": 8450,
           "linker_version": "9.0",
           "image_base": 50069504,
@@ -65,7 +65,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1473957813,
-          "timestamp_iso": "2016-09-15 18:43:33",
+          "timestamp_iso": "2016-09-15 16:43:33",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 268435456,
@@ -95,7 +95,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1478082684,
-          "timestamp_iso": "2016-11-02 11:31:24",
+          "timestamp_iso": "2016-11-02 10:31:24",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 268435456,
@@ -123,11 +123,75 @@
           "path": "olepro32.pdb"
         }
       },
+      "10.0.14393.953_58ba594b_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1488607563,
+          "timestamp_iso": "2017-03-04 06:06:03",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.953",
+        "product_version": "10.0.14393.953",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.953 (rs1_release_inmarket.170303-1614)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.953"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "19af7621-ecaa-463a-ae3f-068341a986bb",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.1066_58d9f1cd_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1490678221,
+          "timestamp_iso": "2017-03-28 05:17:01",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.1066",
+        "product_version": "10.0.14393.1066",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.1066 (rs1_release_sec.170327-1835)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1066"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "1b430680-af88-43c4-be94-5be3ce444963",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
       "10.0.14393.1198_590285bd_19000_16200": {
         "pe_header": {
           "machine": 332,
           "timestamp": 1493337533,
-          "timestamp_iso": "2017-04-28 01:58:53",
+          "timestamp_iso": "2017-04-27 23:58:53",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 268435456,
@@ -159,7 +223,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1498027203,
-          "timestamp_iso": "2017-06-21 08:40:03",
+          "timestamp_iso": "2017-06-21 06:40:03",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 268435456,
@@ -191,7 +255,7 @@
         "pe_header": {
           "machine": 332,
           "timestamp": 1504762637,
-          "timestamp_iso": "2017-09-07 07:37:17",
+          "timestamp_iso": "2017-09-07 05:37:17",
           "coff_characteristics": 8450,
           "linker_version": "14.0",
           "image_base": 268435456,
@@ -219,11 +283,491 @@
           "path": "olepro32.pdb"
         }
       },
+      "10.0.14393.2068_5a7e6f7e_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1518235518,
+          "timestamp_iso": "2018-02-10 04:05:18",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2068",
+        "product_version": "10.0.14393.2068",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2068 (rs1_release.180209-1727)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2068"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "0c662303-efa6-4424-b878-d82004cdead1",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2125_5a990974_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1519978868,
+          "timestamp_iso": "2018-03-02 08:21:08",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2125",
+        "product_version": "10.0.14393.2125",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2125 (rs1_release.180301-2139)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2125"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "89c91639-6e8d-4ecc-909f-3f19f845e044",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2156_5ab31de3_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1521688035,
+          "timestamp_iso": "2018-03-22 03:07:15",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2156",
+        "product_version": "10.0.14393.2156",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2156 (rs1_release_inmarket.180321-1733)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2156"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "1c739f51-cd79-4370-b18a-a0a580ae7296",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2312_5b1a0de5_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1528434149,
+          "timestamp_iso": "2018-06-08 05:02:29",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2312",
+        "product_version": "10.0.14393.2312",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2312 (rs1_release.180607-1919)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2312"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "e21a75d3-f343-4e89-800d-b12fca6c89d2",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2339_5b1f185c_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1528764508,
+          "timestamp_iso": "2018-06-12 00:48:28",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2339",
+        "product_version": "10.0.14393.2339",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2339 (rs1_release_inmarket.180611-1502)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2339"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "33b95fc0-d4d2-4738-8a3d-c4140bf3f357",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2430_5b691b03_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1533614851,
+          "timestamp_iso": "2018-08-07 04:07:31",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2430",
+        "product_version": "10.0.14393.2430",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2430 (rs1_release_inmarket_aim.180806-1810)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2430"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "c89f6743-3047-491c-887d-0acfe01140f2",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2485_5b84c430_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1535427632,
+          "timestamp_iso": "2018-08-28 03:40:32",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2485",
+        "product_version": "10.0.14393.2485",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2485 (rs1_release.180827-1809)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2485"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "ad3753b9-dd05-488c-ab9b-34b92ba674df",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2515_5b8850be_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1535660222,
+          "timestamp_iso": "2018-08-30 20:17:02",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2515",
+        "product_version": "10.0.14393.2515",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2515 (rs1_release_1.180830-1044)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2515"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "86dda8a7-5f79-4672-b9d7-72ef7843a3ab",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2608_5bd13610_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1540437520,
+          "timestamp_iso": "2018-10-25 03:18:40",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2608",
+        "product_version": "10.0.14393.2608",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2608 (rs1_release.181024-1742)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2608"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "fec5a768-6aa9-406b-aa42-30bf2c5ce5c2",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2636_5bda81f4_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1541046772,
+          "timestamp_iso": "2018-11-01 04:32:52",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2636",
+        "product_version": "10.0.14393.2636",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2636 (rs1_release_1.181031-1836)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2636"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "c7955ba7-e97b-42bf-9ad4-0e4abb20d2a0",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2791_5c5a455d_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1549419869,
+          "timestamp_iso": "2019-02-06 02:24:29",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2791",
+        "product_version": "10.0.14393.2791",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2791 (rs1_release.190205-1511)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2791"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "6565fd16-d4ec-44bf-9663-dce64b90f8dd",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2848_5c7f630e_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1551852302,
+          "timestamp_iso": "2019-03-06 06:05:02",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2848",
+        "product_version": "10.0.14393.2848",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2848 (rs1_release.190305-1856)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2848"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "7562ba1c-0c17-43c8-8a94-0be380fd2a19",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2879_5c89eb29_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1552542505,
+          "timestamp_iso": "2019-03-14 05:48:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2879",
+        "product_version": "10.0.14393.2879",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2879 (rs1_release_inmarket.190313-1855)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2879"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "c32d6e2e-9a33-4fae-b7b5-87648dc2169c",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2969_5ccd1502_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1556944130,
+          "timestamp_iso": "2019-05-04 04:28:50",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2969",
+        "product_version": "10.0.14393.2969",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2969 (rs1_release.190503-1820)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2969"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "83666106-8baf-4077-b1e5-1be7d391b38d",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
+      "10.0.14393.2999_5ce36d93_19000_16200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1558408595,
+          "timestamp_iso": "2019-05-21 03:16:35",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 90624,
+        "file_version": "10.0.14393.2999",
+        "product_version": "10.0.14393.2999",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.14393.2999 (rs1_release_inmarket.190520-1518)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2999"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "1baf3a2f-8dcd-4d79-b47d-71d4763fc6a4",
+          "age": 1,
+          "path": "olepro32.pdb"
+        }
+      },
       "10.0.16299.15_881a9949_19000_15c00": {
         "pe_header": {
           "machine": 332,
           "timestamp": 2283444553,
-          "timestamp_iso": "2042-05-11 20:09:13",
+          "timestamp_iso": "2042-05-11 18:09:13",
           "coff_characteristics": 8450,
           "linker_version": "14.10",
           "image_base": 268435456,
@@ -252,11 +796,143 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.16299.611_3670190e_19000_15c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 913316110,
+          "timestamp_iso": "1998-12-10 18:55:10",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 89088,
+        "file_version": "10.0.16299.611",
+        "product_version": "10.0.16299.611",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.16299.611 (WinBuild.160101.0800)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.611"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "a33d395f-cc08-ab3a-4169-7caa280f2d54",
+          "age": 1,
+          "path": "olepro32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.637_ea3756e4_19000_15c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3929495268,
+          "timestamp_iso": "2094-07-09 06:27:48",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 89088,
+        "file_version": "10.0.16299.637",
+        "product_version": "10.0.16299.637",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.16299.637 (WinBuild.160101.0800)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.637"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "b1760d69-b810-17aa-7a50-235364c8e39d",
+          "age": 1,
+          "path": "olepro32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.936_7c3ad9a6_19000_15c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2084231590,
+          "timestamp_iso": "2036-01-18 01:13:10",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 89088,
+        "file_version": "10.0.16299.936",
+        "product_version": "10.0.16299.936",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.16299.936 (WinBuild.160101.0800)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.936"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "8311360e-8161-141b-26a8-5c3fc7654f23",
+          "age": 1,
+          "path": "olepro32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.1004_1ef5f332_19000_15c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 519435058,
+          "timestamp_iso": "1986-06-17 23:30:58",
+          "coff_characteristics": 8450,
+          "linker_version": "14.10",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 89088,
+        "file_version": "10.0.16299.1004",
+        "product_version": "10.0.16299.1004",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.16299.1004 (WinBuild.160101.0800)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.1004"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "63100bb3-eb38-9156-d6dc-b8f1b9567cda",
+          "age": 1,
+          "path": "olepro32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.17134.1_acf1f99b_19000_15e00": {
         "pe_header": {
           "machine": 332,
           "timestamp": 2901539227,
-          "timestamp_iso": "2061-12-11 16:07:07",
+          "timestamp_iso": "2061-12-11 15:07:07",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 268435456,
@@ -285,11 +961,44 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17134.765_0a44251d_19000_15e00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 172238109,
+          "timestamp_iso": "1975-06-17 11:55:09",
+          "coff_characteristics": 8450,
+          "linker_version": "14.12",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 89600,
+        "file_version": "10.0.17134.765",
+        "product_version": "10.0.17134.765",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.17134.765 (WinBuild.160101.0800)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.765"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "46452418-4925-9c8f-fea1-ffd739bcc7f9",
+          "age": 1,
+          "path": "olepro32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.17134.858_fe20b00a_19000_15e00": {
         "pe_header": {
           "machine": 332,
           "timestamp": 4263555082,
-          "timestamp_iso": "2105-02-08 17:51:22",
+          "timestamp_iso": "2105-02-08 16:51:22",
           "coff_characteristics": 8450,
           "linker_version": "14.12",
           "image_base": 268435456,
@@ -318,11 +1027,110 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1_b4464326_19000_15800": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3024503590,
+          "timestamp_iso": "2065-11-03 19:53:10",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 88064,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "2ffcabda-ce56-3cfb-308c-1667f30484d3",
+          "age": 1,
+          "path": "olepro32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.404_48f0b1bf_19000_15a00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1223733695,
+          "timestamp_iso": "2008-10-11 14:01:35",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 88576,
+        "file_version": "10.0.17763.404",
+        "product_version": "10.0.17763.404",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.17763.404 (WinBuild.160101.0800)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.404"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "3769b72a-7449-8231-1bf3-789e856c0c48",
+          "age": 1,
+          "path": "olepro32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.503_2d18466b_19000_15a00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 756565611,
+          "timestamp_iso": "1993-12-22 13:06:51",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 88576,
+        "file_version": "10.0.17763.503",
+        "product_version": "10.0.17763.503",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.17763.503 (WinBuild.160101.0800)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.503"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "79e16187-965b-6852-42a0-84c1684eb3e7",
+          "age": 1,
+          "path": "olepro32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_d328210c_19000_15800": {
         "pe_header": {
           "machine": 332,
           "timestamp": 3542622476,
-          "timestamp_iso": "2082-04-05 15:47:56",
+          "timestamp_iso": "2082-04-05 13:47:56",
           "coff_characteristics": 8450,
           "linker_version": "14.15",
           "image_base": 268435456,
@@ -353,6 +1161,43 @@
           "guid": "fd609548-45bb-b865-0d46-85370c132c80",
           "unknown": "28a951f31889cd48e0db6c50",
           "timestamp": 3542622476
+        }
+      },
+      "10.0.18362.113_558cbf41_19000_15800": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1435287361,
+          "timestamp_iso": "2015-06-26 02:56:01",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 88064,
+        "file_version": "10.0.18362.113",
+        "product_version": "10.0.18362.113",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEPRO32.DLL",
+          "FileVersion": "10.0.18362.113 (WinBuild.160101.0800)",
+          "InternalName": "OLEPRO32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEPRO32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.113"
+        },
+        "export_dll_name": "OLEPRO32.DLL",
+        "debug_codeview": {
+          "guid": "602bffe4-7bdf-6ee0-8e9f-4625fe17ae0c",
+          "age": 1,
+          "path": "olepro32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "602bffe4-7bdf-6ee0-8e9f-4625fe17ae0c",
+          "unknown": "3b69cc707d74b4e16ad2a793",
+          "timestamp": 1435287361
         }
       }
     }
