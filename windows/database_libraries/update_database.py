@@ -244,7 +244,7 @@ class Database:
         """Analyze a PE file"""
         try:
             pe_file = pe_structs.PEFile(file_path)
-        except (AssertionError, KeyError, ValueError, NotImplementedError) as exc:
+        except (AssertionError, KeyError, NotImplementedError, TypeError, ValueError) as exc:
             logger.error("Error while reading PE file: %s", file_path)
             logger.error("... Exception: %s", exc)
             return
@@ -307,6 +307,35 @@ class Database:
             ('string_info', pe_file.resource_version_info.string_file_info),
         ))
 
+        if pe_file.signatures:
+            version_info['authenticode'] = []
+            for signature in pe_file.signatures:
+                sign_info = collections.OrderedDict((
+                    ('digest_alg', signature.data.content_info.content.digest_alg),
+                    ('digest', binascii.hexlify(signature.data.content_info.content.digest).decode('ascii')),
+                    ('signer_infos', collections.OrderedDict((
+                        ('issuer', signature.data.signer_info.issuer),
+                        ('serial_number', signature.data.signer_info.serial_number),
+                        ('digest_enc_alg', signature.data.signer_info.digest_enc_alg),
+                    ))),
+                ))
+
+                # Record the timestamp counter sign attribute, if provided
+                tscs_attr = signature.data.signer_info.unauthenticated_attrs.get('timestampCounterSign')
+                if tscs_attr is not None:
+                    timestamp = tscs_attr.data.content_info.content.gen_time
+                    timestamp_seconds = (timestamp - datetime.datetime(1970, 1, 1)).total_seconds()
+                    sign_info['timestamp_counter_sign'] = collections.OrderedDict((
+                        ('timestamp', timestamp_seconds),
+                        ('timestamp_iso', str(timestamp)),
+                        ('signer_infos', collections.OrderedDict((
+                            ('issuer', tscs_attr.data.signer_info.issuer),
+                            ('serial_number', tscs_attr.data.signer_info.serial_number),
+                            ('digest_enc_alg', tscs_attr.data.signer_info.digest_enc_alg),
+                        ))),
+                    ))
+                version_info['authenticode'].append(sign_info)
+
         if pe_file.export_dll_name:
             version_info['export_dll_name'] = pe_file.export_dll_name
 
@@ -332,7 +361,7 @@ class Database:
             else:
                 version_info['debug_reproducible'] = collections.OrderedDict((
                     ('guid', str(pe_file.debug_repro_guid)),
-                    ('unknown', str(binascii.hexlify(pe_file.debug_repro_unknown).decode('ascii'))),
+                    ('unknown', binascii.hexlify(pe_file.debug_repro_unknown).decode('ascii')),
                     ('timestamp', pe_file.debug_repro_timestamp),
                 ))
 

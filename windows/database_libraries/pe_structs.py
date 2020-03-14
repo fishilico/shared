@@ -1,8 +1,31 @@
 #!/usr/bin/env python3
+# -*- coding:UTF-8 -*-
+# Copyright (c) 2020 Nicolas Iooss
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 """Structures of a PE file
 
 Documentation:
 * https://docs.microsoft.com/en-us/windows/win32/debug/pe-format
+
+@author: Nicolas Iooss
+@license: MIT
 """
 import binascii
 import contextlib
@@ -19,6 +42,7 @@ import uuid
 
 
 sys.path.insert(0, Path(__file__).parent)
+from authenticode import AuthenticodeWinCert2  # noqa
 from version_info import VsVersionInfo  # noqa
 
 
@@ -457,6 +481,23 @@ def dump_dict(obj, indent=''):
         elif isinstance(value, dict):
             print("{}* {}:".format(indent, key))
             dump_dict(value, indent=indent + '  ')
+        elif isinstance(value, list):
+            if len(value) == 0:
+                print("{}* {} = {}".format(indent, key, repr(value)))
+            else:
+                first = value[0]
+            if isinstance(first, int):
+                print("{}* {} = [{}]".format(
+                    indent, key,
+                    ', '.join(format_int(x) for x in value)))
+            elif isinstance(first, dict):
+                print("{}* {}:".format(indent, key))
+                for idx, subvalue in enumerate(value):
+                    print("{}  [{}]:".format(indent, idx))
+                    dump_dict(subvalue, indent=indent + '    ')
+            else:
+                raise NotImplementedError("Unable to represent list of {} for key {}".format(
+                    type(first), key))
         else:
             print("{}* {} = {}".format(indent, key, repr(value)))
 
@@ -499,22 +540,23 @@ class PEFile:
             raise NotImplementedError("Unexpected NumberOfRvaAndSizes in {}: {:#x} != 0x10".format(
                 file_path, self.pe_header.OptionalHeader.NumberOfRvaAndSizes))
 
-        # List the regions that are excluded from authenticode hashing
+        # List the regions that are excluded from Authenticode hashing
         # cf. https://download.microsoft.com/download/9/c/5/9c5b2167-8017-4bae-9fde-d599bac8184a/Authenticode_PE.docx
         self.authenticode_excluded = [
             # Exclude CheckSum field from Authenticode signature
-            (pe_optional_offset + 0x40, 4),
+            (pe_optional_offset + 0x40, 4, 'PE Checksum'),
             # Exclude the entry of the Attribute Certificate Table in the Data Directory
             (
                 pe_optional_offset + self.pe_header.FileHeader.SizeOfOptionalHeader -
                 8 * self.pe_header.OptionalHeader.NumberOfRvaAndSizes +
-                8 * ImageDirectoryEntry.IMAGE_DIRECTORY_ENTRY_SECURITY, 8),
+                8 * ImageDirectoryEntry.IMAGE_DIRECTORY_ENTRY_SECURITY,
+                8,
+                'Attribute Certificate Table Entry'),
         ]
         # Exclude the Attribute Certificate Table
         entry = self.pe_header.OptionalHeader.DataDirectory[ImageDirectoryEntry.IMAGE_DIRECTORY_ENTRY_SECURITY]
         if entry.Size != 0:
-            self.authenticode_excluded.append((entry.VirtualAddress, entry.Size))
-        self.authenticode_excluded.sort()
+            self.authenticode_excluded.append((entry.VirtualAddress, entry.Size, 'Attribute Certificate Table'))
 
         self.authenticode_file_end = 0
 
@@ -558,7 +600,7 @@ class PEFile:
             sect_name = sect_header.Name.decode('ascii')
             sections.append((sect_virt_addr, sect_virt_addr + sect_virt_size, sect_content, sect_name))
 
-            # Compute the end of file from the point of view of authenticode
+            # Compute the end of file from the point of view of Authenticode
             if sect_raw_end > self.authenticode_file_end:
                 self.authenticode_file_end = sect_raw_end
 
@@ -582,6 +624,7 @@ class PEFile:
         self.load_resource_directory()
 
         self.signatures = None
+        self.authenticode_digests = None
         self.load_attribute_certificate_table()
 
         self.debug_directories = None
@@ -599,6 +642,23 @@ class PEFile:
 
         self.syscall_stubs = None
         self.enumerate_syscall_stubs()
+
+        # Adjust the region signed by Authenticode
+        self.authenticode_excluded.sort()
+        for start, size, _name in self.authenticode_excluded:
+            if start == self.authenticode_file_end:
+                # Artificially set the end of signed data to the end of excluded data
+                self.authenticode_file_end = start + size
+            elif start - 8 < self.authenticode_file_end < start:
+                # Consider alignment: padding is also signed
+                self.authenticode_file_end = start + size
+        self.compute_authenticode_digests()
+        if self.signatures and self.authenticode_file_end != len(self.file_content):
+            if any(x != 0 for x in self.file_content[self.authenticode_file_end:]):
+                logger.warning("Unexpected signed file mapping: Authenticode signed data ends at %#x/%#x",
+                               self.authenticode_file_end, len(self.file_content))
+                logger.warning("... remaining data: %r", self.file_content[self.authenticode_file_end:])
+                raise ValueError("Unexpected signed file mapping for Authenticode")
 
         # Find out the PE file name from the information
         self.pe_file_name = None
@@ -842,22 +902,54 @@ class PEFile:
                     raise NotImplementedError("Version 1 Win_Certificate structure is not implemented")
             elif rev == 0x200:  # WIN_CERT_REVISION_2_0
                 if cert_type == 2:  # WIN_CERT_TYPE_PKCS_SIGNED_DATA
-                    self.signatures.append(cert_content)
+                    self.signatures.append(AuthenticodeWinCert2(cert_content))
                 else:
                     raise ValueError("Unexpected Win_Certificate.cert_type value: {:#x}".format(rev))
             else:
                 raise ValueError("Unexpected Win_Certificate.rev value: {:#x}".format(rev))
 
-    def compute_authenticode_digest(self, algorithm):
-        """Compute the authenticode digest of the PE file"""
-        engine = hashlib.new(algorithm)
+    def compute_authenticode_digests(self):
+        """Compute the Authenticode digest of the PE file"""
+        md5_engine = hashlib.md5()  # noqa
+        sha1_engine = hashlib.sha1()  # noqa
+        sha256_engine = hashlib.sha256()
         current_offset = 0
-        for start, size in self.authenticode_excluded:
-            engine.update(self.file_content[current_offset:start])
+        for start, size, _name in self.authenticode_excluded:
+            chunk = self.file_content[current_offset:start]
+            md5_engine.update(chunk)
+            sha1_engine.update(chunk)
+            sha256_engine.update(chunk)
             current_offset = start + size
         if current_offset < self.authenticode_file_end:
-            engine.update(self.file_content[current_offset:self.authenticode_file_end])
-        return engine.digest()
+            chunk = self.file_content[current_offset:self.authenticode_file_end]
+            md5_engine.update(chunk)
+            sha1_engine.update(chunk)
+            sha256_engine.update(chunk)
+
+        self.authenticode_digests = {
+            'MD5': md5_engine.digest(),
+            'SHA1': sha1_engine.digest(),
+            'SHA256': sha256_engine.digest(),
+        }
+
+        # Check the digest if there is a signature
+        if self.signatures:
+            for signature in self.signatures:
+                sign_digest_alg1 = signature.data.digest_alg
+                sign_digest_alg2 = signature.data.content_info.content.digest_alg
+                sign_digest = signature.data.content_info.content.digest
+                if sign_digest_alg1 != sign_digest_alg2:
+                    raise ValueError("Incoherent digest algorithms in Authenticode signature: {} != {}".format(
+                        sign_digest_alg1, sign_digest_alg2))
+                computed_digest = self.authenticode_digests.get(sign_digest_alg1)
+                if not computed_digest:
+                    raise NotImplementedError("Unknown Authenticode digest algorithms: {}".format(
+                        sign_digest_alg1))
+                if sign_digest != computed_digest:
+                    raise ValueError("Mismatched Authenticode {} digest: {} != {}".format(
+                        sign_digest_alg1,
+                        binascii.hexlify(sign_digest).decode('ascii'),
+                        binascii.hexlify(computed_digest).decode('ascii')))
 
     def load_debug_directory(self):
         """Load the debug directory"""
@@ -882,6 +974,11 @@ class PEFile:
                 continue
             if data_file_addr == 0:
                 raise ValueError("Debug Directory has PointerToRawData = 0")
+
+            # The debug directory is signed
+            data_file_end = data_file_addr + data_size
+            if data_file_end >= self.authenticode_file_end:
+                self.authenticode_file_end = data_file_end
 
             debug_data = None
             if debug_directory.AddressOfRawData != 0:
@@ -1154,28 +1251,18 @@ class PEFile:
             print("* Authenticode signature:")
             print("  * {} regions excluded from the Authenticode signature:".format(
                 len(self.authenticode_excluded)))
-            for start, size in self.authenticode_excluded:
-                print("    * {:#x}..{:#x} ({} bytes)".format(start, start + size, size))
-            last_start, last_size = self.authenticode_excluded[-1]
-            last_end = last_start + last_size
-            if self.authenticode_file_end == last_start:
-                if len(self.file_content) == last_end:
-                    print("  * Authenticode signature is at the end of file")
-                else:
-                    raise ValueError("There are {} unsigned bytes after Authenticode SignedData".format(
-                        len(self.file_content) - last_end))
-            else:
-                print("  * Authenticode signed data stops at {:#x}/{:#x} ({} bytes skipped)".format(
-                    self.authenticode_file_end, len(self.file_content),
-                    len(self.file_content) - self.authenticode_file_end))
-                # TODO: check Authenticode signnature properly
-                raise NotImplementedError("Inserted Authenticode signature ?!?")
+            for start, size, name in self.authenticode_excluded:
+                print("    * {:#x}..{:#x} {} ({} bytes)".format(start, start + size, repr(name), size))
+            if self.authenticode_file_end != len(self.file_content):
+                raise ValueError("There are {:#x} unsigned bytes after Authenticode SignedData, at {:#x}".format(
+                    len(self.file_content) - self.authenticode_file_end, self.authenticode_file_end))
 
-            sha256_digest = self.compute_authenticode_digest('sha256')
-            print("  * SHA256 digest: {}".format(binascii.hexlify(sha256_digest).decode('ascii')))
+            for alg, digest in sorted(self.authenticode_digests.items()):
+                print("  * {} digest: {}".format(alg, binascii.hexlify(digest).decode('ascii')))
             print("  * {} PKCS#7 SignedData structure(s)".format(len(self.signatures)))
             for idx, signature in enumerate(self.signatures):
-                print("    [{}]: {} bytes".format(idx, len(signature)))
+                print("    [{}]:".format(idx))
+                dump_dict(signature.to_dict_description(), indent='      ')
 
         if self.debug_directories is not None:
             print("")
