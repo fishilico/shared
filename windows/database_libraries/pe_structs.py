@@ -1140,7 +1140,6 @@ class PEFile:
         if syscall_stubs:
             # Check consistency
             for name, sysnum in syscall_stubs.items():
-                continue
                 if not re.match(r'^(Nt|Rtl|Zw)[A-Z][0-9A-Za-z_]+$', name):
                     if name == 'EndTask' and self.export_dll_name and self.export_dll_name.upper() == 'USER32.DLL':
                         pass
