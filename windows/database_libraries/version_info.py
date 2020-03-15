@@ -29,6 +29,7 @@ import ctypes
 import logging
 import re
 import struct
+from typing import Any, Mapping, Optional, Tuple
 
 # pylint: disable=invalid-name
 logger = logging.getLogger(__name__)
@@ -51,9 +52,10 @@ class struct_vs_fixedfileinfo(ctypes.Structure):
         ('dwFileDateMS', ctypes.c_uint32),
         ('dwFileDateLS', ctypes.c_uint32),
     ]
+    dwSignature: int = 0
 
 
-assert ctypes.sizeof(struct_vs_fixedfileinfo) == 0x34
+assert ctypes.sizeof(struct_vs_fixedfileinfo) == 0x34  # type: ignore
 
 
 class VsVersionInfo:
@@ -166,7 +168,7 @@ class VsVersionInfo:
         'gSOAP Copyright',
     ))
 
-    def __init__(self, content):
+    def __init__(self, content: bytes):
         self.content = content
 
         # Parse the header
@@ -190,7 +192,8 @@ class VsVersionInfo:
             raise ValueError("Unexpected key for VS_VERSION_INFO: {}".format(repr(key)))
 
         # Parse structure VS_FIXEDFILEINFO
-        self.fixed = struct_vs_fixedfileinfo.from_buffer_copy(content, offset)
+        self.fixed: struct_vs_fixedfileinfo = \
+            struct_vs_fixedfileinfo.from_buffer_copy(content, offset)
         offset += 0x34
         if self.fixed.dwSignature != 0xfeef04bd:
             raise ValueError("Unexpected signature for VS_FIXEDFILEINFO: {:#x}".format(self.fixed.dwSignature))
@@ -216,7 +219,7 @@ class VsVersionInfo:
             self.fixed.dwProductVersionLS & 0xffff,
         )
 
-        self.children = collections.OrderedDict()
+        self.children: Mapping[str, Any] = collections.OrderedDict()
         while offset < length:
             key, value, offset = self.parse_root_child(offset)
             if key in self.children:
@@ -243,7 +246,7 @@ class VsVersionInfo:
                     raise ValueError("Unexpected Version Info child strings: {}".format(
                         repr(self.children)))
                 lang, codepage = self.var_translation
-                self.var_translation_hex = '{:04X}{:04X}'.format(lang, codepage)
+                self.var_translation_hex: Optional[str] = '{:04X}{:04X}'.format(lang, codepage)
                 if self.var_translation_hex not in self.children['StringFileInfo']:
                     self.var_translation_hex = '{:04X}{:04x}'.format(lang, codepage)
                     if self.var_translation_hex not in self.children['StringFileInfo']:
@@ -265,7 +268,7 @@ class VsVersionInfo:
             if self.var_translation_hex not in self.children['StringFileInfo']:
                 raise ValueError("Unable to find Translation entry {} into StringFileInfo {}".format(
                     self.var_translation_hex, list(self.children['StringFileInfo'].keys())))
-            self.string_file_info = self.children['StringFileInfo'][self.var_translation_hex]
+            self.string_file_info: Mapping[str, str] = self.children['StringFileInfo'][self.var_translation_hex]
         elif all(key in self.STRING_FIELDS for key in self.children):
             self.var_translation_hex = None
             self.string_file_info = self.children
@@ -308,13 +311,13 @@ class VsVersionInfo:
         # or 'Software Installation Editor Snapin'. So do not check consistency.
 
     @staticmethod
-    def align_offset(offset):
+    def align_offset(offset: int) -> int:
         """Align the offset on 4 bytes"""
         if offset & 3:
             return offset + 4 - (offset & 3)
         return offset
 
-    def parse_header(self, offset):
+    def parse_header(self, offset: int) -> Tuple[int, int, bool, str, int]:
         """Parse (wLength, wValueLength, wType, wszKey) header"""
         length, value_len, is_text = struct.unpack('<HHH', self.content[offset:offset + 6])
         if is_text not in (0, 1):
@@ -330,7 +333,7 @@ class VsVersionInfo:
         key = self.content[offset + 6:key_end].decode('utf-16le')
         return length, value_len, is_text != 0, key, self.align_offset(key_end + 2)
 
-    def parse_root_child(self, base_offset):
+    def parse_root_child(self, base_offset: int) -> Tuple[str, Mapping[str, Any], int]:
         """Parse a StringFileInfo or a VarFileInfo entry"""
         length, value_len, is_text, key, new_offset = self.parse_header(base_offset)
         offset_limit = base_offset + length
@@ -441,7 +444,7 @@ if __name__ == '__main__':
     from pathlib import Path
     import sys
 
-    sys.path.insert(0, Path(__file__).parent)
+    sys.path.insert(0, str(Path(__file__).parent))
     import pe_structs
 
     logging.basicConfig(format='[%(levelname)s] %(message)s', level=logging.DEBUG)

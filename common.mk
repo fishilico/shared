@@ -6,6 +6,7 @@ GREP ?= grep
 JAVA ?= java
 JAVAC ?= javac
 LATEXMK ?= latexmk
+MYPY ?= mypy
 PKG_CONFIG ?= pkg-config
 PYTHON ?= python3
 PYTHON3 ?= python3
@@ -43,7 +44,7 @@ endif
 CLEAN_CMD := $(V_CLEAN)$(RM) \
 	*.a *.aux *.bin *.class *.dll *.efi *.elf *.exe *.fdb_latexmk *.fls *.glob *.log *.o *.out \
 	*.pdf *.pyc *.rst.tex *.so *.tmp *.toc *.vo .*.d .*.o && \
-	$(RM) -r __pycache__ && \
+	$(RM) -r __pycache__ .mypy_cache && \
 	$(RM) -r target
 
 # Try running a command and output the second or third parameter accordingly.

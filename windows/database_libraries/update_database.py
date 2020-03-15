@@ -33,8 +33,9 @@ import logging
 from pathlib import Path
 import re
 import sys
+from typing import List, Optional, Tuple
 
-sys.path.insert(0, Path(__file__).parent)
+sys.path.insert(0, str(Path(__file__).parent))
 import pe_structs  # noqa
 
 
@@ -45,7 +46,7 @@ BASE_DIR_PATH = Path(__file__).parent
 logger = logging.getLogger(__name__)
 
 
-def version_str_sortkey(vers_str):
+def version_str_sortkey(vers_str: str) -> Tuple[List[int], List[int]]:
     """Sort version strings according to the numeric order"""
     parts = vers_str.split('_')
     return ([int(x) for x in parts[0].split('.')], [int(x, 16) for x in parts[1:]])
@@ -176,7 +177,7 @@ class Database:
                     json.dump({name_and_arch: {key: value}}, stream, indent=2)
                 temp_save_path.replace(save_path)
 
-    def analyze_file(self, file_path: Path, only_existing=False, recursive_dir=False) -> bool:
+    def analyze_file(self, file_path: Path, only_existing: bool = False, recursive_dir: bool = False) -> bool:
         """Analyze a file, depending on its type"""
         if file_path.is_dir():
             self.analyze_directory(file_path, recursive_dir=recursive_dir)
@@ -192,8 +193,9 @@ class Database:
 
         if beginning.startswith(b'MZ'):
             # Load a PE header to check its magic numbers
-            mzdos_header = pe_structs.struct_image_dos_header.from_buffer_copy(beginning)
-            peheader_offset = mzdos_header.e_lfanew
+            mzdos_header: pe_structs.struct_image_dos_header = \
+                pe_structs.struct_image_dos_header.from_buffer_copy(beginning)  # type: ignore
+            peheader_offset: int = mzdos_header.e_lfanew
             if beginning[peheader_offset:peheader_offset + 4] == b'PE\0\0':
                 self.analyze_pe_file(file_path, only_existing=only_existing)
                 return True
@@ -202,7 +204,7 @@ class Database:
             logger.error("Unexpected file type for %s", file_path)
         return False
 
-    def analyze_directory(self, file_path: Path, recursive_dir=False):
+    def analyze_directory(self, file_path: Path, recursive_dir: bool = False):
         """Analyze all files in a directory"""
         try:
             children = list(file_path.iterdir())
@@ -415,23 +417,26 @@ class Database:
             })
 
 
-def main(argv=None):
+def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="Update the database")
-    parser.add_argument('files', metavar="FILE", nargs='+', type=Path,
+    parser.add_argument('files', metavar="FILE", nargs='+', type=Path,  # type: ignore
                         help="Files to analyze")
     parser.add_argument('-d', '--debug', action='store_true',
                         help="show debug messages")
     parser.add_argument('-r', '--recursive', action='store_true',
                         help="recurse into directories")
     args = parser.parse_args(argv)
+    arg_files = args.files  # type: List[Path]
+    arg_debug = args.debug  # type: bool
+    arg_recursive = args.recursive  # type: bool
 
     logging.basicConfig(format='[%(levelname)s] %(message)s',
-                        level=logging.DEBUG if args.debug else logging.INFO)
+                        level=logging.DEBUG if arg_debug else logging.INFO)
 
     db = Database()
 
-    for file_path in args.files:
-        if not db.analyze_file(file_path, recursive_dir=args.recursive):
+    for file_path in arg_files:
+        if not db.analyze_file(file_path, recursive_dir=arg_recursive):
             return 1
 
     db.save()

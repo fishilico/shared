@@ -38,10 +38,11 @@ from pathlib import Path
 import re
 import struct
 import sys
+from typing import Any, List, Mapping, Optional, Tuple, Union
 import uuid
 
 
-sys.path.insert(0, Path(__file__).parent)
+sys.path.insert(0, str(Path(__file__).parent))
 from authenticode import AuthenticodeWinCert2  # noqa
 from version_info import VsVersionInfo  # noqa
 
@@ -183,7 +184,7 @@ class struct_image_dos_header(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_dos_header) == 0x40
+assert ctypes.sizeof(struct_image_dos_header) == 0x40  # type: ignore
 
 
 class struct_image_file_header(ctypes.Structure):
@@ -199,7 +200,7 @@ class struct_image_file_header(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_file_header) == 0x14
+assert ctypes.sizeof(struct_image_file_header) == 0x14  # type: ignore
 
 
 class struct_image_data_directory(ctypes.Structure):
@@ -213,7 +214,7 @@ class struct_image_data_directory(ctypes.Structure):
         return self.VirtualAddress == 0 and self.Size == 0
 
 
-assert ctypes.sizeof(struct_image_data_directory) == 8
+assert ctypes.sizeof(struct_image_data_directory) == 8  # type: ignore
 
 
 class struct_image_optional_header32(ctypes.Structure):
@@ -253,7 +254,7 @@ class struct_image_optional_header32(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_optional_header32) == 0xe0
+assert ctypes.sizeof(struct_image_optional_header32) == 0xe0  # type: ignore
 
 
 class struct_image_optional_header64(ctypes.Structure):
@@ -292,7 +293,7 @@ class struct_image_optional_header64(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_optional_header64) == 0xf0
+assert ctypes.sizeof(struct_image_optional_header64) == 0xf0  # type: ignore
 
 
 class struct_image_nt_header32(ctypes.Structure):
@@ -304,7 +305,7 @@ class struct_image_nt_header32(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_nt_header32) == 0xf8
+assert ctypes.sizeof(struct_image_nt_header32) == 0xf8  # type: ignore
 
 
 class struct_image_nt_header64(ctypes.Structure):
@@ -316,7 +317,10 @@ class struct_image_nt_header64(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_nt_header64) == 0x108
+assert ctypes.sizeof(struct_image_nt_header64) == 0x108  # type: ignore
+
+
+struct_image_nt_header = Union[struct_image_nt_header32, struct_image_nt_header64]
 
 
 class struct_image_section_header(ctypes.Structure):
@@ -335,7 +339,7 @@ class struct_image_section_header(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_section_header) == 0x28
+assert ctypes.sizeof(struct_image_section_header) == 0x28  # type: ignore
 
 
 class struct_image_export_directory(ctypes.Structure):
@@ -355,7 +359,7 @@ class struct_image_export_directory(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_export_directory) == 0x28
+assert ctypes.sizeof(struct_image_export_directory) == 0x28  # type: ignore
 
 
 class struct_image_resource_directory(ctypes.Structure):
@@ -370,7 +374,7 @@ class struct_image_resource_directory(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_resource_directory) == 0x10
+assert ctypes.sizeof(struct_image_resource_directory) == 0x10  # type: ignore
 
 
 class struct_image_resource_data_entry(ctypes.Structure):
@@ -383,7 +387,7 @@ class struct_image_resource_data_entry(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_resource_data_entry) == 0x10
+assert ctypes.sizeof(struct_image_resource_data_entry) == 0x10  # type: ignore
 
 
 class struct_image_debug_directory(ctypes.Structure):
@@ -400,7 +404,7 @@ class struct_image_debug_directory(ctypes.Structure):
     ]
 
 
-assert ctypes.sizeof(struct_image_debug_directory) == 0x1c
+assert ctypes.sizeof(struct_image_debug_directory) == 0x1c  # type: ignore
 
 
 def format_int(value: int) -> str:
@@ -427,7 +431,7 @@ def dump_array_struct(array, indent='', key=None):
         dump_struct(value, indent=indent + '  ')
 
 
-def dump_struct(obj, indent=''):
+def dump_struct(obj: ctypes.Structure, indent: str = ''):
     """Dump the fields of a ctypes structure"""
     for key, field_type in obj._fields_:
         value = getattr(obj, key)
@@ -441,7 +445,8 @@ def dump_struct(obj, indent=''):
                 repr_value += " ({})".format(datetime.datetime.utcfromtimestamp(value))
             elif key == 'Machine' and value != 0:
                 with contextlib.suppress(ValueError):
-                    repr_value += " ({} = {})".format(MachineType(value).name, MACHINE_TYPE_NAME.get(value))
+                    mach_type = MachineType(value)
+                    repr_value += " ({} = {})".format(mach_type.name, MACHINE_TYPE_NAME.get(mach_type))
             elif isinstance(obj, struct_image_section_header) and key == 'Characteristics' and value != 0:
                 remaining = value
                 flags = []
@@ -473,7 +478,7 @@ def dump_struct(obj, indent=''):
             print("{}* {} = {}".format(indent, key, repr(value)))
 
 
-def dump_dict(obj, indent=''):
+def dump_dict(obj: Mapping[str, Any], indent: str = ''):
     """Dump the fields of a dictionary"""
     for key, value in obj.items():
         if isinstance(value, int):
@@ -513,9 +518,9 @@ class PEFile:
         # Parse the MZDOS header
         if content[:2] != b'MZ':  # IMAGE_DOS_SIGNATURE
             raise ValueError("Invalid MZ magic in {}: {}".format(file_path, repr(content[:2])))
-        self.mzdos_header = struct_image_dos_header.from_buffer_copy(content)
+        self.mzdos_header: struct_image_dos_header = struct_image_dos_header.from_buffer_copy(content)
 
-        peheader_offset = self.mzdos_header.e_lfanew
+        peheader_offset: int = self.mzdos_header.e_lfanew
         if content[peheader_offset:peheader_offset + 4] != b'PE\0\0':  # IMAGE_NT_SIGNATURE
             raise ValueError("Invalid PE magic in {}: {}".format(
                 file_path, repr(content[peheader_offset:peheader_offset + 4])))
@@ -524,7 +529,8 @@ class PEFile:
         pe_optional_offset = peheader_offset + 0x18
         opt_header_magic = content[pe_optional_offset:pe_optional_offset + 2]
         if opt_header_magic == b'\x0b\x01':  # IMAGE_NT_OPTIONAL_HDR32_MAGIC = 0x10b
-            self.pe_header = struct_image_nt_header32.from_buffer_copy(content, peheader_offset)
+            self.pe_header: struct_image_nt_header = struct_image_nt_header32.from_buffer_copy(
+                content, peheader_offset)
             if self.pe_header.FileHeader.SizeOfOptionalHeader != 0xe0:
                 raise ValueError("Unexpected SizeOfOptionalHeader in {}: {:#x} != 0xe0".format(
                     file_path, self.pe_header.FileHeader.SizeOfOptionalHeader))
@@ -542,7 +548,7 @@ class PEFile:
 
         # List the regions that are excluded from Authenticode hashing
         # cf. https://download.microsoft.com/download/9/c/5/9c5b2167-8017-4bae-9fde-d599bac8184a/Authenticode_PE.docx
-        self.authenticode_excluded = [
+        self.authenticode_excluded: List[Tuple[int, int, str]] = [
             # Exclude CheckSum field from Authenticode signature
             (pe_optional_offset + 0x40, 4, 'PE Checksum'),
             # Exclude the entry of the Attribute Certificate Table in the Data Directory
@@ -563,15 +569,16 @@ class PEFile:
         # Read the section headers
         section_header_offset = pe_optional_offset + self.pe_header.FileHeader.SizeOfOptionalHeader
         section_headers_type = struct_image_section_header * self.pe_header.FileHeader.NumberOfSections
-        self.section_headers = section_headers_type.from_buffer_copy(content, section_header_offset)
+        self.section_headers: List[struct_image_section_header] = \
+            section_headers_type.from_buffer_copy(content, section_header_offset)
 
         # Load all sections as (start, end, content, name) tuples
-        sections = []
+        sections: List[Tuple[int, int, bytes, str]] = []
         for idx, sect_header in enumerate(self.section_headers):
-            sect_virt_addr = sect_header.VirtualAddress
-            sect_virt_size = sect_header.VirtualSize
-            sect_offset = sect_header.PointerToRawData
-            sect_raw_size = sect_header.SizeOfRawData
+            sect_virt_addr: int = sect_header.VirtualAddress
+            sect_virt_size: int = sect_header.VirtualSize
+            sect_offset: int = sect_header.PointerToRawData
+            sect_raw_size: int = sect_header.SizeOfRawData
             sect_raw_end = sect_offset + sect_raw_size
 
             # On old programs, the virtual size of the section may be empty while the file contains data
@@ -597,7 +604,8 @@ class PEFile:
                 sect_content += b'\0' * (sect_virt_size - sect_raw_size)
             assert len(sect_content) == sect_virt_size
 
-            sect_name = sect_header.Name.decode('ascii')
+            sect_name_bytes: bytes = sect_header.Name
+            sect_name = sect_name_bytes.decode('ascii')
             sections.append((sect_virt_addr, sect_virt_addr + sect_virt_size, sect_content, sect_name))
 
             # Compute the end of file from the point of view of Authenticode
@@ -620,10 +628,10 @@ class PEFile:
         self.load_export_table()
 
         self.resources = None
-        self.resource_version_info = None
+        self.resource_version_info: Optional[VsVersionInfo] = None
         self.load_resource_directory()
 
-        self.signatures = None
+        self.signatures: Optional[List[AuthenticodeWinCert2]] = None
         self.authenticode_digests = None
         self.load_attribute_certificate_table()
 
@@ -790,10 +798,10 @@ class PEFile:
             return
 
         # Load the content, which is used by offsets
-        content = self.get_virtual(entry.VirtualAddress, entry.Size)
+        content: bytes = self.get_virtual(entry.VirtualAddress, entry.Size)
 
         def get_unicode_string(offset: int) -> str:
-            length, = struct.unpack('<H', content[offset:offset + 2])
+            length, = struct.unpack('<H', content[offset:offset + 2])  # type: Tuple[int]
             return content[offset + 2:offset + 2 + 2 * length].decode('utf-16le')
 
         # The resource directory is a header for a table for name entries and ID entries.
@@ -1172,7 +1180,7 @@ class PEFile:
                         ', '.join(sorted(possible_names))))
             self.syscall_stubs = syscall_stubs
 
-    def get_mssym_pe_url(self, base_url=MICROSOFT_SYMBOLS_URL):
+    def get_mssym_pe_url(self, base_url: str = MICROSOFT_SYMBOLS_URL) -> Optional[str]:
         """Craft an URL where binaries produced by Microsoft are hosted"""
         if not self.pe_file_name:
             return None
@@ -1182,7 +1190,7 @@ class PEFile:
         image_size = '{:x}'.format(self.pe_header.OptionalHeader.SizeOfImage)
         return '{}/{}/{}{}/{}'.format(base_url, pe_file_name, time_stamp, image_size, pe_file_name)
 
-    def get_mssym_pdb_url(self, base_url=MICROSOFT_SYMBOLS_URL):
+    def get_mssym_pdb_url(self, base_url: str = MICROSOFT_SYMBOLS_URL) -> Optional[str]:
         """Craft an URL where debug symbols are hosted for binaries produced by Microsoft, with GUID"""
         if not self.debug_codeview_guid or not self.debug_codeview_path:
             return None

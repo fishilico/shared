@@ -39,9 +39,11 @@ import datetime
 import logging
 import re
 import struct
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 
 import Crypto.Util.asn1
 import cryptography.hazmat.backends
+import cryptography.x509
 
 
 # pylint: disable=invalid-name
@@ -167,7 +169,7 @@ NAME_TYPE_ABBREVIATION = {
 }
 
 
-def split_der_data(der_data):
+def split_der_data(der_data: bytes) -> Tuple[bytes, bytes]:
     """Split DER-encoded data with something that goes after"""
     size_size = der_data[1]
     if size_size < 0x80:
@@ -184,7 +186,7 @@ def split_der_data(der_data):
     return der_data[:split_index], der_data[split_index:]
 
 
-def decode_object(der_obj):
+def decode_object(der_obj: bytes) -> bytes:
     """Decode an ASN.1 object in DER format"""
     obj_asn1 = Crypto.Util.asn1.DerObject()
     try:
@@ -195,7 +197,7 @@ def decode_object(der_obj):
     return obj_asn1.payload
 
 
-def decode_cont_object(der_obj, expected_cont):
+def decode_cont_object(der_obj: bytes, expected_cont: int) -> bytes:
     """Decode an ASN.1 cont object in DER format, used for example in optional fields"""
     obj_asn1 = Crypto.Util.asn1.DerObject()
     try:
@@ -208,7 +210,9 @@ def decode_cont_object(der_obj, expected_cont):
     return obj_asn1.payload
 
 
-def decode_sequence(der_seq, count=None, counts=None):
+def decode_sequence(der_seq: bytes,
+                    count: Optional[int] = None,
+                    counts: Optional[Tuple[int, ...]] = None) -> List[Union[bytes, int]]:
     """Decode an ASN.1 sequence in DER format"""
     seq_asn1 = Crypto.Util.asn1.DerSequence()
     try:
@@ -220,10 +224,19 @@ def decode_sequence(der_seq, count=None, counts=None):
         raise ValueError("Unexpected number of items in ASN.1 sequence: {} != {}".format(len(seq_asn1), count))
     if counts is not None and len(seq_asn1) not in counts:
         raise ValueError("Unexpected number of items in ASN.1 sequence: {} not in {}".format(len(seq_asn1), counts))
-    return seq_asn1[:]
+    return seq_asn1[:]  # type: ignore
 
 
-def decode_set(der_set):
+def decode_sequence_bytes(der_seq: bytes,
+                          count: Optional[int] = None,
+                          counts: Optional[Tuple[int, ...]] = None) -> List[bytes]:
+    """decode_sequence() but always return bytes"""
+    result = decode_sequence(der_seq, count=count, counts=counts)
+    assert all(isinstance(x, bytes) for x in result)
+    return result  # type: ignore
+
+
+def decode_set(der_set: bytes) -> List[Union[bytes, int]]:
     """Decode an ASN.1 set in DER format"""
     try:
         set_asn1 = Crypto.Util.asn1.DerSetOf()
@@ -235,12 +248,20 @@ def decode_set(der_set):
     except ValueError as exc:
         logger.error("Unable to decode an ASN.1 set: %s", exc)
         raise
-    return set_asn1[:]
+    return set_asn1[:]  # type: ignore
 
 
-def decode_octet_string(der_octet_string):
+def decode_set_bytes(der_seq: bytes) -> List[bytes]:
+    """decode_set() but always return bytes"""
+    result = decode_set(der_seq)
+    assert all(isinstance(x, bytes) for x in result)
+    return result  # type: ignore
+
+
+def decode_octet_string(der_octet_string: bytes) -> bytes:
     """Decode an ASN.1 Octet String in DER format"""
-    octet_string_asn1 = Crypto.Util.asn1.DerOctetString()
+    octet_string_asn1: Union[Crypto.Util.asn1.DerOctetString, Crypto.Util.asn1.DerObject] = \
+        Crypto.Util.asn1.DerOctetString()
     try:
         octet_string_asn1.decode(der_octet_string)
     except ValueError as exc:
@@ -253,7 +274,7 @@ def decode_octet_string(der_octet_string):
     return octet_string_asn1.payload
 
 
-def decode_utf8_string(der_utf8_string):
+def decode_utf8_string(der_utf8_string: bytes) -> str:
     """Decode an ASN.1 UTF-8 String in DER format"""
     if der_utf8_string[0] != 0x0c:
         raise ValueError("Unexpected tag for ASN.1 UTF-8 String: {:#x}".format(
@@ -261,7 +282,7 @@ def decode_utf8_string(der_utf8_string):
     return decode_object(der_utf8_string).decode('ascii')
 
 
-def decode_ia5_string(der_ia5string):
+def decode_ia5_string(der_ia5string: bytes) -> str:
     """Decode an ASN.1 IA5String in DER format"""
     if der_ia5string[0] != 0x16:
         raise ValueError("Unexpected tag for ASN.1 IA5String: {:#x}".format(
@@ -269,7 +290,7 @@ def decode_ia5_string(der_ia5string):
     return decode_object(der_ia5string).decode('ascii')
 
 
-def decode_printable_string(der_printable_string):
+def decode_printable_string(der_printable_string: bytes) -> str:
     """Decode an ASN.1 Printable String in DER format"""
     if der_printable_string[0] != 0x13:
         raise ValueError("Unexpected tag for ASN.1 Printable String: {:#x}".format(
@@ -277,9 +298,10 @@ def decode_printable_string(der_printable_string):
     return decode_object(der_printable_string).decode('ascii')
 
 
-def decode_oid(der_objectid):
+def decode_oid(der_objectid: bytes) -> str:
     """Decode an ASN.1 Object ID in DER format"""
-    oid_asn1 = Crypto.Util.asn1.DerObjectId()
+    oid_asn1: Union[Crypto.Util.asn1.DerObjectId, Crypto.Util.asn1.DerObject] = \
+        Crypto.Util.asn1.DerObjectId()
     try:
         oid_asn1.decode(der_objectid)
     except ValueError as exc:
@@ -310,8 +332,9 @@ def decode_oid(der_objectid):
                 components.append(str(current_val))
                 current_val = 0
     oid_value = '.'.join(components)
-    if hasattr(oid_asn1, 'value') and oid_asn1.value != oid_value:
-        raise RuntimeError("Failed to decode OID {}: got {} instead".format(oid_asn1.value, oid_value))
+    if isinstance(oid_asn1, Crypto.Util.asn1.DerObjectId) and hasattr(oid_asn1, 'value'):
+        if oid_asn1.value != oid_value:
+            raise RuntimeError("Failed to decode OID {}: got {} instead".format(oid_asn1.value, oid_value))
     oid_name = KNOWN_OID.get(oid_value)
     if oid_name:
         return oid_name
@@ -319,7 +342,7 @@ def decode_oid(der_objectid):
     return oid_value
 
 
-def decode_x509_algid(der_algorithm_identifier):
+def decode_x509_algid(der_algorithm_identifier: bytes) -> str:
     """Decode an X.509 AlgorithmIdentifier object
 
     Defined in https://tools.ietf.org/html/rfc2459 as:
@@ -328,7 +351,7 @@ def decode_x509_algid(der_algorithm_identifier):
             parameters ANY DEFINED BY algorithm OPTIONAL
         }
     """
-    algo_id_asn1 = decode_sequence(der_algorithm_identifier, counts=(1, 2))
+    algo_id_asn1 = decode_sequence_bytes(der_algorithm_identifier, counts=(1, 2))
     alg_id = decode_oid(algo_id_asn1[0])
     alg_params = algo_id_asn1[1] if len(algo_id_asn1) >= 2 else None
     if alg_params == b'\x05\x00':  # NULL
@@ -351,9 +374,9 @@ def decode_x509_algid(der_algorithm_identifier):
     return 'Unknown<OID={}, params={}>'.format(alg_id, repr(alg_params))
 
 
-def decode_x509_name_type_and_value(der_object):
+def decode_x509_name_type_and_value(der_object: bytes) -> str:
     """Decode an X.509 AttributeTypeAndValue object used in Name object"""
-    type_der, value_der = decode_sequence(der_object, count=2)
+    type_der, value_der = decode_sequence_bytes(der_object, count=2)
     type_oid = decode_oid(type_der)
     type_abbrev = NAME_TYPE_ABBREVIATION.get(type_oid)
     if not type_abbrev:
@@ -365,7 +388,7 @@ def decode_x509_name_type_and_value(der_object):
     return "{}={}".format(type_abbrev, value)
 
 
-def decode_x509_name(der_name):
+def decode_x509_name(der_name: bytes) -> str:
     """Decode an X.509 Name object
 
     Defined in https://tools.ietf.org/html/rfc2459 as:
@@ -381,16 +404,16 @@ def decode_x509_name(der_name):
         AttributeValue ::= ANY -- DEFINED BY AttributeType
     """
     return ','.join(
-        ','.join(decode_x509_name_type_and_value(x) for x in decode_set(seq))
-        for seq in decode_sequence(der_name))
+        ','.join(decode_x509_name_type_and_value(x) for x in decode_set_bytes(seq))
+        for seq in decode_sequence_bytes(der_name))
 
 
-def describe_der_certificate(certificate):
+def describe_der_certificate(certificate: bytes) -> Dict[str, Union[int, str]]:
     """Craft a description of a certificate in DER format"""
     backend = cryptography.hazmat.backends.default_backend()
     cert = cryptography.x509.load_der_x509_certificate(certificate, backend)
     try:
-        cert_subject = cert.subject
+        cert_subject: Optional[cryptography.x509.Name] = cert.subject
     except ValueError as exc:
         # This happens for example when using C=Unknown
         # ("Country name must be a 2 character country code")
@@ -398,12 +421,12 @@ def describe_der_certificate(certificate):
         cert_subject = None
 
     try:
-        cert_issuer = cert.issuer
+        cert_issuer: Optional[cryptography.x509.Name] = cert.issuer
     except ValueError as exc:
         logger.error("PyCryptography failed to load the certificate issuer: %s", exc)
         cert_issuer = None
 
-    desc = {}
+    desc: Dict[str, Union[int, str]] = {}
     if cert_subject is not None:
         name_bytes = cert_subject.public_bytes(backend)
         desc['subject'] = decode_x509_name(name_bytes)
@@ -416,7 +439,7 @@ def describe_der_certificate(certificate):
             name_bytes = cert_issuer.public_bytes(backend)
             desc['issuer'] = decode_x509_name(name_bytes)
     desc['serial_number'] = cert.serial_number
-    signature_alg_oid = cert.signature_algorithm_oid.dotted_string
+    signature_alg_oid: str = cert.signature_algorithm_oid.dotted_string  # type: ignore
     signature_alg_name = KNOWN_OID.get(signature_alg_oid)
     if not signature_alg_name:
         logger.warning("Unknown X.509 certificate signature alorigthm OID %r for %r",
@@ -428,7 +451,7 @@ def describe_der_certificate(certificate):
     return desc
 
 
-def decode_spc_string(der_spc_string):
+def decode_spc_string(der_spc_string: bytes) -> str:
     """Decode an Authenticode SpcString in DER format
 
     ASN.1 structure:
@@ -456,10 +479,10 @@ class AuthenticodeSpcLink:
             file [2] EXPLICIT SpcString
         }
     """
-    def __init__(self, der_content):
+    def __init__(self, der_content: bytes):
         if der_content[0] == 0x80:
             self.kind = 'url'
-            self.value = decode_object(der_content).decode('ascii')
+            self.value: Union[str, bytes] = decode_object(der_content).decode('ascii')
         elif der_content[0] == 0x81:
             self.kind = 'moniker'
             # Do not decode a SpcSerializedObject for now
@@ -470,7 +493,7 @@ class AuthenticodeSpcLink:
         else:
             raise ValueError("Unexpected choice for SpcLink: {}".format(repr(der_content)))
 
-    def to_dict_description(self):
+    def to_dict_description(self) -> Mapping[str, Union[str, bytes]]:
         """Convert to a dictionary describing the object"""
         return {self.kind: self.value}
 
@@ -489,8 +512,8 @@ class AuthenticodeSpcPeImageData:
             includeImportAddressTable (2)
         }
     """
-    def __init__(self, der_content):
-        flags_der, file_der = decode_sequence(der_content, count=2)
+    def __init__(self, der_content: bytes):
+        flags_der, file_der = decode_sequence_bytes(der_content, count=2)
         if flags_der[0] != 3:
             raise ValueError("Unexpected tag for SpcPeImageFlags in SpcPeImageData: {}".format(
                 repr(flags_der)))
@@ -508,7 +531,7 @@ class AuthenticodeSpcPeImageData:
         # related to page hashes.
         self.file_der = file_der
 
-    def to_dict_description(self):
+    def to_dict_description(self) -> Mapping[str, str]:
         """Convert to a dictionary describing the object"""
         return {
             'flags': self.flags,
@@ -537,19 +560,19 @@ class AuthenticodeSpcIndirectDataContent:
             parameters [0] EXPLICIT ANY OPTIONAL
         }
     """
-    def __init__(self, der_content):
-        data_der, message_digest_der = decode_sequence(der_content, count=2)
-        data_type_der, data_value_der = decode_sequence(data_der, count=2)
+    def __init__(self, der_content: bytes):
+        data_der, message_digest_der = decode_sequence_bytes(der_content, count=2)
+        data_type_der, data_value_der = decode_sequence_bytes(data_der, count=2)
         self.data_type = decode_oid(data_type_der)
         if self.data_type != 'SPC_PE_IMAGE_DATA_OBJID':
             raise ValueError("Unexpected data type in SpcIndirectDataContent: {}".format(
                 repr(self.data_type)))
         self.data_value = AuthenticodeSpcPeImageData(data_value_der)
-        digest_alg_der, digest_der = decode_sequence(message_digest_der, count=2)
+        digest_alg_der, digest_der = decode_sequence_bytes(message_digest_der, count=2)
         self.digest_alg = decode_x509_algid(digest_alg_der)
         self.digest = decode_octet_string(digest_der)
 
-    def to_dict_description(self):
+    def to_dict_description(self) -> Mapping[str, Union[str, Mapping[str, str]]]:
         """Convert to a dictionary describing the object"""
         return {
             'data': self.data_value.to_dict_description(),
@@ -584,8 +607,15 @@ class Rfc3161TSTInfo:
             micros [1] INTEGER (1..999) OPTIONAL
         }
     """
-    def __init__(self, der_content):
+    def __init__(self, der_content: bytes):
         seq = decode_sequence(der_content, counts=(7,))
+        assert isinstance(seq[0], int)
+        assert isinstance(seq[1], bytes)
+        assert isinstance(seq[2], bytes)
+        assert isinstance(seq[3], int)
+        assert isinstance(seq[4], bytes)
+        assert isinstance(seq[5], bytes)
+        assert isinstance(seq[6], bytes)
 
         self.version = seq[0]
         if self.version != 1:
@@ -597,7 +627,7 @@ class Rfc3161TSTInfo:
             raise ValueError("Unexpected policy in TSTInfo: {}".format(
                 repr(self.tsa_policy_id)))
 
-        msg_hash_alg_der, msg_hash_der = decode_sequence(seq[2], count=2)
+        msg_hash_alg_der, msg_hash_der = decode_sequence_bytes(seq[2], count=2)
         self.msg_hash_alg = decode_x509_algid(msg_hash_alg_der)
         self.msg_hash = decode_octet_string(msg_hash_der)
 
@@ -642,7 +672,7 @@ class Rfc3161TSTInfo:
         tsa_name_der = decode_cont_object(tsa_der, 4)
         self.tsa_name = decode_x509_name(tsa_name_der)
 
-    def to_dict_description(self):
+    def to_dict_description(self) -> Mapping[str, Union[float, int, str]]:
         """Convert to a dictionary describing the object"""
         return {
             'tsa_policy_id': self.tsa_policy_id,
@@ -668,15 +698,16 @@ class AuthenticodeContentInfo:
 
         content is SpcIndirectDataContent when contentType is SPC_INDIRECT_DATA_OBJID
     """
-    def __init__(self, der_content, is_timestamp_countersign=False):
-        content_type_der, content_der = decode_sequence(der_content, count=2)
+    def __init__(self, der_content: bytes, is_timestamp_countersign: bool = False):
+        content_type_der, content_der = decode_sequence_bytes(der_content, count=2)
         self.content_type = decode_oid(content_type_der)
         if not is_timestamp_countersign:
             if self.content_type != 'SPC_INDIRECT_DATA_OBJID':
                 raise ValueError("Unexpected contentType in ContentInfo: {}".format(
                     repr(self.content_type)))
             content_der = decode_cont_object(content_der, 0)
-            self.content = AuthenticodeSpcIndirectDataContent(content_der)
+            self.content: Union[AuthenticodeSpcIndirectDataContent, Rfc3161TSTInfo] = \
+                AuthenticodeSpcIndirectDataContent(content_der)
         else:
             if self.content_type != 'id-ct-TSTInfo':
                 raise ValueError("Unexpected contentType in counter signed timestamp ContentInfo: {}".format(
@@ -685,7 +716,7 @@ class AuthenticodeContentInfo:
             content_der = decode_octet_string(content_der)
             self.content = Rfc3161TSTInfo(content_der)
 
-    def to_dict_description(self):
+    def to_dict_description(self) -> Mapping[str, Any]:
         """Convert to a dictionary describing the object"""
         return self.content.to_dict_description()
 
@@ -699,8 +730,8 @@ class AuthenticodeSpcSpOpusInfo:
         moreInfo [1] EXPLICIT SpcLink OPTIONAL,
     }
     """
-    def __init__(self, der_content):
-        seq = decode_sequence(der_content, counts=(0, 1, 2))
+    def __init__(self, der_content: bytes):
+        seq = decode_sequence_bytes(der_content, counts=(0, 1, 2))
         self.program_name = None
         self.more_info = None
         if len(seq) == 0:
@@ -721,9 +752,9 @@ class AuthenticodeSpcSpOpusInfo:
         more_info_der = decode_cont_object(seq[1], 1)
         self.more_info = AuthenticodeSpcLink(more_info_der)
 
-    def to_dict_description(self):
+    def to_dict_description(self) -> Mapping[str, Any]:
         """Convert to a dictionary describing the object"""
-        result = {}
+        result: Dict[str, Any] = {}
         if self.program_name:
             result['program_name'] = self.program_name
         if self.more_info:
@@ -750,57 +781,69 @@ class AuthenticodeSignerInfo:
         }
         EncryptedDigest ::= OCTET STRING
     """
-    def __init__(self, der_content, is_timestamp_countersign=False):
+    def __init__(self, der_content: bytes, is_timestamp_countersign: bool = False):
         self._is_timestamp_countersign = is_timestamp_countersign
         seq = decode_sequence(der_content, counts=(5, 6, 7))
+        assert isinstance(seq[0], int)
+        assert isinstance(seq[1], bytes)
+        assert isinstance(seq[2], bytes)
 
         self.version = seq[0]
         if self.version != 1:
             raise ValueError("Unexpected version in SignerInfo: {}".format(
                 repr(self.version)))
 
-        issuer_der, self.serial_number = decode_sequence(seq[1], count=2)
+        issuer_der, serial_number = decode_sequence(seq[1], count=2)
+        assert isinstance(issuer_der, bytes)
+        assert isinstance(serial_number, int)
+        self.serial_number = serial_number
         self.issuer = decode_x509_name(issuer_der)
 
         self.digest_alg = decode_x509_algid(seq[2])
 
         offset = 3
         if len(seq) >= 6:
+            assert isinstance(seq[offset], bytes)
             # The authenticated attributes are signed
-            self.authenticated_attrs_raw = decode_cont_object(seq[offset], 0)
-            self.authenticated_attrs = self._decode_attributes(self.authenticated_attrs_raw)
+            self.authenticated_attrs_raw = decode_cont_object(seq[offset], 0)  # type: ignore
+            self.authenticated_attrs: Optional[Mapping[str, Any]] = \
+                self._decode_attributes(self.authenticated_attrs_raw)
             offset += 1
         else:
             self.authenticated_attrs = None
 
-        self.digest_enc_alg = decode_x509_algid(seq[offset])
+        assert isinstance(seq[offset], bytes)
+        self.digest_enc_alg = decode_x509_algid(seq[offset])  # type: ignore
         offset += 1
-        self.encrypted_digest = decode_octet_string(seq[offset])
+        assert isinstance(seq[offset], bytes)
+        self.encrypted_digest = decode_octet_string(seq[offset])  # type: ignore
         offset += 1
         if len(seq) == 7:
-            raw = decode_cont_object(seq[offset], 1)
-            self.unauthenticated_attrs = self._decode_attributes(raw)
+            assert isinstance(seq[offset], bytes)
+            raw = decode_cont_object(seq[offset], 1)  # type: ignore
+            self.unauthenticated_attrs: Optional[Mapping[str, Any]] = self._decode_attributes(raw)
             offset += 1
         else:
             self.unauthenticated_attrs = None
         assert offset == len(seq)
 
-    def _decode_attributes(self, raw):
+    def _decode_attributes(self, raw: bytes) -> Mapping[str, Any]:
         """Decode authenticated or unauthenticated attributes"""
         attributes = {}
         while raw:
             attribute, raw = split_der_data(raw)
-            oid_der, values_der = decode_sequence(attribute, count=2)
+            oid_der, values_der = decode_sequence_bytes(attribute, count=2)
             oid = decode_oid(oid_der)
             values = decode_set(values_der)
             if len(values) != 1 and oid != 'szOID_NESTED_SIGNATURE':
                 raise ValueError("Unexpected multiple values for attribute {} in SignerInfo".format(
                     repr(oid)))
 
-            key = None
-            value = None
+            key: Optional[str] = None
+            value: Any = None
             if oid == 'id-contentType':
                 key = 'contentType'
+                assert isinstance(values[0], bytes)
                 value = decode_oid(values[0])
                 if not self._is_timestamp_countersign:
                     if value != 'SPC_INDIRECT_DATA_OBJID':
@@ -813,13 +856,16 @@ class AuthenticodeSignerInfo:
                                 repr(value)))
             elif oid == 'id-messageDigest':
                 key = 'messageDigest'
+                assert isinstance(values[0], bytes)
                 value = decode_octet_string(values[0])
             elif oid == 'SPC_SP_OPUS_INFO_OBJID':
                 key = 'spcSpOpusInfo'
+                assert isinstance(values[0], bytes)
                 value = AuthenticodeSpcSpOpusInfo(values[0])
             elif oid == 'SPC_STATEMENT_TYPE_OBJID':
                 key = 'spcStatementType'
-                statement_type, = decode_sequence(values[0])
+                assert isinstance(values[0], bytes)
+                statement_type, = decode_sequence_bytes(values[0], count=1)
                 value = decode_oid(statement_type)
                 if value != 'SPC_INDIVIDUAL_SP_KEY_PURPOSE_OBJID':
                     raise ValueError(
@@ -829,18 +875,21 @@ class AuthenticodeSignerInfo:
                 # Old counter signature format
                 # ... do not decode it
                 key = 'counterSignature'
+                assert isinstance(values[0], bytes)
                 value = binascii.hexlify(values[0]).decode('ascii')
             elif oid == 'szOID_RFC3161_counterSign':
                 # RFC3161: Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP)
                 # The value is a timestamp signed by a Time Stamping Authority (TSA)
                 # ... in a PKCS#7 signedData structure, like the Authenticode signedData
                 key = 'timestampCounterSign'
+                assert isinstance(values[0], bytes)
                 value = AuthenticodeWinCert2(values[0], is_timestamp_countersign=True)
             elif oid == 'szOID_NESTED_SIGNATURE':
                 # The value is a PKCS#7 signedData structure, like the Authenticode signedData
                 key = 'nestedSignature'
-                value = [AuthenticodeWinCert2(val, is_timestamp_countersign=False) for val in values]
+                value = [AuthenticodeWinCert2(val, is_timestamp_countersign=False) for val in values]  # type: ignore
             elif oid == 'szOID_PLATFORM_MANIFEST_BINARY_ID':
+                assert isinstance(values[0], bytes)
                 base64_value = decode_utf8_string(values[0])
                 if not re.match(r'^[0-9A-Za-z+/]+=*$', base64_value):
                     raise ValueError("Unexpected szOID_PLATFORM_MANIFEST_BINARY_ID base 64 value: {}".format(
@@ -868,21 +917,24 @@ class AuthenticodeSignerInfo:
                 #     policies SEQUENCE OF PolicyInformation OPTIONAL
                 # }
                 # Ignore policies for now. Implement it only if needed.
-                certs_der, = decode_sequence(values[0], count=1)
-                certs = decode_sequence(certs_der)
+                assert isinstance(values[0], bytes)
+                certs_der, = decode_sequence_bytes(values[0], count=1)
+                certs = decode_sequence_bytes(certs_der)
                 # ESSCertID ::=  SEQUENCE {
                 #     certHash Hash,
                 #     issuerSerial IssuerSerial OPTIONAL
                 # }
                 cert_infos = []
                 for cert_der in certs:
-                    seq = decode_sequence(cert_der, counts=(1, 2))
-                    cert_info = {
+                    seq = decode_sequence_bytes(cert_der, counts=(1, 2))
+                    cert_info: Dict[str, Union[bytes, int, str]] = {
                         'cert_hash': decode_octet_string(seq[0]),
                     }
                     if len(seq) >= 2:
                         issuer_der, serial = decode_sequence(seq[1], count=2)
-                        issuer_der, = decode_sequence(issuer_der, count=1)
+                        assert isinstance(issuer_der, bytes)
+                        assert isinstance(serial, int)
+                        issuer_der, = decode_sequence_bytes(issuer_der, count=1)
                         issuer_der = decode_cont_object(issuer_der, 4)
                         cert_info['issuer'] = decode_x509_name(issuer_der)
                         cert_info['serial'] = serial
@@ -896,8 +948,9 @@ class AuthenticodeSignerInfo:
                 #     policies SEQUENCE OF PolicyInformation OPTIONAL
                 # }
                 # Ignore policies for now. Implement it only if needed.
-                certs_der, = decode_sequence(values[0], count=1)
-                certs = decode_sequence(certs_der)
+                assert isinstance(values[0], bytes)
+                certs_der, = decode_sequence_bytes(values[0], count=1)
+                certs = decode_sequence_bytes(certs_der)
                 # ESSCertIDv2 ::=  SEQUENCE {
                 #     hashAlgorithm AlgorithmIdentifier DEFAULT {algorithm id-sha256},
                 #     certHash Hash,
@@ -905,13 +958,15 @@ class AuthenticodeSignerInfo:
                 # }
                 cert_infos = []
                 for cert_der in certs:
-                    seq = decode_sequence(cert_der, counts=(1, 2))
+                    seq = decode_sequence_bytes(cert_der, counts=(1, 2))
                     cert_info = {
                         'cert_hash': decode_octet_string(seq[0]),
                     }
                     if len(seq) >= 2:
                         issuer_der, serial = decode_sequence(seq[1], count=2)
-                        issuer_der, = decode_sequence(issuer_der, count=1)
+                        assert isinstance(issuer_der, bytes)
+                        assert isinstance(serial, int)
+                        issuer_der, = decode_sequence_bytes(issuer_der, count=1)
                         issuer_der = decode_cont_object(issuer_der, 4)
                         cert_info['issuer'] = decode_x509_name(issuer_der)
                         cert_info['serial'] = serial
@@ -921,7 +976,10 @@ class AuthenticodeSignerInfo:
             else:
                 logger.warning("Unknown attribute OID %r in SignerInfo", oid)
                 key = oid
-                value = binascii.hexlify(values[0]).decode('ascii')
+                if isinstance(values[0], bytes):
+                    value = binascii.hexlify(values[0]).decode('ascii')
+                else:
+                    value = values[0]
 
             assert key
             assert value is not None
@@ -932,15 +990,15 @@ class AuthenticodeSignerInfo:
             attributes[key] = value
         return attributes
 
-    def to_dict_description(self):
+    def to_dict_description(self) -> Mapping[str, Union[str, int, Dict[str, Any]]]:
         """Convert to a dictionary describing the object"""
-        result = {
+        result: Dict[str, Union[str, int, Dict[str, Any]]] = {
             'issuer': self.issuer,
             'serial_number': self.serial_number,
             'digest_alg': self.digest_alg,
         }
         if self.authenticated_attrs:
-            result['authenticated_attrs'] = {}
+            authenticated_attrs_desc: Dict[str, Any] = {}
             for key, value in self.authenticated_attrs.items():
                 if key == 'messageDigest':
                     value = binascii.hexlify(value).decode('ascii')
@@ -950,18 +1008,20 @@ class AuthenticodeSignerInfo:
                     value = value.copy()
                     for cert in value:
                         cert['cert_hash'] = binascii.hexlify(cert['cert_hash']).decode('ascii')
-                result['authenticated_attrs'][key] = value
+                authenticated_attrs_desc[key] = value
+            result['authenticated_attrs'] = authenticated_attrs_desc
 
         result['digest_enc_alg'] = self.digest_enc_alg
         result['encrypted_digest'] = '({} bytes)'.format(len(self.encrypted_digest))
         if self.unauthenticated_attrs:
-            result['unauthenticated_attrs'] = {}
+            unauthenticated_attrs_desc: Dict[str, Any] = {}
             for key, value in self.unauthenticated_attrs.items():
                 if key == 'timestampCounterSign':
                     value = value.to_dict_description()
                 elif key == 'nestedSignature':
                     value = [val.to_dict_description() for val in value]
-                result['unauthenticated_attrs'][key] = value
+                unauthenticated_attrs_desc[key] = value
+            result['unauthenticated_attrs'] = unauthenticated_attrs_desc
         return result
 
 
@@ -980,8 +1040,11 @@ class AuthenticodeSignedData:
         DigestAlgorithmIdentifiers ::= SET OF DigestAlgorithmIdentifier
         SignerInfos ::= SET OF SignerInfo
     """
-    def __init__(self, der_content, is_timestamp_countersign=False):
+    def __init__(self, der_content: bytes, is_timestamp_countersign: bool = False):
         seq = decode_sequence(der_content, counts=(4, 5, 6))
+        assert isinstance(seq[0], int)
+        assert isinstance(seq[1], bytes)
+        assert isinstance(seq[2], bytes)
 
         self.version = seq[0]
         if not is_timestamp_countersign:
@@ -992,7 +1055,7 @@ class AuthenticodeSignedData:
             raise ValueError("Unexpected version in counter signed timestamp SignedData: {}".format(
                 repr(self.version)))
 
-        digest_algs_set = decode_set(seq[1])
+        digest_algs_set = decode_set_bytes(seq[1])
         if len(digest_algs_set) != 1:
             raise ValueError("Unexpected number of digestAlgorithms in SignedData: {}".format(
                 repr(digest_algs_set)))
@@ -1002,11 +1065,12 @@ class AuthenticodeSignedData:
             seq[2], is_timestamp_countersign=is_timestamp_countersign)
 
         if len(seq) >= 5:
+            assert isinstance(seq[3], bytes)
             certificates_der = decode_cont_object(seq[3], 0)
 
             # Certificates are concatenated
-            self.certificates = []
-            self.cert_descriptions = []
+            self.certificates: Optional[List[bytes]] = []
+            self.cert_descriptions: Optional[List[Mapping[str, Union[int, str]]]] = []
             while certificates_der:
                 cert, certificates_der = split_der_data(certificates_der)
                 self.certificates.append(cert)
@@ -1016,9 +1080,8 @@ class AuthenticodeSignedData:
                     if cert[0] == 0xa1:
                         self.cert_descriptions.append({"error": "(certificate cont[1])"})
                         continue
-                    else:
-                        raise ValueError("Unexpected ASN.1 tag for certificate in SignedData: {}".format(
-                            repr(cert)))
+                    raise ValueError("Unexpected ASN.1 tag for certificate in SignedData: {}".format(
+                        repr(cert)))
                 desc = describe_der_certificate(cert)
                 self.cert_descriptions.append(desc)
         else:
@@ -1029,7 +1092,8 @@ class AuthenticodeSignedData:
             raise ValueError("Found CRL in SignedData even though it is supposed not to be used: {}".format(
                 repr(seq[4])))
 
-        signer_infos_set = decode_set(seq[-1])
+        assert isinstance(seq[-1], bytes)
+        signer_infos_set = decode_set_bytes(seq[-1])
         if len(signer_infos_set) != 1:
             raise ValueError("Unexpected number of signerInfos in SignedData: {}".format(
                 repr(signer_infos_set)))
@@ -1037,9 +1101,9 @@ class AuthenticodeSignedData:
             signer_infos_set[0],
             is_timestamp_countersign=is_timestamp_countersign)
 
-    def to_dict_description(self):
+    def to_dict_description(self) -> Mapping[str, Any]:
         """Convert to a dictionary describing the object"""
-        result = {
+        result: Dict[str, Any] = {
             'digest_alg': self.digest_alg,
             'content_info': self.content_info.to_dict_description(),
         }
@@ -1061,7 +1125,7 @@ class AuthenticodeWinCert2:
         SignedData [0] IMPLICIT SignedData,
     }
     """
-    def __init__(self, der_content, is_timestamp_countersign=False):
+    def __init__(self, der_content: bytes, is_timestamp_countersign: bool = False):
         """Load a Certificate from DER-encoded content"""
         # Remove the padding after the sequence
         if der_content[0] != 0x30:
@@ -1073,7 +1137,7 @@ class AuthenticodeWinCert2:
             raise ValueError("Unexpected non-null padding in Authenticode SignedData: {}".format(
                 repr(padding)))
 
-        oid_der, signed_data_der = decode_sequence(der_content, count=2)
+        oid_der, signed_data_der = decode_sequence_bytes(der_content, count=2)
         oid = decode_oid(oid_der)
         if oid != 'pkcs7-signedData':
             raise ValueError("Unexpected signedData OID, got {}".format(oid))
@@ -1081,7 +1145,7 @@ class AuthenticodeWinCert2:
         self.data = AuthenticodeSignedData(
             signed_data_der, is_timestamp_countersign=is_timestamp_countersign)
 
-    def to_dict_description(self):
+    def to_dict_description(self) -> Mapping[str, Any]:
         """Convert to a dictionary describing the object"""
         return self.data.to_dict_description()
 
@@ -1090,7 +1154,7 @@ if __name__ == '__main__':
     from pathlib import Path
     import sys
 
-    sys.path.insert(0, Path(__file__).parent)
+    sys.path.insert(0, str(Path(__file__).parent))
     import pe_structs
 
     logging.basicConfig(format='[%(levelname)s] %(message)s', level=logging.DEBUG)

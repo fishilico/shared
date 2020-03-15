@@ -159,6 +159,10 @@ htmlcov/
 */htmlcov/
 */*/htmlcov/
 */*/*/htmlcov/
+.mypy_cache/
+*/.mypy_cache/
+*/*/.mypy_cache/
+*/*/*/.mypy_cache/
 __pycache__/
 */__pycache__/
 */*/__pycache__/
