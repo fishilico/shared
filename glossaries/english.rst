@@ -114,6 +114,7 @@ IT systems
 * CRC = Cyclic Redundancy Check
 * DB = Database
 * DLP = Data Leak Prevention
+* DRM = Digital Rights Management
 * DVD = Digital Versatile Disc
 * EEPROM = Electronically Erasable Programmable Read Only Memory
 * FS = Filesystem
@@ -383,22 +384,57 @@ ARM systems
   - ARM Cortex-R = Real-time profile
   - ARM Cortex-M = Microcontroller profile
 
+* ATF = ARM Trusted Firmware (TrustZone)
+* BLM = Boor Loader (TrustZone)
+
+  - BL1 = AP Trusted ROM
+  - BL2 = Trusted Boot Firmware
+  - BL3-1 = EL3 Runtime Firmware
+  - BL3-2 = Secure-EL1 Payload
+  - BL3-3 = Non-trusted Firmware
+
 * BTI = Branch Target Indicators (ARMv8)
+* CP15 = System Control Coprocessor
 * CPSR = Current Program Status Register
 * DLP = Data Level Parallelism
+* EL = Exception Level
+
+  - EL0 = Application ("user mode")
+  - EL1 = Rich OS ("kernel mode")
+  - EL2 = Hypervisor
+  - S-EL0 = Secure world applications and drivers (TrustZone)
+  - S-EL1 = Secure World Trusted OS (TrustZone)
+  - EL3/S-EL3 = Firmware/Secure Monitor
+
 * HTM = Hardware Transactional Memory
+* HVC = Hypervisor Call
 * LPAE = Large Physical Address Extension
 * LR = Link Register
 * MPAM = Memory Partitioning and Monitoring (ARMv8)
 * MPE = Media Processing Engine (ARM)
 * MTE = Memory Tagging Extension (ARMv8)
+* NWd = Normal World (TrustZone)
+* OP-TEE = Open Portable Trusted Execution Environment (TEE OS)
 * PC = Program Counter
 * PSA = Platform Security Architecture
+* QTEE = Qualcomm Trusted Execution Environment (TEE OS)
+* REE = Rich Execution Environment (TrustZone)
+* SCR = Secure Configuration Register (in CP15, with bit NS=Non Secure) (TrustZone)
+* SMC = Secure Monitor Call (call to request a service from the Secure Monitor running inside S-EL3) (TrustZone)
 * SP = Stack Pointer
+* SVC = Supervisor Call
 * SVE = Scalable Vector Extension (ARMv8)
+* SWd = Secure World (TrustZone)
+* TA = Trusted Application (running at S-EL0) (TrustZone)
+* TD = Trusted Drivers (running at S-EL0) (TrustZone)
+* TEE = Trusted Execution Environments (TrustZone)
 * TLE = Transactional Synchronization Extensions
+* TLK = NVidia's Trusted Little Kernel (TEE OS)
 * TLP = Thread Level Parallelism
 * TME = Transactional Memory Extension (ARMv8)
+* TSP = Trustonic Secured Platform (TEE OS)
+* TTBR = Translation Table Base Register (for memory translation in a MMU)
+* TZASC = TrustZone Access Space Controller (TrustZone)
 * VFP = Vector Floating Point (ARM)
 
 
