@@ -41,6 +41,7 @@ exec indent \
     -nss \
     -nut \
     -ts1 \
+    -T ACL \
     -T BOOL \
     -T BYTE \
     -T CHAR16 \
@@ -91,6 +92,8 @@ exec indent \
     -T LPTSTR \
     -T LPVOID \
     -T OLECHAR \
+    -T PACE_HEADER \
+    -T PACL \
     -T PBYTE \
     -T PDWORD \
     -T PIMAGE_DOS_HEADER \
@@ -98,6 +101,7 @@ exec indent \
     -T PIMAGE_NT_HEADERS \
     -T PNT_TIB \
     -T PSHORT \
+    -T PSID \
     -T PTOKEN_ELEVATION \
     -T PTOKEN_ELEVATION_TYPE \
     -T PTOKEN_GROUPS \
@@ -110,6 +114,7 @@ exec indent \
     -T PULONG \
     -T PVOID \
     -T PWORD \
+    -T SID \
     -T TCHAR \
     -T TEB_internal \
     -T UINT \
