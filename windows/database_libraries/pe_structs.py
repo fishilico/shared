@@ -1148,7 +1148,7 @@ class PEFile:
         if syscall_stubs:
             # Check consistency
             for name, sysnum in syscall_stubs.items():
-                if not re.match(r'^(Nt|Rtl|Zw)[A-Z][0-9A-Za-z_]+$', name):
+                if not re.match(r'^(Ium|Nt|Rtl|Zw)[A-Z][0-9A-Za-z_]+$', name):
                     if name == 'EndTask' and self.export_dll_name and self.export_dll_name.upper() == 'USER32.DLL':
                         pass
                     else:
@@ -1158,7 +1158,8 @@ class PEFile:
                     other_name = 'Zw' + name[2:]
                     if other_name not in syscall_stubs:
                         # Only ntdll has syscall stubs
-                        if self.export_dll_name and self.export_dll_name.upper() in ('USER32.DLL', 'WIN32U.DLL'):
+                        if self.export_dll_name and self.export_dll_name.upper() in (
+                                'USER32.DLL', 'VERTDLL.DLL', 'WIN32U.DLL'):
                             continue
                 elif name.startswith('Zw'):
                     other_name = 'Nt' + name[2:]
@@ -1166,6 +1167,12 @@ class PEFile:
                     other_name = 'NtWow64GetNativeSystemInformation'
                     if other_name not in syscall_stubs:
                         other_name = 'NtQuerySystemInformation'
+                elif name == 'EndTask':
+                    # There is no "other syscall name" for EndTask
+                    other_name = name
+                elif name.startswith('Ium'):
+                    # Isolated Usermode syscalls have no "other syscall name"
+                    other_name = name
                 else:
                     raise ValueError("Unable to guess a matching syscall name for {}:{:#x}".format(
                         name, sysnum))

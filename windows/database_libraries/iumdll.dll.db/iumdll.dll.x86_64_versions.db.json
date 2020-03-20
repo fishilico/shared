@@ -1,0 +1,168 @@
+{
+  "iumdll.dll.x86_64": {
+    "versions": {
+      "10.0.14393.2969_5ccd1462_7000_3a70": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1556943970,
+          "timestamp_iso": "2019-05-04 04:26:10",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 28672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 14960,
+        "file_version": "10.0.14393.2969",
+        "product_version": "10.0.14393.2969",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "IUM Layer DLL",
+          "FileVersion": "10.0.14393.2969 (rs1_release.190503-1820)",
+          "InternalName": "iumdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "iumdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2969"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7961cb8d83bab8a02fc76a813d45fd13df6e47acb6c742196f0017efcc319dea",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1556946884.71,
+              "timestamp_iso": "2019-05-04 05:14:44.710000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006405871818669909035022975445745271030,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "IUMDLL.dll",
+        "debug_codeview": {
+          "guid": "a0896617-9a2c-4510-8c9a-f196b089aeaa",
+          "age": 1,
+          "path": "iumdll.pdb"
+        }
+      },
+      "10.0.17763.1_4d76edff_7000_3d70": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1299639807,
+          "timestamp_iso": "2011-03-09 03:03:27",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 28672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 15728,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "IUM Layer DLL",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "iumdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "iumdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ece3e2ad313db0a69e0af95c0154974ea7ca6b17c3cb5e20d51ade33f94cdc77",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974895.8,
+              "timestamp_iso": "2018-09-15 01:28:15.800000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006326123419109335401708318732727615719,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "IUMDLL.dll",
+        "debug_codeview": {
+          "guid": "9a52bdc3-724a-e102-e631-c112e8a6d31a",
+          "age": 1,
+          "path": "iumdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_3be8b821_7000_3d98": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1005107233,
+          "timestamp_iso": "2001-11-07 04:27:13",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 28672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 15768,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "IUM Layer DLL",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "iumdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "iumdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4ef9cb7ee8ad2c6ae8f80d965f5b29675cc12ce925128ab4a7ed64c2a2b4d38e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007426320923232196182504939660555321787,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949185.701,
+              "timestamp_iso": "2019-03-18 22:46:25.701000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006181034441660578512511571782260490443,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "IUMDLL.dll",
+        "debug_codeview": {
+          "guid": "6a0523ed-a518-cdb9-4710-5010f1a4d82a",
+          "age": 1,
+          "path": "iumdll.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "6a0523ed-a518-cdb9-4710-5010f1a4d82a",
+          "unknown": "65a5d1184c03b6bb4dcb7f77",
+          "timestamp": 1005107233
+        }
+      }
+    }
+  }
+}

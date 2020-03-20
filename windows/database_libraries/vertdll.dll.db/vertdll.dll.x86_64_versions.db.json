@@ -1,0 +1,116 @@
+{
+  "vertdll.dll.x86_64": {
+    "versions": {
+      "10.0.17763.719_038a1e7b_2f000_28298": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 59383419,
+          "timestamp_iso": "1971-11-19 07:23:39",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 192512,
+          "subsystem": 3,
+          "dll_characteristics": 16864
+        },
+        "file_size": 164504,
+        "file_version": "10.0.17763.719",
+        "product_version": "10.0.17763.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "VSM enclave runtime DLL",
+          "FileVersion": "10.0.17763.719 (WinBuild.160101.0800)",
+          "InternalName": "vertdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "vertdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.719"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d76e9b952dcf0b19d1115a26e469a86e27ddf1a2960edbba97f23ba8501e90a5",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1565674824.393,
+              "timestamp_iso": "2019-08-13 05:40:24.393000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006205635862276441701340022307085615312,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "vertdll.dll",
+        "debug_codeview": {
+          "guid": "4fccf647-fd48-262c-1a09-31c29b27517b",
+          "age": 1,
+          "path": "vertdll.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.329_35f8913c_31000_28ce0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 905482556,
+          "timestamp_iso": "1998-09-11 02:55:56",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 200704,
+          "subsystem": 3,
+          "dll_characteristics": 16864
+        },
+        "file_size": 167136,
+        "file_version": "10.0.18362.329",
+        "product_version": "10.0.18362.329",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "VSM enclave runtime DLL",
+          "FileVersion": "10.0.18362.329 (WinBuild.160101.0800)",
+          "InternalName": "vertdll.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "vertdll.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.329"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1f85c9e0e9ae0ab2476a9dd88a9cfe8f8173c91197322271867d8fa6c6191872",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1566952394.149,
+              "timestamp_iso": "2019-08-28 00:33:14.149000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006201410012045501241472821465121292495,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "vertdll.dll",
+        "debug_codeview": {
+          "guid": "ea062e37-480e-f15f-2c6a-d102d8a2fb14",
+          "age": 1,
+          "path": "vertdll.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ea062e37-480e-f15f-2c6a-d102d8a2fb14",
+          "unknown": "eed741dcb5aba492187b439d",
+          "timestamp": 905482556
+        }
+      }
+    }
+  }
+}
