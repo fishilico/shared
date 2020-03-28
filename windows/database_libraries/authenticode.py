@@ -274,12 +274,20 @@ def decode_octet_string(der_octet_string: bytes) -> bytes:
     return octet_string_asn1.payload
 
 
+def decode_bmp_string(der_utf8_string: bytes) -> str:
+    """Decode an ASN.1 BMP (UTF-16 Big Endian) String in DER format"""
+    if der_utf8_string[0] != 0x1e:
+        raise ValueError("Unexpected tag for ASN.1 BMP String: {:#x}".format(
+            der_utf8_string[0]))
+    return decode_object(der_utf8_string).decode('utf-16be')
+
+
 def decode_utf8_string(der_utf8_string: bytes) -> str:
     """Decode an ASN.1 UTF-8 String in DER format"""
     if der_utf8_string[0] != 0x0c:
         raise ValueError("Unexpected tag for ASN.1 UTF-8 String: {:#x}".format(
             der_utf8_string[0]))
-    return decode_object(der_utf8_string).decode('ascii')
+    return decode_object(der_utf8_string).decode('utf-8')
 
 
 def decode_ia5_string(der_ia5string: bytes) -> str:
@@ -296,6 +304,14 @@ def decode_printable_string(der_printable_string: bytes) -> str:
         raise ValueError("Unexpected tag for ASN.1 Printable String: {:#x}".format(
             der_printable_string[0]))
     return decode_object(der_printable_string).decode('ascii')
+
+
+def decode_teletex_string(der_t61string: bytes) -> str:
+    """Decode an ASN.1 T61String (Teletex String) in DER format"""
+    if der_t61string[0] != 0x14:
+        raise ValueError("Unexpected tag for ASN.1 T61String: {:#x}".format(
+            der_t61string[0]))
+    return decode_object(der_t61string).decode('ascii')
 
 
 def decode_oid(der_objectid: bytes) -> str:
@@ -383,6 +399,8 @@ def decode_x509_name_type_and_value(der_object: bytes) -> str:
         raise NotImplementedError("Unknown Name type OID {}".format(repr(type_oid)))
     if type_abbrev == 'DC':
         value = decode_ia5_string(value_der)
+    elif value_der[0] == 0x14:  # The string may be a Teletex String
+        value = decode_teletex_string(value_der)
     else:
         value = decode_printable_string(value_der)
     return "{}={}".format(type_abbrev, value)
@@ -461,7 +479,7 @@ def decode_spc_string(der_spc_string: bytes) -> str:
         }
     """
     if der_spc_string[0] == 0x80:
-        # Unicode
+        # Unicode (there is no sub-tag to define a BMP string)
         return decode_object(der_spc_string).decode('utf-16be')
     if der_spc_string[0] == 0x81:
         # ASCII
