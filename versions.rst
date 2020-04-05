@@ -16,6 +16,7 @@ The version information can be obtained through ``winver.exe`` (popup window) or
 | Version name            | Version | Build number | Release date | End of mainstream support | End of extended support |
 +=========================+=========+==============+==============+===========================+=========================+
 | Windows 10 20H2         | NT 10.0 | TBA          |              |                           |                         |
+| "Manganese"             |         |              |              |                           |                         |
 +-------------------------+---------+--------------+--------------+---------------------------+-------------------------+
 | Windows 10 20H1         | NT 10.0 | TBA          |              |                           |                         |
 |                         |         | (2004)       |              |                           |                         |
