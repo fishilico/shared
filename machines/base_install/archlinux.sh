@@ -359,6 +359,7 @@ then
     # Fonts
     pkg gnu-free-fonts
     pkg ttf-bitstream-vera
+    pkg ttf-cascadia-code
     pkg ttf-dejavu
     pkg ttf-droid
     pkg ttf-fantasque-sans-mono
