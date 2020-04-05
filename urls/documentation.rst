@@ -71,16 +71,12 @@ Hacking
   Free Reverse Engineering Tools
 * https://github.com/das-labor/panopticon
   A libre cross-platform disassembler for reverse engineering written in Rust.
-* https://github.com/fr0gger/awesome-ida-x64-olly-plugin
-  A curated list of IDA x64DBG and OllyDBG plugins.
 * https://github.com/secgroundzero/warberry
   WarBerryPi - Tactical Exploitation
 * https://github.com/radareorg/r2con/blob/master/2016/trainings/02-a-to-z/r2con-AtoZ.pdf
   Radare from A to Z - extended edition
 * https://github.com/radareorg/cutter
   A Qt and C++ GUI for radare2 reverse engineering framework
-* https://www.hex-rays.com/products/ida/support/freefiles/IDA_Pro_Shortcuts.pdf
-  Datarescue Interactive Disassembler (IDA) Pro Quick Reference Sheet
 * https://www.elttam.com.au/blog/intro-sdr-and-rf-analysis/
   Intro to SDR and RF signal analysis
 * https://github.com/avast-tl/retdec
@@ -114,6 +110,19 @@ Hacking
     A tool to identify and exploit sudo rules' misconfigurations and vulnerabilities within sudo
   * https://gtfobins.github.io/ GTFOBins
   * https://github.com/mzfr/gtfo Search gtfobins and lolbas files from your terminal
+
+
+Reverse engineering
+~~~~~~~~~~~~~~~~~~~
+
+* https://www.hex-rays.com/products/ida/support/freefiles/IDA_Pro_Shortcuts.pdf
+  Datarescue Interactive Disassembler (IDA) Pro Quick Reference Sheet
+* https://github.com/fr0gger/awesome-ida-x64-olly-plugin
+  A curated list of IDA x64DBG and OllyDBG plugins.
+* https://github.com/devttys0/ida
+  Collection of IDA Python plugins/scripts/modules (with Rizzo function signatures)
+* https://github.com/fuzzywalls/ghidra_scripts
+  Port of devttyS0's IDA plugins to the Ghidra plugin framework.
 
 
 Debuggers
