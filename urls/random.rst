@@ -50,6 +50,9 @@ Other
 * http://www.boredpanda.com/how-to-care-for-little-sad-person-john-saddington/
   How To Take Care Of A Sad Person (10 Steps)
 
+* https://www.thispersondoesnotexist.com/
+  Imagined by a GAN (generative adversarial network) StyleGAN2 (Dec 2019) - Karras et al. and Nvidia
+
 Games
 -----
 

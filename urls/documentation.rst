@@ -202,6 +202,14 @@ Programming
 * https://github.com/RustSec/advisory-db
   Security advisory database for Rust crates published through crates.io
 
+Rust programming
+~~~~~~~~~~~~~~~~
+
+* https://github.com/ferrous-systems/elements-of-rust
+  Rust Programming Tipz
+* https://github.com/rust-unofficial/patterns
+  Rust Design Patterns
+
 Packaging
 ---------
 
