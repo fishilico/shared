@@ -227,6 +227,7 @@ pkg mypy
 pkg nodejs
 #pkg php
 pkg pkg-config
+pkg pwgen
 pkg pypy
 pkg python
 pkg python-dev

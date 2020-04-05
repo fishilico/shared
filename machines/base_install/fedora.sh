@@ -110,6 +110,7 @@ pkg neovim
 pkg progress
 pkg psmisc
 pkg pv
+pkg pwgen
 pkg rlwrap
 pkg screen
 pkg sl

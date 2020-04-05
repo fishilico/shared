@@ -313,6 +313,7 @@ pkg mypy
 pkg nodejs
 pkg npm
 pkg pkgconf
+pkg pwgen
 pkg pypy
 pkg pypy3
 pkg python
