@@ -178,6 +178,7 @@ pkg neovim
 pkg progress
 pkg psmisc
 pkg pv
+pkg reptyr
 pkg ripgrep
 pkg rlwrap
 pkg rng-tools
@@ -392,6 +393,7 @@ then
     pkg arandr
     pkg baobab
     pkg bleachbit
+    pkg cheese
     pkg chromium
     pkg eog
     pkg evince
