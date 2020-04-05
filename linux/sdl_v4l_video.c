@@ -1,5 +1,9 @@
 /**
  * Capture a video using V4L (Video for Linux) module and SDL to display
+ *
+ * This is like:
+ * * Running vlc v4l2:///dev/video0
+ * * GNOME Cheese (https://wiki.gnome.org/Apps/Cheese)
  */
 #ifndef _GNU_SOURCE
 #    define _GNU_SOURCE /* for clock_gettime, usleep */
