@@ -663,10 +663,17 @@ class PEFile:
         self.compute_authenticode_digests()
         if self.signatures and self.authenticode_file_end != len(self.file_content):
             if any(x != 0 for x in self.file_content[self.authenticode_file_end:]):
-                logger.warning("Unexpected signed file mapping: Authenticode signed data ends at %#x/%#x",
-                               self.authenticode_file_end, len(self.file_content))
-                logger.warning("... remaining data: %r", self.file_content[self.authenticode_file_end:])
-                raise ValueError("Unexpected signed file mapping for Authenticode")
+                logger.warning("Unexpected signed file mapping: Authenticode signed data ends at %#x/%#x for %s",
+                               self.authenticode_file_end, len(self.file_content), file_path)
+                if self.authenticode_file_end + 100 < len(self.file_content):
+                    logger.warning("... remaining data (%#x bytes): %r...",
+                                   len(self.file_content) - self.authenticode_file_end,
+                                   self.file_content[self.authenticode_file_end:self.authenticode_file_end + 100])
+                else:
+                    logger.warning("... remaining data (%#x bytes): %r",
+                                   len(self.file_content) - self.authenticode_file_end,
+                                   self.file_content[self.authenticode_file_end:])
+                # raise ValueError("Unexpected signed file mapping for Authenticode")  # Be more lenient
 
         # Find out the PE file name from the information
         self.pe_file_name = None
@@ -1271,7 +1278,9 @@ class PEFile:
             for start, size, name in self.authenticode_excluded:
                 print("    * {:#x}..{:#x} {} ({} bytes)".format(start, start + size, repr(name), size))
             if self.authenticode_file_end != len(self.file_content):
-                raise ValueError("There are {:#x} unsigned bytes after Authenticode SignedData, at {:#x}".format(
+                print("  * End of authenticode data: {:#x} (file size {:#x})".format(
+                    self.authenticode_file_end, len(self.file_content)))
+                print("    * Warning: there are {:#x} unsigned bytes after Authenticode SignedData, at {:#x}".format(
                     len(self.file_content) - self.authenticode_file_end, self.authenticode_file_end))
 
             for alg, digest in sorted(self.authenticode_digests.items()):
