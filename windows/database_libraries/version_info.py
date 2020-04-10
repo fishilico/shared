@@ -78,6 +78,7 @@ class VsVersionInfo:
         'Applies to',
         'Assembly Version',
         'AssemblyVersion',
+        'AssociatedHotfixBuild',
         'Baseline',
         'BranchName',
         'Build Date',
