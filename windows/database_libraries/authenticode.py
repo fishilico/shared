@@ -73,6 +73,7 @@ KNOWN_OID = {
     # {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)}
     '1.2.840.113549.1.9.3': 'id-contentType',
     '1.2.840.113549.1.9.4': 'id-messageDigest',
+    '1.2.840.113549.1.9.5': 'id-signingTime',
     '1.2.840.113549.1.9.6': 'id-countersignature',
 
     # {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9) smime(16)
@@ -156,6 +157,10 @@ KNOWN_OID = {
     # {joint-iso-itu-t(2) country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
     #  hashAlgs(2) sha256(1)}
     '2.16.840.1.101.3.4.2.1': 'sha256',
+
+    # {joint-iso-itu-t(2) country(16) us(840) organization(1) symantec(113733)
+    #  pki(1) policies(7) vtn-cp(23) class3(3)}
+    '2.16.840.1.113733.1.7.23.3': 'symantec-policies-class3',
 }
 
 NAME_TYPE_ABBREVIATION = {
@@ -641,7 +646,7 @@ class Rfc3161TSTInfo:
                 repr(self.version)))
 
         self.tsa_policy_id = decode_oid(seq[1])
-        if self.tsa_policy_id != 'unknownTimeStampingAuthorityPolicy':
+        if self.tsa_policy_id not in ('unknownTimeStampingAuthorityPolicy', 'symantec-policies-class3'):
             raise ValueError("Unexpected policy in TSTInfo: {}".format(
                 repr(self.tsa_policy_id)))
 
@@ -991,6 +996,13 @@ class AuthenticodeSignerInfo:
                     cert_infos.append(cert_info)
                 key = 'signingCertificateV2'
                 value = cert_infos
+            elif self._is_timestamp_countersign and oid == 'id-signingTime':
+                # ASN.1 UTCTIME + Format "YYYYmmddHHMMSSZ"
+                assert isinstance(values[0], bytes)
+                if len(values[0]) != 0xf or not values[0].startswith(b'\x17\x0d') or not values[0].endswith(b'Z'):
+                    raise ValueError("Unexpected value for attribute {}: {}".format(repr(oid), repr(values[0])))
+                key = 'signingTime'
+                value = str(datetime.datetime.strptime(values[0][2:-1].decode('ascii'), '%y%m%d%H%M%S'))
             else:
                 logger.warning("Unknown attribute OID %r in SignerInfo", oid)
                 key = oid
