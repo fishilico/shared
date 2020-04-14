@@ -1155,9 +1155,12 @@ class PEFile:
         if syscall_stubs:
             # Check consistency
             for name, sysnum in syscall_stubs.items():
+                is_user32_or_gdi32 = False
                 if not re.match(r'^(Ium|Nt|Rtl|Zw)[A-Z][0-9A-Za-z_]+$', name):
-                    if name == 'EndTask' and self.export_dll_name and self.export_dll_name.upper() == 'USER32.DLL':
-                        pass
+                    if self.export_dll_name and self.export_dll_name.upper() in ('GDI32.DLL', 'USER32.DLL'):
+                        # On old versions of Windows (like Windows XP), Gdi32
+                        # and User32 exported syscall stubs with no clear prefix
+                        is_user32_or_gdi32 = True
                     else:
                         raise ValueError("Unexpected name for syscall stub {:#x}: {}".format(sysnum, repr(name)))
 
@@ -1174,8 +1177,8 @@ class PEFile:
                     other_name = 'NtWow64GetNativeSystemInformation'
                     if other_name not in syscall_stubs:
                         other_name = 'NtQuerySystemInformation'
-                elif name == 'EndTask':
-                    # There is no "other syscall name" for EndTask
+                elif is_user32_or_gdi32:
+                    # There is no "other syscall name" for many syscall stubs in Gdi32 and User32
                     other_name = name
                 elif name.startswith('Ium'):
                     # Isolated Usermode syscalls have no "other syscall name"
