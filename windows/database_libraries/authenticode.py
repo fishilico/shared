@@ -63,6 +63,7 @@ KNOWN_OID = {
     '1.2.840.113549.1.1.4': 'md5WithRSAEncryption',
     '1.2.840.113549.1.1.5': 'sha1WithRSAEncryption',
     '1.2.840.113549.1.1.11': 'sha256WithRSAEncryption',
+    '1.2.840.113549.1.1.12': 'sha384WithRSAEncryption',
 
     # {iso(1) member-body(2) us(840) rsadsi(113549) digestAlgorithm(2)}
     '1.2.840.113549.2.5': 'md5',
@@ -137,6 +138,10 @@ KNOWN_OID = {
     # Unknown? Used in TSAPolicyId in timestamp counter signing
     '1.3.6.1.4.1.601.10.3.1': 'unknownTimeStampingAuthorityPolicy',
 
+    # {iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1)
+    #  4146 time-stamp-policies(2) rfc3161-tst-policy-sha1(2)}
+    '1.3.6.1.4.1.4146.2.2': 'rfc3161-tst-policy-sha1',
+
     # {iso(1) identified-organization(3) dod(6) internet(1) security(5) mechanisms(5) pkix(7) kp(3)}
     # Certificate Extended Key Usages
     '1.3.6.1.5.5.7.3.3': 'szOID_PKIX_KP_CODE_SIGNING',
@@ -151,8 +156,10 @@ KNOWN_OID = {
     '2.5.4.6': 'countryName',
     '2.5.4.7': 'localityName',
     '2.5.4.8': 'stateOrProvinceName',
+    '2.5.4.9': 'streetAddress',
     '2.5.4.10': 'organizationName',
     '2.5.4.11': 'organizationalUnitName',
+    '2.5.4.17': 'postalCode',
 
     # {joint-iso-itu-t(2) country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
     #  hashAlgs(2) sha256(1)}
@@ -170,7 +177,9 @@ NAME_TYPE_ABBREVIATION = {
     'localityName': 'L',
     'organizationName': 'O',
     'organizationalUnitName': 'OU',
+    'postalCode': 'postalCode',
     'stateOrProvinceName': 'ST',
+    'streetAddress': 'street',
 }
 
 
@@ -404,6 +413,8 @@ def decode_x509_name_type_and_value(der_object: bytes) -> str:
         raise NotImplementedError("Unknown Name type OID {}".format(repr(type_oid)))
     if type_abbrev == 'DC':
         value = decode_ia5_string(value_der)
+    elif value_der[0] == 0x0c:  # The string may be a UTF-8 String
+        value = decode_utf8_string(value_der)
     elif value_der[0] == 0x14:  # The string may be a Teletex String
         value = decode_teletex_string(value_der)
     else:
@@ -631,14 +642,13 @@ class Rfc3161TSTInfo:
         }
     """
     def __init__(self, der_content: bytes):
-        seq = decode_sequence(der_content, counts=(7,))
+        seq = decode_sequence(der_content, counts=(6, 7))
         assert isinstance(seq[0], int)
         assert isinstance(seq[1], bytes)
         assert isinstance(seq[2], bytes)
         assert isinstance(seq[3], int)
         assert isinstance(seq[4], bytes)
         assert isinstance(seq[5], bytes)
-        assert isinstance(seq[6], bytes)
 
         self.version = seq[0]
         if self.version != 1:
@@ -646,7 +656,10 @@ class Rfc3161TSTInfo:
                 repr(self.version)))
 
         self.tsa_policy_id = decode_oid(seq[1])
-        if self.tsa_policy_id not in ('unknownTimeStampingAuthorityPolicy', 'symantec-policies-class3'):
+        if self.tsa_policy_id not in (
+                'rfc3161-tst-policy-sha1',
+                'symantec-policies-class3',
+                'unknownTimeStampingAuthorityPolicy'):
             raise ValueError("Unexpected policy in TSTInfo: {}".format(
                 repr(self.tsa_policy_id)))
 
@@ -674,39 +687,49 @@ class Rfc3161TSTInfo:
             # Format "YYYYmmddHHMMSSZ"
             self.gen_time = datetime.datetime.strptime(self.gen_time_str[:-1], '%Y%m%d%H%M%S')
 
-        self.accuracy = 0.
-        for accuracy_der in decode_sequence(seq[5], counts=(1, 2, 3)):
-            if isinstance(accuracy_der, int):
-                # seconds
-                self.accuracy += accuracy_der
-            elif accuracy_der[0] == 0x80:
-                # millis
-                accuracy_int, = struct.unpack('>H', decode_object(accuracy_der))
-                self.accuracy += accuracy_int / 1000.
-            elif accuracy_der[0] == 0x81:
-                # micros
-                accuracy_int, = struct.unpack('>H', decode_object(accuracy_der))
-                self.accuracy += accuracy_int / 1000000.
-            else:
-                raise ValueError("Unexpected tag for Accuracy in TSTInfo: {}".format(
-                    repr(accuracy_der)))
+        if len(seq) < 7:
+            self.accuracy: Optional[float] = None
+            seq_idx = 5
+        else:
+            accuracy = 0.
+            for accuracy_der in decode_sequence(seq[5], counts=(1, 2, 3)):
+                if isinstance(accuracy_der, int):
+                    # seconds
+                    accuracy += accuracy_der
+                elif accuracy_der[0] == 0x80:
+                    # millis
+                    accuracy_int, = struct.unpack('>H', decode_object(accuracy_der))
+                    accuracy += accuracy_int / 1000.
+                elif accuracy_der[0] == 0x81:
+                    # micros
+                    accuracy_int, = struct.unpack('>H', decode_object(accuracy_der))
+                    accuracy += accuracy_int / 1000000.
+                else:
+                    raise ValueError("Unexpected tag for Accuracy in TSTInfo: {}".format(
+                        repr(accuracy_der)))
+            self.accuracy = accuracy
+            seq_idx = 6
 
-        tsa_der = decode_cont_object(seq[6], 0)
+        tsa_der_bytes = seq[seq_idx]
+        assert isinstance(tsa_der_bytes, bytes)
+        tsa_der = decode_cont_object(tsa_der_bytes, 0)
         tsa_name_der = decode_cont_object(tsa_der, 4)
         self.tsa_name = decode_x509_name(tsa_name_der)
 
     def to_dict_description(self) -> Mapping[str, Union[float, int, str]]:
         """Convert to a dictionary describing the object"""
-        return {
+        result: Dict[str, Union[float, int, str]] = {
             'tsa_policy_id': self.tsa_policy_id,
             'msg_hash_alg': self.msg_hash_alg,
             'msg_hash': binascii.hexlify(self.msg_hash).decode('ascii'),
             'serial_number': self.serial_number,
             'gen_time_str': self.gen_time_str,
             'gen_time_iso': str(self.gen_time),
-            'accuracy': self.accuracy,
-            'tsa_name': self.tsa_name,
         }
+        if self.accuracy is not None:
+            result['accuracy'] = self.accuracy
+        result['tsa_name'] = self.tsa_name
+        return result
 
 
 class AuthenticodeContentInfo:
