@@ -2,7 +2,7 @@ include ../os-detect.mk
 
 # Use FRAMAC=frama-c-gui to use the gui
 FRAMAC ?= frama-c
-COQC ?= coqc -batch > /dev/null
+COQC ?= coqc > /dev/null
 
 # Use Frama-C libc headers which contains ACSL annotations.
 FRAMAC_SHARE_PATH := $(shell $(FRAMAC) -print-share-path 2> /dev/null)
