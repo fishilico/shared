@@ -124,11 +124,18 @@ proc_setroot_proc_write(struct file *file, const char __user *buf, size_t size, 
 	return size;
 }
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 6, 0)
 static const struct file_operations proc_setroot_proc_fops = {
 	.owner = THIS_MODULE,
 	.read  = proc_setroot_proc_read,
 	.write = proc_setroot_proc_write,
 };
+#else
+static const struct proc_ops proc_setroot_proc_fops = {
+	.proc_read  = proc_setroot_proc_read,
+	.proc_write = proc_setroot_proc_write,
+};
+#endif
 
 static int __init proc_setroot_init(void)
 {
