@@ -48,12 +48,12 @@ RUN \
         python-cffi \
         python-crypto \
         python-numpy \
-        python-pil \
+        python-pil && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
         wine-stable \
         wine32 \
         wine64 && \
-    apt-get clean && \
-    mkdir /usr/include/SDL2
+    apt-get clean
 
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
