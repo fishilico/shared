@@ -86,6 +86,12 @@ endif
 # Test rust/cargo availability
 ifneq ($(call can-run,$(CARGO) --version),y)
 SUBDIRS_BLACKLIST += rust%
+else
+# Old versions of rustc fail to build socket2-0.3.12 because:
+# error[E0658]: use of unstable library feature 'maybe_uninit' (see issue #53491)
+ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-4]\)\.'),y)
+SUBDIRS_BLACKLIST += rust/download_web%
+endif
 endif
 
 # Show "SUBDIR ..." only if -w and -s and V=1 are not given, and then add

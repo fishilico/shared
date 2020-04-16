@@ -11,6 +11,7 @@ PKG_CONFIG ?= pkg-config
 PYTHON ?= python3
 PYTHON3 ?= python3
 RM ?= rm -f
+RUSTC ?= rustc
 SH ?= sh
 
 # Python linters
