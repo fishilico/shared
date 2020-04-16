@@ -83,6 +83,8 @@ ifeq ($(call ccpp-has-option,-Weverything), y)
 	CFLAGS += $(call cc-disable-warning,reserved-id-macro)
 	# clang 3.7 added -Wdocumentation-unknown-command and -fcatch-undefined-behavior
 	CFLAGS += $(call cc-disable-warning,documentation-unknown-command)
+	# clang 10.0 warns about using "bool", with -Wc99-extensions
+	CFLAGS += $(call cc-disable-warning,c99-extensions)
 endif
 
 # Add GCC-specific options unknown to clang
