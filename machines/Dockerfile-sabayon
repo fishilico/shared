@@ -66,10 +66,6 @@ RUN \
     equo cleanup && \
     equo cache clean
 
-# Dirty fix to allow running 32-bit applications on x86_64
-# cf. https://forums.gentoo.org/viewtopic-t-787222-postdays-0-postorder-asc-start-25.html
-RUN ln -sv ../lib32/ld-linux.so.2 /lib/
-
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
 COPY . /shared/
