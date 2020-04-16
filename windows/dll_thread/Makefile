@@ -7,6 +7,7 @@ clean:
 	$(CLEAN_CMD)
 
 test: all
+	$(SLEEP_AFTER_WINE_IF_NEEDED)
 	@$(call run-test-progs,test_dll_thread.$(BIN_EXT))
 	$(SLEEP_AFTER_WINE_IF_NEEDED)
 

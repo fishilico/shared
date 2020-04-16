@@ -90,15 +90,21 @@ ifeq ($(HAVE_WINE),y)
 	endif
 	# On Fedora 32, wine spends too much time terminating, which triggers
 	# "wine: a wine server seems to be running, but I cannot connect to it."
-	# between some tests
-	NEED_WINE_SLEEP := $(call can-run,grep '^CPE_NAME="cpe:/o:fedoraproject:fedora:32"$$' /etc/os-release)
+	# between some tests. The version is wine-5.1.
+	# Ubuntu 20.04 LTS (Focal Fossa) shares the same behavior, with wine-5.0.
+	# Arch Linux too, since Wine 5.
+	NEED_WINE_SLEEP := $(call can-run,grep \
+		-e '^CPE_NAME="cpe:/o:fedoraproject:fedora:32"$$' \
+		-e '^VERSION="20.04 LTS (Focal Fossa)"$$' \
+		-e '^NAME="Arch Linux"$$' \
+		/etc/os-release)
 else ifneq ($(OS), Windows_NT)
 	# Do not run anything on a non-Windows system without wine
 	RUN_TEST_PREFIX := :
 endif
 
 ifeq ($(NEED_WINE_SLEEP), y)
-	SLEEP_AFTER_WINE_IF_NEEDED := sleep 3
+	SLEEP_AFTER_WINE_IF_NEEDED := while [ "$$($(WINE) cmd /c echo OK | head -c2)" != OK ] && sleep 3 ; do echo 'Waiting for wineserver to be available...' ; done ; sleep 10
 else
 	SLEEP_AFTER_WINE_IF_NEEDED := :
 endif
