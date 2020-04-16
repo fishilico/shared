@@ -72,3 +72,10 @@ CMD ["/run_shared_test.sh"]
 #       musl-gcc: not working
 #       x86_64-w64-mingw32-gcc: only compiling
 #       i686-w64-mingw32-gcc: only compiling
+#    Versions:
+#       gcc: gcc (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3
+#       clang: Ubuntu clang version 3.0-6ubuntu3 (tags/RELEASE_30/final) (based on LLVM 3.0)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 4.6.3
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 4.6.3
+#       wine: wine-1.4
+#       Linux kernel: 3.2.0-126-generic

@@ -200,4 +200,8 @@ then
 else
     echo "   $COMPILER: not working"
 fi
+
+echo 'Versions:'
+./machines/show_versions.sh | sed 's/^/   /'
+
 echo 'Done running tests.'

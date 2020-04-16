@@ -89,3 +89,12 @@ CMD ["/run_shared_test.sh"]
 #       musl-gcc: not working
 #       x86_64-w64-mingw32-gcc: only compiling
 #       i686-w64-mingw32-gcc: only compiling
+#    Versions:
+#       gcc: gcc (Ubuntu 4.8.4-2ubuntu1~14.04.4) 4.8.4
+#       clang: Ubuntu clang version 3.4-1ubuntu3 (tags/RELEASE_34/final) (based on LLVM 3.4)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 4.8.2
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 4.8.2
+#       wine: wine-1.6.2
+#       Linux kernel: 3.13.0-170-generic
+#       python3: Python 3.4.3
+#       coqc: The Coq Proof Assistant, version 8.4pl3 (January 2014) compiled on Jan 19 2014 23:14:16 with OCaml 4.01.0

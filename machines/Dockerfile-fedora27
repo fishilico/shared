@@ -91,3 +91,13 @@ CMD ["/run_shared_test.sh"]
 #       musl-gcc: not working
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
+#    Versions:
+#       gcc: gcc (GCC) 7.3.1 20180712 (Red Hat 7.3.1-6)
+#       clang: clang version 5.0.2 (tags/RELEASE_502/final)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 7.3.0 20180125 (Fedora MinGW 7.3.0-1.fc27)
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 7.3.0 20180125 (Fedora MinGW 7.3.0-1.fc27)
+#       wine: wine-3.18 (Staging)
+#       Linux kernel: 4.18.19-100.fc27.x86_64
+#       python3: Python 3.6.6
+#       javac: javac 11.0.1
+#       coqc: The Coq Proof Assistant, version 8.6.1 (September 2017) compiled on Sep 6 2017 16:11:45 with OCaml 4.05.0

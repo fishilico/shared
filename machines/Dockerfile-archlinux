@@ -97,3 +97,17 @@ CMD ["/run_shared_test.sh"]
 #       musl-gcc: ok
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
+#    Versions:
+#       gcc: gcc (Arch Linux 9.3.0-1) 9.3.0
+#       clang: clang version 9.0.1
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (Arch Linux 9.3.0-1) 9.3.0
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (Arch Linux 9.3.0-1) 9.3.0
+#       wine: wine-5.5
+#       Linux kernel: 5.6.4-arch1-1
+#       python: Python 3.8.2
+#       python3: Python 3.8.2
+#       javac: javac 10.0.2
+#       java: openjdk 10.0.2 2018-07-17
+#       rustc: rustc 1.42.0
+#       cargo: cargo 1.42.0
+#       coqc: The Coq Proof Assistant, version 8.11.0 (January 2020) compiled on Jan 28 2020 22:33:30 with OCaml 4.09.0

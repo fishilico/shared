@@ -93,3 +93,12 @@ CMD ["/run_shared_test.sh"]
 #       musl-gcc: ok
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
+#    Versions:
+#       gcc: gcc (Debian 4.9.2-10+deb8u2) 4.9.2
+#       clang: Debian clang version 3.5.0-10 (tags/RELEASE_350/final) (based on LLVM 3.5.0)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 4.9.1
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 4.9.1
+#       wine: wine-1.6.2
+#       Linux kernel: 3.16.0-10-amd64
+#       python3: Python 3.4.2
+#       coqc: The Coq Proof Assistant, version 8.4pl4 (July 2014) compiled on Jul 27 2014 13:34:24 with OCaml 4.01.0

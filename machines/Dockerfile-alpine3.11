@@ -71,3 +71,13 @@ CMD ["/run_shared_test.sh"]
 #       musl-gcc: not working
 #       x86_64-w64-mingw32-gcc: only compiling
 #       i686-w64-mingw32-gcc: not working
+#    Versions:
+#       gcc: gcc (Alpine 9.2.0) 9.2.0
+#       clang: Alpine clang version 9.0.0 (https://git.alpinelinux.org/aports f7f0d2c2b8bcd6a5843401a9a702029556492689) (based on LLVM 9.0.0)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 9.2.0
+#       Linux kernel: 5.4.27-0-lts
+#       python3: Python 3.8.2
+#       javac: javac 11.0.5
+#       java: openjdk 11.0.5 2019-10-15
+#       rustc: rustc 1.39.0
+#       cargo: cargo 1.39.0
