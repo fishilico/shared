@@ -6,6 +6,7 @@
  * * https://docs.microsoft.com/en-gb/windows/win32/api/winuser/nf-winuser-getrawinputdeviceinfoa
  */
 #include "common.h"
+#include <inttypes.h>
 
 /**
  * Wrap GetRawInputDeviceList to allocate memory
@@ -24,7 +25,7 @@ static BOOL GetRawInputDeviceListWithAlloc(PRAWINPUTDEVICELIST *ppRawInputDevice
         return FALSE;
     }
 
-    pBuffer = HeapAlloc(GetProcessHeap(), 0, uiNumDevices * sizeof(TCHAR));
+    pBuffer = HeapAlloc(GetProcessHeap(), 0, uiNumDevices * sizeof(RAWINPUTDEVICELIST));
     if (!pBuffer) {
         print_winerr(_T("HeapAlloc"));
         return FALSE;
@@ -114,7 +115,8 @@ int _tmain(void)
             assert(pDeviceInfo->dwType == pRawInputDeviceList[i].dwType);
             switch (pDeviceInfo->dwType) {
                 case RIM_TYPEMOUSE: /* 0 */
-                    _tprintf(_T("[%2d] Mouse: %s\n"), i, szDeviceName);
+                    _tprintf(_T("[%2d] Mouse (handle %#" PRIxPTR "): %s\n"),
+                             i, (UINT_PTR)pRawInputDeviceList[i].hDevice, szDeviceName);
                     _tprintf(_T("  * ID: %#lx\n"), pDeviceInfo->mouse.dwId);
                     _tprintf(_T("  * Number of buttons: %lu\n"),
                              pDeviceInfo->mouse.dwNumberOfButtons);
@@ -126,7 +128,8 @@ int _tmain(void)
                     */
                     break;
                 case RIM_TYPEKEYBOARD: /* 1 */
-                    _tprintf(_T("[%2d] Keyboard: %s\n"), i, szDeviceName);
+                    _tprintf(_T("[%2d] Keyboard (handle %#" PRIxPTR "): %s\n"),
+                             i, (UINT_PTR)pRawInputDeviceList[i].hDevice, szDeviceName);
                     _tprintf(_T("  * Type: %#lx\n"), pDeviceInfo->keyboard.dwType);
                     _tprintf(_T("  * Subtype: %#lx\n"), pDeviceInfo->keyboard.dwSubType);
                     _tprintf(_T("  * Scan code mode: %#lx\n"), pDeviceInfo->keyboard.dwKeyboardMode);
@@ -135,7 +138,8 @@ int _tmain(void)
                     _tprintf(_T("  * Number of keys total: %lu\n"), pDeviceInfo->keyboard.dwNumberOfKeysTotal);
                     break;
                 case RIM_TYPEHID: /* 2 */
-                    _tprintf(_T("[%2d] HID device: %s\n"), i, szDeviceName);
+                    _tprintf(_T("[%2d] HID device (handle %#" PRIxPTR "): %s\n"),
+                             i, (UINT_PTR)pRawInputDeviceList[i].hDevice, szDeviceName);
                     _tprintf(_T("  * Vendor ID: %#lx\n"), pDeviceInfo->hid.dwVendorId);
                     _tprintf(_T("  * Product ID: %#lx\n"), pDeviceInfo->hid.dwProductId);
                     _tprintf(_T("  * Version number: %#lx\n"), pDeviceInfo->hid.dwVersionNumber);
@@ -143,7 +147,8 @@ int _tmain(void)
                     _tprintf(_T("  * Usage: %#x\n"), pDeviceInfo->hid.usUsage);
                     break;
                 default:
-                    _tprintf(_T("[%2d] Unknown device type %lu: %s\n"), i, pDeviceInfo->dwType, szDeviceName);
+                    _tprintf(_T("[%2d] Unknown device type %lu (handle %#" PRIxPTR "): %s\n"),
+                             i, pDeviceInfo->dwType, (UINT_PTR)pRawInputDeviceList[i].hDevice, szDeviceName);
             }
             HeapFree(GetProcessHeap(), 0, pDeviceInfo);
         }
