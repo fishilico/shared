@@ -19,12 +19,16 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-"""Decode BIOS measurements from TPM 1 event log
+"""Decode BIOS measurements from TPM event log
 
 Linux exposes this event log file in securityfs:
 /sys/kernel/security/tpm0/binary_bios_measurements.
 The Linux kernel module that exposes it has its source code on
 https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/char/tpm/eventlog/tpm2.c?h=v5.1
+
+Windows records the TPM event log in C:\Windows\Logs\MeasuredBoot in files named
+for example ``0000000042-0000000002.log`` for the 42th boot, 3rd wake-up after
+sleep (probably).
 
 The events are specified in https://trustedcomputinggroup.org/resource/tcg-efi-protocol-specification/
 """
@@ -32,6 +36,7 @@ import argparse
 import binascii
 import collections
 import hashlib
+import platform
 import struct
 import sys
 import uuid
@@ -574,7 +579,11 @@ def main(argv=None):
         for input_path in args.files:
             analyze_tpm_binary_bios_measurements(input_path, fail_if_denied=True)
     else:
-        input_files = list(Path('/sys/kernel/security/').glob('tpm*/binary_bios_measurements'))
+        if platform.system() == 'Windows':
+            input_files = list(Path('C:\\Windows\\Logs\\MeasuredBoot').glob('*.log'))
+        else:
+            input_files = list(Path('/sys/kernel/security/').glob('tpm*/binary_bios_measurements'))
+
         if not input_files:
             print("Unable to find a TPM binary measurement file")
             return
