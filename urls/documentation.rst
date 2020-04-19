@@ -8,6 +8,9 @@ Useful tools
 * http://guake.org/ Guake, a top-down terminal for Gnome
 * https://diffoscope.org/ diffoscope, in-depth comparison of files, archives, and directories
 * https://searchcode.com/ free source code search engine
+* https://codesearch.debian.net/
+  Debian Code Search, Search all 130 GiB of source code within Debian
+* https://grep.app/ Search across a half million git repos
 
 System administration
 ---------------------
