@@ -16,6 +16,7 @@ test: all
 	@$(call run-test-progs,$(TEST_BINARIES))
 
 check_winmain_params.$(BIN_EXT) helloworld.$(BIN_EXT): LDFLAGS += -Wl,--subsystem=windows
+list_handles.$(BIN_EXT): LIBS += -lntdll
 list_processes.$(BIN_EXT) virtual_mem.$(BIN_EXT): LIBS += -lpsapi
 network_stat.$(BIN_EXT): LIBS += -liphlpapi -lws2_32
 uuidgen.$(BIN_EXT): LIBS += -lrpcrt4

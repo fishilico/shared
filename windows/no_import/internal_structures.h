@@ -4,6 +4,7 @@
  * Online documentation:
  * * https://github.com/maldevel/Peteb/blob/master/src/SystemTypes.h
  * * https://ntdiff.github.io/
+ * * https://github.com/wine-mirror/wine/blob/master/include/winternl.h
  */
 #ifndef INTERNAL_STRUCTURES_H
 #define INTERNAL_STRUCTURES_H

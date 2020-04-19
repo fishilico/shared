@@ -96,6 +96,7 @@ exec indent \
     -T PACL \
     -T PBYTE \
     -T PDWORD \
+    -T PEB \
     -T PIMAGE_DOS_HEADER \
     -T PIMAGE_EXPORT_DIRECTORY \
     -T PIMAGE_NT_HEADERS \
