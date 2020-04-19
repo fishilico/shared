@@ -191,6 +191,8 @@ static void DumpProccessToken(VOID)
         _tprintf(_T("- Source: \"%s\" {%08lx-%08lx}\n"), szTokenSourceName,
                  pLuid->LowPart, pLuid->HighPart);
         HeapFree(GetProcessHeap(), 0, pTokenSource);
+    } else {
+        _tprintf(_T("- (Source: unavailable)\n"));
     }
 
     dwRetLen = 0;
