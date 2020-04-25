@@ -1,4 +1,4 @@
-# Makefile definitions which are common to every projects
+# Makefile definitions which are common to every project
 
 # External commands used in this file
 CARGO ?= cargo

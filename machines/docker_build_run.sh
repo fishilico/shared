@@ -56,7 +56,7 @@ do
         h)
             echo "Usage: $0 [OPTION] NAME"
             echo "Build and run a docker image from the system NAME"
-            echo "If NAME is 'all', build every for possible system"
+            echo "If NAME is 'all', build for all possible systems"
             echo ""
             echo "Options:"
             echo "  -b       only build an image"
