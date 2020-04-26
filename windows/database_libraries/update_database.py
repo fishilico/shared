@@ -153,7 +153,12 @@ class Database:
                     value = collections.OrderedDict(sorted(
                         (dll_name, collections.OrderedDict(sorted(
                             (fct_name, collections.OrderedDict(sorted(
-                                (fct_ord, sorted(fct_versions, key=version_str_sortkey))
+                                # Filter the versions in order to only include the first 3 numbers
+                                # (Major.Minor.Build), not the extra part of updates.
+                                (fct_ord, sorted(
+                                    set('.'.join(ver.split('.', 3)[:3]) for ver in fct_versions),
+                                    key=version_str_sortkey
+                                ))
                                 for fct_ord, fct_versions in fct_data.items()
                             )))
                             for fct_name, fct_data in export_data.items()
@@ -163,7 +168,10 @@ class Database:
                 elif key == 'syscalls':
                     value = collections.OrderedDict(sorted(
                         (fct_name, collections.OrderedDict(sorted(
-                            (sysnum, sorted(fct_versions, key=version_str_sortkey))
+                            (sysnum, sorted(
+                                set('.'.join(ver.split('.', 3)[:3]) for ver in fct_versions),
+                                key=version_str_sortkey
+                            ))
                             for sysnum, fct_versions in fct_data.items()
                         )))
                         for fct_name, fct_data in value.items()
