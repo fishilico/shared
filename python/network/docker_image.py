@@ -175,7 +175,7 @@ class DockerRegistry:
                 logger.debug("Authentication OK, ping result=%r", ping_response.json())
                 return ping_response.json()
 
-            raise ValueError("Unexpected authentication header kind %r", auth_header)
+            raise ValueError("Unexpected authentication header kind {}".format(repr(auth_header)))
 
         logger.error("Unexpected ping response code %d", ping_response.status_code)
         raise ValueError("Unexpected ping response")
