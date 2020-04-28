@@ -569,7 +569,7 @@ INTEL_FAM6_MODELS = {
     (0x3f, 4): ('HSX', 'Haswell X (Haswell EX), Haswell Server EX', (
         'Intel® Xeon® Processor E7v3 Product Family',
         'Intel® Xeon® Processor v3 E7-4809, E7-4820, E7-4830, E7-4850, E7-8860, E7-8867, E7-8870, E7-8880L, E7-8880, E7-8890, E7-8891, E7-8893',
-        'Intel® Xeon® Processor E7-4809V3, E7-4820V3, E7-4830V3, E7-4850V3, E7-8860V3, E7-8867V3, E7-8870V3, E7-8880LV3, E7-8880V3, E7-8890V3, E7-8891V3, E7-8893V3'
+        'Intel® Xeon® Processor E7-4809V3, E7-4820V3, E7-4830V3, E7-4850V3, E7-8860V3, E7-8867V3, E7-8870V3, E7-8880LV3, E7-8880V3, E7-8890V3, E7-8891V3, E7-8893V3',
     )),
     (0x45, 1): ('HSW', 'Haswell ULT, Haswell U, Haswell Y', (
         '4th Generation Intel® Core™ Mobile Processor Family',
@@ -897,7 +897,7 @@ INTEL_FAM6_MODELS = {
         'Intel® CoreTM Processor i7-8500Y',
         'Intel® CoreTM Processor i5-8310Y, i5-8210Y, i5-8200Y',
         'Intel® CoreTM Processor m3-8100Y',
-        'Intel® CoreTM Processor i7-10510U'
+        'Intel® CoreTM Processor i7-10510U',
         'Intel® CoreTM Processor i5-10210U',
         'Intel® Pentium® Gold Processor 6405U',
         'Intel® Celeron® Processor 5305U',
