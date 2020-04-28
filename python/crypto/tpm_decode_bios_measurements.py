@@ -442,6 +442,12 @@ def analyze_tpm_binary_bios_measurements(bin_path, fail_if_denied=True):
                             pci_function, pci_device = struct.unpack('BB', devpath_data)
                             dev_desc = "HW-PCI dev {:#x} fun {:#x}".format(pci_device, pci_function)
 
+                        if devpath_type == 0x01 and devpath_subtype == 0x04 and devpath_len == 0x15:
+                            # Hardware Device Path / Hardware Vendor Device Path SubType
+                            hw_vendor_guid = uuid.UUID(bytes_le=devpath_data[:0x10])
+                            hw_vendor_byte = struct.unpack('B', devpath_data[0x10:])[0]
+                            dev_desc = "HW-Vendor dev: {},{:#04x}".format(hw_vendor_guid, hw_vendor_byte)
+
                         if devpath_type == 0x02 and devpath_subtype == 0x01 and devpath_len == 0xc:
                             # ACPI Device Path / ACPI Device Path SubType
                             acpi_hid, acpi_uid = struct.unpack('<II', devpath_data)
