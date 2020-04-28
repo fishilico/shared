@@ -1,0 +1,37 @@
+{
+  "smss.exe.x86": {
+    "versions": {
+      "5.1.2600.5512_48025241_f000_c600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208111681,
+          "timestamp_iso": "2008-04-13 18:34:41",
+          "coff_characteristics": 286,
+          "linker_version": "7.10",
+          "image_base": 1213726720,
+          "size_of_image": 61440,
+          "subsystem": 1,
+          "dll_characteristics": 0
+        },
+        "file_size": 50688,
+        "file_version": "5.1.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT Session Manager",
+          "FileVersion": "5.1.2600.5512 (xpsp.080413-2111)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "debug_codeview": {
+          "guid": "6562016a-fd4f-41c9-bd49-9ee8741d6ee4",
+          "age": 1,
+          "path": "smss.pdb"
+        }
+      }
+    }
+  }
+}

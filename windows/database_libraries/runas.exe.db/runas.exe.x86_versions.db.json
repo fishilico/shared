@@ -1,0 +1,201 @@
+{
+  "runas.exe.x86": {
+    "versions": {
+      "5.1.2600.0_3b7d845d_6000_4000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 998081629,
+          "timestamp_iso": "2001-08-17 20:53:49",
+          "coff_characteristics": 271,
+          "linker_version": "7.0",
+          "image_base": 16777216,
+          "size_of_image": 24576,
+          "subsystem": 3,
+          "dll_characteristics": 32768
+        },
+        "file_size": 16384,
+        "file_version": "5.1.2600.0",
+        "product_version": "5.1.2600.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Run As Utility",
+          "FileVersion": "5.1.2600.0 (xpclient.010817-1148)",
+          "InternalName": "runas",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNAS.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.0"
+        },
+        "debug_codeview_timed": {
+          "timestamp": 998081629,
+          "timestamp_iso": "2001-08-17 20:53:49",
+          "age": 1,
+          "path": "runas.pdb"
+        }
+      },
+      "10.0.14393.0_57898ed9_8000_4600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468632793,
+          "timestamp_iso": "2016-07-16 01:33:13",
+          "coff_characteristics": 258,
+          "linker_version": "14.0",
+          "image_base": 4194304,
+          "size_of_image": 32768,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 17920,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Run As Utility",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "runas",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNAS.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "debug_codeview": {
+          "guid": "77d4043a-c8f4-4746-9220-6d5852693f76",
+          "age": 1,
+          "path": "runas.pdb"
+        }
+      },
+      "10.0.16299.15_eca95407_8000_4600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3970520071,
+          "timestamp_iso": "2095-10-27 02:14:31",
+          "coff_characteristics": 258,
+          "linker_version": "14.10",
+          "image_base": 4194304,
+          "size_of_image": 32768,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 17920,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Run As Utility",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "runas",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNAS.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "debug_codeview": {
+          "guid": "186f2759-31f9-e08e-c11f-7cdf823c0eb9",
+          "age": 1,
+          "path": "runas.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_e023037d_8000_4600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3760391037,
+          "timestamp_iso": "2089-02-28 01:03:57",
+          "coff_characteristics": 258,
+          "linker_version": "14.12",
+          "image_base": 4194304,
+          "size_of_image": 32768,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 17920,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Run As Utility",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "runas",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNAS.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "debug_codeview": {
+          "guid": "1d355ab5-9a82-9339-6d93-e839159bbe1f",
+          "age": 1,
+          "path": "runas.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_91d7b709_8000_4600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2446833417,
+          "timestamp_iso": "2047-07-15 19:56:57",
+          "coff_characteristics": 258,
+          "linker_version": "14.13",
+          "image_base": 4194304,
+          "size_of_image": 32768,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 17920,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Run As Utility",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "runas",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNAS.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "debug_codeview": {
+          "guid": "815560ad-3bdb-f62c-d6a4-a30253b1fffd",
+          "age": 1,
+          "path": "runas.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_6149610f_8000_4600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1632198927,
+          "timestamp_iso": "2021-09-21 04:35:27",
+          "coff_characteristics": 258,
+          "linker_version": "14.15",
+          "image_base": 4194304,
+          "size_of_image": 32768,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 17920,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Run As Utility",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "runas",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNAS.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "debug_codeview": {
+          "guid": "92c3d7e6-e370-9b58-935e-2815fb6c200e",
+          "age": 1,
+          "path": "runas.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "92c3d7e6-e370-9b58-935e-2815fb6c200e",
+          "unknown": "418184c05e6d65ea59e96d50",
+          "timestamp": 1632198927
+        }
+      }
+    }
+  }
+}

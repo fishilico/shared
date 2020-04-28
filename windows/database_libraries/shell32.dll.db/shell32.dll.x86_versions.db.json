@@ -4353,6 +4353,112 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1098_577c54e8_553000_5592b8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1467765992,
+          "timestamp_iso": "2016-07-06 00:46:32",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1769996288,
+          "size_of_image": 5582848,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 5608120,
+        "file_version": "10.0.17763.1098",
+        "product_version": "10.0.17763.1098",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.17763.1098 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1098"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "2dea6f09e3308a7439cb9fde0ac3ec834315c48b1b67678784a1496fca098b25",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583318466.431,
+              "timestamp_iso": "2020-03-04 10:41:06.431000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006630659391002870125627888159579701537,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "0ef78b07-87b6-1e1d-9b93-561cd4a4f60f",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1131_3d2aa289_553000_5592b8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1026204297,
+          "timestamp_iso": "2002-07-09 08:44:57",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1769996288,
+          "size_of_image": 5582848,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 5608120,
+        "file_version": "10.0.17763.1131",
+        "product_version": "10.0.17763.1131",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.17763.1131 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1131"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "35de0f58826e063a9a45bdf1115032e5d8c0eb0327ce85fcdb7f415e1dd9db75",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583318190.87,
+              "timestamp_iso": "2020-03-04 10:36:30.870000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006571504587511547041166437022877876502,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "8a4f7e2a-8da6-cbcb-ce82-a14d849c0210",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_864d0b95_574000_57ac30": {
         "pe_header": {
           "machine": 332,
@@ -4864,6 +4970,63 @@
           "guid": "e2dafb16-0934-1378-b575-02bd01470fb4",
           "unknown": "14206cda2c205067d3e5c68f",
           "timestamp": 2171587959
+        }
+      },
+      "10.0.18362.719_1592050c_57a000_57f638": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 361891084,
+          "timestamp_iso": "1981-06-20 13:18:04",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1769996288,
+          "size_of_image": 5742592,
+          "subsystem": 2,
+          "dll_characteristics": 16704
+        },
+        "file_size": 5764664,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "401b4f2774ddf69fd561197388285d449a20ef3a8090c20b4ef577b3209e8d3b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583546817.212,
+              "timestamp_iso": "2020-03-07 02:06:57.212000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006584061304586092475614805417665757464,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "ef1cafad-b47f-a5e3-434c-96f414628b97",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ef1cafad-b47f-a5e3-434c-96f414628b97",
+          "unknown": "9bca7bd604f9869861e706c6",
+          "timestamp": 361891084
         }
       }
     }

@@ -1,0 +1,68 @@
+{
+  "services.exe.x86": {
+    "versions": {
+      "5.1.2600.5755_498c19af_1d000_1b000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1233918383,
+          "timestamp_iso": "2009-02-06 11:06:23",
+          "coff_characteristics": 287,
+          "linker_version": "7.10",
+          "image_base": 16777216,
+          "size_of_image": 118784,
+          "subsystem": 2,
+          "dll_characteristics": 32768
+        },
+        "file_size": 110592,
+        "file_version": "5.1.2600.5755",
+        "product_version": "5.1.2600.5755",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "5.1.2600.5755 (xpsp_sp3_qfe.090206-1316)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5755"
+        },
+        "debug_codeview": {
+          "guid": "37922b59-4977-4b40-8a03-dca398986df1",
+          "age": 2,
+          "path": "services.pdb"
+        }
+      },
+      "5.1.2600.5755_498c1ac8_1d000_1b000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1233918664,
+          "timestamp_iso": "2009-02-06 11:11:04",
+          "coff_characteristics": 287,
+          "linker_version": "7.10",
+          "image_base": 16777216,
+          "size_of_image": 118784,
+          "subsystem": 2,
+          "dll_characteristics": 32768
+        },
+        "file_size": 110592,
+        "file_version": "5.1.2600.5755",
+        "product_version": "5.1.2600.5755",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "5.1.2600.5755 (xpsp_sp3_gdr.090206-1234)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5755"
+        },
+        "debug_codeview": {
+          "guid": "48c5ec95-32f0-4b5a-b808-27c63bb8b535",
+          "age": 2,
+          "path": "services.pdb"
+        }
+      }
+    }
+  }
+}

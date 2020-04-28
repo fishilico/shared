@@ -1821,6 +1821,110 @@
           "path": "hvix64.pdb"
         }
       },
+      "10.0.14393.3564_5e5f4dac_1600000_1190f8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1583304108,
+          "timestamp_iso": "2020-03-04 06:41:48",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1151224,
+        "file_version": "10.0.14393.3564",
+        "product_version": "10.0.14393.3564",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.3564 (rs1_release.200303-1942)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3564"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9a5d1cfa126725061550d8177c5d11dfd4992bdb82c807cb45647f6ef5adcab6",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583306829.838,
+              "timestamp_iso": "2020-03-04 07:27:09.838000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006520054889628057278485313779031605516,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "a96aee2e-735d-4806-b2a2-95a737eaedd7",
+          "age": 1,
+          "path": "hvix64.pdb"
+        }
+      },
+      "10.0.14393.3630_5e8d44da_1600000_1190f8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1586316506,
+          "timestamp_iso": "2020-04-08 03:28:26",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1151224,
+        "file_version": "10.0.14393.3630",
+        "product_version": "10.0.14393.3630",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.3630 (rs1_release.200407-1730)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3630"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "99318a732d04fe31177799d40b4ec46b30cb2639b2fa473d3b5d995e249fe1d7",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586319139.149,
+              "timestamp_iso": "2020-04-08 04:12:19.149000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006574714086727850714242109734421266711,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "95c8a0da-2d09-4655-9781-bb7cb4bca304",
+          "age": 1,
+          "path": "hvix64.pdb"
+        }
+      },
       "10.0.16299.15_bdc819d6_1600000_125198": {
         "pe_header": {
           "machine": 34404,
@@ -5193,6 +5297,112 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1098_e73f996a_1800000_133338": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3879704938,
+          "timestamp_iso": "2092-12-09 23:48:58",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1258296,
+        "file_version": "10.0.17763.1098",
+        "product_version": "10.0.17763.1098",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17763.1098 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1098"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "0ac49ca1ff445dcea5d7c029cb590da7dda79b93f309e11f2592053f40ccd55e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583308253.805,
+              "timestamp_iso": "2020-03-04 07:50:53.805000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006571504587511547041166437022877876502,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "99062727-52dc-823f-620f-7b1ca8a0d241",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1158_79a97dfb_1800000_133410": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2041150971,
+          "timestamp_iso": "2034-09-06 10:22:51",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1258512,
+        "file_version": "10.0.17763.1158",
+        "product_version": "10.0.17763.1158",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17763.1158 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1158"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "5b88fd3fe71e48ba514c13401acdf0eb4cf0e66fcc7dca0c883573c91dec8035",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586665579.186,
+              "timestamp_iso": "2020-04-12 04:26:19.186000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006462103426455033798114803425914913025,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "1e095ec2-4720-22ba-9efd-8e61eb3fca0a",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_ad3189d7_1800000_155b38": {
         "pe_header": {
           "machine": 34404,
@@ -5912,6 +6122,177 @@
           "guid": "47babf75-ccb3-510a-51c7-da37197ebaad",
           "unknown": "2f7d2f4edbaa455b959442e8",
           "timestamp": 646022298
+        }
+      },
+      "10.0.18362.719_85b0066c_1800000_155738": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2242905708,
+          "timestamp_iso": "2041-01-27 13:21:48",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1398584,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "519fc56e87085d914d3d4e570bfd32a49a725365c863bf2eaeaa3dc150afc123",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583536677.177,
+              "timestamp_iso": "2020-03-06 23:17:57.177000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006586951576483970785905606729215770905,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "23525c3b-3665-09b7-0fd8-c494ebd3e9a1",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "23525c3b-3665-09b7-0fd8-c494ebd3e9a1",
+          "unknown": "f73f97c0f39b3c23a2a303cf",
+          "timestamp": 2242905708
+        }
+      },
+      "10.0.18362.720_c51c1416_1800000_155738": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3306951702,
+          "timestamp_iso": "2074-10-16 21:41:42",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1398584,
+        "file_version": "10.0.18362.720",
+        "product_version": "10.0.18362.720",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.18362.720 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.720"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1f14308a7b03a02bd0c07b0304c97070b4c581ad8e021560ccd268a9c0de00a8",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583888731.399,
+              "timestamp_iso": "2020-03-11 01:05:31.399000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006574714086727850714242109734421266711,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "3d285f10-2d35-1d9f-5b72-b8b992e3b982",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "3d285f10-2d35-1d9f-5b72-b8b992e3b982",
+          "unknown": "9a8a2ce28aa6d0637a405ac4",
+          "timestamp": 3306951702
+        }
+      },
+      "10.0.18362.778_75f5f4a2_1800000_155348": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1979053218,
+          "timestamp_iso": "2032-09-17 17:00:18",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1397576,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "hvix64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvix64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "cf19bc2d5169d1391f3e3333eb6add551417de5c77a43e97444c6cd1ec1eaf76",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586394727.22,
+              "timestamp_iso": "2020-04-09 01:12:07.220000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006657751392571021695717514368260243751,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvix64.exe",
+        "debug_codeview": {
+          "guid": "c6d7028e-d5b1-16aa-704e-debc26da6ca6",
+          "age": 1,
+          "path": "hvix64.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "c6d7028e-d5b1-16aa-704e-debc26da6ca6",
+          "unknown": "e35c1ad50ce2f12b947bc041",
+          "timestamp": 1979053218
         }
       }
     }

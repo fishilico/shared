@@ -2217,6 +2217,110 @@
           "path": "ntkrnlmp.pdb"
         }
       },
+      "10.0.14393.3564_5e5f4d4a_81d000_76d2f8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1583304010,
+          "timestamp_iso": "2020-03-04 06:40:10",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 8507392,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 7787256,
+        "file_version": "10.0.14393.3564",
+        "product_version": "10.0.14393.3564",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.14393.3564 (rs1_release.200303-1942)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3564"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "41989a391c8435472af0195ced52631687f8207327e5412ceb93dbf077201b92",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583307098.03,
+              "timestamp_iso": "2020-03-04 07:31:38.030000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006498383676716003993587684659026723080,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "326b55bf-b40d-40cc-9cb6-363c45c90484",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
+      "10.0.14393.3630_5e8d4434_81d000_76d4f8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1586316340,
+          "timestamp_iso": "2020-04-08 03:25:40",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 8507392,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 7787768,
+        "file_version": "10.0.14393.3630",
+        "product_version": "10.0.14393.3630",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.14393.3630 (rs1_release.200407-1730)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3630"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3226bc30250909e79eb53b656133b111f0393a606821b3069951fbeeec91e4ee",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586319412.143,
+              "timestamp_iso": "2020-04-08 04:16:52.143000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006493195827542816622927440104967373063,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "734a0a63-54e8-4788-aa53-a62a341d6cdb",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        }
+      },
       "10.0.16299.15_59cda780_8d2000_831b98": {
         "pe_header": {
           "machine": 34404,
@@ -5649,6 +5753,112 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1098_72743c19_a6f000_939610": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1920220185,
+          "timestamp_iso": "2030-11-06 18:29:45",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 10940416,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9672208,
+        "file_version": "10.0.17763.1098",
+        "product_version": "10.0.17763.1098",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.17763.1098 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1098"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d934bcde50dc37e4318e65bd16e6a83bc0667a9d8fcb79f99176d0f8ac533acb",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583308449.338,
+              "timestamp_iso": "2020-03-04 07:54:09.338000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006487425312414537563639298973612638470,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "5a53034f-e86d-ee79-853a-8e24b3903a93",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1158_f3b41210_a6f000_939610": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4088664592,
+          "timestamp_iso": "2099-07-25 12:09:52",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 10940416,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9672208,
+        "file_version": "10.0.17763.1158",
+        "product_version": "10.0.17763.1158",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.17763.1158 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1158"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d3cdfbfc762cb6c47b05021bf88cbc1a476cf1bef3ef00c37edc2fee49b80bee",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586665570.464,
+              "timestamp_iso": "2020-04-12 04:26:10.464000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006487425312414537563639298973612638470,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "634cc5c9-627f-2ba6-e3db-5b9e6e33c16e",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_00e78e2f_ab2000_975608": {
         "pe_header": {
           "machine": 34404,
@@ -6368,6 +6578,177 @@
           "guid": "cb85be8c-d15a-a76f-5c50-004cd8aec357",
           "unknown": "f652ec025404fd13c3741c73",
           "timestamp": 610220813
+        }
+      },
+      "10.0.18362.719_d36c6033_ab7000_978738": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3547095091,
+          "timestamp_iso": "2082-05-27 08:11:31",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 11235328,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9930552,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "487affd395a0e82694d47ff6bf01493cbeff3600c129cc5eeb60457b5caa074c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583536543.325,
+              "timestamp_iso": "2020-03-06 23:15:43.325000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006586951576483970785905606729215770905,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "5a8a70ea-e299-39ef-a17c-9fc879fa0d90",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "5a8a70ea-e299-39ef-a17c-9fc879fa0d90",
+          "unknown": "d046c5f57fd4d9c2e83fa800",
+          "timestamp": 3547095091
+        }
+      },
+      "10.0.18362.720_e45edf24_ab7000_978738": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3831422756,
+          "timestamp_iso": "2091-05-31 04:05:56",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 11235328,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9930552,
+        "file_version": "10.0.18362.720",
+        "product_version": "10.0.18362.720",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.18362.720 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.720"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "63c1966e026b9d990285aad52f4e18655f365b4f61d4b5a5ced21aecd49ed180",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583888620.869,
+              "timestamp_iso": "2020-03-11 01:03:40.869000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006584061304586092475614805417665757464,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "2b5d086a-9591-c3a5-4729-282e8f43bd82",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "2b5d086a-9591-c3a5-4729-282e8f43bd82",
+          "unknown": "762d527e1445ad12388487c4",
+          "timestamp": 3831422756
+        }
+      },
+      "10.0.18362.778_5629d63a_ab7000_978738": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1445582394,
+          "timestamp_iso": "2015-10-23 06:39:54",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 11235328,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 9930552,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Kernel & System",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "ntkrnlmp.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ntkrnlmp.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b943cabde14ef45a8ca7024158b64505fda6b266a372f7f726013eb6a3cbc0d3",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586394605.41,
+              "timestamp_iso": "2020-04-09 01:10:05.410000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006631386823926077463740860811442127138,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ntoskrnl.exe",
+        "debug_codeview": {
+          "guid": "be3e0ff9-2c7a-9343-3d4a-950a037ef656",
+          "age": 1,
+          "path": "ntkrnlmp.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "be3e0ff9-2c7a-9343-3d4a-950a037ef656",
+          "unknown": "f2c9f0799d08729b512eccc0",
+          "timestamp": 1445582394
         }
       }
     }

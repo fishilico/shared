@@ -5279,6 +5279,145 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1098_0241e0af_14f4000_151c920": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 37871791,
+          "timestamp_iso": "1971-03-15 07:56:31",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 21970944,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 22137120,
+        "file_version": "10.0.17763.1098",
+        "product_version": "10.0.17763.1098",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.17763.1098 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1098"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "83052a1cae0197369df55e23230ab35007712816b5389f51e86619fe3acfc6e4",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583320124.941,
+              "timestamp_iso": "2020-03-04 11:08:44.941000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006610357601351129704964244840447475998,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "f41b6984-f5bf-1364-b633-ba68662e1770",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1098_112a9fd5_19000_14000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 288006101,
+          "timestamp_iso": "1979-02-16 09:41:41",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 81920,
+        "file_version": "10.0.17763.1098",
+        "product_version": "10.0.17763.1098",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.17763.1098 (WinBuild.160101.0800)",
+          "InternalName": "shell32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "shell32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1098"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "b71adf11-7b8e-0237-81db-33e78d70f7b6",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1131_7174ec2c_14f4000_151cb20": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1903488044,
+          "timestamp_iso": "2030-04-27 02:40:44",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 21970944,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 22137632,
+        "file_version": "10.0.17763.1131",
+        "product_version": "10.0.17763.1131",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.17763.1131 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1131"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "70b10f29d62be5c96468bea8daba2fa502b3c8387399c9eac3a1db289129dc13",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583320537.108,
+              "timestamp_iso": "2020-03-04 11:15:37.108000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006571504587511547041166437022877876502,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "a92b04f4-eb10-5c74-ef11-aed5acb1b23f",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_93aaaf60_19000_14000": {
         "pe_header": {
           "machine": 34404,
@@ -6001,6 +6140,137 @@
           "OriginalFilename": "shell32.dll",
           "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
           "ProductVersion": "10.0.18362.657"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "b27457db-524e-3577-180b-fb51d73ffb7a",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "b27457db-524e-3577-180b-fb51d73ffb7a",
+          "unknown": "d308ad026f050d5a8e4fcfcc",
+          "timestamp": 662086473
+        }
+      },
+      "10.0.18362.719_2776a349_19000_14000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 662086473,
+          "timestamp_iso": "1990-12-25 00:54:33",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 81920,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "shell32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "shell32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "b27457db-524e-3577-180b-fb51d73ffb7a",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "b27457db-524e-3577-180b-fb51d73ffb7a",
+          "unknown": "d308ad026f050d5a8e4fcfcc",
+          "timestamp": 662086473
+        }
+      },
+      "10.0.18362.719_6054846d_6e5000_6ed6f8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1616151661,
+          "timestamp_iso": "2021-03-19 11:01:01",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 7229440,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 7263992,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Shell Common Dll",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "SHELL32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "SHELL32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9a5fb537a8fd18faf86c84af0d987476496d55f2bc4aee631fd25ca81cbed591",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583549446.706,
+              "timestamp_iso": "2020-03-07 02:50:46.706000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006516049217624773086440249906935365899,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "SHELL32.dll",
+        "debug_codeview": {
+          "guid": "a51c4f62-eac1-14c1-6a6d-bfb5d673f573",
+          "age": 1,
+          "path": "shell32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "a51c4f62-eac1-14c1-6a6d-bfb5d673f573",
+          "unknown": "64c2cd892a11476624873328",
+          "timestamp": 1616151661
+        }
+      },
+      "10.0.18362.778_2776a349_19000_14000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 662086473,
+          "timestamp_iso": "1990-12-25 00:54:33",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 102400,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 81920,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "shell32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "shell32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
         },
         "export_dll_name": "SHELL32.dll",
         "debug_codeview": {

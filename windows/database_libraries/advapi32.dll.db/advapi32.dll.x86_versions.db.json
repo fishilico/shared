@@ -814,6 +814,59 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1131_be842313_7e000_7be08": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3196330771,
+          "timestamp_iso": "2071-04-15 13:39:31",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1278214144,
+          "size_of_image": 516096,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 507400,
+        "file_version": "10.0.17763.1131",
+        "product_version": "10.0.17763.1131",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.17763.1131 (WinBuild.160101.0800)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1131"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "5d6dcf4c3584d164427401d03064175e7dbc2d3002174b7e024e61a4643b7525",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583318240.295,
+              "timestamp_iso": "2020-03-04 10:37:20.295000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006462103426455033798114803425914913025,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "346d1d34-7484-72a8-60c9-985f34deff13",
+          "age": 1,
+          "path": "advapi32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_56b38228_79000_77280": {
         "pe_header": {
           "machine": 332,
@@ -926,6 +979,63 @@
           "guid": "4408730d-bbcb-4171-079b-395056dd523d",
           "unknown": "1c4961f0cc3ae9c5f3845b2b",
           "timestamp": 3011106621
+        }
+      },
+      "10.0.18362.752_cf4d11bd_79000_77168": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3477934525,
+          "timestamp_iso": "2080-03-17 20:55:25",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1278214144,
+          "size_of_image": 495616,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 487784,
+        "file_version": "10.0.18362.752",
+        "product_version": "10.0.18362.752",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Advanced Windows 32 Base API",
+          "FileVersion": "10.0.18362.752 (WinBuild.160101.0800)",
+          "InternalName": "advapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "advapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.752"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "07678fb30c345fa30d994c2d46252827c407b1c45e9409e3987aef558d6a1e29",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1584431807.334,
+              "timestamp_iso": "2020-03-17 07:56:47.334000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006432883281896596520303285579915723003,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ADVAPI32.dll",
+        "debug_codeview": {
+          "guid": "1f26d342-992e-5af0-859c-07f85085bda5",
+          "age": 1,
+          "path": "advapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "1f26d342-992e-5af0-859c-07f85085bda5",
+          "unknown": "ff083906e3007ed4133dd440",
+          "timestamp": 3477934525
         }
       }
     }

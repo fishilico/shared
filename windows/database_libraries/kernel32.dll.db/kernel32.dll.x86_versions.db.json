@@ -629,6 +629,58 @@
           "path": "wkernel32.pdb"
         }
       },
+      "10.0.14393.3630_5e8d44bf_e0000_96608": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1586316479,
+          "timestamp_iso": "2020-04-08 03:27:59",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 1803550720,
+          "size_of_image": 917504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 615944,
+        "file_version": "10.0.14393.3630",
+        "product_version": "10.0.14393.3630",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.3630 (rs1_release.200407-1730)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3630"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b6b71959ded9ef8d3dae118f2361cd0d15eac370c1a6a98105b7d35f2378c1b4",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586318024.473,
+              "timestamp_iso": "2020-04-08 03:53:44.473000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006616836001661329011654038745486721311,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "544a2ef8-2c25-4c39-a548-1ef7ce103b83",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        }
+      },
       "10.0.16299.15_744765ce_d0000_91278": {
         "pe_header": {
           "machine": 332,
@@ -1371,6 +1423,59 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1158_f35dc1d7_e0000_9e838": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4083007959,
+          "timestamp_iso": "2099-05-21 00:52:39",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1803550720,
+          "size_of_image": 917504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 649272,
+        "file_version": "10.0.17763.1158",
+        "product_version": "10.0.17763.1158",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.1158 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1158"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "6af8ed8d6c2fb75731c8a6a33c0e570acca5e3386932fd8b9004f41d55a7b9fe",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586678083.631,
+              "timestamp_iso": "2020-04-12 07:54:43.631000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006462103426455033798114803425914913025,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "2b87d691-43c7-1995-782f-6ced72c02266",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_ead83e2e_e0000_9a6d8": {
         "pe_header": {
           "machine": 332,
@@ -1540,6 +1645,63 @@
           "guid": "7d80824f-9cce-7c81-9044-b16fd421c63d",
           "unknown": "c26e0b02cdf0edfe63df83f3",
           "timestamp": 2069112812
+        }
+      },
+      "10.0.18362.778_17139767_e0000_99788": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 387159911,
+          "timestamp_iso": "1982-04-09 00:25:11",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1803550720,
+          "size_of_image": 917504,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 628616,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "kernel32",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "kernel32",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "aeec4c87619b2aa794962cf2535217c89485e6c00f2eac88dce5f2960e903eed",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586406692.509,
+              "timestamp_iso": "2020-04-09 04:31:32.509000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006475241620571807812090513360724951300,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNEL32.dll",
+        "debug_codeview": {
+          "guid": "6c2466fb-cfe0-8015-bed2-d6833f6f80fb",
+          "age": 1,
+          "path": "wkernel32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "6c2466fb-cfe0-8015-bed2-d6833f6f80fb",
+          "unknown": "b359a6b95c8c62ec5967aeb9",
+          "timestamp": 387159911
         }
       }
     }

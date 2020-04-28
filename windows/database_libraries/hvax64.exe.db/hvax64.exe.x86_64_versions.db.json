@@ -1821,6 +1821,110 @@
           "path": "hvax64.pdb"
         }
       },
+      "10.0.14393.3564_5e5f4da4_1600000_f5ef8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1583304100,
+          "timestamp_iso": "2020-03-04 06:41:40",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1007352,
+        "file_version": "10.0.14393.3564",
+        "product_version": "10.0.14393.3564",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.3564 (rs1_release.200303-1942)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3564"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "11f448e91e2f1eab1a1957623f5cf6510fc24b7d986c06c55c25e6fef8862645",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583306828.998,
+              "timestamp_iso": "2020-03-04 07:27:08.998000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006507891765450833654085412261965332746,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "eb5dcd6d-7012-417c-9480-95141911414f",
+          "age": 1,
+          "path": "hvax64.pdb"
+        }
+      },
+      "10.0.14393.3630_5e8d44df_1600000_f5fd0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1586316511,
+          "timestamp_iso": "2020-04-08 03:28:31",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 18446735277616529408,
+          "size_of_image": 23068672,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1007568,
+        "file_version": "10.0.14393.3630",
+        "product_version": "10.0.14393.3630",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.14393.3630 (rs1_release.200407-1730)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3630"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "71e237d4dcbd2d6cd2e5ba40d6041ee82f2e65f5b255f8cab0de7ab75a1cf751",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586319128.128,
+              "timestamp_iso": "2020-04-08 04:12:08.128000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006475241620571807812090513360724951300,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "3e8fdaba-bcb0-47f5-8f33-ddfb03f5e96f",
+          "age": 1,
+          "path": "hvax64.pdb"
+        }
+      },
       "10.0.16299.15_0f26474f_1600000_101398": {
         "pe_header": {
           "machine": 34404,
@@ -5193,6 +5297,112 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1098_7ee6f6e2_1800000_100338": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2129065698,
+          "timestamp_iso": "2037-06-19 23:08:18",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1049400,
+        "file_version": "10.0.17763.1098",
+        "product_version": "10.0.17763.1098",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17763.1098 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1098"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "77c4faa48529fc0079cc1c4c41a76c9662ef3b5dfd7859af09a265953e81a491",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583308254.832,
+              "timestamp_iso": "2020-03-04 07:50:54.832000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006503586389530757299465158632612561161,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "b5c1cf90-be0b-5912-5689-a30a589eb277",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1158_7ce4b770_1800000_100810": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2095363952,
+          "timestamp_iso": "2036-05-25 21:32:32",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1050640,
+        "file_version": "10.0.17763.1158",
+        "product_version": "10.0.17763.1158",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.17763.1158 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1158"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7db1663c4e8300e5b5287dba9d93ead77716a4eeecea93095b653dba34408949",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586665579.1,
+              "timestamp_iso": "2020-04-12 04:26:19.100000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006440095625129037045773517305489129725,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "b030fbec-aea6-3a66-6fb4-4bca4ef4a181",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_2c20c320_1800000_105d38": {
         "pe_header": {
           "machine": 34404,
@@ -5912,6 +6122,177 @@
           "guid": "4a678c9a-b263-2047-7513-3223a68ba41b",
           "unknown": "be884a91c13cad3e50a9d7ba",
           "timestamp": 2196822826
+        }
+      },
+      "10.0.18362.719_c8dafc82_1800000_106f38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3369794690,
+          "timestamp_iso": "2076-10-13 06:04:50",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1077048,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "711cc86f9f9be3fc642ff9382e8c3ef47321c0e6b2fd2f742a4442bc15666e3e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583536675.724,
+              "timestamp_iso": "2020-03-06 23:17:55.724000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006507891765450833654085412261965332746,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "4a7c5d60-70fb-1400-dba0-ac15c7fa6316",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "4a7c5d60-70fb-1400-dba0-ac15c7fa6316",
+          "unknown": "dd24f1e4dfe6e32386d0f3f9",
+          "timestamp": 3369794690
+        }
+      },
+      "10.0.18362.720_22f41c06_1800000_106f38": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 586423302,
+          "timestamp_iso": "1988-08-01 07:21:42",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1077048,
+        "file_version": "10.0.18362.720",
+        "product_version": "10.0.18362.720",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.18362.720 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.720"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "80b3faf7dff553a0363855dfef211d561c7444aaaee72c744ed3de3a58118226",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583888731.977,
+              "timestamp_iso": "2020-03-11 01:05:31.977000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006592893612989839592708952785753735450,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "8c70ed25-395a-e893-2e2e-27f197b85b9d",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "8c70ed25-395a-e893-2e2e-27f197b85b9d",
+          "unknown": "47c2a96637c744d4845d7a96",
+          "timestamp": 586423302
+        }
+      },
+      "10.0.18362.778_aaef2885_1800000_106f48": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2867800197,
+          "timestamp_iso": "2060-11-16 03:09:57",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 18446735277616529408,
+          "size_of_image": 25165824,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 1077064,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hypervisor V2.0",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "hvax64.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvax64.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9ecf03566bd7be7e1afa64e9a683e125e875461b1d3db484a9b3a333e8678e2e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586394724.73,
+              "timestamp_iso": "2020-04-09 01:12:04.730000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006657751392571021695717514368260243751,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvax64.exe",
+        "debug_codeview": {
+          "guid": "08a03846-ec19-9d82-c117-dc311bfb342b",
+          "age": 1,
+          "path": "hvax64.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "08a03846-ec19-9d82-c117-dc311bfb342b",
+          "unknown": "1c1222006cdc19f868f55f7f",
+          "timestamp": 2867800197
         }
       }
     }

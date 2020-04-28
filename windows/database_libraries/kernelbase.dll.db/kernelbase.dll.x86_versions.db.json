@@ -1437,6 +1437,110 @@
           "path": "wkernelbase.pdb"
         }
       },
+      "10.0.14393.3564_5e5f4b25_1a2000_1a1090": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1583303461,
+          "timestamp_iso": "2020-03-04 06:31:01",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 1712128,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1708176,
+        "file_version": "10.0.14393.3564",
+        "product_version": "10.0.14393.3564",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.3564 (rs1_release.200303-1942)",
+          "InternalName": "Kernelbase.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Kernelbase.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3564"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "15da16dde12be487c8499e40e75152d24d3b047e2006c54b9a3024b6da45ff84",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583305540.867,
+              "timestamp_iso": "2020-03-04 07:05:40.867000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006454958411117438441908337201136009472,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNELBASE.dll",
+        "debug_codeview": {
+          "guid": "cc8ca735-fdd2-4f84-afae-5df4700a9393",
+          "age": 1,
+          "path": "wkernelbase.pdb"
+        }
+      },
+      "10.0.14393.3630_5e8d4320_1a1000_1a0d98": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1586316064,
+          "timestamp_iso": "2020-04-08 03:21:04",
+          "coff_characteristics": 8450,
+          "linker_version": "14.0",
+          "image_base": 268435456,
+          "size_of_image": 1708032,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1707416,
+        "file_version": "10.0.14393.3630",
+        "product_version": "10.0.14393.3630",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.14393.3630 (rs1_release.200407-1730)",
+          "InternalName": "Kernelbase.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Kernelbase.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3630"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "45e7dd816400e2674b9a0e5cb0b964268cdf791bee39b0c2e218eea03673f24f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586318123.127,
+              "timestamp_iso": "2020-04-08 03:55:23.127000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006616836001661329011654038745486721311,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNELBASE.dll",
+        "debug_codeview": {
+          "guid": "e7233880-263d-4b43-9e25-c13decafebd6",
+          "age": 1,
+          "path": "wkernelbase.pdb"
+        }
+      },
       "10.0.16299.15_2cd1ce3d_1d7000_1d73f0": {
         "pe_header": {
           "machine": 332,
@@ -3345,6 +3449,112 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1098_e934af74_1fa000_1fa968": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3912544116,
+          "timestamp_iso": "2093-12-25 01:48:36",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 268435456,
+          "size_of_image": 2072576,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 2074984,
+        "file_version": "10.0.17763.1098",
+        "product_version": "10.0.17763.1098",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.1098 (WinBuild.160101.0800)",
+          "InternalName": "Kernelbase.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Kernelbase.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1098"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "98edd17b2b302b682f1a014115cbf4ba35aa05626c2d8f4c576e68d9bb8576ec",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583308019.711,
+              "timestamp_iso": "2020-03-04 07:46:59.711000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006450063303566776419683477421161447679,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNELBASE.dll",
+        "debug_codeview": {
+          "guid": "be7859c0-3339-82f7-4c51-e83812f882cd",
+          "age": 1,
+          "path": "wkernelbase.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1158_9d05f84d_1fb000_1fb6b8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2634414157,
+          "timestamp_iso": "2053-06-24 21:42:37",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 268435456,
+          "size_of_image": 2076672,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 2078392,
+        "file_version": "10.0.17763.1158",
+        "product_version": "10.0.17763.1158",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.17763.1158 (WinBuild.160101.0800)",
+          "InternalName": "Kernelbase.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Kernelbase.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1158"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "015f48dd3d40717ef04fa93522bd1534df4e664f11e56d59bb819f724cc14779",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008268757472408374716448233271001612893,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586665399.561,
+              "timestamp_iso": "2020-04-12 04:23:19.561000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006608816545313913098938326020008182045,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNELBASE.dll",
+        "debug_codeview": {
+          "guid": "159ca3c6-3c90-bf0e-078d-8e9950009e32",
+          "age": 1,
+          "path": "wkernelbase.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_b696b1cf_1fc000_1fc2b8": {
         "pe_header": {
           "machine": 332,
@@ -3913,6 +4123,120 @@
           "guid": "b1423108-2613-fce2-d92b-e8fb6b5e1dd0",
           "unknown": "363d34b4dcead0c4738d078a",
           "timestamp": 1416842734
+        }
+      },
+      "10.0.18362.719_4061c730_1fe000_1fd9d0": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1080149808,
+          "timestamp_iso": "2004-03-24 17:36:48",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 2088960,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 2087376,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "Kernelbase.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Kernelbase.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "41b6d5709d7251020f156be389936c49972ebbf3abf4862509d7fe0763b91772",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008001119127362167221508273618548687401,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583535347.068,
+              "timestamp_iso": "2020-03-06 22:55:47.068000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006487425312414537563639298973612638470,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNELBASE.dll",
+        "debug_codeview": {
+          "guid": "b51ce52f-863c-2f8d-f34c-736b3d53bda9",
+          "age": 1,
+          "path": "wkernelbase.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "b51ce52f-863c-2f8d-f34c-736b3d53bda9",
+          "unknown": "052be92b0a54cfa185a7f2a1",
+          "timestamp": 1080149808
+        }
+      },
+      "10.0.18362.778_692cf0ab_1fe000_1fd700": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1764552875,
+          "timestamp_iso": "2025-12-01 01:34:35",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 2088960,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 2086656,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows NT BASE API Client DLL",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "Kernelbase.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Kernelbase.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1b39d3d5c52d47e1a3c182366fd09bc95264f4209b6d8bd2c4be702232c998e7",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008268757472408374716448233271001612893,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586394776.607,
+              "timestamp_iso": "2020-04-09 01:12:56.607000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006586951576483970785905606729215770905,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "KERNELBASE.dll",
+        "debug_codeview": {
+          "guid": "56d647a5-73a4-4ad2-3758-443ff2c3cdc7",
+          "age": 1,
+          "path": "wkernelbase.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "56d647a5-73a4-4ad2-3758-443ff2c3cdc7",
+          "unknown": "8744e24bbeb1490aa710df01",
+          "timestamp": 1764552875
         }
       }
     }

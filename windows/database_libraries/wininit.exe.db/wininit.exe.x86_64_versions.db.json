@@ -1,0 +1,427 @@
+{
+  "wininit.exe.x86_64": {
+    "versions": {
+      "10.0.14393.0_5789987a_4c000_4a470": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468635258,
+          "timestamp_iso": "2016-07-16 02:14:18",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 311296,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 304240,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Start-Up Application",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "WinInit",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WinInit.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e93b12eeb5252010716f32d06822e9c45383b9ed87a812fc86ea15bfdf35f3f5",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006209872388536458221805485294130036944,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468637822.958,
+              "timestamp_iso": "2016-07-16 02:57:02.958000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005930554193287737188107124894997676187,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "5de68c42-8765-4e23-8aa4-b7e2c9b54e16",
+          "age": 1,
+          "path": "wininit.pdb"
+        }
+      },
+      "10.0.14393.1794_59dad47d_4c000_4a468": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1507513469,
+          "timestamp_iso": "2017-10-09 01:44:29",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 311296,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 304232,
+        "file_version": "10.0.14393.1794",
+        "product_version": "10.0.14393.1794",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Start-Up Application",
+          "FileVersion": "10.0.14393.1794 (rs1_release.171008-1615)",
+          "InternalName": "WinInit",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WinInit.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1794"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "0023a7f8dc99191abe6755ef52ee0c9443fbc5b1306e9697816c0f2a659da744",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007007454411873820417082316352074547562,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1507516194.63,
+              "timestamp_iso": "2017-10-09 02:29:54.630000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005983252952945386114569575244197003429,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "9c728cde-3058-455b-acce-ffedac3663d5",
+          "age": 1,
+          "path": "wininit.pdb"
+        }
+      },
+      "10.0.14393.2273_5ae40980_4c000_4a468": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1524894080,
+          "timestamp_iso": "2018-04-28 05:41:20",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 311296,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 304232,
+        "file_version": "10.0.14393.2273",
+        "product_version": "10.0.14393.2273",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Start-Up Application",
+          "FileVersion": "10.0.14393.2273 (rs1_release_1.180427-1811)",
+          "InternalName": "WinInit",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WinInit.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2273"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d132bdd6425e86dce4f544f8ce3fef726034938ae95bd296a36c1399c6fddeeb",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007011710576423512918788467269983797611,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1524897282.868,
+              "timestamp_iso": "2018-04-28 06:34:42.868000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006011477359085519567498317751679713450,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "fa6c1ada-45af-43a9-87d9-2353a5744553",
+          "age": 1,
+          "path": "wininit.pdb"
+        }
+      },
+      "10.0.16299.15_600d94df_5a000_57ca0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1611502815,
+          "timestamp_iso": "2021-01-24 15:40:15",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 368640,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 359584,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Start-Up Application",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "WinInit",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WinInit.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "73b0e2f75083473ceb4d7041b7afa635d5a679f379d8b69d9126b217281eb05d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007007454411873820417082316352074547562,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506659309.454,
+              "timestamp_iso": "2017-09-29 04:28:29.454000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005994211025790091665443654607388541095,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "61cfb27d-8358-7944-d506-bb72ecad5993",
+          "age": 1,
+          "path": "wininit.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_197f773f_5b000_598c8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 427783999,
+          "timestamp_iso": "1983-07-23 04:53:19",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 372736,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 366792,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Start-Up Application",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "WinInit",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WinInit.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a04d744bfad2b767e945cbafbaec1003e14f35b9058c552973e54b850de4960e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007011710576423512918788467269983797611,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421455.73,
+              "timestamp_iso": "2018-04-11 04:37:35.730000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005992121074566940565467069433526616230,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "9d197f39-1f8d-d101-3fb7-ee570d08cde9",
+          "age": 1,
+          "path": "wininit.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_3fbc6f45_60000_5ed18": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1069313861,
+          "timestamp_iso": "2003-11-20 07:37:41",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 393216,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 388376,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Start-Up Application",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "WinInit",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WinInit.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "41d8b8dfdf9efe46fa36847129bc544f65cc7f22e98c6d0b051162871115a0d6",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974977.001,
+              "timestamp_iso": "2018-09-15 01:29:37.001000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006255250095571111745631542615402873049,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "3c444e7f-c68e-e141-2024-936273c6f9b7",
+          "age": 1,
+          "path": "wininit.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_12baaf67_5d000_5aab0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 314224487,
+          "timestamp_iso": "1979-12-16 20:34:47",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 380928,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 371376,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Start-Up Application",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "WinInit",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WinInit.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "0c7a8d8b0bd0e97e6a524280e62dcf9d5130dc4940ffefba04143dea100bedda",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949252.242,
+              "timestamp_iso": "2019-03-18 22:47:32.242000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006286484351334364513552117212125331679,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "b927fa45-7bac-fca0-6e80-5ede85088fa8",
+          "age": 1,
+          "path": "wininit.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "b927fa45-7bac-fca0-6e80-5ede85088fa8",
+          "unknown": "8632d1111bbaf664a47c7ea7",
+          "timestamp": 314224487
+        }
+      },
+      "10.0.18362.387_04791be0_63000_61588": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 75045856,
+          "timestamp_iso": "1972-05-18 14:04:16",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 405504,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 398728,
+        "file_version": "10.0.18362.387",
+        "product_version": "10.0.18362.387",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Start-Up Application",
+          "FileVersion": "10.0.18362.387 (WinBuild.160101.0800)",
+          "InternalName": "WinInit",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "WinInit.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.387"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7accbf592e4c76de2275a824073d4948db2d1bbf3f6259b2de515b4c6cb8ff9f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569298621.445,
+              "timestamp_iso": "2019-09-24 04:17:01.445000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006405871818669909035022975445745271030,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "0926fe50-7f04-378b-ae7d-800caf286cc2",
+          "age": 1,
+          "path": "wininit.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "0926fe50-7f04-378b-ae7d-800caf286cc2",
+          "unknown": "29b9c3e5ed9f05a480d84abb",
+          "timestamp": 75045856
+        }
+      }
+    }
+  }
+}

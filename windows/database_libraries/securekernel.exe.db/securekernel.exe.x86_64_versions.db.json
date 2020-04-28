@@ -2475,6 +2475,112 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1075_ea3b979d_b6000_9f410": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3929773981,
+          "timestamp_iso": "2094-07-12 11:53:01",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 745472,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 652304,
+        "file_version": "10.0.17763.1075",
+        "product_version": "10.0.17763.1075",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.17763.1075 (WinBuild.160101.0800)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1075"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "817bfb4442c1d883f703c953e2507fa58ec2fafbcc889a4d15e67b1f5304b36b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1582263589.613,
+              "timestamp_iso": "2020-02-21 05:39:49.613000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006480397825696636330655590519008133381,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "b275ef7f-f661-0ad3-6e84-d339ef6ed164",
+          "age": 1,
+          "path": "securekernel.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1158_faca5f1c_b6000_9f538": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4207566620,
+          "timestamp_iso": "2103-05-02 16:30:20",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 745472,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 652600,
+        "file_version": "10.0.17763.1158",
+        "product_version": "10.0.17763.1158",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.17763.1158 (WinBuild.160101.0800)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1158"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "51623a4ec4be7b62829431fe61a16c530db2e7d4be2538c0de28aa98c8b4a966",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586665478.239,
+              "timestamp_iso": "2020-04-12 04:24:38.239000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006592893612989839592708952785753735450,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "70f25a40-0afb-9bae-99db-f5cbe250d6ab",
+          "age": 1,
+          "path": "securekernel.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_fb232778_f3000_bd228": {
         "pe_header": {
           "machine": 34404,
@@ -2986,6 +3092,63 @@
           "guid": "cf6627f9-d178-4d05-4924-f44022fa19ba",
           "unknown": "a76d5bb8d7882ab23f0ff4f0",
           "timestamp": 2920415351
+        }
+      },
+      "10.0.18362.778_d3ffa4d5_f4000_bd610": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3556746453,
+          "timestamp_iso": "2082-09-16 01:07:33",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 999424,
+          "subsystem": 1,
+          "dll_characteristics": 352
+        },
+        "file_size": 775696,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "NT Secure Kernel",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "securekernel.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "securekernel.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "0bd51481ce8add36105c4350f94a8daa1a0f3ebaad280aff2bc3f02ca09cf78b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1586394598.838,
+              "timestamp_iso": "2020-04-09 01:09:58.838000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006475241620571807812090513360724951300,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "securekernel.exe",
+        "debug_codeview": {
+          "guid": "07d7e6f0-0312-b464-b492-4e872419ee5b",
+          "age": 1,
+          "path": "securekernel.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "07d7e6f0-0312-b464-b492-4e872419ee5b",
+          "unknown": "8d564723e3399165a0ccf6ac",
+          "timestamp": 3556746453
         }
       }
     }

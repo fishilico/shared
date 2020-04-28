@@ -1,0 +1,268 @@
+{
+  "cmd.exe.x86": {
+    "versions": {
+      "5.1.2600.5512_48025baf_61000_5f000": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1208114095,
+          "timestamp_iso": "2008-04-13 19:14:55",
+          "coff_characteristics": 271,
+          "linker_version": "7.10",
+          "image_base": 1255145472,
+          "size_of_image": 397312,
+          "subsystem": 3,
+          "dll_characteristics": 32768
+        },
+        "file_size": 389120,
+        "file_version": "5.1.2600.5512",
+        "product_version": "5.1.2600.5512",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Command Processor",
+          "FileVersion": "5.1.2600.5512 (xpsp.080413-2111)",
+          "InternalName": "cmd",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Cmd.Exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "5.1.2600.5512"
+        },
+        "debug_codeview": {
+          "guid": "6cef5ccc-ad3c-4359-be4b-fe642184d33e",
+          "age": 2,
+          "path": "cmd.pdb"
+        }
+      },
+      "10.0.14393.0_57899070_52000_31800": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1468633200,
+          "timestamp_iso": "2016-07-16 01:40:00",
+          "coff_characteristics": 258,
+          "linker_version": "14.0",
+          "image_base": 4194304,
+          "size_of_image": 335872,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 202752,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Command Processor",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "cmd",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Cmd.Exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "debug_codeview": {
+          "guid": "2b87debe-845a-42ab-944a-b274b3ab5d92",
+          "age": 1,
+          "path": "cmd.pdb"
+        }
+      },
+      "10.0.16299.15_99b16e73_57000_37400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2578542195,
+          "timestamp_iso": "2051-09-17 05:43:15",
+          "coff_characteristics": 258,
+          "linker_version": "14.10",
+          "image_base": 4194304,
+          "size_of_image": 356352,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 226304,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Command Processor",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "cmd",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Cmd.Exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "debug_codeview": {
+          "guid": "dba2dd6b-8a2c-0964-2837-8a22a81c1a24",
+          "age": 1,
+          "path": "cmd.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_3b7af74d_59000_38e00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 997914445,
+          "timestamp_iso": "2001-08-15 22:27:25",
+          "coff_characteristics": 258,
+          "linker_version": "14.12",
+          "image_base": 4194304,
+          "size_of_image": 364544,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 232960,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Command Processor",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "cmd",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Cmd.Exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "debug_codeview": {
+          "guid": "8ea24759-4034-e084-2c66-7c96cba2e2a8",
+          "age": 1,
+          "path": "cmd.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_d4c81b13_59000_39c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3569883923,
+          "timestamp_iso": "2083-02-15 02:25:23",
+          "coff_characteristics": 258,
+          "linker_version": "14.13",
+          "image_base": 4194304,
+          "size_of_image": 364544,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 236544,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Command Processor",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "cmd",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Cmd.Exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "debug_codeview": {
+          "guid": "e934871d-2e64-47f8-127f-27a2bd213977",
+          "age": 1,
+          "path": "cmd.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.592_7652a5c2_59000_39a00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1985127874,
+          "timestamp_iso": "2032-11-27 00:24:34",
+          "coff_characteristics": 258,
+          "linker_version": "14.13",
+          "image_base": 4194304,
+          "size_of_image": 364544,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 236032,
+        "file_version": "10.0.17763.592",
+        "product_version": "10.0.17763.592",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Command Processor",
+          "FileVersion": "10.0.17763.592 (WinBuild.160101.0800)",
+          "InternalName": "cmd",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Cmd.Exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.592"
+        },
+        "debug_codeview": {
+          "guid": "ff6240ab-729b-8e8c-1850-2ea563046f56",
+          "age": 1,
+          "path": "cmd.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_09e8e578_59000_39a00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 166258040,
+          "timestamp_iso": "1975-04-09 06:47:20",
+          "coff_characteristics": 258,
+          "linker_version": "14.15",
+          "image_base": 4194304,
+          "size_of_image": 364544,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 236032,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Command Processor",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "cmd",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Cmd.Exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "debug_codeview": {
+          "guid": "5c566414-9fb1-4f83-04d0-a9b30833f9d1",
+          "age": 1,
+          "path": "cmd.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "5c566414-9fb1-4f83-04d0-a9b30833f9d1",
+          "unknown": "f2cb153df1c0a0777b2ce4a2",
+          "timestamp": 166258040
+        }
+      },
+      "10.0.18362.449_a753379f_59000_39a00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2807248799,
+          "timestamp_iso": "2058-12-16 07:19:59",
+          "coff_characteristics": 258,
+          "linker_version": "14.15",
+          "image_base": 4194304,
+          "size_of_image": 364544,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 236032,
+        "file_version": "10.0.18362.449",
+        "product_version": "10.0.18362.449",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Command Processor",
+          "FileVersion": "10.0.18362.449 (WinBuild.160101.0800)",
+          "InternalName": "cmd",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "Cmd.Exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.449"
+        },
+        "debug_codeview": {
+          "guid": "1643098e-5a20-6e08-e732-e1d226b66991",
+          "age": 1,
+          "path": "cmd.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "1643098e-5a20-6e08-e732-e1d226b66991",
+          "unknown": "7247ecc4de74753e2421e50b",
+          "timestamp": 2807248799
+        }
+      }
+    }
+  }
+}

@@ -653,6 +653,80 @@
           "unknown": "96625691d6e98433c8edbdab",
           "timestamp": 3834108422
         }
+      },
+      "10.0.18362.719_e487da06_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3834108422,
+          "timestamp_iso": "2091-07-01 06:07:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "unknown": "96625691d6e98433c8edbdab",
+          "timestamp": 3834108422
+        }
+      },
+      "10.0.18362.778_e487da06_a000_4a00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3834108422,
+          "timestamp_iso": "2091-07-01 06:07:02",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 40960,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 18944,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "wtsapi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "wtsapi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
+        },
+        "export_dll_name": "WTSAPI32.dll",
+        "debug_codeview": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "age": 1,
+          "path": "wtsapi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ce9d8b2d-c59e-11ef-54e5-3b4bd80aafa1",
+          "unknown": "96625691d6e98433c8edbdab",
+          "timestamp": 3834108422
+        }
       }
     }
   }

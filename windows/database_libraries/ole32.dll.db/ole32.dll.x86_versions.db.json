@@ -1997,6 +1997,59 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1075_fa4554a7_fc000_fabb8": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 4198847655,
+          "timestamp_iso": "2103-01-21 18:34:15",
+          "coff_characteristics": 8450,
+          "linker_version": "14.13",
+          "image_base": 1760559104,
+          "size_of_image": 1032192,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1027000,
+        "file_version": "10.0.17763.1075",
+        "product_version": "10.0.17763.1075",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft OLE for Windows",
+          "FileVersion": "10.0.17763.1075 (WinBuild.160101.0800)",
+          "InternalName": "OLE32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLE32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1075"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3d9504fc0151657b9d0a669c5eb3577573808c30d47dc37f449ea782eaf25b71",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1582283915.077,
+              "timestamp_iso": "2020-02-21 11:18:35.077000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006475241620571807812090513360724951300,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ole32.dll",
+        "debug_codeview": {
+          "guid": "5efa7f86-65ee-8c8e-f082-34b5c23c530b",
+          "age": 1,
+          "path": "ole32.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_66cd8ae6_f7000_f5e38": {
         "pe_header": {
           "machine": 332,
@@ -2109,6 +2162,63 @@
           "guid": "c456794a-af92-bb03-1a5f-098ee1b81750",
           "unknown": "87146fa965c43d2d7a364c90",
           "timestamp": 572147264
+        }
+      },
+      "10.0.18362.693_bc38e692_f7000_f6038": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 3157845650,
+          "timestamp_iso": "2070-01-25 03:20:50",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 1760559104,
+          "size_of_image": 1011712,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 1007672,
+        "file_version": "10.0.18362.693",
+        "product_version": "10.0.18362.693",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Microsoft OLE for Windows",
+          "FileVersion": "10.0.18362.693 (WinBuild.160101.0800)",
+          "InternalName": "OLE32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLE32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.693"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4afe0d868316e63402f1eeb0a8ccdf3a056ef223a6c1cdb6d93ecff891920f05",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1582272613.444,
+              "timestamp_iso": "2020-02-21 08:10:13.444000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006592893612989839592708952785753735450,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "ole32.dll",
+        "debug_codeview": {
+          "guid": "87764f4b-5e6e-9c33-f63c-dc927063e787",
+          "age": 1,
+          "path": "ole32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "87764f4b-5e6e-9c33-f63c-dc927063e787",
+          "unknown": "057a4b70ca2332a590ae5e54",
+          "timestamp": 3157845650
         }
       }
     }

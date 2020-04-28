@@ -189,6 +189,58 @@
           "path": "logoncli.pdb"
         }
       },
+      "10.0.14393.3595_5e6afc5e_3e000_3c4c8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1584069726,
+          "timestamp_iso": "2020-03-13 03:22:06",
+          "coff_characteristics": 8226,
+          "linker_version": "14.0",
+          "image_base": 6442450944,
+          "size_of_image": 253952,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 246984,
+        "file_version": "10.0.14393.3595",
+        "product_version": "10.0.14393.3595",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Logon Client DLL",
+          "FileVersion": "10.0.14393.3595 (rs1_release_inmarket.200312-1730)",
+          "InternalName": "LOGONCLI.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "LOGONCLI.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3595"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "18d9da8acc6706cad15c6008c90eecda96e9a31a3806e7e639f08118eb66a60f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1584072347.825,
+              "timestamp_iso": "2020-03-13 04:05:47.825000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006475241620571807812090513360724951300,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "logoncli.dll",
+        "debug_codeview": {
+          "guid": "c7e0c06c-9d4f-4c69-998b-dec747d78324",
+          "age": 1,
+          "path": "logoncli.pdb"
+        }
+      },
       "10.0.16299.15_3189f339_3f000_3c6b0": {
         "pe_header": {
           "machine": 34404,
@@ -613,6 +665,59 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1131_8ffff4f3_40000_3dc78": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2415916275,
+          "timestamp_iso": "2046-07-22 23:51:15",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 6442450944,
+          "size_of_image": 262144,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 253048,
+        "file_version": "10.0.17763.1131",
+        "product_version": "10.0.17763.1131",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Logon Client DLL",
+          "FileVersion": "10.0.17763.1131 (WinBuild.160101.0800)",
+          "InternalName": "LOGONCLI.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "LOGONCLI.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1131"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "fbccbabd8eb31f49380d7cadfa50ecf8dddd184172e8e1337f8a6db1f939b071",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583309518.252,
+              "timestamp_iso": "2020-03-04 08:11:58.252000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006534779485525121749671785204537098511,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "logoncli.dll",
+        "debug_codeview": {
+          "guid": "34de8012-2a8b-2aea-b536-f8028c4d047c",
+          "age": 1,
+          "path": "logoncli.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_e852e5d2_42000_3f6c0": {
         "pe_header": {
           "machine": 34404,
@@ -725,6 +830,63 @@
           "guid": "eb9bfdf7-36ff-7b4d-ddca-dd4daaa33686",
           "unknown": "87447dd23c99f0bb053a8e97",
           "timestamp": 2455231509
+        }
+      },
+      "10.0.18362.752_52e29209_42000_3f6c0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1390580233,
+          "timestamp_iso": "2014-01-24 16:17:13",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 270336,
+          "subsystem": 2,
+          "dll_characteristics": 16736
+        },
+        "file_size": 259776,
+        "file_version": "10.0.18362.752",
+        "product_version": "10.0.18362.752",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Net Logon Client DLL",
+          "FileVersion": "10.0.18362.752 (WinBuild.160101.0800)",
+          "InternalName": "LOGONCLI.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "LOGONCLI.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.752"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "8afb8ae82985648980f5cbccee6b9c188fe1cfd5df8d6775fe41a4573f40d86b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1584419524.704,
+              "timestamp_iso": "2020-03-17 04:32:04.704000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006556582883044060310501673628088664339,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "logoncli.dll",
+        "debug_codeview": {
+          "guid": "541c36ed-ecd1-ae09-0c12-2580d9d01e72",
+          "age": 1,
+          "path": "logoncli.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "541c36ed-ecd1-ae09-0c12-2580d9d01e72",
+          "unknown": "4d8d64277d83ab45f35cf045",
+          "timestamp": 1390580233
         }
       }
     }

@@ -1371,6 +1371,80 @@
           "unknown": "886f006f63b117675749c379",
           "timestamp": 332125846
         }
+      },
+      "10.0.18362.719_13cbd696_1e000_19800": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 332125846,
+          "timestamp_iso": "1980-07-11 01:10:46",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 122880,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 104448,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "gdi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "87d30342-b84d-2501-bc6d-303d81041ff8",
+          "age": 1,
+          "path": "gdi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "87d30342-b84d-2501-bc6d-303d81041ff8",
+          "unknown": "886f006f63b117675749c379",
+          "timestamp": 332125846
+        }
+      },
+      "10.0.18362.778_13cbd696_1e000_19800": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 332125846,
+          "timestamp_iso": "1980-07-11 01:10:46",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 122880,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 104448,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "gdi32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "gdi32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
+        },
+        "export_dll_name": "GDI32.dll",
+        "debug_codeview": {
+          "guid": "87d30342-b84d-2501-bc6d-303d81041ff8",
+          "age": 1,
+          "path": "gdi32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "87d30342-b84d-2501-bc6d-303d81041ff8",
+          "unknown": "886f006f63b117675749c379",
+          "timestamp": 332125846
+        }
       }
     }
   }

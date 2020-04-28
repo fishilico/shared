@@ -789,6 +789,80 @@
           "unknown": "e20048cf5430c878898502a9",
           "timestamp": 2031512409
         }
+      },
+      "10.0.18362.719_7c983fe6_52000_4f200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2090352614,
+          "timestamp_iso": "2036-03-28 21:30:14",
+          "coff_characteristics": 258,
+          "linker_version": "14.15",
+          "image_base": 65536,
+          "size_of_image": 335872,
+          "subsystem": 1,
+          "dll_characteristics": 1344
+        },
+        "file_size": 324096,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Multi-User Win32 Driver",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "win32k.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32k.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "export_dll_name": "WIN32K.SYS",
+        "debug_codeview": {
+          "guid": "922c14ac-9bd0-e333-3199-457c1294ffce",
+          "age": 1,
+          "path": "win32k.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "922c14ac-9bd0-e333-3199-457c1294ffce",
+          "unknown": "53dc4e1ce2276e5aa8474a6d",
+          "timestamp": 2090352614
+        }
+      },
+      "10.0.18362.778_7c983fe6_52000_4f200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2090352614,
+          "timestamp_iso": "2036-03-28 21:30:14",
+          "coff_characteristics": 258,
+          "linker_version": "14.15",
+          "image_base": 65536,
+          "size_of_image": 335872,
+          "subsystem": 1,
+          "dll_characteristics": 1344
+        },
+        "file_size": 324096,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Full/Desktop Multi-User Win32 Driver",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "win32k.sys",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "win32k.sys",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
+        },
+        "export_dll_name": "WIN32K.SYS",
+        "debug_codeview": {
+          "guid": "922c14ac-9bd0-e333-3199-457c1294ffce",
+          "age": 1,
+          "path": "win32k.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "922c14ac-9bd0-e333-3199-457c1294ffce",
+          "unknown": "53dc4e1ce2276e5aa8474a6d",
+          "timestamp": 2090352614
+        }
       }
     }
   }

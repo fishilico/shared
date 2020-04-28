@@ -683,6 +683,80 @@
           "unknown": "84757ca869c2b18450bd8409",
           "timestamp": 1263579685
         }
+      },
+      "10.0.18362.719_4b50b225_b000_5000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1263579685,
+          "timestamp_iso": "2010-01-15 18:21:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 20480,
+        "file_version": "10.0.18362.719",
+        "product_version": "10.0.18362.719",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.719 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.719"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "unknown": "84757ca869c2b18450bd8409",
+          "timestamp": 1263579685
+        }
+      },
+      "10.0.18362.778_4b50b225_b000_5000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1263579685,
+          "timestamp_iso": "2010-01-15 18:21:25",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 45056,
+          "subsystem": 3,
+          "dll_characteristics": 16736
+        },
+        "file_size": 20480,
+        "file_version": "10.0.18362.778",
+        "product_version": "10.0.18362.778",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OneCore forwarder shim",
+          "FileVersion": "10.0.18362.778 (WinBuild.160101.0800)",
+          "InternalName": "secur32.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "secur32.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.778"
+        },
+        "export_dll_name": "SECUR32.dll",
+        "debug_codeview": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "age": 1,
+          "path": "secur32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "bb81f99b-306b-4b4d-3d9b-1d478abe6dfc",
+          "unknown": "84757ca869c2b18450bd8409",
+          "timestamp": 1263579685
+        }
       }
     }
   }

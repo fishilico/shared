@@ -1,0 +1,373 @@
+{
+  "svchost.exe.x86_64": {
+    "versions": {
+      "10.0.14393.0_57899b1c_e000_add0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468635932,
+          "timestamp_iso": "2016-07-16 02:25:32",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 57344,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 44496,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Host Process for Windows Services",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "svchost.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "svchost.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "89ee86e28ed0ba141521e0763fe2be8562e3620f632f0c4ee1d123641f2d88d2",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006185890782007615152759767423325831372,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468637830.141,
+              "timestamp_iso": "2016-07-16 02:57:10.141000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005925946554353115990238755445687713946,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "69dbaec0-441c-411d-9e15-2eb6107e74b0",
+          "age": 1,
+          "path": "svchost.pdb"
+        }
+      },
+      "10.0.16299.15_9c786b9a_f000_be30": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2625137562,
+          "timestamp_iso": "2053-03-09 12:52:42",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 61440,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 48688,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Host Process for Windows Services",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "svchost.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "svchost.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c6af861f72f14b250c92b32e47269b8ce5fb38c662847fcddb2b77061e129cbc",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006927878325890273618661515508976714075,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506659307.205,
+              "timestamp_iso": "2017-09-29 04:28:27.205000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006004272612577052131129751449999769769,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "90ce1d9c-7473-8fa1-0d62-621593313259",
+          "age": 1,
+          "path": "svchost.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_a38b9ab2_10000_c858": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2743835314,
+          "timestamp_iso": "2056-12-12 08:28:34",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 65536,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 51288,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Host Process for Windows Services",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "svchost.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "svchost.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "e821c6c6383f4a344f1bb7b960a41e0bff4c9e522c1951f5f3337ae77f2d2314",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006934679262599597527334151708378923356,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421488.126,
+              "timestamp_iso": "2018-04-11 04:38:08.126000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006034800106972072239421993029828870319,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "6b4f7185-5f2b-2726-35d1-e410db19ee00",
+          "age": 1,
+          "path": "svchost.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.556_f23cada5_18000_14de0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4064062885,
+          "timestamp_iso": "2098-10-13 18:21:25",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 98304,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 85472,
+        "file_version": "10.0.17134.556",
+        "product_version": "10.0.17134.556",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Host Process for Windows Services",
+          "FileVersion": "10.0.17134.556 (WinBuild.160101.0800)",
+          "InternalName": "svchost.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "svchost.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.556"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a8b37f4602732a96d9ebee3f9dd0724bad51ef64567ffeeeb3d0f32708113164",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007327768317290508359185432467770180008,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547012374.179,
+              "timestamp_iso": "2019-01-09 05:39:34.179000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006201410012045501241472821465121292495,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "6d1c52f5-c782-29a2-00c9-2f907a0ac157",
+          "age": 1,
+          "path": "svchost.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1276_f598dc78_10000_c8c8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4120435832,
+          "timestamp_iso": "2100-07-28 05:30:32",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 65536,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 51400,
+        "file_version": "10.0.17134.1276",
+        "product_version": "10.0.17134.1276",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Host Process for Windows Services",
+          "FileVersion": "10.0.17134.1276 (WinBuild.160101.0800)",
+          "InternalName": "svchost.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "svchost.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1276"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "2100bba9a00084c2675688b543f0abf93b67ef13329f0d37cbe3fbe579232912",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007905102104923975289332739654442549783,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1578370114.508,
+              "timestamp_iso": "2020-01-07 04:08:34.508000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006450063303566776419683477421161447679,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "1d68eddb-5fb1-6433-3276-3ccc5ff6e28b",
+          "age": 1,
+          "path": "svchost.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_b900eeff_10000_c9f0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3103846143,
+          "timestamp_iso": "2068-05-10 03:29:03",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 65536,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 51696,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Host Process for Windows Services",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "svchost.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "svchost.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a42a20da16f83b8467dced74ab028b58d5927d15d9d74c5c7b0d5c9dac042cb2",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007332095786364865478179027711227330985,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974978.919,
+              "timestamp_iso": "2018-09-15 01:29:38.919000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006277201382232487817802877555127091421,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "89f17e89-9f93-2fd7-5623-ff182b44b947",
+          "age": 1,
+          "path": "svchost.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_32d6c210_10000_d1f0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 852935184,
+          "timestamp_iso": "1997-01-10 22:26:24",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 65536,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 53744,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Host Process for Windows Services",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "svchost.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "svchost.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4d8fb874b2f884fdf7d307756735b5e87d579b0707b9b11377765427e5c74e70",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007332095786364865478179027711227330985,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949246.952,
+              "timestamp_iso": "2019-03-18 22:47:26.952000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006239425970801861227622594399430508758,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "ef7b3786-4e54-5d5e-c65c-4e179c4f815c",
+          "age": 1,
+          "path": "svchost.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "ef7b3786-4e54-5d5e-c65c-4e179c4f815c",
+          "unknown": "1a90ceb425219e471506cf39",
+          "timestamp": 852935184
+        }
+      }
+    }
+  }
+}

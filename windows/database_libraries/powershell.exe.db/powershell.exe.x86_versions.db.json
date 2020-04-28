@@ -1,0 +1,169 @@
+{
+  "powershell.exe.x86": {
+    "versions": {
+      "10.0.14393.206_57dad15a_6c000_69600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1473958234,
+          "timestamp_iso": "2016-09-15 16:50:34",
+          "coff_characteristics": 258,
+          "linker_version": "14.0",
+          "image_base": 4194304,
+          "size_of_image": 442368,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 431616,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "debug_codeview": {
+          "guid": "5b4171a0-74ff-4581-81c6-7b305e26b7da",
+          "age": 1,
+          "path": "powershell.pdb"
+        }
+      },
+      "10.0.16299.15_5542314f_6c000_69600": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1430401359,
+          "timestamp_iso": "2015-04-30 13:42:39",
+          "coff_characteristics": 258,
+          "linker_version": "14.10",
+          "image_base": 4194304,
+          "size_of_image": 442368,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 431616,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "debug_codeview": {
+          "guid": "1a1e6d09-9b49-eebe-e68d-070dee421902",
+          "age": 1,
+          "path": "powershell.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_9203324e_6c000_69200": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2449683022,
+          "timestamp_iso": "2047-08-17 19:30:22",
+          "coff_characteristics": 258,
+          "linker_version": "14.12",
+          "image_base": 4194304,
+          "size_of_image": 442368,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 430592,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "debug_codeview": {
+          "guid": "6581e99f-b8ca-c88e-3724-21006ec37df2",
+          "age": 1,
+          "path": "powershell.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_70fa19ae_6c000_69400": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1895438766,
+          "timestamp_iso": "2030-01-23 22:46:06",
+          "coff_characteristics": 258,
+          "linker_version": "14.13",
+          "image_base": 4194304,
+          "size_of_image": 442368,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 431104,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "debug_codeview": {
+          "guid": "196b4538-74b1-034b-197b-6fa74571d031",
+          "age": 1,
+          "path": "powershell.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_5ed7c919_6d000_69c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 1591200025,
+          "timestamp_iso": "2020-06-03 16:00:25",
+          "coff_characteristics": 258,
+          "linker_version": "14.15",
+          "image_base": 4194304,
+          "size_of_image": 446464,
+          "subsystem": 3,
+          "dll_characteristics": 49472
+        },
+        "file_size": 433152,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "debug_codeview": {
+          "guid": "c1ea6e4c-fc2a-f75a-a1f4-1ab9b2988d86",
+          "age": 1,
+          "path": "powershell.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "c1ea6e4c-fc2a-f75a-a1f4-1ab9b2988d86",
+          "unknown": "5bb6bf2ad0b4771d10f8ea94",
+          "timestamp": 1591200025
+        }
+      }
+    }
+  }
+}

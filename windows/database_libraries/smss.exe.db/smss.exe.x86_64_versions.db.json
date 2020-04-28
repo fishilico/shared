@@ -1,0 +1,743 @@
+{
+  "smss.exe.x86_64": {
+    "versions": {
+      "10.0.14393.0_57899a7d_25000_22cf8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468635773,
+          "timestamp_iso": "2016-07-16 02:22:53",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 151552,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 142584,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4341a6138c01d90cf107305819cb4128098ee5f5ee5034a69db00066d282f067",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006209872388536458221805485294130036944,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468637547.618,
+              "timestamp_iso": "2016-07-16 02:52:27.618000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005925946554353115990238755445687713946,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "4670a291-5787-40a0-bf8a-ee12bbe46784",
+          "age": 1,
+          "path": "smss.pdb"
+        }
+      },
+      "10.0.14393.2097_5a820d95_25000_22ce8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1518472597,
+          "timestamp_iso": "2018-02-12 21:56:37",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 151552,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 142568,
+        "file_version": "10.0.14393.2097",
+        "product_version": "10.0.14393.2097",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.14393.2097 (rs1_release_1.180212-1105)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2097"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "47142c1062b561689edb1d9ae0f9c49d1c0c699571041eb7d0cf927c57ec6a47",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007011710576423512918788467269983797611,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1518474431.06,
+              "timestamp_iso": "2018-02-12 22:27:11.060000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005980436734501164110551909556100792484,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "b9d71498-b627-413e-b89a-84eb13dea694",
+          "age": 1,
+          "path": "smss.pdb"
+        }
+      },
+      "10.0.14393.2969_5ccd1975_25000_22c90": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1556945269,
+          "timestamp_iso": "2019-05-04 04:47:49",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 151552,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 142480,
+        "file_version": "10.0.14393.2969",
+        "product_version": "10.0.14393.2969",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.14393.2969 (rs1_release.190503-1820)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2969"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "bc5be3fdddd1ce7100dffa56fa9c56a60e0478916c3e38acefa974e314867a01",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1556946885.303,
+              "timestamp_iso": "2019-05-04 05:14:45.303000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006416693731309555622055525374131962104,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "b8598a8e-a606-42ea-b287-597437bfe2d5",
+          "age": 1,
+          "path": "smss.pdb"
+        }
+      },
+      "10.0.16299.15_03f3ff4d_25000_23130": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 66322253,
+          "timestamp_iso": "1972-02-07 14:50:53",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 151552,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 143664,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "1bbd23d8958c0ee313c3a47c9ee586adb79805393f294cb6f6aad56f516f80a3",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007007454411873820417082316352074547562,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506659082.282,
+              "timestamp_iso": "2017-09-29 04:24:42.282000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006014856209010126895819358618454589611,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "aa1a22f9-8302-2729-3733-1abaeb564727",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.936_13ae34d9_25000_233a0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 330183897,
+          "timestamp_iso": "1980-06-18 13:44:57",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 151552,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 144288,
+        "file_version": "10.0.16299.936",
+        "product_version": "10.0.16299.936",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.16299.936 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.936"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "847cd4fd5dc9e572dffd4b4c27002da56fbbdbadca90e9fa5852f19d5a6436ab",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1546676135.442,
+              "timestamp_iso": "2019-01-05 08:15:35.442000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006185481711636851350395440858077855948,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "53a81d3f-d701-c57a-4bd3-c620cf0cf617",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.1059_aa4464d7_25000_232d0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2856608983,
+          "timestamp_iso": "2060-07-09 14:29:43",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 151552,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 144080,
+        "file_version": "10.0.16299.1059",
+        "product_version": "10.0.16299.1059",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.16299.1059 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.1059"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "892c614cd7765dc54baa6770c0252075f8e25a9a7d576c0363160109c7ba54ec",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552554262.575,
+              "timestamp_iso": "2019-03-14 09:04:22.575000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006360330202145711146859801529271976173,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "1aa78dbc-add6-ec74-f505-1ba80ae36132",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_046f18b9_25000_23328": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 74389689,
+          "timestamp_iso": "1972-05-10 23:48:09",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 151552,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 144168,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "03df60739eeed23893066819a3dcbfc00fb0960ceb1e715c383b01c60d2b49db",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007011710576423512918788467269983797611,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421423.25,
+              "timestamp_iso": "2018-04-11 04:37:03.250000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006025928075304506519251440873651568813,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "3c4c2d60-d01a-222d-6436-295cb4c6281a",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.590_fd585f68_25000_233a0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4250427240,
+          "timestamp_iso": "2104-09-09 18:14:00",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 151552,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 144288,
+        "file_version": "10.0.17134.590",
+        "product_version": "10.0.17134.590",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.17134.590 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.590"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "adce67e8327bad98c8b17f4df0128412ec6f91e78045e211e06bdaef0dced024",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1549421985.653,
+              "timestamp_iso": "2019-02-06 02:59:45.653000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006213351220777337113178139318827352273,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "f5bfbedf-6463-67e3-dcd4-23fbed98b318",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_2202d126_26000_23db8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 570609958,
+          "timestamp_iso": "1988-01-31 06:45:58",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 155648,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 146872,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "bc3ef4708ce2d742738146673695c6f7b998bd27a6c1195767341c546725213e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974905.811,
+              "timestamp_iso": "2018-09-15 01:28:25.811000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006313329502312636893723982272946766052,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "73875613-aacc-240a-d0d2-f078ad06c7fd",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.292_3a9522ed_26000_23dc8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 982852333,
+          "timestamp_iso": "2001-02-22 14:32:13",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 155648,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 146888,
+        "file_version": "10.0.17763.292",
+        "product_version": "10.0.17763.292",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.17763.292 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.292"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4f9019c75f9b642dedb8de2e89945558268ce13e347335b947a78ebfa2766eaf",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1547619758.688,
+              "timestamp_iso": "2019-01-16 06:22:38.688000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006213351220777337113178139318827352273,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "fc55afec-90d0-1e7d-520f-bf92844270a0",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1131_d4c8092b_26000_23dc8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3569879339,
+          "timestamp_iso": "2083-02-15 01:08:59",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 155648,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 146888,
+        "file_version": "10.0.17763.1131",
+        "product_version": "10.0.17763.1131",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.17763.1131 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1131"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "3d8174fb4aeef8d671711bbde18a299500cde763688739ab82eaa4d4d0b025f7",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583309441.16,
+              "timestamp_iso": "2020-03-04 08:10:41.160000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006454958411117438441908337201136009472,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "0a8bfb30-ab07-4e73-aa3b-c59117719983",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_5e64935f_26000_23fc8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1583649631,
+          "timestamp_iso": "2020-03-08 06:40:31",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 155648,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 147400,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "54b0feee35d115a708b78133324fe92b6e070885de1d1b3efab38785f8b40607",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949187.906,
+              "timestamp_iso": "2019-03-18 22:46:27.906000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006201410012045501241472821465121292495,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "03b02331-5844-1abf-b3c4-f663e8759754",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "03b02331-5844-1abf-b3c4-f663e8759754",
+          "unknown": "efc4aeed597f97b14e3de5a6",
+          "timestamp": 1583649631
+        }
+      },
+      "10.0.18362.329_ac6650d0_26000_23ef0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2892386512,
+          "timestamp_iso": "2061-08-27 16:41:52",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 155648,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 147184,
+        "file_version": "10.0.18362.329",
+        "product_version": "10.0.18362.329",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.18362.329 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.329"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "2b378fc9293110970179e42dc7036bc65373e38fd8062b7aff1e0a0f75419d96",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1566951791.892,
+              "timestamp_iso": "2019-08-28 00:23:11.892000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006367581398823267009292765128881602799,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "31f80b23-9ad6-e027-b8ec-ad8809c60024",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "31f80b23-9ad6-e027-b8ec-ad8809c60024",
+          "unknown": "745b10dd990091c366e31702",
+          "timestamp": 2892386512
+        }
+      },
+      "10.0.18362.752_006b2be9_26000_240f0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 7023593,
+          "timestamp_iso": "1970-03-23 06:59:53",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 155648,
+          "subsystem": 1,
+          "dll_characteristics": 16736
+        },
+        "file_size": 147696,
+        "file_version": "10.0.18362.752",
+        "product_version": "10.0.18362.752",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows Session Manager",
+          "FileVersion": "10.0.18362.752 (WinBuild.160101.0800)",
+          "InternalName": "smss.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "smss.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.752"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9af92d0a64c06c2e7401d32ddffbe078538197b1d41ab53ee7cc8889a684995b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1584419450.641,
+              "timestamp_iso": "2020-03-17 04:30:50.641000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006616836001661329011654038745486721311,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "56111943-310b-6411-fe66-d4192774d23f",
+          "age": 1,
+          "path": "smss.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "56111943-310b-6411-fe66-d4192774d23f",
+          "unknown": "a5a5ea66ef6f813a4854183b",
+          "timestamp": 7023593
+        }
+      }
+    }
+  }
+}

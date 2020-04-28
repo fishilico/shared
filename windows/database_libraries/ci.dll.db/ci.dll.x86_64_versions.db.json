@@ -2456,6 +2456,59 @@
         },
         "debug_reproducible": {}
       },
+      "10.0.17763.1131_7f85c7bf_d4000_d1170": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2139473855,
+          "timestamp_iso": "2037-10-18 10:17:35",
+          "coff_characteristics": 8226,
+          "linker_version": "14.13",
+          "image_base": 7516192768,
+          "size_of_image": 868352,
+          "subsystem": 1,
+          "dll_characteristics": 16864
+        },
+        "file_size": 856432,
+        "file_version": "10.0.17763.1131",
+        "product_version": "10.0.17763.1131",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Code Integrity Module",
+          "FileVersion": "10.0.17763.1131 (WinBuild.160101.0800)",
+          "InternalName": "ci.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "ci.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1131"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4dacbc8c908ec13460211067d975a3db901146e343c44e813d2bddb148d4e1bc",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1583309529.087,
+              "timestamp_iso": "2020-03-04 08:12:09.087000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006534779485525121749671785204537098511,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "CI.dll",
+        "debug_codeview": {
+          "guid": "39de56fc-eafb-804d-91a3-2055a265bd84",
+          "age": 1,
+          "path": "ci.pdb"
+        },
+        "debug_reproducible": {}
+      },
       "10.0.18362.1_ca73d753_dc000_d9068": {
         "pe_header": {
           "machine": 34404,

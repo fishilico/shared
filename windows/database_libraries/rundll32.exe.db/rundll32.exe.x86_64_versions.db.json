@@ -1,0 +1,169 @@
+{
+  "rundll32.exe.x86_64": {
+    "versions": {
+      "10.0.14393.0_57899977_17000_11000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468635511,
+          "timestamp_iso": "2016-07-16 02:18:31",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 69632,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows host process (Rundll32)",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "rundll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNDLL32.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "debug_codeview": {
+          "guid": "68a663e2-50e3-460f-8298-7c3a92646c90",
+          "age": 1,
+          "path": "rundll32.pdb"
+        }
+      },
+      "10.0.16299.15_7517ae00_17000_11600": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1964486144,
+          "timestamp_iso": "2032-04-02 02:35:44",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 71168,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows host process (Rundll32)",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "rundll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNDLL32.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "debug_codeview": {
+          "guid": "79ff0b00-102b-9e3c-047f-be9850acc638",
+          "age": 1,
+          "path": "rundll32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_e814db7d_16000_11000": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3893681021,
+          "timestamp_iso": "2093-05-20 18:03:41",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 90112,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 69632,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows host process (Rundll32)",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "rundll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNDLL32.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "debug_codeview": {
+          "guid": "5a950b1b-c8d5-98ae-8154-e5c117d3190d",
+          "age": 1,
+          "path": "rundll32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_9816818b_17000_11600": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2551611787,
+          "timestamp_iso": "2050-11-09 13:03:07",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 71168,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows host process (Rundll32)",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "rundll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNDLL32.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "debug_codeview": {
+          "guid": "dee39a78-a0b3-7e85-ff6e-87604d77e988",
+          "age": 1,
+          "path": "rundll32.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_8ceb427f_17000_11600": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2364228223,
+          "timestamp_iso": "2044-12-01 18:03:43",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 94208,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 71168,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows host process (Rundll32)",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "rundll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "RUNDLL32.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "debug_codeview": {
+          "guid": "380f4db5-430b-ae91-a5d6-6ffadd8197d1",
+          "age": 1,
+          "path": "rundll32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "380f4db5-430b-ae91-a5d6-6ffadd8197d1",
+          "unknown": "85a1dc7738bf5b35063611cb",
+          "timestamp": 2364228223
+        }
+      }
+    }
+  }
+}

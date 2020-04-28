@@ -2931,6 +2931,63 @@
           "unknown": "20e250d0c4d79295bfcd6985",
           "timestamp": 18549656
         }
+      },
+      "10.0.18362.752_011b0b98_59000_16e10": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 18549656,
+          "timestamp_iso": "1970-08-03 16:40:56",
+          "coff_characteristics": 8226,
+          "linker_version": "14.15",
+          "image_base": 6442450944,
+          "size_of_image": 364544,
+          "subsystem": 16,
+          "dll_characteristics": 0
+        },
+        "file_size": 93712,
+        "file_version": "10.0.18362.752",
+        "product_version": "10.0.18362.752",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Hv Loader Library",
+          "FileVersion": "10.0.18362.752 (WinBuild.160101.0800)",
+          "InternalName": "hvloader.dll",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "hvloader.dll",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.752"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4913fc0b93f0647b2aea0a107d4d7bd46bd2de83b032445d885078ce85ecc591",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1584419573.786,
+              "timestamp_iso": "2020-03-17 04:32:53.786000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006487425312414537563639298973612638470,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "hvloader.dll",
+        "debug_codeview": {
+          "guid": "bfbff5a9-2921-615a-5d9e-e3f76eda588d",
+          "age": 1,
+          "path": "hvloader.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "bfbff5a9-2921-615a-5d9e-e3f76eda588d",
+          "unknown": "20e250d0c4d79295bfcd6985",
+          "timestamp": 18549656
+        }
       }
     }
   }

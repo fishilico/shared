@@ -1,0 +1,200 @@
+{
+  "powershell.exe.x86_64": {
+    "versions": {
+      "10.0.14393.206_57daccf5_70000_6d200": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1473957109,
+          "timestamp_iso": "2016-09-15 16:31:49",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 458752,
+          "subsystem": 3,
+          "dll_characteristics": 49504
+        },
+        "file_size": 446976,
+        "file_version": "10.0.14393.206",
+        "product_version": "10.0.14393.206",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.14393.206 (rs1_release.160915-0644)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.206"
+        },
+        "debug_codeview": {
+          "guid": "fa1bca14-cda2-4c96-96fb-504cd9b75706",
+          "age": 1,
+          "path": "powershell.pdb"
+        }
+      },
+      "10.0.14393.1000_57bd71c5_69000_65e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1472033221,
+          "timestamp_iso": "2016-08-24 10:07:01",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 430080,
+          "subsystem": 3,
+          "dll_characteristics": 49504
+        },
+        "file_size": 417280,
+        "file_version": "10.0.14393.1000",
+        "product_version": "10.0.14393.1000",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.14393.1000 (rs1_release_d_srv_dev.160823-2113)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1000"
+        },
+        "debug_codeview": {
+          "guid": "386c2bd9-5f26-4973-9464-84368ea1fd63",
+          "age": 1,
+          "path": "powershell.pdb"
+        }
+      },
+      "10.0.16299.15_fdd02487_70000_6da00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4258276487,
+          "timestamp_iso": "2104-12-09 14:34:47",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 458752,
+          "subsystem": 3,
+          "dll_characteristics": 49504
+        },
+        "file_size": 449024,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "debug_codeview": {
+          "guid": "1127b6b2-5a54-b5de-3760-64a472c38e23",
+          "age": 1,
+          "path": "powershell.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_05e7290f_70000_6d400": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 99035407,
+          "timestamp_iso": "1973-02-20 05:50:07",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 458752,
+          "subsystem": 3,
+          "dll_characteristics": 49504
+        },
+        "file_size": 447488,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "debug_codeview": {
+          "guid": "7bf0dcc1-7f86-397f-9d59-4cd96a270f90",
+          "age": 1,
+          "path": "powershell.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_c3eca48a_70000_6d600": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3287065738,
+          "timestamp_iso": "2074-02-28 17:48:58",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 458752,
+          "subsystem": 3,
+          "dll_characteristics": 49504
+        },
+        "file_size": 448000,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "debug_codeview": {
+          "guid": "be558482-78e4-ef3a-e8ca-c2bc77ad5aa4",
+          "age": 1,
+          "path": "powershell.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_fce6740d_71000_6e400": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4242961421,
+          "timestamp_iso": "2104-06-15 08:23:41",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 462848,
+          "subsystem": 3,
+          "dll_characteristics": 49504
+        },
+        "file_size": 451584,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Windows PowerShell",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "POWERSHELL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "PowerShell.EXE",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "debug_codeview": {
+          "guid": "d2f07eb4-af4c-a8f5-362a-77028f6214f1",
+          "age": 1,
+          "path": "powershell.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "d2f07eb4-af4c-a8f5-362a-77028f6214f1",
+          "unknown": "33dd238617859515a609698a",
+          "timestamp": 4242961421
+        }
+      }
+    }
+  }
+}

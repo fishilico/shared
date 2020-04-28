@@ -1980,6 +1980,63 @@
           "unknown": "85960375d3d0c4652a89ea65",
           "timestamp": 1011961555
         }
+      },
+      "10.0.18362.693_a695b008_92000_90c00": {
+        "pe_header": {
+          "machine": 332,
+          "timestamp": 2794827784,
+          "timestamp_iso": "2058-07-25 13:03:04",
+          "coff_characteristics": 8450,
+          "linker_version": "14.15",
+          "image_base": 268435456,
+          "size_of_image": 598016,
+          "subsystem": 3,
+          "dll_characteristics": 16704
+        },
+        "file_size": 592896,
+        "file_version": "10.0.18362.693",
+        "product_version": "10.0.18362.693",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "OLEAUT32.DLL",
+          "FileVersion": "10.0.18362.693 (WinBuild.160101.0800)",
+          "InternalName": "OLEAUT32.DLL",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "OLEAUT32.DLL",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.693"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "aed2f1e0ef19d4812c3d30249c9d1288aa4b961412ce20f1147bde9615ef5f99",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338008044470885337573229268881992985870898,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1582261397.968,
+              "timestamp_iso": "2020-02-21 05:03:17.968000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006548490447952049407365478021343478034,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "export_dll_name": "OLEAUT32.dll",
+        "debug_codeview": {
+          "guid": "65508fe1-d7db-ea0a-a14e-5ab5d68a606b",
+          "age": 1,
+          "path": "oleaut32.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "65508fe1-d7db-ea0a-a14e-5ab5d68a606b",
+          "unknown": "1ada61235191fb74ba99c77a",
+          "timestamp": 2794827784
+        }
       }
     }
   }

@@ -1,0 +1,1318 @@
+{
+  "services.exe.x86_64": {
+    "versions": {
+      "10.0.14393.0_578997b3_72000_6efc8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1468635059,
+          "timestamp_iso": "2016-07-16 02:10:59",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 466944,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 454600,
+        "file_version": "10.0.14393.0",
+        "product_version": "10.0.14393.0",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.14393.0 (rs1_release.160715-1616)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.0"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "402f95139e3d5958972df13e06af1e5d337ec644de1b3f60891f709eec747658",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006209872388536458221805485294130036944,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1468637548.961,
+              "timestamp_iso": "2016-07-16 02:52:28.961000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005925946554353115990238755445687713946,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "82395f92-9076-4e3d-b507-403930294691",
+          "age": 1,
+          "path": "services.pdb"
+        }
+      },
+      "10.0.14393.479_5825886e_72000_6efc0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1478854766,
+          "timestamp_iso": "2016-11-11 08:59:26",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 466944,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 454592,
+        "file_version": "10.0.14393.479",
+        "product_version": "10.0.14393.479",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.14393.479 (rs1_release.161110-2025)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.479"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b9e1f47a4aff368fc36d9959e2ac7ad39ca116715fec7c4c5fd574b2c2b20cf7",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006209872388536458221805485294130036944,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1478857873.81,
+              "timestamp_iso": "2016-11-11 09:51:13.810000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006061038740404971435211883170444083380,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "cd7ae524-00ca-4919-b133-dd7f364ca8c2",
+          "age": 1,
+          "path": "services.pdb"
+        }
+      },
+      "10.0.14393.1198_59027fd5_71000_6eba0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1493336021,
+          "timestamp_iso": "2017-04-27 23:33:41",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 462848,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 453536,
+        "file_version": "10.0.14393.1198",
+        "product_version": "10.0.14393.1198",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.14393.1198 (rs1_release_sec.170427-1353)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1198"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "564cb15a4c5e33f7b3bcd3f680e90e0c2a3e2fc833f09e1984d4fd99ffc5297b",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006528719442858677223152984654318928142,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1493339320.669,
+              "timestamp_iso": "2017-04-28 00:28:40.669000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006046391779517120236744985585857331377,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "f1bb616c-5cfa-477f-88e0-63f6fe7fba77",
+          "age": 1,
+          "path": "services.pdb"
+        }
+      },
+      "10.0.14393.1613_5989432d_71000_6eba8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1502167853,
+          "timestamp_iso": "2017-08-08 04:50:53",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 462848,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 453544,
+        "file_version": "10.0.14393.1613",
+        "product_version": "10.0.14393.1613",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.14393.1613 (rs1_release_d.170807-1806)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1613"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d35e47e57a09e353b5334cc3f036e37d6fa04457ef95f3bc8ff7f62865215fe4",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338006528719442858677223152984654318928142,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1502171132.323,
+              "timestamp_iso": "2017-08-08 05:45:32.323000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005956368700127931421646078684015100064,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "3aba3d59-ae77-4715-bc6c-7161b53d297a",
+          "age": 1,
+          "path": "services.pdb"
+        }
+      },
+      "10.0.14393.1914_5a0fa86c_71000_6eba0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1510975596,
+          "timestamp_iso": "2017-11-18 03:26:36",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 462848,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 453536,
+        "file_version": "10.0.14393.1914",
+        "product_version": "10.0.14393.1914",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.14393.1914 (rs1_release_inmarket.171117-1700)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.1914"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "7d198c1117f74a73a6612ee8d45f741351d131a0232a3cd7a001cab06ecb12d8",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007007454411873820417082316352074547562,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1510978221.499,
+              "timestamp_iso": "2017-11-18 04:10:21.499000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006034800106972072239421993029828870319,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "b25e89ac-b06e-41c1-8adb-dfec9b34786f",
+          "age": 1,
+          "path": "services.pdb"
+        }
+      },
+      "10.0.14393.2273_5ae408a7_71000_6eda0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1524893863,
+          "timestamp_iso": "2018-04-28 05:37:43",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 462848,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 454048,
+        "file_version": "10.0.14393.2273",
+        "product_version": "10.0.14393.2273",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.14393.2273 (rs1_release_1.180427-1811)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2273"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "93aba63044fc0b0645a6b04517334674ded38849215e60a606da1c1d7ba25a36",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007011710576423512918788467269983797611,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1524896962.308,
+              "timestamp_iso": "2018-04-28 06:29:22.308000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005983252952945386114569575244197003429,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "31331a26-fe9b-4c31-9669-cca4ae627331",
+          "age": 1,
+          "path": "services.pdb"
+        }
+      },
+      "10.0.14393.2879_5c89e9dc_72000_6f160": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1552542172,
+          "timestamp_iso": "2019-03-14 05:42:52",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 466944,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 455008,
+        "file_version": "10.0.14393.2879",
+        "product_version": "10.0.14393.2879",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.14393.2879 (rs1_release_inmarket.190313-1855)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.2879"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "abeeb1fe6ecc6e25004c6b99a371425fd9b1f0fd8bcb39ae80c03ea3ddabd24d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552545182.297,
+              "timestamp_iso": "2019-03-14 06:33:02.297000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006239425970801861227622594399430508758,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "c5abff9b-4b8f-4f3f-b5e2-8f3b38b5d647",
+          "age": 1,
+          "path": "services.pdb"
+        }
+      },
+      "10.0.14393.3383_5ddcb9bb_72000_6f160": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1574746555,
+          "timestamp_iso": "2019-11-26 05:35:55",
+          "coff_characteristics": 34,
+          "linker_version": "14.0",
+          "image_base": 5368709120,
+          "size_of_image": 466944,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 455008,
+        "file_version": "10.0.14393.3383",
+        "product_version": "10.0.14393.3383",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.14393.3383 (rs1_release.191125-1816)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.14393.3383"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "93cd42b576596ab631e5b52ec557613320a0c40adb98bfbae392efe2cf4e4bc3",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1574749602.385,
+              "timestamp_iso": "2019-11-26 06:26:42.385000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006534779485525121749671785204537098511,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "cef014fe-7ae0-43d2-ad9a-05fc41f90d07",
+          "age": 1,
+          "path": "services.pdb"
+        }
+      },
+      "10.0.16299.15_0bdd439b_98000_96558": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 199050139,
+          "timestamp_iso": "1976-04-22 19:42:19",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 622592,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 615768,
+        "file_version": "10.0.16299.15",
+        "product_version": "10.0.16299.15",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.16299.15 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.15"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "ec04ccafff9b80730d42291dfa1f8e63de3d97c27a2f03ee3b2797b3238eab8e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007007454411873820417082316352074547562,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1506658900.893,
+              "timestamp_iso": "2017-09-29 04:21:40.893000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006028822366486431458344729467831713966,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "3eef0bc6-aaa2-14d4-826a-0a5557190fa9",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.98_2c1b9000_98000_96558": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 740003840,
+          "timestamp_iso": "1993-06-13 20:37:20",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 622592,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 615768,
+        "file_version": "10.0.16299.98",
+        "product_version": "10.0.16299.98",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.16299.98 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.98"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "2fa462d8778131f334f0fbea74368222f7208a28c528f0d882c7993bfbd13872",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007007454411873820417082316352074547562,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1511702455.284,
+              "timestamp_iso": "2017-11-26 13:20:55.284000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005980436734501164110551909556100792484,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "c18cfc1b-dff6-70f5-28e9-e0a3066c8b0e",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.192_6d2c40c7_98000_96558": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1831616711,
+          "timestamp_iso": "2028-01-16 06:25:11",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 622592,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 615768,
+        "file_version": "10.0.16299.192",
+        "product_version": "10.0.16299.192",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.16299.192 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.192"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "4f7bbefb6f82a1693285de4607bc3feacdec6658eeadbe023dc6ced0c96ce789",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007007454411873820417082316352074547562,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1514810082.338,
+              "timestamp_iso": "2018-01-01 12:34:42.338000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005994211025790091665443654607388541095,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "ee720a1d-352c-aaa9-0c09-a7180d31529b",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.461_dbd0fe84_98000_96958": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3687906948,
+          "timestamp_iso": "2086-11-12 02:35:48",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 622592,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 616792,
+        "file_version": "10.0.16299.461",
+        "product_version": "10.0.16299.461",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.16299.461 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.461"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "794bb7e67b7cb5667676441e3010294b70f0e0835cb7ded707f13a327a7e615d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007011710576423512918788467269983797611,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1526079930.312,
+              "timestamp_iso": "2018-05-11 23:05:30.312000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006020938485272644246149794457748242604,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "f696f9aa-ab11-7bcc-bc90-613603b23e80",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.16299.699_6cdc2bf4_98000_969b8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1826368500,
+          "timestamp_iso": "2027-11-16 12:35:00",
+          "coff_characteristics": 34,
+          "linker_version": "14.10",
+          "image_base": 5368709120,
+          "size_of_image": 622592,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 616888,
+        "file_version": "10.0.16299.699",
+        "product_version": "10.0.16299.699",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.16299.699 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.16299.699"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "01c27f399208009502f5f3a27ad14743838aabbec55f1c08d10cc8e7931171bd",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1537679817.085,
+              "timestamp_iso": "2018-09-23 05:16:57.085000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006313329502312636893723982272946766052,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "3a44b0e4-5773-4274-f2d0-064b969fa3db",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1_ca0dfd50_9d000_9b810": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3389914448,
+          "timestamp_iso": "2077-06-03 02:54:08",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 643072,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 636944,
+        "file_version": "10.0.17134.1",
+        "product_version": "10.0.17134.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.17134.1 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "153a1c5b2e5515757282b57c9bb1efc123b72e019cd6b54bcf4e65ef28070b52",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007011710576423512918788467269983797611,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1523421604.068,
+              "timestamp_iso": "2018-04-11 04:40:04.068000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006014856209010126895819358618454589611,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "15692e77-3503-e2a1-72df-61c008a34238",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.191_3c2b9f43_9d000_9b810": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1009491779,
+          "timestamp_iso": "2001-12-27 22:22:59",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 643072,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 636944,
+        "file_version": "10.0.17134.191",
+        "product_version": "10.0.17134.191",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.17134.191 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.191"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "c0132af1747f551996fc4faf8bc38ebadcdd2a6aa20a87f35b8be0935c10ddfb",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007360852573915517405105693195998593454,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1531541981.154,
+              "timestamp_iso": "2018-07-14 04:19:41.154000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338005967766594069328071360617029667127458,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "e0cf91a8-d216-fe64-6209-0ac3beedc7ec",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17134.1184_43be002a_9d000_9b7b0": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1136525354,
+          "timestamp_iso": "2006-01-06 05:29:14",
+          "coff_characteristics": 34,
+          "linker_version": "14.12",
+          "image_base": 5368709120,
+          "size_of_image": 643072,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 636848,
+        "file_version": "10.0.17134.1184",
+        "product_version": "10.0.17134.1184",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.17134.1184 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17134.1184"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "dff0805a5398403eb7fe60f787ab1e53aa3e2c0f93b721cfefc0f331553b420c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1574917776.13,
+              "timestamp_iso": "2019-11-28 05:09:36.130000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006527764226757095668508786132472824078,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "5d4a1214-837e-6139-1d66-f94d5048950d",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1_fd6bac5a_a8000_a5e00": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4251692122,
+          "timestamp_iso": "2104-09-24 09:35:22",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 688128,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 679424,
+        "file_version": "10.0.17763.1",
+        "product_version": "10.0.17763.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "b0000458f08a7bb9d55b8dd62fa816fa82c1c68df4a9e0e0b7b2b14425f937ad",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1536974906.684,
+              "timestamp_iso": "2018-09-15 01:28:26.684000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006164253362406456786752143661637566664,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "b1a25e26-dd98-6eca-920a-c2445a9ef5df",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.652_f69b1107_a7000_a5b18": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 4137357575,
+          "timestamp_iso": "2101-02-09 01:59:35",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 684032,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 678680,
+        "file_version": "10.0.17763.652",
+        "product_version": "10.0.17763.652",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.17763.652 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.652"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "82e81f7988028ef873a787cf9ef9bfc522a30b7a2df684b45324def025a9fa2c",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1563156446.52,
+              "timestamp_iso": "2019-07-15 02:07:26.520000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006244962191294843678316232850330878167,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "08ed676b-e175-8215-29f8-cfd388481283",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.914_0a0bb7e2_a7000_a5b10": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 168540130,
+          "timestamp_iso": "1975-05-05 16:42:10",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 684032,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 678672,
+        "file_version": "10.0.17763.914",
+        "product_version": "10.0.17763.914",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.17763.914 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.914"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "dd02522b66e8dbebd92e51430c0b9b968c7d02e350581cbd31670f0e15bff48e",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1574920377.451,
+              "timestamp_iso": "2019-11-28 05:52:57.451000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006559213792419483139536905441688682772,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "87f15472-aaed-33c0-986e-af07328cb96c",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.17763.1075_0d1e531d_a7000_a59e8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 220091165,
+          "timestamp_iso": "1976-12-22 08:26:05",
+          "coff_characteristics": 34,
+          "linker_version": "14.13",
+          "image_base": 5368709120,
+          "size_of_image": 684032,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 678376,
+        "file_version": "10.0.17763.1075",
+        "product_version": "10.0.17763.1075",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.17763.1075 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.17763.1075"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "a03cd7126c83845a879e153b45de6553e2160be1e57d4bf32b416608fc99104f",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1582263591.816,
+              "timestamp_iso": "2020-02-21 05:39:51.816000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006474618943676559360178350755718103299,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "a4d7a12f-8989-d402-52aa-9f019ac7347c",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {}
+      },
+      "10.0.18362.1_ac6bb341_a7000_a4be8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 2892739393,
+          "timestamp_iso": "2061-08-31 18:43:13",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 684032,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 674792,
+        "file_version": "10.0.18362.1",
+        "product_version": "10.0.18362.1",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.18362.1 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.1"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "04064a67444c3c5e8ec4f706a76257eec03b782225574d91a0dd213f1f8aed8a",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007368030186360790950334238363675001263,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1552949185.233,
+              "timestamp_iso": "2019-03-18 22:46:25.233000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006213351220777337113178139318827352273,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "b0fc3cbd-5f8d-8cd8-8c6b-a29e632599c0",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "b0fc3cbd-5f8d-8cd8-8c6b-a29e632599c0",
+          "unknown": "888d576941dba75018710a2b",
+          "timestamp": 2892739393
+        }
+      },
+      "10.0.18362.145_6d20a7dc_a7000_a4be8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 1830856668,
+          "timestamp_iso": "2028-01-07 11:17:48",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 684032,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 674792,
+        "file_version": "10.0.18362.145",
+        "product_version": "10.0.18362.145",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.18362.145 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.145"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "d444530eafdabde3cc2ea8d36f8908c5fe081b0a98030cd6d1da7da238ed33e2",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1558500891.107,
+              "timestamp_iso": "2019-05-22 04:54:51.107000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006213351220777337113178139318827352273,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "8cc0887c-2734-026f-7c6c-ef320b217bca",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "8cc0887c-2734-026f-7c6c-ef320b217bca",
+          "unknown": "75afe5290495bde9bd7ed3bb",
+          "timestamp": 1830856668
+        }
+      },
+      "10.0.18362.207_c75bb2ea_a7000_a4918": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3344675562,
+          "timestamp_iso": "2075-12-27 12:32:42",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 684032,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 674072,
+        "file_version": "10.0.18362.207",
+        "product_version": "10.0.18362.207",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.18362.207 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.207"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "9baacdbb54e192a44200518bd095a710aaee1fbec76366d74ff79a94e1d37843",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1561008665.439,
+              "timestamp_iso": "2019-06-20 05:31:05.439000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006255250095571111745631542615402873049,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "6e58e48e-0dcf-6423-d935-870c1a87476f",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "6e58e48e-0dcf-6423-d935-870c1a87476f",
+          "unknown": "0aed637b242e8c039f76a81d",
+          "timestamp": 3344675562
+        }
+      },
+      "10.0.18362.387_3a1e9e1a_a7000_a4918": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 975085082,
+          "timestamp_iso": "2000-11-24 16:58:02",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 684032,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 674072,
+        "file_version": "10.0.18362.387",
+        "product_version": "10.0.18362.387",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.18362.387 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.387"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "66ad084472029a4d047b63a575a7680438523b92ebbe9539d336252ef21b0c84",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1569298559.789,
+              "timestamp_iso": "2019-09-24 04:15:59.789000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006277201382232487817802877555127091421,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "a54eac07-2235-0a43-f3c2-8371d4fceb71",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "a54eac07-2235-0a43-f3c2-8371d4fceb71",
+          "unknown": "fec5f117378906706fd82b06",
+          "timestamp": 975085082
+        }
+      },
+      "10.0.18362.535_d67df688_a7000_a49e8": {
+        "pe_header": {
+          "machine": 34404,
+          "timestamp": 3598579336,
+          "timestamp_iso": "2084-01-13 05:22:16",
+          "coff_characteristics": 34,
+          "linker_version": "14.15",
+          "image_base": 5368709120,
+          "size_of_image": 684032,
+          "subsystem": 2,
+          "dll_characteristics": 49504
+        },
+        "file_size": 674280,
+        "file_version": "10.0.18362.535",
+        "product_version": "10.0.18362.535",
+        "string_info": {
+          "CompanyName": "Microsoft Corporation",
+          "FileDescription": "Services and Controller app",
+          "FileVersion": "10.0.18362.535 (WinBuild.160101.0800)",
+          "InternalName": "services.exe",
+          "LegalCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+          "OriginalFilename": "services.exe",
+          "ProductName": "Microsoft\u00ae Windows\u00ae Operating System",
+          "ProductVersion": "10.0.18362.535"
+        },
+        "authenticode": [
+          {
+            "digest_alg": "SHA256",
+            "digest": "96002b8eceaf5547aa32c41e2cfc9eb8f3ec234dc4ee27bbcae23cceedd0841d",
+            "signer_infos": {
+              "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Windows Production PCA 2011",
+              "serial_number": 1137338007938194007199174361436956025396658717,
+              "digest_enc_alg": "RSA"
+            },
+            "timestamp_counter_sign": {
+              "timestamp": 1574920418.157,
+              "timestamp_iso": "2019-11-28 05:53:38.157000",
+              "signer_infos": {
+                "issuer": "C=US,ST=Washington,L=Redmond,O=Microsoft Corporation,CN=Microsoft Time-Stamp PCA 2010",
+                "serial_number": 1137338006467623191412556535549339364036182274,
+                "digest_enc_alg": "RSA-SHA256"
+              }
+            }
+          }
+        ],
+        "debug_codeview": {
+          "guid": "8c0e4f3d-0e92-3db8-303f-9f5782c7b358",
+          "age": 1,
+          "path": "services.pdb"
+        },
+        "debug_reproducible": {
+          "guid": "8c0e4f3d-0e92-3db8-303f-9f5782c7b358",
+          "unknown": "3af676850fbafb7a1ce06403",
+          "timestamp": 3598579336
+        }
+      }
+    }
+  }
+}
