@@ -53,8 +53,7 @@ RUN \
         wine \
         wine32 \
         wine64 && \
-    apt-get clean && \
-    mkdir /usr/include/SDL2
+    apt-get clean
 
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
