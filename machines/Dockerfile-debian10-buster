@@ -101,10 +101,10 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 8.3-win32 20190406
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 8.3-win32 20190406
 #       wine: wine-4.0 (Debian 4.0-2)
-#       Linux kernel: 4.19.0-8-amd64
+#       Linux kernel: 4.19.0-9-amd64
 #       python3: Python 3.7.3
-#       javac: javac 11.0.6
-#       java: openjdk 11.0.6 2020-01-14
+#       javac: javac 11.0.7
+#       java: openjdk 11.0.7 2020-04-14
 #       rustc: rustc 1.34.2
 #       cargo: cargo 1.34.0
 #       coqc: The Coq Proof Assistant, version 8.9.0 (February 2019) compiled on Feb 6 2019 17:43:20 with OCaml 4.05.0

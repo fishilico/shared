@@ -115,9 +115,9 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: not working
 #       i686-w64-mingw32-gcc: not working
 #    Versions:
-#       gcc: gcc (Gentoo Hardened 9.2.0-r2 p3) 9.2.0
+#       gcc: gcc (Gentoo Hardened 9.3.0 p2) 9.3.0
 #       clang: clang version 9.0.1
-#       Linux kernel: 5.4.28-gentoo-x86_64
-#       python: Python 3.6.10
-#       python3: Python 3.6.10
-#       coqc: The Coq Proof Assistant, version 8.6.1 (April 2020) compiled on Apr 14 2020 12:36:15 with OCaml 4.04.2
+#       Linux kernel: 5.4.38-gentoo-x86_64
+#       python: Python 3.7.7
+#       python3: Python 3.7.7
+#       coqc: The Coq Proof Assistant, version 8.6.1 (May 2020) compiled on May 27 2020 12:33:49 with OCaml 4.04.2
