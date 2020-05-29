@@ -106,6 +106,7 @@ IT systems
 ----------
 
 * API = Application Programming Interface
+* BLOB = Binary Large OBject
 * BYOD = Bring Your Own Device
 * CDN = Content Delivery Network
 * CDROM = Compact-Disk Read Only Memory
@@ -129,6 +130,7 @@ IT systems
 * IOT = Internet Of Things
 * IPC = Inter-Process Communication
 * IT = Information Technology
+* NONCE = Number used Once
 * OEM = Original Equipment Manufacturer
 * OOB = Out-of-Band
 * OS = Operating System
