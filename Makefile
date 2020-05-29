@@ -87,9 +87,11 @@ endif
 ifneq ($(call can-run,$(CARGO) --version),y)
 SUBDIRS_BLACKLIST += rust%
 else
-# Old versions of rustc fail to build socket2-0.3.12 because:
+# Old versions of rustc (<=1.34) fail to build socket2-0.3.12 because:
 # error[E0658]: use of unstable library feature 'maybe_uninit' (see issue #53491)
-ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-4]\)\.'),y)
+# Old versions of rustc (<1.38) fail to build object-0.19.0 because:
+# use of unstable library feature 'ptr_cast'
+ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-7]\)\.'),y)
 SUBDIRS_BLACKLIST += rust/download_web%
 endif
 endif
