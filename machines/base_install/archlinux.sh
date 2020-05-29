@@ -201,6 +201,7 @@ pkg dmidecode
 pkg efibootmgr
 pkg fwupd
 pkg gpm
+pkg i2c-tools
 pkg iw
 pkg kbd
 pkg libfido2
@@ -208,6 +209,7 @@ pkg lm_sensors
 pkg lshw
 pkg pciutils
 pkg picocom
+pkg read-edid
 pkg smartmontools
 pkg tpm2-tools
 pkg usbutils
