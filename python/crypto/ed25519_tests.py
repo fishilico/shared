@@ -290,6 +290,10 @@ class Ed25519Point(object):
             bitmask = bitmask // 2
         return result
 
+    def __rmul__(self, other):
+        """Right multiply: integer * Point"""
+        return self.__mul__(other)
+
     def encode(self):
         """Encode a point in a compressed binary form"""
         bits = ED25519_BITS
@@ -492,6 +496,10 @@ class Montgomery25519Point(object):
                 result += self
             bitmask = bitmask // 2
         return result
+
+    def __rmul__(self, other):
+        """Right multiply: integer * Point"""
+        return self.__mul__(other)
 
     def to_edwards(self):
         """Get the equivalent point on Twisted Edwards curve Ed25519
