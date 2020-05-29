@@ -103,6 +103,7 @@ pkg gnupg
 pkg htop
 pkg iotop
 pkg jq
+pkg keyutils
 pkg less
 pkg lsof
 pkg most
@@ -126,9 +127,11 @@ pkg crda
 pkg fwupd
 pkg gpm
 pkg kbd
+pkg hwloc
 pkg iw
 pkg lshw
 pkg pciutils
+pkg read-edid
 pkg usbutils
 pkg wireless-tools
 pkg wpa_supplicant

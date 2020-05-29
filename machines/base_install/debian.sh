@@ -107,6 +107,7 @@ pkg highlight
 pkg htop
 pkg iotop
 pkg jq
+pkg keyutils
 pkg less
 pkg lsb-release
 pkg lsof
@@ -131,13 +132,16 @@ pkg zsh
 pkg acpica-tools
 pkg console-data
 pkg crda
+pkg edid-decode
 pkg fwupd
 pkg gpm
+pkg hwloc-nox
 pkg iw
 pkg lm-sensors
 pkg lshw
 pkg pciutils
 pkg picocom
+pkg read-edid
 pkg rfkill
 pkg usbutils
 pkg wireless-tools
@@ -220,9 +224,10 @@ pkg fakeroot
 pkg gdb
 pkg git
 pkg highlight
-pkg ipython
+pkg ipython3
 pkg libcap-ng-utils
 pkg ltrace
+pkg meson
 pkg mypy
 pkg nodejs
 #pkg php
@@ -232,7 +237,7 @@ pkg pypy
 pkg python
 pkg python-dev
 pkg python-setuptools
-pkg python-virtualenv
+#pkg python-virtualenv  # Removed package
 pkg python3
 pkg python3-dev
 pkg python3-venv
@@ -255,6 +260,7 @@ then
     # apt-listbugs is not available on Ubuntu
     pkg apt-listbugs
 fi
+pkg apt-file
 pkg apt-listchanges
 pkg apt-transport-https
 pkg apt-utils
@@ -276,6 +282,8 @@ then
 
     # Fonts
     pkg fonts-droid-fallback
+    pkg fonts-fantasque-sans
+    pkg fonts-firacode
     pkg fonts-freefont-ttf
     pkg fonts-inconsolata
     pkg fonts-liberation
@@ -310,6 +318,7 @@ then
     pkg graphviz
     pkg gvfs
     pkg kismet
+    pkg libvirt-clients
     pkg meld
     pkg modemmanager
     pkg mupdf
@@ -319,14 +328,22 @@ then
     pkg parted
     pkg pdf-presenter-console
     pkg qpdf
-    #pkg texlive-full
+    pkg redshift-gtk
+    pkg sagemath
+    pkg texlive-full
     pkg tk
+    pkg v4l-utils
+    pkg vagrant
+    pkg vagrant-mutate
+    pkg vagrant-sshfs
     pkg vlc
     pkg vlc-plugin-notify
+    pkg virt-manager
     pkg wireshark-gtk
     pkg xdg-utils
     pkg xsensors
     pkg xterm
+    pkg youtube-dl
 
     # Ubuntu uses chromium-browser and Debian used chromium
     if is_available chromium-browser
@@ -403,7 +420,7 @@ then
     pkg xfce4-notifyd
     pkg xfce4-power-manager
     pkg xfce4-volumed
-    pkg xfwm4-themes
+    #pkg xfwm4-themes  # Removed package
 
     if "$INSTALL_GDM"
     then
