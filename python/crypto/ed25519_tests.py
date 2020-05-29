@@ -327,6 +327,10 @@ class Ed25519Point(object):
             assert self.x == 0
             return Montgomery25519Point(None, None)
         q = ED25519_PRIME
+        if self.y == q - 1:
+            # (0, q-1) is mapped to the origin
+            assert self.x == 0
+            return Montgomery25519Point(0, 0)
         u = ((1 + self.y) * modinv(1 - self.y, q)) % q
         v = (u * modinv(self.x, q) * modsqrt25519(-486664)) % q
         return Montgomery25519Point(u, v)
@@ -510,6 +514,9 @@ class Montgomery25519Point(object):
         if self.x is None:
             return Ed25519Point(0, 1)
         q = ED25519_PRIME
+        if self.x == 0:
+            assert self.y == 0
+            return Ed25519Point(0, q - 1)
         x = (self.x * modinv(self.y, q) * modsqrt25519(-486664)) % q
         y = ((self.x - 1) * modinv(self.x + 1, q)) % q
         return Ed25519Point(x, y)
@@ -635,6 +642,25 @@ def run_test(colorize):
     encoded_b = CURVE25519_BASE.encode_x25519()
     assert Montgomery25519Point.decode(encoded_b) == CURVE25519_BASE
 
+    # Find a point generating the whole curve
+    generator3 = Ed25519Point.from_y(3)
+    pt_ord8 = BASE_ORDER * generator3
+    assert pt_ord8 != Ed25519Point(0, 1)
+    assert pt_ord8 * 8 == Ed25519Point(0, 1)
+    assert pt_ord8 * 4 == Ed25519Point(0, ED25519_PRIME - 1)
+
+    # Show points of order 8
+    print("* Order 8 subgroup:")
+    current_pt = Ed25519Point(0, 1)
+    current_montpt = Montgomery25519Point(None, None)
+    for idx in range(8):
+        print("  [{}] {}".format(idx, current_pt))
+        print("      ... {}".format(xx(current_pt.encode())))
+        print("       Montgomery: {}".format(current_montpt))
+        assert current_pt.to_montgomery() == current_montpt
+        assert current_montpt.to_edwards() == current_pt
+        current_pt += pt_ord8
+        current_montpt += pt_ord8.to_montgomery()
     print("")
 
     print("Signing test message:")
