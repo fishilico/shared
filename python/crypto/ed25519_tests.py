@@ -220,7 +220,12 @@ def modsqrt25519(x2):
     x = pow(x2, (ED25519_PRIME + 3) // 8, ED25519_PRIME)
     if (x * x - x2) % ED25519_PRIME != 0:
         x = (x * ED25519_I) % ED25519_PRIME
-        assert (x * x - x2) % ED25519_PRIME == 0
+        if (x * x - x2) % ED25519_PRIME != 0:
+            # This can only happen if x2 was not a quadratic residue
+            assert pow(x2, (ED25519_PRIME - 1) // 2, ED25519_PRIME) != 1
+            raise ValueError("Trying to compute the modular square root of a non-quadratic residue")
+    assert pow(x2, (ED25519_PRIME - 1) // 2, ED25519_PRIME) in (0, 1)  # Sanity check
+
     # Choose the even value
     if x % 2:
         return ED25519_PRIME - x
@@ -249,6 +254,8 @@ class Ed25519Point(object):
         x^2 = (y^2 - 1) / (dy^2 + 1)
         x = sqrt(x^2) in F_q
         """
+        if not (0 <= y < ED25519_PRIME):
+            raise ValueError("y is out of bounds")
         x = modsqrt25519((y * y - 1) * modinv(ED25519_D * y * y + 1, ED25519_PRIME))
         return cls(x, y)
 
@@ -334,6 +341,25 @@ class Ed25519Point(object):
         u = ((1 + self.y) * modinv(1 - self.y, q)) % q
         v = (u * modinv(self.x, q) * modsqrt25519(-486664)) % q
         return Montgomery25519Point(u, v)
+
+    def order(self):
+        """Get the order of the point"""
+        if self.x == 0 and self.y == 1:
+            return 1
+        # Usually, it is the BASE_ORDER
+        pt_ord = self * BASE_ORDER
+        if pt_ord.x == 0 and pt_ord.y == 1:
+            return BASE_ORDER
+        pt_mul2 = self
+        # Multiply by powers of 2, because the cofactor is 8
+        for order in (2, 4, 8):
+            pt_mul2 = pt_mul2 + pt_mul2
+            if pt_mul2.x == 0 and pt_mul2.y == 1:
+                return order
+            pt_ord = pt_ord + pt_ord
+            if pt_ord.x == 0 and pt_ord.y == 1:
+                return BASE_ORDER * order
+        assert False  # Unreachable
 
 
 class Montgomery25519Point(object):
@@ -521,6 +547,25 @@ class Montgomery25519Point(object):
         y = ((self.x - 1) * modinv(self.x + 1, q)) % q
         return Ed25519Point(x, y)
 
+    def order(self):
+        """Get the order of the point"""
+        if self.x is None and self.y is None:
+            return 1
+        # Usually, it is the BASE_ORDER
+        pt_ord = self * BASE_ORDER
+        if pt_ord.x is None and pt_ord.y is None:
+            return BASE_ORDER
+        pt_mul2 = self
+        # Multiply by powers of 2, because the cofactor is 8
+        for order in (2, 4, 8):
+            pt_mul2 = pt_mul2 + pt_mul2
+            if pt_mul2.x is None and pt_mul2.y is None:
+                return order
+            pt_ord = pt_ord + pt_ord
+            if pt_ord.x is None and pt_ord.y is None:
+                return BASE_ORDER * order
+        assert False  # Unreachable
+
 
 # Define base points
 ED25519_D = (-121665 * modinv(121666, ED25519_PRIME)) % ED25519_PRIME
@@ -630,11 +675,13 @@ def run_test(colorize):
     print("* order of B, l({}): {:#x}".format(curve.ordb.bit_length(), curve.ordb))
     assert curve.ordb == BASE_ORDER
     assert curve.b * curve.ordb == Ed25519Point(0, 1)
+    assert curve.b.order() == BASE_ORDER
 
     # Test that the base point of Curve25519 maps well to the one of Ed25519
     print("* B on Montgomery curve: {}".format(CURVE25519_BASE))
     assert CURVE25519_BASE.x == 9
     assert CURVE25519_BASE * BASE_ORDER == Montgomery25519Point(None, None)
+    assert CURVE25519_BASE.order() == BASE_ORDER
     assert CURVE25519_BASE.to_edwards() == curve.b
     assert CURVE25519_BASE == curve.b.to_montgomery()
 
@@ -648,6 +695,8 @@ def run_test(colorize):
     assert pt_ord8 != Ed25519Point(0, 1)
     assert pt_ord8 * 8 == Ed25519Point(0, 1)
     assert pt_ord8 * 4 == Ed25519Point(0, ED25519_PRIME - 1)
+    assert generator3.order() == 8 * BASE_ORDER
+    assert pt_ord8.order() == 8
 
     # Show points of order 8
     print("* Order 8 subgroup:")
@@ -659,6 +708,7 @@ def run_test(colorize):
         print("       Montgomery: {}".format(current_montpt))
         assert current_pt.to_montgomery() == current_montpt
         assert current_montpt.to_edwards() == current_pt
+        assert current_pt.order() == current_montpt.order()
         current_pt += pt_ord8
         current_montpt += pt_ord8.to_montgomery()
     print("")
