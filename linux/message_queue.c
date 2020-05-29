@@ -81,6 +81,12 @@ int main(int argc, char **argv)
     /* Send a message */
     message_text = "Hello, world!";
     if (mq_send(mqdes, message_text, strlen(message_text), 1) == -1) {
+        if (errno == EPERM) {
+            /* Docker default seccomp policy can forbid mq_send on x86-32 */
+            printf("mq_send() is denied, exiting.\n");
+            retval = 0;
+            goto cleanup;
+        }
         perror("mq_send");
         goto cleanup;
     }
