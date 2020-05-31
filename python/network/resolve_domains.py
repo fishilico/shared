@@ -955,8 +955,8 @@ def main(argv=None):
 
     # Load the list of domains
     with args.file.open(mode='r') as fdomains:
-        raw_domains = [l.rstrip('\n') for l in fdomains.readlines()]
-    domains = [l.strip().rstrip('.').lower() for l in raw_domains]
+        raw_domains = [line.rstrip('\n') for line in fdomains.readlines()]
+    domains = [line.strip().rstrip('.').lower() for line in raw_domains]
     domains_set = set(domains)
     if '' in domains_set:
         domains_set.remove('')
