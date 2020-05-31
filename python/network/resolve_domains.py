@@ -39,6 +39,7 @@ import random
 import re
 import ssl
 import struct
+import sys
 import time
 import urllib.parse
 import urllib.request
@@ -162,10 +163,12 @@ WELLKNOWN_PREFIXES = (
     '_mta-sts',  # MTA-STS, SMTP Mail Transfer Agent Strict Transport Security
     '_psl',  # PSL, Public Suffix List
     '_sip._tcp',
+    '_sip._tls',
     '_sip._udp',
     '_sips._tcp',
     'a',
     'about',
+    'access1',
     'account',
     'adm',
     'admin',
@@ -179,6 +182,7 @@ WELLKNOWN_PREFIXES = (
     'assets',
     'auth',
     'autodiscover',
+    'av',
     'b',
     'back',
     'backup',
@@ -216,6 +220,7 @@ WELLKNOWN_PREFIXES = (
     'demo',
     'dev',
     'developer',
+    'dial-in',
     'dmz',
     'dns',
     'dns1',
@@ -289,6 +294,7 @@ WELLKNOWN_PREFIXES = (
     'mattermost',
     'mdm',
     'media',
+    'meet',
     'mf1',
     'mfa',
     'mobile',
@@ -316,6 +322,7 @@ WELLKNOWN_PREFIXES = (
     'opensource',
     'org',
     'outlook',
+    'owa',
     'pass',
     'pdns',
     'phone',
@@ -404,8 +411,10 @@ WELLKNOWN_PREFIXES = (
     'voip',
     'vpn',
     'web',
+    'web-ext',
     'webapp',
     'webchat',
+    'webcon1',
     'webmail',
     'wifi',
     'wiki',
@@ -516,6 +525,7 @@ class Resolver:
         self.dns_records = None
         self.is_cache_dirty = True
         self.has_show_dnspython_any_warning = False
+        self.query_count = 0
         self.load_cache(if_dirty=False)
 
     def load_cache(self, if_dirty=True):
@@ -616,6 +626,7 @@ class Resolver:
             return
 
         cache_file = self.cache_directory / '{}_{}.json'.format(domain, rtype)
+        cache_file_temp = self.cache_directory / '{}_{}.json.temp'.format(domain, rtype)
         if cache_file.exists():
             print("Warning: cache file exists for {} <{}> but was not loaded".format(domain, rtype))
             return
@@ -632,9 +643,10 @@ class Resolver:
 
         # Write the cache file
         response = response.strip(b'\n')
-        with cache_file.open(mode='wb') as fout:
+        with cache_file_temp.open(mode='wb') as fout:
             fout.write(response)
             fout.write(b'\n')
+        cache_file_temp.replace(cache_file)
 
         self.is_cache_dirty = True
 
@@ -684,6 +696,7 @@ class Resolver:
             return None
 
         print("Querying DNS for {} <{}>...".format(domain, rdtype_text))
+        self.query_count += 1
         resolver = dns.resolver.Resolver()
         resolver.use_edns(0, dns.flags.DO, 4096)
         dot_domain = domain + '.'
@@ -733,6 +746,7 @@ class Resolver:
     def query_google(self, domain, rtype):
         """Perform a DNS query using https://dns.google.com/ API"""
         print("Querying dns.google.com for {} <{}>...".format(domain, rtype))
+        self.query_count += 1
         params = {
             'name': domain,
             'type': rtype,
@@ -766,6 +780,7 @@ class Resolver:
     def query_cloudflare(self, domain, rtype):
         """Perform a DNS query using https://cloudflare-dns.com/ API"""
         print("Querying cloudflare-dns.com for {} <{}>...".format(domain, rtype))
+        self.query_count += 1
         params = {
             'name': domain,
             'type': rtype,
@@ -858,12 +873,18 @@ class Resolver:
         max_domain_len = 0
         deleted_records = set()
         for domain, rtype, data in all_records:
+            # Never display HINFO RFC8482 entries from cloudflare DNS
+            # cf. https://blog.cloudflare.com/rfc8482-saying-goodbye-to-any/
+            if rtype == 'HINFO' and data == 'RFC8482 ':
+                deleted_records.add((domain, rtype, data))
+                continue
+
             is_deleted = False
             for possible_wild_suffix in wildcard_records_by_data.get((rtype, data), []):
                 if domain != '*.' + possible_wild_suffix and domain.endswith('.' + possible_wild_suffix):
                     deleted_records.add((domain, rtype, data))
                     is_deleted = True
-                    continue
+                    break
             if is_deleted:
                 continue
             if rtype == 'PTR':
@@ -912,6 +933,8 @@ def main(argv=None):
     parser.add_argument('-i', '--ipaddr', metavar="IP_NETWORK",
                         nargs='*', type=ipaddress.ip_network,
                         help="resolve reverse (PTR) records for the IP addresses")
+    parser.add_argument('-L', '--limit', type=int,
+                        help="limit the number of DNS queries to perform")
     parser.add_argument('-M', '--merge-cache', action='store_true',
                         help="merge cache files together")
     parser.add_argument('-p', '--prefixes', action='store_true',
@@ -967,6 +990,10 @@ def main(argv=None):
             if rtype != 'PTR':
                 resolver.resolve_in_cache(domain, rtype)
 
+    if args.limit and resolver.query_count >= args.limit:
+        print("Performed {} queries, stopping now".format(resolver.query_count))
+        sys.exit(2)
+
     # Resolve with well-known prefixes
     if args.prefixes:
         domains_with_prefixes = list(
@@ -976,8 +1003,12 @@ def main(argv=None):
         for domain in domains_with_prefixes:
             resolving_types = DNS_SRV_TYPES if '._tcp.' in domain or '._udp.' in domain else DNS_TYPES
             for rtype in resolving_types:
-                if rtype != 'PTR':
-                    resolver.resolve_in_cache(domain, rtype)
+                if rtype == 'PTR':
+                    continue
+                resolver.resolve_in_cache(domain, rtype)
+                if args.limit and resolver.query_count >= args.limit:
+                    print("Performed {} queries, stopping now".format(resolver.query_count))
+                    sys.exit(2)
 
     # Load the cache
     resolver.load_cache(if_dirty=True)
@@ -989,6 +1020,10 @@ def main(argv=None):
             if ip_net.num_addresses >= 2:
                 for ip_addr in ip_net.hosts():
                     resolver.resolve_ip(ip_addr)
+                    if args.limit and resolver.query_count >= args.limit:
+                        print("Performed {} queries, stopping now".format(resolver.query_count))
+                        sys.exit(2)
+
                 resolver.resolve_ip(ip_net.broadcast_address)
         resolver.load_cache(if_dirty=True)
 
@@ -1001,6 +1036,10 @@ def main(argv=None):
     all_ipv6_addresses = set(x[2] for x in resolver.dns_records if x[1] == 'AAAA')
     for ip_addr in all_ipv6_addresses:
         resolver.resolve_ip(ip_addr, version=6)
+
+    if args.limit and resolver.query_count >= args.limit:
+        print("Performed {} queries, stopping now".format(resolver.query_count))
+        sys.exit(2)
 
     # Reload the cache, if needed
     resolver.load_cache(if_dirty=True)
