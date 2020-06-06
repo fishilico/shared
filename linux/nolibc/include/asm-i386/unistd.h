@@ -429,4 +429,8 @@
 #define __NR_openat2 437
 #define __NR_pidfd_getfd 438
 
+#ifdef __KERNEL__
+#define __NR_syscall_max 438
+#endif
+
 #endif /* _ASM_X86_UNISTD_H */
