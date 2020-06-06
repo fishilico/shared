@@ -175,6 +175,7 @@ __extension__ static const char* cpuidstr_7_edx[32] = {
     [27] = "intel_stibp",
     [28] = "flush_l1d",
     [29] = "arch_capabilities",
+    [30] = "core_capabilities",
     [31] = "spec_ctrl_ssbd",
 };
 
