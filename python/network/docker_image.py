@@ -118,7 +118,10 @@ class DockerRegistry:
         # Authenticate with the registry, using /v2/ ping response
         # cf. https://github.com/containers/image/blob/v5.1.0/docker/docker_client.go#L508
         # and https://github.com/containers/image/pull/211#issuecomment-273426236
-        self.ping()
+        # ... or not. Such a request does not work on gcr.io with an empty scope,
+        # so rely on requests using ping(scope=...) to authenticate in a
+        # "lazy evaluation way" with the registry.
+        # self.ping()
 
     def normalize_name_if_needed(self, image_name):
         """Normalize the name of an image for Docker registry, if the registry is Docker's one"""
@@ -137,12 +140,13 @@ class DockerRegistry:
         if ping_response.status_code == 200:
             logger.debug("Ping OK, result=%r", ping_response.json())
             return ping_response.json()
-        elif ping_response.status_code == 401:
+
+        if ping_response.status_code == 401:
             # Authenticate to the registry
             auth_header = ping_response.headers['WWW-Authenticate']
             kind, fields_str = auth_header.split(' ', 1)
             if kind == 'Bearer':
-                logger.debug("Authenicating to %r", fields_str)
+                logger.debug("Authenicating to %r with scope=%r", fields_str, scope)
                 fields = split_auth_header(fields_str)
                 auth_realm = fields['realm']
                 auth_service = fields.get('service')
@@ -172,8 +176,11 @@ class DockerRegistry:
                 if ping_response.status_code != 200:
                     logger.error("Unsuccessful authenticated ping response code %d", ping_response.status_code)
                     raise ValueError("Unsuccessful authenticated ping response")
-                logger.debug("Authentication OK, ping result=%r", ping_response.json())
-                return ping_response.json()
+                # https://registry-1.docker.io replies with '{}'
+                # https://gcr.io replies with ''
+                # https://quay.io replies with 'true'
+                logger.debug("Authentication OK, ping result=%r", ping_response.content)
+                return ping_response.content
 
             raise ValueError("Unexpected authentication header kind {}".format(repr(auth_header)))
 
@@ -503,7 +510,7 @@ def main(argv=None):
                 print(json.dumps(manifest, indent=2))
             else:
                 # With an output directory, save the manifest and download layers
-                logger.info("Downloading {}:{}...".format(image, tag))
+                logger.info("Downloading %s:%s...", image, tag)
                 registry.download_image(image, tag, args.output)
 
 
