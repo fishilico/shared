@@ -146,7 +146,7 @@ class DockerRegistry:
             auth_header = ping_response.headers['WWW-Authenticate']
             kind, fields_str = auth_header.split(' ', 1)
             if kind == 'Bearer':
-                logger.debug("Authenicating to %r with scope=%r", fields_str, scope)
+                logger.debug("Authenticating to %r with scope=%r", fields_str, scope)
                 fields = split_auth_header(fields_str)
                 auth_realm = fields['realm']
                 auth_service = fields.get('service')
