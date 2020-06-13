@@ -5,6 +5,7 @@ LABEL Description="Fedora 32 with build dependencies for shared"
 ENV LANG C.UTF-8
 
 # Fedora>=32 dropped Python 2 support
+# Wine requires an X11 server in order to work properly: use Xvfb in a container
 RUN \
     dnf update -q -y --setopt=deltarpm=false && \
     dnf install -q -y --setopt=deltarpm=false \
@@ -49,14 +50,15 @@ RUN \
         python2-pillow \
         SDL2-devel \
         which \
-        wine && \
+        wine \
+        xorg-x11-server-Xvfb && \
     dnf clean all
 
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
 COPY . /shared/
 
-CMD ["/run_shared_test.sh"]
+CMD ["xvfb-run", "/run_shared_test.sh"]
 
 # make list-nobuild:
 #    Global blacklist: latex%

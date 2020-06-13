@@ -48,14 +48,15 @@ RUN \
         python2-pillow \
         SDL2-devel \
         which \
-        wine && \
+        wine \
+        xorg-x11-server-Xvfb && \
     dnf clean all
 
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
 COPY . /shared/
 
-CMD ["/run_shared_test.sh"]
+CMD ["xvfb-run", "/run_shared_test.sh"]
 
 # make list-nobuild:
 #    Global blacklist: latex%
