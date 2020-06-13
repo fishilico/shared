@@ -94,7 +94,7 @@ ifeq ($(HAVE_WINE),y)
 	# Ubuntu 20.04 LTS (Focal Fossa) shares the same behavior, with wine-5.0.
 	# Arch Linux too, since Wine 5.
 	NEED_WINE_SLEEP := $(call can-run,grep \
-		-e '^CPE_NAME="cpe:/o:fedoraproject:fedora:32"$$' \
+		-e '^CPE_NAME="cpe:/o:fedoraproject:fedora:3[23]"$$' \
 		-e '^VERSION="20.04 LTS (Focal Fossa)"$$' \
 		-e '^NAME="Arch Linux"$$' \
 		/etc/os-release)
