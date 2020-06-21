@@ -21,7 +21,7 @@ case "$(sed -n 's/^ID=//p' /etc/os-release /usr/lib/os-release 2>/dev/null | hea
         ;;
     debian)
         KERNELVER="$(LANG=C dpkg --status linux-headers-amd64 2>/dev/null |
-            sed -n 's/^Depends: linux-headers-\(.*\)/\1/p' | head -n 1)"
+            sed -n 's/^Depends: linux-headers-\([^ ]*\)\( .*\)\?/\1/p' | head -n 1)"
         ;;
     fedora)
         KERNELVER="$(LANG=C rpm -qi kernel-devel 2>/dev/null |
