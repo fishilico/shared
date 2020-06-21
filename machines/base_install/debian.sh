@@ -158,6 +158,7 @@ pkg eject
 pkg exfat-utils
 pkg extundelete
 pkg innoextract
+pkg libarchive-tools
 pkg lvm2
 pkg lzop
 pkg mdadm

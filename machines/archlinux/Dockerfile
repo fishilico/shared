@@ -21,7 +21,7 @@ COPY 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC.asc /etc/archlinux-signing-key.asc
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get -qq update && \
-    apt-get install -qqy bsdtar gnupg wget && \
+    apt-get install -qqy gnupg libarchive-tools wget && \
     apt-get clean && \
     gpg --import /etc/archlinux-signing-key.asc && \
     mkdir /arch && cd /arch && \
