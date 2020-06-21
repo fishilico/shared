@@ -38,7 +38,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% linux/modules% rust% windows%
+#    Global blacklist: latex% rust% windows%
 #    In sub-directories:
 #       c: x86-read_64b_regs_in_32b_mode
 #       glossaries: check_sort_order.py
@@ -61,5 +61,5 @@ CMD ["/run_shared_test.sh"]
 #    Versions:
 #       gcc: gcc (Alpine 5.3.0) 5.3.0
 #       clang: clang version 3.6.2 (tags/RELEASE_362/final)
-#       Linux kernel: 5.5.8-arch1-1
+#       Linux kernel: 4.1.39-0-grsec
 #       python3: Python 3.5.1
