@@ -126,6 +126,10 @@ Reverse engineering
   Collection of IDA Python plugins/scripts/modules (with Rizzo function signatures)
 * https://github.com/fuzzywalls/ghidra_scripts
   Port of devttyS0's IDA plugins to the Ghidra plugin framework.
+* https://github.com/0xgalz/Virtuailor
+  IDAPython tool for creating automatic C++ virtual tables in IDA Pro
+* https://www.magnumdb.com/
+  the Magic Number Database! (name, value, partial value, GUID, error code, etc.)
 
 
 Debuggers
@@ -139,6 +143,16 @@ Debuggers
   GEF - GDB Enhanced Features
 * https://github.com/longld/peda
   PEDA - Python Exploit Development Assistance for GDB
+
+
+Emulation tools
+~~~~~~~~~~~~~~~
+
+* http://www.unicorn-engine.org/
+  Unicorn, The ultimate CPU emulator
+* https://github.com/qilingframework/qiling
+  Qiling Advanced Binary Emulation Framework
+
 
 Windows exploitation
 ~~~~~~~~~~~~~~~~~~~~
