@@ -60,13 +60,6 @@ logger = logging.getLogger(__name__)
 # * https://en.wikipedia.org/wiki/Intel_Core
 # * http://users.atw.hu/instlatx64/ and https://github.com/InstLatx64/InstLatx64/blob/master/ChangeLog.htm
 # * https://en.wikichip.org/wiki/intel/microarchitectures/cascade_lake
-#
-# To confirm: Cascade Lake {X,W,SP,AP} (CSL-X, CSL-W, CSL-SP, CSL-AP) for (0x55, {5,6,7})
-# Future:
-# * in 2020 Cooper Lake {X,W,SP,AP} (CPL-X,W,SP,AP)
-# * in 2020 Tiger Lake (TGL)
-# * in 2021 Sapphire Rapids (SPR)
-# * ACF ?
 INTEL_FAM6_MODELS = {
     (0x01, 1): (None, '?'),
     (0x01, 2): (None, '?'),
@@ -636,7 +629,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Atom® Processor x7-Z8750, x5-Z8550, x5-Z8350, x5-Z8330',
     )),
     (0x4d, 0): (None, '?'),
-    (0x4d, 8): ('AVN', 'Atom Silvermont (Avaton/Rangely)', (
+    (0x4d, 8): ('AVN', 'Atom Silvermont (Avoton/Rangely)', (
         'OctalCore Intel® Atom® C2750, 2400 MHz (24 x 100) (Avoton)',
         'OctalCore Intel® Atom® C2758, 2400 MHz (24 x 100) (Rangeley)',
         'Intel® Atom® Processor C2000 Product Family',
