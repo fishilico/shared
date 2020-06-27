@@ -47,8 +47,15 @@ import sys
 import xml.dom.minidom  # noqa
 
 import Crypto.Cipher.AES
-import Crypto.Cipher.ChaCha20
-import Crypto.Cipher.Salsa20
+
+try:
+    from Crypto.Cipher import ChaCha20
+except ImportError:
+    # On Ubuntu, python3-pycryptodome installs in Cryptodome module
+    from Cryptodome.Cipher import ChaCha20
+    from Cryptodome.Cipher import Salsa20
+else:
+    from Crypto.Cipher import Salsa20
 
 
 try:
@@ -346,7 +353,7 @@ class KeePassDB:
 
         if self.cipher_id == CHACHA20_UUID:
             chacha20_key = hashlib.sha256(master_key).digest()
-            cipher = Crypto.Cipher.ChaCha20.new(key=chacha20_key, nonce=self.encryption_iv)
+            cipher = ChaCha20.new(key=chacha20_key, nonce=self.encryption_iv)
             return cipher.decrypt
 
         raise NotImplementedError("Cipher with ID {} is not yet implemented".format(self.cipher_id))
@@ -540,11 +547,11 @@ class KeePassDB:
         if self.inner_random_stream_id == 2:
             # Decrypt Salsa20-protected data
             key = hashlib.sha256(self.inner_random_stream_key).digest()
-            cipher = Crypto.Cipher.Salsa20.new(key, SALSA20_NONCE)
+            cipher = Salsa20.new(key, SALSA20_NONCE)
         elif self.inner_random_stream_id == 3:
             # Decrypt ChaCha20-protected data
             key_hash = hashlib.sha512(self.inner_random_stream_key).digest()
-            cipher = Crypto.Cipher.ChaCha20.new(key=key_hash[:32], nonce=key_hash[32:44])
+            cipher = ChaCha20.new(key=key_hash[:32], nonce=key_hash[32:44])
         else:
             raise NotImplementedError("Inner random stream variant {} not yet implemented".format(
                 self.inner_random_stream_id))
