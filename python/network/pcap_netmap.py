@@ -695,6 +695,12 @@ class AnalysisContext(object):
         if isinstance(pkt, CookedLinux):  # Captured from any interface
             self.analyze_ether_packet(pkt, is_cookedlinux=True)
             return
+        if isinstance(pkt, IP):  # IPv4 packet (for example on a VPN interface)
+            self.analyze_ipv4_packet(pkt)
+            return
+        if isinstance(pkt, IPv6):  # IPv6 packet (for example on a VPN interface)
+            self.analyze_ipv6_packet(pkt)
+            return
         logger.warning("Unknown packet type %r", pkt)
 
     def analyze_ether_packet(self, ethpkt, is_cookedlinux=False):
