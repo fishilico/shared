@@ -600,6 +600,7 @@ then
     aurpkg jd-gui
     aurpkg kaitai-struct-compiler
     aurpkg kaitai-struct-visualizer
+    aurpkg lcov
     aurpkg libcgroup
     aurpkg msodbcsql
     aurpkg patator

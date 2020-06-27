@@ -226,6 +226,7 @@ pkg gdb
 pkg git
 pkg highlight
 pkg ipython3
+pkg lcov
 pkg libcap-ng-utils
 pkg ltrace
 pkg meson

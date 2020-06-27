@@ -184,6 +184,7 @@ pkg gcc
 pkg gdb
 pkg git
 pkg highlight
+pkg lcov
 pkg libcap-ng-utils
 pkg libcgroup-tools
 pkg make
