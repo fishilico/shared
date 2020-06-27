@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-"""Study ChaCha20-Poly1350 and mathematic properties
+"""Study ChaCha20-Poly1305 and mathematic properties
 
 IMPORTANT NOTICE: these implementations are NOT secure, for example regarding
 timing attacks. DO NOT USE THEM IN PRODUCTION. They may only be useful when
@@ -50,9 +50,9 @@ except ImportError:
     has_crypto = False
 
 
-# Poly1350 prime
-POLY1350_PRIME = (1 << 130) - 5
-assert POLY1350_PRIME == 0x3fffffffffffffffffffffffffffffffb
+# Poly1305 prime
+POLY1305_PRIME = (1 << 130) - 5
+assert POLY1305_PRIME == 0x3fffffffffffffffffffffffffffffffb
 
 
 def rol32(x, shift):
@@ -273,7 +273,7 @@ def poly1305_mac(msg, key):
         n_bytes = struct.unpack('B' * len(chunk), chunk)
         n = sum(x << (8 * i) for i, x in enumerate(n_bytes))
         n |= 1 << (8 * len(n_bytes))
-        accumulator = ((accumulator + n) * r) % POLY1350_PRIME
+        accumulator = ((accumulator + n) * r) % POLY1305_PRIME
     accumulator += s
 
     # Convert the accumulator to 16 bytes in little endian
@@ -291,9 +291,9 @@ def chacha20_poly1305_key_gen(key, nonce):
     return block[:32]
 
 
-def check_poly1350_test_vectors():
-    """Check Poly1350 test vectors"""
-    print("Checking Poly1350 test vectors")
+def check_poly1305_test_vectors():
+    """Check Poly1305 test vectors"""
+    print("Checking Poly1305 test vectors")
 
     # https://tools.ietf.org/html/rfc7539#section-2.5.2
     key = binascii.unhexlify('85d6be7857556d337f4452fe42d506a80103808afb0db2fd4abff6af4149f51b')
@@ -324,8 +324,8 @@ def check_poly1350_test_vectors():
         '965e3bc6f9ec7ed9560808f4d229f94b137ff275ca9b3fcbdd59deaad23310ae')
 
 
-def chacha20_poly1350_aead_encrypt(aad, key, iv, constant, plaintext):
-    """Encrypt data using Chacha20 Poly1350 AEAD
+def chacha20_poly1305_aead_encrypt(aad, key, iv, constant, plaintext):
+    """Encrypt data using Chacha20 Poly1305 AEAD
 
     aad: Additional Authenticated Data
     key: ChaCha20 key, also used of Poly1305 key
@@ -351,8 +351,8 @@ def chacha20_poly1350_aead_encrypt(aad, key, iv, constant, plaintext):
     return ciphertext, tag
 
 
-def chacha20_poly1350_aead_decrypt(aad, key, iv, constant, ciphertext, tag):
-    """Verify and decrypt data using Chacha20 Poly1350 AEAD"""
+def chacha20_poly1305_aead_decrypt(aad, key, iv, constant, ciphertext, tag):
+    """Verify and decrypt data using Chacha20 Poly1305 AEAD"""
     assert len(key) == 32
     assert len(iv) == 8
     nonce = struct.pack('<I', constant) + iv
@@ -368,9 +368,9 @@ def chacha20_poly1350_aead_decrypt(aad, key, iv, constant, ciphertext, tag):
     return chacha20_crypt(key, 1, nonce, ciphertext)
 
 
-def check_chacha20_poly1350_test_vectors():
-    """Check ChaCha20-Poly1350 test vectors"""
-    print("Checking ChaCha20-Poly1350 test vectors")
+def check_chacha20_poly1305_test_vectors():
+    """Check ChaCha20-Poly1305 test vectors"""
+    print("Checking ChaCha20-Poly1305 test vectors")
 
     # https://tools.ietf.org/html/rfc7539#section-2.8.2
     plaintext = (
@@ -380,7 +380,7 @@ def check_chacha20_poly1350_test_vectors():
     key = b''.join(struct.pack('B', 0x80 + i) for i in range(32))
     iv = b'@ABCDEFG'
     sender_id = 7
-    ciphertext, tag = chacha20_poly1350_aead_encrypt(aad, key, iv, sender_id, plaintext)
+    ciphertext, tag = chacha20_poly1305_aead_encrypt(aad, key, iv, sender_id, plaintext)
     expected_ciphertext = binascii.unhexlify(
         'd31a8d34648e60db7b86afbc53ef7ec2' +
         'a4aded51296e08fea9e2b5a736ee62d6' +
@@ -393,7 +393,7 @@ def check_chacha20_poly1350_test_vectors():
     expected_tag = binascii.unhexlify('1ae10b594f09e26a7e902ecbd0600691')
     assert ciphertext == expected_ciphertext
     assert tag == expected_tag
-    assert chacha20_poly1350_aead_decrypt(aad, key, iv, sender_id, ciphertext, tag) == plaintext
+    assert chacha20_poly1305_aead_decrypt(aad, key, iv, sender_id, ciphertext, tag) == plaintext
 
 
 def check_chacha20_openssl_with_keys(key, nonce, message):
@@ -447,13 +447,13 @@ def check_chacha20_openssl():
         print("Failure with key={}, nonce={}, message={}".format(key, nonce, message))
 
 
-def study_chacha20_poly1350():
-    """Perform some tests on Chach20 and Poly1350"""
+def study_chacha20_poly1305():
+    """Perform some tests on Chach20 and Poly1305"""
     check_chacha20_test_vectors()
-    check_poly1350_test_vectors()
-    check_chacha20_poly1350_test_vectors()
+    check_poly1305_test_vectors()
+    check_chacha20_poly1305_test_vectors()
     check_chacha20_openssl()
 
 
 if __name__ == '__main__':
-    study_chacha20_poly1350()
+    study_chacha20_poly1305()
