@@ -16,5 +16,5 @@ cat "$(dirname -- "$0")"/*.db/*_versions.db.json | \
         .[] |
         [.ts_iso, .name_arch, .string_info.FileVersion] |
         join(" ")' | \
-    column --table | \
+    column -t | \
     sed 's/ \+$//'
