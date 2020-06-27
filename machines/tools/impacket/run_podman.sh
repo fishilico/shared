@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Run impacket in a Docker environment
+# Run impacket in a Podman environment
 # Example:
 # - Spawn a SMB share with authentication (remove -username and -password to support any authentication):
 #
-#   ./run_docker.sh -p 445:445 -v "$(pwd):/tmp/serve" smbserver.py -smb2support -username user -password secret share /tmp/serve
+#   sudo sysctl -w net.ipv4.ip_unprivileged_port_start=0
+#   ./run_podman.sh -p 445:445 -v "$(pwd):/tmp/serve" smbserver.py -smb2support -username user -password secret share /tmp/serve
 
 cd "$(dirname -- "$0")" || exit $?
 
@@ -14,11 +15,11 @@ then
 else
     # Clone impacket repository, if needed
     [ -d impacket ] || ./clone_impacket.sh || exit $?
-    # Build the Docker image
-    docker build . -t impacket || exit $?
+    # Build the Podman image
+    podman build . -t impacket || exit $?
 fi
 
-# Forward arguments to Docker before the name of the image
+# Forward arguments to Podman before the name of the image
 RUN_ARGS=()
 while [ $# -ge 1 ]
 do
@@ -37,4 +38,4 @@ do
     esac
 done
 
-exec docker run -it --rm "${RUN_ARGS[@]}" impacket "$@"
+exec podman run -it --rm "${RUN_ARGS[@]}" impacket "$@"
