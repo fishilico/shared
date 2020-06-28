@@ -118,7 +118,7 @@ static struct my_SYSTEM_HANDLE_INFORMATION *query_handles(void)
     ulExpected = (ULONG)(sizeof(struct my_SYSTEM_HANDLE_INFORMATION) +
                          pHandleInfo->NumberOfHandles * sizeof(struct my_SYSTEM_HANDLE_TABLE_ENTRY_INFO));
     if (ulRetSize != ulExpected && pHandleInfo->NumberOfHandles == 0) {
-        /* Old versions of Wine returned no handle, but the structur has room for one entry,
+        /* Old versions of Wine returned no handle, but the structure has room for one entry,
          * so update the expected size
          */
         ulExpected = (ULONG)(sizeof(struct my_SYSTEM_HANDLE_INFORMATION) + sizeof(struct my_SYSTEM_HANDLE_TABLE_ENTRY_INFO));

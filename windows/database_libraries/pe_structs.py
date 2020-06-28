@@ -1064,7 +1064,7 @@ class PEFile:
                 raise ValueError("Mismatched Reproducible Build GUID: {} != {}".format(
                     self.debug_repro_guid, self.debug_codeview_guid))
             if self.debug_repro_timestamp != self.pe_header.FileHeader.TimeDateStamp:
-                # This occcured for example with
+                # This occured for example with
                 # C:/Windows/SoftwareDistribution/Download/Install/Windows-KB890830-x64-V5.75-delta.exe
                 # because the debug timestamp is different from the PE Header one
                 logger.warning("Mismatched Reproducible Build timestamp: %#x != %#x",

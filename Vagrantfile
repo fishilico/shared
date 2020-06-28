@@ -77,7 +77,7 @@ SCRIPT
 
 # Install an ARM chroot with Debian sid
 $arm_chroot_script = <<SCRIPT
-# Install Qemu static, in order to run foreign architures on Arch Linux
+# Install Qemu static, in order to run foreign architectures on Arch Linux
 if ! pacman -Qqi qemu-user-static > /dev/null
 then
     pacman -Qqi git > /dev/null || pacman --noconfirm -S git

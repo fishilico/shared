@@ -6,7 +6,7 @@ pages in ``/proc/self/maps`` as memory ranges with a description in brackets,
 like ``[stack]`` and ``[heap]``.  Apart from containing data, some memory pages
 can be used to:
 
-* run arbitrairy system calls (``[vsyscall]``, on i386),
+* run arbitrary system calls (``[vsyscall]``, on i386),
 * handle the signal trampoline to call sigreturn when a signal handler returns
   (cf. ``man 2 sigreturn``, ``[sigpage]`` on ARM),
 * retrieve the current cpu (``getcpu``) and time information (``gettimeofday``)
