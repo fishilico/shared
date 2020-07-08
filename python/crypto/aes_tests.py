@@ -45,6 +45,14 @@ except ImportError:
     sys.stderr.write("Warning: PyCrypto fails to load. Proceeding without it\n")
     has_crypto = False
 
+try:
+    from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+    from cryptography.hazmat.backends import default_backend
+    has_cryptography = True
+except ImportError:
+    sys.stderr.write("Warning: cryptography fails to load. Proceeding without it\n")
+    has_cryptography = False
+
 
 # S-box, substitution table
 AES_SBOX = (
@@ -2067,6 +2075,27 @@ def check_test_vectors():
                 "Problem encrypting with key={}, block={}".format(xx(key), xx(test_block))
             assert crypto_aes.decrypt(test_block) == aes.decrypt(test_block), \
                 "Problem encrypting with key={}, block={}".format(xx(key), xx(test_block))
+
+        if has_cryptography:
+            # Test encrypting/decrypting random data
+            print("Checking AES-{} implementation vs. Cryptography.io".format(keysize))
+            key = os.urandom(keysize // 8)
+            test_block = os.urandom(16)
+            cipher = Cipher(algorithms.AES(key), modes.ECB(), backend=default_backend())
+            encryptor = cipher.encryptor()
+            decryptor = cipher.decryptor()
+            aes = SimpleAES_4x4Bytes(key)
+            assert encryptor.update(test_block) == aes.encrypt(test_block), \
+                "Problem encrypting with key={}, block={}".format(xx(key), xx(test_block))
+            assert decryptor.update(test_block) == aes.decrypt(test_block), \
+                "Problem encrypting with key={}, block={}".format(xx(key), xx(test_block))
+            aes = SimpleAES_4x32bWords(key)
+            assert encryptor.update(test_block) == aes.encrypt(test_block), \
+                "Problem encrypting with key={}, block={}".format(xx(key), xx(test_block))
+            assert decryptor.update(test_block) == aes.decrypt(test_block), \
+                "Problem encrypting with key={}, block={}".format(xx(key), xx(test_block))
+            assert encryptor.finalize() == b''
+            assert decryptor.finalize() == b''
 
 
 def study_aes():
