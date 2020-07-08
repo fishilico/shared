@@ -43,11 +43,25 @@ import sys
 
 
 try:
-    import Crypto.Cipher.ChaCha20
+    import Crypto.Cipher.ChaCha20 as CryptoChaCha20
     has_crypto = True
 except ImportError:
-    sys.stderr.write("Warning: PyCrypto fails to load. Proceeding without it\n")
-    has_crypto = False
+    try:
+        # On Ubuntu, python3-pycryptodome installs in Cryptodome module
+        import Cryptodome.Cipher.ChaCha20 as CryptoChaCha20
+        has_crypto = True
+    except ImportError:
+        sys.stderr.write("Warning: PyCrypto fails to load. Proceeding without it\n")
+        has_crypto = False
+
+try:
+    from cryptography.hazmat.primitives.ciphers import Cipher, algorithms
+    from cryptography.hazmat.primitives.ciphers.aead import ChaCha20Poly1305
+    from cryptography.hazmat.backends import default_backend
+    has_cryptography = True
+except ImportError:
+    sys.stderr.write("Warning: cryptography fails to load. Proceeding without it\n")
+    has_cryptography = False
 
 
 # Poly1305 prime
@@ -136,7 +150,7 @@ def chacha20_block(key, block_count, nonce):
     """Compute a ChaCha20 block (64 bytes = 512 bits) from parameters"""
     initial_state = chacha_initial_state(key, block_count, nonce)
     state = [x for x in initial_state]
-    for i_round in range(10):
+    for _i_round in range(10):
         chacha_column_round(state)
         chacha_diagonal_round(state)
     for i in range(16):
@@ -244,19 +258,42 @@ def check_chacha20_test_vectors():
 
     if has_crypto:
         # Test encrypting/decrypting random data
-        print("Checking ChaCha20 implementation vs. PyCrypto")
+        print("Checking ChaCha20 implementation vs. PyCrypto(dome)")
         key = os.urandom(32)
-        nonce = os.urandom(12)
+        nonce = os.urandom(8)  # PyCryptodome only supports 64-bit nonce
         plaintext = os.urandom(96)
-        crypto_chacha20 = Crypto.Cipher.ChaCha20.new(key=key, nonce=nonce)
-        encrypted = chacha20_crypt(key, 0, nonce, plaintext)
+        crypto_chacha20 = CryptoChaCha20.new(key=key, nonce=nonce)
+        encrypted = chacha20_crypt(key, 0, b'\0\0\0\0' + nonce, plaintext)
         assert crypto_chacha20.encrypt(plaintext) == encrypted, \
             "Problem encrypting with key={}, nonce={}, plain={}".format(xx(key), xx(nonce), xx(plaintext))
 
-        crypto_chacha20 = Crypto.Cipher.ChaCha20.new(key=key, nonce=nonce)
-        decrypted = chacha20_crypt(key, 0, nonce, encrypted)
+        crypto_chacha20 = CryptoChaCha20.new(key=key, nonce=nonce)
+        decrypted = chacha20_crypt(key, 0, b'\0\0\0\0' + nonce, encrypted)
         assert crypto_chacha20.decrypt(encrypted) == decrypted, \
             "Problem decrypting with key={}, nonce={}, encrypted={}".format(xx(key), xx(nonce), xx(encrypted))
+
+    if has_cryptography:
+        # Test encrypting/decrypting random data
+        print("Checking ChaCha20 implementation vs. Cryptography.io")
+        key = os.urandom(32)
+        block_counter = os.urandom(4)
+        nonce = os.urandom(12)
+        plaintext = os.urandom(96)
+        block_counter_int, = struct.unpack('<I', block_counter)
+        cipher = Cipher(algorithms.ChaCha20(key, block_counter + nonce), mode=None, backend=default_backend())
+        encryptor = cipher.encryptor()
+        encrypted = chacha20_crypt(key, block_counter_int, nonce, plaintext)
+        assert encryptor.update(plaintext) == encrypted, \
+            "Problem encrypting with key={}, bc={}, nonce={}, plain={}".format(
+                xx(key), xx(block_counter), xx(nonce), xx(plaintext))
+        assert encryptor.finalize() == b''
+
+        decryptor = cipher.decryptor()
+        decrypted = chacha20_crypt(key, block_counter_int, nonce, encrypted)
+        assert decryptor.update(encrypted) == decrypted, \
+            "Problem decrypting with key={}, bc={}, nonce={}, encrypted={}".format(
+                xx(key), xx(block_counter), xx(nonce), xx(encrypted))
+        assert decryptor.finalize() == b''
 
 
 def poly1305_mac(msg, key):
@@ -396,6 +433,27 @@ def check_chacha20_poly1305_test_vectors():
     assert ciphertext == expected_ciphertext
     assert tag == expected_tag
     assert chacha20_poly1305_aead_decrypt(aad, key, iv, sender_id, ciphertext, tag) == plaintext
+
+    if has_cryptography:
+        print("Checking ChaCha20-Poly1305 implementation vs. Cryptography.io")
+        key = os.urandom(32)
+        nonce = os.urandom(12)
+        plaintext = os.urandom(96)
+        aad = os.urandom(96)
+        sender_id, = struct.unpack('<I', nonce[:4])
+        iv = nonce[4:]
+
+        ciphertext, tag = chacha20_poly1305_aead_encrypt(aad, key, iv, sender_id, plaintext)
+        assert len(tag) == 16
+        chacha = ChaCha20Poly1305(key)
+        assert chacha.encrypt(nonce, plaintext, aad) == ciphertext + tag, \
+            "Problem encrypting with key={}, nonce={}, plain={}, aad={}".format(
+                xx(key), xx(nonce), xx(plaintext), xx(aad))
+
+        decrypted = chacha20_poly1305_aead_decrypt(aad, key, iv, sender_id, ciphertext, tag)
+        assert chacha.decrypt(nonce, ciphertext + tag, aad) == decrypted, \
+            "Problem decrypting with key={}, nonce={}, ciphertext={}, aad={}".format(
+                xx(key), xx(nonce), xx(ciphertext), xx(aad))
 
 
 def check_chacha20_openssl_with_keys(key, nonce, message):
