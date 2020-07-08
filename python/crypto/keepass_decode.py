@@ -81,7 +81,9 @@ SALSA20_NONCE = b'\xe8\x30\x09\x4b\x97\x20\x5d\x2a'
 
 def xx(data):
     """One-line hexadecimal representation of binary data"""
-    return binascii.hexlify(data).decode('ascii')
+    if sys.version_info < (3, 5):
+        return binascii.hexlify(data).decode('ascii')
+    return data.hex()
 
 
 class KeePassDB:

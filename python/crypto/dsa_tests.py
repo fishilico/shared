@@ -130,24 +130,30 @@ def modinv(a, m):
 
     from https://rosettacode.org/wiki/Modular_inverse#Python
     """
-    # pylint: disable=invalid-name,unused-variable
-    g, x, y = extended_gcd(a, m)
-    if g != 1:
-        raise ValueError
-    return x % m
+    if sys.version_info < (3, 8):
+        # pylint: disable=invalid-name,unused-variable
+        g, x, y = extended_gcd(a, m)
+        if g != 1:
+            raise ValueError
+        return x % m
+    return pow(a, -1, m)
 
 
 def decode_bigint_be(data):
     """Decode a Big-Endian big integer"""
-    return int(binascii.hexlify(data).decode('ascii'), 16)
+    if sys.version_info < (3, 2):
+        return int(binascii.hexlify(data).decode('ascii'), 16)
+    return int.from_bytes(data, 'big')
 
 
 def encode_bigint_be(value, bytelen=None):
     """Encode a Big-Endian big integer"""
     if bytelen is None:
         bytelen = (value.bit_length() + 7) // 8
-    hexval = '{{:0{:d}x}}'.format(bytelen * 2).format(value)
-    return binascii.unhexlify(hexval.encode('ascii'))
+    if sys.version_info < (3, 2):
+        hexval = '{{:0{:d}x}}'.format(bytelen * 2).format(value)
+        return binascii.unhexlify(hexval.encode('ascii'))
+    return value.to_bytes(bytelen, 'big')
 
 
 def run_process_with_input(cmdline, data, color=None):

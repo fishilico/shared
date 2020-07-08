@@ -62,8 +62,10 @@ def rol32(x, shift):
 
 
 def xx(data):
-    """Encode bytes into an hexadecimal string"""
-    return binascii.hexlify(data).decode('ascii')
+    """One-line hexadecimal representation of binary data"""
+    if sys.version_info < (3, 5):
+        return binascii.hexlify(data).decode('ascii')
+    return data.hex()
 
 
 def chacha_quarter_round(a, b, c, d):

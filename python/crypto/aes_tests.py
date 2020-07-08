@@ -1960,13 +1960,17 @@ class SimpleAES_4x32bWords(object):
 
 
 def xx(data):
-    """Encode bytes into an hexadecimal string"""
-    return binascii.hexlify(data).decode('ascii')
+    """One-line hexadecimal representation of binary data"""
+    if sys.version_info < (3, 5):
+        return binascii.hexlify(data).decode('ascii')
+    return data.hex()
 
 
 def unxx(hexvalue):
     """Decode an hexadecimal string into bytes"""
-    return binascii.unhexlify(hexvalue.encode('ascii'))
+    if sys.version_info < (3, 5):
+        return binascii.unhexlify(hexvalue.encode('ascii'))
+    return bytes.fromhex(hexvalue)
 
 
 TEST_VECTORS = {

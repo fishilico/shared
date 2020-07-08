@@ -85,11 +85,17 @@ logger = logging.getLogger(__name__)
 
 
 def xx(data):
-    return binascii.hexlify(data).decode('ascii')
+    """One-line hexadecimal representation of binary data"""
+    if sys.version_info < (3, 5):
+        return binascii.hexlify(data).decode('ascii')
+    return data.hex()
 
 
-def unxx(data):
-    return binascii.unhexlify(data)
+def unxx(hexvalue):
+    """Decode an hexadecimal string into bytes"""
+    if sys.version_info < (3, 5):
+        return binascii.unhexlify(hexvalue)
+    return bytes.fromhex(hexvalue)
 
 
 def b64url_decode(data):

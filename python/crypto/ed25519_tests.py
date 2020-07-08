@@ -163,26 +163,32 @@ def hexdump(data, color=''):
 
 def xx(data):
     """One-line hexadecimal representation of binary data"""
-    return binascii.hexlify(data).decode('ascii')
+    if sys.version_info < (3, 5):
+        return binascii.hexlify(data).decode('ascii')
+    return data.hex()
 
 
 def decode_bigint_le(data):
     """Decode a Little-Endian big integer"""
     if sys.version_info < (3,):
         return sum(ord(x) << (8 * i) for i, x in enumerate(data))
-    return sum(x << (8 * i) for i, x in enumerate(data))
+    if sys.version_info < (3, 2):
+        return sum(x << (8 * i) for i, x in enumerate(data))
+    return int.from_bytes(data, 'little')
 
 
 def encode_bigint_le(value, bytelen=None):
     """Encode a Little-Endian big integer"""
     if bytelen is None:
         bytelen = (value.bit_length() + 7) // 8
-    data = bytearray(bytelen)
-    for i in range(bytelen):
-        data[i] = value & 0xff
-        value >>= 8
-    assert value == 0
-    return bytes(data)
+    if sys.version_info < (3, 2):
+        data = bytearray(bytelen)
+        for i in range(bytelen):
+            data[i] = value & 0xff
+            value >>= 8
+        assert value == 0
+        return bytes(data)
+    return value.to_bytes(bytelen, 'little')
 
 
 # pylint: disable=invalid-name
@@ -205,11 +211,13 @@ def modinv(a, m):
 
     from https://rosettacode.org/wiki/Modular_inverse#Python
     """
-    # pylint: disable=invalid-name,unused-variable
-    g, x, y = extended_gcd(a, m)
-    if g != 1:
-        raise ValueError
-    return x % m
+    if sys.version_info < (3, 8):
+        # pylint: disable=invalid-name,unused-variable
+        g, x, y = extended_gcd(a, m)
+        if g != 1:
+            raise ValueError
+        return x % m
+    return pow(a, -1, m)
 
 
 def modsqrt25519(x2):

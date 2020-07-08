@@ -90,7 +90,9 @@ HASHES = {
 
 def xx(data):
     """One-line hexadecimal representation of binary data"""
-    return binascii.hexlify(data).decode('ascii')
+    if sys.version_info < (3, 5):
+        return binascii.hexlify(data).decode('ascii')
+    return data.hex()
 
 
 def encrypt_message(message, password, algorithm, hash_name, options=None):

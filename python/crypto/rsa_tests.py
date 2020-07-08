@@ -99,14 +99,29 @@ def modinv(a, m):
 
     from https://rosettacode.org/wiki/Modular_inverse#Python
     """
-    # pylint: disable=invalid-name,unused-variable
-    g, x, y = extended_gcd(a, m)
-    if g != 1:
-        raise ValueError
-    x %= m
+    if sys.version_info < (3, 8):
+        if HAVE_GMPY2:
+            return int(gmpy2.invert(a, m))
+        # pylint: disable=invalid-name,unused-variable
+        g, x, y = extended_gcd(a, m)
+        if g != 1:
+            raise ValueError
+        return x % m
+    return pow(a, -1, m)
+
+
+def checked_modinv(a, m):
+    """Modular inverse, with checks
+
+    from https://rosettacode.org/wiki/Modular_inverse#Python
+    """
+    x = modinv(a, m)
+    assert (x * a) % m == 1
     if HAVE_GMPY2:
         # Ensure that the algorithm is correct
         assert x == gmpy2.invert(a, m)
+    if sys.version_info >= (3, 8):
+        assert x == pow(a, -1, m)
     return x
 
 
@@ -307,32 +322,40 @@ def decode_bigint_le(data):
     """Decode a Little-Endian big integer"""
     if sys.version_info < (3,):
         return sum(ord(x) << (8 * i) for i, x in enumerate(data))
-    return sum(x << (8 * i) for i, x in enumerate(data))
+    if sys.version_info < (3, 2):
+        return sum(x << (8 * i) for i, x in enumerate(data))
+    return int.from_bytes(data, 'little')
 
 
 def decode_bigint_be(data):
     """Decode a Big-Endian big integer"""
-    return int(binascii.hexlify(data).decode('ascii'), 16)
+    if sys.version_info < (3, 2):
+        return int(binascii.hexlify(data).decode('ascii'), 16)
+    return int.from_bytes(data, 'big')
 
 
 def encode_bigint_le(value, bytelen=None):
     """Encode a Little-Endian big integer"""
     if bytelen is None:
         bytelen = (value.bit_length() + 7) // 8
-    data = bytearray(bytelen)
-    for i in range(bytelen):
-        data[i] = value & 0xff
-        value >>= 8
-    assert value == 0
-    return bytes(data)
+    if sys.version_info < (3, 2):
+        data = bytearray(bytelen)
+        for i in range(bytelen):
+            data[i] = value & 0xff
+            value >>= 8
+        assert value == 0
+        return bytes(data)
+    return value.to_bytes(bytelen, 'little')
 
 
 def encode_bigint_be(value, bytelen=None):
     """Encode a Big-Endian big integer"""
     if bytelen is None:
         bytelen = (value.bit_length() + 7) // 8
-    hexval = '{{:0{:d}x}}'.format(bytelen * 2).format(value)
-    return binascii.unhexlify(hexval.encode('ascii'))
+    if sys.version_info < (3, 2):
+        hexval = '{{:0{:d}x}}'.format(bytelen * 2).format(value)
+        return binascii.unhexlify(hexval.encode('ascii'))
+    return value.to_bytes(bytelen, 'big')
 
 
 def checked_decode_bigint_be(data):
@@ -355,7 +378,9 @@ def checked_encode_bigint_be(value, bytelen=None):
 
 def xx(data):
     """One-line hexadecimal representation of binary data"""
-    return binascii.hexlify(data).decode('ascii')
+    if sys.version_info < (3, 5):
+        return binascii.hexlify(data).decode('ascii')
+    return data.hex()
 
 
 def xor_bytes(data1, data2):
@@ -411,7 +436,7 @@ def run_openssl_test(bits, colorize):
 
     dp = key.d % (key.p - 1)
     dq = key.d % (key.q - 1)
-    qinv = modinv(key.q, key.p)
+    qinv = checked_modinv(key.q, key.p)
     print("  dp = d mod p-1 \"exponent1\"({}) = {}{:#x}{}".format(dp.bit_length(), color_red, dp, color_norm))
     print("  dq = d mod q-1 \"exponent2\"({}) = {}{:#x}{}".format(dq.bit_length(), color_red, dq, color_norm))
     print("  qInv = 1/q mod p \"coefficient\"({}) = {}{:#x}{}".format(qinv.bit_length(), color_red, qinv, color_norm))
@@ -425,9 +450,9 @@ def run_openssl_test(bits, colorize):
     assert phi_n % lcm_p1q1 == 0
     assert (key.e * key.d) % lcm_p1q1 == 1
     assert (key.p * key.u) % key.q == 1
-    assert modinv(key.d, lcm_p1q1) == key.e
-    assert modinv(key.e, lcm_p1q1) == key.d or modinv(key.e, phi_n) == key.d
-    assert modinv(key.p, key.q) == key.u
+    assert checked_modinv(key.d, lcm_p1q1) == key.e
+    assert checked_modinv(key.e, lcm_p1q1) == key.d or checked_modinv(key.e, phi_n) == key.d
+    assert checked_modinv(key.p, key.q) == key.u
 
     # Export private key
     pemprivkey = key.exportKey('PEM')
@@ -758,7 +783,7 @@ def run_ssh_test(bits, colorize):
 
         dp = key.d % (key.p - 1)
         dq = key.d % (key.q - 1)
-        qinv = modinv(key.q, key.p)
+        qinv = checked_modinv(key.q, key.p)
         print("  dp = d mod p-1 \"exponent1\"({}) = {}{:#x}{}".format(
             dp.bit_length(), color_red, dp, color_norm))
         print("  dq = d mod q-1 \"exponent2\"({}) = {}{:#x}{}".format(
@@ -771,9 +796,9 @@ def run_ssh_test(bits, colorize):
         phi_n = (key.p - 1) * (key.q - 1)
         assert (key.e * key.d) % phi_n == 1
         assert (key.p * key.u) % key.q == 1
-        assert modinv(key.d, phi_n) == key.e
-        assert modinv(key.e, phi_n) == key.d
-        assert modinv(key.p, key.q) == key.u
+        assert checked_modinv(key.d, phi_n) == key.e
+        assert checked_modinv(key.e, phi_n) == key.d
+        assert checked_modinv(key.p, key.q) == key.u
 
         # The public key is a single line
         assert len(pubkey_lines) == 1

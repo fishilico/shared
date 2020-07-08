@@ -185,7 +185,9 @@ class TpmAlgId(enum.IntEnum):
 
 def xx(data):
     """One-line hexadecimal representation of binary data"""
-    return binascii.hexlify(data).decode('ascii')
+    if sys.version_info < (3, 5):
+        return binascii.hexlify(data).decode('ascii')
+    return data.hex()
 
 
 class ComputedDigest:
