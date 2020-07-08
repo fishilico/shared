@@ -400,6 +400,10 @@ class StandardCurve(object):
         """Get the size in bytes of a point coordinate"""
         return (self.p.bit_length() + 7) // 8
 
+    def public_point(self, private):
+        """Get the public key associated with a private key (as bytes)"""
+        return self.g * decode_bigint_be(private)
+
 
 CURVES = collections.OrderedDict((
     ('NIST P-192', StandardCurve(

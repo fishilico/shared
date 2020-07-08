@@ -616,10 +616,13 @@ class Ed25519(object):
         """Get the private key associated with the secret"""
         return self.decode_scalar(self.hash(secret))
 
+    def public_point(self, secret):
+        """Get the public point associated with the secret"""
+        return self.b * self.private_key(secret)
+
     def public_key(self, secret):
         """Get the public key associated with the secret"""
-        pubkey = self.b * self.private_key(secret)
-        return pubkey.encode()
+        return self.public_point(secret).encode()
 
     def sign(self, message, secret, public_key=None):
         """Sign a message with Ed25519 and the secret"""
