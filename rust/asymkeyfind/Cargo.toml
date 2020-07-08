@@ -1,0 +1,13 @@
+[package]
+name = "asymkeyfind"
+version = "0.1.0"
+authors = ["Nicolas Iooss <nicolas.iooss_git@polytechnique.org>"]
+edition = "2018"
+
+[dependencies]
+clap = {version = "2.33", default-features = false}
+rug = {version = "1.9", default-features = false, features=["integer"]}
+sha2 = "0.9"
+
+[dev-dependencies]
+tempfile = "3"

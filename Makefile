@@ -91,7 +91,9 @@ else
 # error[E0658]: use of unstable library feature 'maybe_uninit' (see issue #53491)
 # Old versions of rustc (<1.38) fail to build object-0.19.0 because:
 # use of unstable library feature 'ptr_cast'
-ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-7]\)\.'),y)
+ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-4]\)\.'),y)
+SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/download_web%
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-7]\)\.'),y)
 SUBDIRS_BLACKLIST += rust/download_web%
 endif
 endif
