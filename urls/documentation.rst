@@ -321,6 +321,7 @@ Internet
 
   - https://lgtm.com/ Semmle's LGTM Continuous security analysis  (online; C, C++, C#, COBOL, Java, JavaScript, Python)
   - https://scan.coverity.com/ Coverity Scan Static Analysis (online; Java, C/C++, C#, JavaScript, Ruby, Python)
+  - https://www.codacy.com/ Codacy (online; C, C++, Java, Markdown, PHP, Python, etc.)
   - https://fbinfer.com/ Facebook's infer (Java, C, C++, Objective-C)
   - https://clang-analyzer.llvm.org/ Clang Static Analyzer (C, C++, and Objective-C)
   - http://smatch.sourceforge.net/ Smatch (C)
