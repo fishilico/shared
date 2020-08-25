@@ -168,6 +168,7 @@ __extension__ static const char* cpuidstr_7_edx[32] = {
     [3] = "avx512_4fmaps",
     [4] = "fsrm",
     [8] = "avx512_vp2intersect",
+    [9] = "srbds_ctrl",
     [10] = "md_clear",
     [13] = "tsx_force_abort",
     [18] = "pconfig",
