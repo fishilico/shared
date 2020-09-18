@@ -154,4 +154,4 @@ Qed.
 *)
 
 (* Enumerate everything that were just proved *)
-SearchAbout ack.
+Search ack.
