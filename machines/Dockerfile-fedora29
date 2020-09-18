@@ -61,7 +61,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust/download_web%
+#    Global blacklist: latex%
 #    In sub-directories:
 #       c:
 #       glossaries:
@@ -75,7 +75,7 @@ CMD ["/run_shared_test.sh"]
 #       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex% rust/download_web%
+#       Global blacklist: latex%
 #       In sub-directories:
 #          c: gtk_alpha_window
 #          glossaries:
@@ -101,11 +101,11 @@ CMD ["/run_shared_test.sh"]
 #       clang: clang version 7.0.1 (Fedora 7.0.1-6.fc29)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 8.3.0 20190222 (Fedora MinGW 8.3.0-2.fc29)
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 8.3.0 20190222 (Fedora MinGW 8.3.0-2.fc29)
-#       wine: wine-4.14 (Staging)
-#       Linux kernel: 5.2.11-100.fc29.x86_64
-#       python3: Python 3.7.4
-#       javac: javac 11.0.4
-#       java: openjdk 11.0.4 2019-07-16
-#       rustc: rustc 1.37.0
-#       cargo: cargo 1.37.0
+#       wine: wine-4.15 (Staging)
+#       Linux kernel: 5.3.11-100.fc29.x86_64
+#       python3: Python 3.7.5
+#       javac: javac 11.0.5
+#       java: openjdk 11.0.5 2019-10-15
+#       rustc: rustc 1.39.0
+#       cargo: cargo 1.39.0
 #       coqc: The Coq Proof Assistant, version 8.7.1 (July 2018) compiled on Jul 12 2018 23:40:45 with OCaml 4.07.0
