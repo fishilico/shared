@@ -35,14 +35,6 @@ impl fmt::Display for Error {
 }
 
 impl error::Error for Error {
-    fn description(&self) -> &str {
-        match *self {
-            Error::IoWithoutPath(ref err) => err.description(),
-            Error::IoWithPath(_, ref err) => err.description(),
-            Error::Str(ref err) => err,
-        }
-    }
-
     fn cause(&self) -> Option<&dyn error::Error> {
         match *self {
             Error::IoWithoutPath(ref err) => Some(err),
