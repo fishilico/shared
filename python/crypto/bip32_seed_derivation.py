@@ -63,13 +63,11 @@ import hashlib
 import hmac
 import unicodedata
 
-from ec_tests import CURVES
+from ec_tests import SECP256K1, SECP256R1
 from ed25519_tests import Ed25519
 
 
 ED25519 = Ed25519()
-SECP256K1 = CURVES['Certicom secp256-k1']
-SECP256R1 = CURVES['NIST P-256']
 
 
 # Curves defined in https://github.com/satoshilabs/slips/blob/master/slip-0010.md
