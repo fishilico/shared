@@ -102,12 +102,6 @@ static bool install_syscall_filter(bool do_kill)
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_exit, 0, 1),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
-        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_fstat, 0, 1),
-        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
-#ifdef __NR_fstat64
-        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_fstat64, 0, 1),
-        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
-#endif
 #ifdef __NR_mmap
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_mmap, 0, 1),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
@@ -136,6 +130,38 @@ static bool install_syscall_filter(bool do_kill)
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, STDOUT_FILENO, 0, 1),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
+
+        /* Allow fstat on stdout */
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_fstat, 0, 4),
+        BPF_STMT(BPF_LD + BPF_W + BPF_ABS,
+                 offsetof(struct seccomp_data, args) + SYSCALL_ARG_OFFSET),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, STDOUT_FILENO, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
+#ifdef __NR_fstat64
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_fstat64, 0, 4),
+        BPF_STMT(BPF_LD + BPF_W + BPF_ABS,
+                 offsetof(struct seccomp_data, args) + SYSCALL_ARG_OFFSET),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, STDOUT_FILENO, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
+#endif
+#ifdef __NR_newfstatat
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_newfstatat, 0, 4),
+        BPF_STMT(BPF_LD + BPF_W + BPF_ABS,
+                 offsetof(struct seccomp_data, args) + SYSCALL_ARG_OFFSET),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, STDOUT_FILENO, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
+#endif
+#ifdef __NR_statx
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_statx, 0, 4),
+        BPF_STMT(BPF_LD + BPF_W + BPF_ABS,
+                 offsetof(struct seccomp_data, args) + SYSCALL_ARG_OFFSET),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, STDOUT_FILENO, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
+#endif
 
         /* Deny some other syscalls */
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_getcwd, 0, 1),
