@@ -694,3 +694,14 @@ if __name__ == '__main__':
     # Test to derive Monero seed
     secret, chaincode = bip32derive("m/44'/128'/0'/0/0", seed)
     assert secret == bytes.fromhex('db9e57474be8b64118b6acf6ecebd13f8f7c326b3bc1b19f4546573d6bac9dcf')
+
+    # Test mnemonics with 12 words, from Twitter challenge:
+    # * Subject (2020-05-28): https://twitter.com/alistairmilne/status/1266037520715915267
+    # * Answer (2020-06-17): https://twitter.com/ThisIsMOLAANAA/status/1273144733641199617
+    mnemonics = 'army excuse hero wolf disease liberty moral diagram treat stove message job'
+    seed = bip39toseed(mnemonics)
+    bitcoin_privkey = bip32derive("m/49'/0'/0'/0/0", seed)[0]
+    bitcoin_pubkey = SECP256K1.public_point(bitcoin_privkey)
+    p2sh_bytes = b'\x05' + bitcoin_pubkey.bitcoin_p2sh_p2wpkh()
+    p2sh_bytes_checksum = hashlib.sha256(hashlib.sha256(p2sh_bytes).digest()).digest()[:4]
+    assert base58_decode('3HX5tttedDehKWTTGpxaPAbo157fnjn89s', 0x19) == p2sh_bytes + p2sh_bytes_checksum
