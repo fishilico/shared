@@ -84,6 +84,7 @@ checkpatch:
 		--ignore LINUX_VERSION_CODE \
 		--ignore LONG_LINE \
 		--ignore LONG_LINE_COMMENT \
-		--ignore LONG_LINE_STRING
+		--ignore LONG_LINE_STRING \
+		--ignore REPEATED_WORD
 
 .PHONY: all clean install infos test checkpatch
