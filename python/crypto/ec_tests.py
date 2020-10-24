@@ -354,6 +354,58 @@ class ECPoint(object):
             return 'INFINITY'
         return '({},{})'.format(self.x, self.y)
 
+    def normalized_coordinates(self):
+        """Return the coordinates of the point, normalized in the usual range"""
+        x = self.x
+        if not 0 <= x < self.curve.p:
+            x %= self.curve.p
+        y = self.y
+        if not 0 <= y < self.curve.p:
+            y %= self.curve.p
+        return x, y
+
+    def bytes_compressed(self):
+        """Return the compressed form of the point
+
+            02 + x if y is even
+            03 + x if y is odd
+        """
+        coord_size = self.curve.coord_size()
+        x, y = self.normalized_coordinates()
+        return (b'\x03' if y & 1 else b'\x02') + encode_bigint_be(x, coord_size)
+
+    def bytes_uncompressed(self):
+        """Return the uncompressed form of the point
+
+            04 + x + y
+        """
+        coord_size = self.curve.coord_size()
+        x, y = self.normalized_coordinates()
+        return b'\x04' + encode_bigint_be(x, coord_size) + encode_bigint_be(y, coord_size)
+
+    def bitcoin_hash160(self, compress=True):
+        """Bitcoin hash of a public key: SHA256 and RIPEMD160
+
+        A Pay to Public Key Hash (P2PKH) is the base58 of [00 + hash160(pubkey)].
+        """
+        pubkey_bytes = self.bytes_compressed() if compress else self.bytes_uncompressed()
+        pubkey_sha256 = hashlib.sha256(pubkey_bytes).digest()
+        return hashlib.new('ripemd160', pubkey_sha256).digest()
+
+    def bitcoin_p2sh_p2wpkh(self, compress=True):
+        """Bitcoin P2SH hash of P2WPKH script
+
+        A Pay to Witness Public Key Hash (P2WPKH) script is:
+
+            OP_0 0x14 <PubKey Hash>
+
+        A Pay to Script Hash is the RIPEMD160 of SHA256 of this script, prefixed
+        by 05 and encoded in base58.
+        """
+        pubkey_hash = self.bitcoin_hash160(compress=compress)
+        p2wpkh_sha256 = hashlib.sha256(b'\x00\x14' + pubkey_hash).digest()
+        return hashlib.new('ripemd160', p2wpkh_sha256).digest()
+
 
 # Inifinity on all curves
 INFINITY = ECPoint(None, None, None)
@@ -699,6 +751,7 @@ def run_curve_test(curve, colorize):
         assert privkey < curve.g.order
         pubkey = ECPoint(curve, pubkey_x, pubkey_y)
         assert curve.g * privkey == pubkey
+        assert privkey_asn1_pub.payload == b'\x00' + pubkey.bytes_uncompressed()  # Check encoding
 
         # Test message signature/verification with ECDSA (Elliptic Curve Digital Signature Algorithm)
         test_message = b'Hello, world! This is a test.'
@@ -914,6 +967,7 @@ def run_ssh_test(curve, colorize):
         pubkey_y = decode_bigint_be(pubkey_pt_bin[1 + coord_size:])
         pubkey_pt = ECPoint(curve, pubkey_x, pubkey_y)
         print("* public key point: {}{}{}".format(color_green, pubkey_pt, color_norm))
+        assert pubkey_pt_bin == pubkey_pt.bytes_uncompressed()  # Check encoding
         assert offset == len(public_key)
 
         print("")
@@ -1015,6 +1069,7 @@ def run_ssh_test(curve, colorize):
             priv_pubkey_pt = ECPoint(curve, priv_pubkey_x, priv_pubkey_y)
             print("  * public key point: {}{}{}".format(color_green, priv_pubkey_pt, color_norm))
             assert len(priv_pubkey_pt_bin) == 1 + 2 * coord_size
+            assert priv_pubkey_pt_bin == priv_pubkey_pt.bytes_uncompressed()  # Check encoding
             assert priv_pubkey_pt_bin == pubkey_pt_bin
             assert priv_pubkey_pt == pubkey_pt
             privkey_bin, offset = pop_string(priv_privkey, offset)
@@ -1038,6 +1093,20 @@ def run_ssh_test(curve, colorize):
             # If removing the files failed, the error will appear in rmdir
             logger.debug("Error while removing files: %r", exc)
         os.rmdir(temporary_dir)
+    return True
+
+
+def run_bitcoin_address_test():
+    """Test bitcoin address code"""
+    # Test key from https://medium.com/coinmonks/how-to-generate-a-bitcoin-address-step-by-step-9d7fcbf1ad0b
+    test_priv_key = binascii.unhexlify('a966eb6058f8ec9f47074a2faadd3dab42e2c60ed05bc34d39d6c0e1d32b8bdf')
+    test_pub_key = SECP256K1.public_point(test_priv_key)
+    test_compressed = test_pub_key.bytes_compressed()
+    assert test_compressed == binascii.unhexlify('023cba1f4d12d1ce0bced725373769b2262c6daa97be6a0588cfec8ce1a5f0bd09')
+    bitcoin_hash = test_pub_key.bitcoin_hash160()
+    assert bitcoin_hash == binascii.unhexlify('3a38d44d6a0c8d0bb84e0232cc632b7e48c72e0e')
+    bitcoin_p2sh = test_pub_key.bitcoin_p2sh_p2wpkh()
+    assert bitcoin_p2sh == binascii.unhexlify('1d521dcf4983772b3c1e6ef937103ebdfaa1ad77')
     return True
 
 
@@ -1083,6 +1152,8 @@ def main(argv=None):
     if not run_curve_test(curve, args.color):
         return 1
     if not run_ssh_test(curve, args.color):
+        return 1
+    if not run_bitcoin_address_test():
         return 1
     return 0
 
