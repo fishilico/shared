@@ -1207,7 +1207,12 @@ assert len(TD3_BIG) == 256
 
 
 def slow_mult_polynoms(a, b):
-    """Multiply two polynoms in GF(2^8) using X^8+X^4+X^3+X+1 (=0x1b)"""
+    """Multiply two polynoms in GF(2^8) using X^8+X^4+X^3+X+1 (=0x1b)
+
+    NB. This is NOT constant-time and leaks secret values in timing differences.
+
+    DO NOT USE THIS CODE TO IMPLEMENT SECURE APPLICATIONS
+    """
     m = 0
     assert 0 <= a < 0x100
     assert 0 <= b < 0x100
@@ -1296,7 +1301,12 @@ assert len(POWER_X1_TABLE) == 255
 
 
 def fast_mult_polynoms(a, b):
-    """Fast multiply of two polynoms in GF(2^8) using the log table"""
+    """Fast multiply of two polynoms in GF(2^8) using the log table
+
+    NB. This is NOT constant-time and leaks secret values in timing differences.
+
+    DO NOT USE THIS CODE TO IMPLEMENT SECURE APPLICATIONS
+    """
     if a == 0 or b == 0:
         return 0
     return POWER_X1_TABLE[(LOG_X1_TABLE[a] + LOG_X1_TABLE[b]) % 255]
@@ -1335,7 +1345,12 @@ def check_rcon():
 
 
 def mult_polynoms_x8_1_for_sbox(a, b):
-    """Multiply two polynoms in F2[X] modulo X^8+1"""
+    """Multiply two polynoms in F2[X] modulo X^8+1
+
+    NB. This is NOT constant-time and leaks secret values in timing differences.
+
+    DO NOT USE THIS CODE TO IMPLEMENT SECURE APPLICATIONS
+    """
     m = 0
     assert 0 <= a < 0x100
     assert 0 <= b < 0x100
