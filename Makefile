@@ -90,18 +90,17 @@ else
 # Old versions of rustc (<=1.34) fail to build socket2-0.3.12 because:
 #   error[E0658]: use of unstable library feature 'maybe_uninit' (see issue #53491)
 #   For more information about this error, try `rustc --explain E0658`.
-# Old versions of rustc (<1.38) fail to build object-0.19.0 because:
-#   use of unstable library feature 'ptr_cast'
 # Old versions of rustc (<=1.39) fail to build subtle-2.3.0 because:
 #   error[E0210]: type parameter `T` must be used as the type parameter for some
 #   local type (e.g., `MyStruct<T>`)
 #   For more information about this error, try `rustc --explain E0210`.
+# Old versions of rustc (<=1.39) fail to build curl-0.4.34 because:
+#   error[E0658]: the `#[non_exhaustive]` attribute is an experimental feature
+#   ote: for more information, see https://github.com/rust-lang/rust/issues/44109
 ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-4]\)\.'),y)
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-7]\)\.'),y)
-SUBDIRS_BLACKLIST += rust/check_linux_pass% rust/download_web%
 else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\)\.'),y)
-SUBDIRS_BLACKLIST += rust/check_linux_pass%
+SUBDIRS_BLACKLIST += rust/check_linux_pass% rust/download_web%
 endif
 endif
 
