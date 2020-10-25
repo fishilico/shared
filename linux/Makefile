@@ -1,7 +1,5 @@
 include ../linux-flags.mk
 
-PKG_CONFIG ?= pkg-config
-
 # Programs which need specific options
 KVM_PROGRAMS := kvm_base
 LIBMNL_PROGRAMS := enum_link_addrs
@@ -28,28 +26,28 @@ ifeq ($(HAVE_KVM), y)
 endif
 
 HAVE_NETLINK := $(call ccpp-has-option,-include linux/netlink.h)
-HAVE_LIBMNL := $(call pkg-config-with-options,libmnl,-include libmnl/libmnl.h)
+HAVE_LIBMNL := $(call pkgconf-with-options,libmnl,-include libmnl/libmnl.h)
 ifeq ($(HAVE_NETLINK), y)
 	PROGRAMS += $(NETLINK_PROGRAMS)
 	ifeq ($(HAVE_LIBMNL), y)
 		PROGRAMS += $(LIBMNL_PROGRAMS)
-$(LIBMNL_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs libmnl)
-$(LIBMNL_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags libmnl)
+$(LIBMNL_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKGCONF) --libs libmnl)
+$(LIBMNL_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKGCONF) --cflags libmnl)
 	endif
 endif
 
-HAVE_PULSE := $(call pkg-config-with-options,libpulse,--std=c99 -include pulse/pulseaudio.h)
+HAVE_PULSE := $(call pkgconf-with-options,libpulse,--std=c99 -include pulse/pulseaudio.h)
 ifeq ($(HAVE_PULSE), y)
 	PROGRAMS += $(PULSE_PROGRAMS)
-$(PULSE_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs libpulse)
-$(PULSE_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags libpulse) --std=c99
+$(PULSE_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKGCONF) --libs libpulse)
+$(PULSE_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKGCONF) --cflags libpulse) --std=c99
 endif
 
-HAVE_SDL2 := $(call pkg-config-with-options,sdl2,-include SDL2/SDL.h)
+HAVE_SDL2 := $(call pkgconf-with-options,sdl2,-include SDL2/SDL.h)
 ifeq ($(HAVE_SDL2), y)
 	PROGRAMS += $(SDL_PROGRAMS)
-$(SDL_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs sdl2)
-$(SDL_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags sdl2)
+$(SDL_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKGCONF) --libs sdl2)
+$(SDL_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKGCONF) --cflags sdl2)
 endif
 
 HAVE_SECCOMP := $(call ccpp-has-option,-include linux/seccomp.h)

@@ -2,7 +2,7 @@ FROM fedora:27
 LABEL Description="Fedora 27 with build dependencies for shared"
 
 # Override the language to force UTF-8 output
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 
 # Fedora<28 does not provide python3-z3 nor python-z3
 # Fedora 27 provides a version of Rust (1.30.1) which is too old
@@ -32,7 +32,7 @@ RUN \
         openssl \
         perl-Getopt-Long \
         perl-Term-ANSIColor \
-        pkgconfig \
+        pkgconf \
         pulseaudio-libs-devel \
         python3 \
         python3-cffi \

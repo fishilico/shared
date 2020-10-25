@@ -2,7 +2,7 @@ FROM fedora:28
 LABEL Description="Fedora 28 with build dependencies for shared"
 
 # Override the language to force UTF-8 output
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 
 RUN \
     dnf update -q -y --setopt=deltarpm=false && \
@@ -32,7 +32,7 @@ RUN \
         openssl-devel \
         perl-Getopt-Long \
         perl-Term-ANSIColor \
-        pkgconfig \
+        pkgconf \
         pulseaudio-libs-devel \
         python3 \
         python3-cffi \

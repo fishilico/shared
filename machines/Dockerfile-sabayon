@@ -4,7 +4,8 @@ LABEL Description="Sabayon Linux with build dependencies for shared"
 # Sabayon does not provide: mingw64, musl, z3
 
 # Override the language settings, as Entropy (command "equo") requires a UTF-8 console
-ENV LANG en_US.UTF-8
+ENV LANG=en_US.UTF-8 \
+    PKGCONF=pkg-config
 
 # We need to accept several licenses in order to install packages, by using the
 # file used by Sabayon's package manager, Entropy.

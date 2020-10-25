@@ -233,7 +233,7 @@ pkg meson
 pkg mypy
 pkg nodejs
 #pkg php
-pkg pkg-config
+pkg pkgconf
 pkg pwgen
 pkg pypy
 pkg python

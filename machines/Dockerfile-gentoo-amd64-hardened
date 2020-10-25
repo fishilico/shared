@@ -9,7 +9,7 @@ LABEL Description="Gentoo Hardened with build dependencies for shared"
 # Therefore do not use Rust.
 
 # Override the language to force UTF-8 output
-ENV LANG en_US.UTF-8
+ENV LANG=en_US.UTF-8
 
 # Modify portage useflags and masks
 RUN \

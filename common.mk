@@ -7,7 +7,7 @@ JAVA ?= java
 JAVAC ?= javac
 LATEXMK ?= latexmk
 MYPY ?= mypy
-PKG_CONFIG ?= pkg-config
+PKGCONF ?= pkgconf
 PYTHON ?= python3
 PYTHON3 ?= python3
 RM ?= rm -f
@@ -69,8 +69,8 @@ cc-disable-warning = $(call try-run,$(CC) -Werror -W$(strip $(1)) -E - < /dev/nu
 # for example to detect broken 'musl-gcc -fsanitize=undefined'
 ccld-has-option = $(call can-run-with-tmp,.$$$$.tmp,echo "int main(void){return 0;}" |$(CC) -Werror -x c -o".$$$$.tmp" $(1) - && ./.$$$$.tmp)
 
-# Test whether a pkg-config package exists and an include file is found (with -include option)
-pkg-config-with-options = $(call ccld-has-option,$(shell $(PKG_CONFIG) --cflags --libs $(1) 2>/dev/null) $(2))
+# Test whether a pkgconf package exists and an include file is found (with -include option)
+pkgconf-with-options = $(call ccld-has-option,$(shell $(PKGCONF) --cflags --libs $(1) 2>/dev/null) $(2))
 
 # Run a command with an optional prefix to perform runtime tests.
 # The prefix would be "wine" for Windows applications on Linux, "qemu-arm" for

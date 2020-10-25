@@ -1,4 +1,3 @@
-PKG_CONFIG ?= pkg-config
 SH ?= sh
 WGET ?= wget
 
@@ -64,26 +63,26 @@ $(OPENMP_PROGRAMS:%=.%.o): CFLAGS += -fopenmp $(call cc-disable-warning,source-u
 
 # Only compile Gtk+ programs where $(CC) is not used for cross-compilation
 ifeq ($(filter-out cc gcc clang, $(CC)),)
-	HAVE_GTK3 := $(call pkg-config-with-options,gtk+-3.0,-include gtk/gtk.h)
+	HAVE_GTK3 := $(call pkgconf-with-options,gtk+-3.0,-include gtk/gtk.h)
 	ifeq ($(HAVE_GTK3),y)
 		PROGRAMS += $(GTK_PROGRAMS)
-$(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-3.0)
-$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-3.0) \
+$(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKGCONF) --libs gtk+-3.0)
+$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKGCONF) --cflags gtk+-3.0) \
 	$(call cc-disable-warning,pedantic) \
 	$(call cc-disable-warning,cast-qual) \
 	$(call cc-disable-warning,redundant-parens) \
 	$(call cc-disable-warning,typedef-redefinition) \
 	$(call cc-disable-warning,used-but-marked-unused)
 	else
-		HAVE_GTK2 := $(call pkg-config-with-options,gtk+-2.0,--std=c99 \
+		HAVE_GTK2 := $(call pkgconf-with-options,gtk+-2.0,--std=c99 \
 			$(call cc-disable-warning,strict-prototypes) $(call cc-disable-warning,cast-qual) -include gtk/gtk.h)
 		ifeq ($(HAVE_GTK2),y)
 			PROGRAMS += $(GTK_PROGRAMS)
-$(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKG_CONFIG) --libs gtk+-2.0)
+$(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKGCONF) --libs gtk+-2.0)
 			# Gtk+2 headers:
 			# * Use variadic macros (C99 feature)
 			# * Use prototypes wihch are not strict
-$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKG_CONFIG) --cflags gtk+-2.0) --std=c99 \
+$(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKGCONF) --cflags gtk+-2.0) --std=c99 \
 	$(call cc-disable-warning,strict-prototypes) $(call cc-disable-warning,cast-qual)
 		endif
 	endif

@@ -2,7 +2,7 @@ FROM fedora:30
 LABEL Description="Fedora 30 with build dependencies for shared"
 
 # Override the language to force UTF-8 output
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 
 # Fedora>=30 provides python3-z3 but not python2-z3 (cf. https://src.fedoraproject.org/rpms/z3/c/9257eb278f0353c184d5f68286fe4df7b6a0e504)
 RUN \
@@ -34,7 +34,7 @@ RUN \
         openssl-devel \
         perl-Getopt-Long \
         perl-Term-ANSIColor \
-        pkgconfig \
+        pkgconf \
         pulseaudio-libs-devel \
         python3 \
         python3-cffi \

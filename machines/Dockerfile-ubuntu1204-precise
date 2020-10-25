@@ -2,7 +2,8 @@ FROM ubuntu:12.04
 LABEL Description="Ubuntu 12.04 LTS Precise Pangolin with build dependencies for shared"
 
 # Override the language to force UTF-8 output
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8 \
+    PKGCONF=pkg-config
 
 # Do not install coq because it is too old (8.3pl4) for some features
 # Do not install libmnl-dev because mnl_attr_for_each() performs arithmetic on void*

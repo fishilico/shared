@@ -2,7 +2,7 @@ FROM fedora:26
 LABEL Description="Fedora 26 with build dependencies for shared"
 
 # Override the language to force UTF-8 output
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 
 # Fedora 26 merged python-argparse into python2-libs
 # Building kernel modules now requires elfutils-libelf-devel
@@ -34,7 +34,7 @@ RUN \
         openssl \
         perl-Getopt-Long \
         perl-Term-ANSIColor \
-        pkgconfig \
+        pkgconf \
         pulseaudio-libs-devel \
         python3 \
         python3-cffi \

@@ -2,7 +2,7 @@ FROM fedora:32
 LABEL Description="Fedora 32 with build dependencies for shared"
 
 # Override the language to force UTF-8 output
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 
 # Fedora>=32 dropped Python 2 support
 # Wine requires an X11 server in order to work properly: use Xvfb in a container
@@ -36,7 +36,7 @@ RUN \
         openssl-devel \
         perl-Getopt-Long \
         perl-Term-ANSIColor \
-        pkgconfig \
+        pkgconf \
         pulseaudio-libs-devel \
         python-unversioned-command \
         python3 \
