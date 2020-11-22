@@ -61,7 +61,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
+#    Global blacklist: latex%
 #    In sub-directories:
 #       c:
 #       glossaries:
@@ -75,7 +75,7 @@ CMD ["/run_shared_test.sh"]
 #       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex% rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
+#       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
 #          glossaries:
@@ -98,14 +98,14 @@ CMD ["/run_shared_test.sh"]
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
 #       gcc: gcc (Debian 8.3.0-6) 8.3.0
-#       clang: clang version 7.0.1-8 (tags/RELEASE_701/final)
+#       clang: clang version 7.0.1-8+deb10u2 (tags/RELEASE_701/final)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 8.3-win32 20190406
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 8.3-win32 20190406
 #       wine: wine-4.0 (Debian 4.0-2)
-#       Linux kernel: 4.19.0-10-amd64
+#       Linux kernel: 4.19.0-12-amd64
 #       python3: Python 3.7.3
-#       javac: javac 11.0.8
-#       java: openjdk 11.0.8 2020-07-14
-#       rustc: rustc 1.34.2
-#       cargo: cargo 1.34.0
+#       javac: javac 11.0.9
+#       java: openjdk 11.0.9 2020-10-20
+#       rustc: rustc 1.41.1
+#       cargo: cargo 1.42.1
 #       coqc: The Coq Proof Assistant, version 8.9.0 (February 2019) compiled on Feb 6 2019 17:43:20 with OCaml 4.05.0

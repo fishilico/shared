@@ -99,13 +99,13 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (Ubuntu 9.3.0-10ubuntu2) 9.3.0
+#       gcc: gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
 #       clang: clang version 10.0.0-4ubuntu1
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 9.3-win32 20200320
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 9.3-win32 20200320
 #       wine: wine-5.0 (Ubuntu 5.0-3ubuntu1)
-#       Linux kernel: 5.4.0-47-generic
-#       python3: Python 3.8.2
+#       Linux kernel: 5.4.0-52-generic
+#       python3: Python 3.8.5
 #       javac: javac 11.0.8
 #       java: openjdk 11.0.8 2020-07-14
 #       rustc: rustc 1.43.0

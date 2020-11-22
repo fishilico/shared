@@ -98,16 +98,16 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (GCC) 10.2.1 20200723 (Red Hat 10.2.1-1)
-#       clang: clang version 10.0.0 (Fedora 10.0.0-2.fc32)
+#       gcc: gcc (GCC) 10.2.1 20201016 (Red Hat 10.2.1-6)
+#       clang: clang version 10.0.1 (Fedora 10.0.1-3.fc32)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 9.2.1 20190827 (Fedora MinGW 9.2.1-6.fc32)
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 9.2.1 20190827 (Fedora MinGW 9.2.1-6.fc32)
-#       wine: wine-5.16 (Staging)
-#       Linux kernel: 5.8.7-200.fc32.x86_64
-#       python: Python 3.8.5
-#       python3: Python 3.8.5
-#       javac: javac 11.0.8
-#       java: openjdk 11.0.8 2020-07-14
-#       rustc: rustc 1.45.2
-#       cargo: cargo 1.45.1
+#       wine: wine-5.21 (Staging)
+#       Linux kernel: 5.9.8-100.fc32.x86_64
+#       python: Python 3.8.6
+#       python3: Python 3.8.6
+#       javac: javac 11.0.9
+#       java: openjdk 11.0.9 2020-10-20
+#       rustc: rustc 1.47.0
+#       cargo: cargo 1.47.0
 #       coqc: The Coq Proof Assistant, version 8.11.2 (June 2020) compiled on Jun 15 2020 0:00:00 with OCaml 4.10.0
