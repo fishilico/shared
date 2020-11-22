@@ -321,6 +321,12 @@ static const struct known_libc libc_database[] = {
         linux_glibc_arm_sigjmp_buf_desc, linux_glibc_arm_sigjmp_buf_desc,
         glibc_unmangle_value, glibc_unmangle_value),
 
+    DEFINE_KNOWN_LIBC("Linux", "glibc", "ARM-HF Thumb",
+        "O\xf0\x01\x01\xff\xf7\xbc\xbf",
+        "", /* The first instructions are "movw ip, #... ; movt ip, #..." with a variable value */
+        linux_glibc_arm_sigjmp_buf_desc, linux_glibc_arm_sigjmp_buf_desc,
+        NULL, NULL),
+
     /* glibc with __SOFTFP__ */
     DEFINE_KNOWN_LIBC("Linux", "glibc", "ARM-EL SoftFP",
         "\x01\x10\xa0\xe3\xcd\xff\xff\xea",
@@ -499,13 +505,33 @@ static const struct known_libc *identify_libc(void)
 {
     unsigned long idx;
     const uint8_t *setjmp_addr = (const uint8_t *)(uintptr_t)setjmp_symbol;
+    uintptr_t setjmp_pcshift = 0;
 #ifdef sigsetjmp_symbol
     const uint8_t *sigsetjmp_addr = (const uint8_t *)(uintptr_t)sigsetjmp_symbol;
+    uintptr_t sigsetjmp_pcshift = 0;
 #endif
 
-    printf("setjmp is at %#" PRIxPTR "\n", (uintptr_t)setjmp_addr);
+#if defined(__arm__)
+    /* Detect Thumb mode */
+    setjmp_pcshift = ((uintptr_t)setjmp_addr) & 1;
+    setjmp_addr -= setjmp_pcshift;
+#    ifdef sigsetjmp_symbol
+    sigsetjmp_pcshift = ((uintptr_t)sigsetjmp_addr) & 1;
+    sigsetjmp_addr -= sigsetjmp_pcshift;
+#    endif
+#endif
+
+    if (setjmp_pcshift) {
+        printf("setjmp is at %#" PRIxPTR " +%#" PRIxPTR "\n", (uintptr_t)setjmp_addr, setjmp_pcshift);
+    } else {
+        printf("setjmp is at %#" PRIxPTR "\n", (uintptr_t)setjmp_addr);
+    }
 #ifdef sigsetjmp_symbol
-    printf("sigsetjmp is at %#" PRIxPTR "\n", (uintptr_t)sigsetjmp_addr);
+    if (sigsetjmp_pcshift) {
+        printf("sigsetjmp is at %#" PRIxPTR " +%#" PRIxPTR "\n", (uintptr_t)sigsetjmp_addr, sigsetjmp_pcshift);
+    } else {
+        printf("sigsetjmp is at %#" PRIxPTR "\n", (uintptr_t)sigsetjmp_addr);
+    }
 #else
     printf("sigsetjmp is not defined on this platform.\n");
 #endif
