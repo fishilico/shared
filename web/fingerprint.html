@@ -64,12 +64,18 @@ function get_local_ips() {
 
     var rtc = new RTCPeerConnection({iceServers: []});
     if (typeof rtc.createDataChannel !== 'undefined') { /* Microsoft Edge does not have rtc.createDataChannel */
-        rtc.createDataChannel('', {reliable: false});
+        /* Create an unordered and unreliable channel */
+        rtc.createDataChannel('label', {
+            maxRetransmits: 0,
+            ordered: false
+        });
     }
 
     rtc.onicecandidate = function (evt) {
         // convert the candidate to SDP so we can run it through our general parser
-        // see https://twitter.com/lancestout/status/525796175425720320 for details
+        // see https://twitter.com/lancestout/status/525796175425720320 for details:
+        //     IETF says "a=candidate.." for SDP, but W3C uses "candidate.." for its API calls. See this thread:
+        //     https://lists.w3.org/Archives/Public/public-webrtc/2014Jun/0113.html
         if (evt.candidate) {
             extract_addr_from_sdp("a="+evt.candidate.candidate);
         }
