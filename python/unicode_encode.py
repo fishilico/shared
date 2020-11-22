@@ -73,6 +73,7 @@ EXAMPLES_UTF8 = [
     b'\xe2\x88\x9e',  # U+221E infinity
     b'\xe2\x98\x80',  # U+2605 black sun with rays
     b'\xe2\x98\x85',  # U+2605 black star
+    b'\xe2\x88\x95',  # U+2215 division slash
     b'\xe2\x98\xa2',  # U+2622 radioactive sign
     b'\xe2\x98\xba',  # U+263A white smiling face
     b'\xe2\x99\xa5',  # U+2665 black heart suit
@@ -81,8 +82,11 @@ EXAMPLES_UTF8 = [
     b'\xef\xbf\xbd',  # U+FFFD replacement character
     b'\xf0\x9f\x98\x87',  # U+1F607 smiling face with halo (angel)
     b'\xf0\x9f\x90\xa7',  # U+1F427 penguin
+    b'\xf0\x9f\x91\x8c',  # U+1F44C ok hand sign
+    b'\xf0\x9f\x91\x8d',  # U+1F44D thumbs up sign
     b'\xf0\x9f\x96\x92',  # U+1F592 reversed thumbs up sign ("like")
     b'\xf0\x9f\x98\x8a',  # U+1F60A smiling face with smiling eyes
+    b'\xf0\x9f\xa4\x97',  # U+1F917 hugging face
 ]
 
 
