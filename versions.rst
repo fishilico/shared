@@ -302,6 +302,7 @@ Apple Mac OS
 
 * https://www.macworld.co.uk/feature/mac/mac-os-x-macos-version-code-names-3662757/
 * https://en.wikipedia.org/wiki/MacOS_version_history
+* https://en.wikipedia.org/wiki/List_of_Apple_codenames
 * Security updates: https://support.apple.com/en-us/HT201222
 * The version information can be obtained through ``sw_vers``
   (https://opensource.apple.com/source/DarwinTools/DarwinTools-1/sw_vers.c.auto.html)
@@ -309,6 +310,8 @@ Apple Mac OS
 +-----------------+---------------------------+--------------+
 | Version         | Code name                 | Release date |
 +=================+===========================+==============+
+| macOS 11        | Big Sur                   | 2020-11-12   |
++-----------------+---------------------------+--------------+
 | macOS 10.15     | Catalina (Jazz)           | 2019-10-07   |
 +-----------------+---------------------------+--------------+
 | macOS 10.14     | Mojave (Liberty)          | 2018-09-24   |
