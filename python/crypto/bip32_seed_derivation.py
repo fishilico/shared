@@ -604,10 +604,13 @@ assert len(BASE58_BITCOIN_ALPHABET) == 58
 def base58_decode(data, size=None):
     """Decode some data encoded using Base58 bitcoin alphabet"""
     value = 0
+    leading_zeros = 0
     for char in data:
         value = value * 58 + BASE58_BITCOIN_ALPHABET.index(char)
+        if value == 0:
+            leading_zeros += 1
     if size is None:
-        size = (value.bit_length() + 7) // 8
+        size = leading_zeros + (value.bit_length() + 7) // 8
     return value.to_bytes(size, 'big')
 
 
@@ -704,4 +707,11 @@ if __name__ == '__main__':
     bitcoin_pubkey = SECP256K1.public_point(bitcoin_privkey)
     p2sh_bytes = b'\x05' + bitcoin_pubkey.bitcoin_p2sh_p2wpkh()
     p2sh_bytes_checksum = hashlib.sha256(hashlib.sha256(p2sh_bytes).digest()).digest()[:4]
+    assert base58_decode('3HX5tttedDehKWTTGpxaPAbo157fnjn89s') == p2sh_bytes + p2sh_bytes_checksum
     assert base58_decode('3HX5tttedDehKWTTGpxaPAbo157fnjn89s', 0x19) == p2sh_bytes + p2sh_bytes_checksum
+
+    # Old encoding
+    p2pkh_bytes = b'\x00' + bitcoin_pubkey.bitcoin_hash160()
+    p2pkh_bytes_checksum = hashlib.sha256(hashlib.sha256(p2pkh_bytes).digest()).digest()[:4]
+    assert base58_decode('1F2C2dfD8B5qLM7ZrW4Ag1kLUg8sZjfyBB') == p2pkh_bytes + p2pkh_bytes_checksum
+    assert base58_decode('1F2C2dfD8B5qLM7ZrW4Ag1kLUg8sZjfyBB', 0x19) == p2pkh_bytes + p2pkh_bytes_checksum
