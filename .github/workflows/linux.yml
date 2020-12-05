@@ -1,0 +1,88 @@
+name: Run tests on Linux
+
+on: [push, pull_request]
+
+jobs:
+  linux-test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        compiler:
+          - gcc -m64
+          - gcc -m32
+          - clang -m64
+          - clang -m32
+        python:
+          - 3.9
+          - 3.8
+          - 3.7
+          - 3.6
+          - 3.5
+          - pypy3
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python }}
+
+    - name: Install dependencies
+      run: |
+        if ${{ contains(matrix.compiler, '-m32') }} ; then
+            sudo dpkg --add-architecture i386
+        fi
+
+        sudo apt-get update
+        sudo apt-get install -y \
+            cargo \
+            coq \
+            latexmk \
+            libgtk-3-dev \
+            libmnl-dev \
+            libpulse-dev \
+            libsdl2-dev \
+            libz3-dev \
+            openjdk-11-jdk \
+            pkgconf \
+            sagemath \
+            texlive-fonts-extra \
+            texlive-lang-french \
+            texlive-science
+
+        if ${{ contains(matrix.compiler, '-m32') }} ; then
+            sudo apt-get install -y \
+                libc6-dev-i386
+        fi
+
+        pip install \
+            cffi \
+            numpy \
+            Pillow \
+            pycryptodome \
+            z3
+
+    - name: Configure the environment
+      run: |
+        echo "CC=${{ matrix.compiler }}" >> "$GITHUB_ENV"
+        echo "PYTHON=python" >> "$GITHUB_ENV"
+
+        # Find the version of the installed kernel headers from linux-headers-generic package, when compiling with gcc
+        if ${{ matrix.compiler == 'gcc -m64' }} ; then
+            KERNELVER="$(LANG=C dpkg --status linux-headers-generic | sed -n 's/^Depends: linux-headers-\(.*\)/KERNELVER=\1/p')" >> "$GITHUB_ENV"
+        fi
+
+        # Disable Rust in 32-bit environment
+        if ${{ contains(matrix.compiler, '-m32') }} ; then
+            echo "CARGO=false" >> "$GITHUB_ENV"
+        fi
+
+        # Display the final environment file, for debugging purpose
+        cat "$GITHUB_ENV"
+
+    - name: Run tests
+      run: make test
+
+    - name: List targets which are not built
+      run: make list-nobuild

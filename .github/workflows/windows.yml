@@ -1,0 +1,52 @@
+name: Run tests on Windows
+
+on: [push, pull_request]
+
+jobs:
+  windows-test:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        compiler:
+          - x86_64-w64-mingw32-gcc
+          - i686-w64-mingw32-gcc
+        unicode: [y, n]
+        python:
+          #- 3.9  # TODO
+          - 3.8
+          - 3.7
+          - 3.6
+          - 3.5
+          #- pypy3  # TODO
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python }}
+
+    - name: Configure the environment
+      shell: bash
+      run: |
+        echo "CC=${{ matrix.compiler }}" >> "$GITHUB_ENV"
+        echo "PYTHON=python" >> "$GITHUB_ENV"
+        echo "PYTHON3=python" >> "$GITHUB_ENV"
+        echo "HAVE_UNICODE=${{ matrix.unicode }}" >> "$GITHUB_ENV"
+
+        # Skip Rust programs, as gmp-mpfr-sys is not available on Windows: it
+        # reports "Windows MSVC target is not supported (linking would fail)"
+        # and would require MSYS2, according to
+        # https://docs.rs/gmp-mpfr-sys/1.4.2/gmp_mpfr_sys/index.html#building-on-windows
+        echo "CARGO=false" >> "$GITHUB_ENV"
+
+        # Display the final environment file, for debugging purpose
+        cat "$GITHUB_ENV"
+
+    - name: Run tests
+      # TODO: remove verbosity
+      run: make test V=1
+
+    - name: List targets which are not built
+      run: make list-nobuild
