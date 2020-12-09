@@ -45,6 +45,7 @@ RUN \
         python3-gmpy2 \
         python3-numpy \
         python3-pil \
+        python3-z3 \
         python-argparse \
         python-cffi \
         python-crypto \
@@ -69,7 +70,7 @@ CMD ["/run_shared_test.sh"]
 #       glossaries:
 #       java/keystore:
 #       linux:
-#       python: z3_example.py
+#       python:
 #       python/crypto:
 #       python/network:
 #       python/network/dnssec:
@@ -83,7 +84,7 @@ CMD ["/run_shared_test.sh"]
 #          glossaries:
 #          java/keystore:
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
-#          python: z3_example.py
+#          python:
 #          python/crypto:
 #          python/network:
 #          python/network/dnssec:
