@@ -51,12 +51,15 @@ static void configure_umip_recovery(void)
 }
 
 # define UMIP_SECTION_START(instruction) \
-    if (g_umip_in_section = 1, sigsetjmp(g_umip_jmpbuf, SIGSEGV)) { \
-        fprintf(stderr, "UMIP error: instruction %s is forbidden.\n", (instruction)); \
-        g_umip_in_section = 0; \
-    } else {
+    { \
+        g_umip_in_section = 1; \
+        if (sigsetjmp(g_umip_jmpbuf, SIGSEGV)) { \
+            fprintf(stderr, "UMIP error: instruction %s is forbidden.\n", (instruction)); \
+            g_umip_in_section = 0; \
+        } else {
 # define UMIP_SECTION_END \
-        g_umip_in_section = 0; \
+            g_umip_in_section = 0; \
+        } \
     }
 
 #else
