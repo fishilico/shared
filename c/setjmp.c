@@ -663,16 +663,16 @@ static const struct known_libc *identify_libc(void)
 /**
  * Analyze a jmp_buf or sigjmp_buf structure with uintptr_t "registers"
  */
-#define JMP_BUG_NREGS ((unsigned long)(sizeof(jmp_buf) / sizeof(uintptr_t)))
+#define JMP_BUF_NREGS ((unsigned long)(sizeof(jmp_buf) / (sizeof(uintptr_t))))
 union introspected_jmp_buf {
     jmp_buf env;
-    uintptr_t env_regs[JMP_BUG_NREGS];
+    uintptr_t env_regs[JMP_BUF_NREGS];
 };
 #ifdef sigsetjmp_symbol
-#    define SIGJMP_BUG_NREGS ((unsigned long)(sizeof(sigjmp_buf) / sizeof(uintptr_t)))
+#    define SIGJMP_BUF_NREGS ((unsigned long)(sizeof(sigjmp_buf) / (sizeof(uintptr_t))))
 union introspected_sigjmp_buf {
     sigjmp_buf env;
-    uintptr_t env_regs[SIGJMP_BUG_NREGS];
+    uintptr_t env_regs[SIGJMP_BUF_NREGS];
 };
 #endif
 
@@ -759,7 +759,7 @@ int main(void)
     printf("\n");
 
     printf("sizeof(jmp_buf) = %#lx = %lu (%lu registers):\n",
-           (unsigned long)sizeof(jmp_buf), (unsigned long)sizeof(jmp_buf), JMP_BUG_NREGS);
+           (unsigned long)sizeof(jmp_buf), (unsigned long)sizeof(jmp_buf), JMP_BUF_NREGS);
     assert(sizeof(inenv[0].env_regs) == sizeof(jmp_buf));
     assert((void *)&inenv[0].env_regs == (void *)&inenv[0].env);
     assert((void *)&inenv[1].env_regs == (void *)&inenv[1].env);
@@ -767,7 +767,7 @@ int main(void)
     for (iteration = 0; iteration < 2; iteration++) {
         setjmp(inenv[iteration].env);
     }
-    diff_registers(inenv[0].env_regs, inenv[1].env_regs, JMP_BUG_NREGS,
+    diff_registers(inenv[0].env_regs, inenv[1].env_regs, JMP_BUF_NREGS,
                    g_current_libc->jmp_buf_desc, g_current_libc->jmp_buf_count,
                    g_current_libc->unmangle_jmp_buf_value);
 
@@ -775,7 +775,7 @@ int main(void)
     printf("\n");
 
     printf("sizeof(sigjmp_buf) = %#lx = %lu (%lu registers):\n",
-           (unsigned long)sizeof(sigjmp_buf), (unsigned long)sizeof(sigjmp_buf), SIGJMP_BUG_NREGS);
+           (unsigned long)sizeof(sigjmp_buf), (unsigned long)sizeof(sigjmp_buf), SIGJMP_BUF_NREGS);
     assert(sizeof(insigenv[0].env_regs) == sizeof(sigjmp_buf));
     assert((void *)&insigenv[0].env_regs == (void *)&insigenv[0].env);
     assert((void *)&insigenv[1].env_regs == (void *)&insigenv[1].env);
@@ -783,7 +783,7 @@ int main(void)
         /* Ask for saving the process's current signal mask */
         sigsetjmp(insigenv[iteration].env, 1);
     }
-    diff_registers(insigenv[0].env_regs, insigenv[1].env_regs, JMP_BUG_NREGS,
+    diff_registers(insigenv[0].env_regs, insigenv[1].env_regs, JMP_BUF_NREGS,
                    g_current_libc->sigjmp_buf_desc, g_current_libc->sigjmp_buf_count,
                    g_current_libc->unmangle_sigjmp_buf_value);
 #endif
