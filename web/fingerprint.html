@@ -174,6 +174,25 @@ function fill_fingerprint_infos() {
     e_list.appendChild(create_list_item('screen.colorDepth', screen.colorDepth));
     container.appendChild(e_list);
 
+    // Gather information from document
+    container.innerHTML += '<h2>document</h2>';
+    e_list = document.createElement('ul');
+    e_list.appendChild(create_list_item('document.cookie', document.cookie));
+    e_list.appendChild(create_list_item('document.referrer', document.referrer));
+    e_list.appendChild(create_list_item('document.location', document.location));
+    e_list.appendChild(create_list_item('document.location.href', document.location.href));
+    e_list.appendChild(create_list_item('document.location.origin', document.location.origin));
+    e_list.appendChild(create_list_item('document.location.protocol', document.location.protocol));
+    e_list.appendChild(create_list_item('document.location.host', document.location.host));
+    e_list.appendChild(create_list_item('document.location.port', document.location.port));
+    e_list.appendChild(create_list_item('document.location.pathname', document.location.pathname));
+    e_list.appendChild(create_list_item('document.location.hash', document.location.hash));
+    e_list.appendChild(create_list_item('document.URL', document.URL));
+    e_list.appendChild(create_list_item('document.domain', document.domain));
+    e_list.appendChild(create_list_item('document.compatMode', document.compatMode));
+    e_list.appendChild(create_list_item('document.fullscreen', document.fullscreen));
+    container.appendChild(e_list);
+
     // Display plugins
     container.innerHTML += '<h2>Plugins</h2>';
     if (typeof navigator.plugins === 'undefined') {
@@ -205,7 +224,7 @@ function fill_fingerprint_infos() {
     }
 
     // Gather local IP addresses
-    container.innerHTML += '<h2>Local IP addresses</h2>';
+    container.innerHTML += '<h2>Local IP addresses (using WebRTC)</h2>';
     container.innerHTML += '<div id="local-ip-addrs">None found</div>';
     get_local_ips();
 
