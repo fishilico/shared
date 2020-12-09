@@ -47,7 +47,8 @@ RUN \
         python3-gmpy2 \
         python3-numpy \
         python3-pil \
-        python3-z3 && \
+        python3-z3 \
+        sagemath && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         wine \
         wine32 \

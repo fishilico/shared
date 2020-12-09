@@ -50,7 +50,8 @@ RUN \
         python-cffi \
         python-crypto \
         python-numpy \
-        python-pil && \
+        python-pil \
+        sagemath && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         wine-stable \
         wine32 \

@@ -47,6 +47,7 @@ RUN \
         python-numpy \
         python-pil \
         python-z3 \
+        sagemath \
         wine \
         wine32 \
         wine64 && \
