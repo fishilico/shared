@@ -272,7 +272,7 @@ static const char *const windows_x86_32_jmp_buf_desc[16] = {
 };
 
 static const char *const windows_x86_64_jmp_buf_desc[32] = {
-    /* 0x00 */ "frame",
+    /* 0x00 */ "frame", /* from parameter rdx */
     /* 0x08 */ "rbx",
     /* 0x10 */ "rsp",
     /* 0x18 */ "rbp",
@@ -283,7 +283,7 @@ static const char *const windows_x86_64_jmp_buf_desc[32] = {
     /* 0x40 */ "r14",
     /* 0x48 */ "r15",
     /* 0x50 */ "rip",
-    /* 0x58 */ "", /* "spare", which is padding */
+    /* 0x58 */ "MXCSR, FPU Control Word", /* padding for MinGW, stmxcsr 0x58(%rcx);fnstcw 0x5c(%rcx) for Windows */
     /* 0x60 */ "xmm6", "xmm6",
     /* 0x70 */ "xmm7", "xmm7",
     /* 0x80 */ "xmm8", "xmm8",
@@ -449,10 +449,38 @@ static const struct known_libc libc_database[] = {
         linux_musl_x86_64_jmp_buf_desc, linux_musl_x86_64_sigjmp_buf_desc,
         NULL, NULL),
 
-    /* Windows, from MinGW */
-    DEFINE_KNOWN_LIBC("Windows", "MinGW's msvcrt.dll", "x86_32", "", "",
+    /* https://github.com/wine-mirror/wine/blob/wine-5.22/dlls/msvcrt/except_i386.c#L1026-L1041 */
+    DEFINE_KNOWN_LIBC("Windows", "Wine msvcrt.dll", "x86_32",
+        "\x8bL$\x04\x89)\x89Y\x04\x89y\x08\x89q\x0c\x89\x61\x10\x8b\x04$\x89\x41\x14\xe9",
+        "",
         windows_x86_32_jmp_buf_desc, no_sigjmp_buf_desc, NULL, NULL),
-    DEFINE_KNOWN_LIBC("Windows", "MinGW's msvcrt.dll", "x86_64 (amd64)", "", "",
+    /* https://github.com/wine-mirror/wine/blob/wine-1.8.7/dlls/msvcrt/except_x86_64.c#L286-L321
+     * Patterns for 5-bytes jump/padding depends on the compiler:
+     * Debian 8 (x86_64-w64-mingw32-gcc 4.9.1):
+     * Fedora 22 (x86_64-w64-mingw32-gcc 5.1.0):
+     * Fedora 23 (x86_64-w64-mingw32-gcc 5.3.0):
+     *     0: e9 00 00 00 00    jmpq 0x5
+     * Debian 9 (x86_64-w64-mingw32-gcc 6.3.0):
+     *     0: eb 03             jmp  0x5
+     *     2: 1f 00             nopl (%rax)
+     */
+    DEFINE_KNOWN_LIBC("Windows", "Wine 1.5...4.10 msvcrt.dll from MinGW-gcc<6", "x86_64 (amd64)",
+        "H1\xd2\xe9\0\0\0\0H\x89\x11H\x89Y\x08H\x8d\x44$\x08H\x89\x41\x10H\x89i\x18H\x89q H\x89y(L\x89\x61\x30L\x89i8L\x89q@L\x89yHH\x8b\x04$H\x89\x41Pf\x0f\x7fq`f\x0f\x7fypfD\x0f\x7f\x81\x80\0\0\0\x66\x44\x0f\x7f\x89\x90\0\0\0\x66\x44\x0f\x7f\x91\xa0\0\0\0\x66\x44\x0f\x7f\x99\xb0\0\0\0\x66\x44\x0f\x7f\xa1\xc0\0\0\0\x66\x44\x0f\x7f\xa9\xd0\0\0\0\x66\x44\x0f\x7f\xb1\xe0\0\0\0\x66\x44\x0f\x7f\xb9\xf0\0\0\0H1\xc0\xc3",
+        "",
+        windows_x86_64_jmp_buf_desc, no_sigjmp_buf_desc, NULL, NULL),
+    DEFINE_KNOWN_LIBC("Windows", "Wine 1.5...4.10 msvcrt.dll from MinGW-gcc>=6", "x86_64 (amd64)",
+        "H1\xd2\xeb\x03\x0f\x1f\0H\x89\x11H\x89Y\x08H\x8d\x44$\x08H\x89\x41\x10H\x89i\x18H\x89q H\x89y(L\x89\x61\x30L\x89i8L\x89q@L\x89yHH\x8b\x04$H\x89\x41Pf\x0f\x7fq`f\x0f\x7fypfD\x0f\x7f\x81\x80\0\0\0\x66\x44\x0f\x7f\x89\x90\0\0\0\x66\x44\x0f\x7f\x91\xa0\0\0\0\x66\x44\x0f\x7f\x99\xb0\0\0\0\x66\x44\x0f\x7f\xa1\xc0\0\0\0\x66\x44\x0f\x7f\xa9\xd0\0\0\0\x66\x44\x0f\x7f\xb1\xe0\0\0\0\x66\x44\x0f\x7f\xb9\xf0\0\0\0H1\xc0\xc3",
+        "",
+        windows_x86_64_jmp_buf_desc, no_sigjmp_buf_desc, NULL, NULL),
+    /* https://github.com/wine-mirror/wine/blob/wine-5.15/dlls/winecrt0/exception.c#L69-L94 */
+    DEFINE_KNOWN_LIBC("Windows", "Wine>=4.0 msvcrt.dll", "x86_64 (amd64)",
+        "H\x89\x11H\x89Y\x08H\x8d\x44$\x08H\x89\x41\x10H\x89i\x18H\x89q H\x89y(L\x89\x61\x30L\x89i8L\x89q@L\x89yHH\x8b\x04$H\x89\x41Pf\x0f\x7fq`f\x0f\x7fypfD\x0f\x7f\x81\x80\0\0\0\x66\x44\x0f\x7f\x89\x90\0\0\0\x66\x44\x0f\x7f\x91\xa0\0\0\0\x66\x44\x0f\x7f\x99\xb0\0\0\0\x66\x44\x0f\x7f\xa1\xc0\0\0\0\x66\x44\x0f\x7f\xa9\xd0\0\0\0\x66\x44\x0f\x7f\xb1\xe0\0\0\0\x66\x44\x0f\x7f\xb9\xf0\0\0\0H1\xc0\xc3",
+        "",
+        windows_x86_64_jmp_buf_desc, no_sigjmp_buf_desc, NULL, NULL),
+    /* Windows uses stmxcsr 0x58(%rcx);fnstcw 0x5c(%rcx) to save SSE and FPU control registers */
+    DEFINE_KNOWN_LIBC("Windows", "Windows msvcrt.dll (with SSE and FPU)", "x86_64 (amd64)",
+        "H\x89\x11H\x89Y\x08H\x89i\x18H\x89q H\x89y(L\x89\x61\x30L\x89i8L\x89q@L\x89yHL\x8d\x44$\x08L\x89\x41\x10L\x8b\x04$L\x89\x41P\x0f\xaeYX\xd9y\\f\x0f\x7fq`f\x0f\x7fypfD\x0f\x7f\x81\x80\0\0\0\x66\x44\x0f\x7f\x89\x90\0\0\0\x66\x44\x0f\x7f\x91\xa0\0\0\0\x66\x44\x0f\x7f\x99\xb0\0\0\0\x66\x44\x0f\x7f\xa1\xc0\0\0\0\x66\x44\x0f\x7f\xa9\xd0\0\0\0\x66\x44\x0f\x7f\xb1\xe0\0\0\0\x66\x44\x0f\x7f\xb9\xf0\0\0\0\x33\xc0\xc3",
+        "",
         windows_x86_64_jmp_buf_desc, no_sigjmp_buf_desc, NULL, NULL),
 };
 
@@ -465,7 +493,7 @@ static void hexdump_as_escstring(const uint8_t *data, size_t size)
     for (idx = 0; idx < size; idx++) {
         if (!data[idx]) {
             printf("\\0");
-            last_has_been_hex_escaped = false;
+            last_has_been_hex_escaped = true; /* Prevent digits from appearing after \0 */
         } else if (data[idx] == 0x09) {
             printf("\\t");
             last_has_been_hex_escaped = false;
@@ -478,7 +506,7 @@ static void hexdump_as_escstring(const uint8_t *data, size_t size)
         } else if (data[idx] == 0x22) {
             printf("\\\"");
             last_has_been_hex_escaped = false;
-        } else if (data[idx] == 0x5d) {
+        } else if (data[idx] == 0x5c) {
             printf("\\\\");
             last_has_been_hex_escaped = false;
         } else if (data[idx] >= 0x20 && data[idx] < 0x7f) {
@@ -526,6 +554,76 @@ static const struct known_libc *identify_libc(void)
     } else {
         printf("setjmp is at %#" PRIxPTR "\n", (uintptr_t)setjmp_addr);
     }
+
+#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+    /* On Windows, setjmp actually points to a trampoline such as (x86_64):
+     *   0000000000407568 <_setjmp>:
+     *     407568: ff 25 be 9d 00 00  jmpq *0x9dbe(%rip)  # 41132c <__imp__setjmp>
+     *     40756e: 90                 nop
+     *     40756f: 90                 nop
+     * or (x86):
+     *   004077c8 <__setjmp>:
+     *     4077c8: ff 25 c0 f1 40 00  jmp *0x40f1c0
+     *     4077ce: 90                 nop
+     *     4077cf: 90                 nop
+     * where __imp__setjmp is the address of setjmp in the import table.
+     *
+     * Use this address instead.
+     *
+     * => indirect jump to *0x41132c = 0x6a094f90
+     *
+     * On Linux with Wine (x86_64), this is in /usr/lib/wine/msvcrt.dll:
+     *     export table for _setjmp:
+     *        [ 570] +base[ 571] 14f90 Export RVA
+     *     6a094f90: e9 db e6 04 00  jmpq 6a0e3670 <.text+0x62670>
+     *     export table for _setjmpex:
+     *        [ 571] +base[ 572] 63670 Export RVA
+     *     6a0e3670: 48 89 11        mov  %rdx,(%rcx) ...
+     */
+    if (setjmp_addr[0] == 0xff && setjmp_addr[1] == 0x25) {
+        /* Indirect jmp */
+        int32_t indirect_jmp_imm32 = 0;
+        const uint8_t *import_addr_entry;
+        uintptr_t imported_setjmp = 0;
+
+        memmove(&indirect_jmp_imm32, setjmp_addr + 2, 4);
+#    if defined(__x86_64__)
+        assert(sizeof(imported_setjmp) == 8);
+        import_addr_entry = setjmp_addr + 6 + indirect_jmp_imm32;
+        memmove(&imported_setjmp, import_addr_entry, 8);
+#    elif defined(__i386__)
+        assert(sizeof(imported_setjmp) == 4);
+        import_addr_entry = (const uint8_t *)indirect_jmp_imm32;
+        memmove(&imported_setjmp, import_addr_entry, 4);
+#    else
+#        error Unknown target architecture for Windows
+#    endif
+        setjmp_addr = (const uint8_t *)imported_setjmp;
+        printf("=> indirect jump (imported function) to *%#" PRIxPTR " = %#" PRIxPTR "\n",
+               (uintptr_t)import_addr_entry, (uintptr_t)setjmp_addr);
+
+#    if defined(__x86_64__)
+        if (setjmp_addr[0] == 0xe9) {
+            /* Direct jmp +imm32 on x86_64: https://github.com/wine-mirror/wine/blob/wine-5.22/dlls/msvcrt/except_x86_64.c#L702-L703 */
+            int32_t direct_jmp_imm32 = 0;
+
+            memmove(&direct_jmp_imm32, setjmp_addr + 1, 4);
+            setjmp_addr = setjmp_addr + 5 + direct_jmp_imm32;
+            printf("=> direct jump to %#" PRIxPTR "\n",
+                   (uintptr_t)setjmp_addr);
+        } else if (setjmp_addr[0] == 0xeb) {
+            /* Direct jmp +imm8 on x86_64: https://github.com/wine-mirror/wine/blob/wine-3.0.5/dlls/msvcrt/except_x86_64.c#L694-L695 */
+            int8_t direct_jmp_imm8 = 0;
+
+            memmove(&direct_jmp_imm8, setjmp_addr + 1, 1);
+            setjmp_addr = setjmp_addr + 2 + direct_jmp_imm8;
+            printf("=> direct jump to %#" PRIxPTR "\n",
+                   (uintptr_t)setjmp_addr);
+        }
+#    endif
+    }
+#endif
+
 #ifdef sigsetjmp_symbol
     if (sigsetjmp_pcshift) {
         printf("sigsetjmp is at %#" PRIxPTR " +%#" PRIxPTR "\n", (uintptr_t)sigsetjmp_addr, sigsetjmp_pcshift);
@@ -537,20 +635,6 @@ static const struct known_libc *identify_libc(void)
 #endif
 
     for (idx = 0; idx < sizeof(libc_database) / sizeof(libc_database[0]); idx++) {
-#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
-        /* As Windows imports code from a DLL, select the description according to the architecture */
-        if (strcmp(libc_database[idx].os_name, "Windows"))
-            continue;
-#    if defined(__x86_64__)
-        if (strcmp(libc_database[idx].arch_name, "x86_64 (amd64)"))
-            continue;
-#    elif defined(__i386__)
-        if (strcmp(libc_database[idx].arch_name, "x86_32"))
-            continue;
-#    else
-            continue;
-#    endif
-#else
         if (!libc_database[idx].setjmp_code_len && !libc_database[idx].sigsetjmp_code_len)
             continue;
         if (memcmp(setjmp_addr, libc_database[idx].setjmp_code, libc_database[idx].setjmp_code_len))
@@ -559,7 +643,6 @@ static const struct known_libc *identify_libc(void)
         if (memcmp(sigsetjmp_addr, libc_database[idx].sigsetjmp_code, libc_database[idx].sigsetjmp_code_len))
             continue;
 #    endif
-#endif
         return &libc_database[idx];
     }
 
