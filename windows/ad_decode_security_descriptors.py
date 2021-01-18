@@ -43,10 +43,18 @@ import attr
 logger = logging.getLogger(__name__)
 
 
+# Well-known Security Identifiers (SIDs) from:
+# * https://docs.microsoft.com/en-us/windows/win32/secauthz/sid-strings
+# * https://docs.microsoft.com/en-us/windows/win32/secauthz/well-known-sids
+# * https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/f4296d69-1c0f-491f-9587-a960b292d070
+#   Abbreviated form of a well-known SID
+# * https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/81d92bba-d22b-4a8c-908a-554ab29148ab
+#   Well-known SID structure values and their matching descriptions
 WELL_KNOWN_SIDS: Dict[str, Tuple[str, str]] = {
     'S-1-1-0': ('WD', 'World/Everyone'),
     'S-1-3-0': ('CO', 'Creator Owner'),
     'S-1-3-1': ('CG', 'Creator Group'),
+    'S-1-3-4': ('OW', 'Creator Owner Rights'),
     'S-1-5-2': ('NU', 'Network logon User'),
     'S-1-5-4': ('IU', 'Interactively logged-on User'),
     'S-1-5-6': ('SU', 'Service logon User'),
@@ -58,6 +66,8 @@ WELL_KNOWN_SIDS: Dict[str, Tuple[str, str]] = {
     'S-1-5-18': ('SY', 'Local System'),
     'S-1-5-19': ('LS', 'Local Service'),
     'S-1-5-20': ('NS', 'Network Service'),
+    'S-1-5-33': ('WR', 'Write Restricted Code'),
+
     'S-1-5-32-544': ('BA', 'Built-in Administrators'),
     'S-1-5-32-545': ('BU', 'Built-in Users'),
     'S-1-5-32-546': ('BG', 'Built-in Guests'),
@@ -71,7 +81,17 @@ WELL_KNOWN_SIDS: Dict[str, Tuple[str, str]] = {
     'S-1-5-32-555': ('RD', 'Built-in Remote Desktop Users'),
     'S-1-5-32-556': ('NO', 'Built-in Network Configuration Operators'),
     'S-1-5-32-558': ('MU', 'Built-in Performance Monitoring Users'),
+    'S-1-5-32-559': ('LU', 'Built-in Performance Logging Users'),
+    'S-1-5-32-568': ('IS', 'Built-in Internet Users'),
+    'S-1-5-32-569': ('CY', 'Built-in Cryptographic Operators'),
+    'S-1-5-32-573': ('ER', 'Built-in Event Log Readers Group'),
     'S-1-5-32-574': ('CD', 'Built-in CertSVC (Certificate Service) DCOM Access Group'),
+    'S-1-5-32-575': ('RA', 'Built-in RDS Remote Access Servers'),
+    'S-1-5-32-576': ('ES', 'Built-in RDS Endpoint Servers'),
+    'S-1-5-32-577': ('MS', 'Built-in RDS Management Servers'),
+    'S-1-5-32-578': ('HA', 'Built-in Hyper V Admins'),
+    'S-1-5-32-579': ('AA', 'Built-in Access Control Assistance Operators'),
+    'S-1-5-32-580': ('RM', 'Built-in Remote Management Users'),
 
     'S-1-5-21-0-0-0-498': ('RO', 'Enterprise Read-Only Domain Controllers Group'),
     'S-1-5-21-0-0-0-500': ('LA', 'Local Administrator'),
@@ -85,7 +105,18 @@ WELL_KNOWN_SIDS: Dict[str, Tuple[str, str]] = {
     'S-1-5-21-0-0-0-518': ('SA', 'Schema Administrators'),
     'S-1-5-21-0-0-0-519': ('EA', 'Entreprise Admins'),
     'S-1-5-21-0-0-0-520': ('PA', 'Group Policy Creator Owners (Admins)'),
+    'S-1-5-21-0-0-0-522': ('CN', 'Clonable Domain Controllers'),
     'S-1-5-21-0-0-0-553': ('RS', 'RAS (Remote Access Services) Servers'),
+
+    'S-1-5-84-0-0-0-0-0': ('UD', 'User Mode Driver'),
+
+    'S-1-15-2-1': ('AC', 'All App Packages'),
+
+    'S-1-16-4096': ('LW', 'Low integrity level'),
+    'S-1-16-8192': ('ME', 'Medium integrity level'),
+    'S-1-16-8448': ('MP', 'Medium-plus integrity level'),
+    'S-1-16-12288': ('HI', 'High integrity level'),
+    'S-1-16-16384': ('SI', 'System integrity level'),
 }
 
 # Security identifiers local to the system
