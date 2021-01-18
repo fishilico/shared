@@ -74,6 +74,8 @@ EXAMPLES_UTF8 = [
     b'\xe2\x98\x80',  # U+2605 black sun with rays
     b'\xe2\x98\x85',  # U+2605 black star
     b'\xe2\x88\x95',  # U+2215 division slash
+    b'\xe2\x98\x90',  # U+2610 ballot box
+    b'\xe2\x98\x91',  # U+2611 ballot box with check
     b'\xe2\x98\xa2',  # U+2622 radioactive sign
     b'\xe2\x98\xba',  # U+263A white smiling face
     b'\xe2\x99\xa5',  # U+2665 black heart suit
