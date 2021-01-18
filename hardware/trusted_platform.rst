@@ -244,6 +244,11 @@ Its most significant octet (8 bits) identifies the type of the referenced resour
 
 Each resource also have a *name*, which is either the handle (for ``MSO = 0x00, 0x02, 0x03, 0x40``) or the hash digest of the public data associated with the resource, prefixed by the name of the hash algorithm (for ``MSO = 0x01, 0x80, 0x81``).
 
+In TPM 2.0, quoting PCRs (i.e. signing them to attest their values) use an *Attestation Key* (AK), which is the successor of TPM 1.2's AIK.
+
+  - This is described more thoroughly (as well as restricted keys, which can only sign data coming from the TPM) in https://developers.tpm.dev/posts/10242712.
+  - An AK is linked to an EK.
+
 Software Stack
 --------------
 
@@ -268,6 +273,31 @@ The commands use several API (Application Programming Interface):
 * SAPI (TSS 2.0 System API): this layer is intended to sit on top of the TCTI providing marshaling/unmarshalling for TPM commands and responses.
 * ESAPI (TSS 2.0 Enhanced System API): this layer is intended to sit on top of the System API providing enhanced context management and cryptography.
 * FAPI (TSS 2.0 Feature API): this layer sits above the ESAPI and provides a highlevel interface including a policy definition language and key store.
+
+Simulator with vTPM
+~~~~~~~~~~~~~~~~~~~
+
+On a system without a TPM, it is possible to add a virtual one by using the module `tpm_vtpm_proxy` (since Linux 4.8) and the project `swtpm` (https://github.com/stefanberger/swtpm), with the following configuration for systemd:
+
+.. code-block:: sh
+
+    echo tpm_vtpm_proxy > /etc/modules-load.d/virtual-tpm.conf
+    mkdir /var/lib/swtpm
+    cat > /etc/systemd/system/swtpm.service << EOF
+    [Unit]
+    # Require modprobe tpm_vtpm_proxy
+    ConditionPathExists=/dev/vtpmx
+    Description=Software TPM
+
+    [Service]
+    Type=simple
+    ExecStart=/usr/bin/swtpm chardev --tpm2 --vtpm-proxy --tpmstate dir=/var/lib/swtpm
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+
+This creates devices `/dev/tpm0` and `/dev/tpmrm0`, usable in the same way as a hardware TPM.
 
 Hardware interfaces with a TPM device
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
