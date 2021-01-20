@@ -7,7 +7,7 @@ NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
 HAVE_PYTHON_CFFI := $(call can-run,$(PYTHON) -c 'import cffi')
 HAVE_PYTHON_NUMPY := $(call can-run,$(PYTHON) -c 'import numpy')
-HAVE_PYTHON_Z3 := $(call can-run,$(PYTHON) -c 'import z3')
+HAVE_PYTHON_Z3 := $(call can-run,$(PYTHON) -c 'import z3;z3.BitVec')
 
 ifneq ($(HAVE_PYTHON_CFFI),y)
 NONTEST_BINARIES += cffi_example.py cffi_numpy.py
