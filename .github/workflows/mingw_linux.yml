@@ -1,0 +1,63 @@
+name: Run tests with MinGW on Linux
+
+on: [push, pull_request]
+
+jobs:
+  mingw-linux-test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        compiler:
+          - x86_64-w64-mingw32-gcc
+          - i686-w64-mingw32-gcc
+        unicode: [y, n]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        if ${{ matrix.compiler == 'i686-w64-mingw32-gcc' }} ; then
+            sudo dpkg --add-architecture i386
+        fi
+
+        sudo apt-get update
+        sudo apt-get install -y \
+            cargo \
+            coq \
+            gcc-mingw-w64 \
+            openjdk-11-jdk \
+            pkgconf
+
+        if ${{ matrix.compiler == 'i686-w64-mingw32-gcc' }} ; then
+            # libc6 needs to be installed separately, otherwise apt-get fails to
+            # configure things:
+            #   E: Could not configure 'libc6:i386'.
+            #   E: Could not perform immediate configuration on 'libgcc-s1:i386'.
+            #   Please see man 5 apt.conf under APT::Immediate-Configure for details. (2)
+            sudo apt-get install -y libc6:i386
+            # Install wine32:i386 dependencies explicitly, otherwise apt-get complains
+            # "The following packages have unmet dependencies"
+            #sudo apt-get install -y libgd3:i386 libgphoto2-6:i386 libwine:i386 wine32:i386
+            sudo apt-get install -y libgd3:i386 libgphoto2-6:i386 libwine:i386 wine32:i386
+        else
+            sudo apt-get install -y wine-stable wine64
+        fi
+
+    - name: Configure the environment
+      run: |
+        echo "OS=Windows_NT" >> "$GITHUB_ENV"
+        echo "CC=${{ matrix.compiler }}" >> "$GITHUB_ENV"
+        echo "WINCC=${{ matrix.compiler }}" >> "$GITHUB_ENV"
+        echo "HAVE_UNICODE=${{ matrix.unicode }}" >> "$GITHUB_ENV"
+        echo "PYTHON=python3" >> "$GITHUB_ENV"
+        echo "CARGO=false" >> "$GITHUB_ENV"
+
+        # Display the final environment file, for debugging purpose
+        cat "$GITHUB_ENV"
+
+    - name: Run tests
+      run: make test
+
+    - name: List targets which are not built
+      run: make list-nobuild
