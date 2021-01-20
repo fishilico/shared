@@ -23,6 +23,7 @@ else
     BIN_EXT="bin"
 fi
 PROG="$(dirname -- "$0")/antidebug.$BIN_EXT"
+GDB_COMMANDS="${PROG}.gdbinit"
 
 # Use "set" to expand the command array in sh
 set -- $GDB
@@ -33,7 +34,7 @@ then
 fi
 
 # In some Docker environments, tracing is not permitted
-if ! "$@" --quiet -ex r --return-child-result true < /dev/null
+if ! "$@" --quiet -ex run -ex quit --return-child-result true < /dev/null
 then
     echo >&2 "gdb is not allowed here. Skipping test."
     exit
@@ -46,11 +47,17 @@ then
     exit 1
 fi
 
-"$@" --quiet --return-child-result < /dev/null \
-    -ex 'b sensitive_computation' \
-    -ex 'r' \
+# Write commands in a file, in order to prevent space splitting issues on Windows with "-ex 'break ...'"
+cat > "$GDB_COMMANDS" << EOF
+break sensitive_computation
+run
+quit
+EOF
+
+"$@" --quiet --batch --command="$GDB_COMMANDS" --return-child-result < /dev/null \
     "$PROG"
 EXITCODE=$?
+rm -f "$GDB_COMMANDS"
 
 # antidebug program exits with code 3 when it has detected all debugging features
 if [ $EXITCODE != 3 ]
