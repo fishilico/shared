@@ -211,7 +211,9 @@ pkg pciutils
 pkg picocom
 pkg read-edid
 pkg smartmontools
+pkg tpm2-pkcs11
 pkg tpm2-tools
+pkg tpm2-tss-engine
 pkg usbutils
 pkg wireless_tools
 pkg wpa_supplicant

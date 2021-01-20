@@ -137,12 +137,14 @@ pkg fwupd
 pkg gpm
 pkg hwloc-nox
 pkg iw
+pkg libtpm2-pkcs11-1
 pkg lm-sensors
 pkg lshw
 pkg pciutils
 pkg picocom
 pkg read-edid
 pkg rfkill
+pkg tpm2-tools
 pkg usbutils
 pkg wireless-tools
 pkg wpasupplicant

@@ -132,6 +132,8 @@ pkg iw
 pkg lshw
 pkg pciutils
 pkg read-edid
+pkg tpm2-pkcs11
+pkg tpm2-tools
 pkg usbutils
 pkg wireless-tools
 pkg wpa_supplicant
