@@ -224,7 +224,7 @@ pkg cryfs
 pkg cryptsetup
 pkg dosfstools
 pkg exfat-utils
-pkg extundelete
+pkg ext4magic
 pkg innoextract
 pkg lvm2
 pkg lzop
@@ -240,7 +240,7 @@ pkg zip
 
 # Network
 pkg arptables
-pkg bind-tools
+pkg bind
 pkg bridge-utils
 pkg curl
 pkg cyrus-sasl-gssapi
@@ -282,7 +282,6 @@ pkg traceroute
 pkg unbound
 pkg wget
 pkg whois
-pkg wireguard-dkms
 pkg wireguard-tools
 pkg wireshark-cli
 
@@ -471,7 +470,7 @@ then
     pkg wine wine-gecko wine-mono winetricks
 
     # MinGW64
-    aurpkg mingw-w64-binutils mingw-w64-gcc
+    pkg mingw-w64-binutils mingw-w64-gcc
 
     # Optional
     #pkg gnome-keyring
@@ -507,7 +506,6 @@ then
     pkg arm-none-eabi-gcc
     pkg arm-none-eabi-gdb
     pkg arm-none-eabi-newlib
-    pkg beignet
     pkg binwalk
     pkg bochs
     pkg clinfo
@@ -523,7 +521,7 @@ then
     pkg impacket
     pkg ipcalc
     pkg ipv6calc
-    pkg jre10-openjdk
+    pkg jre-openjdk
     pkg libnfc
     pkg libvirt
     #pkg lxc
@@ -591,6 +589,7 @@ then
     aurpkg arm-linux-gnueabihf-gcc
     aurpkg arm-linux-gnueabihf-glibc
     aurpkg arm-linux-gnueabihf-linux-api-headers
+    #aurpkg beignet  # For using OpenCL on some Intel iGPU
     aurpkg bluez-hcitool
     aurpkg bluez-rfcomm
     aurpkg coccinelle
