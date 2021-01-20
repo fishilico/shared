@@ -131,7 +131,7 @@ def check_file_sort_order(file_path):
     result = True
     current_lines = []
     title_line = None
-    with file_path.open('r') as stream:
+    with file_path.open('r', encoding='utf8') as stream:
         for line in stream:
             if not line.endswith('\n'):
                 print(f"{file_path}: no \\n at the end of {repr(line)}")
