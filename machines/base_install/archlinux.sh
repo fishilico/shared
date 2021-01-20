@@ -533,6 +533,7 @@ then
     pkg perl-net-dns
     pkg php
     pkg php-sqlite
+    pkg podman
     pkg python-argon2_cffi
     pkg python-gmpy2
     pkg python-kaitaistruct
