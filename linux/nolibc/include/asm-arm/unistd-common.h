@@ -395,5 +395,6 @@
 #define __NR_pidfd_getfd (__NR_SYSCALL_BASE + 438)
 #define __NR_faccessat2 (__NR_SYSCALL_BASE + 439)
 #define __NR_process_madvise (__NR_SYSCALL_BASE + 440)
+#define __NR_epoll_pwait2 (__NR_SYSCALL_BASE + 441)
 
 #endif /* _ASM_ARM_UNISTD_COMMON_H */

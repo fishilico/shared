@@ -431,9 +431,10 @@
 #define __NR_pidfd_getfd 438
 #define __NR_faccessat2 439
 #define __NR_process_madvise 440
+#define __NR_epoll_pwait2 441
 
 #ifdef __KERNEL__
-#define __NR_syscall_max 440
+#define __NR_syscall_max 441
 #endif
 
 #endif /* _ASM_X86_UNISTD_H */
