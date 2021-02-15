@@ -66,6 +66,10 @@ EXAMPLES_UTF8 = [
     b'\xce\xa9',  # U+3A9 Greek capital letter Omega
     b'\xe2\x80\xa2',  # U+2022 bullet
     b'\xe2\x80\xbd',  # U+203D interrobang
+    b'\xe2\x80\x8b',  # U+200B zero width space (ZWSP)
+    b'\xe2\x80\x8c',  # U+200C zero width non-joiner (ZWNJ)
+    b'\xe2\x80\x8d',  # U+200C zero width joiner (ZWJ)
+    b'\xe2\x80\x8e',  # U+200F left-to-right mark (LRM)
     b'\xe2\x80\x8f',  # U+200F right-to-left mark (RLM)
     b'\xe2\x82\xac',  # U+20AC euro sign
     b'\xe2\x86\x92',  # U+2192 rightwards arrow
