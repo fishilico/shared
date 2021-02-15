@@ -31,6 +31,10 @@ for example ``0000000042-0000000002.log`` for the 42th boot, 3rd wake-up after
 sleep (probably).
 
 The events are specified in https://trustedcomputinggroup.org/resource/tcg-efi-protocol-specification/
+
+fwupd provides a tool to decode the event log named fwupdtpmevlog. This helps
+find issues such as mismatching PCR0 values:
+https://github.com/fwupd/fwupd/wiki/TPM-PCR0-differs-from-reconstruction
 """
 import argparse
 import binascii
