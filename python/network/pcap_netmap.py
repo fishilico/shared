@@ -586,11 +586,14 @@ class AnalysisContext(object):
         self.hwaddrdb = HwAddrDatabase()
         self.ipaddrdb = IpAddrDatabase()
         self.ipnetdb = IpNetworkDatabase()
-        self.seen_eth_dec_mop_dna_rc = False
-        self.seen_eth_lldp = False
-        self.seen_eth_fortinet = False
-        self.seen_eth_802_11 = False
-        self.seen_eth_aerohive = False
+        self.seen_eth_0x2600_aerohive = False
+        self.seen_eth_0x6002_dec_mop_dna_rc = False
+        self.seen_eth_0x887b_homeplug = False
+        self.seen_eth_0x889x_fortinet = False
+        self.seen_eth_0x88cc_lldp = False
+        self.seen_eth_0x88d9_lltd = False
+        self.seen_eth_0x88e1_homeplug_av = False
+        self.seen_eth_0x890d_802_11 = False
         self.seen_eth_0x9001 = False
 
     def post_processing(self, add_local_networks=False):
@@ -755,20 +758,20 @@ class AnalysisContext(object):
             aerohive_data = base_pkt[1].load
             if aerohive_data.startswith(b'\x00\x00\xaf\x81\x01\x00aerohive gratuitous arp'):
                 logger.debug("Seen AeroHive[%s] %r", hw_src, aerohive_data[15:].rstrip(b'\0'))
-                if not self.seen_eth_aerohive:
+                if not self.seen_eth_0x2600_aerohive:
                     logger.info(
                         "Broadcast AeroHive Gratuitous ARP found in capture. Maybe an AeroHive WiFi network (%r)",
                         ethpkt)
-                    self.seen_eth_aerohive = True
+                    self.seen_eth_0x2600_aerohive = True
                 return
         if pkt_type == 0x6002:  # DNA_RC, for Decnet Maintenance Operation Protocol (MOP) Remote Console (RC)
             if hw_dst != 'ab:00:00:02:00:00':
                 logger.warning("Unexpected Ethernet destination for DEC MOP DNA_RC packet: %r", ethpkt)
-            elif not self.seen_eth_dec_mop_dna_rc:
+            elif not self.seen_eth_0x6002_dec_mop_dna_rc:
                 logger.info(
                     "DEC MOP DNA_RC packet found in capture. This may signal a Cisco router (%r)",
                     ethpkt)
-                self.seen_eth_dec_mop_dna_rc = True
+                self.seen_eth_0x6002_dec_mop_dna_rc = True
             return
         if pkt_type == 0x8035:  # Reverse ARP (https://tools.ietf.org/html/rfc903)
             rarppkt = base_pkt[1]
@@ -792,35 +795,59 @@ class AnalysisContext(object):
                 self.hwaddrdb.add_ipv6(ippkt.dst, hw_dst, 'IPv6 packet destination')
             self.analyze_ipv6_packet(ippkt)
             return
-        if pkt_type == 0x888e:  # EAPOL (IEEE 802.1X)
-            return
-        if pkt_type == 0x88cc:  # LLDP
-            # Scapy does not understand LLDP, but Wireshark does.
-            # These packets may given VLAN IDs and network names.
-            if not self.seen_eth_lldp:
+        if pkt_type == 0x887b and hw_dst == 'ff:ff:ff:ff:ff:ff':
+            # Homeplug, broadcasted protocol, eventualy in a VLAN 101 in a home network
+            if not self.seen_eth_0x887b_homeplug:
                 logger.info(
-                    "LLDP found in packet capture. This may give useful information about the network (%r)",
+                    "Homeplug heartbit found in capture: %r",
                     ethpkt)
-                # logger.debug("Skipping LLDP packet %r", ethpkt)
-                self.seen_eth_lldp = True
+                self.seen_eth_0x887b_homeplug = True
+            return
+        if pkt_type == 0x888e:  # EAPOL (IEEE 802.1X)
             return
         if pkt_type in (0x8890, 0x8891, 0x8893):
             # Fortinet hardware uses these special ethernet types
             # https://help.fortinet.com/fos50hlp/56/Content/FortiOS/fortigate-high-availability/HA_failoverHeartbeat.htm
-            if not self.seen_eth_fortinet:
+            if not self.seen_eth_0x889x_fortinet:
                 logger.info(
                     "Fortinet Heartbeat found in capture. This may give useful information about the network (%r)",
                     ethpkt)
-                self.seen_eth_fortinet = True
+                self.seen_eth_0x889x_fortinet = True
+            return
+        if pkt_type == 0x88cc:  # LLDP
+            # Scapy does not understand LLDP, but Wireshark does.
+            # These packets may given VLAN IDs and network names.
+            if not self.seen_eth_0x88cc_lldp:
+                logger.info(
+                    "LLDP found in packet capture. This may give useful information about the network (%r)",
+                    ethpkt)
+                # logger.debug("Skipping LLDP packet %r", ethpkt)
+                self.seen_eth_0x88cc_lldp = True
+            return
+        if pkt_type == 0x88d9:  # LLTD (Link Layer Topology Discovery)
+            if not self.seen_eth_0x88d9_lltd:
+                logger.info(
+                    "LLTP found in packet capture. This may give useful information about the network (%r)",
+                    ethpkt)
+                self.seen_eth_0x88d9_lltd = True
+            return
+        if pkt_type == 0x88e1 and hw_dst == 'ff:ff:ff:ff:ff:ff':
+            # Homeplug AV, broadcasted protocol, eventualy in a VLAN 101 in a home network
+            # in Wireshark: "HomePlug AV: CM_BRG_INFO.REQ (Get Bridge Informations Request)"
+            if not self.seen_eth_0x88e1_homeplug_av:
+                logger.info(
+                    "Homeplug AV packet found in capture: %r",
+                    ethpkt)
+                self.seen_eth_0x88e1_homeplug_av = True
             return
         if pkt_type == 0x890d:  # IEEE 802.11 data encapsulation (WiFi)
             # The source MAC address is probably a WiFi access point on a wired network
             self.hwaddrdb.add_bridge(hw_src)
-            if not self.seen_eth_802_11:
+            if not self.seen_eth_0x890d_802_11:
                 logger.info(
                     "Encapsulated 802.11 data found, probably emitted by a WiFi access point (%r)",
                     ethpkt)
-                self.seen_eth_802_11 = True
+                self.seen_eth_0x890d_802_11 = True
             return
         if pkt_type == 0x9000:  # Configuration Test Protocol (loopback), from a Cisco switch
             self.hwaddrdb.add_bridge(hw_src)
