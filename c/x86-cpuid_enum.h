@@ -106,6 +106,7 @@ __extension__ static const char* cpuidstr_6_eax[32] = {
 __extension__ static const char* cpuidstr_7_ebx[32] = {
     [0] = "fsgsbase",
     [1] = "tsc_adjust",
+    [2] = "sgx",
     [3] = "bmi1",
     [4] = "hle",
     [5] = "avx2",
@@ -159,6 +160,7 @@ __extension__ static const char* cpuidstr_7_ecx[32] = {
     [27] = "movdiri",
     [28] = "movdir64b",
     [29] = "enqcmd",
+    [30] = "sgx_lc",
 };
 
 /**
@@ -176,6 +178,7 @@ __extension__ static const char* cpuidstr_7_edx[32] = {
     [16] = "tsxldtrk",
     [18] = "pconfig",
     [19] = "arch_lbr",
+    [23] = "avx512_fp16",
     [26] = "spec_ctrl",
     [27] = "intel_stibp",
     [28] = "flush_l1d",
