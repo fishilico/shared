@@ -84,6 +84,7 @@ def generate_p12_keystore(password):
         run_process_with_input(
             [
                 'keytool', '-genkeypair', '-noprompt',
+                '-keyalg', 'dsa',
                 '-storetype', 'pkcs12',
                 '-keystore', ks_path,
                 '-storepass', password,

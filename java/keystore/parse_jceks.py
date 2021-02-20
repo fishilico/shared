@@ -114,6 +114,7 @@ def generate_keystore(store_type, password):
         run_process_with_input(
             [
                 'keytool', '-genkeypair', '-noprompt',
+                '-keyalg', 'dsa',
                 '-storetype', store_type,
                 '-keystore', ks_path,
                 '-storepass', password,
@@ -141,6 +142,7 @@ def generate_keystore(store_type, password):
             run_process_with_input(
                 [
                     'keytool', '-genseckey',
+                    '-keyalg', 'des',
                     '-storetype', store_type,
                     '-keystore', ks_path,
                     '-storepass', password,
