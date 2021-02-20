@@ -81,6 +81,7 @@ checkpatch:
 	$(CHECKPATCH) --no-tree --show-types \
 		--file $(filter-out %.mod.c, $(wildcard *.c)) \
 		--ignore CONSTANT_COMPARISON \
+		--ignore EMBEDDED_FILENAME \
 		--ignore LINUX_VERSION_CODE \
 		--ignore LONG_LINE \
 		--ignore LONG_LINE_COMMENT \
