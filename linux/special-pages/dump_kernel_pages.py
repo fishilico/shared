@@ -66,12 +66,14 @@ with open('/proc/self/maps', 'r') as fmaps:
         if name in ('stack', 'heap'):
             continue
 
-        # Retrieve the pages
+        # Retrieve the pages into a file
+        filename = 'kernel-{}.out'.format(name)
         addr1, addr2 = [int(addr, 16) for addr in sline[0].split('-', 1)]
         assert addr1 < addr2
-
-        # Write the pages to a file
-        filename = 'kernel-{}.out'.format(name)
-        print("{}: {:x}..{:x} {}".format(filename, addr1, addr2, sline[1]))
+        perms = sline[1]
+        print("{}: {:x}..{:x} {}".format(filename, addr1, addr2, perms))
+        if name == 'vsyscall' and addr1 == 0xffffffffff600000 and addr2 == 0xffffffffff601000 and perms == '--xp':
+            print("... Skipping executable-only vsyscall page")
+            continue
         with open(filename, 'wb') as fout:
             raw_write(fout, addr1, addr2 - addr1)
