@@ -443,8 +443,17 @@ static const struct known_libc libc_database[] = {
 
     /* http://git.musl-libc.org/cgit/musl/tree/src/setjmp/x86_64/setjmp.s?h=v1.1.24 */
     /* http://git.musl-libc.org/cgit/musl/tree/src/signal/x86_64/sigsetjmp.s?h=v1.1.24 */
-    DEFINE_KNOWN_LIBC("Linux", "musl", "x86_64 (amd64)",
+    DEFINE_KNOWN_LIBC("Linux", "musl<1.2.2", "x86_64 (amd64)",
         "H\x89\x1fH\x89o\x08L\x89g\x10L\x89o\x18L\x89w L\x89\x7f(H\x8dT$\x08H\x89W0H\x8b\x14$H\x89W8H1\xc0\xc3",
+        "",
+        linux_musl_x86_64_jmp_buf_desc, linux_musl_x86_64_sigjmp_buf_desc,
+        NULL, NULL),
+    /* http://git.musl-libc.org/cgit/musl/tree/src/setjmp/x86_64/setjmp.s?h=v1.2.2
+     * Commit http://git.musl-libc.org/cgit/musl/commit/?id=c6a6fe4ccdba92c518dfbf337cda1bf0f697527d
+     * removed a useless REX-prefix on xor %eax, %eax
+     */
+    DEFINE_KNOWN_LIBC("Linux", "musl>=1.2.2", "x86_64 (amd64)",
+        "H\x89\x1fH\x89o\x08L\x89g\x10L\x89o\x18L\x89w L\x89\x7f(H\x8dT$\x08H\x89W0H\x8b\x14$H\x89W81\xc0\xc3",
         "",
         linux_musl_x86_64_jmp_buf_desc, linux_musl_x86_64_sigjmp_buf_desc,
         NULL, NULL),
