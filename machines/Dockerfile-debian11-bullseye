@@ -98,15 +98,15 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (Debian 10.2.0-16) 10.2.0
-#       clang: clang version 9.0.1-15+b1
-#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 10-win32 20200525
-#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 10-win32 20200525
-#       wine: wine-5.0 (Debian 5.0-4)
-#       Linux kernel: 5.9.0-2-amd64
-#       python3: Python 3.8.6
-#       javac: javac 11.0.9.1
-#       java: openjdk 11.0.9.1 2020-11-04
-#       rustc: rustc 1.47.0
-#       cargo: cargo 1.42.1
-#       coqc: The Coq Proof Assistant, version 8.12.0 (October 2020) compiled on Oct 13 2020 22:18:48 with OCaml 4.11.1
+#       gcc: gcc (Debian 10.2.1-6) 10.2.1 20210110
+#       clang: Debian clang version 11.0.1-2
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 10-win32 20210110
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 10-win32 20210110
+#       wine: wine-5.0.3 (Debian 5.0.3-3)
+#       Linux kernel: 5.10.0-3-amd64
+#       python3: Python 3.9.1+
+#       javac: javac 11.0.10
+#       java: openjdk 11.0.10 2021-01-19
+#       rustc: rustc 1.48.0
+#       cargo: cargo 1.46.0
+#       coqc: The Coq Proof Assistant, version 8.12.0 (November 2020) compiled on Nov 25 2020 6:34:32 with OCaml 4.11.1
