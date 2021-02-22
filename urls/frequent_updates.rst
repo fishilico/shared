@@ -70,6 +70,7 @@ Code repositories
 * https://sourceware.org/git/?p=glibc.git;a=shortlog glibc
 * http://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=shortlog GnuPG
 * https://github.com/libressl-portable/portable LibreSSL
+* https://github.com/jedisct1/libsodium libsodium
 * https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/log/
   Linux
 * http://git.musl-libc.org/cgit/musl musl

@@ -19,8 +19,12 @@ Fun stuff
   Take me to another useless website please
 * https://www.windy.com/
   Windy: Wind map & weather forecast
+* http://stuffin.space/
+  Stuff in Space (a realtime 3D map of objects in Earth orbit, visualized using WebGL)
 * https://0ver.org/
   ZeroVer: 0-based Versioning, Software's most popular versioning scheme!
+* https://file.pizza/
+  Free peer-to-peer file transfers in your browser.
 
 Other
 -----
@@ -52,6 +56,9 @@ Other
 
 * https://www.thispersondoesnotexist.com/
   Imagined by a GAN (generative adversarial network) StyleGAN2 (Dec 2019) - Karras et al. and Nvidia
+
+* https://www.securemessagingapps.com/
+  Secure Messaging Apps Comparison
 
 Games
 -----

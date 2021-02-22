@@ -23,6 +23,7 @@ Linux
 * https://www.brow.sh/ brow.sh, the modern text-based browser
 * http://www.brendangregg.com/Perf/linux_observability_tools.png
   Linux Performance Observability tools
+* https://repology.org/ Repology, the packaging hub
 
 Windows
 -------
@@ -91,3 +92,5 @@ Other
   Day 37: After 5 days, my OS doesn't crash when I press a key
 * https://blogs.gnome.org/hughsie/2019/11/18/google-and-fwupd/
   Google and fwupd sitting in a tree
+* https://github.com/binarly-io/efiXplorer
+  efiXplorer - IDA plugin for UEFI firmware analysis and reverse engineering automation

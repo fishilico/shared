@@ -106,6 +106,10 @@ Hacking
   LD_PRELOAD Linux rootkit (x86 & ARM)
 * https://bitvijays.github.io/LFC-VulnerableMachines.html#unprivileged-shell-to-privileged-shell
   CTF Series : Vulnerable Machines
+* https://github.com/Ciphey/Ciphey
+  Fully automated decryption tool using natural language processing & artificial intelligence, along with some common sense.
+* https://mahlet-inc.github.io/
+  Hobbits is a software platform for analyzing, processing, and visualizing bits.
 
 * Lists of programs that can be used for local privilege escalation:
 
@@ -228,6 +232,9 @@ Programming
 * https://github.com/RustSec/advisory-db
   Security advisory database for Rust crates published through crates.io
 
+* https://internalpointers.com/post/modern-cmake-beginner-introduction
+  Introduction to modern CMake for beginners
+
 Rust programming
 ~~~~~~~~~~~~~~~~
 
@@ -303,6 +310,7 @@ Internet
 * https://caniuse.com/ Can I use... Support tables for HTML5, CSS3, etc
 * https://github.com/qdm12/private-internet-access-docker
   Private internet access openvpn client in a lightweight Docker container
+* https://awwapp.com/ A Web Whiteboard
 
 * Free Web development reverse proxies:
 
