@@ -69,6 +69,10 @@ static bool test_open_by_handle_with_name(const char *pathname, bool is_file)
         } else if (errno == ENOENT) {
             printf("%s does not exist\n", pathname);
             return true;
+        } else if (errno == ENOTSUP) {
+            /* For example in containers using overlay filesystem do not implement "fh_to_dentry" */
+            printf("%s does not support name_to_handle_at\n", pathname);
+            return true;
         }
         perror("name_to_handle_at");
         return false;
