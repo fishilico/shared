@@ -35,12 +35,15 @@ import requests
 logger = logging.getLogger(__name__)
 
 
-def list_gitlab_user_projects(gitlab_url, username):
+def list_gitlab_user_projects(gitlab_url, username, is_group):
     """Use Gitlab's API to list the projects of a user
 
     https://docs.gitlab.com/ee/api/projects.html#list-user-projects
     """
-    endpoint_url = '{}/api/v4/users/{}/projects'.format(gitlab_url, username)
+    if is_group:
+        endpoint_url = '{}/api/v4/groups/{}/projects'.format(gitlab_url, username)
+    else:
+        endpoint_url = '{}/api/v4/users/{}/projects'.format(gitlab_url, username)
     response = requests.get(endpoint_url, allow_redirects=False)
     if response.status_code != 200:
         raise ValueError("unsuccessful HTTP status code {}".format(response.status_code))
@@ -93,6 +96,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description="List the gitlab projects of a user")
     parser.add_argument('user', metavar="USERNAME", type=str,
                         help="username to list the projects from")
+    parser.add_argument('-g', '--group', action='store_true',
+                        help="request projects from a group instead of a user")
     parser.add_argument('-c', '--clone', action='store_true',
                         help="clone the projects")
     parser.add_argument('-j', '--json-out', metavar='OUTPUT_FILE', type=Path,
@@ -108,7 +113,7 @@ def main(argv=None):
     logging.basicConfig(format='[%(levelname)s] %(message)s', level=logging.DEBUG)
 
     try:
-        projects = list_gitlab_user_projects(args.url, args.user)
+        projects = list_gitlab_user_projects(args.url, args.user, args.group)
     except ValueError as exc:
         logger.error("Error: %s", exc)
         return 1
@@ -134,7 +139,7 @@ def main(argv=None):
             logger.warning("Unexpected URL %r for path %r", prj_url, prj_pathname)
             print("{} {} {}".format(prj_name, prj_pathname, prj_url))
         else:
-            path_from_name = prj_name.lower()
+            path_from_name = prj_name.lower().replace(' ', '-')
             if prj_pathname == path_from_name:
                 print("{} {}".format(prj_name, prj_url))
             else:
