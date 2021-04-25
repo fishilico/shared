@@ -67,7 +67,7 @@ typedef struct _RTL_USER_PROCESS_PARAMETERS {
     DWORD Flags; /* 0x008 0x008 */
     DWORD DebugFlags; /* 0x00c 0x00c */
     HANDLE ConsoleHandle; /* 0x010 0x010 */
-    DWORD onsoleFlags; /* 0x014 0x018 */
+    DWORD ConsoleFlags; /* 0x014 0x018 */
     HANDLE StandardInput; /* 0x018 0x020 */
     HANDLE StandardOutput; /* 0x01c 0x028 */
     HANDLE StandardError; /* 0x020 0x030 */
