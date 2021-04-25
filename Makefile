@@ -87,9 +87,6 @@ endif
 ifneq ($(call can-run,$(CARGO) --version),y)
 SUBDIRS_BLACKLIST += rust%
 else
-# Old versions of rustc (<=1.34) fail to build socket2-0.3.12 because:
-#   error[E0658]: use of unstable library feature 'maybe_uninit' (see issue #53491)
-#   For more information about this error, try `rustc --explain E0658`.
 # Old versions of rustc (<=1.39) fail to build subtle-2.3.0 because:
 #   error[E0210]: type parameter `T` must be used as the type parameter for some
 #   local type (e.g., `MyStruct<T>`)
@@ -100,11 +97,14 @@ else
 # Old versions of rustc (<=1.42) fail to build object-0.23.0 because:
 #   error[E0658]: subslice patterns are unstable
 #   note: for more information, see https://github.com/rust-lang/rust/issues/62254
+# Old versions of rustc (<=1.44) fail to build socket2-0.4.0 because:
+#   error[E0658]: `match` is not allowed in a `const fn`
+#   Fnote: see issue #49146 <https://github.com/rust-lang/rust/issues/49146> for more information
 ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-4]\)\.'),y)
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
 else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\)\.'),y)
 SUBDIRS_BLACKLIST += rust/check_linux_pass% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(4[0-1]\)\.'),y)
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(4[0-4]\)\.'),y)
 SUBDIRS_BLACKLIST += rust/download_web%
 endif
 endif
