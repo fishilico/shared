@@ -96,11 +96,16 @@ else
 #   For more information about this error, try `rustc --explain E0210`.
 # Old versions of rustc (<=1.39) fail to build curl-0.4.34 because:
 #   error[E0658]: the `#[non_exhaustive]` attribute is an experimental feature
-#   ote: for more information, see https://github.com/rust-lang/rust/issues/44109
+#   note: for more information, see https://github.com/rust-lang/rust/issues/44109
+# Old versions of rustc (<=1.42) fail to build object-0.23.0 because:
+#   error[E0658]: subslice patterns are unstable
+#   note: for more information, see https://github.com/rust-lang/rust/issues/62254
 ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-4]\)\.'),y)
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
 else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\)\.'),y)
 SUBDIRS_BLACKLIST += rust/check_linux_pass% rust/download_web%
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(4[0-1]\)\.'),y)
+SUBDIRS_BLACKLIST += rust/download_web%
 endif
 endif
 
