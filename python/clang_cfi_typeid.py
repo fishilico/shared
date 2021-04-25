@@ -70,30 +70,30 @@ KNOWN_TYPEINFO_NAMES = (
     ("_ZTSry", 0x38d32f23243bcd4a, "unsigned long long restrict"),
     ("_ZTSrz", 0xbb41cedf5e8065bf, "... restrict"),
 
-    ("_ZTSCa", 0x4ff5d986e474fad1, "signed char _Complex"),
-    ("_ZTSCb", 0x4816f8ad6979290e, "bool _Complex"),
-    ("_ZTSCc", 0x7fa8f59b01ebf074, "char _Complex"),
-    ("_ZTSCd", 0x845c45c213cadb6a, "double _Complex"),
-    ("_ZTSCe", 0x64acad2a49d24cc5, "long double _Complex"),
-    ("_ZTSCf", 0x60a787870523ccec, "float _Complex"),
-    ("_ZTSCg", 0x3f4c7013309344bf, "__float128 _Complex"),
-    ("_ZTSCh", 0x569fad76e8daf47e, "unsigned char _Complex"),
-    ("_ZTSCi", 0x2361d577e2e092ee, "int _Complex"),
-    ("_ZTSCj", 0xbb363c22fb04e032, "unsigned int _Complex"),
-    ("_ZTSCl", 0xdd3fc3e7a36ca4b9, "long _Complex"),
-    ("_ZTSCm", 0x689f36a7b3b0d664, "unsigned long _Complex"),
-    ("_ZTSCn", 0xcf583a5324ef7dae, "__int128 _Complex"),
-    ("_ZTSCo", 0x219cb01a36368fb7, "unsigned __int128 _Complex"),
-    ("_ZTSCs", 0xfe00a35d68300ff3, "short _Complex"),
-    ("_ZTSCt", 0x251b44bbe7a85f0b, "unsigned short _Complex"),
-    ("_ZTSCv", 0x03ff01e73a793c5c, "void _Complex"),
-    ("_ZTSCw", 0x298f4f7f9542de9a, "wchar_t _Complex"),
-    ("_ZTSCx", 0xc57f64d471fe4abe, "long long _Complex"),
-    ("_ZTSCy", 0xd1c0634e6902a868, "unsigned long long _Complex"),
-    ("_ZTSCz", 0xe38311a225a60dba, "... _Complex"),
+    ("_ZTSCa", 0x4ff5d986e474fad1, "signed char _Complex", "signed charcomplex"),
+    ("_ZTSCb", 0x4816f8ad6979290e, "bool _Complex", "boolcomplex"),
+    ("_ZTSCc", 0x7fa8f59b01ebf074, "char _Complex", "charcomplex"),
+    ("_ZTSCd", 0x845c45c213cadb6a, "double _Complex", "doublecomplex", "doublecomplex"),
+    ("_ZTSCe", 0x64acad2a49d24cc5, "long double _Complex", "long doublecomplex"),
+    ("_ZTSCf", 0x60a787870523ccec, "float _Complex", "floatcomplex"),
+    ("_ZTSCg", 0x3f4c7013309344bf, "__float128 _Complex", "__float128complex"),
+    ("_ZTSCh", 0x569fad76e8daf47e, "unsigned char _Complex", "unsigned charcomplex"),
+    ("_ZTSCi", 0x2361d577e2e092ee, "int _Complex", "intcomplex"),
+    ("_ZTSCj", 0xbb363c22fb04e032, "unsigned int _Complex", "unsigned intcomplex"),
+    ("_ZTSCl", 0xdd3fc3e7a36ca4b9, "long _Complex", "longcomplex"),
+    ("_ZTSCm", 0x689f36a7b3b0d664, "unsigned long _Complex", "unsigned longcomplex"),
+    ("_ZTSCn", 0xcf583a5324ef7dae, "__int128 _Complex", "__int128complex"),
+    ("_ZTSCo", 0x219cb01a36368fb7, "unsigned __int128 _Complex", "unsigned __int128complex"),
+    ("_ZTSCs", 0xfe00a35d68300ff3, "short _Complex", "shortcomplex"),
+    ("_ZTSCt", 0x251b44bbe7a85f0b, "unsigned short _Complex", "unsigned shortcomplex"),
+    ("_ZTSCv", 0x03ff01e73a793c5c, "void _Complex", "voidcomplex"),
+    ("_ZTSCw", 0x298f4f7f9542de9a, "wchar_t _Complex", "wchar_tcomplex"),
+    ("_ZTSCx", 0xc57f64d471fe4abe, "long long _Complex", "long longcomplex"),
+    ("_ZTSCy", 0xd1c0634e6902a868, "unsigned long long _Complex", "unsigned long longcomplex"),
+    ("_ZTSCz", 0xe38311a225a60dba, "... _Complex", "...complex"),
 
     ("_ZTSDa", 0xfb10158115c295e9, "auto"),
-    ("_ZTSDc", 0x5d8409bc536008a9, "decltype(auto)"),
+    ("_ZTSDc", 0x5d8409bc536008a9, "decltype(auto)", None),
     ("_ZTSDd", 0xd083f9d47886cafd, "decimal64"),
     ("_ZTSDe", 0xb5cf4b4111bdd3d3, "decimal128"),
     ("_ZTSDf", 0xe1e952e08c0ad611, "decimal32"),
@@ -101,29 +101,29 @@ KNOWN_TYPEINFO_NAMES = (
     ("_ZTSDi", 0x503a7dc8daab6211, "char32_t"),
     ("_ZTSDn", 0xb22d832571e7f23f, "decltype(nullptr)"),
     ("_ZTSDs", 0xcc352155d790d4ca, "char16_t"),
-    ("_ZTSDu", 0x6b9922ed202cc991, "char8_t"),
+    ("_ZTSDu", 0x6b9922ed202cc991, "char8_t", None),
 
-    ("_ZTSGa", 0x002501a685a95653, "signed char _Imaginary"),
-    ("_ZTSGb", 0x6ab5cd51f02c10c7, "bool _Imaginary"),
-    ("_ZTSGc", 0xc204b0de682e3c32, "char _Imaginary"),
-    ("_ZTSGd", 0xe100c2d34d960fb2, "double _Imaginary"),
-    ("_ZTSGe", 0x157cb03cb1192149, "long double _Imaginary"),
-    ("_ZTSGf", 0xac7f2b45e7f73f1d, "float _Imaginary"),
-    ("_ZTSGg", 0x2d9d5727947746cf, "__float128 _Imaginary"),
-    ("_ZTSGh", 0x5dc5f758dd6a03c0, "unsigned char _Imaginary"),
-    ("_ZTSGi", 0xdcdf69d9389c2c4e, "int _Imaginary"),
-    ("_ZTSGj", 0xd3e11d44de988bd7, "unsigned int _Imaginary"),
-    ("_ZTSGl", 0x8a88d8c9f3c559a5, "long _Imaginary"),
-    ("_ZTSGm", 0x585ea9eab5c9db23, "unsigned long _Imaginary"),
-    ("_ZTSGn", 0x7d180229bea09e6c, "__int128 _Imaginary"),
-    ("_ZTSGo", 0x32096bfc85fd2c21, "unsigned __int128 _Imaginary"),
-    ("_ZTSGs", 0x5cb4f3abbb9d93ed, "short _Imaginary"),
-    ("_ZTSGt", 0x726b1738c858485d, "unsigned short _Imaginary"),
-    ("_ZTSGv", 0x0367259a0ed71ac3, "void _Imaginary"),
-    ("_ZTSGw", 0xf0269ef5f72cdcd3, "wchar_t _Imaginary"),
-    ("_ZTSGx", 0xf4e5046d5c0fa4da, "long long _Imaginary"),
-    ("_ZTSGy", 0xe6de9a2c91f3e165, "unsigned long long _Imaginary"),
-    ("_ZTSGz", 0x01f833e8ffbe3fc6, "... _Imaginary"),
+    ("_ZTSGa", 0x002501a685a95653, "signed char _Imaginary", "signed charimaginary"),
+    ("_ZTSGb", 0x6ab5cd51f02c10c7, "bool _Imaginary", "boolimaginary"),
+    ("_ZTSGc", 0xc204b0de682e3c32, "char _Imaginary", "charimaginary"),
+    ("_ZTSGd", 0xe100c2d34d960fb2, "double _Imaginary", "doubleimaginary"),
+    ("_ZTSGe", 0x157cb03cb1192149, "long double _Imaginary", "long doubleimaginary"),
+    ("_ZTSGf", 0xac7f2b45e7f73f1d, "float _Imaginary", "floatimaginary"),
+    ("_ZTSGg", 0x2d9d5727947746cf, "__float128 _Imaginary", "__float128imaginary"),
+    ("_ZTSGh", 0x5dc5f758dd6a03c0, "unsigned char _Imaginary", "unsigned charimaginary"),
+    ("_ZTSGi", 0xdcdf69d9389c2c4e, "int _Imaginary", "intimaginary"),
+    ("_ZTSGj", 0xd3e11d44de988bd7, "unsigned int _Imaginary", "unsigned intimaginary"),
+    ("_ZTSGl", 0x8a88d8c9f3c559a5, "long _Imaginary", "longimaginary"),
+    ("_ZTSGm", 0x585ea9eab5c9db23, "unsigned long _Imaginary", "unsigned longimaginary"),
+    ("_ZTSGn", 0x7d180229bea09e6c, "__int128 _Imaginary", "__int128imaginary"),
+    ("_ZTSGo", 0x32096bfc85fd2c21, "unsigned __int128 _Imaginary", "unsigned __int128imaginary"),
+    ("_ZTSGs", 0x5cb4f3abbb9d93ed, "short _Imaginary", "shortimaginary"),
+    ("_ZTSGt", 0x726b1738c858485d, "unsigned short _Imaginary", "unsigned shortimaginary"),
+    ("_ZTSGv", 0x0367259a0ed71ac3, "void _Imaginary", "voidimaginary"),
+    ("_ZTSGw", 0xf0269ef5f72cdcd3, "wchar_t _Imaginary", "wchar_timaginary"),
+    ("_ZTSGx", 0xf4e5046d5c0fa4da, "long long _Imaginary", "long longimaginary"),
+    ("_ZTSGy", 0xe6de9a2c91f3e165, "unsigned long long _Imaginary", "unsigned long longimaginary"),
+    ("_ZTSGz", 0x01f833e8ffbe3fc6, "... _Imaginary", "...imaginary"),
 
     ("_ZTSKa", 0xabc0ed19f744a038, "signed char const"),
     ("_ZTSKb", 0x7ffbb567d1d339df, "bool const"),
@@ -271,16 +271,27 @@ def decode_typeinfo(typeinfo):
 def check_known_types():
     """Check some known typeinfo names"""
     has_error = False
-    for typeinfo, known_typeid, known_type_string in KNOWN_TYPEINFO_NAMES:
+    for entry in KNOWN_TYPEINFO_NAMES:
+        typeinfo, known_typeid, known_type_string = entry[:3]
         typeid = get_typeid(typeinfo)
         if typeid != known_typeid:
             print(f"Unexpected typeid for {typeinfo!r}: {typeid:#018x} != {known_typeid:#018x}")
             has_error = True
 
-        type_string = decode_typeinfo(typeinfo)
-        if type_string != known_type_string:
-            print(f"Unexpected typeid for {typeinfo!r}: {type_string!r} != {known_type_string!r}")
-            has_error = True
+        try:
+            type_string = decode_typeinfo(typeinfo)
+        except ValueError:
+            # The type might be unknown to old versions of c++filt (like 2.32), from a known-list
+            if None in entry[3:]:
+                type_string = None
+            else:
+                raise
+
+        if type_string is not None and type_string != known_type_string:
+            # The typeid might be an alternate one (from old binutils), so check the known ones
+            if type_string not in entry[3:]:
+                print(f"Unexpected typeid for {typeinfo!r}: {type_string!r} != {known_type_string!r}")
+                has_error = True
 
         print(f"{typeinfo!r} ({typeid:#018x}): {type_string!r}")
     assert not has_error
