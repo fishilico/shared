@@ -31,10 +31,6 @@ case "$(sed -n 's/^ID=//p' /etc/os-release /usr/lib/os-release 2>/dev/null | hea
         KERNELVER="$(LANG=C eselect --brief kernel show 2>/dev/null |
             sed -n 's:^\s*/usr/src/linux-::p' | head -n 1)-$(uname -m)"
         ;;
-    sabayon)
-        KERNELVER="$(LC_ALL=en_US.UTF-8 equo query files linux-sabayon 2>/dev/null |
-            sed -n 's:^.* /lib/modules/\([^/]\+\)/.*:\1:p' | head -n 1)"
-        ;;
     ubuntu)
         KERNELVER="$(LANG=C dpkg --status linux-headers-generic 2>/dev/null |
             sed -n 's/^Depends: linux-headers-\(.*\)/\1/p' | head -n 1)"
