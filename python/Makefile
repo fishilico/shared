@@ -9,6 +9,8 @@ HAVE_PYTHON_CFFI := $(call can-run,$(PYTHON) -c 'import cffi')
 HAVE_PYTHON_NUMPY := $(call can-run,$(PYTHON) -c 'import numpy')
 HAVE_PYTHON_Z3 := $(call can-run,$(PYTHON) -c 'import z3;z3.BitVec')
 
+HAVE_PYTHON_FSTRING := $(call can-run,$(PYTHON) -c 'f""')
+
 # On Windows, open("/etc/shells") fails, and this is required to test xml_xxe_file.py
 HAVE_PYTHON_OPEN_ETC_SHELLS := $(call can-run,$(PYTHON) -c 'open("/etc/shells", "rb")')
 
@@ -20,6 +22,10 @@ endif
 
 ifneq ($(HAVE_PYTHON_Z3),y)
 NONTEST_BINARIES += z3_example.py
+endif
+
+ifneq ($(HAVE_PYTHON_FSTRING),y)
+NONTEST_BINARIES += clang_cfi_typeid.py
 endif
 
 ifneq ($(HAVE_PYTHON_OPEN_ETC_SHELLS),y)

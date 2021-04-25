@@ -64,7 +64,7 @@ CMD ["/run_shared_test.sh"]
 #       glossaries: check_sort_order.py
 #       java/keystore:
 #       linux:
-#       python: z3_example.py
+#       python: clang_cfi_typeid.py z3_example.py
 #       python/crypto:
 #       python/network:
 #       python/network/dnssec:
@@ -77,7 +77,7 @@ CMD ["/run_shared_test.sh"]
 #          glossaries: check_sort_order.py
 #          java/keystore:
 #          linux: pulseaudio_echo sdl_v4l_video
-#          python: z3_example.py
+#          python: clang_cfi_typeid.py z3_example.py
 #          python/crypto:
 #          python/network:
 #          python/network/dnssec:
