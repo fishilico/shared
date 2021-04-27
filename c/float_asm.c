@@ -217,7 +217,15 @@ static float invsqrt_f(float x)
 
     i = *(int32_t *)&x;
     i = 0x5f3759df - (i >> 1);
+/* gcc 11.0.1 on Fedora 34 warns about i being uninitialized here */
+#if !defined(__clang__) && __GNUC__ == 11
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wuninitialized"
+#endif
     x = *(float *)&i;
+#if !defined(__clang__) && __GNUC__ == 11
+#pragma GCC diagnostic pop
+#endif
     x = x * (1.5f - (xhalf * x * x));
     x = x * (1.5f - (xhalf * x * x));
     return x;
@@ -230,7 +238,14 @@ static double invsqrt_d(double x)
 
     i = *(int64_t *)&x;
     i = 0x5fe6eb50c7b537a9LL - (i >> 1);
+#if !defined(__clang__) && __GNUC__ == 11
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wuninitialized"
+#endif
     x = *(double *)&i;
+#if !defined(__clang__) && __GNUC__ == 11
+#pragma GCC diagnostic pop
+#endif
     x = x * (1.5 - (xhalf * x * x));
     return x;
 }
