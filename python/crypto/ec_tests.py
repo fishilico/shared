@@ -539,9 +539,7 @@ class StandardCurve(object):
                 ry_is_odd = (decoded_rec_id & 1) == 1
                 if decoded_rec_id >= 2:
                     decoded_r += self.g.order
-            elif decoded_rec_id in (29, 30):  # Uncompressed recovered pubkeys, add order to r
-                ry_is_odd = decoded_rec_id == 30
-            if decoded_rec_id in (27, 28):  # Uncompressed recovered pubkeys
+            elif decoded_rec_id in (27, 28):  # Uncompressed recovered pubkeys
                 ry_is_odd = decoded_rec_id == 28
             elif decoded_rec_id in (29, 30):  # Uncompressed recovered pubkeys, add order to r
                 ry_is_odd = decoded_rec_id == 30
