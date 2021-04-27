@@ -118,11 +118,11 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: not working
 #       i686-w64-mingw32-gcc: not working
 #    Versions:
-#       gcc: gcc (Gentoo Hardened 9.3.0-r1 p3) 9.3.0
-#       clang: clang version 10.0.0
-#       Linux kernel: 5.4.60-gentoo-x86_64
-#       python: Python 3.7.8
-#       python3: Python 3.7.8
-#       rustc: rustc 1.45.2
-#       cargo: cargo 1.45.1
-#       coqc: The Coq Proof Assistant, version 8.6.1 (September 2020) compiled on Sep 17 2020 13:20:5 with OCaml 4.04.2
+#       gcc: gcc (Gentoo Hardened 10.2.0-r5 p6) 10.2.0
+#       clang: clang version 11.1.0
+#       Linux kernel: 5.10.27-gentoo-x86_64
+#       python: Python 3.8.8
+#       python3: Python 3.8.8
+#       rustc: rustc 1.51.0 (gentoo)
+#       cargo: cargo 1.51.0
+#       coqc: The Coq Proof Assistant, version 8.12.0 (April 2021) compiled on Apr 26 2021 7:21:57 with OCaml 4.09.0
