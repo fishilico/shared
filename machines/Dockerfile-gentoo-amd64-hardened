@@ -1,4 +1,4 @@
-FROM gentoo/stage3-amd64-hardened
+FROM gentoo/stage3:amd64-hardened
 LABEL Description="Gentoo Hardened with build dependencies for shared"
 
 # Gentoo does not provide sci-mathematics/z3 with Python3 support:
