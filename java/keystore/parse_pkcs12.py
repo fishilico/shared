@@ -63,8 +63,8 @@ import struct
 import sys
 import tempfile
 
-import Crypto.Cipher.ARC2
-import Crypto.Cipher.DES3
+import Cryptodome.Cipher.ARC2
+import Cryptodome.Cipher.DES3
 
 import rc2
 import util_asn1
@@ -219,7 +219,7 @@ def try_pkcs12_decrypt(encrypted, enc_alg, password, indent=''):
                                 iterations=enc_alg.iterations, result_size=24)
         iv = pkcs12_derivation(alg='SHA1', id_byte=2, password=password, salt=enc_alg.salt,
                                iterations=enc_alg.iterations, result_size=8)
-        crypto_3des = Crypto.Cipher.DES3.new(key, Crypto.Cipher.DES3.MODE_CBC, iv)
+        crypto_3des = Cryptodome.Cipher.DES3.new(key, Cryptodome.Cipher.DES3.MODE_CBC, iv)
         decrypted = crypto_3des.decrypt(encrypted)
 
     elif enc_alg.oid_name == 'pbeWithSHA1And40BitRC2-CBC':
@@ -229,7 +229,7 @@ def try_pkcs12_decrypt(encrypted, enc_alg, password, indent=''):
         iv = pkcs12_derivation(alg='SHA1', id_byte=2, password=password, salt=enc_alg.salt,
                                iterations=enc_alg.iterations, result_size=8)
         try:
-            crypto_rc2 = Crypto.Cipher.ARC2.new(key, Crypto.Cipher.ARC2.MODE_CBC, iv, effective_keylen=40)
+            crypto_rc2 = Cryptodome.Cipher.ARC2.new(key, Cryptodome.Cipher.ARC2.MODE_CBC, iv, effective_keylen=40)
             decrypted = crypto_rc2.decrypt(encrypted)
         except ValueError:
             # Use custom RC2 implementation because "effective_keylen=40" is not always supported

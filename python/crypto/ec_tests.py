@@ -50,7 +50,7 @@ import subprocess
 import sys
 import tempfile
 
-import Crypto.Util.asn1
+import Cryptodome.Util.asn1
 
 
 logger = logging.getLogger(__name__)
@@ -693,16 +693,16 @@ def run_curve_test(curve, colorize):
         # Doc: Elliptic Curve Private Key Structure https://tools.ietf.org/html/rfc5915
         ec_params_der = base64.b64decode(sign_key_lines[1])
         privkey_der = base64.b64decode(''.join(sign_key_lines[4:-1]))
-        privkey_asn1 = Crypto.Util.asn1.DerSequence()
+        privkey_asn1 = Cryptodome.Util.asn1.DerSequence()
         privkey_asn1.decode(privkey_der)
         assert len(privkey_asn1) == 4
         assert privkey_asn1[0] == 1
         assert privkey_asn1[2] == struct.pack('BB', 0xa0, len(ec_params_der)) + ec_params_der
-        privkey_asn1_obj = Crypto.Util.asn1.DerObject()
+        privkey_asn1_obj = Cryptodome.Util.asn1.DerObject()
         privkey_asn1_obj.decode(privkey_asn1[1])
-        privkey_asn1_pubcont = Crypto.Util.asn1.DerObject()
+        privkey_asn1_pubcont = Cryptodome.Util.asn1.DerObject()
         privkey_asn1_pubcont.decode(privkey_asn1[3])
-        privkey_asn1_pub = Crypto.Util.asn1.DerObject()
+        privkey_asn1_pub = Cryptodome.Util.asn1.DerObject()
         privkey_asn1_pub.decode(privkey_asn1_pubcont.payload)
 
         logger.debug("Generate the public key")
@@ -724,10 +724,10 @@ def run_curve_test(curve, colorize):
 
         # Decode PEM-encoded ASN.1 public key and ensure it is matching
         pubkey_der = base64.b64decode(''.join(verify_key_lines[1:-1]))
-        pubkey_asn1 = Crypto.Util.asn1.DerSequence()
+        pubkey_asn1 = Cryptodome.Util.asn1.DerSequence()
         pubkey_asn1.decode(pubkey_der)
         assert len(pubkey_asn1) == 2
-        pubkey_asn1_pub = Crypto.Util.asn1.DerObject()
+        pubkey_asn1_pub = Cryptodome.Util.asn1.DerObject()
         pubkey_asn1_pub.decode(pubkey_asn1[1])
         assert pubkey_asn1_pub.payload == privkey_asn1_pub.payload
 
@@ -801,7 +801,7 @@ def run_curve_test(curve, colorize):
         #       = (x_1, y_1)
         with open(sig_path, 'rb') as fsig:
             signature_binary = fsig.read()
-        sig_asn1 = Crypto.Util.asn1.DerSequence()
+        sig_asn1 = Cryptodome.Util.asn1.DerSequence()
         sig_asn1.decode(signature_binary)
         sig_r, sig_s = sig_asn1[:]  # noqa
         assert 0 <= sig_r < curve.g.order
@@ -984,26 +984,26 @@ def run_ssh_test(curve, colorize):
             if not result:
                 return False
 
-            privkey_asn1 = Crypto.Util.asn1.DerSequence()
+            privkey_asn1 = Cryptodome.Util.asn1.DerSequence()
             privkey_asn1.decode(private_key)
             assert len(privkey_asn1) == 4
             assert privkey_asn1[0] == 1
-            privkey_asn1_obj = Crypto.Util.asn1.DerObject()
+            privkey_asn1_obj = Cryptodome.Util.asn1.DerObject()
             privkey_asn1_obj.decode(privkey_asn1[1])
             private_key_secret = decode_bigint_be(privkey_asn1_obj.payload)
             print("* private key({}): {}{:#x}{}".format(
                 len(privkey_asn1_obj.payload) * 8, color_red, private_key_secret, color_norm))
 
-            privkey_asn1_curvecont = Crypto.Util.asn1.DerObject()
+            privkey_asn1_curvecont = Cryptodome.Util.asn1.DerObject()
             privkey_asn1_curvecont.decode(privkey_asn1[2])
-            privkey_asn1_curve = Crypto.Util.asn1.DerObject()
+            privkey_asn1_curve = Cryptodome.Util.asn1.DerObject()
             privkey_asn1_curve.decode(privkey_asn1_curvecont.payload)
             print("* hexadecimal curve OID: {}".format(
                 binascii.hexlify(privkey_asn1_curve.payload).decode('ascii')))
 
-            privkey_asn1_pubcont = Crypto.Util.asn1.DerObject()
+            privkey_asn1_pubcont = Cryptodome.Util.asn1.DerObject()
             privkey_asn1_pubcont.decode(privkey_asn1[3])
-            privkey_asn1_pub = Crypto.Util.asn1.DerObject()
+            privkey_asn1_pub = Cryptodome.Util.asn1.DerObject()
             privkey_asn1_pub.decode(privkey_asn1_pubcont.payload)
             priv_pubkey = privkey_asn1_pub.payload
             print("* public key:")

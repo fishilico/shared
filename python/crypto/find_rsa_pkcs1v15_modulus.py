@@ -65,20 +65,20 @@ import struct
 import sys
 
 try:
-    import Crypto.Signature.PKCS1_v1_5
+    import Cryptodome.Signature.PKCS1_v1_5
     has_crypto = True
 except ImportError:
     # pypy for example does not provide PyCrypto
     has_crypto = False
 else:
-    import Crypto.PublicKey.RSA
-    import Crypto.Hash.MD5
-    import Crypto.Hash.SHA
-    import Crypto.Hash.SHA224
-    import Crypto.Hash.SHA256
-    import Crypto.Hash.SHA384
-    import Crypto.Hash.SHA512
-    import Crypto.Util.asn1
+    import Cryptodome.PublicKey.RSA
+    import Cryptodome.Hash.MD5
+    import Cryptodome.Hash.SHA
+    import Cryptodome.Hash.SHA224
+    import Cryptodome.Hash.SHA256
+    import Cryptodome.Hash.SHA384
+    import Cryptodome.Hash.SHA512
+    import Cryptodome.Util.asn1
 
 
 logger = logging.getLogger(__name__)
@@ -274,14 +274,14 @@ def decode_x509_dn(asn1_der_dn):
 
     A DN is used to identify the subject and the issuer of an X.509 certificate.
     """
-    dn_asn1 = Crypto.Util.asn1.DerSequence()
+    dn_asn1 = Cryptodome.Util.asn1.DerSequence()
     dn_asn1.decode(asn1_der_dn)
     dn_parts = []
     for dn_asn1_part in dn_asn1:
         # Decode SET (tag 0x31 = constructed tag 0x11)
-        dn_set_item = Crypto.Util.asn1.DerObject(asn1Id=0x11, constructed=True)
+        dn_set_item = Cryptodome.Util.asn1.DerObject(asn1Id=0x11, constructed=True)
         dn_set_item.decode(dn_asn1_part)
-        dn_set_seq = Crypto.Util.asn1.DerSequence()
+        dn_set_seq = Cryptodome.Util.asn1.DerSequence()
         dn_set_seq.decode(dn_set_item.payload)
         if len(dn_set_seq) != 2:
             logger.warning("Unexpected ASN.1 DN construction %s", xx(dn_set_item.payload))
@@ -328,12 +328,12 @@ def decode_x509_dn(asn1_der_dn):
             item_key = 'OU'
         else:
             # Build the OID from der_oid
-            oid_asn1 = Crypto.Util.asn1.DerObjectId()
+            oid_asn1 = Cryptodome.Util.asn1.DerObjectId()
             oid_asn1.decode(der_oid)
             item_key = oid_asn1.value
             logger.warning("Unknown DN component OID %s (%s)", item_key, der_oid_hex)
 
-        value_asn1 = Crypto.Util.asn1.DerObject()
+        value_asn1 = Cryptodome.Util.asn1.DerObject()
         value_asn1.decode(der_value)
         item_value = value_asn1.payload.decode('utf-8', errors='replace')
         dn_parts.append("{}={}".format(
@@ -362,7 +362,7 @@ def show_pemfile(pemfile, show_raw=False):
         logger.error("Unable to find the end of a certificate section in %s", pemfile)
         return False
     der_certificate = base64.b64decode(b''.join(pem_lines[begin_index + 1:end_index]))
-    cert_asn1 = Crypto.Util.asn1.DerSequence()
+    cert_asn1 = Cryptodome.Util.asn1.DerSequence()
     cert_asn1.decode(der_certificate)
     # The certificate is in 3 parts: signed information, algorithm ID, signature
     if len(cert_asn1) != 3:
@@ -376,7 +376,7 @@ def show_pemfile(pemfile, show_raw=False):
     #     algorithm         OBJECT IDENTIFIER,
     #     parameters        ANY DEFINED BY algorithm OPTIONAL
     # }
-    algorithm_ident_asn1 = Crypto.Util.asn1.DerSequence()
+    algorithm_ident_asn1 = Cryptodome.Util.asn1.DerSequence()
     algorithm_ident_asn1.decode(der_algorithm_ident)
     if len(algorithm_ident_asn1) != 2:
         # This may occur when using ecdsa-with-SHA256 signature (1 component)
@@ -416,20 +416,20 @@ def show_pemfile(pemfile, show_raw=False):
     else:
         logger.error("Unknown signature algorithm identifier in %s: %s", pemfile, hex_algo_id)
         # Show the decoded OID when an error happens
-        algo_oid = Crypto.Util.asn1.DerObjectId()
+        algo_oid = Cryptodome.Util.asn1.DerObjectId()
         algo_oid.decode(algo_id)
         logger.error("... algorithm OID is %r", algo_oid.value)
         return False
 
     # The signature is a BIT STRING
-    signature_asn1 = Crypto.Util.asn1.DerBitString()
+    signature_asn1 = Cryptodome.Util.asn1.DerBitString()
     signature_asn1.decode(der_signature)
     signature = signature_asn1.value
     bits = len(signature) * 8
     logger.debug("Read a RSA-%d signature with digest %s from %s", bits, hash_kind, pemfile)
 
     # Decode the issuer from the certificate
-    signed_info_asn1 = Crypto.Util.asn1.DerSequence()
+    signed_info_asn1 = Cryptodome.Util.asn1.DerSequence()
     signed_info_asn1.decode(der_signed_information)
     # https://tools.ietf.org/html/rfc1422#appendix-A.1
     # Certificate ::= SIGNED SEQUENCE{
@@ -461,7 +461,7 @@ def show_pemfile(pemfile, show_raw=False):
         # Allow specifying a self-signed certificate in order to test the program
         logger.info("Certificate %s is self-signed. Verifying the signature", pemfile)
         public_key_der = signed_info_asn1[6]
-        pubkey = Crypto.PublicKey.RSA.importKey(public_key_der)
+        pubkey = Cryptodome.PublicKey.RSA.importKey(public_key_der)
 
         encrypted_num = decode_bigint_be(signature)
         signed_data = encapsulate_pcks1v15_digest(hash_kind, der_signed_information, bits)
@@ -540,7 +540,7 @@ def main(argv=None):
             logger.fatal("Unable to import pyCrypto, needed to generate a key")
             return 1
         bits = args.bits or 2048
-        key = Crypto.PublicKey.RSA.generate(bits)
+        key = Cryptodome.PublicKey.RSA.generate(bits)
         print("# KEY_N = {:#x}".format(key.n))
         print("# KEY_E = {:#x}".format(key.e))
         print("# KEY_D = {:#x}".format(key.d))
@@ -552,13 +552,13 @@ def main(argv=None):
         # Sign messages
         hash_kind = args.hash
         if hash_kind == 'SHA1':
-            # Old versions of PyCrypto use Crypto.Hash.SHA instead of Crypto.Hash.SHA1
-            hash_class = Crypto.Hash.SHA
+            # Old versions of PyCrypto use Cryptodome.Hash.SHA instead of Cryptodome.Hash.SHA1
+            hash_class = Cryptodome.Hash.SHA
         else:
-            hash_class = getattr(Crypto.Hash, hash_kind)
+            hash_class = getattr(Cryptodome.Hash, hash_kind)
         for i in range(args.generate_count):
             msg = struct.pack('>Q', i)
-            engine = Crypto.Signature.PKCS1_v1_5.new(key)
+            engine = Cryptodome.Signature.PKCS1_v1_5.new(key)
             signature = engine.sign(hash_class.new(msg))
             clear_signature = encode_bigint_be(
                 pow(decode_bigint_be(signature), key.e, key.n),
@@ -726,7 +726,7 @@ def main(argv=None):
 
     # Show the public key as a PEM certificate, if PyCrypto is available
     if has_crypto and current_modulus.bit_length() >= 512:
-        public_key = Crypto.PublicKey.RSA.construct((current_modulus, args.exponent))
+        public_key = Cryptodome.PublicKey.RSA.construct((current_modulus, args.exponent))
         print("Public key in PEM format:")
         print(public_key.exportKey('PEM').decode('ascii'))
     return 0

@@ -43,12 +43,12 @@ import subprocess
 import sys
 import tempfile
 
-import Crypto.Cipher.AES
-import Crypto.Cipher.Blowfish
-import Crypto.Cipher.DES
-import Crypto.Cipher.DES3
-import Crypto.Util.Counter
-import Crypto.Util.number
+import Cryptodome.Cipher.AES
+import Cryptodome.Cipher.Blowfish
+import Cryptodome.Cipher.DES
+import Cryptodome.Cipher.DES3
+import Cryptodome.Util.Counter
+import Cryptodome.Util.number
 
 
 logger = logging.getLogger(__name__)
@@ -193,9 +193,9 @@ def parse_salted(enc_data, password, algorithm, hash_name, use_pbkdf2=False, n_i
         # DES
         mode = algorithm[4:]
         if mode == 'ecb':
-            crypto_des = Crypto.Cipher.DES.new(key, Crypto.Cipher.DES.MODE_ECB)
+            crypto_des = Cryptodome.Cipher.DES.new(key, Cryptodome.Cipher.DES.MODE_ECB)
         elif mode == 'cbc':
-            crypto_des = Crypto.Cipher.DES.new(key, Crypto.Cipher.DES.MODE_CBC, iv)
+            crypto_des = Cryptodome.Cipher.DES.new(key, Cryptodome.Cipher.DES.MODE_CBC, iv)
         else:
             raise NotImplementedError("Unimplemented DES mode {}".format(mode))
         return crypto_des.decrypt(enc_data[0x10:])
@@ -204,9 +204,9 @@ def parse_salted(enc_data, password, algorithm, hash_name, use_pbkdf2=False, n_i
         # 3DES
         mode = algorithm[8:]
         if mode == 'ecb':
-            crypto_3des = Crypto.Cipher.DES3.new(key, Crypto.Cipher.DES3.MODE_ECB)
+            crypto_3des = Cryptodome.Cipher.DES3.new(key, Cryptodome.Cipher.DES3.MODE_ECB)
         elif mode == 'cbc':
-            crypto_3des = Crypto.Cipher.DES3.new(key, Crypto.Cipher.DES3.MODE_CBC, iv)
+            crypto_3des = Cryptodome.Cipher.DES3.new(key, Cryptodome.Cipher.DES3.MODE_CBC, iv)
         else:
             raise NotImplementedError("Unimplemented 3DES mode {}".format(mode))
         return crypto_3des.decrypt(enc_data[0x10:])
@@ -216,11 +216,11 @@ def parse_salted(enc_data, password, algorithm, hash_name, use_pbkdf2=False, n_i
         # Blowfish
         mode = m.group(1)
         if mode == 'ecb':
-            crypto_bf = Crypto.Cipher.Blowfish.new(key, Crypto.Cipher.Blowfish.MODE_ECB)
+            crypto_bf = Cryptodome.Cipher.Blowfish.new(key, Cryptodome.Cipher.Blowfish.MODE_ECB)
         elif mode == 'cbc':
-            crypto_bf = Crypto.Cipher.Blowfish.new(key, Crypto.Cipher.Blowfish.MODE_CBC, iv)
+            crypto_bf = Cryptodome.Cipher.Blowfish.new(key, Cryptodome.Cipher.Blowfish.MODE_CBC, iv)
         elif mode == 'ofb':
-            crypto_bf = Crypto.Cipher.Blowfish.new(key, Crypto.Cipher.Blowfish.MODE_OFB, iv)
+            crypto_bf = Cryptodome.Cipher.Blowfish.new(key, Cryptodome.Cipher.Blowfish.MODE_OFB, iv)
         else:
             raise NotImplementedError("Unimplemented Blowfish mode {}".format(mode))
         return crypto_bf.decrypt(enc_data[0x10:])
@@ -230,17 +230,17 @@ def parse_salted(enc_data, password, algorithm, hash_name, use_pbkdf2=False, n_i
         # AES
         mode = m.group(1)
         if mode == 'ecb':
-            crypto_aes = Crypto.Cipher.AES.new(key, Crypto.Cipher.AES.MODE_ECB)
+            crypto_aes = Cryptodome.Cipher.AES.new(key, Cryptodome.Cipher.AES.MODE_ECB)
         elif mode == 'cbc':
-            crypto_aes = Crypto.Cipher.AES.new(key, Crypto.Cipher.AES.MODE_CBC, iv)
+            crypto_aes = Cryptodome.Cipher.AES.new(key, Cryptodome.Cipher.AES.MODE_CBC, iv)
         elif mode == 'ofb':
-            crypto_aes = Crypto.Cipher.AES.new(key, Crypto.Cipher.AES.MODE_OFB, iv)
+            crypto_aes = Cryptodome.Cipher.AES.new(key, Cryptodome.Cipher.AES.MODE_OFB, iv)
         elif mode == 'ctr':
-            ctr = Crypto.Util.Counter.new(
+            ctr = Cryptodome.Util.Counter.new(
                 nbits=iv_size * 8,
-                initial_value=Crypto.Util.number.bytes_to_long(iv),
+                initial_value=Cryptodome.Util.number.bytes_to_long(iv),
                 little_endian=False)
-            crypto_aes = Crypto.Cipher.AES.new(key, Crypto.Cipher.AES.MODE_CTR, counter=ctr)
+            crypto_aes = Cryptodome.Cipher.AES.new(key, Cryptodome.Cipher.AES.MODE_CTR, counter=ctr)
         else:
             raise NotImplementedError("Unimplemented AES mode {}".format(mode))
         return crypto_aes.decrypt(enc_data[0x10:])

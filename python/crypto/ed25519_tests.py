@@ -100,7 +100,7 @@ import sys
 import tempfile
 
 try:
-    import Crypto.Util.asn1
+    import Cryptodome.Util.asn1
     HAVE_CRYPTO = True
 except ImportError:
     HAVE_CRYPTO = False
@@ -802,7 +802,7 @@ def run_openssl_test(colorize):
         #     Algorithm Identifiers for Ed25519, Ed448, X25519, and X448
         #     for Use in the Internet X.509 Public Key Infrastructure
         privkey_der = base64.b64decode(''.join(priv_key_lines[1:-1]))
-        privkey_asn1 = Crypto.Util.asn1.DerSequence()
+        privkey_asn1 = Cryptodome.Util.asn1.DerSequence()
         privkey_asn1.decode(privkey_der)
         assert len(privkey_asn1) == 3  # Could be more, if there were attributes
         # Version
@@ -843,7 +843,7 @@ def run_openssl_test(colorize):
 
         # Decode PEM-encoded ASN.1 key
         pubkey_der = base64.b64decode(''.join(pub_key_lines[1:-1]))
-        pubkey_asn1 = Crypto.Util.asn1.DerSequence()
+        pubkey_asn1 = Cryptodome.Util.asn1.DerSequence()
         pubkey_asn1.decode(pubkey_der)
         assert len(pubkey_asn1) == 2
         assert pubkey_asn1[0] == b'0\x05\x06\x03+ep'  # Object ID 1.3.101.112, like the private key

@@ -34,12 +34,12 @@ import ssl
 import struct
 import sys
 
-import Crypto.PublicKey.RSA
-import Crypto.Hash.SHA
-import Crypto.Hash.SHA256
-import Crypto.Hash.SHA512
-import Crypto.Signature.PKCS1_v1_5
-import Crypto.Util.number
+import Cryptodome.PublicKey.RSA
+import Cryptodome.Hash.SHA
+import Cryptodome.Hash.SHA256
+import Cryptodome.Hash.SHA512
+import Cryptodome.Signature.PKCS1_v1_5
+import Cryptodome.Util.number
 
 if sys.version_info >= (3,):
     import urllib.request
@@ -54,8 +54,8 @@ except ImportError:
 
 # PyCryptodome provides ECDSA but not PyCrypto
 try:
-    import Crypto.PublicKey.ECC
-    import Crypto.Signature.DSS
+    import Cryptodome.PublicKey.ECC
+    import Cryptodome.Signature.DSS
     HAVE_CRYPTO_ECDSA = True
 except ImportError:
     HAVE_CRYPTO_ECDSA = False
@@ -128,7 +128,7 @@ def update_tld_list():
 
 def decode_bigint_be(data):
     """Decode a Big-Endian big integer"""
-    return Crypto.Util.number.bytes_to_long(data)
+    return Cryptodome.Util.number.bytes_to_long(data)
 
 
 DNSSEC_ALGORITHMS = {
@@ -265,9 +265,9 @@ class DNSKeyRecord(object):
             exponent = decode_bigint_be(self.pubkey[1:1 + exponent_size])
             modulus = decode_bigint_be(self.pubkey[1 + exponent_size:])
             self.alg_desc += '(RSA{})'.format(modulus.bit_length())
-            pubkey = Crypto.PublicKey.RSA.construct((modulus, exponent))
-            self.signer = Crypto.Signature.PKCS1_v1_5.new(pubkey)
-            self.hash = Crypto.Hash.SHA
+            pubkey = Cryptodome.PublicKey.RSA.construct((modulus, exponent))
+            self.signer = Cryptodome.Signature.PKCS1_v1_5.new(pubkey)
+            self.hash = Cryptodome.Hash.SHA
         elif self.algorithm == 7:
             # RSA/SHA1-NSEC3-SHA1
             exponent_size = struct.unpack('B', self.pubkey[:1])[0]
@@ -275,9 +275,9 @@ class DNSKeyRecord(object):
             exponent = decode_bigint_be(self.pubkey[1:1 + exponent_size])
             modulus = decode_bigint_be(self.pubkey[1 + exponent_size:])
             self.alg_desc += '(RSA{})'.format(modulus.bit_length())
-            pubkey = Crypto.PublicKey.RSA.construct((modulus, exponent))
-            self.signer = Crypto.Signature.PKCS1_v1_5.new(pubkey)
-            self.hash = Crypto.Hash.SHA
+            pubkey = Cryptodome.PublicKey.RSA.construct((modulus, exponent))
+            self.signer = Cryptodome.Signature.PKCS1_v1_5.new(pubkey)
+            self.hash = Cryptodome.Hash.SHA
         elif self.algorithm == 8:
             # RSA/SHA256
             exponent_size = struct.unpack('B', self.pubkey[:1])[0]
@@ -285,9 +285,9 @@ class DNSKeyRecord(object):
             exponent = decode_bigint_be(self.pubkey[1:1 + exponent_size])
             modulus = decode_bigint_be(self.pubkey[1 + exponent_size:])
             self.alg_desc += '(RSA{})'.format(modulus.bit_length())
-            pubkey = Crypto.PublicKey.RSA.construct((modulus, exponent))
-            self.signer = Crypto.Signature.PKCS1_v1_5.new(pubkey)
-            self.hash = Crypto.Hash.SHA256
+            pubkey = Cryptodome.PublicKey.RSA.construct((modulus, exponent))
+            self.signer = Cryptodome.Signature.PKCS1_v1_5.new(pubkey)
+            self.hash = Cryptodome.Hash.SHA256
         elif self.algorithm == 10:
             # RSA/SHA512
             exponent_size = struct.unpack('B', self.pubkey[:1])[0]
@@ -295,22 +295,22 @@ class DNSKeyRecord(object):
             exponent = decode_bigint_be(self.pubkey[1:1 + exponent_size])
             modulus = decode_bigint_be(self.pubkey[1 + exponent_size:])
             self.alg_desc += '(RSA{})'.format(modulus.bit_length())
-            pubkey = Crypto.PublicKey.RSA.construct((modulus, exponent))
-            self.signer = Crypto.Signature.PKCS1_v1_5.new(pubkey)
-            self.hash = Crypto.Hash.SHA512
+            pubkey = Cryptodome.PublicKey.RSA.construct((modulus, exponent))
+            self.signer = Cryptodome.Signature.PKCS1_v1_5.new(pubkey)
+            self.hash = Cryptodome.Hash.SHA512
         elif self.algorithm == 13:
             # ECDSA-P256/SHA256
             assert len(self.pubkey) == 64
             pt_x = decode_bigint_be(self.pubkey[:32])
             pt_y = decode_bigint_be(self.pubkey[32:])
             if HAVE_CRYPTO_ECDSA:
-                pubkey = Crypto.PublicKey.ECC.construct(curve='prime256v1', point_x=pt_x, point_y=pt_y)
-                self.signer = Crypto.Signature.DSS.new(pubkey, 'fips-186-3')
+                pubkey = Cryptodome.PublicKey.ECC.construct(curve='prime256v1', point_x=pt_x, point_y=pt_y)
+                self.signer = Cryptodome.Signature.DSS.new(pubkey, 'fips-186-3')
             else:
                 # A warning message was reported in main()
                 logger.debug("Ignoring ECDSA verification")
                 self.signer = None
-            self.hash = Crypto.Hash.SHA256
+            self.hash = Cryptodome.Hash.SHA256
             self.signer_returns_bool = False
         else:
             raise ValueError("Unimplemented DNSKEY algorithm %d (%s)" % (self.algorithm, self.alg_desc))
@@ -381,9 +381,9 @@ class DSRecord(object):
         self.alg_desc = DNSSEC_ALGORITHMS.get(self.algorithm, 'Unknown ({})'.format(self.algorithm))
         self.digest_desc = DNSSEC_DIGESTS.get(self.digest_type, 'Unknown ({})'.format(self.digest_type))
         if self.digest_type == 1:
-            self.hash = Crypto.Hash.SHA
+            self.hash = Cryptodome.Hash.SHA
         elif self.digest_type == 2:
-            self.hash = Crypto.Hash.SHA256
+            self.hash = Cryptodome.Hash.SHA256
         else:
             self.hash = None
 
@@ -830,7 +830,7 @@ def main(argv=None):
         update_tld_list()
 
     if not HAVE_CRYPTO_ECDSA:
-        logger.warning("Crypto.PublicKey.ECC is not available (please used PyCryptodome instead of PyCrypto)")
+        logger.warning("Cryptodome.PublicKey.ECC is not available (please used PyCryptodome instead of PyCrypto)")
 
     if args.refresh and not HAVE_DNSPYTHON:
         parser.error("--refresh requires dnspython to be installed.")

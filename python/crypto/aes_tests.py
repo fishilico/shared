@@ -39,11 +39,11 @@ import sys
 
 
 try:
-    import Crypto.Cipher.AES
-    has_crypto = True
+    import Cryptodome.Cipher.AES
+    has_cryptodome = True
 except ImportError:
-    sys.stderr.write("Warning: PyCrypto fails to load. Proceeding without it\n")
-    has_crypto = False
+    sys.stderr.write("Warning: Cryptodome fails to load. Proceeding without it\n")
+    has_cryptodome = False
 
 try:
     from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -2074,12 +2074,12 @@ def check_test_vectors():
             assert aes.encrypt(plain_block) == encrypted_block
             assert aes.decrypt(encrypted_block) == plain_block
 
-        if has_crypto:
+        if has_cryptodome:
             # Test encrypting/decrypting random data
             print("Checking AES-{} implementation vs. PyCrypto".format(keysize))
             key = os.urandom(keysize // 8)
             test_block = os.urandom(16)
-            crypto_aes = Crypto.Cipher.AES.new(key, Crypto.Cipher.AES.MODE_ECB)
+            crypto_aes = Cryptodome.Cipher.AES.new(key, Cryptodome.Cipher.AES.MODE_ECB)
             aes = SimpleAES_4x4Bytes(key)
             assert crypto_aes.encrypt(test_block) == aes.encrypt(test_block), \
                 "Problem encrypting with key={}, block={}".format(xx(key), xx(test_block))

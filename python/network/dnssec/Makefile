@@ -3,9 +3,9 @@ include ../../../env-python.mk
 NEVER_TEST_BINARIES := enumerate_nsec.py enumerate_nsec3.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
-HAVE_PYTHON_CRYPTO := $(call can-run,$(PYTHON) -c 'import Crypto')
+HAVE_PYTHON_CRYPTODOME := $(call can-run,$(PYTHON) -c 'import Cryptodome')
 
-ifneq ($(HAVE_PYTHON_CRYPTO),y)
+ifneq ($(HAVE_PYTHON_CRYPTODOME),y)
 NONTEST_BINARIES += verify_dnssec.py
 endif
 

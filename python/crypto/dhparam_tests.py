@@ -61,8 +61,8 @@ import subprocess
 import sys
 import tempfile
 
-import Crypto.Util.asn1
-import Crypto.Util.number
+import Cryptodome.Util.asn1
+import Cryptodome.Util.number
 
 
 logger = logging.getLogger(__name__)
@@ -140,7 +140,7 @@ def run_openssl_test(bits, generator, colorize):
 
         # Decode PEM-encoded ASN.1 parameters
         param_der = base64.b64decode(''.join(param_lines[1:-1]))
-        param_asn1 = Crypto.Util.asn1.DerSequence()
+        param_asn1 = Cryptodome.Util.asn1.DerSequence()
         param_asn1.decode(param_der)
         assert len(param_asn1) == 2
         param_p, param_g = param_asn1
@@ -149,8 +149,8 @@ def run_openssl_test(bits, generator, colorize):
         print("  g({}) = {}{:#x}{}".format(param_g.bit_length(), color_green, param_g, color_norm))
         assert 1 < param_g < param_p - 1
         assert pow(param_g, (param_p - 1) // 2, param_p) == param_p - 1, "The generator is not a quadratic residue"
-        assert Crypto.Util.number.isPrime(param_p)
-        assert Crypto.Util.number.isPrime((param_p - 1) // 2)
+        assert Cryptodome.Util.number.isPrime(param_p)
+        assert Cryptodome.Util.number.isPrime((param_p - 1) // 2)
         assert param_g == generator
 
         # (p-1)/2 is odd, so p mod 4 = 3.

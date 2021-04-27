@@ -46,16 +46,16 @@ import struct
 import sys
 import xml.dom.minidom  # noqa
 
-import Crypto.Cipher.AES
+import Cryptodome.Cipher.AES
 
 try:
-    from Crypto.Cipher import ChaCha20
+    from Cryptodome.Cipher import ChaCha20
 except ImportError:
     # On Ubuntu, python3-pycryptodome installs in Cryptodome module
     from Cryptodome.Cipher import ChaCha20
     from Cryptodome.Cipher import Salsa20
 else:
-    from Crypto.Cipher import Salsa20
+    from Cryptodome.Cipher import Salsa20
 
 
 try:
@@ -340,7 +340,7 @@ class KeePassDB:
     @staticmethod
     def aes_kdf(composite_key, seed, rounds):
         """Derive a transformed key using AES KDF"""
-        aes = Crypto.Cipher.AES.new(seed, Crypto.Cipher.AES.MODE_ECB)
+        aes = Cryptodome.Cipher.AES.new(seed, Cryptodome.Cipher.AES.MODE_ECB)
         transformed_key = composite_key
         for _ in range(rounds):
             transformed_key = aes.encrypt(transformed_key)
@@ -350,7 +350,7 @@ class KeePassDB:
         """Get a function that implements decryption, using the computed master key"""
         if self.cipher_id == AES_UUID:
             aes_key = hashlib.sha256(master_key).digest()
-            cipher = Crypto.Cipher.AES.new(aes_key, Crypto.Cipher.AES.MODE_CBC, self.encryption_iv)
+            cipher = Cryptodome.Cipher.AES.new(aes_key, Cryptodome.Cipher.AES.MODE_CBC, self.encryption_iv)
             return cipher.decrypt
 
         if self.cipher_id == CHACHA20_UUID:

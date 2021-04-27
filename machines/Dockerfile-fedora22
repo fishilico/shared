@@ -61,12 +61,12 @@ CMD ["/run_shared_test.sh"]
 #    In sub-directories:
 #       c:
 #       glossaries: check_sort_order.py
-#       java/keystore:
+#       java/keystore: parse_jceks.py parse_pkcs12.py util_asn1.py
 #       linux:
 #       python: clang_cfi_typeid.py z3_example.py
-#       python/crypto:
+#       python/crypto: bip32_seed_derivation.py chacha20_poly1305_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py
 #       python/network:
-#       python/network/dnssec:
+#       python/network/dnssec: verify_dnssec.py
 #       python/qrcode:
 #       verification:
 #    With gcc -m32:
@@ -74,12 +74,12 @@ CMD ["/run_shared_test.sh"]
 #       In sub-directories:
 #          c: gtk_alpha_window openmp_matrix
 #          glossaries: check_sort_order.py
-#          java/keystore:
+#          java/keystore: parse_jceks.py parse_pkcs12.py util_asn1.py
 #          linux: pulseaudio_echo sdl_v4l_video
 #          python: clang_cfi_typeid.py z3_example.py
-#          python/crypto:
+#          python/crypto: bip32_seed_derivation.py chacha20_poly1305_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py
 #          python/network:
-#          python/network/dnssec:
+#          python/network/dnssec: verify_dnssec.py
 #          python/qrcode:
 #          verification:
 #    Compilers:

@@ -3,7 +3,7 @@
 RC2 implementation based on
 https://github.com/0xEBFE/RC2-python/blob/master/rc2.py
 
-This is needed because Crypto.Cipher.ARC2 does not work properly when using
+This is needed because Cryptodome.Cipher.ARC2 does not work properly when using
 40-bit keys: https://github.com/Legrandin/pycryptodome/issues/267
 """
 import array
@@ -277,13 +277,13 @@ def main():
 
     # Compare with PyCrypto implementation
     try:
-        import Crypto.Cipher.ARC2
+        import Cryptodome.Cipher.ARC2
     except ImportError:
         pass
     else:
         key = b'12345678'
         plaintext = b'\0' * 8
-        crypto_rc2 = Crypto.Cipher.ARC2.new(key, Crypto.Cipher.ARC2.MODE_ECB, effective_keylen=len(key) * 8)
+        crypto_rc2 = Cryptodome.Cipher.ARC2.new(key, Cryptodome.Cipher.ARC2.MODE_ECB, effective_keylen=len(key) * 8)
         encrypted_pycrypto = crypto_rc2.encrypt(plaintext)
 
         rc2 = RC2(key)

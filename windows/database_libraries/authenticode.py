@@ -41,7 +41,7 @@ import re
 import struct
 from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 
-import Crypto.Util.asn1
+import Cryptodome.Util.asn1
 import cryptography.hazmat.backends
 import cryptography.x509
 
@@ -202,7 +202,7 @@ def split_der_data(der_data: bytes) -> Tuple[bytes, bytes]:
 
 def decode_object(der_obj: bytes) -> bytes:
     """Decode an ASN.1 object in DER format"""
-    obj_asn1 = Crypto.Util.asn1.DerObject()
+    obj_asn1 = Cryptodome.Util.asn1.DerObject()
     try:
         obj_asn1.decode(der_obj)
     except ValueError as exc:
@@ -213,7 +213,7 @@ def decode_object(der_obj: bytes) -> bytes:
 
 def decode_cont_object(der_obj: bytes, expected_cont: int) -> bytes:
     """Decode an ASN.1 cont object in DER format, used for example in optional fields"""
-    obj_asn1 = Crypto.Util.asn1.DerObject()
+    obj_asn1 = Cryptodome.Util.asn1.DerObject()
     try:
         obj_asn1.decode(der_obj)
     except ValueError as exc:
@@ -228,7 +228,7 @@ def decode_sequence(der_seq: bytes,
                     count: Optional[int] = None,
                     counts: Optional[Tuple[int, ...]] = None) -> List[Union[bytes, int]]:
     """Decode an ASN.1 sequence in DER format"""
-    seq_asn1 = Crypto.Util.asn1.DerSequence()
+    seq_asn1 = Cryptodome.Util.asn1.DerSequence()
     try:
         seq_asn1.decode(der_seq)
     except ValueError as exc:
@@ -253,10 +253,10 @@ def decode_sequence_bytes(der_seq: bytes,
 def decode_set(der_set: bytes) -> List[Union[bytes, int]]:
     """Decode an ASN.1 set in DER format"""
     try:
-        set_asn1 = Crypto.Util.asn1.DerSetOf()
+        set_asn1 = Cryptodome.Util.asn1.DerSetOf()
     except AttributeError:
         # PyCrypto < 2.7 did not implement DerSetOf
-        raise NotImplementedError("Crypto.Util.asn1.DerSetOf is not available")
+        raise NotImplementedError("Cryptodome.Util.asn1.DerSetOf is not available")
     try:
         set_asn1.decode(der_set)
     except ValueError as exc:
@@ -274,8 +274,8 @@ def decode_set_bytes(der_seq: bytes) -> List[bytes]:
 
 def decode_octet_string(der_octet_string: bytes) -> bytes:
     """Decode an ASN.1 Octet String in DER format"""
-    octet_string_asn1: Union[Crypto.Util.asn1.DerOctetString, Crypto.Util.asn1.DerObject] = \
-        Crypto.Util.asn1.DerOctetString()
+    octet_string_asn1: Union[Cryptodome.Util.asn1.DerOctetString, Cryptodome.Util.asn1.DerObject] = \
+        Cryptodome.Util.asn1.DerOctetString()
     try:
         octet_string_asn1.decode(der_octet_string)
     except ValueError as exc:
@@ -283,7 +283,7 @@ def decode_octet_string(der_octet_string: bytes) -> bytes:
         raise
     except TypeError:
         # python-crypto 2.6.1-4ubuntu0.3 is buggy on Ubuntu 14.04
-        octet_string_asn1 = Crypto.Util.asn1.DerObject()
+        octet_string_asn1 = Cryptodome.Util.asn1.DerObject()
         octet_string_asn1.decode(der_octet_string)
     return octet_string_asn1.payload
 
@@ -330,8 +330,8 @@ def decode_teletex_string(der_t61string: bytes) -> str:
 
 def decode_oid(der_objectid: bytes) -> str:
     """Decode an ASN.1 Object ID in DER format"""
-    oid_asn1: Union[Crypto.Util.asn1.DerObjectId, Crypto.Util.asn1.DerObject] = \
-        Crypto.Util.asn1.DerObjectId()
+    oid_asn1: Union[Cryptodome.Util.asn1.DerObjectId, Cryptodome.Util.asn1.DerObject] = \
+        Cryptodome.Util.asn1.DerObjectId()
     try:
         oid_asn1.decode(der_objectid)
     except ValueError as exc:
@@ -345,7 +345,7 @@ def decode_oid(der_objectid: bytes) -> str:
         # TypeError: unbound method decode() must be called with DerObject instance as first argument
         #   (got str instance instead)
         # ... so fallback to a raw DerObject()
-        oid_asn1 = Crypto.Util.asn1.DerObject()
+        oid_asn1 = Cryptodome.Util.asn1.DerObject()
         oid_asn1.decode(der_objectid)
 
     # PyCrypto < 2.7 did not decode the Object Identifier. Let's implement OID decoding
@@ -362,7 +362,7 @@ def decode_oid(der_objectid: bytes) -> str:
                 components.append(str(current_val))
                 current_val = 0
     oid_value = '.'.join(components)
-    if isinstance(oid_asn1, Crypto.Util.asn1.DerObjectId) and hasattr(oid_asn1, 'value'):
+    if isinstance(oid_asn1, Cryptodome.Util.asn1.DerObjectId) and hasattr(oid_asn1, 'value'):
         if oid_asn1.value != oid_value:
             raise RuntimeError("Failed to decode OID {}: got {} instead".format(oid_asn1.value, oid_value))
     oid_name = KNOWN_OID.get(oid_value)

@@ -4,12 +4,12 @@ include ../../env-python.mk
 NEVER_TEST_BINARIES := find_rsa_pkcs1v15_modulus.py keepass_decode.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
-HAVE_PYTHON_CRYPTO := $(call can-run,$(PYTHON) -c 'import Crypto')
+HAVE_PYTHON_CRYPTODOME := $(call can-run,$(PYTHON) -c 'import Cryptodome')
 
 # "enum" module was introduced in Python 3.4 and was backported with "pip install enum34"
 HAVE_PYTHON_ENUM := $(call can-run,$(PYTHON) -c 'import enum')
 
-ifneq ($(HAVE_PYTHON_CRYPTO),y)
+ifneq ($(HAVE_PYTHON_CRYPTODOME),y)
 NONTEST_BINARIES += bip32_seed_derivation.py chacha20_poly1305_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py
 endif
 

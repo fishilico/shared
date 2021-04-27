@@ -49,7 +49,7 @@ import struct
 import sys
 import tempfile
 
-import Crypto.Cipher.DES3
+import Cryptodome.Cipher.DES3
 
 import util_asn1
 from util_bin import run_openssl_show_cert, run_process_with_input, xx
@@ -488,7 +488,7 @@ def print_ks_private_key(ks_content, password, offset=0, show_pem=False, list_on
         print("    * iterations: {}".format(iterations))
 
         key, iv = PBEWithMD5AndTripleDES_derivation(password, salt, iterations)
-        crypto_3des = Crypto.Cipher.DES3.new(key, Crypto.Cipher.DES3.MODE_CBC, iv)
+        crypto_3des = Cryptodome.Cipher.DES3.new(key, Cryptodome.Cipher.DES3.MODE_CBC, iv)
         decrypted = crypto_3des.decrypt(privkey_encrypted)
         padlen, = struct.unpack('B', decrypted[-1:])
         # Check PKCS#5 padding
@@ -539,11 +539,11 @@ def print_jceks_secret_key(ks_content, password, offset=0, list_only=False):
     # The parameters consist in an ASN.1 sequence of [salt, iterations_count]
     print("  * params ({} bytes: {})".format(len(params), xx(params)))
     # run_process_with_input(['openssl', 'asn1parse', '-i', '-inform', 'DER'], params)
-    params_asn1 = Crypto.Util.asn1.DerSequence()
+    params_asn1 = Cryptodome.Util.asn1.DerSequence()
     params_asn1.decode(params)
     assert len(params_asn1) == 2
     salt_obj, iterations = params_asn1
-    salt_asn1 = Crypto.Util.asn1.DerObject()
+    salt_asn1 = Cryptodome.Util.asn1.DerObject()
     salt_asn1.decode(salt_obj)
     salt = salt_asn1.payload
     print("    * salt ({} bytes): {}".format(len(salt), xx(salt)))
@@ -554,7 +554,7 @@ def print_jceks_secret_key(ks_content, password, offset=0, list_only=False):
     print("  * encrypted ({} bytes):".format(len(encrypted)))
 
     key, iv = PBEWithMD5AndTripleDES_derivation(password, salt, iterations)
-    crypto_3des = Crypto.Cipher.DES3.new(key, Crypto.Cipher.DES3.MODE_CBC, iv)
+    crypto_3des = Cryptodome.Cipher.DES3.new(key, Cryptodome.Cipher.DES3.MODE_CBC, iv)
     decrypted = crypto_3des.decrypt(encrypted)
     padlen, = struct.unpack('B', decrypted[-1:])
     # Check PKCS#5 padding

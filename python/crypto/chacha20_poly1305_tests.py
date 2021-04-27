@@ -43,16 +43,11 @@ import sys
 
 
 try:
-    import Crypto.Cipher.ChaCha20 as CryptoChaCha20
-    has_crypto = True
+    import Cryptodome.Cipher.ChaCha20 as CryptoChaCha20
+    has_cryptodome = True
 except ImportError:
-    try:
-        # On Ubuntu, python3-pycryptodome installs in Cryptodome module
-        import Cryptodome.Cipher.ChaCha20 as CryptoChaCha20
-        has_crypto = True
-    except ImportError:
-        sys.stderr.write("Warning: PyCrypto fails to load. Proceeding without it\n")
-        has_crypto = False
+    sys.stderr.write("Warning: Cryptodome fail to load. Proceeding without it\n")
+    has_cryptodome = False
 
 try:
     from cryptography.hazmat.primitives.ciphers import Cipher, algorithms
@@ -256,7 +251,7 @@ def check_chacha20_test_vectors():
         '5f8fc299e8148362fa198a39531bed6d')
     assert block == expected_block
 
-    if has_crypto:
+    if has_cryptodome:
         # Test encrypting/decrypting random data
         print("Checking ChaCha20 implementation vs. PyCrypto(dome)")
         key = os.urandom(32)

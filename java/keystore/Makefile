@@ -3,9 +3,9 @@ include ../../env-python.mk
 NEVER_TEST_BINARIES := image_lsb.py matplotlib_feed_plot3d.py pcap_netmap.py unicode_norm.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
-HAVE_PYTHON_CRYPTO := $(call can-run,$(PYTHON) -c 'import Crypto')
+HAVE_PYTHON_CRYPTODOME := $(call can-run,$(PYTHON) -c 'import Cryptodome')
 
-ifneq ($(HAVE_PYTHON_CRYPTO),y)
+ifneq ($(HAVE_PYTHON_CRYPTODOME),y)
 NONTEST_BINARIES += parse_jceks.py parse_pkcs12.py util_asn1.py
 endif
 

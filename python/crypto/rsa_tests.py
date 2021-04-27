@@ -47,12 +47,12 @@ import struct
 import sys
 import tempfile
 
-import Crypto.PublicKey.RSA
-import Crypto.Cipher.PKCS1_OAEP
-import Crypto.Cipher.PKCS1_v1_5
-import Crypto.Hash.SHA512
-import Crypto.Signature.PKCS1_PSS
-import Crypto.Signature.PKCS1_v1_5
+import Cryptodome.PublicKey.RSA
+import Cryptodome.Cipher.PKCS1_OAEP
+import Cryptodome.Cipher.PKCS1_v1_5
+import Cryptodome.Hash.SHA512
+import Cryptodome.Signature.PKCS1_PSS
+import Cryptodome.Signature.PKCS1_v1_5
 
 try:
     import gmpy2
@@ -277,7 +277,7 @@ def privkey_from_npe(n, p, e, q=None, use_lcm=False):
         q = n // p
     assert p * q == n
     d = get_privexp_from_npe(n, p, e, q=q, use_lcm=use_lcm)
-    return Crypto.PublicKey.RSA.construct((n, e, d, p, q))
+    return Cryptodome.PublicKey.RSA.construct((n, e, d, p, q))
 
 
 def privkey_from_pub_p(pubkey, p, use_lcm=False):
@@ -288,7 +288,7 @@ def privkey_from_pub_p(pubkey, p, use_lcm=False):
 def privkey_from_ned(n, e, d, verbose=False):
     """Craft a private RSA key from a public key (n, e) and a private exponent, d"""
     p, q = get_primes_from_ned(n, e, d, verbose=verbose)
-    return Crypto.PublicKey.RSA.construct((n, e, d, p, q))
+    return Cryptodome.PublicKey.RSA.construct((n, e, d, p, q))
 
 
 def privkey_from_pub_d(pubkey, d, verbose=False):
@@ -425,7 +425,7 @@ def run_openssl_test(bits, colorize):
     color_purple = COLOR_PURPLE if colorize else ''
 
     logger.debug("Generate a RSA-%d key", bits)
-    key = Crypto.PublicKey.RSA.generate(bits)
+    key = Cryptodome.PublicKey.RSA.generate(bits)
     print("RSA-{} generated key:".format(bits))
     print("  n({}) = {}{:#x}{}".format(key.n.bit_length(), color_green, key.n, color_norm))
     print("  d({}) = {}{:#x}{}".format(key.d.bit_length(), color_red, key.d, color_norm))
@@ -463,7 +463,7 @@ def run_openssl_test(bits, colorize):
     print("")
 
     # Create public key
-    pubkey = Crypto.PublicKey.RSA.construct((key.n, key.e))
+    pubkey = Cryptodome.PublicKey.RSA.construct((key.n, key.e))
     pempubkey = pubkey.exportKey('PEM')
     print("Public key in PEM format:")
     print("{}{}{}".format(color_green, pempubkey.decode('ascii'), color_norm))
@@ -474,7 +474,7 @@ def run_openssl_test(bits, colorize):
     print("")
 
     # Recover the private key from a prime
-    decoded_pubkey = Crypto.PublicKey.RSA.importKey(pempubkey)
+    decoded_pubkey = Cryptodome.PublicKey.RSA.importKey(pempubkey)
     recovered_privkey_nolcm = privkey_from_pub_p(decoded_pubkey, key.p, use_lcm=False)
     recovered_privkey_lcm = privkey_from_pub_p(decoded_pubkey, key.p, use_lcm=True)
     assert recovered_privkey_nolcm.n == pubkey.n
@@ -488,7 +488,7 @@ def run_openssl_test(bits, colorize):
     assert key.d in (recovered_privkey_nolcm.d, recovered_privkey_lcm.d)
 
     # Recover the private key from the private exponent
-    decoded_pubkey = Crypto.PublicKey.RSA.importKey(pempubkey)
+    decoded_pubkey = Cryptodome.PublicKey.RSA.importKey(pempubkey)
     recovered_privkey = privkey_from_pub_d(decoded_pubkey, key.d, verbose=True)
     assert recovered_privkey.n == pubkey.n
     assert recovered_privkey.e == pubkey.e
@@ -515,7 +515,7 @@ def run_openssl_test(bits, colorize):
     # Use Public-Key Cryptography Standards (PKCS) with random padding
     # RSAES-PKCS1-v1_5 (encryption) and RSASSA-PKCS1-v1_5 (signature)
     print("PKCS#1 v1.5 RSA_encrypt({}):".format(repr(test_message)))
-    cipher = Crypto.Cipher.PKCS1_v1_5.new(pubkey)
+    cipher = Cryptodome.Cipher.PKCS1_v1_5.new(pubkey)
     ciphertext = cipher.encrypt(test_message)
     hexdump(ciphertext, color=color_purple)
     print("Decrypted RSAES-PKCS1-v1_5:")
@@ -532,7 +532,7 @@ def run_openssl_test(bits, colorize):
 
     # Encrypt with Optimal Asymmetric Encryption Padding (OAEP), RSAES-OAEP
     print("PKCS#1 OAEP RSA_encrypt({}):".format(repr(test_message)))
-    cipher = Crypto.Cipher.PKCS1_OAEP.new(pubkey)
+    cipher = Cryptodome.Cipher.PKCS1_OAEP.new(pubkey)
     ciphertext = cipher.encrypt(test_message)
     hexdump(ciphertext, color=color_purple)
     print("Raw decrypted PKCS#1 OAEP RSA (00 || masked_seed || masked_data_block):")
@@ -565,8 +565,8 @@ def run_openssl_test(bits, colorize):
 
     # RSASSA-PKCS1-v1_5
     print("PKCS#1 v1.5 RSA_sign({}):".format(repr(test_message)))
-    cipher = Crypto.Signature.PKCS1_v1_5.new(key)
-    signature = cipher.sign(Crypto.Hash.SHA512.new(test_message))
+    cipher = Cryptodome.Signature.PKCS1_v1_5.new(key)
+    signature = cipher.sign(Cryptodome.Hash.SHA512.new(test_message))
     hexdump(signature, color=color_purple)
     print("Decrypted RSASSA-PKCS1-v1_5:")
     signedint = checked_decode_bigint_be(signature)
@@ -588,15 +588,15 @@ def run_openssl_test(bits, colorize):
     # Sign with Probabilistic Signature Scheme (PSS), RSASSA-PSS
     # Use SHA512 but with 1024-bit keys (not enough room), which uses SHA-1 (the default algorithm)
     if bits == 1024:
-        crypto_hash = Crypto.Hash.SHA
+        crypto_hash = Cryptodome.Hash.SHA
         hashlib_hash = hashlib.sha1  # noqa
         salt_len = 20
     else:
-        crypto_hash = Crypto.Hash.SHA512
+        crypto_hash = Cryptodome.Hash.SHA512
         hashlib_hash = hashlib.sha512
         salt_len = 64
     print("PKCS#1 RSASSA-PSS sign({}):".format(repr(test_message)))
-    cipher = Crypto.Signature.PKCS1_PSS.new(key)
+    cipher = Cryptodome.Signature.PKCS1_PSS.new(key)
     signature = cipher.sign(crypto_hash.new(test_message))
     hexdump(signature, color=color_purple)
     print("Raw decrypted PKCS#1 RSASSA-PSS (masked_data_block || salted_hash || 0xbc):")
@@ -715,7 +715,7 @@ def decode_openssh_private_key(private_key, colorize):
     if sys.version_info < (3,):
         privkey_e = long(privkey_e)  # noqa
 
-    return Crypto.PublicKey.RSA.construct((privkey_n, privkey_e, privkey_d, privkey_p, privkey_q))
+    return Cryptodome.PublicKey.RSA.construct((privkey_n, privkey_e, privkey_d, privkey_p, privkey_q))
 
 
 def run_ssh_test(bits, colorize):
@@ -763,7 +763,7 @@ def run_ssh_test(bits, colorize):
                 private_key, color=color_red)
             if not result:
                 return False
-            key = Crypto.PublicKey.RSA.importKey(private_key)
+            key = Cryptodome.PublicKey.RSA.importKey(private_key)
         else:
             # The private key is in OpenSSH format by default since OpenSSH 7.8
             assert privkey_lines[0] == '-----BEGIN OPENSSH PRIVATE KEY-----\n'

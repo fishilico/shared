@@ -46,7 +46,7 @@ CMD ["/run_shared_test.sh"]
 #       glossaries: check_sort_order.py
 #       java/keystore: parse_jceks.py parse_pkcs12.py util_asn1.py
 #       linux: enum_link_addrs sdl_v4l_video
-#       python: cffi_example.py cffi_numpy.py z3_example.py
+#       python: cffi_example.py cffi_numpy.py clang_cfi_typeid.py z3_example.py
 #       python/crypto: bip32_seed_derivation.py chacha20_poly1305_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py tpm_decode_bios_measurements.py tpm_ea_policy.py
 #       python/network: udp_multihome.py
 #       python/network/dnssec: verify_dnssec.py
@@ -59,7 +59,7 @@ CMD ["/run_shared_test.sh"]
 #          glossaries: check_sort_order.py
 #          java/keystore: parse_jceks.py parse_pkcs12.py util_asn1.py
 #          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
-#          python: cffi_example.py cffi_numpy.py z3_example.py
+#          python: cffi_example.py cffi_numpy.py clang_cfi_typeid.py z3_example.py
 #          python/crypto: bip32_seed_derivation.py chacha20_poly1305_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py tpm_decode_bios_measurements.py tpm_ea_policy.py
 #          python/network: udp_multihome.py
 #          python/network/dnssec: verify_dnssec.py

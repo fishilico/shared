@@ -23,7 +23,7 @@
 import logging
 import struct
 
-import Crypto.Util.asn1
+import Cryptodome.Util.asn1
 
 import util_bin
 
@@ -33,7 +33,7 @@ logger = logging.getLogger(__name__)
 
 def decode_object(der_obj):
     """Decode an ASN.1 object in DER format"""
-    obj_asn1 = Crypto.Util.asn1.DerObject()
+    obj_asn1 = Cryptodome.Util.asn1.DerObject()
     try:
         obj_asn1.decode(der_obj)
     except ValueError as exc:
@@ -44,7 +44,7 @@ def decode_object(der_obj):
 
 def decode_sequence(der_seq, count=None, counts=None):
     """Decode an ASN.1 sequence in DER format"""
-    seq_asn1 = Crypto.Util.asn1.DerSequence()
+    seq_asn1 = Cryptodome.Util.asn1.DerSequence()
     try:
         seq_asn1.decode(der_seq)
     except ValueError as exc:
@@ -60,10 +60,10 @@ def decode_sequence(der_seq, count=None, counts=None):
 def decode_set(der_set):
     """Decode an ASN.1 set in DER format"""
     try:
-        set_asn1 = Crypto.Util.asn1.DerSetOf()
+        set_asn1 = Cryptodome.Util.asn1.DerSetOf()
     except AttributeError:
         # PyCrypto < 2.7 did not implement DerSetOf
-        raise NotImplementedError("Crypto.Util.asn1.DerSetOf is not available")
+        raise NotImplementedError("Cryptodome.Util.asn1.DerSetOf is not available")
     try:
         set_asn1.decode(der_set)
     except ValueError as exc:
@@ -74,7 +74,7 @@ def decode_set(der_set):
 
 def decode_octet_string(der_octet_string):
     """Decode an ASN.1 Octet String in DER format"""
-    octet_string_asn1 = Crypto.Util.asn1.DerOctetString()
+    octet_string_asn1 = Cryptodome.Util.asn1.DerOctetString()
     try:
         octet_string_asn1.decode(der_octet_string)
     except ValueError as exc:
@@ -82,7 +82,7 @@ def decode_octet_string(der_octet_string):
         raise
     except TypeError:
         # python-crypto 2.6.1-4ubuntu0.3 is buggy on Ubuntu 14.04
-        octet_string_asn1 = Crypto.Util.asn1.DerObject()
+        octet_string_asn1 = Cryptodome.Util.asn1.DerObject()
         octet_string_asn1.decode(der_octet_string)
     return octet_string_asn1.payload
 
@@ -105,7 +105,7 @@ def decode_any_string(der_string):
 
 def decode_oid(der_objectid):
     """Decode an ASN.1 Object ID in DER format"""
-    oid_asn1 = Crypto.Util.asn1.DerObjectId()
+    oid_asn1 = Cryptodome.Util.asn1.DerObjectId()
     try:
         oid_asn1.decode(der_objectid)
     except ValueError as exc:
@@ -118,7 +118,7 @@ def decode_oid(der_objectid):
         # TypeError: unbound method decode() must be called with DerObject instance as first argument
         #   (got str instance instead)
         # ... so fallback to a raw DerObject()
-        oid_asn1 = Crypto.Util.asn1.DerObject()
+        oid_asn1 = Cryptodome.Util.asn1.DerObject()
         oid_asn1.decode(der_objectid)
 
     # PyCrypto < 2.7 did not decode the Object Identifier. Let's implement OID decoding
