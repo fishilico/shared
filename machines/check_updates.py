@@ -58,7 +58,7 @@ def get_used_non_latest_image_tags():
                     break
         if image_tag is None:
             raise ValueError("Invalid file {}: missing FROM line".format(file_path))
-        matches = re.match(r'^([0-9a-z/-]+)(?::([0-9a-z.-]+))?$', image_tag)
+        matches = re.match(r'^(?:docker\.io/)?([0-9a-z/-]+)(?::([0-9a-z.-]+))?$', image_tag)
         if not matches:
             raise ValueError("Invalid file {}: unexpected FROM line {}".format(file_path, repr(image_tag)))
         image, tag = matches.groups()

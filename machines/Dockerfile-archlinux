@@ -1,8 +1,6 @@
-FROM archlinux/base
-# Use https://github.com/docker/docker/blob/master/contrib/mkimage-arch.sh
-# to build a local Arch Linux image, from an Arch Linux distribution.
-# (Download https://raw.githubusercontent.com/docker/docker/master/contrib/mkimage-arch.sh
-# and https://raw.githubusercontent.com/docker/docker/master/contrib/mkimage-arch-pacman.conf)
+FROM docker.io/archlinux/archlinux:latest
+# Use official Arch Linux Docker image:
+# https://gitlab.archlinux.org/archlinux/archlinux-docker
 LABEL Description="Arch Linux with build dependencies for shared"
 
 # Arch Linux no longer provides python2-z3, since 2019-03-19:
