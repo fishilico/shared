@@ -18,7 +18,7 @@ RUN \
         gcc \
         gdb \
         gtk3 \
-        jdk11-openjdk \
+        jdk-openjdk \
         kernel-headers-musl \
         libpulse \
         linux-headers \
@@ -44,6 +44,7 @@ RUN \
         sdl2 \
         which \
         wine && \
+    archlinux-java set java-15-openjdk && \
     (pacman --noconfirm -Sc ; rm -rf /var/cache/pacman/pkg/* )
 
 WORKDIR /shared
