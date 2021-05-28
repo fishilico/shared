@@ -370,6 +370,8 @@ Intel CPU Microarchitecture
   (process-architecture-optimization model of production)
 * https://en.wikipedia.org/wiki/Semiconductor_device_fabrication
   (Minimal feature size is the size of semiconductor in the manufacturing process)
+* https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h
+  (list of Intel microarchitectures in Linux kernel)
 
 +-----------------------------------------+--------------+--------------+-------------------------------------------------------------------------------------------------+
 | Microarchitecture                       | Release date | Transistors  | Brand and CPU names                                                                             |
