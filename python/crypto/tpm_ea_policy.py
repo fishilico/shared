@@ -314,11 +314,14 @@ WELL_KNOWN_EA_POLICIES = {
     # tpm2_policysecret -S session.ctx -L policy -c e
     # Policy for EK template in "B.3.3 Template L-1: RSA 2048 (Storage)" and
     # "B.3.4 Template L-2: ECC NIST P256 (Storage)" and
-    # "B.5.3 Policy Index I-1: SHA256" of
+    # "B.5.3 Policy Index I-1: SHA256" and
+    # "B.6.2 Computing PolicyA" of
     # https://trustedcomputinggroup.org/wp-content/uploads/TCG_IWG_Credential_Profile_EK_V2.1_R13.pdf
     # (TCG EK Credential Profile For TPM Family 2.0; Level 0,
     # Specification Version 2.1, Revision 13, 10 December 2018)
     '837197674484b3f81a90cc8d46a5d724fd52d76e06520b64f2a1da1b331469aa': 'PolicySecret(RH_ENDORSEMENT)',
+    '8bbf2266537c171cb56e403c4dc1d4b64f432611dc386e6f532050c3278c930e143e8bb1133824ccb431053871c6db53': 'PolicySecret_SHA384(RH_ENDORSEMENT)',  # noqa
+    '1e3b76502c8a1425aa0b7b3fc646a1b0fae063b03b5368f9c4cddecaff0891dd682bac1a85d4d832b781ea451915de5fc5bf0dc4a1917cd42fa041e3f998e0ee': 'PolicySecret_SHA512(RH_ENDORSEMENT)',  # noqa
     # tpm2_policysecret -S session.ctx -L policy -c p
     'c8b1292eff2ce7a3fa0fb1aed9ad254fb03fc01c9abc2dd1985161ba6811bdc7': 'PolicySecret(RH_PLATFORM)',
 
@@ -331,11 +334,17 @@ WELL_KNOWN_EA_POLICIES = {
     #   authorization policy: 0C8DF0CF0169C38828C8FA4C0FF37A548C23C041AEECD2A12CA740D501D620B7
     '0c8df0cf0169c38828c8fa4c0ff37a548c23c041aeecd2a12ca740d501d620b7': 'PolicySecret(RH_LOCKOUT) OR PolicyNvWritten(YES)',  # noqa
 
-    # Policy documented in B.5. Policy NV Indices
+    # Policy documented in B.5. Policy NV Indices,
+    # B.6.4 Computing PolicyC and B.6.5 Computing PolicyB
     # https://trustedcomputinggroup.org/wp-content/uploads/TCG_IWG_Credential_Profile_EK_V2.1_R13.pdf
     # (TCG EK Credential Profile For TPM Family 2.0; Level 0,
     # Specification Version 2.1, Revision 13, 10 December 2018)
-    'db41c13534033fadb50e75c0300e11e8a43b3c96b5d659f0f72f2f667f67ac77': 'PolicySecret(RH_ENDORSEMENT) OR PolicyAuthorizeNV(0x01c07f01)',  # noqa
+    '3767e2edd43ff45a3a7e1eaefcef78643dca964632e7aad82c673a30d8633fde': 'PolicyAuthorizeNV(0x01c07f01)',
+    'd6032ce61f2fb3c240eb3cf6a33237ef2b6a16f4293c22b455e261cffd217ad5b4947c2d73e63005eed2dc2b3593d165': 'PolicyAuthorizeNV_SHA384(0x01c07f02)',  # noqa
+    '589ee1e146544716e8deafe6db247b01b81e9f9c7dd16b814aa159138749105fba5388dd1dea702f35240c184933121e2c61b8f50d3ef91393a49a38c3f73fc8': 'PolicyAuthorizeNV_SHA512(0x01c07f03)',  # noqa
+    'ca3d0a99a2b93906f7a3342414efcfb3a385d44cd1fd459089d19b5071c0b7a0': 'PolicySecret(RH_ENDORSEMENT) OR PolicyAuthorizeNV(0x01c07f01)',  # noqa
+    'b26e7d28d11a50bc53d882bcf5fd3a1a074148bb35d3b4e4cb1c0ad9bde419cacb47ba09699646150f9fc000f3f80e12': 'PolicySecret_SHA384(RH_ENDORSEMENT) OR PolicyAuthorizeNV_SHA384(0x01c07f02)',  # noqa
+    'b8221ca69e8550a4914de3faa6a18c072cc01208073a928d5d66d59ef79e49a429c41a6b269571d57edb25fbdb1838425608b413cd616a5f6db5b6071af99bea': 'PolicySecret_SHA512(RH_ENDORSEMENT) OR PolicyAuthorizeNV_SHA512(0x01c07f03)',  # noqa
 
     # Policy for Intel TXT Launch Auxiliary NV Index (0x01800003 or 0x01c10102)
     # with attributes "policywrite|policy_delete|write_stclear|authread|no_da|platformcreate"
@@ -408,34 +417,41 @@ WELL_KNOWN_EA_POLICIES = {
 }
 
 
-def policy_and(old_digest, policy):
+def policy_and(old_digest, policy, alg):
     """Combine an old digest (possibly all-zeros for the first one) with a policy"""
-    ctx = hashlib.sha256(old_digest or b'\x00' * 32)
+    if alg is None or alg == 'sha256':
+        ctx = hashlib.sha256(old_digest or b'\x00' * 32)
+    elif alg == 'sha384':
+        ctx = hashlib.sha384(old_digest or b'\x00' * 48)
+    elif alg == 'sha512':
+        ctx = hashlib.sha512(old_digest or b'\x00' * 64)
+    else:
+        raise ValueError("Unsupported hash algorithm for policy {}".format(repr(alg)))
     ctx.update(policy)
     return ctx.digest()
 
 
-def policy_or(policies):
+def policy_or(policies, alg=None):
     """TPM2_CC_PolicyOR with a set of policies"""
-    return policy_and(None, struct.pack('>I', Tpm20CommandCode.TPM2_CC_PolicyOR) + b''.join(policies))
+    return policy_and(None, struct.pack('>I', Tpm20CommandCode.TPM2_CC_PolicyOR) + b''.join(policies), alg)
 
 
-def policy_auth_value(parent=None):
+def policy_auth_value(parent=None, alg=None):
     """TPM2_CC_PolicyAuthValue"""
-    return policy_and(parent, struct.pack('>I', Tpm20CommandCode.TPM2_CC_PolicyAuthValue))
+    return policy_and(parent, struct.pack('>I', Tpm20CommandCode.TPM2_CC_PolicyAuthValue), alg)
 
 
-def policy_authorize_nv(nv_index_name, parent=None):
+def policy_authorize_nv(nv_index_name, parent=None, alg=None):
     """TPM2_CC_PolicyAuthorizeNV with the name of a NV index"""
-    return policy_and(parent, struct.pack('>I', Tpm20CommandCode.TPM2_CC_PolicyAuthorizeNV) + nv_index_name)
+    return policy_and(parent, struct.pack('>I', Tpm20CommandCode.TPM2_CC_PolicyAuthorizeNV) + nv_index_name, alg)
 
 
-def policy_command_code(command, parent=None):
+def policy_command_code(command, parent=None, alg=None):
     """TPM2_CC_PolicyCommandCode with a command code"""
-    return policy_and(parent, struct.pack('>II', Tpm20CommandCode.TPM2_CC_PolicyCommandCode, command))
+    return policy_and(parent, struct.pack('>II', Tpm20CommandCode.TPM2_CC_PolicyCommandCode, command), alg)
 
 
-def policy_locality(locality_bits, parent=None):
+def policy_locality(locality_bits, parent=None, alg=None):
     """TPM2_CC_PolicyLocality with localities given as bits
 
     Locality Zero is 1, One is 2, Two is 4, Three is 8, Four is 0x10.
@@ -448,18 +464,21 @@ def policy_locality(locality_bits, parent=None):
     Locality 3: Intel TXT Authenticated Code Module (ACM)
     Locality 4: Hardware (processor executing its microcode)
     """
-    return policy_and(parent, struct.pack('>IB', Tpm20CommandCode.TPM2_CC_PolicyLocality, locality_bits))
+    return policy_and(parent, struct.pack('>IB', Tpm20CommandCode.TPM2_CC_PolicyLocality, locality_bits), alg)
 
 
-def policy_nv_written(written, parent=None):
+def policy_nv_written(written, parent=None, alg=None):
     """TPM2_CC_PolicyNvWritten with a boolean value"""
-    return policy_and(parent, struct.pack('>IB', Tpm20CommandCode.TPM2_CC_PolicyNvWritten, 1 if written else 0))
+    return policy_and(parent, struct.pack('>IB', Tpm20CommandCode.TPM2_CC_PolicyNvWritten, 1 if written else 0), alg)
 
 
-def policy_pcr(pcrs, parent=None):
+def policy_pcr(pcrs, parent=None, alg=None):
     """TPM2_CC_PolicyPCR with a dict of PCR index->value"""
     pcr_bitmap = bytearray(3)
-    pcr_digest = hashlib.sha256()
+    if alg is None or alg == 'sha256':
+        pcr_digest = hashlib.sha256()
+    else:
+        raise ValueError("Unsupported hash algorithm for policy PCR: {}".format(repr(alg)))
     for pcr_index, pcr_value in sorted(pcrs.items()):
         assert 0 <= pcr_index < 24
         pcr_bitmap[pcr_index // 8] |= 1 << (pcr_index % 8)
@@ -468,21 +487,21 @@ def policy_pcr(pcrs, parent=None):
     # TPM_ALG_SHA256 = 0x000b
     pcr_selection = struct.pack('>IHB', 1, 0x000b, 3) + pcr_bitmap
     policy = struct.pack('>I', Tpm20CommandCode.TPM2_CC_PolicyPCR) + pcr_selection + pcr_digest.digest()
-    return policy_and(parent, policy)
+    return policy_and(parent, policy, alg)
 
 
-def policy_physical_presence(parent=None):
+def policy_physical_presence(parent=None, alg=None):
     """TPM2_CC_PolicyPhysicalPresence"""
-    return policy_and(parent, struct.pack('>I', Tpm20CommandCode.TPM2_CC_PolicyPhysicalPresence))
+    return policy_and(parent, struct.pack('>I', Tpm20CommandCode.TPM2_CC_PolicyPhysicalPresence), alg)
 
 
-def policy_secret_by_handle(handle, parent=None):
+def policy_secret_by_handle(handle, parent=None, alg=None):
     """TPM2_CC_PolicySecret with a handle which is neither transient nor NV index
     (otherwise the object name is used in the computation)
     """
-    policy = policy_and(parent, struct.pack('>II', Tpm20CommandCode.TPM2_CC_PolicySecret, handle))
+    policy = policy_and(parent, struct.pack('>II', Tpm20CommandCode.TPM2_CC_PolicySecret, handle), alg)
     # The "reference data" is always added to the policy hash, even when it is empty
-    return policy_and(policy, b'')
+    return policy_and(policy, b'', alg)
 
 
 def check_well_known_ea_policies():
@@ -504,6 +523,8 @@ def check_well_known_ea_policies():
     computed['PolicyPhysicalPresence()'] = policy_physical_presence()
     computed['PolicySecret(RH_OWNER)'] = policy_secret_by_handle(Tpm20Handle.TPM_RH_OWNER)
     computed['PolicySecret(RH_ENDORSEMENT)'] = policy_secret_by_handle(Tpm20Handle.TPM_RH_ENDORSEMENT)
+    computed['PolicySecret_SHA384(RH_ENDORSEMENT)'] = policy_secret_by_handle(Tpm20Handle.TPM_RH_ENDORSEMENT, alg='sha384')  # noqa
+    computed['PolicySecret_SHA512(RH_ENDORSEMENT)'] = policy_secret_by_handle(Tpm20Handle.TPM_RH_ENDORSEMENT, alg='sha512')  # noqa
     computed['PolicySecret(RH_LOCKOUT)'] = policy_secret_by_handle(Tpm20Handle.TPM_RH_LOCKOUT)
     computed['PolicySecret(RH_PLATFORM)'] = policy_secret_by_handle(Tpm20Handle.TPM_RH_PLATFORM)
 
@@ -512,10 +533,38 @@ def check_well_known_ea_policies():
         policy_nv_written(True),
     ))
 
+    # Follow section "B.6.3 Computing Policy Index Names" of
+    # https://trustedcomputinggroup.org/wp-content/uploads/TCG_IWG_Credential_Profile_EK_V2.1_R13.pdf
+    i1_name = struct.pack('>H', 0x000b) + hashlib.sha256(
+        struct.pack('>IHIH', 0x01c07f01, 0x000b, 0x220f1008, 0x0020) +
+        policy_secret_by_handle(Tpm20Handle.TPM_RH_ENDORSEMENT, alg='sha256') +
+        struct.pack('>H', 0x0022)).digest()
+    assert i1_name == binascii.unhexlify('000b0c9d717e9c3fe69fda41769450bb145957f8b3610e084dbf65591a5d11ecd83f')
+    computed['PolicyAuthorizeNV(0x01c07f01)'] = policy_authorize_nv(i1_name)
     computed['PolicySecret(RH_ENDORSEMENT) OR PolicyAuthorizeNV(0x01c07f01)'] = policy_or((
         policy_secret_by_handle(Tpm20Handle.TPM_RH_ENDORSEMENT),
-        policy_authorize_nv(struct.pack('>I', 0x01c07f01)),  # In practice, there is an indirection
+        policy_authorize_nv(i1_name),
     ))
+    i2_name = struct.pack('>H', 0x000c) + hashlib.sha384(
+        struct.pack('>IHIH', 0x01c07f02, 0x000c, 0x220f1008, 0x0030) +
+        policy_secret_by_handle(Tpm20Handle.TPM_RH_ENDORSEMENT, alg='sha384') +
+        struct.pack('>H', 0x0032)).digest()
+    assert i2_name == binascii.unhexlify('000cdb62fca346612c976732ff4e8621fb4e858be82586486504f7d02e621f8d7d61ae32cfc60c4d120609ed6768afcf090c')  # noqa
+    computed['PolicyAuthorizeNV_SHA384(0x01c07f02)'] = policy_authorize_nv(i2_name, alg='sha384')
+    computed['PolicySecret_SHA384(RH_ENDORSEMENT) OR PolicyAuthorizeNV_SHA384(0x01c07f02)'] = policy_or((
+        policy_secret_by_handle(Tpm20Handle.TPM_RH_ENDORSEMENT, alg='sha384'),
+        policy_authorize_nv(i2_name, alg='sha384'),
+    ), alg='sha384')
+    i3_name = struct.pack('>H', 0x000d) + hashlib.sha512(
+        struct.pack('>IHIH', 0x01c07f03, 0x000d, 0x220f1008, 0x0040) +
+        policy_secret_by_handle(Tpm20Handle.TPM_RH_ENDORSEMENT, alg='sha512') +
+        struct.pack('>H', 0x0042)).digest()
+    assert i3_name == binascii.unhexlify('000d1c47c0bbcbd3cf7d7cae6987d31937c171015dde3b7f0d3c869bca1f7e8a223b9acfadb49b7c9cf14d450f41e9327de34d9291eece2c58ab1dc10e9059cce560')  # noqa
+    computed['PolicyAuthorizeNV_SHA512(0x01c07f03)'] = policy_authorize_nv(i3_name, alg='sha512')
+    computed['PolicySecret_SHA512(RH_ENDORSEMENT) OR PolicyAuthorizeNV_SHA512(0x01c07f03)'] = policy_or((
+        policy_secret_by_handle(Tpm20Handle.TPM_RH_ENDORSEMENT, alg='sha512'),
+        policy_authorize_nv(i3_name, alg='sha512'),
+    ), alg='sha512')
 
     computed['PolicyLocality(THREE, FOUR) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)'] = \
         policy_command_code(
