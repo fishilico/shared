@@ -141,7 +141,7 @@ test_mod_sqrt()
 
 
 def hexdump(data, color=''):
-    """Show an hexdecimal dump of binary data"""
+    """Show an hexadecimal dump of binary data"""
     if color:
         sys.stdout.write(color)
     for iline in range(0, len(data), 16):

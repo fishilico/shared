@@ -297,7 +297,7 @@ def privkey_from_pub_d(pubkey, d, verbose=False):
 
 
 def hexdump(data, color=''):
-    """Show an hexdecimal dump of binary data"""
+    """Show an hexadecimal dump of binary data"""
     if color:
         sys.stdout.write(color)
     for iline in range(0, len(data), 16):

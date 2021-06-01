@@ -796,7 +796,7 @@ class AnalysisContext(object):
             self.analyze_ipv6_packet(ippkt)
             return
         if pkt_type == 0x887b and hw_dst == 'ff:ff:ff:ff:ff:ff':
-            # Homeplug, broadcasted protocol, eventualy in a VLAN 101 in a home network
+            # Homeplug, broadcasted protocol, eventually in a VLAN 101 in a home network
             if not self.seen_eth_0x887b_homeplug:
                 logger.info(
                     "Homeplug heartbit found in capture: %r",
@@ -832,8 +832,8 @@ class AnalysisContext(object):
                 self.seen_eth_0x88d9_lltd = True
             return
         if pkt_type == 0x88e1 and hw_dst == 'ff:ff:ff:ff:ff:ff':
-            # Homeplug AV, broadcasted protocol, eventualy in a VLAN 101 in a home network
-            # in Wireshark: "HomePlug AV: CM_BRG_INFO.REQ (Get Bridge Informations Request)"
+            # Homeplug AV, broadcasted protocol, eventually in a VLAN 101 in a home network
+            # in Wireshark: "HomePlug AV: CM_BRG_INFO.REQ (Get Bridge Information Request)"
             if not self.seen_eth_0x88e1_homeplug_av:
                 logger.info(
                     "Homeplug AV packet found in capture: %r",

@@ -81,7 +81,7 @@ $(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKGCONF) --cflags gtk+-3.0) \
 $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKGCONF) --libs gtk+-2.0)
 			# Gtk+2 headers:
 			# * Use variadic macros (C99 feature)
-			# * Use prototypes wihch are not strict
+			# * Use prototypes which are not strict
 $(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKGCONF) --cflags gtk+-2.0) --std=c99 \
 	$(call cc-disable-warning,strict-prototypes) $(call cc-disable-warning,cast-qual)
 		endif
