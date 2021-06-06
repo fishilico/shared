@@ -173,6 +173,8 @@ Windows exploitation
 * https://www.powershellempire.com Powershell Empire
 * https://speakerdeck.com/ropnop/fun-with-ldap-kerberos-and-msrpc-in-ad-environments
   Fun with LDAP, Kerberos (and MSRPC) in AD Environments
+* https://github.com/Cr4sh/KernelForge Kernel Forge library for Windows
+* https://github.com/hfiref0x/KDU Kernel Driver Utility
 
 Programming
 -----------

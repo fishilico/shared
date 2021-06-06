@@ -24,6 +24,7 @@ Linux
 * http://www.brendangregg.com/Perf/linux_observability_tools.png
   Linux Performance Observability tools
 * https://repology.org/ Repology, the packaging hub
+* https://safeboot.dev/ safeboot: Booting Linux Safely
 
 Windows
 -------
