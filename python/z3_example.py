@@ -85,6 +85,22 @@ def reverse32_bits(num):
     return num
 
 
+def z3_rol32(value, count):
+    """Rotate count times a 32-bit value to the left"""
+    assert value.size() == 32
+    if count in (0, 32):
+        return value
+    return z3.Concat(z3.Extract(31 - count, 0, value), z3.Extract(31, 32 - count, value))
+
+
+def z3_ror32(value, count):
+    """Rotate count times a 32-bit value to the right"""
+    assert value.size() == 32
+    if count in (0, 32):
+        return value
+    return z3.Concat(z3.Extract(count - 1, 0, value), z3.Extract(31, count, value))
+
+
 POLY_CRC32_REV = reverse32_bits(POLY_CRC32)
 
 
@@ -101,6 +117,24 @@ def hexlify_bksl(data):
     """Encode bytes into an hexadecimal string with backslashes"""
     hexstr = binascii.hexlify(data).decode('ascii')
     return ''.join('\\x' + hexstr[i:i + 2] for i in range(0, len(hexstr), 2))
+
+
+def test_rotate_operations():
+    """Ensure that rotate operations operate correctly"""
+    x = z3.BitVec('x', 32)
+    for count in range(0, 33):
+        result = z3_rol32(x, count)
+        check = z3.simplify(result == (x << count) | z3.LShR(x, 32 - count))
+        assert repr(check) == "True", "Unable to simplify z3 assertion {}".format(check)
+
+        result = z3_ror32(result, count)
+        check = z3.simplify(result == x)
+        assert repr(check) == "True", "Unable to simplify z3 assertion {}".format(check)
+
+        result = z3_ror32(x, count)
+        check = z3.simplify(result == (x << (32 - count)) | z3.LShR(x, count))
+        assert repr(check) == "True", "Unable to simplify z3 assertion {}".format(check)
+    print("Verified that z3_rol32 and z3_ror32 are correct")
 
 
 def reverse_crc32(target_crc, size, polynom=POLY_CRC32_REV):
@@ -215,7 +249,7 @@ def test_alphanum_guess(verbose=False):
         ))
 
     # Simple algorithm
-    value = 0x555555
+    value = z3.BitVecVal(0x555555, 64)
     for char_var in input_chars:
         value = value ^ char_var
         value = (value << 7) | z3.LShR(value, 25)
@@ -268,6 +302,7 @@ def test_boolean_add():
 
 
 if __name__ == '__main__':
+    test_rotate_operations()
     test_reverse_crc32()
     test_alphanum_guess()
     test_boolean_add()
