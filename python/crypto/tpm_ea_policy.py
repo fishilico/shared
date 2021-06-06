@@ -55,6 +55,9 @@ Documentation:
 * https://www.trustedcomputinggroup.org/wp-content/uploads/TPM-Rev-2.0-Part-3-Commands-01.38.pdf
   Trusted Platform Module Library, Part 3: Commands
     Family 2.0 Level 00 Revision 01.38 (September 29, 2016)
+* https://trustedcomputinggroup.org/wp-content/uploads/TSS_JSON_Policy_v0p7_r08_pub.pdf
+  TCG TSS 2.0 JSON Data Types and Policy Language Specification
+    Version 0.7 Revision 08 (June 11, 2020)
 """
 import binascii
 import enum
