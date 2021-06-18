@@ -49,6 +49,9 @@ do
         *alpine313*|*alpine3.13*)
             echo "alpine3.13"
             ;;
+        *alpine314*|*alpine3.14*)
+            echo "alpine3.14"
+            ;;
 
         *debian8*|*jessie*)
             echo "debian8-jessie"
