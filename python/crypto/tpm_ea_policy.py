@@ -288,6 +288,27 @@ class Tpm20Handle(enum.IntEnum):
     TPM_RESERVED_HANDLE_PLATFORM_KEY_1 = 0x81800001
 
 
+@enum.unique
+class Tpm20EaArithmeticOperands(enum.IntEnum):
+    """TPM_EO constants
+
+    https://github.com/tianocore/edk2/blob/edk2-stable202105/MdePkg/Include/IndustryStandard/Tpm20.h#L465-L478
+    https://github.com/tpm2-software/tpm2-tss/blob/3.1.0/include/tss2/tss2_tpm2_types.h#L407-L420
+    """
+    TPM_EO_EQ = 0x0000
+    TPM_EO_NEQ = 0x0001
+    TPM_EO_SIGNED_GT = 0x0002
+    TPM_EO_UNSIGNED_GT = 0x0003
+    TPM_EO_SIGNED_LT = 0x0004
+    TPM_EO_UNSIGNED_LT = 0x0005
+    TPM_EO_SIGNED_GE = 0x0006
+    TPM_EO_UNSIGNED_GE = 0x0007
+    TPM_EO_SIGNED_LE = 0x0008
+    TPM_EO_UNSIGNED_LE = 0x0009
+    TPM_EO_BITSET = 0x000a
+    TPM_EO_BITCLEAR = 0x000b
+
+
 WELL_KNOWN_EA_POLICIES = {
     # tpm2_policypassword -S session.ctx -L policy
     '8fcd2169ab92694e0c633f1ab772842b8241bbc20288981fc7ac1eddc1fddb0e': 'PolicyAuthValue()',
@@ -381,6 +402,19 @@ WELL_KNOWN_EA_POLICIES = {
     # tpm2_policyor -S session.ctx -L policy -l sha256:policy.read,policy.write_AND_password
     '3355408f64a7ebe10ac90dab8a4405eef7c8f164eaa9034220c961edf1dbb680': 'PolicyCommandCode(TPM2_CC_NV_Write) AND PolicyAuthValue()',  # noqa
     'c1ef6962e6e15b2fda5026efca791ae9272bd87338c6fcacdf2ccca45d03d7be': 'PolicyCommandCode(TPM2_CC_NV_Read) OR (PolicyCommandCode(TPM2_CC_NV_Write) AND PolicyAuthValue())',  # noqa
+
+    # Policy from tpm2_policycountertimer's man page
+    # https://github.com/tpm2-software/tpm2-tools/blob/5.1/man/tpm2_policycountertimer.1.md
+    # tpm2_policycountertimer -S session.ctx safe
+    '310a0eb2a2c3ebd96c39d954d2865a80c7925ab8996c5d73d0bb723756ec42bf': 'PolicyCounterTimer(safe=YES)',
+    # tpm2_policycountertimer -S session.ctx --ult 60000
+    '7f48cceb9fae31e1662d7f8306fdd1c4f81d2b8d3b0e9d82fdec42949ad5257e': 'PolicyCounterTimer(time<60000)',
+    # tpm2_policycountertimer -S session.ctx --ult clock=60000
+    '47a3a4e8c7567b07e33aad03b2adca52b02c2f96cd0ea41073d67f3e3f80eaf8': 'PolicyCounterTimer(clock<60000)',
+    # tpm2_policycountertimer -S session.ctx --ule resets=42
+    'cd397212fec5f9c77c0f9eff5d6878d7d5d43fe0f0ef4bfd9c9edf2adc7ab30f': 'PolicyCounterTimer(resets<=42)',
+    # tpm2_policycountertimer -S session.ctx --ule restarts=42
+    '12d20ca971bf0eaafae3c58f4666013cab78654330ef8c95a3e7fc9d87c9658d': 'PolicyCounterTimer(restarts<=42)',
 
     # Unknown policy seen on SRK_2 (maybe AIK = Attestation Identity Key)
     # tpm2_readpublic -c 0x81000002 :
@@ -507,6 +541,46 @@ def policy_secret_by_handle(handle, parent=None, alg=None):
     return policy_and(policy, b'', alg)
 
 
+def policy_counter_timer(offset, operation, value, parent=None, alg=None):
+    """TPM2_CC_PolicyCounterTimer with an integer offset, TPM_EO operation and encoded value"""
+    # The specification defines a double-hash to compute the policy
+    args = value + struct.pack('>HH', offset, operation)
+    if alg is None or alg == 'sha256':
+        hash_args = hashlib.sha256(args).digest()
+    elif alg == 'sha384':
+        hash_args = hashlib.sha384(args).digest()
+    elif alg == 'sha512':
+        hash_args = hashlib.sha512(args).digest()
+    else:
+        raise ValueError("Unsupported hash algorithm for policy {}".format(repr(alg)))
+    return policy_and(parent, struct.pack('>I', Tpm20CommandCode.TPM2_CC_PolicyCounterTimer) + hash_args, alg)
+
+
+def policy_counter_timer_time(operation, value, parent=None, alg=None):
+    """TPM2_CC_PolicyCounterTimer with offset 0 of struct TPMS_TIME_INFO: UINT64 time"""
+    return policy_counter_timer(0, operation, struct.pack('>Q', value), parent=parent, alg=alg)
+
+
+def policy_counter_timer_clock(operation, value, parent=None, alg=None):
+    """TPM2_CC_PolicyCounterTimer with offset 8 of struct TPMS_TIME_INFO: UINT64 clock"""
+    return policy_counter_timer(8, operation, struct.pack('>Q', value), parent=parent, alg=alg)
+
+
+def policy_counter_timer_resets(operation, value, parent=None, alg=None):
+    """TPM2_CC_PolicyCounterTimer with offset 0x10 of struct TPMS_TIME_INFO: UINT32 resetCount"""
+    return policy_counter_timer(0x10, operation, struct.pack('>I', value), parent=parent, alg=alg)
+
+
+def policy_counter_timer_restarts(operation, value, parent=None, alg=None):
+    """TPM2_CC_PolicyCounterTimer with offset 0x14 of struct TPMS_TIME_INFO: UINT32 restartCount"""
+    return policy_counter_timer(0x14, operation, struct.pack('>I', value), parent=parent, alg=alg)
+
+
+def policy_counter_timer_safe(operation=Tpm20EaArithmeticOperands.TPM_EO_EQ, value=1, parent=None, alg=None):
+    """TPM2_CC_PolicyCounterTimer with offset 0x18 of struct TPMS_TIME_INFO: TPMI_YES_NO safe"""
+    return policy_counter_timer(0x18, operation, struct.pack('B', value), parent=parent, alg=alg)
+
+
 def check_well_known_ea_policies():
     """Check the consistency of WELL_KNOWN_EA_POLICIES"""
     computed = {}
@@ -608,6 +682,16 @@ def check_well_known_ea_policies():
         policy_command_code(Tpm20CommandCode.TPM2_CC_NV_Read),
         policy_auth_value(policy_command_code(Tpm20CommandCode.TPM2_CC_NV_Write)),
     ))
+
+    computed['PolicyCounterTimer(safe=YES)'] = policy_counter_timer_safe()
+    computed['PolicyCounterTimer(time<60000)'] = \
+        policy_counter_timer_time(Tpm20EaArithmeticOperands.TPM_EO_UNSIGNED_LT, 60000)
+    computed['PolicyCounterTimer(clock<60000)'] = \
+        policy_counter_timer_clock(Tpm20EaArithmeticOperands.TPM_EO_UNSIGNED_LT, 60000)
+    computed['PolicyCounterTimer(resets<=42)'] = \
+        policy_counter_timer_resets(Tpm20EaArithmeticOperands.TPM_EO_UNSIGNED_LE, 42)
+    computed['PolicyCounterTimer(restarts<=42)'] = \
+        policy_counter_timer_restarts(Tpm20EaArithmeticOperands.TPM_EO_UNSIGNED_LE, 42)
 
     # Compare the computed digests with the reference ones
     if sys.version_info < (3, 5):
