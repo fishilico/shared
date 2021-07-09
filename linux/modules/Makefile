@@ -58,6 +58,7 @@ KCFLAGS_WARN = -Wall -Wextra -Werror \
 	-Wno-shadow \
 	-Wno-sign-conversion \
 	-Wno-switch-default \
+	-Wno-type-limits \
 	-Wno-unused-parameter
 
 # Paravirt uses self-initialised local vars
