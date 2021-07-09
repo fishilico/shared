@@ -86,19 +86,24 @@ include/sys/syscall.h: Makefile
 	echo '#endif' >> $@
 
 # Build ARM syscall table using script "syscallhdr.sh" from the kernel
-include/syscall-arm/%:
+# cf. command line from https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain/arch/arm/tools/Makefile?id=v5.13
+include/syscall-arm/syscall.tbl:
 	$(MKDIR) -p $(@D)
 	$(WGET) -q -O $@ $(LINUX_URL)/arch/arm/tools/$(@F) || (rm $@ ; false)
 
-include/asm-arm/unistd-%.h: include/syscall-arm/syscall.tbl include/syscall-arm/syscallhdr.sh
+include/scripts/syscallhdr.sh:
 	$(MKDIR) -p $(@D)
-	$(SH) include/syscall-arm/syscallhdr.sh '$<' '$@' '$*' '' '__NR_SYSCALL_BASE'
+	$(WGET) -q -O $@ $(LINUX_URL)/scripts/$(@F) || (rm $@ ; false)
+
+include/asm-arm/unistd-%.h: include/syscall-arm/syscall.tbl include/scripts/syscallhdr.sh
+	$(MKDIR) -p $(@D)
+	$(SH) include/scripts/syscallhdr.sh --abis 'common,$*' '$<' '$@'
 
 include/asm-arm/unistd-base.h:
 	$(MKDIR) -p $(@D)
 	$(WGET) -q -O $@ $(LINUX_URL)/arch/arm/include/uapi/asm/unistd.h || (rm $@ ; false)
 
-include/asm-arm/unistd.h: include/asm-arm/unistd-base.h include/asm-arm/unistd-eabi.h include/asm-arm/unistd-oabi.h include/asm-arm/unistd-common.h
+include/asm-arm/unistd.h: include/asm-arm/unistd-base.h include/asm-arm/unistd-eabi.h include/asm-arm/unistd-oabi.h
 	$(SED) 's,#include <asm/\(unistd-[a-z]*.h\)>,#include "\1",' < $< > $@
 
 # Download asm-generic headers
@@ -128,6 +133,6 @@ include/sys/utsname.h: include/sys/linux_utsname.h
 	$(SED) 's/struct new_utsname/struct utsname/' < $< > $@
 
 .PHONY: all all32 all64 clean test sync-inet create_include
-.PRECIOUS: .%.o include/syscall-arm/% include/syscall-x86/%
+.PRECIOUS: .%.o include/scripts/% include/syscall-arm/% include/syscall-x86/%
 
 -include .*.d
