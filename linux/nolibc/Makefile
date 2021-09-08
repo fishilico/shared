@@ -60,8 +60,13 @@ tinyelf.$(BIN_EXT): .tinyelf.o
 	$(V_CC)$(CC) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 # Make an "include" directory, when no system header is available
-INCLUDE_ARCH := arm generic i386 x86_64
-INCLUDE_FILES := $(INCLUDE_ARCH:%=include/asm-%/unistd.h) include/sys/syscall.h include/sys/utsname.h
+INCLUDE_FILES := \
+    include/asm-arm/unistd.h \
+    include/asm-generic/unistd.h \
+    include/asm-i386/unistd_32.h \
+    include/asm-x86_64/unistd_64.h \
+    include/sys/syscall.h \
+    include/sys/utsname.h
 LINUX_URL := https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain
 
 sync-inet:
@@ -80,20 +85,20 @@ include/sys/syscall.h: Makefile
 	echo '#elif defined(__arm__)' >> $@
 	echo '#include "../asm-arm/unistd.h"' >> $@
 	echo '#elif defined(__i386__)' >> $@
-	echo '#include "../asm-i386/unistd.h"' >> $@
+	echo '#include "../asm-i386/unistd_32.h"' >> $@
 	echo '#elif defined(__x86_64__)' >> $@
-	echo '#include "../asm-x86_64/unistd.h"' >> $@
+	echo '#include "../asm-x86_64/unistd_64.h"' >> $@
 	echo '#endif' >> $@
 
 # Build ARM syscall table using script "syscallhdr.sh" from the kernel
 # cf. command line from https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain/arch/arm/tools/Makefile?id=v5.13
-include/syscall-arm/syscall.tbl:
-	$(MKDIR) -p $(@D)
-	$(WGET) -q -O $@ $(LINUX_URL)/arch/arm/tools/$(@F) || (rm $@ ; false)
-
 include/scripts/syscallhdr.sh:
 	$(MKDIR) -p $(@D)
 	$(WGET) -q -O $@ $(LINUX_URL)/scripts/$(@F) || (rm $@ ; false)
+
+include/syscall-arm/syscall.tbl:
+	$(MKDIR) -p $(@D)
+	$(WGET) -q -O $@ $(LINUX_URL)/arch/arm/tools/$(@F) || (rm $@ ; false)
 
 include/asm-arm/unistd-%.h: include/syscall-arm/syscall.tbl include/scripts/syscallhdr.sh
 	$(MKDIR) -p $(@D)
@@ -112,17 +117,18 @@ include/asm-generic/unistd.h:
 	$(WGET) -q -O $@ $(LINUX_URL)/include/uapi/asm-generic/$(@F) || (rm $@ ; false)
 
 # Build x86 syscall tables using script "syscallhdr.sh" from the kernel
+# cf. command line from https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/entry/syscalls/Makefile?id=v5.14
 include/syscall-x86/%:
 	$(MKDIR) -p $(@D)
 	$(WGET) -q -O $@ $(LINUX_URL)/arch/x86/entry/syscalls/$(@F) || (rm $@ ; false)
 
-include/asm-i386/unistd.h: include/syscall-x86/syscall_32.tbl include/syscall-x86/syscallhdr.sh
+include/asm-i386/unistd_32.h: include/syscall-x86/syscall_32.tbl include/scripts/syscallhdr.sh
 	$(MKDIR) -p $(@D)
-	$(SH) include/syscall-x86/syscallhdr.sh '$<' '$@' 'common,i386' '' ''
+	$(SH) include/scripts/syscallhdr.sh --abis 'common,i386' --emit-nr '$<' '$@'
 
-include/asm-x86_64/unistd.h: include/syscall-x86/syscall_64.tbl include/syscall-x86/syscallhdr.sh
+include/asm-x86_64/unistd_64.h: include/syscall-x86/syscall_64.tbl include/scripts/syscallhdr.sh
 	$(MKDIR) -p $(@D)
-	$(SH) include/syscall-x86/syscallhdr.sh '$<' '$@' 'common,64' '' ''
+	$(SH) include/scripts/syscallhdr.sh --abis 'common,64' --emit-nr '$<' '$@'
 
 # Build sys/utsname.h file from linux/utsname.h kernel header
 include/sys/linux_utsname.h:

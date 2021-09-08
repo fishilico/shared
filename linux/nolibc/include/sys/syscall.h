@@ -5,7 +5,7 @@
 #elif defined(__arm__)
 #include "../asm-arm/unistd.h"
 #elif defined(__i386__)
-#include "../asm-i386/unistd.h"
+#include "../asm-i386/unistd_32.h"
 #elif defined(__x86_64__)
-#include "../asm-x86_64/unistd.h"
+#include "../asm-x86_64/unistd_64.h"
 #endif
