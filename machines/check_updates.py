@@ -154,10 +154,6 @@ def is_usable_tag(image, tag):
         if re.match(r'^[a-z]+$', tag):
             return False
 
-    if image == 'gentoo/stage3':
-        # Only accept a single tag for Gentoo image
-        return tag == 'amd64-hardened'
-
     # By default, keep the tag
     logger.warning("Unknown tag format: %r %r", image, tag)
     return True

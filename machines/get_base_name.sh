@@ -125,10 +125,6 @@ do
             echo "fedora35"
             ;;
 
-        *gentoo*)
-            echo "gentoo-amd64-hardened"
-            ;;
-
         *)
             echo >&2 "Error: invalid name $NAME (from $1)"
             exit 1
