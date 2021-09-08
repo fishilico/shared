@@ -4,7 +4,11 @@
 \usetikzlibrary{angles,quotes}
 
 % Define math shortcuts
-\renewcommand{\C}[0]{\ensuremath{\mathbbm{C}}}
+\ifcsname{C}\endcsname%
+  \renewcommand{\C}[0]{\ensuremath{\mathbbm{C}}}
+\else%
+  \newcommand{\C}[0]{\ensuremath{\mathbbm{C}}}
+\fi
 \newcommand{\N}[0]{\ensuremath{\mathbbm{N}}}
 \newcommand{\Ns}[0]{\ensuremath{\mathbbm{N^{*}}}}
 \newcommand{\Z}[0]{\ensuremath{\mathbbm{Z}}}
