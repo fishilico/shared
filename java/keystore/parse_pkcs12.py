@@ -63,6 +63,7 @@ import struct
 import sys
 import tempfile
 
+import Cryptodome.Cipher.AES
 import Cryptodome.Cipher.ARC2
 import Cryptodome.Cipher.DES3
 
@@ -145,6 +146,10 @@ def pkcs12_derivation(alg, id_byte, password, salt, iterations, result_size=None
         hash_func = hashlib.sha1
         u = 160  # SHA1 digest size, in bits
         v = 512  # SHA1 block size, in bits
+    elif alg == 'SHA256':
+        hash_func = hashlib.sha256
+        u = 256  # SHA256 digest size, in bits
+        v = 512  # SHA256 block size, in bits
     else:
         raise NotImplementedError("Unimplemented algorithm {} for PKCS#12 key derivation".format(alg))
 
@@ -206,36 +211,49 @@ assert pkcs12_derivation(
     'SHA1', 2, 'changeit',
     binascii.unhexlify('a9fb3e857865d5e2aeff3983389c980d5de4bf39'), 50000, 8
     ) == binascii.unhexlify('13515c2efce50ef9')
+assert pkcs12_derivation(
+    'SHA256', 3, 'changeit',
+    binascii.unhexlify('ad18630f2594018bd53c4573a7b03f89afda3e87'), 10000
+    ) == binascii.unhexlify('894a3be59b92531f08a458c54e4d89493fd9dda40d65b1831ff3ca69f4ff716c')
 
 
 def try_pkcs12_decrypt(encrypted, enc_alg, password, indent=''):
     """Try to decrypt some data with the given password and PKCS#12 password-based encryption algorithms"""
-    if not isinstance(enc_alg, util_asn1.PKCS12PbeAlg):
-        raise NotImplementedError("Unimplemented encryption algorithm {}".format(enc_alg))
+    if isinstance(enc_alg, util_asn1.PKCS12PbeAlg):
+        if enc_alg.oid_name == 'pbeWithSHA1And3-KeyTripleDES-CBC':
+            # 192-bits 3DES key and 64-bit IV from SHA1
+            key = pkcs12_derivation(alg='SHA1', id_byte=1, password=password, salt=enc_alg.salt,
+                                    iterations=enc_alg.iterations, result_size=24)
+            iv = pkcs12_derivation(alg='SHA1', id_byte=2, password=password, salt=enc_alg.salt,
+                                   iterations=enc_alg.iterations, result_size=8)
+            crypto_3des = Cryptodome.Cipher.DES3.new(key, Cryptodome.Cipher.DES3.MODE_CBC, iv)
+            decrypted = crypto_3des.decrypt(encrypted)
 
-    if enc_alg.oid_name == 'pbeWithSHA1And3-KeyTripleDES-CBC':
-        # 192-bits 3DES key and 64-bit IV from SHA1
-        key = pkcs12_derivation(alg='SHA1', id_byte=1, password=password, salt=enc_alg.salt,
-                                iterations=enc_alg.iterations, result_size=24)
-        iv = pkcs12_derivation(alg='SHA1', id_byte=2, password=password, salt=enc_alg.salt,
-                               iterations=enc_alg.iterations, result_size=8)
-        crypto_3des = Cryptodome.Cipher.DES3.new(key, Cryptodome.Cipher.DES3.MODE_CBC, iv)
-        decrypted = crypto_3des.decrypt(encrypted)
+        elif enc_alg.oid_name == 'pbeWithSHA1And40BitRC2-CBC':
+            # 40-bits RC2 key and 64-bit IV from SHA1
+            key = pkcs12_derivation(alg='SHA1', id_byte=1, password=password, salt=enc_alg.salt,
+                                    iterations=enc_alg.iterations, result_size=5)
+            iv = pkcs12_derivation(alg='SHA1', id_byte=2, password=password, salt=enc_alg.salt,
+                                   iterations=enc_alg.iterations, result_size=8)
+            try:
+                crypto_rc2 = Cryptodome.Cipher.ARC2.new(key, Cryptodome.Cipher.ARC2.MODE_CBC, iv, effective_keylen=40)
+                decrypted = crypto_rc2.decrypt(encrypted)
+            except ValueError:
+                # Use custom RC2 implementation because "effective_keylen=40" is not always supported
+                # https://github.com/Legrandin/pycryptodome/issues/267
+                crypto_rc2 = rc2.RC2(key)
+                decrypted = crypto_rc2.decrypt(encrypted, rc2.MODE_CBC, iv)
+        else:
+            raise NotImplementedError("Unimplemented encryption algorithm {}".format(enc_alg))
 
-    elif enc_alg.oid_name == 'pbeWithSHA1And40BitRC2-CBC':
-        # 40-bits RC2 key and 64-bit IV from SHA1
-        key = pkcs12_derivation(alg='SHA1', id_byte=1, password=password, salt=enc_alg.salt,
-                                iterations=enc_alg.iterations, result_size=5)
-        iv = pkcs12_derivation(alg='SHA1', id_byte=2, password=password, salt=enc_alg.salt,
-                               iterations=enc_alg.iterations, result_size=8)
-        try:
-            crypto_rc2 = Cryptodome.Cipher.ARC2.new(key, Cryptodome.Cipher.ARC2.MODE_CBC, iv, effective_keylen=40)
-            decrypted = crypto_rc2.decrypt(encrypted)
-        except ValueError:
-            # Use custom RC2 implementation because "effective_keylen=40" is not always supported
-            # https://github.com/Legrandin/pycryptodome/issues/267
-            crypto_rc2 = rc2.RC2(key)
-            decrypted = crypto_rc2.decrypt(encrypted, rc2.MODE_CBC, iv)
+    elif isinstance(enc_alg, util_asn1.PKCS12Pbes2Alg):
+        pwd_bytes = password.encode('utf-8')
+        key = hashlib.pbkdf2_hmac(enc_alg.prf_alg, pwd_bytes, enc_alg.salt, enc_alg.iterations, enc_alg.dklen)
+        if enc_alg.enc_alg == 'aes256-CBC-PAD':
+            crypto_aes = Cryptodome.Cipher.AES.new(key, Cryptodome.Cipher.AES.MODE_CBC, enc_alg.enc_iv)
+            decrypted = crypto_aes.decrypt(encrypted)
+        else:
+            raise NotImplementedError("Unimplemented encryption algorithm {}".format(enc_alg))
 
     else:
         raise NotImplementedError("Unimplemented encryption algorithm {}".format(enc_alg))
@@ -262,9 +280,6 @@ def print_p12_keybag(keybag_der, password, show_pem=False, list_only=False, inde
     enc_alg = util_asn1.decode_x509_algid(enc_alg_der)
     enc_data = util_asn1.decode_octet_string(enc_data_der)
     print("{}* encryption algorithm: {}".format(indent, enc_alg))
-    if not isinstance(enc_alg, util_asn1.PKCS12PbeAlg):
-        raise NotImplementedError("Unimplemented encryption algorithm {}".format(enc_alg))
-
     decrypted = try_pkcs12_decrypt(enc_data, enc_alg, password, indent=indent)
     if decrypted is not None:
         # Show the private key
@@ -438,7 +453,14 @@ def print_p12_keystore(ks_content, password, show_pem=False, list_only=False):
         salt=mac_salt,
         iterations=mac_iterations)
 
-    mac_hmac = hmac.new(key=mac_key, msg=authsafe_content, digestmod=hashlib.sha1).digest()
+    if mac_digest_algorithm == 'SHA1':
+        hash_func = hashlib.sha1
+    elif mac_digest_algorithm == 'SHA256':
+        hash_func = hashlib.sha256
+    else:
+        raise NotImplementedError("Unimplemented algorithm {} for PKCS#12 hmac verification".format(hash_func))
+
+    mac_hmac = hmac.new(key=mac_key, msg=authsafe_content, digestmod=hash_func).digest()
     if mac_hmac == mac_digest:
         print("    (password: {})".format(repr(password)))
         print("    (HMAC key: {})".format(xx(mac_key)))

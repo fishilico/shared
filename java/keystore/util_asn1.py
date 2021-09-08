@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 """Some functions helpful to decode ASN.1 structures"""
+import binascii
 import logging
 import struct
 
@@ -147,6 +148,13 @@ def decode_oid(der_objectid):
         # RSAES-PKCS1-v1_5 encryption scheme
         return 'rsaEncryption'
 
+    if oid_value == '1.2.840.113549.1.5.12':
+        # {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-5(5) pBKDF2(12)}
+        return 'pbkdf2'
+    if oid_value == '1.2.840.113549.1.5.13':
+        # {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-5(5) pbes2(13)}
+        return 'pbes2'
+
     if oid_value == '1.2.840.113549.1.7.1':
         # {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-7(7) data(1)}
         return 'pkcs7-data'
@@ -227,6 +235,10 @@ def decode_oid(der_objectid):
         #  pkcs-12BagIds(1) safeContentsBag(6)}
         return 'safeContentsBag'
 
+    if oid_value == '1.2.840.113549.2.9':
+        # {iso(1) member-body(2) us(840) rsadsi(113549) digestAlgorithm(2) hmacWithSHA256(9)}
+        return 'hmacWithSHA256'
+
     if oid_value == '1.3.14.3.2.26':
         # {iso(1) identified-organization(3) oiw(14) secsig(3) algorithms(2) hashAlgorithmIdentifier(26)}
         return 'sha1'
@@ -234,6 +246,15 @@ def decode_oid(der_objectid):
     if oid_value == '2.16.840.1.101.3.4.1':
         # {joint-iso-itu-t(2) country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) aes(1)}
         return 'aes'
+    if oid_value == '2.16.840.1.101.3.4.1.42':
+        # {joint-iso-itu-t(2) country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithms(4) aes(1)
+        #  aes256-CBC-PAD(42)}
+        return 'aes256-CBC-PAD'
+
+    if oid_value == '2.16.840.1.101.3.4.2.1':
+        # {joint-iso-itu-t(2) country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithms(4) hashalgs(2)
+        #  sha256(1)}
+        return 'sha256'
 
     return oid_value
 
@@ -274,6 +295,75 @@ class PKCS12PbeAlg(object):
         return cls(oid_name, salt, iterations)
 
 
+class PKCS12Pbes2Alg(object):
+    """Represent a PKCS#12 Password-Based Encryption using PBKDF2
+
+    cf. https://datatracker.ietf.org/doc/html/rfc8018#appendix-A.4
+
+        id-PBES2 OBJECT IDENTIFIER ::= {pkcs-5 13}
+        PBES2-params ::= SEQUENCE {
+          keyDerivationFunc AlgorithmIdentifier {{PBES2-KDFs}},
+          encryptionScheme AlgorithmIdentifier {{PBES2-Encs}} }
+    """
+    def __init__(self, salt, iterations, dklen, prf_alg, enc_alg, enc_iv):
+        self.salt = salt
+        self.iterations = iterations
+        self.dklen = dklen
+        self.prf_alg = prf_alg
+        self.enc_alg = enc_alg
+        self.enc_iv = enc_iv
+
+    def __str__(self):
+        return "PBKDF2(salt={}, iterations={}, dklen={}, enc={}, enciv={})".format(
+            util_bin.xx(self.salt), self.iterations, self.dklen, self.enc_alg, util_bin.xx(self.enc_iv))
+
+    @classmethod
+    def from_der_parameters(cls, params_der):
+        """Parse parameters in DER form"""
+        kdf_seq_raw, enc_seq_raw = decode_sequence(params_der, 2)
+        kdf_seq = decode_sequence(kdf_seq_raw, 2)
+        kdf_alg_id = decode_oid(kdf_seq[0])
+        if kdf_alg_id != 'pbkdf2':
+            raise ValueError("Unexpected Pbes2 KDF OID {}".format(kdf_alg_id))
+        kdf_params = decode_sequence(kdf_seq[1], 4)
+        salt = decode_octet_string(kdf_params[0])
+        iterations = kdf_params[1]
+        dklen = kdf_params[2]
+        prf_alg_seq = decode_sequence(kdf_params[3], 2)
+        prf_alg_id = decode_oid(prf_alg_seq[0])
+        prf_alg_params = prf_alg_seq[1]
+        if prf_alg_id == 'hmacWithSHA256' and prf_alg_params == b'\x05\x00':
+            prf_alg = 'sha256'
+        else:
+            raise NotImplementedError("Unimplemented Pbes2 PRF algorithm {}".format(prf_alg_id))
+        enc_seq = decode_sequence(enc_seq_raw, 2)
+        enc_alg_id = decode_oid(enc_seq[0])
+        enc_alg_params = enc_seq[1]
+        if enc_alg_id == 'aes256-CBC-PAD':
+            enc_iv = decode_octet_string(enc_alg_params)
+            assert len(enc_iv) == 16
+            return cls(salt, iterations, dklen, prf_alg, enc_alg_id, enc_iv)
+        raise NotImplementedError("Unimplemented Pbes2 encryption algorithm {}".format(enc_alg_id))
+
+    @classmethod
+    def self_test(cls):
+        """Check that the implementation works"""
+        params_der = binascii.unhexlify(
+            '3059303806092a864886f70d01050c302b0414cef0098d02991b428da712c3a8'
+            '520537ab207cfc02022710020120300c06082a864886f70d02090500301d0609'
+            '60864801650304012a0410ef539601ee5e7ef13ed1b36b71b7e4e1')
+        obj = cls.from_der_parameters(params_der)
+        assert obj.salt == binascii.unhexlify('cef0098d02991b428da712c3a8520537ab207cfc')
+        assert obj.iterations == 10000
+        assert obj.dklen == 32
+        assert obj.prf_alg == 'sha256'
+        assert obj.enc_alg == 'aes256-CBC-PAD'
+        assert obj.enc_iv == binascii.unhexlify('ef539601ee5e7ef13ed1b36b71b7e4e1')
+
+
+PKCS12Pbes2Alg.self_test()
+
+
 def decode_x509_algid(der_algorithm_identifier):
     """Decode an X.509 AlgorithmIdentifier object
 
@@ -290,6 +380,8 @@ def decode_x509_algid(der_algorithm_identifier):
         alg_params = None
     if alg_id == 'sha1' and not alg_params:
         return 'SHA1'
+    if alg_id == 'sha256' and not alg_params:
+        return 'SHA256'
     if alg_id == 'dsaEncryption' and alg_params:
         # For DSA, algorithm parameters contain DSA numbers
         return 'DSA'
@@ -300,6 +392,9 @@ def decode_x509_algid(der_algorithm_identifier):
 
     if alg_id in PKCS12_PBE_ALGS:
         return PKCS12PbeAlg.from_der_parameters(alg_id, alg_params)
+
+    if alg_id == 'pbes2':
+        return PKCS12Pbes2Alg.from_der_parameters(alg_params)
 
     return 'Unknown<OID={}, params={}>'.format(alg_id, repr(alg_params))
 
