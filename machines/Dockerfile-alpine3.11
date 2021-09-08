@@ -50,7 +50,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust/check_linux_pass% rust/download_web%
+#    Global blacklist: latex% rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
 #    In sub-directories:
 #       c: x86-read_64b_regs_in_32b_mode
 #       glossaries:

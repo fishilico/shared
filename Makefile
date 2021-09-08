@@ -100,12 +100,11 @@ else
 # Old versions of rustc (<=1.44) fail to build socket2-0.4.0 because:
 #   error[E0658]: `match` is not allowed in a `const fn`
 #   Fnote: see issue #49146 <https://github.com/rust-lang/rust/issues/49146> for more information
-ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-4]\)\.'),y)
+# Old versions of rustc (<=1.44) fail to build clap-2.33.3 because:
+#   error[E0723]: loops and conditional expressions are not stable in const fn
+#   note: for more information, see issue https://github.com/rust-lang/rust/issues/57563
+ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-4]\)\.'),y)
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\)\.'),y)
-SUBDIRS_BLACKLIST += rust/check_linux_pass% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(4[0-4]\)\.'),y)
-SUBDIRS_BLACKLIST += rust/download_web%
 endif
 endif
 
