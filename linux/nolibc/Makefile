@@ -42,7 +42,7 @@ NOLIBC_LDFLAGS += $(NO_ASYNC_UNWIND_TABLES_OPT)
 NOLIBC_CFLAGS += $(shell [ -d include ] && echo '-I./include')
 
 # Files
-C_SOURCES := $(wildcard *.c)
+C_SOURCES := $(filter-out _memcpy.c, $(wildcard *.c))
 ASM_SOURCES := $(wildcard *.S)
 BINARIES := $(C_SOURCES:%.c=%.$(BIN_EXT)) $(ASM_SOURCES:%.S=%.$(BIN_EXT)) shebang_print_args
 
@@ -59,8 +59,12 @@ test: all
 	echo 'echo $$0 && set && exit' | $(call run-test-progs,shellcode.$(BIN_EXT)) && \
 	echo ./tinyelf.$(BIN_EXT) && ($(RUN_TEST_PREFIX) ./tinyelf.$(BIN_EXT) ; test $$? = 42)
 
-%.$(BIN_EXT): .%.o
+%.$(BIN_EXT): .%.o _memcpy.a
 	$(V_CCLD)$(CC) $(NOLIBC_LDFLAGS) -o $@ $^
+
+# Use a .a archive to make it optional
+_memcpy.a: ._memcpy.o
+	$(V_AR)$(AR) rcs $@ $^
 
 .%.o: %.c
 	$(V_CC)$(CC) $(NOLIBC_CFLAGS) $(CPPFLAGS) -c -o $@ $<

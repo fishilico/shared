@@ -21,6 +21,7 @@ PYLINT ?= pylint
 # Define "quiet" commands, with V=1, like git and systemd project
 ifneq ($(findstring $(MAKEFLAGS), s), s)
 ifndef V
+V_AR        = @echo '  AR        $@';
 V_CARGO_BUILD= @echo '  CARGO BUILD';
 V_CARGO_CLEAN= @echo '  CARGO CLEAN';
 V_CC        = @echo '  CC        $<';
