@@ -7,7 +7,7 @@
 #include <sys/utsname.h>
 #include "nolibc-syscall-linux.h"
 
-static int _uname(struct utsname *name)
+static ALWAYS_INLINE int _uname(struct utsname *name)
 {
     return (int)syscall1(__NR_uname, name);
 }
@@ -15,7 +15,7 @@ static int _uname(struct utsname *name)
 /**
  * Copy a size-bounded string, returning a pointer to its end
  */
-static char *stplcpy(char *dst, const char *src, size_t n)
+static ALWAYS_INLINE char *stplcpy(char *dst, const char *src, size_t n)
 {
     char c;
     do {

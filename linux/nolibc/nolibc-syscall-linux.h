@@ -12,8 +12,8 @@
 /* Import the lists of error numbers and system calls */
 /*#define _GNU_SOURCE*/
 #include <errno.h>
-#include <stddef.h> /* for size_t */
 #include <fcntl.h> /* for AT_FDCWD */
+#include <stddef.h> /* for size_t */
 #include <sys/syscall.h>
 #include <sys/types.h> /* for ssize_t */
 
@@ -22,10 +22,13 @@
  */
 void _start(void) __attribute__((noreturn));
 
+/* Force all functions to be inlined, to produce simple shellcodes */
+#define ALWAYS_INLINE __inline__ __attribute__((always_inline))
+
 /**
  * Define System Call with 4 arguments for each supported architectures
  */
-static long _syscall4(
+static ALWAYS_INLINE long _syscall4(
     int number, unsigned long arg1, unsigned long arg2, unsigned long arg3,
     unsigned long arg4)
 {
@@ -122,7 +125,7 @@ static long _syscall4(
 /**
  * Simple system calls
  */
-static int open3(const char *pathname, int flags, mode_t mode)
+static ALWAYS_INLINE int open3(const char *pathname, int flags, mode_t mode)
 {
 #ifdef __NR_openat
     return (int)syscall4(__NR_openat, AT_FDCWD, pathname, flags, mode);
@@ -130,19 +133,19 @@ static int open3(const char *pathname, int flags, mode_t mode)
     return (int)syscall3(__NR_open, pathname, flags, mode);
 #endif
 }
-static int open2(const char *pathname, int flags)
+static ALWAYS_INLINE int open2(const char *pathname, int flags)
 {
     return open3(pathname, flags, 0);
 }
-static int close(int fd)
+static ALWAYS_INLINE int close(int fd)
 {
     return (int)syscall1(__NR_close, fd);
 }
-static ssize_t read(int fd, const void *buf, size_t count)
+static ALWAYS_INLINE ssize_t read(int fd, const void *buf, size_t count)
 {
     return (ssize_t)syscall3(__NR_read, fd, buf, count);
 }
-static ssize_t write(int fd, const void *buf, size_t count)
+static ALWAYS_INLINE ssize_t write(int fd, const void *buf, size_t count)
 {
     return (ssize_t)syscall3(__NR_write, fd, buf, count);
 }
@@ -150,7 +153,7 @@ static ssize_t write(int fd, const void *buf, size_t count)
 /**
  * Exit current process
  */
-static void __attribute__((noreturn)) nolibc_exit(int status)
+static ALWAYS_INLINE void __attribute__((noreturn)) nolibc_exit(int status)
 {
     while (1) {
 #ifdef __NR_exit_group
@@ -164,7 +167,7 @@ static void __attribute__((noreturn)) nolibc_exit(int status)
 /**
  * Read a file in a buffer, looping if the call is interrupted
  */
-static ssize_t read_buffer(int fd, const void *buf, size_t count)
+static ALWAYS_INLINE ssize_t read_buffer(int fd, const void *buf, size_t count)
 {
     ssize_t ret;
     do {
@@ -177,7 +180,7 @@ static ssize_t read_buffer(int fd, const void *buf, size_t count)
  * Write all count bytes from buf to file descriptor fd
  * Return value: 0 if an error occurred, 1 if successful
  */
-static int write_all(int fd, const char *buf, size_t count)
+static ALWAYS_INLINE int write_all(int fd, const char *buf, size_t count)
 {
     while (count > 0) {
         ssize_t ret = write(fd, buf, count);
@@ -196,7 +199,7 @@ static int write_all(int fd, const char *buf, size_t count)
 /**
  * Get the length of a string
  */
-static size_t nolibc_strlen(const char *str)
+static ALWAYS_INLINE size_t nolibc_strlen(const char *str)
 {
     /* This is really inefficient but works */
     const char *ptr = str;
@@ -211,7 +214,7 @@ static size_t nolibc_strlen(const char *str)
  * Write a nul-terminated string to file descriptor fd
  * Return value: same as write_all
  */
-static int write_string(int fd, const char *str)
+static ALWAYS_INLINE int write_string(int fd, const char *str)
 {
     return write_all(fd, str, strlen(str));
 }
@@ -223,7 +226,7 @@ static int write_string(int fd, const char *str)
 /**
  * Write an unsigned long to a file descriptor
  */
-static int write_ulong(int fd, unsigned long l)
+static ALWAYS_INLINE int write_ulong(int fd, unsigned long l)
 {
     char buffer[sizeof(unsigned long) * 3 + 1], *ptr;
 
@@ -246,8 +249,7 @@ static int write_ulong(int fd, unsigned long l)
 /**
  * Execute program
  */
-static int execve(const char *filename, char *const argv[],
-                   char *const envp[])
+static ALWAYS_INLINE int execve(const char *filename, char *const argv[], char *const envp[])
 {
     return (int)syscall3(__NR_execve, filename, argv, envp);
 }
