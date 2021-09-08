@@ -254,4 +254,20 @@ static ALWAYS_INLINE int execve(const char *filename, char *const argv[], char *
     return (int)syscall3(__NR_execve, filename, argv, envp);
 }
 
+/**
+ * Create a new process
+ */
+static ALWAYS_INLINE int fork(void)
+{
+    return (int)syscall0(__NR_fork);
+}
+
+/**
+ * Wait for a process
+ */
+static ALWAYS_INLINE int wait4(int pid, int *wstatus, int options, void *rusage)
+{
+    return (int)syscall4(__NR_wait4, pid, wstatus, options, rusage);
+}
+
 #endif /* NOLIBC_SYSCALL_H */

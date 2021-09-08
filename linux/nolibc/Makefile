@@ -51,7 +51,8 @@ clean:
 
 # Test shellcode separately
 test: all
-	@$(call run-test-progs,$(filter-out shellcode.$(BIN_EXT) tinyelf.$(BIN_EXT), $(BINARIES))) && \
+	@$(call run-test-progs,$(filter-out fork_shellcode.$(BIN_EXT) shellcode.$(BIN_EXT) tinyelf.$(BIN_EXT), $(BINARIES))) && \
+	echo 'echo $$0 && set && exit' | $(call run-test-progs,fork_shellcode.$(BIN_EXT)) && \
 	echo 'echo $$0 && set && exit' | $(call run-test-progs,shellcode.$(BIN_EXT)) && \
 	echo ./tinyelf.$(BIN_EXT) && ($(RUN_TEST_PREFIX) ./tinyelf.$(BIN_EXT) ; test $$? = 42)
 
