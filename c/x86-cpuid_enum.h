@@ -174,6 +174,7 @@ __extension__ static const char* cpuidstr_7_edx[32] = {
     [8] = "avx512_vp2intersect",
     [9] = "srbds_ctrl",
     [10] = "md_clear",
+    [11] = "rtm_always_abort",
     [13] = "tsx_force_abort",
     [14] = "serialize",
     [15] = "hybrid_cpu",
