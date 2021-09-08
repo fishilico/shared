@@ -27,6 +27,9 @@ endif
 NOLIBC_CFLAGS += -fno-builtin -fno-stack-protector
 NOLIBC_LDFLAGS += -nostdlib
 
+# Disable SSE code generation (which requires aligned stack, which is not guaranteed when using _start)
+NOLIBC_CFLAGS += $(call ccpp-option,-mno-sse)
+
 # Do not include a build ID, to make the binaries slightly smaller
 NOLIBC_LDFLAGS += -Wl,--build-id=none
 

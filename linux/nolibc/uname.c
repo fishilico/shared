@@ -43,7 +43,7 @@ void _start(void)
     char *ptr;
 
     if (_uname(&name) < 0) {
-        write_string(2, "Error: uname failed\n");
+        write_cstring_using_stack(2, "Error: uname failed\n");
         exit(1);
     }
     ptr = buffer;

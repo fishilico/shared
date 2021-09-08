@@ -16,23 +16,23 @@ static void _c_start(const void *stack)
     unsigned long i;
     for (i = 0; i < argc; i++) {
         if (!argv[i]) {
-            write_string(2, "Error: NULL argv before end of array\n");
+            write_cstring_using_stack(2, "Error: NULL argv before end of array\n");
             exit(1);
         }
-        write_cstring(1, "argv[");
+        write_cstring_using_stack(1, "argv[");
         write_ulong(1, i);
-        write_cstring(1, "] = ");
+        write_cstring_using_stack(1, "] = ");
         write_string(1, argv[i]);
-        write_cstring(1, "\n");
+        write_char_using_stack(1, '\n');
     }
     /* Show envp too, if compiled without -DONLY_ARGV */
 #ifndef ONLY_ARGV
     for (i = 0; envp[i]; i++) {
-        write_cstring(1, "envp[");
+        write_cstring_using_stack(1, "envp[");
         write_ulong(1, i);
-        write_cstring(1, "] = ");
+        write_cstring_using_stack(1, "] = ");
         write_string(1, envp[i]);
-        write_cstring(1, "\n");
+        write_char_using_stack(1, '\n');
     }
 #endif
     exit(0);

@@ -223,6 +223,18 @@ static ALWAYS_INLINE int write_string(int fd, const char *str)
  */
 #define write_cstring(fd, str) write_all((fd), (str), sizeof((str)) - 1)
 
+#define write_cstring_using_stack(fd, str) \
+    do { \
+        char _constant_string[] = str; \
+        write_all((fd), _constant_string, sizeof(_constant_string) - 1); \
+    } while (0)
+
+#define write_char_using_stack(fd, c) \
+    do { \
+        char _single_char = (c); \
+        write_all((fd), &_single_char, 1); \
+    } while (0)
+
 /**
  * Write an unsigned long to a file descriptor
  */
@@ -231,7 +243,9 @@ static ALWAYS_INLINE int write_ulong(int fd, unsigned long l)
     char buffer[sizeof(unsigned long) * 3 + 1], *ptr;
 
     if (!l) {
-        return write_cstring(fd, "0");
+        char zero = '0';
+
+        return write_all(fd, &zero, 1);
     }
 
     ptr = &(buffer[sizeof(buffer) - 1]);
@@ -239,7 +253,7 @@ static ALWAYS_INLINE int write_ulong(int fd, unsigned long l)
         *(ptr--) = '0' + (char)(l % 10);
         l /= 10;
         if (ptr < buffer) {
-            write_cstring(2, "BUG: number too long for buffer\n");
+            write_cstring_using_stack(2, "BUG: number too long for buffer\n");
             exit(255);
         }
     }
