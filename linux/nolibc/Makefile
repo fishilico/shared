@@ -27,6 +27,14 @@ endif
 NOLIBC_CFLAGS += -fno-builtin -fno-stack-protector
 NOLIBC_LDFLAGS += -nostdlib
 
+# Do not include a build ID, to make the binaries slightly smaller
+NOLIBC_LDFLAGS += -Wl,--build-id=none
+
+# Do not generate .eh_frame sections, to make the binaries slightly smaller
+NO_ASYNC_UNWIND_TABLES_OPT := $(call ccpp-option,-fno-asynchronous-unwind-tables)
+NOLIBC_CFLAGS += $(NO_ASYNC_UNWIND_TABLES_OPT)
+NOLIBC_LDFLAGS += $(NO_ASYNC_UNWIND_TABLES_OPT)
+
 # Use custom include dir if it exists
 NOLIBC_CFLAGS += $(shell [ -d include ] && echo '-I./include')
 
