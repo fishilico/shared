@@ -42,7 +42,7 @@ RUN \
         sdl2 \
         which \
         wine && \
-    archlinux-java set java-15-openjdk && \
+    archlinux-java set java-16-openjdk && \
     (pacman --noconfirm -Sc ; rm -rf /var/cache/pacman/pkg/* )
 
 WORKDIR /shared
@@ -89,15 +89,15 @@ CMD ["/run_shared_test.sh"]
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
 #       gcc: gcc (GCC) 11.1.0
-#       clang: clang version 11.1.0
-#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 10.2.0
-#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 10.2.0
-#       wine: wine-6.9
-#       Linux kernel: 5.12.7-arch1-1
-#       python: Python 3.9.5
-#       python3: Python 3.9.5
-#       javac: javac 15.0.2
-#       java: openjdk 15.0.2 2021-01-19
-#       rustc: rustc 1.52.1
-#       cargo: cargo 1.52.0
-#       coqc: The Coq Proof Assistant, version 8.13.2 (May 2021) compiled on May 28 2021 15:28:51 with OCaml 4.11.1
+#       clang: clang version 12.0.1
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 11.2.0
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 11.2.0
+#       wine: wine-6.16
+#       Linux kernel: 5.13.13-arch1-1
+#       python: Python 3.9.6
+#       python3: Python 3.9.6
+#       javac: javac 16.0.2
+#       java: openjdk 16.0.2 2021-07-20
+#       rustc: rustc 1.54.0
+#       cargo: cargo 1.54.0
+#       coqc: The Coq Proof Assistant, version 8.13.2 (July 2021) compiled on Jul 27 2021 14:53:47 with OCaml 4.12.0
