@@ -65,6 +65,9 @@ do
         *debian11*|*bullseye*)
             echo "debian11-bullseye"
             ;;
+        *debian12*|*bookworm*)
+            echo "debian12-bookworm"
+            ;;
 
         *ubuntu1204*|*ubuntu12.04*|*precise*)
             echo "ubuntu1204-precise"
