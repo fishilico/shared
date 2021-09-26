@@ -35,13 +35,14 @@ ffi = cffi.FFI()
 ffi.cdef('const size_t LONG_SIZE;')
 try:
     libv = ffi.verify('const size_t LONG_SIZE = sizeof(long);')
-except cffi.VerificationError as exc:
+except (cffi.VerificationError, OSError) as exc:
     # This may have when using a custom $CC
     if initial_cc:
         print(exc)
         print("... Warning: cffi.verify failed with CC={}, retrying without".format(repr(initial_cc)))
         del os.environ['CC']
-        libv = ffi.verify('const size_t LONG_SIZE = sizeof(long);')
+        # Use a tag in order to force using another cached module file (to force recompilation)
+        libv = ffi.verify('const size_t LONG_SIZE = sizeof(long);', tag='empty_cc')
         os.environ['CC'] = initial_cc
     else:
         raise
