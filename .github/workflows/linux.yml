@@ -18,7 +18,8 @@ jobs:
           - 3.7
           - 3.6
           - 3.5
-          - pypy3
+          - pypy-3.7
+          - pypy-3.6
 
     steps:
     - uses: actions/checkout@v2
