@@ -113,6 +113,7 @@ class VsVersionInfo:
         'FileVersion',
         'Full Version',
         'GenerationDate',
+        'GitHash',
         'GoldenBits',
         'Info',
         'Installation Type',
