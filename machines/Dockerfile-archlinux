@@ -42,7 +42,7 @@ RUN \
         sdl2 \
         which \
         wine && \
-    archlinux-java set java-16-openjdk && \
+    archlinux-java set java-17-openjdk && \
     (pacman --noconfirm -Sc ; rm -rf /var/cache/pacman/pkg/* )
 
 WORKDIR /shared
