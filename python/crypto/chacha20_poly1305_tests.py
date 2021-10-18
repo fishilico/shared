@@ -50,7 +50,8 @@ except ImportError:
     has_cryptodome = False
 
 try:
-    from cryptography.hazmat.primitives.ciphers import Cipher, algorithms
+    from cryptography.hazmat.primitives.ciphers import Cipher
+    from cryptography.hazmat.primitives.ciphers.algorithms import ChaCha20
     from cryptography.hazmat.primitives.ciphers.aead import ChaCha20Poly1305
     from cryptography.hazmat.backends import default_backend
     has_cryptography = True
@@ -275,7 +276,7 @@ def check_chacha20_test_vectors():
         nonce = os.urandom(12)
         plaintext = os.urandom(96)
         block_counter_int, = struct.unpack('<I', block_counter)
-        cipher = Cipher(algorithms.ChaCha20(key, block_counter + nonce), mode=None, backend=default_backend())
+        cipher = Cipher(ChaCha20(key, block_counter + nonce), mode=None, backend=default_backend())
         encryptor = cipher.encryptor()
         encrypted = chacha20_crypt(key, block_counter_int, nonce, plaintext)
         assert encryptor.update(plaintext) == encrypted, \
