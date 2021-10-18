@@ -575,8 +575,11 @@ static void dump_x86_tables(void)
 			else if (i == HYPERVISOR_CALLBACK_VECTOR)
 				comment = "Hypervisor Callback Vector";
 #endif
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 14, 0)
+			/* Removed by commit f1b7d45d3f8f ("x86/irq: Remove unused vectors defines") */
 			else if (i == UV_BAU_MESSAGE)
 				comment = "UV Bau Message";
+#endif
 			else if (i == IRQ_WORK_VECTOR)
 				comment = "IRQ Work Vector";
 			else if (i == X86_PLATFORM_IPI_VECTOR)
