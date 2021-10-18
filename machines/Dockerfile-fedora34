@@ -99,12 +99,12 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       clang: clang version 12.0.1 (Fedora 12.0.1-1.fc34)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 10.3.1 20210422 (Fedora MinGW 10.3.1-2.fc34)
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 10.3.1 20210422 (Fedora MinGW 10.3.1-2.fc34)
-#       wine: wine-6.16 (Staging)
-#       Linux kernel: 5.13.13-200.fc34.x86_64
-#       python: Python 3.9.6
-#       python3: Python 3.9.6
+#       wine: wine-6.18 (Staging)
+#       Linux kernel: 5.14.11-200.fc34.x86_64
+#       python: Python 3.9.7
+#       python3: Python 3.9.7
 #       javac: javac 11.0.12
 #       java: openjdk 11.0.12 2021-07-20
-#       rustc: rustc 1.54.0 (Fedora 1.54.0-1.fc34)
-#       cargo: cargo 1.54.0
+#       rustc: rustc 1.55.0 (Fedora 1.55.0-1.fc34)
+#       cargo: cargo 1.55.0
 #       coqc: The Coq Proof Assistant, version 8.13.2 (June 2021) compiled on Jun 4 2021 0:00:00 with OCaml 4.11.1
