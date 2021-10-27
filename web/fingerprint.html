@@ -104,6 +104,19 @@ function create_code_text(text) {
 }
 
 /**
+ * Create a <li> element with a HTML description
+ */
+function create_list_item_html(name, html) {
+    var elem = document.createElement('li');
+    if (name) {
+        elem.innerHTML = name + ': ' + html;
+    } else {
+        elem.innerHTML = html;
+    }
+    return elem;
+}
+
+/**
  * Create a <li> element with a text item description
  */
 function create_list_item(name, text) {
@@ -164,6 +177,45 @@ function fill_fingerprint_infos() {
     // On Microsoft Internet Explorer 11, window.doNotTrack = "1" or null
     // On Microsoft Edge, window.doNotTrack = "1" or "unspecified"
     e_list.appendChild(create_list_item('window.doNotTrack', window.doNotTrack));
+    // Help detect issues related to window.opener (prevented with target="_blank" rel="noopener noreferrer")
+    // cf. https://web.dev/external-anchors-use-rel-noopener/
+    try {
+        e_list.appendChild(create_list_item('window.opener', window.opener));
+        if (window.opener !== null) {
+            e_list.appendChild(create_list_item('window.opener.location', window.opener.location));
+        }
+    } catch (e) {
+        e_list.appendChild(create_list_item('window.opener => Exception', e));
+    }
+    // Add more fields from https://html.spec.whatwg.org/multipage/browsers.html#navigating-nested-browsing-contexts-in-the-dom
+    if (window.top === window) {
+        e_list.appendChild(create_list_item_html('window.top', '<i>same as <code>window</code></i>'));
+    } else {
+        try {
+            e_list.appendChild(create_list_item('window.top', window.top));
+            if (window.top !== null) {
+                e_list.appendChild(create_list_item('window.top.location', window.top.location));
+            }
+        } catch (e) {
+            e_list.appendChild(create_list_item('window.top => Exception', e));
+        }
+    }
+    if (window.parent === window) {
+        e_list.appendChild(create_list_item_html('window.parent', '<i>same as <code>window</code></i>'));
+    } else {
+        try {
+            e_list.appendChild(create_list_item('window.parent', window.parent));
+            if (window.parent !== null) {
+                e_list.appendChild(create_list_item('window.parent.location', window.parent.location));
+            }
+        } catch (e) {
+            e_list.appendChild(create_list_item('window.parent => Exception', e));
+        }
+    }
+    e_list.appendChild(create_list_item('window.frameElement', window.frameElement));
+    if (window.frameElement !== null) {
+        e_list.appendChild(create_list_item('window.frameElement.location', window.frameElement.location));
+    }
     container.appendChild(e_list);
 
     // Gather information from screen
@@ -247,12 +299,12 @@ function fill_fingerprint_infos() {
 
             var osm_url = 'https://www.openstreetmap.org/?mlat=' + position.coords.latitude + '&mlon=' + position.coords.longitude + '&zoom=14';
             var osm_li = document.createElement('li');
-            osm_li.innerHTML = 'OpenStreetMap: <a href="' + osm_url + '">' + osm_url + '</a>'
+            osm_li.innerHTML = 'OpenStreetMap: <a href="' + osm_url + '" rel="noopener noreferrer">' + osm_url + '</a>'
             e_list.appendChild(osm_li);
 
             var gmaps_url = 'https://maps.google.com/?q=' + position.coords.latitude+' '+position.coords.longitude;
             var gmaps_li = document.createElement('li');
-            gmaps_li.innerHTML = 'Google Maps: <a href="' + gmaps_url + '">' + gmaps_url + '</a>'
+            gmaps_li.innerHTML = 'Google Maps: <a href="' + gmaps_url + '" rel="noopener noreferrer">' + gmaps_url + '</a>'
             e_list.appendChild(gmaps_li);
 
             elem.innerHTML = '';
@@ -296,7 +348,7 @@ function fill_fingerprint_infos() {
         } else {
             container.innerHTML += '<i>No debug information found in WebGL context extensions.</i>';
         }
-    } catch(e) {
+    } catch (e) {
         container.innerHTML += '<i>An error occurred while looking for WebGL information.</i>';
     }
 }
