@@ -146,6 +146,15 @@ function fill_fingerprint_infos() {
     var e_list;
     container.innerHTML = '';
 
+    // If the page was requested to be in a frame, do it
+    if (document.location.hash == '#frame') {
+        document.write('<frameset cols="90%,10%"><frame src="?" /><frame src="about:blank" /></frameset>');
+        return;
+    }
+    if (document.location.hash == '#iframe') {
+        container.innerHTML += '<iframe src="?" width="100%" height="500" />';
+    }
+
     // Gather information from navigator
     container.innerHTML += '<h2>navigator</h2>';
     e_list = document.createElement('ul');
@@ -351,6 +360,24 @@ function fill_fingerprint_infos() {
     } catch (e) {
         container.innerHTML += '<i>An error occurred while looking for WebGL information.</i>';
     }
+
+    // Add links to test some actions
+    container.innerHTML += '<h2>Helper actions</h2>';
+    e_list = document.createElement('ul');
+    var date = new Date();
+    var time = date.getTime();
+    e_list.appendChild(create_list_item_html('', '<a href="?time=' + time + '">Go to <code>?time=' + time + '</code></a>'));
+    e_list.appendChild(create_list_item_html('', '<a href="#">Go to <code>#</code></a>'));
+    e_list.appendChild(create_list_item_html('', '<a href="?" target="_blank">Go to <code>?</code> with <code>target="_blank"</code></a>'));
+    e_list.appendChild(create_list_item_html('', '<a href="?" target="_top">Go to <code>?</code> with <code>target="_top"</code></a>'));
+    e_list.appendChild(create_list_item_html('', '<a href="?" target="_parent">Go to <code>?</code> with <code>target="_parent"</code></a>'));
+    e_list.appendChild(create_list_item_html('', '<a href="?" target="_blank" rel="noopener noreferrer">Go to <code>?</code> with <code>target="_blank" rel="noopener noreferrer"</code></a>'));
+    e_list.appendChild(create_list_item_html('', '<a href="javascript:window.open(\'?\');void(0);">Go to <code>?</code> with <code>javascript:window.open</code></a>'));
+    e_list.appendChild(create_list_item_html('', '<a href="javascript:window.open(\'?\', \'_blank\');void(0);">Go to <code>?</code> with <code>javascript:window.open(\'?\', \'_blank\')</code></a>'));
+    e_list.appendChild(create_list_item_html('', '<a href="javascript:var w=window.open(\'?\');w.opener=null;void(0);">Go to <code>?</code> with <code>javascript:w=window.open;w.opener=null;</code></a>'));
+    e_list.appendChild(create_list_item_html('', '<a href="?time=' + time + '#frame">Go to <code>?time=' + time + '#frame</code> to use <code>&lt;frameset&gt;</code> and <code>&lt;frame&gt;</code></a>'));
+    e_list.appendChild(create_list_item_html('', '<a href="?time=' + time + '#iframe">Go to <code>?time=' + time + '#iframe</code> to use <code>&lt;iframe&gt;</code></a>'));
+    container.appendChild(e_list);
 }
 window.onload = fill_fingerprint_infos;
         --></script>
