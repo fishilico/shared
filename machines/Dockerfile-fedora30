@@ -38,11 +38,13 @@ RUN \
         pulseaudio-libs-devel \
         python3 \
         python3-cffi \
+        python3-cryptography \
         python3-devel \
         python3-gmpy2 \
         python3-numpy \
         python3-pillow \
         python3-pycryptodomex \
+        python3-pynacl \
         python3-z3 \
         python2-cffi \
         python2-devel \

@@ -28,10 +28,12 @@ RUN \
         openssl-dev \
         pulseaudio-dev \
         py3-cffi \
+        py3-cryptography \
         py3-numpy \
         py3-pillow \
         py3-setuptools \
         py3-pycryptodomex \
+        py3-pynacl \
         py3-z3 \
         python2-dev \
         python3-dev \

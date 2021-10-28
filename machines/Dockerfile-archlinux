@@ -27,10 +27,12 @@ RUN \
         pkgconf \
         python \
         python-cffi \
+        python-cryptography \
         python-gmpy2 \
         python-numpy \
         python-pillow \
         python-pycryptodomex \
+        python-pynacl \
         python-setuptools \
         python-z3 \
         python2 \
