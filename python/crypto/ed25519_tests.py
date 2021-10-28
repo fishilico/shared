@@ -86,6 +86,10 @@ Documentation:
   Using Ed25519 for OpenSSH keys (instead of DSA/RSA/ECDSA)
 * https://tools.ietf.org/html/rfc7748
   Elliptic Curves for Security
+* https://github.com/warner/python-pure25519/blob/c88a6aeee0653c46c429f096ec3090388f77525a/misc/djbec.py
+  Pure python implementation of Ed25519 digital signatures
+* https://github.com/monero-ecosystem/monero-python/blob/master/monero/ed25519.py
+  Monero's pure python implementation of Ed25519 digital signatures
 """
 import argparse
 import base64
@@ -101,9 +105,29 @@ import tempfile
 
 try:
     import Cryptodome.Util.asn1
-    HAVE_CRYPTO = True
+    has_cryptodome = True
 except ImportError:
-    HAVE_CRYPTO = False
+    has_cryptodome = False
+
+try:
+    from cryptography.hazmat.primitives import serialization
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
+    has_cryptography = True
+except ImportError:
+    sys.stderr.write("Warning: cryptography fails to load. Proceeding without it\n")
+    has_cryptography = False
+
+try:
+    import nacl.bindings
+    # Only support nacl>=1.4.0 (https://github.com/pyca/pynacl/pull/528 and
+    # https://github.com/pyca/pynacl/commit/0e2ae90ac8bdc8f3cddf04d58a71da68678e6816 )
+    has_nacl = hasattr(nacl.bindings, "crypto_scalarmult_ed25519_noclamp")
+    if not has_nacl:
+        # Ensure that version is below 1.4.0, to detect issues
+        assert tuple(nacl.__version__.split(".")) < ("1", "4")
+except ImportError:
+    sys.stderr.write("Warning: nacl fails to load. Proceeding without it\n")
+    has_nacl = False
 
 
 logger = logging.getLogger(__name__)
@@ -292,6 +316,9 @@ class Ed25519Point(object):
         x3 = ((x1 * y2 + y1 * x2) % q) * modinv(1 + dx1x2y1y2, q)
         y3 = ((y1 * y2 + x1 * x2) % q) * modinv(1 - dx1x2y1y2, q)
         return Ed25519Point(x3 % q, y3 % q)
+
+    def __sub__(self, other):
+        return self + (-other)
 
     def __mul__(self, other):
         """Multiply a point by an integer (exponentiation)"""
@@ -776,6 +803,139 @@ def run_test(colorize):
     return True
 
 
+def run_cryptography_test(colorize):
+    """Generate a key using Cryptography.io, with API from
+    https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ed25519/
+    """
+    color_red = COLOR_RED if colorize else ''
+    color_green = COLOR_GREEN if colorize else ''
+    color_norm = COLOR_NORM if colorize else ''
+
+    print("Cryptography.io key generation:")
+    private_key = Ed25519PrivateKey.generate()
+    private_bytes = private_key.private_bytes(
+        encoding=serialization.Encoding.Raw,
+        format=serialization.PrivateFormat.Raw,
+        encryption_algorithm=serialization.NoEncryption(),
+    )
+    print("* private key({}): {}{}{}".format(len(private_bytes) * 8, color_red, xx(private_bytes), color_norm))
+    loaded_private_key = Ed25519PrivateKey.from_private_bytes(private_bytes)
+    loaded_private_bytes = loaded_private_key.private_bytes(
+        encoding=serialization.Encoding.Raw,
+        format=serialization.PrivateFormat.Raw,
+        encryption_algorithm=serialization.NoEncryption(),
+    )
+    assert loaded_private_bytes == private_bytes
+
+    public_key = private_key.public_key()
+    public_bytes = public_key.public_bytes(
+        encoding=serialization.Encoding.Raw,
+        format=serialization.PublicFormat.Raw,
+    )
+    print("* public key({}): {}{}{}".format(len(public_bytes) * 8, color_green, xx(public_bytes), color_norm))
+    loaded_public_key = Ed25519PublicKey.from_public_bytes(public_bytes)
+    loaded_public_bytes = loaded_public_key.public_bytes(
+        encoding=serialization.Encoding.Raw,
+        format=serialization.PublicFormat.Raw,
+    )
+    assert loaded_public_bytes == public_bytes
+
+    test_message = b'Hello, world! This is a test.'
+    signature = private_key.sign(test_message)
+    print("* signature({}): {}{}{}".format(len(signature) * 8, color_green, xx(signature), color_norm))
+    public_key.verify(signature, test_message)
+
+    curve = Ed25519()
+    public_point = curve.public_point(private_bytes)
+    assert public_point.encode() == public_bytes
+    assert public_point == Ed25519Point.decode(public_bytes)
+
+    public_point_2 = curve.decode_scalar(hashlib.sha512(private_bytes).digest()) * curve.b
+    assert public_point_2 == public_point
+
+    my_public_key = public_point.encode()
+    curve.check_signature(test_message, signature, my_public_key)
+
+    return True
+
+
+def run_nacl_test(colorize):
+    """Compare the implementation with PyNaCl bindings"""
+    color_red = COLOR_RED if colorize else ''
+    color_green = COLOR_GREEN if colorize else ''
+    color_norm = COLOR_NORM if colorize else ''
+
+    print("PyNaCl operations:")
+
+    # Get the encoded base by using a libsodium API
+    encoded_base = bytes.fromhex("5866666666666666666666666666666666666666666666666666666666666666")
+    encoded_base_2 = nacl.bindings.crypto_scalarmult_ed25519_base_noclamp(b"\x01" + b"\x00" * 31)
+    assert encoded_base_2 == encoded_base
+
+    # nacl.util.random is os.urandom:
+    # https://github.com/pyca/pynacl/blob/1.4.0/src/nacl/utils.py#L69
+    assert nacl.bindings.crypto_core_ed25519_SCALARBYTES == 32
+    secret_key = os.urandom(nacl.bindings.crypto_core_ed25519_SCALARBYTES)
+    print("* secret key({}): {}{}{}".format(len(secret_key) * 8, color_red, xx(secret_key), color_norm))
+    private_key = hashlib.sha512(secret_key).digest()[:32]
+    print("* private key({}): {}{}{}".format(len(private_key) * 8, color_red, xx(private_key), color_norm))
+    public_key = nacl.bindings.crypto_scalarmult_ed25519_base(private_key)
+    print("* public key({}): {}{}{}".format(len(public_key) * 8, color_green, xx(public_key), color_norm))
+
+    public_key2 = nacl.bindings.crypto_scalarmult_ed25519(private_key, encoded_base)
+    assert public_key2 == public_key
+
+    curve = Ed25519()
+    my_public_key = curve.public_key(secret_key)
+    assert my_public_key == public_key
+
+    # scalarmult expect a scalar < order. Try without... it clears the most significant bit
+    pub_noclamp = nacl.bindings.crypto_scalarmult_ed25519_base_noclamp(private_key)
+    print("* (trunc private)*Base({}): {}{}{}".format(len(pub_noclamp) * 8, color_green, xx(pub_noclamp), color_norm))
+    pub_noclamp_2 = nacl.bindings.crypto_scalarmult_ed25519_noclamp(private_key, encoded_base)
+    assert pub_noclamp_2 == pub_noclamp
+    noclamp_scalar = int.from_bytes(private_key, "little") & (~(1 << 255))
+    my_pub_noclamp_point = noclamp_scalar * curve.b
+    assert my_pub_noclamp_point.encode() == pub_noclamp
+    assert my_pub_noclamp_point == Ed25519Point.decode(pub_noclamp)
+
+    # Use crypto_core_ed25519_scalar_reduce too
+    assert nacl.bindings.crypto_core_ed25519_NONREDUCEDSCALARBYTES == 64
+    reduced_priv = nacl.bindings.crypto_core_ed25519_scalar_reduce(private_key + b"\x00" * 32)
+    print("* reduced private({}): {}{}{}".format(len(reduced_priv) * 8, color_red, xx(reduced_priv), color_norm))
+    assert int.from_bytes(reduced_priv, "little") == int.from_bytes(private_key, "little") % BASE_ORDER
+    pub_reduced = nacl.bindings.crypto_scalarmult_ed25519_base_noclamp(reduced_priv)
+    print("* private*Base({}): {}{}{}".format(len(pub_reduced) * 8, color_green, xx(pub_reduced), color_norm))
+    my_pub_point = int.from_bytes(private_key, "little") * curve.b
+    assert my_pub_point.encode() == pub_reduced
+    assert my_pub_point == Ed25519Point.decode(pub_reduced)
+    my_pub_point_reduced = int.from_bytes(reduced_priv, "little") * curve.b
+    assert my_pub_point_reduced == my_pub_point
+
+    # Test point addition and subtraction
+    rand_scalar_a = os.urandom(nacl.bindings.crypto_core_ed25519_SCALARBYTES)
+    rand_point_a = nacl.bindings.crypto_scalarmult_ed25519_base_noclamp(rand_scalar_a)
+    rand_point_a_pt = Ed25519Point.decode(rand_point_a)
+    print("* point A: {}".format(xx(rand_point_a)))
+    rand_scalar_b = os.urandom(nacl.bindings.crypto_core_ed25519_SCALARBYTES)
+    rand_point_b = nacl.bindings.crypto_scalarmult_ed25519_base_noclamp(rand_scalar_b)
+    rand_point_b_pt = Ed25519Point.decode(rand_point_b)
+    print("* point B: {}".format(xx(rand_point_b)))
+
+    sum_a_b = nacl.bindings.crypto_core_ed25519_add(rand_point_a, rand_point_b)
+    print("* A+B: {}".format(xx(sum_a_b)))
+    assert rand_point_a_pt + rand_point_b_pt == Ed25519Point.decode(sum_a_b)
+
+    diff_a_b = nacl.bindings.crypto_core_ed25519_sub(rand_point_a, rand_point_b)
+    print("* A-B: {}".format(xx(diff_a_b)))
+    assert rand_point_a_pt - rand_point_b_pt == Ed25519Point.decode(diff_a_b)
+
+    diff_a_b_sum_b = nacl.bindings.crypto_core_ed25519_add(diff_a_b, rand_point_b)
+    assert diff_a_b_sum_b == rand_point_a
+
+    return True
+
+
 def run_openssl_test(colorize):
     """Generate a key using OpenSSL and load it"""
     color_red = COLOR_RED if colorize else ''
@@ -1044,8 +1204,18 @@ def main(argv=None):
     if not run_test(args.color):
         return 1
     print("")
-    if not HAVE_CRYPTO:
-        print("Skipping OpenSSL test because Crypto is missing")
+    if not has_cryptography:
+        print("Skipping Cryptography.io test because cryptography is missing")
+    elif not run_cryptography_test(args.color):
+        return 1
+    print("")
+    if not has_nacl:
+        print("Skipping PyNaCl test because nacl is missing")
+    elif not run_nacl_test(args.color):
+        return 1
+    print("")
+    if not has_cryptodome:
+        print("Skipping OpenSSL test because Cryptodome is missing")
     elif not run_openssl_test(args.color):
         return 1
     print("")
