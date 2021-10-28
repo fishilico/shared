@@ -276,6 +276,11 @@ class Ed25519Point(object):
     def __ne__(self, other):
         return self.x != other.x or self.y != other.y
 
+    def __neg__(self):
+        if not self.x:
+            return Ed25519Point(self.x, self.y)
+        return Ed25519Point(ED25519_PRIME - self.x, self.y)
+
     def __add__(self, other):
         """Add two points together, on the twisted Edwards curve"""
         q = ED25519_PRIME
@@ -428,6 +433,13 @@ class Montgomery25519Point(object):
     def encode_x25519(self):
         """Encode the x coordinate, for X25519"""
         return encode_bigint_le(self.x, ED25519_BITS // 8)
+
+    def __neg__(self):
+        if self.x is None:
+            return Montgomery25519Point(None, None)  # Infinity
+        if not self.y:
+            return Montgomery25519Point(self.x, self.y)
+        return Montgomery25519Point(self.x, ED25519_PRIME - self.y)
 
     def mul_2(self):
         """Compute the double of the point on curve y^2 = x^3 + 486662*x^2 + x mod q

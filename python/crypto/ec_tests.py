@@ -224,7 +224,7 @@ class ECPoint(object):
     def __ne__(self, other):
         return self.curve != other.curve or self.x != other.x or self.y != other.y
 
-    def negate(self):
+    def __neg__(self):
         """Return the opposite value of the point"""
         if self == INFINITY:
             return INFINITY
@@ -318,7 +318,7 @@ class ECPoint(object):
 
     def __sub__(self, other):
         """Subtract a point with another"""
-        return self + other.negate()
+        return self + (-other)
 
     def __mul__(self, other):
         """Multiply a point by an integer (exponent)"""
@@ -332,7 +332,7 @@ class ECPoint(object):
         assert e > 0
 
         # Fast (and insecure) exponentiation
-        negative_self = self.negate()
+        negative_self = -self
         e3 = 3 * e
         bitmask = 1 << (e3.bit_length() - 2)
         result = self
