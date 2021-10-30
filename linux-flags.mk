@@ -85,6 +85,8 @@ ifeq ($(call ccpp-has-option,-Weverything), y)
 	CFLAGS += $(call cc-disable-warning,documentation-unknown-command)
 	# clang 10.0 warns about using "bool", with -Wc99-extensions
 	CFLAGS += $(call cc-disable-warning,c99-extensions)
+	# clang 13.0 added -Wreserved-identifier, which triggers many warnings in headers when names starts with _
+	CFLAGS += $(call cc-disable-warning,reserved-identifier)
 endif
 
 # Add GCC-specific options unknown to clang
