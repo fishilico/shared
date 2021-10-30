@@ -148,7 +148,6 @@ def run_openssl_test(bits, generator, colorize):
         print("  p({}) = {}{:#x}{}".format(param_p.bit_length(), color_green, param_p, color_norm))
         print("  g({}) = {}{:#x}{}".format(param_g.bit_length(), color_green, param_g, color_norm))
         assert 1 < param_g < param_p - 1
-        assert pow(param_g, (param_p - 1) // 2, param_p) == param_p - 1, "The generator is not a quadratic residue"
         assert Cryptodome.Util.number.isPrime(param_p)
         assert Cryptodome.Util.number.isPrime((param_p - 1) // 2)
         assert param_g == generator
@@ -156,32 +155,70 @@ def run_openssl_test(bits, generator, colorize):
         # (p-1)/2 is odd, so p mod 4 = 3.
         # If p mod 3 = 1, 3 divides (p-1), so it divides (p-1)/2 too, which
         # would not be prime. As p mod 3 can not be 0 either, p mod 3 = 2.
-        # the Chinese remainder theorem (CRT) allows combining these two results
+        # The Chinese remainder theorem (CRT) allows combining these two results
         # into: p mod 12 = 11
         print("p mod 12 = {} (expected 11)".format(param_p % 12))
         assert param_p % 12 == 11
 
-        # It can be shown that 2 is a quadratic residue modulo p if and only if
-        # p mod 8 = 1 or 7. Otherwise, p mod 8 = 3 or 5.
-        # If p mod 8 = 5, (p-1)/2 mod 4 = 2 so (p-1)/2 is not prime.
-        # Therefore for 2 to be a generator, p mod 8 = 3.
-        # With p mod 12 = 11, the CRT gives: p mod 24 = 11
-        print("p mod 24 = {} (expected 11 for g=2, maybe 23 otherwise)".format(param_p % 24))
-        if generator == 2:
-            assert param_p % 24 == 11
+        # OpenSSL<3.0.0 generated quadratic residue generators, until it was
+        # changed in:
+        # - https://github.com/openssl/openssl/pull/9363
+        # - https://github.com/openssl/openssl/issues/4737
+        # Therefore, with OpenSSL>=3.0.0, g^(((param_p - 1) // 2) = 1
+        # and with OpenSSL<3.0.0, g^(((param_p - 1) // 2) = -1
+        realtive_g_pow_q = pow(param_g, (param_p - 1) // 2, param_p)
+        if realtive_g_pow_q > (param_p // 2):
+            realtive_g_pow_q -= param_p
+        print(f"g^((p-1)/2) mod p = {realtive_g_pow_q}")
+        assert realtive_g_pow_q in {-1, 1}
+        if realtive_g_pow_q == 1:  # OpenSSL>=3.0.0
+            # It can be shown that 2 is a quadratic residue modulo p if and only
+            # if p mod 8 = 1 or 7.
+            # If p mod 8 = 1, (p-1)/2 mod 4 = 0 so (p-1)/2 is not prime.
+            # Therefore for 2 to be a generator, p mod 8 = 7
+            # With p mod 12 = 11, the CRT gives: p mod 24 = 23
+            print("p mod 24 = {} (expected 23 for g=2, also 11 otherwise)".format(param_p % 24))
+            if generator == 2:
+                assert param_p % 24 == 23
 
-        # For generator 5, as (-1)^((5-1)/2)*(p-1)/2) = ((-1)^2)^((p-1)/2) = 1,
-        # the Law of quadratic reciprocity results in (p|5)*(5|p) = 1, where
-        # (a|b) is the Legendre symbol.
-        # For 5 to be a generator, it can not be a quadratic residue modulo p,
-        # so (p|5) = -1, which means that -1 = (5|p) = p^2 mod 5.
-        # Finally p mod 5 = 2 or 3.
-        # With p mod 12 = 11, the CRT gives: p mod 60 = 47 or 23.
-        # If g is not 5, p mod 5 cannot be 0 nor 1 (in order for (p-1)/2 to be
-        # prime), so the only other possible value for p mod 5 is 4.
-        print("p mod 60 = {} (expected 23 or 47 for g=5, maybe 59 otherwise)".format(param_p % 60))
-        if generator == 5:
-            assert param_p % 60 in (23, 47)
+            # For generator 5, as (-1)^((5-1)/2)*(p-1)/2) = ((-1)^2)^((p-1)/2) = 1,
+            # the Law of quadratic reciprocity results in (p|5)*(5|p) = 1, where
+            # (a|b) is the Legendre symbol.
+            # For 5 to be a generator, it has to be a quadratic residue modulo p,
+            # so (p|5) = 1, which means that 1 = (5|p) = p^2 mod 5.
+            # Finally p mod 5 = 1 or 4.
+            # If p mod 5 = 1, (p-1)/2 mod 5 = 0 so (p-1)/2 is not prime.
+            # Therefore for 5 to be a generator, p mod 5 = 7
+            # With p mod 12 = 11, the CRT gives: p mod 60 = 59
+            # If g is not 5, p mod 5 cannot be 0 nor 1 (in order for (p-1)/2 to
+            # be prime), so the only other possible values for p mod 5 are 2 and 3,
+            # which lead to p mod 60 being 47 or 23.
+            print("p mod 60 = {} (expected 59 for g=5, also 23 or 47 otherwise)".format(param_p % 60))
+            if generator == 5:
+                assert param_p % 60 == 59
+        else:  # OpenSSL<3.0.0
+            assert realtive_g_pow_q == -1
+            # It can be shown that 2 is a quadratic residue modulo p if and only
+            # if p mod 8 = 1 or 7. Otherwise, p mod 8 = 3 or 5.
+            # If p mod 8 = 5, (p-1)/2 mod 4 = 2 so (p-1)/2 is not prime.
+            # Therefore for 2 to be a generator, p mod 8 = 3.
+            # With p mod 12 = 11, the CRT gives: p mod 24 = 11
+            print("p mod 24 = {} (expected 11 for g=2, also 23 otherwise)".format(param_p % 24))
+            if generator == 2:
+                assert param_p % 24 == 11
+
+            # For generator 5, as (-1)^((5-1)/2)*(p-1)/2) = ((-1)^2)^((p-1)/2) = 1,
+            # the Law of quadratic reciprocity results in (p|5)*(5|p) = 1, where
+            # (a|b) is the Legendre symbol.
+            # For 5 to be a generator, it can not be a quadratic residue modulo p,
+            # so (p|5) = -1, which means that -1 = (5|p) = p^2 mod 5.
+            # Finally p mod 5 = 2 or 3.
+            # With p mod 12 = 11, the CRT gives: p mod 60 = 47 or 23.
+            # If g is not 5, p mod 5 cannot be 0 nor 1 (in order for (p-1)/2 to
+            # be prime), so the only other possible value for p mod 5 is 4.
+            print("p mod 60 = {} (expected 23 or 47 for g=5, also 59 otherwise)".format(param_p % 60))
+            if generator == 5:
+                assert param_p % 60 in (23, 47)
     finally:
         try:
             os.remove(param_path)
