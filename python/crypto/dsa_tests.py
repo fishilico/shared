@@ -202,10 +202,18 @@ def run_pycrypto_test(bits, colorize):
     assert pow(key.g, key.x, key.p) == key.y
     assert pow(key.y, key.q, key.p) == 1  # Check the public key against the parameters
 
-    # Compute the size of the key order in bytes
-    # It is always 20 (160 bits) in practise
+    # Compute the size of the key order in bytes:
+    # - 20 for DSA-1024
+    # - 28 for DSA-2048
+    # - 32 for DSA-3072
     key_order_bytes = (key.q.bit_length() + 7) // 8
-    assert key_order_bytes == 20, "Unexpected order size of {} bytes".format(key_order_bytes)
+    expected_key_order_bytes = {
+        1024: 20,
+        2048: 28,
+        3072: 32,
+    }[bits]
+    assert key_order_bytes == expected_key_order_bytes, "Unexpected order size of {} bytes (!= {})".format(
+        key_order_bytes, expected_key_order_bytes)
 
     # Signature mode can be 'fips-186-3' (random nonce)
     # or 'deterministic-rfc6979' (deterministic nonce)
@@ -333,6 +341,23 @@ def run_openssl_test(bits, colorize):
         assert 1 < param_g < param_p - 1
         assert pow(param_g, param_q, param_p) == 1
 
+        # The size of q depends on the bits
+        if bits == 1024:
+            # Some OpenSSL versions generate 20 bytes, others 28 bytes
+            assert param_q.bit_length() in (160, 224), "Unexpected q order: {} for DSA-{}".format(
+                param_q.bit_length(), bits)
+        elif bits == 2048:
+            # Some OpenSSL versions generate 28 bytes, others 32 bytes
+            assert param_q.bit_length() in (224, 256), "Unexpected q order: {} for DSA-{}".format(
+                param_q.bit_length(), bits)
+        elif bits == 3072:
+            # Some OpenSSL versions generate 28 bytes, others 32 bytes
+            assert param_q.bit_length() in (224, 256), "Unexpected q order: {} for DSA-{}".format(
+                param_q.bit_length(), bits)
+        else:
+            raise NotImplementedError("Unknown q order for OpenSSL-generated DSA-{} keys: {}".format(
+                bits, param_q.bit_length()))
+
         logger.debug("Generate a DSA-%d key with OpenSSL", bits)
         result = run_process_with_input(
             ['openssl', 'gendsa', '-out', sk_path, param_path],
@@ -343,20 +368,48 @@ def run_openssl_test(bits, colorize):
         with open(sk_path, 'r') as fsk:
             sign_key_lines = fsk.readlines()
         colorprint(color_red, ''.join(sign_key_lines))
-        assert sign_key_lines[0] == '-----BEGIN DSA PRIVATE KEY-----\n'
-        assert sign_key_lines[-1] == '-----END DSA PRIVATE KEY-----\n'
         result = run_process_with_input(
             ['openssl', 'asn1parse', '-i', '-dump', '-in', sk_path],
             b'', color=color_red)
         if not result:
             return False
 
-        # Decode PEM-encoded ASN.1 key
-        sign_key_der = base64.b64decode(''.join(sign_key_lines[1:-1]))
-        sign_key_asn1 = Cryptodome.Util.asn1.DerSequence()
-        sign_key_asn1.decode(sign_key_der)
-        assert len(sign_key_asn1) == 6
-        key_zero, key_p, key_q, key_g, key_y, key_x = sign_key_asn1
+        if sign_key_lines[0] == '-----BEGIN DSA PRIVATE KEY-----\n':
+            assert sign_key_lines[-1] == '-----END DSA PRIVATE KEY-----\n'
+            # Decode PEM-encoded ASN.1 key
+            sign_key_der = base64.b64decode(''.join(sign_key_lines[1:-1]))
+            sign_key_asn1 = Cryptodome.Util.asn1.DerSequence()
+            sign_key_asn1.decode(sign_key_der)
+            assert len(sign_key_asn1) == 6
+            key_zero, key_p, key_q, key_g, key_y, key_x = sign_key_asn1
+        elif sign_key_lines[0] == '-----BEGIN PRIVATE KEY-----\n':
+            # OpenSSL>=3.0.0 format
+            assert sign_key_lines[-1] == '-----END PRIVATE KEY-----\n'
+            sign_key_der = base64.b64decode(''.join(sign_key_lines[1:-1]))
+            sign_key_asn1 = Cryptodome.Util.asn1.DerSequence()
+            sign_key_asn1.decode(sign_key_der)
+            assert len(sign_key_asn1) == 3
+            key_zero, sign_key_algo_der, sign_key_priv_der = sign_key_asn1
+
+            sign_key_algo_asn1 = Cryptodome.Util.asn1.DerSequence()
+            sign_key_algo_asn1.decode(sign_key_algo_der)
+            assert len(sign_key_algo_asn1) == 2
+            assert sign_key_algo_asn1[0] == b'\x06\x07\x2a\x86\x48\xce\x38\x04\x01'  # OID for dsaEncryption
+            sign_key_params_asn1 = Cryptodome.Util.asn1.DerSequence()
+            sign_key_params_asn1.decode(sign_key_algo_asn1[1])
+            assert len(sign_key_params_asn1) == 3
+            key_p, key_q, key_g = sign_key_params_asn1
+
+            # Decode an Octet String encoding an integer
+            sign_key_priv_oc_asn1 = Cryptodome.Util.asn1.DerObject()
+            sign_key_priv_oc_asn1.decode(sign_key_priv_der)
+            sign_key_priv_int_asn1 = Cryptodome.Util.asn1.DerInteger()
+            sign_key_priv_int_asn1.decode(sign_key_priv_oc_asn1.payload)
+            key_x = sign_key_priv_int_asn1.value
+            key_y = pow(key_g, key_x, key_p)  # The public key is not encoded when using this format
+        else:
+            raise NotImplementedError("Unknown private key file format")
+
         print("DSA-{} OpenSSL-generated key:".format(bits))
         print("  y({}) = {}{:#x}{}".format(key_y.bit_length(), color_green, key_y, color_norm))
         print("  x({}) = {}{:#x}{}".format(key_x.bit_length(), color_red, key_x, color_norm))
@@ -440,8 +493,9 @@ def run_openssl_test(bits, colorize):
         assert 0 < sig_r < param_q
         assert 0 < sig_s < param_q
 
-        # OpenSSL uses truncated SHA-512 hashes (to 160 bits, the size of SHA-1)
-        h_msg = decode_bigint_be(hashlib.sha512(test_message).digest()[:20]) % param_q
+        # OpenSSL uses truncated SHA-512 hashes
+        key_order_bytes = (param_q.bit_length() + 7) // 8
+        h_msg = decode_bigint_be(hashlib.sha512(test_message).digest()[:key_order_bytes]) % param_q
 
         print("DSA-SHA512({}):".format(repr(test_message)))
         print("  r({}) = {}{:#x}{}".format(sig_r.bit_length(), color_green, sig_r, color_norm))
