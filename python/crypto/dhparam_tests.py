@@ -197,7 +197,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(
         description="Perform operations on DH parameters",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-b', '--bits', type=int, default=256,
+    parser.add_argument('-b', '--bits', type=int, default=512,
                         help="size of the generated DH prime, in bits")
     parser.add_argument('-5', '--gen5', action='store_true',
                         help="use 5 as generator instead of 2")
