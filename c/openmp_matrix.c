@@ -5,6 +5,11 @@
 #    define _GNU_SOURCE /* for snprintf */
 #endif
 
+/* Define inline for OpenMP compatibility with "clang -ansi" */
+#ifdef __clang__
+#    define inline __inline__
+#endif
+
 #include <errno.h>
 #include <omp.h>
 #include <stddef.h>
