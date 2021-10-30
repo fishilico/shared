@@ -708,7 +708,10 @@ def decode_openssh_private_key(private_key, colorize):
     # Sanity checks
     assert privkey_p * privkey_q == privkey_n
     phi_n = (privkey_p - 1) * (privkey_q - 1)
-    assert (privkey_e * privkey_d) % phi_n == 1
+    # OpenSSL 3.0 now uses LCM(p-1, q-1) instead of (p-1)*(q-1)
+    lcm_p1q1 = lcm(privkey_p - 1, privkey_q - 1)
+    assert phi_n % lcm_p1q1 == 0
+    assert (privkey_e * privkey_d) % lcm_p1q1 == 1
     assert (privkey_qinv * privkey_q) % privkey_p == 1
 
     # Python2 requires long values
@@ -794,10 +797,12 @@ def run_ssh_test(bits, colorize):
         # Sanity checks
         assert key.p * key.q == key.n
         phi_n = (key.p - 1) * (key.q - 1)
-        assert (key.e * key.d) % phi_n == 1
+        lcm_p1q1 = lcm(key.p - 1, key.q - 1)
+        assert phi_n % lcm_p1q1 == 0
+        assert (key.e * key.d) % lcm_p1q1 == 1
         assert (key.p * key.u) % key.q == 1
-        assert checked_modinv(key.d, phi_n) == key.e
-        assert checked_modinv(key.e, phi_n) == key.d
+        assert checked_modinv(key.d, lcm_p1q1) == key.e
+        assert checked_modinv(key.e, lcm_p1q1) == key.d % lcm_p1q1
         assert checked_modinv(key.p, key.q) == key.u
 
         # The public key is a single line
