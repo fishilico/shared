@@ -163,6 +163,12 @@ static bool install_syscall_filter(bool do_kill)
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
 #endif
 
+        /* Allow getrandom, used by glibc on Fedora 35 to use the heap */
+#ifdef __NR_getrandom
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_getrandom, 0, 1),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+#endif
+
         /* Deny some other syscalls */
         BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_getcwd, 0, 1),
         BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ERRNO | EPERM),
