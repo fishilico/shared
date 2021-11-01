@@ -520,6 +520,16 @@ WELL_KNOWN_EA_POLICIES = {
     '983d228d2827649da8e461587538d741991aef5cd1b5ceae869242f537535ce1': 'PolicyNvWritten(YES) AND PolicyLocality(TWO, THREE, FOUR)',  # noqa
     'fb204f312abaaac0980ce9fbbf5260788c7c7b6d4b68b6ce0845750c761511ed': 'PolicyNV(windows_nvbits_0x01880001: bit 1 clear) OR (PolicyNvWritten(YES) AND PolicyLocality(TWO, THREE, FOUR))',  # noqa
 
+    # Coreboot policies used by some nvmem indexes
+    # https://mail.coreboot.org/hyperkitty/list/coreboot-gerrit@coreboot.org/message/23XQ5J4IA2FYB4OUIR6KWRTMR3SGWYSD/
+    # https://github.com/coreboot/coreboot/blob/4.14/src/security/vboot/secdata_tpm.c#L112
+    # For index 0x01001007 (FIRMWARE_NV_INDEX)
+    '093ceb41181d47808862d7946268ee6a17a10e3d1b79b32351bc56e4beaceff0': 'PolicyPCR(0 is ZEROS)',
+    '4b44fc4192db5ad7167e0135708fd374890a06bfb56317df01f24f2226542a3f': 'PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is ZEROS)',  # noqa
+    'cb5c8014e27a5f7586aae42db4f9776a977bcbc952ca61e33609da2b2c329418': 'PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(00,01,00))',  # noqa
+    'e6ef4f0296ac3ef0f53906480985b1be8058e0e517e5f74a5b8a415efe339d87': 'PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(01,01,00))',  # noqa
+    '44447900cbb83f5b15765650ef96980a2b966ea909044a01b85fa54a96fc5984': '(PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is ZEROS)) OR (PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(00,01,00))) OR (PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(01,01,00)))',  # noqa
+
     # Unknown policy seen on some Lenovo laptops.
     # Intel TXT documentation states that the auth policy of these NV Indexes is "OEM policy"
     # tpm2_nvreadpublic 0x01800001 : LCP Platform Supplier (Intel TXT "PS", old)
@@ -889,6 +899,28 @@ def check_well_known_ea_policies():
     windows_drtm_svn_0x01880002 = compute_nv_name_sha256(
         0x01880002, 0x22061028, computed['PolicyNV(windows_nvbits_0x01880001: bit 1 clear) OR (PolicyNvWritten(YES) AND PolicyLocality(TWO, THREE, FOUR))'], 8)  # noqa
     assert windows_drtm_svn_0x01880002 == binascii.unhexlify('000b56094638c94535195b5f577a5c007401de262ca8b90aeaa0433f8471ae5829f6')  # noqa
+
+    computed['PolicyPCR(0 is ZEROS)'] = policy_pcr({0: b'\x00' * 32})
+    computed['PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is ZEROS)'] = policy_pcr(
+        {0: b'\x00' * 32},
+        policy_command_code(Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial))
+    computed['PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(00,01,00))'] = policy_pcr(  # noqa
+        {0: hashlib.sha256(b'\x00' * 32 + hashlib.sha1(b'\x00\x01\x00').digest() + b'\x00' * 12).digest()},
+        policy_command_code(Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial))
+    computed['PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(01,01,00))'] = policy_pcr(  # noqa
+        {0: hashlib.sha256(b'\x00' * 32 + hashlib.sha1(b'\x01\x01\x00').digest() + b'\x00' * 12).digest()},
+        policy_command_code(Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial))
+    computed['(PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is ZEROS)) OR (PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(00,01,00))) OR (PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(01,01,00)))'] = policy_or((  # noqa
+        policy_pcr(
+            {0: b'\x00' * 32},
+            policy_command_code(Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial)),
+        policy_pcr(
+            {0: hashlib.sha256(b'\x00' * 32 + hashlib.sha1(b'\x00\x01\x00').digest() + b'\x00' * 12).digest()},
+            policy_command_code(Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial)),
+        policy_pcr(
+            {0: hashlib.sha256(b'\x00' * 32 + hashlib.sha1(b'\x01\x01\x00').digest() + b'\x00' * 12).digest()},
+            policy_command_code(Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial)),
+    ))
 
     # Compare the computed digests with the reference ones
     if sys.version_info < (3, 5):
