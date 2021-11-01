@@ -438,9 +438,10 @@
 #define __NR_landlock_add_rule 445
 #define __NR_landlock_restrict_self 446
 #define __NR_memfd_secret 447
+#define __NR_process_mrelease 448
 
 #ifdef __KERNEL__
-#define __NR_syscalls 448
+#define __NR_syscalls 449
 #endif
 
 #endif /* _UAPI_ASM_UNISTD_32_H */
