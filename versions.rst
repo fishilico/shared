@@ -392,23 +392,30 @@ Intel CPU Microarchitecture
 * https://en.wikipedia.org/wiki/List_of_Intel_codenames
 * https://en.wikipedia.org/wiki/Tick%E2%80%93tock_model
   (process-architecture-optimization model of production)
+* https://en.wikipedia.org/wiki/Process%E2%80%93architecture%E2%80%93optimization_model
 * https://en.wikipedia.org/wiki/Semiconductor_device_fabrication
   (Minimal feature size is the size of semiconductor in the manufacturing process)
 * https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h
   (list of Intel microarchitectures in Linux kernel)
 
+* N.B. "10++ nm" means "10 nm Enhanced SuperFin (10ESF)" (cf. https://en.wikipedia.org/wiki/Golden_Cove and https://en.wikipedia.org/wiki/7_nm_process)
+
 +-------------------------------------------+--------------+--------------+-------------------------------------------------------------------------------------------------+
 | Microarchitecture                         | Release date | Transistors  | Brand and CPU names                                                                             |
 +===========================================+==============+==============+=================================================================================================+
-| Ocean Cove                                | TBA          |              |                                                                                                 |
+| Redwood Cove: Meteor Lake (14th gen Core) | TBA - 2023   | 7 nm         | Granite Rapids, Eagle Stream platform                                                           |
 +-------------------------------------------+--------------+--------------+-------------------------------------------------------------------------------------------------+
-| Meteor Lake                               | TBA - 2022   | 7 nm         | Granite Rapids, Eagle Stream platform                                                           |
+| Ocean Cove                                | TBA - 2023   |              |                                                                                                 |
 +-------------------------------------------+--------------+--------------+-------------------------------------------------------------------------------------------------+
-| Golden Cove: Alder Lake (12th gen Core)   | TBA - 2021   | 10++ nm      | (ADL) Sapphire Rapids (SPR) Eagle Stream platform                                               |
+| Raptor Cove: Raptor Lake (13th gen Core)  | TBA - 2022   |              | (RPL)                                                                                           |
 +-------------------------------------------+--------------+--------------+-------------------------------------------------------------------------------------------------+
-| Gracemont (4th gen Atom low-power SoC)    | TBA - 2021   | 10 nm        |                                                                                                 |
+| Golden Cove: Sapphire Rapids              | TBA - 2022   | 10++ nm      | (SPR) Eagle Stream platform                                                                     |
 +-------------------------------------------+--------------+--------------+-------------------------------------------------------------------------------------------------+
 |                                           | Last update  |              |                                                                                                 |
++-------------------------------------------+--------------+--------------+-------------------------------------------------------------------------------------------------+
+| Golden Cove: Alder Lake (12th gen Core)   | 2021-11      | 10++ nm      | (ADL)                                                                                           |
++-------------------------------------------+--------------+--------------+-------------------------------------------------------------------------------------------------+
+| Gracemont (4th gen Atom low-power SoC)    | 2021-11      | 10 nm        |                                                                                                 |
 +-------------------------------------------+--------------+--------------+-------------------------------------------------------------------------------------------------+
 | Cypress Cove: Rocket Lake (11th gen Core) | 2021-03      | 14++ nm      | (RKL)                                                                                           |
 +-------------------------------------------+--------------+--------------+-------------------------------------------------------------------------------------------------+
