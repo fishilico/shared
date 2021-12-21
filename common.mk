@@ -44,8 +44,10 @@ endif
 
 # Clean command
 CLEAN_CMD := $(V_CLEAN)$(RM) \
-	*.a *.aux *.bin *.class *.dll *.efi *.elf *.exe *.fdb_latexmk *.fls *.glob *.log *.o *.out \
-	*.pdf *.pyc *.rst.tex *.so *.tmp *.toc *.vo *.vok *.vos .*.d .*.o && \
+	*.a *.aux *.bin *.class *.dll *.efi *.elf *.exe *.fdb_latexmk *.fls \
+	*.glob *.lock *.log *.o *.out *.pdf *.pyc *.rst.tex *.so *.tmp *.toc \
+	*.vo *.vok *.vos \
+	.*.aux .*.d .*.o && \
 	$(RM) -r __pycache__ .mypy_cache && \
 	$(RM) -r target
 
