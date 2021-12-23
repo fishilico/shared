@@ -12,37 +12,54 @@ jobs:
           - i686-w64-mingw32-gcc
         unicode: [y, n]
 
-    steps:
-    - uses: actions/checkout@v2
+    container:
+      image: docker://docker.io/library/ubuntu:20.04
 
+    steps:
     - name: Install dependencies
       run: |
-        if ${{ matrix.compiler == 'i686-w64-mingw32-gcc' }} ; then
-            sudo dpkg --add-architecture i386
-        fi
+        # 32-bit wine is needed to run many installers (even the 64-bit Python installer!)
+        dpkg --add-architecture i386
 
-        sudo apt-get update
-        sudo apt-get install -y \
-            cargo \
+        apt-get update
+        apt-get install -y \
+            build-essential \
             coq \
             gcc-mingw-w64 \
+            git \
             openjdk-11-jdk \
-            pkgconf
+            pkgconf \
+            wget \
+            wine32:i386 \
+            wine64 \
+            winetricks \
+            xvfb
+
+        # Restore the HOME directory to the root user, as Github overrode it to /home/github and this caused issues with Wine
+        export HOME=/root
+
+        # Python3 requires Windows>=8.1 compatibility
+        winetricks win10
 
         if ${{ matrix.compiler == 'i686-w64-mingw32-gcc' }} ; then
-            # libc6 needs to be installed separately, otherwise apt-get fails to
-            # configure things:
-            #   E: Could not configure 'libc6:i386'.
-            #   E: Could not perform immediate configuration on 'libgcc-s1:i386'.
-            #   Please see man 5 apt.conf under APT::Immediate-Configure for details. (2)
-            sudo apt-get install -y libc6:i386
-            # Install wine32:i386 dependencies explicitly, otherwise apt-get complains
-            # "The following packages have unmet dependencies"
-            #sudo apt-get install -y libgd3:i386 libgphoto2-6:i386 libwine:i386 wine32:i386
-            sudo apt-get install -y libgd3:i386 libgphoto2-6:i386 libwine:i386 wine32:i386
+            # Download 32-bit Python from https://www.python.org/downloads/windows/
+            wget https://www.python.org/ftp/python/3.10.1/python-3.10.1.exe
+            # Use Xvfb to create a virtual X11 server for the installer
+            xvfb-run wine python-3.10.1.exe /quiet InstallAllUsers=1 PrependPath=1
         else
-            sudo apt-get install -y wine-stable wine64
+            # Download 64-bit Python from https://www.python.org/downloads/windows/
+            wget https://www.python.org/ftp/python/3.10.1/python-3.10.1-amd64.exe
+            xvfb-run wine64 python-3.10.1-amd64.exe /quiet InstallAllUsers=1 PrependPath=1
         fi
+
+        # Add a helper to launch "wine python" without spaces
+        printf '#!/bin/sh\nexec wine python.exe "$@"' > /usr/local/bin/wine-python
+        chmod +x /usr/local/bin/wine-python
+      env:
+        DEBIAN_FRONTEND: noninteractive
+
+    # "checkout" requires git to be installed, which is why it is used after installing software
+    - uses: actions/checkout@v2
 
     - name: Configure the environment
       run: |
@@ -50,8 +67,9 @@ jobs:
         echo "CC=${{ matrix.compiler }}" >> "$GITHUB_ENV"
         echo "WINCC=${{ matrix.compiler }}" >> "$GITHUB_ENV"
         echo "HAVE_UNICODE=${{ matrix.unicode }}" >> "$GITHUB_ENV"
-        echo "PYTHON=python3" >> "$GITHUB_ENV"
+        echo "PYTHON=wine-python" >> "$GITHUB_ENV"
         echo "CARGO=false" >> "$GITHUB_ENV"
+        echo "HOME=/root" >> "$GITHUB_ENV"
 
         # Display the final environment file, for debugging purpose
         cat "$GITHUB_ENV"
