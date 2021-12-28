@@ -255,6 +255,11 @@ KNOWN_TYPEINFO_NAMES = (
 )
 
 
+class CxxFiltNotFoundException(Exception):
+    """c++filt was not found"""
+    pass
+
+
 def get_typeid(typeinfo):
     """Compute the CallSiteTypeId from a typeinfo string"""
     return int.from_bytes(hashlib.md5(typeinfo.encode("ascii")).digest()[:8], "little")
@@ -262,7 +267,12 @@ def get_typeid(typeinfo):
 
 def decode_typeinfo(typeinfo):
     """Invoke c++filt to decode a typeinfo"""
-    type_string = subprocess.check_output(["c++filt", typeinfo], stdin=subprocess.DEVNULL)
+    try:
+        type_string = subprocess.check_output(["c++filt", typeinfo], stdin=subprocess.DEVNULL)
+    except FileNotFoundError:
+        # This happens when c++filt (from package binutils) is not found,
+        # and with "wine python" on Linux systems
+        raise CxxFiltNotFoundException
     if not type_string.startswith(b"typeinfo name for "):
         raise ValueError(f"Unexpected c++filt output for {typeinfo!r}: {type_string!r}")
     return type_string[18:].decode("ascii").strip()
@@ -299,7 +309,10 @@ def check_known_types():
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        check_known_types()
+        try:
+            check_known_types()
+        except CxxFiltNotFoundException:
+            print("c++filt whan not found, exiting.")
     else:
         for typeinfo in sys.argv[1:]:
             typeid = get_typeid(typeinfo)
