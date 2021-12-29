@@ -6,8 +6,6 @@ ENV LANG=C.UTF-8
 
 # Ubuntu 20.04 dropped Python 2 support
 # Install apt-utils first, in order to apply package configuration tasks
-# Create directory /usr/include/SDL2 because "pkgconf --cflags sdl2" specifies
-# "-I/usr/include/x86_64-linux-gnu/SDL2 -I/usr/include/SDL2" without creating it.
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -108,10 +106,10 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 9.3-win32 20200320
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 9.3-win32 20200320
 #       wine: wine-5.0 (Ubuntu 5.0-3ubuntu1)
-#       Linux kernel: 5.4.0-88-generic
+#       Linux kernel: 5.4.0-91-generic
 #       python3: Python 3.8.10
-#       javac: javac 11.0.11
-#       java: openjdk 11.0.11 2021-04-20
-#       rustc: rustc 1.51.0
-#       cargo: cargo 1.51.0
+#       javac: javac 11.0.13
+#       java: openjdk 11.0.13 2021-10-19
+#       rustc: rustc 1.53.0
+#       cargo: cargo 1.53.0
 #       coqc: The Coq Proof Assistant, version 8.11.0 (March 2020) compiled on Mar 5 2020 20:37:30 with OCaml 4.08.1

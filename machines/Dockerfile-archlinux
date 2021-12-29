@@ -36,7 +36,6 @@ RUN \
         python-setuptools \
         python-z3 \
         python2 \
-        python2-cffi \
         python2-numpy \
         python2-setuptools \
         rust \
@@ -91,15 +90,15 @@ CMD ["/run_shared_test.sh"]
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
 #       gcc: gcc (GCC) 11.1.0
-#       clang: clang version 12.0.1
+#       clang: clang version 13.0.0
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 11.2.0
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 11.2.0
-#       wine: wine-6.16
-#       Linux kernel: 5.14.12-arch1-1
-#       python: Python 3.9.7
-#       python3: Python 3.9.7
-#       javac: javac 17
-#       java: openjdk 17 2021-09-14
-#       rustc: rustc 1.55.0
-#       cargo: cargo 1.55.0
-#       coqc: The Coq Proof Assistant, version 8.13.2 (July 2021) compiled on Jul 27 2021 14:53:47 with OCaml 4.12.0
+#       wine: wine-7.0-rc1
+#       Linux kernel: 5.15.10-arch1-1
+#       python: Python 3.10.1
+#       python3: Python 3.10.1
+#       javac: javac 17.0.1
+#       java: openjdk 17.0.1 2021-10-19
+#       rustc: rustc 1.57.0 (Arch Linux rust 1:1.57.0-1)
+#       cargo: cargo 1.57.0
+#       coqc: The Coq Proof Assistant, version 8.14.1 compiled with OCaml 4.13.1

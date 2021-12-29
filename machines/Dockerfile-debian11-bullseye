@@ -7,8 +7,6 @@ ENV LANG=C.UTF-8
 # Installing openjdk-11-jre-headless requires /usr/share/man/man1 to exist
 # Install apt-utils first, in order to apply package configuration tasks
 # Install wine last, because otherwise apt fails to configure it
-# Create directory /usr/include/SDL2 because "pkgconf --cflags sdl2" specifies
-# "-I/usr/include/x86_64-linux-gnu/SDL2 -I/usr/include/SDL2" without creating it.
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -105,10 +103,10 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 10-win32 20210110
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 10-win32 20210110
 #       wine: wine-5.0.3 (Debian 5.0.3-3)
-#       Linux kernel: 5.10.0-9-amd64
+#       Linux kernel: 5.10.0-10-amd64
 #       python3: Python 3.9.2
-#       javac: javac 11.0.12
-#       java: openjdk 11.0.12 2021-07-20
+#       javac: javac 11.0.13
+#       java: openjdk 11.0.13 2021-10-19
 #       rustc: rustc 1.48.0
 #       cargo: cargo 1.46.0
 #       coqc: The Coq Proof Assistant, version 8.12.0 (November 2020) compiled on Nov 25 2020 6:34:32 with OCaml 4.11.1
