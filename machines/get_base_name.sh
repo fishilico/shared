@@ -69,9 +69,6 @@ do
             echo "debian12-bookworm"
             ;;
 
-        *ubuntu1204*|*ubuntu12.04*|*precise*)
-            echo "ubuntu1204-precise"
-            ;;
         *ubuntu1404*|*ubuntu14.04*|*trusty*)
             echo "ubuntu1404-trusty"
             ;;

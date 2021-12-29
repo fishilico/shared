@@ -142,7 +142,7 @@ def is_usable_tag(image, tag):
     if image == 'ubuntu':
         # Filter out ancient releases that are no longer supported
         # (they are for example issues with the package manager)
-        if tag == '10.04':
+        if tag in ('10.04', '12.04'):
             return False
         # Use MM.YY date with LTS (Long Term Support)
         if re.match(r'^[0-9][02468]\.04$', tag):
