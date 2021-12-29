@@ -86,6 +86,13 @@ def parse_log_file(filepath):
                         update_dockerfile(current_image, current_output)
                     current_output = None
                     current_image = None
+                elif line.rstrip() in (
+                        '0016:err:service:process_send_command service protocol error - failed to read pipe r = 0  count = 0!',  # noqa
+                        '007c:err:rpc:RpcAssoc_BindConnection receive failed with error 1726',
+                        '008c:err:rpc:I_RpcReceive we got fault packet with status 0x1c010003',
+                        ):
+                    # Ignore lines generated from stray instances of Wine
+                    continue
                 else:
                     current_output.append(line.rstrip())
     return retval
