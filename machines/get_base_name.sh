@@ -84,6 +84,9 @@ do
         *ubuntu2004*|*ubuntu20.04*|*focal*)
             echo "ubuntu2004-focal"
             ;;
+        *ubuntu2204*|*ubuntu22.04*|*jammy*)
+            echo "ubuntu2204-jammy"
+            ;;
 
         *fedora22*)
             echo "fedora22"

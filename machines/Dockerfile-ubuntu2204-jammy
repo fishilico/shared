@@ -1,0 +1,109 @@
+FROM ubuntu:22.04
+LABEL Description="Ubuntu 22.04 LTS Jammy Jellyfish with build dependencies for shared"
+
+# Override the language to force UTF-8 output
+ENV LANG=C.UTF-8
+
+# Install apt-utils first, in order to apply package configuration tasks
+RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
+    dpkg --add-architecture i386 && \
+    apt-get -qq update && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy apt-utils && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
+        binutils-mingw-w64 \
+        cargo \
+        clang \
+        coq \
+        gcc-mingw-w64 \
+        gcc-multilib \
+        gdb \
+        libc-dev \
+        libc6-dev-i386 \
+        libgmp-dev \
+        libgtk-3-dev \
+        libmnl-dev \
+        libpulse-dev \
+        libsdl2-dev \
+        libssl-dev \
+        linux-headers-generic \
+        m4 \
+        make \
+        musl-dev \
+        musl-tools \
+        openjdk-11-jdk \
+        openssh-client \
+        openssl \
+        pkgconf \
+        python3 \
+        python3-cffi \
+        python3-cryptography \
+        python3-dev \
+        python3-gmpy2 \
+        python3-nacl \
+        python3-numpy \
+        python3-pil \
+        python3-pycryptodome \
+        python3-z3 \
+        sagemath && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
+        wine-stable \
+        wine32 \
+        wine64 && \
+    apt-get clean
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]
+
+# make list-nobuild:
+#    Global blacklist: latex%
+#    In sub-directories:
+#       c:
+#       glossaries:
+#       java/keystore:
+#       linux:
+#       python:
+#       python/crypto:
+#       python/network:
+#       python/network/dnssec:
+#       python/qrcode:
+#       rust:
+#       verification:
+#    With gcc -m32:
+#       Global blacklist: latex%
+#       In sub-directories:
+#          c: gmp_functions gtk_alpha_window
+#          glossaries:
+#          java/keystore:
+#          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
+#          python:
+#          python/crypto:
+#          python/network:
+#          python/network/dnssec:
+#          python/qrcode:
+#          rust:
+#          verification:
+#    Compilers:
+#       gcc -m64: ok
+#       gcc -m32: ok
+#       clang -m64: ok
+#       clang -m32: ok
+#       musl-gcc: ok
+#       x86_64-w64-mingw32-gcc: ok
+#       i686-w64-mingw32-gcc: ok
+#    Versions:
+#       gcc: gcc (Ubuntu 11.2.0-13ubuntu1) 11.2.0
+#       clang: Ubuntu clang version 13.0.0-9
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 10-win32 20210610
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 10-win32 20210610
+#       wine: wine-5.0.3 (Ubuntu 5.0.3-3ubuntu2)
+#       Linux kernel: 5.13.0-19-generic
+#       python3: Python 3.9.9
+#       javac: javac 11.0.13
+#       java: openjdk 11.0.13 2021-10-19
+#       rustc: rustc 1.56.0
+#       cargo: cargo 1.56.0
+#       coqc: The Coq Proof Assistant, version 8.14.1 compiled with OCaml 4.11.1
