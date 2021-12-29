@@ -6,6 +6,7 @@ ENV LANG=C.UTF-8
 
 # Install apt-utils first, in order to apply package configuration tasks
 # Install wine last, because otherwise apt fails to configure it
+# Debian 12 removed sagemath because it failed to build from source
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -45,8 +46,7 @@ RUN \
         python3-numpy \
         python3-pil \
         python3-pycryptodome \
-        python3-z3 \
-        sagemath && \
+        python3-z3 && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         wine \
         wine32 \
