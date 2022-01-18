@@ -361,9 +361,10 @@
 #define __NR_landlock_restrict_self 446
 #define __NR_memfd_secret 447
 #define __NR_process_mrelease 448
+#define __NR_futex_waitv 449
 
 #ifdef __KERNEL__
-#define __NR_syscalls 449
+#define __NR_syscalls 450
 #endif
 
 #endif /* _UAPI_ASM_UNISTD_64_H */
