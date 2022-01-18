@@ -168,6 +168,7 @@ __extension__ static const char* cpuidstr_7_ecx[32] = {
  * cpuid 0x00000007:0, edx register
  */
 __extension__ static const char* cpuidstr_7_edx[32] = {
+    [24] = "amx_tile",
     [2] = "avx512_4vnniw",
     [3] = "avx512_4fmaps",
     [4] = "fsrm",
