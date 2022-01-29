@@ -38,7 +38,7 @@ extract_cpuid_features() {
  */
 __extension__ static const char* $2[32] = {
 EOF
-    sed -n 's/^#define X86_FEATURE_\(\S\+\)\s\+(\s*'$1'\*32+\s*\([0-9]\+\)\s*).*/    [\2] = "\1",/p' < "$CPU_FEATURE_FILE" | tr '[A-Z]' '[a-z]'
+    sed -n 's/^#define X86_FEATURE_\(\S\+\)\s\+(\s*'$1'\*32+\s*\([0-9]\+\)\s*).*/    [\2] = "\1",/p' < "$CPU_FEATURE_FILE" | tr '[A-Z]' '[a-z]' | sort -t'[' -k2 -n
     echo '};'
 }
 extract_cpuid_features  0 cpuidstr_1_edx 'cpuid 0x00000001, edx register' | sed 's/"ds"/"dts"/;s/"xmm/"sse/'
