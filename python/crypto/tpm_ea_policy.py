@@ -387,6 +387,8 @@ WELL_KNOWN_EA_POLICIES = {
     # documented in Appendix I of https://drive.google.com/file/d/1-vn6C-yPAR19xXILOE0FZ2-ARWbvr1t1/view
     # (Intel Trusted Execution Technology (Intel TXT), Software Development Guide,
     # Measured Launched Environment Developer's Guide, September 2019, Revision 016)
+    # and in https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-system-guard/system-guard-secure-launch-and-smm-protection
+    # (System Guard Secure Launch and SMM protection)
     '06c7d805ad3bec1106502a44c6b2e3b36d157750e8efca1fff998c874a7664c5': 'PolicyLocality(THREE, FOUR) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)',  # noqa
     'ef9a26fc22d1ae8cecff59e9481ac1ec533dbe228bec6d17930f4cb2cc5b9724': 'PolicyLocality(THREE, FOUR) OR (PolicyLocality(THREE, FOUR) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial))',  # noqa
 
