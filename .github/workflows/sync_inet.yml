@@ -1,0 +1,34 @@
+name: Synchronize some directories with the Internet
+
+on:
+  schedule:
+    # Trigger every Sunday at 5:00
+    - cron: '0 5 * * 0'
+
+jobs:
+  sync-inet:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Update GPG keys
+      run: make -C gpg sync-inet
+
+    - name: Update DNSSEC records
+      run: make -C python/network/dnssec sync-inet
+
+    - name: Show the changes
+      run: |
+          git add -A
+          git diff --cached
+
+    - name: Commit the changes
+      run: |
+        if git status --short | grep '^' ; then
+          git add -A
+          git config --global user.email "updater@github.local"
+          git config --global user.name "GitHub Actions Updater"
+          git commit -m "Update repository $(date --utc +"%Y-%m-%d %H:%M:%S")"
+          git push origin "${GITHUB_REF##*/}"
+        fi
