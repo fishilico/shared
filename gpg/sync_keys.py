@@ -209,7 +209,7 @@ def get_pgp_key_id(raw_key: bytes) -> str:
 
 
 def gpg_recv_key(key_id: str) -> bytes:
-    """Receive a key using GnuPG"""
+    """Receive a key using GnuPG using Ubuntu keyserver https://keyserver.ubuntu.com/"""
     with tempfile.TemporaryDirectory(prefix="gnupghome") as tmpdir:
         # Create an empty public keyring to avoid a GnuPG message
         with (Path(tmpdir) / "pubring.kbx").open("wb"):
@@ -217,7 +217,7 @@ def gpg_recv_key(key_id: str) -> bytes:
         with (Path(tmpdir) / "trustdb.gpg").open("wb"):
             pass
         subprocess.check_output(
-            ("gpg", "--recv-keys", key_id),
+            ("gpg", "--keyserver", "hkps://keyserver.ubuntu.com", "--recv-keys", key_id),
             input=b"",
             env={
                 "GNUPGHOME": tmpdir,
