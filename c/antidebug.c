@@ -128,7 +128,7 @@ int main(void)
 #endif
 
     /* Check the sensitive function for breakpoints */
-    assert(sensitive_start < sensitive_end);
+    assert(&sensitive_start[0] < &sensitive_end[0]);
     for (pcode = sensitive_start; pcode < sensitive_end; pcode++) {
 #if defined(__x86_64__) || defined(__i386__)
         if (*pcode == 0xcc) {
