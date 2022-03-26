@@ -553,7 +553,7 @@ INTEL_FAM6_MODELS = {
     (0x3f, -1): ('HSX', 'Haswell X (Haswell EP, EN)', (
         'OctalCore Intel® Core™ i7-5960X Extreme Edition, 3300 MHz (33 x 100) (Haswell-E)',
     )),
-    (0x3f, 2): ('HSX', 'Haswell X (Haswell EP, EN), Haswell Server E, EP, EP4S', (
+    (0x3f, 2): ('HSX-E/EP', 'Haswell X (Haswell EP, EN), Haswell Server E, EP, EP4S (Stepping Cx/M1)', (
         'Intel® Xeon® Processor E5v3 Product Family',
         'HexaCore Intel® Core™ i7-5820K, 3300 MHz (33 x 100) (Haswell-E)',
         '2x 18-Core Intel® Xeon® E5-2699 v3, 2300 MHz (23 x 100) (Haswell-EP)',
@@ -563,7 +563,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i7-5820K, i7-5930K',
         'Intel® Xeon® Processor v3 E5-1428L, E5-1603, E5-1607, E5-1620, E5-1630, E5-1650, E5-1660, E5-1680, E5-2408L, E5-2418L, E5-2428L, E5-2438L, E5-2603, E5-2608L, E5-2608L, E5-2609, E5-2618L, E5-2620, E5-2623, E5-2628L, E5-2630, E5-2630L, E5-2637, E5-2640, E5-2643, E5-2648L, E5-2650, E5-2650L, E5-2658, E5-2660, E5-2667, E5-2670, E5-2680, E5-2683, E5-2685, E5-2687W, E5-2690, E5-2695, E5-2697, E5-2698, E5-2699, E5-4610, E5-4620, E5-4627, E5-4640, E5-4648, E5-4650, E5-4655, E5-4660, E5-4667, E5-4669',
     )),
-    (0x3f, 4): ('HSX', 'Haswell X (Haswell EX), Haswell Server EX', (
+    (0x3f, 4): ('HSX-EX', 'Haswell X (Haswell EX), Haswell Server EX (Stepping E0)', (
         'Intel® Xeon® Processor E7v3 Product Family',
         'Intel® Xeon® Processor v3 E7-4809, E7-4820, E7-4830, E7-4850, E7-8860, E7-8867, E7-8870, E7-8880L, E7-8880, E7-8890, E7-8891, E7-8893',
         'Intel® Xeon® Processor E7-4809V3, E7-4820V3, E7-4830V3, E7-4850V3, E7-8860V3, E7-8867V3, E7-8870V3, E7-8880LV3, E7-8880V3, E7-8890V3, E7-8891V3, E7-8893V3',
@@ -639,7 +639,7 @@ INTEL_FAM6_MODELS = {
     )),
     (0x4e, 1): (None, '?'),
     (0x4e, 2): (None, '?'),
-    (0x4e, 3): ('SKL', 'Skylake Mobile (Skylake U/Y/U23e)', (
+    (0x4e, 3): ('SKL-U/Y/SKL-U23e', 'Skylake Mobile (Skylake U/Y/U23e) (Stepping D0, K1)', (
         '6th Generation Intel® Core™ m Processors',
         '6th Generation Intel® Core™ Processors',
         'DualCore Intel® Core™ i7-6500U, 3100 MHz (31 x 100) (Skylake-U/Y)',
@@ -659,7 +659,7 @@ INTEL_FAM6_MODELS = {
     )),
     (0x4e, 8): (None, '?'),
     (0x4f, 0): (None, '?'),
-    (0x4f, 1): ('BDX', 'Broadwell X (Broadwell Server E, EP, EP4S, EX)', (
+    (0x4f, 1): ('BDX-ML', 'Broadwell X (Broadwell Server E, EP, EP4S, EX) (Stepping B0/M0/R0)', (
         'Intel® Xeon® Processor E5v4 Product Family',
         'Intel® Xeon® Processor E7v4 Product Family',
         '22-Core Intel® Xeon® E5-2696 v4, 2800 MHz (28 x 100), 55MB L3',
@@ -673,11 +673,11 @@ INTEL_FAM6_MODELS = {
         'Intel® Xeon® Processor v4 E5-2603, E5-2608L, E5-2609, E5-2618L, E5-2620, E5-2623, E5-2628L, E5-2630L, E5-2630, E5-2637, E5-2640, E5-2643, E5-2648L, E5-2650L, E5-2650, E5-2658, E5-2660, E5-2667, E5-2679, E5-2680, E5-2683, E5-2690, E5-2695, E5-2697A, E5-2697, E5-2698, E5-2699A, E5-2699, E5-2699R, E5-4628L',
         'Intel® Xeon® Processor v4 E7-4809, E7-4820, E7-4830, E7-4850, E7-8855, E7-8860, E7-8867, E7-8870, E7-8880, E7-8890, E7-8891, E7-8893, E7-8894',
     )),
-    (0x55, 3): ('SKL', 'Skylake Server', (
+    (0x55, 3): ('SKX-SP', 'Skylake Server (Stepping B1)', (
         'Intel® Xeon® Scalable Processors',
         'Intel® Xeon® Platinum Processor P-8124, P-8136',
     )),
-    (0x55, 4): ('SKX', 'Skylake X (Skylake SP, Basin Falls ; Skylake D, Bakerville ; W)', (
+    (0x55, 4): ('SKX-SP/D', 'Skylake X (Skylake SP, Basin Falls ; Skylake D, Bakerville ; W) (Stepping H0/M0/U0, M1)', (
         'Intel® Core™ i9 79xxX, 78xxX',
         'Intel® Xeon® Scalable Processor Family',
         'Intel® Xeon® Processor D Family',
@@ -703,8 +703,13 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ X-series Processor i9-7900X, i9-7920X, i9-7940X, i9-7960X',
         'Intel® Core™ X-series Processor i7-7800X, i7-7820X',
     )),
-    (0x55, 6): (None, '?'),
-    (0x55, 7): ('CSL', 'Cascade Lake Server, Cascade Lake W', (
+    (0x55, 5): ('CLX-SP', 'Cascade Lake Server (Stepping A0)', (
+        '2nd Generation Intel® Xeon® Scalable Processors',
+    )),
+    (0x55, 6): ('CLX-SP', 'Cascade Lake Server (Stepping B0)', (
+        '2nd Generation Intel® Xeon® Scalable Processors',
+    )),
+    (0x55, 7): ('CLX-SP', 'Cascade Lake Server, Cascade Lake W (Stepping B1)', (
         '2nd Generation Intel® Xeon® Scalable Processors',
         'Intel® Xeon® W Processor Family',
         'Intel® Xeon® Platinum Processor 8253, 8256, 8260, 8260L, 8260M, 8260Y, 8268, 8270, 8276, 8276L, 8276M, 8280, 8280L, 8280M, 9220, 9221, 9222, 9242, 9282',
@@ -713,7 +718,9 @@ INTEL_FAM6_MODELS = {
         'Intel® Xeon® Bronze Processor 3204, 3206R',
         'Intel® Xeon® Processor W-3275M, W-3275, W-3265M, W-3265, W-3245M, W-3245, W-3235, W-3225, W-3223, W-2295, W-2275, W-2265, W-2255, W-2245, W-2235, W-2225, W-2223',
     )),
-    (0x55, 11): (None, '?'),
+    (0x55, 11): ('CPX-SP', 'Cooper Lake (Stepping A1)', (
+        '3rd Generation Intel® Xeon® Scalable Processors',
+    )),
     (0x56, 2): ('BDX-DE', 'Broadwell Xeon D (Broadwell DE V1)', (
         'Intel® Xeon® Processor D-1500 Product Family',
         'OctalCore Intel® Xeon® D-1540, 2000 MHz (20 x 100) (Broadwell-DE)',
@@ -728,7 +735,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Xeon® Processor D-1500 Product Family',
         'Intel® Xeon® Processor D-1557, D-1559, D-1567, D-1571, D-1577, D-1581, D-1587',
     )),
-    (0x56, 5): ('BDX-DE', 'Broadwell Xeon D (Broadwell NS, Broadwell DE A1), Hewitt Lake', (
+    (0x56, 5): ('BDX-DE/NS', 'Broadwell Xeon D (Broadwell NS, Broadwell DE A1), Hewitt Lake (Stepping A1)', (
         'Intel® Xeon® Processor D-1500 NS Product Family',
         'Intel® Xeon® D Processor Family',
         'Intel® Xeon® Processor D-1513N, D-1523N, D-1533N, D1543N, D1553N',
@@ -752,7 +759,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Atom® Processor T5500, T5700',
     )),
     (0x5c, 8): (None, '?'),
-    (0x5c, 9): ('BXT', 'Atom Goldmont, Apollo Lake', (
+    (0x5c, 9): ('BXT/APL', 'Atom Goldmont, Apollo Lake (Stepping D0)', (
         'QuadCore Intel® Pentium® N4200 (Apollo Lake platform, Goldmont core)',
         'QuadCore Intel® Celeron® J3455, 2200 MHz (22 x 100) (Apollo Lake-D)',
         'QuadCore Intel® Celeron® N3450 (Apollo Lake platform, Goldmont core)',
@@ -762,7 +769,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Atom® Processor x5-A3930, x5-A3940, x7-A3950, x7-A3960',
         'Intel® Atom® Processor x5-E3930, x5-E3940, x7-E3950',
     )),
-    (0x5c, 10): (None, 'Apollo Lake', (
+    (0x5c, 10): ('APL', 'Apollo Lake (Stepping E0)', (
         'Intel® Pentium® J4205, N4200',
         'Intel® Celeron® J3355, J3455, N3350, N3450',
         'Intel® Atom® x5-E3930, x5-E3940, x7-E3950',
@@ -774,7 +781,7 @@ INTEL_FAM6_MODELS = {
     (0x5e, 0): (None, '?'),
     (0x5e, 1): (None, '?'),
     (0x5e, 2): (None, '?'),
-    (0x5e, 3): ('SKL', 'Skylake Desktop (Skylake H/S, Xeon E3)', (
+    (0x5e, 3): ('SKL-H/S', 'Skylake Desktop (Skylake H/S, Xeon E3) (Stepping R0/N0)', (
         '6th Generation Intel® Core™ Processor Family',
         'Intel® Xeon® Processor E3-1200 v5 Product Family',
         'Intel® Xeon® Processor v5 E3-1220, E3-1225, E3-1230, E3-1235L, E3-1240, E3-1240L, E3-1245, E3-1260L, E3-1270, E3-1275, E3-1280, E3-1505M, E3-1515M, E3-1535M, E3-1545M, E3-1558L, E3-1565L, E3-1575M, E3-1578L, E3-1585, E3-1585L',
@@ -792,7 +799,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Celeron® Processor G3900, G3900T, G3920, G3920T, G3940',
     )),
     (0x5e, 8): (None, '?'),
-    (0x5f, 1): ('DNV', 'Atom Denverton (Goldmont Microserver)', (
+    (0x5f, 1): ('DNV', 'Atom Denverton (Goldmont Microserver) (Stepping B0)', (
         '16-Core Intel® Atom® C3958, 2000 MHz (20 x 100) (Denverton)',
         'Intel® Atom® Processor C Series',
         'Intel® Atom® Processor C3000 Product Family',
@@ -804,12 +811,18 @@ INTEL_FAM6_MODELS = {
     )),
     (0x66, -1): ('CNL', 'Cannon Lake Mobile'),
     (0x6a, -1): ('ICL', 'Ice Lake'),
+    (0x6a, 5): ('ICX-SP', 'Ice Lake (Stepping C0)', (
+        '3rd Generation Intel® Xeon® Scalable Processors',
+    )),
+    (0x6a, 6): ('ICX-SP', 'Ice Lake (Stepping D0)', (
+        '3rd Generation Intel® Xeon® Scalable Processors',
+    )),
     (0x6c, -1): ('ICXD', 'Ice Lake Xeon D'),
     (0x6e, 1): (None, 'Cougar Mountain (AMT)', (
         'Intel® Puma™ 7 Home Gateway',
     )),
     (0x7a, 0): (None, '?'),
-    (0x7a, 1): (None, 'Gemini Lake', (
+    (0x7a, 1): ('GLK', 'Gemini Lake (Stepping B0)', (
         'Intel® Pentium® Processor Silver Series',
         'Intel® Celeron® Processor J Series',
         'Intel® Celeron® Processor N Series',
@@ -819,7 +832,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Celeron® Processor J4005, J4105',
         'Intel® Celeron® Processor N4000, N4100',
     )),
-    (0x7a, 8): (None, 'Gemini Lake', (
+    (0x7a, 8): ('GLK-R', 'Gemini Lake (Stepping R0)', (
         'Inteli LakeeddedmbeddedProcessor J5005, N5000 Intel® CelProcessor J Series',
         'Intel® Celeron® Processor N Series',
         'Intel® Pentium® Silver J5040 Processor',
@@ -833,7 +846,7 @@ INTEL_FAM6_MODELS = {
     (0x7e, -1): ('ICL', 'Ice Lake Mobile'),
     (0x7e, 0): ('ICL', 'Ice Lake A0'),
     (0x7e, 1): ('ICL', 'Ice Lake B0'),
-    (0x7e, 5): ('ICL', 'Ice Lake', (
+    (0x7e, 5): ('ICL-U/Y', 'Ice Lake (Stepping D1)', (
         '10th Generation Intel® Core™ Processor Family',
         'Intel® Core™ Processor i7-1060G7, i7-1065G7',
         'Intel® Core™ Processor i5-1030G4, i5-1030G7, i5-1035G1, i5-1035G4, i5-1035G7',
@@ -845,9 +858,28 @@ INTEL_FAM6_MODELS = {
         'Intel® Xeon Phi™ 7235, 7285, 7295',
     )),
     (0x86, -1): (None, 'Atom Tremont X (Jacobsville)'),
-    (0x8a, 1): (None, '?'),
-    (0x8c, 1): (None, '?'),
-    (0x8e, 9): ('KBL', 'Kaby Lake Mobile (Kaby Lake U/Y, U23e), Amber Lake Y', (
+    (0x86, 4): ('SNR', 'Snow Ridge (Stepping B0)', (
+        'Atom P59xxB',
+    )),
+    (0x86, 5): ('SNR', 'Snow Ridge (Stepping B1)', (
+        'Atom P59xxB',
+    )),
+    (0x8a, 1): ('LKF', 'Lakefield (Stepping B2/B3)', (
+        'Core w/Hybrid Technology',
+    )),
+    (0x8c, 1): ('TGL', 'Tiger Lake (Stepping B1)', (
+        '11th Generation Intel® Core™ Processor Family',
+        'Intel® Celeron® Processor UP3, UP3 IOT, UP4, H35',
+    )),
+    (0x8c, 2): ('TGL-R', 'Tiger Lake Refresh (Stepping C0)', (
+        '11th Generation Intel® Core™ Processor Family',
+        'Intel® Celeron® Processor UP3-Refresh, H35-Refresh',
+    )),
+    (0x8d, 1): ('TGL-H', 'Tiger Lake (Stepping R0)', (
+        '11th Generation Intel® Core™ Processor Family',
+        'Intel® Celeron® Processor H81',
+    )),
+    (0x8e, 9): ('KBL-U/Y/AML-Y22', 'Kaby Lake Mobile (Kaby Lake U/Y, U23e), Amber Lake Y (Stepping H0)', (
         '7th Generation Intel® Core™ Mobile Processors',
         '7th Generation Intel® Core™ Processor Family',
         'DualCore Intel® Core™ i5-7200U, 3100 MHz (31 x 100) (KabyLake-U/Y)',
@@ -871,7 +903,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i5-8310Y, i5-8210Y, i5-8200Y',
         'Intel® Core™ Processor m3-8100Y',
     )),
-    (0x8e, 10): ('KBL', 'Kaby Lake Mobile (Kaby Lake Refresh U4+2), Coffee Lake U43e', (
+    (0x8e, 10): ('KBL/CFL-U43e', 'Kaby Lake Mobile (Kaby Lake Refresh U4+2), Coffee Lake U43e (Stepping D0)', (
         '8th Generation Intel® Core™ Mobile Processor Family',
         '8th Generation Intel® Core™ Processor Family',
         'QuadCore Intel® Core™ i5-8250U (Kaby Lake-U Refresh)',
@@ -882,14 +914,14 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i5-8250U, i5-8350U',
         'Intel® Core™ Processor i3-7020U, i3-8130U',
     )),
-    (0x8e, 11): ('WHL-U', 'Whiskey Lake U', (
+    (0x8e, 11): ('WHL-U/', 'Whiskey Lake U (Stepping W0)', (
         '8th Generation Intel® Core™ Processors',
         'Intel® Core™ Processor i7-8565U',
         'Intel® Core™ Processor i5-8265U',
         'Intel® Core™ Processor i3-8145U',
         'Intel® Core™ Processor 4205U, 5405U',
     )),
-    (0x8e, 12): ('WHL-U', 'Whiskey Lake U, Amber Lake Y', (
+    (0x8e, 12): ('WHL-U/AML-Y42/CML-Y42', 'Whiskey Lake U, Amber Lake Y (Stepping V0)', (
         '8th Generation Intel® Core™ Processors',
         '10th Generation Intel® Core™ Processor Family',
         'Intel® Pentium® Gold Processor Series',
@@ -909,8 +941,17 @@ INTEL_FAM6_MODELS = {
     # FIXME: maybe (0x9e, 13) from
     # https://software.intel.com/security-software-guidance/insights/processors-affected-l1d-eviction-sampling
     (0x8e, 13): ('WHL', 'Whiskey Lake (Desktop)'),
+    (0x96, 1): ('EHL', 'Elkhart Lake (Stepping B1)', (
+        'Pentium J6426/N6415',
+        'Celeron J6412/J6413/N6210/N6211',
+        'Atom x6000E',
+    )),
+    (0x9c, 0): ('JSL', 'Jasper Lake (Stepping A0/A1)', (
+        'Pentium N6000/N6005',
+        'Celeron N4500/N4505/N5100/N5105',
+    )),
     (0x9d, -1): ('ICL-NNPI', 'Ice Lake Neural Network Processor for Deep Learning Inference'),
-    (0x9e, 9): ('KBL', 'Kaby Lake Desktop (Kaby Lake H/S/X/G, Xeon E3), Greenlow', (
+    (0x9e, 9): ('KBL-G/H/S/E3', 'Kaby Lake Desktop (Kaby Lake H/S/X/G, Xeon E3), Greenlow (Stepping B0)', (
         '7th Generation Intel® Core™ Processor Family',
         '8th Generation Intel® Core™ Processor Family',
         'Intel® Core™ X-series Processors',
@@ -934,7 +975,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Xeon® Processor v6 E3-1220, E3-1225, E3-1230, E3-1240, E3-1245, E3-1270, E3-1275, E3-1280, E3-1501L, E3-1501M, E3-1505L, E3-1505M, E3-1535M',
         'Intel® Xeon® Processor v6 E3-1535M, E3-1505M, E3-1505L, E3-1501L, E3-1501M, E3-1285, E3-1280, E3-1275, E3-1270, E3-1245, E3-1240, E3-1230, E3-1225, E3-1220',
     )),
-    (0x9e, 10): ('KBL', 'Kaby Lake Desktop, Coffee Lake H (6+2), Coffee Lake S (6+2), Coffee Lake S (6+2) Xeon E3, Coffee Lake S (4+2) Xeon E, Coffee Lake S (6+2) x/KBP', (
+    (0x9e, 10): ('KBL/CFL-H/S/E3', 'Kaby Lake Desktop, Coffee Lake H (6+2), Coffee Lake S (6+2), Coffee Lake S (6+2) Xeon E3, Coffee Lake S (4+2) Xeon E, Coffee Lake S (6+2) x/KBP (Stepping U0)', (
         '8th Generation Intel® Core™ Processor Family',
         'Intel® Xeon® Processor E Family',
         'HexaCore Intel® Core™ i7-8700K, 4600 MHz (46 x 100) (Coffee Lake-S)',
@@ -947,7 +988,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Xeon® Processor E-2186G, E-2176G, E-2146G, E-2136, E-2126G',
         'Intel® Xeon® Processor E-2174G, E-2144G, E-2134, E-2124, E-2124G',
     )),
-    (0x9e, 11): ('KBL', 'Kaby Lake Desktop (Coffee Lake-S), Coffee Lake-S (4+2) + KBL PCH, Coffee Lake-S (4+2) Xeon E3', (
+    (0x9e, 11): ('KBL/CFL-S', 'Kaby Lake Desktop (Coffee Lake-S), Coffee Lake-S (4+2) + KBL PCH, Coffee Lake-S (4+2) Xeon E3 (Stepping B0)', (
         '8th Generation Intel® Core™ Desktop Processor Family',
         '8th Generation Intel® Core™ Processor Family',
         'Intel® Pentium® Gold Processor Series',
@@ -957,7 +998,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Pentium® Gold G5400, G5400T, G5400T, G5420, G5420T, G5420T, G5500, G5500T, G5600',
         'Intel® Celeron® Processor G4900, G4900T, G4920',
     )),
-    (0x9e, 12): ('CFL', 'Coffee Lake H (8+2), Coffee Lake S (8+2)', (
+    (0x9e, 12): ('CFL-H/S', 'Coffee Lake H (8+2), Coffee Lake S (8+2) (Stepping P0)', (
         '9th Generation Intel® Core™ Processor Family',
         'Intel® Core™ Processor i9-9980HK, 9880H',
         'Intel® Core™ Processor i7-9850H, 9750HF',
@@ -966,7 +1007,7 @@ INTEL_FAM6_MODELS = {
         'Intel® Core™ Processor i7-9700K, i7-9700KF',
         'Intel® Core™ Processor i5-9600K, i5-9600KF, i5-9400, i5-9400F',
     )),
-    (0x9e, 13): ('CFL', 'Coffee Lake H (8+2), Coffee Lake S (8+2)', (
+    (0x9e, 13): ('CFL-H', 'Coffee Lake H (8+2), Coffee Lake S (8+2) (Stepping R0)', (
         '9th Generation Intel® Core™ Processor Family',
         'Intel® Xeon® Processor E Family',
         'Intel® Core™ Processor i9-9980HK, i9-9880H',
@@ -979,21 +1020,24 @@ INTEL_FAM6_MODELS = {
     )),
     (0xa5, 0): ('CML', 'Comet Lake H S 6 2 P0'),
     (0xa5, 1): ('CML', 'Comet Lake H S 10 2 P0'),
-    (0xa5, 2): (None, '?', (
+    (0xa5, 2): ('CML-H', 'Comet Lake H (Stepping R1)', (
         '10th Generation Intel® Core™ Processor Family',
     )),
-    (0xa5, 3): (None, '?', (
+    (0xa5, 3): ('CML-S62', 'Comet Lake (Stepping G1)', (
         '10th Generation Intel® Core™ Processor Family',
     )),
-    (0xa5, 5): (None, '?', (
+    (0xa5, 5): ('CML-S102', 'Comet Lake (Stepping Q0)', (
         '10th Generation Intel® Core™ Processor Family',
     )),
-    (0xa6, 0): ('CML', 'Comet Lake U A0', (
+    (0xa6, 0): ('CML-U62-V1', 'Comet Lake U A0 (Stepping A0)', (
         '10th Generation Intel® Core™ Processor Family',
         'Intel® Core™ Processor i7-10710U',
     )),
-    (0xa6, 1): ('CML', 'Comet Lake U K0 S0', (
+    (0xa6, 1): ('CML-U62-V2', 'Comet Lake U K0 S0 (Stepping K1)', (
         '10th Generation Intel® Core™ Processor Family',
+    )),
+    (0xa7, 1): ('RKL-S', 'Rocket Lake (Stepping B0)', (
+        '11th Generation Intel® Core™ Processor Family',
     )),
 }
 INTEL_FAM15_MODELS = {
@@ -1527,6 +1571,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000306f2, 0x0043, '2019-03-01'),
     (0x000306f2, 0x0044, '2020-05-27'),
     (0x000306f2, 0x0046, '2021-01-27'),
+    (0x000306f2, 0x0049, '2021-08-11'),
     (0x000306f2, 0x0f07, '2014-07-07'),
     (0x000306f3, 0x000d, '2016-02-11'),
     (0x000306f4, 0x0009, '2015-07-17'),
@@ -1540,6 +1585,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000306f4, 0x0014, '2019-03-01'),
     (0x000306f4, 0x0016, '2019-06-17'),
     (0x000306f4, 0x0019, '2021-02-05'),
+    (0x000306f4, 0x001a, '2021-05-24'),
     (0x00040651, 0x0015, '2013-07-02'),
     (0x00040651, 0x0016, '2013-08-08'),
     (0x00040651, 0x0017, '2013-09-14'),
@@ -1598,6 +1644,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000406e3, 0x00dc, '2020-04-27'),
     (0x000406e3, 0x00e2, '2020-07-14'),
     (0x000406e3, 0x00ea, '2021-01-25'),
+    (0x000406e3, 0x00ec, '2021-04-28'),
     (0x000406e8, 0x0026, '2016-04-14'),
     (0x000406f0, 0x0014, '2015-07-02'),
     (0x000406f1, 0xb00001c, '2016-05-20'),
@@ -1610,12 +1657,14 @@ INTEL_UCODE_VERSIONS = (
     (0x000406f1, 0xb000036, '2019-03-02'),
     (0x000406f1, 0xb000038, '2019-06-18'),
     (0x000406f1, 0xb00003e, '2021-02-06'),
+    (0x000406f1, 0xb000040, '2021-05-19'),
     (0x00050653, 0x100013e, '2017-11-21'),
     (0x00050653, 0x1000140, '2018-01-29'),
     (0x00050653, 0x1000151, '2019-09-09'),
     (0x00050653, 0x1000157, '2020-04-24'),
     (0x00050653, 0x1000159, '2020-06-18'),
     (0x00050653, 0x100015b, '2021-03-08'),
+    (0x00050653, 0x100015c, '2021-05-26'),
     (0x00050654, 0x2000022, '2017-06-01'),
     (0x00050654, 0x2000035, '2017-10-17'),
     (0x00050654, 0x200003c, '2017-12-08'),
@@ -1629,12 +1678,14 @@ INTEL_UCODE_VERSIONS = (
     (0x00050654, 0x2006a08, '2020-06-16'),
     (0x00050654, 0x2006a0a, '2020-12-31'),
     (0x00050654, 0x2006b06, '2021-03-08'),
+    (0x00050654, 0x2006c0a, '2021-06-16'),
     (0x00050655, 0x3000010, '2018-11-16'),
     (0x00050656, 0x400002c, '2019-09-05'),
     (0x00050656, 0x4002f01, '2020-04-23'),
     (0x00050656, 0x4003003, '2020-06-18'),
     (0x00050656, 0x4003006, '2020-12-31'),
     (0x00050656, 0x4003102, '2021-03-08'),
+    (0x00050656, 0x400320a, '2021-08-13'),
     (0x00050657, 0x5000021, '2019-02-27'),
     (0x00050657, 0x500002b, '2019-08-12'),
     (0x00050657, 0x500002c, '2019-09-05'),
@@ -1642,8 +1693,10 @@ INTEL_UCODE_VERSIONS = (
     (0x00050657, 0x5003003, '2020-06-18'),
     (0x00050657, 0x5003006, '2020-12-31'),
     (0x00050657, 0x5003102, '2021-03-08'),
+    (0x00050657, 0x500320a, '2021-08-13'),
     (0x0005065b, 0x700001e, '2020-08-20'),
     (0x0005065b, 0x7002302, '2021-04-23'),
+    (0x0005065b, 0x7002402, '2021-06-04'),
     (0x00050662, 0x000f, '2015-12-12'),
     (0x00050662, 0x0014, '2017-12-16'),
     (0x00050662, 0x0015, '2018-01-22'),
@@ -1659,6 +1712,7 @@ INTEL_UCODE_VERSIONS = (
     (0x00050663, 0x7000017, '2019-03-23'),
     (0x00050663, 0x7000019, '2019-06-17'),
     (0x00050663, 0x700001b, '2021-02-04'),
+    (0x00050663, 0x700001c, '2021-06-12'),
     (0x00050664, 0xf00000a, '2016-06-02'),
     (0x00050664, 0xf00000c, '2017-02-15'),
     (0x00050664, 0xf000011, '2018-01-22'),
@@ -1667,12 +1721,14 @@ INTEL_UCODE_VERSIONS = (
     (0x00050664, 0xf000015, '2019-03-23'),
     (0x00050664, 0xf000017, '2019-06-17'),
     (0x00050664, 0xf000019, '2021-02-04'),
+    (0x00050664, 0xf00001a, '2021-06-12'),
     (0x00050665, 0xe000009, '2018-01-22'),
     (0x00050665, 0xe00000a, '2018-04-20'),
     (0x00050665, 0xe00000c, '2018-11-17'),
     (0x00050665, 0xe00000d, '2019-03-23'),
     (0x00050665, 0xe00000f, '2019-06-17'),
     (0x00050665, 0xe000012, '2021-02-04'),
+    (0x00050665, 0xe000014, '2021-09-18'),
     (0x00050671, 0x01b6, '2018-01-08'),
     (0x000506a0, 0x0038, '2015-01-12'),
     (0x000506c2, 0x000e, '2017-06-06'),
@@ -1685,6 +1741,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000506c9, 0x0038, '2019-01-15'),
     (0x000506c9, 0x0040, '2020-02-27'),
     (0x000506c9, 0x0044, '2020-10-23'),
+    (0x000506c9, 0x0046, '2021-05-10'),
     (0x000506ca, 0x0008, '2017-11-22'),
     (0x000506ca, 0x000c, '2018-05-11'),
     (0x000506ca, 0x0010, '2018-09-20'),
@@ -1692,6 +1749,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000506ca, 0x001e, '2020-02-27'),
     (0x000506ca, 0x0020, '2020-10-23'),
     (0x000506ca, 0x0022, '2021-06-22'),
+    (0x000506ca, 0x0024, '2021-05-10'),
     (0x000506d1, 0x0101, '2014-11-20'),
     (0x000506d1, 0x0102, '2015-06-05'),
     (0x000506e0, 0x0018, '2014-11-19'),
@@ -1708,16 +1766,19 @@ INTEL_UCODE_VERSIONS = (
     (0x000506e3, 0x00dc, '2020-04-27'),
     (0x000506e3, 0x00e2, '2020-07-14'),
     (0x000506e3, 0x00ea, '2021-01-25'),
+    (0x000506e3, 0x00ec, '2021-04-29'),
     (0x000506e8, 0x0034, '2016-07-10'),
     (0x000506f1, 0x0020, '2017-11-22'),
     (0x000506f1, 0x0024, '2018-05-11'),
     (0x000506f1, 0x002e, '2019-03-21'),
     (0x000506f1, 0x0034, '2020-10-23'),
+    (0x000506f1, 0x0036, '2021-05-10'),
     (0x00060660, 0x000c, '2016-08-21'),
     (0x00060661, 0x000e, '2017-01-28'),
     (0x00060663, 0x002a, '2018-04-17'),
     (0x000606a5, 0xc0002f0, '2021-03-08'),
     (0x000606a6, 0xd0002a0, '2021-04-25'),
+    (0x000606a6, 0xd000331, '2021-12-03'),
     (0x000706a0, 0x0026, '2017-07-12'),
     (0x000706a1, 0x001e, '2017-10-31'),
     (0x000706a1, 0x0022, '2017-12-26'),
@@ -1727,22 +1788,29 @@ INTEL_UCODE_VERSIONS = (
     (0x000706a1, 0x0032, '2019-08-28'),
     (0x000706a1, 0x0034, '2020-06-09'),
     (0x000706a1, 0x0036, '2020-10-23'),
+    (0x000706a1, 0x0038, '2021-05-10'),
     (0x000706a8, 0x0016, '2019-08-29'),
     (0x000706a8, 0x0018, '2020-06-09'),
     (0x000706a8, 0x001a, '2020-10-23'),
+    (0x000706a8, 0x001c, '2021-05-10'),
     (0x000706e5, 0x0046, '2019-09-05'),
     (0x000706e5, 0x0078, '2020-03-12'),
     (0x000706e5, 0x00a0, '2020-07-30'),
     (0x000706e5, 0x00a6, '2020-11-01'),
+    (0x000706e5, 0x00a8, '2021-05-26'),
     (0x00080650, 0x0018, '2018-01-08'),
     (0x00080664, 0xb00000f, '2021-02-17'),
     (0x00080665, 0xb00000f, '2021-02-17'),
     (0x000806a1, 0x0028, '2020-06-26'),
     (0x000806a1, 0x002a, '2020-11-06'),
+    (0x000806a1, 0x002d, '2021-09-02'),
     (0x000806c1, 0x0068, '2020-10-02'),
     (0x000806c1, 0x0088, '2021-03-31'),
+    (0x000806c1, 0x009a, '2021-08-06'),
     (0x000806c2, 0x0016, '2021-04-07'),
+    (0x000806c2, 0x0022, '2021-07-16'),
     (0x000806d1, 0x002c, '2021-04-23'),
+    (0x000806d1, 0x003c, '2021-07-16'),
     (0x000806e9, 0x0062, '2017-04-27'),
     (0x000806e9, 0x0080, '2018-01-04'),
     (0x000806e9, 0x0084, '2018-01-21'),
@@ -1768,6 +1836,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000806ea, 0x00d6, '2020-04-27'),
     (0x000806ea, 0x00e0, '2020-06-17'),
     (0x000806ea, 0x00ea, '2021-01-06'),
+    (0x000806ea, 0x00ec, '2021-04-28'),
     (0x000806eb, 0x00a4, '2018-10-25'),
     (0x000806eb, 0x00b8, '2019-03-30'),
     (0x000806eb, 0x00c6, '2019-08-14'),
@@ -1775,6 +1844,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000806eb, 0x00d6, '2020-04-27'),
     (0x000806eb, 0x00de, '2020-06-03'),
     (0x000806eb, 0x00ea, '2021-01-05'),
+    (0x000806eb, 0x00ec, '2021-04-28'),
     (0x000806ec, 0x00b2, '2019-02-12'),
     (0x000806ec, 0x00b8, '2019-03-30'),
     (0x000806ec, 0x00c6, '2019-08-14'),
@@ -1782,8 +1852,11 @@ INTEL_UCODE_VERSIONS = (
     (0x000806ec, 0x00d6, '2020-04-23'),
     (0x000806ec, 0x00de, '2020-05-18'),
     (0x000806ec, 0x00ea, '2021-01-05'),
+    (0x000806ec, 0x00ec, '2021-04-28'),
     (0x00090661, 0x0011, '2021-02-04'),
+    (0x00090661, 0x0015, '2021-09-21'),
     (0x000906c0, 0x001d, '2021-03-23'),
+    (0x000906c0, 0x2400001f, '2021-08-09'),
     (0x000906e9, 0x005e, '2017-04-06'),
     (0x000906e9, 0x0080, '2018-01-04'),
     (0x000906e9, 0x0084, '2018-01-21'),
@@ -1795,6 +1868,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000906e9, 0x00d6, '2020-04-23'),
     (0x000906e9, 0x00de, '2020-05-26'),
     (0x000906e9, 0x00ea, '2021-01-05'),
+    (0x000906e9, 0x00ec, '2021-04-29'),
     (0x000906ea, 0x0070, '2017-08-23'),
     (0x000906ea, 0x0080, '2018-01-04'),
     (0x000906ea, 0x0084, '2018-01-21'),
@@ -1806,6 +1880,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000906ea, 0x00d6, '2020-04-27'),
     (0x000906ea, 0x00de, '2020-05-25'),
     (0x000906ea, 0x00ea, '2021-01-05'),
+    (0x000906ea, 0x00ec, '2021-04-28'),
     (0x000906eb, 0x0072, '2017-09-20'),
     (0x000906eb, 0x0080, '2018-01-04'),
     (0x000906eb, 0x0084, '2018-01-21'),
@@ -1817,6 +1892,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000906eb, 0x00d6, '2020-04-23'),
     (0x000906eb, 0x00de, '2020-05-25'),
     (0x000906eb, 0x00ea, '2021-01-05'),
+    (0x000906eb, 0x00ec, '2021-04-28'),
     (0x000906ec, 0x00a2, '2018-09-29'),
     (0x000906ec, 0x00ae, '2019-02-14'),
     (0x000906ec, 0x00c6, '2019-08-14'),
@@ -1824,6 +1900,7 @@ INTEL_UCODE_VERSIONS = (
     (0x000906ec, 0x00d6, '2020-04-27'),
     (0x000906ec, 0x00de, '2020-06-03'),
     (0x000906ec, 0x00ea, '2021-01-05'),
+    (0x000906ec, 0x00ec, '2021-04-28'),
     (0x000906ed, 0x00b0, '2019-02-04'),
     (0x000906ed, 0x00b8, '2019-03-17'),
     (0x000906ed, 0x00c6, '2019-08-14'),
@@ -1831,19 +1908,26 @@ INTEL_UCODE_VERSIONS = (
     (0x000906ed, 0x00d6, '2020-04-23'),
     (0x000906ed, 0x00de, '2020-05-24'),
     (0x000906ed, 0x00ea, '2021-01-05'),
+    (0x000906ed, 0x00ec, '2021-04-28'),
     (0x000a0652, 0x00e0, '2020-07-08'),
     (0x000a0652, 0x00ea, '2021-02-07'),
+    (0x000a0652, 0x00ec, '2021-04-28'),
     (0x000a0653, 0x00e0, '2020-07-08'),
     (0x000a0653, 0x00ea, '2021-03-08'),
+    (0x000a0653, 0x00ec, '2021-04-28'),
     (0x000a0655, 0x00e0, '2020-07-08'),
     (0x000a0655, 0x00ec, '2021-03-08'),
+    (0x000a0655, 0x00ee, '2021-04-28'),
     (0x000a0660, 0x00c6, '2019-08-27'),
     (0x000a0660, 0x00ca, '2019-10-03'),
     (0x000a0660, 0x00e0, '2020-07-08'),
     (0x000a0660, 0x00e8, '2020-12-08'),
+    (0x000a0660, 0x00ea, '2021-04-28'),
     (0x000a0661, 0x00e0, '2020-07-02'),
     (0x000a0661, 0x00ea, '2021-02-07'),
+    (0x000a0661, 0x00ec, '2021-04-29'),
     (0x000a0671, 0x0040, '2021-04-11'),
+    (0x000a0671, 0x0050, '2021-08-29'),
 )
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/include/asm/cputype.h
@@ -2016,7 +2100,22 @@ class Aarch64CPUInfo(CPUInfo):
 
 
 class X86CPUInfo(CPUInfo):
-    """Information about an x86 CPU"""
+    """Information about an x86 CPU
+
+    CPUID[EAX=0].(EBX,ECX,EDX) contains the vendor ID
+    CPUID[EAX=1].EAX contains version information (Type, Family, Model, and Stepping ID)
+        bits  0- 3 Stepping ID
+        bits  4- 7 Model
+        bits  8-11 Family ID (in practice: 6 or 0xf)
+        bits 12-13 Processor Type
+                    (in practice: 0 (Original OEM Processor)
+                    or 1 (Intel OverDrive, only found for CPUID 0x00001632))
+        bits 14-15 Reserved
+        bits 16-19 Extended Model ID
+        bits 20-27 Extended Family ID (in practice: 0)
+        bits 28-31 Reserved
+    CPUID[EAX=0x80000002,0x80000003,0x80000004] contains the Processor Brand String
+    """
     def __init__(self, vendor_id, model_name, cpuid, microcode_version=None):
         super(X86CPUInfo, self).__init__('x86')
         self.vendor_id = vendor_id
@@ -2038,10 +2137,12 @@ class X86CPUInfo(CPUInfo):
 
     @property
     def x86_family(self):
-        return ((self.cpuid >> 8) & 0xf) + ((self.cpuid >> 20) & 0xff)
+        """Returns the family identifier, encoded in bits 8-11 and 20-27"""
+        return ((self.cpuid >> 8) & 0xf) + ((self.cpuid >> 16) & 0xff0)
 
     @property
     def x86_model(self):
+        """Returns the model number, encoded in bits 4-7 and 16-19"""
         return ((self.cpuid >> 4) & 0xf) + ((self.cpuid >> 12) & 0xf0)
 
     @property
