@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        pip install pycryptodome
+        pip install pycryptodomex
 
     - uses: actions/checkout@v2
 
