@@ -97,16 +97,16 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (GCC) 11.2.1 20211203 (Red Hat 11.2.1-7)
-#       clang: clang version 13.0.0 (Fedora 13.0.0-5.fc36)
-#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 11.2.1 20211019 (Fedora MinGW 11.2.1-4.fc36)
-#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 11.2.1 20211019 (Fedora MinGW 11.2.1-4.fc36)
-#       wine: wine-6.21 (Staging)
-#       Linux kernel: 5.16.0-0.rc5.20211216git2b14864acbaa.37.fc36.x86_64
-#       python: Python 3.10.1
-#       python3: Python 3.10.1
-#       javac: javac 11.0.14-ea
-#       java: openjdk 11.0.14-ea 2022-01-18
-#       rustc: rustc 1.57.0 (Fedora 1.57.0-1.fc36)
-#       cargo: cargo 1.57.0
-#       coqc: The Coq Proof Assistant, version 8.14.1 compiled with OCaml 4.13.1
+#       gcc: gcc (GCC) 12.0.1 20220308 (Red Hat 12.0.1-0)
+#       clang: clang version 13.0.1 (Fedora 13.0.1-1.fc36)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 11.2.1 20211019 (Fedora MinGW 11.2.1-5.fc36)
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 11.2.1 20211019 (Fedora MinGW 11.2.1-5.fc36)
+#       wine: wine-7.2 (Staging)
+#       Linux kernel: 5.17.0-300.fc36.x86_64
+#       python: Python 3.10.4
+#       python3: Python 3.10.4
+#       javac: javac 11.0.14.1
+#       java: openjdk 11.0.14.1 2022-02-08
+#       rustc: rustc 1.59.0 (Fedora 1.59.0-2.fc36)
+#       cargo: cargo 1.59.0
+#       coqc: The Coq Proof Assistant, version 8.15.1 compiled with OCaml 4.13.1
