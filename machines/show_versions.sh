@@ -36,5 +36,8 @@ show_version cargo "$(cargo --version 2>/dev/null)"
 show_version coqc "$(coqc --version 2>/dev/null | xargs)"
 show_version frama-c "$(frama-c --version 2>/dev/null)"
 
+# OpenSSL
+show_version openssl "$(openssl version 2>/dev/null)"
+
 # LaTeX
 show_version latexmk "$(latexmk --version 2>/dev/null | xargs)"
