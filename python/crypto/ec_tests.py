@@ -50,6 +50,7 @@ import subprocess
 import sys
 import tempfile
 
+import Cryptodome.Hash.RIPEMD160
 import Cryptodome.Util.asn1
 
 
@@ -390,7 +391,7 @@ class ECPoint(object):
         """
         pubkey_bytes = self.bytes_compressed() if compress else self.bytes_uncompressed()
         pubkey_sha256 = hashlib.sha256(pubkey_bytes).digest()
-        return hashlib.new('ripemd160', pubkey_sha256).digest()
+        return Cryptodome.Hash.RIPEMD160.new(pubkey_sha256).digest()
 
     def bitcoin_p2sh_p2wpkh(self, compress=True):
         """Bitcoin P2SH hash of P2WPKH script
@@ -404,7 +405,7 @@ class ECPoint(object):
         """
         pubkey_hash = self.bitcoin_hash160(compress=compress)
         p2wpkh_sha256 = hashlib.sha256(b'\x00\x14' + pubkey_hash).digest()
-        return hashlib.new('ripemd160', p2wpkh_sha256).digest()
+        return Cryptodome.Hash.RIPEMD160.new(p2wpkh_sha256).digest()
 
 
 # Inifinity on all curves
