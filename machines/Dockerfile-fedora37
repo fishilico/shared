@@ -103,6 +103,7 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 11.2.1 20211019 (Fedora MinGW 11.2.1-7.fc37)
 #       wine: wine-7.3 (Staging)
 #       Linux kernel: 5.18.0-0.rc0.20220325git34af78c4e616.7.fc37.x86_64
+#       /lib/ld-linux.so.2: ld.so (GNU libc) development release version 2.35.9000.
 #       python: Python 3.10.4
 #       python3: Python 3.10.4
 #       javac: javac 11.0.14.1

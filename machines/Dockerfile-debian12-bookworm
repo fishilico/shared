@@ -102,6 +102,8 @@ CMD ["/run_shared_test.sh"]
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 10-win32 20220113
 #       wine: wine-6.0.3 (Debian 6.0.3~repack-1)
 #       Linux kernel: 5.16.0-5-amd64
+#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.33-7) release release version 2.33.
+#       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.2
 #       python3: Python 3.9.12
 #       javac: javac 11.0.14
 #       java: openjdk 11.0.14 2022-01-18

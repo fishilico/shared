@@ -78,6 +78,7 @@ CMD ["/run_shared_test.sh"]
 #       clang: Alpine clang version 9.0.0 (https://git.alpinelinux.org/aports f7f0d2c2b8bcd6a5843401a9a702029556492689) (based on LLVM 9.0.0)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 9.2.0
 #       Linux kernel: 5.4.143-0-lts
+#       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.1.24
 #       python3: Python 3.8.10
 #       javac: javac 11.0.5
 #       java: openjdk 11.0.5 2019-10-15
