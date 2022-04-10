@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        pip install pycryptodomex
+        pip install dnspython pycryptodomex
 
     - uses: actions/checkout@v2
 
