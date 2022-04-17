@@ -505,8 +505,10 @@ class AAAARecord(object):
 
 class DNSCache(object):
     """Handle a cache of DNS results in text files"""
-    def __init__(self, cache_dir):
+    def __init__(self, cache_dir, use_cloudflare=False, use_google=False):
         self.cache_dir = cache_dir
+        self.use_cloudflare = use_cloudflare
+        self.use_google = use_google
         # Split records whose signatures have been verified from the other ones
         self.unverified_cache = {}
         self.verified_cache = {}
@@ -590,6 +592,15 @@ class DNSCache(object):
         """Get the DNS records for the specified (domain, type), from online DNS servers"""
         resolver = dns.resolver.Resolver()
         resolver.use_edns(0, dns.flags.DO, 4096)
+        nameservers = []
+        if self.use_cloudflare:
+            # https://cloudflare-dns.com/dns/
+            nameservers += ["1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001"]
+        if self.use_google:
+            # https://developers.google.com/speed/public-dns/docs/using#addresses
+            nameservers += ["8.8.8.8", "8.8.4.4", "2001:4860:4860::8888", "2001:4860:4860::8844"]
+        if nameservers:
+            resolver.nameservers = nameservers
         rdtype = dns.rdatatype.from_text(rdtype_text)
         rdclass = dns.rdataclass.IN
 
@@ -821,6 +832,10 @@ def main(argv=None):
                         help="Update the list of TLDs")
     parser.add_argument('--all-the-tld-of-the-internet', action='store_true',
                         help="Query all the available TLDs, just for the fun of doing this!")
+    parser.add_argument('--use-cloudflare', action='store_true',
+                        help="use Cloudflare nameservers")
+    parser.add_argument('--use-google', action='store_true',
+                        help="use Google nameservers")
     args = parser.parse_args(argv)
 
     logging.basicConfig(format='[%(levelname)-5s] %(message)s',
@@ -835,7 +850,7 @@ def main(argv=None):
     if args.refresh and not HAVE_DNSPYTHON:
         parser.error("--refresh requires dnspython to be installed.")
 
-    dns_cache = DNSCache(DNS_CACHE_PATH)
+    dns_cache = DNSCache(DNS_CACHE_PATH, use_cloudflare=args.use_cloudflare, use_google=args.use_google)
 
     # Verify TLDs if no domain has been provided, except if a special option was given
     if args.all_the_tld_of_the_internet:

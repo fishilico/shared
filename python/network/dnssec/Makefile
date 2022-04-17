@@ -30,7 +30,7 @@ test: all
 	@$(call run-test-progs,$(TEST_BINARIES))
 
 sync-inet:
-	$(PYTHON) verify_dnssec.py --update-tld-list --refresh
+	$(PYTHON) verify_dnssec.py --update-tld-list --refresh --use-cloudflare --use-google
 
 .PHONY: all clean lint list-nobuild test sync-inet
 
