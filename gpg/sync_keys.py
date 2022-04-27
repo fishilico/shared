@@ -246,26 +246,28 @@ def sync_keys(keys_path: Path) -> None:
                 continue
 
             current_key_id, email = line.split(" ", 1)
-            email = email.lower()
-
-            # Download the key using WKD
-            wkd_url = get_wkd_advanced_url(email)
             raw_key = None
-            try:
-                with urllib.request.urlopen(wkd_url) as response:
-                    raw_key = response.read()
-            except urllib.error.URLError:
-                pass
+            wkd_url = None
+            if "@" in email:
+                email = email.lower()
 
-            # Try the direct method when the advanced one failed
-            if raw_key is None:
-                wkd_url = get_wkd_direct_url(email)
-                raw_key = None
+                # Download the key using WKD
+                wkd_url = get_wkd_advanced_url(email)
                 try:
                     with urllib.request.urlopen(wkd_url) as response:
                         raw_key = response.read()
                 except urllib.error.URLError:
                     pass
+
+                # Try the direct method when the advanced one failed
+                if raw_key is None:
+                    wkd_url = get_wkd_direct_url(email)
+                    raw_key = None
+                    try:
+                        with urllib.request.urlopen(wkd_url) as response:
+                            raw_key = response.read()
+                    except urllib.error.URLError:
+                        pass
 
             # Try using GnuPG directly
             if raw_key is None:
@@ -275,7 +277,7 @@ def sync_keys(keys_path: Path) -> None:
             # Save the key using the key ID
             key_id = get_pgp_key_id(raw_key)
             file_name = email.replace("@", "_") + "_" + key_id + ".asc"
-            assert re.match(r"^[a-z][-a-zA-Z0-9._]+$", file_name), f"Unexpected characters in file name {file_name!r}"
+            assert re.match(r"^[A-Za-z][-0-9A-Za-z._]+$", file_name), f"Unexpected characters in file name {file_name!r}"
             print(f"Saving key for {email!r} in {'all_keys/' + file_name!r}")
             b64_key = base64.b64encode(raw_key).decode("ascii")
             with (ALL_KEYS_PATH / file_name).open("w") as fkey:
