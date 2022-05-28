@@ -98,6 +98,7 @@ __extension__ static const char* cpuidstr_6_eax[32] = {
     [9] = "hwp_act_window",
     [10] = "hwp_epp",
     [11] = "hwp_pkg_req",
+    [19] = "hfi",
 };
 
 /**
@@ -181,6 +182,7 @@ __extension__ static const char* cpuidstr_7_edx[32] = {
     [16] = "tsxldtrk",
     [18] = "pconfig",
     [19] = "arch_lbr",
+    [20] = "ibt",
     [22] = "amx_bf16",
     [23] = "avx512_fp16",
     [24] = "amx_tile",
