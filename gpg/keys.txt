@@ -5,12 +5,12 @@
 0x7F2D434B9741E8AC pierre@archlinux.de
 
 # Core utils, https://www.gnu.org/software/coreutils/
-0xDF6FD971306037D9 p@draigbrady.com
+0xDF6FD971306037D9 p@draigbrady.com https://github.com/pixelb.gpg
 
 # Debian, https://www.debian.org/CD/verify
-0x988021A964E6EA7D debian-cd@lists.debian.org
-0xDA87E80D6294BE9B debian-cd@lists.debian.org
-0x42468F4009EA8AC3 debian-cd@lists.debian.org
+0x988021A964E6EA7D debian-cd@lists.debian.org https://www.debian.org/CD/key-988021A964E6EA7D.txt
+0xDA87E80D6294BE9B debian-cd@lists.debian.org https://www.debian.org/CD/key-DA87E80D6294BE9B.txt
+0x42468F4009EA8AC3 debian-cd@lists.debian.org https://www.debian.org/CD/key-42468F4009EA8AC3.txt
 
 # D-Bus, https://www.freedesktop.org/wiki/Software/dbus/
 0x4DE8FF2A63C7CC90 simon.mcvittie@collabora.co.uk
@@ -39,7 +39,7 @@
 
 # GitHub (web-flow commit signing)
 # https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification
-0x4AEE18F83AFDEB23 noreply@github.com
+0x4AEE18F83AFDEB23 noreply@github.com https://github.com/web-flow.gpg
 
 # Glibc, https://www.gnu.org/software/libc/
 0x16792B4EA25340F8 carlos@redhat.com
@@ -48,7 +48,7 @@
 0x7721F63BD38B4796 linux-packages-keymaster@google.com
 
 # Iproute2, https://wiki.linuxfoundation.org/networking/iproute2
-0x80A77F6095CDE47E stephen@networkplumber.org
+0x80A77F6095CDE47E stephen@networkplumber.org https://github.com/shemminger.gpg
 
 # Kali, https://www.kali.org/docs/introduction/download-images-securely/
 0xED444FF07D8D0BF6 devel@kali.org
@@ -64,11 +64,11 @@
 0xE7BFC8EC95861109 benh@debian.org
 
 # Logrotate, https://github.com/logrotate/logrotate
-0x873DB37572A37B36 kdudka@redhat.com
+0x873DB37572A37B36 kdudka@redhat.com https://github.com/kdudka.gpg
 
 # Ncurses, https://invisible-island.net/ncurses/ncurses.html
 0x702353E0F7E48EDB dickey@invisible-island.net
-0xCC2AF4472167BE03 dickey@his.com
+0xCC2AF4472167BE03 dickey@his.com https://github.com/ThomasDickey.gpg
 
 # Nftables, https://wiki.nftables.org/wiki-nftables/index.php/Main_Page
 0xD55D978A8A1420E4 coreteam@netfilter.org
@@ -95,10 +95,10 @@
 0xA9F4C021CEA470FB todd.miller@sudo.ws
 
 # Systemd, https://www.freedesktop.org/wiki/Software/systemd/
-0x327F26951A015CC4 lpoetter@redhat.com
-0xA81CEA22BC8C7E2E bluca@debian.org
-0xA0099A18E29326E1 watanabe.yu+github@gmail.com
-0xC54CA336CFEB557E zbyszek@in.waw.pl
+0x327F26951A015CC4 lpoetter@redhat.com https://github.com/poettering.gpg
+0xA81CEA22BC8C7E2E bluca@debian.org https://github.com/bluca.gpg
+0xA0099A18E29326E1 watanabe.yu+github@gmail.com https://github.com/yuwata.gpg
+0xC54CA336CFEB557E zbyszek@in.waw.pl https://github.com/keszybz.gpg
 
 # Tor project, https://support.torproject.org/tbb/ (0xEF6E286DDA85EA2A4BA7DE684E2C6E8793298290)
 0x4E2C6E8793298290 torbrowser@torproject.org

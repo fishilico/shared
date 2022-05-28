@@ -35,6 +35,7 @@ from pathlib import Path
 import re
 import subprocess
 import tempfile
+from typing import Union
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -69,6 +70,23 @@ def opgp_crc24_b64(data: bytes) -> str:
     """Computes the CRC24 used by OpenPGP Message Format, encoded in base64"""
     crc = opgp_crc24(data)
     return "=" + base64.b64encode(crc.to_bytes(3, "big")).decode("ascii")
+
+
+def unarmor_gpg(armored: Union[bytes, str]) -> bytes:
+    if isinstance(armored, str):
+        lines = armored.splitlines()
+    else:
+        lines = armored.decode("ascii").splitlines()
+    if lines[0] != "-----BEGIN PGP PUBLIC KEY BLOCK-----":
+        raise ValueError(f"unexpected first line {lines[0]!r}")
+    if lines[-1] != "-----END PGP PUBLIC KEY BLOCK-----":
+        raise ValueError(f"unexpected last line {lines[0]!r}")
+    first_empty_line = lines.index("")
+    data = base64.b64decode("".join(lines[first_empty_line + 1:-2]))
+    computed_checksum = opgp_crc24_b64(data)
+    if lines[-2] != computed_checksum:
+        raise ValueError(f"unexpected checksum {lines[-2]!r}, expected {computed_checksum}")
+    return data
 
 
 def zbase32_encode(data: bytes) -> str:
@@ -245,9 +263,14 @@ def sync_keys(keys_path: Path) -> None:
                 file_lines.append(line)
                 continue
 
-            current_key_id, email = line.split(" ", 1)
+            fields = line.split(" ")
+            if len(fields) < 2:
+                raise ValueError(f"Unexpected line: {line!r}")
+            current_key_id = fields[0]
+            email = fields[1]
             raw_key = None
             wkd_url = None
+            key_comment = None
             if "@" in email:
                 email = email.lower()
 
@@ -258,6 +281,9 @@ def sync_keys(keys_path: Path) -> None:
                         raw_key = response.read()
                 except urllib.error.URLError:
                     pass
+                else:
+                    print(f"Downloaded key for {email} from {wkd_url}")
+                    key_comment = wkd_url
 
                 # Try the direct method when the advanced one failed
                 if raw_key is None:
@@ -268,24 +294,43 @@ def sync_keys(keys_path: Path) -> None:
                             raw_key = response.read()
                     except urllib.error.URLError:
                         pass
+                    else:
+                        print(f"Downloaded key for {email} from {wkd_url}")
+                        key_comment = wkd_url
+
+            for url in fields[2:]:
+                # Check URL, and only keep the first valid key
+                with urllib.request.urlopen(url) as response:
+                    armored_key = response.read()
+                try:
+                    new_raw_key = unarmor_gpg(armored_key)
+                except ValueError as exc:
+                    raise ValueError(f"Error in {url!r}: {exc}")
+
+                if new_raw_key == b"":
+                    print(f"Downloaded empty key from {url}")
+                    continue
+                if raw_key is None:
+                    raw_key = new_raw_key
+                    key_comment = url
+                print(f"Downloaded key from {url}")
 
             # Try using GnuPG directly
             if raw_key is None:
-                wkd_url = None
                 raw_key = gpg_recv_key(current_key_id)
+                key_comment = "received using GnuPG"
 
             # Save the key using the key ID
             key_id = get_pgp_key_id(raw_key)
-            file_name = email.replace("@", "_") + "_" + key_id + ".asc"
-            assert re.match(r"^[A-Za-z][-0-9A-Za-z._]+$", file_name), f"Unexpected characters in file name {file_name!r}"
+            file_name = email.replace("@", "_").replace("+", "_") + "_" + key_id + ".asc"
+            assert re.match(
+                r"^[A-Za-z][-0-9A-Za-z._]+$", file_name
+            ), f"Unexpected characters in file name {file_name!r}"
             print(f"Saving key for {email!r} in {'all_keys/' + file_name!r}")
             b64_key = base64.b64encode(raw_key).decode("ascii")
             with (ALL_KEYS_PATH / file_name).open("w") as fkey:
                 print("-----BEGIN PGP PUBLIC KEY BLOCK-----", file=fkey)
-                if wkd_url:
-                    print(f"Comment: {wkd_url}", file=fkey)
-                else:
-                    print("Comment: received using GnuPG", file=fkey)
+                print(f"Comment: {key_comment}", file=fkey)
                 print("", file=fkey)
                 for offset in range(0, len(b64_key), 64):
                     print(b64_key[offset:offset + 64], file=fkey)
@@ -293,7 +338,10 @@ def sync_keys(keys_path: Path) -> None:
                 print("-----END PGP PUBLIC KEY BLOCK-----", file=fkey)
 
             # Write the key ID in the file
-            file_lines.append(f"0x{key_id} {email}")
+            new_line = f"0x{key_id} {email}"
+            if len(fields) > 2:
+                new_line += " " + " ".join(fields[2:])
+            file_lines.append(new_line)
 
     # Refresh the file
     with keys_path.open("w") as fout:
