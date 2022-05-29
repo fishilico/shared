@@ -17,6 +17,7 @@ all:
 
 clean:
 	$(CLEAN_CMD)
+	$(RM) ./dns_cache/DNS_*.RRSIG_cache.txt
 
 lint:
 	$(FLAKE8) $(FLAKE8_PARAMS) *.py
