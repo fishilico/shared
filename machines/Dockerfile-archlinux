@@ -36,14 +36,13 @@ RUN \
         python-setuptools \
         python-z3 \
         python2 \
-        python2-numpy \
         python2-setuptools \
         rust \
         sagemath \
         sdl2 \
         which \
         wine && \
-    archlinux-java set java-17-openjdk && \
+    archlinux-java set java-18-openjdk && \
     (pacman --noconfirm -Sc ; rm -rf /var/cache/pacman/pkg/* )
 
 WORKDIR /shared
@@ -89,19 +88,19 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (GCC) 11.2.0
+#       gcc: gcc (GCC) 12.1.0
 #       clang: clang version 13.0.1
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 11.2.0
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 11.2.0
-#       wine: wine-7.5
-#       Linux kernel: 5.16.16-arch1-1
+#       wine: wine-7.7
+#       Linux kernel: 5.17.9-arch1-1
 #       /lib/ld-linux.so.2: ld.so (GNU libc) stable release version 2.35.
-#       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.2
-#       python: Python 3.10.3
-#       python3: Python 3.10.3
-#       javac: javac 17.0.3
-#       java: openjdk 17.0.3 2022-04-19
-#       rustc: rustc 1.59.0 (Arch Linux rust 1:1.59.0-1)
-#       cargo: cargo 1.59.0
+#       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.3
+#       python: Python 3.10.4
+#       python3: Python 3.10.4
+#       javac: javac 18.0.1.1
+#       java: openjdk 18.0.1.1 2022-04-22
+#       rustc: rustc 1.61.0 (Arch Linux rust 1:1.61.0-1)
+#       cargo: cargo 1.61.0
 #       coqc: The Coq Proof Assistant, version 8.15.0 compiled with OCaml 4.13.1
-#       openssl: OpenSSL 1.1.1n  15 Mar 2022
+#       openssl: OpenSSL 1.1.1o  3 May 2022
