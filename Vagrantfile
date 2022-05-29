@@ -9,13 +9,13 @@
 #    script -c "echo '/vagrant/machines/docker_test_all.sh' | vagrant ssh" dockers.log
 #    ./machines/update_list_nobuild_from_log.py dockers.log
 
-# In order to carry all possible Docker environments, at least 180 GB of storage
+# In order to carry all possible Docker environments, at least 200 GB of storage
 # is needed in the virtual machine. To expand a disk of a VM created using
 # packer-arch and using libvirt, perform the following steps:
 # * On the host, expand the QCow2 disk file:
 #
 #    cd /var/lib/libvirt/images
-#    qemu-img resize shared_default.img +140G
+#    qemu-img resize shared_default.img +160G
 #    qemu-img info shared_default.img |grep 'virtual size:'
 #
 # * Power on the VM.
