@@ -98,6 +98,15 @@ ifeq ($(HAVE_WINE),y)
 		-e '^VERSION="20.04 LTS (Focal Fossa)"$$' \
 		-e '^NAME="Arch Linux"$$' \
 		/etc/os-release)
+	# On Fedora 37, wine-7.9 is buggy when doing its first configuration:
+	#     0094:fixme:imm:ImeSetActiveContext (0000000000346DA0, 1): stub
+	#     0094:fixme:imm:ImmReleaseContext (000000000001008C, 0000000000346DA0): stub
+	#     0024:err:environ:run_wineboot boot event wait timed out
+	#     wine: could not load kernel32.dll, status c0000135
+	# Disable it instead
+	ifeq ($(call can-run,grep -e '^CPE_NAME="cpe:/o:fedoraproject:fedora:37"$$' /etc/os-release),y)
+		RUN_TEST_PREFIX := :
+	endif
 else ifneq ($(OS), Windows_NT)
 	# Do not run anything on a non-Windows system without wine
 	RUN_TEST_PREFIX := :
