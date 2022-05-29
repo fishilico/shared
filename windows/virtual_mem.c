@@ -119,7 +119,20 @@ static LPCVOID get_stack_pointer(void)
 #ifdef _NT_TIB_DEFINED
     /* Check with TEB */
     {
+        /* gcc 12 reports a strange error when using NtCurrentTeb():
+         * /usr/x86_64-w64-mingw32/sys-root/mingw/include/psdk_inc/intrin-impl.h:838:1:
+         * error: array subscript 0 is outside array bounds of 'long long unsigned int[0]' [-Werror=array-bounds]
+         *   838 | __buildreadseg(__readgsqword, unsigned __int64, "gs", "q")
+         *       | ^~~~~~~~~~~~~~
+         */
+#if __GNUC__ == 12
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Warray-bounds"
+#endif
         const NT_TIB *pTib = (PNT_TIB)NtCurrentTeb();
+#if __GNUC__ == 12
+#    pragma GCC diagnostic pop
+#endif
         if (pTib->StackLimit < pTib->StackBase) {
             /* Stack grows down from base to limit */
             if (pStack < pTib->StackLimit || pStack > pTib->StackBase) {
@@ -247,7 +260,20 @@ int _tmain(int argc, TCHAR **argv)
     /* Gather stack, heap, Thread Environment Block and Process Environment Block */
     pStack = get_stack_pointer();
     pHeap = HeapAlloc(GetProcessHeap(), 0, 1);
+    /* gcc 12 reports a strange error when using NtCurrentTeb():
+     * /usr/x86_64-w64-mingw32/sys-root/mingw/include/psdk_inc/intrin-impl.h:838:1:
+     * error: array subscript 0 is outside array bounds of 'long long unsigned int[0]' [-Werror=array-bounds]
+     *   838 | __buildreadseg(__readgsqword, unsigned __int64, "gs", "q")
+     *       | ^~~~~~~~~~~~~~
+     */
+#if __GNUC__ == 12
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Warray-bounds"
+#endif
     pTeb = NtCurrentTeb();
+#if __GNUC__ == 12
+#    pragma GCC diagnostic pop
+#endif
     pPeb = get_peb();
 
     for (i = 1; i < argc; i++) {

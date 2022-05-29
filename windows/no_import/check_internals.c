@@ -101,8 +101,22 @@ int _tmain(void)
     dwStatus = _NtQueryInformationProcess(hProcess, ProcessBasicInformation, &pbi, sizeNeeded, &sizeNeeded);
     assert(dwStatus == 0);
 
-    /* Directly use internal structures */
+    /* gcc 12 reports a strange error when using NtCurrentTeb():
+     * /usr/x86_64-w64-mingw32/sys-root/mingw/include/psdk_inc/intrin-impl.h:838:1:
+     * error: array subscript 0 is outside array bounds of 'long long unsigned int[0]' [-Werror=array-bounds]
+     *   838 | __buildreadseg(__readgsqword, unsigned __int64, "gs", "q")
+     *       | ^~~~~~~~~~~~~~
+     */
+#if __GNUC__ == 12
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Warray-bounds"
+#endif
     pTeb = NtCurrentTeb();
+#if __GNUC__ == 12
+#    pragma GCC diagnostic pop
+#endif
+
+    /* Directly use internal structures */
     pTeb2 = _NtCurrentTeb();
     if (pTeb != pTeb2) {
         printf("Invalid NtCurrentTeb implementation. Windows API gives %p and internal structures %p.\n",

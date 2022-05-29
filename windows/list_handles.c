@@ -290,6 +290,17 @@ int _tmain(void)
     hStderr = (UINT_PTR)GetStdHandle(STD_ERROR_HANDLE);
     hwndActive = (UINT_PTR)GetActiveWindow();
 
+    /* gcc 12 reports a strange error when using NtCurrentTeb():
+     * /usr/x86_64-w64-mingw32/sys-root/mingw/include/psdk_inc/intrin-impl.h:838:1:
+     * error: array subscript 0 is outside array bounds of 'long long unsigned int[0]' [-Werror=array-bounds]
+     *   838 | __buildreadseg(__readgsqword, unsigned __int64, "gs", "q")
+     *       | ^~~~~~~~~~~~~~
+     */
+#if __GNUC__ == 12
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Warray-bounds"
+#endif
+
     /* Retrieve the PEB (Process Environment Block), using the TEB (Thread Environment Block).
      * Unfortunately, MinGW-w64 did not include TEB::ProcessEnvironmentBlock before
      * version 6 and this commit from 2018-07-06:
@@ -302,6 +313,9 @@ int _tmain(void)
     ProcessEnvironmentBlock = *(PEB **)((BYTE *)NtCurrentTeb() + 0x30);
 #else
 #    warning Unsupported architecture
+#endif
+#if __GNUC__ == 12
+#    pragma GCC diagnostic pop
 #endif
     pbUserProcParams = (BYTE *)ProcessEnvironmentBlock->ProcessParameters;
 
