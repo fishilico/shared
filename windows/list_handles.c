@@ -187,19 +187,31 @@ static void print_access_mask(ULONG ulAccessMask)
     assert(0x20006 == KEY_WRITE);
     assert(0x20008 == TOKEN_READ);
     assert(0x20019 == KEY_READ);
+    assert(0x2001f == (KEY_WRITE | KEY_READ));
     assert(0x200e0 == TOKEN_WRITE);
     assert(0xf0000 == STANDARD_RIGHTS_REQUIRED);
     assert(0xf0001 == (STANDARD_RIGHTS_REQUIRED | 1));
+    assert(0xf0003 == SESSION_ALL_ACCESS);
     assert(0xf0007 == (STANDARD_RIGHTS_REQUIRED | 7));
+    assert(0xf000d == (STANDARD_RIGHTS_REQUIRED | 0xd));
+    assert(0xf001f == SECTION_ALL_ACCESS);
     assert(0xf003f == KEY_ALL_ACCESS);
+    assert(0xf003f == TRANSACTIONMANAGER_ALL_ACCESS);
     assert(0xf00ff == TOKEN_ALL_ACCESS_P);
     assert(0xf01ff == TOKEN_ALL_ACCESS);
     assert(0x100000 == SYNCHRONIZE);
+    assert(0x100018 == (SYNCHRONIZE | FILE_WRITE_EA | FILE_READ_EA));
+    assert(0x10001b == (SYNCHRONIZE | FILE_WRITE_EA | FILE_READ_EA | FILE_WRITE_DATA | FILE_READ_DATA));
     assert(0x100020 == (SYNCHRONIZE | FILE_EXECUTE));
     assert(0x100020 == (SYNCHRONIZE | FILE_TRAVERSE));
+    assert(0x100183 == (SYNCHRONIZE | FILE_WRITE_ATTRIBUTES | FILE_READ_ATTRIBUTES | FILE_WRITE_DATA | FILE_READ_DATA));
+    assert(0x120001 == TRANSACTION_GENERIC_READ);
+    assert(0x120018 == TRANSACTION_GENERIC_EXECUTE);
+    assert(0x12003e == TRANSACTION_GENERIC_WRITE);
     assert(0x120089 == FILE_GENERIC_READ);
     assert(0x1200a0 == FILE_GENERIC_EXECUTE);
     assert(0x120116 == FILE_GENERIC_WRITE);
+    assert(0x120196 == (FILE_GENERIC_WRITE | FILE_READ_ATTRIBUTES));
     assert(0x12019f == (FILE_GENERIC_READ | FILE_GENERIC_WRITE));
     assert(0x1f0001 == (STANDARD_RIGHTS_ALL | 1));
     assert(0x1f0001 == MUTANT_ALL_ACCESS);
@@ -209,7 +221,9 @@ static void print_access_mask(ULONG ulAccessMask)
     assert(0x1f0003 == TIMER_ALL_ACCESS);
     assert(0x1f0003 == IO_COMPLETION_ALL_ACCESS);
     assert(0x1f001f == JOB_OBJECT_ALL_ACCESS);
+    assert(0x1f003f == TRANSACTION_ALL_ACCESS);
     assert(0x1f01ff == FILE_ALL_ACCESS);
+    assert(0x1f03ff == THREAD_ALL_ACCESS || 0x1fffff == THREAD_ALL_ACCESS);
     assert(0x1f0fff == PROCESS_ALL_ACCESS || 0x1fffff == PROCESS_ALL_ACCESS);
     if (ulAccessMask == 0) {
         _tprintf(_T("NONE"));
@@ -225,33 +239,64 @@ static void print_access_mask(ULONG ulAccessMask)
         _tprintf(_T("token_r (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x20019) {
         _tprintf(_T("key_r (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0x2001f) {
+        _tprintf(_T("key_rw (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x200e0) {
         _tprintf(_T("token_w (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0xf0000) {
         _tprintf(_T("std_req (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0xf0001) {
         _tprintf(_T("std_req|1 (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0xf0003) {
+        _tprintf(_T("session_all (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0xf0007) {
         _tprintf(_T("std_req|7 (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0xf000d) {
+        _tprintf(_T("std_req|0xd ??? (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0xf001f) {
+        _tprintf(_T("section_all (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0xf003f) {
-        _tprintf(_T("key_all (%#lx)"), ulAccessMask);
+        _tprintf(_T("key_all=txmgr_all (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0xf00ff) {
         _tprintf(_T("token_all_p (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0xf01ff) {
         _tprintf(_T("token_all (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x100000) {
         _tprintf(_T("sync (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0x100018) {
+        /* used for Console connection in Wine, since:
+         * https://source.winehq.org/git/wine.git/commitdiff/74192f7a56c319c1a9cadb67a3dd3305c965292d?hp=7364a4b07536c10331e6049bc098ca9dba9554e6
+         */
+        _tprintf(_T("sync|file_prop_rw (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0x10001b) {
+        /* used for Console reference in Wine, since:
+         * https://source.winehq.org/git/wine.git/commitdiff/7ea9f9edeed417a241d607bac282d68bdf5abd36?hp=5f0d268fffc741171fcf9006012c310128846de5
+         */
+        _tprintf(_T("sync|file_prop_rw|file_data_rw (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x100020) {
         /* used for current directory in RtlSetCurrentDirectory_U:
          * https://source.winehq.org/git/wine.git/blob/4cdb7ec8291c171176fb390f4cef1f88409a982f:/dlls/ntdll/path.c#l1023
          */
         _tprintf(_T("sync|file_x (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0x100183) {
+        /* used for standard handles in Wine, since:
+         * https://source.winehq.org/git/wine.git/commitdiff/bd54f39766e53f92909bc208e5746497c0dc5d69?hp=e7550069ded02c1f8503a15e155127e1e2c26f6a
+         */
+        _tprintf(_T("sync|file_attr_rw|file_data_rw (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0x120001) {
+        _tprintf(_T("transaction_gen_r (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0x120018) {
+        _tprintf(_T("transaction_gen_x (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0x12003e) {
+        _tprintf(_T("transaction_gen_w (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x120089) {
         _tprintf(_T("file_gen_r (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x1200a0) {
         _tprintf(_T("file_gen_x (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x120116) {
         _tprintf(_T("file_gen_w (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0x120196) {
+        _tprintf(_T("file_gen_w|file_attr_r (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x12019f) {
         _tprintf(_T("file_gen_rw (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x1f0001) {
@@ -260,6 +305,8 @@ static void print_access_mask(ULONG ulAccessMask)
         _tprintf(_T("std_all|3=evt_all=sem_all=timer_all (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x1f001f) {
         _tprintf(_T("job_all (%#lx)"), ulAccessMask);
+    } else if (ulAccessMask == 0x1f003f) {
+        _tprintf(_T("transaction_all (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x1f01ff) {
         _tprintf(_T("file_all (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x1f0fff) {
