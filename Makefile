@@ -50,7 +50,7 @@ endif
 hash_sign := \#
 ifneq ($(shell printf '$(hash_sign)if defined(__x86_64__)||defined(__i386__)\ny\n$(hash_sign)endif' |$(CC) -Werror -E - |grep '^[^$(hash_sign)]'),y)
 SUBDIRS_BLACKLIST += boot%
-else ifneq ($(call can-run,echo '__asm__(".code16");' |$(CC) -Werror -m32 -march=i386 -xc -c /dev/stdin -o /dev/null),y)
+else ifneq ($(call can-run,echo '__asm__(".code16");' |$(CC) -Werror -m32 -march=i386 -xc -c - -o /dev/null),y)
 SUBDIRS_BLACKLIST += boot/mbr%
 else ifneq ($(call ccpp-has-option,-falign-functions=0),y)
 SUBDIRS_BLACKLIST += boot/mbr/syslinux-mbr
