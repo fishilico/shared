@@ -86,12 +86,14 @@ EXAMPLES_UTF8 = [
     b'\xe2\x9a\xa0',  # U+26A0 warning sign
     b'\xef\xbb\xbf',  # U+FEFF byte order mark (BOM, zero width no-break space)
     b'\xef\xbf\xbd',  # U+FFFD replacement character
+    b'\xf0\x9f\x8e\x89',  # U+1F389 party popper (:tada:)
     b'\xf0\x9f\x98\x87',  # U+1F607 smiling face with halo (angel)
     b'\xf0\x9f\x90\xa7',  # U+1F427 penguin
     b'\xf0\x9f\x91\x8c',  # U+1F44C ok hand sign
     b'\xf0\x9f\x91\x8d',  # U+1F44D thumbs up sign
     b'\xf0\x9f\x96\x92',  # U+1F592 reversed thumbs up sign ("like")
     b'\xf0\x9f\x98\x8a',  # U+1F60A smiling face with smiling eyes
+    b'\xf0\x9f\x9a\x80',  # U+1F680 rocket
     b'\xf0\x9f\xa4\x97',  # U+1F917 hugging face
 ]
 
