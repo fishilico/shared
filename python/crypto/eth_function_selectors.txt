@@ -1,0 +1,2092 @@
+# Ethereum function selectors from:
+# - https://eips.ethereum.org/EIPS/eip-20 (for ERC20 tokens)
+# - https://eips.ethereum.org/EIPS/eip-137 (for Ethereum Domain Name Service, a.k.a. ENS)
+#   - https://etherscan.io/accounts/label/ens on Etherscan
+#     - https://etherscan.io/address/0x314159265dd8dbb310642f98f50c066173c1259b#code for ENS: Eth Name Service
+#   - https://docs.ens.domains/contract-api-reference/publicresolver for documentation
+# - https://eips.ethereum.org/EIPS/eip-165 (for Standard Interface Detection)
+# - https://eips.ethereum.org/EIPS/eip-721 (for Non-Fungible Tokens, a.k.a. NTF)
+# - https://eips.ethereum.org/EIPS/eip-777 (for ERC777 tokens)
+# - https://eips.ethereum.org/EIPS/eip-820 (for Pseudo-introspection Registry Contract ERC-820)
+#   - https://eips.ethereum.org/EIPS/eip-1820 (for updated revision ERC-1820)
+# - https://eips.ethereum.org/EIPS/eip-1155 (for Multi Token)
+
+0x2203ab56 ABI(bytes32,uint256)
+    EIP-205 ENS ABI: function ABI(bytes32 node, uint256 contentType) constant returns (uint256, bytes)
+
+# https://eips.ethereum.org/EIPS/eip-3009
+0xd9169487 CANCEL_AUTHORIZATION_TYPEHASH()
+    EIP3009: bytes32 public constant CANCEL_AUTHORIZATION_TYPEHASH
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/libraries/LibConstants.sol
+0x77e84e0d DEPOSIT_CANCEL_DELAY()
+    StarkEx: uint256 public constant DEPOSIT_CANCEL_DELAY
+
+# https://eips.ethereum.org/EIPS/eip-3009
+0x3644e515 DOMAIN_SEPARATOR()
+    EIP712Domain: bytes32 public DOMAIN_SEPARATOR
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/libraries/LibConstants.sol
+0x00717542 FREEZE_GRACE_PERIOD()
+    StarkEx: uint256 public constant FREEZE_GRACE_PERIOD
+
+# https://etherscan.io/address/0xc8c212f11f6acca77a7afeb7282deba5530eb46c
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkPerpetual-v1.0/scalable-dex/contracts/src/upgrade/StorageSlots.sol
+0x14778a83 MAIN_DISPATCHER_SAFEGUARD_SLOT()
+    StarkEx: bytes32 public constant MAIN_DISPATCHER_SAFEGUARD_SLOT
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/MainGovernance.sol
+0xc23b60ef MAIN_GOVERNANCE_INFO_TAG()
+    StarkEx: string public constant MAIN_GOVERNANCE_INFO_TAG
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x1a058bca MAXIMAL_RATIO()
+    SashimiInvestment: uint256 public constant MAXIMAL_RATIO
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/libraries/LibConstants.sol
+0xe30a5cff MAX_FORCED_ACTIONS_REQS_PER_BLOCK()
+    StarkEx: uint256 public constant MAX_FORCED_ACTIONS_REQS_PER_BLOCK
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/libraries/LibConstants.sol
+0xe6de6282 MAX_VERIFIER_COUNT()
+    StarkEx: uint256 public constant MAX_VERIFIER_COUNT
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x24b81cdf MINIMAL_RATIO()
+    SashimiInvestment: uint256 public constant MINIMAL_RATIO
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0xba9a7a56 MINIMUM_LIQUIDITY()
+    UniswapV2Pair: uint public constant MINIMUM_LIQUIDITY
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2ERC20.sol
+0x30adf81f PERMIT_TYPEHASH()
+    EIP2612: bytes32 public constant PERMIT_TYPEHASH
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/ProxyGovernance.sol
+0x56f36dbf PROXY_GOVERNANCE_TAG()
+    StarkEx: string public constant PROXY_GOVERNANCE_TAG
+
+# https://etherscan.io/address/0x2cAbD63F6f28b493f33D13E34060f0959F3570aE
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/upgrade/Proxy.sol
+0xc5ab8453 PROXY_VERSION()
+    StarkEx: string public constant PROXY_VERSION
+
+# https://eips.ethereum.org/EIPS/eip-3009
+0x7f2eecc3 RECEIVE_WITH_AUTHORIZATION_TYPEHASH()
+    EIP3009: bytes32 public constant RECEIVE_WITH_AUTHORIZATION_TYPEHASH
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x9b199073 SASHIMI()
+    SashimiLendingVaultProvider: address public SASHIMI
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x4140c93f TOTAL_RATIO_SHARES()
+    SashimiInvestment: uint256 public constant TOTAL_RATIO_SHARES
+
+# https://eips.ethereum.org/EIPS/eip-3009
+0xa0cc6a68 TRANSFER_WITH_AUTHORIZATION_TYPEHASH()
+    EIP3009: bytes32 public constant TRANSFER_WITH_AUTHORIZATION_TYPEHASH
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/libraries/LibConstants.sol
+0x993f3639 UNFREEZE_DELAY()
+    StarkEx: int256 public constant UNFREEZE_DELAY
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/Proxy.sol
+0xf7b456d0 UPGRADE_ACTIVATION_DELAY()
+    StarkEx: uint256 public constant UPGRADE_ACTIVATION_DELAY
+
+# https://etherscan.io/address/0x2cAbD63F6f28b493f33D13E34060f0959F3570aE
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/upgrade/StorageSlots.sol
+0x20cea94d UPGRADE_DELAY_SLOT()
+    StarkEx: bytes32 public constant UPGRADE_DELAY_SLOT
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/libraries/LibConstants.sol
+0xb7663112 VERIFIER_REMOVAL_DELAY()
+    StarkEx: uint256 public constant VERIFIER_REMOVAL_DELAY
+
+# https://etherscan.io/address/0x4edd62189732e9ff476aba880b48c29432a7ac9b
+0xffa1ad74 VERSION()
+    StarkEx: string public constant VERSION
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/UniswapV2Router01.sol
+0xad5c4648 WETH()
+    IUniswapV2Router01: function WETH() external pure returns (address)
+    UniswapV2Router01: address public immutable override WETH
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0xfe24cb7f _BASE_PRICE_CUMULATIVE_LAST_()
+    DODOVendingMachine: uint256 public _BASE_PRICE_CUMULATIVE_LAST_
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0x7d721504 _BASE_RESERVE_()
+    DODOVendingMachine: uint112 public _BASE_RESERVE_
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0x4a248d2a _BASE_TOKEN_()
+    DODOVendingMachine: IERC20 public _BASE_TOKEN_
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0x880a4d87 _BLOCK_TIMESTAMP_LAST_()
+    DODOVendingMachine: uint32 public _BLOCK_TIMESTAMP_LAST_
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0x2df6cb48 _IS_OPEN_TWAP_()
+    DODOVendingMachine: bool public _IS_OPEN_TWAP_ = false
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0xf811d692 _I_()
+    DODOVendingMachine: uint256 public _I_
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0xec2fd46d _K_()
+    DODOVendingMachine: uint256 public _K_
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0xab44a7a3 _LP_FEE_RATE_()
+    DODOVendingMachine: uint256 public _LP_FEE_RATE_
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0x4322ec83 _MAINTAINER_()
+    DODOVendingMachine: address public _MAINTAINER_
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0xf6b06e70 _MT_FEE_RATE_MODEL_()
+    DODOVendingMachine: IFeeRateModel public _MT_FEE_RATE_MODEL_
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0xbbf5ce78 _QUOTE_RESERVE_()
+    DODOVendingMachine: uint112 public _QUOTE_RESERVE_
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0xd4b97046 _QUOTE_TOKEN_()
+    DODOVendingMachine: IERC20 public _QUOTE_TOKEN_
+
+0xc5cc6b6a _factory()
+    unknown: _factory
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x8ee1a74e _transferERC20(address,address,uint128,uint128)
+    zkSync: function _transferERC20(IERC20 _token, address _to, uint128 _amount, uint128 _maxAmount) external returns (uint128 withdrawnAmount)
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0xa7e7aacd activateExodusMode()
+    zkSync: function activateExodusMode() public returns (bool)
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapRoles.sol
+0x70480275 addAdmin(address)
+    POAP: function addAdmin(address account) public onlyAdmin
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapRoles.sol
+0x9cd3cad6 addEventMinter(uint256,address)
+    POAP: function addEventMinter(uint256 eventId, address account) public onlyEventMinter(eventId)
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/Proxy.sol
+0x5e3a97e7 addImplementation(address,bytes,bool)
+    StarkEx: function addImplementation(address newImplementation, bytes calldata data, bool finalize) external onlyGovernance
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0xe8e33700 addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)
+    IUniswapV2Router01: function addLiquidity(address tokenA, address tokenB, uint amountADesired, uint amountBDesired, uint amountAMin, uint amountBMin, address to, uint deadline) external returns (uint amountA, uint amountB, uint liquidity)
+
+# https://etherscan.io/address/0x66e7d7839333f502df355f5bd87aea24bac2ee63
+0x1b879378 addLiquidity(address,uint256,address)
+    Monoswap: function addLiquidity(address _token, uint256 _amount, address to) external returns(uint256 liquidity)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0xf305d719 addLiquidityETH(address,uint256,uint256,uint256,address,uint256)
+    IUniswapV2Router01: function addLiquidityETH(address token, uint amountTokenDesired, uint amountTokenMin, uint amountETHMin, address to, uint deadline) external payable returns (uint amountToken, uint amountETH, uint liquidity)
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x9755f5be addProvider(address,address)
+    SashimiInvestment: function addProvider(address _token, address _vault) onlyOwner public returns (uint256)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0xd48bfca7 addToken(address)
+    zkSync Governance: function addToken(address _token) external
+    zkSync TokenGovernance: function addToken(address _token) external
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0x999f0be2 addUpgradeable(address)
+    zkSync UpgradeGatekeeper: function addUpgradeable(address addr) external
+
+0x3b3b57de addr(bytes32)
+    EIP-137 ENS Address Resolution: function addr(bytes32 node) constant returns (address)
+
+0xf1cb7e06 addr(bytes32,uint256)
+    EIP-2304 ENS Multichain Address Resolution: function addr(bytes32 node, uint coinType) public view returns(bytes memory)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVM.sol
+0x17101940 addressToShortString(address)
+    DODOVendingMachine: function addressToShortString(address _addr) public pure returns (string memory)
+
+# https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+# https://eips.ethereum.org/EIPS/eip-1967
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0xf851a440 admin()
+    EIP-1967 Proxy: function admin() external view ifAdmin returns (address)
+    MonoXPool: address public admin
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0x1e3dd18b allPairs(uint256)
+    UniswapV2Factory: address[] public allPairs
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0x574f2ba3 allPairsLength()
+    UniswapV2Factory: function allPairsLength() external view returns (uint)
+
+0xdd62ed3e allowance(address,address)
+    ERC20: function allowance(address _owner, address _spender) public view returns (uint256 remaining)
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/AvailabilityVerifiers.sol
+0x1d078bbb announceAvailabilityVerifierRemovalIntent(address)
+    StarkEx: function announceAvailabilityVerifierRemovalIntent(address verifier) external
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/Verifiers.sol
+0x418573b7 announceVerifierRemovalIntent(address)
+    StarkEx: function announceVerifierRemovalIntent(address verifier) external
+
+0x095ea7b3 approve(address,uint256)
+    ERC20: function approve(address _spender, uint256 _value) public returns (bool success)
+    ERC721: function approve(address _approved, uint256 _tokenId) external payable
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Storage.sol
+0x8ae20dc9 authFacts(address,uint32)
+    zkSync: mapping (address => mapping (uint32 => bytes32)) public authFacts
+
+# https://eips.ethereum.org/EIPS/eip-3009
+0xe94a0102 authorizationState(address,bytes32)
+    EIP3009: function authorizationState(address authorizer, bytes32 nonce) external view returns (bool)
+
+0x959b8c3f authorizeOperator(address)
+    ERC777Token: function authorizeOperator(address operator) external
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0xb69ef8a8 balance()
+    SashimiLendingVaultProvider: uint256 public balance = 0
+
+0x70a08231 balanceOf(address)
+    ERC20: function balanceOf(address _owner) public view returns (uint256 balance)
+    ERC721: function balanceOf(address _owner) external view returns (uint256)
+    ERC777Token: function balanceOf(address holder) external view returns (uint256)
+
+0x00fdd58e balanceOf(address,uint256)
+    ERC1155: function balanceOf(address _owner, uint256 _id) external view returns (uint256)
+
+0x4e1273f4 balanceOfBatch(address[],uint256[])
+    ERC1155: function balanceOfBatch(address[] calldata _owners, uint256[] calldata _ids) external view returns (uint256[] memory)
+
+# https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.0/contracts/mocks/ERC721Mock.sol
+0x6c0360eb baseURI()
+    OpenZeppelin ERC721Mock: function baseURI() public view returns (string memory)
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x38af3eed beneficiary()
+    SashimiInvestment: address public beneficiary
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Blacklistable.sol
+0xf9f92be4 blacklist(address)
+    USDC: function blacklist(address _account) external onlyBlacklister
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Blacklistable.sol
+0xbd102430 blacklister()
+    USDC: address public blacklister
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0x89afcb44 burn(address)
+    UniswapV2Pair: function burn(address to) external lock returns (uint amount0, uint amount1)
+
+0xf5298aca burn(address,uint256,uint256)
+    ERC1155 Implementation: function burn(address account, uint256 id, uint256 amount) public onlyOwner
+
+# https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.0/contracts/mocks/ERC721Mock.sol
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/FiatTokenV1.sol
+0x42966c68 burn(uint256)
+    OpenZeppelin ERC721Mock: function burn(uint256 tokenId) public
+    USDC: function burn(uint256 _amount) external whenNotPaused onlyMinters notBlacklisted(msg.sender)
+
+0xfe9d9303 burn(uint256,bytes)
+    ERC777Token: function burn(uint256 amount, bytes calldata data) external
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMFunding.sol
+0x4c85b425 buyShares(address)
+    DODOVendingMachine: function buyShares(address to) external preventReentrant returns (uint256 shares, uint256 baseInput, uint256 quoteInput)
+
+# N.B. The arguments are inverted in EIP-820 and EIP-1820!
+0xf0083250 canImplementInterfaceForAddress(address,bytes32)
+    ERC820Implementer: function canImplementInterfaceForAddress(address addr, bytes32 interfaceHash) view public returns(bytes32)
+    ERC1820Implementer: function canImplementInterfaceForAddress(address addr, bytes32 interfaceHash) view public returns(bytes32)
+
+# https://eips.ethereum.org/EIPS/eip-3009
+0x5a049a70 cancelAuthorization(address,bytes32,uint8,bytes32,bytes32)
+    EIP3009: function cancelAuthorization(address authorizer, bytes32 nonce, uint8 v, bytes32 r, bytes32 s) external
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x7efcfe85 cancelOutstandingDepositsForExodusMode(uint64,bytes[])
+    zkSync: function cancelOutstandingDepositsForExodusMode(uint64 _n, bytes[] memory _depositsPubdata) external
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0x55f29166 cancelUpgrade()
+    zkSync UpgradeGatekeeper: function cancelUpgrade() external
+
+# https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+# https://eips.ethereum.org/EIPS/eip-1967
+0x8f283970 changeAdmin(address)
+    EIP-1967 Proxy: function changeAdmin(address newAdmin) external ifAdmin
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0xdc070657 changeBeneficiary(address)
+    SashimiInvestment: function changeBeneficiary(address _beneficiary) onlyOwner public
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xe4c0aaf4 changeGovernor(address)
+    zkSync Governance: function changeGovernor(address _newGovernor) external
+
+# https://etherscan.io/address/0xe4FE6a45f354E845F954CdDeE6084603CEDB9410
+0xa6f9dae1 changeOwner(address)
+    UniswapV2Router02: function changeOwner(address _owner) external override
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x9b138599 changeReservesRatio(address,uint256)
+    SashimiInvestment: function changeReservesRatio(address _token, uint256 _reservesRatio) onlyAdmin validRatio(_reservesRatio) public
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x340ac20f changeRouter(address)
+    SashimiInvestment: function changeRouter(address _router) onlyOwner public
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0x78393d22 changeTokenGovernance(address)
+    zkSync Governance: function changeTokenGovernance(TokenGovernance _newTokenGovernance) external
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x39535304 chooseProvider(address,uint256)
+    SashimiInvestment: function chooseProvider(address _token, uint256 _providerId) onlyAdmin public
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x6acfc074 chosenProviders(address)
+    SashimiInvestment: mapping (address => uint256) public chosenProviders
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0xe4bcc082 commitBlocks(tuple,tuple[])
+    zkSync: function commitBlocks(StoredBlockInfo memory _lastCommittedBlockData, CommitBlockInfo[] memory _newBlocksData) external nonReentrant
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x5fe3b567 comptroller()
+    SashimiLendingVaultProvider: address public comptroller;
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/FiatTokenV1.sol
+0x4e44d956 configureMinter(address,uint256)
+    USDC: function configureMinter(address minter, uint256 minterAllowedAmount) external whenNotPaused onlyMasterMinter returns (bool)
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0xf77c4791 controller()
+    SashimiLendingVaultProvider: address override public controller
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0xc9c65396 createPair(address,address)
+    UniswapV2Factory: function createPair(address tokenA, address tokenB) external returns (address pair)
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0x50a1676e createdAt(uint256)
+    MonoXPool: mapping (uint256 => uint256) public createdAt
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/FiatTokenV1.sol
+0xe5a6b10f currency()
+    USDC: string public currency
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x3e71e1e7 cutUpgradeNoticePeriod()
+    zkSync: function cutUpgradeNoticePeriod() external
+
+# https://etherscan.io/address/0xcc7e678D6750E49fe95b15593a35C567B428C869
+# https://github.com/matter-labs/zksync/blob/contracts-7/contracts/contracts/AdditionalZkSync.sol
+0x9beb4650 cutUpgradeNoticePeriodBySignature(bytes[])
+    zkSync AdditionalZkSync: function cutUpgradeNoticePeriodBySignature(bytes[] calldata signatures) external
+
+0x313ce567 decimals()
+    ERC20: function decimals() public view returns (uint8)
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v2/FiatTokenV2.sol
+0xa457c2d7 decreaseAllowance(address,uint256)
+    USDC: function decreaseAllowance(address spender, uint256 decrement) external whenNotPaused notBlacklisted(msg.sender) notBlacklisted(spender) returns (bool)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xd4b6846d defaultFactory()
+    zkSync Governance: NFTFactory public defaultFactory
+
+0x06e48538 defaultOperators()
+    ERC777Token: function defaultOperators() external view returns (address[] memory)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IWETH.sol
+0xd0e30db0 deposit()
+    Uniswap IWETH: function deposit() external payable
+
+# https://github.com/AztecProtocol/aztec-connect-starter/blob/d92b805aa05162bb665bbe5e05c435ea4b070150/contracts/DefiBridgeProxy.sol#L17
+0xb6b55f25 deposit(uint256)
+    Aztec Connect DefiBridge: function deposit(uint256)
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0xde5f6268 depositAll()
+    SashimiLendingVaultProvider: function depositAll() override onlyController external
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0xe17376b5 depositERC20(address,uint104,address)
+    zkSync: function depositERC20(IERC20 _token, uint104 _amount, address _zkSyncAddress) external nonReentrant
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x2d2da806 depositETH(address)
+    zkSync: function depositETH(address _zkSyncAddress) external payable
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0x66dd0f24 depositWETH(uint256)
+    MonoXPool: function depositWETH(uint256 amount) external
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0xfc7e286d deposits(address)
+    SashimiInvestment: mapping (address => uint256) public deposits
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0xad0b8b9d disableProvider(uint256)
+    SashimiInvestment: function disableProvider(uint256 _providerId) onlyOwner public
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0xd6f19262 earned()
+    SashimiLendingVaultProvider: function earned() override view external returns(uint256)
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x008cc262 earned(address)
+    SashimiInvestment: function earned(address _token) view public returns(address profit, uint256 amount)
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x997d3bd6 earnedCurrent()
+    SashimiLendingVaultProvider: function earnedCurrent() external returns (uint256, uint256)
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0xc1f16904 emergenceChangeLend(address)
+    SashimiLendingVaultProvider: function emergenceChangeLend(address _lend) override public onlyController
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x3f1f3e59 emergencePause()
+    SashimiInvestment: function emergencePause() onlyAdmin public
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0xf7434ccd emergenceTrigger(address,uint256,string,bytes)
+    SashimiInvestment: function emergenceTrigger(address target, uint value, string memory signature, bytes memory data) onlyOwner payable public
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0xccc6461b emergenceTriggerProvider(uint256,address,uint256,string,bytes)
+    SashimiInvestment: function emergenceTriggerProvider(uint256 providerId, address target, uint value, string memory signature, bytes memory data) onlyOwner public
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x3992f725 emergenceWithdraw(address,uint256,uint256,address)
+    SashimiInvestment: function emergenceWithdraw(address _token, uint256 providerId, uint256 _amount, address _to) onlyOwner public
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x7adea6bf emergenceWithdrawETH(uint256,uint256,address)
+    SashimiInvestment: function emergenceWithdrawETH(uint256 providerId, uint256 _amount, address _to) onlyOwner public
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x6e54c664 enableProvider(uint256)
+    SashimiInvestment: function enableProvider(uint256 _providerId) onlyOwner public
+
+# https://etherscan.io/address/0xd418049AdA41D59913AbC5bBcfDfA54152E2FA9F
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/ForcedExit.sol
+0x238dafe0 enabled()
+    zkSync ForcedExit: bool public enabled
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x26f60801 executeBlocks(tuple[])
+    zkSync: function executeBlocks(ExecuteBlockInfo[] memory _blocksData) external nonReentrant
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x2224fa25 executeTransaction(address,uint256,string,bytes)
+    SashimiLendingVaultProvider: function executeTransaction(address target, uint value, string memory signature, bytes memory data) override public payable onlyController
+
+# https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.0/contracts/mocks/ERC721Mock.sol
+0x4f558e79 exists(uint256)
+    OpenZeppelin ERC721Mock: function exists(uint256 tokenId) public view returns (bool)
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Storage.sol
+0x264c0912 exodusMode()
+    zkSync: bool public exodusMode
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/interfaces/IUniswapV2Pair.sol
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0xc45a0155 factory()
+    IUniswapV2Pair: function factory() external view returns (address)
+    IUniswapV2Router01: function factory() external pure returns (address)
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0x017e7e58 feeTo()
+    UniswapV2Factory: address public feeTo
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0x094b7415 feeToSetter()
+    UniswapV2Factory: address public feeToSetter
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0x253b153b finishUpgrade(bytes[])
+    zkSync UpgradeGatekeeper: function finishUpgrade(bytes[] calldata targetsUpgradeParameters) external
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Storage.sol
+0x67708dae firstPriorityRequestId()
+    zkSync: uint64 public firstPriorityRequestId
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMTrader.sol
+0xd0a494e4 flashLoan(uint256,uint256,address,bytes)
+    DODOVendingMachine: function flashLoan(uint256 baseAmount, uint256 quoteAmount, address assetTo, bytes calldata data) external preventReentrant
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x054f7d9c frozen()
+    SashimiInvestment: bool public frozen
+
+0x53b609b5 getAmountIn(address,address,uint256)
+    unknown: function getAmountIn(address,address,uint256)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0x85f8c259 getAmountIn(uint256,uint256,uint256)
+    IUniswapV2Router01: function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) external pure returns (uint amountIn)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0x054d50d4 getAmountOut(uint256,uint256,uint256)
+    IUniswapV2Router01: function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) external pure returns (uint amountOut)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0x1f00ca74 getAmountsIn(uint256,address[])
+    IUniswapV2Router01: function getAmountsIn(uint amountOut, address[] calldata path) external view returns (uint[] memory amounts))
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0xd06ca61f getAmountsOut(uint256,address[])
+    IUniswapV2Router01: function getAmountsOut(uint amountIn, address[] calldata path) external view returns (uint[] memory amounts)
+
+0x081812fc getApproved(uint256)
+    ERC721: function getApproved(uint256 _tokenId) external view returns (address)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0x65f6fcbb getBaseInput()
+    DODOVendingMachine: function getBaseInput() public view returns (uint256 input)
+
+# https://etherscan.io/address/0x7C770595a2Be9A87CF49B35eA9bC534f1a59552D
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSyncNFTFactory.sol
+0xffbdc8cb getContentHash(uint256)
+    zkSync NFT Factory: function getContentHash(uint256 _tokenId) external view returns (bytes32)
+
+# https://etherscan.io/address/0x7C770595a2Be9A87CF49B35eA9bC534f1a59552D
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSyncNFTFactory.sol
+0xb90ea3ec getCreatorAccountId(uint256)
+    zkSync NFT Factory: function getCreatorAccountId(uint256 tokenId) external view returns (uint32)
+
+# https://etherscan.io/address/0x7C770595a2Be9A87CF49B35eA9bC534f1a59552D
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSyncNFTFactory.sol
+0xa30b4db9 getCreatorAddress(uint256)
+    zkSync NFT Factory: function getCreatorAddress(uint256 tokenId) external view returns (address)
+
+# https://etherscan.io/address/0x7C770595a2Be9A87CF49B35eA9bC534f1a59552D
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSyncNFTFactory.sol
+0xa1b8aa26 getCreatorFingerprint(uint256)
+    zkSync NFT Factory: function getCreatorFingerprint(uint256 _tokenId) external view returns (uint256)
+
+0xaabbb8ca getInterfaceImplementer(address,bytes32)
+    ERC820Registry: function getInterfaceImplementer(address _addr, bytes32 _interfaceHash) external view returns (address)
+    ERC1820Registry: function getInterfaceImplementer(address _addr, bytes32 _interfaceHash) external view returns (address)
+
+0x3d584063 getManager(address)
+    ERC820Registry: function getManager(address _addr) public view returns(address)
+    ERC1820Registry: function getManager(address _addr) public view returns(address)
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Ownable.sol
+0x5a99719e getMaster()
+    zkSync Ownable: function getMaster() public view returns (address master)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0xee27c689 getMidPrice()
+    DODOVendingMachine: function getMidPrice() public view returns (uint256 midPrice)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xb79eb8c7 getNFTFactory(uint32,address)
+    zkSync Governance: function getNFTFactory(uint32 _creatorAccountId, address _creatorAddress) external view returns (NFTFactory)
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Proxy.sol
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x2a3174f4 getNoticePeriod()
+    zkSync: function getNoticePeriod() external override returns (uint256)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0xa382d1b9 getPMMState()
+    DODOVendingMachine: function getPMMState() public view returns (PMMPricing.PMMState memory state)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMStorage.sol
+0xfd1ed7e9 getPMMStateForCall()
+    DODOVendingMachine: function getPMMStateForCall() external view returns (uint256 i, uint256 K, uint256 B, uint256 Q, uint256 B0, uint256 Q0, uint256 R)
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0xe6a43905 getPair(address,address)
+    UniswapV2Factory: mapping (address => mapping (address => address)) public getPair
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x5aca41f6 getPendingBalance(address,address)
+    zkSync: function getPendingBalance(address _address, address _token) public view returns (uint128)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMVault.sol
+0x71f9100c getQuoteInput()
+    DODOVendingMachine: function getQuoteInput() public view returns (uint256 input)
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/AvailabilityVerifiers.sol
+0x1ac347f2 getRegisteredAvailabilityVerifiers()
+    StarkEx: function getRegisteredAvailabilityVerifiers() external view returns (address[] memory _verifers)
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/Verifiers.sol
+0x4eab9ed3 getRegisteredVerifiers()
+    StarkEx: function getRegisteredVerifiers() external view returns (address[] memory _verifers)
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0x0902f1ac getReserves()
+    UniswapV2Pair: function getReserves() public view returns (uint112 _reserve0, uint112 _reserve1, uint32 _blockTimestampLast)
+
+# https://etherscan.io/address/0x7C770595a2Be9A87CF49B35eA9bC534f1a59552D
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSyncNFTFactory.sol
+0x328c3a4a getSerialId(uint256)
+    zkSync NFT Factory: function getSerialId(uint256 tokenId) external view returns (uint32)
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Proxy.sol
+0xf00e6a2a getTarget()
+    zkSyn Proxyc: function getTarget() public view returns (address target)
+
+# https://etherscan.io/address/0xe4FE6a45f354E845F954CdDeE6084603CEDB9410
+0x6f7abe6a getTokenInPair(address,address)
+    UniswapV2Router02: function getTokenInPair(address pair,address token) public view virtual override returns (uint balance)
+
+# https://etherscan.io/address/0x2cAbD63F6f28b493f33D13E34060f0959F3570aE
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/upgrade/Proxy.sol
+0x72a44f07 getUpgradeActivationDelay()
+    StarkEx: function getUpgradeActivationDelay() public view returns (uint256 delay)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMVault.sol
+0x44096609 getUserFeeRate(address)
+    DODOVendingMachine: function getUserFeeRate(address user) external view returns (uint256 lpFeeRate, uint256 mtFeeRate)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMVault.sol
+0x36223ce9 getVaultReserve()
+    DODOVendingMachine: function getVaultReserve() external view returns (uint256 baseReserve, uint256 quoteReserve)
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0x5aa6e675 governance()
+    zkSync TokenGovernance: Governance public governance
+
+0x556f0dc7 granularity()
+    ERC777Token: function granularity() external view returns (uint256)
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x4641257d harvest()
+    SashimiLendingVaultProvider: function harvest() override onlyController external returns (uint256 amount)
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x0e5c011e harvest(address)
+    SashimiInvestment: function harvest(address _token) notFrozen public
+
+# https://etherscan.io/address/0xA9b7e2DCA4B7bD8161204C6c8A4e2DB3750dFd2e
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/components/FactRegistry.sol
+0xd6354e15 hasRegisteredFact()
+    StarkEx: function hasRegisteredFact() external view override returns (bool)
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/toplevel_subcontracts/AllVerifiers.sol
+0xeeb72866 identify()
+    StarkEx: function identify() external pure override returns (string memory)
+
+# https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+# https://eips.ethereum.org/EIPS/eip-1967
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/Proxy.sol
+0x5c60da1b implementation()
+    EIP-1967 Proxy: function implementation() external view ifAdmin returns (address)
+    StarkEx: function implementation() public view returns (address _implementation)
+
+0xf712f3e8 implementsERC165Interface(address,bytes4)
+    ERC820Registry: function implementsERC165Interface(address _contract, bytes4 _interfaceId) public view returns (bool)
+    ERC1820Registry: function implementsERC165Interface(address _contract, bytes4 _interfaceId) public view returns (bool)
+
+0xb7056765 implementsERC165InterfaceNoCache(address,bytes4)
+    ERC820Registry: function implementsERC165InterfaceNoCache(address _contract, bytes4 _interfaceId) public view returns (bool)
+    ERC1820Registry: function implementsERC165InterfaceNoCache(address _contract, bytes4 _interfaceId) public view returns (bool)
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v2/FiatTokenV2.sol
+0x39509351 increaseAllowance(address,uint256)
+    USDC: function increaseAllowance(address spender, uint256 increment) external whenNotPaused notBlacklisted(msg.sender) notBlacklisted(spender) returns (bool)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVM.sol
+0x5039972a init(address,address,address,uint256,address,uint256,uint256,bool)
+    DODOVendingMachine: function init(address maintainer, address baseTokenAddress, address quoteTokenAddress, uint256 lpFeeRate, address mtFeeRateModel, uint256 i, uint256 k, bool isOpenTWAP) external
+
+# https://etherscan.io/address/0x4BaE3BFE9cE7C53dA5B016453c917Fd06874ECE7
+# https://explorer.bitquery.io/ethereum/token/0x4bae3bfe9ce7c53da5b016453c917fd06874ece7/smart_contract
+0x7e24f904 init(address,uint256,string,string,uint256)
+    SHIBSWAP InitializableERC20: function init(address _creator, uint256 _totalSupply, string memory _name, string memory _symbol, uint256 _decimals) public
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapPausable.sol
+0x8129fc1c initialize()
+    POAP: function initialize() public initializer
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0xc4d66de8 initialize(address)
+    MonoXPool: function initialize(address _WETH) public initializer
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0x485cc955 initialize(address,address)
+    UniswapV2Pair: function initialize(address _token0, address _token1) external
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0xc0c53b8b initialize(address,address,address)
+    UniswapV2Pair: function initialize(address _token0, address _token1, address _router) external
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/toplevel_subcontracts/AllVerifiers.sol
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Proxy.sol
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0x439fab91 initialize(bytes)
+    StarkEx: function initialize(bytes calldata) external override
+    zkSync: function initialize(bytes calldata initializationParameters) external
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/Poap.sol
+0x8d232094 initialize(string,string,string,address[])
+    POAP: function initialize(string memory __name, string memory __symbol, string memory __baseURI, address[] memory admins)     public initializer
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/FiatTokenV1.sol
+0x3357162b initialize(string,string,string,uint8,address,address,address,address)
+    USDC: function initialize(string memory tokenName, string memory tokenSymbol, string memory tokenCurrency, uint8 tokenDecimals, address newMasterMinter, address newPauser, address newBlacklister, address newOwner) public
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v2/FiatTokenV2.sol
+0xd608ea64 initializeV2(string)
+    USDC: function initializeV2(string calldata newName) external
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v2/FiatTokenV2_1.sol
+0x2fc81e09 initializeV2_1(address)
+    USDC: function initializeV2_1(address lostAndFound) external
+
+# https://etherscan.io/address/0x4BaE3BFE9cE7C53dA5B016453c917Fd06874ECE7
+# https://explorer.bitquery.io/ethereum/token/0x4bae3bfe9ce7c53da5b016453c917fd06874ece7/smart_contract
+0x158ef93e initialized()
+    SHIBSWAP InitializableERC20: bool public initialized
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/toplevel_subcontracts/AllVerifiers.sol
+0x3cc660ad initializerSize()
+    StarkEx: function initializerSize() external view override returns (uint256)
+
+0x65ba36c1 interfaceHash(string)
+    ERC820Registry: function interfaceHash(string _interfaceName) external pure returns(bytes32)
+    ERC1820Registry: function interfaceHash(string calldata _interfaceName) external pure returns(bytes32)
+
+# https://etherscan.io/address/0x7C770595a2Be9A87CF49B35eA9bC534f1a59552D
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSyncNFTFactory.sol
+0x422b7a0d ipfsCID(bytes32)
+    zkSync NFT Factory: function ipfsCID(bytes32 source) public pure returns (string memory)
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapRoles.sol
+0x24d7806c isAdmin(address)
+    POAP: function isAdmin(address account) public view returns (bool)
+
+0xe985e9c5 isApprovedForAll(address,address)
+    ERC721: function isApprovedForAll(address _owner, address _operator) external view returns (bool)
+    ERC1155: function isApprovedForAll(address _owner, address _operator) external view returns (bool))
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/AvailabilityVerifiers.sol
+0xbd1279ae isAvailabilityVerifier(address)
+    StarkEx: function isAvailabilityVerifier(address verifierAddress) external view returns (bool)
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Blacklistable.sol
+0xfe575a87 isBlacklisted(address)
+    USDC: function isBlacklisted(address _account) external view returns (bool) 
+
+# https://etherscan.io/address/0x02d476dE41B914Fd38dF58B85008A91DB2BE3D6C
+0xe54ee6b1 isBlockSizeSupported(uint32)
+    zkSync Verifier: function isBlockSizeSupported(uint32 _size) public pure returns (bool)
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapRoles.sol
+0x28db38b4 isEventMinter(uint256,address)
+    POAP: function isEventMinter(uint256 eventId, address account) public view returns (bool)
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/Freezable.sol
+0x33eeb147 isFrozen()
+    StarkEx: function isFrozen() external view returns (bool frozen)
+
+# https://etherscan.io/address/0x16BA0f221664A5189cf2C1a7AF0d3AbFc70aA295
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/committee/Committee.sol
+0xa230c524 isMember(address)
+    StarkEx: mapping (address => bool) public isMember
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/FiatTokenV1.sol
+0xaa271e1a isMinter(address)
+    USDC: function isMinter(address account) external view returns (bool)
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/Proxy.sol
+0xe907fa3c isNotFinalized()
+    StarkEx: function isNotFinalized() public view returns (bool notFinal)
+
+0xd95b6371 isOperatorFor(address,address)
+    ERC777Token: function isOperatorFor(address operator, address holder) external view returns (bool)
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Proxy.sol
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x8773334c isReadyForUpgrade()
+    zkSync Proxy: function isReadyForUpgrade() external override returns (bool)
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0xe62f5aac isUnofficial(uint256)
+    MonoXPool: mapping (uint256 => bool) public isUnofficial
+
+# https://etherscan.io/address/0xA9b7e2DCA4B7bD8161204C6c8A4e2DB3750dFd2e
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/components/FactRegistry.sol
+0x6a938567 isValid(bytes32)
+    StarkEx: function isValid(bytes32 fact) external view override returns (bool)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xe2c79268 isValidTokenId(uint16)
+    zkSync Governance: function isValidTokenId(uint16 _tokenId) external view returns (bool)
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/Verifiers.sol
+0x33105218 isVerifier(address)
+    StarkEx: function isVerifier(address verifierAddress) external view returns (bool)
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0x7464fc3d kLast()
+    UniswapV2Pair: uint public kLast
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x97dffc61 lend()
+    SashimiLendingVaultProvider: address override public lend
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0xdc1c402c liquidityLastAddedOf(uint256,address)
+    MonoXPool: function liquidityLastAddedOf(uint256 pid, address account) external view returns (uint256)
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0x9b453945 listingCap()
+    zkSync TokenGovernance: uint16 public listingCap
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0x6a1b7ecc listingFee()
+    zkSync TokenGovernance: uint256 public listingFee
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0xa1a18c38 listingFeeToken()
+    zkSync TokenGovernance: IERC20 public listingFeeToken
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/MainGovernance.sol
+0x28700a15 mainAcceptGovernance()
+    StarkEx: function mainAcceptGovernance() external
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/MainGovernance.sol
+0x72eb3688 mainCancelNomination()
+    StarkEx: function mainCancelNomination() external
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0xd270e7ab mainContract()
+    zkSync UpgradeGatekeeper: UpgradeableMaster public mainContract
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/MainGovernance.sol
+0x45f5cd97 mainIsGovernor(address)
+    StarkEx: function mainIsGovernor(address testGovernor) external view returns (bool)
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/MainGovernance.sol
+0x8c4bce1c mainNominateNewGovernor(address)
+    StarkEx: function mainNominateNewGovernor(address newGovernor) external
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/MainGovernance.sol
+0xa1cc921e mainRemoveGovernor(address)
+    StarkEx: function mainRemoveGovernor(address governorForRemoval) external
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0xf1ce598e managedContracts(uint256)
+    zkSync UpgradeGatekeeper: Upgradeable[] public managedContracts
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/FiatTokenV1.sol
+0x35d99f35 masterMinter()
+    USDC: address public masterMinter
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0x7cd07e47 migrator()
+    UniswapV2Factory: address public override migrator
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0x6a627842 mint(address)
+    UniswapV2Pair: function mint(address to) external lock returns (uint liquidity)
+
+# https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.0/contracts/mocks/ERC721Mock.sol
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/FiatTokenV1.sol
+0x40c10f19 mint(address,uint256)
+    OpenZeppelin ERC721Mock: function mint(address to, uint256 tokenId) public
+    USDC: function mint(address _to, uint256 _amount) external whenNotPaused onlyMinters notBlacklisted(msg.sender) notBlacklisted(_to) returns (bool)
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0x156e29f6 mint(address,uint256,uint256)
+    MonoXPool: function mint(address account, uint256 id, uint256 amount) public onlyOwner
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/Poap.sol
+0x278d9c41 mintEventToManyUsers(uint256,address[])
+    POAP: function mintEventToManyUsers(uint256 eventId, address[] memory to) public whenNotPaused onlyEventMinter(eventId) returns (bool)
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0x905dcca5 mintLp(address,uint256,uint256,bool)
+    MonoXPool: function mintLp(address account, uint256 id, uint256 amount, bool _isUnofficial) public onlyOwner
+
+# https://etherscan.io/address/0x7C770595a2Be9A87CF49B35eA9bC534f1a59552D
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSyncNFTFactory.sol
+0x234ce590 mintNFTFromZkSync(address,address,uint32,uint32,bytes32,uint256)
+    zkSync NFT Factory: function mintNFTFromZkSync(address creator, address recipient, uint32 creatorAccountId, uint32 serialId, bytes32 contentHash, uint256 tokenId) external override
+
+# https://docs.ipfs.io/how-to/mint-nfts-with-ipfs/#how-minty-works
+0x3d02d0c9 mintToken(address,string)
+    Example ERC721 IPFS: function mintToken(address owner, string memory metadataURI) public returns (uint256)
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/Poap.sol
+0xa140ae23 mintToken(uint256,address)
+    POAP: function mintToken(uint256,address) public whenNotPaused onlyEventMinter(eventId) returns (bool)
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/Poap.sol
+0xd890c8e2 mintToken(uint256,uint256,address)
+    POAP: function mintToken(uint256 eventId, uint256 tokenId, address to) public whenNotPaused onlyEventMinter(eventId) returns (bool)
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/Poap.sol
+0xf980f3dc mintUserToManyEvents(uint256[],address)
+    POAP: function mintUserToManyEvents(uint256[] memory eventIds, address to) public whenNotPaused onlyAdmin() returns (bool)
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/FiatTokenV1.sol
+0x8a6db9c3 minterAllowance(address)
+    USDC: function minterAllowance(address minter) external view returns (uint256)
+
+0x06fdde03 name()
+    ERC20: function name() public view returns (string)
+    ERC721Metadata: function name() external view returns (string _name)
+    ERC777Token: function name() external view returns (string memory)
+
+0x691f3431 name(bytes32)
+    EIP-181 ENS Reverse Resolution: function name(bytes32 node) constant returns (string)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xf39349ef networkGovernor()
+    zkSync Governance: address public networkGovernor
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0xc3d17706 nextTargets(uint256)
+    zkSync UpgradeGatekeeper: address[] public nextTargets
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xe122b7d1 nftFactories(uint32,address)
+    zkSync Governance: mapping (uint32 => mapping (address => NFTFactory)) public nftFactories
+
+# https://eips.ethereum.org/EIPS/eip-2612
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2ERC20.sol
+0x7ecebe00 nonces(address)
+    EIP2612: function nonces(address owner) external view returns (uint256)
+    UniswapV2ERC20: mapping (address => uint) public nonces
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0x25391624 noticePeriodFinishTimestamp()
+    zkSync UpgradeGatekeeper: uint256 public noticePeriodFinishTimestamp
+
+0xbc197c81 onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)
+    ERC1155TokenReceiver: function onERC1155BatchReceived(address _operator, address _from, uint256[] calldata _ids, uint256[] calldata _values, bytes calldata _data) external returns(bytes4)
+
+0xf23a6e61 onERC1155Received(address,address,uint256,uint256,bytes)
+    ERC1155TokenReceiver: function onERC1155Received(address _operator, address _from, uint256 _id, uint256 _value, bytes calldata _data) external returns(bytes4)
+
+0x150b7a02 onERC721Received(address,address,uint256,bytes)
+    ERC721TokenReceiver: function onERC721Received(address _operator, address _from, uint256 _tokenId, bytes _data) external returns(bytes4)
+
+0xfc673c4f operatorBurn(address,uint256,bytes,bytes)
+    ERC777Token: function operatorBurn(address from, uint256 amount, bytes calldata data, bytes calldata operatorData) external
+
+0x62ad1b83 operatorSend(address,address,uint256,bytes,bytes)
+    ERC777Token: function operatorSend(address from, address to, uint256 amount, bytes calldata data, bytes calldata operatorData) external
+
+# https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/v4.4.0/contracts/access/OwnableUpgradeable.sol
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Ownable.sol
+0x8da5cb5b owner()
+    OwnableUpgradeable: function owner() public view virtual returns (address)
+    USDC: function owner() external view returns (address)
+
+0x02571be3 owner(bytes32)
+    EIP-137 Registry: function owner(bytes32 node) constant returns (address)
+
+0x6352211e ownerOf(uint256)
+    ERC721: function ownerOf(uint256 _tokenId) external view returns (address)
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0x9aab9248 pairCodeHash()
+    UniswapV2Factory: function pairCodeHash() external pure returns (bytes32)
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapPausable.sol
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Pausable.sol
+0x8456cb59 pause()
+    POAP: function pause() public onlyAdmin whenNotPaused
+    USDC: function pause() external onlyPauser
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapPausable.sol
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Pausable.sol
+0x5c975abb paused()
+    POAP: function paused() public view returns (bool)
+    USDC: bool public paused = false
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xf3a65bf9 pausedTokens(uint16)
+    zkSync Governance: mapping (uint16 => bool) public pausedTokens
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Pausable.sol
+0x9fd0506d pauser()
+    USDC: address public pauser
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0xdebb5993 performExodus(tuple,address,uint32,uint32,uint128,uint32,address,uint32,bytes32,uint256[])
+    zkSync: function performExodus(StoredBlockInfo memory _storedBlockInfo, address _owner, uint32 _accountId, uint32 _tokenId, uint128 _amount, uint32 _nftCreatorAccountId, address _nftCreatorAddress, uint32 _nftSerialId, bytes32 _nftContentHash, uint256[] memory _proof) external
+
+# https://eips.ethereum.org/EIPS/eip-2612
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2ERC20.sol
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v2/FiatTokenV2.sol
+0xd505accf permit(address,address,uint256,uint256,uint8,bytes32,bytes32)
+    EIP2612: function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external
+    EIP2612: function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) external whenNotPaused notBlacklisted(owner) notBlacklisted(spender)
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0x5909c0d5 price0CumulativeLast()
+    UniswapV2Pair: uint public price0CumulativeLast
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0x5a3d5493 price1CumulativeLast()
+    UniswapV2Pair: uint public price1CumulativeLast
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x66d16cc3 profit()
+    SashimiLendingVaultProvider: address override public profit
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x6058306a proveBlocks(tuple[],tuple)
+    zkSync: function proveBlocks(StoredBlockInfo[] memory _committedBlocks, ProofInput memory _proof) external nonReentrant
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x50f3fc81 providers(uint256)
+    SashimiInvestment: Provider[] public providers
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0xad23fe73 providersLength()
+    SashimiInvestment: function providersLength() external view returns (uint256)
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/ProxyGovernance.sol
+0x6684b1d6 proxyAcceptGovernance()
+    StarkEx: function proxyAcceptGovernance() external
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/ProxyGovernance.sol
+0xf9bcdde4 proxyCancelNomination()
+    StarkEx: function proxyCancelNomination() external
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/ProxyGovernance.sol
+0xb449ea5d proxyIsGovernor(address)
+    StarkEx: function proxyIsGovernor(address testGovernor) external view returns (bool)
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/ProxyGovernance.sol
+0x8757653f proxyNominateNewGovernor(address)
+    StarkEx: function proxyNominateNewGovernor(address newGovernor) external
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/ProxyGovernance.sol
+0x12f16e6d proxyRemoveGovernor(address)
+    StarkEx: function proxyRemoveGovernor(address governorForRemoval) external
+
+0xc8690233 pubkey(bytes32)
+    EIP-619 ENS Pubkey: function pubkey(bytes32 node) constant returns (bytes32 x, bytes32 y)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMTrader.sol
+0x79a04876 querySellBase(address,uint256)
+    DODOVendingMachine: function querySellBase(address trader, uint256 payBaseAmount) public view returns (uint256 receiveQuoteAmount, uint256 mtFee)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMTrader.sol
+0x66410a21 querySellQuote(address,uint256)
+    DODOVendingMachine: function querySellQuote(address trader, uint256 payQuoteAmount) public view returns (uint256 receiveBaseAmount, uint256 mtFee)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0xad615dec quote(uint256,uint256,uint256)
+    IUniswapV2Router01: function quote(uint amountA, uint reserveA, uint reserveB) external pure returns (uint amountB)
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x2d829c8f reBalance(address)
+    SashimiInvestment: function reBalance(address _token) notFrozen public
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v2/FiatTokenV2.sol
+0xef55bec6 receiveWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32)
+    USDC: function receiveWithAuthorization(address from, address to, uint256 value, uint256 validAfter, uint256 validBefore, bytes32 nonce, uint8 v, bytes32 r, bytes32 s) external whenNotPaused notBlacklisted(from) notBlacklisted(to)
+
+# https://etherscan.io/address/0xd418049AdA41D59913AbC5bBcfDfA54152E2FA9F
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/ForcedExit.sol
+0xf7260d3e receiver()
+    zkSync ForcedExit: address payable public receiver
+
+0x28ed4f6c reclaim(uint256,address)
+    ENS BaseRegistrarImplementation: function reclaim(uint256 id, address owner) external live
+
+0xd22057a9 register(bytes32,address)
+    EIP-137 Registrar: function register(bytes32 subnode, address owner)
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/AvailabilityVerifiers.sol
+0xbdb75785 registerAvailabilityVerifier(address,string)
+    StarkEx: function registerAvailabilityVerifier(address verifier, string calldata identifier) external
+
+# https://etherscan.io/address/0xA9b7e2DCA4B7bD8161204C6c8A4e2DB3750dFd2e
+# https://docs.starkware.co/starkex-v4/deployments-addresses#sharp-verifier-contract
+# https://docs.starkware.co/starkex-v4/starkex-deep-dive/how-cairo-is-used-in-starkex#sharp
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/evm-verifier/solidity/contracts/cpu/MemoryPageFactRegistry.sol
+0x5578ceae registerContinuousMemoryPage(uint256,uint256[],uint256,uint256,uint256)
+    StarkEx: function registerContinuousMemoryPage(uint256 startAddr, uint256[] memory values, uint256 z, uint256 alpha, uint256 prime) public returns (bytes32 factHash, uint256 memoryHash, uint256 prod)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xc4dcb92c registerNFTFactoryCreator(uint32,address,bytes)
+    zkSync Governance: function registerNFTFactoryCreator(uint32 _creatorAccountId, address _creatorAddress, bytes memory _signature) external
+
+# https://etherscan.io/address/0xA9b7e2DCA4B7bD8161204C6c8A4e2DB3750dFd2e
+# https://docs.starkware.co/starkex-v4/deployments-addresses#sharp-verifier-contract
+# https://docs.starkware.co/starkex-v4/starkex-deep-dive/how-cairo-is-used-in-starkex#sharp
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/evm-verifier/solidity/contracts/cpu/MemoryPageFactRegistry.sol
+0x405a6362 registerRegularMemoryPage(uint256[],uint256,uint256,uint256)
+    StarkEx: function registerRegularMemoryPage(uint256[] calldata memoryPairs, uint256 z, uint256 alpha, uint256 prime) external returns (bytes32 factHash, uint256 memoryHash, uint256 prod)
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/Verifiers.sol
+0x3776fe2a registerVerifier(address,string)
+    StarkEx: function registerVerifier(address verifier, string calldata identifier) external
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/Poap.sol
+0x1785f53c removeAdmin(address)
+    POAP: function removeAdmin(address account) public onlyAdmin
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/AvailabilityVerifiers.sol
+0xb1e640bf removeAvailabilityVerifier(address)
+    StarkEx: function removeAvailabilityVerifier(address verifier) external
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapRoles.sol
+0x166c4b05 removeEventMinter(uint256,address)
+    POAP: function removeEventMinter(uint256 eventId, address account) public onlyAdmin
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/Proxy.sol
+0x22175a32 removeImplementation(address)
+    StarkEx: function removeImplementation(address newImplementation)
+
+# https://etherscan.io/address/0x2cAbD63F6f28b493f33D13E34060f0959F3570aE
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/upgrade/Proxy.sol
+0x5cef2e86 removeImplementation(address,bytes,bool)
+    StarkEx: function removeImplementation( address removedImplementation, bytes calldata data, bool finalize) external onlyGovernance
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0xbaa2abde removeLiquidity(address,address,uint256,uint256,uint256,address,uint256)
+    IUniswapV2Router01: function removeLiquidity(address tokenA, address tokenB, uint liquidity, uint amountAMin, uint amountBMin, address to, uint deadline) external returns (uint amountA, uint amountB)
+
+# https://etherscan.io/address/0x66e7d7839333f502df355f5bd87aea24bac2ee63
+0x00c24087 removeLiquidity(address,uint256,address,uint256,uint256)
+    Monoswap: function removeLiquidity(address _token, uint256 liquidity, address to, uint256 minVcashOut, uint256 minTokenOut) external returns(uint256 vcashOut, uint256 tokenOut)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0x02751cec removeLiquidityETH(address,uint256,uint256,uint256,address,uint256)
+    IUniswapV2Router01: function removeLiquidityETH(address token, uint liquidity, uint amountTokenMin, uint amountETHMin, address to, uint deadline) external returns (uint amountToken, uint amountETH)
+
+# https://etherscan.io/address/0xe4FE6a45f354E845F954CdDeE6084603CEDB9410
+# https://github.com/Uniswap/v2-periphery/blob/2efa12e0f2d808d9b49737927f0e416fafa5af68/contracts/UniswapV2Router02.sol
+0xaf2979eb removeLiquidityETHSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256)
+    UniswapV2Router02: function removeLiquidityETHSupportingFeeOnTransferTokens(address token, uint liquidity, uint amountTokenMin, uint amountETHMin, address to, uint deadline) public virtual override ensure(deadline) returns (uint amountETH)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0xded9382a removeLiquidityETHWithPermit(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)
+    IUniswapV2Router01: function removeLiquidityETHWithPermit(address token, uint liquidity, uint amountTokenMin, uint amountETHMin, address to, uint deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) external returns (uint amountToken, uint amountETH)
+
+# https://etherscan.io/address/0xe4FE6a45f354E845F954CdDeE6084603CEDB9410
+# https://github.com/Uniswap/v2-periphery/blob/2efa12e0f2d808d9b49737927f0e416fafa5af68/contracts/UniswapV2Router02.sol
+0x5b0d5984 removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)
+    UniswapV2Router02: function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address token, uint liquidity, uint amountTokenMin, uint amountETHMin, address to, uint deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) external virtual override returns (uint amountETH)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0x2195995c removeLiquidityWithPermit(address,address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)
+    IUniswapV2Router01: function removeLiquidityWithPermit(address tokenA, address tokenB, uint liquidity, uint amountAMin, uint amountBMin, address to, uint deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) external returns (uint amountA, uint amountB)
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/FiatTokenV1.sol
+0x3092afd5 removeMinter(address)
+    USDC: function removeMinter(address minter) external onlyMasterMinter returns (bool)
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/Verifiers.sol
+0xca2dfd0a removeVerifier(address)
+    StarkEx: function removeVerifier(address verifier) external
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapRoles.sol
+0x8bad0c0a renounceAdmin()
+    POAP: function renounceAdmin() public
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapRoles.sol
+0x02c37ddc renounceEventMinter(uint256)
+    POAP: function renounceEventMinter(uint256 eventId) public
+
+# https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/v4.4.0/contracts/access/OwnableUpgradeable.sol
+0x715018a6 renounceOwnership()
+    OwnableUpgradeable: function renounceOwnership() public virtual onlyOwner
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0xab9b2adf requestFullExit(uint32,address)
+    zkSync: function requestFullExit(uint32 _accountId, address _token) public nonReentrant
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x13d9787b requestFullExitNFT(uint32,uint32)
+    zkSync: function requestFullExitNFT(uint32 _accountId, uint32 _tokenId) public nonReentrant
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0x4b18bd0f requireActiveValidator(address)
+    zkSync Governance: function requireActiveValidator(address _address) external view
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xf5f84ed4 requireGovernor(address)
+    zkSync Governance: function requireGovernor(address _address) public view
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1.1/Rescuable.sol
+0xb2118a8d rescueERC20(address,address,uint256)
+    USDC: function rescueERC20(IERC20 tokenContract, address to, uint256 amount) external onlyRescuer
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1.1/Rescuable.sol
+0x38a63183 rescuer()
+    USDC: function rescuer() external view returns (address)
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0xe403d411 reservesRatios(address)
+    SashimiInvestment: mapping (address => uint256) public reservesRatios
+
+0x0178b8bf resolver(bytes32)
+    EIP-137 Registry: function resolver(bytes32 node) constant returns (address)
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0xbb826ac7 revertBlocks(tuple[])
+    zkSync: function revertBlocks(StoredBlockInfo[] memory _blocksToRevert) external
+
+0xfad8b32a revokeOperator(address)
+    ERC777Token: function revokeOperator(address operator) external
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0xf887ea40 router()
+    SashimiLendingVaultProvider: address public router
+
+0x2eb2c2d6 safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)
+    ERC1155: function safeBatchTransferFrom(address _from, address _to, uint256[] calldata _ids, uint256[] calldata _values, bytes calldata _data) external)
+
+# https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.0/contracts/mocks/ERC721Mock.sol
+0xa1448194 safeMint(address,uint256)
+    OpenZeppelin ERC721Mock: function safeMint(address to, uint256 tokenId) public
+
+# https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.0/contracts/mocks/ERC721Mock.sol
+0x8832e6e3 safeMint(address,uint256,bytes)
+    OpenZeppelin ERC721Mock: function safeMint(address to, uint256 tokenId, bytes memory _data) public
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0xe0f1d62a safeTransferERC20Token(address,address,uint256)
+    MonoXPool: function safeTransferERC20Token(address token, address to, uint256 amount) external onlyOwner
+
+# https://github.com/Uniswap/solidity-lib/blob/v2.1.0/contracts/libraries/TransferHelper.sol
+0x7c4368c1 safeTransferETH(address,uint256)
+    TransferHelper: function safeTransferETH(address to, uint256 value) external onlyOwner
+
+0x42842e0e safeTransferFrom(address,address,uint256)
+    ERC721: function safeTransferFrom(address _from, address _to, uint256 _tokenId) external payable
+
+0xb88d4fde safeTransferFrom(address,address,uint256,bytes)
+    ERC721: function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes data) external payable
+
+0xf242432a safeTransferFrom(address,address,uint256,uint256,bytes)
+    ERC1155: function safeTransferFrom(address _from, address _to, uint256 _id, uint256 _value, bytes calldata _data) external
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x86f28dd2 sashimiLendingLens()
+    SashimiLendingVaultProvider: SashimiLendingLens public sashimiLendingLens
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x32a9862e sashimiRouter()
+    SashimiLendingVaultProvider: address public sashimiRouter
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMTrader.sol
+0xbd6015b4 sellBase(address)
+    DODOVendingMachine: function sellBase(address to) external preventReentrant returns (uint256 receiveQuoteAmount)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMTrader.sol
+0xdd93f59a sellQuote(address)
+    DODOVendingMachine: function sellQuote(address to) external preventReentrant returns (uint256 receiveBaseAmount)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMFunding.sol
+0xb56ceaa6 sellShares(uint256,address,uint256,uint256,bytes,uint256)
+    DODOVendingMachine: function sellShares(uint256 shareAmount, address to, uint256 baseMinAmount, uint256 quoteMinAmount, bytes calldata data, uint256 deadline) external preventReentrant returns (uint256 baseAmount, uint256 quoteAmount)
+
+0x9bd9bbc6 send(address,uint256,bytes)
+    ERC777Token: function send(address to, uint256 amount, bytes calldata data) external
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0x704b6c02 setAdmin(address)
+    MonoXPool: function setAdmin(address _admin) public onlyAdmin
+
+0xa22cb465 setApprovalForAll(address,bool)
+    ERC721: function setApprovalForAll(address _operator, bool _approved) external
+    ERC1155: function setApprovalForAll(address _operator, bool _approved) external)
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x595a5ebc setAuthPubkeyHash(bytes,uint32)
+    zkSync: function setAuthPubkeyHash(bytes calldata _pubkeyHash, uint32 _nonce) external
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/Poap.sol
+0x55f804b3 setBaseURI(string)
+    POAP: function setBaseURI(string memory baseURI) public onlyAdmin whenNotPaused
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xce09e20d setDefaultNFTFactory(address)
+    zkSync Governance: function setDefaultNFTFactory(address _factory) external
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0xf46901ed setFeeTo(address)
+    UniswapV2Factory: function setFeeTo(address _feeTo) external
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0xa2e74af6 setFeeToSetter(address)
+    UniswapV2Factory: function setFeeToSetter(address _feeToSetter) external
+
+0x29965a1d setInterfaceImplementer(address,bytes32,address)
+    ERC820Registry: function setInterfaceImplementer(address _addr, bytes32 _interfaceHash, address _implementer) external
+    ERC1820Registry: function setInterfaceImplementer(address _addr, bytes32 _interfaceHash, address _implementer) external
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0x719c150c setLister(address,bool)
+    zkSync TokenGovernance: function setLister(address _listerAddress, bool _active) external
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0xb42a9d80 setListingCap(uint16)
+    zkSync TokenGovernance: function setListingCap(uint16 _newListingCap) external
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0x131dbd09 setListingFee(uint256)
+    zkSync TokenGovernance: function setListingFee(uint256 _newListingFee) external
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0x70de40b0 setListingFeeToken(address,uint256)
+    zkSync TokenGovernance: function setListingFeeToken(IERC20 _newListingFeeToken, uint256 _newListingFee) external
+
+0x5df8122f setManager(address,address)
+    ERC820Registry: function setManager(address _addr, address _newManager) external
+    ERC1820Registry: function setManager(address _addr, address _newManager) external
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0x23cf3118 setMigrator(address)
+    UniswapV2Factory: function setMigrator(address _migrator) external override
+
+0x5b0fc9c3 setOwner(bytes32,address)
+    EIP-137 Registry: function setOwner(bytes32 node, address owner)
+
+# https://etherscan.io/address/0xd418049AdA41D59913AbC5bBcfDfA54152E2FA9F
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/ForcedExit.sol
+0x718da7ee setReceiver(address)
+    zkSync ForcedExit: function setReceiver(address payable _newReceiver) external
+
+0x1896f70a setResolver(bytes32,address)
+    EIP-137 Registry: function setResolver(bytes32 node, address resolver)
+
+# https://etherscan.io/address/0xF028F723ED1D0fE01cC59973C49298AA95c57472
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Factory.sol
+0xc0d78655 setRouter(address)
+    UniswapV2Factory: function setRouter(address router) external
+
+0x06ab5923 setSubnodeOwner(bytes32,bytes32,address)
+    EIP-137 Registry: function setSubnodeOwner(bytes32 node, bytes32 label, address owner)
+
+0x14ab9038 setTTL(bytes32,uint64)
+    EIP-137 Registry: function setTTL(bytes32 node, uint64 ttl)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0x62257470 setTokenPaused(address,bool)
+    zkSync Governance: function setTokenPaused(address _tokenAddr, bool _tokenPaused) external
+
+# https://etherscan.io/address/0x66e7d7839333f502df355f5bd87aea24bac2ee63
+0x15d95a00 setTokenStatus(address,uint8)
+    Monoswap: function setTokenStatus(address _token, uint8 _status) onlyOwner external
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0xf0f44260 setTreasury(address)
+    zkSync TokenGovernance: function setTreasury(address _newTreasury) external
+
+0x02fe5305 setURI(string)
+    ERC1155 Implementation: function setURI(string memory uri) external onlyAdmin
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0x4623c91d setValidator(address,bool)
+    zkSync Governance: function setValidator(address _validator, bool _active) external
+
+# https://etherscan.io/address/0xe4FE6a45f354E845F954CdDeE6084603CEDB9410
+0x6817031b setVault(address)
+    UniswapV2Router02: function setVault(address vaultAddress) external override
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0x53d6fd59 setWhitelist(address,bool)
+    MonoXPool: function setWhitelist(address _whitelist, bool _isWhitelist) external onlyAdmin
+
+# https://etherscan.io/address/0x16BA0f221664A5189cf2C1a7AF0d3AbFc70aA295
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/committee/Committee.sol
+0xce757d29 signaturesRequired()
+    StarkEx: uint256 public signaturesRequired
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0xbe9a6555 start()
+    SashimiInvestment: function start() onlyOwner public
+
+# https://versatile.blocksecteam.com/tx/eth/0x713c2ce2cb424eb746083c25b7e48c368bb64f587c2d77b5c474a307a79bf069
+# https://twitter.com/blocksecteam/status/1476516736422019082
+# https://etherscan.io/address/0x2cCc076d1de2d88209f491C679Fa5BDe870C384a
+0xf3e4e385 start(address[])
+    unknown: function start(address[] _counts)
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0x6b131e06 startPreparation()
+    zkSync UpgradeGatekeeper: function startPreparation() external returns (bool)
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0x31a94da3 startUpgrade(address[])
+    zkSync UpgradeGatekeeper: function startUpgrade(address[] calldata newTargets) external
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Storage.sol
+0x9ba0d146 storedBlockHashes(uint32)
+    zkSync: mapping (uint32 => bytes32) public storedBlockHashes
+
+0x01ffc9a7 supportsInterface(bytes4)
+    ERC165: function supportsInterface(bytes4 interfaceID) external view returns (bool)
+    EIP-137 Resolver: function supportsInterface(bytes4 interfaceID) constant returns (bool)
+
+0x6548aff0 swap(address,uint256,address,uint256,address)
+    unknown: function swap(address,uint256,address,uint256,address)
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0x022c0d9f swap(uint256,uint256,address,bytes)
+    UniswapV2Pair: function swap(uint amount0Out, uint amount1Out, address to, bytes calldata data) external lock
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0xfb3bdb41 swapETHForExactTokens(uint256,address[],address,uint256)
+    IUniswapV2Router01: function swapETHForExactTokens(uint amountOut, address[] calldata path, address to, uint deadline) external payable returns (uint[] memory amounts)
+
+# https://etherscan.io/address/0x66e7d7839333f502df355f5bd87aea24bac2ee63
+0xb64c9be6 swapExactETHForToken(address,uint256,address,uint256)
+    Monoswap: function swapExactETHForToken(address tokenOut, uint amountOutMin, address to, uint deadline) external virtual payable ensure(deadline) returns (uint amountOut)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0x7ff36ab5 swapExactETHForTokens(uint256,address[],address,uint256)
+    IUniswapV2Router01: function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline) external payable returns (uint[] memory amounts)
+
+# https://etherscan.io/address/0xe4FE6a45f354E845F954CdDeE6084603CEDB9410
+# https://github.com/Uniswap/v2-periphery/blob/2efa12e0f2d808d9b49737927f0e416fafa5af68/contracts/UniswapV2Router02.sol
+0xb6f9de95 swapExactETHForTokensSupportingFeeOnTransferTokens(uint256,address[],address,uint256)
+    UniswapV2Router02: function swapExactETHForTokensSupportingFeeOnTransferTokens(uint amountOutMin, address[] calldata path, address to, uint deadline) external virtual override payable ensure(deadline)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0x18cbafe5 swapExactTokensForETH(uint256,uint256,address[],address,uint256)
+    IUniswapV2Router01: function swapExactTokensForETH(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)
+
+# https://etherscan.io/address/0xe4FE6a45f354E845F954CdDeE6084603CEDB9410
+# https://github.com/Uniswap/v2-periphery/blob/2efa12e0f2d808d9b49737927f0e416fafa5af68/contracts/UniswapV2Router02.sol
+0x791ac947 swapExactTokensForETHSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)
+    UniswapV2Router02: function swapExactTokensForETHSupportingFeeOnTransferTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external virtual override ensure(deadline)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0x38ed1739 swapExactTokensForTokens(uint256,uint256,address[],address,uint256)
+    IUniswapV2Router01: function swapExactTokensForTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)
+
+# https://etherscan.io/address/0xe4FE6a45f354E845F954CdDeE6084603CEDB9410
+# https://github.com/Uniswap/v2-periphery/blob/2efa12e0f2d808d9b49737927f0e416fafa5af68/contracts/UniswapV2Router02.sol
+0x5c11d795 swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)
+    UniswapV2Router02: function swapExactTokensForTokensSupportingFeeOnTransferTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external virtual override ensure(deadline)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0x4a25d94a swapTokensForExactETH(uint256,uint256,address[],address,uint256)
+    IUniswapV2Router01: function swapTokensForExactETH(uint amountOut, uint amountInMax, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IUniswapV2Router01.sol
+0x8803dbee swapTokensForExactTokens(uint256,uint256,address[],address,uint256)
+    IUniswapV2Router01: function swapTokensForExactTokens(uint amountOut, uint amountInMax, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)
+
+0x95d89b41 symbol()
+    ERC20: function symbol() public view returns (string)
+    ERC721Metadata: function symbol() external view returns (string _symbol)
+    ERC777Token: function symbol() external view returns (string memory)
+
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVMVault.sol
+0xfff6cae9 sync()
+    DODOVendingMachine: function sync() external preventReentrant
+
+# https://etherscan.io/address/0xe4FE6a45f354E845F954CdDeE6084603CEDB9410
+0x52180208 take(address,uint256)
+    UniswapV2Router02: function take(address token, uint amount) external virtual override
+
+0x07bb7655 toChainId()
+    unknown: address public toChainId
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0xfc0c546a token()
+    SashimiLendingVaultProvider: address override public token
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0x0dfe1681 token0()
+    UniswapV2Pair: address public token0
+
+# https://etherscan.io/address/0x490Ccb3C835597Ff31E525262235487f9426312b
+# https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/UniswapV2Pair.sol
+0xd21220a7 token1()
+    UniswapV2Pair: address public token1
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0x10603dad tokenAddresses(uint16)
+    zkSync Governance: mapping (uint16 => address) public tokenAddresses
+
+0x4f6ccce7 tokenByIndex(uint256)
+    ERC721Enumerable: function tokenByIndex(uint256 _index) external view returns (uint256)
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/Poap.sol
+0x67e971ce tokenDetailsOfOwnerByIndex(address,uint256)
+    POAP: function tokenDetailsOfOwnerByIndex(address owner, uint256 index) public view returns (uint256 tokenId, uint256 eventId)
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/Poap.sol
+0x127a5298 tokenEvent(uint256)
+    POAP: function tokenEvent(uint256 tokenId) public view returns (uint256)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0x8d1db940 tokenGovernance()
+    zkSync Governance: TokenGovernance public tokenGovernance
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xfc97a303 tokenIds(address)
+    zkSync Governance: mapping (address => uint16) public tokenIds
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0xaf3d414b tokenLister(address)
+    zkSync TokenGovernance: mapping (address => bool) public tokenLister
+
+0x2f745c59 tokenOfOwnerByIndex(address,uint256)
+    ERC721Enumerable: function tokenOfOwnerByIndex(address _owner, uint256 _index) external view returns (uint256)
+
+0xc87b56dd tokenURI(uint256)
+    ERC721Metadata: function tokenURI(uint256 _tokenId) external view returns (string)
+
+0x0023de29 tokensReceived(address,address,address,uint256,bytes,bytes)
+    ERC777TokensRecipient: function tokensReceived(address operator, address from, address to, uint256 amount, bytes calldata data, bytes calldata operatorData) external
+
+0x75ab9782 tokensToSend(address,address,address,uint256,bytes,bytes)
+    ERC777TokensSender: function tokensToSend(address operator, address from, address to, uint256 amount, bytes calldata userData, bytes calldata operatorData) external
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0x440c96e4 topHolder(uint256)
+    MonoXPool: mapping (uint256 => address) public topHolder
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0x7ccbbaff topLPHolderOf(uint256)
+    MonoXPool: function topLPHolderOf(uint256 pid) external view returns (address)
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Storage.sol
+0xfaf4d8cb totalBlocksCommitted()
+    zkSync: uint32 public totalBlocksCommitted
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Storage.sol
+0xf2235487 totalBlocksExecuted()
+    zkSync: uint32 public totalBlocksExecuted
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/Storage.sol
+0x647b5923 totalBlocksProven()
+    zkSync: uint32 public totalBlocksProven
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Storage.sol
+0xc57b22be totalOpenPriorityRequests()
+    zkSync: uint64 public totalOpenPriorityRequests
+
+0x18160ddd totalSupply()
+    ERC20: function totalSupply() public view returns (uint256)
+    ERC721Enumerable: function totalSupply() external view returns (uint256)
+    ERC777Token: function totalSupply() external view returns (uint256)
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0xbd85b039 totalSupply(uint256)
+    MonoXPool: mapping (uint256 => uint256) public totalSupply
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0x75b0d9cd totalSupplyOf(uint256)
+    MonoXPool: function totalSupplyOf(uint256 pid) external view returns (uint256)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0x7e1c0c09 totalTokens()
+    zkSync Governance: uint16 public totalTokens
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0xbeabacc8 transfer(address,address,uint256)
+    SashimiLendingVaultProvider: function transfer(address _token, address _receipt, uint256 _amount) override onlyController public
+
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IWETH.sol
+0xa9059cbb transfer(address,uint256)
+    ERC20: function transfer(address _to, uint256 _value) public returns (bool success)
+    Uniswap IWETH: function transfer(address to, uint value) external returns (bool)
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x7b1a4909 transferETH(address,uint256)
+    SashimiLendingVaultProvider: function transferETH(address _receipt, uint256 _amount) override onlyController public
+
+0x23b872dd transferFrom(address,address,uint256)
+    ERC20: function transferFrom(address _from, address _to, uint256 _value) public returns (bool success)
+    ERC721: function transferFrom(address _from, address _to, uint256 _tokenId) external payable
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Ownable.sol
+0xc3f59687 transferMastership(address)
+    zkSync Ownable: function transferMastership(address _newMaster) external
+
+# https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/v4.4.0/contracts/access/OwnableUpgradeable.sol
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Ownable.sol
+0xf2fde38b transferOwnership(address)
+    OwnableUpgradeable: function transferOwnership(address newOwner) public virtual onlyOwner
+    USDC: function transferOwnership(address newOwner) external onlyOwner
+
+# https://eips.ethereum.org/EIPS/eip-3009
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v2/FiatTokenV2.sol
+0xe3ee160e transferWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32)
+    EIP3009: function transferWithAuthorization(address from, address to, uint256 value, uint256 validAfter, uint256 validBefore, bytes32 nonce, uint8 v, bytes32 r, bytes32 s) external
+    USDC: function transferWithAuthorization(address from, address to, uint256 value, uint256 validAfter, uint256 validBefore, bytes32 nonce, uint8 v, bytes32 r, bytes32 s) external whenNotPaused notBlacklisted(from) notBlacklisted(to)
+
+# https://etherscan.io/address/0x5140Cc54Bb876aBE1ba67d15AC66Ad2D42FDf46A
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/TokenGovernance.sol
+0x61d027b3 treasury()
+    zkSync TokenGovernance: address public treasury
+
+0x16a25cbd ttl(bytes32)
+    EIP-137 Registry: function ttl(bytes32 node) constant returns (uint64)
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Blacklistable.sol
+0x1a895266 unBlacklist(address)
+    USDC: function unBlacklist(address _account) external onlyBlacklister
+
+# https://etherscan.io/address/0xF65C115efd24102315Af53f84aD65aD240bc9D57
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/components/Freezable.sol
+0x7cf12b90 unFreeze()
+    StarkEx: function unFreeze() external onlyFrozen() onlyGovernance()
+
+# https://etherscan.io/address/0x96d0ec5abb022ebf3a269344b2593ed909a77948#code
+# https://github.com/poap-xyz/poap-contracts/blob/5f9a31ed3b95e63d8de5a2b5057aeed0f6ed6750/contracts/PoapPausable.sol
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Pausable.sol
+0x3f4ba83a unpause()
+    POAP: function unpause() public onlyAdmin whenPaused
+    USDC: function unpause() external onlyPauser
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Blacklistable.sol
+0xad38bf22 updateBlacklister(address)
+    USDC: function updateBlacklister(address _newBlacklister) external onlyOwner
+
+0x61455567 updateContract(address,string,string)
+    ERC1538 Transparent Contract: function updateContract(address _delegate, string calldata _functionSignatures, string calldata _commitMessage) external
+
+0xa41e7d51 updateERC165Cache(address,bytes4)
+    ERC820Registry: function updateERC165Cache(address _contract, bytes4 _interfaceId) external
+    ERC1820Registry: function updateERC165Cache(address _contract, bytes4 _interfaceId) external
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/FiatTokenV1.sol
+0xaa20e1e4 updateMasterMinter(address)
+    USDC: function updateMasterMinter(address _newMasterMinter) external onlyOwner
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1/Pausable.sol
+0x554bab3c updatePauser(address)
+    USDC: function updatePauser(address _newPauser) external onlyOwner
+
+# https://etherscan.io/address/0x66e7d7839333f502df355f5bd87aea24bac2ee63
+0x3f3d69e3 updatePoolStatus(address,uint8)
+    Monoswap: function updatePoolStatus(address _token, uint8 PoolStatus _status) external onlyOwner
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v1.1/Rescuable.sol
+0x2ab60045 updateRescuer(address)
+    USDC: function updateRescuer(address newRescuer) external onlyOwner
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Proxy.sol
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0x25394645 upgrade(bytes)
+    zkSync: function upgrade(bytes calldata) external pure
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Proxy.sol
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x871b8ff1 upgradeCanceled()
+    zkSync: function upgradeCanceled() external override
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Proxy.sol
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0xb269b9ae upgradeFinishes()
+    zkSync: function upgradeFinishes() external override
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Proxy.sol
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x3b154b73 upgradeNoticePeriodStarted()
+    zkSync: function upgradeNoticePeriodStarted() external override
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Proxy.sol
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x78b91e70 upgradePreparationStarted()
+    zkSync: function upgradePreparationStarted() external override
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0xd4d543c5 upgradeStatus()
+    zkSync UpgradeGatekeeper: UpgradeStatus public upgradeStatus
+
+# https://etherscan.io/address/0xaBEA9132b05A70803a4E85094fD0e1800777fBEF
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Proxy.sol
+0x6fc49140 upgradeTarget(address,bytes)
+    zkSync: function upgradeTarget(address newTarget, bytes calldata newTargetUpgradeParameters) external override
+
+# https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+# https://eips.ethereum.org/EIPS/eip-1967
+0x3659cfe6 upgradeTo(address)
+    EIP-1967 Proxy: function upgradeTo(address newImplementation) external ifAdmin
+
+# https://etherscan.io/address/0x5d22045DAcEAB03B158031eCB7D9d06Fad24609b
+# https://github.com/starkware-libs/starkex-contracts/blob/v2.0/scalable-dex/contracts/src/upgrade/Proxy.sol
+0x7147855d upgradeTo(address,bytes,bool)
+    StarkEx: function upgradeTo(address newImplementation, bytes calldata data, bool finalize) external payable onlyGovernance notFinalized notFrozen
+
+# https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+# https://eips.ethereum.org/EIPS/eip-1967
+0x4f1ef286 upgradeToAndCall(address,bytes)
+    EIP-1967 Proxy: function upgradeToAndCall(address newImplementation, bytes data) payable external ifAdmin
+
+0x0e89341c uri(uint256)
+    ERC1155Metadata_URI: function uri(uint256 _id) external view returns (string memory)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xead31762 validateTokenAddress(address)
+    zkSync Governance: function validateTokenAddress(address _tokenAddr) external view returns (uint16)
+
+# https://etherscan.io/address/0x9a97008ccCbDEc3413F9304602427e66895996A0
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Governance.sol
+0xfa52c7d8 validators(address)
+    zkSync Governance: mapping (address => bool) public validators
+
+# https://etherscan.io/address/0xe4FE6a45f354E845F954CdDeE6084603CEDB9410
+0xfbfa77cf vault()
+    UniswapV2Router02: address public override vault
+
+# https://etherscan.io/address/0xf7Bd436a05678B647D74a88ffcf4445Efc43BDfC
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Verifier.sol
+0xa830bd60 verifyAggregatedBlockProof(uint256[],uint256[],uint8[],uint256[],uint256[16])
+    zkSync Verifier: function verifyAggregatedBlockProof(uint256[] memory _recursiveInput, uint256[] memory _proof, uint8[] memory _vkIndexes, uint256[] memory _individualVksInputs, uint256[16] memory _subproofsLimbs) external view returns (bool)
+
+# https://etherscan.io/address/0x16BA0f221664A5189cf2C1a7AF0d3AbFc70aA295
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/scalable-dex/contracts/src/committee/Committee.sol
+0x504f7f6f verifyAvailabilityProof(bytes32,bytes)
+    StarkEx: function verifyAvailabilityProof(bytes32 claimHash, bytes calldata availabilityProofs) external
+
+# https://etherscan.io/address/0x02d476dE41B914Fd38dF58B85008A91DB2BE3D6C
+0xdc46ea94 verifyBlockProof(uint256[],bytes32,uint32)
+    zkSync Verifier: function verifyBlockProof(uint256[] calldata _proof, bytes32 _commitment, uint32 _chunks) external view returns (bool)
+
+# https://etherscan.io/address/0x02d476dE41B914Fd38dF58B85008A91DB2BE3D6C
+0xc81a27ad verifyExitProof(bytes32,uint32,address,uint16,uint128,uint256[])
+    zkSync Verifier: function verifyExitProof(bytes32 _rootHash, uint32 _accountId, address _owner, uint16 _tokenId, uint128 _amount, uint256[] calldata _proof) external view returns (bool)
+
+# https://etherscan.io/address/0xf7Bd436a05678B647D74a88ffcf4445Efc43BDfC
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/Verifier.sol
+0xf7e13636 verifyExitProof(bytes32,uint32,address,uint32,uint128,uint32,address,uint32,bytes32,uint256[])
+    zkSync Verifier: function verifyExitProof(bytes32 _rootHash, uint32 _accountId, address _owner, uint32 _tokenId, uint128 _amount, uint32 _nftCreatorAccountId, address _nftCreatorAddress, uint32 _nftSerialId, bytes32 _nftContentHash, uint256[] calldata _proof) external view returns (bool)
+
+# https://etherscan.io/address/0x689F886B4E61b5907166B2506DB5e89609443045
+# https://docs.starkware.co/starkex-v4/deployments-addresses#sharp-verifier-contract
+# https://docs.starkware.co/starkex-v4/starkex-deep-dive/how-cairo-is-used-in-starkex#sharp
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/evm-verifier/solidity/contracts/FriStatementContract.sol
+0xe85a6a28 verifyFRI(uint256[],uint256[],uint256,uint256,uint256)
+    StarkEx: function verifyFRI(uint256[] memory proof, uint256[] memory friQueue, uint256 evaluationPoint, uint256 friStepSize, uint256 expectedRoot) public
+
+# https://etherscan.io/address/0x01378dadF607ac74A072c956D8240D1DF75bCCA0
+# https://docs.starkware.co/starkex-v4/deployments-addresses#sharp-verifier-contract
+# https://docs.starkware.co/starkex-v4/starkex-deep-dive/how-cairo-is-used-in-starkex#sharp
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/evm-verifier/solidity/contracts/MerkleStatementContract.sol
+0x3fe317a6 verifyMerkle(uint256[],uint256[],uint256,uint256)
+    StarkEx: function verifyMerkle(uint256[] memory merkleView, uint256[] memory initialMerkleQueue, uint256 height, uint256 expectedRoot) public
+
+# https://etherscan.io/address/0x2cAbD63F6f28b493f33D13E34060f0959F3570aE
+# https://docs.starkware.co/starkex-v4/deployments-addresses#sharp-verifier-contract
+# https://docs.starkware.co/starkex-v4/starkex-deep-dive/how-cairo-is-used-in-starkex#sharp
+# https://github.com/starkware-libs/starkex-contracts/blob/StarkExchange-v4.0/evm-verifier/solidity/contracts/gps/GpsStatementVerifier.sol
+0x9b3b76cc verifyProofAndRegister(uint256[],uint256[],uint256[],uint256[],uint256)
+    StarkEx: function verifyProofAndRegister(uint256[] calldata proofParams, uint256[] calldata proof, uint256[] calldata taskMetadata, uint256[] calldata cairoAuxInput, uint256 cairoVerifierId) external
+
+# https://etherscan.io/address/0xf7Bd436a05678B647D74a88ffcf4445Efc43BDfC
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/PlonkCore.sol
+0x31e8d491 verify_serialized_proof(uint256[],uint256[],tuple)
+    zkSync Verifier: function verify_serialized_proof(uint256[] memory public_inputs, uint256[] memory serialized_proof, VerificationKey memory vk) public view returns (bool)
+
+# https://etherscan.io/address/0xf7Bd436a05678B647D74a88ffcf4445Efc43BDfC
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/PlonkCore.sol
+0x8b27130a verify_serialized_proof_with_recursion(uint256[],uint256[],uint256,uint8,uint8[],uint256[],uint256[16],tuple)
+    zkSync Verifier: function verify_serialized_proof_with_recursion(uint256[] memory public_inputs, uint256[] memory serialized_proof, uint256 recursive_vks_root, uint8 max_valid_index, uint8[] memory recursive_vks_indexes, uint256[] memory individual_vks_inputs, uint256[16] memory subproofs_limbs, VerificationKey memory vk) public view returns (bool)
+
+# https://etherscan.io/address/0xa2327a938Febf5FEC13baCFb16Ae10EcBc4cbDCF
+# https://github.com/centrehq/centre-tokens/blob/v2.1.0/contracts/v2/FiatTokenV2_1.sol
+# https://etherscan.io/address/0x7cA7B5EAAf526d93705d28c1b47E9739595C90E7
+# https://github.com/DODOEX/contractV2/blob/08a06609604779c31db493bc0d755efa1c3f0a61/contracts/DODOVendingMachine/impl/DVM.sol
+0x54fd4d50 version()
+    USDC: function version() external view returns (string memory)
+    DODOVendingMachine: function version() external pure returns (string memory)
+
+# https://etherscan.io/address/0x38A43F4330f24fe920F943409709fc9A6084C939
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/UpgradeGatekeeper.sol
+0xac0d925c versionId()
+    zkSync UpgradeGatekeeper: uint256 public versionId
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0xf3fef3a3 withdraw(address,uint256)
+    SashimiInvestment: function withdraw(address _token, uint256 _amount) override onlyRouter notFrozen public
+
+# https://github.com/AztecProtocol/aztec-connect-starter/blob/d92b805aa05162bb665bbe5e05c435ea4b070150/contracts/DefiBridgeProxy.sol#L18
+# https://github.com/Uniswap/v2-periphery/blob/v1.0.0-beta.0/contracts/interfaces/IWETH.sol
+0x2e1a7d4d withdraw(uint256)
+    Aztec Connect DefiBridge: function withdraw(uint256)
+    Uniswap IWETH: function withdraw(uint) external
+
+# https://etherscan.io/address/0x7Bc801A840a7c2c027f4E5e48Bf618348B0bCE2B
+0x853828b6 withdrawAll()
+    SashimiLendingVaultProvider: function withdrawAll() override onlyController external returns (uint256 amount)
+
+0xbd1f4b52 withdrawErc20(address,uint256)
+    unknown: function withdrawErc20(address tokenContract, uint256 amount)
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0xd514da50 withdrawPendingBalance(address,address,uint128)
+    zkSync: function withdrawPendingBalance(address payable _owner, address _token, uint128 _amount) external nonReentrant
+
+# https://etherscan.io/address/0xd418049AdA41D59913AbC5bBcfDfA54152E2FA9F
+# https://github.com/matter-labs/zksync/blob/contracts-6/contracts/contracts/ForcedExit.sol
+0x7be9c682 withdrawPendingFunds(address)
+    zkSync ForcedExit: function withdrawPendingFunds(address payable _to) external nonReentrant
+
+# https://etherscan.io/address/0x204c6BADaD00Ef326dE0921A940D8267060d1033
+# https://github.com/matter-labs/zksync/blob/v1.0.0/contracts/contracts/ZkSync.sol
+0x505a7573 withdrawPendingNFTBalance(uint32)
+    zkSync: function withdrawPendingNFTBalance(uint32 _tokenId) external nonReentrant
+
+# https://polygonscan.com/address/0x3826367A5563eCE9C164eFf9701146d96cC70AD9
+0xfc4dd333 withdrawWETH(uint256)
+    MonoXPool: function withdrawWETH(uint256 amount) external onlyOwner
+
+# https://etherscan.io/address/0x3F966FA1c0606e19047ed72068D2857677E07EF4
+0x1268754f withdrawWithReBalance(address,uint256)
+    SashimiInvestment: function withdrawWithReBalance(address _token, uint256 _amount) override onlyRouter notFrozen public

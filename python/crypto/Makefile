@@ -5,6 +5,7 @@ NEVER_TEST_BINARIES := find_rsa_pkcs1v15_modulus.py keepass_decode.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
 HAVE_PYTHON_CRYPTODOME := $(call can-run,$(PYTHON) -c 'import Cryptodome')
+HAVE_FSTRINGS := $(call can-run,$(PYTHON) -c 'print(f"{repr(6*7)}")')
 
 # "enum" module was introduced in Python 3.4 and was backported with "pip install enum34"
 HAVE_PYTHON_ENUM := $(call can-run,$(PYTHON) -c 'import enum')
@@ -15,6 +16,10 @@ endif
 
 ifneq ($(HAVE_PYTHON_ENUM),y)
 NONTEST_BINARIES += tpm_decode_bios_measurements.py tpm_ea_policy.py
+endif
+
+ifneq ($(HAVE_FSTRINGS),y)
+NONTEST_BINARIES += eth_functions_keccak.py
 endif
 
 BINARIES := $(wildcard *.py)
