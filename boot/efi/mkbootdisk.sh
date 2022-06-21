@@ -6,9 +6,18 @@
 #    mkbootdisk.sh -t image.efi           Create image.disk in /tmp
 #    mkbootdisk.sh -r image.efi           Create image.disk and run it
 #
-# Here are some command lines to run the image with Qemu:
+# Here are some command lines to run the image with QEMU in the old way (before 2016):
 # * qemu-system-x86_64 -bios /usr/share/ovmf/ovmf_x64.bin -hda image.disk -serial stdio -display none
 # * qemu-system-i386 -bios /usr/share/ovmf/ovmf_ia32.bin -hda image.disk -serial stdio -display none
+#
+# To run the image in QEMU in the new way, with a split OVMF file:
+# * qemu-system-x86_64 \
+#     -drive if=pflash,format=raw,readonly=on,file=/usr/share/ovmf/x64/OVMF_CODE.fd \
+#     -drive if=pflash,format=raw,file=copy_of_OVMF_VARS.fd \
+#     -drive if=virtio,format=raw,file=image.disk -serial stdio -display none
+#
+# Such a logic has also been implemented in Debian to test edk2:
+# https://salsa.debian.org/qemu-team/edk2/-/blob/31c48f28db6083d7f8238b56fd31aedbc1fcde6b/debian/python/UEFI/Qemu.py
 
 # Create a disk able to store several 512-byte sectors
 FAT_NUMSECT=200
@@ -78,16 +87,32 @@ then
     esac
 fi
 
-OVMF_FIRMWARE=
+# OVMF firmware:
+# - Arch Linux https://archlinux.org/packages/extra/any/edk2-ovmf/
+#       /usr/share/edk2-ovmf/x64/OVMF_CODE.fd
+#       /usr/share/edk2-ovmf/x64/OVMF_VARS.fd
+#       /usr/share/edk2-ovmf/ia32/OVMF_CODE.fd
+#       /usr/share/edk2-ovmf/ia32/OVMF_VARS.fd
+# - Debian https://packages.debian.org/fr/sid/all/ovmf/filelist
+#       /usr/share/OVMF/OVMF_CODE.fd
+#       /usr/share/OVMF/OVMF_VARS.fd
+# - Debian https://packages.debian.org/fr/sid/all/ovmf-ia32/filelist
+#       /usr/share/OVMF/OVMF32_CODE_4M.secboot.fd
+#       /usr/share/OVMF/OVMF32_VARS_4M.fd
+# - Fedora https://fedora.pkgs.org/35/fedora-updates-x86_64/edk2-ovmf-20211126gitbb1bba3d7767-1.fc35.noarch.rpm.html
+#       /usr/share/edk2/ovmf/OVMF_CODE.fd
+#       /usr/share/edk2/ovmf/OVMF_VARS.fd
+
+OVMF_CODE=
 case "$ARCH" in
     x86_64)
         EFI_FILE_IN_PART="/EFI/BOOT/BOOTX64.efi"
         QEMU_COMMAND="qemu-system-x86_64"
-        for FILE in /usr/share/ovmf/ovmf_code_x64.bin /usr/share/ovmf/ovmf_x64.bin
+        for FILE in /usr/share/edk2-ovmf/x64/OVMF_CODE.fd /usr/share/OVMF/OVMF_CODE.fd /usr/share/edk2/ovmf/OVMF_CODE.fd
         do
             if [ -e "$FILE" ]
             then
-                OVMF_FIRMWARE="$FILE"
+                OVMF_CODE="$FILE"
                 break
             fi
         done
@@ -95,11 +120,11 @@ case "$ARCH" in
     ia32)
         EFI_FILE_IN_PART="/EFI/BOOT/BOOTIA32.efi"
         QEMU_COMMAND="qemu-system-i386"
-        for FILE in /usr/share/ovmf/ovmf_code_ia32.bin /usr/share/ovmf/ovmf_ia32.bin
+        for FILE in /usr/share/edk2-ovmf/ia32/OVMF_CODE.fd /usr/share/OVMF/OVMF32_CODE_4M.secboot.fd
         do
             if [ -e "$FILE" ]
             then
-                OVMF_FIRMWARE="$FILE"
+                OVMF_CODE="$FILE"
                 break
             fi
         done
@@ -109,9 +134,16 @@ case "$ARCH" in
         exit 1
         ;;
 esac
-if [ -z "$OVMF_FIRMWARE" ]
+if [ -z "$OVMF_CODE" ]
 then
-    echo >&2 "Unable to find OVMF firmware in /usr/share/ovmf"
+    echo >&2 "Unable to find OVMF firmware in /usr/share"
+    exit 1
+fi
+
+OVMF_VARS="$(printf "%s" "$OVMF_CODE" | sed 's/_CODE/_VARS/' | sed 's/\.secboot\.fd$/.fd/')"
+if [ -z "$OVMF_VARS" ]
+then
+    echo >&2 "Unable to find OVMF matching variables template $OVMF_VARS for $OVMF_CODE"
     exit 1
 fi
 
@@ -173,5 +205,12 @@ rm "$PART_FILE"
 if $RUN_IMAGE
 then
     echo "Booting $DISK_PATH as an $ARCH UEFI disk"
-    exec "$QEMU_COMMAND" -bios "$OVMF_FIRMWARE" -drive "format=raw,file=$DISK_PATH" -serial stdio -display none
+    OVMF_VARS_TEMP="$(mktemp)"
+    trap 'rm -f "$OVMF_VARS_TEMP"' EXIT HUP INT QUIT TERM
+    cat < "$OVMF_VARS" > "$OVMF_VARS_TEMP"
+    "$QEMU_COMMAND" \
+        -drive "if=pflash,format=raw,readonly=on,file=$OVMF_CODE" \
+        -drive "if=pflash,format=raw,file=$OVMF_VARS_TEMP" \
+        -drive "format=raw,file=$DISK_PATH" \
+        -serial stdio -no-reboot -display none
 fi
