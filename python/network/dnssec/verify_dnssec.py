@@ -62,6 +62,7 @@ except ImportError:
 
 
 TLD_REPORT_URL = 'https://stats.research.icann.org/dns/tld_report/'
+TLD_OPENPROVIDER_URL = 'https://support.openprovider.eu/hc/en-us/articles/216648838-List-of-TLDs-that-support-DNSSEC'
 TLD_LIST_PATH = os.path.join(os.path.dirname(__file__), 'tld.list.txt')
 MOST_USED_TLD_LIST_PATH = os.path.join(os.path.dirname(__file__), 'most_used_tld.list.txt')
 DNS_CACHE_PATH = os.path.join(os.path.dirname(__file__), 'dns_cache')
@@ -84,7 +85,12 @@ def load_tld_list(filename):
 MOST_USED_TOP_LEVEL_DOMAINS = load_tld_list(MOST_USED_TLD_LIST_PATH)
 
 
-def update_tld_list():
+def update_tld_list_from_icann():
+    """Update the TLD list from stats.research.icann.org.
+
+    Since 2022-06-23 it has been broken
+    https://stats.research.icann.org/dns/tld_report/archive/20220623.000101.html
+    """
     # The certificate declares *.icann.org, which does not match stats.research.icann.org
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
@@ -124,6 +130,56 @@ def update_tld_list():
         for tld_desc, is_signed in sorted(tlds.items())]
     with open(TLD_LIST_PATH, 'w') as ftld:
         ftld.write('# List from {}\n{}\n'.format(TLD_REPORT_URL, '\n'.join(all_tlds)))
+
+
+def update_tld_list_from_openprovider():
+    """Update the TLD list from support.openprovider.eu."""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)",
+    }
+    if sys.version_info >= (3,):
+        urlopen = urllib.request.urlopen
+        req = urllib.request.Request(TLD_OPENPROVIDER_URL, headers=headers)
+    else:
+        req = urllib2.Request(TLD_OPENPROVIDER_URL, headers=headers)
+    tlds = {}
+    with urlopen(req) as resp:
+        # Read table such as:
+        # <tr style="height: 22px;">
+        # <td style="width: 203px; height: 22px;" data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;fr&quot;}"
+        #   >fr</td>
+        # <td style="width: 308px; height: 22px;" data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;
+        #   [6,8,10,12,13]&quot;}">[6,8,10,12,13]</td>
+        # </tr>
+        current_row = []
+        for line in resp:
+            line = line.decode('utf-8', 'replace')
+            m = re.match(r'^<td[^>]*data-sheets-value="\{([^>"]+)\}"', line)
+            if m:
+                values = m.group(1).split(":", 2)
+                if len(values) != 3:
+                    print("Ignoring invalid TLD record {}".format(values))
+                    continue
+                current_row.append(values[2].replace("&quot;", ""))
+            if current_row and '</tr>' in line:
+                if len(current_row) != 2:
+                    print("Ignoring invalid TLD row {}".format(current_row))
+                    current_row = []
+                    continue
+                tld = current_row[0] + "."
+                is_signed = current_row[1] != "NULL"
+                current_row = []
+                if tld in tlds:
+                    print("Ignoring duplicate TLD {}".format(tld))
+                    continue
+                tlds[tld] = is_signed
+
+    # Update the list
+    all_tlds = [
+        (tld_desc if is_signed else '# {} (not signed)'.format(tld_desc))
+        for tld_desc, is_signed in sorted(tlds.items())]
+    with open(TLD_LIST_PATH, 'w') as ftld:
+        ftld.write('# List from {}\n{}\n'.format(TLD_OPENPROVIDER_URL, '\n'.join(all_tlds)))
 
 
 def decode_bigint_be(data):
@@ -842,7 +898,7 @@ def main(argv=None):
                         level=logging.DEBUG if args.debug else logging.INFO)
 
     if args.update_tld_list:
-        update_tld_list()
+        update_tld_list_from_openprovider()
 
     if not HAVE_CRYPTO_ECDSA:
         logger.warning("Cryptodome.PublicKey.ECC is not available (please used PyCryptodome instead of PyCrypto)")
