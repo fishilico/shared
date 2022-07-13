@@ -143,36 +143,43 @@ def update_tld_list_from_openprovider():
     else:
         req = urllib2.Request(TLD_OPENPROVIDER_URL, headers=headers)
     tlds = {}
-    with urlopen(req) as resp:
-        # Read table such as:
-        # <tr style="height: 22px;">
-        # <td style="width: 203px; height: 22px;" data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;fr&quot;}"
-        #   >fr</td>
-        # <td style="width: 308px; height: 22px;" data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;
-        #   [6,8,10,12,13]&quot;}">[6,8,10,12,13]</td>
-        # </tr>
-        current_row = []
-        for line in resp:
-            line = line.decode('utf-8', 'replace')
-            m = re.match(r'^<td[^>]*data-sheets-value="\{([^>"]+)\}"', line)
-            if m:
-                values = m.group(1).split(":", 2)
-                if len(values) != 3:
-                    print("Ignoring invalid TLD record {}".format(values))
-                    continue
-                current_row.append(values[2].replace("&quot;", ""))
-            if current_row and '</tr>' in line:
-                if len(current_row) != 2:
-                    print("Ignoring invalid TLD row {}".format(current_row))
+    try:
+        with urlopen(req) as resp:
+            # Read table such as:
+            # <tr style="height: 22px;">
+            # <td style="width: 203px; height: 22px;" data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;fr&quot;}"
+            #   >fr</td>
+            # <td style="width: 308px; height: 22px;" data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;
+            #   [6,8,10,12,13]&quot;}">[6,8,10,12,13]</td>
+            # </tr>
+            current_row = []
+            for line in resp:
+                line = line.decode('utf-8', 'replace')
+                m = re.match(r'^<td[^>]*data-sheets-value="\{([^>"]+)\}"', line)
+                if m:
+                    values = m.group(1).split(":", 2)
+                    if len(values) != 3:
+                        print("Ignoring invalid TLD record {}".format(values))
+                        continue
+                    current_row.append(values[2].replace("&quot;", ""))
+                if current_row and '</tr>' in line:
+                    if len(current_row) != 2:
+                        print("Ignoring invalid TLD row {}".format(current_row))
+                        current_row = []
+                        continue
+                    tld = current_row[0] + "."
+                    is_signed = current_row[1] != "NULL"
                     current_row = []
-                    continue
-                tld = current_row[0] + "."
-                is_signed = current_row[1] != "NULL"
-                current_row = []
-                if tld in tlds:
-                    print("Ignoring duplicate TLD {}".format(tld))
-                    continue
-                tlds[tld] = is_signed
+                    if tld in tlds:
+                        print("Ignoring duplicate TLD {}".format(tld))
+                        continue
+                    tlds[tld] = is_signed
+    except urllib.error.HTTPError as exc:
+        if exc.status == 403:  # HTTP Error 403: Forbidden
+            print("Ignoring HTTP 403 Forbidden from {}".format(TLD_OPENPROVIDER_URL))
+            # Do not update the file
+            return
+        raise
 
     # Update the list
     all_tlds = [
