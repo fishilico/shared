@@ -293,7 +293,8 @@ def sync_keys(keys_path: Path) -> None:
                     key_comment = wkd_url
 
                 # Try the direct method when the advanced one failed
-                if raw_key is None:
+                # Ignore domains which have issues in their configuration
+                if raw_key is None and not email.endswith("@att.net"):
                     wkd_url = get_wkd_direct_url(email)
                     raw_key = None
                     try:
