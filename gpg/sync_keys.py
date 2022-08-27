@@ -34,6 +34,7 @@ import hashlib
 from pathlib import Path
 import re
 import subprocess
+import sys
 import tempfile
 from typing import Union
 import urllib.error
@@ -206,6 +207,9 @@ def self_check() -> None:
 
 def get_pgp_key_id(raw_key: bytes) -> str:
     """Get the identifier of a key, using GnuPG"""
+    # Flush stdout and stderr to prevent interleaving messages from a subprocess
+    sys.stdout.flush()
+    sys.stderr.flush()
     with tempfile.TemporaryDirectory(prefix="gnupghome") as tmpdir:
         # Create an empty public keyring to avoid a GnuPG message
         with (Path(tmpdir) / "pubring.kbx").open("wb"):
@@ -228,6 +232,9 @@ def get_pgp_key_id(raw_key: bytes) -> str:
 
 def gpg_recv_key(key_id: str) -> bytes:
     """Receive a key using GnuPG using Ubuntu keyserver https://keyserver.ubuntu.com/"""
+    # Flush stdout and stderr to prevent interleaving messages from a subprocess
+    sys.stdout.flush()
+    sys.stderr.flush()
     with tempfile.TemporaryDirectory(prefix="gnupghome") as tmpdir:
         # Create an empty public keyring to avoid a GnuPG message
         with (Path(tmpdir) / "pubring.kbx").open("wb"):
