@@ -5,6 +5,7 @@ LABEL Description="Arch Linux with build dependencies for shared"
 
 # Arch Linux no longer provides python2-z3, since 2019-03-19:
 #   https://git.archlinux.org/svntogit/community.git/commit/?h=packages/z3&id=ce606b542b80ae8af30beda4c3838bd14818e51f
+# coq requires /etc/findlib.conf, which is provided by ocaml-findlib
 RUN \
     echo '[multilib]' >> /etc/pacman.conf && \
     echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf && \
@@ -23,6 +24,7 @@ RUN \
         make \
         mingw-w64-gcc \
         musl \
+        ocaml-findlib \
         openssh \
         pkgconf \
         python \
