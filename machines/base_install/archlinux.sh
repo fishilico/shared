@@ -564,7 +564,7 @@ then
     pkg python-sympy
     pkg python-unicorn
     pkg python-yaml
-    pkg python-z3
+    pkg python-z3-solver
     pkg python2-pillow
     pkg python2-pycryptodome
     pkg python2-pycryptodomex
