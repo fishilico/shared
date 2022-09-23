@@ -51,6 +51,8 @@
 0x16792B4EA25340F8 carlos@redhat.com
 
 # Google Linux Packages Signing Authority, for BinDiff https://www.zynamics.com/bindiff/manual/#N20240
+# and for Chrome https://www.google.com/linuxrepositories/
+0xA040830F7FAC5991 linux-packages-keymaster@google.com
 0x7721F63BD38B4796 linux-packages-keymaster@google.com
 
 # Iproute2, https://wiki.linuxfoundation.org/networking/iproute2
@@ -71,6 +73,9 @@
 
 # Logrotate, https://github.com/logrotate/logrotate
 0x873DB37572A37B36 kdudka@redhat.com https://github.com/kdudka.gpg
+
+# Microsoft (for Visual Studio Code), https://code.visualstudio.com/docs/setup/linux
+0xEB3E94ADBE1229CF gpgsecurity@microsoft.com https://packages.microsoft.com/keys/microsoft.asc
 
 # Ncurses, https://invisible-island.net/ncurses/ncurses.html
 0x702353E0F7E48EDB dickey@invisible-island.net
