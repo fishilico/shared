@@ -320,7 +320,6 @@ pkg pwgen
 pkg pypy
 pkg pypy3
 pkg python
-pkg python2
 pkg ruby
 pkg ruby-irb
 pkg ruby-rake
@@ -565,10 +564,6 @@ then
     pkg python-unicorn
     pkg python-yaml
     pkg python-z3-solver
-    pkg python2-pillow
-    pkg python2-pycryptodome
-    pkg python2-pycryptodomex
-    pkg python2-yara
     pkg qemu
     pkg qemu-arch-extra
     pkg radare2
