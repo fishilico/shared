@@ -6,13 +6,13 @@ ENV LANG=C.UTF-8
 
 # python-z3 does not install an __init__.py file, which is required with Python 2
 # Install OpenJDK 8 because OpenJDK 9 package is buggy: https://bugs.launchpad.net/ubuntu/+source/openjdk-9/+bug/1593191
+# Ubuntu 16.04 provides a version of Cargo (1.46.0)  fails to load https://github.com/rust-lang/crates.io-index
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
     apt-get -qq update && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
-        cargo \
         clang \
         coq \
         gcc-mingw-w64 \
@@ -63,7 +63,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust/download_web%
+#    Global blacklist: latex% rust%
 #    In sub-directories:
 #       c:
 #       glossaries: check_sort_order.py
@@ -74,10 +74,9 @@ CMD ["/run_shared_test.sh"]
 #       python/network:
 #       python/network/dnssec: verify_dnssec.py
 #       python/qrcode:
-#       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex% rust/download_web%
+#       Global blacklist: latex% rust%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
 #          glossaries: check_sort_order.py
@@ -88,7 +87,6 @@ CMD ["/run_shared_test.sh"]
 #          python/network:
 #          python/network/dnssec: verify_dnssec.py
 #          python/qrcode:
-#          rust:
 #          verification:
 #    Compilers:
 #       gcc -m64: ok
@@ -107,7 +105,5 @@ CMD ["/run_shared_test.sh"]
 #       Linux kernel: 4.4.0-210-generic
 #       /lib/ld-musl-x86_64.so.1: musl libc Version 1.1.9
 #       python3: Python 3.5.2
-#       rustc: rustc 1.47.0
-#       cargo: cargo 1.46.0
 #       coqc: The Coq Proof Assistant, version 8.4pl4 (November 2015) compiled on Nov 04 2015 12:56:53 with OCaml 4.02.3
 #       openssl: OpenSSL 1.0.2g  1 Mar 2016
