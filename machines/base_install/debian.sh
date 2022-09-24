@@ -223,6 +223,7 @@ pkg build-essential
 pkg cargo
 pkg clang
 pkg cmake
+#pkg devscripts  # For building packages, but with many dependencies
 pkg fakeroot
 pkg gdb
 pkg git
