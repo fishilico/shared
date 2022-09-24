@@ -88,6 +88,7 @@ def parse_log_file(filepath):
                     current_image = None
                 elif line.rstrip() in (
                         '0014:err:service:process_send_command service protocol error - failed to read pipe r = 0  count = 0!',  # noqa
+                        '0015:err:service:process_send_command service protocol error - failed to read pipe r = 0  count = 0!',  # noqa
                         '0016:err:service:process_send_command service protocol error - failed to read pipe r = 0  count = 0!',  # noqa
                         '0017:err:service:process_send_command service protocol error - failed to read pipe r = 0  count = 0!',  # noqa
                         '007c:err:rpc:RpcAssoc_BindConnection receive failed with error 1726',
