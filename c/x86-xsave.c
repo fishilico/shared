@@ -127,7 +127,7 @@ __extension__ static struct xstate_metadata xstate_desc[65] = {
     [6] = {"AVX-512 ZMM_Hi256 (upper 256 bits of ZMM0-ZMM15)", 0, 512},
     [7] = {"AVX-512 Hi_ZMM256 (ZMM16-ZMM31)", 0, 1024},
     [8] = {"PT (Intel Processor Trace MSRs)", 0, 0},
-    [9] = {"PKRU (Protection Keys Rights for User Pages)", 0, 0},
+    [9] = {"PKRU (Protection Keys Rights for User Pages)", 0, 8},
 };
 
 static void asm_cpuid(uint32_t code, uint32_t *peax, uint32_t *pebx, uint32_t *pecx, uint32_t *pedx)
@@ -289,6 +289,9 @@ static void hexdump_both(const uint8_t *data1, const uint8_t *data2, unsigned in
                     idx = (xstate_relative >> 6) + 16;
                     bit_offset = 128 * ((xstate_relative >> 4) & 3);
                     printf("  AVX-512 ZMM%u[%u:%u]", idx, bit_offset + 127, bit_offset);
+                    is_empty = false;
+                } else if (j == 9 && xstate_offset > 0) {
+                    printf("  PKRU");
                     is_empty = false;
                 } else if (xstate_offset > 0) {
                     /* TODO add more data structures when the program is tested on compatible hardware */
