@@ -118,7 +118,9 @@ int main(void)
     print_compatibility(const char *, char *, 0);
     print_compatibility(unsigned char *, char *, 0);
     print_compatibility(void *, char *, 0);
-    print_compatibility(char *, void *, 0);
+    print_compatibility(char[], char *, 0);
+    print_compatibility(char[1], char *, 0);
+    print_compatibility(char[2], char[1], 0);
 
     return exitcode;
 }
