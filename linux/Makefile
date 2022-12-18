@@ -23,6 +23,10 @@ PROGRAMS := $(filter-out \
 HAVE_KVM := $(call ccpp-has-option,-include linux/kvm.h)
 ifeq ($(HAVE_KVM), y)
 	PROGRAMS += $(KVM_PROGRAMS)
+# gcc 12 warns about "invalid use of structure with flexible array member"
+$(KVM_PROGRAMS:%=.%.o): CFLAGS += $(call cc-disable-warning,pedantic)
+# clang 15 warns about "field 'header' with variable sized type 'struct kvm_cpuid2' not at the end of a struct or class is a GNU extension"
+$(KVM_PROGRAMS:%=.%.o): CFLAGS += $(call cc-disable-warning,gnu-variable-sized-type-not-at-end)
 endif
 
 HAVE_NETLINK := $(call ccpp-has-option,-include linux/netlink.h)
