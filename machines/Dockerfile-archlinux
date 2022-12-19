@@ -42,7 +42,7 @@ RUN \
         sdl2 \
         which \
         wine && \
-    archlinux-java set java-18-openjdk && \
+    archlinux-java set "java-$(pacman -Qqi jdk-openjdk | sed -n 's/^Version\s*:\s*\([0-9]\+\)\..*/\1/p')-openjdk" && \
     (pacman --noconfirm -Sc ; rm -rf /var/cache/pacman/pkg/* )
 
 WORKDIR /shared
