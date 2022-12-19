@@ -93,6 +93,8 @@ def is_usable_tag(image, tag):
         # Filter out 3-number version with release candidate tag
         if re.match(r'^3\.[0-9]+\.[0-9]+-rc\.[0-9]+$', tag):
             return False
+        if re.match(r'^3\.[0-9]+\.[0-9]+_rc[0-9]+$', tag):
+            return False
         # Filter out dates
         if re.match(r'^20[0-9]{6}$', tag):
             return False
