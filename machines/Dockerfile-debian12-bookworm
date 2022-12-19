@@ -97,18 +97,18 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (Debian 12.2.0-3) 12.2.0
-#       clang: Debian clang version 14.0.6-2
-#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 10-win32 20220324
-#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 10-win32 20220324
-#       wine: wine-7.0 (Debian 7.0~repack-7)
-#       Linux kernel: 5.19.0-1-amd64
-#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.34-8) stable release version 2.34.
+#       gcc: gcc (Debian 12.2.0-10) 12.2.0
+#       clang: Debian clang version 14.0.6
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 12 20220819
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 12 20220819
+#       wine: wine-7.0 (Debian 7.0~repack-10)
+#       Linux kernel: 6.0.0-6-amd64
+#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.36-6) stable release version 2.36.
 #       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.3
-#       python3: Python 3.10.7
-#       javac: javac 11.0.16
-#       java: openjdk 11.0.16 2022-07-19
-#       rustc: rustc 1.60.0
-#       cargo: cargo 1.56.0
-#       coqc: The Coq Proof Assistant, version 8.16.0 compiled with OCaml 4.13.1
-#       openssl: OpenSSL 3.0.5 5 Jul 2022 (Library: OpenSSL 3.0.5 5 Jul 2022)
+#       python3: Python 3.10.9
+#       javac: javac 11.0.17
+#       java: openjdk 11.0.17 2022-10-18
+#       rustc: rustc 1.63.0
+#       cargo: cargo 1.62.1
+#       coqc: The Coq Proof Assistant, version 8.16.1 compiled with OCaml 4.13.1
+#       openssl: OpenSSL 3.0.7 1 Nov 2022 (Library: OpenSSL 3.0.7 1 Nov 2022)

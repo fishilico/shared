@@ -93,15 +93,15 @@ CMD ["/run_shared_test.sh"]
 #       clang: clang version 14.0.6
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 12.2.0
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 12.2.0
-#       wine: wine-7.17
-#       Linux kernel: 5.19.10-arch1-1
+#       wine: wine-7.22
+#       Linux kernel: 6.0.12-arch1-1
 #       /lib/ld-linux.so.2: ld.so (GNU libc) stable release version 2.36.
 #       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.3
-#       python: Python 3.10.7
-#       python3: Python 3.10.7
-#       javac: javac 18.0.2
-#       java: openjdk 18.0.2 2022-07-19
-#       rustc: rustc 1.63.0 (Arch Linux rust 1:1.63.0-1)
-#       cargo: cargo 1.63.0
-#       coqc: The Coq Proof Assistant, version 8.16.0 compiled with OCaml 4.14.0
-#       openssl: OpenSSL 1.1.1q  5 Jul 2022
+#       python: Python 3.10.8
+#       python3: Python 3.10.8
+#       javac: javac 19.0.1
+#       java: openjdk 19.0.1 2022-10-18
+#       rustc: rustc 1.66.0 (69f9c33d7 2022-12-12) (Arch Linux rust 1:1.66.0-1)
+#       cargo: cargo 1.66.0
+#       coqc: The Coq Proof Assistant, version 8.16.1 compiled with OCaml 4.14.0
+#       openssl: OpenSSL 3.0.7 1 Nov 2022 (Library: OpenSSL 3.0.7 1 Nov 2022)
