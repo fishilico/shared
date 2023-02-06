@@ -86,7 +86,7 @@ endif
 # Test rust/cargo availability
 ifneq ($(call can-run,$(CARGO) --version),y)
 SUBDIRS_BLACKLIST += rust%
-else
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-4]\)\.'),y)
 # Old versions of rustc (<=1.39) fail to build subtle-2.3.0 because:
 #   error[E0210]: type parameter `T` must be used as the type parameter for some
 #   local type (e.g., `MyStruct<T>`)
@@ -103,14 +103,21 @@ else
 # Old versions of rustc (<=1.44) fail to build clap-2.33.3 because:
 #   error[E0723]: loops and conditional expressions are not stable in const fn
 #   note: for more information, see issue https://github.com/rust-lang/rust/issues/57563
-ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-4]\)\.'),y)
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
 else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(4[5-9]\|5[0-2]\)\.'),y)
 # Old versions of rustc (<=1.52) fail to build libz-sys-1.1.8 because:
 #   error[E0658]: arbitrary expressions in key-value attributes are unstable
 #   note: see issue #78835 <https://github.com/rust-lang/rust/issues/78835> for more information
-SUBDIRS_BLACKLIST += rust/download_web%
-endif
+SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/download_web%
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(5[3-9]\|6[0-4]\)\.'),y)
+# Old versions of cargo (<=1.47) fail to build rug-1.19.0 because:
+#   failed to parse manifest at .../.cargo/registry/src/github.com-1ecc6299db9ec823/rug-1.19.0/Cargo.toml
+#   failed to parse the `edition` key
+#   this version of Cargo is older than the `2021` edition, and only supports `2015` and `2018` editions.
+# Old versions of cargo (<=1.64) fail to build rug-1.19.0 because:
+#   error: package `rug v1.19.0` cannot be built because it requires rustc 1.65 or newer, while the currently active
+#   rustc version is 1.61.0
+SUBDIRS_BLACKLIST += rust/asymkeyfind%
 endif
 
 # Show "SUBDIR ..." only if -w and -s and V=1 are not given, and then add

@@ -62,7 +62,7 @@ COPY . /shared/
 CMD ["xvfb-run", "/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex%
+#    Global blacklist: latex% rust/asymkeyfind%
 #    In sub-directories:
 #       c:
 #       glossaries:
@@ -76,7 +76,7 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex%
+#       Global blacklist: latex% rust/asymkeyfind%
 #       In sub-directories:
 #          c: gtk_alpha_window
 #          glossaries:
