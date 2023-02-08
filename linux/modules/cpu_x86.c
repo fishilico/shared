@@ -24,6 +24,8 @@
 /* Add missing bitmask definitions which were added in recent kernels in
  * arch/x86/include/uapi/asm/processor-flags.h
  */
+#define X86_CR4_UINTR 0x02000000
+#define X86_CR4_PKS 0x01000000
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 18, 0)
 #define X86_CR4_CET 0x00800000
 #endif
@@ -162,15 +164,17 @@ static void dump_x86_cr(void)
 	show_cr_bit(cr, 4, PCE, "enable performance counters at ipl 3");
 	show_cr_bit(cr, 4, OSFXSR, "enable fast FPU save and restore");
 	show_cr_bit(cr, 4, OSXMMEXCPT, "enable unmasked SSE exceptions");
-	show_cr_bit(cr, 4, VMXE, "enable VMX virtualization");
-	show_cr_bit(cr, 4, SMXE, "enable safer mode (TXT)");
-	show_cr_bit(cr, 4, FSGSBASE, "enable RDWRFSGS support");
-	show_cr_bit(cr, 4, PCIDE, "enable PCID support");
-	show_cr_bit(cr, 4, OSXSAVE, "enable xsave and xrestore");
+	show_cr_bit(cr, 4, VMXE, "enable Virtual Machine Extensions");
+	show_cr_bit(cr, 4, SMXE, "enable Safer Mode Extensions (TXT)");
+	show_cr_bit(cr, 4, FSGSBASE, "enable RDWRFSGS instructions support");
+	show_cr_bit(cr, 4, PCIDE, "enable Process Context ID support");
+	show_cr_bit(cr, 4, OSXSAVE, "enable XSAVE and XRESTORE instructions");
 	show_cr_bit(cr, 4, SMEP, "enable Supervisor Mode Execution Protection");
 	show_cr_bit(cr, 4, SMAP, "enable Supervisor Mode Access Prevention");
 	show_cr_bit(cr, 4, PKE, "enable Protection Keys support");
 	show_cr_bit(cr, 4, CET, "enable Control-flow Enforcement Technology");
+	show_cr_bit(cr, 4, PKS, "enable Protection Keys for Supervisor-Mode Pages");
+	show_cr_bit(cr, 4, UINTR, "enable User Interrupts");
 
 #ifdef CONFIG_X86_64
 	cr = read_cr8();
