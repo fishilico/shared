@@ -2,6 +2,7 @@
 # Create x86-cpuid_enum.h by parsing cpufeatures.h from Linux:
 # /usr/src/linux/arch/x86/include/asm/cpufeatures.h
 # https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/cpufeatures.h
+# https://www.intel.com/content/dam/develop/external/us/en/documents/architecture-instruction-set-extensions-programming-reference.pdf
 
 CPU_FEATURE_FILE="x86-linux-cpufeatures.h.tmp"
 CPU_SCATTERED_FILE="x86-linux-cpu-scattered.c.tmp"
@@ -80,6 +81,8 @@ static void add_manual_cpuid_str(void)
     cpuidstr_6_eax[13] = "hdc";
     assert(cpuidstr_7_ebx[22] == NULL);
     cpuidstr_7_ebx[22] = "pcommit"; /* Deprecated pcommit instruction, Linux commit fd1d961dd681 ("x86/insn: remove pcommit") */
+    assert(cpuidstr_7_edx[5] == NULL);
+    cpuidstr_7_edx[5] = "uintr"; /* user interrupts */
 
     /* documented in /usr/src/linux/arch/x86/kernel/cpu/{amd.c,intel.c}
      * and also /usr/src/linux/tools/power/x86/turbostat/turbostat.c
