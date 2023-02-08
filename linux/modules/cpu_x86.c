@@ -21,7 +21,12 @@
 #include <linux/printk.h>
 #include <linux/version.h>
 
-/* Add missing bitmask definitions which were added in recent kernels */
+/* Add missing bitmask definitions which were added in recent kernels in
+ * arch/x86/include/uapi/asm/processor-flags.h
+ */
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 18, 0)
+#define X86_CR4_CET 0x00800000
+#endif
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 6, 0)
 #define X86_CR4_PKE 0x00400000
 #endif
@@ -165,6 +170,7 @@ static void dump_x86_cr(void)
 	show_cr_bit(cr, 4, SMEP, "enable Supervisor Mode Execution Protection");
 	show_cr_bit(cr, 4, SMAP, "enable Supervisor Mode Access Prevention");
 	show_cr_bit(cr, 4, PKE, "enable Protection Keys support");
+	show_cr_bit(cr, 4, CET, "enable Control-flow Enforcement Technology");
 
 #ifdef CONFIG_X86_64
 	cr = read_cr8();
