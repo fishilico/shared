@@ -594,6 +594,7 @@ class AnalysisContext(object):
         self.seen_eth_0x88d9_lltd = False
         self.seen_eth_0x88e1_homeplug_av = False
         self.seen_eth_0x890d_802_11 = False
+        self.seen_eth_0x893a_ieee1905_convergent = False
         self.seen_eth_0x9001 = False
 
     def post_processing(self, add_local_networks=False):
@@ -832,7 +833,7 @@ class AnalysisContext(object):
                 self.seen_eth_0x88d9_lltd = True
             return
         if pkt_type == 0x88e1 and hw_dst == 'ff:ff:ff:ff:ff:ff':
-            # Homeplug AV, broadcasted protocol, eventually in a VLAN 101 in a home network
+            # IEEE 1901 Homeplug AV, broadcasted protocol, eventually in a VLAN 101 in a home network
             # in Wireshark: "HomePlug AV: CM_BRG_INFO.REQ (Get Bridge Information Request)"
             if not self.seen_eth_0x88e1_homeplug_av:
                 logger.info(
@@ -848,6 +849,21 @@ class AnalysisContext(object):
                     "Encapsulated 802.11 data found, probably emitted by a WiFi access point (%r)",
                     ethpkt)
                 self.seen_eth_0x890d_802_11 = True
+            return
+        if pkt_type == 0x893a and hw_dst == '01:80:c2:00:00:13':
+            # IEEE 1905.1a Convergent Digital Home Network for Heterogenous Technologies
+            # The packet is a Control Message Data Unit frame (CMDU)
+            # The source MAC address is probably the gateway of the network
+            # The destination MAC address is "IEEE-1905.1-Control (01:80:c2:00:00:13)"
+            # Payload of a Topology discovery (0x0000) message with MAC address 11:22:33:44:55:66
+            #   00 00 00 00 13 37 00 80 01 00 06 11 22 33 44 55
+            #   66 02 00 06 11 22 33 44 55 66 00 00 00 00 00 00
+            #   00 00 00 00 00 00 00 00 00 00 00 00 00 00
+            if not self.seen_eth_0x893a_ieee1905_convergent:
+                logger.info(
+                    "IEEE 1905.1a Convergent Digital Home Network for Heterogenous Technologies found in capture: %r",
+                    ethpkt)
+                self.seen_eth_0x893a_ieee1905_convergent = True
             return
         if pkt_type == 0x9000:  # Configuration Test Protocol (loopback), from a Cisco switch
             self.hwaddrdb.add_bridge(hw_src)
