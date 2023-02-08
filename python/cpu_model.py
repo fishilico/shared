@@ -1976,6 +1976,7 @@ INTEL_UCODE_VERSIONS = (
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/kernel/cpuinfo.c
 AARCH64_PARTS = {
     0x41: ('ARM Limited', {  # 'A'
+        0x000: 'Potenza',
         0xd00: 'Foundation',
         0xd03: 'Cortex-A53',
         0xd04: 'Cortex-A35',
@@ -1984,9 +1985,23 @@ AARCH64_PARTS = {
         0xd08: 'Cortex-A72',
         0xd09: 'Cortex-A73',
         0xd0a: 'Cortex-A75',
+        0xd0b: 'Cortex-A76',
+        0xd0c: 'Neoverse-N1',
+        0xd0d: 'Cortex-A77',
         0xd0f: 'AEM-v8',
+        0xd40: 'Neoverse-V1',
+        0xd41: 'Cortex-A78',
+        0xd42: 'Cortex-A78AE',
+        0xd44: 'Cortex-X1',
+        0xd46: 'Cortex-A510',
+        0xd47: 'Cortex-A710',
+        0xd48: 'Cortex-X2',
+        0xd49: 'Neoverse-N2',
+        0xd4b: 'Cortex-A78C',
+        0xd4d: 'Cortex-A715',
     }),
     0x42: ('Broadcom', {  # 'B'
+        0x100: 'Brahma B53',
         0x516: 'Vulcan',
     }),
     0x43: ('Cavium', {  # 'C'
@@ -1994,6 +2009,18 @@ AARCH64_PARTS = {
         0x0a2: 'ThunderX 81XX',
         0x0a3: 'ThunderX 83XX',
         0x0af: 'ThunderX 2',
+        0x0b1: 'OcteonTx2 98XX',
+        0x0b2: 'OcteonTx2 96X',
+        0x0b3: 'OcteonTx2 95XX',
+        0x0b4: 'OcteonTx2 95XXN',
+        0x0b5: 'OcteonTx2 95XXMM',
+        0x0b6: 'OcteonTx2 95XXO',
+    }),
+    0x46: ('Fujitsu', {  # 'F'
+        0x001: 'A64FX',
+    }),
+    0x48: ('Hisi', {  # 'H'
+        0xd01: 'TSV110',
     }),
     0x4e: ('NVidia', {  # 'N'
         0x003: 'Denver',
@@ -2004,8 +2031,25 @@ AARCH64_PARTS = {
     }),
     0x51: ('Qualcomm', {  # 'Q'
         0x200: 'Kryo',
-        0x800: 'Falkor v1',
+        0x800: 'Falkor v1, Kryo 2XX Gold',
+        0x801: 'Kryo 2XX Silver',
+        0x803: 'Kryo 3XX Silver',
+        0x804: 'Kryo 4XX Gold',
+        0x805: 'Kryo 4XX Silver',
         0xc00: 'Falkor',
+    }),
+    0x61: ('Apple', {  # 'a'
+        0x022: 'M1 Icestorm',
+        0x023: 'M1 Firestorm',
+        0x024: 'M1 Icestorm Pro',
+        0x025: 'M1 Firestorm Pro',
+        0x028: 'M1 Icestorm Max',
+        0x029: 'M1 Firestorm Max',
+        0x032: 'M2 Blizzard',
+        0x033: 'M2 Avalanche',
+    }),
+    0xc0: ('Ampere', {
+        0xac3: 'Ampere 1',
     }),
 }
 
