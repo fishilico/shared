@@ -590,6 +590,7 @@ class AnalysisContext(object):
         self.seen_eth_0x6002_dec_mop_dna_rc = False
         self.seen_eth_0x887b_homeplug = False
         self.seen_eth_0x889x_fortinet = False
+        self.seen_eth_0x88c7_802_11i_preauth = False
         self.seen_eth_0x88cc_lldp = False
         self.seen_eth_0x88d9_lltd = False
         self.seen_eth_0x88e1_homeplug_av = False
@@ -814,6 +815,13 @@ class AnalysisContext(object):
                     "Fortinet Heartbeat found in capture. This may give useful information about the network (%r)",
                     ethpkt)
                 self.seen_eth_0x889x_fortinet = True
+            return
+        if pkt_type == 0x88c7:  # IEEE 802.11i Pre-Authentication (with EAPOL 802.1x authentication)
+            if not self.seen_eth_0x88c7_802_11i_preauth:
+                logger.info(
+                    "IEEE 802.11i Pre-Authentication found in packet capture. This may give useful information about the network (%r)",  # noqa
+                    ethpkt)
+                self.seen_eth_0x88c7_802_11i_preauth = True
             return
         if pkt_type == 0x88cc:  # LLDP
             # Scapy does not understand LLDP, but Wireshark does.
