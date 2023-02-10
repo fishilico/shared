@@ -1,0 +1,3083 @@
+# List of x86 Model-Specific Registers (MSR)
+# https://en.wikipedia.org/wiki/Model-specific_register
+#
+# The main reference for Intel processors is Intel Software Developer's Manual
+# (SDM) Volume 4 "Model-Specific Registers"
+# https://www.intel.com/content/dam/develop/external/us/en/documents/335592-sdm-vol-4.pdf
+# It defines "architectural MSRs" as existing for a long time, prefixed by "IA32_"
+# This reference is abbreviated "Intel-SDM-Vol4" here.
+#
+# An older version of this document (September 2013, 252046-040) is available on
+# https://www.ti.uni-bielefeld.de/html/teaching/WS1920/techinf1/64-ia-32-architectures-software-developers-manual.pdf
+# This reference is abbreviated "Intel-SDM-252046-040" here
+#
+# The main reference for AMD64 processors is AMD64 Architecture Programmer's
+# Manual Volume 2: System Programming, Appendix A MSR Cross-Reference
+# https://www.amd.com/system/files/TechDocs/24593.pdf
+# (Publication 24593 revision 3.40, January 2023)
+# This reference is abbreviated "AMD64-Vol2" here
+#
+# An older reference for AMD processors is Processor Programming Reference (PPR)
+# for AMD Family 17h Model 01h, Revision B1 Processors
+# https://developer.amd.com/wordpress/media/2017/11/54945_PPR_Family_17h_Models_00h-0Fh.pdf
+# (Publication 54945 revision 1.14, April 2017)
+# This reference is abbreviated "AMD-2017" here
+#
+# An older reference for AMD processors is BIOS and Kernel Developer's Guide (BKDG)
+# for AMD Family 15h Models 00h-0Fh Processors
+# https://www.amd.com/system/files/TechDocs/42301_15h_Mod_00h-0Fh_BKDG.pdf
+# (Publication 42301 revision 3.14, January 2013)
+# This reference is abbreviated "AMD-2013" here
+#
+# An older reference for AMD processors is BIOS and Kernel Developer's Guide (BKDG)
+# for AMD NPT Family 0Fh Processors
+# https://www.amd.com/system/files/TechDocs/32559.pdf
+# (Publication 32559 revision 3.08, July 2007)
+# This reference is abbreviated "AMD-2007" here
+#
+# An older reference for AMD processors is AMD-K6-2E+ Embedded Processor Data Sheet
+# https://www.amd.com/system/files/TechDocs/23542a.pdf
+# (Publication 23542 revision A, September 2000)
+# This reference is abbreviated "AMD-K6" here even though it is a AMD-K6-2E+
+#
+# MSRs are documented in:
+# - BIOS bits: https://github.com/biosbits/bits/tree/master/python (in each Python file)
+# - Chipsec: https://github.com/chipsec/chipsec/tree/main/chipsec/cfg (with register tags)
+# - Coreboot: https://github.com/coreboot/coreboot/blob/master/src/include/cpu/x86/msr.h
+#   and many other files such as https://github.com/coreboot/coreboot/blob/master/src/include/cpu/intel/msr.h
+# - EDK II: https://github.com/tianocore/edk2/tree/master/MdePkg/Include/Register
+#   and UefiCpuPkg/Include/Register/ArchitecturalMsr.h
+# - Firecracker: https://github.com/firecracker-microvm/firecracker/blob/main/src/arch_gen/src/x86/msr_index.rs
+# - Linux kernel: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h
+#   used in https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/trace/beauty/tracepoints/x86_msr.sh
+# - QEMU: https://gitlab.com/qemu-project/qemu/-/blob/master/target/i386/cpu.h
+# - Rowhammer: https://github.com/CMU-SAFARI/rowhammer/blob/master/src/msr.h
+# - U-Boot: https://source.denx.de/u-boot/u-boot/-/blob/master/arch/x86/include/asm/msr-index.h
+# - x86 module in Rust: https://docs.rs/x86/0.52.0/src/x86/msr.rs.html
+# - XEN: https://github.com/xen-project/xen/blob/master/xen/arch/x86/include/asm/msr-index.h
+
+# Intel-SDM-Vol4 See Section 16.10.2, "Pentium Processor Machine-Check Exception Handling."
+0x0 IA32_P5_MC_ADDR
+0x1 IA32_P5_MC_TYPE
+
+AMDK6 0x0 MCAR # AMD-K6 Machine Check Address Register
+AMDK6 0x1 MCTR # AMD-K6 Machine Check Type Register
+
+# http://datasheets.chipdb.org/IDT/x86/C6/c6_data_sheet.pdf IDT WinChip C6 Processor
+IDT 0x2 TR1        # Test Register 1
+IDT 0xE TR12       # Test Register 12 (also in AMD-K6)
+IDT 0x11 EC_CTRL   # Event Counter Control
+IDT 0x12 EC0       # Event Counter 0
+IDT 0x13 EC1       # Event Counter 1
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 Centaur-Hauls/IDT defined MSRs
+IDT 0x107 FCR1     # Feature Control Reg 1
+IDT 0x108 FCR2     # Feature Control Reg 2
+IDT 0x109 FCR3     # Feature Control Reg 3
+IDT 0x10A FCR4     # Feature Control Reg 4
+IDT 0x110 MCR0     # Memory Configuration Register
+IDT 0x111 MCR1     # Memory Configuration Register
+IDT 0x112 MCR2     # Memory Configuration Register
+IDT 0x113 MCR3     # Memory Configuration Register
+IDT 0x114 MCR4     # Memory Configuration Register
+IDT 0x115 MCR5     # Memory Configuration Register
+IDT 0x116 MCR6     # Memory Configuration Register
+IDT 0x117 MCR7     # Memory Configuration Register
+IDT 0x120 MCR_CTRL # Memory Configuration Register
+
+# Intel-SDM-Vol4 See Section 9.10.5, "Monitor/Mwait Address Range Determination."
+0x6 IA32_MONITOR_FILTER_SIZE
+PENTIUM4 0x6 IA32_MONITOR_FILTER_LINE_SIZE # Intel-SDM-Vol4 (Pentium 4 and Xeon)
+
+# Intel-SDM-Vol4 See Section 18.17, "Time-Stamp Counter."
+0x10 IA32_TIME_STAMP_COUNTER
+
+# Intel-SDM-Vol4 (Pentium)
+PENTIUM 0x10 TSC  # See Section 18.17, "Time-Stamp Counter."
+PENTIUM 0x11 CESR # See Section 20.6.9.1, "Control and Event Select Register (CESR)."
+PENTIUM 0x12 CTR0 # Section 20.6.9.3, "Events Counted."
+PENTIUM 0x13 CTR1 # Section 20.6.9.3, "Events Counted."
+
+0x17 IA32_PLATFORM_ID # Intel-SDM-Vol4 Platform ID
+
+0x1B IA32_APIC_BASE # Intel-SDM-Vol4 APIC base address
+
+# https://cdrdv2-public.intel.com/315168/315168_TXT_MLE_Development%20Guide_rev_017_3.pdf Intel Trusted Execution Technology (Intel TXT) Software Development Guide (315168-017 Revision 017.3, March 2022) "Actual Public Key Hash is typically available in CPU MSRs 0x20...0x23"
+0x20 ACM_SIGNER_PUBLICKEY_HASH_0
+0x21 ACM_SIGNER_PUBLICKEY_HASH_1
+0x22 ACM_SIGNER_PUBLICKEY_HASH_2
+0x23 ACM_SIGNER_PUBLICKEY_HASH_3
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 in MSR_KNC namespace (Knights Corner, ancestor of Xeon Phi)
+XEONKNC 0x20 PERFCTR0
+XEONKNC 0x21 PERFCTR1
+XEONKNC 0x28 EVNTSEL0
+XEONKNC 0x29 EVNTSEL1
+
+# Intel-SDM-Vol4 (Core 2, Atom, Silvermont) Processor Hard Power-On Configuration
+0x2A EBL_CR_POWERON
+PENTIUM4 0x2A EBC_HARD_POWERON # Intel-SDM-Vol4 (Pentium 4 and Xeon) Processor Hard Power-On Configuration
+PENTIUM4 0x2B EBC_SOFT_POWERON # Intel-SDM-Vol4 (Pentium 4 and Xeon) Processor Soft Power-On Configuration
+
+# Intel-SDM-Vol4 (Pentium 4) Processor Frequency Configuration
+PENTIUM4 0x2C EBC_FREQUENCY_ID
+
+# https://review.coreboot.org/c/coreboot/+/51796/14/src/include/cpu/intel/msr.h#10
+# https://source.denx.de/u-boot/u-boot/-/blob/v2022.10/arch/x86/include/asm/msr-index.h
+0x2E PIC_MSG_CONTROL # Register for bit PLATFORM_INFO_SET_TDP = 1 << 29 and "Enable APIC TPR updates" = ~(1 << 10)
+
+# Intel-SDM-Vol4 (P6 Family Processors) Test Control Register
+P6 0x33 TEST_CTL
+
+# Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors) Memory Control Register
+CORE12 0x33 MEMORY_CTRL # Memory Control Register
+
+# Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture) SMI Counter
+CORE1 0x34 SMI_COUNT
+
+# Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
+
+# Intel-SDM-Vol4 (Xeon Processor E5 v3)
+XEONE5V3 0x35 CORE_THREAD_COUNT # Configured State of Enabled Processor Core Count and Logical Processor Count
+
+# https://github.com/biosbits/bits/blob/bits-2079/python/cpu_gen.py
+? 0x39 UNKNOWN_BUT_REFERENCED_IN_BIOSBITS # TODO Replace with its real name
+
+0x3A IA32_FEATURE_CONTROL # Intel-SDM-Vol4 Control Features in Intel 64 Processor
+
+0x3B IA32_TSC_ADJUST # Intel-SDM-Vol4 Per Logical Processor TSC Adjust
+
+# https://github.com/chipsec/chipsec/blob/1.10.0/chipsec/cfg/8086/qrk.xml
+QUARK 0x40 MTRRCAP # MTRR Capabilities
+
+# Intel-SDM-Vol4 (Intel Core Solo and Duo) Last Branch Record 0
+CORESOLO 0x40 LASTBRANCH_0
+CORESOLO 0x41 LASTBRANCH_1
+CORESOLO 0x42 LASTBRANCH_2
+CORESOLO 0x43 LASTBRANCH_3
+CORESOLO 0x44 LASTBRANCH_4
+CORESOLO 0x45 LASTBRANCH_5
+CORESOLO 0x46 LASTBRANCH_6
+CORESOLO 0x47 LASTBRANCH_7
+
+# Intel-SDM-Vol4 (Intel Core Microarchitecture) Last Branch Record 0 From IP
+0x40 LASTBRANCH_0_FROM_IP
+0x41 LASTBRANCH_1_FROM_IP
+0x42 LASTBRANCH_2_FROM_IP
+0x43 LASTBRANCH_3_FROM_IP
+0x44 LASTBRANCH_4_FROM_IP
+0x45 LASTBRANCH_5_FROM_IP
+0x46 LASTBRANCH_6_FROM_IP
+0x47 LASTBRANCH_7_FROM_IP
+
+0x48 IA32_SPEC_CTRL # Intel-SDM-Vol4 Speculation Control
+0x49 IA32_PRED_CMD  # Intel-SDM-Vol4 Prediction Command
+0x4E IA32_PPIN_CTL  # Intel-SDM-Vol4 Protected Processor Inventory Number Enable Control
+0x4F IA32_PPIN      # Intel-SDM-Vol4 Protected Processor Inventory Number
+
+# Intel-SDM-Vol4 (Xeon Processor E5 v3)
+XEONE5V3 0x53 THREAD_ID_INFO # A Hardware Assigned ID for the Logical Processor
+
+# Intel-SDM-Vol4 (Intel Core Microarchitecture) Last Branch Record 0 To IP
+0x60 LASTBRANCH_0_TO_IP
+0x61 LASTBRANCH_1_TO_IP
+0x62 LASTBRANCH_2_TO_IP
+0x63 LASTBRANCH_3_TO_IP
+0x64 LASTBRANCH_4_TO_IP
+0x65 LASTBRANCH_5_TO_IP
+0x66 LASTBRANCH_6_TO_IP
+0x67 LASTBRANCH_7_TO_IP
+
+# https://twitter.com/_markel___/status/1578749396547932160 2022-10 Alder Lake
+? 0x77 PROBE_CHANGE_PG
+
+# Intel-SDM-Vol4 BIOS Update Trigger (to trigger the load of a microcode update)
+0x79 IA32_BIOS_UPDT_TRIG
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
+0x7A BIOS_UPGD_TRIG
+
+# https://twitter.com/_markel___/status/1578749396547932160 2022-10 Alder Lake
+? 0x7D SE_RDINFO_CMD # Allows Probe Mode ITP software to access relevant information located in the SECS and EPCM that is not accessible using EDBGRD instruction
+
+# Intel-SDM-Vol4 (7th and 8th Generation Intel Core Processors)
+CORE7 0x80 TRACE_HUB_STH_ACPIBAR_BASE  # NPK Address Used by AET Messages
+
+# https://twitter.com/_markel___/status/1578690635539677184 2022-10 "MSRs, for the newest CPU"
+? 0x81 FME_ACTIVATE
+
+# https://www.intel.com/content/dam/develop/external/us/en/documents/intel-tdx-cpu-architectural-specification.pdf Intel Trust Domain CPU Architectural Extensions
+0x87 IA32_MKTME_KEYID_PARTITIONING # Multi-Key Total Memory Encryption (MKTME) KeyID Partitioning Enumeration
+
+# Intel-SDM-Vol4 (P6 Family Processors) Chunk 0 data register D[63:0]: used to write to and read from the L2
+P6 0x88 BBL_CR_D0
+P6 0x89 BBL_CR_D1
+P6 0x8A BBL_CR_D2
+P6 0x8B BBL_CR_D3
+
+# Intel-SDM-Vol4 BIOS Update Signature
+0x8B IA32_BIOS_SIGN_ID
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
+AMD64 0x8B PATCH_LEVEL
+
+# Intel-SDM-Vol4 SHA256 digest of the SIGSTRUCT.MODULUS for SGX Launch Enclave
+0x8C IA32_SGXLEPUBKEYHASH0
+0x8D IA32_SGXLEPUBKEYHASH1
+0x8E IA32_SGXLEPUBKEYHASH2
+0x8F IA32_SGXLEPUBKEYHASH3
+
+# https://twitter.com/_markel___/status/1578690635539677184 2022-10 "MSRs, for the newest CPU" (related to xucode)
+? 0x91 TIO_UNWRAP
+? 0x92 TIO_PRM_CLEANUP
+? 0x93 TIO_COPY_ENCRYPT
+? 0x95 ENABLE_DISABLE_CACHE_QOS
+
+# https://www.intel.com/content/dam/develop/external/us/en/documents-tps/intel-tdx-cpu-architectural-specification.pdf Intel Trust Domain CPU Architectural Extensions (May 2021, 343754-002US) cache management interface to SEAM (Secure Arbitration Mode) VMX root operation
+# https://kib.kiev.ua/x86docs/Intel/TDX/348551-001.pdf Intel Trust Domain Extensions (Intel TDX) Module Architecture Application Binary Interface (ABI) Reference Specification (September 2021, 348551-001US)
+# https://cdrdv2-public.intel.com/733568/tdx-module-1.0-public-spec-344425004.pdf Architecture Specification: Intel Trust Domain Extensions (Intel TDX) Module (June 2022, 344425-004US)
+0x98 WBINVDP    # SEAM Write-Back and Invalidate cache sub-blocks
+0x99 WBNOINVDP  # SEAM Write-Back cache sub-blocks
+
+# https://www.intel.com/content/dam/develop/external/us/en/documents/intel-tdx-cpu-architectural-specification.pdf Intel Trust Domain CPU Architectural Extensions defines an incorrect value 0x981 for MSR INTR_PENDING
+# https://kib.kiev.ua/x86docs/Intel/TDX/348551-001.pdf Intel Trust Domain Extensions (Intel TDX) Module Architecture Application Binary Interface (ABI) Reference Specification defines the correct one
+# https://cdrdv2-public.intel.com/733568/tdx-module-1.0-public-spec-344425004.pdf Architecture Specification: Intel Trust Domain Extensions (Intel TDX) Module (June 2022, 344425-004US)
+0x9A INTR_PENDING # Determine if there are pending interrupts or events
+
+
+0x9B IA32_SMM_MONITOR_CTL # Intel-SDM-Vol4 SMM Monitor Configuration
+0x9E IA32_SMBASE          # Intel-SDM-Vol4 Base address of the logical processor's SMRAM image
+
+# Intel-SDM-Vol4 (Intel Core Microarchitecture)
+0xA0 SMRR_PHYSBASE # System Management Mode Base Address register
+0xA1 SMRR_PHYSMASK # System Management Mode Base Mask register
+
+# Intel-SDM-Vol4 (10th Generation Intel Core)
+CORE10 0xA0 BIOS_MCU_ERRORCODE
+CORE10 0xA5 FIT_BIOS_ERROR     # BIOS Firmware Table error code
+
+# Intel-SDM-Vol4 (11th Generation Intel Core)
+CORE11 0xA7 BIOS_DEBUG
+
+0xBC IA32_MISC_PACKAGE_CTLS     # Intel-SDM-Vol4 Power Filtering Control
+0xBD IA32_XAPIC_DISABLE_STATUS  # Intel-SDM-Vol4 xAPIC Disable Status
+
+# Intel-SDM-Vol4 General Performance Counter 0
+0xC1 IA32_PMC0
+0xC2 IA32_PMC1
+0xC3 IA32_PMC2
+0xC4 IA32_PMC3
+0xC5 IA32_PMC4
+0xC6 IA32_PMC5
+0xC7 IA32_PMC6
+0xC8 IA32_PMC7
+
+0xCD FSB_FREQ # Intel-SDM-Vol4 (Intel Core Microarchitecture) Scalable Bus Speed
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/braswell/include/soc/msr.h
+ATOMBRASWELL 0xCD BSEL_CR_OVERCLOCK_CONTROL
+
+# Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture)
+CORE1 0xCE PLATFORM_INFO # Platform Information
+
+# Intel-SDM-Vol4 IA32 Core Capabilities Register
+0xCF IA32_CORE_CAPABILITIES
+
+# Intel-SDM-Vol4 UMWAIT Control
+0xE1 IA32_UMWAIT_CONTROL
+
+# Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture)
+CORE1 0xE2 PKG_CST_CONFIG_CONTROL # C-State Configuration Control
+CORE1 0xE4 PMG_IO_CAPTURE_BASE    # Power Management IO Redirection in C-state
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/intel/speedstep.h
+0xE3 PMG_IO_BASE_ADDR
+
+0xE7 IA32_MPERF  # Intel-SDM-Vol4 TSC Frequency Clock Counter (Maximum Performance Frequency Clock Count)
+0xE8 IA32_APERF  # Intel-SDM-Vol4 Actual Performance Clock Counter
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/intel/speedstep.h
+0xEE EXTENDED_CONFIG
+
+# Intel-SDM-Vol4 (4th Generation Intel Xeon Scalable Processor Family)
+XEONSCAL4 0xED RAR_CONTROL            # RAR Control
+XEONSCAL4 0xEE RAR_ACTION_VECTOR_BASE # Pointer to RAR Action Vector
+XEONSCAL4 0xEF RAR_PAYLOAD_TABLE_BASE # Pointer to Base of RAR Payload Table
+XEONSCAL4 0xF0 RAR_INFO               # Read Only RAR Information
+XEONSCAL4 0x105 CORE_BIST             # Core BIST
+
+0xFE IA32_MTRRCAP            # Intel-SDM-Vol4 MTRR Capability
+0x10A IA32_ARCH_CAPABILITIES # Intel-SDM-Vol4 Enumeration of Architectural Features
+0x10B IA32_FLUSH_CMD         # Intel-SDM-Vol4 Flush Command
+0x10F IA32_TSX_FORCE_ABORT   # Intel-SDM-Vol4 TSX Force Abort
+
+# Intel-SDM-Vol4 (P6 Family Processors)
+P6 0x116 BBL_CR_ADDR # Address register: used to send specified address (A31-A3) to L2 during cache initialization accesses
+P6 0x118 BBL_CR_DECC # Data ECC register D[7:0]: used to write ECC and read ECC to/from L2
+P6 0x119 BBL_CR_CTL  # Control register: used to program L2 commands to be issued via cache configuration accesses mechanism
+P6 0x11A BBL_CR_TRIG # Trigger register: used to initiate a cache configuration accesses access
+P6 0x11B BBL_CR_BUSY # Busy register: indicates when a cache configuration accesses L2 command is in progress
+P6 0x11E BBL_CR_CTL3 # Control register 3: used to configure the L2 Cache
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/braswell/include/soc/msr.h
+ATOMBRASWELL 0x120 POWER_MISC
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
+0x121 EMULATE_PM_TIMER
+
+0x122 IA32_TSX_CTRL     # Intel-SDM-Vol4 TSX Control
+0x123 IA32_MCU_OPT_CTRL # Intel-SDM-Vol4 Microcode Update Option Control
+
+# From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
+0x130 BTG_BOOT_POLICY # BootGuard Boot Policy
+0x131 BTG_BP_KEY0
+0x132 BTG_BP_KEY1
+0x133 BTG_BP_KEY2
+0x134 BTG_BP_KEY3
+0x135 BTG_BP_KEY4
+0x136 BTG_BP_KEY5
+0x137 BTG_BP_RSVD3
+0x138 BTG_BOOT_STATUS # BootGuard Boot Status
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/intel/msr.h
+0x139 BC_PBEC
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/intel/msr.h
+0x13A BOOT_GUARD_SACM_INFO
+
+# Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
+CORE2 0x13C FEATURE_CONFIG # AES Configuration
+
+# Intel-SDM-Vol4 (Intel Xeon Phi)
+XEONPHI 0x140 MISC_FEATURE_ENABLES # Enable User Mode MONITOR and MWAIT
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/platform/x86/intel/turbo_max_3.c?h=v6.1 defines MSR_OC_MAILBOX
+# https://github.com/mihic/linux-intel-undervolt/tree/6f911700236c5b0c4dd20028ed3936ffe5d7155e documents how to use this MSR for under-voltage where the CPU has an integrated voltage controller (FIVR)
+# https://github.com/georgewhewell/undervolt/blob/e39aea12f665695d7ef7f1b66467c5138caea52a/undervolt.py defines it as "voltage offset" with planes (Core, GPU, Cache, Uncore, Analog IO, Digital IO)
+# https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00289.html CVE-2019-11157 restricts this MSR (https://www.usenix.org/system/files/sec21summer_chen-zitai.pdf)
+CORE4 0x150 OC_MAILBOX # (maybe) Overclock Mailbox
+
+# Intel-SDM-Vol4 (10th Generation Intel Core)
+CORE10 0x151 BIOS_DONE
+
+0x174 IA32_SYSENTER_CS  # Intel-SDM-Vol4
+0x175 IA32_SYSENTER_ESP # Intel-SDM-Vol4
+0x176 IA32_SYSENTER_EIP # Intel-SDM-Vol4
+
+0x179 IA32_MCG_CAP      # Intel-SDM-Vol4 Global Machine Check Capability
+0x17A IA32_MCG_STATUS   # Intel-SDM-Vol4 Global Machine Check Status
+0x17B IA32_MCG_CTL      # Intel-SDM-Vol4 Global Machine Check Control
+
+# Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
+CORE4 0x17D SMM_MCA_CAP # Enhanced SMM Capabilities
+
+# Intel-SDM-Vol4 (Xeon Processor E5)
+XEONE5 0x17F ERROR_CONTROL # MC Bank Error Configuration
+
+# Intel-SDM-Vol4 (Pentium 4 and Xeon)
+PENTIUM4 0x180 MCG_RAX               # Machine Check EAX/RAX Save State
+PENTIUM4 0x181 MCG_RBX               # Machine Check EBX/RBX Save State
+PENTIUM4 0x182 MCG_RCX               # Machine Check ECX/RCX Save State
+PENTIUM4 0x183 MCG_RDX               # Machine Check EDX/RDX Save State
+PENTIUM4 0x184 MCG_RSI               # Machine Check ESI/RSI Save State
+PENTIUM4 0x185 MCG_RDI               # Machine Check EDI/RDI Save State
+PENTIUM4 0x186 MCG_RBP               # Machine Check EBP/RBP Save State
+PENTIUM4 0x187 MCG_RSP               # Machine Check ESP/RSP Save State
+PENTIUM4 0x188 MCG_RFLAGS            # Machine Check EFLAGS/RFLAG Save State
+PENTIUM4 0x189 MCG_RIP               # Machine Check EIP/RIP Save State
+PENTIUM4 0x18A MCG_MISC              # Machine Check Miscellaneous
+PENTIUM4 0x18B MCG_RESERVED1         # Reserved
+PENTIUM4 0x18C MCG_RESERVED2         # Reserved
+PENTIUM4 0x18D MCG_RESERVED3         # Reserved
+PENTIUM4 0x18E MCG_RESERVED4         # Reserved
+PENTIUM4 0x18F MCG_RESERVED5         # Reserved
+PENTIUM4 0x190 MCG_R8                # Machine Check R8
+PENTIUM4 0x191 MCG_R9                # Machine Check R9D/R9
+PENTIUM4 0x192 MCG_R10               # Machine Check R10
+PENTIUM4 0x193 MCG_R11               # Machine Check R11
+PENTIUM4 0x194 MCG_R12               # Machine Check R12
+PENTIUM4 0x195 MCG_R13               # Machine Check R13
+PENTIUM4 0x196 MCG_R14               # Machine Check R14
+PENTIUM4 0x197 MCG_R15               # Machine Check R15
+
+# Intel-SDM-Vol4 Performance Event Select Registers
+0x186 IA32_PERFEVTSEL0
+0x187 IA32_PERFEVTSEL1
+0x188 IA32_PERFEVTSEL2
+0x189 IA32_PERFEVTSEL3
+0x18A IA32_PERFEVTSEL4
+0x18B IA32_PERFEVTSEL5
+0x18C IA32_PERFEVTSEL6
+0x18D IA32_PERFEVTSEL7
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/haswell/haswell.h
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
+0x194 FLEX_RATIO
+
+0x195 IA32_OVERCLOCKING_STATUS # Intel-SDM-Vol4 Overclocking Status
+0x198 IA32_PERF_STATUS         # Intel-SDM-Vol4 Current Performance Status
+0x199 IA32_PERF_CTL            # Intel-SDM-Vol4 Performance Control
+0x19A IA32_CLOCK_MODULATION    # Intel-SDM-Vol4 Clock Modulation Control
+0x19B IA32_THERM_INTERRUPT     # Intel-SDM-Vol4 Thermal Interrupt Control
+0x19C IA32_THERM_STATUS        # Intel-SDM-Vol4 Thermal Status Information
+0x19D THERM2_CTL               # Intel-SDM-Vol4 Thermal Monitor 2 Control
+
+0x1A0 IA32_MISC_ENABLE # Intel-SDM-Vol4 Enable Miscellaneous Processor Features
+
+# Intel-SDM-Vol4 (Pentium 4 and Xeon)
+PENTIUM4 0x1A1 PLATFORM_BRV          # Platform Feature Requirements
+
+# Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture)
+CORE1 0x1A2 TEMPERATURE_TARGET   # Temperature Target
+CORE1 0x1A4 MISC_FEATURE_CONTROL # Miscellaneous Feature Control
+CORE1 0x1A6 OFFCORE_RSP_0        # Offcore Response Event Select Register
+CORE1 0x1AA MISC_PWR_MGMT        # Miscellaneous Power Management Control
+CORE1 0x1AC TURBO_POWER_CURRENT_LIMIT # Power Current Limit
+CORE1 0x1AD TURBO_RATIO_LIMIT   # Maximum Ratio Limit of Turbo Mode
+
+# Intel-SDM-Vol4 (Xeon Processor 5600)
+XEON5600 0x1A7 OFFCORE_RSP_1     # Offcore Response Event Select Register
+
+# Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors)
+# Intel-SDM-Vol4 (4th Generation Intel Xeon Scalable Processor Family)
+CORE12 0x1AD PRIMARY_TURBO_RATIO_LIMIT # Primary Maximum Turbo Ratio Limit
+
+# Intel-SDM-Vol4 (Atom Goldmont Microarchitecture)
+ATOM 0x1AE TURBO_GROUP_CORECNT #  Group Size of Active Cores for Turbo Mode Operation
+
+# Intel-SDM-Vol4 (Xeon Processor E5 v2)
+XEONE5V2 0x1AE TURBO_RATIO_LIMIT1 # Maximum Ratio Limit of Turbo Mode
+
+# Intel-SDM-Vol4 (Xeon Processor E5 v3)
+XEONE5V3 0x1AF TURBO_RATIO_LIMIT2 # Maximum Ratio Limit of Turbo Mode
+
+# Intel-SDM-Vol4 (4th Generation Intel Xeon Scalable Processor Family)
+XEONSCAL4 0x1A4 PREFETCH_CONTROL          # Prefetch Disable Bits
+XEONSCAL4 0x1AE TURBO_RATIO_LIMIT_CORES   # See Table 2-50.
+
+# Intel-SDM-Vol4 (Xeon Processor D)
+XEOND 0x1AC TURBO_RATIO_LIMIT3     # Config Ratio Limit of Turbo Mode
+
+0x1B0 IA32_ENERGY_PERF_BIAS        # Intel-SDM-Vol4 Performance Energy Bias Hint
+0x1B1 IA32_PACKAGE_THERM_STATUS    # Intel-SDM-Vol4 Package Thermal Status Information
+0x1B2 IA32_PACKAGE_THERM_INTERRUPT # Intel-SDM-Vol4 Pkg Thermal Interrupt Control
+
+0x1C4 IA32_XFD     # Intel-SDM-Vol4 Extended Feature Disable Control
+0x1C5 IA32_XFD_ERR # Intel-SDM-Vol4 Extended Feature Disable Error Code
+
+# Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture)
+CORE1 0x1C8 LBR_SELECT # Last Branch Record Filtering Select Register
+
+0x1C9 LASTBRANCH_TOS # Intel-SDM-Vol4 (Intel Core Microarchitecture) Last Branch Record Stack TOS
+
+0x1D9 IA32_DEBUGCTL # Intel-SDM-Vol4 Trace/Profile Resource Control
+
+# Intel-SDM-Vol4 (Pentium 4 and Xeon)
+PENTIUM4 0x1D7 LER_FROM_LIP          # Last Exception Record From Linear IP
+PENTIUM4 0x1D8 LER_TO_LIP            # Last Exception Record To Linear IP
+PENTIUM4 0x1D9 DEBUGCTLA             # Debug Control
+PENTIUM4 0x1DA LASTBRANCH_TOS        # Last Branch Record Stack TOS
+PENTIUM4 0x1DB LASTBRANCH_0          # Last Branch Record 0
+PENTIUM4 0x1DC LASTBRANCH_1          # Last Branch Record 1
+PENTIUM4 0x1DD LASTBRANCH_2          # Last Branch Record 2
+PENTIUM4 0x1DE LASTBRANCH_3          # Last Branch Record 3
+
+# Intel-SDM-Vol4 (P6 Family Processors)
+P6 0x1DB LASTBRANCHFROMIP # 32-bit register for recording the instruction pointers for the last branch, interrupt, or exception that the processor took prior to a debug exception being generated
+P6 0x1DC LASTBRANCHTOIP   # 32-bit register for recording the instruction pointers for the last branch, interrupt, or exception that the processor took prior to a debug exception being generated
+P6 0x1DD LASTINTFROMIP    # Last INT from IP
+P6 0x1DE LASTINTTOIP     #  Last INT to IP
+
+# Intel-SDM-Vol4 (Intel Core Solo and Duo) Last Branch Record 0
+# Warning: many other sources swap LER_FROM_LIP and LER_TO_LIP:
+# - https://github.com/tianocore/edk2/blob/edk2-stable202211/MdePkg/Include/Register/Intel/Msr/PentiumMMsr.h
+# - https://github.com/gz/rust-x86/blob/0.52.0/src/msr.rs
+CORESOLO 0x1DD LER_FROM_LIP # Last Exception Record From Linear IP
+CORESOLO 0x1DE LER_TO_LIP   # Last Exception Record To Linear IP
+
+# https://twitter.com/_markel___/status/1384607442328334337 2021-04 "Probe Mode redirection is a microcode feature of modern Intel CPUs allowing to halt CPU and jump into JTAG debugger due to many arch events. It's controlled by undocumented ICECTLPMR MSR (0x1DF)"
+?ATOMGOLDMONT 0x1DF ICECTLPMR
+
+0x1DD IA32_LER_FROM_IP # Intel-SDM-Vol4 Last Event Record Source IP Register
+0x1DE IA32_LER_TO_IP   # Intel-SDM-Vol4 Last Event Record Destination IP Register
+
+0x1E0 IA32_LER_INFO    # Intel-SDM-Vol4 Last Event Record Info Register
+
+# https://github.com/tianocore/edk2/commit/e0d87abe8f7d135837af4447450e3892d5ec9104 "Add Core Solo/Duo MSRs from: Intel 64 and IA-32 Architectures Software Developer's Manual, Volume 3, December 2015, Chapter 35 Model-Specific-Registers (MSR), Section 35-17." (and removed in https://github.com/tianocore/edk2/commit/f49bbeda3ecaedf89b0190292980a84e80824a9b)
+# https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developers-manual.pdf
+CORESOLO 0x1E0 ROB_CR_BKUPTMPDR6
+
+# Intel-SDM-Vol4 (10th Generation Intel Core)
+CORE10 0x1F1 CRASHLOG_CONTROL # Write Data to a Crash Log Configuration
+
+0x1F2 IA32_SMRR_PHYSBASE  # Intel-SDM-Vol4 SMRR Base Address
+0x1F3 IA32_SMRR_PHYSMASK  # Intel-SDM-Vol4 SMRR Range Mask
+
+# Intel-SDM-Vol4 (7th and 8th Generation Intel Core Processors)
+CORE7 0x1F4 PRMRR_PHYS_BASE  # Processor Reserved Memory Range Register - Physical Base Control Register
+CORE7 0x1F5 PRMRR_PHYS_MASK  # Processor Reserved Memory Range Register - Physical Mask Control Register
+
+# From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
+0x1F5 PRMRR_MASK # Mask for PRMRR_BASE=0x2A0
+
+# From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
+0x1F6 SMRR2_PHYBASE
+0x1F7 SMRR2_PHYMASK
+
+0x1F8 IA32_PLATFORM_DCA_CAP # Intel-SDM-Vol4 DCA Capability
+0x1F9 IA32_CPU_DCA_CAP      # Intel-SDM-Vol4 If set, CPU supports Prefetch-Hint type
+0x1FA IA32_DCA_0_CAP        # Intel-SDM-Vol4 DCA type 0 Status and Control register
+
+# Intel-SDM-Vol4 (7th and 8th Generation Intel Core Processors)
+CORE7 0x1FB PRMRR_VALID_CONFIG  # Valid PRMRR Configurations
+
+# Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture)
+# https://download.gigabyte.com/FileList/Manual/server_manual_r161-r12_e_10.pdf Bit 20 is Race to Halt (RtH)
+CORE1 0x1FC POWER_CTL # Power Control Register
+
+# https://review.coreboot.org/c/coreboot/+/51796/14
+# https://github.com/tianocore/edk2-platforms/blob/aa3f6fd542e99dde4206537b095f1a2201275e75/Silicon/Intel/CoffeelakeSiliconPkg/Cpu/Include/CpuRegs.h#L22
+# https://www.mail-archive.com/devel@edk2.groups.io/msg27241.html
+0x1FE SPCL_CHIPSET_USAGE # Special Chipset Usage
+
+# Intel-SDM-Vol4 See Section 12.11.2.3, "Variable Range MTRRs"
+0x200 IA32_MTRR_PHYSBASE0
+0x201 IA32_MTRR_PHYSMASK0
+0x202 IA32_MTRR_PHYSBASE1
+0x203 IA32_MTRR_PHYSMASK1
+0x204 IA32_MTRR_PHYSBASE2
+0x205 IA32_MTRR_PHYSMASK2
+0x206 IA32_MTRR_PHYSBASE3
+0x207 IA32_MTRR_PHYSMASK3
+0x208 IA32_MTRR_PHYSBASE4
+0x209 IA32_MTRR_PHYSMASK4
+0x20A IA32_MTRR_PHYSBASE5
+0x20B IA32_MTRR_PHYSMASK5
+0x20C IA32_MTRR_PHYSBASE6
+0x20D IA32_MTRR_PHYSMASK6
+0x20E IA32_MTRR_PHYSBASE7
+0x20F IA32_MTRR_PHYSMASK7
+0x210 IA32_MTRR_PHYSBASE8
+0x211 IA32_MTRR_PHYSMASK8
+0x212 IA32_MTRR_PHYSBASE9
+0x213 IA32_MTRR_PHYSMASK9
+0x250 IA32_MTRR_FIX64K_00000
+0x258 IA32_MTRR_FIX16K_80000
+0x259 IA32_MTRR_FIX16K_A0000
+
+# Intel-SDM-Vol4 See Section 12.11.2.2, "Fixed Range MTRRs."
+0x268 IA32_MTRR_FIX4K_C0000
+0x269 IA32_MTRR_FIX4K_C8000
+0x26A IA32_MTRR_FIX4K_D0000
+0x26B IA32_MTRR_FIX4K_D8000
+0x26C IA32_MTRR_FIX4K_E0000
+0x26D IA32_MTRR_FIX4K_E8000
+0x26E IA32_MTRR_FIX4K_F0000
+0x26F IA32_MTRR_FIX4K_F8000
+
+# https://kib.kiev.ua/x86docs/Intel/TDX/348551-001.pdf Intel Trust Domain Extensions (Intel TDX) Module Architecture Application Binary Interface (ABI) Reference Specification (September 2021, 348551-001US)
+# https://cdrdv2-public.intel.com/733568/tdx-module-1.0-public-spec-344425004.pdf Architecture Specification: Intel Trust Domain Extensions (Intel TDX) Module (June 2022, 344425-004US)
+0x276 SLAM_ENABLE
+
+# Intel-SDM-Vol4
+0x277 IA32_PAT
+
+# Intel-SDM-Vol4 MSR Enable/disable CMCI capability for bank 0
+0x280 IA32_MC0_CTL2
+0x281 IA32_MC1_CTL2
+0x282 IA32_MC2_CTL2
+0x283 IA32_MC3_CTL2
+0x284 IA32_MC4_CTL2
+0x285 IA32_MC5_CTL2
+0x286 IA32_MC6_CTL2
+0x287 IA32_MC7_CTL2
+0x288 IA32_MC8_CTL2
+0x289 IA32_MC9_CTL2
+0x28A IA32_MC10_CTL2
+0x28B IA32_MC11_CTL2
+0x28C IA32_MC12_CTL2
+0x28D IA32_MC13_CTL2
+0x28E IA32_MC14_CTL2
+0x28F IA32_MC15_CTL2
+0x290 IA32_MC16_CTL2
+0x291 IA32_MC17_CTL2
+0x292 IA32_MC18_CTL2
+0x293 IA32_MC19_CTL2
+0x294 IA32_MC20_CTL2
+0x295 IA32_MC21_CTL2
+0x296 IA32_MC22_CTL2
+0x297 IA32_MC23_CTL2
+0x298 IA32_MC24_CTL2
+0x299 IA32_MC25_CTL2
+0x29A IA32_MC26_CTL2
+0x29B IA32_MC27_CTL2
+0x29C IA32_MC28_CTL2
+0x29D IA32_MC29_CTL2
+0x29E IA32_MC30_CTL2
+0x29F IA32_MC31_CTL2
+
+# Intel-SDM-Vol4 (10th Generation Intel Core)
+CORE10 0x2A0 PRMRR_BASE_0 # Processor Reserved Memory Range Register - Physical Base Control Register
+
+# Intel-SDM-Vol4 (4th Generation Intel Xeon Scalable Processor Family)
+XEONSCAL4 0x2C2 COPY_SCAN_HASHES   # linear address of the SCAN Test HASH Binary loaded into memory
+XEONSCAL4 0x2C3 SCAN_HASHES_STATUS
+XEONSCAL4 0x2C4 AUTHENTICATE_AND_COPY_CHUNK
+XEONSCAL4 0x2C5 CHUNKS_AUTHENTICATION_STATUS
+XEONSCAL4 0x2C6 ACTIVATE_SCAN
+XEONSCAL4 0x2C7 SCAN_STATUS
+XEONSCAL4 0x2C8 SCAN_MODULE_ID
+XEONSCAL4 0x2C9 LAST_SAF_WP
+XEONSCAL4 0x2D9 INTEGRITY_CAPABILITIES
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
+0x2E0 EVICT_CTL
+0x2E7 LT_CONTROL
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/skylake/include/soc/msr.h
+CORE6 0x2E7 LT_LOCK_MEMORY
+
+# From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
+0x2E8 EDRAM_ACM
+
+# Intel-SDM-Vol4 (7th and 8th Generation Intel Core Processors)
+CORE7 0x2F4 UNCORE_PRMRR_PHYS_BASE
+CORE7 0x2F5 UNCORE_PRMRR_PHYS_MASK
+
+# Intel-SDM-Vol4
+0x2FF IA32_MTRR_DEF_TYPE
+
+# From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
+0x300 BUS_NUM
+
+# Intel-SDM-Vol4 (6th-13th Xeon Processor) Lower 64 Bit CR_SGXOWNEREPOCH
+XEON6 0x300 SGXOWNEREPOCH0
+
+# Intel-SDM-Vol4 (Pentium 4 and Xeon)
+PENTIUM4 0x300 BPU_COUNTER0   # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x301 BPU_COUNTER1   # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x302 BPU_COUNTER2   # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x303 BPU_COUNTER3   # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x304 MS_COUNTER0    # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x305 MS_COUNTER1    # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x306 MS_COUNTER2    # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x307 MS_COUNTER3    # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x308 FLAME_COUNTER0 # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x309 FLAME_COUNTER1 # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x30A FLAME_COUNTER2 # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x30B FLAME_COUNTER3 # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x30C IQ_COUNTER0    # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x30D IQ_COUNTER1    # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x30E IQ_COUNTER2    # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x30F IQ_COUNTER3    # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x310 IQ_COUNTER4    # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x311 IQ_COUNTER5    # See Section 20.6.3.2, "Performance Counters."
+PENTIUM4 0x360 BPU_CCCR0      # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x361 BPU_CCCR1      # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x362 BPU_CCCR2      # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x363 BPU_CCCR3      # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x364 MS_CCCR0       # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x365 MS_CCCR1       # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x366 MS_CCCR2       # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x367 MS_CCCR3       # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x368 FLAME_CCCR0    # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x369 FLAME_CCCR1    # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x36A FLAME_CCCR2    # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x36B FLAME_CCCR3    # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x36C IQ_CCCR0       # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x36D IQ_CCCR1       # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x36E IQ_CCCR2       # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x36F IQ_CCCR3       # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x370 IQ_CCCR4       # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x371 IQ_CCCR5       # See Section 20.6.3.3, "CCCR MSRs."
+PENTIUM4 0x3A0 BSU_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3A1 BSU_ESCR1      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3A2 FSB_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3A3 FSB_ESCR1      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3A4 FIRM_ESCR0     # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3A5 FIRM_ESCR1     # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3A6 FLAME_ESCR0    # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3A7 FLAME_ESCR1    # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3A8 DAC_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3A9 DAC_ESCR1      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3AA MOB_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3AB MOB_ESCR1      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3AC PMH_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3AD PMH_ESCR1      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3AE SAAT_ESCR0     # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3AF SAAT_ESCR1     # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3B0 U2L_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3B1 U2L_ESCR1      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3B2 BPU_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3B3 BPU_ESCR1      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3B4 IS_ESCR0       # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3B5 IS_ESCR1       # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3B6 ITLB_ESCR0     # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3B7 ITLB_ESCR1     # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3B8 CRU_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3B9 CRU_ESCR1      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3BA IQ_ESCR0       # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3BB IQ_ESCR1       # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3BC RAT_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3BD RAT_ESCR1      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3BE SSU_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3BF SSU_ESCR1      # Guessed in https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
+PENTIUM4 0x3C0 MS_ESCR0       # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3C1 MS_ESCR1       # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3C2 TBPU_ESCR0     # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3C3 TBPU_ESCR1     # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3C4 TC_ESCR0       # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3C5 TC_ESCR1       # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3C8 IX_ESCR0       # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3C9 IX_ESCR1       # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3CA ALF_ESCR0      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3CB ALF_ESCR1      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3CC CRU_ESCR2      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3CD CRU_ESCR3      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3E0 CRU_ESCR4      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3E1 CRU_ESCR5      # See Section 20.6.3.1, "ESCR MSRs."
+PENTIUM4 0x3F0 TC_PRECISE_EVENT # See Section 20.6.3.1, "ESCR MSRs."
+
+# Intel-SDM-Vol4 (6th-13th Xeon Processor) Upper 64 Bit CR_SGXOWNEREPOCH
+XEON6 0x301 SGXOWNEREPOCH1
+
+# Intel-SDM-Vol4 (Intel Xeon Processor 5500 and 3400 Series)
+XEON5000 0x301 GQ_SNOOP_MESF
+
+# https://github.com/chipsec/chipsec/blob/1.10.0/chipsec/cfg/8086/common.xml
+0x302 BIOS_SE_SVN
+
+# Intel-SDM-Vol4 Fixed-Function Performance Counters
+# https://github.com/intel/intel-cmt-cat/blob/6f385efba25682bc1d3dd2332fd177639ac8d0c7/lib/cpu_registers.h defines some names: IA32_MSR_INST_RETIRED_ANY=0x309, IA32_MSR_CPU_UNHALTED_THREAD=0x30A
+0x309 IA32_FIXED_CTR0
+0x30A IA32_FIXED_CTR1
+0x30B IA32_FIXED_CTR2
+
+# Intel-SDM-Vol4 (10th Generation Intel Core)
+0x30C IA32_FIXED_CTR3 # Fixed-Function Performance Counter Register 3
+CORE10 0x329 PERF_METRICS # Performance Metrics
+
+# https://kib.kiev.ua/x86docs/Intel/TDX/348551-001.pdf Intel Trust Domain Extensions (Intel TDX) Module Architecture Application Binary Interface (ABI) Reference Specification (September 2021, 348551-001US)
+# https://cdrdv2-public.intel.com/733568/tdx-module-1.0-public-spec-344425004.pdf Architecture Specification: Intel Trust Domain Extensions (Intel TDX) Module (June 2022, 344425-004US)
+0x329 IA32_PERF_METRICS # Performance Metrics
+
+0x345 IA32_PERF_CAPABILITIES # Intel-SDM-Vol4 Read Only MSR that enumerates the existence of performance monitoring features
+
+# Intel-SDM-Vol4 (8th Generation Intel Core i3)
+CORE8 0x350 BR_DETECT_CTRL   # Branch Monitoring Global Control
+CORE8 0x351 BR_DETECT_STATUS # Branch Monitoring Global Status
+CORE8 0x354 BR_DETECT_COUNTER_CONFIG_0 # Branch Monitoring Detect Counter Configuration
+CORE8 0x355 BR_DETECT_COUNTER_CONFIG_1 # Branch Monitoring Detect Counter Configuration
+
+0x38D IA32_FIXED_CTR_CTRL           # Intel-SDM-Vol4 Fixed-Function Performance Counter Control
+0x38E IA32_PERF_GLOBAL_STATUS       # Intel-SDM-Vol4 Global Performance Counter Status
+0x38F IA32_PERF_GLOBAL_CTRL         # Intel-SDM-Vol4 Global Performance Counter Control
+0x390 IA32_PERF_GLOBAL_STATUS_RESET # Intel-SDM-Vol4 Global Performance Counter Overflow Reset Control
+0x391 IA32_PERF_GLOBAL_STATUS_SET   # Intel-SDM-Vol4 Global Performance Counter Overflow Set Control
+0x392 IA32_PERF_GLOBAL_INUSE        # Intel-SDM-Vol4 Indicator that core perfmon interface is in use
+
+CORE 0x390 IA32_PERF_GLOBAL_OVF_CTRL # Intel-SDM-Vol4 Global Performance Counter Overflow Control (old name)
+
+# Intel-SDM-Vol4 (2nd Generation Intel Core Processors)
+CORE2 0x391 UNC_PERF_GLOBAL_CTRL   # Uncore PMU Global Control
+CORE2 0x392 UNC_PERF_GLOBAL_STATUS # Uncore PMU Main Status
+CORE2 0x394 UNC_PERF_FIXED_CTRL    # Uncore Fixed Counter Control
+CORE2 0x395 UNC_PERF_FIXED_CTR     # Uncore Fixed Counter
+CORE2 0x396 UNC_CBO_CONFIG         # Uncore C-Box Configuration Information
+CORE2 0x3B0 UNC_ARB_PERFCTR0       # Uncore Arb Unit, Performance Counter 0
+CORE2 0x3B1 UNC_ARB_PERFCTR1       # Uncore Arb Unit, Performance Counter 1
+CORE2 0x3B2 UNC_ARB_PERFEVTSEL0    # Uncore Arb Unit, Counter 0 Event Select MSR
+CORE2 0x3B3 UNC_ARB_PERFEVTSEL1    # Uncore Arb Unit, Counter 1 Event Select MSR
+
+# Intel-SDM-Vol4 (Intel Xeon Processor 5500 and 3400 Series) See Section 20.3.1.2.1, "Uncore Performance Monitoring Management Facility."
+XEON5500 0x391 UNCORE_PERF_GLOBAL_CTRL
+XEON5500 0x392 UNCORE_PERF_GLOBAL_STATUS
+XEON5500 0x393 UNCORE_PERF_GLOBAL_OVF_CTRL
+XEON5500 0x394 UNCORE_FIXED_CTR0
+XEON5500 0x395 UNCORE_FIXED_CTR_CTRL
+# Intel-SDM-Vol4 (Intel Xeon Processor 5500 and 3400 Series) See Section 20.3.1.2.3, "Uncore Address/Opcode Match MSR."
+XEON5500 0x396 UNCORE_ADDR_OPCODE_MATCH
+# Intel-SDM-Vol4 (Intel Xeon Processor 5500 and 3400 Series) See Section 20.3.1.2.2, "Uncore Performance Event Configuration Facility."
+XEON5500 0x3B0 UNCORE_PMC0
+XEON5500 0x3B1 UNCORE_PMC1
+XEON5500 0x3B2 UNCORE_PMC2
+XEON5500 0x3B3 UNCORE_PMC3
+XEON5500 0x3B4 UNCORE_PMC4
+XEON5500 0x3B5 UNCORE_PMC5
+XEON5500 0x3B6 UNCORE_PMC6
+XEON5500 0x3B7 UNCORE_PMC7
+# Intel-SDM-Vol4 (Intel Xeon Processor 5500 and 3400 Series) See Section 20.3.1.2.2, "Uncore Performance Event Configuration Facility."
+XEON5500 0x3C0 UNCORE_PERFEVTSEL0
+XEON5500 0x3C1 UNCORE_PERFEVTSEL1
+XEON5500 0x3C2 UNCORE_PERFEVTSEL2
+XEON5500 0x3C3 UNCORE_PERFEVTSEL3
+XEON5500 0x3C4 UNCORE_PERFEVTSEL4
+XEON5500 0x3C5 UNCORE_PERFEVTSEL5
+XEON5500 0x3C6 UNCORE_PERFEVTSEL6
+XEON5500 0x3C7 UNCORE_PERFEVTSEL7
+
+# Intel-SDM-Vol4 (Intel Xeon Processor E5)
+XEONE5 0x39C PEBS_NUM_ALT # Enable alternate PEBS counting logic
+
+# Intel-SDM-Vol4 (Intel Xeon Processor 7500 Series)
+XEON7500 0x394 W_PMON_FIXED_CTR     # Uncore W-box perfmon fixed counter
+XEON7500 0x395 W_PMON_FIXED_CTR_CTL # Uncore U-box perfmon fixed counter control MSR
+
+0x3F1 IA32_PEBS_ENABLE # Intel-SDM-Vol4 PEBS Control
+
+# Intel-SDM-Vol4 (Pentium 4 and Xeon)
+PENTIUM4 0x3F2 PEBS_MATRIX_VERT
+
+# Intel-SDM-Vol4 (10th Generation Intel Core)
+CORE10 0x3F2 PEBS_DATA_CFG # PEBS Data Configuration
+
+# Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture) See Section 20.3.1.1.2, "Load Latency Performance Monitoring Facility."
+CORE1 0x3F6 PEBS_LD_LAT
+
+# Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors) FrontEnd Precise Event Condition Select
+# Intel-SDM-Vol4 (6th-13th Xeon Processor) FrontEnd Precise Event Condition Select
+CORE12 0x3F7 PEBS_FRONTEND
+
+# Intel-SDM-Vol4 (Atom)
+ATOM 0x3F8 PKG_C2_RESIDENCY  # Package C2 Residency Counter
+ATOM 0x3F9 PKG_C4_RESIDENCY  # Package C4 Residency Counter
+ATOM 0x3FA PKG_C6_RESIDENCY  # Package C6 Residency Counter
+
+# Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture)
+CORE1 0x3F8 PKG_C3_RESIDENCY  # Package C3 Residency Counter
+CORE1 0x3F9 PKG_C6_RESIDENCY  # Package C6 Residency Counter
+CORE1 0x3FA PKG_C7_RESIDENCY  # Package C7 Residency Counter
+CORE1 0x3FC CORE_C3_RESIDENCY # CORE C3 Residency Counter
+CORE1 0x3FD CORE_C6_RESIDENCY # CORE C6 Residency Counter
+
+# Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
+CORE2 0x3FE CORE_C7_RESIDENCY # CORE C7 Residency Counter
+
+# Intel-SDM-Vol4 (Intel Xeon Phi)
+XEONPHI 0x3FC MC0_RESIDENCY     # Module C0 Residency Counter
+XEONPHI 0x3FD MC6_RESIDENCY     # Module C6 Residency Counter
+XEONPHI 0x3FF CORE_C6_RESIDENCY # CORE C6 Residency Counter
+
+# Intel-SDM-Vol4
+0x400 IA32_MC0_CTL
+0x401 IA32_MC0_STATUS
+0x402 IA32_MC0_ADDR
+0x403 IA32_MC0_MISC
+0x404 IA32_MC1_CTL
+0x405 IA32_MC1_STATUS
+0x406 IA32_MC1_ADDR
+0x407 IA32_MC1_MISC
+0x408 IA32_MC2_CTL
+0x409 IA32_MC2_STATUS
+0x40A IA32_MC2_ADDR
+0x40B IA32_MC2_MISC
+0x40C IA32_MC3_CTL
+0x40D IA32_MC3_STATUS
+0x40E IA32_MC3_ADDR
+0x40F IA32_MC3_MISC
+0x410 IA32_MC4_CTL
+0x411 IA32_MC4_STATUS
+0x412 IA32_MC4_ADDR
+0x413 IA32_MC4_MISC
+0x414 IA32_MC5_CTL
+0x415 IA32_MC5_STATUS
+0x416 IA32_MC5_ADDR
+0x417 IA32_MC5_MISC
+0x418 IA32_MC6_CTL
+0x419 IA32_MC6_STATUS
+0x41A IA32_MC6_ADDR
+0x41B IA32_MC6_MISC
+0x41C IA32_MC7_CTL
+0x41D IA32_MC7_STATUS
+0x41E IA32_MC7_ADDR
+0x41F IA32_MC7_MISC
+0x420 IA32_MC8_CTL
+0x421 IA32_MC8_STATUS
+0x422 IA32_MC8_ADDR
+0x423 IA32_MC8_MISC
+0x424 IA32_MC9_CTL
+0x425 IA32_MC9_STATUS
+0x426 IA32_MC9_ADDR
+0x427 IA32_MC9_MISC
+0x428 IA32_MC10_CTL
+0x429 IA32_MC10_STATUS
+0x42A IA32_MC10_ADDR
+0x42B IA32_MC10_MISC
+0x42C IA32_MC11_CTL
+0x42D IA32_MC11_STATUS
+0x42E IA32_MC11_ADDR
+0x42F IA32_MC11_MISC
+0x430 IA32_MC12_CTL
+0x431 IA32_MC12_STATUS
+0x432 IA32_MC12_ADDR
+0x433 IA32_MC12_MISC
+0x434 IA32_MC13_CTL
+0x435 IA32_MC13_STATUS
+0x436 IA32_MC13_ADDR
+0x437 IA32_MC13_MISC
+0x438 IA32_MC14_CTL
+0x439 IA32_MC14_STATUS
+0x43A IA32_MC14_ADDR
+0x43B IA32_MC14_MISC
+0x43C IA32_MC15_CTL
+0x43D IA32_MC15_STATUS
+0x43E IA32_MC15_ADDR
+0x43F IA32_MC15_MISC
+0x440 IA32_MC16_CTL
+0x441 IA32_MC16_STATUS
+0x442 IA32_MC16_ADDR
+0x443 IA32_MC16_MISC
+0x444 IA32_MC17_CTL
+0x445 IA32_MC17_STATUS
+0x446 IA32_MC17_ADDR
+0x447 IA32_MC17_MISC
+0x448 IA32_MC18_CTL
+0x449 IA32_MC18_STATUS
+0x44A IA32_MC18_ADDR
+0x44B IA32_MC18_MISC
+0x44C IA32_MC19_CTL
+0x44D IA32_MC19_STATUS
+0x44E IA32_MC19_ADDR
+0x44F IA32_MC19_MISC
+0x450 IA32_MC20_CTL
+0x451 IA32_MC20_STATUS
+0x452 IA32_MC20_ADDR
+0x453 IA32_MC20_MISC
+0x454 IA32_MC21_CTL
+0x455 IA32_MC21_STATUS
+0x456 IA32_MC21_ADDR
+0x457 IA32_MC21_MISC
+0x458 IA32_MC22_CTL
+0x459 IA32_MC22_STATUS
+0x45A IA32_MC22_ADDR
+0x45B IA32_MC22_MISC
+0x45C IA32_MC23_CTL
+0x45D IA32_MC23_STATUS
+0x45E IA32_MC23_ADDR
+0x45F IA32_MC23_MISC
+0x460 IA32_MC24_CTL
+0x461 IA32_MC24_STATUS
+0x462 IA32_MC24_ADDR
+0x463 IA32_MC24_MISC
+0x464 IA32_MC25_CTL
+0x465 IA32_MC25_STATUS
+0x466 IA32_MC25_ADDR
+0x467 IA32_MC25_MISC
+0x468 IA32_MC26_CTL
+0x469 IA32_MC26_STATUS
+0x46A IA32_MC26_ADDR
+0x46B IA32_MC26_MISC
+0x46C IA32_MC27_CTL
+0x46D IA32_MC27_STATUS
+0x46E IA32_MC27_ADDR
+0x46F IA32_MC27_MISC
+0x470 IA32_MC28_CTL
+0x471 IA32_MC28_STATUS
+0x472 IA32_MC28_ADDR
+0x473 IA32_MC28_MISC
+0x474 IA32_MC29_CTL
+0x475 IA32_MC29_STATUS
+0x476 IA32_MC29_ADDR
+0x477 IA32_MC29_MISC
+0x478 IA32_MC30_CTL
+0x479 IA32_MC30_STATUS
+0x47A IA32_MC30_ADDR
+0x47B IA32_MC30_MISC
+0x47C IA32_MC31_CTL
+0x47D IA32_MC31_STATUS
+0x47E IA32_MC31_ADDR
+0x47F IA32_MC31_MISC
+
+# Intel-SDM-Vol4 (Intel Core Solo and Duo): MC4 and MC3 are swapped
+CORESOLO 0x40C IA32_MC4_CTL
+CORESOLO 0x40D IA32_MC4_STATUS
+CORESOLO 0x40E IA32_MC4_ADDR
+CORESOLO 0x40F IA32_MC4_MISC
+CORESOLO 0x410 IA32_MC3_CTL
+CORESOLO 0x411 IA32_MC3_STATUS
+CORESOLO 0x412 IA32_MC3_ADDR
+CORESOLO 0x413 IA32_MC3_MISC
+
+0x480 IA32_VMX_BASIC               # Intel-SDM-Vol4 Reporting Register of Basic VMX Capabilities
+0x481 IA32_VMX_PINBASED_CTLS       # Intel-SDM-Vol4 Capability Reporting Register of Pin-Based VM-Execution Controls
+0x482 IA32_VMX_PROCBASED_CTLS      # Intel-SDM-Vol4 Capability Reporting Register of Primary Processor-Based VM-Execution Controls
+0x483 IA32_VMX_EXIT_CTLS           # Intel-SDM-Vol4 Capability Reporting Register of Primary VM-Exit Controls
+0x484 IA32_VMX_ENTRY_CTLS          # Intel-SDM-Vol4 Capability Reporting Register of VM-Entry Control
+0x485 IA32_VMX_MISC                # Intel-SDM-Vol4 Reporting Register of Miscellaneous VMX Capabilities
+0x486 IA32_VMX_CR0_FIXED0          # Intel-SDM-Vol4 Capability Reporting Register of CR0 Bits Fixed to
+0x487 IA32_VMX_CR0_FIXED1          # Intel-SDM-Vol4 Capability Reporting Register of CR0 Bits Fixed to 1
+0x488 IA32_VMX_CR4_FIXED0          # Intel-SDM-Vol4 Capability Reporting Register of CR4 Bits Fixed to 0
+0x489 IA32_VMX_CR4_FIXED1          # Intel-SDM-Vol4 Capability Reporting Register of CR4 Bits Fixed to 1
+0x48A IA32_VMX_VMCS_ENUM           # Intel-SDM-Vol4 Capability Reporting Register of VMCS Field Enumeration
+0x48B IA32_VMX_PROCBASED_CTLS2     # Intel-SDM-Vol4 Capability Reporting Register of Secondary Processor-Based VM-Execution Controls
+0x48C IA32_VMX_EPT_VPID_CAP        # Intel-SDM-Vol4 Capability Reporting Register of EPT and VPID
+0x48D IA32_VMX_TRUE_PINBASED_CTLS  # Intel-SDM-Vol4 Capability Reporting Register of Pin-Based VM-Execution Flex Controls
+0x48E IA32_VMX_TRUE_PROCBASED_CTLS # Intel-SDM-Vol4 Capability Reporting Register of Primary Processor-Based VM-Execution Flex Controls
+0x48F IA32_VMX_TRUE_EXIT_CTLS      # Intel-SDM-Vol4 Capability Reporting Register of VM-Exit Flex Controls
+0x490 IA32_VMX_TRUE_ENTRY_CTLS     # Intel-SDM-Vol4 Capability Reporting Register of VM-Entry Flex Controls
+0x491 IA32_VMX_VMFUNC              # Intel-SDM-Vol4 Capability Reporting Register of VMFunction Controls
+0x492 IA32_VMX_PROCBASED_CTLS3     # Intel-SDM-Vol4 Capability Reporting Register of Tertiary Processor-Based VM-Execution Controls
+0x493 IA32_VMX_EXIT_CTLS2          # Intel-SDM-Vol4 Capability Reporting Register of Secondary VM-Exit Controls
+
+# Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
+CORE2 0x48C IA32_VMX_EPT_VPID_ENUM # Capability Reporting Register of EPT and VPID
+
+# Intel-SDM-Vol4 (Intel Xeon Phi Processor 7215, 7285, 7295 Series)
+XEONPHI7215 0x491 IA32_VMX_FMFUNC  # Capability Reporting Register of VM-Function Controls
+
+0x4C1 IA32_A_PMC0 # Intel-SDM-Vol4 Full Width Writable IA32_PMC0 Alias
+0x4C2 IA32_A_PMC1 # Intel-SDM-Vol4 Full Width Writable IA32_PMC1 Alias
+0x4C3 IA32_A_PMC2 # Intel-SDM-Vol4 Full Width Writable IA32_PMC2 Alias
+0x4C4 IA32_A_PMC3 # Intel-SDM-Vol4 Full Width Writable IA32_PMC3 Alias
+0x4C5 IA32_A_PMC4 # Intel-SDM-Vol4 Full Width Writable IA32_PMC4 Alias
+0x4C6 IA32_A_PMC5 # Intel-SDM-Vol4 Full Width Writable IA32_PMC5 Alias
+0x4C7 IA32_A_PMC6 # Intel-SDM-Vol4 Full Width Writable IA32_PMC6 Alias
+0x4C8 IA32_A_PMC7 # Intel-SDM-Vol4 Full Width Writable IA32_PMC7 Alias
+
+0x4D0 IA32_MCG_EXT_CTL # Intel-SDM-Vol4 Allows software to signal some MCEs to only a single logical processor in the system
+
+# Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
+CORE4 0x4E0 SMM_FEATURE_CONTROL # Enhanced SMM Feature Control
+CORE4 0x4E2 SMM_DELAYED         # SMM Delayed
+CORE4 0x4E3 SMM_BLOCKED         # SMM Blocked
+
+# Intel-SDM-Vol4 Status and SVN Threshold of SGX Support for ACM
+# From Intel SDM 38.11.3 Interactions with Authenticated Code Modules (ACMs)
+# https://www.intel.com/content/dam/develop/external/us/en/documents-tps/intel-tdx-cpu-architectural-specification.pdf Intel Trust Domain CPU Architectural Extensions
+0x500 IA32_SGX_SVN_STATUS
+
+# From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/p-seam-loader/src/common/x86_defs/msr_defs.h
+0x503 IA32_SGX_DEBUG_MODE
+
+# https://twitter.com/_markel___/status/1450854279267459077 2021-10 "Found undocumented Intel PDM (Probe-less Debug Methodology) mechanism implemented in microcode. FSCP_CR_PDM_CTRL is exposed via MSR 0x512 for Goldmont"
+?ATOMGOLDMONT 0x512 FSCP_CR_PDM_CTRL # Probe-less Debug Methodology Control
+
+# Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors)
+CORE12 0x540 THREAD_UARCH_CTL # Thread Microarchitectural Control
+
+# Intel-SDM-Vol4 (10th Generation Intel Core)
+CORE10 0x541 CORE_UARCH_CTL   # Core Microarchitecture Control
+
+0x560 IA32_RTIT_OUTPUT_BASE      # Intel-SDM-Vol4 Trace Output Base Register
+0x561 IA32_RTIT_OUTPUT_MASK_PTRS # Intel-SDM-Vol4 Trace Output Mask Pointers Register
+0x570 IA32_RTIT_CTL              # Intel-SDM-Vol4 Trace Control Register
+0x571 IA32_RTIT_STATUS           # Intel-SDM-Vol4 Tracing Status Register
+0x572 IA32_RTIT_CR3_MATCH        # Intel-SDM-Vol4 Trace Filter CR3 Match Register
+0x580 IA32_RTIT_ADDR0_A          # Intel-SDM-Vol4 Region 0 Start Address
+0x581 IA32_RTIT_ADDR0_B          # Intel-SDM-Vol4 Region 0 End Address
+0x582 IA32_RTIT_ADDR1_A          # Intel-SDM-Vol4 Region 1 Start Address
+0x583 IA32_RTIT_ADDR1_B          # Intel-SDM-Vol4 Region 1 End Address
+0x584 IA32_RTIT_ADDR2_A          # Intel-SDM-Vol4 Region 2 Start Address
+0x585 IA32_RTIT_ADDR2_B          # Intel-SDM-Vol4 Region 2 End Address
+0x586 IA32_RTIT_ADDR3_A          # Intel-SDM-Vol4 Region 3 Start Address
+0x587 IA32_RTIT_ADDR3_B          # Intel-SDM-Vol4 Region 3 End Address
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/model_6fx/model_6fx_init.c
+0x5A0 IA32_PECI_CTL
+
+0x600 IA32_DS_AREA               # Intel-SDM-Vol4 DS Save Area
+
+# Intel-SDM-Vol4 (11th Generation Intel Core)
+CORE11 0x601 VR_CURRENT_CONFIG # Power Limit 4 (PL4)
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/model_206ax/model_206ax.h
+INTEL206AX 0x601 PP0_CURRENT_CONFIG
+INTEL206AX 0x602 PP1_CURRENT_CONFIG
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/haswell/haswell.h
+CORE4 0x603 VR_MISC_CONFIG
+
+# Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
+# Intel-SDM-Vol4 (Xeon Processor E5 v3)
+CORE4 0x606 RAPL_POWER_UNIT # Unit Multipliers Used in RAPL (Run Time Average Power Limiting) Interfaces
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/braswell/include/soc/msr.h
+ATOMBRASWELL 0x606 PKG_POWER_SKU_UNIT
+
+# Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
+CORE2 0x60A PKGC3_IRTL        # Package C3 Interrupt Response Limit
+CORE2 0x60B PKGC6_IRTL        # Package C6 Interrupt Response Limit
+CORE2 0x60C PKGC7_IRTL        # Package C7 Interrupt Response Limit
+CORE2 0x60D PKG_C2_RESIDENCY  # Package C2 Residency Counter
+CORE2 0x610 PKG_POWER_LIMIT   # PKG RAPL Power Limit Control
+CORE2 0x611 PKG_ENERGY_STATUS # PKG Energy Status
+CORE2 0x614 PKG_POWER_INFO    # PKG RAPL Parameters
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/skylake/include/soc/msr.h
+CORE6 0x615 PL3_CONTROL
+
+# Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
+CORE4 0x60B PKGC_IRTL1        # Package C6/C7 Interrupt Response Limit 1
+CORE4 0x60C PKGC_IRTL2        # Package C6/C7 Interrupt Response Limit 2
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/haswell/haswell.h
+CORE4HASWELL 0x60A C_STATE_LATENCY_CONTROL_0  # Same as PKGC3_IRTL
+CORE4HASWELL 0x60B C_STATE_LATENCY_CONTROL_1  # Same as PKGC_IRTL1
+CORE4HASWELL 0x60C C_STATE_LATENCY_CONTROL_2  # Same as PKGC_IRTL2
+
+# Intel-SDM-Vol4 (7th and 8th Generation Intel Core Processors, Intel Core i3)
+CORE7 0x620 RING_RATIO_LIMIT # Ring Ratio Limit
+
+# Intel-SDM-Vol4 (3rd Generation Intel Xeon Scalable Processor Family)
+XEONSCAL3 0x612 PACKAGE_ENERGY_TIME_STATUS # Package energy consumed by the entire CPU
+
+# Intel-SDM-Vol4 (Intel Xeon Processor E5)
+XEONE5 0x613 PKG_PERF_STATUS    # Package RAPL Perf Status
+XEONE5 0x618 DRAM_POWER_LIMIT   # DRAM RAPL Power Limit Control
+XEONE5 0x619 DRAM_ENERGY_STATUS # DRAM Energy Status
+XEONE5 0x61B DRAM_PERF_STATUS   # DRAM Performance Throttling Status
+XEONE5 0x61C DRAM_POWER_INFO    # DRAM RAPL Parameters
+
+# Intel-SDM-Vol4 (Xeon Processor E5 v3)
+XEONE5V3 0x61E PCIE_PLL_RATIO     # Configuration of PCIE PLL Relative to BCLK
+XEONE5V3 0x620 UNCORE_RATIO_LIMIT # Uncore Ratio Limit
+
+# Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
+CORE4 0x630 PKG_C8_RESIDENCY  # Package C8 Residency Counter
+CORE4 0x631 PKG_C9_RESIDENCY  # Package C9 Residency Counter
+CORE4 0x632 PKG_C10_RESIDENCY # Package C10 Residency Counter
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 (put in "CORE4" to be consistent with PKG_C8_RESIDENCY)
+CORE4 0x633 PKGC8_IRTL   # Package C8 Interrupt Response Limit
+CORE4 0x634 PKGC9_IRTL   # Package C9 Interrupt Response Limit
+CORE4 0x635 PKGC10_IRTL  # Package C10 Interrupt Response Limit
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/haswell/haswell.h
+CORE4HASWELL 0x633 C_STATE_LATENCY_CONTROL_3  # Same as PKGC8_IRTL
+CORE4HASWELL 0x634 C_STATE_LATENCY_CONTROL_4  # Same as PKGC9_IRTL
+CORE4HASWELL 0x635 C_STATE_LATENCY_CONTROL_5  # Same as PKGC10_IRTL
+CORE4 0x636 VR_MISC_CONFIG2
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
+0x637 COUNTER_24_MHZ
+
+# Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
+CORE2 0x638 PP0_POWER_LIMIT   # PP0 RAPL Power Limit Control
+CORE2 0x639 PP0_ENERGY_STATUS # PP0 Energy Status
+CORE2 0x63A PP0_POLICY        # PP0 Balance Policy
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/braswell/include/soc/msr.h
+ATOMBRASWELL 0x638 PP1_POWER_LIMIT
+
+# Intel-SDM-252046-040 (2nd Gen Core, Sandy Bridge Microarchitecture)
+CORE2 0x63B PP0_PERF_STATUS   # PP0 Performance Throttling Status
+
+# Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
+CORE2 0x640 PP1_POWER_LIMIT   # PP1 RAPL Power Limit Control
+CORE2 0x641 PP1_ENERGY_STATUS # PP1 Energy Status
+CORE2 0x642 PP1_POLICY        # PP1 Balance Policy
+
+# Intel-SDM-Vol4 (3rd Gen Core, Ivy Bridge Microarchitecture)
+CORE3 0x648 CONFIG_TDP_NOMINAL     # Base TDP Ratio
+CORE3 0x649 CONFIG_TDP_LEVEL1      # ConfigTDP Level 1 ratio and power level
+CORE3 0x64A CONFIG_TDP_LEVEL2      # ConfigTDP Level 2 ratio and power level
+CORE3 0x64B CONFIG_TDP_CONTROL     # ConfigTDP Control
+CORE3 0x64C TURBO_ACTIVATION_RATIO # ConfigTDP Control
+
+# Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors)
+CORE12 0x650 SECONDARY_TURBO_RATIO_LIMIT # Secondary Maximum Turbo Ratio Limit
+
+# Intel-SDM-Vol4 (10th Generation Intel Core)
+CORE10 0x657 FAST_UNCORE_MSRS_CTL        # Thread Fast WRMSR/RDMSR Control MSR
+CORE10 0x65E FAST_UNCORE_MSRS_STATUS     # Indication of Uncore MSRs, Post Write Activates
+CORE10 0x65F FAST_UNCORE_MSRS_CAPABILITY # Fast WRMSR/RDMSR Enumeration MSR
+
+# Intel-SDM-Vol4 (6th-13th Xeon Processor)
+XEON6 0x64D PLATFORM_ENERGY_COUNTER   # Platform Energy Counter
+XEON6 0x64E PPERF                     # Productive Performance Count
+XEON6 0x64F CORE_PERF_LIMIT_REASONS   # Indicator of Frequency Clipping in Processor Cores
+XEON6 0x652 PKG_HDC_CONFIG            # HDC Configuration
+XEON6 0x653 CORE_HDC_RESIDENCY        # Core HDC Idle Residency
+XEON6 0x655 PKG_HDC_SHALLOW_RESIDENCY # Accumulate the cycles the package was in C2 state and at least one logical processor was in forced idle
+XEON6 0x656 PKG_HDC_DEEP_RESIDENCY    # Package Cx HDC Idle Residency
+XEON6 0x658 WEIGHTED_CORE_C0          # Core-count Weighted C0 Residency
+XEON6 0x659 ANY_CORE_C0               # Any Core C0 Residency
+XEON6 0x65A ANY_GFXE_C0               # Any Graphics Engine C0 Residency
+XEON6 0x65B CORE_GFXE_OVERLAP_C0      # Core and Graphics Engine Overlapped C0 Residency
+XEON6 0x65C PLATFORM_POWER_LIMIT      # Platform Power Limit Control
+
+# Intel-SDM-Vol4 (8th Generation Intel Core i3)
+CORE8 0x660 CORE_C1_RESIDENCY  # Core C1 Residency Counter
+CORE8 0x662 CORE_C3_RESIDENCY  # Core C3 Residency Counter
+
+# Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors) Module C6 Residency Counter
+CORE12 0x664 MC6_RESIDENCY_COUNTER # Time that this module is in module-specific C6 states since last reset. Counts at 1 Mhz frequency.
+
+# Intel-SDM-Vol4 (Intel Atom Processor E3000 Series)
+ATOME3000 0x668 CC6_DEMOTION_POLICY_CONFIG # Core C6 Demotion Policy Config MSR
+ATOME3000 0x669 MC6_DEMOTION_POLICY_CONFIG # Module C6 Demotion Policy Config MSR
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
+ATOM 0x66A CORE_RATIOS
+ATOM 0x66B CORE_VIDS
+ATOM 0x66C CORE_TURBO_RATIOS
+ATOM 0x66D CORE_TURBO_VIDS
+
+# Intel-SDM-Vol4 (Intel Atom Processor C2000 Series)
+ATOMC2000 0x66E PKG_POWER_INFO # PKG RAPL Parameter
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/braswell/include/soc/msr.h
+ATOMBRASWELL 0x670 PKG_TURBO_CFG1
+ATOMBRASWELL 0x671 CPU_TURBO_WKLD_CFG1
+ATOMBRASWELL 0x672 CPU_TURBO_WKLD_CFG2
+ATOMBRASWELL 0x673 CPU_THERM_CFG1
+ATOMBRASWELL 0x674 CPU_THERM_CFG2
+ATOMBRASWELL 0x675 CPU_THERM_SENS_CFG
+
+# Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture) Last Branch Record 0 From IP
+CORE1 0x680 LASTBRANCH_0_FROM_IP
+CORE1 0x681 LASTBRANCH_1_FROM_IP
+CORE1 0x682 LASTBRANCH_2_FROM_IP
+CORE1 0x683 LASTBRANCH_3_FROM_IP
+CORE1 0x684 LASTBRANCH_4_FROM_IP
+CORE1 0x685 LASTBRANCH_5_FROM_IP
+CORE1 0x686 LASTBRANCH_6_FROM_IP
+CORE1 0x687 LASTBRANCH_7_FROM_IP
+CORE1 0x688 LASTBRANCH_8_FROM_IP
+CORE1 0x689 LASTBRANCH_9_FROM_IP
+CORE1 0x68A LASTBRANCH_10_FROM_IP
+CORE1 0x68B LASTBRANCH_11_FROM_IP
+CORE1 0x68C LASTBRANCH_12_FROM_IP
+CORE1 0x68D LASTBRANCH_13_FROM_IP
+CORE1 0x68E LASTBRANCH_14_FROM_IP
+CORE1 0x68F LASTBRANCH_15_FROM_IP
+
+# Intel-SDM-Vol4 (6th-13th Xeon Processor) Last Branch Record 16 From IP
+CORE1 0x690 LASTBRANCH_16_FROM_IP
+CORE1 0x691 LASTBRANCH_17_FROM_IP
+CORE1 0x692 LASTBRANCH_18_FROM_IP
+CORE1 0x693 LASTBRANCH_19_FROM_IP
+CORE1 0x694 LASTBRANCH_20_FROM_IP
+CORE1 0x695 LASTBRANCH_21_FROM_IP
+CORE1 0x696 LASTBRANCH_22_FROM_IP
+CORE1 0x697 LASTBRANCH_23_FROM_IP
+CORE1 0x698 LASTBRANCH_24_FROM_IP
+CORE1 0x699 LASTBRANCH_25_FROM_IP
+CORE1 0x69A LASTBRANCH_26_FROM_IP
+CORE1 0x69B LASTBRANCH_27_FROM_IP
+CORE1 0x69C LASTBRANCH_28_FROM_IP
+CORE1 0x69D LASTBRANCH_29_FROM_IP
+CORE1 0x69E LASTBRANCH_30_FROM_IP
+CORE1 0x69F LASTBRANCH_31_FROM_IP
+
+# Intel-SDM-Vol4 (Xeon Processor E5 v3)
+# Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
+CORE4 0x690 CORE_PERF_LIMIT_REASONS # Indicator of Frequency Clipping in Processor Cores
+
+0x6A0 IA32_U_CET   # Intel-SDM-Vol4 Configure User Mode CET
+0x6A2 IA32_S_CET   # Intel-SDM-Vol4 Configure Supervisor Mode CET
+0x6A4 IA32_PL0_SSP # Intel-SDM-Vol4 Linear address to be loaded into SSP on transition to privilege level 0
+0x6A5 IA32_PL1_SSP # Intel-SDM-Vol4 Linear address to be loaded into SSP on transition to privilege level 1
+0x6A6 IA32_PL2_SSP # Intel-SDM-Vol4 Linear address to be loaded into SSP on transition to privilege level 2
+0x6A7 IA32_PL3_SSP # Intel-SDM-Vol4 Linear address to be loaded into SSP on transition to privilege level 3
+0x6A8 IA32_INTERRUPT_SSP_TABLE_ADDR # Intel-SDM-Vol4 Linear address of a table of seven shadow stack pointers that are selected in IA-32e mode using the IST index (when not 0) from the interrupt gate descriptor
+
+# Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
+CORE4 0x6B0 GRAPHICS_PERF_LIMIT_REASONS # Indicator of Frequency Clipping in the Processor
+CORE4 0x6B1 RING_PERF_LIMIT_REASONS     # Indicator of Frequency Clipping in the Ring Interconnect
+
+# Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture) Last Branch Record 0 To IP
+CORE1 0x6C0 LASTBRANCH_0_TO_IP
+CORE1 0x6C1 LASTBRANCH_1_TO_IP
+CORE1 0x6C2 LASTBRANCH_2_TO_IP
+CORE1 0x6C3 LASTBRANCH_3_TO_IP
+CORE1 0x6C4 LASTBRANCH_4_TO_IP
+CORE1 0x6C5 LASTBRANCH_5_TO_IP
+CORE1 0x6C6 LASTBRANCH_6_TO_IP
+CORE1 0x6C7 LASTBRANCH_7_TO_IP
+CORE1 0x6C8 LASTBRANCH_8_TO_IP
+CORE1 0x6C9 LASTBRANCH_9_TO_IP
+CORE1 0x6CA LASTBRANCH_10_TO_IP
+CORE1 0x6CB LASTBRANCH_11_TO_IP
+CORE1 0x6CC LASTBRANCH_12_TO_IP
+CORE1 0x6CD LASTBRANCH_13_TO_IP
+CORE1 0x6CE LASTBRANCH_14_TO_IP
+CORE1 0x6CF LASTBRANCH_15_TO_IP
+
+# Intel-SDM-Vol4 (6th-13th Xeon Processor) Last Branch Record 16 To IP
+CORE6 0x6D0 LASTBRANCH_16_TO_IP
+CORE6 0x6D1 LASTBRANCH_17_TO_IP
+CORE6 0x6D2 LASTBRANCH_18_TO_IP
+CORE6 0x6D3 LASTBRANCH_19_TO_IP
+CORE6 0x6D4 LASTBRANCH_20_TO_IP
+CORE6 0x6D5 LASTBRANCH_21_TO_IP
+CORE6 0x6D6 LASTBRANCH_22_TO_IP
+CORE6 0x6D7 LASTBRANCH_23_TO_IP
+CORE6 0x6D8 LASTBRANCH_24_TO_IP
+CORE6 0x6D9 LASTBRANCH_25_TO_IP
+CORE6 0x6DA LASTBRANCH_26_TO_IP
+CORE6 0x6DB LASTBRANCH_27_TO_IP
+CORE6 0x6DC LASTBRANCH_28_TO_IP
+CORE6 0x6DD LASTBRANCH_29_TO_IP
+CORE6 0x6DE LASTBRANCH_30_TO_IP
+CORE6 0x6DF LASTBRANCH_31_TO_IP
+
+0x6E0 IA32_TSC_DEADLINE  # Intel-SDM-Vol4 TSC Target of Local APIC's TSC Deadline Mode
+0x6E1 IA32_PKRS          # Intel-SDM-Vol4 Specifies the PK permissions associated with each protection domain for supervisor page
+
+# Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
+CORE2 0x700 UNC_CBO_0_PERFEVTSEL0 # Uncore C-Box 0, Counter 0 Event Select MSR
+CORE2 0x701 UNC_CBO_0_PERFEVTSEL1 # Uncore C-Box 0, Counter 1 Event Select MSR
+CORE2 0x702 UNC_CBO_0_PERFEVTSEL2 # Uncore C-Box 0, Counter 2 Event Select MSR
+CORE2 0x703 UNC_CBO_0_PERFEVTSEL3 # Uncore C-Box 0, Counter 3 Event Select MSR
+CORE2 0x705 UNC_CBO_0_UNIT_STATUS # Uncore C-Box 0, Unit Status for Counter 0-3
+CORE2 0x706 UNC_CBO_0_PERFCTR0    # Uncore C-Box 0, Performance Counter 0
+CORE2 0x707 UNC_CBO_0_PERFCTR1    # Uncore C-Box 0, Performance Counter 1
+CORE2 0x708 UNC_CBO_0_PERFCTR2    # Uncore C-Box 0, Performance Counter 2
+CORE2 0x709 UNC_CBO_0_PERFCTR3    # Uncore C-Box 0, Performance Counter 3
+CORE2 0x710 UNC_CBO_1_PERFEVTSEL0 # Uncore C-Box 1, Counter 0 Event Select MSR
+CORE2 0x711 UNC_CBO_1_PERFEVTSEL1 # Uncore C-Box 1, Counter 1 Event Select MSR
+CORE2 0x712 UNC_CBO_1_PERFEVTSEL2 # Uncore C-Box 1, Counter 2 Event Select MSR
+CORE2 0x713 UNC_CBO_1_PERFEVTSEL3 # Uncore C-Box 1, Counter 3 Event Select MSR
+CORE2 0x715 UNC_CBO_1_UNIT_STATUS # Uncore C-Box 1, Unit Status for Counter 0-3
+CORE2 0x716 UNC_CBO_1_PERFCTR0    # Uncore C-Box 1, Performance Counter 0
+CORE2 0x717 UNC_CBO_1_PERFCTR1    # Uncore C-Box 1, Performance Counter 1
+CORE2 0x718 UNC_CBO_1_PERFCTR2    # Uncore C-Box 1, Performance Counter 2
+CORE2 0x719 UNC_CBO_1_PERFCTR3    # Uncore C-Box 1, Performance Counter 3
+CORE2 0x720 UNC_CBO_2_PERFEVTSEL0 # Uncore C-Box 2, Counter 0 Event Select MSR
+CORE2 0x721 UNC_CBO_2_PERFEVTSEL1 # Uncore C-Box 2, Counter 1 Event Select MSR
+CORE2 0x722 UNC_CBO_2_PERFEVTSEL2 # Uncore C-Box 2, Counter 2 Event Select MSR
+CORE2 0x723 UNC_CBO_2_PERFEVTSEL3 # Uncore C-Box 2, Counter 3 Event Select MSR
+CORE2 0x725 UNC_CBO_2_UNIT_STATUS # Uncore C-Box 2, Unit Status for Counter 0-3
+CORE2 0x726 UNC_CBO_2_PERFCTR0    # Uncore C-Box 2, Performance Counter 0
+CORE2 0x727 UNC_CBO_2_PERFCTR1    # Uncore C-Box 2, Performance Counter 1
+CORE2 0x728 UNC_CBO_2_PERFCTR2    # Uncore C-Box 2, Performance Counter 2
+CORE2 0x729 UNC_CBO_2_PERFCTR3    # Uncore C-Box 2, Performance Counter 3
+CORE2 0x730 UNC_CBO_3_PERFEVTSEL0 # Uncore C-Box 3, Counter 0 Event Select MSR
+CORE2 0x731 UNC_CBO_3_PERFEVTSEL1 # Uncore C-Box 3, Counter 1 Event Select MSR
+CORE2 0x732 UNC_CBO_3_PERFEVTSEL2 # Uncore C-Box 3, Counter 2 Event Select MSR
+CORE2 0x733 UNC_CBO_3_PERFEVTSEL3 # Uncore C-Box 3, counter 3 Event Select MSR
+CORE2 0x735 UNC_CBO_3_UNIT_STATUS # Uncore C-Box 3, Unit Status for Counter 0-3
+CORE2 0x736 UNC_CBO_3_PERFCTR0    # Uncore C-Box 3, Performance Counter 0
+CORE2 0x737 UNC_CBO_3_PERFCTR1    # Uncore C-Box 3, Performance Counter 1
+CORE2 0x738 UNC_CBO_3_PERFCTR2    # Uncore C-Box 3, Performance Counter 2
+CORE2 0x739 UNC_CBO_3_PERFCTR3    # Uncore C-Box 3, Performance Counter 3
+CORE2 0x740 UNC_CBO_4_PERFEVTSEL0 # Uncore C-Box 4, Counter 0 Event Select MSR
+CORE2 0x741 UNC_CBO_4_PERFEVTSEL1 # Uncore C-Box 4, Counter 1 Event Select MSR
+CORE2 0x742 UNC_CBO_4_PERFEVTSEL2 # Uncore C-Box 4, Counter 2 Event Select MSR
+CORE2 0x743 UNC_CBO_4_PERFEVTSEL3 # Uncore C-Box 4, Counter 3 Event Select MSR
+CORE2 0x745 UNC_CBO_4_UNIT_STATUS # Uncore C-Box 4, Unit status for Counter 0-3
+CORE2 0x746 UNC_CBO_4_PERFCTR0    # Uncore C-Box 4, Performance Counter 0
+CORE2 0x747 UNC_CBO_4_PERFCTR1    # Uncore C-Box 4, Performance Counter 1
+CORE2 0x748 UNC_CBO_4_PERFCTR2    # Uncore C-Box 4, Performance Counter 2
+CORE2 0x749 UNC_CBO_4_PERFCTR3    # Uncore C-Box 4, Performance Counter 3
+
+# Intel-SDM-Vol4 (Intel Xeon Processor E5 v3)
+XEONE5V3 0x700 PMON_GLOBAL_CTL       # Uncore Perfmon Per-Socket Global Control
+XEONE5V3 0x701 PMON_GLOBAL_STATUS    # Uncore Perfmon Per-Socket Global Status
+XEONE5V3 0x702 PMON_GLOBAL_CONFIG    # Uncore Perfmon Per-Socket Global Configuration
+XEONE5V3 0x703 U_PMON_UCLK_FIXED_CTL # Uncore U-Box UCLK Fixed Counter Control
+XEONE5V3 0x704 U_PMON_UCLK_FIXED_CTR # Uncore U-Box UCLK Fixed Counter
+XEONE5V3 0x705 U_PMON_EVNTSEL0       # Uncore U-Box Perfmon Event Select for U-Box Counter 0
+XEONE5V3 0x706 U_PMON_EVNTSEL1       # Uncore U-Box Perfmon Event Select for U-Box Counter 1
+XEONE5V3 0x708 U_PMON_BOX_STATUS     # Uncore U-Box Perfmon U-Box Wide Status
+XEONE5V3 0x709 U_PMON_CTR0           # Uncore U-Box Perfmon Counter 0
+XEONE5V3 0x70A U_PMON_CTR1           # Uncore U-Box Perfmon Counter 1
+XEONE5V3 0x710 PCU_PMON_BOX_CTL      # Uncore PCU Perfmon for PCU-Box-Wide Control
+XEONE5V3 0x711 PCU_PMON_EVNTSEL0     # Uncore PCU Perfmon Event Select for PCU Counter 0
+XEONE5V3 0x712 PCU_PMON_EVNTSEL1     # Uncore PCU Perfmon Event Select for PCU Counter 1
+XEONE5V3 0x713 PCU_PMON_EVNTSEL2     # Uncore PCU Perfmon Event Select for PCU Counter 2
+XEONE5V3 0x714 PCU_PMON_EVNTSEL3     # Uncore PCU Perfmon Event Select for PCU Counter 3
+XEONE5V3 0x715 PCU_PMON_BOX_FILTER   # Uncore PCU Perfmon Box-Wide Filter
+XEONE5V3 0x716 PCU_PMON_BOX_STATUS   # Uncore PCU Perfmon Box Wide Status
+XEONE5V3 0x717 PCU_PMON_CTR0         # Uncore PCU Perfmon Counter 0
+XEONE5V3 0x718 PCU_PMON_CTR1         # Uncore PCU Perfmon Counter 1
+XEONE5V3 0x719 PCU_PMON_CTR2         # Uncore PCU Perfmon Counter 2
+XEONE5V3 0x71A PCU_PMON_CTR3         # Uncore PCU Perfmon Counter 3
+XEONE5V3 0x720 S0_PMON_BOX_CTL       # Uncore SBo 0 Perfmon for SBo 0 Box-Wide Control
+XEONE5V3 0x721 S0_PMON_EVNTSEL0      # Uncore SBo 0 Perfmon Event Select for SBo 0 Counter 0
+XEONE5V3 0x722 S0_PMON_EVNTSEL1      # Uncore SBo 0 Perfmon Event Select for SBo 0 Counter 1
+XEONE5V3 0x723 S0_PMON_EVNTSEL2      # Uncore SBo 0 Perfmon Event Select for SBo 0 Counter 2
+XEONE5V3 0x724 S0_PMON_EVNTSEL3      # Uncore SBo 0 Perfmon Event Select for SBo 0 Counter 3
+XEONE5V3 0x725 S0_PMON_BOX_FILTER    # Uncore SBo 0 Perfmon Box-Wide Filter
+XEONE5V3 0x726 S0_PMON_CTR0          # Uncore SBo 0 Perfmon Counter 0
+XEONE5V3 0x727 S0_PMON_CTR1          # Uncore SBo 0 Perfmon Counter 1
+XEONE5V3 0x728 S0_PMON_CTR2          # Uncore SBo 0 Perfmon Counter 2
+XEONE5V3 0x729 S0_PMON_CTR3          # Uncore SBo 0 Perfmon Counter 3
+XEONE5V3 0x72A S1_PMON_BOX_CTL       # Uncore SBo 1 Perfmon for SBo 1 Box-Wide Control
+XEONE5V3 0x72B S1_PMON_EVNTSEL0      # Uncore SBo 1 Perfmon Event Select for SBo 1 Counter 0
+XEONE5V3 0x72C S1_PMON_EVNTSEL1      # Uncore SBo 1 Perfmon Event Select for SBo 1 Counter 1
+XEONE5V3 0x72D S1_PMON_EVNTSEL2      # Uncore SBo 1 Perfmon Event Select for SBo 1 Counter 2
+XEONE5V3 0x72E S1_PMON_EVNTSEL3      # Uncore SBo 1 Perfmon Event Select for SBo 1 Counter 3
+XEONE5V3 0x72F S1_PMON_BOX_FILTER    # Uncore SBo 1 Perfmon Box-Wide Filter
+XEONE5V3 0x730 S1_PMON_CTR0          # Uncore SBo 1 Perfmon Counter 0
+XEONE5V3 0x731 S1_PMON_CTR1          # Uncore SBo 1 Perfmon Counter 1
+XEONE5V3 0x732 S1_PMON_CTR2          # Uncore SBo 1 Perfmon Counter 2
+XEONE5V3 0x733 S1_PMON_CTR3          # Uncore SBo 1 Perfmon Counter 3
+XEONE5V3 0x734 S2_PMON_BOX_CTL       # Uncore SBo 2 Perfmon for SBo 2 Box-Wide Control
+XEONE5V3 0x735 S2_PMON_EVNTSEL0      # Uncore SBo 2 Perfmon Event Select for SBo 2 Counter 0
+XEONE5V3 0x736 S2_PMON_EVNTSEL1      # Uncore SBo 2 Perfmon Event Select for SBo 2 Counter 1
+XEONE5V3 0x737 S2_PMON_EVNTSEL2      # Uncore SBo 2 Perfmon Event Select for SBo 2 Counter 2
+XEONE5V3 0x738 S2_PMON_EVNTSEL3      # Uncore SBo 2 Perfmon Event Select for SBo 2 Counter 3
+XEONE5V3 0x739 S2_PMON_BOX_FILTER    # Uncore SBo 2 Perfmon Box-Wide Filter
+XEONE5V3 0x73A S2_PMON_CTR0          # Uncore SBo 2 Perfmon Counter 0
+XEONE5V3 0x73B S2_PMON_CTR1          # Uncore SBo 2 Perfmon Counter 1
+XEONE5V3 0x73C S2_PMON_CTR2          # Uncore SBo 2 Perfmon Counter 2
+XEONE5V3 0x73D S2_PMON_CTR3          # Uncore SBo 2 Perfmon Counter 3
+XEONE5V3 0x73E S3_PMON_BOX_CTL       # Uncore SBo 3 Perfmon for SBo 3 Box-Wide Control
+XEONE5V3 0x73F S3_PMON_EVNTSEL0      # Uncore SBo 3 Perfmon Event Select for SBo 3 Counter 0
+XEONE5V3 0x740 S3_PMON_EVNTSEL1      # Uncore SBo 3 Perfmon Event Select for SBo 3 Counter 1
+XEONE5V3 0x741 S3_PMON_EVNTSEL2      # Uncore SBo 3 Perfmon Event Select for SBo 3 Counter 2
+XEONE5V3 0x742 S3_PMON_EVNTSEL3      # Uncore SBo 3 Perfmon Event Select for SBo 3 Counter 3
+XEONE5V3 0x743 S3_PMON_BOX_FILTER    # Uncore SBo 3 Perfmon Box-Wide Filter
+XEONE5V3 0x744 S3_PMON_CTR0          # Uncore SBo 3 Perfmon Counter 0
+XEONE5V3 0x745 S3_PMON_CTR1          # Uncore SBo 3 Perfmon Counter 1
+XEONE5V3 0x746 S3_PMON_CTR2          # Uncore SBo 3 Perfmon Counter 2
+XEONE5V3 0x747 S3_PMON_CTR3          # Uncore SBo 3 Perfmon Counter 3
+
+# Intel-SDM-Vol4 (8th Gen Core, Cannon Lake Microarchitecture)
+CORE8 0x700 UNC_CBO_0_PERFEVTSEL0 # Uncore C-Box 0, Counter 0 Event Select MSR
+CORE8 0x701 UNC_CBO_0_PERFEVTSEL1 # Uncore C-Box 0, Counter 1 Event Select MSR
+CORE8 0x702 UNC_CBO_0_PERFCTR0    # Uncore C-Box 0, Performance Counter 0
+CORE8 0x703 UNC_CBO_0_PERFCTR1    # Uncore C-Box 0, Performance Counter 1
+CORE8 0x708 UNC_CBO_1_PERFEVTSEL0 # Uncore C-Box 1, Counter 0 Event Select MSR
+CORE8 0x709 UNC_CBO_1_PERFEVTSEL1 # Uncore C-Box 1, Counter 1 Event Select MSR
+CORE8 0x70A UNC_CBO_1_PERFCTR0    # Uncore C-Box 1, Performance Counter 0
+CORE8 0x70B UNC_CBO_1_PERFCTR1    # Uncore C-Box 1, Performance Counter 1
+CORE8 0x710 UNC_CBO_2_PERFEVTSEL0 # Uncore C-Box 2, Counter 0 Event Select MSR
+CORE8 0x711 UNC_CBO_2_PERFEVTSEL1 # Uncore C-Box 2, Counter 1 Event Select MSR
+CORE8 0x712 UNC_CBO_2_PERFCTR0    # Uncore C-Box 2, Performance Counter 0
+CORE8 0x713 UNC_CBO_2_PERFCTR1    # Uncore C-Box 2, Performance Counter 1
+CORE8 0x718 UNC_CBO_3_PERFEVTSEL0 # Uncore C-Box 3, Counter 0 Event Select MSR
+CORE8 0x719 UNC_CBO_3_PERFEVTSEL1 # Uncore C-Box 3, Counter 1 Event Select MSR
+CORE8 0x71A UNC_CBO_3_PERFCTR0    # Uncore C-Box 3, Performance Counter 0
+CORE8 0x71B UNC_CBO_3_PERFCTR1    # Uncore C-Box 3, Performance Counter 1
+CORE8 0x720 UNC_CBO_4_PERFEVTSEL0 # Uncore C-Box 4, Counter 0 Event Select MSR
+CORE8 0x721 UNC_CBO_4_PERFEVTSEL1 # Uncore C-Box 4, Counter 1 Event Select MSR
+CORE8 0x722 UNC_CBO_4_PERFCTR0    # Uncore C-Box 4, Performance Counter 0
+CORE8 0x723 UNC_CBO_4_PERFCTR1    # Uncore C-Box 4, Performance Counter 1
+CORE8 0x728 UNC_CBO_5_PERFEVTSEL0 # Uncore C-Box 5, Counter 0 Event Select MSR
+CORE8 0x729 UNC_CBO_5_PERFEVTSEL1 # Uncore C-Box 5, Counter 1 Event Select MSR
+CORE8 0x72A UNC_CBO_5_PERFCTR0    # Uncore C-Box 5, Performance Counter 0
+CORE8 0x72B UNC_CBO_5_PERFCTR1    # Uncore C-Box 5, Performance Counter 1
+CORE8 0x730 UNC_CBO_6_PERFEVTSEL0 # Uncore C-Box 6, Counter 0 Event Select MSR
+CORE8 0x731 UNC_CBO_6_PERFEVTSEL1 # Uncore C-Box 6, Counter 1 Event Select MSR
+CORE8 0x732 UNC_CBO_6_PERFCTR0    # Uncore C-Box 6, Performance Counter 0
+CORE8 0x733 UNC_CBO_6_PERFCTR1    # Uncore C-Box 6, Performance Counter 1
+CORE8 0x738 UNC_CBO_7_PERFEVTSEL0 # Uncore C-Box 7, Counter 0 Event Select MSR
+CORE8 0x739 UNC_CBO_7_PERFEVTSEL1 # Uncore C-Box 7, Counter 1 Event Select MSR
+CORE8 0x73A UNC_CBO_7_PERFCTR0    # Uncore C-Box 7, Performance Counter 0
+CORE8 0x73B UNC_CBO_7_PERFCTR1    # Uncore C-Box 7, Performance Counter 1
+
+0x770 IA32_PM_ENABLE        # Intel-SDM-Vol4 Enable/disable HWP (Hardware-Controlled Performance State)
+0x771 IA32_HWP_CAPABILITIES # Intel-SDM-Vol4 HWP Performance Range Enumeration
+0x772 IA32_HWP_REQUEST_PKG  # Intel-SDM-Vol4 Power Management Control Hints for All Logical Processors in a Package
+0x773 IA32_HWP_INTERRUPT    # Intel-SDM-Vol4 Control HWP Native Interrupts
+0x774 IA32_HWP_REQUEST      # Intel-SDM-Vol4 Power Management Control Hints to a Logical Processor
+0x775 IA32_PECI_HWP_REQUEST_INFO # Intel-SDM-Vol4
+0x776 IA32_HWP_CTL          # Intel-SDM-Vol4
+0x777 IA32_HWP_STATUS       # Intel-SDM-Vol4 Log bits indicating changes to Guaranteed & excursions to Minimum
+
+# http://www.iway-tech.com/Uploads/Content/2020-12-02/5fc739d5cafc5.pdf ASRock WC621D8A-2T User Manual "S/W Error Injection is supported by unlocking MSR 0x790"
+# https://download.asrock.com/Manual/C621A%20WS.pdf AsRock C621A WS User Manual (same)
+# https://download.gigabyte.com/FileList/Manual/server_manual_r161-r12_e_10.pdf Gigabyte R161-R12 User Manual "software error injection is supported by unlocking MSR 0x790."
+? 0x790 SW_ERROR_INJECTION # Software Error Injection
+
+# 0x800-0x8FF is the x2APIC range
+
+0x802 IA32_X2APIC_APICID  # Intel-SDM-Vol4 x2APIC ID Register
+0x803 IA32_X2APIC_VERSION # Intel-SDM-Vol4 x2APIC Version Register
+0x808 IA32_X2APIC_TPR     # Intel-SDM-Vol4 x2APIC Task Priority Register
+0x80A IA32_X2APIC_PPR     # Intel-SDM-Vol4 x2APIC Processor Priority Register
+0x80B IA32_X2APIC_EOI     # Intel-SDM-Vol4 x2APIC EOI Register
+0x80D IA32_X2APIC_LDR     # Intel-SDM-Vol4 x2APIC Logical Destination Register
+0x80F IA32_X2APIC_SIVR    # Intel-SDM-Vol4 x2APIC Spurious Interrupt Vector Register
+
+# Intel-SDM-Vol4 x2APIC In-Service Register Bits
+0x810 IA32_X2APIC_ISR0
+0x811 IA32_X2APIC_ISR1
+0x812 IA32_X2APIC_ISR2
+0x813 IA32_X2APIC_ISR3
+0x814 IA32_X2APIC_ISR4
+0x815 IA32_X2APIC_ISR5
+0x816 IA32_X2APIC_ISR6
+0x817 IA32_X2APIC_ISR7
+
+# Intel-SDM-Vol4 x2APIC Trigger Mode Register Bits
+0x818 IA32_X2APIC_TMR0
+0x819 IA32_X2APIC_TMR1
+0x81A IA32_X2APIC_TMR2
+0x81B IA32_X2APIC_TMR3
+0x81C IA32_X2APIC_TMR4
+0x81D IA32_X2APIC_TMR5
+0x81E IA32_X2APIC_TMR6
+0x81F IA32_X2APIC_TMR7
+
+# Intel-SDM-Vol4 x2APIC Interrupt Request Register Bits
+0x820 IA32_X2APIC_IRR0
+0x821 IA32_X2APIC_IRR1
+0x822 IA32_X2APIC_IRR2
+0x823 IA32_X2APIC_IRR3
+0x824 IA32_X2APIC_IRR4
+0x825 IA32_X2APIC_IRR5
+0x826 IA32_X2APIC_IRR6
+0x827 IA32_X2APIC_IRR7
+
+0x828 IA32_X2APIC_ESR         # Intel-SDM-Vol4 x2APIC Error Status Register
+0x82F IA32_X2APIC_LVT_CMCI    # Intel-SDM-Vol4 x2APIC LVT Corrected Machine Check Interrupt Register
+0x830 IA32_X2APIC_ICR         # Intel-SDM-Vol4 x2APIC Interrupt Command Register
+0x832 IA32_X2APIC_LVT_TIMER   # Intel-SDM-Vol4 x2APIC LVT Timer Interrupt Register
+0x833 IA32_X2APIC_LVT_THERMAL # Intel-SDM-Vol4 x2APIC LVT Thermal Sensor Interrupt Register
+0x834 IA32_X2APIC_LVT_PMI     # Intel-SDM-Vol4 x2APIC LVT Performance Monitor Interrupt Register
+0x835 IA32_X2APIC_LVT_LINT0   # Intel-SDM-Vol4 x2APIC LVT LINT0 Register
+0x836 IA32_X2APIC_LVT_LINT1   # Intel-SDM-Vol4 x2APIC LVT LINT1 Register
+0x837 IA32_X2APIC_LVT_ERROR   # Intel-SDM-Vol4 x2APIC LVT Error Register
+0x838 IA32_X2APIC_INIT_COUNT  # Intel-SDM-Vol4 x2APIC Initial Count Register (X2APIC_TMICT)
+0x839 IA32_X2APIC_CUR_COUNT   # Intel-SDM-Vol4 x2APIC Current Count Register (X2APIC_TMCCT)
+0x83E IA32_X2APIC_DIV_CONF    # Intel-SDM-Vol4 x2APIC Divide Configuration Register
+0x83F IA32_X2APIC_SELF_IPI    # Intel-SDM-Vol4 x2APIC Self IPI Register
+
+# https://software.intel.com/content/dam/develop/external/us/en/documents/multi-key-total-memory-encryption-spec-753926.pdf Intel Architecture Memory Encryption Technologies (336907-004US rev 1.4, August 2022)
+0x981 IA32_TME_CAPABILITY   # Intel-SDM-Vol4 Memory Encryption Capability
+0x982 IA32_TME_ACTIVATE     # Intel-SDM-Vol4 Memory Encryption Activation
+0x983 IA32_TME_EXCLUDE_MASK # Intel-SDM-Vol4 Memory Encryption Exclude Mask
+0x984 IA32_TME_EXCLUDE_BASE # Intel-SDM-Vol4 Memory Encryption Exclude Base
+
+0x985 IA32_UINTR_RR          # Intel-SDM-Vol4 User Interrupt Request Register
+0x986 IA32_UINTR_HANDLER     # Intel-SDM-Vol4 User Interrupt Handler Address
+0x987 IA32_UINTR_STACKADJUST # Intel-SDM-Vol4 User Interrupt Stack Adjustment
+0x988 IA32_UINTR_MISC        # Intel-SDM-Vol4 User-Interrupt Target-Table Size and Notification Vector
+0x989 IA32_UINTR_PD          # Intel-SDM-Vol4 User Interrupt PID Address
+0x98A IA32_UINTR_TT          # Intel-SDM-Vol4 User-Interrupt Target Table
+
+0x990 IA32_COPY_STATUS        # Intel-SDM-Vol4 Status of Most Recent Platform to Local or Local to Platform Copies
+0x991 IA32_IWKEYBACKUP_STATUS # Intel-SDM-Vol4 Information about IWKeyBackup Register
+
+# https://cdrdv2-public.intel.com/315168/315168_TXT_MLE_Development%20Guide_rev_017_3.pdf Intel Trusted Execution Technology (Intel TXT) Software Development Guide (315168-017 Revision 017.3, March 2022)
+0x9FB IA32_TME_CLEAR_SAVED_KEY
+
+# https://software.intel.com/content/dam/develop/external/us/en/documents/multi-key-total-memory-encryption-spec-753926.pdf Intel Architecture Memory Encryption Technologies (336907-004US rev 1.4, August 2022)
+0x9FF MK_TME_CORE_ACTIVATE # Multi-Key Total Memory Encryption
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/xeon_sp/include/soc/msr.h
+XEONSP 0xA01 ENERGY_PERF_BIAS_CONFIG
+
+# Intel-SDM-Vol4 (Intel Xeon Processor 7500 Series)
+XEON7500 0xC00 U_PMON_GLOBAL_CTRL     # Uncore U-box perfmon global control MSR
+XEON7500 0xC01 U_PMON_GLOBAL_STATUS   # Uncore U-box perfmon global status MSR
+XEON7500 0xC02 U_PMON_GLOBAL_OVF_CTRL # Uncore U-box perfmon global overflow control MSR
+XEON7500 0xC10 U_PMON_EVNT_SEL        # Uncore U-box perfmon event select MSR
+XEON7500 0xC11 U_PMON_CTR             # Uncore U-box perfmon counter MSR
+XEON7500 0xC20 B0_PMON_BOX_CTRL     # Uncore B-box 0 perfmon local box control MSR
+XEON7500 0xC21 B0_PMON_BOX_STATUS   # Uncore B-box 0 perfmon local box status MSR
+XEON7500 0xC22 B0_PMON_BOX_OVF_CTRL # Uncore B-box 0 perfmon local box overflow control MSR
+XEON7500 0xC30 B0_PMON_EVNT_SEL0    # Uncore B-box 0 perfmon event select MSR
+XEON7500 0xC31 B0_PMON_CTR0         # Uncore B-box 0 perfmon counter MSR
+XEON7500 0xC32 B0_PMON_EVNT_SEL1
+XEON7500 0xC33 B0_PMON_CTR1
+XEON7500 0xC34 B0_PMON_EVNT_SEL2
+XEON7500 0xC35 B0_PMON_CTR2
+XEON7500 0xC36 B0_PMON_EVNT_SEL3
+XEON7500 0xC37 B0_PMON_CTR3
+XEON7500 0xC40 S0_PMON_BOX_CTRL     # Uncore S-box 0 perfmon local box control MSR
+XEON7500 0xC41 S0_PMON_BOX_STATUS   # Uncore S-box 0 perfmon local box status MSR
+XEON7500 0xC42 S0_PMON_BOX_OVF_CTRL # Uncore S-box 0 perfmon local box overflow control MSR
+XEON7500 0xC50 S0_PMON_EVNT_SEL0    # Uncore S-box 0 perfmon event select MSR
+XEON7500 0xC51 S0_PMON_CTR0         # Uncore S-box 0 perfmon counter MSR
+XEON7500 0xC52 S0_PMON_EVNT_SEL1
+XEON7500 0xC53 S0_PMON_CTR1
+XEON7500 0xC54 S0_PMON_EVNT_SEL2
+XEON7500 0xC55 S0_PMON_CTR2
+XEON7500 0xC56 S0_PMON_EVNT_SEL3
+XEON7500 0xC57 S0_PMON_CTR3
+XEON7500 0xC60 B1_PMON_BOX_CTRL     # Uncore B-box 1 perfmon local box control MSR
+XEON7500 0xC61 B1_PMON_BOX_STATUS   # Uncore B-box 1 perfmon local box status MSR
+XEON7500 0xC62 B1_PMON_BOX_OVF_CTRL # Uncore B-box 1 perfmon local box overflow control MSR
+XEON7500 0xC70 B1_PMON_EVNT_SEL0    # Uncore B-box 1 perfmon event select MSR
+XEON7500 0xC71 B1_PMON_CTR0         # Uncore B-box 1 perfmon counter MSR
+XEON7500 0xC72 B1_PMON_EVNT_SEL1
+XEON7500 0xC73 B1_PMON_CTR1
+XEON7500 0xC74 B1_PMON_EVNT_SEL2
+XEON7500 0xC75 B1_PMON_CTR2
+XEON7500 0xC76 B1_PMON_EVNT_SEL3
+XEON7500 0xC77 B1_PMON_CTR3
+XEON7500 0xC80 W_PMON_BOX_CTRL     # Uncore W-box perfmon local box control MSR
+XEON7500 0xC81 W_PMON_BOX_STATUS   # Uncore W-box perfmon local box status MSR
+XEON7500 0xC82 W_PMON_BOX_OVF_CTRL # Uncore W-box perfmon local box overflow control MSR
+XEON7500 0xC90 W_PMON_EVNT_SEL0    # Uncore W-box perfmon event select MSR
+XEON7500 0xC91 W_PMON_CTR0         # Uncore W-box perfmon counter MSR
+XEON7500 0xC92 W_PMON_EVNT_SEL1
+XEON7500 0xC93 W_PMON_CTR1
+XEON7500 0xC94 W_PMON_EVNT_SEL2
+XEON7500 0xC95 W_PMON_CTR2
+XEON7500 0xC96 W_PMON_EVNT_SEL3
+XEON7500 0xC97 W_PMON_CTR3
+XEON7500 0xCA0 M0_PMON_BOX_CTRL     # Uncore M-box 0 perfmon local box control MSR
+XEON7500 0xCA1 M0_PMON_BOX_STATUS   # Uncore M-box 0 perfmon local box status MSR
+XEON7500 0xCA2 M0_PMON_BOX_OVF_CTRL # Uncore M-box 0 perfmon local box overflow control MSR
+XEON7500 0xCA4 M0_PMON_TIMESTAMP    # Uncore M-box 0 perfmon time stamp unit select MSR
+XEON7500 0xCA5 M0_PMON_DSP          # Uncore M-box 0 perfmon DSP unit select MSR
+XEON7500 0xCA6 M0_PMON_ISS          # Uncore M-box 0 perfmon ISS unit select MSR
+XEON7500 0xCA7 M0_PMON_MAP          # Uncore M-box 0 perfmon MAP unit select MSR
+XEON7500 0xCA8 M0_PMON_MSC_THR      # Uncore M-box 0 perfmon MIC THR select MSR
+XEON7500 0xCA9 M0_PMON_PGT          # Uncore M-box 0 perfmon PGT unit select MSR
+XEON7500 0xCAA M0_PMON_PLD          # Uncore M-box 0 perfmon PLD unit select MSR
+XEON7500 0xCAB M0_PMON_ZDP          # Uncore M-box 0 perfmon ZDP unit select MSR
+XEON7500 0xCB0 M0_PMON_EVNT_SEL0    # Uncore M-box 0 perfmon event select MSR
+XEON7500 0xCB1 M0_PMON_CTR0         # Uncore M-box 0 perfmon counter MSR
+XEON7500 0xCB2 M0_PMON_EVNT_SEL1
+XEON7500 0xCB3 M0_PMON_CTR1
+XEON7500 0xCB4 M0_PMON_EVNT_SEL2
+XEON7500 0xCB5 M0_PMON_CTR2
+XEON7500 0xCB6 M0_PMON_EVNT_SEL3
+XEON7500 0xCB7 M0_PMON_CTR3
+XEON7500 0xCB8 M0_PMON_EVNT_SEL4
+XEON7500 0xCB9 M0_PMON_CTR4
+XEON7500 0xCBA M0_PMON_EVNT_SEL5
+XEON7500 0xCBB M0_PMON_CTR5
+XEON7500 0xCC0 S1_PMON_BOX_CTRL     # Uncore S-box 1 perfmon local box control MSR
+XEON7500 0xCC1 S1_PMON_BOX_STATUS   # Uncore S-box 1 perfmon local box status MSR
+XEON7500 0xCC2 S1_PMON_BOX_OVF_CTRL # Uncore S-box 1 perfmon local box overflow control MSR
+XEON7500 0xCD0 S1_PMON_EVNT_SEL0    # Uncore S-box 1 perfmon event select MSR
+XEON7500 0xCD1 S1_PMON_CTR0         # Uncore S-box 1 perfmon counter MSR
+XEON7500 0xCD2 S1_PMON_EVNT_SEL1
+XEON7500 0xCD3 S1_PMON_CTR1
+XEON7500 0xCD4 S1_PMON_EVNT_SEL2
+XEON7500 0xCD5 S1_PMON_CTR2
+XEON7500 0xCD6 S1_PMON_EVNT_SEL3
+XEON7500 0xCD7 S1_PMON_CTR3
+XEON7500 0xCE0 M1_PMON_BOX_CTRL     # Uncore M-box 1 perfmon local box control MSR
+XEON7500 0xCE1 M1_PMON_BOX_STATUS   # Uncore M-box 1 perfmon local box status MSR
+XEON7500 0xCE2 M1_PMON_BOX_OVF_CTRL # Uncore M-box 1 perfmon local box overflow control MSR
+XEON7500 0xCE4 M1_PMON_TIMESTAMP    # Uncore M-box 1 perfmon time stamp unit select MSR
+XEON7500 0xCE5 M1_PMON_DSP          # Uncore M-box 1 perfmon DSP unit select MSR
+XEON7500 0xCE6 M1_PMON_ISS          # Uncore M-box 1 perfmon ISS unit select MSR
+XEON7500 0xCE7 M1_PMON_MAP          # Uncore M-box 1 perfmon MAP unit select MSR
+XEON7500 0xCE8 M1_PMON_MSC_THR      # Uncore M-box 1 perfmon MIC THR select MSR
+XEON7500 0xCE9 M1_PMON_PGT          # Uncore M-box 1 perfmon PGT unit select MSR
+XEON7500 0xCEA M1_PMON_PLD          # Uncore M-box 1 perfmon PLD unit select MSR
+XEON7500 0xCEB M1_PMON_ZDP          # Uncore M-box 1 perfmon ZDP unit select MSR
+XEON7500 0xCF0 M1_PMON_EVNT_SEL0    # Uncore M-box 1 perfmon event select MSR
+XEON7500 0xCF1 M1_PMON_CTR0         # Uncore M-box 1 perfmon counter MSR
+XEON7500 0xCF2 M1_PMON_EVNT_SEL1
+XEON7500 0xCF3 M1_PMON_CTR1
+XEON7500 0xCF4 M1_PMON_EVNT_SEL2
+XEON7500 0xCF5 M1_PMON_CTR2
+XEON7500 0xCF6 M1_PMON_EVNT_SEL3
+XEON7500 0xCF7 M1_PMON_CTR3
+XEON7500 0xCF8 M1_PMON_EVNT_SEL4
+XEON7500 0xCF9 M1_PMON_CTR4
+XEON7500 0xCFA M1_PMON_EVNT_SEL5
+XEON7500 0xCFB M1_PMON_CTR5
+XEON7500 0xD00 C0_PMON_BOX_CTRL     # Uncore C-box 0 perfmon local box control MSR
+XEON7500 0xD01 C0_PMON_BOX_STATUS   # Uncore C-box 0 perfmon local box status MSR
+XEON7500 0xD02 C0_PMON_BOX_OVF_CTRL # Uncore C-box 0 perfmon local box overflow control MSR
+XEON7500 0xD10 C0_PMON_EVNT_SEL0    # Uncore C-box 0 perfmon event select MSR
+XEON7500 0xD11 C0_PMON_CTR0         # Uncore C-box 0 perfmon counter MSR
+XEON7500 0xD12 C0_PMON_EVNT_SEL1
+XEON7500 0xD13 C0_PMON_CTR1
+XEON7500 0xD14 C0_PMON_EVNT_SEL2
+XEON7500 0xD15 C0_PMON_CTR2
+XEON7500 0xD16 C0_PMON_EVNT_SEL3
+XEON7500 0xD17 C0_PMON_CTR3
+XEON7500 0xD18 C0_PMON_EVNT_SEL4
+XEON7500 0xD19 C0_PMON_CTR4
+XEON7500 0xD1A C0_PMON_EVNT_SEL5
+XEON7500 0xD1B C0_PMON_CTR5
+XEON7500 0xD20 C4_PMON_BOX_CTRL     # Uncore C-box 4 perfmon local box control MSR
+XEON7500 0xD21 C4_PMON_BOX_STATUS   # Uncore C-box 4 perfmon local box status MSR
+XEON7500 0xD22 C4_PMON_BOX_OVF_CTRL # Uncore C-box 4 perfmon local box overflow control MSR
+XEON7500 0xD30 C4_PMON_EVNT_SEL0    # Uncore C-box 4 perfmon event select MSR
+XEON7500 0xD31 C4_PMON_CTR0         # Uncore C-box 4 perfmon counter MSR
+XEON7500 0xD32 C4_PMON_EVNT_SEL1
+XEON7500 0xD33 C4_PMON_CTR1
+XEON7500 0xD34 C4_PMON_EVNT_SEL2
+XEON7500 0xD35 C4_PMON_CTR2
+XEON7500 0xD36 C4_PMON_EVNT_SEL3
+XEON7500 0xD37 C4_PMON_CTR3
+XEON7500 0xD38 C4_PMON_EVNT_SEL4
+XEON7500 0xD39 C4_PMON_CTR4
+XEON7500 0xD3A C4_PMON_EVNT_SEL5
+XEON7500 0xD3B C4_PMON_CTR5
+XEON7500 0xD40 C2_PMON_BOX_CTRL     # Uncore C-box 2 perfmon local box control MSR
+XEON7500 0xD41 C2_PMON_BOX_STATUS   # Uncore C-box 2 perfmon local box status MSR
+XEON7500 0xD42 C2_PMON_BOX_OVF_CTRL # Uncore C-box 2 perfmon local box overflow control MSR
+XEON7500 0xD50 C2_PMON_EVNT_SEL0    # Uncore C-box 2 perfmon event select MSR
+XEON7500 0xD51 C2_PMON_CTR0         # Uncore C-box 2 perfmon counter MSR
+XEON7500 0xD52 C2_PMON_EVNT_SEL1
+XEON7500 0xD53 C2_PMON_CTR1
+XEON7500 0xD54 C2_PMON_EVNT_SEL2
+XEON7500 0xD55 C2_PMON_CTR2
+XEON7500 0xD56 C2_PMON_EVNT_SEL3
+XEON7500 0xD57 C2_PMON_CTR3
+XEON7500 0xD58 C2_PMON_EVNT_SEL4
+XEON7500 0xD59 C2_PMON_CTR4
+XEON7500 0xD5A C2_PMON_EVNT_SEL5
+XEON7500 0xD5B C2_PMON_CTR5
+XEON7500 0xD60 C6_PMON_BOX_CTRL     # Uncore C-box 6 perfmon local box control MSR
+XEON7500 0xD61 C6_PMON_BOX_STATUS   # Uncore C-box 6 perfmon local box status MSR
+XEON7500 0xD62 C6_PMON_BOX_OVF_CTRL # Uncore C-box 6 perfmon local box overflow control MSR
+XEON7500 0xD70 C6_PMON_EVNT_SEL0    # Uncore C-box 6 perfmon event select MSR
+XEON7500 0xD71 C6_PMON_CTR0         # Uncore C-box 6 perfmon counter MSR
+XEON7500 0xD72 C6_PMON_EVNT_SEL1
+XEON7500 0xD73 C6_PMON_CTR1
+XEON7500 0xD74 C6_PMON_EVNT_SEL2
+XEON7500 0xD75 C6_PMON_CTR2
+XEON7500 0xD76 C6_PMON_EVNT_SEL3
+XEON7500 0xD77 C6_PMON_CTR3
+XEON7500 0xD78 C6_PMON_EVNT_SEL4
+XEON7500 0xD79 C6_PMON_CTR4
+XEON7500 0xD7A C6_PMON_EVNT_SEL5
+XEON7500 0xD7B C6_PMON_CTR5
+XEON7500 0xD80 C1_PMON_BOX_CTRL     # Uncore C-box 1 perfmon local box control MSR
+XEON7500 0xD81 C1_PMON_BOX_STATUS   # Uncore C-box 1 perfmon local box status MSR
+XEON7500 0xD82 C1_PMON_BOX_OVF_CTRL # Uncore C-box 1 perfmon local box overflow control MSR
+XEON7500 0xD90 C1_PMON_EVNT_SEL0  # Uncore C-box 1 perfmon event select MSR
+XEON7500 0xD91 C1_PMON_CTR0       # Uncore C-box 1 perfmon counter MSR
+XEON7500 0xD92 C1_PMON_EVNT_SEL1
+XEON7500 0xD93 C1_PMON_CTR1
+XEON7500 0xD94 C1_PMON_EVNT_SEL2
+XEON7500 0xD95 C1_PMON_CTR2
+XEON7500 0xD96 C1_PMON_EVNT_SEL3
+XEON7500 0xD97 C1_PMON_CTR3
+XEON7500 0xD98 C1_PMON_EVNT_SEL4
+XEON7500 0xD99 C1_PMON_CTR4
+XEON7500 0xD9A C1_PMON_EVNT_SEL5
+XEON7500 0xD9B C1_PMON_CTR5
+XEON7500 0xDA0 C5_PMON_BOX_CTRL     # Uncore C-box 5 perfmon local box control MSR
+XEON7500 0xDA1 C5_PMON_BOX_STATUS   # Uncore C-box 5 perfmon local box status MSR
+XEON7500 0xDA2 C5_PMON_BOX_OVF_CTRL # Uncore C-box 5 perfmon local box overflow control MSR
+XEON7500 0xDB0 C5_PMON_EVNT_SEL0 # Uncore C-box 5 perfmon event select MSR
+XEON7500 0xDB1 C5_PMON_CTR0         # Uncore C-box 5 perfmon counter MSR
+XEON7500 0xDB2 C5_PMON_EVNT_SEL1
+XEON7500 0xDB3 C5_PMON_CTR1
+XEON7500 0xDB4 C5_PMON_EVNT_SEL2
+XEON7500 0xDB5 C5_PMON_CTR2
+XEON7500 0xDB6 C5_PMON_EVNT_SEL3
+XEON7500 0xDB7 C5_PMON_CTR3
+XEON7500 0xDB8 C5_PMON_EVNT_SEL4
+XEON7500 0xDB9 C5_PMON_CTR4
+XEON7500 0xDBA C5_PMON_EVNT_SEL5
+XEON7500 0xDBB C5_PMON_CTR5
+XEON7500 0xDC0 C3_PMON_BOX_CTRL     # Uncore C-box 3 perfmon local box control MSR
+XEON7500 0xDC1 C3_PMON_BOX_STATUS   # Uncore C-box 3 perfmon local box status MSR
+XEON7500 0xDC2 C3_PMON_BOX_OVF_CTRL # Uncore C-box 3 perfmon local box overflow control MSR
+XEON7500 0xDD0 C3_PMON_EVNT_SEL0    # Uncore C-box 3 perfmon event select MSR
+XEON7500 0xDD1 C3_PMON_CTR0         # Uncore C-box 3 perfmon counter MSR
+XEON7500 0xDD2 C3_PMON_EVNT_SEL1
+XEON7500 0xDD3 C3_PMON_CTR1
+XEON7500 0xDD4 C3_PMON_EVNT_SEL2
+XEON7500 0xDD5 C3_PMON_CTR2
+XEON7500 0xDD6 C3_PMON_EVNT_SEL3
+XEON7500 0xDD7 C3_PMON_CTR3
+XEON7500 0xDD8 C3_PMON_EVNT_SEL4
+XEON7500 0xDD9 C3_PMON_CTR4
+XEON7500 0xDDA C3_PMON_EVNT_SEL5
+XEON7500 0xDDB C3_PMON_CTR5
+XEON7500 0xDE0 C7_PMON_BOX_CTRL     # Uncore C-box 7 perfmon local box control MSR
+XEON7500 0xDE1 C7_PMON_BOX_STATUS   # Uncore C-box 7 perfmon local box status MSR
+XEON7500 0xDE2 C7_PMON_BOX_OVF_CTRL # Uncore C-box 7 perfmon local box overflow control MSR
+XEON7500 0xDF0 C7_PMON_EVNT_SEL0    # Uncore C-box 7 perfmon event select MSR
+XEON7500 0xDF1 C7_PMON_CTR0         # Uncore C-box 7 perfmon counter MSR
+XEON7500 0xDF2 C7_PMON_EVNT_SEL1
+XEON7500 0xDF3 C7_PMON_CTR1
+XEON7500 0xDF4 C7_PMON_EVNT_SEL2
+XEON7500 0xDF5 C7_PMON_CTR2
+XEON7500 0xDF6 C7_PMON_EVNT_SEL3
+XEON7500 0xDF7 C7_PMON_CTR3
+XEON7500 0xDF8 C7_PMON_EVNT_SEL4
+XEON7500 0xDF9 C7_PMON_CTR4
+XEON7500 0xDFA C7_PMON_EVNT_SEL5
+XEON7500 0xDFB C7_PMON_CTR5
+
+# Intel-SDM-Vol4 (Intel Xeon Processor E5)
+XEONE5 0xC08 U_PMON_UCLK_FIXED_CTL # Uncore U-box UCLK Fixed Counter Control
+XEONE5 0xC09 U_PMON_UCLK_FIXED_CTR # Uncore U-box UCLK Fixed Counter
+XEONE5 0xC10 U_PMON_EVNTSEL0       # Uncore U-box Perfmon Event Select for U-box Counter 0
+XEONE5 0xC11 U_PMON_EVNTSEL1       # Uncore U-box Perfmon Event Select for U-box Counter 1
+XEONE5 0xC16 U_PMON_CTR0           # Uncore U-box Perfmon Counter 0
+XEONE5 0xC17 U_PMON_CTR1           # Uncore U-box Perfmon Counter 1
+XEONE5 0xC24 PCU_PMON_BOX_CTL      # Uncore PCU Perfmon for PCU-box-wide Control
+XEONE5 0xC30 PCU_PMON_EVNTSEL0     # Uncore PCU Perfmon Event Select for PCU Counter 0
+XEONE5 0xC31 PCU_PMON_EVNTSEL1     # Uncore PCU Perfmon Event Select for PCU Counter 1
+XEONE5 0xC32 PCU_PMON_EVNTSEL2     # Uncore PCU Perfmon Event Select for PCU Counter 2
+XEONE5 0xC33 PCU_PMON_EVNTSEL3     # Uncore PCU Perfmon Event Select for PCU Counter 3
+XEONE5 0xC34 PCU_PMON_BOX_FILTER   # Uncore PCU Perfmon box-wide Filter
+XEONE5 0xC36 PCU_PMON_CTR0         # Uncore PCU Perfmon Counter 0
+XEONE5 0xC37 PCU_PMON_CTR1         # Uncore PCU Perfmon Counter 1
+XEONE5 0xC38 PCU_PMON_CTR2         # Uncore PCU Perfmon Counter 2
+XEONE5 0xC39 PCU_PMON_CTR3         # Uncore PCU Perfmon Counter 3
+XEONE5 0xD04 C0_PMON_BOX_CTL       # Uncore C-box 0 Perfmon Local Box Wide Control
+XEONE5 0xD10 C0_PMON_EVNTSEL0      # Uncore C-box 0 Perfmon Event Select for C-box 0 Counter 0
+XEONE5 0xD11 C0_PMON_EVNTSEL1      # Uncore C-box 0 Perfmon Event Select for C-box 0 Counter 1
+XEONE5 0xD12 C0_PMON_EVNTSEL2      # Uncore C-box 0 Perfmon Event Select for C-box 0 Counter 2
+XEONE5 0xD13 C0_PMON_EVNTSEL3      # Uncore C-box 0 Perfmon Event Select for C-box 0 Counter 3
+XEONE5 0xD14 C0_PMON_BOX_FILTER    # Uncore C-box 0 Perfmon Box Wide Filter
+XEONE5 0xD16 C0_PMON_CTR0          # Uncore C-box 0 Perfmon Counter 0
+XEONE5 0xD17 C0_PMON_CTR1          # Uncore C-box 0 Perfmon Counter 1
+XEONE5 0xD18 C0_PMON_CTR2          # Uncore C-box 0 Perfmon Counter 2
+XEONE5 0xD19 C0_PMON_CTR3          # Uncore C-box 0 Perfmon Counter 3
+XEONE5 0xD24 C1_PMON_BOX_CTL       # Uncore C-box 1 Perfmon Local Box Wide Control
+XEONE5 0xD30 C1_PMON_EVNTSEL0      # Uncore C-box 1 Perfmon Event Select for C-box 1 Counter 0
+XEONE5 0xD31 C1_PMON_EVNTSEL1      # Uncore C-box 1 Perfmon Event Select for C-box 1 Counter 1
+XEONE5 0xD32 C1_PMON_EVNTSEL2      # Uncore C-box 1 Perfmon Event Select for C-box 1 Counter 2
+XEONE5 0xD33 C1_PMON_EVNTSEL3      # Uncore C-box 1 Perfmon Event Select for C-box 1 Counter 3
+XEONE5 0xD34 C1_PMON_BOX_FILTER    # Uncore C-box 1 Perfmon Box Wide Filter
+XEONE5 0xD36 C1_PMON_CTR0          # Uncore C-box 1 Perfmon Counter 0
+XEONE5 0xD37 C1_PMON_CTR1          # Uncore C-box 1 Perfmon Counter 1
+XEONE5 0xD38 C1_PMON_CTR2          # Uncore C-box 1 Perfmon Counter 2
+XEONE5 0xD39 C1_PMON_CTR3          # Uncore C-box 1 Perfmon Counter 3
+XEONE5 0xD44 C2_PMON_BOX_CTL       # Uncore C-box 2 Perfmon Local Box Wide Control
+XEONE5 0xD50 C2_PMON_EVNTSEL0      # Uncore C-box 2 Perfmon Event Select for C-box 2 Counter 0
+XEONE5 0xD51 C2_PMON_EVNTSEL1      # Uncore C-box 2 Perfmon Event Select for C-box 2 Counter 1
+XEONE5 0xD52 C2_PMON_EVNTSEL2      # Uncore C-box 2 Perfmon Event Select for C-box 2 Counter 2
+XEONE5 0xD53 C2_PMON_EVNTSEL3      # Uncore C-box 2 Perfmon Event Select for C-box 2 Counter 3
+XEONE5 0xD54 C2_PMON_BOX_FILTER    # Uncore C-box 2 Perfmon Box Wide Filter
+XEONE5 0xD56 C2_PMON_CTR0          # Uncore C-box 2 Perfmon Counter 0
+XEONE5 0xD57 C2_PMON_CTR1          # Uncore C-box 2 Perfmon Counter 1
+XEONE5 0xD58 C2_PMON_CTR2          # Uncore C-box 2 Perfmon Counter 2
+XEONE5 0xD59 C2_PMON_CTR3          # Uncore C-box 2 Perfmon Counter 3
+XEONE5 0xD64 C3_PMON_BOX_CTL       # Uncore C-box 3 Perfmon Local Box Wide Control
+XEONE5 0xD70 C3_PMON_EVNTSEL0      # Uncore C-box 3 Perfmon Event Select for C-box 3 Counter 0
+XEONE5 0xD71 C3_PMON_EVNTSEL1      # Uncore C-box 3 Perfmon Event Select for C-box 3 Counter 1
+XEONE5 0xD72 C3_PMON_EVNTSEL2      # Uncore C-box 3 Perfmon Event Select for C-box 3 Counter 2
+XEONE5 0xD73 C3_PMON_EVNTSEL3      # Uncore C-box 3 Perfmon Event Select for C-box 3 Counter 3
+XEONE5 0xD74 C3_PMON_BOX_FILTER    # Uncore C-box 3 Perfmon Box Wide Filter
+XEONE5 0xD76 C3_PMON_CTR0          # Uncore C-box 3 Perfmon Counter 0
+XEONE5 0xD77 C3_PMON_CTR1          # Uncore C-box 3 Perfmon Counter 1
+XEONE5 0xD78 C3_PMON_CTR2          # Uncore C-box 3 Perfmon Counter 2
+XEONE5 0xD79 C3_PMON_CTR3          # Uncore C-box 3 Perfmon Counter 3
+XEONE5 0xD84 C4_PMON_BOX_CTL       # Uncore C-box 4 Perfmon Local Box Wide Control
+XEONE5 0xD90 C4_PMON_EVNTSEL0      # Uncore C-box 4 Perfmon Event Select for C-box 4 Counter 0
+XEONE5 0xD91 C4_PMON_EVNTSEL1      # Uncore C-box 4 Perfmon Event Select for C-box 4 Counter 1
+XEONE5 0xD92 C4_PMON_EVNTSEL2      # Uncore C-box 4 Perfmon Event Select for C-box 4 Counter 2
+XEONE5 0xD93 C4_PMON_EVNTSEL3      # Uncore C-box 4 Perfmon Event Select for C-box 4 Counter 3
+XEONE5 0xD94 C4_PMON_BOX_FILTER    # Uncore C-box 4 Perfmon Box Wide Filter
+XEONE5 0xD96 C4_PMON_CTR0          # Uncore C-box 4 Perfmon Counter 0
+XEONE5 0xD97 C4_PMON_CTR1          # Uncore C-box 4 Perfmon Counter 1
+XEONE5 0xD98 C4_PMON_CTR2          # Uncore C-box 4 Perfmon Counter 2
+XEONE5 0xD99 C4_PMON_CTR3          # Uncore C-box 4 Perfmon Counter 3
+XEONE5 0xDA4 C5_PMON_BOX_CTL       # Uncore C-box 5 Perfmon Local Box Wide Control
+XEONE5 0xDB0 C5_PMON_EVNTSEL0      # Uncore C-box 5 Perfmon Event Select for C-box 5 Counter 0
+XEONE5 0xDB1 C5_PMON_EVNTSEL1      # Uncore C-box 5 Perfmon Event Select for C-box 5 Counter 1
+XEONE5 0xDB2 C5_PMON_EVNTSEL2      # Uncore C-box 5 Perfmon Event Select for C-box 5 Counter 2
+XEONE5 0xDB3 C5_PMON_EVNTSEL3      # Uncore C-box 5 Perfmon Event Select for C-box 5 Counter 3
+XEONE5 0xDB4 C5_PMON_BOX_FILTER    # Uncore C-box 5 Perfmon Box Wide Filter
+XEONE5 0xDB6 C5_PMON_CTR0          # Uncore C-box 5 Perfmon Counter 0
+XEONE5 0xDB7 C5_PMON_CTR1          # Uncore C-box 5 Perfmon Counter 1
+XEONE5 0xDB8 C5_PMON_CTR2          # Uncore C-box 5 Perfmon Counter 2
+XEONE5 0xDB9 C5_PMON_CTR3          # Uncore C-box 5 Perfmon Counter 3
+XEONE5 0xDC4 C6_PMON_BOX_CTL       # Uncore C-box 6 Perfmon Local Box Wide Control
+XEONE5 0xDD0 C6_PMON_EVNTSEL0      # Uncore C-box 6 Perfmon Event Select for C-box 6 Counter 0
+XEONE5 0xDD1 C6_PMON_EVNTSEL1      # Uncore C-box 6 Perfmon Event Select for C-box 6 Counter 1
+XEONE5 0xDD2 C6_PMON_EVNTSEL2      # Uncore C-box 6 Perfmon Event Select for C-box 6 Counter 2
+XEONE5 0xDD3 C6_PMON_EVNTSEL3      # Uncore C-box 6 Perfmon Event Select for C-box 6 Counter 3
+XEONE5 0xDD4 C6_PMON_BOX_FILTER    # Uncore C-box 6 Perfmon Box Wide Filter
+XEONE5 0xDD6 C6_PMON_CTR0          # Uncore C-box 6 Perfmon Counter 0
+XEONE5 0xDD7 C6_PMON_CTR1          # Uncore C-box 6 Perfmon Counter 1
+XEONE5 0xDD8 C6_PMON_CTR2          # Uncore C-box 6 Perfmon Counter 2
+XEONE5 0xDD9 C6_PMON_CTR3          # Uncore C-box 6 Perfmon Counter 3
+XEONE5 0xDE4 C7_PMON_BOX_CTL       # Uncore C-box 7 Perfmon Local Box Wide Control
+XEONE5 0xDF0 C7_PMON_EVNTSEL0      # Uncore C-box 7 Perfmon Event Select for C-box 7 Counter 0
+XEONE5 0xDF1 C7_PMON_EVNTSEL1      # Uncore C-box 7 Perfmon Event Select for C-box 7 Counter 1
+XEONE5 0xDF2 C7_PMON_EVNTSEL2      # Uncore C-box 7 Perfmon Event Select for C-box 7 Counter 2
+XEONE5 0xDF3 C7_PMON_EVNTSEL3      # Uncore C-box 7 Perfmon Event Select for C-box 7 Counter 3
+XEONE5 0xDF4 C7_PMON_BOX_FILTER    # Uncore C-box 7 Perfmon Box Wide Filter
+XEONE5 0xDF6 C7_PMON_CTR0          # Uncore C-box 7 Perfmon Counter 0
+XEONE5 0xDF7 C7_PMON_CTR1          # Uncore C-box 7 Perfmon Counter 1
+XEONE5 0xDF8 C7_PMON_CTR2          # Uncore C-box 7 Perfmon Counter 2
+XEONE5 0xDF9 C7_PMON_CTR3          # Uncore C-box 7 Perfmon Counter 3
+
+# Intel-SDM-Vol4 (Intel Xeon Processor E5 v2 and E7 v2)
+XEONE5V2 0xC00 PMON_GLOBAL_CTL      # Uncore Perfmon Per-Socket Global Control
+XEONE5V2 0xC01 PMON_GLOBAL_STATUS   # Uncore Perfmon Per-Socket Global Status
+XEONE5V2 0xC06 PMON_GLOBAL_CONFIG   # Uncore Perfmon Per-Socket Global Configuration
+XEONE5V2 0xC15 U_PMON_BOX_STATUS    # Uncore U-box Perfmon U-Box Wide Status
+XEONE5V2 0xC35 PCU_PMON_BOX_STATUS  # Uncore PCU Perfmon Box Wide Status
+XEONE5V2 0xD1A C0_PMON_BOX_FILTER1  # Uncore C-Box 0 Perfmon Box Wide Filter1
+XEONE5V2 0xD3A C1_PMON_BOX_FILTER1  # Uncore C-Box 1 Perfmon Box Wide Filter1
+XEONE5V2 0xD5A C2_PMON_BOX_FILTER1  # Uncore C-Box 2 Perfmon Box Wide Filter1
+XEONE5V2 0xD7A C3_PMON_BOX_FILTER1  # Uncore C-Box 3 Perfmon Box Wide Filter1
+XEONE5V2 0xD9A C4_PMON_BOX_FILTER1  # Uncore C-Box 4 Perfmon Box Wide Filter1
+XEONE5V2 0xDBA C5_PMON_BOX_FILTER1  # Uncore C-Box 5 Perfmon Box Wide Filter1
+XEONE5V2 0xDDA C6_PMON_BOX_FILTER1  # Uncore C-Box 6 Perfmon Box Wide Filter1
+XEONE5V2 0xDFA C7_PMON_BOX_FILTER1  # Uncore C-Box 7 Perfmon Box Wide Filter1
+XEONE5V2 0xE04 C8_PMON_BOX_CTL      # Uncore C-Box 8 Perfmon Local Box Wide Control
+XEONE5V2 0xE10 C8_PMON_EVNTSEL0     # Uncore C-Box 8 Perfmon Event Select for C-Box 8 Counter 0
+XEONE5V2 0xE11 C8_PMON_EVNTSEL1     # Uncore C-Box 8 Perfmon Event Select for C-Box 8 Counter 1
+XEONE5V2 0xE12 C8_PMON_EVNTSEL2     # Uncore C-Box 8 Perfmon Event Select for C-Box 8 Counter 2
+XEONE5V2 0xE13 C8_PMON_EVNTSEL3     # Uncore C-Box 8 Perfmon Event Select for C-Box 8 Counter 3
+XEONE5V2 0xE14 C8_PMON_BOX_FILTER   # Uncore C-Box 8 Perfmon Box Wide Filter
+XEONE5V2 0xE16 C8_PMON_CTR0         # Uncore C-Box 8 Perfmon Counter 0
+XEONE5V2 0xE17 C8_PMON_CTR1         # Uncore C-Box 8 Perfmon Counter 1
+XEONE5V2 0xE18 C8_PMON_CTR2         # Uncore C-Box 8 Perfmon Counter 2
+XEONE5V2 0xE19 C8_PMON_CTR3         # Uncore C-Box 8 Perfmon Counter 3
+XEONE5V2 0xE1A C8_PMON_BOX_FILTER1  # Uncore C-Box 8 Perfmon Box Wide Filter1
+XEONE5V2 0xE24 C9_PMON_BOX_CTL      # Uncore C-Box 9 Perfmon Local Box Wide Control
+XEONE5V2 0xE30 C9_PMON_EVNTSEL0     # Uncore C-Box 9 Perfmon Event Select for C-box 9 Counter 0
+XEONE5V2 0xE31 C9_PMON_EVNTSEL1     # Uncore C-Box 9 Perfmon Event Select for C-box 9 Counter 1
+XEONE5V2 0xE32 C9_PMON_EVNTSEL2     # Uncore C-Box 9 Perfmon Event Select for C-box 9 Counter 2
+XEONE5V2 0xE33 C9_PMON_EVNTSEL3     # Uncore C-Box 9 Perfmon Event Select for C-box 9 Counter 3
+XEONE5V2 0xE34 C9_PMON_BOX_FILTER   # Uncore C-Box 9 Perfmon Box Wide Filter
+XEONE5V2 0xE36 C9_PMON_CTR0         # Uncore C-Box 9 Perfmon Counter 0
+XEONE5V2 0xE37 C9_PMON_CTR1         # Uncore C-Box 9 Perfmon Counter 1
+XEONE5V2 0xE38 C9_PMON_CTR2         # Uncore C-Box 9 Perfmon Counter 2
+XEONE5V2 0xE39 C9_PMON_CTR3         # Uncore C-Box 9 Perfmon Counter 3
+XEONE5V2 0xE3A C9_PMON_BOX_FILTER1  # Uncore C-Box 9 Perfmon Box Wide Filter1
+XEONE5V2 0xE44 C10_PMON_BOX_CTL     # Uncore C-Box 10 Perfmon Local Box Wide Control
+XEONE5V2 0xE50 C10_PMON_EVNTSEL0    # Uncore C-Box 10 Perfmon Event Select for C-Box 10 Counter 0
+XEONE5V2 0xE51 C10_PMON_EVNTSEL1    # Uncore C-Box 10 Perfmon Event Select for C-Box 10 Counter 1
+XEONE5V2 0xE52 C10_PMON_EVNTSEL2    # Uncore C-Box 10 Perfmon Event Select for C-Box 10 Counter 2
+XEONE5V2 0xE53 C10_PMON_EVNTSEL3    # Uncore C-Box 10 Perfmon Event Select for C-Box 10 Counter 3
+XEONE5V2 0xE54 C10_PMON_BOX_FILTER  # Uncore C-Box 10 Perfmon Box Wide Filter
+XEONE5V2 0xE56 C10_PMON_CTR0        # Uncore C-Box 10 Perfmon Counter 0
+XEONE5V2 0xE57 C10_PMON_CTR1        # Uncore C-Box 10 Perfmon Counter 1
+XEONE5V2 0xE58 C10_PMON_CTR2        # Uncore C-Box 10 Perfmon Counter 2
+XEONE5V2 0xE59 C10_PMON_CTR3        # Uncore C-Box 10 Perfmon Counter 3
+XEONE5V2 0xE5A C10_PMON_BOX_FILTER1 # Uncore C-Box 10 Perfmon Box Wide Filter1
+XEONE5V2 0xE64 C11_PMON_BOX_CTL     # Uncore C-Box 11 Perfmon Local Box Wide Control
+XEONE5V2 0xE70 C11_PMON_EVNTSEL0    # Uncore C-Box 11 Perfmon Event Select for C-Box 11 Counter 0
+XEONE5V2 0xE71 C11_PMON_EVNTSEL1    # Uncore C-Box 11 Perfmon Event Select for C-Box 11 Counter 1
+XEONE5V2 0xE72 C11_PMON_EVNTSEL2    # Uncore C-Box 11 Perfmon Event Select for C-Box 11 Counter 2
+XEONE5V2 0xE73 C11_PMON_EVNTSEL3    # Uncore C-Box 11 Perfmon Event Select for C-Box 11 Counter 3
+XEONE5V2 0xE74 C11_PMON_BOX_FILTER  # Uncore C-Box 11 Perfmon Box Wide Filter
+XEONE5V2 0xE76 C11_PMON_CTR0        # Uncore C-Box 11 Perfmon Counter 0
+XEONE5V2 0xE77 C11_PMON_CTR1        # Uncore C-Box 11 Perfmon Counter 1
+XEONE5V2 0xE78 C11_PMON_CTR2        # Uncore C-Box 11 Perfmon Counter 2
+XEONE5V2 0xE79 C11_PMON_CTR3        # Uncore C-Box 11 Perfmon Counter 3
+XEONE5V2 0xE7A C11_PMON_BOX_FILTER1 # Uncore C-Box 11 Perfmon Box Wide Filter1
+XEONE5V2 0xE84 C12_PMON_BOX_CTL     # Uncore C-Box 12 Perfmon Local Box Wide Control
+XEONE5V2 0xE90 C12_PMON_EVNTSEL0    # Uncore C-Box 12 Perfmon Event Select for C-Box 12 Counter 0
+XEONE5V2 0xE91 C12_PMON_EVNTSEL1    # Uncore C-Box 12 Perfmon Event Select for C-Box 12 Counter 1
+XEONE5V2 0xE92 C12_PMON_EVNTSEL2    # Uncore C-Box 12 Perfmon Event Select for C-Box 12 Counter 2
+XEONE5V2 0xE93 C12_PMON_EVNTSEL3    # Uncore C-Box 12 Perfmon Event Select for C-Box 12 Counter 3
+XEONE5V2 0xE94 C12_PMON_BOX_FILTER  # Uncore C-Box 12 Perfmon Box Wide Filter
+XEONE5V2 0xE96 C12_PMON_CTR0        # Uncore C-Box 12 Perfmon Counter 0
+XEONE5V2 0xE97 C12_PMON_CTR1        # Uncore C-Box 12 Perfmon Counter 1
+XEONE5V2 0xE98 C12_PMON_CTR2        # Uncore C-Box 12 Perfmon Counter 2
+XEONE5V2 0xE99 C12_PMON_CTR3        # Uncore C-Box 12 Perfmon Counter 3
+XEONE5V2 0xE9A C12_PMON_BOX_FILTER1 # Uncore C-Box 12 Perfmon Box Wide Filter1
+XEONE5V2 0xEA4 C13_PMON_BOX_CTL     # Uncore C-Box 13 Perfmon Local Box Wide Control
+XEONE5V2 0xEB0 C13_PMON_EVNTSEL0    # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 0
+XEONE5V2 0xEB1 C13_PMON_EVNTSEL1    # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 1
+XEONE5V2 0xEB2 C13_PMON_EVNTSEL2    # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 2
+XEONE5V2 0xEB3 C13_PMON_EVNTSEL3    # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 3
+XEONE5V2 0xEB4 C13_PMON_BOX_FILTER  # Uncore C-Box 13 Perfmon Box Wide Filter
+XEONE5V2 0xEB6 C13_PMON_CTR0        # Uncore C-Box 13 Perfmon Counter 0
+XEONE5V2 0xEB7 C13_PMON_CTR1        # Uncore C-Box 13 Perfmon Counter 1
+XEONE5V2 0xEB8 C13_PMON_CTR2        # Uncore C-Box 13 Perfmon Counter 2
+XEONE5V2 0xEB9 C13_PMON_CTR3        # Uncore C-Box 13 Perfmon Counter 3
+XEONE5V2 0xEBA C13_PMON_BOX_FILTER1 # Uncore C-Box 13 Perfmon Box Wide Filter1
+XEONE5V2 0xEC4 C14_PMON_BOX_CTL     # Uncore C-Box 14 Perfmon Local Box Wide Control
+XEONE5V2 0xED0 C14_PMON_EVNTSEL0    # Uncore C-Box 14 Perfmon Event Select for C-Box 14 Counter 0
+XEONE5V2 0xED1 C14_PMON_EVNTSEL1    # Uncore C-Box 14 Perfmon Event Select for C-Box 14 Counter 1
+XEONE5V2 0xED2 C14_PMON_EVNTSEL2    # Uncore C-Box 14 Perfmon Event Select for C-Box 14 Counter 2
+XEONE5V2 0xED3 C14_PMON_EVNTSEL3    # Uncore C-Box 14 Perfmon Event Select for C-Box 14 Counter 3
+XEONE5V2 0xED4 C14_PMON_BOX_FILTER  # Uncore C-Box 14 Perfmon Box Wide Filter
+XEONE5V2 0xED6 C14_PMON_CTR0        # Uncore C-Box 14 Perfmon Counter 0
+XEONE5V2 0xED7 C14_PMON_CTR1        # Uncore C-Box 14 Perfmon Counter 1
+XEONE5V2 0xED8 C14_PMON_CTR2        # Uncore C-Box 14 Perfmon Counter 2
+XEONE5V2 0xED9 C14_PMON_CTR3        # Uncore C-Box 14 Perfmon Counter 3
+XEONE5V2 0xEDA C14_PMON_BOX_FILTER1 # Uncore C-Box 14 Perfmon Box Wide Filter1
+
+# https://github.com/fwupd/fwupd/blob/55bd4862d3ad8f0c7bf92dc6d7732afcad6e47a8/plugins/msr/fu-plugin-msr.c#L49
+# https://github.com/tianocore/edk2/blob/c9b7c6e0cc7da76b74bcdd8c90cef956d5ae971c/MdePkg/Include/Register/Intel/ArchitecturalMsr.h#L5700-L5737
+0xC80 IA32_DEBUG_INTERFACE  # Intel-SDM-Vol4 Silicon Debug Feature Control
+
+0xC81 IA32_L3_QOS_CFG # Intel-SDM-Vol4 L3 QOS Configuration
+0xC82 IA32_L2_QOS_CFG # Intel-SDM-Vol4 L2 QOS Configuration
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/x86/msr.h
+0xC85 IA32_L3_PROTECTED_WAYS
+0xC87 IA32_SF_QOS_INFO
+
+0xC8D IA32_QM_EVTSEL  # Intel-SDM-Vol4 Monitoring Event Select Register
+0xC8E IA32_QM_CTR     # Intel-SDM-Vol4 Monitoring Counter Register
+0xC8F IA32_PQR_ASSOC  # Intel-SDM-Vol4 Resource Association Register
+
+# 0xC90-0xD8F Intel-SDM-Vol4 Reserved MSR Address Space for CAT Mask Registers, See Section 18.19.4.1, "Enumeration and Detection Support of Cache Allocation Technology" ; L3 CAT Mask for COS0
+# 0xC90-0xCCF Intel-SDM-Vol4 L3 CAT Mask for COSn (Class Of Service Mask)
+# https://github.com/intel/intel-cmt-cat/blob/6f385efba25682bc1d3dd2332fd177639ac8d0c7/lib/cpu_registers.h defines 0xC90-0xD0F as PQOS_MSR_L3CA_MASK_{START,END}
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/cpu/resctrl/internal.h?h=v6.1 defines MSR_IA32_L3_CBM_BASE=0xc90
+0xC90 IA32_L3_MASK_0
+0xC91 IA32_L3_MASK_1
+0xC92 IA32_L3_MASK_2
+0xC93 IA32_L3_MASK_3
+0xC94 IA32_L3_MASK_4
+0xC95 IA32_L3_MASK_5
+0xC96 IA32_L3_MASK_6
+0xC97 IA32_L3_MASK_7
+0xC98 IA32_L3_MASK_8
+0xC99 IA32_L3_MASK_9
+0xC9A IA32_L3_MASK_10
+0xC9B IA32_L3_MASK_11
+0xC9C IA32_L3_MASK_12
+0xC9D IA32_L3_MASK_13
+0xC9E IA32_L3_MASK_14
+0xC9F IA32_L3_MASK_15
+
+# Intel-SDM-Vol4 (Intel Xeon Processor D and Intel Xeon Processors E5 v4 Family) L3 Class Of Service Mask - COS 0
+XEONE5V4 0xC90 IA32_L3_QOS_MASK_0
+XEONE5V4 0xC91 IA32_L3_QOS_MASK_1
+XEONE5V4 0xC92 IA32_L3_QOS_MASK_2
+XEONE5V4 0xC93 IA32_L3_QOS_MASK_3
+XEONE5V4 0xC94 IA32_L3_QOS_MASK_4
+XEONE5V4 0xC95 IA32_L3_QOS_MASK_5
+XEONE5V4 0xC96 IA32_L3_QOS_MASK_6
+XEONE5V4 0xC97 IA32_L3_QOS_MASK_7
+XEONE5V4 0xC98 IA32_L3_QOS_MASK_8
+XEONE5V4 0xC99 IA32_L3_QOS_MASK_9
+XEONE5V4 0xC9A IA32_L3_QOS_MASK_10
+XEONE5V4 0xC9B IA32_L3_QOS_MASK_11
+XEONE5V4 0xC9C IA32_L3_QOS_MASK_12
+XEONE5V4 0xC9D IA32_L3_QOS_MASK_13
+XEONE5V4 0xC9E IA32_L3_QOS_MASK_14
+XEONE5V4 0xC9F IA32_L3_QOS_MASK_15
+
+# 0xD10-0xD4F Intel-SDM-Vol4 Reserved MSR Address Space for L2 CAT Mask Registers, See Section 18.19.4.1, "Enumeration and Detection Support of Cache Allocation Technology"
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/cpu/resctrl/internal.h?h=v6.1 defines MSR_IA32_L2_CBM_BASE=0xd10
+# https://github.com/intel/intel-cmt-cat/blob/6f385efba25682bc1d3dd2332fd177639ac8d0c7/lib/cpu_registers.h defines PQOS_MSR_L2CA_MASK_START=0xD10
+0xD10 IA32_L2_MASK_0  # Intel-SDM-Vol4 L2 CAT Mask for COS0
+0xD11 IA32_L2_MASK_1  # Intel-SDM-Vol4 L2 CAT Mask for COS1
+0xD12 IA32_L2_MASK_2  # Intel-SDM-Vol4 L2 CAT Mask for COS2
+0xD13 IA32_L2_MASK_3  # Intel-SDM-Vol4 L2 CAT Mask for COS3
+0xD14 IA32_L2_MASK_4  # Intel-SDM-Vol4 L2 CAT Mask for COS4
+0xD15 IA32_L2_MASK_5  # Intel-SDM-Vol4 L2 CAT Mask for COS5
+0xD16 IA32_L2_MASK_6  # Intel-SDM-Vol4 L2 CAT Mask for COS6
+0xD17 IA32_L2_MASK_7  # Intel-SDM-Vol4 L2 CAT Mask for COS7
+0xD18 IA32_L2_MASK_8  # Intel-SDM-Vol4 L2 CAT Mask for COS8
+0xD19 IA32_L2_MASK_9  # Intel-SDM-Vol4 L2 CAT Mask for COS9
+0xD1A IA32_L2_MASK_10 # Intel-SDM-Vol4 L2 CAT Mask for COS10
+0xD1B IA32_L2_MASK_11 # Intel-SDM-Vol4 L2 CAT Mask for COS11
+0xD1C IA32_L2_MASK_12 # Intel-SDM-Vol4 L2 CAT Mask for COS12
+0xD1D IA32_L2_MASK_13 # Intel-SDM-Vol4 L2 CAT Mask for COS13
+0xD1E IA32_L2_MASK_14 # Intel-SDM-Vol4 L2 CAT Mask for COS14
+0xD1F IA32_L2_MASK_15 # Intel-SDM-Vol4 L2 CAT Mask for COS15
+0xD20 IA32_L2_MASK_16 # Intel-SDM-Vol4 L2 CAT Mask for COS16
+0xD21 IA32_L2_MASK_17 # Intel-SDM-Vol4 L2 CAT Mask for COS17
+0xD22 IA32_L2_MASK_18 # Intel-SDM-Vol4 L2 CAT Mask for COS18
+0xD23 IA32_L2_MASK_19 # Intel-SDM-Vol4 L2 CAT Mask for COS19
+0xD24 IA32_L2_MASK_20 # Intel-SDM-Vol4 L2 CAT Mask for COS20
+0xD25 IA32_L2_MASK_21 # Intel-SDM-Vol4 L2 CAT Mask for COS21
+0xD26 IA32_L2_MASK_22 # Intel-SDM-Vol4 L2 CAT Mask for COS22
+0xD27 IA32_L2_MASK_23 # Intel-SDM-Vol4 L2 CAT Mask for COS23
+0xD28 IA32_L2_MASK_24 # Intel-SDM-Vol4 L2 CAT Mask for COS24
+0xD29 IA32_L2_MASK_25 # Intel-SDM-Vol4 L2 CAT Mask for COS25
+0xD2A IA32_L2_MASK_26 # Intel-SDM-Vol4 L2 CAT Mask for COS26
+0xD2B IA32_L2_MASK_27 # Intel-SDM-Vol4 L2 CAT Mask for COS27
+0xD2C IA32_L2_MASK_28 # Intel-SDM-Vol4 L2 CAT Mask for COS28
+0xD2D IA32_L2_MASK_29 # Intel-SDM-Vol4 L2 CAT Mask for COS29
+0xD2E IA32_L2_MASK_30 # Intel-SDM-Vol4 L2 CAT Mask for COS30
+0xD2F IA32_L2_MASK_31 # Intel-SDM-Vol4 L2 CAT Mask for COS31
+0xD30 IA32_L2_MASK_32 # Intel-SDM-Vol4 L2 CAT Mask for COS32
+0xD31 IA32_L2_MASK_33 # Intel-SDM-Vol4 L2 CAT Mask for COS33
+0xD32 IA32_L2_MASK_34 # Intel-SDM-Vol4 L2 CAT Mask for COS34
+0xD33 IA32_L2_MASK_35 # Intel-SDM-Vol4 L2 CAT Mask for COS35
+0xD34 IA32_L2_MASK_36 # Intel-SDM-Vol4 L2 CAT Mask for COS36
+0xD35 IA32_L2_MASK_37 # Intel-SDM-Vol4 L2 CAT Mask for COS37
+0xD36 IA32_L2_MASK_38 # Intel-SDM-Vol4 L2 CAT Mask for COS38
+0xD37 IA32_L2_MASK_39 # Intel-SDM-Vol4 L2 CAT Mask for COS39
+0xD38 IA32_L2_MASK_40 # Intel-SDM-Vol4 L2 CAT Mask for COS40
+0xD39 IA32_L2_MASK_41 # Intel-SDM-Vol4 L2 CAT Mask for COS41
+0xD3A IA32_L2_MASK_42 # Intel-SDM-Vol4 L2 CAT Mask for COS42
+0xD3B IA32_L2_MASK_43 # Intel-SDM-Vol4 L2 CAT Mask for COS43
+0xD3C IA32_L2_MASK_44 # Intel-SDM-Vol4 L2 CAT Mask for COS44
+0xD3D IA32_L2_MASK_45 # Intel-SDM-Vol4 L2 CAT Mask for COS45
+0xD3E IA32_L2_MASK_46 # Intel-SDM-Vol4 L2 CAT Mask for COS46
+0xD3F IA32_L2_MASK_47 # Intel-SDM-Vol4 L2 CAT Mask for COS47
+0xD40 IA32_L2_MASK_48 # Intel-SDM-Vol4 L2 CAT Mask for COS48
+0xD41 IA32_L2_MASK_49 # Intel-SDM-Vol4 L2 CAT Mask for COS49
+0xD42 IA32_L2_MASK_50 # Intel-SDM-Vol4 L2 CAT Mask for COS50
+0xD43 IA32_L2_MASK_51 # Intel-SDM-Vol4 L2 CAT Mask for COS51
+0xD44 IA32_L2_MASK_52 # Intel-SDM-Vol4 L2 CAT Mask for COS52
+0xD45 IA32_L2_MASK_53 # Intel-SDM-Vol4 L2 CAT Mask for COS53
+0xD46 IA32_L2_MASK_54 # Intel-SDM-Vol4 L2 CAT Mask for COS54
+0xD47 IA32_L2_MASK_55 # Intel-SDM-Vol4 L2 CAT Mask for COS55
+0xD48 IA32_L2_MASK_56 # Intel-SDM-Vol4 L2 CAT Mask for COS56
+0xD49 IA32_L2_MASK_57 # Intel-SDM-Vol4 L2 CAT Mask for COS57
+0xD4A IA32_L2_MASK_58 # Intel-SDM-Vol4 L2 CAT Mask for COS58
+0xD4B IA32_L2_MASK_59 # Intel-SDM-Vol4 L2 CAT Mask for COS59
+0xD4C IA32_L2_MASK_60 # Intel-SDM-Vol4 L2 CAT Mask for COS60
+0xD4D IA32_L2_MASK_61 # Intel-SDM-Vol4 L2 CAT Mask for COS61
+0xD4E IA32_L2_MASK_62 # Intel-SDM-Vol4 L2 CAT Mask for COS62
+0xD4F IA32_L2_MASK_63 # Intel-SDM-Vol4 L2 CAT Mask for COS63
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/cpu/resctrl/internal.h?h=v6.1 defines MSR_IA32_MBA_THRTL_BASE=0xd50
+# https://github.com/intel/intel-cmt-cat/blob/6f385efba25682bc1d3dd2332fd177639ac8d0c7/lib/cpu_registers.h defines PQOS_MSR_MBA_MASK_START=0xD50
+0xD50 MBA_THRTL_0 # Memory Bandwidth Allocation
+
+# Intel-SDM-Vol4 (Atom Goldmont Microarchitecture)
+ATOM 0xD10 IA32_L2_QOS_MASK_0 # L2 Class Of Service Mask - COS 0
+ATOM 0xD11 IA32_L2_QOS_MASK_1 # L2 Class Of Service Mask - COS 1
+ATOM 0xD12 IA32_L2_QOS_MASK_2 # L2 Class Of Service Mask - COS 2
+ATOM 0xD13 IA32_L2_QOS_MASK_3 # L2 Class Of Service Mask - COS 3
+
+# 0xD10-0xD17 Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors) IA32_CR_L2_QOS_MASK_[0-7]
+# 0xD10-0xD1F Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors) IA32_CR_L2_QOS_MASK_[0-15]
+CORE12 0xD10 IA32_CR_L2_QOS_MASK_0
+CORE12 0xD11 IA32_CR_L2_QOS_MASK_1
+CORE12 0xD12 IA32_CR_L2_QOS_MASK_2
+CORE12 0xD13 IA32_CR_L2_QOS_MASK_3
+CORE12 0xD14 IA32_CR_L2_QOS_MASK_4
+CORE12 0xD15 IA32_CR_L2_QOS_MASK_5
+CORE12 0xD16 IA32_CR_L2_QOS_MASK_6
+CORE12 0xD17 IA32_CR_L2_QOS_MASK_7
+CORE12 0xD18 IA32_CR_L2_QOS_MASK_8
+CORE12 0xD19 IA32_CR_L2_QOS_MASK_9
+CORE12 0xD1A IA32_CR_L2_QOS_MASK_10
+CORE12 0xD1B IA32_CR_L2_QOS_MASK_11
+CORE12 0xD1C IA32_CR_L2_QOS_MASK_12
+CORE12 0xD1D IA32_CR_L2_QOS_MASK_13
+CORE12 0xD1E IA32_CR_L2_QOS_MASK_14
+CORE12 0xD1F IA32_CR_L2_QOS_MASK_15
+
+0xD90 IA32_BNDCFGS                # Intel-SDM-Vol4 Supervisor State of MPX Configuration
+0xD91 IA32_COPY_LOCAL_TO_PLATFORM # Intel-SDM-Vol4 Copy Local State to Platform State
+0xD92 IA32_COPY_PLATFORM_TO_LOCAL # Intel-SDM-Vol4 Copy Platform State to Local State
+0xD93 IA32_PASID                  # Intel-SDM-Vol4 Process Address Space Identifier
+
+0xDA0 IA32_XSS  # Intel-SDM-Vol4 Extended Supervisor State Mask
+
+# Intel-SDM-Vol4 Package Level Enable/disable HDC
+0xDB0 IA32_PKG_HDC_CTL
+
+# Intel-SDM-Vol4 Enable/disable HWP
+0xDB1 IA32_PM_CTL1
+
+# Intel-SDM-Vol4 Per-Logical_Processor HDC Idle Residency
+0xDB2 IA32_THREAD_STALL
+
+# Intel-SDM-Vol4 (6th-13th Xeon Processor)
+XEON6 0xDC0 LBR_INFO_0 # Last Branch Record 0 Additional Information
+XEON6 0xDC1 LBR_INFO_1
+XEON6 0xDC2 LBR_INFO_2
+XEON6 0xDC3 LBR_INFO_3
+XEON6 0xDC4 LBR_INFO_4
+XEON6 0xDC5 LBR_INFO_5
+XEON6 0xDC6 LBR_INFO_6
+XEON6 0xDC7 LBR_INFO_7
+XEON6 0xDC8 LBR_INFO_8
+XEON6 0xDC9 LBR_INFO_9
+XEON6 0xDCA LBR_INFO_10
+XEON6 0xDCB LBR_INFO_11
+XEON6 0xDCC LBR_INFO_12
+XEON6 0xDCD LBR_INFO_13
+XEON6 0xDCE LBR_INFO_14
+XEON6 0xDCF LBR_INFO_15
+XEON6 0xDD0 LBR_INFO_16
+XEON6 0xDD1 LBR_INFO_17
+XEON6 0xDD2 LBR_INFO_18
+XEON6 0xDD3 LBR_INFO_19
+XEON6 0xDD4 LBR_INFO_20
+XEON6 0xDD5 LBR_INFO_21
+XEON6 0xDD6 LBR_INFO_22
+XEON6 0xDD7 LBR_INFO_23
+XEON6 0xDD8 LBR_INFO_24
+XEON6 0xDD9 LBR_INFO_25
+XEON6 0xDDA LBR_INFO_26
+XEON6 0xDDB LBR_INFO_27
+XEON6 0xDDC LBR_INFO_28
+XEON6 0xDDD LBR_INFO_29
+XEON6 0xDDE LBR_INFO_30
+XEON6 0xDDF LBR_INFO_31
+
+# Intel-SDM-Vol4 (6th, 7th, 8th Generations Intel Core Processors)
+CORE6 0xE01 UNC_PERF_GLOBAL_CTRL   # Uncore PMU Global Control
+CORE6 0xE02 UNC_PERF_GLOBAL_STATUS # Uncore PMU Main Status
+
+# Intel-SDM-Vol4 (Intel Xeon Processor 7500 Series)
+XEON7500 0xE00 R0_PMON_BOX_CTRL     # Uncore R-box 0 perfmon local box control MSR
+XEON7500 0xE01 R0_PMON_BOX_STATUS   # Uncore R-box 0 perfmon local box status MSR
+XEON7500 0xE02 R0_PMON_BOX_OVF_CTRL # Uncore R-box 0 perfmon local box overflow control MSR
+XEON7500 0xE04 R0_PMON_IPERF0_P0    # Uncore R-box 0 perfmon IPERF0 unit Port 0 select MSR
+XEON7500 0xE05 R0_PMON_IPERF0_P1
+XEON7500 0xE06 R0_PMON_IPERF0_P2
+XEON7500 0xE07 R0_PMON_IPERF0_P3
+XEON7500 0xE08 R0_PMON_IPERF0_P4
+XEON7500 0xE09 R0_PMON_IPERF0_P5
+XEON7500 0xE0A R0_PMON_IPERF0_P6
+XEON7500 0xE0B R0_PMON_IPERF0_P7
+XEON7500 0xE0C R0_PMON_QLX_P0       # Uncore R-box 0 perfmon QLX unit Port 0 select MSR
+XEON7500 0xE0D R0_PMON_QLX_P1
+XEON7500 0xE0E R0_PMON_QLX_P2
+XEON7500 0xE0F R0_PMON_QLX_P3
+XEON7500 0xE10 R0_PMON_EVNT_SEL0    # Uncore R-box 0 perfmon event select MSR
+XEON7500 0xE11 R0_PMON_CTR0         # Uncore R-box 0 perfmon counter MSR
+XEON7500 0xE12 R0_PMON_EVNT_SEL1
+XEON7500 0xE13 R0_PMON_CTR1
+XEON7500 0xE14 R0_PMON_EVNT_SEL2
+XEON7500 0xE15 R0_PMON_CTR2
+XEON7500 0xE16 R0_PMON_EVNT_SEL3
+XEON7500 0xE17 R0_PMON_CTR3
+XEON7500 0xE18 R0_PMON_EVNT_SEL4
+XEON7500 0xE19 R0_PMON_CTR4
+XEON7500 0xE1A R0_PMON_EVNT_SEL5
+XEON7500 0xE1B R0_PMON_CTR5
+XEON7500 0xE1C R0_PMON_EVNT_SEL6
+XEON7500 0xE1D R0_PMON_CTR6
+XEON7500 0xE1E R0_PMON_EVNT_SEL7
+XEON7500 0xE1F R0_PMON_CTR7
+XEON7500 0xE20 R1_PMON_BOX_CTRL     # Uncore R-box 1 perfmon local box control MSR
+XEON7500 0xE21 R1_PMON_BOX_STATUS   # Uncore R-box 1 perfmon local box status MSR
+XEON7500 0xE22 R1_PMON_BOX_OVF_CTRL # Uncore R-box 1 perfmon local box overflow control MSR
+XEON7500 0xE24 R1_PMON_IPERF1_P8    # Uncore R-box 1 perfmon IPERF1 unit Port 8 select MSR
+XEON7500 0xE25 R1_PMON_IPERF1_P9
+XEON7500 0xE26 R1_PMON_IPERF1_P10
+XEON7500 0xE27 R1_PMON_IPERF1_P11
+XEON7500 0xE28 R1_PMON_IPERF1_P12
+XEON7500 0xE29 R1_PMON_IPERF1_P13
+XEON7500 0xE2A R1_PMON_IPERF1_P14
+XEON7500 0xE2B R1_PMON_IPERF1_P15
+XEON7500 0xE2C R1_PMON_QLX_P4      # Uncore R-box 1 perfmon QLX unit Port 4 select MSR
+XEON7500 0xE2D R1_PMON_QLX_P5
+XEON7500 0xE2E R1_PMON_QLX_P6
+XEON7500 0xE2F R1_PMON_QLX_P7
+XEON7500 0xE30 R1_PMON_EVNT_SEL8   # Uncore R-box 1 perfmon event select MSR
+XEON7500 0xE31 R1_PMON_CTR8        # Uncore R-box 1 perfmon counter MSR
+XEON7500 0xE32 R1_PMON_EVNT_SEL9
+XEON7500 0xE33 R1_PMON_CTR9
+XEON7500 0xE34 R1_PMON_EVNT_SEL10
+XEON7500 0xE35 R1_PMON_CTR10
+XEON7500 0xE36 R1_PMON_EVNT_SEL11
+XEON7500 0xE37 R1_PMON_CTR11
+XEON7500 0xE38 R1_PMON_EVNT_SEL12
+XEON7500 0xE39 R1_PMON_CTR12
+XEON7500 0xE3A R1_PMON_EVNT_SEL13
+XEON7500 0xE3B R1_PMON_CTR13
+XEON7500 0xE3C R1_PMON_EVNT_SEL14
+XEON7500 0xE3D R1_PMON_CTR14
+XEON7500 0xE3E R1_PMON_EVNT_SEL15
+XEON7500 0xE3F R1_PMON_CTR15
+XEON7500 0xE45 B0_PMON_MATCH       # Uncore B-box 0 perfmon local box match MSR
+XEON7500 0xE46 B0_PMON_MASK        # Uncore B-box 0 perfmon local box mask MSR
+XEON7500 0xE49 S0_PMON_MATCH       # Uncore S-box 0 perfmon local box match MSR
+XEON7500 0xE4A S0_PMON_MASK        # Uncore S-box 0 perfmon local box mask MSR
+XEON7500 0xE4D B1_PMON_MATCH       # Uncore B-box 1 perfmon local box match MSR
+XEON7500 0xE4E B1_PMON_MASK        # Uncore B-box 1 perfmon local box mask MSR
+XEON7500 0xE54 M0_PMON_MM_CONFIG   # Uncore M-box 0 perfmon local box address match/mask config MSR
+XEON7500 0xE55 M0_PMON_ADDR_MATCH  # Uncore M-box 0 perfmon local box address match MSR
+XEON7500 0xE56 M0_PMON_ADDR_MASK   # Uncore M-box 0 perfmon local box address mask MSR
+XEON7500 0xE59 S1_PMON_MATCH       # Uncore S-box 1 perfmon local box match MSR
+XEON7500 0xE5A S1_PMON_MASK        # Uncore S-box 1 perfmon local box mask MSR
+XEON7500 0xE5C M1_PMON_MM_CONFIG   # Uncore M-box 1 perfmon local box address match/mask config MSR
+XEON7500 0xE5D M1_PMON_ADDR_MATCH  # Uncore M-box 1 perfmon local box address match MSR
+XEON7500 0xE5E M1_PMON_ADDR_MASK   # Uncore M-box 1 perfmon local box address mask MSR
+
+# Intel-SDM-Vol4 (Intel Xeon Processor E5 v3)
+XEONE5V3 0xE00 C0_PMON_BOX_CTL       # Uncore C-Box 0 Perfmon for Box-Wide Control
+XEONE5V3 0xE01 C0_PMON_EVNTSEL0      # Uncore C-Box 0 Perfmon Event Select for C-Box 0 Counter 0
+XEONE5V3 0xE02 C0_PMON_EVNTSEL1      # Uncore C-Box 0 Perfmon Event Select for C-Box 0 Counter 1
+XEONE5V3 0xE03 C0_PMON_EVNTSEL2      # Uncore C-Box 0 Perfmon Event Select for C-Box 0 Counter 2
+XEONE5V3 0xE04 C0_PMON_EVNTSEL3      # Uncore C-Box 0 Perfmon Event Select for C-Box 0 Counter 3
+XEONE5V3 0xE05 C0_PMON_BOX_FILTER0   # Uncore C-Box 0 Perfmon Box Wide Filter 0
+XEONE5V3 0xE06 C0_PMON_BOX_FILTER1   # Uncore C-Box 0 Perfmon Box Wide Filter 1
+XEONE5V3 0xE07 C0_PMON_BOX_STATUS    # Uncore C-Box 0 Perfmon Box Wide Status
+XEONE5V3 0xE08 C0_PMON_CTR0          # Uncore C-Box 0 Perfmon Counter 0
+XEONE5V3 0xE09 C0_PMON_CTR1          # Uncore C-Box 0 Perfmon Counter 1
+XEONE5V3 0xE0A C0_PMON_CTR2          # Uncore C-Box 0 Perfmon Counter 2
+XEONE5V3 0xE0B C0_PMON_CTR3          # Uncore C-Box 0 Perfmon Counter 3
+XEONE5V3 0xE10 C1_PMON_BOX_CTL       # Uncore C-Box 1 Perfmon for Box-Wide Control
+XEONE5V3 0xE11 C1_PMON_EVNTSEL0      # Uncore C-Box 1 Perfmon Event Select for C-Box 1 Counter 0
+XEONE5V3 0xE12 C1_PMON_EVNTSEL1      # Uncore C-Box 1 Perfmon Event Select for C-Box 1 Counter 1
+XEONE5V3 0xE13 C1_PMON_EVNTSEL2      # Uncore C-Box 1 Perfmon Event Select for C-Box 1 Counter 2
+XEONE5V3 0xE14 C1_PMON_EVNTSEL3      # Uncore C-Box 1 Perfmon Event Select for C-Box 1 Counter 3
+XEONE5V3 0xE15 C1_PMON_BOX_FILTER0   # Uncore C-Box 1 Perfmon Box Wide Filter 0
+XEONE5V3 0xE16 C1_PMON_BOX_FILTER1   # Uncore C-Box 1 Perfmon Box Wide Filter1
+XEONE5V3 0xE17 C1_PMON_BOX_STATUS    # Uncore C-Box 1 Perfmon Box Wide Status
+XEONE5V3 0xE18 C1_PMON_CTR0          # Uncore C-Box 1 Perfmon Counter 0
+XEONE5V3 0xE19 C1_PMON_CTR1          # Uncore C-Box 1 Perfmon Counter 1
+XEONE5V3 0xE1A C1_PMON_CTR2          # Uncore C-Box 1 Perfmon Counter 2
+XEONE5V3 0xE1B C1_PMON_CTR3          # Uncore C-Box 1 Perfmon Counter 3
+XEONE5V3 0xE20 C2_PMON_BOX_CTL       # Uncore C-Box 2 Perfmon for Box-Wide Control
+XEONE5V3 0xE21 C2_PMON_EVNTSEL0      # Uncore C-Box 2 Perfmon Event Select for C-Box 2 Counter 0
+XEONE5V3 0xE22 C2_PMON_EVNTSEL1      # Uncore C-Box 2 Perfmon Event Select for C-Box 2 Counter 1
+XEONE5V3 0xE23 C2_PMON_EVNTSEL2      # Uncore C-Box 2 Perfmon Event Select for C-Box 2 Counter 2
+XEONE5V3 0xE24 C2_PMON_EVNTSEL3      # Uncore C-Box 2 Perfmon Event select for C-Box 2 Counter 3
+XEONE5V3 0xE25 C2_PMON_BOX_FILTER0   # Uncore C-Box 2 Perfmon Box Wide Filter 0
+XEONE5V3 0xE26 C2_PMON_BOX_FILTER1   # Uncore C-Box 2 Perfmon Box Wide Filter1
+XEONE5V3 0xE27 C2_PMON_BOX_STATUS    # Uncore C-Box 2 Perfmon Box Wide Status
+XEONE5V3 0xE28 C2_PMON_CTR0          # Uncore C-Box 2 Perfmon Counter 0
+XEONE5V3 0xE29 C2_PMON_CTR1          # Uncore C-Box 2 Perfmon Counter 1
+XEONE5V3 0xE2A C2_PMON_CTR2          # Uncore C-Box 2 Perfmon Counter 2
+XEONE5V3 0xE2B C2_PMON_CTR3          # Uncore C-Box 2 Perfmon Counter 3
+XEONE5V3 0xE30 C3_PMON_BOX_CTL       # Uncore C-Box 3 Perfmon for Box-Wide Control
+XEONE5V3 0xE31 C3_PMON_EVNTSEL0      # Uncore C-Box 3 Perfmon Event Select for C-Box 3 Counter 0
+XEONE5V3 0xE32 C3_PMON_EVNTSEL1      # Uncore C-Box 3 Perfmon Event Select for C-Box 3 Counter 1
+XEONE5V3 0xE33 C3_PMON_EVNTSEL2      # Uncore C-Box 3 Perfmon Event Select for C-Box 3 Counter 2
+XEONE5V3 0xE34 C3_PMON_EVNTSEL3      # Uncore C-Box 3 Perfmon Event Select for C-Box 3 Counter 3
+XEONE5V3 0xE35 C3_PMON_BOX_FILTER0   # Uncore C-Box 3 Perfmon Box Wide Filter 0
+XEONE5V3 0xE36 C3_PMON_BOX_FILTER1   # Uncore C-Box 3 Perfmon Box Wide Filter1
+XEONE5V3 0xE37 C3_PMON_BOX_STATUS    # Uncore C-Box 3 Perfmon Box Wide Status
+XEONE5V3 0xE38 C3_PMON_CTR0          # Uncore C-Box 3 Perfmon Counter 0
+XEONE5V3 0xE39 C3_PMON_CTR1          # Uncore C-Box 3 Perfmon Counter 1
+XEONE5V3 0xE3A C3_PMON_CTR2          # Uncore C-Box 3 Perfmon Counter 2
+XEONE5V3 0xE3B C3_PMON_CTR3          # Uncore C-Box 3 Perfmon Counter 3
+XEONE5V3 0xE40 C4_PMON_BOX_CTL       # Uncore C-Box 4 Perfmon for Box-Wide Control
+XEONE5V3 0xE41 C4_PMON_EVNTSEL0      # Uncore C-Box 4 Perfmon Event Select for C-Box 4 Counter 0
+XEONE5V3 0xE42 C4_PMON_EVNTSEL1      # Uncore C-Box 4 Perfmon Event Select for C-Box 4 Counter 1
+XEONE5V3 0xE43 C4_PMON_EVNTSEL2      # Uncore C-Box 4 Perfmon Event Select for C-Box 4 Counter 2
+XEONE5V3 0xE44 C4_PMON_EVNTSEL3      # Uncore C-Box 4 Perfmon Event Select for C-Box 4 Counter 3
+XEONE5V3 0xE45 C4_PMON_BOX_FILTER0   # Uncore C-Box 4 Perfmon Box Wide Filter 0
+XEONE5V3 0xE46 C4_PMON_BOX_FILTER1   # Uncore C-Box 4 Perfmon Box Wide Filter1
+XEONE5V3 0xE47 C4_PMON_BOX_STATUS    # Uncore C-Box 4 Perfmon Box Wide Status
+XEONE5V3 0xE48 C4_PMON_CTR0          # Uncore C-Box 4 Perfmon Counter 0
+XEONE5V3 0xE49 C4_PMON_CTR1          # Uncore C-Box 4 Perfmon Counter 1
+XEONE5V3 0xE4A C4_PMON_CTR2          # Uncore C-Box 4 Perfmon Counter 2
+XEONE5V3 0xE4B C4_PMON_CTR3          # Uncore C-Box 4 Perfmon Counter 3
+XEONE5V3 0xE50 C5_PMON_BOX_CTL       # Uncore C-Box 5 Perfmon for Box-Wide Control
+XEONE5V3 0xE51 C5_PMON_EVNTSEL0      # Uncore C-Box 5 Perfmon Event Select for C-Box 5 Counter 0
+XEONE5V3 0xE52 C5_PMON_EVNTSEL1      # Uncore C-Box 5 Perfmon Event Select for C-Box 5 Counter 1
+XEONE5V3 0xE53 C5_PMON_EVNTSEL2      # Uncore C-Box 5 Perfmon Event Select for C-Box 5 Counter 2
+XEONE5V3 0xE54 C5_PMON_EVNTSEL3      # Uncore C-Box 5 Perfmon Event Select for C-Box 5 Counter 3
+XEONE5V3 0xE55 C5_PMON_BOX_FILTER0   # Uncore C-Box 5 Perfmon Box Wide Filter 0
+XEONE5V3 0xE56 C5_PMON_BOX_FILTER1   # Uncore C-Box 5 Perfmon Box Wide Filter 1
+XEONE5V3 0xE57 C5_PMON_BOX_STATUS    # Uncore C-Box 5 Perfmon Box Wide Status
+XEONE5V3 0xE58 C5_PMON_CTR0          # Uncore C-Box 5 Perfmon Counter 0
+XEONE5V3 0xE59 C5_PMON_CTR1          # Uncore C-Box 5 Perfmon Counter 1
+XEONE5V3 0xE5A C5_PMON_CTR2          # Uncore C-Box 5 Perfmon Counter 2
+XEONE5V3 0xE5B C5_PMON_CTR3          # Uncore C-Box 5 Perfmon Counter 3
+XEONE5V3 0xE60 C6_PMON_BOX_CTL       # Uncore C-Box 6 Perfmon for Box-Wide Control
+XEONE5V3 0xE61 C6_PMON_EVNTSEL0      # Uncore C-Box 6 Perfmon Event Select for C-Box 6 Counter 0
+XEONE5V3 0xE62 C6_PMON_EVNTSEL1      # Uncore C-Box 6 Perfmon Event Select for C-Box 6 Counter 1
+XEONE5V3 0xE63 C6_PMON_EVNTSEL2      # Uncore C-Box 6 Perfmon Event Select for C-Box 6 Counter 2
+XEONE5V3 0xE64 C6_PMON_EVNTSEL3      # Uncore C-Box 6 Perfmon Event Select for C-Box 6 Counter 3
+XEONE5V3 0xE65 C6_PMON_BOX_FILTER0   # Uncore C-Box 6 Perfmon Box Wide Filter 0
+XEONE5V3 0xE66 C6_PMON_BOX_FILTER1   # Uncore C-Box 6 Perfmon Box Wide Filter 1
+XEONE5V3 0xE67 C6_PMON_BOX_STATUS    # Uncore C-Box 6 Perfmon Box Wide Status
+XEONE5V3 0xE68 C6_PMON_CTR0          # Uncore C-Box 6 Perfmon Counter 0
+XEONE5V3 0xE69 C6_PMON_CTR1          # Uncore C-Box 6 Perfmon Counter 1
+XEONE5V3 0xE6A C6_PMON_CTR2          # Uncore C-Box 6 Perfmon Counter 2
+XEONE5V3 0xE6B C6_PMON_CTR3          # Uncore C-Box 6 Perfmon Counter 3
+XEONE5V3 0xE70 C7_PMON_BOX_CTL       # Uncore C-Box 7 Perfmon for Box-Wide Control
+XEONE5V3 0xE71 C7_PMON_EVNTSEL0      # Uncore C-Box 7 Perfmon Event Select for C-Box 7 Counter 0
+XEONE5V3 0xE72 C7_PMON_EVNTSEL1      # Uncore C-Box 7 Perfmon Event Select for C-Box 7 Counter 1
+XEONE5V3 0xE73 C7_PMON_EVNTSEL2      # Uncore C-Box 7 Perfmon Event Select for C-Box 7 Counter 2
+XEONE5V3 0xE74 C7_PMON_EVNTSEL3      # Uncore C-Box 7 Perfmon Event Select for C-Box 7 Counter 3
+XEONE5V3 0xE75 C7_PMON_BOX_FILTER0   # Uncore C-Box 7 Perfmon Box Wide Filter 0
+XEONE5V3 0xE76 C7_PMON_BOX_FILTER1   # Uncore C-Box 7 Perfmon Box Wide Filter 1
+XEONE5V3 0xE77 C7_PMON_BOX_STATUS    # Uncore C-Box 7 Perfmon Box Wide Status
+XEONE5V3 0xE78 C7_PMON_CTR0          # Uncore C-Box 7 Perfmon Counter 0
+XEONE5V3 0xE79 C7_PMON_CTR1          # Uncore C-Box 7 Perfmon Counter 1
+XEONE5V3 0xE7A C7_PMON_CTR2          # Uncore C-Box 7 Perfmon Counter 2
+XEONE5V3 0xE7B C7_PMON_CTR3          # Uncore C-Box 7 Perfmon Counter 3
+XEONE5V3 0xE80 C8_PMON_BOX_CTL       # Uncore C-Box 8 Perfmon Local Box Wide Control
+XEONE5V3 0xE81 C8_PMON_EVNTSEL0      # Uncore C-Box 8 Perfmon Event Select for C-Box 8 Counter 0
+XEONE5V3 0xE82 C8_PMON_EVNTSEL1      # Uncore C-Box 8 Perfmon Event Select for C-Box 8 Counter 1
+XEONE5V3 0xE83 C8_PMON_EVNTSEL2      # Uncore C-Box 8 Perfmon Event Select for C-Box 8 Counter 2
+XEONE5V3 0xE84 C8_PMON_EVNTSEL3      # Uncore C-Box 8 Perfmon Event Select for C-Box 8 Counter 3
+XEONE5V3 0xE85 C8_PMON_BOX_FILTER0   # Uncore C-Box 8 Perfmon Box Wide Filter 0
+XEONE5V3 0xE86 C8_PMON_BOX_FILTER1   # Uncore C-Box 8 Perfmon Box Wide Filter 1
+XEONE5V3 0xE87 C8_PMON_BOX_STATUS    # Uncore C-Box 8 Perfmon Box Wide Status
+XEONE5V3 0xE88 C8_PMON_CTR0          # Uncore C-Box 8 Perfmon Counter 0
+XEONE5V3 0xE89 C8_PMON_CTR1          # Uncore C-Box 8 Perfmon Counter 1
+XEONE5V3 0xE8A C8_PMON_CTR2          # Uncore C-Box 8 Perfmon Counter 2
+XEONE5V3 0xE8B C8_PMON_CTR3          # Uncore C-Box 8 Perfmon Counter 3
+XEONE5V3 0xE90 C9_PMON_BOX_CTL       # Uncore C-Box 9 Perfmon Local Box Wide Control
+XEONE5V3 0xE91 C9_PMON_EVNTSEL0      # Uncore C-Box 9 Perfmon Event Select for C-Box 9 Counter 0
+XEONE5V3 0xE92 C9_PMON_EVNTSEL1      # Uncore C-Box 9 Perfmon Event Select for C-Box 9 Counter 1
+XEONE5V3 0xE93 C9_PMON_EVNTSEL2      # Uncore C-Box 9 Perfmon Event Select for C-Box 9 Counter 2
+XEONE5V3 0xE94 C9_PMON_EVNTSEL3      # Uncore C-Box 9 Perfmon Event Select for C-Box 9 Counter 3
+XEONE5V3 0xE95 C9_PMON_BOX_FILTER0   # Uncore C-Box 9 Perfmon Box Wide Filter 0
+XEONE5V3 0xE96 C9_PMON_BOX_FILTER1   # Uncore C-Box 9 Perfmon Box Wide Filter 1
+XEONE5V3 0xE97 C9_PMON_BOX_STATUS    # Uncore C-Box 9 Perfmon Box Wide Status
+XEONE5V3 0xE98 C9_PMON_CTR0          # Uncore C-Box 9 Perfmon Counter 0
+XEONE5V3 0xE99 C9_PMON_CTR1          # Uncore C-Box 9 Perfmon Counter 1
+XEONE5V3 0xE9A C9_PMON_CTR2          # Uncore C-Box 9 Perfmon Counter 2
+XEONE5V3 0xE9B C9_PMON_CTR3          # Uncore C-Box 9 Perfmon Counter 3
+XEONE5V3 0xEA0 C10_PMON_BOX_CTL      # Uncore C-Box 10 Perfmon Local Box Wide Control
+XEONE5V3 0xEA1 C10_PMON_EVNTSEL0     # Uncore C-Box 10 Perfmon Event Select for C-Box 10 Counter 0
+XEONE5V3 0xEA2 C10_PMON_EVNTSEL1     # Uncore C-Box 10 Perfmon Event Select for C-Box 10 Counter 1
+XEONE5V3 0xEA3 C10_PMON_EVNTSEL2     # Uncore C-Box 10 Perfmon Event Select for C-Box 10 Counter 2
+XEONE5V3 0xEA4 C10_PMON_EVNTSEL3     # Uncore C-Box 10 Perfmon Event Select for C-Box 10 Counter 3
+XEONE5V3 0xEA5 C10_PMON_BOX_FILTER0  # Uncore C-Box 10 Perfmon Box Wide Filter 0
+XEONE5V3 0xEA6 C10_PMON_BOX_FILTER1  # Uncore C-Box 10 Perfmon Box Wide Filter 1
+XEONE5V3 0xEA7 C10_PMON_BOX_STATUS   # Uncore C-Box 10 Perfmon Box Wide Status
+XEONE5V3 0xEA8 C10_PMON_CTR0         # Uncore C-Box 10 Perfmon Counter 0
+XEONE5V3 0xEA9 C10_PMON_CTR1         # Uncore C-Box 10 perfmon Counter 1
+XEONE5V3 0xEAA C10_PMON_CTR2         # Uncore C-Box 10 Perfmon Counter 2
+XEONE5V3 0xEAB C10_PMON_CTR3         # Uncore C-Box 10 Perfmon Counter 3
+XEONE5V3 0xEB0 C11_PMON_BOX_CTL      # Uncore C-Box 11 Perfmon Local Box Wide Control
+XEONE5V3 0xEB1 C11_PMON_EVNTSEL0     # Uncore C-Box 11 Perfmon Event Select for C-Box 11 Counter 0
+XEONE5V3 0xEB2 C11_PMON_EVNTSEL1     # Uncore C-Box 11 Perfmon Event Select for C-Box 11 Counter 1
+XEONE5V3 0xEB3 C11_PMON_EVNTSEL2     # Uncore C-Box 11 Perfmon Event Select for C-Box 11 Counter 2
+XEONE5V3 0xEB4 C11_PMON_EVNTSEL3     # Uncore C-box 11 Perfmon Event Select for C-Box 11 Counter 3
+XEONE5V3 0xEB5 C11_PMON_BOX_FILTER0  # Uncore C-Box 11 Perfmon Box Wide Filter 0
+XEONE5V3 0xEB6 C11_PMON_BOX_FILTER1  # Uncore C-Box 11 Perfmon Box Wide Filter 1
+XEONE5V3 0xEB7 C11_PMON_BOX_STATUS   # Uncore C-Box 11 Perfmon Box Wide Status
+XEONE5V3 0xEB8 C11_PMON_CTR0         # Uncore C-Box 11 Perfmon Counter 0
+XEONE5V3 0xEB9 C11_PMON_CTR1         # Uncore C-Box 11 Perfmon Counter 1
+XEONE5V3 0xEBA C11_PMON_CTR2         # Uncore C-Box 11 Perfmon Counter 2
+XEONE5V3 0xEBB C11_PMON_CTR3         # Uncore C-Box 11 Perfmon Counter 3
+XEONE5V3 0xEC0 C12_PMON_BOX_CTL      # Uncore C-Box 12 Perfmon Local Box Wide Control
+XEONE5V3 0xEC1 C12_PMON_EVNTSEL0     # Uncore C-Box 12 Perfmon Event Select for C-Box 12 Counter 0
+XEONE5V3 0xEC2 C12_PMON_EVNTSEL1     # Uncore C-Box 12 Perfmon Event Select for C-Box 12 Counter 1
+XEONE5V3 0xEC3 C12_PMON_EVNTSEL2     # Uncore C-Box 12 Perfmon Event Select for C-Box 12 Counter 2
+XEONE5V3 0xEC4 C12_PMON_EVNTSEL3     # Uncore C-Box 12 Perfmon Event Select for C-Box 12 Counter 3
+XEONE5V3 0xEC5 C12_PMON_BOX_FILTER0  # Uncore C-Box 12 Perfmon Box Wide Filter 0
+XEONE5V3 0xEC6 C12_PMON_BOX_FILTER1  # Uncore C-Box 12 Perfmon Box Wide Filter 1
+XEONE5V3 0xEC7 C12_PMON_BOX_STATUS   # Uncore C-Box 12 Perfmon Box Wide Status
+XEONE5V3 0xEC8 C12_PMON_CTR0         # Uncore C-Box 12 Perfmon Counter 0
+XEONE5V3 0xEC9 C12_PMON_CTR1         # Uncore C-Box 12 Perfmon Counter 1
+XEONE5V3 0xECA C12_PMON_CTR2         # Uncore C-Box 12 Perfmon Counter 2
+XEONE5V3 0xECB C12_PMON_CTR3         # Uncore C-Box 12 Perfmon Counter 3
+XEONE5V3 0xED0 C13_PMON_BOX_CTL      # Uncore C-Box 13 Perfmon local box wide control.
+XEONE5V3 0xED1 C13_PMON_EVNTSEL0     # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 0
+XEONE5V3 0xED2 C13_PMON_EVNTSEL1     # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 1
+XEONE5V3 0xED3 C13_PMON_EVNTSEL2     # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 2
+XEONE5V3 0xED4 C13_PMON_EVNTSEL3     # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 3
+XEONE5V3 0xED5 C13_PMON_BOX_FILTER0  # Uncore C-Box 13 Perfmon Box Wide Filter 0
+XEONE5V3 0xED6 C13_PMON_BOX_FILTER1  # Uncore C-Box 13 Perfmon Box Wide Filter 1
+XEONE5V3 0xED7 C13_PMON_BOX_STATUS   # Uncore C-Box 13 Perfmon Box Wide Status
+XEONE5V3 0xED8 C13_PMON_CTR0         # Uncore C-Box 13 Perfmon Counter 0
+XEONE5V3 0xED9 C13_PMON_CTR1         # Uncore C-Box 13 Perfmon Counter 1
+XEONE5V3 0xEDA C13_PMON_CTR2         # Uncore C-Box 13 Perfmon Counter 2
+XEONE5V3 0xEDB C13_PMON_CTR3         # Uncore C-Box 13 Perfmon Counter 3
+XEONE5V3 0xEE0 C14_PMON_BOX_CTL      # Uncore C-Box 14 Perfmon Local Box Wide Control
+XEONE5V3 0xEE1 C14_PMON_EVNTSEL0     # Uncore C-Box 14 Perfmon Event Select for C-Box 14 Counter 0
+XEONE5V3 0xEE2 C14_PMON_EVNTSEL1     # Uncore C-Box 14 Perfmon Event Select for C-Box 14 Counter 1
+XEONE5V3 0xEE3 C14_PMON_EVNTSEL2     # Uncore C-Box 14 Perfmon Event Select for C-Box 14 Counter 2
+XEONE5V3 0xEE4 C14_PMON_EVNTSEL3     # Uncore C-Box 14 Perfmon Event Select for C-Box 14 Counter 3
+XEONE5V3 0xEE5 C14_PMON_BOX_FILTER   # Uncore C-Box 14 Perfmon Box Wide Filter 0
+XEONE5V3 0xEE6 C14_PMON_BOX_FILTER1  # Uncore C-Box 14 Perfmon Box Wide Filter 1
+XEONE5V3 0xEE7 C14_PMON_BOX_STATUS   # Uncore C-Box 14 Perfmon Box Wide Status
+XEONE5V3 0xEE8 C14_PMON_CTR0         # Uncore C-Box 14 Perfmon Counter 0
+XEONE5V3 0xEE9 C14_PMON_CTR1         # Uncore C-Box 14 Perfmon Counter 1
+XEONE5V3 0xEEA C14_PMON_CTR2         # Uncore C-Box 14 Perfmon Counter 2
+XEONE5V3 0xEEB C14_PMON_CTR3         # Uncore C-Box 14 Perfmon Counter 3
+XEONE5V3 0xEF0 C15_PMON_BOX_CTL      # Uncore C-Box 15 Perfmon Local Box Wide Control
+XEONE5V3 0xEF1 C15_PMON_EVNTSEL0     # Uncore C-Box 15 Perfmon Event Select for C-Box 15 Counter 0
+XEONE5V3 0xEF2 C15_PMON_EVNTSEL1     # Uncore C-Box 15 Perfmon Event Select for C-Box 15 Counter 1
+XEONE5V3 0xEF3 C15_PMON_EVNTSEL2     # Uncore C-Box 15 Perfmon Event Select for C-Box 15 Counter 2
+XEONE5V3 0xEF4 C15_PMON_EVNTSEL3     # Uncore C-Box 15 Perfmon Event Select for C-Box 15 Counter 3
+XEONE5V3 0xEF5 C15_PMON_BOX_FILTER0  # Uncore C-Box 15 Perfmon Box Wide Filter 0
+XEONE5V3 0xEF6 C15_PMON_BOX_FILTER1  # Uncore C-Box 15 Perfmon Box Wide Filter 1
+XEONE5V3 0xEF7 C15_PMON_BOX_STATUS   # Uncore C-Box 15 Perfmon Box Wide Status
+XEONE5V3 0xEF8 C15_PMON_CTR0         # Uncore C-Box 15 Perfmon Counter 0
+XEONE5V3 0xEF9 C15_PMON_CTR1         # Uncore C-Box 15 Perfmon Counter 1
+XEONE5V3 0xEFA C15_PMON_CTR2         # Uncore C-Box 15 Perfmon Counter 2
+XEONE5V3 0xEFB C15_PMON_CTR3         # Uncore C-Box 15 Perfmon Counter 3
+XEONE5V3 0xF00 C16_PMON_BOX_CTL      # Uncore C-Box 16 Perfmon for Box-Wide Control
+XEONE5V3 0xF01 C16_PMON_EVNTSEL0     # Uncore C-Box 16 Perfmon Event Select for C-Box 16 Counter 0
+XEONE5V3 0xF02 C16_PMON_EVNTSEL1     # Uncore C-Box 16 Perfmon Event Select for C-Box 16 Counter 1
+XEONE5V3 0xF03 C16_PMON_EVNTSEL2     # Uncore C-Box 16 Perfmon Event Select for C-Box 16 Counter 2
+XEONE5V3 0xF04 C16_PMON_EVNTSEL3     # Uncore C-Box 16 Perfmon Event Select for C-Box 16 Counter 3
+XEONE5V3 0xF05 C16_PMON_BOX_FILTER0  # Uncore C-Box 16 Perfmon Box Wide Filter 0
+XEONE5V3 0xF06 C16_PMON_BOX_FILTER1  # Uncore C-Box 16 Perfmon Box Wide Filter 1
+XEONE5V3 0xF07 C16_PMON_BOX_STATUS   # Uncore C-Box 16 Perfmon Box Wide Status
+XEONE5V3 0xF08 C16_PMON_CTR0         # Uncore C-Box 16 Perfmon Counter 0
+XEONE5V3 0xF09 C16_PMON_CTR1         # Uncore C-Box 16 Perfmon Counter 1
+XEONE5V3 0xF0A C16_PMON_CTR2         # Uncore C-Box 16 Perfmon Counter 2
+XEONE5V3 0xF0B C16_PMON_CTR3         # Uncore C-Box 16 Perfmon Counter 3
+XEONE5V3 0xF10 C17_PMON_BOX_CTL      # Uncore C-Box 17 Perfmon for Box-Wide Control
+XEONE5V3 0xF11 C17_PMON_EVNTSEL0     # Uncore C-Box 17 Perfmon Event Select for C-Box 17 Counter 0
+XEONE5V3 0xF12 C17_PMON_EVNTSEL1     # Uncore C-Box 17 Perfmon Event Select for C-Box 17 Counter 1
+XEONE5V3 0xF13 C17_PMON_EVNTSEL2     # Uncore C-Box 17 Perfmon Event Select for C-Box 17 Counter 2
+XEONE5V3 0xF14 C17_PMON_EVNTSEL3     # Uncore C-Box 17 Perfmon Event Select for C-Box 17 Counter 3
+XEONE5V3 0xF15 C17_PMON_BOX_FILTER0  # Uncore C-Box 17 Perfmon Box Wide Filter 0
+XEONE5V3 0xF16 C17_PMON_BOX_FILTER1  # Uncore C-Box 17 Perfmon Box Wide Filter1
+XEONE5V3 0xF17 C17_PMON_BOX_STATUS   # Uncore C-Box 17 Perfmon Box Wide Status
+XEONE5V3 0xF18 C17_PMON_CTR0         # Uncore C-Box 17 Perfmon Counter 0
+XEONE5V3 0xF19 C17_PMON_CTR1         # Uncore C-Box 17 Perfmon Counter 1
+XEONE5V3 0xF1A C17_PMON_CTR2         # Uncore C-Box 17 Perfmon Counter 2
+XEONE5V3 0xF1B C17_PMON_CTR3         # Uncore C-Box 17 Perfmon Counter 3
+
+# Intel-SDM-Vol4 (Intel Xeon Processor E7)
+XEONE7 0xF40 C8_PMON_BOX_CTRL     # Uncore C-box 8 perfmon local box control MSR
+XEONE7 0xF41 C8_PMON_BOX_STATUS   # Uncore C-box 8 perfmon local box status MSR
+XEONE7 0xF42 C8_PMON_BOX_OVF_CTRL # Uncore C-box 8 perfmon local box overflow control MSR
+XEONE7 0xF50 C8_PMON_EVNT_SEL0    # Uncore C-box 8 perfmon event select MSR
+XEONE7 0xF51 C8_PMON_CTR0         # Uncore C-box 8 perfmon counter MSR
+XEONE7 0xF52 C8_PMON_EVNT_SEL1    # Uncore C-box 8 perfmon event select MSR
+XEONE7 0xF53 C8_PMON_CTR1         # Uncore C-box 8 perfmon counter MSR
+XEONE7 0xF54 C8_PMON_EVNT_SEL2    # Uncore C-box 8 perfmon event select MSR
+XEONE7 0xF55 C8_PMON_CTR2         # Uncore C-box 8 perfmon counter MSR
+XEONE7 0xF56 C8_PMON_EVNT_SEL3    # Uncore C-box 8 perfmon event select MSR
+XEONE7 0xF57 C8_PMON_CTR3         # Uncore C-box 8 perfmon counter MSR
+XEONE7 0xF58 C8_PMON_EVNT_SEL4    # Uncore C-box 8 perfmon event select MSR
+XEONE7 0xF59 C8_PMON_CTR4         # Uncore C-box 8 perfmon counter MSR
+XEONE7 0xF5A C8_PMON_EVNT_SEL5    # Uncore C-box 8 perfmon event select MSR
+XEONE7 0xF5B C8_PMON_CTR5         # Uncore C-box 8 perfmon counter MSR
+XEONE7 0xFC0 C9_PMON_BOX_CTRL     # Uncore C-box 9 perfmon local box control MSR
+XEONE7 0xFC1 C9_PMON_BOX_STATUS   # Uncore C-box 9 perfmon local box status MSR
+XEONE7 0xFC2 C9_PMON_BOX_OVF_CTRL # Uncore C-box 9 perfmon local box overflow control MSR
+XEONE7 0xFD0 C9_PMON_EVNT_SEL0    # Uncore C-box 9 perfmon event select MSR
+XEONE7 0xFD1 C9_PMON_CTR0         # Uncore C-box 9 perfmon counter MSR
+XEONE7 0xFD2 C9_PMON_EVNT_SEL1    # Uncore C-box 9 perfmon event select MSR
+XEONE7 0xFD3 C9_PMON_CTR1         # Uncore C-box 9 perfmon counter MSR
+XEONE7 0xFD4 C9_PMON_EVNT_SEL2    # Uncore C-box 9 perfmon event select MSR
+XEONE7 0xFD5 C9_PMON_CTR2         # Uncore C-box 9 perfmon counter MSR
+XEONE7 0xFD6 C9_PMON_EVNT_SEL3    # Uncore C-box 9 perfmon event select MSR
+XEONE7 0xFD7 C9_PMON_CTR3         # Uncore C-box 9 perfmon counter MSR
+XEONE7 0xFD8 C9_PMON_EVNT_SEL4    # Uncore C-box 9 perfmon event select MSR
+XEONE7 0xFD9 C9_PMON_CTR4         # Uncore C-box 9 perfmon counter MSR
+XEONE7 0xFDA C9_PMON_EVNT_SEL5    # Uncore C-box 9 perfmon event select MSR
+XEONE7 0xFDB C9_PMON_CTR5         # Uncore C-box 9 perfmon counter MSR
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 VIA Cyrix defined MSRs
+VIA 0x1107 FCR
+VIA 0x110A LONGHAUL
+VIA 0x110B RNG
+VIA 0x1147 BCR2
+
+# 0x1200-0x121F Intel-SDM-Vol4 Last Branch Record Entry X Info Register
+0x1200 IA32_LBR_0_INFO
+0x1201 IA32_LBR_1_INFO
+0x1202 IA32_LBR_2_INFO
+0x1203 IA32_LBR_3_INFO
+0x1204 IA32_LBR_4_INFO
+0x1205 IA32_LBR_5_INFO
+0x1206 IA32_LBR_6_INFO
+0x1207 IA32_LBR_7_INFO
+0x1208 IA32_LBR_8_INFO
+0x1209 IA32_LBR_9_INFO
+0x120A IA32_LBR_10_INFO
+0x120B IA32_LBR_11_INFO
+0x120C IA32_LBR_12_INFO
+0x120D IA32_LBR_13_INFO
+0x120E IA32_LBR_14_INFO
+0x120F IA32_LBR_15_INFO
+0x1210 IA32_LBR_16_INFO
+0x1211 IA32_LBR_17_INFO
+0x1212 IA32_LBR_18_INFO
+0x1213 IA32_LBR_19_INFO
+0x1214 IA32_LBR_20_INFO
+0x1215 IA32_LBR_21_INFO
+0x1216 IA32_LBR_22_INFO
+0x1217 IA32_LBR_23_INFO
+0x1218 IA32_LBR_24_INFO
+0x1219 IA32_LBR_25_INFO
+0x121A IA32_LBR_26_INFO
+0x121B IA32_LBR_27_INFO
+0x121C IA32_LBR_28_INFO
+0x121D IA32_LBR_29_INFO
+0x121E IA32_LBR_30_INFO
+0x121F IA32_LBR_31_INFO
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/cpu/zhaoxin.c?h=v6.1 Zhaoxin processors
+ZHAOXIN 0x1257 FCR57
+
+# Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors) Reload value for IA32_FIXED_CTRx
+CORE12 0x1309 RELOAD_FIXED_CTR0
+CORE12 0x130A RELOAD_FIXED_CTR1
+CORE12 0x130B RELOAD_FIXED_CTR2
+
+# https://www.intel.com/content/dam/develop/external/us/en/documents-tps/intel-tdx-cpu-architectural-specification.pdf Intel Trust Domain CPU Architectural Extensions
+0x1400 IA32_SEAMRR_PHYS_BASE   # Secure Arbitration Mode Range Register - Physical Base Control Register
+0x1401 IA32_SEAMRR_PHYS_MASK   # Secure Arbitration Mode Range Register - Physical Mask Control Register
+
+# From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/p-seam-loader/src/common/x86_defs/msr_defs.h
+0x1402 IA32_SEAMEXTEND
+
+0x1406 IA32_MCU_CONTROL # Intel-SDM-Vol4 MCU Control
+
+# Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors) Reload value for IA32_PMCx
+CORE12 0x14C1 RELOAD_PMC0
+CORE12 0x14C2 RELOAD_PMC1
+CORE12 0x14C3 RELOAD_PMC2
+CORE12 0x14C4 RELOAD_PMC3
+CORE12 0x14C5 RELOAD_PMC4
+CORE12 0x14C6 RELOAD_PMC5
+
+0x14CE IA32_LBR_CTL   # Intel-SDM-Vol4 Last Branch Record Enabling and Configuration Register
+0x14CF IA32_LBR_DEPTH # Intel-SDM-Vol4 Last Branch Record Maximum Stack Depth Register
+
+# 0x1500-0x151F Intel-SDM-Vol4 Last Branch Record entry X source IP register
+0x1500 IA32_LBR_0_FROM_IP
+0x1501 IA32_LBR_1_FROM_IP
+0x1502 IA32_LBR_2_FROM_IP
+0x1503 IA32_LBR_3_FROM_IP
+0x1504 IA32_LBR_4_FROM_IP
+0x1505 IA32_LBR_5_FROM_IP
+0x1506 IA32_LBR_6_FROM_IP
+0x1507 IA32_LBR_7_FROM_IP
+0x1508 IA32_LBR_8_FROM_IP
+0x1509 IA32_LBR_9_FROM_IP
+0x150A IA32_LBR_10_FROM_IP
+0x150B IA32_LBR_11_FROM_IP
+0x150C IA32_LBR_12_FROM_IP
+0x150D IA32_LBR_13_FROM_IP
+0x150E IA32_LBR_14_FROM_IP
+0x150F IA32_LBR_15_FROM_IP
+0x1510 IA32_LBR_16_FROM_IP
+0x1511 IA32_LBR_17_FROM_IP
+0x1512 IA32_LBR_18_FROM_IP
+0x1513 IA32_LBR_19_FROM_IP
+0x1514 IA32_LBR_20_FROM_IP
+0x1515 IA32_LBR_21_FROM_IP
+0x1516 IA32_LBR_22_FROM_IP
+0x1517 IA32_LBR_23_FROM_IP
+0x1518 IA32_LBR_24_FROM_IP
+0x1519 IA32_LBR_25_FROM_IP
+0x151A IA32_LBR_26_FROM_IP
+0x151B IA32_LBR_27_FROM_IP
+0x151C IA32_LBR_28_FROM_IP
+0x151D IA32_LBR_29_FROM_IP
+0x151E IA32_LBR_30_FROM_IP
+0x151F IA32_LBR_31_FROM_IP
+
+# 0x1600-0x161F Intel-SDM-Vol4 Last Branch Record entry X destination IP register
+0x1600 IA32_LBR_0_TO_IP
+0x1601 IA32_LBR_1_TO_IP
+0x1602 IA32_LBR_2_TO_IP
+0x1603 IA32_LBR_3_TO_IP
+0x1604 IA32_LBR_4_TO_IP
+0x1605 IA32_LBR_5_TO_IP
+0x1606 IA32_LBR_6_TO_IP
+0x1607 IA32_LBR_7_TO_IP
+0x1608 IA32_LBR_8_TO_IP
+0x1609 IA32_LBR_9_TO_IP
+0x160A IA32_LBR_10_TO_IP
+0x160B IA32_LBR_11_TO_IP
+0x160C IA32_LBR_12_TO_IP
+0x160D IA32_LBR_13_TO_IP
+0x160E IA32_LBR_14_TO_IP
+0x160F IA32_LBR_15_TO_IP
+0x1610 IA32_LBR_16_TO_IP
+0x1611 IA32_LBR_17_TO_IP
+0x1612 IA32_LBR_18_TO_IP
+0x1613 IA32_LBR_19_TO_IP
+0x1614 IA32_LBR_20_TO_IP
+0x1615 IA32_LBR_21_TO_IP
+0x1616 IA32_LBR_22_TO_IP
+0x1617 IA32_LBR_23_TO_IP
+0x1618 IA32_LBR_24_TO_IP
+0x1619 IA32_LBR_25_TO_IP
+0x161A IA32_LBR_26_TO_IP
+0x161B IA32_LBR_27_TO_IP
+0x161C IA32_LBR_28_TO_IP
+0x161D IA32_LBR_29_TO_IP
+0x161E IA32_LBR_30_TO_IP
+0x161F IA32_LBR_31_TO_IP
+
+0x17D0 IA32_HW_FEEDBACK_PTR           # Intel-SDM-Vol4 Hardware Feedback Interface Pointer
+0x17D1 IA32_HW_FEEDBACK_CONFIG        # Intel-SDM-Vol4 Hardware Feedback Interface Configuration
+0x17D2 IA32_THREAD_FEEDBACK_CHAR      # Intel-SDM-Vol4 Thread Feedback Characteristics
+0x17D4 IA32_HW_FEEDBACK_THREAD_CONFIG # Intel-SDM-Vol4 Hardware Feedback Thread Configuration
+0x17DA IA32_HRESET_ENABLE             # Intel-SDM-Vol4 History Reset Enable
+
+# https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/x86/msr.h
+0x1891 IA32_CR_SF_QOS_MASK_1
+0x1892 IA32_CR_SF_QOS_MASK_2
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 Geode defined MSRs
+GEODE 0x1900 BUSCONT_CONF0
+
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/data-operand-independent-timing-isa-guidance.html
+0x1B01 IA32_UARCH_MISC_CTL            # Intel-SDM-Vol4
+
+# Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors)
+CORE12 0x2000 UNC_CBO_0_PERFEVTSEL0  # Uncore C-Box 0, Counter 0 Event Select MSR
+CORE12 0x2001 UNC_CBO_0_PERFEVTSEL1  # Uncore C-Box 0, Counter 1 Event Select MSR
+CORE12 0x2002 UNC_CBO_0_PERFCTR0     # Uncore C-Box 0, Performance Counter 0
+CORE12 0x2003 UNC_CBO_0_PERFCTR1     # Uncore C-Box 0, Performance Counter 1
+CORE12 0x2008 UNC_CBO_1_PERFEVTSEL0  # Uncore C-Box 1, Counter 0 Event Select MSR
+CORE12 0x2009 UNC_CBO_1_PERFEVTSEL1  # Uncore C-Box 1, Counter 1 Event Select MSR
+CORE12 0x200A UNC_CBO_1_PERFCTR0     # Uncore C-Box 1, Performance Counter 0
+CORE12 0x200B UNC_CBO_1_PERFCTR1     # Uncore C-Box 1, Performance Counter 1
+CORE12 0x2010 UNC_CBO_2_PERFEVTSEL0  # Uncore C-Box 2, Counter 0 Event Select MSR
+CORE12 0x2011 UNC_CBO_2_PERFEVTSEL1  # Uncore C-Box 2, Counter 1 Event Select MSR
+CORE12 0x2012 UNC_CBO_2_PERFCTR0     # Uncore C-Box 2, Performance Counter 0
+CORE12 0x2013 UNC_CBO_2_PERFCTR1     # Uncore C-Box 2, Performance Counter 1
+CORE12 0x2018 UNC_CBO_3_PERFEVTSEL0  # Uncore C-Box 3, Counter 0 Event Select MSR
+CORE12 0x2019 UNC_CBO_3_PERFEVTSEL1  # Uncore C-Box 3, Counter 1 Event Select MSR
+CORE12 0x201A UNC_CBO_3_PERFCTR0     # Uncore C-Box 3, Performance Counter 0
+CORE12 0x201B UNC_CBO_3_PERFCTR1     # Uncore C-Box 3, Performance Counter 1
+CORE12 0x2020 UNC_CBO_4_PERFEVTSEL0  # Uncore C-Box 4, Counter 0 Event Select MSR
+CORE12 0x2021 UNC_CBO_4_PERFEVTSEL1  # Uncore C-Box 4, Counter 1 Event Select MSR
+CORE12 0x2022 UNC_CBO_4_PERFCTR0     # Uncore C-Box 4, Performance Counter 0
+CORE12 0x2023 UNC_CBO_4_PERFCTR1     # Uncore C-Box 4, Performance Counter 1
+CORE12 0x2028 UNC_CBO_5_PERFEVTSEL0  # Uncore C-Box 5, Counter 0 Event Select MSR
+CORE12 0x2029 UNC_CBO_5_PERFEVTSEL1  # Uncore C-Box 5, Counter 1 Event Select MSR
+CORE12 0x202A UNC_CBO_5_PERFCTR0     # Uncore C-Box 5, Performance Counter 0
+CORE12 0x202B UNC_CBO_5_PERFCTR1     # Uncore C-Box 5, Performance Counter 1
+CORE12 0x2030 UNC_CBO_6_PERFEVTSEL0  # Uncore C-Box 6, Counter 0 Event Select MSR
+CORE12 0x2031 UNC_CBO_6_PERFEVTSEL1  # Uncore C-Box 6, Counter 1 Event Select MSR
+CORE12 0x2032 UNC_CBO_6_PERFCTR0     # Uncore C-Box 6, Performance Counter 0
+CORE12 0x2033 UNC_CBO_6_PERFCTR1     # Uncore C-Box 6, Performance Counter 1
+CORE12 0x2038 UNC_CBO_7_PERFEVTSEL0  # Uncore C-Box 7, Counter 0 Event Select MSR
+CORE12 0x2039 UNC_CBO_7_PERFEVTSEL1  # Uncore C-Box 7, Counter 1 Event Select MSR
+CORE12 0x203A UNC_CBO_7_PERFCTR0     # Uncore C-Box 7, Performance Counter 0
+CORE12 0x203B UNC_CBO_7_PERFCTR1     # Uncore C-Box 7, Performance Counter 1
+CORE12 0x2040 UNC_CBO_8_PERFEVTSEL0  # Uncore C-Box 8, Counter 0 Event Select MSR
+CORE12 0x2041 UNC_CBO_8_PERFEVTSEL1  # Uncore C-Box 8, Counter 1 Event Select MSR
+CORE12 0x2042 UNC_CBO_8_PERFCTR0     # Uncore C-Box 8, Performance Counter 0
+CORE12 0x2043 UNC_CBO_8_PERFCTR1     # Uncore C-Box 8, Performance Counter 1
+CORE12 0x2048 UNC_CBO_9_PERFEVTSEL0  # Uncore C-Box 9, Counter 0 Event Select MSR
+CORE12 0x2049 UNC_CBO_9_PERFEVTSEL1  # Uncore C-Box 9, Counter 1 Event Select MSR
+CORE12 0x204A UNC_CBO_9_PERFCTR0     # Uncore C-Box 9, Performance Counter 0
+CORE12 0x204B UNC_CBO_9_PERFCTR1     # Uncore C-Box 9, Performance Counter 1
+CORE12 0x2FD0 UNC_ARB_0_PERFEVTSEL0  # Uncore Arb Unit 0, Counter 0 Event Select MSR
+CORE12 0x2FD1 UNC_ARB_0_PERFEVTSEL1  # Uncore Arb Unit 0, Counter 1 Event Select MSR
+CORE12 0x2FD2 UNC_ARB_0_PERFCTR0     # Uncore Arb Unit 0, Performance Counter 0
+CORE12 0x2FD3 UNC_ARB_0_PERFCTR1     # Uncore Arb Unit 0, Performance Counter 1
+CORE12 0x2FD4 UNC_ARB_0_PERF_STATUS  # Uncore Arb Unit 0, Performance Status
+CORE12 0x2FD5 UNC_ARB_0_PERF_CTRL    # Uncore Arb Unit 0, Performance Control
+CORE12 0x2FD8 UNC_ARB_1_PERFEVTSEL0  # Uncore Arb Unit 1, Counter 0 Event Select MSR
+CORE12 0x2FD9 UNC_ARB_1_PERFEVTSEL1  # Uncore Arb Unit 1, Counter 1 Event Select MSR
+CORE12 0x2FDA UNC_ARB_1_PERFCTR0     # Uncore Arb Unit 1, Performance Counter 0
+CORE12 0x2FDB UNC_ARB_1_PERFCTR1     # Uncore Arb Unit 1, Performance Counter 1
+CORE12 0x2FDC UNC_ARB_1_PERF_STATUS  # Uncore Arb Unit 1, Performance Status
+CORE12 0x2FDD UNC_ARB_1_PERF_CTRL    # Uncore Arb Unit 1, Performance Control
+CORE12 0x2FDE UNC_PERF_FIXED_CTRL    # Uncore Fixed Counter Control (R/W)
+CORE12 0x2FDF UNC_PERF_FIXED_CTR     # Uncore Fixed Counter
+CORE12 0x2FF0 UNC_PERF_GLOBAL_CTRL   # Uncore PMU Global Control
+CORE12 0x2FF2 UNC_PERF_GLOBAL_STATUS # Uncore PMU Main Status
+
+# Intel-SDM-Vol4 (Intel Core Microarchitecture)
+0x107CC EMON_L3_CTR_CTL0 # GBUSQ Event Control/Counter Register
+0x107CD EMON_L3_CTR_CTL1 # GBUSQ Event Control/Counter Register
+0x107CE EMON_L3_CTR_CTL2 # GSNPQ Event Control/Counter Register
+0x107CF EMON_L3_CTR_CTL3 # GSNPQ Event Control/Counter Register
+0x107D0 EMON_L3_CTR_CTL4 # FSB Event Control/Counter Register
+0x107D1 EMON_L3_CTR_CTL5 # FSB Event Control/Counter Register
+0x107D2 EMON_L3_CTR_CTL6 # FSB Event Control/Counter Register
+0x107D3 EMON_L3_CTR_CTL7 # FSB Event Control/Counter Register
+0x107D8 EMON_L3_GL_CTL # L3/FSB Common Control Register
+
+# Intel-SDM-Vol4 (MSRs Unique to Intel Xeon Processor MP with L3 Cache)
+XEONMPL3 0x107CC IFSB_BUSQ0 # IFSB BUSQ Event Control and Counter Register
+XEONMPL3 0x107CD IFSB_BUSQ1 # IFSB BUSQ Event Control and Counter Register
+XEONMPL3 0x107CE IFSB_SNPQ0 # IFSB SNPQ Event Control and Counter Register
+XEONMPL3 0x107CF IFSB_SNPQ1 # IFSB SNPQ Event Control and Counter Register
+XEONMPL3 0x107D0 EFSB_DRDY0 # EFSB DRDY Event Control and Counter Register
+XEONMPL3 0x107D1 EFSB_DRDY1 # EFSB DRDY Event Control and Counter Register
+XEONMPL3 0x107D2 IFSB_CTL6  # IFSB Latency Event Control Register
+XEONMPL3 0x107D3 IFSB_CNTR7 # IFSB Latency Event Counter Register
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 Transmeta defined MSRs
+TRANSMETA 0x80868010 LONGRUN_CTRL
+TRANSMETA 0x80868011 LONGRUN_FLAGS
+TRANSMETA 0x80868018 LRTI_READOUT
+TRANSMETA 0x8086801A LRTI_VOLT_MHZ
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/uapi/asm/kvm_para.h?h=v6.1
+# https://gitlab.com/qemu-project/qemu/-/blob/v7.2.0/include/standard-headers/asm-x86/kvm_para.h
+KVM 0x4B564D00 KVM_WALL_CLOCK_NEW
+KVM 0x4B564D01 KVM_SYSTEM_TIME_NEW
+KVM 0x4B564D02 KVM_ASYNC_PF_EN
+KVM 0x4B564D03 KVM_STEAL_TIME
+KVM 0x4B564D04 KVM_PV_EOI_EN
+KVM 0x4B564D05 KVM_POLL_CONTROL
+KVM 0x4B564D06 KVM_ASYNC_PF_INT
+KVM 0x4B564D07 KVM_ASYNC_PF_ACK
+KVM 0x4B564D08 KVM_MIGRATION_CONTROL
+
+0xC0000080 IA32_EFER   # Intel-SDM-Vol4 Extended Feature Enable
+0xC0000081 IA32_STAR   # Intel-SDM-Vol4 System Call Target Address
+0xC0000082 IA32_LSTAR  # Intel-SDM-Vol4 IA-32e Long Mode System Call Target Address
+0xC0000083 IA32_CSTAR  # Intel-SDM-Vol4 IA-32e Compatibility Mode System Call Target Address. Not used, as the SYSCALL instruction is not recognized in compatibility mode
+0xC0000084 IA32_FMASK  # Intel-SDM-Vol4 System Call Flag Mask
+
+AMDK6 0xC0000082 WHCR  # AMD-K6 Write Handling Control Register
+AMDK6 0xC0000085 UWCCR # AMD-K6 UC/WC Cacheability Control Register
+AMDK6 0xC0000086 EPMR  # AMD-K6 Enhanced Power Management Register (only in low-power versions)
+AMDK6 0xC0000087 PSOR  # AMD-K6 Processor State Observability Register
+AMDK6 0xC0000088 PFIR  # AMD-K6 Page Flush/Invalidate Register
+AMDK6 0xC0000089 L2AAR # AMD-K6 Level-2 Cache Array Register
+
+AMD64 0xC00000E7 M_PERF_READ_ONLY # AMD64-Vol2 Read only version of MPERF
+AMD64 0xC00000E8 A_PERF_READ_ONLY # AMD64-Vol2 Read only version of APERF
+AMD64 0xC00000E9 IR_PERF_COUNT    # AMD64-Vol2 Dedicated instructions retired performance counter.
+
+0xC0000100 IA32_FS_BASE  # Intel-SDM-Vol4 Map of BASE Address of FS
+0xC0000101 IA32_GS_BASE  # Intel-SDM-Vol4 Map of BASE Address of GS
+0xC0000102 IA32_KERNEL_GS_BASE  # Intel-SDM-Vol4 Swap Target of BASE Address of GS
+
+0xC0000103 IA32_TSC_AUX  # Intel-SDM-Vol4 Auxiliary TSC
+
+AMD64 0xC0000104 TSC_RATIO                # AMD64-Vol2 Specifies the TSCRatio value which is used to scale the TSC value read by a Guest
+
+AMD64 0xC0000105 LWP_CFG    # AMD-2013 Lightweight Profile Configuration
+AMD64 0xC0000106 LWP_CBADDR # AMD-2013 Lightweight Profile Control Block Address
+
+AMD64 0xC0000108 PREFETCH_CONTROL         # AMD64-Vol2 Controls enabling / disabling hardware prefetchers
+AMD64 0xC000010E LAST_BRANCH_STACK_SELECT # AMD64-Vol2 Software Debug "Last Branch Record Stack
+AMD64 0xC000010F DEBUG_EXTN_CTL           # AMD64-Vol2 Software Debug "Debug-Extension-Control MSR
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/cpu/resctrl/internal.h?h=v6.1 defines MSR_IA32_MBA_BW_BASE=0xc0000200
+# https://github.com/intel/intel-cmt-cat/blob/6f385efba25682bc1d3dd2332fd177639ac8d0c7/lib/cpu_registers.h defines PQOS_MSR_MBA_MASK_START_AMD=0xC0000200
+AMD64 0xC0000200 MBA_BW_0  # Memory Bandwidth Allocation
+
+AMD64 0xC0000300 PERF_CNTR_GLOBAL_STATUS     # AMD64-Vol2 Core Performance Counter Status Registers
+AMD64 0xC0000301 PERF_CNTR_GLOBAL_CTL        # AMD64-Vol2 Core Performance Global Control Register (with a typo: "PerfCntrGobalCtl" in the spec)
+AMD64 0xC0000302 PERF_CNTR_GLOBAL_STATUS_CLR # AMD64-Vol2 Performance Counter Global Status Clear Register
+AMD64 0xC0000303 PERF_CNTR_GLOBAL_STATUS_SET # AMD64-Vol2 Performance Counter Global Status Set Register
+
+# # AMD64-Vol2 Additional Machine-Check Miscellaneous-Error Information Registers
+AMD64 0xC0000408 MC4_MISC1    # AMD64-Vol2 (AMD-2013: "Link Thresholding")
+AMD64 0xC0000409 MC4_MISC2    # AMD64-Vol2 (AMD-2013: "L3 Thresholding")
+AMD64 0xC000040A MC4_MISC3    # AMD64-Vol2
+AMD64 0xC000040B MC4_MISC4    # AMD64-Vol2
+AMD64 0xC000040C MC4_MISC5    # AMD64-Vol2
+AMD64 0xC000040D MC4_MISC6    # AMD64-Vol2
+AMD64 0xC000040E MC4_MISC7    # AMD64-Vol2
+AMD64 0xC000040F MC4_MISC8    # AMD64-Vol2
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/cpu/mce/amd.c?h=v6.1 defines MSR_CU_DEF_ERR=0xC0000410 (Deferred error settings)
+AMD64 0xC0000410 MCA_INTR_CFG # AMD64-Vol2 MCA interrupt configuration
+
+# AMD64 0xC0001019 DR1_ADDR_MASK # AMD64-Vol2 Address mask for DR1 breakpoint (probably a typo for 0xC0011019)
+# AMD64 0xC000101A DR2_ADDR_MASK # AMD64-Vol2 Address mask for DR2 breakpoint (probably a typo for 0xC001101A)
+# AMD64 0xC000101B DR3_ADDR_MASK # AMD64-Vol2 Address mask for DR3 breakpoint (probably a typo for 0xC001101B)
+# AMD64 0xC0001027 DR0_ADDR_MASK # AMD64-Vol2 Address mask for DR0 breakpoint (probably a typo for 0xC0011027)
+
+# AMD64-Vol2 MCAi_... Machine Check Architecture Registers, 32 banks at 0xC000200x + 0x10*i.
+# AMD-2017 Bank 0 is LS, 1 is IF, 2 is L2, 3 is DE, 5 is EX, 6 is FP, 7 is L3, 0xF is UMC, 0x13 is PB, 0x14 is CS, 0x16 is PIE
+AMD64 0xC0002000 MCA0_CTL
+AMD64 0xC0002001 MCA0_STATUS # Machine-Check Status Register
+AMD64 0xC0002002 MCA0_ADDR   # Machine-Check Address Register
+AMD64 0xC0002003 MCA0_MISC0  # Machine-Check Miscellaneous-Error Information Register 0
+AMD64 0xC0002004 MCA0_CONFIG # MCA Configuration Register
+AMD64 0xC0002005 MCA0_IPID   # MCA IP Identification
+AMD64 0xC0002006 MCA0_SYND   # MCA Syndrome Register
+AMD64 0xC0002008 MCA0_DESTAT # MCA Deferred Error Status Register
+AMD64 0xC0002009 MCA0_DEADDR # MCA Deferred Error Address Register
+AMD64 0xC000200A MCA0_MISC1  # MCA Miscellaneous Register 1
+AMD64 0xC000200B MCA0_MISC2  # MCA Miscellaneous Register 2
+AMD64 0xC000200C MCA0_MISC3  # MCA Miscellaneous Register 3
+AMD64 0xC000200D MCA0_MISC4  # MCA Miscellaneous Register 4
+AMD64 0xC000200E MCA0_SYND1  # MCA Syndrome Register 1
+AMD64 0xC000200F MCA0_SYND2  # MCA Syndrome Register Z
+
+AMD64 0xC0010000 PERFEVTSEL0 # AMD64-Vol2 Core Performance Event-Select Register (AMD-2017 defines it as Legacy)
+AMD64 0xC0010001 PERFEVTSEL1 # AMD64-Vol2 Core Performance Event-Select Register (AMD-2017 defines it as Legacy)
+AMD64 0xC0010002 PERFEVTSEL2 # AMD64-Vol2 Core Performance Event-Select Register (AMD-2017 defines it as Legacy)
+AMD64 0xC0010003 PERFEVTSEL3 # AMD64-Vol2 Core Performance Event-Select Register (AMD-2017 defines it as Legacy)
+AMD64 0xC0010004 PERFCTR0    # AMD64-Vol2 Performance Counter (AMD-2017 defines it as Legacy)
+AMD64 0xC0010005 PERFCTR1    # AMD64-Vol2 Performance Counter (AMD-2017 defines it as Legacy)
+AMD64 0xC0010006 PERFCTR2    # AMD64-Vol2 Performance Counter (AMD-2017 defines it as Legacy)
+AMD64 0xC0010007 PERFCTR3    # AMD64-Vol2 Performance Counter (AMD-2017 defines it as Legacy)
+
+# https://github.com/fwupd/fwupd/blob/55bd4862d3ad8f0c7bf92dc6d7732afcad6e47a8/plugins/msr/fu-plugin-msr.c#L51
+AMD64 0xC0010010 SYSCFG # AMD64-Vol2 System Configuration Register
+
+AMD64 0xC0010015 HWCR   # AMD64-Vol2 Hardware Configuration Register
+
+AMD64 0xC0010016 IORR_BASE_0 # AMD64-Vol2 I/O Range Register
+AMD64 0xC0010017 IORR_MASK_0 # AMD64-Vol2 Size of a variable-range I/O region
+AMD64 0xC0010018 IORR_BASE_1 # AMD64-Vol2 I/O Range Register
+AMD64 0xC0010019 IORR_MASK_1 # AMD64-Vol2 Size of a variable-range I/O region
+
+AMD64 0xC001001A TOP_MEM # AMD64-Vol2 Top of Memory, boundary between system memory and memory-mapped I/O for addresses below 4 Gbytes
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
+AMD64 0xC001001B CLK_CTL
+
+AMD64 0xC001001D TOP_MEM2 # AMD64-Vol2 Boundary between system memory and memory-mapped I/O for addresses above 4 Gbytes
+AMD64 0xC001001E MANID    # AMD-2007 Manufacturing Identification Number
+AMD64 0xC001001F NB_CFG   # AMD-2007
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
+AMD64 0xC0010020 PATCH_LOADER
+
+AMD64 0xC0010022 MC_EXCEP_REDIR # AMD-2017 Machine Check Exception Redirection
+
+AMD64 0xC0010030 PROCESSOR_NAME_STRING_0 # AMD64-Vol2 CPUID Name
+AMD64 0xC0010031 PROCESSOR_NAME_STRING_1 # AMD64-Vol2 CPUID Name
+AMD64 0xC0010032 PROCESSOR_NAME_STRING_2 # AMD64-Vol2 CPUID Name
+AMD64 0xC0010033 PROCESSOR_NAME_STRING_3 # AMD64-Vol2 CPUID Name
+AMD64 0xC0010034 PROCESSOR_NAME_STRING_4 # AMD64-Vol2 CPUID Name
+AMD64 0xC0010035 PROCESSOR_NAME_STRING_5 # AMD64-Vol2 CPUID Name
+
+AMD64 0xC001003E HTC             # AMD-2007 Hardware Thermal Control
+AMD64 0xC001003F THERMAL_CONTROL # AMD-2007
+
+AMD64 0xC0010041 FIDVID_CTL    # AMD-2007 Frequency ID and Voltage ID Control
+AMD64 0xC0010042 FIDVID_STATUS # AMD-2007 Frequency ID and Voltage ID Status
+
+AMD64 0xC0010044 MC0_CTL_MASK  # AMD-2007 Machine Check Control Mask Register (AMD-2013 LS)
+AMD64 0xC0010045 MC1_CTL_MASK  # AMD-2007 Machine Check Control Mask Register (AMD-2013 IF)
+AMD64 0xC0010046 MC2_CTL_MASK  # AMD-2007 Machine Check Control Mask Register (AMD-2013 CU)
+AMD64 0xC0010047 MC3_CTL_MASK  # AMD-2007 Machine Check Control Mask Register
+AMD64 0xC0010048 MC4_CTL_MASK  # AMD-2007 Machine Check Control Mask Register (AMD-2013 NB)
+AMD64 0xC0010049 MC5_CTL_MASK  # AMD-2013 EX Machine Check Control Mask Register
+AMD64 0xC001004A MC6_CTL_MASK  # AMD-2013 FP Machine Check Control Mask Register
+
+AMD64 0xC0010050 IOTRAP_ADDR0  # AMD-2007 I/O and Configuration Space Trapping to SMI (AMD-2013 SMI_ON_IO_TRAP_0)
+AMD64 0xC0010051 IOTRAP_ADDR1  # AMD-2007 I/O and Configuration Space Trapping to SMI
+AMD64 0xC0010052 IOTRAP_ADDR2  # AMD-2007 I/O and Configuration Space Trapping to SMI
+AMD64 0xC0010053 IOTRAP_ADDR3  # AMD-2007 I/O and Configuration Space Trapping to SMI
+AMD64 0xC0010054 IOTRAP_CTL    # AMD-2007 I/O and Configuration Space Trapping to SMI
+
+AMD64 0xC0010055 INT_PENDING_MSG # AMD-2013 Interrupt Pending
+
+AMD64 0xC0010056 SMI_TRIGGER_IO_CYCLE # AMD64-Vol2 Specifies an IO cycle that may be generated when a local SMI trigger event occurs
+
+AMD64 0xC0010058 MMIO_CFG_BASE_ADDR # AMD-2017 MMIO Configuration Base Address
+
+AMD64 0xC0010060 BIST_RESULTS # AMD-2013 BIST Results
+
+AMD64 0xC0010061 PSTATE_CURRENT_LIMIT # AMD64-Vol2 P-State Current Limit Register
+AMD64 0xC0010062 PSTATE_CONTROL       # AMD64-Vol2 P-State Control Register
+AMD64 0xC0010063 PSTATE_STATUS        # AMD64-Vol2 P-State Status Register
+
+AMD64 0xC0010064 PSTATE_DEF_0 # AMD-2017 Core P-state
+AMD64 0xC0010065 PSTATE_DEF_1 # AMD-2017 Core P-state
+AMD64 0xC0010066 PSTATE_DEF_2 # AMD-2017 Core P-state
+AMD64 0xC0010067 PSTATE_DEF_3 # AMD-2017 Core P-state
+AMD64 0xC0010068 PSTATE_DEF_4 # AMD-2017 Core P-state
+AMD64 0xC0010069 PSTATE_DEF_5 # AMD-2017 Core P-state
+AMD64 0xC001006A PSTATE_DEF_6 # AMD-2017 Core P-state
+AMD64 0xC001006B PSTATE_DEF_7 # AMD-2017 Core P-state
+
+AMD64 0xC0010070 COFVID_CTL       # AMD-2013 COFVID Control
+AMD64 0xC0010071 COFVID_STATUS    # AMD-2013 COFVID Control
+AMD64 0xC0010072 SBI_PSTATE_LIMIT # AMD-2013 SBI P-state Limit
+AMD64 0xC0010073 CSTATE_BASE_ADDR # AMD-2013 C-state Base Address
+
+AMD64 0xC0010074 CPU_WATCHDOG_TIMER # AMD64-Vol2 Machine Check "CPU Watchdog Timer Register"
+
+AMD64 0xC0010075 APML_TDP_LIMIT # AMD-2013 APML (Advanced Platform Management Link) TDP (Thermal Design Power) Limit
+
+AMD64 0xC0010077 TDP_PROCESSOR_POWER          # AMD-2013 Processor Power in TDP
+AMD64 0xC0010078 POWER_AVERAGING_PERIOD       # AMD-2013 Power Averaging Period
+AMD64 0xC0010079 DRAM_CONTROLLER_CMD_THROTTLE # AMD-2013 DRAM Controller Command Throttle
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
+AMD64 0xC001007A CU_PWR_ACCUMULATOR     # Linux: "F15H"
+AMD64 0xC001007B CU_MAX_PWR_ACCUMULATOR # Linux: "F15H"
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/cpufreq/amd_freq_sensitivity.c?h=v6.1
+AMD64 0xC0010080 FREQ_SENSITIVITY_ACTUAL
+AMD64 0xC0010081 FREQ_SENSITIVITY_REFERENCE
+
+# AMD64 0xC0010104 TSC_RATIO # AMD64-Vol2 defines C001_0104h as "TSC Ratio", but it is C000_0104h in fact.
+
+AMD64 0xC0010111 SMBASE           # AMD64-Vol2 SMRAM base address (also known as SMM_BASE)
+AMD64 0xC0010112 SMM_ADDR         # AMD64-Vol2 Base address of protected memory for the SMM Handler
+AMD64 0xC0010113 SMM_MASK         # AMD64-Vol2 Size of the protected area for the SMM handler
+AMD64 0xC0010114 VM_CR            # AMD64-Vol2 Controls certain global aspects of SVM
+AMD64 0xC0010115 IGNNE            # AMD64-Vol2 Sets the state of the processor-internal IGNNE signal
+AMD64 0xC0010116 SMM_CTL          # AMD64-Vol2 Provides software control over SMM signals
+AMD64 0xC0010117 VM_HSAVE_PA      # AMD64-Vol2 Virtual Machine Host Save Physical Address
+AMD64 0xC0010118 SVM_KEY          # AMD64-Vol2 Creates a password-protected mechanism to clear VM_CR.LOCK
+AMD64 0xC0010119 SMM_KEY          # AMD64-Vol2 Creates a password-protected mechanism to clear SmmLock
+AMD64 0xC001011A LOCAL_SMI_STATUS # AMD64-Vol2 Status associated with SMI sources local to the CPU core
+AMD64 0xC001011B SVM_AVIC_DOORBELL # AMD64-Vol2 Register Sends a doorbell signal to the specified physical APIC (AMD-2017 AVIC Doorbell)
+AMD64 0xC001011E VMPAGE_FLUSH     # AMD64-Vol2 Page Flush
+
+# https://gitlab.com/qemu-project/qemu/-/blob/v7.2.0/target/i386/cpu.h defines MSR_VIRT_SSBD=0xc001011f
+AMD64 0xC001011F VIRT_SPEC_CTRL   # AMD64-Vol2 Virtual Speculation Control
+
+# https://github.com/tianocore/edk2/blob/5386c9e6dab2f6a555e679aff9f6a59f60c8e029/MdePkg/Include/Register/Amd/Fam17Msr.h
+# https://github.com/AMDESE/AMDSEV/blob/c159b65c0893da6e7e29d5e79740579d2389c60b/README.md
+# https://github.com/fwupd/fwupd/blob/55bd4862d3ad8f0c7bf92dc6d7732afcad6e47a8/plugins/msr/fu-plugin-msr.c#L52
+AMD64 0xC0010130 SEV_ES_GHCB # Secure Encrypted Virtualization - Encrypted State (SEV-ES) GHCB register
+AMD64 0xC0010131 SEV_STATUS # Secure Encrypted Virtualization (SEV) status register
+
+AMD64 0xC0010132 RMP_BASE   # AMD64-Vol2 Base address of RMP (Reverse Map Table)
+AMD64 0xC0010133 RMP_END    # AMD64-Vol2 Ending address of RMP
+
+AMD64 0xC0010134 GUEST_TSC_FREQ  # AMD64-Vol2 Guest TSC Frequency
+AMD64 0xC0010135 VIRTUAL_TOM     # AMD64-Vol2 SVM Virtual Top-of-Memory
+AMD64 0xC0010137 IDLE_WAKEUP_ICR # AMD64-Vol2 SVM "Side-Channel Protection" (require sibling threads of a SEV-SNP VM to be idle, Interrupt Command Register)
+
+AMD64 0xC0010140 OSVW_ID_LENGTH  # AMD64-Vol2 OS-Visible Workarounds, length of the status vector OSVW_E in bits
+AMD64 0xC0010141 OSVW_STATUS     # AMD64-Vol2 OS-Visible Workarounds Status
+
+AMD64 0xC0010200 PERFEVTSEL0 # AMD64-Vol2 Core Performance Event-Select Register
+AMD64 0xC0010201 PERFCTR0    # AMD64-Vol2 Performance Counter
+AMD64 0xC0010202 PERFEVTSEL1 # AMD64-Vol2 Core Performance Event-Select Register
+AMD64 0xC0010203 PERFCTR1    # AMD64-Vol2 Performance Counter
+AMD64 0xC0010204 PERFEVTSEL2 # AMD64-Vol2 Core Performance Event-Select Register
+AMD64 0xC0010205 PERFCTR2    # AMD64-Vol2 Performance Counter
+AMD64 0xC0010206 PERFEVTSEL3 # AMD64-Vol2 Core Performance Event-Select Register
+AMD64 0xC0010207 PERFCTR3    # AMD64-Vol2 Performance Counter
+AMD64 0xC0010208 PERFEVTSEL4 # AMD64-Vol2 Core Performance Event-Select Register
+AMD64 0xC0010209 PERFCTR4    # AMD64-Vol2 Performance Counter
+AMD64 0xC001020A PERFEVTSEL5 # AMD64-Vol2 Core Performance Event-Select Register
+AMD64 0xC001020B PERFCTR5    # AMD64-Vol2 Performance Counter
+
+# AMD64-Vol2 defines L2I perf event, AMD-2017 defines L3 perf event
+AMD64 0xC0010230 L2I_PERFEVTSEL0 # AMD64-Vol2 L2 cache events Performance Event Select
+AMD64 0xC0010231 L2I_PERFCTR0    # AMD64-Vol2 L2 cache events Performance Counter
+AMD64 0xC0010232 L2I_PERFEVTSEL1
+AMD64 0xC0010233 L2I_PERFCTR1
+AMD64 0xC0010234 L2I_PERFEVTSEL2
+AMD64 0xC0010235 L2I_PERFCTR2
+AMD64 0xC0010236 L2I_PERFEVTSEL3
+AMD64 0xC0010237 L2I_PERFCTR3
+
+AMD64 0xC0010240 NB_PERFEVTSEL0 # AMD64-Vol2 Northbridge events Performance Event Select
+AMD64 0xC0010241 NB_PERFCTR0    # AMD64-Vol2 Northbridge events Performance Counter
+AMD64 0xC0010242 NB_PERFEVTSEL1
+AMD64 0xC0010243 NB_PERFCTR1
+AMD64 0xC0010244 NB_PERFEVTSEL2
+AMD64 0xC0010245 NB_PERFCTR2
+AMD64 0xC0010246 NB_PERFEVTSEL3
+AMD64 0xC0010247 NB_PERFCTR3
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
+AMD64 0xC0010280 PTSC # Linux: "F15H"
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/power/x86/turbostat/turbostat.c?h=v6.1
+AMD64 0xC0010299 RAPL_PWR_UNIT    # AMD-2017 RAPL Power Unit
+AMD64 0xC001029A CORE_ENERGY_STAT # AMD-2017 Core Energy Status
+AMD64 0xC001029B PKG_ENERGY_STAT  # AMD-2017 Package Energy Status
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
+AMD64 0xC00102B0 CAP1
+AMD64 0xC00102B1 CPPC_ENABLE
+AMD64 0xC00102B2 CPPC_CAP2
+AMD64 0xC00102B3 CPPC_REQ
+AMD64 0xC00102B4 CPPC_STATUS
+AMD64 0xC00102F0 PPIN_CTL
+AMD64 0xC00102F1 PPIN
+
+AMD64 0xC0010300 LASTBRANCH_STACK_FROM_IP_0 # AMD64-Vol2
+AMD64 0xC0010301 LASTBRANCH_STACK_TO_IP_0   # AMD64-Vol2
+AMD64 0xC0010302 LASTBRANCH_STACK_FROM_IP_1 # AMD64-Vol2
+AMD64 0xC0010303 LASTBRANCH_STACK_TO_IP_1   # AMD64-Vol2
+# ...
+
+AMD64 0xC0010400 MCA_CTL_MASK_LS  # AMD-2017 LS Machine Check Control Mask
+AMD64 0xC0010401 MCA_CTL_MASK_IF  # AMD-2017 IF Machine Check Control Mask
+AMD64 0xC0010402 MCA_CTL_MASK_L2  # AMD-2017 L2 Machine Check Control Mask
+AMD64 0xC0010403 MCA_CTL_MASK_DE  # AMD-2017 DE Machine Check Control Mask
+AMD64 0xC0010405 MCA_CTL_MASK_EX  # AMD-2017 EX Machine Check Control Mask
+AMD64 0xC0010406 MCA_CTL_MASK_FP  # AMD-2017 FP Machine Check Control Mask
+AMD64 0xC0010407 MCA_CTL_MASK_L3  # AMD-2017 L3 Machine Check Control Mask
+AMD64 0xC001040F MCA_CTL_MASK_UMC # AMD-2017 UMC Machine Check Control Mask
+AMD64 0xC0010413 MCA_CTL_MASK_PB  # AMD-2017 PB Machine Check Control Mask
+AMD64 0xC0010414 MCA_CTL_MASK_CS  # AMD-2017 CS Machine Check Control Mask
+AMD64 0xC0010416 MCA_CTL_MASK_PIE # AMD-2017 PIE Machine Check Control Mask
+
+AMD64 0xC0011002 CPUID_7_FEATURES   # AMD-2017 CPUID Features for CPUID Fn00000007_E[A,B]X
+AMD64 0xC0011003 CPUID_PWR_THERM    # AMD-2017 Thermal and Power Management CPUID Features
+AMD64 0xC0011004 CPUID_FEATURES     # AMD-2017 CPUID Features for CPUID Fn00000001_E[C,D]X
+AMD64 0xC0011005 CPUID_EXT_FEATURES # AMD-2017 CPUID Features for CPUID Fn80000001_E[C,D]X
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
+AMD64 0xC001100C NODE_ID
+
+AMD64 0xC0011019 DR1_ADDR_MASK # AMD64-Vol2 Address Mask for DR1 Breakpoint
+AMD64 0xC001101A DR2_ADDR_MASK # AMD64-Vol2 Address Mask for DR2 Breakpoint
+AMD64 0xC001101B DR3_ADDR_MASK # AMD64-Vol2 Address Mask for DR3 Breakpoint
+
+AMD64 0xC0011020 LS_CFG # AMD-2013 Load-Store Configuration
+AMD64 0xC0011021 IC_CFG # AMD-2013 Instruction Cache Configuration
+AMD64 0xC0011022 DC_CFG # AMD-2013 Data Cache Configuration
+AMD64 0xC0011023 CU_CFG # AMD-2013 Combined Unit Configuration
+# AMD64 0xC0011023 TW_CFG # AMD-2017 Table Walker Configuration
+
+AMD64 0xC0011027 DR0_ADDR_MASK # AMD64-Vol2 Address Mask for DR0 Breakpoint
+
+AMD64 0xC0011028 FP_CFG  # AMD-2013 Floating Point Configuration
+AMD64 0xC0011029 DE_CFG  # AMD-2013 Decode Configuration
+AMD64 0xC001102A CU_CFG2 # AMD-2013 Combined Unit Configuration 2
+AMD64 0xC001102B CU_CFG3 # AMD-2013 Combined Unit Configuration 3
+AMD64 0xC001102C EX_CFG  # AMD-2013 Execution Unit Configuration
+AMD64 0xC001102D LS_CFG2 # AMD-2013 Load-Store Configuration 2
+
+AMD64 0xC0011030 IBS_FETCH_CTL      # AMD-2017 IBS Fetch Control (AMD-2013 IC_IBS_CTL)
+AMD64 0xC0011031 IBS_FETCH_LINADDR  # AMD-2017 IBS Fetch Linear Address (AMD-2013 IC_IBS_LIN_AD)
+AMD64 0xC0011032 IBS_FETCH_PHYSADDR # AMD-2017 IBS Fetch Physical Address (AMD-2013 IC_IBS_PHYS_AD)
+AMD64 0xC0011033 IBS_OP_CTL         # AMD-2017 IBS Execution Control (AMD-2013 SC_IBS_CTL)
+AMD64 0xC0011034 IBS_OP_RIP         # AMD-2017 IBS Op Logical Address
+AMD64 0xC0011035 IBS_OP_DATA        # AMD-2017 IBS Op Data (AMD-2013 SC_IBS_DATA)
+AMD64 0xC0011036 IBS_OP_DATA2       # AMD-2017 IBS Op Data 2
+AMD64 0xC0011037 IBS_OP_DATA3       # AMD-2017 IBS Op Data 3
+AMD64 0xC0011038 IBS_DC_LINADDR     # AMD-2017 IBS DC Linear Address
+AMD64 0xC0011039 IBS_DC_PHYSADDR    # AMD-2017 IBS DC Physical Address
+AMD64 0xC001103A IBS_CTL            # AMD-2017 IBS Control
+AMD64 0xC001103B BP_IBSTGT_RIP      # AMD-2017 IBS Branch Target Address
+AMD64 0xC001103C IC_IBS_EXTD_CTL    # AMD-2017 IBS Fetch Control Extended
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
+AMD64 0xC001103D IBS_OP_DATA4       # IBS Op Data 3
+
+AMD64 0xC0011095 L3_RANGE_RESERVE_BASE_ADDR # AMD64-Vol2 L3 Range Reserve Base Address Register (
+AMD64 0xC0011096 L3_RANGE_RESERVE_MAX_ADDR  # AMD64-Vol2
+AMD64 0xC001109A L3_RANGE_RESERVE_WAY_MASK  # AMD64-Vol2
+
+# https://github.com/xen-project/xen/blob/RELEASE-4.17.0/xen/arch/x86/include/asm/msr-index.h
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=d7caac991feeef1b871ee6988fd2c9725df09039 Linux named this MSR_ZEN2_SPECTRAL_CHICKEN, as it contains a chicken bit which is offered on the altar of Speculation
+AMD64 0xC00110E3 DE_CFG2 # Decode Configuration 2

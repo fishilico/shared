@@ -25,7 +25,7 @@ NONTEST_BINARIES += z3_example.py
 endif
 
 ifneq ($(HAVE_PYTHON_FSTRING),y)
-NONTEST_BINARIES += clang_cfi_typeid.py
+NONTEST_BINARIES += clang_cfi_typeid.py x86_msr.py
 endif
 
 ifneq ($(HAVE_PYTHON_OPEN_ETC_SHELLS),y)
