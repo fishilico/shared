@@ -35,6 +35,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import time
 import tempfile
 from typing import Union
 import urllib.error
@@ -241,14 +242,26 @@ def gpg_recv_key(key_id: str) -> bytes:
             pass
         with (Path(tmpdir) / "trustdb.gpg").open("wb"):
             pass
-        subprocess.check_output(
-            ("gpg", "--keyserver", "hkps://keyserver.ubuntu.com", "--recv-keys", key_id),
-            input=b"",
-            env={
-                "GNUPGHOME": tmpdir,
-                "HOME": tmpdir,
-            },
-        )
+        # Retry several times, as sometimes the command fails with:
+        # gpg: keyserver receive failed: No data
+        try_count = 0
+        while 1:
+            try:
+                subprocess.check_output(
+                    ("gpg", "--keyserver", "hkps://keyserver.ubuntu.com", "--recv-keys", key_id),
+                    input=b"",
+                    env={
+                        "GNUPGHOME": tmpdir,
+                        "HOME": tmpdir,
+                    },
+                )
+                break
+            except subprocess.CalledProcessError:
+                if try_count >= 10:
+                    raise
+            print(f"Receiving key {key_id} failed [{try_count}], retrying...")
+            time.sleep(1)
+            try_count += 1
         raw_key = subprocess.check_output(
             ("gpg", "--export", key_id),
             env={
