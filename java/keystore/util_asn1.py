@@ -98,7 +98,11 @@ def decode_any_string(der_string):
     """Decode an ASN.1 Octet String or BMPSTRING (= Unicode String)"""
     asn1_tag_id, = struct.unpack('B', der_string[:1])
     if asn1_tag_id == 0x04:  # OCTET STRING
-        return decode_octet_string(der_string).decode('ascii')
+        value = decode_octet_string(der_string)
+        try:
+            return value.decode('ascii')
+        except UnicodeDecodeError:
+            return value
     if asn1_tag_id == 0x1e:  # BMPSTRING
         return decode_unicode_string(der_string)
     raise ValueError("Unable to decode an ASN.1 string with tag {:#x}".format(asn1_tag_id))

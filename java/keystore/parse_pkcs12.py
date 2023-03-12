@@ -367,7 +367,7 @@ def print_p12_safe_contents(safe_contents_der, password, show_pem=False, list_on
                 attr_values_der = util_asn1.decode_set(attr_values_der)
                 attr_values = [util_asn1.decode_any_string(v) for v in attr_values_der]
                 attr_descs.append("{}={}".format(attr_id, ','.join(repr(v) for v in attr_values)))
-                if attr_id == 'localKeyID' and len(attr_values) == 1:
+                if attr_id == 'localKeyID' and len(attr_values) == 1 and isinstance(attr_values[0], str):
                     m = re.match(r'^Time ([0-9]+)$', attr_values[0])
                     if m:
                         # Parse the timestamp from the local key ID
