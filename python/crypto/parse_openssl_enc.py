@@ -31,7 +31,7 @@ NB. by default, the digest algorithm is:
 * SHA256 for OpenSSL >= 1.1, since commit
   https://github.com/openssl/openssl/commit/f8547f62c212837dbf44fb7e2755e5774a59a57b
 
-To be compatible, either "-md md5" or "-md dha256" need to be specified when
+To be compatible, either "-md md5" or "-md sha256" need to be specified when
 invoking command "openssl enc".
 """
 import argparse
