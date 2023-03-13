@@ -82,6 +82,46 @@ KNOWN_CURVES = {
 }
 
 
+def bip32derive_priv_int(privkey, chaincode, child_index, curve='secp256k1'):
+    """Derive a key from a seed according to a BIP-0032 derivation path as integer"""
+    try:
+        curve_obj, _ = KNOWN_CURVES[curve.lower()]
+    except KeyError:
+        raise ValueError("Unknown curve name {}".format(repr(curve)))
+
+    assert len(privkey) == 32
+    assert len(chaincode) == 32
+    kpar = int.from_bytes(privkey, 'big')
+    cpar = chaincode
+
+    assert 0 <= child_index <= 0xffffffff
+    index_bytes = child_index.to_bytes(4, 'big')
+    if child_index & 0x80000000:
+        data = b'\x00' + kpar.to_bytes(32, 'big') + index_bytes
+    else:
+        if curve_obj == ED25519:
+            raise ValueError("Ed25519 derivation does not support non-hardened key")
+        pubkey = curve_obj.g * kpar
+        data = (b'\x03' if pubkey.y & 1 else b'\x02') + pubkey.x.to_bytes(32, 'big') + index_bytes
+
+    while True:
+        child_i = hmac.new(cpar, data, 'sha512').digest()
+        if curve_obj == ED25519:
+            kpar = int.from_bytes(child_i[:32], 'big')
+        else:
+            int_ileft = int.from_bytes(child_i[:32], 'big')
+            kpar_new = (kpar + int_ileft) % curve_obj.g.order
+            if int_ileft >= curve_obj.g.order or kpar_new == 0:
+                # resulting key is invalid, loop
+                # This is in fact SLIP-0010 rejection algorithm
+                data = b'\x01' + child_i[32:] + index_bytes
+                continue
+            kpar = kpar_new
+        break
+
+    return kpar.to_bytes(32, 'big'), child_i[32:]
+
+
 def bip32derive(derivation_path, seed, curve='secp256k1'):
     """Derive a key from a seed according to a BIP-0032 derivation path
 
@@ -113,33 +153,15 @@ def bip32derive(derivation_path, seed, curve='secp256k1'):
             continue
         break
 
+    kpar_bytes = master_key[:32]
     for child in parts[1:]:
         if child.endswith("'"):
-            index = (0x80000000 + int(child[:-1])).to_bytes(4, 'big')
-            data = b'\x00' + kpar.to_bytes(32, 'big') + index
+            index = (0x80000000 + int(child[:-1]))
         else:
-            if curve_obj == ED25519:
-                raise ValueError("Ed25519 derivation does not support non-hardened key")
-            index = int(child).to_bytes(4, 'big')
-            pubkey = curve_obj.g * kpar
-            data = (b'\x03' if pubkey.y & 1 else b'\x02') + pubkey.x.to_bytes(32, 'big') + index
+            index = int(child)
+        kpar_bytes, cpar = bip32derive_priv_int(kpar_bytes, cpar, index, curve=curve)
 
-        while True:
-            child_i = hmac.new(cpar, data, 'sha512').digest()
-            if curve_obj == ED25519:
-                kpar = int.from_bytes(child_i[:32], 'big')
-            else:
-                int_ileft = int.from_bytes(child_i[:32], 'big')
-                kpar_new = (kpar + int_ileft) % curve_obj.g.order
-                if int_ileft >= curve_obj.g.order or kpar_new == 0:
-                    # resulting key is invalid, loop
-                    data = b'\x01' + child_i[32:] + index
-                    continue
-                kpar = kpar_new
-            break
-        cpar = child_i[32:]
-
-    return kpar.to_bytes(32, 'big'), cpar
+    return kpar_bytes, cpar
 
 
 def bip39toseed(sentence, passphrase=None):
@@ -158,7 +180,7 @@ def public_point(private_key, curve='secp256k1'):
         curve_obj = KNOWN_CURVES[curve.lower()][0]
     except KeyError:
         raise ValueError("Unknown curve name {}".format(repr(curve)))
-    return curve_obj.public_point(key)
+    return curve_obj.public_point(private_key)
 
 
 def public_key(private_key, curve='secp256k1'):
@@ -167,7 +189,7 @@ def public_key(private_key, curve='secp256k1'):
         curve_obj = KNOWN_CURVES[curve.lower()][0]
     except KeyError:
         raise ValueError("Unknown curve name {}".format(repr(curve)))
-    pubkey = curve_obj.public_point(key)
+    pubkey = curve_obj.public_point(private_key)
     if curve_obj == ED25519:
         encoded = pubkey.encode()
         assert encoded == curve_obj.public_key(private_key)
