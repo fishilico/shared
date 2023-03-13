@@ -66,7 +66,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust/asymkeyfind%
+#    Global blacklist: latex%
 #    In sub-directories:
 #       c:
 #       glossaries:
@@ -80,7 +80,7 @@ CMD ["/run_shared_test.sh"]
 #       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex% rust/asymkeyfind%
+#       Global blacklist: latex%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
 #          glossaries:
@@ -107,12 +107,12 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 9.3-win32 20200320
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 9.3-win32 20200320
 #       wine: wine-5.0 (Ubuntu 5.0-3ubuntu1)
-#       Linux kernel: 5.4.0-137-generic
+#       Linux kernel: 5.4.0-144-generic
 #       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.1.24
 #       python3: Python 3.8.10
-#       javac: javac 11.0.17
-#       java: openjdk 11.0.17 2022-10-18
-#       rustc: rustc 1.61.0
-#       cargo: cargo 1.61.0
+#       javac: javac 11.0.18
+#       java: openjdk 11.0.18 2023-01-17
+#       rustc: rustc 1.65.0
+#       cargo: cargo 1.65.0
 #       coqc: The Coq Proof Assistant, version 8.11.0 (March 2020) compiled on Mar 5 2020 20:37:30 with OCaml 4.08.1
 #       openssl: OpenSSL 1.1.1f  31 Mar 2020
