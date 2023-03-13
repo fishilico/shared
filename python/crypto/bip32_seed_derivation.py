@@ -61,6 +61,7 @@ Here are other websites:
 import binascii
 import hashlib
 import hmac
+import os.path
 import unicodedata
 
 from ec_tests import SECP256K1, SECP256R1
@@ -172,6 +173,70 @@ def bip39toseed(sentence, passphrase=None):
         passphrase = unicodedata.normalize('NFKD', passphrase)
         salt += passphrase.encode('utf-8')
     return hashlib.pbkdf2_hmac('sha512', sentence.encode('utf-8'), salt, 2048, 64)
+
+
+def load_bip39_wordlist(lang):
+    """Load a list of words for the specified language
+
+    Dictionaries are available on:
+    https://github.com/bitcoin/bips/blob/master/bip-0039/bip-0039-wordlists.md
+    """
+    file_path = os.path.join(os.path.dirname(__file__), "bip39_{}.txt".format(lang))
+    with open(file_path, "r") as words_fd:
+        words = tuple(line.strip() for line in words_fd)
+    assert len(words) == 2048
+    return words
+
+
+BIP39_ENGLISH = load_bip39_wordlist("english")
+
+
+def bip39_entropy2mnemonics(entropy, wordlist=BIP39_ENGLISH):
+    """Convert some bytes to a BIP-0039 mnemonic sentence"""
+    assert len(entropy) in {16, 20, 24, 28, 32}  # Entropy of 128, 160, 192, 224 or 256 bits
+    checksum_size_bits = len(entropy) // 4  # In BIP-0039: CS = ENT / 32
+    checksum_size_bytes, checksum_size_rem = divmod(checksum_size_bits, 8)
+    checksum_full = hashlib.sha256(entropy).digest()
+    if checksum_size_rem == 0:
+        checksum = int.from_bytes(checksum_full[:checksum_size_bytes], "big")
+    else:
+        checksum = int.from_bytes(checksum_full[:checksum_size_bytes + 1], "big") >> (8 - checksum_size_rem)
+
+    assert checksum.bit_length() <= checksum_size_bits
+
+    num_words = (len(entropy) * 8 + checksum_size_bits) // 11  # In BIP-0039: MS = (ENT + CS) / 11
+    entropy_int = (int.from_bytes(entropy, "big") << checksum_size_bits) | checksum
+    words = []
+    for idx in range(num_words - 1, -1, -1):
+        word_index = (entropy_int >> (11 * idx)) & 0x7ff
+        words.append(wordlist[word_index])
+    return " ".join(words)
+
+
+def bip39_mnemonics2entropy(mnemonics, verify_checksum=True, wordlist=BIP39_ENGLISH):
+    """Convert a BIP-0039 mnemonic sentence to the underlying entropy"""
+    words = mnemonics.split()
+    assert len(words) in {12, 15, 18, 21, 24}
+    checksum_size_bits = len(words) // 3
+    entropy_len = checksum_size_bits * 4
+    entropy_int = 0
+    for word in words:
+        word_index = wordlist.index(word)
+        entropy_int = (entropy_int << 11) | word_index
+
+    entropy = (entropy_int >> checksum_size_bits).to_bytes(entropy_len, "big")
+    if not verify_checksum:
+        return entropy
+    checksum_int = entropy_int & ((1 << checksum_size_bits) - 1)
+    checksum_size_bytes, checksum_size_rem = divmod(checksum_size_bits, 8)
+    checksum_full = hashlib.sha256(entropy).digest()
+    if checksum_size_rem == 0:
+        checksum = int.from_bytes(checksum_full[:checksum_size_bytes], "big")
+    else:
+        checksum = int.from_bytes(checksum_full[:checksum_size_bytes + 1], "big") >> (8 - checksum_size_rem)
+    if checksum != checksum_int:
+        raise ValueError("Invalid checksum: {} != {}".format(checksum, checksum_int))
+    return entropy
 
 
 def public_point(private_key, curve='secp256k1'):
@@ -723,10 +788,16 @@ if __name__ == '__main__':
 
     # Test mnemonics with 12 words
     mnemonics = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about'
+    assert bip39_entropy2mnemonics(b"\0" * 16) == mnemonics
+    assert b"\0" * 16 == bip39_mnemonics2entropy(mnemonics)
     seed = bip39toseed(mnemonics)
     assert seed == bytes.fromhex(
         '5eb00bbddcf069084889a8ab9155568165f5c453ccb85e70811aaed6f6da5fc1' +
         '9a5ac40b389cd370d086206dec8aa6c43daea6690f20ad3d8d48b2d2ce9e38e4')
+
+    mnemonics = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art'  # noqa
+    assert bip39_entropy2mnemonics(b"\0" * 32) == mnemonics
+    assert b"\0" * 32 == bip39_mnemonics2entropy(mnemonics)
 
     # Test to derive Monero seed
     secret, chaincode = bip32derive("m/44'/128'/0'/0/0", seed)
@@ -736,6 +807,8 @@ if __name__ == '__main__':
     # * Subject (2020-05-28): https://twitter.com/alistairmilne/status/1266037520715915267
     # * Answer (2020-06-17): https://twitter.com/ThisIsMOLAANAA/status/1273144733641199617
     mnemonics = 'army excuse hero wolf disease liberty moral diagram treat stove message job'
+    assert bip39_entropy2mnemonics(bytes.fromhex("0c09e1ad7e63f101e3e9e7e7dad62fbc")) == mnemonics
+    assert bytes.fromhex("0c09e1ad7e63f101e3e9e7e7dad62fbc") == bip39_mnemonics2entropy(mnemonics)
     seed = bip39toseed(mnemonics)
     bitcoin_privkey = bip32derive("m/49'/0'/0'/0/0", seed)[0]
     bitcoin_pubkey = SECP256K1.public_point(bitcoin_privkey)
@@ -752,6 +825,8 @@ if __name__ == '__main__':
 
     # Test mnemonic phrase used by Hardhat: https://hardhat.org/hardhat-network/docs/reference#accounts
     mnemonics = 'test test test test test test test test test test test junk'
+    assert bip39_entropy2mnemonics(bytes.fromhex("df9bf37e6fcdf9bf37e6fcdf9bf37e3c")) == mnemonics
+    assert bytes.fromhex("df9bf37e6fcdf9bf37e6fcdf9bf37e3c") == bip39_mnemonics2entropy(mnemonics)
     hardhat_20_privkeys = (
         bytes.fromhex('ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'),
         bytes.fromhex('59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d'),
