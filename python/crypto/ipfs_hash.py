@@ -22,7 +22,7 @@
 """InterPlanetary File System (IPFS) hash
 
 IPFS (https://ipfs.tech/) uses a specific hash to compute the content ID of a
-file. It is not direcly the hash of the file.
+file. It is not directly the hash of the file.
 
 The official container for Kubo (https://github.com/ipfs/kubo), one of the main
 implementations of IPFS, enables computing the Content Identifier (CID) of any

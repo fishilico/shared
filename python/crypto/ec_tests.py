@@ -419,7 +419,7 @@ class ECPoint(object):
         return Cryptodome.Hash.RIPEMD160.new(p2wpkh_sha256).digest()
 
 
-# Inifinity on all curves
+# Infinity on all curves
 INFINITY = ECPoint(None, None, None)
 
 

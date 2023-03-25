@@ -859,7 +859,7 @@ class AnalysisContext(object):
                 self.seen_eth_0x890d_802_11 = True
             return
         if pkt_type == 0x893a and hw_dst == '01:80:c2:00:00:13':
-            # IEEE 1905.1a Convergent Digital Home Network for Heterogenous Technologies
+            # IEEE 1905.1a Convergent Digital Home Network for Heterogeneous Technologies
             # The packet is a Control Message Data Unit frame (CMDU)
             # The source MAC address is probably the gateway of the network
             # The destination MAC address is "IEEE-1905.1-Control (01:80:c2:00:00:13)"
@@ -869,7 +869,7 @@ class AnalysisContext(object):
             #   00 00 00 00 00 00 00 00 00 00 00 00 00 00
             if not self.seen_eth_0x893a_ieee1905_convergent:
                 logger.info(
-                    "IEEE 1905.1a Convergent Digital Home Network for Heterogenous Technologies found in capture: %r",
+                    "IEEE 1905.1a Convergent Digital Home Network for Heterogeneous Technologies found in capture: %r",
                     ethpkt)
                 self.seen_eth_0x893a_ieee1905_convergent = True
             return
