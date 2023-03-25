@@ -43,6 +43,7 @@ int main(void)
     asm_instr_context ctx;
     const uintptr_t data_addr = 0xda7a0000;
     uint8_t data[] = "\x17\x15\x7e\x57\xda\x7a\xb1\x0b It is test data blob";
+    uint8_t buffer[100];
     uint8_t olddata;
     int retval = 0;
     asm_instr_reg data64h;
@@ -163,6 +164,48 @@ int main(void)
     R_RCX(&ctx) = -1;
     test("\xf2\xae", "repnz scas (rdi=0xda7a0000), al=0x00",
         RCX, (asm_instr_reg)(-(sizeof(data) + 1)));
+
+    /* Move data from string to string */
+    memset(buffer, 0, sizeof(buffer));
+    R_RSI(&ctx) = data_addr;
+    R_RDI(&ctx) = (asm_instr_reg)buffer;
+    test("\xa4", "movsb (rsi=0xda7a0000), (rdi)", RSI, (asm_instr_reg)(data_addr + 1));
+    if (buffer[0] != 0x17 || buffer[1] != 0 || buffer[2] != 0 || buffer[3] != 0) {
+        printf("[FAIL] movsb: unexpected destination data %02x %02x %02x %02x\n", buffer[0],
+               buffer[1], buffer[2], buffer[3]);
+        retval = 1;
+    }
+    R_RSI(&ctx) = data_addr;
+    R_RDI(&ctx) = (asm_instr_reg)buffer;
+    test("\xa4", "movsb (rsi=0xda7a0000), (rdi)", RDI, (asm_instr_reg)&buffer[1]);
+
+    memset(buffer, 0, sizeof(buffer));
+    R_RSI(&ctx) = data_addr;
+    R_RDI(&ctx) = (asm_instr_reg)buffer;
+    test("\x66\xa5", "movsw (rsi=0xda7a0000), (rdi)", RSI, (asm_instr_reg)(data_addr + 2));
+    if (buffer[0] != 0x17 || buffer[1] != 0x15 || buffer[2] != 0 || buffer[3] != 0 ||
+        buffer[4] != 0) {
+        printf("[FAIL] movsw: unexpected destination data %02x %02x %02x %02x %02x\n", buffer[0],
+               buffer[1], buffer[2], buffer[3], buffer[4]);
+        retval = 1;
+    }
+    R_RSI(&ctx) = data_addr;
+    R_RDI(&ctx) = (asm_instr_reg)buffer;
+    test("\x66\xa5", "movsw (rsi=0xda7a0000), (rdi)", RDI, (asm_instr_reg)&buffer[2]);
+
+    memset(buffer, 0, sizeof(buffer));
+    R_RSI(&ctx) = data_addr;
+    R_RDI(&ctx) = (asm_instr_reg)buffer;
+    test("\xa5", "movsl (rsi=0xda7a0000), (rdi)", RSI, (asm_instr_reg)(data_addr + 4));
+    if (buffer[0] != 0x17 || buffer[1] != 0x15 || buffer[2] != 0x7e || buffer[3] != 0x57 ||
+        buffer[4] != 0) {
+        printf("[FAIL] movsl: unexpected destination data %02x %02x %02x %02x %02x\n", buffer[0],
+               buffer[1], buffer[2], buffer[3], buffer[4]);
+        retval = 1;
+    }
+    R_RSI(&ctx) = data_addr;
+    R_RDI(&ctx) = (asm_instr_reg)buffer;
+    test("\xa5", "movsl (rsi=0xda7a0000), (rdi)", RDI, (asm_instr_reg)&buffer[4]);
 
     /* SSE2 */
     R_RSI(&ctx) = data_addr;

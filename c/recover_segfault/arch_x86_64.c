@@ -626,6 +626,36 @@ bool run_mov_asm_instruction_p(
         return true;
     }
 
+    /* 66 a5: movsw  %ds:(%rsi), %es:(%rdi) */
+    if (has_66_prefix && !has_f2_prefix && !has_f3_prefix && instr[0] == 0xa5) {
+        uintptr_t source_addr = (uintptr_t)R_RSI(ctx);
+        if (source_addr != data_addr) {
+            fprintf(stderr, "Error: mem parameter rsi is not address %" PRIxPTR "\n", data_addr);
+            return false;
+        }
+        asm_printf(asm_instr, "movsw (rsi=0x%" PRIxREG "), (rdi)", R_RSI(ctx));
+        memcpy((uint8_t *)(uint64_t)R_RDI(ctx), data, 2);
+        R_RDI(ctx) += 2;
+        R_RSI(ctx) += 2;
+        R_RIP(ctx) += 1;
+        return true;
+    }
+
+    /* a5: movsl  %ds:(%rsi), %es:(%rdi) */
+    if (has_no_prefix && instr[0] == 0xa5) {
+        uintptr_t source_addr = (uintptr_t)R_RSI(ctx);
+        if (source_addr != data_addr) {
+            fprintf(stderr, "Error: mem parameter rsi is not address %" PRIxPTR "\n", data_addr);
+            return false;
+        }
+        asm_printf(asm_instr, "movsl (rsi=0x%" PRIxREG "), (rdi)", R_RSI(ctx));
+        memcpy((uint8_t *)(uint64_t)R_RDI(ctx), data, 4);
+        R_RDI(ctx) += 4;
+        R_RSI(ctx) += 4;
+        R_RIP(ctx) += 1;
+        return true;
+    }
+
     /* f3 48 a5: rep movsq %ds:(%rsi), %es:(%rdi) */
     if (has_f3_prefix && instr[0] == 0xa5) {
         uintptr_t source_addr = (uintptr_t)R_RSI(ctx);

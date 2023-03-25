@@ -451,7 +451,7 @@ bool run_mov_asm_instruction_p(
     }
 
     /* f3 a4: rep movsb %ds:(%esi),%es:(%edi) */
-    if (has_f3_prefix && instr[0] == 0xa4) {
+    if (has_f3_prefix && !has_66_prefix && !has_f2_prefix && instr[0] == 0xa4) {
         size_t len;
         uintptr_t computed_addr = (uintptr_t)R_ESI(ctx);
         if (computed_addr != data_addr) {
@@ -469,7 +469,7 @@ bool run_mov_asm_instruction_p(
     }
 
     /* 66 a5: movsw %ds:(%esi), %es:(%edi) */
-    if (has_66_prefix && instr[0] == 0xa5) {
+    if (has_66_prefix && !has_f2_prefix && !has_f3_prefix && instr[0] == 0xa5) {
         uintptr_t computed_addr = (uintptr_t)R_ESI(ctx);
         if (computed_addr != data_addr) {
             fprintf(stderr, "Error: mem parameter esi is not address %" PRIxPTR "\n", data_addr);
@@ -483,8 +483,23 @@ bool run_mov_asm_instruction_p(
         return true;
     }
 
+    /* a5: movsl %ds:(%esi), %es:(%edi) */
+    if (has_no_prefix && instr[0] == 0xa5) {
+        uintptr_t computed_addr = (uintptr_t)R_ESI(ctx);
+        if (computed_addr != data_addr) {
+            fprintf(stderr, "Error: mem parameter esi is not address %" PRIxPTR "\n", data_addr);
+            return 0;
+        }
+        asm_printf(asm_instr, "movsl (esi=0x%" PRIxREG "), (edi)", R_ESI(ctx));
+        memcpy((void *)R_EDI(ctx), data, 4);
+        R_ESI(ctx) += 4;
+        R_EDI(ctx) += 4;
+        R_EIP(ctx) += 1;
+        return true;
+    }
+
     /* f3 a5: rep movsl %ds:(%esi), %es:(%edi) */
-    if (has_f3_prefix && instr[0] == 0xa5) {
+    if (has_f3_prefix && !has_66_prefix && !has_f2_prefix && instr[0] == 0xa5) {
         size_t len;
         uintptr_t computed_addr = (uintptr_t)R_ESI(ctx);
         if (computed_addr != data_addr) {

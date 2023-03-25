@@ -39,7 +39,7 @@ int main(void)
     const asm_instr_reg data32 = 0x7ada1517UL;
     const asm_instr_reg data16 = data32 & 0xffff;
     const asm_instr_reg data8 = data32 & 0xff;
-    char buffer[100];
+    uint8_t buffer[100];
 
 #ifdef CONTEXT_FPREGS_TYPE
     CONTEXT_FPREGS_TYPE ctx_fpregs;
@@ -135,6 +135,12 @@ int main(void)
     R_ESI(&ctx) = (asm_instr_reg)data_addr;
     R_EDI(&ctx) = (asm_instr_reg)buffer;
     test("\x66\xa5", "movsw (esi=0xda7a0000), (edi)", EDI, (asm_instr_reg)(&buffer[2]));
+    R_ESI(&ctx) = (asm_instr_reg)data_addr;
+    R_EDI(&ctx) = (asm_instr_reg)buffer;
+    test("\xa5", "movsl (esi=0xda7a0000), (edi)", ESI, (asm_instr_reg)(data_addr + 4));
+    R_ESI(&ctx) = (asm_instr_reg)data_addr;
+    R_EDI(&ctx) = (asm_instr_reg)buffer;
+    test("\xa5", "movsl (esi=0xda7a0000), (edi)", EDI, (asm_instr_reg)(&buffer[4]));
     R_ESI(&ctx) = (asm_instr_reg)data_addr;
     R_EDI(&ctx) = (asm_instr_reg)buffer;
     R_ECX(&ctx) = 2;
