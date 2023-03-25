@@ -8,26 +8,42 @@ import cffi
 import os
 import os.path
 import weakref
+import sys
 
 
 # Save initial $CC value
 initial_cc = os.environ.get('CC')
 
-# Call functions from the standard lib C library
-ffi = cffi.FFI()
-ffi.cdef("""
-    typedef unsigned int gid_t;
-    typedef unsigned int uid_t;
-    typedef int pid_t;
+if sys.platform == "win32":
+    # Call functions from the kernel32.dll on Windows
+    ffi = cffi.FFI()
+    ffi.cdef("""
+        typedef unsigned long DWORD;
 
-    gid_t getgid(void);
-    uid_t getuid(void);
-    pid_t getpid(void);
-""")
-libc = ffi.dlopen(None)
-print("getuid() = {}".format(libc.getuid()))
-print("getgid() = {}".format(libc.getgid()))
-print("getpid() = {}".format(libc.getpid()))
+        DWORD GetVersion(void);
+        DWORD GetCurrentProcessId(void);
+        DWORD GetCurrentThreadId();
+    """)
+    kernel32 = ffi.dlopen("kernel32")
+    print("GetVersion() = {:#x}".format(kernel32.GetVersion()))
+    print("GetCurrentProcessId() = {}".format(kernel32.GetCurrentProcessId()))
+    print("GetCurrentThreadId() = {}".format(kernel32.GetCurrentThreadId()))
+else:
+    # Call functions from the standard lib C library, on Linux
+    ffi = cffi.FFI()
+    ffi.cdef("""
+        typedef unsigned int gid_t;
+        typedef unsigned int uid_t;
+        typedef int pid_t;
+
+        gid_t getgid(void);
+        uid_t getuid(void);
+        pid_t getpid(void);
+    """)
+    libc = ffi.dlopen(None)
+    print("getuid() = {}".format(libc.getuid()))
+    print("getgid() = {}".format(libc.getgid()))
+    print("getpid() = {}".format(libc.getpid()))
 
 
 # Use ffi.verify to compile code
