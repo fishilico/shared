@@ -412,7 +412,7 @@ class SerializedJavaObject(object):
             self.references.append(enum_obj)
             cst_name = self.read_java_ser_opcode()
             if cst_name['java_type'] != 'string':
-                raise ValueError("Unexpected {} object when reading an enum value name".format(obj['java_type']))
+                raise ValueError("Unexpected {} object when reading an enum value name".format(cst_name['java_type']))
             enum_obj['constant_name'] = cst_name['str']
             return enum_obj
 
