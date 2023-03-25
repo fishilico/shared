@@ -458,7 +458,8 @@ def print_p12_keystore(ks_content, password, show_pem=False, list_only=False):
     elif mac_digest_algorithm == 'SHA256':
         hash_func = hashlib.sha256
     else:
-        raise NotImplementedError("Unimplemented algorithm {} for PKCS#12 hmac verification".format(hash_func))
+        raise NotImplementedError("Unimplemented algorithm {} for PKCS#12 hmac verification".format(
+            mac_digest_algorithm))
 
     mac_hmac = hmac.new(key=mac_key, msg=authsafe_content, digestmod=hash_func).digest()
     if mac_hmac == mac_digest:
