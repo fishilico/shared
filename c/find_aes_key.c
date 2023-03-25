@@ -1569,6 +1569,7 @@ static bool find_aes_keys_in_file(const char *filename)
     total_time = (double)(clock() - start_clock) / CLOCKS_PER_SEC;
     printf("Processed %.2f MB in %.0fs, speed = %.2f MB/s\n",
            (double)total / MB, total_time, (double)total / MB / total_time);
+    fclose(f);
     return found_key;
 }
 #pragma GCC diagnostic pop
