@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   mingw-linux-test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         compiler:
@@ -13,7 +13,7 @@ jobs:
         unicode: [y, n]
 
     container:
-      image: docker://docker.io/library/ubuntu:20.04
+      image: docker://docker.io/library/ubuntu:22.04
 
     steps:
     - name: Install dependencies
@@ -59,7 +59,7 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
 
     # "checkout" requires git to be installed, which is why it is used after installing software
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Configure the environment
       run: |

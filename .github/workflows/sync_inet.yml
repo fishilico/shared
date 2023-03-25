@@ -14,7 +14,7 @@ jobs:
       run: |
         pip install dnspython pycryptodomex
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Update GPG keys
       run: make -C gpg sync-inet

@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   linux-test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         compiler:
@@ -13,19 +13,21 @@ jobs:
           - clang -m64
           - clang -m32
         python:
-          - 3.9
-          - 3.8
-          - 3.7
-          - 3.6
-          - 3.5
-          - pypy-3.7
-          - pypy-3.6
+          - "3.11"
+          - "3.10"
+          - "3.9"
+          - "3.8"
+          - "3.7"
+          - "pypy-3.9"
+          - "pypy-3.8"
+          - "pypy-3.7"
+          - "pypy-3.6"
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Set up Python ${{ matrix.python }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python }}
 
