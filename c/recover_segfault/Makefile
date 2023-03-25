@@ -16,6 +16,16 @@ OBJECTS := .arch_common.o .arch_$(TARGET_ARCH).o .os_$(TARGET_OS).o
 PROGRAMS += test_asm_$(TARGET_ARCH)
 BINARIES := $(PROGRAMS:%=%.$(BIN_EXT))
 
+ifeq ($(TARGET_ARCH),x86_64)
+    ifeq ($(TARGET_OS),linux)
+        # Disable EVEX support (cf. notes_x86_evex_avx512.md)
+        HAVE_CPUINFO_EVEX := $(call can-run,$(GREP) '^flags.* avx512bw avx512vl' /proc/cpuinfo)
+        ifeq ($(HAVE_CPUINFO_EVEX),y)
+            RUN_TEST_PREFIX := echo SKIP because current CPU supports EVEX
+        endif
+    endif
+endif
+
 all: $(BINARIES)
 	@:
 
