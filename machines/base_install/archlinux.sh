@@ -253,7 +253,6 @@ pkg firejail
 pkg hping
 pkg iftop
 pkg inetutils
-pkg iptables
 pkg iptables-nft
 pkg iputils
 pkg ldns
@@ -289,10 +288,9 @@ pkg wireguard-tools
 pkg wireshark-cli
 
 # Development
-grouppkg base-devel
-grouppkg multilib-devel
 grouppkg linux-tools
 pkg autoconf-archive
+pkg base-devel
 pkg bat
 pkg bison
 pkg check
@@ -313,6 +311,7 @@ pkg libcap-ng
 pkg linux-hardened-headers
 pkg linux-headers
 pkg ltrace
+pkg multilib-devel
 pkg mypy
 pkg nodejs
 pkg npm
