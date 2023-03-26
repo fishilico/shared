@@ -99,7 +99,7 @@ pkg diffstat
 pkg dos2unix
 pkg file
 pkg fortune-mod
-pkg gnupg
+pkg gnupg2
 pkg htop
 pkg iotop
 pkg jq
@@ -124,7 +124,6 @@ pkg vim-enhanced
 pkg zsh
 
 # Hardware and TTY
-pkg crda
 pkg fwupd
 pkg gpm
 pkg kbd
@@ -136,6 +135,7 @@ pkg pciutils
 pkg tpm2-pkcs11
 pkg tpm2-tools
 pkg usbutils
+pkg wireless-regdb
 pkg wpa_supplicant
 
 # Archives and filesystems
@@ -150,16 +150,14 @@ pkg unzip
 pkg zip
 
 # Network
-pkg arptables
 pkg bind-utils
 pkg bridge-utils
 pkg curl
 pkg dnsmasq
-pkg ebtables
 pkg fuse-sshfs
 pkg ftp
 pkg iftop
-pkg iptables
+pkg iptables-nft
 pkg ldns-utils
 pkg lftp
 pkg links
@@ -192,7 +190,7 @@ pkg libcap-ng-utils
 pkg libcgroup-tools
 pkg make
 pkg pkgconf-pkg-config
-pkg python2
+pkg python2.7
 pkg python3
 pkg python3-mypy
 pkg ShellCheck
@@ -215,15 +213,14 @@ if "$INSTALL_DESKTOP"
 then
     # X11 server
     pkg rxvt-unicode
-    pkg xorg-x11-server-utils
     pkg xorg-x11-server-Xorg
     pkg xscreensaver
 
     # Sound
     pkg alsa-utils
-    pkg paprefs
+    #pkg paprefs # require pulseaudio
     pkg pavucontrol
-    pkg pulseaudio
+    pkg pipewire-pulseaudio
     pkg pulseaudio-utils
 
     # Applications
@@ -239,19 +236,19 @@ then
     pkg gedit-plugins
     pkg gimp
     pkg gitk
-    pkg gksu
+    #pkg gksu # Removed because it is incompatible with Wayland, https://bugzilla.redhat.com/show_bug.cgi?id=1274451
     pkg gnome-system-monitor
     pkg gparted
     pkg graphviz
     pkg gvfs
-    pkg keepass
+    pkg keepassxc
     pkg kismet
-    pkg libreoffice-fresh
+    pkg libreoffice
     pkg meld
-    pkg modemmanager
+    pkg ModemManager
     pkg mupdf
     pkg network-manager-applet
-    pkg network-manager
+    pkg NetworkManager
     pkg pandoc
     pkg parted
     pkg pdfpc
@@ -260,14 +257,14 @@ then
     #pkg texlive-full
     pkg tk
     pkg udisks
-    pkg wireshark-gtk
+    pkg wireshark
     pkg xdg-utils
     pkg xsensors
     pkg xterm
 
     # Language
-    pkg hunspell-en_GB
-    pkg hunspell-en_US
+    pkg hunspell-en-GB
+    pkg hunspell-en-US
     pkg hunspell-fr
     pkg mythes-en
     pkg mythes-fr
@@ -284,10 +281,9 @@ fi
 
 if "$INSTALL_LIGHTDM"
 then
-    pkg gnome-themes-standard
-    pkg gtk2-engines
+    pkg gnome-themes-extra
     pkg lightdm
-    pkg lightdm-gtk-greeter
+    pkg lightdm-gtk
 fi
 
 if "$INSTALL_XFCE"
