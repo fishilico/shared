@@ -385,7 +385,6 @@ then
 
     # Smartcard and YubiKey
     pkg ccid
-    pkg libu2f-host
     pkg opensc
     pkg pcsc-tools
     pkg yubikey-manager
@@ -428,7 +427,7 @@ then
     pkg networkmanager
     pkg networkmanager-openvpn
     pkg networkmanager-strongswan
-    pkg pandoc
+    pkg pandoc-cli
     pkg parted
     pkg pdfpc
     pkg python-pdfminer
@@ -458,8 +457,8 @@ then
     aurpkg trickle
 
     # Language
-    pkg hunspell-en_GB
-    pkg hunspell-en_US
+    pkg hunspell-en_gb
+    pkg hunspell-en_us
     pkg hunspell-fr
     pkg mythes-en
     pkg mythes-fr
@@ -509,7 +508,6 @@ then
     pkg arm-none-eabi-gdb
     pkg arm-none-eabi-newlib
     pkg binwalk
-    pkg bochs
     pkg clinfo
     pkg codespell
     pkg cppcheck
@@ -520,10 +518,12 @@ then
     pkg hashcat
     pkg hashcat-utils
     pkg hydra
+    pkg iaito
     pkg impacket
     pkg ipcalc
     pkg ipv6calc
     pkg jre-openjdk
+    pkg lcov
     pkg libnfc
     pkg libvirt
     #pkg lxc
@@ -565,10 +565,10 @@ then
     pkg python-unicorn
     pkg python-yaml
     pkg python-z3-solver
-    pkg qemu
-    pkg qemu-arch-extra
+    pkg qemu-desktop
+    pkg qemu-system-x86
+    pkg qemu-user-static
     pkg radare2
-    pkg radare2-cutter
     pkg ropgadget
     pkg sagemath
     pkg samba
@@ -577,7 +577,7 @@ then
     pkg sshpass
     pkg upx
     pkg vagrant
-    pkg volatility
+    pkg volatility3
     pkg wabt
     pkg zbar
 
@@ -589,6 +589,7 @@ then
     aurpkg arm-linux-gnueabihf-glibc
     aurpkg arm-linux-gnueabihf-linux-api-headers
     #aurpkg beignet  # For using OpenCL on some Intel iGPU
+    #aurpkg bochs
     aurpkg bluez-hcitool
     aurpkg bluez-rfcomm
     aurpkg coccinelle
@@ -598,7 +599,6 @@ then
     aurpkg jd-gui
     aurpkg kaitai-struct-compiler
     aurpkg kaitai-struct-visualizer
-    aurpkg lcov
     aurpkg libcgroup
     aurpkg msodbcsql
     aurpkg patator
