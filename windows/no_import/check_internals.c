@@ -107,12 +107,12 @@ int _tmain(void)
      *   838 | __buildreadseg(__readgsqword, unsigned __int64, "gs", "q")
      *       | ^~~~~~~~~~~~~~
      */
-#if __GNUC__ == 12
+#if __GNUC__ >= 12 && __GNUC__ <= 13
 #    pragma GCC diagnostic push
 #    pragma GCC diagnostic ignored "-Warray-bounds"
 #endif
     pTeb = NtCurrentTeb();
-#if __GNUC__ == 12
+#if __GNUC__ >= 12 && __GNUC__ <= 13
 #    pragma GCC diagnostic pop
 #endif
 
