@@ -203,6 +203,7 @@ pkg net-tools
 pkg netcat
 pkg nftables
 pkg nmap
+pkg postgresql-client
 pkg rsync
 pkg smbclient
 pkg snmp

@@ -271,6 +271,7 @@ pkg nmap
 pkg openbsd-netcat
 pkg openldap
 pkg openssh
+pkg postgresql-libs
 pkg proxychains-ng
 pkg rsync
 pkg smbclient

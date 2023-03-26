@@ -171,6 +171,7 @@ pkg nftables
 pkg nmap
 pkg nmap-ncat
 pkg openssh
+pkg postgresql
 pkg rsync
 pkg socat
 pkg tcpdump
