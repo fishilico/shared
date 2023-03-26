@@ -254,6 +254,7 @@ then
     pkg pandoc
     pkg parted
     pkg pdfpc
+    pkg python3-pdfminer
     pkg qpdf
     #pkg texlive-full
     pkg tk

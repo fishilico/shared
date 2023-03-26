@@ -431,6 +431,7 @@ then
     pkg pandoc
     pkg parted
     pkg pdfpc
+    pkg python-pdfminer
     pkg qpdf
     pkg rdesktop
     pkg recordmydesktop

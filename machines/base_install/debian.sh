@@ -332,6 +332,7 @@ then
     pkg pandoc
     pkg parted
     pkg pdf-presenter-console
+    pkg python3-pdfminer
     pkg qpdf
     pkg redshift-gtk
     pkg sagemath
