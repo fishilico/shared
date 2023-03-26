@@ -274,6 +274,12 @@ pkg apt-utils
 pkg debian-keyring
 pkg debsums
 
+# Package specific to x86 and ARM
+if is_available gcc-multilib
+then
+    pkg gcc-multilib
+fi
+
 if "$INSTALL_DESKTOP"
 then
     # X11 server
