@@ -59,6 +59,29 @@ do
 done
 
 # Install Docker and build Arch Linux Docker image
+# Configure docker such that the ulimits is not crazy
+# By default, prlimit shows:
+#   NOFILE     max number of open files           1073741816 1073741816 files
+#   NPROC      max number of processes             unlimited  unlimited processes
+#   RSS        max resident set size               unlimited  unlimited bytes
+#   RTPRIO     max real-time priority                      0          0
+# Instead of the system-wide sane 1024:524288, 15615:15615
+cat > /etc/docker/daemon.json << EOF
+{
+  "default-ulimits": {
+    "nofile": {
+      "Name": "nofile",
+      "Soft": 1024,
+      "Hard": 2048
+    },
+    "nproc": {
+      "Name": "nproc",
+      "Soft": 15615,
+      "Hard": 15615
+    }
+  }
+}
+EOF
 systemctl enable --now docker
 gpasswd -a vagrant docker
 (docker images |grep -q '^archlinux ') || su vagrant -c 'docker build -t archlinux /vagrant/machines/archlinux'
