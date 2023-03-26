@@ -132,7 +132,6 @@ pkg zsh
 # Hardware and TTY
 pkg acpica-tools
 pkg console-data
-pkg crda
 pkg edid-decode
 pkg fwupd
 pkg gpm
@@ -147,6 +146,7 @@ pkg read-edid
 pkg rfkill
 pkg tpm2-tools
 pkg usbutils
+pkg wireless-regdb
 pkg wireless-tools
 pkg wpasupplicant
 
@@ -158,7 +158,17 @@ pkg cryfs
 pkg cryptsetup
 pkg dosfstools
 pkg eject
-pkg exfat-utils
+if is_available exfatprogs
+then
+    # exfatprogs appeared in Debian 11 and Ubuntu 22.04
+    # cf https://packages.debian.org/bullseye/exfatprogs :
+    # * exfatprogs maintained by Samsung engineers, who provided Linux exFAT support.
+    # * exfat-utils written by the author of the exfat-fuse implementation.
+    pkg exfatprogs
+else
+    # exfat-utils was removed in Ubuntu 22.04
+    pkg exfat-utils
+fi
 pkg extundelete
 pkg innoextract
 pkg libarchive-tools
@@ -200,16 +210,16 @@ pkg mariadb-client
 pkg mutt
 pkg ndisc6
 pkg net-tools
-pkg netcat
+pkg netcat-openbsd
 pkg nftables
 pkg nmap
+pkg openssh-client
 pkg postgresql-client
 pkg rsync
 pkg smbclient
 pkg snmp
 pkg socat
 pkg sqlmap
-pkg ssh
 pkg sshfs
 pkg tcpdump
 pkg telnet
@@ -240,10 +250,7 @@ pkg nodejs
 #pkg php
 pkg pkgconf
 pkg pwgen
-pkg pypy
-pkg python
-pkg python-dev
-pkg python-setuptools
+pkg pypy3
 #pkg python-virtualenv  # Removed package
 pkg python3
 pkg python3-dev
@@ -251,7 +258,6 @@ pkg python3-venv
 pkg python3-setuptools
 pkg rake
 pkg ruby
-pkg rust
 pkg shellcheck
 
 # Other
@@ -294,6 +300,7 @@ then
     pkg xterm
 
     # Fonts
+    pkg fonts-dejavu
     pkg fonts-droid-fallback
     pkg fonts-fantasque-sans
     pkg fonts-firacode
@@ -302,7 +309,6 @@ then
     pkg fonts-liberation
     pkg fonts-vlgothic
     pkg ttf-bitstream-vera
-    pkg ttf-dejavu
 
     # Sound
     pkg alsa-utils
@@ -322,19 +328,26 @@ then
     pkg ffmpeg
     pkg file-roller
     pkg filezilla
+    pkg freerdp2-x11
     pkg gedit
     pkg gedit-plugins
     pkg gimp
+    pkg git-lfs
     pkg gitk
     pkg gnome-system-monitor
     pkg gparted
     pkg graphviz
     pkg gvfs
-    pkg kismet
+    if is_available kismet
+    then
+        # kismet was removed in Debian 11 but is still in sid
+        pkg kismet
+    fi
     pkg libvirt-clients
     pkg meld
     pkg modemmanager
     pkg mupdf
+    pkg mupdf-tools
     pkg network-manager-gnome
     pkg network-manager
     pkg pandoc
@@ -353,7 +366,7 @@ then
     pkg vlc
     pkg vlc-plugin-notify
     pkg virt-manager
-    pkg wireshark-gtk
+    pkg wireshark-qt
     pkg xdg-utils
     pkg xsensors
     pkg xterm
@@ -401,6 +414,31 @@ then
     # Libraries
     pkg libgtk-3-dev
     pkg libsdl2-dev
+
+    # Install Wine
+    pkg wine
+    pkg mingw-w64
+    pkg winbind
+
+    # Scapy
+    pkg python3-scapy
+
+    # For Visplot
+    pkg python3-vispy
+
+    # For Volatility
+    pkg dwarfdump
+
+    # Android development
+    pkg adb
+    pkg apktool
+    pkg fastboot
+
+    # WebAssembly Binary Toolkit
+    pkg wabt
+
+    # Use systemd-coredump instead of apport, that only collect crashes from packaged programs
+    pkg systemd-coredump
 fi
 
 if "$INSTALL_GDM"
@@ -410,7 +448,7 @@ fi
 
 if "$INSTALL_LIGHTDM"
 then
-    pkg gnome-themes-standard
+    pkg gnome-themes-extra
     pkg gtk2-engines
     pkg lightdm
     pkg lightdm-gtk-greeter
@@ -433,13 +471,4 @@ then
     pkg xfce4-goodies
     pkg xfce4-notifyd
     pkg xfce4-power-manager
-    pkg xfce4-volumed
-    #pkg xfwm4-themes  # Removed package
-
-    if "$INSTALL_GDM"
-    then
-        # https://goodies.xfce.org/projects/panel-plugins/xfswitch-plugin
-        # "At the moment it relies on GDM, but other display managers will be supported in the future."
-        pkg xfswitch-plugin
-    fi
 fi
