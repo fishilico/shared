@@ -183,6 +183,7 @@ pkg ripgrep
 pkg rlwrap
 pkg rng-tools
 pkg screen
+pkg sequoia-sq
 pkg strace
 pkg sudo
 pkg time

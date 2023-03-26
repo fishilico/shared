@@ -121,6 +121,7 @@ pkg pv
 pkg ripgrep
 pkg rlwrap
 pkg screen
+pkg sq
 pkg strace
 pkg sudo
 pkg time

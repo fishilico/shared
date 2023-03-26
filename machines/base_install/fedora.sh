@@ -114,6 +114,7 @@ pkg pv
 pkg pwgen
 pkg rlwrap
 pkg screen
+pkg sequoia-sq
 pkg sl
 pkg strace
 pkg sudo
