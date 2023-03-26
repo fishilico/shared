@@ -197,7 +197,6 @@ pkg acpi_call
 pkg acpica
 pkg bluez
 pkg bluez-utils
-pkg crda
 pkg dmidecode
 pkg efibootmgr
 pkg fwupd
@@ -216,6 +215,7 @@ pkg tpm2-pkcs11
 pkg tpm2-tools
 pkg tpm2-tss-engine
 pkg usbutils
+pkg wireless-regdb
 pkg wireless_tools
 pkg wpa_supplicant
 
@@ -242,20 +242,19 @@ pkg unzip
 pkg zip
 
 # Network
-pkg arptables
 pkg bind
 pkg bridge-utils
 pkg curl
 pkg cyrus-sasl-gssapi
 pkg dhclient
 pkg dnsmasq
-pkg ebtables
 pkg fail2ban
 pkg firejail
 pkg hping
 pkg iftop
 pkg inetutils
 pkg iptables
+pkg iptables-nft
 pkg iputils
 pkg ldns
 pkg lftp
