@@ -316,7 +316,7 @@ static void print_additional_desc(struct pg_state *st, unsigned long last_addr)
 
 #ifdef CONFIG_X86
 	/* Show where the percpu area is on x86, using current_task */
-	describe_with_pointer(this_cpu_ptr(&current_task), "percpu area");
+	describe_with_pointer(per_cpu_ptr(&current_task, 0), "percpu area");
 #endif
 
 #ifdef CONFIG_ARM
