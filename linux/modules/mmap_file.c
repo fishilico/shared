@@ -154,7 +154,14 @@ static int mmap_file_mmap(struct file *filp, struct vm_area_struct *vma)
 		return ret;
 
 	vma->vm_ops = &mmap_vm_ops;
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)
+	/* Commit bc292ab00f6c ("mm: introduce vma->vm_flags wrapper functions")
+	 * replaced vma->vm_flags with helpers, to prevent race conditions.
+	 */
+	vm_flags_set(vma, VM_DONTEXPAND | VM_DONTDUMP);
+#else
 	vma->vm_flags |= VM_DONTEXPAND | VM_DONTDUMP;
+#endif
 	vma->vm_private_data = filp->private_data;
 	mmap_open(vma);
 	return 0;
