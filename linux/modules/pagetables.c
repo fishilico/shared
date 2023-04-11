@@ -315,8 +315,16 @@ static void print_additional_desc(struct pg_state *st, unsigned long last_addr)
 	describe_with_pointer(&addr, "current stack");
 
 #ifdef CONFIG_X86
+# if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0)
+	/* Commit e57ef2ed97c1 ("x86: Put hot per CPU variables into a struct")
+	 * replaced current_task with pcpu_hot.current_task.
+	 * Show where the percpu area is on x86, using pcpu_hot
+	 */
+	describe_with_pointer(per_cpu_ptr(&pcpu_hot, 0), "percpu area");
+# else
 	/* Show where the percpu area is on x86, using current_task */
 	describe_with_pointer(per_cpu_ptr(&current_task, 0), "percpu area");
+# endif
 #endif
 
 #ifdef CONFIG_ARM
@@ -893,7 +901,12 @@ static const struct file_operations ptdump_fops = {
 /**
  * Create a device node with only user-read permission
  */
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 3, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0)
+/* Commit ff62b8e6588f ("driver core: make struct class.devnode() take a
+ * const *") modified the type of the first parameter.
+ */
+static char *ptdump_class_devnode(const struct device *dev, umode_t *mode)
+#elif LINUX_VERSION_CODE >= KERNEL_VERSION(3, 3, 0)
 /* (struct class*)->devnode prototype has been changed in Linux 3.3 by commit
  * 2c9ede55ecec ("switch device_get_devnode() and ->devnode() to umode_t *")
  */
