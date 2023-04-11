@@ -572,7 +572,19 @@ static void walk_pud(struct pg_state *st, pud_t *pud, unsigned long addr)
  */
 static void walk_p4d(struct pg_state *st, p4d_t *p4d, unsigned long addr)
 {
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 17, 0)
+/* Commit 98219dda2ab5 ("x86/mm: Fold p4d page table layer at runtime") changed
+ * the logic to enable walking without detection, in Linux 4.17
+ */
+	unsigned int i;
+
+	for (i = 0; i < PTRS_PER_P4D; i++, p4d++, addr += P4D_SIZE) {
+		if (p4d_none(*p4d) || !p4d_present(*p4d))
+			note_page(st, addr, 2, p4d_val_nopfn(*p4d));
+		else
+			walk_pud(st, pud_offset(p4d, 0), addr);
+	}
+#elif LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
 /* This needs the functions introduced in commit fe1e8c3e9634 ("x86/mm: Extend
  * headers with basic definitions to support 5-level paging") in Linux 4.12
  */
