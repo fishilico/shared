@@ -2508,7 +2508,11 @@ XEONE7 0xFDA C9_PMON_EVNT_SEL5    # Uncore C-box 9 perfmon event select MSR
 XEONE7 0xFDB C9_PMON_CTR5         # Uncore C-box 9 perfmon counter MSR
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 VIA Cyrix defined MSRs
+# https://www.etallen.com/msr.html
+# https://wiki.osdev.org/User:Lionel/MSR_Draft
 VIA 0x1107 FCR
+VIA 0x1108 FCR2
+VIA 0x1109 FCR3
 VIA 0x110A LONGHAUL
 VIA 0x110B RNG
 VIA 0x1147 BCR2
@@ -2850,10 +2854,29 @@ KVM 0x4B564D07 KVM_ASYNC_PF_ACK
 KVM 0x4B564D08 KVM_MIGRATION_CONTROL
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 Transmeta defined MSRs
-TRANSMETA 0x80868010 LONGRUN_CTRL
-TRANSMETA 0x80868011 LONGRUN_FLAGS
-TRANSMETA 0x80868018 LRTI_READOUT
-TRANSMETA 0x8086801A LRTI_VOLT_MHZ
+# http://datasheets.chipdb.org/Transmeta/Crusoe/Crusoe_MSR_4-10-02.pdf
+TRANSMETA 0x80860000 CPUID_TFMS         # CPUID type. family, model and stepping
+TRANSMETA 0x80860001 CPUID_VND1         # CPUID vendor ID string, part 1/3
+TRANSMETA 0x80860002 CPUID_VND2         # CPUID vendor ID string, part 2/3
+TRANSMETA 0x80860003 CPUID_VND3         # CPUID vendor ID string, part 3/3
+TRANSMETA 0x80860004 CPUID_MASK         # CPUID  feature flags mask
+
+TRANSMETA 0x80868010 LONGRUN_CTRL       # LongRun control and status register
+TRANSMETA 0x80868011 LONGRUN_FLAGS      # LongRun flags register
+TRANSMETA 0x80868018 LRTI_READOUT       # LongRun Table Interface readout
+TRANSMETA 0x80868019 LRTI_PERF          # LongRun Table Interface performance index
+TRANSMETA 0x8086801A LRTI_VOLT_MHZ      # LongRun Table Interface voltage and frequency
+TRANSMETA 0x8086801B LRTI_DIV_MEM       # LongRun Table Interface memory divisors
+TRANSMETA 0x8086801C LRTI_DIV_IO        # LongRun Table Interface I/O divisors
+TRANSMETA 0x8086801D LRTI_GATE          # LongRun Table Interface gate delay
+TRANSMETA 0x80868030 LRTI_SDR_MISC      # LongRun Table Interface SDR MISC
+TRANSMETA 0x80868031 LRTI_SDR_TIF       # LongRun Table Interface SDR TIF
+TRANSMETA 0x80868032 LRTI_SDR_MRS       # LongRun Table Interface SDR MRS
+TRANSMETA 0x80868033 LRTI_SDR_LBT       # LongRun Table Interface SDR LBT
+TRANSMETA 0x80868034 LRTI_DDR_MISC_TIF  # LongRun Table Interface DDR MISC/TIF
+TRANSMETA 0x80868035 LRTI_DDR_MRS0      # LongRun Table Interface DDR MRS0
+TRANSMETA 0x80868036 LRTI_DDR_MRS1_MRS2 # LongRun Table Interface DDR MRS1_MRS2
+TRANSMETA 0x80868037 LRTI_PFTIMING      # LongRun Table Interface PFTIMING
 
 0xC0000080 IA32_EFER   # Intel-SDM-Vol4 Extended Feature Enable
 0xC0000081 IA32_STAR   # Intel-SDM-Vol4 System Call Target Address
