@@ -66,6 +66,7 @@ CMD ["/run_shared_test.sh"]
 # make list-nobuild:
 #    Global blacklist: latex%
 #    In sub-directories:
+#    0018:err:ntdll:RtlLeaveCriticalSection section 0x10f40 is not acquired
 #       c:
 #       glossaries:
 #       java/keystore:
@@ -74,6 +75,7 @@ CMD ["/run_shared_test.sh"]
 #       python/crypto:
 #       python/network:
 #       python/network/dnssec:
+#       python/processor:
 #       python/qrcode:
 #       rust:
 #       verification:
@@ -88,6 +90,7 @@ CMD ["/run_shared_test.sh"]
 #          python/crypto:
 #          python/network:
 #          python/network/dnssec:
+#          python/processor:
 #          python/qrcode:
 #          rust:
 #          verification:

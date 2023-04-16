@@ -70,6 +70,7 @@ CMD ["/run_shared_test.sh"]
 #       python/crypto:
 #       python/network:
 #       python/network/dnssec:
+#       python/processor:
 #       python/qrcode:
 #       verification:
 #    With gcc -m32:
@@ -83,6 +84,7 @@ CMD ["/run_shared_test.sh"]
 #          python/crypto:
 #          python/network:
 #          python/network/dnssec:
+#          python/processor:
 #          python/qrcode:
 #          verification:
 #    Compilers:

@@ -72,6 +72,7 @@ CMD ["/run_shared_test.sh"]
 #       python/crypto:
 #       python/network:
 #       python/network/dnssec:
+#       python/processor:
 #       python/qrcode:
 #       rust:
 #       verification:
@@ -86,6 +87,7 @@ CMD ["/run_shared_test.sh"]
 #          python/crypto:
 #          python/network:
 #          python/network/dnssec:
+#          python/processor:
 #          python/qrcode:
 #          rust:
 #          verification:
