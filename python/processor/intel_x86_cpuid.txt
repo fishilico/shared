@@ -653,8 +653,10 @@
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x4d,  x (0x406dx): Atom Silvermont D (Avoton/Rangely)
 
-0x4d,  0 (0x406d0): ?
-0x4d,  8 (0x406d8): "AVN" Atom Silvermont D (Avoton/Rangely)
+0x4d,  0 (0x406d0): "AVN" Atom Avoton (Stepping A0, A1)
+    Intel® Atom® Processor C2xxx
+
+0x4d,  8 (0x406d8): "AVN" Atom Silvermont D (Avoton/Rangely) (Stepping B0, C0)
     Intel® Atom® Processor C2xxx
     OctalCore Intel® Atom® C2750, 2400 MHz (24 x 100) (Avoton)
     OctalCore Intel® Atom® C2758, 2400 MHz (24 x 100) (Rangeley)
@@ -702,6 +704,11 @@
     Intel® Core™ Processor i7-6800K, i7-6850, i7-6900K
     Intel® Xeon® Processor v4 E5-2603, E5-2608L, E5-2609, E5-2618L, E5-2620, E5-2623, E5-2628L, E5-2630L, E5-2630, E5-2637, E5-2640, E5-2643, E5-2648L, E5-2650L, E5-2650, E5-2658, E5-2660, E5-2667, E5-2679, E5-2680, E5-2683, E5-2690, E5-2695, E5-2697A, E5-2697, E5-2698, E5-2699A, E5-2699, E5-2699R, E5-4628L
     Intel® Xeon® Processor v4 E7-4809, E7-4820, E7-4830, E7-4850, E7-8855, E7-8860, E7-8867, E7-8870, E7-8880, E7-8890, E7-8891, E7-8893, E7-8894
+
+# https://www.etallen.com/cpuid.html
+# https://fossies.org/linux/misc/cpuid-20230406.src.tar.gz/cpuid-20230406/cpuid.c
+0x55,  2 (0x50652): "SKX-SP" Skylake Server (Stepping B0/L0)
+    Intel® Xeon® Scalable Processor Family
 
 0x55,  3 (0x50653): "SKX-SP" Skylake Server (Stepping B1)
     Intel® Xeon® Scalable Processor Family
@@ -915,7 +922,9 @@
     Intel® Puma™ 7 Home Gateway
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+# https://fossies.org/linux/misc/cpuid-20230406.src.tar.gz/cpuid-20230406/cpuid.c
 0x75,  x (0x7065x): Atom Airmont NP (Lightning Mountain)
+    Intel Spreadtrum SC9853I-IA
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x7a,  x (0x706ax): Atom Goldmont Plus (Gemini Lake)
@@ -1155,6 +1164,10 @@
     Intel® Celeron® Processor Family
     Intel® Celeron® Processor G6900, G6900T
 
+# https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
+0x9a,  x (0x906ax): "ADL-P" Alder Lake P
+    12th Generation Intel® Core™ Processor Family
+
 0x9a,  0 (0x906a0): "ADL" Alder Lake U (Stepping J0)
     12th Generation Intel® Core™ Processor Family
 
@@ -1294,6 +1307,15 @@
     10th Generation Intel® Core™ Processor Family
     10th Generation Intel® Core™ Mobile Processor Family
 
+0xa6,  2 (0xa0662): "CML" Comet Lake H (Stepping R1)
+    10th Generation Intel® Core™ Processor Family
+
+0xa6,  3 (0xa0663): "CML" Comet Lake S (Stepping G1)
+    10th Generation Intel® Core™ Processor Family
+
+0xa6,  5 (0xa0665): "CML" Comet Lake S (Stepping Q0)
+    10th Generation Intel® Core™ Processor Family
+
 0xa7,  0 (0xa0670): "RKL-S" Rocket Lake
     11th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i5-11600K, i5-11600KF, i5-11600, i5-11600T, i5-11500, i5-11500T, i5-11400, i5-11400F, i5-11400T
@@ -1326,9 +1348,14 @@
 0xaa,  2 (0xa06a2): "MTL" Meteor Lake (Stepping B0)
     14th Generation Intel® Core™ Processor Family
 
+# https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
+# https://fossies.org/linux/misc/cpuid-20230406.src.tar.gz/cpuid-20230406/cpuid.c
+0xab,  x (0xa06bx): "MTL-N" Meteor Lake-N
+    14th Generation Intel® Core™ Processor Family
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
-0xac,  x (0xa06cx): "MTL" Meteor Lake
+0xac,  x (0xa06cx): "MTL-S" Meteor Lake-S
     14th Generation Intel® Core™ Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
@@ -1348,13 +1375,17 @@
 0xb6,  x (0xb066x): "GRR" Grand Ridge
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0xb7,  x (0xb067x): "RPL" Raptor Lake
+# https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
+0xb7,  x (0xb067x): "RPL-S" Raptor Lake-S
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0xb7,  1 (0xb0671): "RPL-S" Raptor Lake S 8P+16E, HX 8P+16E (Raptor Cove/Gracemont) (Stepping B-0)
     13th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i9-13900K, i7-13700K, i5-13600K, i9-13900KF, i7-13700KF, i5-13600KF
+
+# https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
+0xba,  x (0xb06ax): "RPL-P" Raptor Lake-P
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 0xba,  2 (0xb06a2): "RPL-H/P/PX/U" Raptor Lake H 6P+8E, P 6P+8E, PX 6E+8P (Stepping J-0)
@@ -1369,7 +1400,7 @@
     16th Generation Intel® Core™ Processor Family
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
-0xbe,  0 (0xb06e0): "ADL" Alder Lake N (Stepping A0)
+0xbe,  0 (0xb06e0): "ADL-N" Alder Lake N (Stepping A0)
     12th Generation Intel® Core™ Processor Family
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
@@ -1391,39 +1422,54 @@
     5th Generation Intel® Xeon® Scalable Processor Family
 
 
+[Family 11]
+# https://www.intel.com/content/dam/www/public/us/en/documents/specification-updates/xeon-phi-coprocessor-specification-update.pdf (328205-016)
+# https://fossies.org/linux/misc/cpuid-20230406.src.tar.gz/cpuid-20230406/cpuid.c
+0x01,  1 (0x00b11): Xeon Phi Knights Corner (Stepping B0)
+    Intel® Xeon Phi™ x100 Coprocessor (Knights Corner B0)
+
+0x01,  3 (0x00b13): Xeon Phi Knights Corner (Stepping B1)
+    Intel® Xeon Phi™ x100 Coprocessor (Knights Corner B1)
+
+0x01,  4 (0x00b14): Xeon Phi Knights Corner (Stepping C0)
+    Intel® Xeon Phi™ x100 Coprocessor (Knights Corner C0)
+
+
 [Family 15]
 0x00,  x (0x00f0x): ?
+0x00,  7 (0x00f07): Pentium 4 (Willamette) (Stepping B2)
+0x00, 10 (0x00f0a): Pentium 4 (Willamette), Xeon (Foster) (Stepping C1)
 
-0x01,  1 (0x00f11): ?
-0x01,  2 (0x00f12): ?
-0x01,  3 (0x00f13): ?
+0x01,  1 (0x00f11): Xeon MP (Foster) (Stepping C0)
+0x01,  2 (0x00f12): Pentium 4 (Willamette), Xeon (Foster) (Stepping D0)
+0x01,  3 (0x00f13): Pentium 4 (Willamette), Xeon (Foster) (Stepping E0)
     Intel® Celeron®, 1715 MHz (17 x 101) (Willamette-128) (32 bits)
 
 0x02,  0 (0x00f20): ?
 0x02,  1 (0x00f21): ?
-0x02,  2 (0x00f22): ?
+0x02,  2 (0x00f22): Xeon MP (Gallatin) (Stepping A0)
 0x02,  3 (0x00f23): ?
-0x02,  4 (0x00f24): ?
+0x02,  4 (0x00f24): Mobile Pentium 4 Processor-M (Northwood), Mobile Celeron (Northwood), Xeon (Prestonia) (Stepping B0)
     Intel® Pentium® 4, 1600 MHz (16 x 100) (Northwood) (32 bits)
 
-0x02,  5 (0x00f25): ?
+0x02,  5 (0x00f25): Pentium 4 (Northwood), Xeon MP (Gallatin), Xeon (Prestonia) (Stepping B1)
     2x Intel® Xeon®, 3066 MHz (23 x 133) (Gallatin DP) (32 bits)
     Intel® Pentium® 4 Extreme Edition, 3466 MHz (13 x 267) (Gallatin) (32 bits)
 
-0x02,  6 (0x00f26): ?
-0x02,  7 (0x00f27): ?
+0x02,  6 (0x00f26): Xeon MP (Gallatin) (Stepping C0)
+0x02,  7 (0x00f27): Mobile Pentium 4 Processor-M (Northwood), Mobile Celeron (Northwood), Xeon (Prestonia) (Stepping C1)
     Intel® Celeron®, 2033 MHz (20 x 102) (Northwood-128) (32 bits)
     Intel® Pentium® 4, 2400 MHz (18 x 133) (Northwood) (32 bits)
 
-0x02,  9 (0x00f29): ?
+0x02,  9 (0x00f29): Mobile Pentium 4 Processor-M (Northwood), Mobile Celeron (Northwood), Xeon (Prestonia) (Stepping D1
     Intel® Pentium® 4, 2800 MHz (14 x 200) (Northwood HyperThreading) (32 bits)
     Intel(R) Xeon(TM) CPU 3.06GHz
 
 0x03,  0 (0x00f30): ?
 0x03,  1 (0x00f31): ?
 0x03,  2 (0x00f32): ?
-0x03,  3 (0x00f33): ?
-0x03,  4 (0x00f34): ?
+0x03,  3 (0x00f33): Pentium 4 (Prescott) (Stepping C0)
+0x03,  4 (0x00f34): Pentium 4 (Prescott) (Stepping D0)
     2x Intel® Xeon® (Nocona) (32 bits)
     Intel Pentium 4 (Prescott) (32 bits)
 
@@ -1431,44 +1477,44 @@
 0x03,  7 (0x00f37): ?
 
 0x04,  0 (0x00f40): ?
-0x04,  1 (0x00f41): ?
+0x04,  1 (0x00f41): Intel Pentium 4 (Prescott), Xeon (Nocona) (Stepping E0), Xeon MP (Cranford A0), Xeon MP (Potomac C0)
     Intel® Celeron® D 326, 2533 MHz (19 x 133) (Prescott-256)
     2x Intel P4 Xeon 3.40GHz (Cranford)
 
 0x04,  2 (0x00f42): ?
 
-0x04,  3 (0x00f43): ?
+0x04,  3 (0x00f43): Intel Pentium 4 (Prescott), Xeon (Nocona), Xeon (Irwindale) (Stepping N0)
     Intel® Xeon®, 3200 MHz (16 x 200) (Irwindale)
     Intel® Pentium® 4 640, 3200 MHz (16 x 200) (Prescott-2M)
     Intel® Pentium® 4 Extreme Edition, 3733 MHz (14 x 267) (Prescott-2M)
 
-0x04,  4 (0x00f44): ?
+0x04,  4 (0x00f44): Pentium D (Smithfield) (Stepping A0)
     DualCore Intel® Pentium® D 820, 2800 MHz (14 x 200) (Smithfield)
 
 0x04,  6 (0x00f46): ?
 
-0x04,  7 (0x00f47): ?
-0x04,  8 (0x00f48): ?
+0x04,  7 (0x00f47): Pentium D (Smithfield) (Stepping B0)
+0x04,  8 (0x00f48): Dual-Core Xeon (Paxville) (Stepping A0)
     4x Intel® Xeon® 7020 2667.2 MHz (16.0 x 166.7 MHz) (Paxville)
 
-0x04,  9 (0x00f49): ?
-0x04, 10 (0x00f4a): ?
+0x04,  9 (0x00f49): Pentium 4 (Prescott) (Stepping G1), Xeon MP (Cranford) (Stepping B0)
+0x04, 10 (0x00f4a): Pentium 4 (Prescott), Xeon (Nocona), Xeon (Irwindale) (Stepping R0)
     2x Intel® Xeon®, 3400 MHz (17 x 200) (Irwindale)
 
 0x06,  0 (0x00f60): ?
 0x06,  1 (0x00f61): ?
-0x06,  2 (0x00f62): ?
+0x06,  2 (0x00f62): Pentium 4 (Cedar Mill), Pentium D (Presler) (Stepping B1)
     DualCore Intel® Pentium® Extreme Edition 955, 3466 MHz (13 x 267) (Presler)
 
 0x06,  3 (0x00f63): ?
-0x06,  4 (0x00f64): ?
+0x06,  4 (0x00f64): Pentium 4 (Cedar Mill), Pentium D (Presler) (Stepping C1)
     Intel® Xeon® 5060 3192 MHz 3066.7MHz (Dempsey)
 
-0x06,  5 (0x00f65): ?
+0x06,  5 (0x00f65): Pentium 4 (Cedar Mill), Pentium D (Presler) (Stepping D0)
     Intel® Celeron® D 347, 3066 MHz (23 x 133) (Cedar Mill)
 
 0x06,  6 (0x00f66): ?
     2x DualCore Intel® Xeon®, 3000 MHz (18 x 167) (Tulsa)
 
-0x06,  8 (0x00f68): ?
+0x06,  8 (0x00f68): Xeon (Tulsa) (Stepping B0)
     2x Intel® Xeon® MP 7140M 2792.7 MHz (14.0 x 199.5 MHz) (Tulsa)
