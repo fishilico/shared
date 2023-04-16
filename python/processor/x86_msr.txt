@@ -50,6 +50,7 @@
 # - Firecracker: https://github.com/firecracker-microvm/firecracker/blob/main/src/arch_gen/src/x86/msr_index.rs
 # - Linux kernel: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h
 #   used in https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/trace/beauty/tracepoints/x86_msr.sh
+# - Perfmon from Intel: https://github.com/intel/perfmon/blob/main/secure-pmu-access-1.01.csv
 # - QEMU: https://gitlab.com/qemu-project/qemu/-/blob/master/target/i386/cpu.h
 # - Rowhammer: https://github.com/CMU-SAFARI/rowhammer/blob/master/src/msr.h
 # - U-Boot: https://source.denx.de/u-boot/u-boot/-/blob/master/arch/x86/include/asm/msr-index.h
@@ -132,7 +133,8 @@ P6 0x33 TEST_CTL
 CORE12 0x33 MEMORY_CTRL # Memory Control Register
 
 # Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture) SMI Counter
-CORE1 0x34 SMI_COUNT
+# https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/secure-pmu-access-1.01.csv
+CORE1 0x34 SMI_COUNT  # Count System Management Interrupts
 
 # Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
 
@@ -262,14 +264,15 @@ CORE11 0xA7 BIOS_DEBUG
 0xBD IA32_XAPIC_DISABLE_STATUS  # Intel-SDM-Vol4 xAPIC Disable Status
 
 # Intel-SDM-Vol4 General Performance Counter 0
-0xC1 IA32_PMC0
-0xC2 IA32_PMC1
-0xC3 IA32_PMC2
-0xC4 IA32_PMC3
-0xC5 IA32_PMC4
-0xC6 IA32_PMC5
-0xC7 IA32_PMC6
-0xC8 IA32_PMC7
+# https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/secure-pmu-access-1.01.csv
+0xC1 IA32_PMC0  # Value of counter 0
+0xC2 IA32_PMC1  # Value of counter 1
+0xC3 IA32_PMC2  # Value of counter 2
+0xC4 IA32_PMC3  # Value of counter 3
+0xC5 IA32_PMC4  # Value of counter 4
+0xC6 IA32_PMC5  # Value of counter 5
+0xC7 IA32_PMC6  # Value of counter 6
+0xC8 IA32_PMC7  # Value of counter 7
 
 0xCD FSB_FREQ # Intel-SDM-Vol4 (Intel Core Microarchitecture) Scalable Bus Speed
 
@@ -748,9 +751,10 @@ XEON5000 0x301 GQ_SNOOP_MESF
 
 # Intel-SDM-Vol4 Fixed-Function Performance Counters
 # https://github.com/intel/intel-cmt-cat/blob/6f385efba25682bc1d3dd2332fd177639ac8d0c7/lib/cpu_registers.h defines some names: IA32_MSR_INST_RETIRED_ANY=0x309, IA32_MSR_CPU_UNHALTED_THREAD=0x30A
-0x309 IA32_FIXED_CTR0
-0x30A IA32_FIXED_CTR1
-0x30B IA32_FIXED_CTR2
+# https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/secure-pmu-access-1.01.csv
+0x309 IA32_FIXED_CTR0   # Value of fixed counter 0 (cycles)
+0x30A IA32_FIXED_CTR1   # Value of fixed counter 1 (instructions)
+0x30B IA32_FIXED_CTR2   # Value of fixed counter 2 (reference cycles)
 
 # Intel-SDM-Vol4 (10th Generation Intel Core)
 0x30C IA32_FIXED_CTR3 # Fixed-Function Performance Counter Register 3
@@ -1024,6 +1028,7 @@ CORE2 0x48C IA32_VMX_EPT_VPID_ENUM # Capability Reporting Register of EPT and VP
 # Intel-SDM-Vol4 (Intel Xeon Phi Processor 7215, 7285, 7295 Series)
 XEONPHI7215 0x491 IA32_VMX_FMFUNC  # Capability Reporting Register of VM-Function Controls
 
+# https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/secure-pmu-access-1.01.csv
 0x4C1 IA32_A_PMC0 # Intel-SDM-Vol4 Full Width Writable IA32_PMC0 Alias
 0x4C2 IA32_A_PMC1 # Intel-SDM-Vol4 Full Width Writable IA32_PMC1 Alias
 0x4C3 IA32_A_PMC2 # Intel-SDM-Vol4 Full Width Writable IA32_PMC2 Alias
