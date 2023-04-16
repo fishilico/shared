@@ -361,14 +361,16 @@
 0x2d,  5 (0x206d5): "SNBX" Sandy Bridge Xeon (Sandy Bridge E, EN, EP, EP4S)
     2x OctalCore Intel® Xeon®, 3000 MHz (30 x 100) (Sandy Bridge-EP)
 
-0x2d,  6 (0x206d6): "SNBX" Sandy Bridge Xeon (Sandy Bridge E, EN, EP, EP4S)
+0x2d,  6 (0x206d6): "SNBX/SNB-E/EN/EP" Sandy Bridge Xeon (Sandy Bridge E, EN, EP, EP4S)
+    Intel® Xeon® Processor E3 Product Family
     Intel® Xeon® Processor E5 Product Family
     Intel® Xeon® Processor E5-2620, E5-2630, E5-2630L, E5-2640, E5-2650, E5-2650L, E5-2660, E5-2667, E5-2670, E5-2680, E5-2690
     Intel® Pentium® Processor 1405
     HexaCore Intel® Core™ i7-3960X Extreme Edition, 3600 MHz (36 x 100) (Sandy Bridge-E)
 
-0x2d,  7 (0x206d7): "SNBX" Sandy Bridge Xeon (Sandy Bridge E, EN, EP, EP4S)
+0x2d,  7 (0x206d7): "SNBX/SNB-E/EN/EP" Sandy Bridge Xeon (Sandy Bridge E, EN, EP, EP4S)
     Intel® Core™ X-series Processors
+    Intel® Xeon® Processor E3 Product Family
     Intel® Xeon® Processor E5 Product Family
     Intel® Xeon® Processor E5-1428L, E5-1620, E5-1650, E5-1660, E5-2403, E5-2407, E5-2418L, E5-2420, E5-2428L, E5-2430, E5-2430L, E5-2440, E5-2448L, E5-2450, E5-2450L, E5-2470, E5-2603, E5-2609, E5-2620, E5-2630, E5-2630L, E5-2637, E5-2640, E5-2643, E5-2648L, E5-2650, E5-2650L, E5-2658, E5-2660, E5-2665, E5-2667, E5-2670, E5-2680, E5-2687W, E5-2690, E5-4603, E5-4607, E5-4610, E5-4617, E5-4620, E5-4640, E5-4650, E5-4650L
     Intel® Pentium® Processor 1405
@@ -429,10 +431,12 @@
     Intel® Celeron® Processor J1900, J1850, J1800, J1750
     Intel® Celeron® Processor N2920, N2910, N2820, N2815, N2810, N2806, N2805
 
-0x37,  8 (0x30678): "BYT" Atom Silvermont (BayTrail/BYT / Valley View), Valley View, Bay Trail M/D (C0 step)
+0x37,  8 (0x30678): "BYT/VLV" Atom Silvermont (BayTrail/BYT / Valley View), Valley View, Bay Trail M/D (C0 step)
     Intel® Atom® Processor Z Series
     Intel® Celeron® Processor N Series
     Intel® Pentium® Processor N Series
+    Intel® Celeron® Processor N2xxx
+    Intel® Pentium® Processor N35xx
     Intel® Atom® CPU Z3745 @ 1.33GHz (Bay Trail-T, Silvermont core)
     Intel® Celeron® Processor Jxxxx & Nxxxx
     Intel® Pentium® Processor Jxxxx & Nxxxx
@@ -441,11 +445,12 @@
     Intel® Pentium® Processor N3540, N3530
     Intel® Celeron® Processor N2940, N2930, N2840, N2830, N2808, N2807
 
-0x37,  9 (0x30679): Valley View, Bay Trail I (D0, D1 step) ; Valley View, Bay Trail M/D (D1 step)
+0x37,  9 (0x30679): "VLV/BYT" Valley View, Bay Trail I (D0, D1 step) ; Valley View, Bay Trail M/D (D1 step)
     Intel® Atom® Processor E3800 Product Family
     Intel® Celeron® Processor N2807, N2930
     Intel® Pentium® Processor J1800, J1900
     Intel® Atom® Processor E3845, E3827, E3826, E3825, E3815, E3805
+    Intel® Atom® Processor E38xx
 
 0x3a,  0 (0x306a0): ?
 0x3a,  2 (0x306a2): ?
@@ -454,6 +459,7 @@
 0x3a,  6 (0x306a6): ?
 0x3a,  8 (0x306a8): ?
 0x3a,  9 (0x306a9): "IVB" Ivy Bridge, Ivy Bridge Xeon E3, Gladden
+    3rd Generation Intel® Core™ Processor Family
     3rd Generation Intel® Core™ Mobile Processor Family
     Intel® Pentium® Mobile Processor Family
     Intel® Celeron® Mobile Processor Family
@@ -477,6 +483,7 @@
     Intel® Pentium® Processor 1405 v2, 2020M, 2030M, 2117U, 2127U, 2129Y, A1018, G2010, G2020, G2020T, G2030, G2030T, G2100T, G2120, G2120T, G2130, G2140
 
 0x3c,  3 (0x306c3): "HSW" Haswell Core, Haswell Xeon E3, Haswell Desktop, Haswell M
+    4th Generation Intel® Core™ Processor Family
     4th Generation Intel® Core™ Mobile Processor Family
     Intel® Pentium® Mobile Processor Family
     Intel® Celeron® Mobile Processor Family
@@ -497,7 +504,7 @@
     Intel® Pentium® 3560M
     Intel® Celeron® 2970M
 
-0x3d,  4 (0x306d4): "BDW" Broadwell Core (Broadwell U/Y)
+0x3d,  4 (0x306d4): "BDW-U/Y" Broadwell Core (Broadwell U/Y)
     5th Generation Intel® Core™ Processor Family
     Intel® Pentium® Mobile Processor Family
     Intel® Celeron® Mobile Processor Family
@@ -516,7 +523,8 @@
 0x3e,  3 (0x306e3): "IVBX" Ivy Bridge Xeon (Ivy Bridge EN, EP)
     2x 12-Core Genuine Intel® CPU @ 2.40GHz ES (Ivy Bridge-EP, Ivytown, 30MB L3)
 
-0x3e,  4 (0x306e4): "IVBX" Ivy Bridge Xeon (Ivy Bridge EN, EP), Ivy Bridge Server E, EN, EP, EP4S
+0x3e,  4 (0x306e4): "IVBX/IVB-E/EP" Ivy Bridge Xeon (Ivy Bridge EN, EP), Ivy Bridge Server E, EN, EP, EP4S
+    3rd Generation Intel® Core™ Processor Family
     Intel® Xeon® Processor E5v2 Product Family
     Intel® Core™ X-series Processors
     Intel® Xeon® CPU E5-2697 v2 @ 2.70GHz (Ivy Bridge-EP, Ivytown, 30MB L3)
@@ -527,7 +535,7 @@
     Intel® Core™ Processor i7-4820K, i7-4930K
 
 0x3e,  6 (0x306e6): "IVBX" Ivy Bridge Xeon
-0x3e,  7 (0x306e7): "IVBX" Ivy Bridge Xeon (Ivy Bridge Server EX)
+0x3e,  7 (0x306e7): "IVBX/IVB-EX" Ivy Bridge Xeon (Ivy Bridge Server EX)
     Intel® Xeon® Processor E7v2 Product Family
     Intel® Xeon® Processor v2 E7-2850, 2870, 2880, 2890, 4809, 4820, 4830, 4850, 4860, 4870, 4880, 4890, 8893, 8891, 8890, 8880L, 8880, 8870, 8857, 8850
 
@@ -535,6 +543,7 @@
     OctalCore Intel® Core™ i7-5960X Extreme Edition, 3300 MHz (33 x 100) (Haswell-E)
 
 0x3f,  2 (0x306f2): "HSX-E/EP" Haswell X (Haswell EP, EN), Haswell Server E, EP, EP4S (Stepping Cx/M1)
+    4th Generation Intel® Core™ Processor Family
     Intel® Xeon® Processor E5v3 Product Family
     HexaCore Intel® Core™ i7-5820K, 3300 MHz (33 x 100) (Haswell-E)
     2x 18-Core Intel® Xeon® E5-2699 v3, 2300 MHz (23 x 100) (Haswell-EP)
@@ -549,7 +558,8 @@
     Intel® Xeon® Processor v3 E7-4809, E7-4820, E7-4830, E7-4850, E7-8860, E7-8867, E7-8870, E7-8880L, E7-8880, E7-8890, E7-8891, E7-8893
     Intel® Xeon® Processor E7-4809V3, E7-4820V3, E7-4830V3, E7-4850V3, E7-8860V3, E7-8867V3, E7-8870V3, E7-8880LV3, E7-8880V3, E7-8890V3, E7-8891V3, E7-8893V3
 
-0x45,  1 (0x40651): "HSW" Haswell ULT, Haswell U, Haswell Y
+0x45,  1 (0x40651): "HSW-U" Haswell ULT, Haswell U, Haswell Y
+    4th Generation Intel® Core™ Processor Family
     4th Generation Intel® Core™ Mobile Processor Family
     Intel® Pentium® Mobile Processor Family
     Intel® Celeron® Mobile Processor Family
@@ -565,7 +575,7 @@
     Intel® Core™ Processor i3-4010Y, i3-4012Y, i3-4020Y, i3-4030Y
     Intel® Pentium® Processor 3560Y, 3561Y
 
-0x46,  1 (0x40661): "HSW" Haswell GT3E (Haswell Perf), Haswell Perf Halo, Haswell H, Haswell R
+0x46,  1 (0x40661): "HSW-H" Haswell GT3E (Haswell Perf), Haswell Perf Halo, Haswell H, Haswell R
     4th Generation Intel® Core™ Processor Family
     Intel® Core™ Extreme Processor (5960x, 5930x, 5820x)
     QuadCore Intel® Core™ i7-4770R, 3600 MHz (36 x 100) (Crystal Well-DT, 128MB L4 cache)
@@ -574,14 +584,14 @@
     Intel® Core™ Processor i7-4770R
     Intel® Core™ Processor i5-4570R, i5-4670R
 
-0x47,  1 (0x40671): "BDW" Broadwell GT3E (Broadwell H 43e), Broadwell Xeon E3
+0x47,  1 (0x40671): "BDW-H/E3" Broadwell GT3E (Broadwell H 43e), Broadwell Xeon E3
+    5th Generation Intel® Core™ Processor Family
     5th Generation Intel® Core™ Mobile Processor Family
     Intel® Xeon® Processor E3-1200 v4 Product Family
     Intel® Xeon® Processor v4 E3-1258L, E3-1265L, E3-1278L, E3-1285, E3-1285
     QuadCore Intel® Core™ i7-5775C, 3300 MHz (33 x 100) (Broadwell-H)
     Intel® Core™ Processor i7-5700EQ, i7-5700HQ, i7-5750HQ, i7-5850EQ , i7-5850HQ, i7-5950HQ
     Intel® Core™ Processor i5-5575R, i5-5675C, i5-5675R, i7-5775C, i7-5775R
-
 
 0x4a,  x (0x406ax): Atom Merrifield (Tangier), Atom Silvermont Mid
 0x4a,  8 (0x406a8): Tangier (SLM)
@@ -596,23 +606,26 @@
 
 0x4c,  1 (0x406c1): ?
 0x4c,  2 (0x406c2): ?
-0x4c,  3 (0x406c3): Atom Airmont (CherryTrail / Braswell), Cherry View (Cherry Trail, Braswell)
+0x4c,  3 (0x406c3): "CHV" Atom Airmont (CherryTrail / Braswell), Cherry View (Cherry Trail, Braswell)
     QuadCore Intel® Atom® x7-Z8700, 1600MHz (Cherry Trail)
     QuadCore Intel® Celeron® N3150, 2083 MHz (26 x 80) (Braswell) Silvermont vs. Airmont
     DualCore Intel® Celeron® N3050, 2166 MHz (27 x 80) (Braswell)
+    Intel® Atom® Processor X Series
     Intel® Atom® x5-Zxxxx CPU
     Intel® Atom® Processor x7-Z8700, x5-Z8500, x5-Z8300
 
-0x4c,  4 (0x406c4): Cherry View (Cherry Trail, Braswell)
+0x4c,  4 (0x406c4): "CHV" Cherry View (Cherry Trail, Braswell)
     Intel® Celeron® Processor Jxxxx
     Intel® Celeron® Processor N3xxx
     Intel® Pentium® Processor J3xxx
     Intel® Pentium® Processor N3xxx
+    Intel® Atom® Processor X Series
     Intel® Atom® x5-E8000 Processor
     Intel® Atom® Processor x7-Z8750, x5-Z8550, x5-Z8350, x5-Z8330
 
 0x4d,  0 (0x406d0): ?
 0x4d,  8 (0x406d8): "AVN" Atom Silvermont (Avoton/Rangely)
+    Intel® Atom® Processor C2xxx
     OctalCore Intel® Atom® C2750, 2400 MHz (24 x 100) (Avoton)
     OctalCore Intel® Atom® C2758, 2400 MHz (24 x 100) (Rangeley)
     Intel® Atom® Processor C2000 Product Family
@@ -621,8 +634,8 @@
 0x4e,  1 (0x406e1): ?
 0x4e,  2 (0x406e2): ?
 0x4e,  3 (0x406e3): "SKL-U/Y/SKL-U23e" Skylake Mobile (Skylake U/Y/U23e) (Stepping D0, K1)
-    6th Generation Intel® Core™ m Processors
-    6th Generation Intel® Core™ Processors
+    6th Generation Intel® Core™ Processor Family
+    6th Generation Intel® Core™ Mobile Processor Family
     DualCore Intel® Core™ i7-6500U, 3100 MHz (31 x 100) (Skylake-U/Y)
     DualCore Intel® Core™ m3-6Y30 (Skylake-U/Y)
     Intel® Core™ Processor i7-6500U, i7-6510U, i7-6600U
@@ -651,12 +664,13 @@
     HexaCore Intel® Core™ i7-6850K, 3800 MHz (38 x 100) (Broadwell-E)
     Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz
     Intel® Core™ Processor Extreme Edition i7-6950K
+    Intel® Core™ Processor i7 68xx, 69xx
     Intel® Core™ Processor i7-6800K, i7-6850, i7-6900K
     Intel® Xeon® Processor v4 E5-2603, E5-2608L, E5-2609, E5-2618L, E5-2620, E5-2623, E5-2628L, E5-2630L, E5-2630, E5-2637, E5-2640, E5-2643, E5-2648L, E5-2650L, E5-2650, E5-2658, E5-2660, E5-2667, E5-2679, E5-2680, E5-2683, E5-2690, E5-2695, E5-2697A, E5-2697, E5-2698, E5-2699A, E5-2699, E5-2699R, E5-4628L
     Intel® Xeon® Processor v4 E7-4809, E7-4820, E7-4830, E7-4850, E7-8855, E7-8860, E7-8867, E7-8870, E7-8880, E7-8890, E7-8891, E7-8893, E7-8894
 
 0x55,  3 (0x50653): "SKX-SP" Skylake Server (Stepping B1)
-    Intel® Xeon® Scalable Processors
+    Intel® Xeon® Scalable Processor Family
     Intel® Xeon® Platinum Processor P-8124, P-8136
 
 0x55,  4 (0x50654): "SKX-SP/D" Skylake X (Skylake SP, Basin Falls ; Skylake D, Bakerville ; W) (Stepping H0/M0/U0, M1)
@@ -675,6 +689,7 @@
     HexaCore Intel® Core™ i7-7800X, 3500 MHz (35 x 100) (Skylake-X)
     10-Core Intel® Core™ i9-7900X, 4000 MHz (40 x 100) (Skylake-X)
     18-Core Intel® Core™ i9-7980XE (Skylake-X)
+    Intel® Xeon® Processor D-21xx
     Intel® Xeon® Processor D-2123IT, D-2141I, D-2142IT, D-2143IT, D-2145NT, D-2146NT, D-2161I, D-2163IT, D-2166NT, D-2173IT, D-2177NT, D-2183IT, D-2187NT
     Intel® Xeon® Platinum Processor 8153, 8156, 8158, 8160, 8160F, 8160M, 8160T, 8164, 8168, 8170, 8170M, 8176, 8176F, 8176M, 8180, 8180M
     Intel® Xeon® Gold Processor 5115, 5118, 5119T, 5120, 5120T, 5122, 6126, 6126F, 6126T, 6128, 6130, 6130F, 6130T, 6132, 6134, 6134M, 6136, 6138, 6138F, 6138T, 6140, 6140M, 6142, 6142F, 6142M, 6144, 6146, 6148, 6148F, 6150, 6152, 6154
@@ -686,13 +701,13 @@
     Intel® Core™ X-series Processor i7-7800X, i7-7820X
 
 0x55,  5 (0x50655): "CLX-SP" Cascade Lake Server (Stepping A0)
-    2nd Generation Intel® Xeon® Scalable Processors
+    2nd Generation Intel® Xeon® Scalable Processor Family
 
 0x55,  6 (0x50656): "CLX-SP" Cascade Lake Server (Stepping B0)
-    2nd Generation Intel® Xeon® Scalable Processors
+    2nd Generation Intel® Xeon® Scalable Processor Family
 
 0x55,  7 (0x50657): "CLX-SP" Cascade Lake Server, Cascade Lake W (Stepping B1)
-    2nd Generation Intel® Xeon® Scalable Processors
+    2nd Generation Intel® Xeon® Scalable Processor Family
     Intel® Xeon® W Processor Family
     Intel® Xeon® Platinum Processor 8253, 8256, 8260, 8260L, 8260M, 8260Y, 8268, 8270, 8276, 8276L, 8276M, 8280, 8280L, 8280M, 9220, 9221, 9222, 9242, 9282
     Intel® Xeon® Gold Processor 5215, 5215L, 5215M, 5215R, 5217, 5218, 5218B, 5218N, 5218T, 5220, 5220R, 5220S, 5220T, 5222, 6222V, 6226, 6230, 6230N, 6230T, 6234, 6238, 6238L, 6238M, 6238T, 6240, 6240L, 6240M, 6240Y, 6242, 6244, 6246, 6248, 6252, 6252N, 6254, 6262V
@@ -701,7 +716,7 @@
     Intel® Xeon® Processor W-3275M, W-3275, W-3265M, W-3265, W-3245M, W-3245, W-3235, W-3225, W-3223, W-2295, W-2275, W-2265, W-2255, W-2245, W-2235, W-2225, W-2223
 
 0x55, 11 (0x5065b): "CPX-SP" Cooper Lake (Stepping A1)
-    3rd Generation Intel® Xeon® Scalable Processors
+    3rd Generation Intel® Xeon® Scalable Processor Family
 
 0x56,  2 (0x50662): "BDX-DE" Broadwell Xeon D (Broadwell DE V1)
     Intel® Xeon® Processor D-1500 Product Family
@@ -742,12 +757,15 @@
 
 0x5c,  8 (0x506c8): ?
 0x5c,  9 (0x506c9): "BXT/APL" Atom Goldmont, Apollo Lake (Stepping D0)
+    Intel® Pentium® Processor N4xxx/J4xxx
+    Intel® Celeron® Processor N3xxx/J3xxx
     QuadCore Intel® Pentium® N4200 (Apollo Lake platform, Goldmont core)
     QuadCore Intel® Celeron® J3455, 2200 MHz (22 x 100) (Apollo Lake-D)
     QuadCore Intel® Celeron® N3450 (Apollo Lake platform, Goldmont core)
     Intel® Celeron® & Pentium Processor Product Family
     Intel® Pentium® Processor J4205, N4200
     Intel® Celeron® Processor J3355, J3455, N3350, N3450
+    Intel® Atom® Processor x5/x7-E39xx
     Intel® Atom® Processor x5-A3930, x5-A3940, x7-A3950, x7-A3960
     Intel® Atom® Processor x5-E3930, x5-E3940, x7-E3950
 
@@ -756,6 +774,8 @@
     Intel® Celeron® J3355, J3455, N3350, N3450
     Intel® Atom® x5-E3930, x5-E3940, x7-E3950
     Intel® Atom® A39xx Product Family
+    Intel® Atom® Processor x5-E39xx
+    Intel® Atom® Processor x7-E39xx
 
 0x5d,  1 (0x506d1): ?
     Intel® Atom® x3-C3230 (SoFIA, Smart or Feature phone with Intel Architecture)
@@ -763,8 +783,9 @@
 0x5e,  0 (0x506e0): ?
 0x5e,  1 (0x506e1): ?
 0x5e,  2 (0x506e2): ?
-0x5e,  3 (0x506e3): "SKL-H/S" Skylake Desktop (Skylake H/S, Xeon E3) (Stepping R0/N0)
+0x5e,  3 (0x506e3): "SKL-H/S/E3" Skylake Desktop (Skylake H/S, Xeon E3) (Stepping R0/N0)
     6th Generation Intel® Core™ Processor Family
+    Intel® Xeon® Processor E3 v5 Product Family
     Intel® Xeon® Processor E3-1200 v5 Product Family
     Intel® Xeon® Processor v5 E3-1220, E3-1225, E3-1230, E3-1235L, E3-1240, E3-1240L, E3-1245, E3-1260L, E3-1270, E3-1275, E3-1280, E3-1505M, E3-1515M, E3-1535M, E3-1545M, E3-1558L, E3-1565L, E3-1575M, E3-1578L, E3-1585, E3-1585L
     QuadCore Intel® Core™ i5-6400T, 2200 MHz (22 x 100) (Skylake-S) Haswell vs. Broadwell vs. Skylake
@@ -793,15 +814,23 @@
     Intel® XMM™ 7272 Modem
 
 0x66,  x (0x6066x): "CNL" Cannon Lake Mobile
+0x66,  3 (0x60663): "CNL-U" Cannon Lake Mobile
+    8th Generation Intel® Core™ Mobile Processor Family
 
 0x6a,  x (0x606ax): "ICL" Ice Lake
 0x6a,  5 (0x606a5): "ICX-SP" Ice Lake (Stepping C0)
-    3rd Generation Intel® Xeon® Scalable Processors
+    3rd Generation Intel® Xeon® Scalable Processor Family
 
 0x6a,  6 (0x606a6): "ICX-SP" Ice Lake (Stepping D0)
-    3rd Generation Intel® Xeon® Scalable Processors
+    3rd Generation Intel® Xeon® Scalable Processor Family
 
 0x6c,  x (0x606cx): "ICXD" Ice Lake Xeon D
+    3rd Generation Intel® Xeon® Scalable Processor Family
+
+0x6c,  1 (0x606c1): "ICL-D" Ice Lake Xeon D
+    3rd Generation Intel® Xeon® Scalable Processor Family
+    Intel® Xeon® Processor D-17xx, D-27xx
+
 0x6e,  1 (0x606e1): Cougar Mountain (AMT)
     Intel® Puma™ 7 Home Gateway
 
@@ -833,6 +862,7 @@
 0x7e,  1 (0x706e1): "ICL" Ice Lake B0
 0x7e,  5 (0x706e5): "ICL-U/Y" Ice Lake (Stepping D1)
     10th Generation Intel® Core™ Processor Family
+    10th Generation Intel® Core™ Mobile Processor Family
     Intel® Core™ Processor i7-1060G7, i7-1065G7
     Intel® Core™ Processor i5-1030G4, i5-1030G7, i5-1035G1, i5-1035G4, i5-1035G7
     Intel® Core™ Processor i3-1000G1, i3-1000G4, i3-1005G1
@@ -844,29 +874,32 @@
 
 0x86,  x (0x8066x): Atom Tremont X (Jacobsville)
 0x86,  4 (0x80664): "SNR" Snow Ridge (Stepping B0)
-    Atom P59xxB
+    Intel® Atom® Processor P59xxB
 
 0x86,  5 (0x80665): "SNR" Snow Ridge (Stepping B1)
-    Atom P59xxB
+    Intel® Atom® Processor P59xxB
 
 0x8a,  1 (0x806a1): "LKF" Lakefield (Stepping B2/B3)
-    Core w/Hybrid Technology
+    Intel® Core™ Processor with Hybrid Technology
 
 0x8c,  1 (0x806c1): "TGL" Tiger Lake (Stepping B1)
     11th Generation Intel® Core™ Processor Family
+    11th Generation Intel® Core™ Mobile Processor Family
     Intel® Celeron® Processor UP3, UP3 IOT, UP4, H35
 
 0x8c,  2 (0x806c2): "TGL-R" Tiger Lake Refresh (Stepping C0)
     11th Generation Intel® Core™ Processor Family
+    11th Generation Intel® Core™ Mobile Processor Family
     Intel® Celeron® Processor UP3-Refresh, H35-Refresh
 
 0x8d,  1 (0x806d1): "TGL-H" Tiger Lake (Stepping R0)
     11th Generation Intel® Core™ Processor Family
+    11th Generation Intel® Core™ Mobile Processor Family
     Intel® Celeron® Processor H81
 
-0x8e,  9 (0x806e9): "KBL-U/Y/AML-Y22" Kaby Lake Mobile (Kaby Lake U/Y, U23e), Amber Lake Y (Stepping H0)
-    7th Generation Intel® Core™ Mobile Processors
+0x8e,  9 (0x806e9): "KBL-U/Y/U23e/AML-Y22" Kaby Lake Mobile (Kaby Lake U/Y, U23e), Amber Lake Y (Stepping H0)
     7th Generation Intel® Core™ Processor Family
+    7th Generation Intel® Core™ Mobile Processor Family
     DualCore Intel® Core™ i5-7200U, 3100 MHz (31 x 100) (KabyLake-U/Y)
     DualCore Intel® Pentium® 4415U 2300 MHz (23 x 100) (Kaby Lake-U)
     DualCore Intel® Core™ m3-7Y30, 2600 MHz (26 x 100) (Kaby Lake-Y)
@@ -884,11 +917,12 @@
     Intel® Pentium® Processor 4410Y, 4415Y
     Intel® Celeron® Processor 3965Y
     8th Generation Intel® Core™ Processor Family
+    8th Generation Intel® Core™ Mobile Processor Family
     Intel® Core™ Processor i7-8510Y, i7-8500Y
     Intel® Core™ Processor i5-8310Y, i5-8210Y, i5-8200Y
     Intel® Core™ Processor m3-8100Y
 
-0x8e, 10 (0x806ea): "KBL/CFL-U43e" Kaby Lake Mobile (Kaby Lake Refresh U4+2), Coffee Lake U43e (Stepping D0)
+0x8e, 10 (0x806ea): "KBL-R-U/CFL-U43e" Kaby Lake Mobile (Kaby Lake Refresh U4+2), Coffee Lake U43e (Stepping D0)
     8th Generation Intel® Core™ Mobile Processor Family
     8th Generation Intel® Core™ Processor Family
     QuadCore Intel® Core™ i5-8250U (Kaby Lake-U Refresh)
@@ -899,16 +933,19 @@
     Intel® Core™ Processor i5-8250U, i5-8350U
     Intel® Core™ Processor i3-7020U, i3-8130U
 
-0x8e, 11 (0x806eb): "WHL-U/" Whiskey Lake U (Stepping W0)
+0x8e, 11 (0x806eb): "WHL-U" Whiskey Lake U (Stepping W0)
     8th Generation Intel® Core™ Processors
+    8th Generation Intel® Core™ Mobile Processor Family
     Intel® Core™ Processor i7-8565U
     Intel® Core™ Processor i5-8265U
     Intel® Core™ Processor i3-8145U
     Intel® Core™ Processor 4205U, 5405U
 
-0x8e, 12 (0x806ec): "WHL-U/AML-Y42/CML-Y42" Whiskey Lake U, Amber Lake Y (Stepping V0)
+0x8e, 12 (0x806ec): "WHL-U/AML-Y/Y42/CML-U42/Y42" Whiskey Lake U, Amber Lake Y (Stepping V0)
     8th Generation Intel® Core™ Processors
+    8th Generation Intel® Core™ Mobile Processor Family
     10th Generation Intel® Core™ Processor Family
+    10th Generation Intel® Core™ Mobile Processor Family
     Intel® Pentium® Gold Processor Series
     Intel® Celeron® Processor 5000 Series
     Intel® Core™ Processor i7-8565U, i7-8665U
@@ -924,24 +961,60 @@
     Intel® Celeron® Processor 5305U
 
 # FIXME: this may be (0x9e, 13) from https://software.intel.com/security-software-guidance/insights/processors-affected-l1d-eviction-sampling
-0x8e, 13 (0x806ed): "WHL" Whiskey Lake (Desktop)
+0x8e, 13 (0x806ed): "WHL-U" Whiskey Lake (Desktop)
+    8th Generation Intel® Core™ Mobile Processor Family
+
+0x8f,  3 (0x806f3): "SPR-SP" Xeon Sapphire Rapids-SP
+    4th Generation Intel® Xeon® Scalable Processor Family
+
+0x8f,  4 (0x806f4): "SPR-SP" Xeon Sapphire Rapids-SP
+    4th Generation Intel® Xeon® Scalable Processor Family
+    Genuine Intel® w9-3495 CPU @ 1.80GHz
+
+0x8f,  5 (0x806f5): "SPR-SP" Xeon Sapphire Rapids-SP
+    4th Generation Intel® Xeon® Scalable Processor Family
+
+0x8f,  6 (0x806f6): "SPR-SP" Xeon Sapphire Rapids-SP
+    4th Generation Intel® Xeon® Scalable Processor Family
+
+0x8f,  7 (0x806f7): "SPR-SP" Xeon Sapphire Rapids-SP
+    4th Generation Intel® Xeon® Scalable Processor Family
+
+# https://www.vmware.com/resources/compatibility/detail.php?deviceCategory=cpu&productid=153&vcl=true
+0x8f,  8 (0x806f8): "SPR-SP/HBM" Xeon Sapphire Rapids-SP, Xeon Max (Sapphire Rapids HBM)
+    4th Generation Intel® Xeon® Scalable Processor Family
+    Intel® Xeon® Max Processor
+    Intel Xeon Silver 4400, Bronze 3400 (Sapphire-Rapids-SP) Series
 
 0x96,  1 (0x90661): "EHL" Elkhart Lake (Stepping B1)
-    Pentium J6426/N6415
-    Celeron J6412/J6413/N6210/N6211
-    Atom x6000E
+    Intel® Pentium® J6426/N6415
+    Intel® Celeron® J6412/J6413/N6210/N6211
+    Intel® Atom® x6000E
+
+0x97,  2 (0x90672): "ADL" Alder Lake
+    12th Generation Intel® Core™ Processor Family
+
+0x97,  5 (0x90675): "ADL" Alder Lake
+    12th Generation Intel® Core™ Processor Family
+
+0x9a,  3 (0x906a3): "ADL" Alder Lake
+    12th Generation Intel® Core™ Processor Family
+
+0x9a,  4 (0x906a4): "ADL" Alder Lake
+    12th Generation Intel® Core™ Processor Family
 
 0x9c,  0 (0x906c0): "JSL" Jasper Lake (Stepping A0/A1)
-    Pentium N6000/N6005
-    Celeron N4500/N4505/N5100/N5105
+    Intel® Pentium® N6000/N6005
+    Intel® Celeron® N4500/N4505/N5100/N5105
 
 0x9d,  x (0x906dx): "ICL-NNPI" Ice Lake Neural Network Processor for Deep Learning Inference
 
-0x9e,  9 (0x906e9): "KBL-G/H/S/E3" Kaby Lake Desktop (Kaby Lake H/S/X/G, Xeon E3), Greenlow (Stepping B0)
+0x9e,  9 (0x906e9): "KBL-G/H/S/X/E3" Kaby Lake Desktop (Kaby Lake H/S/X/G, Xeon E3), Greenlow (Stepping B0)
     7th Generation Intel® Core™ Processor Family
+    7th Generation Intel® Core™ Mobile Processor Family
     8th Generation Intel® Core™ Processor Family
     Intel® Core™ X-series Processors
-    Intel® Xeon® Processor E3 v6 Family
+    Intel® Xeon® Processor E3 v6 Product Family
     QuadCore Intel® Core™ i5-7600K, 3800 MHz (Kaby Lake-H/S)
     QuadCore Intel® Core™ i7-7700K, 4500 MHz (45 x 100) (Kaby Lake-S)
     DualCore Intel® Pentium® G4600 3600 MHz (Kaby Lake-S)
@@ -963,6 +1036,7 @@
 
 0x9e, 10 (0x906ea): "KBL/CFL-H/S/E3" Kaby Lake Desktop, Coffee Lake H (6+2), Coffee Lake S (6+2), Coffee Lake S (6+2) Xeon E3, Coffee Lake S (4+2) Xeon E, Coffee Lake S (6+2) x/KBP (Stepping U0)
     8th Generation Intel® Core™ Processor Family
+    8th Generation Intel® Core™ Mobile Processor Family
     Intel® Xeon® Processor E Family
     HexaCore Intel® Core™ i7-8700K, 4600 MHz (46 x 100) (Coffee Lake-S)
     Intel® Core™ Processor i9-8950HK
@@ -993,8 +1067,9 @@
     Intel® Core™ Processor i7-9700K, i7-9700KF
     Intel® Core™ Processor i5-9600K, i5-9600KF, i5-9400, i5-9400F
 
-0x9e, 13 (0x906ed): "CFL-H" Coffee Lake H (8+2), Coffee Lake S (8+2) (Stepping R0)
+0x9e, 13 (0x906ed): "CFL-H/S/E3" Coffee Lake H (8+2), Coffee Lake S (8+2) (Stepping R0)
     9th Generation Intel® Core™ Processor Family
+    9th Generation Intel® Core™ Mobile Processor Family
     Intel® Xeon® Processor E Family
     Intel® Core™ Processor i9-9980HK, i9-9880H
     Intel® Core™ Processor i7-9850H, i7-9750HF
@@ -1008,6 +1083,7 @@
 0xa5,  1 (0xa0651): "CML" Comet Lake H S 10 2 P0
 0xa5,  2 (0xa0652): "CML-H" Comet Lake H (Stepping R1)
     10th Generation Intel® Core™ Processor Family
+    10th Generation Intel® Core™ Mobile Processor Family
 
 0xa5,  3 (0xa0653): "CML-S62" Comet Lake (Stepping G1)
     10th Generation Intel® Core™ Processor Family
@@ -1017,13 +1093,37 @@
 
 0xa6,  0 (0xa0660): "CML-U62-V1" Comet Lake U A0 (Stepping A0)
     10th Generation Intel® Core™ Processor Family
+    10th Generation Intel® Core™ Mobile Processor Family
     Intel® Core™ Processor i7-10710U
 
 0xa6,  1 (0xa0661): "CML-U62-V2" Comet Lake U K0 S0 (Stepping K1)
     10th Generation Intel® Core™ Processor Family
+    10th Generation Intel® Core™ Mobile Processor Family
 
 0xa7,  1 (0xa0671): "RKL-S" Rocket Lake (Stepping B0)
     11th Generation Intel® Core™ Processor Family
+
+# https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
+0xb7,  1 (0xb0671): "RPL-S" Raptor Lake S 8P+16E, HX 8P+16E (Stepping B-0)
+    13th Generation Intel® Core™ Processor Family
+
+# https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
+0xba,  2 (0xb06a2): "RPL-H/P/PX/U" Raptor Lake H 6P+8E, P 6P+8E, PX 6E+8P (Stepping J-0)
+    13th Generation Intel® Core™ Processor Family
+
+# https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
+0xba,  3 (0xb06a3): "RPL-U" Raptor Lake U 2E+8P (Stepping Q-0)
+    13th Generation Intel® Core™ Processor Family
+
+# https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
+0xbf,  2 (0xb06f2): "ADL/RPL-S/HX" Alder Lake, Raptor Lake S 8P+8E, HX 8P+8E (Stepping C-0)
+    12th Generation Intel® Core™ Processor Family
+    13th Generation Intel® Core™ Processor Family
+
+# https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
+0xbf,  5 (0xb06f5): "ADL/RPL-S" Alder Lake, Raptor Lake S 6P+0E (Stepping C-0)
+    12th Generation Intel® Core™ Processor Family
+    13th Generation Intel® Core™ Processor Family
 
 
 [Family 15]
