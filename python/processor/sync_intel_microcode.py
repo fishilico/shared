@@ -361,6 +361,13 @@ def parse_intel_ucode_directory(directory: Path, ucode_versions: Optional[Set[Tu
             file_data = stream.read()
         parse_intel_ucode(file_data, ucode_versions=ucode_versions)
 
+    # Parse also directories like the one from https://github.com/platomav/CPUMicrocodes
+    for ucode_file in sorted(directory.glob("**/Intel/*.bin")):
+        print(f"Parsing {ucode_file.absolute()}")
+        with ucode_file.open("rb") as stream:
+            file_data = stream.read()
+        parse_intel_ucode(file_data, ucode_versions=ucode_versions)
+
 
 def parse_intel_ucode_from_github(ucode_versions: Optional[Set[Tuple[int, int, str]]] = None) -> None:
     """Download Intel microcode's main branch and analyze it"""
