@@ -11,6 +11,12 @@
 #   - https://eips.ethereum.org/EIPS/eip-1820 (for updated revision ERC-1820)
 # - https://eips.ethereum.org/EIPS/eip-1155 (for Multi Token)
 
+# There are also public ABI databases on:
+# - https://www.4byte.directory/
+# - https://github.com/ethereum/go-ethereum/blob/v1.11.5/signer/fourbyte/4byte.json
+# - https://github.com/maticnetwork/bor/blob/v0.3.7/signer/fourbyte/4byte.json
+# - https://github.com/palkeo/panoramix/blob/d436ac1b61d6586fcf956d56b771614d782486ed/panoramix/data/abi_dump.xz
+
 0x2203ab56 ABI(bytes32,uint256)
     EIP-205 ENS ABI: function ABI(bytes32 node, uint256 contentType) constant returns (uint256, bytes)
 
