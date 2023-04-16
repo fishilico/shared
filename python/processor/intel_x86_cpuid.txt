@@ -124,55 +124,55 @@
 0x0d,  8 (0x006d8): ?
     Mobile Intel® Pentium® M 730, 1600 MHz (12 x 133) (Dothan) (32 bits)
 
-0x0e,  0 (0x006e0): Core Solo/Core Duo
-0x0e,  1 (0x006e1): Core Solo/Core Duo
+0x0e,  0 (0x006e0): Core Yonah Solo/Core Duo
+0x0e,  1 (0x006e1): Core Yonah Solo/Core Duo
 0x0e,  4 (0x006e4): Core Yonah
     Mobile DualCore Intel® Core™ Duo T2500, 2000 MHz (12 x 167) (Yonah) (32 bits)
 
 0x0e,  8 (0x006e8): Core Yonah
     Mobile Intel® Celeron® 215, 1333 MHz (10 x 133) (Yonah-512) (32 bits)
 
-0x0e, 12 (0x006ec): Core Solo/Core Duo
+0x0e, 12 (0x006ec): Core Yonah Solo/Core Duo
 
-0x0f,  0 (0x006f0): Core 2 Solo/Core Duo
-0x0f,  1 (0x006f1): Core 2 Solo/Core Duo
-0x0f,  2 (0x006f2): Core 2 Merom
+0x0f,  0 (0x006f0): Core 2 Merom Solo/Core Duo
+0x0f,  1 (0x006f1): Core 2 Merom Solo/Core Duo
+0x0f,  2 (0x006f2): Core 2 Merom Solo/Core Duo
     DualCore Intel® Core™ 2 Duo E6300, 1866 MHz (7 x 267) (Conroe-2M)
 
-0x0f,  4 (0x006f4): Core 2 Solo/Core Duo
+0x0f,  4 (0x006f4): Core 2 Merom Solo/Core Duo
     DualCore Intel® Core™ 2 Duo E6700, 2666 MHz (10 x 267) (Conroe)
     2x DualCore Intel® Xeon® 5140, 2333 MHz (7 x 333) (Woodcrest)
 
-0x0f,  5 (0x006f5): Core 2 Solo/Core Duo
-0x0f,  6 (0x006f6): Core 2 Merom
+0x0f,  5 (0x006f5): Core 2 Merom Solo/Core Duo
+0x0f,  6 (0x006f6): Core 2 Merom Solo/Core Duo
     Mobile DualCore Intel® Core™ 2 Duo T5600, 1833 MHz (11 x 167) (Merom-2M)
 
-0x0f,  7 (0x006f7): Core 2 Solo/Core Duo
+0x0f,  7 (0x006f7): Core 2 Merom Solo/Core Duo
     2x QuadCore Intel® Xeon® L5320, 1866 MHz (7 x 267) (Clovertown)
     QuadCore Intel® Xeon® X3210, 2133 MHz (8 x 267) (Kentsfield)
     QuadCore Intel® Core™ 2 Extreme QX6700, 2666 MHz (10 x 267) (Kentsfield)
 
-0x0f,  9 (0x006f9): Core 2 Solo/Core Duo
+0x0f,  9 (0x006f9): Core 2 Merom Solo/Core Duo
     2x QuadCore Intel® Core™ 2 Quad Q6400, 2133 MHz (8 x 267) (Tigerton)
 
-0x0f, 10 (0x006fa): Core 2 Solo/Core Duo
-0x0f, 11 (0x006fb): Core 2 Solo/Core Duo
+0x0f, 10 (0x006fa): Core 2 Merom Solo/Core Duo
+0x0f, 11 (0x006fb): Core 2 Merom Solo/Core Duo
     DualCore Intel® Core™ 2 Duo E6750, 2666 MHz (8 x 333) (Conroe)
     Intel(R) Core(TM)2 Duo CPU E6550 @ 2.33GHz
 
-0x0f, 13 (0x006fd): Core 2 Solo/Core Duo
+0x0f, 13 (0x006fd): Core 2 Merom Solo/Core Duo
 
 0x15,  0 (0x10650): ?
     Intel® LE80578, 800 MHz (16 x 50) (Vermilion)
 
-0x16,  0 (0x10660): ?
+0x16,  0 (0x10660): Core 2 Merom L
 0x16,  1 (0x10661): Core 2 Merom L
     Intel® Celeron® 420, 1600 MHz (8 x 200) (Conroe-L)
     Intel(R) Celeron(R) CPU          220  @ 1.20GHz
 
-0x17,  0 (0x10670): ?
-0x17,  1 (0x10671): ?
-0x17,  4 (0x10674): ?
+0x17,  0 (0x10670): Core 2 Penryn
+0x17,  1 (0x10671): Core 2 Penryn
+0x17,  4 (0x10674): Core 2 Penryn
 0x17,  6 (0x10676): Core 2 Penryn, Harpertown, Wolfdale C0, M0, Wolfdale Xeon C0
     2x QuadCore Intel® Xeon® E5462, 2800 MHz (7 x 400) (Harpertown)
     Mobile DualCore Intel® Core™ 2 Duo P8400, 2400 MHz (9 x 267) (Penryn-3M)
@@ -232,6 +232,9 @@
     Intel® Xeon® Processor L5506, L5508, L5518, L5520, L5530
     Intel® Xeon® Processor W5580, W5590
     Intel® Xeon® Processor X5550, X5560, X5570
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x1c,  x (0x106cx): Atom Bonnell (Diamondville, Pineview)
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/cpu/intel/model_106cx/model_106cx_init.c#L83
 0x1c,  0 (0x106c0): Atom Diamondville
@@ -311,11 +314,11 @@
     Intel® Core™ Processor i3-530, 540
     Intel® Pentium® Processor G6950, G6951, G6960
 
-0x26,  x (0x2066x): Atom Bonnell Mid ( Silverthorne, Lincroft)
+0x26,  x (0x2066x): Atom Bonnell Mid (Silverthorne, Lincroft)
 0x26,  1 (0x20661): Atom Lincroft
     Intel® Atom® Z670 (Tunnel Creek)
 
-0x27,  x (0x2067x): Atom Saltwell (Penwell)
+0x27,  x (0x2067x): Atom Saltwell Mid (Penwell)
 0x27,  2 (0x20672): Atom Penwell
     Intel® Atom® Z2460 1.6GHz (Medfield platform, Penwell SoC, Saltwell core)
 
@@ -402,8 +405,8 @@
     Intel® Xeon® 65xx, Intel® Xeon® 75xx
     Intel® Xeon® Processor E6510, E6540, E7520, E7530, E7540, L7545, L7555, X6550, X7542, X7550, X7560
 
-0x2f,  0 (0x206f0): ?
-0x2f,  1 (0x206f1): ?
+0x2f,  0 (0x206f0): Westmere-EX
+0x2f,  1 (0x206f1): Westmere-EX
 0x2f,  2 (0x206f2): Westmere-EX Xeon (Eagleton), Westmere EX (EGL, WSM)
     Intel® Xeon® Processor E7 Family
     4x 10-Core Intel® Xeon® MP E7-4870, 2400 MHz (18 x 133) (Eagleton, Westmere-EX)
@@ -414,6 +417,10 @@
 0x35,  1 (0x30651): Atom Cloverview
     DualCore Intel® Atom® Z2760, 1800MHz (Cloverview, Saltwell core)
 
+# https://boxmatrix.info/wiki/Property:Puma6
+0x35,  8 (0x30658): ?
+    Intel® Atom™ CPU 652 @ 1.20GHz
+
 0x36,  x (0x3066x): Atom Saltwell (Cedarview)
 0x36,  0 (0x30660): ?
 0x36,  1 (0x30661): Atom Cedarview
@@ -422,6 +429,9 @@
 
 0x36,  9 (0x30669): Atom Cedarview
     Intel® Atom® S1260 @ 2.00GHz (Centerton, Saltwell core)
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x37,  x (0x3067x): Atom Silvermont (Bay Trail, Valleyview)
 
 0x37,  1 (0x30671): ?
 0x37,  2 (0x30672): ?
@@ -465,6 +475,7 @@
     Intel® Atom® Processor E3845, E3827, E3826, E3825, E3815, E3805
     Intel® Atom® Processor E38xx
 
+0x3a,  0 (0x306a0): "IVB" Ivy Bridge
 0x3a,  2 (0x306a2): "IVB" Ivy Bridge
 0x3a,  4 (0x306a4): "IVB" Ivy Bridge
 0x3a,  5 (0x306a5): "IVB" Ivy Bridge
@@ -530,8 +541,8 @@
     Intel® Pentium® Processor 3805U, 3825U, 3765U, 3755U, 3215U, 3205U
     Intel® Celeron® 3765U
 
-0x3e,  0 (0x306e0): ?
-0x3e,  2 (0x306e2): ?
+0x3e,  0 (0x306e0): "IVBX" Ivy Bridge Xeon
+0x3e,  2 (0x306e2): "IVBX" Ivy Bridge Xeon
 0x3e,  3 (0x306e3): "IVBX" Ivy Bridge Xeon (Ivy Bridge EN, EP)
     2x 12-Core Genuine Intel® CPU @ 2.40GHz ES (Ivy Bridge-EP, Ivytown, 30MB L3)
 
@@ -605,6 +616,7 @@
     Intel® Core™ Processor i7-5700EQ, i7-5700HQ, i7-5750HQ, i7-5850EQ , i7-5850HQ, i7-5950HQ
     Intel® Core™ Processor i5-5575R, i5-5675C, i5-5675R, i7-5775C, i7-5775R
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x4a,  x (0x406ax): Atom Merrifield (Tangier), Atom Silvermont Mid
 0x4a,  8 (0x406a8): Tangier (SLM)
     Intel® Atom™ Processor Z Series
@@ -615,6 +627,9 @@
     Intel® Atom™ Processor Z Series
     Intel® Atom® Processor Z34XX
     Intel® Atom® Processor Z3460, Z3480
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x4c,  x (0x406cx): Atom Airmont (Cherry Trail, Braswell)
 
 0x4c,  1 (0x406c1): ?
 0x4c,  2 (0x406c2): ?
@@ -635,15 +650,18 @@
     Intel® Atom® x5-E8000 Processor
     Intel® Atom® Processor x7-Z8750, x5-Z8550, x5-Z8350, x5-Z8330
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x4d,  x (0x406dx): Atom Silvermont D (Avoton/Rangely)
+
 0x4d,  0 (0x406d0): ?
-0x4d,  8 (0x406d8): "AVN" Atom Silvermont (Avoton/Rangely)
+0x4d,  8 (0x406d8): "AVN" Atom Silvermont D (Avoton/Rangely)
     Intel® Atom® Processor C2xxx
     OctalCore Intel® Atom® C2750, 2400 MHz (24 x 100) (Avoton)
     OctalCore Intel® Atom® C2758, 2400 MHz (24 x 100) (Rangeley)
     Intel® Atom® Processor C2000 Product Family
     Intel® Atom® Processor C2750, C2730, C2550, C2530, C2350 (Avoton)
 
-0x4e,  1 (0x406e1): ?
+0x4e,  1 (0x406e1): "SKL" Skylake
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x4e,  2 (0x406e2): "SKL" Skylake (Stepping C0)
@@ -669,7 +687,7 @@
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x4e,  8 (0x406e8): "KBL" Kaby Lake (Stepping G0)
 
-0x4f,  0 (0x406f0): ?
+0x4f,  0 (0x406f0): "BDX" Broadwell X
 0x4f,  1 (0x406f1): "BDX-ML" Broadwell X (Broadwell Server E, EP, EP4S, EX) (Stepping B0/M0/R0)
     Intel® Xeon® Processor E5v4 Product Family
     Intel® Xeon® Processor E7v4 Product Family
@@ -770,6 +788,9 @@
     Intel® Atom® 1.0GHz (Moorefield)
     Intel® Atom® Processor Z3530, Z3560, Z3570, Z3580, Z3590
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x5c,  x (0x506cx): Atom Goldmont (Apollo Lake)
+
 0x5c,  2 (0x506c2): Broxton
     Intel® Atom® Scalable Platform
     Intel® Atom® Processor T5500, T5700
@@ -827,6 +848,9 @@
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x5e,  8 (0x506e8): "KBL-H" Kaby Lake (Stepping A0)
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x5f,  x (0x506fx): Atom Goldmont D (Denverton)
+
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x5f,  0 (0x506f0): "DNV" Atom Denverton (Goldmont Microserver) (Stepping A0, A1), Skylake SP (Stepping A0, A1)
 
@@ -856,21 +880,45 @@
     8th Generation Intel® Core™ Mobile Processor Family
 
 0x6a,  x (0x606ax): "ICL" Ice Lake
-0x6a,  5 (0x606a5): "ICX-SP" Ice Lake (Stepping C0)
+0x6a,  4 (0x606a4): "ICX-SP" Ice Lake Xeon-SP
     3rd Generation Intel® Xeon® Scalable Processor Family
 
-0x6a,  6 (0x606a6): "ICX-SP" Ice Lake (Stepping D0)
+0x6a,  5 (0x606a5): "ICX-SP" Ice Lake Xeon-SP (Stepping C0)
     3rd Generation Intel® Xeon® Scalable Processor Family
 
+0x6a,  6 (0x606a6): "ICX-SP" Ice Lake Xeon-SP (Stepping D0)
+    3rd Generation Intel® Xeon® Scalable Processor Family
+
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0x6c,  x (0x606cx): "ICXD" Ice Lake Xeon D
     3rd Generation Intel® Xeon® Scalable Processor Family
+
+0x6c,  0 (0x606c0): "ICL-D" Ice Lake Xeon D
+    3rd Generation Intel® Xeon® Scalable Processor Family
+    Intel® Xeon® D-1513N, D-1518, D-1520, D-1521, D-1523N, D-1524N, D-1527, D-1528, D-1529, D-1531, D-1533N, D-1537, D-1539, D-1540, D-1541, D-1543N, D-1548, D-1553N, D-1557, D-1559, D-1563N, D-1564N, D-1567, D-1571, D-1573N, D-1577, D-1581, D-1587
+    Intel® Xeon® D-1602, D-1612, D-1622, D-1623N, D-1627, D-1632, D-1633N, D-1637, D-1649N, D-1653N
+    Intel® Xeon® D-2123IT, D-2141I, D-2142IT, D-2143IT, D-2145NT, D-2146NT, D-2161I, D-2163IT, D-2166NT, D-2173IT, D-2177NT, D-2183IT, D-2187NT, D-2191
 
 0x6c,  1 (0x606c1): "ICL-D" Ice Lake Xeon D
     3rd Generation Intel® Xeon® Scalable Processor Family
     Intel® Xeon® Processor D-17xx, D-27xx
+    Intel® Xeon® D-1702, D-1712TR, D-1713NT, D-1713NTE, D-1714, D-1715TER, D-1718T, D-1722NE, D-1726, D-1732TE, D-1733NT, D-1734NT, D-1735TR, D-1736, D-1736NT, D-1739, D-1746TER, D-1747NTE, D-1748TE, D-1749NT
+    Intel® Xeon® D-2712T, D-2733NT, D-2738, D-2745NX, D-2752NTE, D-2752TER, D-2753NT, D-2757NX, D-2766NT, D-2775TE, D-2776NT, D-2777NX, D-2779, D-2786NTE, D-2795NT, D-2796NT, D-2796TE, D-2798NT, D-2798NX, D-2799
 
-0x6e,  1 (0x606e1): Cougar Mountain (AMT)
+# Extrapolated from 0x606e1
+0x6e,  x (0x606ex): Cougar Mountain
+
+# https://www.intel.com/content/dam/www/public/us/en/documents/corporate-information/SA00233-microcode-update-guidance.pdf
+# https://boxmatrix.info/wiki/Property:Puma7
+0x6e,  1 (0x606e1): Cougar Mountain
+    Intel® Puma™ Family
     Intel® Puma™ 7 Home Gateway
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x75,  x (0x7065x): Atom Airmont NP (Lightning Mountain)
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x7a,  x (0x706ax): Atom Goldmont Plus (Gemini Lake)
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x7a,  0 (0x706a0): "GLK" Gemini Lake (Stepping A0)
@@ -896,11 +944,12 @@
 
 0x7d,  x (0x706dx): "ICL" Ice Lake Desktop
 
-0x7e,  x (0x706ex): "ICL" Ice Lake Mobile
-0x7e,  0 (0x706e0): "ICL" Ice Lake (Stepping A0)
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
+0x7e,  x (0x706ex): "ICL-U/Y" Ice Lake Mobile
+0x7e,  0 (0x706e0): "ICL-U/Y" Ice Lake (Stepping A0)
     10th Generation Intel® Core™ Processor Family
 
-0x7e,  1 (0x706e1): "ICL" Ice Lake (Stepping B0)
+0x7e,  1 (0x706e1): "ICL-U/Y" Ice Lake (Stepping B0)
     10th Generation Intel® Core™ Processor Family
 
 0x7e,  5 (0x706e5): "ICL-U/Y" Ice Lake (Stepping D1)
@@ -915,34 +964,63 @@
     Intel® Xeon Phi™ 72x5 Processor Family
     Intel® Xeon Phi™ 7235, 7285, 7295
 
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0x86,  x (0x8066x): Atom Tremont X (Jacobsville)
-0x86,  4 (0x80664): "SNR" Snow Ridge (Stepping B0)
+0x86,  4 (0x80664): "SNR" Snow Ridge  BTS (Tremont) (Stepping B0)
     Intel® Atom® Processor P59xxB
+    Intel® Atom® Processor P5942B, P5931B, P5962B, P5921B
 
-0x86,  5 (0x80665): "SNR" Snow Ridge (Stepping B1)
+0x86,  5 (0x80665): "SNR" Snow Ridge BTS (Tremont) (Stepping B1)
     Intel® Atom® Processor P59xxB
+    Intel® Atom® Processor P5962B, P5942B, P5931B, P5921B
 
-0x8a,  1 (0x806a1): "LKF" Lakefield (Stepping B2/B3)
+0x86,  7 (0x80667): "SNR" Parker Ridge / Snow Ridge NS/NX
+    Intel Atom® Processor C5310, C5315, C5320, C5325, C5125, C5115
+    Intel Atom® Processor P5322, P5332, P5342, P5352, P5362
+    Intel Atom® Processor P5721, P5731, P5742, P5752
+
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
+0x8a,  0 (0x806a0): "LKF" Lakefield (Tremont, Sunny Cove) (Stepping Bx)
+    Intel® Core™ Processor i3-L13G4, i5-L16G7
+
+0x8a,  1 (0x806a1): "LKF" Lakefield (Tremont, Sunny Cove) (Stepping B2/B3)
     Intel® Core™ Processor with Hybrid Technology
+    Intel® Core™ Processor i3-L13G4, i5-L16G7
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
-0x8c,  0 (0x806c0): "TGL" Tiger Lake (Stepping A0)
+0x8c,  0 (0x806c0): "TGL" Tiger Lake U (Stepping A0)
     11th Generation Intel® Core™ Processor Family
+    Intel® Core™ i3-1125G4, i3-1115GRE, i3-1115G4E, i3-1120G4, i3-1110G4
+    Intel® Core™ i5-1145G7, i5-1145GRE, i5-1145G7E, i5-1140G7, i5-1130G7
+    Intel® Core™ i7-1185G7, i7-1165G7, i7-1185GRE, i7-1185G7E, i7-1180G7, i7-1160G7
+    Intel® Celeron® 6305 Processor, Intel® Celeron® 6305E Processor
 
-0x8c,  1 (0x806c1): "TGL" Tiger Lake (Stepping B0, B1)
+0x8c,  1 (0x806c1): "TGL" Tiger Lake U/H35 (Stepping B0, B1)
     11th Generation Intel® Core™ Processor Family
     11th Generation Intel® Core™ Mobile Processor Family
     Intel® Celeron® Processor UP3, UP3 IOT, UP4, H35
+    Intel® Core™ i7-1195G7, i5-1155G7, i5-1135G7, i3-1115G4
+    Intel® Core™ i7-11390H, i5-11320H
+    Intel® Pentium® Gold 7505
 
-0x8c,  2 (0x806c2): "TGL-R" Tiger Lake Refresh (Stepping C0)
+0x8c,  2 (0x806c2): "TGL-R" Tiger Lake U Refresh (Stepping C0)
     11th Generation Intel® Core™ Processor Family
     11th Generation Intel® Core™ Mobile Processor Family
     Intel® Celeron® Processor UP3-Refresh, H35-Refresh
+
+0x8d,  0 (0x806d0): "TGL-H" Tiger Lake
+    11th Generation Intel® Core™ Processor Family
+    Intel® Core™ Processor i9-11980HK, i9-11950H, i9-11900H, i7-11850H, i7-11800H, i5-11500H, i5-11400H, i5-11260H, i7-11390H, i7-11375H, i7-11370H, i5-11320H, i5-11300H
+    Intel® Xeon® Processor Family
+    Intel® Xeon® W-11955M, Intel® Xeon® W-11855M
 
 0x8d,  1 (0x806d1): "TGL-H" Tiger Lake (Stepping R0)
     11th Generation Intel® Core™ Processor Family
     11th Generation Intel® Core™ Mobile Processor Family
     Intel® Celeron® Processor H81
+    Intel® Core™ Processor i9-11980HK, i9-11950H, i9-11900H, i7-11850H, i7-11800H, i5-11500H, i5-11400H, i5-11260H, i7-11390H, i7-11375H, i7-11370H, i5-11320H, i5-11300H
+    Intel® Xeon® Processor Family
+    Intel® Xeon® W-11955M, Intel® Xeon® W-11855M
 
 0x8e,  9 (0x806e9): "KBL-U/Y/U23e/AML-Y22" Kaby Lake Mobile (Kaby Lake U/Y, U23e), Amber Lake Y (Stepping H0)
     7th Generation Intel® Core™ Processor Family
@@ -997,19 +1075,23 @@
     Intel® Celeron® Processor 5000 Series
     Intel® Core™ Processor i7-8565U, i7-8665U
     Intel® Core™ Processor i5-8365U, i5-8265U
-    Intel® CoreTM Processor i7-10510Y, i5-10310Y
-    Intel® CoreTM Processor i5-10210Y, i5-10110Y
-    Intel® CoreTM Processor i7-8500Y
-    Intel® CoreTM Processor i5-8310Y, i5-8210Y, i5-8200Y
-    Intel® CoreTM Processor m3-8100Y
-    Intel® CoreTM Processor i7-10510U
-    Intel® CoreTM Processor i5-10210U
+    Intel® Core™ Processor i7-10510Y, i5-10310Y
+    Intel® Core™ Processor i5-10210Y, i5-10110Y
+    Intel® Core™ Processor i7-8500Y
+    Intel® Core™ Processor i5-8310Y, i5-8210Y, i5-8200Y
+    Intel® Core™ Processor m3-8100Y
+    Intel® Core™ Processor i7-10510U
+    Intel® Core™ Processor i5-10210U
     Intel® Pentium® Gold Processor 6405U
     Intel® Celeron® Processor 5305U
 
 # FIXME: this may be (0x9e, 13) from https://software.intel.com/security-software-guidance/insights/processors-affected-l1d-eviction-sampling
 0x8e, 13 (0x806ed): "WHL-U" Whiskey Lake (Desktop)
     8th Generation Intel® Core™ Mobile Processor Family
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x8f,  x (0x806fx): "SPR-X" Sapphire Rapids Xeon
+    4th Generation Intel® Xeon® Scalable Processor Family
 
 0x8f,  0 (0x806f0): "SPR-SP" Xeon Sapphire Rapids-SP (Stepping A)
     4th Generation Intel® Xeon® Scalable Processor Family
@@ -1035,6 +1117,8 @@
 
 0x8f,  7 (0x806f7): "SPR-SP" Xeon Sapphire Rapids-SP (Stepping E4)
     4th Generation Intel® Xeon® Scalable Processor Family
+    Intel® Xeon® Platinum 8452YL, Intel® Xeon® Platinum 8455CL, Intel® Xeon® Platinum 8468L, Intel® Xeon® Platinum 8468VL, Intel® Xeon® Platinum 8470L, Intel® Xeon® Platinum 8470QL, Intel® Xeon® Platinum 8475BL, Intel® Xeon® Platinum 8480BL, Intel® Xeon® Platinum 8480CL, Intel® Xeon® Platinum 8480L
+    Intel® Xeon® Gold 6414UL, Intel® Xeon® Gold 6430CL, Intel® Xeon® Gold 6430L
 
 # https://www.vmware.com/resources/compatibility/detail.php?deviceCategory=cpu&productid=153&vcl=true
 0x8f,  8 (0x806f8): "SPR-SP/HBM" Xeon Sapphire Rapids-SP, Xeon Max (Sapphire Rapids HBM) (Stepping E5/B3)
@@ -1043,13 +1127,14 @@
     Intel Xeon Silver 4400, Bronze 3400 (Sapphire-Rapids-SP) Series
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
-0x96,  0 (0x90660): "EHL" Elkhart Lake (Stepping A0)
-0x96,  1 (0x90661): "EHL" Elkhart Lake (Stepping B0, B1)
+0x96,  0 (0x90660): "EHL" Elkhart Lake (Tremont) (Stepping A0)
+0x96,  1 (0x90661): "EHL" Elkhart Lake (Tremont) (Stepping B0, B1)
     Intel® Pentium® J6426/N6415
     Intel® Celeron® J6412/J6413/N6210/N6211
     Intel® Atom® x6000E
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0x97,  0 (0x90670): "ADL" Alder Lake S (Stepping A0)
     12th Generation Intel® Core™ Processor Family
 
@@ -1062,30 +1147,41 @@
 0x97,  4 (0x90674): "ADL" Alder Lake S (Stepping G0)
     12th Generation Intel® Core™ Processor Family
 
-0x97,  5 (0x90675): "ADL" Alder Lake S (Stepping H0)
+0x97,  5 (0x90675): "ADL" Alder Lake S (Golden Cove, Gracemont) (Stepping H0)
+    12th Generation Intel® Core™ Processor Family
+    Intel® Core™ Processor i5-12600, i5-12500, i5-12400, i5-12400F, i3-12300, i3-12100, i3-12100F, i5-12600T, i5-12500T, i5-12400T, i3-12300T, i3-12100T
+    Intel® Pentium® Gold Processor Family
+    Intel® Pentium® Gold Processor G7400, G7400T
+    Intel® Celeron® Processor Family
+    Intel® Celeron® Processor G6900, G6900T
+
+0x9a,  0 (0x906a0): "ADL" Alder Lake U (Stepping J0)
     12th Generation Intel® Core™ Processor Family
 
-0x9a,  0 (0x906a0): "ADL" Alder Lake (Stepping J0)
+0x9a,  1 (0x906a1): "ADL" Alder Lake U (Stepping Q0)
     12th Generation Intel® Core™ Processor Family
 
-0x9a,  1 (0x906a1): "ADL" Alder Lake (Stepping Q0)
+0x9a,  2 (0x906a2): "ADL" Alder Lake U (Stepping K0)
     12th Generation Intel® Core™ Processor Family
 
-0x9a,  2 (0x906a2): "ADL" Alder Lake (Stepping K0)
+0x9a,  3 (0x906a3): "ADL" Alder Lake U (Stepping L0)
     12th Generation Intel® Core™ Processor Family
 
-0x9a,  3 (0x906a3): "ADL" Alder Lake (Stepping L0)
+0x9a,  4 (0x906a4): "ADL" Alder Lake U (Golden Cove, Gracemont) (Stepping R0)
     12th Generation Intel® Core™ Processor Family
+    Intel® Core™ Processor i7-1265U, i7-1260U, i7-1255U, i7-1250U, i5-1245U, i5-1240U, i5-1235U, i5-1230U, i3-1215U, i3-1210U
+    Intel® Pentium® Gold Processor Family
+    Intel® Pentium® Gold Processor 8505, 8500
+    Intel® Celeron® Processor Family
+    Intel® Celeron® Processor 7305, 7300
 
-0x9a,  4 (0x906a4): "ADL" Alder Lake (Stepping R0)
-    12th Generation Intel® Core™ Processor Family
-
-0x9c,  0 (0x906c0): "JSL" Jasper Lake (Stepping A0/A1)
+0x9c,  0 (0x906c0): "JSL" Jasper Lake (Tremont L) (Stepping A0/A1)
     Intel® Pentium® N6000/N6005
     Intel® Celeron® N4500/N4505/N5100/N5105
 
 0x9d,  x (0x906dx): "ICL-NNPI" Ice Lake Neural Network Processor for Deep Learning Inference
 
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0x9e,  9 (0x906e9): "KBL-G/H/S/X/E3" Kaby Lake Desktop (Kaby Lake H/S/X/G, Xeon E3), Greenlow (Stepping B0)
     7th Generation Intel® Core™ Processor Family
     7th Generation Intel® Core™ Mobile Processor Family
@@ -1166,13 +1262,28 @@
     10th Generation Intel® Core™ Processor Family
     10th Generation Intel® Core™ Mobile Processor Family
 
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0xa5,  3 (0xa0653): "CML-S62" Comet Lake H S 6 2 (Stepping G1)
     10th Generation Intel® Core™ Processor Family
+    Intel® Core™ Processor i3-10320, i3-10300, i3-10300T, i3-10100, i3-10100T, i3-10100F, i3-10325, i3-10305, i3-10305T, i3-10105, i3-10105F, i3-10105T
+    Intel® Core™ Processor i5-10600, i5-10600T, i5-10505, i5-10500, i5-10500T, i5-10400, i5-10400F, i5-10400T
+    Intel® Pentium® Gold Processor Family
+    Intel® Pentium® Gold Processor G6600, G6500, G6500T, G6400, G6400T, G6605, G6505, G6505T, G6405, G6405T
+    Intel® Celeron® Processor Family
+    Intel® Celeron® Processor G5920, G5900, G5900T, G5925, G5905, G5905T
+    Intel® Xeon® W processor family
+    Intel® Xeon® W-1250 processors
 
 0xa5,  4 (0xa0654): "CML" Comet Lake H S 10 2 (Stepping P1)
 
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0xa5,  5 (0xa0655): "CML-S102" Comet Lake H S 10 2 (Stepping Q0)
     10th Generation Intel® Core™ Processor Family
+    Intel® Core™ Processor i5-10600K, i5-10600KF, i5-10400, i5-10400F
+    Intel® Core™ Processor i7-10700K, i7-10700KF, i7-10700, i7-10700T, i7-10700F
+    Intel® Core™ Processor i9-10900K, i9-10900KF, i9-10900, i9-10900T, i9-10900F, i9-10850K
+    Intel® Xeon® W processor family
+    Intel® Xeon® W-1290P, W-1290, W-1290T, W-1270P, W-1270, W-1250P
 
 0xa6,  0 (0xa0660): "CML-U62-V1" Comet Lake U A0 (Stepping A0)
     10th Generation Intel® Core™ Processor Family
@@ -1183,22 +1294,67 @@
     10th Generation Intel® Core™ Processor Family
     10th Generation Intel® Core™ Mobile Processor Family
 
+0xa7,  0 (0xa0670): "RKL-S" Rocket Lake
+    11th Generation Intel® Core™ Processor Family
+    Intel® Core™ Processor i5-11600K, i5-11600KF, i5-11600, i5-11600T, i5-11500, i5-11500T, i5-11400, i5-11400F, i5-11400T
+    Intel® Core™ Processor i7-11700K, i7-11700KF, i7-11700, i7-11700T, i7-11700F
+    Intel® Core™ Processor i9-11900K, i9-11900KF, i9-11900, i9-11900T, i9-11900F
+    Intel® Xeon® E-2300 Processor Family
+    Intel® Xeon® E-2388G, E-2378G, E-2378, E-2386G, E-2356G, E-2336, E-2374G, E-2334, E-2324G, E-2314, E-2378G, E-2378, E-2386G, E-2356G, E-2336, E-2374G, E-2334, E-2324G, E-2314 processor
+    Intel® Xeon® W-1300 processor family
+    Intel® Xeon® W-1300 Processors W-1390P, W-1390, W-1390T, W-1370P, W-1370, W-1350P, W-1350
+
 0xa7,  1 (0xa0671): "RKL-S" Rocket Lake (Stepping B0)
     11th Generation Intel® Core™ Processor Family
+    Intel® Core™ Processor i5-11600K, i5-11600KF, i5-11600, i5-11600T, i5-11500, i5-11500T, i5-11400, i5-11400F, i5-11400T
+    Intel® Core™ Processor i7-11700K, i7-11700KF, i7-11700, i7-11700T, i7-11700F
+    Intel® Core™ Processor i9-11900K, i9-11900KF, i9-11900, i9-11900T, i9-11900F
+    Intel® Xeon® E-2300 Processor Family
+    Intel® Xeon® E-2388G, E-2378G, E-2378, E-2386G, E-2356G, E-2336, E-2374G, E-2334, E-2324G, E-2314, E-2378G, E-2378, E-2386G, E-2356G, E-2336, E-2374G, E-2334, E-2324G, E-2314 processor
+    Intel® Xeon® W-1300 processor family
+    Intel® Xeon® W-1300 Processors W-1390P, W-1390, W-1390T, W-1370P, W-1370, W-1350P, W-1350
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
-0xaa,  0 (0xa06a0): Meteor Lake (Stepping A0-1)
+# https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
+0xaa,  0 (0xa06a0): "MTL" Meteor Lake (Stepping A0-1)
     14th Generation Intel® Core™ Processor Family
 
-0xaa,  1 (0xa06a1): Meteor Lake (Stepping A0-2)
+0xaa,  1 (0xa06a1): "MTL" Meteor Lake (Stepping A0-2)
     14th Generation Intel® Core™ Processor Family
 
-0xaa,  2 (0xa06a2): Meteor Lake (Stepping B0)
+# https://twitter.com/InstLatX64/status/1647504366251679744
+0xaa,  2 (0xa06a2): "MTL" Meteor Lake (Stepping B0)
     14th Generation Intel® Core™ Processor Family
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+# https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
+0xac,  x (0xa06cx): "MTL" Meteor Lake
+    14th Generation Intel® Core™ Processor Family
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+# https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
+0xad,  x (0xa06dx): "GNR-X" Granite Rapids Xeon
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+# https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
+0xae,  x (0xa06ex): "GNR-D" Granite Rapids D
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+# https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
+0xaf,  x (0xa06fx): "SRF" Sierra Forest Xeon
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+# https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
+0xb6,  x (0xb066x): "GRR" Grand Ridge
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0xb7,  x (0xb067x): "RPL" Raptor Lake
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
-0xb7,  1 (0xb0671): "RPL-S" Raptor Lake S 8P+16E, HX 8P+16E (Stepping B-0)
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
+0xb7,  1 (0xb0671): "RPL-S" Raptor Lake S 8P+16E, HX 8P+16E (Raptor Cove/Gracemont) (Stepping B-0)
     13th Generation Intel® Core™ Processor Family
+    Intel® Core™ Processor i9-13900K, i7-13700K, i5-13600K, i9-13900KF, i7-13700KF, i5-13600KF
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 0xba,  2 (0xb06a2): "RPL-H/P/PX/U" Raptor Lake H 6P+8E, P 6P+8E, PX 6E+8P (Stepping J-0)
@@ -1207,6 +1363,10 @@
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 0xba,  3 (0xb06a3): "RPL-U" Raptor Lake U 2E+8P (Stepping Q-0)
     13th Generation Intel® Core™ Processor Family
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0xbd,  x (0xb06dx): "LNL" Lunar Lake
+    16th Generation Intel® Core™ Processor Family
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0xbe,  0 (0xb06e0): "ADL" Alder Lake N (Stepping A0)
@@ -1221,6 +1381,14 @@
 0xbf,  5 (0xb06f5): "ADL/RPL-S" Alder Lake, Raptor Lake S 6P+0E (Stepping C-0)
     12th Generation Intel® Core™ Processor Family
     13th Generation Intel® Core™ Processor Family
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.3
+0xc6,  x (0xc066x): "ARL" Arrow Lake
+    15th Generation Intel® Core™ Processor Family
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0xcf,  x (0xc06fx): "EMR-X" Emerald Rapids Xeon
+    5th Generation Intel® Xeon® Scalable Processor Family
 
 
 [Family 15]
