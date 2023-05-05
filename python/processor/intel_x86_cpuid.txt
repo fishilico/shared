@@ -414,8 +414,11 @@
 
 0x35,  x (0x3065x): Atom Saltwell Tablet (Cloverview)
 0x35,  0 (0x30650): ?
-0x35,  1 (0x30651): Atom Cloverview
+
+# https://github.com/chipsec/chipsec/blob/1.10.4/chipsec/cfg/8086/cht.xml
+0x35,  1 (0x30651): "CHT" Atom Braswell/Cherry Trail, Atom Cloverview
     DualCore Intel® Atom® Z2760, 1800MHz (Cloverview, Saltwell core)
+    Intel® Atom™ Processor Z8000 series
 
 # https://boxmatrix.info/wiki/Property:Puma6
 0x35,  8 (0x30658): ?
@@ -433,8 +436,8 @@
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x37,  x (0x3067x): Atom Silvermont (Bay Trail, Valleyview)
 
-0x37,  1 (0x30671): ?
-0x37,  2 (0x30672): ?
+0x37,  1 (0x30671): "BYT" Atom Silvermont (BayTrail)
+0x37,  2 (0x30672): "BYT" Atom Silvermont (BayTrail)
 0x37,  3 (0x30673): "BYT" Atom Silvermont (BayTrail/BYT / Valley View), Valley View, Bay Trail I (B2, B3 step)
     Intel® Atom® Processor Z Series
     Intel® Celeron® Processor J Series
@@ -527,6 +530,10 @@
     Intel® Pentium® 3560M
     Intel® Celeron® 2970M
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x3d,  x (0x306dx): "BDW" Broadwell
+    5th Generation Intel® Core™ Processor Family
+
 0x3d,  4 (0x306d4): "BDW-U/Y" Broadwell Core (Broadwell U/Y)
     5th Generation Intel® Core™ Processor Family
     Intel® Pentium® Mobile Processor Family
@@ -598,6 +605,9 @@
     Intel® Core™ Processor i3-4010Y, i3-4012Y, i3-4020Y, i3-4030Y
     Intel® Pentium® Processor 3560Y, 3561Y
 
+0x46,  x (0x4066x): "HSW" Haswell
+    4th Generation Intel® Core™ Processor Family
+
 0x46,  1 (0x40661): "HSW-H" Haswell GT3E (Haswell Perf), Haswell Perf Halo, Haswell H, Haswell R
     4th Generation Intel® Core™ Processor Family
     Intel® Core™ Extreme Processor (5960x, 5930x, 5820x)
@@ -606,6 +616,10 @@
     Intel® Core™ Processor i5-4210H, i5-4402EC
     Intel® Core™ Processor i7-4770R
     Intel® Core™ Processor i5-4570R, i5-4670R
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x47,  x (0x4067x): "BDW-G" Broadwell-G
+    5th Generation Intel® Core™ Processor Family
 
 0x47,  1 (0x40671): "BDW-H/E3" Broadwell GT3E (Broadwell H 43e), Broadwell Xeon E3
     5th Generation Intel® Core™ Processor Family
@@ -663,10 +677,16 @@
     Intel® Atom® Processor C2000 Product Family
     Intel® Atom® Processor C2750, C2730, C2550, C2530, C2350 (Avoton)
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x4e,  x (0x406ex): "SKL" Skylake-L
+    6th Generation Intel® Core™ Processor Family
+
 0x4e,  1 (0x406e1): "SKL" Skylake
+    6th Generation Intel® Core™ Processor Family
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x4e,  2 (0x406e2): "SKL" Skylake (Stepping C0)
+    6th Generation Intel® Core™ Processor Family
 
 0x4e,  3 (0x406e3): "SKL-U/Y/SKL-U23e" Skylake Mobile (Skylake U/Y/U23e) (Stepping D0, K1)
     6th Generation Intel® Core™ Processor Family
@@ -704,6 +724,13 @@
     Intel® Core™ Processor i7-6800K, i7-6850, i7-6900K
     Intel® Xeon® Processor v4 E5-2603, E5-2608L, E5-2609, E5-2618L, E5-2620, E5-2623, E5-2628L, E5-2630L, E5-2630, E5-2637, E5-2640, E5-2643, E5-2648L, E5-2650L, E5-2650, E5-2658, E5-2660, E5-2667, E5-2679, E5-2680, E5-2683, E5-2690, E5-2695, E5-2697A, E5-2697, E5-2698, E5-2699A, E5-2699, E5-2699R, E5-4628L
     Intel® Xeon® Processor v4 E7-4809, E7-4820, E7-4830, E7-4850, E7-8855, E7-8860, E7-8867, E7-8870, E7-8880, E7-8890, E7-8891, E7-8893, E7-8894
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x55,  0 (0x50650): "SKX" Skylake Server
+    Intel® Xeon® Scalable Processor Family
+
+0x55,  1 (0x50651): "SKX" Skylake Server
+    Intel® Xeon® Scalable Processor Family
 
 # https://www.etallen.com/cpuid.html
 # https://fossies.org/linux/misc/cpuid-20230406.src.tar.gz/cpuid-20230406/cpuid.c
@@ -827,12 +854,18 @@
 0x5d,  1 (0x506d1): ?
     Intel® Atom® x3-C3230 (SoFIA, Smart or Feature phone with Intel Architecture)
 
-0x5e,  0 (0x506e0): ?
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
+0x5e,  x (0x506ex): "SKL" Skylake
+    6th Generation Intel® Core™ Processor Family
+
+0x5e,  0 (0x506e0): "SKL" Skylake
+    6th Generation Intel® Core™ Processor Family
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x5e,  1 (0x506e1): "SKL-H" Skylake H (Stepping Q0)
 
-0x5e,  2 (0x506e2): ?
+0x5e,  2 (0x506e2): "SKL" Skylake
+    6th Generation Intel® Core™ Processor Family
 
 0x5e,  3 (0x506e3): "SKL-H/S/E3" Skylake Desktop (Skylake H/S, Xeon E3) (Stepping R0/N0)
     6th Generation Intel® Core™ Processor Family
@@ -927,7 +960,7 @@
     Intel Spreadtrum SC9853I-IA
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0x7a,  x (0x706ax): Atom Goldmont Plus (Gemini Lake)
+0x7a,  x (0x706ax): "GLK" Atom Goldmont Plus (Gemini Lake)
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x7a,  0 (0x706a0): "GLK" Gemini Lake (Stepping A0)
@@ -959,6 +992,9 @@
     10th Generation Intel® Core™ Processor Family
 
 0x7e,  1 (0x706e1): "ICL-U/Y" Ice Lake (Stepping B0)
+    10th Generation Intel® Core™ Processor Family
+
+0x7e,  4 (0x706e4): "ICL-U/Y" Ice Lake
     10th Generation Intel® Core™ Processor Family
 
 0x7e,  5 (0x706e5): "ICL-U/Y" Ice Lake (Stepping D1)
