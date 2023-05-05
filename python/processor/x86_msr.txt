@@ -171,6 +171,7 @@ CORESOLO 0x47 LASTBRANCH_7
 0x46 LASTBRANCH_6_FROM_IP
 0x47 LASTBRANCH_7_FROM_IP
 
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
 0x48 IA32_SPEC_CTRL # Intel-SDM-Vol4 Speculation Control
 0x49 IA32_PRED_CMD  # Intel-SDM-Vol4 Prediction Command
 0x4E IA32_PPIN_CTL  # Intel-SDM-Vol4 Protected Processor Inventory Number Enable Control
@@ -245,7 +246,6 @@ AMD64 0x8B PATCH_LEVEL
 # https://cdrdv2-public.intel.com/733568/tdx-module-1.0-public-spec-344425004.pdf Architecture Specification: Intel Trust Domain Extensions (Intel TDX) Module (June 2022, 344425-004US)
 0x9A INTR_PENDING # Determine if there are pending interrupts or events
 
-
 0x9B IA32_SMM_MONITOR_CTL # Intel-SDM-Vol4 SMM Monitor Configuration
 0x9E IA32_SMBASE          # Intel-SDM-Vol4 Base address of the logical processor's SMRAM image
 
@@ -261,6 +261,8 @@ CORE10 0xA5 FIT_BIOS_ERROR     # BIOS Firmware Table error code
 CORE11 0xA7 BIOS_DEBUG
 
 0xBC IA32_MISC_PACKAGE_CTLS     # Intel-SDM-Vol4 Power Filtering Control
+
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
 0xBD IA32_XAPIC_DISABLE_STATUS  # Intel-SDM-Vol4 xAPIC Disable Status
 
 # Intel-SDM-Vol4 General Performance Counter 0
@@ -309,6 +311,8 @@ XEONSCAL4 0xF0 RAR_INFO               # Read Only RAR Information
 XEONSCAL4 0x105 CORE_BIST             # Core BIST
 
 0xFE IA32_MTRRCAP            # Intel-SDM-Vol4 MTRR Capability
+
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
 0x10A IA32_ARCH_CAPABILITIES # Intel-SDM-Vol4 Enumeration of Architectural Features
 0x10B IA32_FLUSH_CMD         # Intel-SDM-Vol4 Flush Command
 0x10F IA32_TSX_FORCE_ABORT   # Intel-SDM-Vol4 TSX Force Abort
@@ -327,6 +331,7 @@ ATOMBRASWELL 0x120 POWER_MISC
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
 0x121 EMULATE_PM_TIMER
 
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
 0x122 IA32_TSX_CTRL     # Intel-SDM-Vol4 TSX Control
 0x123 IA32_MCU_OPT_CTRL # Intel-SDM-Vol4 Microcode Update Option Control
 
@@ -370,8 +375,23 @@ CORE10 0x151 BIOS_DONE
 0x17A IA32_MCG_STATUS   # Intel-SDM-Vol4 Global Machine Check Status
 0x17B IA32_MCG_CTL      # Intel-SDM-Vol4 Global Machine Check Control
 
+# https://github.com/liuwei142536/BIOS_Amesterdam/blob/3014c18c7c467266c5a86aff39fce25bc462e812/GrantleyPkg/Ras/Include/mca_msr.h#L232
+# https://github.com/marktsai0316/RAIDOOBMODULE/blob/abf3a08719182c16769d5549db1235e05ec97fc0/PurleySktPkg/Include/mca_msr.h#L228
+# https://www.intel.com/content/dam/develop/external/us/en/documents/emca2-integration-validation-guide-556978.pdf
+# (Reliability, Availability and Serviceability (RAS) Integration and Validation Guide for the Intel Xeon Processor E7- v3 Family
+# Error Reporting through EMCA Gen 2, April 2015)
+# documents page 12 for MCA (Machine Check Architecture): Two new MSRs:
+# CORE_SMI_ERR_SRC and UNCORE_SMI_ERR_SRC are used by SMM handler to determine
+# if the SMI was caused by a MCE or CMCI that was rerouted to a SMI.
+# SMM will clear the MSR when return.
+0x17C CORE_SMI_ERR_SRC
+
 # Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
 CORE4 0x17D SMM_MCA_CAP # Enhanced SMM Capabilities
+
+# https://github.com/liuwei142536/BIOS_Amesterdam/blob/3014c18c7c467266c5a86aff39fce25bc462e812/GrantleyPkg/Ras/Include/mca_msr.h#L233
+# https://github.com/marktsai0316/RAIDOOBMODULE/blob/abf3a08719182c16769d5549db1235e05ec97fc0/PurleySktPkg/Include/mca_msr.h#L229
+0x17E UNCORE_SMI_ERR_SRC
 
 # Intel-SDM-Vol4 (Xeon Processor E5)
 XEONE5 0x17F ERROR_CONTROL # MC Bank Error Configuration
@@ -523,6 +543,7 @@ CORE7 0x1F5 PRMRR_PHYS_MASK  # Processor Reserved Memory Range Register - Physic
 0x1F5 PRMRR_MASK # Mask for PRMRR_BASE=0x2A0
 
 # From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
+# https://services.google.com/fh/files/misc/intel_tdx_-_full_report_041423.pdf
 0x1F6 SMRR2_PHYBASE
 0x1F7 SMRR2_PHYMASK
 
@@ -1079,6 +1100,7 @@ CORE10 0x541 CORE_UARCH_CTL   # Core Microarchitecture Control
 # https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/model_6fx/model_6fx_init.c
 0x5A0 IA32_PECI_CTL
 
+# In SgxLateInitSPR UEFI module 4th Generation Intel Xeon Scalable Processor Family), it is named MCHECK_CMCS_MSR
 0x600 IA32_DS_AREA               # Intel-SDM-Vol4 DS Save Area
 
 # Intel-SDM-Vol4 (11th Generation Intel Core)
@@ -1476,6 +1498,11 @@ CORE8 0x73B UNC_CBO_7_PERFCTR1    # Uncore C-Box 7, Performance Counter 1
 # https://download.asrock.com/Manual/C621A%20WS.pdf AsRock C621A WS User Manual (same)
 # https://download.gigabyte.com/FileList/Manual/server_manual_r161-r12_e_10.pdf Gigabyte R161-R12 User Manual "software error injection is supported by unlocking MSR 0x790."
 ? 0x790 SW_ERROR_INJECTION # Software Error Injection
+
+# https://services.google.com/fh/files/misc/intel_tdx_-_full_report_041423.pdf
+# https://enveloper14.rssing.com/chan-8140356/article43.html "Intel Xeon Processor E7-8800/4800 V3 Product Family Technical Overview", for Enhanced machine check architecture recovery Gen2 (EMCA2)
+# https://cdrdv2-public.intel.com/671064/329176-mca-enhancements-in-intel-xeon-processors.pdf (formerly http://www.intel.com/content/dam/www/public/us/en/documents/white-papers/enhanced-mca-logging-xeon-paper.pdf) "MCA Enhancements in Intel Xeon Processors"
+0x793 EXTENDED_MCG_PTR      # Extended Machine Check Pointer
 
 # 0x800-0x8FF is the x2APIC range
 
@@ -2564,7 +2591,8 @@ CORE12 0x130B RELOAD_FIXED_CTR2
 0x1401 IA32_SEAMRR_PHYS_MASK   # Secure Arbitration Mode Range Register - Physical Mask Control Register
 
 # From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/p-seam-loader/src/common/x86_defs/msr_defs.h
-0x1402 IA32_SEAMEXTEND
+# https://services.google.com/fh/files/misc/intel_tdx_-_full_report_041423.pdf
+0x1402 IA32_SEAM_EXTEND # Secure Arbitration Mode Range Register - Extend
 
 0x1406 IA32_MCU_CONTROL # Intel-SDM-Vol4 MCU Control
 
@@ -2661,6 +2689,7 @@ CORE12 0x14C6 RELOAD_PMC5
 GEODE 0x1900 BUSCONT_CONF0
 
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/data-operand-independent-timing-isa-guidance.html
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
 0x1B01 IA32_UARCH_MISC_CTL            # Intel-SDM-Vol4
 
 # Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors)
