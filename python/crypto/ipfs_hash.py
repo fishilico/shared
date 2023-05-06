@@ -88,8 +88,16 @@ class MultiCodec(enum.IntEnum):
     SHA3_384 = 0x15
     SHA3_256 = 0x16
     SHA3_224 = 0x17
+    SHAKE_128 = 0x18
+    SHAKE_256 = 0x19
+    KECCAK_224 = 0x1A
+    KECCAK_256 = 0x1B
+    KECCAK_384 = 0x1C
+    KECCAK_512 = 0x1D
+    BLAKE3 = 0x1E
     SHA2_384 = 0x20
     MURMUR3_X64_64 = 0x22
+    MURMUR3_32 = 0x23
 
     IP6 = 0x29
     PATH = 0x2F
@@ -107,6 +115,8 @@ class MultiCodec(enum.IntEnum):
     PROTOBUF = 0x50
     CBOR = 0x51
     RAW = 0x55
+    RLP = 0x60
+    BENCODE = 0x63
     DAG_PB = 0x70  # MerkleDAG Protobuf
     DAG_CBOR = 0x71  # MerkleDAG CBOR
     LIBP2P_KEY = 0x72
@@ -134,11 +144,25 @@ class MultiCodec(enum.IntEnum):
     STELLAR_BLOCK = 0xD0
     STELLAR_TX = 0xD1
 
+    MD4 = 0xD4
+    MD5 = 0xD5
+
+    DECRED_BLOCK = 0xE0
+    DECRED_TX = 0xE1
+
     IPLD = 0xE2
     IPFS = 0xE3
     SWARM = 0xE4
     IPNS = 0xE5
+    ZERONET = 0xE6
     DNSLINK = 0xE8
+
+    DASH_BLOCK = 0xF0
+    DASH_TX = 0xF1
+
+    SWARM_MANIFEST = 0xFA
+    SWARM_FEED = 0xFB
+    BEESON = 0xFC
 
     UDP = 0x0111
 
@@ -247,6 +271,9 @@ def multibase_decode(data_str: str) -> bytes:
     if data_str.startswith("0x00"):
         return data_str[4:].encode()
     if data_str.startswith("0"):  # binary
+        if data_str.startswith("0x"):  # non-standard hexadecimal with usual 0x prefix
+            assert (len(data_str) % 2) == 0
+            return bytes.fromhex(data_str[2:])
         assert (len(data_str) % 8) == 1
         return int(data_str[1:], 2).to_bytes(len(data_str) // 8, "big")
     if data_str.startswith("7"):  # octal
@@ -368,21 +395,32 @@ class CID:
             assert raw_cid.startswith(b"\x12\x20")  # SHA256, 32 bytes
             assert len(raw_cid) == 0x22
             return cls(0, "", MultiCodec.DAG_PB, MultiCodec.SHA2_256, raw_cid[2:])
-        else:
-            raw_cid = multibase_decode(cid)
-            cid_version, raw_cid = decode_varint(raw_cid)
-            if cid_version != 1:
-                raise NotImplementedError(
-                    "CIDv{} {}: unknown version with hex {}".format(cid_version, cid, raw_cid.hex())
-                )
 
-            multicodec, multihash = decode_varint(raw_cid)
-            multihash_code, multihash = decode_varint(multihash)
-            multihash_size, multihash_out = decode_varint(multihash)
-            if multihash_size != len(multihash_out):
-                raise ValueError("Unexpected hash size {} != {}", multihash_size, len(multihash_out))
-            encoding = "0x00" if cid.startswith("0x00") else cid[:1]
-            return cls(cid_version, encoding, multicodec, multihash_code, multihash_out)
+        raw_cid = multibase_decode(cid)
+        cid_version, raw_cid = decode_varint(raw_cid)
+        if cid_version in {MultiCodec.IPFS, MultiCodec.SWARM}:
+            # In https://eips.ethereum.org/EIPS/eip-1577 (ERC-1577: contenthash field for ENS),
+            # the contenthash of a ENS domain can start with 0xe3 (IPFS) or 0xe4 (Swarm)
+            # and the content does not include a base prefix
+            cid_version, raw_cid = decode_varint(raw_cid)
+
+        if cid_version != 1:
+            raise NotImplementedError("CIDv{} {}: unknown version with hex {}".format(cid_version, cid, raw_cid.hex()))
+
+        multicodec, multihash = decode_varint(raw_cid)
+        multihash_code, multihash = decode_varint(multihash)
+        multihash_size, multihash_out = decode_varint(multihash)
+        if multihash_size != len(multihash_out):
+            raise ValueError("Unexpected hash size {} != {}", multihash_size, len(multihash_out))
+
+        if cid.startswith("0x00"):
+            encoding = "0x00"
+        elif cid.startswith("0x"):
+            encoding = "0x"
+        else:
+            encoding = cid[:1]
+
+        return cls(cid_version, encoding, multicodec, multihash_code, multihash_out)
 
     def encode(self, version: Optional[int] = None, encoding: Optional[str] = None) -> str:
         if version is None:
@@ -407,6 +445,10 @@ class CID:
                 + encode_varint(len(self.multihash_out))
                 + self.multihash_out
             )
+            if encoding == "f" or encoding == "0x":
+                return encoding + raw_cid.hex()
+            if encoding == "F":
+                return "F" + raw_cid.hex().upper()
             if encoding == "b":
                 return "b" + base64.b32encode(raw_cid).decode("ascii").rstrip("=").lower()
             if encoding == "B":
@@ -684,6 +726,26 @@ def run_self_tests() -> None:
     assert cidv1_obj.multihash_out == bytes.fromhex("b7fe081ef41160a57b591356186076e5eec77402385325bc1a0816b5bb764adb")
     assert cidv1_obj.encode() == cidv1b
     assert cidv1_obj.encode(version=0) == cidv0
+
+    # Example on https://eips.ethereum.org/EIPS/eip-1577
+    cidv0 = "QmRAQB6YaCyidP37UdDnjFY5vQuiBrcqdyoW1CuDgwxkD4"
+    cidv1 = "0xe3010170122029f2d17be6139079dc48696d1f582a8530eb9805b561eda517e22a892c7e3f1f"
+    len_0xe301 = len("0xe301")
+    cidv1_obj = CID.decode(cidv1)
+    assert cidv1_obj.version == 1
+    assert cidv1_obj.multicodec == MultiCodec.DAG_PB
+    assert cidv1_obj.multihash_code == MultiCodec.SHA2_256
+    assert cidv1_obj.multihash_out == bytes.fromhex("29f2d17be6139079dc48696d1f582a8530eb9805b561eda517e22a892c7e3f1f")
+    assert cidv1_obj.encode() == "0x" + cidv1[len_0xe301:]
+    assert cidv1_obj.encode(version=0) == cidv0
+
+    cidv1 = "0xe40101fa011b20d1de9994b4d039f6548d191eb26786769f580809256b4685ef316805265ea162"
+    cidv1_obj = CID.decode(cidv1)
+    assert cidv1_obj.version == 1
+    assert cidv1_obj.multicodec == MultiCodec.SWARM_MANIFEST
+    assert cidv1_obj.multihash_code == MultiCodec.KECCAK_256
+    assert cidv1_obj.multihash_out == bytes.fromhex("d1de9994b4d039f6548d191eb26786769f580809256b4685ef316805265ea162")
+    assert cidv1_obj.encode() == "0x" + cidv1[len_0xe301:]
 
     # Test to host anything, on https://bafkqadcimvwgy3zmebevarstee.ipfs.cf-ipfs.com/
     hello_cid_obj = CID(1, "b", MultiCodec.RAW, MultiCodec.IDENTITY, b"Hello, IPFS!")
