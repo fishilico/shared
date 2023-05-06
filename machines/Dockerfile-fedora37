@@ -100,17 +100,17 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
 #       gcc: gcc (GCC) 12.2.1 20221121 (Red Hat 12.2.1-4)
-#       clang: clang version 15.0.7 (Fedora 15.0.7-1.fc37)
-#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 12.2.1 20221121 (Fedora MinGW 12.2.1-5.fc37)
-#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 12.2.1 20221121 (Fedora MinGW 12.2.1-5.fc37)
-#       wine: wine-8.2 (Staging)
-#       Linux kernel: 6.1.15-200.fc37.x86_64
+#       clang: clang version 15.0.7 (Fedora 15.0.7-2.fc37)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 12.2.1 20221121 (Fedora MinGW 12.2.1-6.fc37)
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 12.2.1 20221121 (Fedora MinGW 12.2.1-6.fc37)
+#       wine: wine-8.5 (Staging)
+#       Linux kernel: 6.2.9-200.fc37.x86_64
 #       /lib/ld-linux.so.2: ld.so (GNU libc) stable release version 2.36.
 #       python: Python 3.11.2
 #       python3: Python 3.11.2
 #       javac: javac 11.0.18
 #       java: openjdk 11.0.18 2023-01-17
-#       rustc: rustc 1.67.1 (d5a82bbd2 2023-02-07) (Fedora 1.67.1-1.fc37)
-#       cargo: cargo 1.67.1
+#       rustc: rustc 1.68.2 (9eb3afe9e 2023-03-27) (Fedora 1.68.2-1.fc37)
+#       cargo: cargo 1.68.2
 #       coqc: The Coq Proof Assistant, version 8.16.1 compiled with OCaml 4.14.0
 #       openssl: OpenSSL 3.0.8 7 Feb 2023 (Library: OpenSSL 3.0.8 7 Feb 2023)
