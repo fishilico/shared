@@ -416,7 +416,8 @@ def show_pkcs8_private_key_info(privkey_der, list_only=False, show_pem=False, in
     # PrivateKeyAlgorithmIdentifier ::= AlgorithmIdentifier
     # PrivateKey ::= OCTET STRING
     # Attributes ::= SET OF Attribute
-    version, privatekey_algid_der, privatekey_der = decode_sequence(privkey_der, 3)
+    priv_asn1 = decode_sequence(privkey_der, counts=(3, 4))
+    version, privatekey_algid_der, privatekey_der = priv_asn1[:3]
     if version != 0:
         raise ValueError("Unknown PrivateKeyInfo version {}".format(version))
     privatekey_algid = decode_x509_algid(privatekey_algid_der)
@@ -438,3 +439,11 @@ def show_pkcs8_private_key_info(privkey_der, list_only=False, show_pem=False, in
     else:
         util_bin.run_openssl_asn1parse(privatekey_algid_der)
         raise ValueError("Unknown encryption algorithm {}".format(privatekey_algid))
+
+    if len(priv_asn1) >= 4:
+        attributes_der = priv_asn1[3]
+        # It starts with a continuation tag
+        if not attributes_der.startswith(b"\xa0"):
+            raise ValueError("Unknown PrivateKeyInfo field: {}".format(repr(attributes_der)))
+        attributes = decode_sequence(decode_object(attributes_der))
+        print("{}    * attributes: {}".format(indent, repr(attributes)))
