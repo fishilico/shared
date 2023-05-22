@@ -103,6 +103,7 @@ PENTIUM 0x13 CTR1 # Section 20.6.9.3, "Events Counted."
 0x1B IA32_APIC_BASE # Intel-SDM-Vol4 APIC base address
 
 # https://cdrdv2-public.intel.com/315168/315168_TXT_MLE_Development%20Guide_rev_017_3.pdf Intel Trusted Execution Technology (Intel TXT) Software Development Guide (315168-017 Revision 017.3, March 2022) "Actual Public Key Hash is typically available in CPU MSRs 0x20...0x23"
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h defines MSR_ACM_CPU_KEY_HASH_{0,1,2,3}
 0x20 ACM_SIGNER_PUBLICKEY_HASH_0
 0x21 ACM_SIGNER_PUBLICKEY_HASH_1
 0x22 ACM_SIGNER_PUBLICKEY_HASH_2
@@ -116,6 +117,12 @@ XEONKNC 0x29 EVNTSEL1
 
 # Intel-SDM-Vol4 (Core 2, Atom, Silvermont) Processor Hard Power-On Configuration
 0x2A EBL_CR_POWERON
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x2B THREAD_SMI_ERR_INJ_CONTROL # Enhanced MCA Thread error injection control
+0x2C CORE_SMI_ERR_INJ_CONTROL   # Enhanced MCA Core error injection control
+0x2D UNCORE_SMI_ERR_INJ_CONTROL # Enhanced MCA Uncore error injection control
+
 PENTIUM4 0x2A EBC_HARD_POWERON # Intel-SDM-Vol4 (Pentium 4 and Xeon) Processor Hard Power-On Configuration
 PENTIUM4 0x2B EBC_SOFT_POWERON # Intel-SDM-Vol4 (Pentium 4 and Xeon) Processor Soft Power-On Configuration
 
@@ -124,7 +131,11 @@ PENTIUM4 0x2C EBC_FREQUENCY_ID
 
 # https://review.coreboot.org/c/coreboot/+/51796/14/src/include/cpu/intel/msr.h#10
 # https://source.denx.de/u-boot/u-boot/-/blob/v2022.10/arch/x86/include/asm/msr-index.h
-0x2E PIC_MSG_CONTROL # Register for bit PLATFORM_INFO_SET_TDP = 1 << 29 and "Enable APIC TPR updates" = ~(1 << 10)
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x2E PIC_MSG_CONTROL # Register for bit PLATFORM_INFO_SET_TDP = 1 << 29 and "Enable APIC TPR updates" = ~(1 << 10). MSR used to control APIC TPR Update messages from the processor's Local APIC.
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x31 DCU_MODE_CONTROL # MSR used to select the mode for the Data Cache Unit (DCU). This MSR is only available when more than one DCU Mode is selectable and is only intended for use in early BIOS before the first transition of the CR0.CD from 1 to 0.
 
 # Intel-SDM-Vol4 (P6 Family Processors) Test Control Register
 P6 0x33 TEST_CTL
@@ -137,16 +148,19 @@ CORE12 0x33 MEMORY_CTRL # Memory Control Register
 CORE1 0x34 SMI_COUNT  # Count System Management Interrupts
 
 # Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
-
 # Intel-SDM-Vol4 (Xeon Processor E5 v3)
 XEONE5V3 0x35 CORE_THREAD_COUNT # Configured State of Enabled Processor Core Count and Logical Processor Count
 
 # https://github.com/biosbits/bits/blob/bits-2079/python/cpu_gen.py
-? 0x39 UNKNOWN_BUT_REFERENCED_IN_BIOSBITS # TODO Replace with its real name
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x39 SOCKET_ID # The SOCKET_ID MSR is used to reassign the package-specific portions of the APIC ID. This MSR is intended only to be used on scalable DP and high-end MP platforms to resolve legacy-mode APIC ID conflicts
 
 0x3A IA32_FEATURE_CONTROL # Intel-SDM-Vol4 Control Features in Intel 64 Processor
 
 0x3B IA32_TSC_ADJUST # Intel-SDM-Vol4 Per Logical Processor TSC Adjust
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/CommonhMsr.h
+XEONSCAL4 0x3E SMM_SAVE_CONTROL # Contains bits that determine what additional state SMI/RSM must save and restore FSCP Crunch - 1:32
 
 # https://github.com/chipsec/chipsec/blob/1.10.0/chipsec/cfg/8086/qrk.xml
 QUARK 0x40 MTRRCAP # MTRR Capabilities
@@ -177,8 +191,26 @@ CORESOLO 0x47 LASTBRANCH_7
 0x4E IA32_PPIN_CTL  # Intel-SDM-Vol4 Protected Processor Inventory Number Enable Control
 0x4F IA32_PPIN      # Intel-SDM-Vol4 Protected Processor Inventory Number
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x50 QUIESCE_CTL1 # MSR that is used to initiate quiesce and unquiesce of CSI links
+0x51 QUIESCE_CTL2 # MSR that is used for PSMI handshake before initiating a RAS quiesce
+0x52 CLOAKING     # Cloaking error Virtual MSR in core Creg PLA
+
 # Intel-SDM-Vol4 (Xeon Processor E5 v3)
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h defines it as SPR_MSR_THD_LOGICAL_ID
 XEONE5V3 0x53 THREAD_ID_INFO # A Hardware Assigned ID for the Logical Processor
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x56 ADR_CACHE_FLUSH # new MSR to flush caches
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x57 SMM_CLEAR_SMI   # Clear SMI (bit 0). Bit 1 to enable MSMI to MCE morphing
+0x58 SMM_CFG_OPTIONS # This MSR reads/writes bit 0 in smm_cfg_options fscp
+0x5E THERM_EVENT_FFM # This register provides support for the Firmware-First-Mode thermal interrupt feature.
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x60 SUPPRESS_SHUTDOWN # Shutdown suppression feature
+XEONSCAL4 0x61 MCA_ON_NONNEM_CACHABLEMMIO_EN # This MSR reads/writes CBO_CR_CBO_COH_CONFIG[0]
 
 # Intel-SDM-Vol4 (Intel Core Microarchitecture) Last Branch Record 0 To IP
 0x60 LASTBRANCH_0_TO_IP
@@ -190,8 +222,42 @@ XEONE5V3 0x53 THREAD_ID_INFO # A Hardware Assigned ID for the Logical Processor
 0x66 LASTBRANCH_6_TO_IP
 0x67 LASTBRANCH_7_TO_IP
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/CommonhMsr.h
+XEONSCAL4 0x62 ACE_SPI_COMMAND  # command reg in ACE IP
+XEONSCAL4 0x63 ACE_SPI_DATA     # command reg in ACE IP
+XEONSCAL4 0x64 ACE_SPI_STATUS   # status reg in ACE IP
+XEONSCAL4 0x65 ACE_SPI_CONFIG   # config reg in ACE IP
+XEONSCAL4 0x66 PFR_EXIT         # Used to exit out of PFR VCM. Write only command MSR. Read will #GP
+XEONSCAL4 0x67 PFR_VCM_PROVISION # MSR to provision VCM key hash to CPU
+XEONSCAL4 0x68 PFR_VCM_PROVISION_STATUS # MSR to read PFR provision status
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x69 IIO_ERRPINSTS    # Holds the error pin status
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h
+XEONSCAL4 0x6B PROBE_MODE_OCCURRED # Probe Mode Occurred Value
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x6C PREF_TUNING      # Register to tune HL configuration
+XEONSCAL4 0x6D FEATURE_TUNING_1 # Register to tune HL configuration
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x6E QOS_2LM_CONFIG1 # Contains Leakybkt counter Sat value and time window cntr value
+0x6F QOS_2LM_CONFIG5 # Contains Remote Leakybkt counter Sat value and time window counter value
+
 # https://twitter.com/_markel___/status/1578749396547932160 2022-10 Alder Lake
-? 0x77 PROBE_CHANGE_PG
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x70 PROBE_TO_FROM_PDR  # Probe mode MSR used to move data from/to PDR
+0x71 PROBE_GP_REG       # Probe mode MSR used for copying EDX, EAX, EFLAGS, ST0 and the SMMEM bit to/from the scratch pad
+0x72 PROBE_SEG_REG_1    # Probe mode MSR used for copying SS, CS, ES, LDTR, and GDTR to the scratch pad for probe mode.
+0x73 PROBE_PL_REG       # Probe mode MSR added in SKL i1350201 that on RD/WRMSR does the following operations: R16/R17 to/from CTAP_CR_PROBE_MODE_DR/FSCP_CR_REGISTER_1 ; BND_STATUS to/from FSCP_CR_REGISTER_2 ; BNDCFG3_BASE_FIELD to/from FSCP_CR_REGISTER_3
+0x74 PROBE_MMX2_REG     # Probe mode MSR used for copying XMM0 and MXCSR to the scratch pad for probe mode.
+0x75 PROBE_SEG_REG_3    # Probe mode MSR used for copying shadow copies of ES, DS, FS, and GS to the scratch pad for probe mode.
+0x76 PROBE_LT_SPC_CYC   # Probe mode MSR Register used for issuing Special Cycles to the LT chipset.
+0x77 PROBE_CHANGE_PG    # Probe mode MSR used for changing CR0.PG to the value specified in bit 31 of EAX. It allows ITP (In Target Probe) to transition into and back out of Pseudo-64-bit mode (Long Mode, but with paging turned off).
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/ArchMsr.h
+0x78 BIOS_DYNAMIC_UPDATE_PTR # This is a read only BIOS MSR to return the dynamic update (aka push patch) pointer stored in the PCH
 
 # Intel-SDM-Vol4 BIOS Update Trigger (to trigger the load of a microcode update)
 0x79 IA32_BIOS_UPDT_TRIG
@@ -200,13 +266,24 @@ XEONE5V3 0x53 THREAD_ID_INFO # A Hardware Assigned ID for the Logical Processor
 0x7A BIOS_UPGD_TRIG
 
 # https://twitter.com/_markel___/status/1578749396547932160 2022-10 Alder Lake
-? 0x7D SE_RDINFO_CMD # Allows Probe Mode ITP software to access relevant information located in the SECS and EPCM that is not accessible using EDBGRD instruction
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x7D SE_RDINFO_CMD # Allows Probe Mode ITP (In Target Probe) software to access relevant information located in the SECS and EPCM that is not accessible using EDBGRD instruction
+0x7E EINIT_FAIL_CTR
 
 # Intel-SDM-Vol4 (7th and 8th Generation Intel Core Processors)
-CORE7 0x80 TRACE_HUB_STH_ACPIBAR_BASE  # NPK Address Used by AET Messages
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h defines MSR_NPK_STH_ACPIBAR_BASE
+CORE7 0x80 TRACE_HUB_STH_ACPIBAR_BASE  # This register is used by BIOS to program Trace Hub (NPK) STH base address that will be used by AET (Architectural Event Trace) messages
 
 # https://twitter.com/_markel___/status/1578690635539677184 2022-10 "MSRs, for the newest CPU"
-? 0x81 FME_ACTIVATE
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x81 FME_ACTIVATE       # Rd/Wr register to generate or restore Far Memory Keys
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+0x82 FZM_RANGE_INDEX        # FZM Range Index register to R/W Domain|Index
+0x83 FZM_DOMAIN_CONFIG      # FZM Domain ConfigValue Read Only
+0x84 FZM_RANGE_STARTADDR    # FZM Domain Start Address - Ready Only
+0x85 FZM_RANGE_ENDADDR      # FZM Domain End Address - Ready Only
+0x86 FZM_RANGE_WRITESTATUS  # FZM Domain Write Status - Ready Only
 
 # https://www.intel.com/content/dam/develop/external/us/en/documents/intel-tdx-cpu-architectural-specification.pdf Intel Trust Domain CPU Architectural Extensions
 0x87 IA32_MKTME_KEYID_PARTITIONING # Multi-Key Total Memory Encryption (MKTME) KeyID Partitioning Enumeration
@@ -223,30 +300,39 @@ P6 0x8B BBL_CR_D3
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1
 AMD64 0x8B PATCH_LEVEL
 
-# Intel-SDM-Vol4 SHA256 digest of the SIGSTRUCT.MODULUS for SGX Launch Enclave
+# Intel-SDM-Vol4 SHA256 digest of the SIGSTRUCT.MODULUS for SGX Launch Enclave. Launch Enclave Provider signing key hash
 0x8C IA32_SGXLEPUBKEYHASH0
 0x8D IA32_SGXLEPUBKEYHASH1
 0x8E IA32_SGXLEPUBKEYHASH2
 0x8F IA32_SGXLEPUBKEYHASH3
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x90 TIO_DEBUG_STATUS # emulated by xucode --> cause pppe exit, described in SNC HSD 1304290485 - HCTIO/SoftCE: SoftCE ISA support  and in SNC HSD 1304428988 - HCTIO/SoftCE: uArch support for TIO_DEBUG_STATUS MSRs
 # https://twitter.com/_markel___/status/1578690635539677184 2022-10 "MSRs, for the newest CPU" (related to xucode)
-? 0x91 TIO_UNWRAP
-? 0x92 TIO_PRM_CLEANUP
-? 0x93 TIO_COPY_ENCRYPT
-? 0x95 ENABLE_DISABLE_CACHE_QOS
+XEONSCAL4 0x91 TIO_UNWRAP
+XEONSCAL4 0x92 TIO_PRM_CLEANUP
+XEONSCAL4 0x93 TIO_COPY_ENCRYPT
+XEONSCAL4 0x95 ENABLE_DISABLE_CACHE_QOS # Used to enable or disable cache QoS
+XEONSCAL4 0x96 TIORR_PHYSBASE # Address Match Range Register - Physical Mask Control Register
+XEONSCAL4 0x97 TIORR_PHYSMASK # Address Match Range Register - Physical Mask Control Register
 
 # https://www.intel.com/content/dam/develop/external/us/en/documents-tps/intel-tdx-cpu-architectural-specification.pdf Intel Trust Domain CPU Architectural Extensions (May 2021, 343754-002US) cache management interface to SEAM (Secure Arbitration Mode) VMX root operation
 # https://kib.kiev.ua/x86docs/Intel/TDX/348551-001.pdf Intel Trust Domain Extensions (Intel TDX) Module Architecture Application Binary Interface (ABI) Reference Specification (September 2021, 348551-001US)
 # https://cdrdv2-public.intel.com/733568/tdx-module-1.0-public-spec-344425004.pdf Architecture Specification: Intel Trust Domain Extensions (Intel TDX) Module (June 2022, 344425-004US)
-0x98 WBINVDP    # SEAM Write-Back and Invalidate cache sub-blocks
-0x99 WBNOINVDP  # SEAM Write-Back cache sub-blocks
+0x98 WBINVDP    # SEAM Write-Back and Invalidate cache sub-blocks. Virtual MSR to perform partial WBINVD
+0x99 WBNOINVDP  # SEAM Write-Back cache sub-blocks. Virtual MSR to perform partial WBINVD
 
 # https://www.intel.com/content/dam/develop/external/us/en/documents/intel-tdx-cpu-architectural-specification.pdf Intel Trust Domain CPU Architectural Extensions defines an incorrect value 0x981 for MSR INTR_PENDING
 # https://kib.kiev.ua/x86docs/Intel/TDX/348551-001.pdf Intel Trust Domain Extensions (Intel TDX) Module Architecture Application Binary Interface (ABI) Reference Specification defines the correct one
 # https://cdrdv2-public.intel.com/733568/tdx-module-1.0-public-spec-344425004.pdf Architecture Specification: Intel Trust Domain Extensions (Intel TDX) Module (June 2022, 344425-004US)
 0x9A INTR_PENDING # Determine if there are pending interrupts or events
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h defines MSR_VMX_MSEG_BASE
 0x9B IA32_SMM_MONITOR_CTL # Intel-SDM-Vol4 SMM Monitor Configuration
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x9D SMM_PROT_MODE_BASE   # SMM Protected Mode Base MSR
+
 0x9E IA32_SMBASE          # Intel-SDM-Vol4 Base address of the logical processor's SMRAM image
 
 # Intel-SDM-Vol4 (Intel Core Microarchitecture)
@@ -257,8 +343,24 @@ AMD64 0x8B PATCH_LEVEL
 CORE10 0xA0 BIOS_MCU_ERRORCODE
 CORE10 0xA5 FIT_BIOS_ERROR     # BIOS Firmware Table error code
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xA0 SGX_MCU_ERRORCODE # MSR to expose the MCHECK error code to BIOS
+XEONSCAL4 0xA1 PRID_0_0          # SGX PRID values
+XEONSCAL4 0xA2 PRID_1_1          # SGX PRID values
+XEONSCAL4 0xA3 SGX_RAS           # MSR to opt in to SGX (bit 0) and opt out of advanced RAS features
+XEONSCAL4 0xA4 BIOS_PKG_CONFIG   # SGX QoS MSR
+XEONSCAL4 0xA5 FIT_BIOS_ERROR    # FIT BIOS and ACM error type and code
+XEONSCAL4 0xA6 MPX_FUSE_OVERRIDE # Override MPX Fuse
+XEONSCAL4 0xAF BIOS_AVX_DIS      # Virtual MSR to disable AVX instructions from BIOS
+
 # Intel-SDM-Vol4 (11th Generation Intel Core)
 CORE11 0xA7 BIOS_DEBUG
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xB0 VMSR_U2P_0_0     # vMSRs for power mgmt
+XEONSCAL4 0xB1 VMSR_U2P_1_1     # vMSRs for power mgmt
+XEONSCAL4 0xB2 VMSR_U2P_2_2     # vMSRs for power mgmt
+XEONSCAL4 0xB3 VMSR_U2P_3_3     # vMSRs for power mgmt
 
 0xBC IA32_MISC_PACKAGE_CTLS     # Intel-SDM-Vol4 Power Filtering Control
 
@@ -287,12 +389,22 @@ CORE1 0xCE PLATFORM_INFO # Platform Information
 # Intel-SDM-Vol4 IA32 Core Capabilities Register
 0xCF IA32_CORE_CAPABILITIES
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xD0 SSKU_DATA        # SoftSKU data MSR
+XEONSCAL4 0xD1 SSKU_CMD         # SoftSKU cmd MSR
+XEONSCAL4 0xD2 SSKU_SMM_ADDR    # SoftSKU SMM access to LB regs
+XEONSCAL4 0xD3 SSKU_SMM_DATA    # SoftSKU SMM access to LB regs
+XEONSCAL4 0xD4 SSKU_ENFORCE     # SoftSKU enforcement MSR
+
 # Intel-SDM-Vol4 UMWAIT Control
 0xE1 IA32_UMWAIT_CONTROL
 
 # Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture)
 CORE1 0xE2 PKG_CST_CONFIG_CONTROL # C-State Configuration Control
 CORE1 0xE4 PMG_IO_CAPTURE_BASE    # Power Management IO Redirection in C-state
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xE2 CLOCK_CST_CONFIG_CONTROL # C-State Configuration register
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/intel/speedstep.h
 0xE3 PMG_IO_BASE_ADDR
@@ -308,7 +420,22 @@ XEONSCAL4 0xED RAR_CONTROL            # RAR Control
 XEONSCAL4 0xEE RAR_ACTION_VECTOR_BASE # Pointer to RAR Action Vector
 XEONSCAL4 0xEF RAR_PAYLOAD_TABLE_BASE # Pointer to Base of RAR Payload Table
 XEONSCAL4 0xF0 RAR_INFO               # Read Only RAR Information
-XEONSCAL4 0x105 CORE_BIST             # Core BIST
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xF1 RAR_TIMER_CONFIG       # Control for RAR UC load timeout
+XEONSCAL4 0x101 PROBE_CPL                       # Probe mode MSR used to modify CPL
+XEONSCAL4 0x102 PAIR_WEIGHT_OVERRIDE            # Software PAIR weight override
+XEONSCAL4 0x103 PAIR_PKG_THREAD_PARTICIPATION   # Pair package level thread participation
+XEONSCAL4 0x104 PAIR_THREAD_PARTICIPATION       # Register to specify a thread's inclusion or exclusion in Power Aware Interrupt Routing
+
+# Intel-SDM-Vol4 (4th Generation Intel Xeon Scalable Processor Family)
+XEONSCAL4 0x105 CORE_BIST # Controls Array PBIST triggered from ucode as part of FUSA
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x106 CORE_ARRAY_ERROR_INJECTION # Controls error injections to FUSA BIST Arrays
+XEONSCAL4 0x107 PERRINJ_AT_IP              # Specified IDI Parity Error Injection SRC Agent
+XEONSCAL4 0x108 PERRINJ_CTRL               # Control Parity Error Injection
+XEONSCAL4 0x10B DCU_FLUSH_CMD              # Write-only virtual MSR to activate DCU flush command
 
 0xFE IA32_MTRRCAP            # Intel-SDM-Vol4 MTRR Capability
 
@@ -316,6 +443,17 @@ XEONSCAL4 0x105 CORE_BIST             # Core BIST
 0x10A IA32_ARCH_CAPABILITIES # Intel-SDM-Vol4 Enumeration of Architectural Features
 0x10B IA32_FLUSH_CMD         # Intel-SDM-Vol4 Flush Command
 0x10F IA32_TSX_FORCE_ABORT   # Intel-SDM-Vol4 TSX Force Abort
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x110 PLAT_FRMW_PROT_CTRL       # Platform Firmware Control MSR
+XEONSCAL4 0x111 PLAT_FRMW_PROT_HASH_0     # Platform Firmware Hash Value 063:000
+XEONSCAL4 0x112 PLAT_FRMW_PROT_HASH_1     # Platform Firmware Hash Value 127:064
+XEONSCAL4 0x113 PLAT_FRMW_PROT_HASH_2     # Platform Firmware Hash Value 191:128
+XEONSCAL4 0x114 PLAT_FRMW_PROT_HASH_3     # Platform Firmware Hash Value 255:192
+XEONSCAL4 0x115 PLAT_FRMW_PROT_TRIG_PARAM # This registers contains the 64-bit physical address of the start of the PFAT DIRECTORY
+XEONSCAL4 0x116 PLAT_FRMW_PROT_TRIGGER    # This is a Write-Only command MSR. A write triggers the command. A Rd will GP Fault
+XEONSCAL4 0x117 PFAT_EC_PASSWORD          # MSR to enable PFAT support on embedded controller discrete flash
+XEONSCAL4 0x118 PFAT_GT_SLEEP_CMDSTS      # send to Sleep MSR
 
 # Intel-SDM-Vol4 (P6 Family Processors)
 P6 0x116 BBL_CR_ADDR # Address register: used to send specified address (A31-A3) to L2 during cache initialization accesses
@@ -325,17 +463,29 @@ P6 0x11A BBL_CR_TRIG # Trigger register: used to initiate a cache configuration 
 P6 0x11B BBL_CR_BUSY # Busy register: indicates when a cache configuration accesses L2 command is in progress
 P6 0x11E BBL_CR_CTL3 # Control register 3: used to configure the L2 Cache
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x11F BIOS_INFO_FLAGS # Read bits 23:16 of uncore SCP (storage for this 8b MSR)
+
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/braswell/include/soc/msr.h
 ATOMBRASWELL 0x120 POWER_MISC
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
 0x121 EMULATE_PM_TIMER
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x121 BIOS_UCODE_PM_TMR_EMULATION_CFG # his is a read/write MSR that will control the ucode emulation of the PM_TMR. BIOS will program this register
+
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
 0x122 IA32_TSX_CTRL     # Intel-SDM-Vol4 TSX Control
 0x123 IA32_MCU_OPT_CTRL # Intel-SDM-Vol4 Microcode Update Option Control
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x128 CPU_BUSNUMBER # This RO MSR will be used to read the Ubox CPUBUSNO/CPUBUSNO1/CPUBUSNO_VALID CSRs
+XEONSCAL4 0x129 MMCFG_RULE_CFG
+XEONSCAL4 0x12A MMCFG_RULE_TARGET_LIST
+
 # From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h defines MSR_ANC_BOOT_POLICY_0_0, MSR_ANC_BOOT_POLICY_1_1... "Base addr is 0xFED58000 and reads are consecutive"
 0x130 BTG_BOOT_POLICY # BootGuard Boot Policy
 0x131 BTG_BP_KEY0
 0x132 BTG_BP_KEY1
@@ -344,10 +494,14 @@ ATOMBRASWELL 0x120 POWER_MISC
 0x135 BTG_BP_KEY4
 0x136 BTG_BP_KEY5
 0x137 BTG_BP_RSVD3
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h defines MSR_ANC_FORCE_BOOT_POLICY_ENFORCED: Anchor Cove MSR to indicate that the initial boot block is complete, and to re-enable events. Write-only and accessible via the ACM
 0x138 BTG_BOOT_STATUS # BootGuard Boot Status
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/intel/msr.h
 0x139 BC_PBEC
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x139 ANC_INITIAL_BOOT_BLOCK_COMPLETE # Anchor Cove MSR to tell PCH that the ACM has successfully launched and to stop the deadman timer countdown. Write-only and accessible via the ACM
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/intel/msr.h
 0x13A BOOT_GUARD_SACM_INFO
@@ -355,21 +509,86 @@ ATOMBRASWELL 0x120 POWER_MISC
 # Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
 CORE2 0x13C FEATURE_CONFIG # AES Configuration
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x13D CORE_SPECIFIC_SPARE_0_0 # Spare core MSRs supported by the cregpla. Ucode (instead of the PLA) will signal #GP on access
+XEONSCAL4 0x13E CORE_SPECIFIC_SPARE_1_1
+XEONSCAL4 0x13F CORE_SPECIFIC_SPARE_2_2
+
 # Intel-SDM-Vol4 (Intel Xeon Phi)
 XEONPHI 0x140 MISC_FEATURE_ENABLES # Enable User Mode MONITOR and MWAIT
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x140 MISC_THD_FEATURE_ENABLES # Miscellaneous enables for thread specific features
+XEONSCAL4 0x141 SMM_SUPOVR_STATE_LOCK    # SMM-only MSR which allows locking of various states while in SMM mode
+XEONSCAL4 0x142 THREAD_SPECIFIC_SPARE_0_0 # Spare thread MSRs supported by the cregpla. Ucode (instead of the PLA) will signal #GP on access
+XEONSCAL4 0x143 THREAD_SPECIFIC_SPARE_1_1
+XEONSCAL4 0x144 THREAD_SPECIFIC_SPARE_2_2
+XEONSCAL4 0x145 THREAD_SPECIFIC_SPARE_3_3
+XEONSCAL4 0x146 THREAD_SPECIFIC_SPARE_4_4
+XEONSCAL4 0x147 THREAD_SPECIFIC_SPARE_5_5
+XEONSCAL4 0x148 THREAD_SPECIFIC_SPARE_6_6
+XEONSCAL4 0x149 THREAD_SPECIFIC_SPARE_7_7
+XEONSCAL4 0x14A THREAD_SPECIFIC_SPARE_8_8
+XEONSCAL4 0x14B THREAD_SPECIFIC_SPARE_9_9
+XEONSCAL4 0x14C THREAD_SPECIFIC_SPARE_10_10
+XEONSCAL4 0x14D THREAD_SPECIFIC_SPARE_11_11
+XEONSCAL4 0x14E THREAD_SPECIFIC_SPARE_12_12
+XEONSCAL4 0x14F THREAD_SPECIFIC_SPARE_13_13
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/platform/x86/intel/turbo_max_3.c?h=v6.1 defines MSR_OC_MAILBOX
 # https://github.com/mihic/linux-intel-undervolt/tree/6f911700236c5b0c4dd20028ed3936ffe5d7155e documents how to use this MSR for under-voltage where the CPU has an integrated voltage controller (FIVR)
 # https://github.com/georgewhewell/undervolt/blob/e39aea12f665695d7ef7f1b66467c5138caea52a/undervolt.py defines it as "voltage offset" with planes (Core, GPU, Cache, Uncore, Analog IO, Digital IO)
 # https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00289.html CVE-2019-11157 restricts this MSR (https://www.usenix.org/system/files/sec21summer_chen-zitai.pdf)
-CORE4 0x150 OC_MAILBOX # (maybe) Overclock Mailbox
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+CORE4 0x150 OVERCLOCKING_MAILBOX # An Interface to perform various overclocking oriented commands
 
 # Intel-SDM-Vol4 (10th Generation Intel Core)
 CORE10 0x151 BIOS_DONE
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x152 SNC_CONFIG
+XEONSCAL4 0x153 SNC_RANGE0_BASE
+XEONSCAL4 0x154 SNC_RANGE1_BASE
+XEONSCAL4 0x155 SNC_RANGE2_BASE
+XEONSCAL4 0x156 SNC_RANGE3_BASE
+XEONSCAL4 0x157 SNC_RANGE4_BASE
+XEONSCAL4 0x158 THREAD_SMI_ERR_SRC  # Core SMI Error Source
+XEONSCAL4 0x159 SNC_UPPER_BASE      # SNC range upper 6 bits per range register
+XEONSCAL4 0x15B SPCL_UNCORE_USAGE   # Special uncore usage msr, work in PFAT or in SMM BIOS flash
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/CommonMsr.h
+XEONSCAL4 0x15C PERMEM_CONFIG_INFO  # Read-only MSR that specifies the maximum number of memory controllers on the platform capable of supporting memory persistence
+XEONSCAL4 0x15D PERMEM_CTRLR_INDEX  # Index into the list of persistent memory addresses which is accessed when the PERMEM_CTRLR_ID MSR is read/written
+XEONSCAL4 0x15E PERMEM_CTRLR_ID     # Read-only MSR that specifies the maximum number of memory controllers on the platform capable of supporting memory persistence
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x160 REGISTER_0  # Probe mode MSR, used also in cache flush and segmentation. C6NoSave Candidate
+XEONSCAL4 0x161 REGISTER_1
+XEONSCAL4 0x162 REGISTER_2
+XEONSCAL4 0x163 REGISTER_3
+XEONSCAL4 0x164 REGISTER_4
+XEONSCAL4 0x165 REGISTER_5
+XEONSCAL4 0x166 REGISTER_6
+XEONSCAL4 0x167 REGISTER_7
+XEONSCAL4 0x168 REGISTER_8
+XEONSCAL4 0x169 REGISTER_9
+XEONSCAL4 0x16A REGISTER_10
+XEONSCAL4 0x16B REGISTER_11
+XEONSCAL4 0x16C REGISTER_12
+XEONSCAL4 0x16D REGISTER_13
+XEONSCAL4 0x16E TASK_SWITCH_OR_SMI_RIP         # SCP used by Task Switch and SMI code to save RIP. Probe mode MSR, used also in PDM flows
+XEONSCAL4 0x16F TASK_SWITCH_OR_PROBE_MODE_MISC # Probe mode MSR, used also in task switch. C6NoSave Candidate
+XEONSCAL4 0x170 P6_CR_SMREVID # SMM revision identifier
+XEONSCAL4 0x171 P6_CR_SMBASE  # SMM Base register
+XEONSCAL4 0x172 PROBE_MODE_PPPE_REDIRECTION # Used to save PPPE exit reason for probe mode redirection. C6NoSave Candidate
+XEONSCAL4 0x173 PROBE_MODE_DR # Probe mode data register result
+
 0x174 IA32_SYSENTER_CS  # Intel-SDM-Vol4
 0x175 IA32_SYSENTER_ESP # Intel-SDM-Vol4
 0x176 IA32_SYSENTER_EIP # Intel-SDM-Vol4
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x178 MCG_CONTAIN # Register that contains the poison and viral bit valid / invalid state
 
 0x179 IA32_MCG_CAP      # Intel-SDM-Vol4 Global Machine Check Capability
 0x17A IA32_MCG_STATUS   # Intel-SDM-Vol4 Global Machine Check Status
@@ -384,14 +603,15 @@ CORE10 0x151 BIOS_DONE
 # CORE_SMI_ERR_SRC and UNCORE_SMI_ERR_SRC are used by SMM handler to determine
 # if the SMI was caused by a MCE or CMCI that was rerouted to a SMI.
 # SMM will clear the MSR when return.
-0x17C CORE_SMI_ERR_SRC
+0x17C CORE_SMI_ERR_SRC # Core SMI Error Source
 
 # Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
-CORE4 0x17D SMM_MCA_CAP # Enhanced SMM Capabilities
+CORE4 0x17D SMM_MCA_CAP # Enhanced SMM MCA Capabilities
 
 # https://github.com/liuwei142536/BIOS_Amesterdam/blob/3014c18c7c467266c5a86aff39fce25bc462e812/GrantleyPkg/Ras/Include/mca_msr.h#L233
 # https://github.com/marktsai0316/RAIDOOBMODULE/blob/abf3a08719182c16769d5549db1235e05ec97fc0/PurleySktPkg/Include/mca_msr.h#L229
-0x17E UNCORE_SMI_ERR_SRC
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x17E UNCORE_SMI_ERR_SRC # Uncore SMI Error Source
 
 # Intel-SDM-Vol4 (Xeon Processor E5)
 XEONE5 0x17F ERROR_CONTROL # MC Bank Error Configuration
@@ -434,7 +654,7 @@ PENTIUM4 0x197 MCG_R15               # Machine Check R15
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/haswell/haswell.h
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
-0x194 FLEX_RATIO
+0x194 FLEX_RATIO # This 'flexible boot' register is written by BIOS in order to modify the maximum non-turbo ratio on the next reset
 
 0x195 IA32_OVERCLOCKING_STATUS # Intel-SDM-Vol4 Overclocking Status
 0x198 IA32_PERF_STATUS         # Intel-SDM-Vol4 Current Performance Status
@@ -473,9 +693,20 @@ XEONE5V2 0x1AE TURBO_RATIO_LIMIT1 # Maximum Ratio Limit of Turbo Mode
 # Intel-SDM-Vol4 (Xeon Processor E5 v3)
 XEONE5V3 0x1AF TURBO_RATIO_LIMIT2 # Maximum Ratio Limit of Turbo Mode
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x1A1 PACKAGE_THERM_MARGIN # Temperature margin in PECI temperature counts from the thermal profile specification. Platform fan control SW is expected to read therm_margin value to control fan or blower speed
+XEONSCAL4 0x1A2 TEMPERATURE_TARGET   # Legacy register holding temperature related constants for Platform use
+XEONSCAL4 0x1A3 MCP_THERMAL_REPORT_1 # MCP Thermal reporting
+
 # Intel-SDM-Vol4 (4th Generation Intel Xeon Scalable Processor Family)
 XEONSCAL4 0x1A4 PREFETCH_CONTROL          # Prefetch Disable Bits
-XEONSCAL4 0x1AE TURBO_RATIO_LIMIT_CORES   # See Table 2-50.
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x1A5 MCP_THERMAL_REPORT_2 # MCP Thermal reporting
+XEONSCAL4 0x1A6 OFFCORE_RSP_0_0      # Offcore Response Event Select Register
+XEONSCAL4 0x1A7 OFFCORE_RSP_1_1      # Offcore Response Event Select Register
+XEONSCAL4 0x1A8 THREAD_SW_DEFEATURE  # MSR for thread specific defeature
+XEONSCAL4 0x1AD BIGCORE_TURBO_RATIO_LIMIT # This MSR indicates the factory configured values for of 1-core, 2-core, 3-core and 4-core turbo ratio limits for all processors and also allows configuration of those values on parts with PLATFORM_INFO MSR 0CEh[28]==1
+XEONSCAL4 0x1AE BIGCORE_TURBO_RATIO_LIMIT_CORES # This register defines the active core ranges for each frequency point
 
 # Intel-SDM-Vol4 (Xeon Processor D)
 XEOND 0x1AC TURBO_RATIO_LIMIT3     # Config Ratio Limit of Turbo Mode
@@ -484,14 +715,29 @@ XEOND 0x1AC TURBO_RATIO_LIMIT3     # Config Ratio Limit of Turbo Mode
 0x1B1 IA32_PACKAGE_THERM_STATUS    # Intel-SDM-Vol4 Package Thermal Status Information
 0x1B2 IA32_PACKAGE_THERM_INTERRUPT # Intel-SDM-Vol4 Pkg Thermal Interrupt Control
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+0x1C2 HW_GET_LP_PM_META_DATA    # Current Logical Processor PM Meta Data and CTC data
+0x1C3 HW_HW_SET_LP_PM_META_DATA # Deliver the LP PM Meta Data into the H/W
+
 0x1C4 IA32_XFD     # Intel-SDM-Vol4 Extended Feature Disable Control
 0x1C5 IA32_XFD_ERR # Intel-SDM-Vol4 Extended Feature Disable Error Code
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x1C6 DEBUG_RESOURCE_STATUS # This MSR return the status of debug resources (Used to be in MISC_ENABLES MSR)
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+0x1C7 DD_THROTTLE_DEACTIVATE # Command reg in ACE IP
 
 # Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture)
 CORE1 0x1C8 LBR_SELECT # Last Branch Record Filtering Select Register
 
 0x1C9 LASTBRANCH_TOS # Intel-SDM-Vol4 (Intel Core Microarchitecture) Last Branch Record Stack TOS
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+0x1CA DD_DI_CAPABILITY  # Read only register for DEDUP capability
+0x1CB DD_DI_ACTIVATE    # Rd/Wr register to specify keyID for dedup domain isolation
+
+# Also known as MSR_DEBUGCTLMSR in 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
 0x1D9 IA32_DEBUGCTL # Intel-SDM-Vol4 Trace/Profile Resource Control
 
 # Intel-SDM-Vol4 (Pentium 4 and Xeon)
@@ -517,17 +763,35 @@ P6 0x1DE LASTINTTOIP     #  Last INT to IP
 CORESOLO 0x1DD LER_FROM_LIP # Last Exception Record From Linear IP
 CORESOLO 0x1DE LER_TO_LIP   # Last Exception Record To Linear IP
 
-# https://twitter.com/_markel___/status/1384607442328334337 2021-04 "Probe Mode redirection is a microcode feature of modern Intel CPUs allowing to halt CPU and jump into JTAG debugger due to many arch events. It's controlled by undocumented ICECTLPMR MSR (0x1DF)"
-?ATOMGOLDMONT 0x1DF ICECTLPMR
-
 0x1DD IA32_LER_FROM_IP # Intel-SDM-Vol4 Last Event Record Source IP Register
 0x1DE IA32_LER_TO_IP   # Intel-SDM-Vol4 Last Event Record Destination IP Register
+
+# https://twitter.com/_markel___/status/1384607442328334337 2021-04 "Probe Mode redirection is a microcode feature of modern Intel CPUs allowing to halt CPU and jump into JTAG debugger due to many arch events. It's controlled by undocumented ICECTLPMR MSR (0x1DF)"
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x1DF ICECTLPMR # Probe mode control and status register. 16 bit. (Mrm roctlregc/roctlregd/icectlpmrSM306L)
 
 0x1E0 IA32_LER_INFO    # Intel-SDM-Vol4 Last Event Record Info Register
 
 # https://github.com/tianocore/edk2/commit/e0d87abe8f7d135837af4447450e3892d5ec9104 "Add Core Solo/Duo MSRs from: Intel 64 and IA-32 Architectures Software Developer's Manual, Volume 3, December 2015, Chapter 35 Model-Specific-Registers (MSR), Section 35-17." (and removed in https://github.com/tianocore/edk2/commit/f49bbeda3ecaedf89b0190292980a84e80824a9b)
 # https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developers-manual.pdf
 CORESOLO 0x1E0 ROB_CR_BKUPTMPDR6
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x1E1 CPU_TYPE # This RO MSR will be used to report the fuse_cpu_type bits from PCU Package Config CSR
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/CommonMsr.h
+XEONSCAL4 0x1E2 CUSTOMER_SPECIFIC_FEATURE_ENABLE # Register used to enable customer specific features (Bit 1 is user-level mwait)
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x1E3 DEBUG_ERR_INJ_CTL # This MSR holds the capability of error spoofing. Bit 1 for unlock MCA/CMCI generation capability (allows event injection), bit 0 to unlock writing to MC banks
+XEONSCAL4 0x1E4 DEBUG_ERR_INJ_CTL2 # This MSR will be used to trigger MCA(bit0)/CMCI(bit1)
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/CommonMsr.h
+XEONSCAL4 0x1E5 ULI_VECTOR_INFO # User-level Interrupts Vector
+XEONSCAL4 0x1E7 ULI_TARGET_RIP  # User-level Interrupts Target RIP
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x1F0 VLW_CAPABILITY # VLW capability MSR that reports information about the VLW messages that are supported
 
 # Intel-SDM-Vol4 (10th Generation Intel Core)
 CORE10 0x1F1 CRASHLOG_CONTROL # Write Data to a Crash Log Configuration
@@ -544,8 +808,8 @@ CORE7 0x1F5 PRMRR_PHYS_MASK  # Processor Reserved Memory Range Register - Physic
 
 # From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
 # https://services.google.com/fh/files/misc/intel_tdx_-_full_report_041423.pdf
-0x1F6 SMRR2_PHYBASE
-0x1F7 SMRR2_PHYMASK
+0x1F6 SMRR2_PHYBASE # SMM Range Register #2 - Physical Base Control Register
+0x1F7 SMRR2_PHYMASK # SMM Range Register Base #2 - Physical Mask Control Register
 
 0x1F8 IA32_PLATFORM_DCA_CAP # Intel-SDM-Vol4 DCA Capability
 0x1F9 IA32_CPU_DCA_CAP      # Intel-SDM-Vol4 If set, CPU supports Prefetch-Hint type
@@ -587,6 +851,9 @@ CORE1 0x1FC POWER_CTL # Power Control Register
 0x250 IA32_MTRR_FIX64K_00000
 0x258 IA32_MTRR_FIX16K_80000
 0x259 IA32_MTRR_FIX16K_A0000
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x25B ICECTLPMR_2 # Scratch Pad register P6_CR_ICECTLPMR_2
 
 # Intel-SDM-Vol4 See Section 12.11.2.2, "Fixed Range MTRRs."
 0x268 IA32_MTRR_FIX4K_C0000
@@ -642,6 +909,23 @@ CORE1 0x1FC POWER_CTL # Power Control Register
 # Intel-SDM-Vol4 (10th Generation Intel Core)
 CORE10 0x2A0 PRMRR_BASE_0 # Processor Reserved Memory Range Register - Physical Base Control Register
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x2A1 PRMRR_BASE_1_1 # Processor Reserved Memory Range Register - Physical Base Control Register
+XEONSCAL4 0x2A2 PRMRR_BASE_2_2
+XEONSCAL4 0x2A3 PRMRR_BASE_3_3
+XEONSCAL4 0x2A4 PRMRR_BASE_4_4
+XEONSCAL4 0x2A5 PRMRR_BASE_5_5
+XEONSCAL4 0x2A6 PRMRR_BASE_6_6
+XEONSCAL4 0x2A7 PRMRR_BASE_7_7
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h
+XEONSCAL4 0x2BC ACTIVATE_SBFT # Runs SBFT program (structurally based functional test)
+XEONSCAL4 0x2BD SBFT_STATUS  # Returns the result of most recent WRMSR(ACTIVATE_SBFT)
+XEONSCAL4 0x2C0 FUSARR_BASE # Address Match Range Register - Physical Base Control Register for Hidden Lake
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x2C1 FUSARR_MASK # Address Match Range Register - Physical Mask Control Register for Hidden Lake
+
 # Intel-SDM-Vol4 (4th Generation Intel Xeon Scalable Processor Family)
 XEONSCAL4 0x2C2 COPY_SCAN_HASHES   # linear address of the SCAN Test HASH Binary loaded into memory
 XEONSCAL4 0x2C3 SCAN_HASHES_STATUS
@@ -651,17 +935,31 @@ XEONSCAL4 0x2C6 ACTIVATE_SCAN
 XEONSCAL4 0x2C7 SCAN_STATUS
 XEONSCAL4 0x2C8 SCAN_MODULE_ID
 XEONSCAL4 0x2C9 LAST_SAF_WP
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h
+XEONSCAL4 0x2D8 ENABLE_LSM # virtual CR for Lock-Step-Mode
+
+# Intel-SDM-Vol4 (4th Generation Intel Xeon Scalable Processor Family)
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h defines GNR_MSR_FUSA_CAPABILITIES
 XEONSCAL4 0x2D9 INTEGRITY_CAPABILITIES
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
-0x2E0 EVICT_CTL
-0x2E7 LT_CONTROL
+0x2E0 EVICT_CTL # No Evict Mode (for the BIOS to disable Cache as RAM)
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x2E0 NEM # No-Evict Mode MSR
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x2E6 LT_UNLOCK_MEMORY # Used by Intel TXT enabled BIOS to unlock memory after checking that the TPM is valid
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x2E7 LTCTRLSTS # Also known as LT_CONTROL
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/skylake/include/soc/msr.h
 CORE6 0x2E7 LT_LOCK_MEMORY
 
 # From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
-0x2E8 EDRAM_ACM
+0x2E8 EDRAM_ACM # ACM Only MSR for EDRAM management
 
 # Intel-SDM-Vol4 (7th and 8th Generation Intel Core Processors)
 CORE7 0x2F4 UNCORE_PRMRR_PHYS_BASE
@@ -767,8 +1065,22 @@ XEON6 0x301 SGXOWNEREPOCH1
 # Intel-SDM-Vol4 (Intel Xeon Processor 5500 and 3400 Series)
 XEON5000 0x301 GQ_SNOOP_MESF
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x300 SE_EPOCH_0 # External 128-bit entropy for SGX keys derivation
+XEONSCAL4 0x301 SE_EPOCH_1
+
 # https://github.com/chipsec/chipsec/blob/1.10.0/chipsec/cfg/8086/common.xml
-0x302 BIOS_SE_SVN
+0x302 BIOS_SE_SVN # Non-architectural MSR to read and update the SGX SVN by BIOS. The MSR is logically divided into eight 8-bit components, where each of the components is either reserved (MBZ) or tracks the minimum SGX SVN of a particular ACM that was launched on the platform since last reset. Bits[15:0] is PrResetSvn (Writing non-zero value results in #GP(0)). Bits[23:16] is SinitSeSvn (SINIT ACM). Bits[31:24] is ScleanSeSvn (SCLEAN ACM). Bits[39:32] is AncSeSvn (SGX HW). Bits[47:40] is PfatSeSvn (PFAT ACM). Bits[63:56] is SeamldrSeSvn (SEAMLDR).
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x304 MCHECK_BOOT_SCENARIO # BOOT MSR for communicating boot protocol to MCHECK uses NcuScratchpad26
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h
+XEONSCAL4 0x305 PERF_OCCUPANCY_CTRS # Perfcntd Occupancy Counter
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x306 COMPOUND_CTR_CTRL # PerfMon Compound Counter enhancement
+XEONSCAL4 0x307 COMPOUND_PERF_CTR # PerfMon Compound Counter enhancement
 
 # Intel-SDM-Vol4 Fixed-Function Performance Counters
 # https://github.com/intel/intel-cmt-cat/blob/6f385efba25682bc1d3dd2332fd177639ac8d0c7/lib/cpu_registers.h defines some names: IA32_MSR_INST_RETIRED_ANY=0x309, IA32_MSR_CPU_UNHALTED_THREAD=0x30A
@@ -792,6 +1104,15 @@ CORE8 0x350 BR_DETECT_CTRL   # Branch Monitoring Global Control
 CORE8 0x351 BR_DETECT_STATUS # Branch Monitoring Global Status
 CORE8 0x354 BR_DETECT_COUNTER_CONFIG_0 # Branch Monitoring Detect Counter Configuration
 CORE8 0x355 BR_DETECT_COUNTER_CONFIG_1 # Branch Monitoring Detect Counter Configuration
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/CommonMsr.h
+XEONSCAL4 0x350 ROP_DETECT_CTRL         # The BM_DETECT_CTRL is used to enable Branck Monitoring detection (BM), enable PMI exceptions on BM detect, set BM window size, determine counting method for BM window, and determine if trip is due to all counting conditions being met
+XEONSCAL4 0x351 ROP_DETECT_STATUS       # Branch Monitoring detect status - threshold tripped, which counter tripped, and tripping count
+XEONSCAL4 0x352 ROP_DETECT_CAPABILITIES # Branch Monitoring Detect Capabilities
+XEONSCAL4 0x354 ROP_COUNTER_CONFIG_0    # Counter_0: Counter enables, events selection, counter trip threshold
+XEONSCAL4 0x355 ROP_COUNTER_CONFIG_1    # Counter_1: Counter enables, events selection, counter trip threshold
+XEONSCAL4 0x360 ROP_EVENT_FILTER0       # Branch Monitoring event filter 0
+XEONSCAL4 0x361 ROP_EVENT_FILTER0_DATA  # ROP event filter 0 Data
 
 0x38D IA32_FIXED_CTR_CTRL           # Intel-SDM-Vol4 Fixed-Function Performance Counter Control
 0x38E IA32_PERF_GLOBAL_STATUS       # Intel-SDM-Vol4 Global Performance Counter Status
@@ -846,6 +1167,10 @@ XEONE5 0x39C PEBS_NUM_ALT # Enable alternate PEBS counting logic
 # Intel-SDM-Vol4 (Intel Xeon Processor 7500 Series)
 XEON7500 0x394 W_PMON_FIXED_CTR     # Uncore W-box perfmon fixed counter
 XEON7500 0x395 W_PMON_FIXED_CTR_CTL # Uncore U-box perfmon fixed counter control MSR
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x392 EMON_PERF_RES_PROGRAMMED # This MSR displays the programming status of all the PerfMon counters
+XEONSCAL4 0x396 NCUPMONCONFIG # This is MSR that shows to user configuration of uncore PMON's
 
 0x3F1 IA32_PEBS_ENABLE # Intel-SDM-Vol4 PEBS Control
 
@@ -1066,13 +1391,46 @@ CORE4 0x4E0 SMM_FEATURE_CONTROL # Enhanced SMM Feature Control
 CORE4 0x4E2 SMM_DELAYED         # SMM Delayed
 CORE4 0x4E3 SMM_BLOCKED         # SMM Blocked
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x4E8 SMM_ENABLE_MATCH # This SMM_ENABLE_MASK and MATCH registers are used to select threads (Logical thread Id's) that should be servicing a Targeted SMI. BIOS programs the MASK register to indicate which bits should be masked before doing a MATCH check
+XEONSCAL4 0x4EA SMM_ENABLE_MASK
+
 # Intel-SDM-Vol4 Status and SVN Threshold of SGX Support for ACM
 # From Intel SDM 38.11.3 Interactions with Authenticated Code Modules (ACMs)
 # https://www.intel.com/content/dam/develop/external/us/en/documents-tps/intel-tdx-cpu-architectural-specification.pdf Intel Trust Domain CPU Architectural Extensions
-0x500 IA32_SGX_SVN_STATUS
+0x500 IA32_SGX_SVN_STATUS # SGX SVN Status MSR. Bits[23:16] is SinitSeSvn. Bits[63:56] is SeamldrSeSvn
 
 # From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/p-seam-loader/src/common/x86_defs/msr_defs.h
 0x503 IA32_SGX_DEBUG_MODE
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x504 PROBE_MODE_VMEXIT_REDIRECTION_REASON # Scratch Pad register PROBE_MODE_4. C6NoSave Candidate
+XEONSCAL4 0x505 PROBE_MODE_VMX_REDIRECTION_INFO # VMX Redirection info used for Probe Mode
+XEONSCAL4 0x508 PROBE_TLB_FLUSH # Probe mode MSR used to flush all TLBs
+XEONSCAL4 0x509 PROBE_VMX_POINTER # Probe mode MSR used to read/write VMX pointers
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x50A TIO_PM_DEBUG_STATUS # emulated by xucode --> cause pppe exit, described in SNC HSD 1304428988 - HCTIO/SoftCE: uArch support for TIO_DEBUG_STATUS MSRs
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x510 EPTP # Extended Page Table Pointer
+XEONSCAL4 0x511 AET_MISC_ENABLE # Programmed in Probe mode, used in PDM. Need to save in C6 (AET = Architectural Event Trace ; PDM = Probeless Debug Methodology)
+XEONSCAL4 0x512 AET_EVENT_CTRL # AET (PDM) Event Control Register
+XEONSCAL4 0x513 PROBE_MODE_PPPE_REDIRECTION_INFO # PPPE Redirection info used for Probe Mode
+XEONSCAL4 0x514 PROBE_MODE_RESERVED_1_1 # This define is used to reserve some MSR addresses for probe mode. Ucode would have a dedicated handler for these MSRs
+XEONSCAL4 0x515 PROBE_MODE_RESERVED_2_2
+XEONSCAL4 0x516 PROBE_MODE_RESERVED_3_3
+XEONSCAL4 0x517 PROBE_MODE_RESERVED_4_4
+XEONSCAL4 0x518 PROBE_MODE_RESERVED_5_5
+XEONSCAL4 0x519 PROBE_MODE_RESERVED_6_6
+XEONSCAL4 0x51A PROBE_MODE_RESERVED_7_7
+XEONSCAL4 0x51B PROBE_MODE_RESERVED_8_8
+XEONSCAL4 0x51C PROBE_MODE_RESERVED_9_9
+XEONSCAL4 0x51D PROBE_MODE_RESERVED_10_10
+XEONSCAL4 0x51E PROBE_MODE_RESERVED_11_11
+XEONSCAL4 0x51F PROBE_MODE_RESERVED_12_12
+XEONSCAL4 0x520 ICECTLPMR_PRIOR_STATE # Scratch Pad register ICECTLPMR_PRIOR_STATE. Used only by probe mode. C6NoSave candidate
+XEONSCAL4 0x521 AET_BASE_ADDRESS # AET base address. programmed by probe mode software. Ucode will use it as the address where it will send all PDM messages
 
 # https://twitter.com/_markel___/status/1450854279267459077 2021-10 "Found undocumented Intel PDM (Probe-less Debug Methodology) mechanism implemented in microcode. FSCP_CR_PDM_CTRL is exposed via MSR 0x512 for Goldmont"
 ?ATOMGOLDMONT 0x512 FSCP_CR_PDM_CTRL # Probe-less Debug Methodology Control
@@ -1082,6 +1440,9 @@ CORE12 0x540 THREAD_UARCH_CTL # Thread Microarchitectural Control
 
 # Intel-SDM-Vol4 (10th Generation Intel Core)
 CORE10 0x541 CORE_UARCH_CTL   # Core Microarchitecture Control
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h
+XEONSCAL4 0x550 SEAM_SAI_MODE # Used by SEAM loader ACM to set the SEAM SAI from the core
 
 0x560 IA32_RTIT_OUTPUT_BASE      # Intel-SDM-Vol4 Trace Output Base Register
 0x561 IA32_RTIT_OUTPUT_MASK_PTRS # Intel-SDM-Vol4 Trace Output Mask Pointers Register
@@ -1100,31 +1461,46 @@ CORE10 0x541 CORE_UARCH_CTL   # Core Microarchitecture Control
 # https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/model_6fx/model_6fx_init.c
 0x5A0 IA32_PECI_CTL
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x5F0 DD_HASH_SEED_INIT         # addr conver msr in dedup for dlid
+XEONSCAL4 0x5F1 DD_THROTTLE_DISABLE       # command reg in ACE IP
+XEONSCAL4 0x5F2 DD_REVERSE_ADDR_CONV_SA   # addr conv msr in dedup
+XEONSCAL4 0x5F3 DD_REVERSE_ADDR_CONV_DLID # addr conver msr in dedup for dlid
+XEONSCAL4 0x5F4 DD_REVERSE_ADDR_CONV_SA1  # addr conver msr in dedup SA1
+XEONSCAL4 0x5F5 DD_REVERSE_ADDR_CONV_SA2  # ddr conver msr in dedup SA2
+XEONSCAL4 0x5F6 DD_REMAP_LIST             # remap list msr
+
 # In SgxLateInitSPR UEFI module 4th Generation Intel Xeon Scalable Processor Family), it is named MCHECK_CMCS_MSR
 0x600 IA32_DS_AREA               # Intel-SDM-Vol4 DS Save Area
 
 # Intel-SDM-Vol4 (11th Generation Intel Core)
-CORE11 0x601 VR_CURRENT_CONFIG # Power Limit 4 (PL4)
+CORE11 0x601 VR_CURRENT_CONFIG # Power Limit 4 (PL4). It is Icc limit on some power-delivery board element, mapped into W. It is proactive, instantaneous limit.
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/model_206ax/model_206ax.h
 INTEL206AX 0x601 PP0_CURRENT_CONFIG
 INTEL206AX 0x602 PP1_CURRENT_CONFIG
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/cpu/intel/haswell/haswell.h
-CORE4 0x603 VR_MISC_CONFIG
+CORE4 0x603 VR_MISC_CONFIG # Input voltage regulator configuration parameters.
 
 # Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
 # Intel-SDM-Vol4 (Xeon Processor E5 v3)
 CORE4 0x606 RAPL_POWER_UNIT # Unit Multipliers Used in RAPL (Run Time Average Power Limiting) Interfaces
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/braswell/include/soc/msr.h
-ATOMBRASWELL 0x606 PKG_POWER_SKU_UNIT
+ATOMBRASWELL 0x606 PKG_POWER_SKU_UNIT # Defines units for calculating SKU power and timing parameters
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x607 BIOS_MAILBOX_INTERFACE # Control and Status register for the BIOS-to-PCODE mailbox. This mailbox is implemented as a means for accessing statistics and implementing PCODE patches. This register is used in conjunction with BIOS_MAILBOX_DATA
+XEONSCAL4 0x608 BIOS_MAILBOX_DATA # Data register for the BIOS-to-PCODE mailbox
+XEONSCAL4 0x609 PST_CONFIG_CONTROL # This MSR reads/writes THREAD_P_REQ[P_STATE_OFFSET]
 
 # Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
 CORE2 0x60A PKGC3_IRTL        # Package C3 Interrupt Response Limit
 CORE2 0x60B PKGC6_IRTL        # Package C6 Interrupt Response Limit
 CORE2 0x60C PKGC7_IRTL        # Package C7 Interrupt Response Limit
 CORE2 0x60D PKG_C2_RESIDENCY  # Package C2 Residency Counter
+# https://github.com/intel/powergov/blob/cdfd69c063db50679b8dd453067c889f24a219dc/msr.h
 CORE2 0x610 PKG_POWER_LIMIT   # PKG RAPL Power Limit Control
 CORE2 0x611 PKG_ENERGY_STATUS # PKG Energy Status
 CORE2 0x614 PKG_POWER_INFO    # PKG RAPL Parameters
@@ -1148,6 +1524,7 @@ CORE7 0x620 RING_RATIO_LIMIT # Ring Ratio Limit
 XEONSCAL3 0x612 PACKAGE_ENERGY_TIME_STATUS # Package energy consumed by the entire CPU
 
 # Intel-SDM-Vol4 (Intel Xeon Processor E5)
+# https://github.com/intel/powergov/blob/cdfd69c063db50679b8dd453067c889f24a219dc/msr.h
 XEONE5 0x613 PKG_PERF_STATUS    # Package RAPL Perf Status
 XEONE5 0x618 DRAM_POWER_LIMIT   # DRAM RAPL Power Limit Control
 XEONE5 0x619 DRAM_ENERGY_STATUS # DRAM Energy Status
@@ -1157,6 +1534,23 @@ XEONE5 0x61C DRAM_POWER_INFO    # DRAM RAPL Parameters
 # Intel-SDM-Vol4 (Xeon Processor E5 v3)
 XEONE5V3 0x61E PCIE_PLL_RATIO     # Configuration of PCIE PLL Relative to BCLK
 XEONE5V3 0x620 UNCORE_RATIO_LIMIT # Uncore Ratio Limit
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x610 PACKAGE_RAPL_LIMIT # This register allows platform BIOS to limit the power consumption of the processor to the specified values
+XEONSCAL4 0x611 PACKAGE_ENERGY_STATUS # Package energy consumed by the entire CPU (including IA, GT and uncore). The counter will wrap around and continue counting when it reaches its limit. The energy status is reported in units which are defined in PACKAGE_POWER_SKU_UNIT_MSR[ENERGY_UNIT]
+XEONSCAL4 0x612 PACKAGE_ENERGY_TIME_STATUS # Package energy consumed by the entire CPU (including IA, GT and uncore). The counter will wrap around and continue counting when it reaches its limit. The energy status is reported in units which are defined in PACKAGE_POWER_SKU_UNIT_MSR[ENERGY_UNIT]
+XEONSCAL4 0x613 PACKAGE_RAPL_PERF_STATUS # Package RAPL Performance Status Register. This register provides information on the performance impact of the RAPL power limit and indicates the duration for processor went below the requested P-state due to package power constraint
+XEONSCAL4 0x614 PACKAGE_POWER_SKU # Defines allowed SKU power and timing parameters. PCODE will update the contents of this register
+XEONSCAL4 0x615 PL3_CONTROL # Read/write data from/to pcode through internal mailbox
+XEONSCAL4 0x618 DRAM_PLANE_POWER_LIMIT # Allows software to set power limits for the DRAM domain and measurement attributes associated with each limit
+XEONSCAL4 0x619 DDR_ENERGY_STATUS # Accumulates the energy consumed by the DIMMs (summed across all channels)
+XEONSCAL4 0x61B DDR_RAPL_PERF_STATUS # Memory RAPL performance excursion counter. This register can report the performance impact of power limiting
+XEONSCAL4 0x61C DRAM_POWER_INFO_CFG
+XEONSCAL4 0x61D LLC_FLUSHED_RCNTR # Time spent with LLC flushed. Count at the same frequency as the TSC
+XEONSCAL4 0x620 UNCORE_RATIO_LIMIT # Min/Max Ratio Limits for Uncore
+XEONSCAL4 0x621 UNCORE_PERF_STATUS # Ring and Last Level Cache Performance Status
+XEONSCAL4 0x622 PCH_EA_CONTROL # Gives SW ability to trigger a PMReq through Pcode to put the chipset and other devices off of the chipset into a low power state
+XEONSCAL4 0x623 PCH_EA_STATUS # Reflect the value of control when PCH has responded to request from PCH_EA_CONTROL
 
 # Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
 CORE4 0x630 PKG_C8_RESIDENCY  # Package C8 Residency Counter
@@ -1172,23 +1566,25 @@ CORE4 0x635 PKGC10_IRTL  # Package C10 Interrupt Response Limit
 CORE4HASWELL 0x633 C_STATE_LATENCY_CONTROL_3  # Same as PKGC8_IRTL
 CORE4HASWELL 0x634 C_STATE_LATENCY_CONTROL_4  # Same as PKGC9_IRTL
 CORE4HASWELL 0x635 C_STATE_LATENCY_CONTROL_5  # Same as PKGC10_IRTL
-CORE4 0x636 VR_MISC_CONFIG2
+CORE4 0x636 VR_MISC_CONFIG2 # Input voltage regulator configuration parameters
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
 0x637 COUNTER_24_MHZ
 
+# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/braswell/include/soc/msr.h
+ATOMBRASWELL 0x638 PP1_POWER_LIMIT
+
 # Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
+# https://github.com/intel/powergov/blob/cdfd69c063db50679b8dd453067c889f24a219dc/msr.h
 CORE2 0x638 PP0_POWER_LIMIT   # PP0 RAPL Power Limit Control
 CORE2 0x639 PP0_ENERGY_STATUS # PP0 Energy Status
 CORE2 0x63A PP0_POLICY        # PP0 Balance Policy
-
-# https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/braswell/include/soc/msr.h
-ATOMBRASWELL 0x638 PP1_POWER_LIMIT
 
 # Intel-SDM-252046-040 (2nd Gen Core, Sandy Bridge Microarchitecture)
 CORE2 0x63B PP0_PERF_STATUS   # PP0 Performance Throttling Status
 
 # Intel-SDM-Vol4 (2nd Gen Core, Sandy Bridge Microarchitecture)
+# https://github.com/intel/powergov/blob/cdfd69c063db50679b8dd453067c889f24a219dc/msr.h
 CORE2 0x640 PP1_POWER_LIMIT   # PP1 RAPL Power Limit Control
 CORE2 0x641 PP1_ENERGY_STATUS # PP1 Energy Status
 CORE2 0x642 PP1_POLICY        # PP1 Balance Policy
@@ -1203,12 +1599,17 @@ CORE3 0x64C TURBO_ACTIVATION_RATIO # ConfigTDP Control
 # Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors)
 CORE12 0x650 SECONDARY_TURBO_RATIO_LIMIT # Secondary Maximum Turbo Ratio Limit
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x651 ATOM_TURBO_RATIO_LIMIT_CORES # This register defines the active core ranges for each frequency point
+XEONSCAL4 0x654 THREAD_INFO # Contains software threads information for the current ia_thread
+
 # Intel-SDM-Vol4 (10th Generation Intel Core)
 CORE10 0x657 FAST_UNCORE_MSRS_CTL        # Thread Fast WRMSR/RDMSR Control MSR
 CORE10 0x65E FAST_UNCORE_MSRS_STATUS     # Indication of Uncore MSRs, Post Write Activates
 CORE10 0x65F FAST_UNCORE_MSRS_CAPABILITY # Fast WRMSR/RDMSR Enumeration MSR
 
 # Intel-SDM-Vol4 (6th-13th Xeon Processor)
+# https://github.com/intel/powergov/blob/cdfd69c063db50679b8dd453067c889f24a219dc/msr.h
 XEON6 0x64D PLATFORM_ENERGY_COUNTER   # Platform Energy Counter
 XEON6 0x64E PPERF                     # Productive Performance Count
 XEON6 0x64F CORE_PERF_LIMIT_REASONS   # Indicator of Frequency Clipping in Processor Cores
@@ -1228,6 +1629,10 @@ CORE8 0x662 CORE_C3_RESIDENCY  # Core C3 Residency Counter
 
 # Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors) Module C6 Residency Counter
 CORE12 0x664 MC6_RESIDENCY_COUNTER # Time that this module is in module-specific C6 states since last reset. Counts at 1 Mhz frequency.
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x665 PLATFORM_POWER_INFO # Package energy consumed by the entire CPU (including IA, GT and uncore). The counter will wrap around and continue counting when it reaches its limit. The energy status is reported in units which are defined in PACKAGE_POWER_SKU_UNIT_MSR[ENERGY_UNIT]
+XEONSCAL4 0x666 PLATFORM_RAPL_SOCKET_PERF_STATUS # Package energy consumed by the entire CPU (including IA, GT and uncore). The counter will wrap around and continue counting when it reaches its limit. The energy status is reported in units which are defined in PACKAGE_POWER_SKU_UNIT_MSR[ENERGY_UNIT]
 
 # Intel-SDM-Vol4 (Intel Atom Processor E3000 Series)
 ATOME3000 0x668 CC6_DEMOTION_POLICY_CONFIG # Core C6 Demotion Policy Config MSR
@@ -1267,6 +1672,9 @@ CORE1 0x68C LASTBRANCH_12_FROM_IP
 CORE1 0x68D LASTBRANCH_13_FROM_IP
 CORE1 0x68E LASTBRANCH_14_FROM_IP
 CORE1 0x68F LASTBRANCH_15_FROM_IP
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x680 POWERPERF_CTL
 
 # Intel-SDM-Vol4 (6th-13th Xeon Processor) Last Branch Record 16 From IP
 CORE1 0x690 LASTBRANCH_16_FROM_IP
@@ -1485,6 +1893,11 @@ CORE8 0x739 UNC_CBO_7_PERFEVTSEL1 # Uncore C-Box 7, Counter 1 Event Select MSR
 CORE8 0x73A UNC_CBO_7_PERFCTR0    # Uncore C-Box 7, Performance Counter 0
 CORE8 0x73B UNC_CBO_7_PERFCTR1    # Uncore C-Box 7, Performance Counter 1
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x71B RESIDENCY_CTR_SELECT # Spare Virtual MSRs in uncore Creg PLA
+XEONSCAL4 0x71C RESIDENCY_CTR_CONFIG # Spare Virtual MSRs in uncore Creg PLA
+XEONSCAL4 0x71D RESIDENCY_CTR        # Spare Virtual MSRs in uncore Creg PLA
+
 0x770 IA32_PM_ENABLE        # Intel-SDM-Vol4 Enable/disable HWP (Hardware-Controlled Performance State)
 0x771 IA32_HWP_CAPABILITIES # Intel-SDM-Vol4 HWP Performance Range Enumeration
 0x772 IA32_HWP_REQUEST_PKG  # Intel-SDM-Vol4 Power Management Control Hints for All Logical Processors in a Package
@@ -1497,7 +1910,24 @@ CORE8 0x73B UNC_CBO_7_PERFCTR1    # Uncore C-Box 7, Performance Counter 1
 # http://www.iway-tech.com/Uploads/Content/2020-12-02/5fc739d5cafc5.pdf ASRock WC621D8A-2T User Manual "S/W Error Injection is supported by unlocking MSR 0x790"
 # https://download.asrock.com/Manual/C621A%20WS.pdf AsRock C621A WS User Manual (same)
 # https://download.gigabyte.com/FileList/Manual/server_manual_r161-r12_e_10.pdf Gigabyte R161-R12 User Manual "software error injection is supported by unlocking MSR 0x790."
-? 0x790 SW_ERROR_INJECTION # Software Error Injection
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+0x790 ERR_INJ_LCK_UNLOCK_CTL # Software Error Injection. This MSR will write the ERRINJLCK bit of IIO, QPI, CBO, MC
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x791 UNCORE_SPARE_0_0 # Spare Virtual MSRs in uncore Creg PLA
+XEONSCAL4 0x792 UNCORE_SPARE_1_1
+XEONSCAL4 0x794 UNCORE_SPARE_2_2
+XEONSCAL4 0x795 UNCORE_SPARE_3_3
+XEONSCAL4 0x796 UNCORE_SPARE_4_4
+XEONSCAL4 0x797 UNCORE_SPARE_5_5
+XEONSCAL4 0x798 UNCORE_SPARE_6_6
+XEONSCAL4 0x799 UNCORE_SPARE_7_7
+XEONSCAL4 0x79A UNCORE_SPARE_8_8
+XEONSCAL4 0x79B UNCORE_SPARE_9_9
+XEONSCAL4 0x79C UNCORE_SPARE_10_10
+XEONSCAL4 0x79D UNCORE_SPARE_11_11
+XEONSCAL4 0x79E UNCORE_SPARE_12_12
+XEONSCAL4 0x79F UNCORE_SPARE_13_13
 
 # https://services.google.com/fh/files/misc/intel_tdx_-_full_report_041423.pdf
 # https://enveloper14.rssing.com/chan-8140356/article43.html "Intel Xeon Processor E7-8800/4800 V3 Product Family Technical Overview", for Enhanced machine check architecture recovery Gen2 (EMCA2)
@@ -1505,6 +1935,225 @@ CORE8 0x73B UNC_CBO_7_PERFCTR1    # Uncore C-Box 7, Performance Counter 1
 0x793 EXTENDED_MCG_PTR      # Extended Machine Check Pointer
 
 # 0x800-0x8FF is the x2APIC range
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x800 VIRTUAL_APIC_0_0 # Virtual APIC MSRs that are modeled by ucode
+XEONSCAL4 0x801 VIRTUAL_APIC_1_1
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x802 PIC_EXTENDED_LOCAL_APIC_ID # X2APIC Local APIC ID register
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x804 VIRTUAL_APIC_2_2
+XEONSCAL4 0x805 VIRTUAL_APIC_3_3
+XEONSCAL4 0x806 VIRTUAL_APIC_4_4
+XEONSCAL4 0x807 VIRTUAL_APIC_5_5
+XEONSCAL4 0x809 VIRTUAL_APIC_6_6
+XEONSCAL4 0x80C VIRTUAL_APIC_7_7
+XEONSCAL4 0x80E VIRTUAL_APIC_8_8
+XEONSCAL4 0x829 VIRTUAL_APIC_9_9
+XEONSCAL4 0x82A VIRTUAL_APIC_10_10
+XEONSCAL4 0x82B VIRTUAL_APIC_11_11
+XEONSCAL4 0x82C VIRTUAL_APIC_12_12
+XEONSCAL4 0x82D VIRTUAL_APIC_13_13
+XEONSCAL4 0x82E VIRTUAL_APIC_14_14
+XEONSCAL4 0x831 VIRTUAL_APIC_15_15
+XEONSCAL4 0x83A VIRTUAL_APIC_16_16
+XEONSCAL4 0x83B VIRTUAL_APIC_17_17
+XEONSCAL4 0x83C VIRTUAL_APIC_18_18
+XEONSCAL4 0x83D VIRTUAL_APIC_19_19
+XEONSCAL4 0x840 VIRTUAL_APIC_20_20
+XEONSCAL4 0x841 VIRTUAL_APIC_21_21
+XEONSCAL4 0x842 VIRTUAL_APIC_22_22
+XEONSCAL4 0x843 VIRTUAL_APIC_23_23
+XEONSCAL4 0x844 VIRTUAL_APIC_24_24
+XEONSCAL4 0x845 VIRTUAL_APIC_25_25
+XEONSCAL4 0x846 VIRTUAL_APIC_26_26
+XEONSCAL4 0x847 VIRTUAL_APIC_27_27
+XEONSCAL4 0x848 VIRTUAL_APIC_28_28
+XEONSCAL4 0x849 VIRTUAL_APIC_29_29
+XEONSCAL4 0x84A VIRTUAL_APIC_30_30
+XEONSCAL4 0x84B VIRTUAL_APIC_31_31
+XEONSCAL4 0x84C VIRTUAL_APIC_32_32
+XEONSCAL4 0x84D VIRTUAL_APIC_33_33
+XEONSCAL4 0x84E VIRTUAL_APIC_34_34
+XEONSCAL4 0x84F VIRTUAL_APIC_35_35
+XEONSCAL4 0x850 VIRTUAL_APIC_36_36
+XEONSCAL4 0x851 VIRTUAL_APIC_37_37
+XEONSCAL4 0x852 VIRTUAL_APIC_38_38
+XEONSCAL4 0x853 VIRTUAL_APIC_39_39
+XEONSCAL4 0x854 VIRTUAL_APIC_40_40
+XEONSCAL4 0x855 VIRTUAL_APIC_41_41
+XEONSCAL4 0x856 VIRTUAL_APIC_42_42
+XEONSCAL4 0x857 VIRTUAL_APIC_43_43
+XEONSCAL4 0x858 VIRTUAL_APIC_44_44
+XEONSCAL4 0x859 VIRTUAL_APIC_45_45
+XEONSCAL4 0x85A VIRTUAL_APIC_46_46
+XEONSCAL4 0x85B VIRTUAL_APIC_47_47
+XEONSCAL4 0x85C VIRTUAL_APIC_48_48
+XEONSCAL4 0x85D VIRTUAL_APIC_49_49
+XEONSCAL4 0x85E VIRTUAL_APIC_50_50
+XEONSCAL4 0x85F VIRTUAL_APIC_51_51
+XEONSCAL4 0x860 VIRTUAL_APIC_52_52
+XEONSCAL4 0x861 VIRTUAL_APIC_53_53
+XEONSCAL4 0x862 VIRTUAL_APIC_54_54
+XEONSCAL4 0x863 VIRTUAL_APIC_55_55
+XEONSCAL4 0x864 VIRTUAL_APIC_56_56
+XEONSCAL4 0x865 VIRTUAL_APIC_57_57
+XEONSCAL4 0x866 VIRTUAL_APIC_58_58
+XEONSCAL4 0x867 VIRTUAL_APIC_59_59
+XEONSCAL4 0x868 VIRTUAL_APIC_60_60
+XEONSCAL4 0x869 VIRTUAL_APIC_61_61
+XEONSCAL4 0x86A VIRTUAL_APIC_62_62
+XEONSCAL4 0x86B VIRTUAL_APIC_63_63
+XEONSCAL4 0x86C VIRTUAL_APIC_64_64
+XEONSCAL4 0x86D VIRTUAL_APIC_65_65
+XEONSCAL4 0x86E VIRTUAL_APIC_66_66
+XEONSCAL4 0x86F VIRTUAL_APIC_67_67
+XEONSCAL4 0x870 VIRTUAL_APIC_68_68
+XEONSCAL4 0x871 VIRTUAL_APIC_69_69
+XEONSCAL4 0x872 VIRTUAL_APIC_70_70
+XEONSCAL4 0x873 VIRTUAL_APIC_71_71
+XEONSCAL4 0x874 VIRTUAL_APIC_72_72
+XEONSCAL4 0x875 VIRTUAL_APIC_73_73
+XEONSCAL4 0x876 VIRTUAL_APIC_74_74
+XEONSCAL4 0x877 VIRTUAL_APIC_75_75
+XEONSCAL4 0x878 VIRTUAL_APIC_76_76
+XEONSCAL4 0x879 VIRTUAL_APIC_77_77
+XEONSCAL4 0x87A VIRTUAL_APIC_78_78
+XEONSCAL4 0x87B VIRTUAL_APIC_79_79
+XEONSCAL4 0x87C VIRTUAL_APIC_80_80
+XEONSCAL4 0x87D VIRTUAL_APIC_81_81
+XEONSCAL4 0x87E VIRTUAL_APIC_82_82
+XEONSCAL4 0x87F VIRTUAL_APIC_83_83
+XEONSCAL4 0x880 VIRTUAL_APIC_84_84
+XEONSCAL4 0x881 VIRTUAL_APIC_85_85
+XEONSCAL4 0x882 VIRTUAL_APIC_86_86
+XEONSCAL4 0x883 VIRTUAL_APIC_87_87
+XEONSCAL4 0x884 VIRTUAL_APIC_88_88
+XEONSCAL4 0x885 VIRTUAL_APIC_89_89
+XEONSCAL4 0x886 VIRTUAL_APIC_90_90
+XEONSCAL4 0x887 VIRTUAL_APIC_91_91
+XEONSCAL4 0x888 VIRTUAL_APIC_92_92
+XEONSCAL4 0x889 VIRTUAL_APIC_93_93
+XEONSCAL4 0x88A VIRTUAL_APIC_94_94
+XEONSCAL4 0x88B VIRTUAL_APIC_95_95
+XEONSCAL4 0x88C VIRTUAL_APIC_96_96
+XEONSCAL4 0x88D VIRTUAL_APIC_97_97
+XEONSCAL4 0x88E VIRTUAL_APIC_98_98
+XEONSCAL4 0x88F VIRTUAL_APIC_99_99
+XEONSCAL4 0x890 VIRTUAL_APIC_100_100
+XEONSCAL4 0x891 VIRTUAL_APIC_101_101
+XEONSCAL4 0x892 VIRTUAL_APIC_102_102
+XEONSCAL4 0x893 VIRTUAL_APIC_103_103
+XEONSCAL4 0x894 VIRTUAL_APIC_104_104
+XEONSCAL4 0x895 VIRTUAL_APIC_105_105
+XEONSCAL4 0x896 VIRTUAL_APIC_106_106
+XEONSCAL4 0x897 VIRTUAL_APIC_107_107
+XEONSCAL4 0x898 VIRTUAL_APIC_108_108
+XEONSCAL4 0x899 VIRTUAL_APIC_109_109
+XEONSCAL4 0x89A VIRTUAL_APIC_110_110
+XEONSCAL4 0x89B VIRTUAL_APIC_111_111
+XEONSCAL4 0x89C VIRTUAL_APIC_112_112
+XEONSCAL4 0x89D VIRTUAL_APIC_113_113
+XEONSCAL4 0x89E VIRTUAL_APIC_114_114
+XEONSCAL4 0x89F VIRTUAL_APIC_115_115
+XEONSCAL4 0x8A0 VIRTUAL_APIC_116_116
+XEONSCAL4 0x8A1 VIRTUAL_APIC_117_117
+XEONSCAL4 0x8A2 VIRTUAL_APIC_118_118
+XEONSCAL4 0x8A3 VIRTUAL_APIC_119_119
+XEONSCAL4 0x8A4 VIRTUAL_APIC_120_120
+XEONSCAL4 0x8A5 VIRTUAL_APIC_121_121
+XEONSCAL4 0x8A6 VIRTUAL_APIC_122_122
+XEONSCAL4 0x8A7 VIRTUAL_APIC_123_123
+XEONSCAL4 0x8A8 VIRTUAL_APIC_124_124
+XEONSCAL4 0x8A9 VIRTUAL_APIC_125_125
+XEONSCAL4 0x8AA VIRTUAL_APIC_126_126
+XEONSCAL4 0x8AB VIRTUAL_APIC_127_127
+XEONSCAL4 0x8AC VIRTUAL_APIC_128_128
+XEONSCAL4 0x8AD VIRTUAL_APIC_129_129
+XEONSCAL4 0x8AE VIRTUAL_APIC_130_130
+XEONSCAL4 0x8AF VIRTUAL_APIC_131_131
+XEONSCAL4 0x8B0 VIRTUAL_APIC_132_132
+XEONSCAL4 0x8B1 VIRTUAL_APIC_133_133
+XEONSCAL4 0x8B2 VIRTUAL_APIC_134_134
+XEONSCAL4 0x8B3 VIRTUAL_APIC_135_135
+XEONSCAL4 0x8B4 VIRTUAL_APIC_136_136
+XEONSCAL4 0x8B5 VIRTUAL_APIC_137_137
+XEONSCAL4 0x8B6 VIRTUAL_APIC_138_138
+XEONSCAL4 0x8B7 VIRTUAL_APIC_139_139
+XEONSCAL4 0x8B8 VIRTUAL_APIC_140_140
+XEONSCAL4 0x8B9 VIRTUAL_APIC_141_141
+XEONSCAL4 0x8BA VIRTUAL_APIC_142_142
+XEONSCAL4 0x8BB VIRTUAL_APIC_143_143
+XEONSCAL4 0x8BC VIRTUAL_APIC_144_144
+XEONSCAL4 0x8BD VIRTUAL_APIC_145_145
+XEONSCAL4 0x8BE VIRTUAL_APIC_146_146
+XEONSCAL4 0x8BF VIRTUAL_APIC_147_147
+XEONSCAL4 0x8C0 VIRTUAL_APIC_148_148
+XEONSCAL4 0x8C1 VIRTUAL_APIC_149_149
+XEONSCAL4 0x8C2 VIRTUAL_APIC_150_150
+XEONSCAL4 0x8C3 VIRTUAL_APIC_151_151
+XEONSCAL4 0x8C4 VIRTUAL_APIC_152_152
+XEONSCAL4 0x8C5 VIRTUAL_APIC_153_153
+XEONSCAL4 0x8C6 VIRTUAL_APIC_154_154
+XEONSCAL4 0x8C7 VIRTUAL_APIC_155_155
+XEONSCAL4 0x8C8 VIRTUAL_APIC_156_156
+XEONSCAL4 0x8C9 VIRTUAL_APIC_157_157
+XEONSCAL4 0x8CA VIRTUAL_APIC_158_158
+XEONSCAL4 0x8CB VIRTUAL_APIC_159_159
+XEONSCAL4 0x8CC VIRTUAL_APIC_160_160
+XEONSCAL4 0x8CD VIRTUAL_APIC_161_161
+XEONSCAL4 0x8CE VIRTUAL_APIC_162_162
+XEONSCAL4 0x8CF VIRTUAL_APIC_163_163
+XEONSCAL4 0x8D0 VIRTUAL_APIC_164_164
+XEONSCAL4 0x8D1 VIRTUAL_APIC_165_165
+XEONSCAL4 0x8D2 VIRTUAL_APIC_166_166
+XEONSCAL4 0x8D3 VIRTUAL_APIC_167_167
+XEONSCAL4 0x8D4 VIRTUAL_APIC_168_168
+XEONSCAL4 0x8D5 VIRTUAL_APIC_169_169
+XEONSCAL4 0x8D6 VIRTUAL_APIC_170_170
+XEONSCAL4 0x8D7 VIRTUAL_APIC_171_171
+XEONSCAL4 0x8D8 VIRTUAL_APIC_172_172
+XEONSCAL4 0x8D9 VIRTUAL_APIC_173_173
+XEONSCAL4 0x8DA VIRTUAL_APIC_174_174
+XEONSCAL4 0x8DB VIRTUAL_APIC_175_175
+XEONSCAL4 0x8DC VIRTUAL_APIC_176_176
+XEONSCAL4 0x8DD VIRTUAL_APIC_177_177
+XEONSCAL4 0x8DE VIRTUAL_APIC_178_178
+XEONSCAL4 0x8DF VIRTUAL_APIC_179_179
+XEONSCAL4 0x8E0 VIRTUAL_APIC_180_180
+XEONSCAL4 0x8E1 VIRTUAL_APIC_181_181
+XEONSCAL4 0x8E2 VIRTUAL_APIC_182_182
+XEONSCAL4 0x8E3 VIRTUAL_APIC_183_183
+XEONSCAL4 0x8E4 VIRTUAL_APIC_184_184
+XEONSCAL4 0x8E5 VIRTUAL_APIC_185_185
+XEONSCAL4 0x8E6 VIRTUAL_APIC_186_186
+XEONSCAL4 0x8E7 VIRTUAL_APIC_187_187
+XEONSCAL4 0x8E8 VIRTUAL_APIC_188_188
+XEONSCAL4 0x8E9 VIRTUAL_APIC_189_189
+XEONSCAL4 0x8EA VIRTUAL_APIC_190_190
+XEONSCAL4 0x8EB VIRTUAL_APIC_191_191
+XEONSCAL4 0x8EC VIRTUAL_APIC_192_192
+XEONSCAL4 0x8ED VIRTUAL_APIC_193_193
+XEONSCAL4 0x8EE VIRTUAL_APIC_194_194
+XEONSCAL4 0x8EF VIRTUAL_APIC_195_195
+XEONSCAL4 0x8F0 VIRTUAL_APIC_196_196
+XEONSCAL4 0x8F1 VIRTUAL_APIC_197_197
+XEONSCAL4 0x8F2 VIRTUAL_APIC_198_198
+XEONSCAL4 0x8F3 VIRTUAL_APIC_199_199
+XEONSCAL4 0x8F4 VIRTUAL_APIC_200_200
+XEONSCAL4 0x8F5 VIRTUAL_APIC_201_201
+XEONSCAL4 0x8F6 VIRTUAL_APIC_202_202
+XEONSCAL4 0x8F7 VIRTUAL_APIC_203_203
+XEONSCAL4 0x8F8 VIRTUAL_APIC_204_204
+XEONSCAL4 0x8F9 VIRTUAL_APIC_205_205
+XEONSCAL4 0x8FA VIRTUAL_APIC_206_206
+XEONSCAL4 0x8FB VIRTUAL_APIC_207_207
+XEONSCAL4 0x8FC VIRTUAL_APIC_208_208
+XEONSCAL4 0x8FD VIRTUAL_APIC_209_209
+XEONSCAL4 0x8FE VIRTUAL_APIC_210_210
+XEONSCAL4 0x8FF VIRTUAL_APIC_211_211
 
 0x802 IA32_X2APIC_APICID  # Intel-SDM-Vol4 x2APIC ID Register
 0x803 IA32_X2APIC_VERSION # Intel-SDM-Vol4 x2APIC Version Register
@@ -1558,11 +2207,163 @@ CORE8 0x73B UNC_CBO_7_PERFCTR1    # Uncore C-Box 7, Performance Counter 1
 0x83E IA32_X2APIC_DIV_CONF    # Intel-SDM-Vol4 x2APIC Divide Configuration Register
 0x83F IA32_X2APIC_SELF_IPI    # Intel-SDM-Vol4 x2APIC Self IPI Register
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x900 XRSTOR_INFO # Holds XSAVE_AREA "triplet" w/ addition of XCompaction vector for the XMODIFIED optimization
+XEONSCAL4 0x901 VMX_IO_EXIT_QUAL # Contains Exit Qual used on SMI I/O exits. C6NoSave Candidate
+XEONSCAL4 0x902 TMPDR6 # Equivalent to architectural DR6 reg
+XEONSCAL4 0x903 XU_MACROINSTRUCTION_ALIAS # Millicode MSR used to read/write certain fields of the Macroalias register
+XEONSCAL4 0x904 XU_VMX_CONTROL # Millicode MSR used to update the POST_VMXON and CURRENT_WP_IS_SHADOW_VMCS mode-based branch bits
+XEONSCAL4 0x905 VMX_PLE_FIRST # Pause-Loop Exiting: First value
+XEONSCAL4 0x906 VMX_PLE_LAST  # Pause-Loop Exiting: Last value
+XEONSCAL4 0x907 VMX_VMENTRY_AVRR_UTT_MAILBOX # Holds address bits [11:0] of a guest load/store access that hit the AVRR range. C6NoSave Candidate
+XEONSCAL4 0x908 XU_SMM_STATE # Millicode MSR used to control SMM states
+XEONSCAL4 0x909 IO_SMI_BACKUP_RSI # Saved RSI value from IO SMI, used by parallel VMExit and SMI. C6NoSave Candidate
+XEONSCAL4 0x90A IO_SMI_BACKUP_RCX # Saved RCX value from IO SMI, used by parallel VMExit and SMI. C6NoSave Candidate
+XEONSCAL4 0x90B IO_SMI_BACKUP_RDI # Saved RDI value from IO SMI, used by parallel VMExit and SMI. C6NoSave Candidate
+XEONSCAL4 0x90C VMX_VPPR # Holds VPPR bits [7:4]
+XEONSCAL4 0x90D PDM_GDXC_MSG # Write only MSR for Xucode to write PDM data out to the GDXC
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x90E GT_FLUSH_RELOAD # This is a Write-Only cmd MSR. A write causes GT to flush outstanding transactions and re-load it's boot context. A Rd will GP Fault. With the removal of the GT_CREG_ADDR_DIFFERENTIATOR there is no need for this to be virtual
+XEONSCAL4 0x90F GT_FLUSH_BCLD_ACK # GT writes a '1 to this bit to acknowledge PPPE range registers are loaded into GT
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x910 XU_STATUS
+XEONSCAL4 0x911 XRSTOR_XCOMPACTION_VECTOR # Holds XSAVE_AREA XCompaction vector for the XMODIFIED optimization
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x912 XU_TIO_CF_INFO  # Trusted IO - CAM Filter Info
+XEONSCAL4 0x913 XU_TIO_CF_TABLE # MSR used to access the CAM Filter Table
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x915 VMX_AVRR_REMAP # VMX AVRR Remap Addr used in RR assist
+XEONSCAL4 0x916 AVRR_BASE # APIC Virtualization Range Register - Base address of virtual APIC
+XEONSCAL4 0x917 XU_RESERVED_1_1 # This define is used to reserve some MSR addresses for XuCode. Ucode would have a dedicated handler for these MSRs
+XEONSCAL4 0x918 XU_RESERVED_2_2
+XEONSCAL4 0x919 XU_RESERVED_3_3
+XEONSCAL4 0x91A XU_RESERVED_4_4
+XEONSCAL4 0x91B EM_EXCEPTIONS_HANDLING_EIP # PPPE Exception Handling Entrypoint
+XEONSCAL4 0x91C XU_RESERVED_5_5
+XEONSCAL4 0x91D XU_RESERVED_6_6
+XEONSCAL4 0x91E XU_RESERVED_7_7
+XEONSCAL4 0x91F XU_RESERVED_8_8
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h and SprMsr.h
+XEONSCAL4 0x920 NCUWHOAMI # The who-am-I register is used by uCode to set up the APIC ID. This register is initialized by the PCU according to the socket configuration using the NcuPcuWHOAMI register. The who-am-i register returns a thread specific identifier, however some of the fields of this registers are shared between all threads as indicated by the fields description
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0x921 RESOLVED_CORES
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x922 PDM_HEADER # Write only MSR for Xucode to modify the PDM header for GDXC messages
+XEONSCAL4 0x923 MLC_PWR_MGMT_TIMER_CTRL # Timer control bits for various MLC/APIC Timers
+XEONSCAL4 0x924 PPPE_DOORBELL_EXIT_BITMAP # Scratch space exposed via MSR in PPPE
+XEONSCAL4 0x925 PPPE_EVENT_STATUS # Maps to ML3_CR_PIC_EVENT_STATUS (lower 32b) and ROB1_CR_PIC_EVENT_STATUS (upper 32b)
+XEONSCAL4 0x926 PPPE_EVENT_SET # Maps to ML3_CR_PIC_EVENT_SET (lower 32b) and ROB1_CR_PIC_EVENT_SET (upper 32b)
+XEONSCAL4 0x927 PPPE_EVENT_RESET # Maps to ML3_CR_PIC_EVENT_RESET (lower 32b) and ROB1_CR_PIC_EVENT_RESET (upper 32b)
+XEONSCAL4 0x928 XU_RESERVED_9_9
+XEONSCAL4 0x929 XU_RESERVED_10_10
+XEONSCAL4 0x92A XU_RESERVED_11_11
+XEONSCAL4 0x92B XU_RESERVED_12_12
+XEONSCAL4 0x92C XU_RESERVED_13_13
+XEONSCAL4 0x92D XU_RESERVED_14_14
+XEONSCAL4 0x92E XU_RESERVED_15_15
+XEONSCAL4 0x92F PIC_LT_DOORBELL
+XEONSCAL4 0x930 XU_RESERVED_16_16
+XEONSCAL4 0x931 XU_RESERVED_17_17
+XEONSCAL4 0x932 XU_RESERVED_18_18
+XEONSCAL4 0x933 VMCS_CACHE_BASE # PPPE will have read/write access to the FSCP_CR_VMCS_CACHE_BASE register for implementing the VMCS cache. Can be cut to 32-bits if not used by PPPE
+XEONSCAL4 0x934 PSMI_BASE # Scratch Pad register BNS_CR_PSMBASE
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h and SprMsr.h
+XEONSCAL4 0x936 LT_SMX_STATE # Holds various SMX state
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x937 MLC_VT_TIMER_COUNT # VMX timer current count
+XEONSCAL4 0x938 MLC_VT_TIMER_CONTROL # VMX timer control
+XEONSCAL4 0x939 IOMISCINFO # MM IO MISC INFO Register. 32 bit. (Mrm roctlregc/roapes/roiomiscinfoSM306L)
+XEONSCAL4 0x93B XU_RESERVED_19_19
+XEONSCAL4 0x93E IO_MEM_ADDR # Memory address accessed by the last IO instruction. Used to communicate between io and SMI/PPPE. C6NoSave candidate
+XEONSCAL4 0x93F XU_RESERVED_20_20
+XEONSCAL4 0x940 PDPTR_0_0 # Mode C - Protected Mode PagDir Pointers - 0
+XEONSCAL4 0x941 PDPTR_1_1
+XEONSCAL4 0x942 PDPTR_2_2
+XEONSCAL4 0x943 PDPTR_3_3
+XEONSCAL4 0x944 XU_RESERVED_21_21
+XEONSCAL4 0x945 XU_RESERVED_22_22
+XEONSCAL4 0x946 XU_RESERVED_23_23
+XEONSCAL4 0x947 XU_RESERVED_24_24
+XEONSCAL4 0x948 XU_RESERVED_25_25
+XEONSCAL4 0x949 XU_RESERVED_26_26
+XEONSCAL4 0x94A XU_RESERVED_27_27
+XEONSCAL4 0x94B XU_RESERVED_28_28
+XEONSCAL4 0x94C XU_RESERVED_29_29
+XEONSCAL4 0x94D XU_RESERVED_30_30
+XEONSCAL4 0x94E XU_ALL_CORES_POISON
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/CommonMsr.h
+XEONSCAL4 0x94F XU_OPTIN
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x950 XUCODE_UCODE_COMMAND # Each bit is command from xucode for specific action
+XEONSCAL4 0x951 GLOBAL_SE_ENABLE # An uncore register indicating that SE is fully installed. Used by CPUID and preamble need to check the option to cache it for each core
+XEONSCAL4 0x952 PKG_SE_SVN
+XEONSCAL4 0x955 ELSRR_BASE # Enclave Linear Space Range Register - Physical Base Control Register
+XEONSCAL4 0x956 ELSRR_MASK # Enclave Linear Space Range Register - Physical Mask Control Register
+XEONSCAL4 0x958 TCS_PA # TCS Physical Address. Pointer to TCS structure, to be used at ASEX
+XEONSCAL4 0x959 SECS_SID # Holds SE Active SECS
+XEONSCAL4 0x960 FUSE_KEY1_0 # This is a Read-Only xucode MSR
+XEONSCAL4 0x961 FUSE_KEY1_1 # This is a Read-Only xucode MSR
+XEONSCAL4 0x962 EMRR_BASE # Millicode Memory Range Register - Physical Base Control Register
+XEONSCAL4 0x963 EMRR_MASK # Millicode Memory Range Register - Physical Mask Control Register
+XEONSCAL4 0x964 EMXRR_BASE # Xucode Memory Range Register - Physical Base Control Register
+XEONSCAL4 0x965 EMXRR_MASK # Xucode Memory Range Register - Physical Mask Control Register
+XEONSCAL4 0x967 XU_RESERVED_31_31
+XEONSCAL4 0x96A MEE_SETUP # This is uncore SCP. RO MSR to provide 128 bits of external entropy used for key derivation
+XEONSCAL4 0x96B PPPE_TAP_STATUS
+XEONSCAL4 0x96C EE_INIT # MEE init register
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/CommonMsr.h
+XEONSCAL4 0x96D XCR0 # Holds XCR0 and XSAVE Compaction Vector (used for XMODIFIED optimization check)
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x970 SGX_RDPCHSGXID_0 # PCHSGXID 0 exposed in PCH by CSME
+XEONSCAL4 0x971 SGX_RDPCHSGXID_1 # PCHSGXID 1 exposed in PCH by CSME
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h
+XEONSCAL4 0x972 MCHECK_CPU_REGISTER_ADDRESS # MCHECK XuCode register that holds address of uncore register to be written
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x973 MCHECK_CPU_REGISTER_DATA # Virtual MSR to will write data to an Uncore CR. The write is invoked by MCHECK flow. CR address is taken from MSR 0x972
+XEONSCAL4 0x985 IA32_UINT_RR # This MSR holds the current value of UIRR
+XEONSCAL4 0x986 UINT_HANDLER # This MSR holds the current value of UIHANDLER. This is a linear address that must be canonical relative to the maximum linear-address width supported by the processor
+XEONSCAL4 0x987 UINT_STACKADJUST # This MSR holds the current value of UISTACKADJUST. This is a linear address that must be canonical relative to the maximum linear-address width supported by the processor
+XEONSCAL4 0x988 IA32_CR_UINT_MISC # Bits 31:0 hold the current value of UITTSZ. Bits 39:32 hold the current value of UINV
+XEONSCAL4 0x989 UINT_PD # This MSR holds the current value of UPIDADDR. This is a linear address that must be canonical relative to the maximum linear-address width supported by the processor
+XEONSCAL4 0x98A UINT_TT # Bits 63:4 of this MSR holds the current value of UITTADDR. This is a linear address that must be canonical relative to the maximum linear-address width supported by the processor
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h
+XEONSCAL4 0x990 COPY_STATUS # FSCP To hold keylocker information
+XEONSCAL4 0x991 IWKEYBACKUP_STATUS # Status of IWKey Backup in PCH
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x992 BIOS_TME_KEY_0 # MSR to read/write ubox LOW TME EPHEMERAL KEY
+XEONSCAL4 0x993 BIOS_TME_KEY_1 # MSR to read/write ubox HIGH TME EPHEMERAL KEY
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h
+XEONSCAL4 0x994 BIOS_TME_KEY_2 # MSR to read/write ubox LOW TME EPHEMERAL KEY
+XEONSCAL4 0x995 BIOS_TME_KEY_3
+
+XEONSCAL4 0x9FF CORE_MKTME_ACTIVATION # Virtual MSR to read TME_ACTIVATE[MK_TME_KEYID_BITS] from SoC. Write with EDX:EAX == 0 will translate the above value into PMH mask register
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+0x966 PERMON_EVNTSEL_AUX    # This is a new PerfMon register is used for future user-invisible controls to be shadowed in all PerfMon units.
+
 # https://software.intel.com/content/dam/develop/external/us/en/documents/multi-key-total-memory-encryption-spec-753926.pdf Intel Architecture Memory Encryption Technologies (336907-004US rev 1.4, August 2022)
-0x981 IA32_TME_CAPABILITY   # Intel-SDM-Vol4 Memory Encryption Capability
-0x982 IA32_TME_ACTIVATE     # Intel-SDM-Vol4 Memory Encryption Activation
-0x983 IA32_TME_EXCLUDE_MASK # Intel-SDM-Vol4 Memory Encryption Exclude Mask
-0x984 IA32_TME_EXCLUDE_BASE # Intel-SDM-Vol4 Memory Encryption Exclude Base
+0x981 IA32_TME_CAPABILITY   # Intel-SDM-Vol4 Memory Encryption Capability. Read only register for encryption policies supported by Total Memory Encryption (TME) and Multi-key TME (MKTME)
+0x982 IA32_TME_ACTIVATE     # Intel-SDM-Vol4 Memory Encryption Activation. R/W register to generate or restore Keys for TME
+0x983 IA32_TME_EXCLUDE_MASK # Intel-SDM-Vol4 Memory Encryption Exclude Mask. Register for debug purposes to exclude a memory range from encryption by TME
+0x984 IA32_TME_EXCLUDE_BASE # Intel-SDM-Vol4 Memory Encryption Exclude Base. Register for debug purposes to exclude a memory range from encryption by TME
 
 0x985 IA32_UINTR_RR          # Intel-SDM-Vol4 User Interrupt Request Register
 0x986 IA32_UINTR_HANDLER     # Intel-SDM-Vol4 User Interrupt Handler Address
@@ -1571,8 +2372,8 @@ CORE8 0x73B UNC_CBO_7_PERFCTR1    # Uncore C-Box 7, Performance Counter 1
 0x989 IA32_UINTR_PD          # Intel-SDM-Vol4 User Interrupt PID Address
 0x98A IA32_UINTR_TT          # Intel-SDM-Vol4 User-Interrupt Target Table
 
-0x990 IA32_COPY_STATUS        # Intel-SDM-Vol4 Status of Most Recent Platform to Local or Local to Platform Copies
-0x991 IA32_IWKEYBACKUP_STATUS # Intel-SDM-Vol4 Information about IWKeyBackup Register
+0x990 IA32_COPY_STATUS        # Intel-SDM-Vol4 Status of Most Recent Platform to Local or Local to Platform Copies. FSCP To hold keylocker information
+0x991 IA32_IWKEYBACKUP_STATUS # Intel-SDM-Vol4 Information about IWKeyBackup Register. Status of IWKey Backup in PCH
 
 # https://cdrdv2-public.intel.com/315168/315168_TXT_MLE_Development%20Guide_rev_017_3.pdf Intel Trusted Execution Technology (Intel TXT) Software Development Guide (315168-017 Revision 017.3, March 2022)
 0x9FB IA32_TME_CLEAR_SAVED_KEY
@@ -1582,6 +2383,52 @@ CORE8 0x73B UNC_CBO_7_PERFCTR1    # Uncore C-Box 7, Performance Counter 1
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/xeon_sp/include/soc/msr.h
 XEONSP 0xA01 ENERGY_PERF_BIAS_CONFIG
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xA00 IO_BW_P_LIMIT_OVERRIDE # Various controls
+XEONSCAL4 0xA01 ENERGY_PERF_BIAS_CONFIG # This register effectively governs all major power saving engines and heuristics on the die
+XEONSCAL4 0xA02 SW_LTR_OVRD # This register is intended for OS usage. It enables the OS to write an LTR value if they choose to participate in the LTR process. This register includes parameters that PCODE will use to override information received from PCI Express via LTR messages. Pcode will choose this value, or PCIE_LTR_OVRD, or actual LTR values from IIO depending on selection function in POWER_CTL uCR PCODE will sample this register at slow loop
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h
+XEONSCAL4 0xA03 MEMORY_CONFIG_MEASUREMENT_0 # uCode scratchpad register shared by all threads. ucode memory config measurement register
+XEONSCAL4 0xA04 MEMORY_CONFIG_MEASUREMENT_1
+XEONSCAL4 0xA05 MEMORY_CONFIG_MEASUREMENT_2
+XEONSCAL4 0xA06 MEMORY_CONFIG_MEASUREMENT_3
+XEONSCAL4 0xA07 MMCFG_LOCAL_RULE_ADDRESS_CFG_01 # mmcfg local rule address 0 and 1
+XEONSCAL4 0xA08 MMCFG_LOCAL_RULE_ADDRESS_CFG_23 # mmcfg local rule address 2 and 3
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/CommonMsr.h
+XEONSCAL4 0xB18 M2PPMONCNTRCFG_2 # Holds the status information and control the operation of the the PMON Fixed Counter
+XEONSCAL4 0xB19 M2PPMONCNTRCFG_3
+XEONSCAL4 0xB1D IRPPMONCNTRCFG_0
+XEONSCAL4 0xB1E IRPPMONCNTRCFG_1
+XEONSCAL4 0xB20 IIOPMONUNITCTRL
+XEONSCAL4 0xB21 IIOPMONCNTR_0   # This register is a perf counter. Software can read it and write it
+XEONSCAL4 0xB22 IIOPMONCNTR_1
+XEONSCAL4 0xB23 IIOPMONCNTR_2
+XEONSCAL4 0xB24 IIOPMONCNTR_3
+XEONSCAL4 0xB25 IIOPMONFRCNTRCLK
+XEONSCAL4 0xB27 IIOPMONUNITSTATUS
+XEONSCAL4 0xB28 IOPMONCNTRCFG_0 # Holds the status information and control the operation of the the PMON Fixed Counter
+XEONSCAL4 0xB29 IOPMONCNTRCFG_1
+XEONSCAL4 0xB2A IOPMONCNTRCFG_2
+XEONSCAL4 0xB2B IOPMONCNTRCFG_3
+XEONSCAL4 0xB50 IIOPMONFRCNTR_0
+XEONSCAL4 0xB51 IIOPMONFRCNTR_1
+XEONSCAL4 0xB52 IIOPMONFRCNTR_2
+XEONSCAL4 0xB53 IIOPMONFRCNTR_3
+XEONSCAL4 0xB54 IIOPMONFRCNTR_4
+XEONSCAL4 0xB55 IIOPMONFRCNTR_5
+XEONSCAL4 0xB56 IIOPMONFRCNTR_6
+XEONSCAL4 0xB57 IIOPMONFRCNTR_7
+XEONSCAL4 0xB58 IIOPMONFRCNTR_8
+XEONSCAL4 0xB59 IIOPMONFRCNTR_9
+XEONSCAL4 0xB5A IIOPMONFRCNTR_10
+XEONSCAL4 0xB5B IIOPMONFRCNTR_11
+XEONSCAL4 0xB5C IIOPMONFRCNTR_12
+XEONSCAL4 0xB5D IIOPMONFRCNTR_13
+XEONSCAL4 0xB5E IIOPMONFRCNTR_14
+XEONSCAL4 0xB5F IIOPMONFRCNTR_15
 
 # Intel-SDM-Vol4 (Intel Xeon Processor 7500 Series)
 XEON7500 0xC00 U_PMON_GLOBAL_CTRL     # Uncore U-box perfmon global control MSR
@@ -2001,12 +2848,97 @@ XEONE5V2 0xED8 C14_PMON_CTR2        # Uncore C-Box 14 Perfmon Counter 2
 XEONE5V2 0xED9 C14_PMON_CTR3        # Uncore C-Box 14 Perfmon Counter 3
 XEONE5V2 0xEDA C14_PMON_BOX_FILTER1 # Uncore C-Box 14 Perfmon Box Wide Filter1
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xC00 SMRAM_CR0               # Available only in SMM. SMRAM copy of CR0 saved by SMI
+XEONSCAL4 0xC01 SMRAM_CR3               # Available only in SMM. SMRAM copy of CR3 saved by SMI
+XEONSCAL4 0xC02 SMRAM_EFLAGS            # Available only in SMM. SMRAM copy of EFLAGS saved by SMI
+XEONSCAL4 0xC03 SMRAM_EFER              # Available only in SMM. SMRAM copy of EFER saved by SMI
+XEONSCAL4 0xC04 SMRAM_RIP               # Available only in SMM. SMRAM copy of RIP saved by SMI, introduced in HSW
+XEONSCAL4 0xC05 SMRAM_DR6               # Available only in SMM. SMRAM copy of DR6 saved by SMI
+XEONSCAL4 0xC06 SMRAM_DR7               # Available only in SMM. SMRAM copy of DR7 saved by SMI
+XEONSCAL4 0xC07 SMRAM_TR_LDTR           # Available only in SMM. SMRAM copy of TR Sel and LDTR Sel saved by SMI
+XEONSCAL4 0xC08 SMRAM_GS_FS             # Available only in SMM. SMRAM copy of GS and FS saved by SMI
+XEONSCAL4 0xC09 SMRAM_DS_SS             # Available only in SMM. SMRAM copy of DS and SS saved by SMI
+XEONSCAL4 0xC0A SMRAM_CS_ES             # Available only in SMM. SMRAM copy of CS and ES saved by SMI
+XEONSCAL4 0xC0B SMRAM_IOMISCINFO        # Available only in SMM. SMRAM copy of IOMISCINFO saved by SMI
+XEONSCAL4 0xC0C SMRAM_IO_MEM_ADDR       # Available only in SMM. SMRAM copy of IO_MEM_ADDR saved by SMI
+XEONSCAL4 0xC0D SMRAM_RDI               # Available only in SMM. SMRAM copy of RDI saved by SMI
+XEONSCAL4 0xC0E SMRAM_RSI               # Available only in SMM. SMRAM copy of RSI saved by SMI
+XEONSCAL4 0xC0F SMRAM_RBP               # Available only in SMM. SMRAM copy of RBP saved by SMI
+XEONSCAL4 0xC10 SMRAM_RSP               # Available only in SMM. SMRAM copy of RSP saved by SMI
+XEONSCAL4 0xC11 SMRAM_RBX               # Available only in SMM. SMRAM copy of RBX saved by SMI
+XEONSCAL4 0xC12 SMRAM_RDX               # Available only in SMM. SMRAM copy of RDX saved by SMI
+XEONSCAL4 0xC13 SMRAM_RCX               # Available only in SMM. SMRAM copy of RCX saved by SMI
+XEONSCAL4 0xC14 SMRAM_RAX               # Available only in SMM. SMRAM copy of RAX saved by SMI
+XEONSCAL4 0xC15 SMRAM_R8                # Available only in SMM. SMRAM copy of R8 saved by SMI
+XEONSCAL4 0xC16 SMRAM_R9
+XEONSCAL4 0xC17 SMRAM_R10
+XEONSCAL4 0xC18 SMRAM_R11
+XEONSCAL4 0xC19 SMRAM_R12
+XEONSCAL4 0xC1A SMRAM_R13
+XEONSCAL4 0xC1B SMRAM_R14
+XEONSCAL4 0xC1C SMRAM_R15
+XEONSCAL4 0xC1F SMRAM_EVENT_CTL_HLT_IO  # Available only in SMM. SMRAM copy of EVENT_CTL, HLT flag and IO flag saved by SMI
+XEONSCAL4 0xC20 SMRAM_SMBASE            # Available only in SMM. SMRAM copy of SMBASE saved by SMI
+XEONSCAL4 0xC21 SMRAM_SMM_REVID         # Available only in SMM. SMRAM copy of SMM_REVID saved by SMI
+XEONSCAL4 0xC22 SMRAM_IEDBASE           # Available only in SMM. SMRAM copy of IEDBASE saved by SMI
+XEONSCAL4 0xC23 SMRAM_EPTP_ENABLE       # Available only in SMM. SMRAM copy of EPTP_ENABLE saved by SMI
+XEONSCAL4 0xC24 SMRAM_EPTP              # Available only in SMM. SMRAM copy of EPTP saved by SMI
+XEONSCAL4 0xC25 SMRAM_BNDCFGS           # Available only in SMM. SMRAM copy of BNDCFGS saved by SMI
+XEONSCAL4 0xC26 SMRAM_SSP               # Available only in SMM. SMRAM copy of SSP saved by SMI
+XEONSCAL4 0xC2C SMRAM_LDTR_BASE         # Available only in SMM. SMRAM copy of LDTR_BASE saved by SMI
+XEONSCAL4 0xC2D SMRAM_IDTR_BASE         # Available only in SMM. SMRAM copy of IDTR_BASE saved by SMI
+XEONSCAL4 0xC2E SMRAM_GDTR_BASE         # Available only in SMM. SMRAM copy of IDTR_BASE saved by SMI
+XEONSCAL4 0xC37 SMRAM_CR4               # Available only in SMM. SMRAM copy of CR0 saved by SMI
+XEONSCAL4 0xC40 SMRAM_IO_RSI            # Available only in SMM. SMRAM copy of IO_RSI saved by SMI
+XEONSCAL4 0xC41 SMRAM_IO_RCX            # Available only in SMM. SMRAM copy of IO_RCX saved by SMI
+XEONSCAL4 0xC42 SMRAM_IO_RIP            # Available only in SMM. SMRAM copy of IO_RIP saved by SMI
+XEONSCAL4 0xC43 SMRAM_IO_RDI            # Available only in SMM. SMRAM copy of IO_RDI saved by SMI
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h and SprMsr.h
+XEONSCAL4 0xC70 QOS_MBM_RANGE0_BASE_ADDR # MSR that is used by SW to program the Address Range Base value at 64MB granularity to be used for monitoring the memory BW
+XEONSCAL4 0xC71 QOS_MBM_RANGE1_BASE_ADDR
+XEONSCAL4 0xC72 QOS_MBM_RANGE2_BASE_ADDR
+XEONSCAL4 0xC73 QOS_MBM_RANGE3_BASE_ADDR
+XEONSCAL4 0xC74 QOS_MBM_RANGE4_BASE_ADDR
+XEONSCAL4 0xC75 QOS_MBM_RANGE5_BASE_ADDR
+XEONSCAL4 0xC76 QOS_MBM_RANGE6_BASE_ADDR
+XEONSCAL4 0xC77 QOS_MBM_RANGE7_BASE_ADDR
+XEONSCAL4 0xC78 QOS_MBM_RANGE0_LIMIT_ADDR # MSR that is used by SW to program the Address Range0 LIMIT value at 64MB granularity to be used for monitoring the memory BW
+XEONSCAL4 0xC79 QOS_MBM_RANGE1_LIMIT_ADDR
+XEONSCAL4 0xC7A QOS_MBM_RANGE2_LIMIT_ADDR
+XEONSCAL4 0xC7B QOS_MBM_RANGE3_LIMIT_ADDR
+XEONSCAL4 0xC7C QOS_MBM_RANGE4_LIMIT_ADDR
+XEONSCAL4 0xC7D QOS_MBM_RANGE5_LIMIT_ADDR
+XEONSCAL4 0xC7E QOS_MBM_RANGE6_LIMIT_ADDR
+XEONSCAL4 0xC7F QOS_MBM_RANGE7_LIMIT_ADDR
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xC81 PQOS_CDP_ENABLE         # CDP enable
+XEONSCAL4 0xC83 IIO_QOS_CFG
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0xC84 MBA_CFG # MBA (mem bandwidth alloc) cfg
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xC85 L3_PROTECTED_WAYS       # way mask for locked LLC ways. If the hit way intersects this mask, LLC to SF migration is disabled
+XEONSCAL4 0xC86 MBM_CFG_3DXP            # enable maksing of events that MBM counts
+XEONSCAL4 0xC87 SF_QOS_INFO             # STLB QoS MASK configuration
+XEONSCAL4 0xC8B IIO_LLC_WAYS            # Way Mask for IIO accesses (SF and LLC)
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0xC8C QLRU_CONFIG # uCR: LRU Update values for various opcodes that update the LRU bits
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xC8D QOSEVTSEL               # MSR that is used to receive query id from software for which data will be looked up by another MSR
+XEONSCAL4 0xC8E QMC                     # MSR that is used to convey the counter value for the RMID queried by the QOSEVTSEL MSR. This is a Read only MSR
+
 # https://github.com/fwupd/fwupd/blob/55bd4862d3ad8f0c7bf92dc6d7732afcad6e47a8/plugins/msr/fu-plugin-msr.c#L49
 # https://github.com/tianocore/edk2/blob/c9b7c6e0cc7da76b74bcdd8c90cef956d5ae971c/MdePkg/Include/Register/Intel/ArchitecturalMsr.h#L5700-L5737
 0xC80 IA32_DEBUG_INTERFACE  # Intel-SDM-Vol4 Silicon Debug Feature Control
 
 0xC81 IA32_L3_QOS_CFG # Intel-SDM-Vol4 L3 QOS Configuration
-0xC82 IA32_L2_QOS_CFG # Intel-SDM-Vol4 L2 QOS Configuration
+0xC82 IA32_L2_QOS_CFG # Intel-SDM-Vol4 L2 QOS Configuration. MLC Class Of Service Configuration Register
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/x86/msr.h
 0xC85 IA32_L3_PROTECTED_WAYS
@@ -2054,6 +2986,10 @@ XEONE5V4 0xC9C IA32_L3_QOS_MASK_12
 XEONE5V4 0xC9D IA32_L3_QOS_MASK_13
 XEONE5V4 0xC9E IA32_L3_QOS_MASK_14
 XEONE5V4 0xC9F IA32_L3_QOS_MASK_15
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xCA0 RMID_SNC_DISABLE        # If set, RMID will be compared with FinalCHAID = BaseCHA_Cluster + HashCHAID. If not set, RMID will be compared with HashCHAID
+XEONSCAL4 0xCA1 QMC_CNTR_CORRECTION     # Apply correction factor upon data return through the IA32_QM_CTR MSR
 
 # 0xD10-0xD4F Intel-SDM-Vol4 Reserved MSR Address Space for L2 CAT Mask Registers, See Section 18.19.4.1, "Enumeration and Detection Support of Cache Allocation Technology"
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/cpu/resctrl/internal.h?h=v6.1 defines MSR_IA32_L2_CBM_BASE=0xd10
@@ -2151,6 +3087,42 @@ CORE12 0xD1C IA32_CR_L2_QOS_MASK_12
 CORE12 0xD1D IA32_CR_L2_QOS_MASK_13
 CORE12 0xD1E IA32_CR_L2_QOS_MASK_14
 CORE12 0xD1F IA32_CR_L2_QOS_MASK_15
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
+XEONSCAL4 0xD1F RO_DUMMY_REGISTER_MUST_GP # Dummy register, intended to use as sink CR for writes, will return zeroes for reads
+XEONSCAL4 0xD20 DUMMY_REGISTER_MUST_GP0_0
+XEONSCAL4 0xD21 DUMMY_REGISTER_MUST_GP1_1
+XEONSCAL4 0xD22 DUMMY_REGISTER_MUST_GP2_2
+XEONSCAL4 0xD23 DUMMY_REGISTER_MUST_GP3_3
+XEONSCAL4 0xD24 DUMMY_REGISTER_MUST_GP4_4
+XEONSCAL4 0xD25 DUMMY_REGISTER_MUST_GP5_5
+XEONSCAL4 0xD26 DUMMY_REGISTER_MUST_GP6_6
+XEONSCAL4 0xD27 DUMMY_REGISTER_MUST_GP7_7
+XEONSCAL4 0xD28 DUMMY_REGISTER_MUST_GP8_8
+XEONSCAL4 0xD29 DUMMY_REGISTER_MUST_GP9_9
+XEONSCAL4 0xD2A DUMMY_REGISTER_MUST_GP10_10
+XEONSCAL4 0xD2B DUMMY_REGISTER_MUST_GP11_11
+XEONSCAL4 0xD2C DUMMY_REGISTER_MUST_GP12_12
+XEONSCAL4 0xD2D DUMMY_REGISTER_MUST_GP13_13
+XEONSCAL4 0xD2E DUMMY_REGISTER_MUST_GP14_14
+XEONSCAL4 0xD2F DUMMY_REGISTER_MUST_GP15_15
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xD50 QOS_EXT_BW_THRTL_0_0    # This MSR is used for Memory BW enforcement
+XEONSCAL4 0xD51 QOS_EXT_BW_THRTL_1_1
+XEONSCAL4 0xD52 QOS_EXT_BW_THRTL_2_2
+XEONSCAL4 0xD53 QOS_EXT_BW_THRTL_3_3
+XEONSCAL4 0xD54 QOS_EXT_BW_THRTL_4_4
+XEONSCAL4 0xD55 QOS_EXT_BW_THRTL_5_5
+XEONSCAL4 0xD56 QOS_EXT_BW_THRTL_6_6
+XEONSCAL4 0xD57 QOS_EXT_BW_THRTL_7_7
+XEONSCAL4 0xD58 QOS_EXT_BW_THRTL_8_8
+XEONSCAL4 0xD59 QOS_EXT_BW_THRTL_9_9
+XEONSCAL4 0xD5A QOS_EXT_BW_THRTL_10_10
+XEONSCAL4 0xD5B QOS_EXT_BW_THRTL_11_11
+XEONSCAL4 0xD5C QOS_EXT_BW_THRTL_12_12
+XEONSCAL4 0xD5D QOS_EXT_BW_THRTL_13_13
+XEONSCAL4 0xD5E QOS_EXT_BW_THRTL_14_14
 
 0xD90 IA32_BNDCFGS                # Intel-SDM-Vol4 Supervisor State of MPX Configuration
 0xD91 IA32_COPY_LOCAL_TO_PLATFORM # Intel-SDM-Vol4 Copy Local State to Platform State
@@ -2441,7 +3413,7 @@ XEONE5V3 0xEC8 C12_PMON_CTR0         # Uncore C-Box 12 Perfmon Counter 0
 XEONE5V3 0xEC9 C12_PMON_CTR1         # Uncore C-Box 12 Perfmon Counter 1
 XEONE5V3 0xECA C12_PMON_CTR2         # Uncore C-Box 12 Perfmon Counter 2
 XEONE5V3 0xECB C12_PMON_CTR3         # Uncore C-Box 12 Perfmon Counter 3
-XEONE5V3 0xED0 C13_PMON_BOX_CTL      # Uncore C-Box 13 Perfmon local box wide control.
+XEONE5V3 0xED0 C13_PMON_BOX_CTL      # Uncore C-Box 13 Perfmon local box wide control
 XEONE5V3 0xED1 C13_PMON_EVNTSEL0     # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 0
 XEONE5V3 0xED2 C13_PMON_EVNTSEL1     # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 1
 XEONE5V3 0xED3 C13_PMON_EVNTSEL2     # Uncore C-Box 13 Perfmon Event Select for C-Box 13 Counter 2
@@ -2533,6 +3505,61 @@ XEONE7 0xFD8 C9_PMON_EVNT_SEL4    # Uncore C-box 9 perfmon event select MSR
 XEONE7 0xFD9 C9_PMON_CTR4         # Uncore C-box 9 perfmon counter MSR
 XEONE7 0xFDA C9_PMON_EVNT_SEL5    # Uncore C-box 9 perfmon event select MSR
 XEONE7 0xFDB C9_PMON_CTR5         # Uncore C-box 9 perfmon counter MSR
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0xE1F MEMORY_PRIORITY_ENUM # CMI priority indication based on thread
+XEONSCAL4 0xE20 UNCORE_DEMAND_REQ_PRIORITY_0_0 # This MSR indicates CMI ReqPriority for Demand Reads with various CLOSes
+XEONSCAL4 0xE21 UNCORE_DEMAND_REQ_PRIORITY_1_1
+XEONSCAL4 0xE22 UNCORE_DEMAND_REQ_PRIORITY_2_2
+XEONSCAL4 0xE23 UNCORE_DEMAND_REQ_PRIORITY_3_3
+XEONSCAL4 0xE24 UNCORE_DEMAND_REQ_PRIORITY_4_4
+XEONSCAL4 0xE25 UNCORE_DEMAND_REQ_PRIORITY_5_5
+XEONSCAL4 0xE26 UNCORE_DEMAND_REQ_PRIORITY_6_6
+XEONSCAL4 0xE27 UNCORE_DEMAND_REQ_PRIORITY_7_7
+XEONSCAL4 0xE28 UNCORE_PREFETCH_REQ_PRIORITY_0_0 # This MSR indicates CMI ReqPriority for Prefetch Reads with various CLOSes
+XEONSCAL4 0xE29 UNCORE_PREFETCH_REQ_PRIORITY_1_1
+XEONSCAL4 0xE2A UNCORE_PREFETCH_REQ_PRIORITY_2_2
+XEONSCAL4 0xE2B UNCORE_PREFETCH_REQ_PRIORITY_3_3
+XEONSCAL4 0xE2C UNCORE_PREFETCH_REQ_PRIORITY_4_4
+XEONSCAL4 0xE2D UNCORE_PREFETCH_REQ_PRIORITY_5_5
+XEONSCAL4 0xE2E UNCORE_PREFETCH_REQ_PRIORITY_6_6
+XEONSCAL4 0xE2F UNCORE_PREFETCH_REQ_PRIORITY_7_7
+XEONSCAL4 0xF00 AMRR_BASE_0_0 # Address Match Range Register - Physical Base Control Register for Hidden Lake
+XEONSCAL4 0xF01 AMRR_MASK_0_0 # Address Match Range Register - Physical Mask Control Register for Hidden Lake
+XEONSCAL4 0xF02 AMRR_BASE_1_1
+XEONSCAL4 0xF03 AMRR_MASK_1_1
+XEONSCAL4 0xF04 AMRR_BASE_2_2
+XEONSCAL4 0xF05 AMRR_MASK_2_2
+XEONSCAL4 0xF06 AMRR_BASE_3_3
+XEONSCAL4 0xF07 AMRR_MASK_3_3
+XEONSCAL4 0xF08 AMRR_BASE_4_4
+XEONSCAL4 0xF09 AMRR_MASK_4_4
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+0x1000 MPX_LAX # MPX extension for determine MAWAU
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x1001 CORE_SPECIFIC_13_BIT_SPARE_0_0 # Spare core MSRs supported by the cregpla. Ucode (instead of the PLA) will signal #GP on access
+XEONSCAL4 0x1002 CORE_SPECIFIC_13_BIT_SPARE_1_1
+XEONSCAL4 0x1003 CORE_SPECIFIC_13_BIT_SPARE_2_2
+XEONSCAL4 0x1004 THREAD_SPECIFIC_13_BIT_SPARE_0_0 # Spare Thread MSRs supported by the cregpla. Ucode (instead of the PLA) will signal #GP on access
+XEONSCAL4 0x1005 THREAD_SPECIFIC_13_BIT_SPARE_1_1
+XEONSCAL4 0x1006 THREAD_SPECIFIC_13_BIT_SPARE_2_2
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+# SPIRAL is Security Protocol with Independent Recovery Algorithm: https://www.intel.com/content/dam/www/central-libraries/us/en/documents/below-the-os-security-white-paper.pdf
+XEONSCAL4 0x1130 SPIRAL_UCODE_SVN # This read-only MSR is going to return data from the CORE_SPIRAL_STATUS VCR (UCODE_SVN field). It's in the core CREGPLA as uncore CREGPLA is frozen
+XEONSCAL4 0x1131 SPIRAL_CSME_CTRL        # This read/write MSR sets up (or reads) from the Host Secure Boot SPIRAL Buffer Control Register in the CSME (offset 0xFED58D00 ~ 0xFED58D07). It's in the core CREGPLA as uncore CREGPLA is frozen. #GP on read if SPIRAL is fuse-disabled or we aren't in ACM mode
+XEONSCAL4 0x1132 SPIRAL_CSME_DATA_ACCESS # This read/write ACM-only MSR is going to either send data on a write or return data from a read to the CSME's Secure Boot SPIRAL Buffer write (o 0xFED58D60-0xFED58D67) or read (to 0xFED58D40-0xFED58D47). It's in the core CREGPLA as uncore CREGPLA is frozen. #GP on read if SPIRAL is fuse-disabled or we aren't in ACM mode
+XEONSCAL4 0x1133 SPIRAL_CSME_ACCESS_CTRL # This read-only MSR is going to return data from a read to the CSME's Secure Boot SPIRAL Buffer read (to 0xFED58D40-0xFED58D47). It's in the core CREGPLA as uncore CREGPLA is frozen. #GP on read if SPIRAL is fuse-disabled or we aren't in ACM mode
+XEONSCAL4 0x1134 SPIRAL_ACM_ACCESS_INDEX # This register will be used to save the current index that the ACM is going to access for the SPIRAL MSRs. It doesn't need to be C6 saved (C6NoSave candidate). After reset it can be considered a spare FSCP and can be re-used
+XEONSCAL4 0x1135 SPIRAL_SHARED_SECRET_2  # Shared secret. Derived from CPU seed with 4 factors: uCode patch SVN p, ACM SVN n, CSE SVN m, and CSE public key PBK_m. SS is 32 bytes for non-PQC and 48 bytes for PQC
+XEONSCAL4 0x1136 SPIRAL_SEED_ID          # Seed ID. Derived from CPU seed with a simple text string
+XEONSCAL4 0x1137 SPIRAL_CA_SIGNATURE     # CA Signature. This signature is strictly a set of fuses that have been tied via a one-way function to the CPU seed fuses. This read-only MSR will be ACM-only and will strictly return sequential portions of the signature
+XEONSCAL4 0x1138 SPIRAL_SEED_PASSWORD_2_1_1 # Seed Password. CPU's private credential for authenticating to CSE. SP is derived from CPU seed with 4 factors in 4 steps: Peer ID i (in this spec, it is using only one Peer with ID i=1 and that Peer is CSE), uCode patch SVN p, ACM SVN n, and CSE SVN m. SP_i_p_n_m refers to the SP used with this combination of the 4 factors. Four versions of this MSR series will be defined (i = 1 to 4). SP is 32 bytes for non-PQC and 48 bytes for PQC
+XEONSCAL4 0x1139 SPIRAL_SEED_PASSWORD_2_2_2
+XEONSCAL4 0x113A SPIRAL_SEED_PASSWORD_2_3_3
+XEONSCAL4 0x113B SPIRAL_SEED_PASSWORD_2_4_4
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 VIA Cyrix defined MSRs
 # https://www.etallen.com/msr.html
@@ -2681,12 +3708,113 @@ CORE12 0x14C6 RELOAD_PMC5
 0x17D4 IA32_HW_FEEDBACK_THREAD_CONFIG # Intel-SDM-Vol4 Hardware Feedback Thread Configuration
 0x17DA IA32_HRESET_ENABLE             # Intel-SDM-Vol4 History Reset Enable
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+XEONSCAL4 0x1830 GT_SF_QOS_MASK_0_0 # available ways vectors for class of service of LLC snoop filter. "seq has 16 instances in addresses range 0x1890 to 0x189F"
+XEONSCAL4 0x1831 GT_SF_QOS_MASK_1_1
+XEONSCAL4 0x1832 GT_SF_QOS_MASK_2_2
+XEONSCAL4 0x1833 GT_SF_QOS_MASK_3_3
+XEONSCAL4 0x1834 GT_SF_QOS_MASK_4_4
+XEONSCAL4 0x1835 GT_SF_QOS_MASK_5_5
+XEONSCAL4 0x1836 GT_SF_QOS_MASK_6_6
+XEONSCAL4 0x1837 GT_SF_QOS_MASK_7_7
+XEONSCAL4 0x1838 GT_SF_QOS_MASK_8_8
+XEONSCAL4 0x1839 GT_SF_QOS_MASK_9_9
+XEONSCAL4 0x183A GT_SF_QOS_MASK_10_10
+XEONSCAL4 0x183B GT_SF_QOS_MASK_11_11
+XEONSCAL4 0x183C GT_SF_QOS_MASK_12_12
+XEONSCAL4 0x183D GT_SF_QOS_MASK_13_13
+XEONSCAL4 0x183E GT_SF_QOS_MASK_14_14
+XEONSCAL4 0x183F GT_SF_QOS_MASK_15_15
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+XEONSCAL4 0x1850 WRC_SF_QOS_MASK_0_0 # available ways vectors for class of service of LLC snoop filter. "seq has 16 instances in addresses range 0x1890 to 0x189F"
+XEONSCAL4 0x1851 WRC_SF_QOS_MASK_1_1
+XEONSCAL4 0x1852 WRC_SF_QOS_MASK_2_2
+XEONSCAL4 0x1853 WRC_SF_QOS_MASK_3_3
+XEONSCAL4 0x1854 WRC_SF_QOS_MASK_4_4
+XEONSCAL4 0x1855 WRC_SF_QOS_MASK_5_5
+XEONSCAL4 0x1856 WRC_SF_QOS_MASK_6_6
+XEONSCAL4 0x1857 WRC_SF_QOS_MASK_7_7
+XEONSCAL4 0x1858 WRC_SF_QOS_MASK_8_8
+XEONSCAL4 0x1859 WRC_SF_QOS_MASK_9_9
+XEONSCAL4 0x185A WRC_SF_QOS_MASK_10_10
+XEONSCAL4 0x185B WRC_SF_QOS_MASK_11_11
+XEONSCAL4 0x185C WRC_SF_QOS_MASK_12_12
+XEONSCAL4 0x185D WRC_SF_QOS_MASK_13_13
+XEONSCAL4 0x185E WRC_SF_QOS_MASK_14_14
+XEONSCAL4 0x185F WRC_SF_QOS_MASK_15_15
+
 # https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/x86/msr.h
 0x1891 IA32_CR_SF_QOS_MASK_1
 0x1892 IA32_CR_SF_QOS_MASK_2
 
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+XEONSCAL4 0x1890 SF_QOS_MASK_0_0 # available ways vectors for class of service of LLC snoop filter
+XEONSCAL4 0x1891 SF_QOS_MASK_1_1
+XEONSCAL4 0x1892 SF_QOS_MASK_2_2
+XEONSCAL4 0x1893 SF_QOS_MASK_3_3
+XEONSCAL4 0x1894 SF_QOS_MASK_4_4
+XEONSCAL4 0x1895 SF_QOS_MASK_5_5
+XEONSCAL4 0x1896 SF_QOS_MASK_6_6
+XEONSCAL4 0x1897 SF_QOS_MASK_7_7
+XEONSCAL4 0x1898 SF_QOS_MASK_8_8
+XEONSCAL4 0x1899 SF_QOS_MASK_9_9
+XEONSCAL4 0x189A SF_QOS_MASK_10_10
+XEONSCAL4 0x189B SF_QOS_MASK_11_11
+XEONSCAL4 0x189C SF_QOS_MASK_12_12
+XEONSCAL4 0x189D SF_QOS_MASK_13_13
+XEONSCAL4 0x189E SF_QOS_MASK_14_14
+XEONSCAL4 0x189F SF_QOS_MASK_15_15
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+XEONSCAL4 0x18B0 GT_COS_WAY_MASK_0_0 # available ways vectors for class of service of IA core. MSRs exposed to allow QoS for GT access to LLC QoS masks
+XEONSCAL4 0x18B1 GT_COS_WAY_MASK_1_1
+XEONSCAL4 0x18B2 GT_COS_WAY_MASK_2_2
+XEONSCAL4 0x18B3 GT_COS_WAY_MASK_3_3
+XEONSCAL4 0x18B4 GT_COS_WAY_MASK_4_4
+XEONSCAL4 0x18B5 GT_COS_WAY_MASK_5_5
+XEONSCAL4 0x18B6 GT_COS_WAY_MASK_6_6
+XEONSCAL4 0x18B7 GT_COS_WAY_MASK_7_7
+XEONSCAL4 0x18B8 GT_COS_WAY_MASK_8_8
+XEONSCAL4 0x18B9 GT_COS_WAY_MASK_9_9
+XEONSCAL4 0x18BA GT_COS_WAY_MASK_10_10
+XEONSCAL4 0x18BB GT_COS_WAY_MASK_11_11
+XEONSCAL4 0x18BC GT_COS_WAY_MASK_12_12
+XEONSCAL4 0x18BD GT_COS_WAY_MASK_13_13
+XEONSCAL4 0x18BE GT_COS_WAY_MASK_14_14
+XEONSCAL4 0x18BF GT_COS_WAY_MASK_15_15
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
+XEONSCAL4 0x18D0 WRC_COS_WAY_MASK_0_0 # available ways vectors for class of service of IA core. MSRs exposed to allow QoS for WRC access to LLC QoS masks
+XEONSCAL4 0x18D1 WRC_COS_WAY_MASK_1_1
+XEONSCAL4 0x18D2 WRC_COS_WAY_MASK_2_2
+XEONSCAL4 0x18D3 WRC_COS_WAY_MASK_3_3
+XEONSCAL4 0x18D4 WRC_COS_WAY_MASK_4_4
+XEONSCAL4 0x18D5 WRC_COS_WAY_MASK_5_5
+XEONSCAL4 0x18D6 WRC_COS_WAY_MASK_6_6
+XEONSCAL4 0x18D7 WRC_COS_WAY_MASK_7_7
+XEONSCAL4 0x18D8 WRC_COS_WAY_MASK_8_8
+XEONSCAL4 0x18D9 WRC_COS_WAY_MASK_9_9
+XEONSCAL4 0x18DA WRC_COS_WAY_MASK_10_10
+XEONSCAL4 0x18DB WRC_COS_WAY_MASK_11_11
+XEONSCAL4 0x18DC WRC_COS_WAY_MASK_12_12
+XEONSCAL4 0x18DD WRC_COS_WAY_MASK_13_13
+XEONSCAL4 0x18DE WRC_COS_WAY_MASK_14_14
+XEONSCAL4 0x18DF WRC_COS_WAY_MASK_15_15
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 Geode defined MSRs
 GEODE 0x1900 BUSCONT_CONF0
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x1A8F STLB_QOS_CFG       # STLB QoS MASK configuration
+XEONSCAL4 0x1A90 STLB_QOS_MASK_0_0
+XEONSCAL4 0x1A91 STLB_QOS_MASK_1_1
+XEONSCAL4 0x1A92 STLB_QOS_MASK_2_2
+XEONSCAL4 0x1A93 STLB_QOS_MASK_3_3
+XEONSCAL4 0x1A94 STLB_QOS_MASK_4_4
+XEONSCAL4 0x1A95 STLB_QOS_MASK_5_5
+XEONSCAL4 0x1A96 STLB_QOS_MASK_6_6
+XEONSCAL4 0x1A97 STLB_QOS_MASK_7_7
 
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/data-operand-independent-timing-isa-guidance.html
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
@@ -2749,6 +3877,1468 @@ CORE12 0x2FDE UNC_PERF_FIXED_CTRL    # Uncore Fixed Counter Control (R/W)
 CORE12 0x2FDF UNC_PERF_FIXED_CTR     # Uncore Fixed Counter
 CORE12 0x2FF0 UNC_PERF_GLOBAL_CTRL   # Uncore PMU Global Control
 CORE12 0x2FF2 UNC_PERF_GLOBAL_STATUS # Uncore PMU Main Status
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+XEONSCAL4 0x2000 CBOPMONUNITCTRL_0  # When this bit is written to, the counter configuration registers will be reset. This does not effect the values in the counters. To reset the counters, this bit need only be set by one of the unit control registers
+XEONSCAL4 0x2001 CBOPMONCTRSTATUS_0
+XEONSCAL4 0x2002 CBOPMONCT_0_0      # PMON Counter 0 data register. Holds the counter value
+XEONSCAL4 0x2003 CBOPMONCT_1_0
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h and SprMsr.h
+XEONSCAL4 0x2004 CBOPMONCTRCTRL_2_0 # Holds the status information and control the operation of the PerfMon Fixed Counter
+XEONSCAL4 0x2005 CBOPMONCTRCTRL_3_0
+
+# 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h and GnrMsr.h
+XEONSCAL4 0x2008 CBOPMONCTRCTRL_0_1 # Holds the status information and control the operation of the the PMON Fixed Counter
+XEONSCAL4 0x2009 CBOPMONCTRCTRL_1_1
+XEONSCAL4 0x200A CBOPMONCT_2_0
+XEONSCAL4 0x200B CBOPMONCT_3_0
+XEONSCAL4 0x200E CBOPMONCTRLGLCTR_0
+XEONSCAL4 0x2010 CBOPMONUNITCTRL_1
+XEONSCAL4 0x2011 CBOPMONCTRSTATUS_1
+XEONSCAL4 0x2012 CBOPMONCT_0_2
+XEONSCAL4 0x2013 CBOPMONCT_1_2
+XEONSCAL4 0x2014 CBOPMONCTRCTRL_2_1
+XEONSCAL4 0x2015 CBOPMONCTRCTRL_3_1
+XEONSCAL4 0x2018 CBOPMONCTRCTRL_0_3
+XEONSCAL4 0x2019 CBOPMONCTRCTRL_1_3
+XEONSCAL4 0x201A CBOPMONCT_2_1
+XEONSCAL4 0x201B CBOPMONCT_3_1
+XEONSCAL4 0x201E CBOPMONCTRLGLCTR_1
+XEONSCAL4 0x2020 CBOPMONUNITCTRL_2
+XEONSCAL4 0x2021 CBOPMONCTRSTATUS_2
+XEONSCAL4 0x2022 CBOPMONCT_0_4
+XEONSCAL4 0x2023 CBOPMONCT_1_4
+XEONSCAL4 0x2024 CBOPMONCTRCTRL_2_2
+XEONSCAL4 0x2025 CBOPMONCTRCTRL_3_2
+XEONSCAL4 0x2028 CBOPMONCTRCTRL_0_5
+XEONSCAL4 0x2029 CBOPMONCTRCTRL_1_5
+XEONSCAL4 0x202A CBOPMONCT_2_2
+XEONSCAL4 0x202B CBOPMONCT_3_2
+XEONSCAL4 0x202E CBOPMONCTRLGLCTR_2
+XEONSCAL4 0x2030 CBOPMONUNITCTRL_3
+XEONSCAL4 0x2031 CBOPMONCTRSTATUS_3
+XEONSCAL4 0x2032 CBOPMONCT_0_6
+XEONSCAL4 0x2033 CBOPMONCT_1_6
+XEONSCAL4 0x2034 CBOPMONCTRCTRL_2_3
+XEONSCAL4 0x2035 CBOPMONCTRCTRL_3_3
+XEONSCAL4 0x2038 CBOPMONCTRCTRL_0_7
+XEONSCAL4 0x2039 CBOPMONCTRCTRL_1_7
+XEONSCAL4 0x203A CBOPMONCT_2_3
+XEONSCAL4 0x203B CBOPMONCT_3_3
+XEONSCAL4 0x203E CBOPMONCTRLGLCTR_3
+XEONSCAL4 0x2040 CBOPMONUNITCTRL_4
+XEONSCAL4 0x2041 CBOPMONCTRSTATUS_4
+XEONSCAL4 0x2042 CBOPMONCT_0_8
+XEONSCAL4 0x2043 CBOPMONCT_1_8
+XEONSCAL4 0x2044 CBOPMONCTRCTRL_2_4
+XEONSCAL4 0x2045 CBOPMONCTRCTRL_3_4
+XEONSCAL4 0x2048 CBOPMONCTRCTRL_0_9
+XEONSCAL4 0x2049 CBOPMONCTRCTRL_1_9
+XEONSCAL4 0x204A CBOPMONCT_2_4
+XEONSCAL4 0x204B CBOPMONCT_3_4
+XEONSCAL4 0x204E CBOPMONCTRLGLCTR_4
+XEONSCAL4 0x2050 CBOPMONUNITCTRL_5
+XEONSCAL4 0x2051 CBOPMONCTRSTATUS_5
+XEONSCAL4 0x2052 CBOPMONCT_0_10
+XEONSCAL4 0x2053 CBOPMONCT_1_10
+XEONSCAL4 0x2054 CBOPMONCTRCTRL_2_5
+XEONSCAL4 0x2055 CBOPMONCTRCTRL_3_5
+XEONSCAL4 0x2058 CBOPMONCTRCTRL_0_11
+XEONSCAL4 0x2059 CBOPMONCTRCTRL_1_11
+XEONSCAL4 0x205A CBOPMONCT_2_5
+XEONSCAL4 0x205B CBOPMONCT_3_5
+XEONSCAL4 0x205E CBOPMONCTRLGLCTR_5
+XEONSCAL4 0x2060 CBOPMONUNITCTRL_6
+XEONSCAL4 0x2061 CBOPMONCTRSTATUS_6
+XEONSCAL4 0x2062 CBOPMONCT_0_12
+XEONSCAL4 0x2063 CBOPMONCT_1_12
+XEONSCAL4 0x2064 CBOPMONCTRCTRL_2_6
+XEONSCAL4 0x2065 CBOPMONCTRCTRL_3_6
+XEONSCAL4 0x2068 CBOPMONCTRCTRL_0_13
+XEONSCAL4 0x2069 CBOPMONCTRCTRL_1_13
+XEONSCAL4 0x206A CBOPMONCT_2_6
+XEONSCAL4 0x206B CBOPMONCT_3_6
+XEONSCAL4 0x206E CBOPMONCTRLGLCTR_6
+XEONSCAL4 0x2070 CBOPMONUNITCTRL_7
+XEONSCAL4 0x2071 CBOPMONCTRSTATUS_7
+XEONSCAL4 0x2072 CBOPMONCT_0_14
+XEONSCAL4 0x2073 CBOPMONCT_1_14
+XEONSCAL4 0x2074 CBOPMONCTRCTRL_2_7
+XEONSCAL4 0x2075 CBOPMONCTRCTRL_3_7
+XEONSCAL4 0x2078 CBOPMONCTRCTRL_0_15
+XEONSCAL4 0x2079 CBOPMONCTRCTRL_1_15
+XEONSCAL4 0x207A CBOPMONCT_2_7
+XEONSCAL4 0x207B CBOPMONCT_3_7
+XEONSCAL4 0x207E CBOPMONCTRLGLCTR_7
+XEONSCAL4 0x2080 CBOPMONUNITCTRL_8
+XEONSCAL4 0x2081 CBOPMONCTRSTATUS_8
+XEONSCAL4 0x2084 CBOPMONCTRCTRL_2_8
+XEONSCAL4 0x2085 CBOPMONCTRCTRL_3_8
+XEONSCAL4 0x208A CBOPMONCT_2_8
+XEONSCAL4 0x208B CBOPMONCT_3_8
+XEONSCAL4 0x208E CBOPMONCTRLGLCTR_8
+XEONSCAL4 0x2090 CBOPMONUNITCTRL_9
+XEONSCAL4 0x2091 CBOPMONCTRSTATUS_9
+XEONSCAL4 0x2094 CBOPMONCTRCTRL_2_9
+XEONSCAL4 0x2095 CBOPMONCTRCTRL_3_9
+XEONSCAL4 0x209A CBOPMONCT_2_9
+XEONSCAL4 0x209B CBOPMONCT_3_9
+XEONSCAL4 0x209E CBOPMONCTRLGLCTR_9
+XEONSCAL4 0x20A0 CBOPMONUNITCTRL_10
+XEONSCAL4 0x20A1 CBOPMONCTRSTATUS_10
+XEONSCAL4 0x20A4 CBOPMONCTRCTRL_2_10
+XEONSCAL4 0x20A5 CBOPMONCTRCTRL_3_10
+XEONSCAL4 0x20AA CBOPMONCT_2_10
+XEONSCAL4 0x20AB CBOPMONCT_3_10
+XEONSCAL4 0x20AE CBOPMONCTRLGLCTR_10
+XEONSCAL4 0x20B0 CBOPMONUNITCTRL_11
+XEONSCAL4 0x20B1 CBOPMONCTRSTATUS_11
+XEONSCAL4 0x20B4 CBOPMONCTRCTRL_2_11
+XEONSCAL4 0x20B5 CBOPMONCTRCTRL_3_11
+XEONSCAL4 0x20BA CBOPMONCT_2_11
+XEONSCAL4 0x20BB CBOPMONCT_3_11
+XEONSCAL4 0x20BE CBOPMONCTRLGLCTR_11
+XEONSCAL4 0x20C0 CBOPMONUNITCTRL_12
+XEONSCAL4 0x20C1 CBOPMONCTRSTATUS_12
+XEONSCAL4 0x20C4 CBOPMONCTRCTRL_2_12
+XEONSCAL4 0x20C5 CBOPMONCTRCTRL_3_12
+XEONSCAL4 0x20CA CBOPMONCT_2_12
+XEONSCAL4 0x20CB CBOPMONCT_3_12
+XEONSCAL4 0x20CE CBOPMONCTRLGLCTR_12
+XEONSCAL4 0x20D0 CBOPMONUNITCTRL_13
+XEONSCAL4 0x20D1 CBOPMONCTRSTATUS_13
+XEONSCAL4 0x20D4 CBOPMONCTRCTRL_2_13
+XEONSCAL4 0x20D5 CBOPMONCTRCTRL_3_13
+XEONSCAL4 0x20DA CBOPMONCT_2_13
+XEONSCAL4 0x20DB CBOPMONCT_3_13
+XEONSCAL4 0x20DE CBOPMONCTRLGLCTR_13
+XEONSCAL4 0x20E0 CBOPMONUNITCTRL_14
+XEONSCAL4 0x20E1 CBOPMONCTRSTATUS_14
+XEONSCAL4 0x20E4 CBOPMONCTRCTRL_2_14
+XEONSCAL4 0x20E5 CBOPMONCTRCTRL_3_14
+XEONSCAL4 0x20EA CBOPMONCT_2_14
+XEONSCAL4 0x20EB CBOPMONCT_3_14
+XEONSCAL4 0x20EE CBOPMONCTRLGLCTR_14
+XEONSCAL4 0x20F0 CBOPMONUNITCTRL_15
+XEONSCAL4 0x20F1 CBOPMONCTRSTATUS_15
+XEONSCAL4 0x20F4 CBOPMONCTRCTRL_2_15
+XEONSCAL4 0x20F5 CBOPMONCTRCTRL_3_15
+XEONSCAL4 0x20FA CBOPMONCT_2_15
+XEONSCAL4 0x20FB CBOPMONCT_3_15
+XEONSCAL4 0x20FE CBOPMONCTRLGLCTR_15
+XEONSCAL4 0x2100 CBOPMONUNITCTRL_16
+XEONSCAL4 0x2101 CBOPMONCTRSTATUS_16
+XEONSCAL4 0x2102 CBOPMONCTRCTRL_0_16
+XEONSCAL4 0x2103 CBOPMONCTRCTRL_1_16
+XEONSCAL4 0x2104 CBOPMONCTRCTRL_2_16
+XEONSCAL4 0x2105 CBOPMONCTRCTRL_3_16
+XEONSCAL4 0x2108 CBOPMONCT_0_16
+XEONSCAL4 0x2109 CBOPMONCT_1_16
+XEONSCAL4 0x210A CBOPMONCT_2_16
+XEONSCAL4 0x210B CBOPMONCT_3_16
+XEONSCAL4 0x210E CBOPMONCTRLGLCTR_16
+XEONSCAL4 0x2110 CBOPMONUNITCTRL_17
+XEONSCAL4 0x2111 CBOPMONCTRSTATUS_17
+XEONSCAL4 0x2112 CBOPMONCTRCTRL_0_17
+XEONSCAL4 0x2113 CBOPMONCTRCTRL_1_17
+XEONSCAL4 0x2114 CBOPMONCTRCTRL_2_17
+XEONSCAL4 0x2115 CBOPMONCTRCTRL_3_17
+XEONSCAL4 0x2118 CBOPMONCT_0_17
+XEONSCAL4 0x2119 CBOPMONCT_1_17
+XEONSCAL4 0x211A CBOPMONCT_2_17
+XEONSCAL4 0x211B CBOPMONCT_3_17
+XEONSCAL4 0x211E CBOPMONCTRLGLCTR_17
+XEONSCAL4 0x2120 CBOPMONUNITCTRL_18
+XEONSCAL4 0x2121 CBOPMONCTRSTATUS_18
+XEONSCAL4 0x2122 CBOPMONCTRCTRL_0_18
+XEONSCAL4 0x2123 CBOPMONCTRCTRL_1_18
+XEONSCAL4 0x2124 CBOPMONCTRCTRL_2_18
+XEONSCAL4 0x2125 CBOPMONCTRCTRL_3_18
+XEONSCAL4 0x2128 CBOPMONCT_0_18
+XEONSCAL4 0x2129 CBOPMONCT_1_18
+XEONSCAL4 0x212A CBOPMONCT_2_18
+XEONSCAL4 0x212B CBOPMONCT_3_18
+XEONSCAL4 0x212E CBOPMONCTRLGLCTR_18
+XEONSCAL4 0x2130 CBOPMONUNITCTRL_19
+XEONSCAL4 0x2131 CBOPMONCTRSTATUS_19
+XEONSCAL4 0x2132 CBOPMONCTRCTRL_0_19
+XEONSCAL4 0x2133 CBOPMONCTRCTRL_1_19
+XEONSCAL4 0x2134 CBOPMONCTRCTRL_2_19
+XEONSCAL4 0x2135 CBOPMONCTRCTRL_3_19
+XEONSCAL4 0x2138 CBOPMONCT_0_19
+XEONSCAL4 0x2139 CBOPMONCT_1_19
+XEONSCAL4 0x213A CBOPMONCT_2_19
+XEONSCAL4 0x213B CBOPMONCT_3_19
+XEONSCAL4 0x213E CBOPMONCTRLGLCTR_19
+XEONSCAL4 0x2140 CBOPMONUNITCTRL_20
+XEONSCAL4 0x2141 CBOPMONCTRSTATUS_20
+XEONSCAL4 0x2142 CBOPMONCTRCTRL_0_20
+XEONSCAL4 0x2143 CBOPMONCTRCTRL_1_20
+XEONSCAL4 0x2144 CBOPMONCTRCTRL_2_20
+XEONSCAL4 0x2145 CBOPMONCTRCTRL_3_20
+XEONSCAL4 0x2148 CBOPMONCT_0_20
+XEONSCAL4 0x2149 CBOPMONCT_1_20
+XEONSCAL4 0x214A CBOPMONCT_2_20
+XEONSCAL4 0x214B CBOPMONCT_3_20
+XEONSCAL4 0x214E CBOPMONCTRLGLCTR_20
+XEONSCAL4 0x2150 CBOPMONUNITCTRL_21
+XEONSCAL4 0x2151 CBOPMONCTRSTATUS_21
+XEONSCAL4 0x2152 CBOPMONCTRCTRL_0_21
+XEONSCAL4 0x2153 CBOPMONCTRCTRL_1_21
+XEONSCAL4 0x2154 CBOPMONCTRCTRL_2_21
+XEONSCAL4 0x2155 CBOPMONCTRCTRL_3_21
+XEONSCAL4 0x2158 CBOPMONCT_0_21
+XEONSCAL4 0x2159 CBOPMONCT_1_21
+XEONSCAL4 0x215A CBOPMONCT_2_21
+XEONSCAL4 0x215B CBOPMONCT_3_21
+XEONSCAL4 0x215E CBOPMONCTRLGLCTR_21
+XEONSCAL4 0x2160 CBOPMONUNITCTRL_22
+XEONSCAL4 0x2161 CBOPMONCTRSTATUS_22
+XEONSCAL4 0x2162 CBOPMONCTRCTRL_0_22
+XEONSCAL4 0x2163 CBOPMONCTRCTRL_1_22
+XEONSCAL4 0x2164 CBOPMONCTRCTRL_2_22
+XEONSCAL4 0x2165 CBOPMONCTRCTRL_3_22
+XEONSCAL4 0x2168 CBOPMONCT_0_22
+XEONSCAL4 0x2169 CBOPMONCT_1_22
+XEONSCAL4 0x216A CBOPMONCT_2_22
+XEONSCAL4 0x216B CBOPMONCT_3_22
+XEONSCAL4 0x216E CBOPMONCTRLGLCTR_22
+XEONSCAL4 0x2170 CBOPMONUNITCTRL_23
+XEONSCAL4 0x2171 CBOPMONCTRSTATUS_23
+XEONSCAL4 0x2172 CBOPMONCTRCTRL_0_23
+XEONSCAL4 0x2173 CBOPMONCTRCTRL_1_23
+XEONSCAL4 0x2174 CBOPMONCTRCTRL_2_23
+XEONSCAL4 0x2175 CBOPMONCTRCTRL_3_23
+XEONSCAL4 0x2178 CBOPMONCT_0_23
+XEONSCAL4 0x2179 CBOPMONCT_1_23
+XEONSCAL4 0x217A CBOPMONCT_2_23
+XEONSCAL4 0x217B CBOPMONCT_3_23
+XEONSCAL4 0x217E CBOPMONCTRLGLCTR_23
+XEONSCAL4 0x2180 CBOPMONUNITCTRL_24
+XEONSCAL4 0x2181 CBOPMONCTRSTATUS_24
+XEONSCAL4 0x2182 CBOPMONCTRCTRL_0_24
+XEONSCAL4 0x2183 CBOPMONCTRCTRL_1_24
+XEONSCAL4 0x2184 CBOPMONCTRCTRL_2_24
+XEONSCAL4 0x2185 CBOPMONCTRCTRL_3_24
+XEONSCAL4 0x2188 CBOPMONCT_0_24
+XEONSCAL4 0x2189 CBOPMONCT_1_24
+XEONSCAL4 0x218A CBOPMONCT_2_24
+XEONSCAL4 0x218B CBOPMONCT_3_24
+XEONSCAL4 0x218E CBOPMONCTRLGLCTR_24
+XEONSCAL4 0x2190 CBOPMONUNITCTRL_25
+XEONSCAL4 0x2191 CBOPMONCTRSTATUS_25
+XEONSCAL4 0x2192 CBOPMONCTRCTRL_0_25
+XEONSCAL4 0x2193 CBOPMONCTRCTRL_1_25
+XEONSCAL4 0x2194 CBOPMONCTRCTRL_2_25
+XEONSCAL4 0x2195 CBOPMONCTRCTRL_3_25
+XEONSCAL4 0x2198 CBOPMONCT_0_25
+XEONSCAL4 0x2199 CBOPMONCT_1_25
+XEONSCAL4 0x219A CBOPMONCT_2_25
+XEONSCAL4 0x219B CBOPMONCT_3_25
+XEONSCAL4 0x219E CBOPMONCTRLGLCTR_25
+XEONSCAL4 0x21A0 CBOPMONUNITCTRL_26
+XEONSCAL4 0x21A1 CBOPMONCTRSTATUS_26
+XEONSCAL4 0x21A2 CBOPMONCTRCTRL_0_26
+XEONSCAL4 0x21A3 CBOPMONCTRCTRL_1_26
+XEONSCAL4 0x21A4 CBOPMONCTRCTRL_2_26
+XEONSCAL4 0x21A5 CBOPMONCTRCTRL_3_26
+XEONSCAL4 0x21A8 CBOPMONCT_0_26
+XEONSCAL4 0x21A9 CBOPMONCT_1_26
+XEONSCAL4 0x21AA CBOPMONCT_2_26
+XEONSCAL4 0x21AB CBOPMONCT_3_26
+XEONSCAL4 0x21AE CBOPMONCTRLGLCTR_26
+XEONSCAL4 0x21B0 CBOPMONUNITCTRL_27
+XEONSCAL4 0x21B1 CBOPMONCTRSTATUS_27
+XEONSCAL4 0x21B2 CBOPMONCTRCTRL_0_27
+XEONSCAL4 0x21B3 CBOPMONCTRCTRL_1_27
+XEONSCAL4 0x21B4 CBOPMONCTRCTRL_2_27
+XEONSCAL4 0x21B5 CBOPMONCTRCTRL_3_27
+XEONSCAL4 0x21B8 CBOPMONCT_0_27
+XEONSCAL4 0x21B9 CBOPMONCT_1_27
+XEONSCAL4 0x21BA CBOPMONCT_2_27
+XEONSCAL4 0x21BB CBOPMONCT_3_27
+XEONSCAL4 0x21BE CBOPMONCTRLGLCTR_27
+XEONSCAL4 0x21C0 CBOPMONUNITCTRL_28
+XEONSCAL4 0x21C1 CBOPMONCTRSTATUS_28
+XEONSCAL4 0x21C2 CBOPMONCTRCTRL_0_28
+XEONSCAL4 0x21C3 CBOPMONCTRCTRL_1_28
+XEONSCAL4 0x21C4 CBOPMONCTRCTRL_2_28
+XEONSCAL4 0x21C5 CBOPMONCTRCTRL_3_28
+XEONSCAL4 0x21C8 CBOPMONCT_0_28
+XEONSCAL4 0x21C9 CBOPMONCT_1_28
+XEONSCAL4 0x21CA CBOPMONCT_2_28
+XEONSCAL4 0x21CB CBOPMONCT_3_28
+XEONSCAL4 0x21CE CBOPMONCTRLGLCTR_28
+XEONSCAL4 0x21D0 CBOPMONUNITCTRL_29
+XEONSCAL4 0x21D1 CBOPMONCTRSTATUS_29
+XEONSCAL4 0x21D2 CBOPMONCTRCTRL_0_29
+XEONSCAL4 0x21D3 CBOPMONCTRCTRL_1_29
+XEONSCAL4 0x21D4 CBOPMONCTRCTRL_2_29
+XEONSCAL4 0x21D5 CBOPMONCTRCTRL_3_29
+XEONSCAL4 0x21D8 CBOPMONCT_0_29
+XEONSCAL4 0x21D9 CBOPMONCT_1_29
+XEONSCAL4 0x21DA CBOPMONCT_2_29
+XEONSCAL4 0x21DB CBOPMONCT_3_29
+XEONSCAL4 0x21DE CBOPMONCTRLGLCTR_29
+XEONSCAL4 0x21E0 CBOPMONUNITCTRL_30
+XEONSCAL4 0x21E1 CBOPMONCTRSTATUS_30
+XEONSCAL4 0x21E2 CBOPMONCTRCTRL_0_30
+XEONSCAL4 0x21E3 CBOPMONCTRCTRL_1_30
+XEONSCAL4 0x21E4 CBOPMONCTRCTRL_2_30
+XEONSCAL4 0x21E5 CBOPMONCTRCTRL_3_30
+XEONSCAL4 0x21E8 CBOPMONCT_0_30
+XEONSCAL4 0x21E9 CBOPMONCT_1_30
+XEONSCAL4 0x21EA CBOPMONCT_2_30
+XEONSCAL4 0x21EB CBOPMONCT_3_30
+XEONSCAL4 0x21EE CBOPMONCTRLGLCTR_30
+XEONSCAL4 0x21F0 CBOPMONUNITCTRL_31
+XEONSCAL4 0x21F1 CBOPMONCTRSTATUS_31
+XEONSCAL4 0x21F2 CBOPMONCTRCTRL_0_31
+XEONSCAL4 0x21F3 CBOPMONCTRCTRL_1_31
+XEONSCAL4 0x21F4 CBOPMONCTRCTRL_2_31
+XEONSCAL4 0x21F5 CBOPMONCTRCTRL_3_31
+XEONSCAL4 0x21F8 CBOPMONCT_0_31
+XEONSCAL4 0x21F9 CBOPMONCT_1_31
+XEONSCAL4 0x21FA CBOPMONCT_2_31
+XEONSCAL4 0x21FB CBOPMONCT_3_31
+XEONSCAL4 0x21FE CBOPMONCTRLGLCTR_31
+XEONSCAL4 0x2200 CBOPMONUNITCTRL_32
+XEONSCAL4 0x2201 CBOPMONCTRSTATUS_32
+XEONSCAL4 0x2202 CBOPMONCTRCTRL_0_32
+XEONSCAL4 0x2203 CBOPMONCTRCTRL_1_32
+XEONSCAL4 0x2204 CBOPMONCTRCTRL_2_32
+XEONSCAL4 0x2205 CBOPMONCTRCTRL_3_32
+XEONSCAL4 0x2208 CBOPMONCT_0_32
+XEONSCAL4 0x2209 CBOPMONCT_1_32
+XEONSCAL4 0x220A CBOPMONCT_2_32
+XEONSCAL4 0x220B CBOPMONCT_3_32
+XEONSCAL4 0x220E CBOPMONCTRLGLCTR_32
+XEONSCAL4 0x2210 CBOPMONUNITCTRL_33
+XEONSCAL4 0x2211 CBOPMONCTRSTATUS_33
+XEONSCAL4 0x2212 CBOPMONCTRCTRL_0_33
+XEONSCAL4 0x2213 CBOPMONCTRCTRL_1_33
+XEONSCAL4 0x2214 CBOPMONCTRCTRL_2_33
+XEONSCAL4 0x2215 CBOPMONCTRCTRL_3_33
+XEONSCAL4 0x2218 CBOPMONCT_0_33
+XEONSCAL4 0x2219 CBOPMONCT_1_33
+XEONSCAL4 0x221A CBOPMONCT_2_33
+XEONSCAL4 0x221B CBOPMONCT_3_33
+XEONSCAL4 0x221E CBOPMONCTRLGLCTR_33
+XEONSCAL4 0x2220 CBOPMONUNITCTRL_34
+XEONSCAL4 0x2221 CBOPMONCTRSTATUS_34
+XEONSCAL4 0x2222 CBOPMONCTRCTRL_0_34
+XEONSCAL4 0x2223 CBOPMONCTRCTRL_1_34
+XEONSCAL4 0x2224 CBOPMONCTRCTRL_2_34
+XEONSCAL4 0x2225 CBOPMONCTRCTRL_3_34
+XEONSCAL4 0x2228 CBOPMONCT_0_34
+XEONSCAL4 0x2229 CBOPMONCT_1_34
+XEONSCAL4 0x222A CBOPMONCT_2_34
+XEONSCAL4 0x222B CBOPMONCT_3_34
+XEONSCAL4 0x222E CBOPMONCTRLGLCTR_34
+XEONSCAL4 0x2230 CBOPMONUNITCTRL_35
+XEONSCAL4 0x2231 CBOPMONCTRSTATUS_35
+XEONSCAL4 0x2232 CBOPMONCTRCTRL_0_35
+XEONSCAL4 0x2233 CBOPMONCTRCTRL_1_35
+XEONSCAL4 0x2234 CBOPMONCTRCTRL_2_35
+XEONSCAL4 0x2235 CBOPMONCTRCTRL_3_35
+XEONSCAL4 0x2238 CBOPMONCT_0_35
+XEONSCAL4 0x2239 CBOPMONCT_1_35
+XEONSCAL4 0x223A CBOPMONCT_2_35
+XEONSCAL4 0x223B CBOPMONCT_3_35
+XEONSCAL4 0x223E CBOPMONCTRLGLCTR_35
+XEONSCAL4 0x2240 CBOPMONUNITCTRL_36
+XEONSCAL4 0x2241 CBOPMONCTRSTATUS_36
+XEONSCAL4 0x2242 CBOPMONCTRCTRL_0_36
+XEONSCAL4 0x2243 CBOPMONCTRCTRL_1_36
+XEONSCAL4 0x2244 CBOPMONCTRCTRL_2_36
+XEONSCAL4 0x2245 CBOPMONCTRCTRL_3_36
+XEONSCAL4 0x2248 CBOPMONCT_0_36
+XEONSCAL4 0x2249 CBOPMONCT_1_36
+XEONSCAL4 0x224A CBOPMONCT_2_36
+XEONSCAL4 0x224B CBOPMONCT_3_36
+XEONSCAL4 0x224E CBOPMONCTRLGLCTR_36
+XEONSCAL4 0x2250 CBOPMONUNITCTRL_37
+XEONSCAL4 0x2251 CBOPMONCTRSTATUS_37
+XEONSCAL4 0x2252 CBOPMONCTRCTRL_0_37
+XEONSCAL4 0x2253 CBOPMONCTRCTRL_1_37
+XEONSCAL4 0x2254 CBOPMONCTRCTRL_2_37
+XEONSCAL4 0x2255 CBOPMONCTRCTRL_3_37
+XEONSCAL4 0x2258 CBOPMONCT_0_37
+XEONSCAL4 0x2259 CBOPMONCT_1_37
+XEONSCAL4 0x225A CBOPMONCT_2_37
+XEONSCAL4 0x225B CBOPMONCT_3_37
+XEONSCAL4 0x225E CBOPMONCTRLGLCTR_37
+XEONSCAL4 0x2260 CBOPMONUNITCTRL_38
+XEONSCAL4 0x2261 CBOPMONCTRSTATUS_38
+XEONSCAL4 0x2262 CBOPMONCTRCTRL_0_38
+XEONSCAL4 0x2263 CBOPMONCTRCTRL_1_38
+XEONSCAL4 0x2264 CBOPMONCTRCTRL_2_38
+XEONSCAL4 0x2265 CBOPMONCTRCTRL_3_38
+XEONSCAL4 0x2268 CBOPMONCT_0_38
+XEONSCAL4 0x2269 CBOPMONCT_1_38
+XEONSCAL4 0x226A CBOPMONCT_2_38
+XEONSCAL4 0x226B CBOPMONCT_3_38
+XEONSCAL4 0x226E CBOPMONCTRLGLCTR_38
+XEONSCAL4 0x2270 CBOPMONUNITCTRL_39
+XEONSCAL4 0x2271 CBOPMONCTRSTATUS_39
+XEONSCAL4 0x2272 CBOPMONCTRCTRL_0_39
+XEONSCAL4 0x2273 CBOPMONCTRCTRL_1_39
+XEONSCAL4 0x2274 CBOPMONCTRCTRL_2_39
+XEONSCAL4 0x2275 CBOPMONCTRCTRL_3_39
+XEONSCAL4 0x2278 CBOPMONCT_0_39
+XEONSCAL4 0x2279 CBOPMONCT_1_39
+XEONSCAL4 0x227A CBOPMONCT_2_39
+XEONSCAL4 0x227B CBOPMONCT_3_39
+XEONSCAL4 0x227E CBOPMONCTRLGLCTR_39
+XEONSCAL4 0x2280 CBOPMONUNITCTRL_40
+XEONSCAL4 0x2281 CBOPMONCTRSTATUS_40
+XEONSCAL4 0x2282 CBOPMONCTRCTRL_0_40
+XEONSCAL4 0x2283 CBOPMONCTRCTRL_1_40
+XEONSCAL4 0x2284 CBOPMONCTRCTRL_2_40
+XEONSCAL4 0x2285 CBOPMONCTRCTRL_3_40
+XEONSCAL4 0x2288 CBOPMONCT_0_40
+XEONSCAL4 0x2289 CBOPMONCT_1_40
+XEONSCAL4 0x228A CBOPMONCT_2_40
+XEONSCAL4 0x228B CBOPMONCT_3_40
+XEONSCAL4 0x228E CBOPMONCTRLGLCTR_40
+XEONSCAL4 0x2290 CBOPMONUNITCTRL_41
+XEONSCAL4 0x2291 CBOPMONCTRSTATUS_41
+XEONSCAL4 0x2292 CBOPMONCTRCTRL_0_41
+XEONSCAL4 0x2293 CBOPMONCTRCTRL_1_41
+XEONSCAL4 0x2294 CBOPMONCTRCTRL_2_41
+XEONSCAL4 0x2295 CBOPMONCTRCTRL_3_41
+XEONSCAL4 0x2298 CBOPMONCT_0_41
+XEONSCAL4 0x2299 CBOPMONCT_1_41
+XEONSCAL4 0x229A CBOPMONCT_2_41
+XEONSCAL4 0x229B CBOPMONCT_3_41
+XEONSCAL4 0x229E CBOPMONCTRLGLCTR_41
+XEONSCAL4 0x22A0 CBOPMONUNITCTRL_42
+XEONSCAL4 0x22A1 CBOPMONCTRSTATUS_42
+XEONSCAL4 0x22A2 CBOPMONCTRCTRL_0_42
+XEONSCAL4 0x22A3 CBOPMONCTRCTRL_1_42
+XEONSCAL4 0x22A4 CBOPMONCTRCTRL_2_42
+XEONSCAL4 0x22A5 CBOPMONCTRCTRL_3_42
+XEONSCAL4 0x22A8 CBOPMONCT_0_42
+XEONSCAL4 0x22A9 CBOPMONCT_1_42
+XEONSCAL4 0x22AA CBOPMONCT_2_42
+XEONSCAL4 0x22AB CBOPMONCT_3_42
+XEONSCAL4 0x22AE CBOPMONCTRLGLCTR_42
+XEONSCAL4 0x22B0 CBOPMONUNITCTRL_43
+XEONSCAL4 0x22B1 CBOPMONCTRSTATUS_43
+XEONSCAL4 0x22B2 CBOPMONCTRCTRL_0_43
+XEONSCAL4 0x22B3 CBOPMONCTRCTRL_1_43
+XEONSCAL4 0x22B4 CBOPMONCTRCTRL_2_43
+XEONSCAL4 0x22B5 CBOPMONCTRCTRL_3_43
+XEONSCAL4 0x22B8 CBOPMONCT_0_43
+XEONSCAL4 0x22B9 CBOPMONCT_1_43
+XEONSCAL4 0x22BA CBOPMONCT_2_43
+XEONSCAL4 0x22BB CBOPMONCT_3_43
+XEONSCAL4 0x22BE CBOPMONCTRLGLCTR_43
+XEONSCAL4 0x22C0 CBOPMONUNITCTRL_44
+XEONSCAL4 0x22C1 CBOPMONCTRSTATUS_44
+XEONSCAL4 0x22C2 CBOPMONCTRCTRL_0_44
+XEONSCAL4 0x22C3 CBOPMONCTRCTRL_1_44
+XEONSCAL4 0x22C4 CBOPMONCTRCTRL_2_44
+XEONSCAL4 0x22C5 CBOPMONCTRCTRL_3_44
+XEONSCAL4 0x22C8 CBOPMONCT_0_44
+XEONSCAL4 0x22C9 CBOPMONCT_1_44
+XEONSCAL4 0x22CA CBOPMONCT_2_44
+XEONSCAL4 0x22CB CBOPMONCT_3_44
+XEONSCAL4 0x22CE CBOPMONCTRLGLCTR_44
+XEONSCAL4 0x22D0 CBOPMONUNITCTRL_45
+XEONSCAL4 0x22D1 CBOPMONCTRSTATUS_45
+XEONSCAL4 0x22D2 CBOPMONCTRCTRL_0_45
+XEONSCAL4 0x22D3 CBOPMONCTRCTRL_1_45
+XEONSCAL4 0x22D4 CBOPMONCTRCTRL_2_45
+XEONSCAL4 0x22D5 CBOPMONCTRCTRL_3_45
+XEONSCAL4 0x22D8 CBOPMONCT_0_45
+XEONSCAL4 0x22D9 CBOPMONCT_1_45
+XEONSCAL4 0x22DA CBOPMONCT_2_45
+XEONSCAL4 0x22DB CBOPMONCT_3_45
+XEONSCAL4 0x22DE CBOPMONCTRLGLCTR_45
+XEONSCAL4 0x22E0 CBOPMONUNITCTRL_46
+XEONSCAL4 0x22E1 CBOPMONCTRSTATUS_46
+XEONSCAL4 0x22E2 CBOPMONCTRCTRL_0_46
+XEONSCAL4 0x22E3 CBOPMONCTRCTRL_1_46
+XEONSCAL4 0x22E4 CBOPMONCTRCTRL_2_46
+XEONSCAL4 0x22E5 CBOPMONCTRCTRL_3_46
+XEONSCAL4 0x22E8 CBOPMONCT_0_46
+XEONSCAL4 0x22E9 CBOPMONCT_1_46
+XEONSCAL4 0x22EA CBOPMONCT_2_46
+XEONSCAL4 0x22EB CBOPMONCT_3_46
+XEONSCAL4 0x22EE CBOPMONCTRLGLCTR_46
+XEONSCAL4 0x22F0 CBOPMONUNITCTRL_47
+XEONSCAL4 0x22F1 CBOPMONCTRSTATUS_47
+XEONSCAL4 0x22F2 CBOPMONCTRCTRL_0_47
+XEONSCAL4 0x22F3 CBOPMONCTRCTRL_1_47
+XEONSCAL4 0x22F4 CBOPMONCTRCTRL_2_47
+XEONSCAL4 0x22F5 CBOPMONCTRCTRL_3_47
+XEONSCAL4 0x22F8 CBOPMONCT_0_47
+XEONSCAL4 0x22F9 CBOPMONCT_1_47
+XEONSCAL4 0x22FA CBOPMONCT_2_47
+XEONSCAL4 0x22FB CBOPMONCT_3_47
+XEONSCAL4 0x22FE CBOPMONCTRLGLCTR_47
+XEONSCAL4 0x2300 CBOPMONUNITCTRL_48
+XEONSCAL4 0x2301 CBOPMONCTRSTATUS_48
+XEONSCAL4 0x2302 CBOPMONCTRCTRL_0_48
+XEONSCAL4 0x2303 CBOPMONCTRCTRL_1_48
+XEONSCAL4 0x2304 CBOPMONCTRCTRL_2_48
+XEONSCAL4 0x2305 CBOPMONCTRCTRL_3_48
+XEONSCAL4 0x2308 CBOPMONCT_0_48
+XEONSCAL4 0x2309 CBOPMONCT_1_48
+XEONSCAL4 0x230A CBOPMONCT_2_48
+XEONSCAL4 0x230B CBOPMONCT_3_48
+XEONSCAL4 0x230E CBOPMONCTRLGLCTR_48
+XEONSCAL4 0x2310 CBOPMONUNITCTRL_49
+XEONSCAL4 0x2311 CBOPMONCTRSTATUS_49
+XEONSCAL4 0x2312 CBOPMONCTRCTRL_0_49
+XEONSCAL4 0x2313 CBOPMONCTRCTRL_1_49
+XEONSCAL4 0x2314 CBOPMONCTRCTRL_2_49
+XEONSCAL4 0x2315 CBOPMONCTRCTRL_3_49
+XEONSCAL4 0x2318 CBOPMONCT_0_49
+XEONSCAL4 0x2319 CBOPMONCT_1_49
+XEONSCAL4 0x231A CBOPMONCT_2_49
+XEONSCAL4 0x231B CBOPMONCT_3_49
+XEONSCAL4 0x231E CBOPMONCTRLGLCTR_49
+XEONSCAL4 0x2320 CBOPMONUNITCTRL_50
+XEONSCAL4 0x2321 CBOPMONCTRSTATUS_50
+XEONSCAL4 0x2322 CBOPMONCTRCTRL_0_50
+XEONSCAL4 0x2323 CBOPMONCTRCTRL_1_50
+XEONSCAL4 0x2324 CBOPMONCTRCTRL_2_50
+XEONSCAL4 0x2325 CBOPMONCTRCTRL_3_50
+XEONSCAL4 0x2328 CBOPMONCT_0_50
+XEONSCAL4 0x2329 CBOPMONCT_1_50
+XEONSCAL4 0x232A CBOPMONCT_2_50
+XEONSCAL4 0x232B CBOPMONCT_3_50
+XEONSCAL4 0x232E CBOPMONCTRLGLCTR_50
+XEONSCAL4 0x2330 CBOPMONUNITCTRL_51
+XEONSCAL4 0x2331 CBOPMONCTRSTATUS_51
+XEONSCAL4 0x2332 CBOPMONCTRCTRL_0_51
+XEONSCAL4 0x2333 CBOPMONCTRCTRL_1_51
+XEONSCAL4 0x2334 CBOPMONCTRCTRL_2_51
+XEONSCAL4 0x2335 CBOPMONCTRCTRL_3_51
+XEONSCAL4 0x2338 CBOPMONCT_0_51
+XEONSCAL4 0x2339 CBOPMONCT_1_51
+XEONSCAL4 0x233A CBOPMONCT_2_51
+XEONSCAL4 0x233B CBOPMONCT_3_51
+XEONSCAL4 0x233E CBOPMONCTRLGLCTR_51
+XEONSCAL4 0x2340 CBOPMONUNITCTRL_52
+XEONSCAL4 0x2341 CBOPMONCTRSTATUS_52
+XEONSCAL4 0x2342 CBOPMONCTRCTRL_0_52
+XEONSCAL4 0x2343 CBOPMONCTRCTRL_1_52
+XEONSCAL4 0x2344 CBOPMONCTRCTRL_2_52
+XEONSCAL4 0x2345 CBOPMONCTRCTRL_3_52
+XEONSCAL4 0x2348 CBOPMONCT_0_52
+XEONSCAL4 0x2349 CBOPMONCT_1_52
+XEONSCAL4 0x234A CBOPMONCT_2_52
+XEONSCAL4 0x234B CBOPMONCT_3_52
+XEONSCAL4 0x234E CBOPMONCTRLGLCTR_52
+XEONSCAL4 0x2350 CBOPMONUNITCTRL_53
+XEONSCAL4 0x2351 CBOPMONCTRSTATUS_53
+XEONSCAL4 0x2352 CBOPMONCTRCTRL_0_53
+XEONSCAL4 0x2353 CBOPMONCTRCTRL_1_53
+XEONSCAL4 0x2354 CBOPMONCTRCTRL_2_53
+XEONSCAL4 0x2355 CBOPMONCTRCTRL_3_53
+XEONSCAL4 0x2358 CBOPMONCT_0_53
+XEONSCAL4 0x2359 CBOPMONCT_1_53
+XEONSCAL4 0x235A CBOPMONCT_2_53
+XEONSCAL4 0x235B CBOPMONCT_3_53
+XEONSCAL4 0x235E CBOPMONCTRLGLCTR_53
+XEONSCAL4 0x2360 CBOPMONUNITCTRL_54
+XEONSCAL4 0x2361 CBOPMONCTRSTATUS_54
+XEONSCAL4 0x2362 CBOPMONCTRCTRL_0_54
+XEONSCAL4 0x2363 CBOPMONCTRCTRL_1_54
+XEONSCAL4 0x2364 CBOPMONCTRCTRL_2_54
+XEONSCAL4 0x2365 CBOPMONCTRCTRL_3_54
+XEONSCAL4 0x2368 CBOPMONCT_0_54
+XEONSCAL4 0x2369 CBOPMONCT_1_54
+XEONSCAL4 0x236A CBOPMONCT_2_54
+XEONSCAL4 0x236B CBOPMONCT_3_54
+XEONSCAL4 0x236E CBOPMONCTRLGLCTR_54
+XEONSCAL4 0x2370 CBOPMONUNITCTRL_55
+XEONSCAL4 0x2371 CBOPMONCTRSTATUS_55
+XEONSCAL4 0x2372 CBOPMONCTRCTRL_0_55
+XEONSCAL4 0x2373 CBOPMONCTRCTRL_1_55
+XEONSCAL4 0x2374 CBOPMONCTRCTRL_2_55
+XEONSCAL4 0x2375 CBOPMONCTRCTRL_3_55
+XEONSCAL4 0x2378 CBOPMONCT_0_55
+XEONSCAL4 0x2379 CBOPMONCT_1_55
+XEONSCAL4 0x237A CBOPMONCT_2_55
+XEONSCAL4 0x237B CBOPMONCT_3_55
+XEONSCAL4 0x237E CBOPMONCTRLGLCTR_55
+XEONSCAL4 0x2380 CBOPMONUNITCTRL_56
+XEONSCAL4 0x2381 CBOPMONCTRSTATUS_56
+XEONSCAL4 0x2382 CBOPMONCTRCTRL_0_56
+XEONSCAL4 0x2383 CBOPMONCTRCTRL_1_56
+XEONSCAL4 0x2384 CBOPMONCTRCTRL_2_56
+XEONSCAL4 0x2385 CBOPMONCTRCTRL_3_56
+XEONSCAL4 0x2388 CBOPMONCT_0_56
+XEONSCAL4 0x2389 CBOPMONCT_1_56
+XEONSCAL4 0x238A CBOPMONCT_2_56
+XEONSCAL4 0x238B CBOPMONCT_3_56
+XEONSCAL4 0x238E CBOPMONCTRLGLCTR_56
+XEONSCAL4 0x2390 CBOPMONUNITCTRL_57
+XEONSCAL4 0x2391 CBOPMONCTRSTATUS_57
+XEONSCAL4 0x2392 CBOPMONCTRCTRL_0_57
+XEONSCAL4 0x2393 CBOPMONCTRCTRL_1_57
+XEONSCAL4 0x2394 CBOPMONCTRCTRL_2_57
+XEONSCAL4 0x2395 CBOPMONCTRCTRL_3_57
+XEONSCAL4 0x2398 CBOPMONCT_0_57
+XEONSCAL4 0x2399 CBOPMONCT_1_57
+XEONSCAL4 0x239A CBOPMONCT_2_57
+XEONSCAL4 0x239B CBOPMONCT_3_57
+XEONSCAL4 0x239E CBOPMONCTRLGLCTR_57
+XEONSCAL4 0x23A0 CBOPMONUNITCTRL_58
+XEONSCAL4 0x23A1 CBOPMONCTRSTATUS_58
+XEONSCAL4 0x23A2 CBOPMONCTRCTRL_0_58
+XEONSCAL4 0x23A3 CBOPMONCTRCTRL_1_58
+XEONSCAL4 0x23A4 CBOPMONCTRCTRL_2_58
+XEONSCAL4 0x23A5 CBOPMONCTRCTRL_3_58
+XEONSCAL4 0x23A8 CBOPMONCT_0_58
+XEONSCAL4 0x23A9 CBOPMONCT_1_58
+XEONSCAL4 0x23AA CBOPMONCT_2_58
+XEONSCAL4 0x23AB CBOPMONCT_3_58
+XEONSCAL4 0x23AE CBOPMONCTRLGLCTR_58
+XEONSCAL4 0x23B0 CBOPMONUNITCTRL_59
+XEONSCAL4 0x23B1 CBOPMONCTRSTATUS_59
+XEONSCAL4 0x23B2 CBOPMONCTRCTRL_0_59
+XEONSCAL4 0x23B3 CBOPMONCTRCTRL_1_59
+XEONSCAL4 0x23B4 CBOPMONCTRCTRL_2_59
+XEONSCAL4 0x23B5 CBOPMONCTRCTRL_3_59
+XEONSCAL4 0x23B8 CBOPMONCT_0_59
+XEONSCAL4 0x23B9 CBOPMONCT_1_59
+XEONSCAL4 0x23BA CBOPMONCT_2_59
+XEONSCAL4 0x23BB CBOPMONCT_3_59
+XEONSCAL4 0x23BE CBOPMONCTRLGLCTR_59
+XEONSCAL4 0x2800 PMON_UNIT_CTRL_0
+XEONSCAL4 0x2801 PMON_COUNTER_STATUS_0
+XEONSCAL4 0x2802 PMON_COUNTER_CTRL_0_0
+XEONSCAL4 0x2803 PMON_COUNTER_CTRL_1_0
+XEONSCAL4 0x2804 PMON_COUNTER_CTRL_2_0
+XEONSCAL4 0x2805 PMON_COUNTER_CTRL_3_0
+XEONSCAL4 0x2808 PMON_COUNTER_0_0
+XEONSCAL4 0x2809 PMON_COUNTER_1_0
+XEONSCAL4 0x280A PMON_COUNTER_2_0
+XEONSCAL4 0x280B PMON_COUNTER_3_0
+XEONSCAL4 0x2810 PMON_UNIT_CTRL_1
+XEONSCAL4 0x2811 PMON_COUNTER_STATUS_1
+XEONSCAL4 0x2812 PMON_COUNTER_CTRL_0_1
+XEONSCAL4 0x2813 PMON_COUNTER_CTRL_1_1
+XEONSCAL4 0x2814 PMON_COUNTER_CTRL_2_1
+XEONSCAL4 0x2815 PMON_COUNTER_CTRL_3_1
+XEONSCAL4 0x2818 PMON_COUNTER_0_1
+XEONSCAL4 0x2819 PMON_COUNTER_1_1
+XEONSCAL4 0x281A PMON_COUNTER_2_1
+XEONSCAL4 0x281B PMON_COUNTER_3_1
+XEONSCAL4 0x2820 PMON_UNIT_CTRL_2
+XEONSCAL4 0x2821 PMON_COUNTER_STATUS_2
+XEONSCAL4 0x2822 PMON_COUNTER_CTRL_0_2
+XEONSCAL4 0x2823 PMON_COUNTER_CTRL_1_2
+XEONSCAL4 0x2824 PMON_COUNTER_CTRL_2_2
+XEONSCAL4 0x2825 PMON_COUNTER_CTRL_3_2
+XEONSCAL4 0x2828 PMON_COUNTER_0_2
+XEONSCAL4 0x2829 PMON_COUNTER_1_2
+XEONSCAL4 0x282A PMON_COUNTER_2_2
+XEONSCAL4 0x282B PMON_COUNTER_3_2
+XEONSCAL4 0x2830 PMON_UNIT_CTRL_3
+XEONSCAL4 0x2831 PMON_COUNTER_STATUS_3
+XEONSCAL4 0x2832 PMON_COUNTER_CTRL_0_3
+XEONSCAL4 0x2833 PMON_COUNTER_CTRL_1_3
+XEONSCAL4 0x2834 PMON_COUNTER_CTRL_2_3
+XEONSCAL4 0x2835 PMON_COUNTER_CTRL_3_3
+XEONSCAL4 0x2838 PMON_COUNTER_0_3
+XEONSCAL4 0x2839 PMON_COUNTER_1_3
+XEONSCAL4 0x283A PMON_COUNTER_2_3
+XEONSCAL4 0x283B PMON_COUNTER_3_3
+XEONSCAL4 0x2840 PMON_UNIT_CTRL_4
+XEONSCAL4 0x2841 PMON_COUNTER_STATUS_4
+XEONSCAL4 0x2842 PMON_COUNTER_CTRL_0_4
+XEONSCAL4 0x2843 PMON_COUNTER_CTRL_1_4
+XEONSCAL4 0x2844 PMON_COUNTER_CTRL_2_4
+XEONSCAL4 0x2845 PMON_COUNTER_CTRL_3_4
+XEONSCAL4 0x2848 PMON_COUNTER_0_4
+XEONSCAL4 0x2849 PMON_COUNTER_1_4
+XEONSCAL4 0x284A PMON_COUNTER_2_4
+XEONSCAL4 0x284B PMON_COUNTER_3_4
+XEONSCAL4 0x2850 PMON_UNIT_CTRL_5
+XEONSCAL4 0x2851 PMON_COUNTER_STATUS_5
+XEONSCAL4 0x2852 PMON_COUNTER_CTRL_0_5
+XEONSCAL4 0x2853 PMON_COUNTER_CTRL_1_5
+XEONSCAL4 0x2854 PMON_COUNTER_CTRL_2_5
+XEONSCAL4 0x2855 PMON_COUNTER_CTRL_3_5
+XEONSCAL4 0x2858 PMON_COUNTER_0_5
+XEONSCAL4 0x2859 PMON_COUNTER_1_5
+XEONSCAL4 0x285A PMON_COUNTER_2_5
+XEONSCAL4 0x285B PMON_COUNTER_3_5
+XEONSCAL4 0x2860 PMON_UNIT_CTRL_6
+XEONSCAL4 0x2861 PMON_COUNTER_STATUS_6
+XEONSCAL4 0x2862 PMON_COUNTER_CTRL_0_6
+XEONSCAL4 0x2863 PMON_COUNTER_CTRL_1_6
+XEONSCAL4 0x2864 PMON_COUNTER_CTRL_2_6
+XEONSCAL4 0x2865 PMON_COUNTER_CTRL_3_6
+XEONSCAL4 0x2868 PMON_COUNTER_0_6
+XEONSCAL4 0x2869 PMON_COUNTER_1_6
+XEONSCAL4 0x286A PMON_COUNTER_2_6
+XEONSCAL4 0x286B PMON_COUNTER_3_6
+XEONSCAL4 0x2870 PMON_UNIT_CTRL_7
+XEONSCAL4 0x2871 PMON_COUNTER_STATUS_7
+XEONSCAL4 0x2872 PMON_COUNTER_CTRL_0_7
+XEONSCAL4 0x2873 PMON_COUNTER_CTRL_1_7
+XEONSCAL4 0x2874 PMON_COUNTER_CTRL_2_7
+XEONSCAL4 0x2875 PMON_COUNTER_CTRL_3_7
+XEONSCAL4 0x2878 PMON_COUNTER_0_7
+XEONSCAL4 0x2879 PMON_COUNTER_1_7
+XEONSCAL4 0x287A PMON_COUNTER_2_7
+XEONSCAL4 0x287B PMON_COUNTER_3_7
+XEONSCAL4 0x2880 PMON_UNIT_CTRL_8
+XEONSCAL4 0x2881 PMON_COUNTER_STATUS_8
+XEONSCAL4 0x2882 PMON_COUNTER_CTRL_0_8
+XEONSCAL4 0x2883 PMON_COUNTER_CTRL_1_8
+XEONSCAL4 0x2884 PMON_COUNTER_CTRL_2_8
+XEONSCAL4 0x2885 PMON_COUNTER_CTRL_3_8
+XEONSCAL4 0x2888 PMON_COUNTER_0_8
+XEONSCAL4 0x2889 PMON_COUNTER_1_8
+XEONSCAL4 0x288A PMON_COUNTER_2_8
+XEONSCAL4 0x288B PMON_COUNTER_3_8
+XEONSCAL4 0x2890 PMON_UNIT_CTRL_9
+XEONSCAL4 0x2891 PMON_COUNTER_STATUS_9
+XEONSCAL4 0x2892 PMON_COUNTER_CTRL_0_9
+XEONSCAL4 0x2893 PMON_COUNTER_CTRL_1_9
+XEONSCAL4 0x2894 PMON_COUNTER_CTRL_2_9
+XEONSCAL4 0x2895 PMON_COUNTER_CTRL_3_9
+XEONSCAL4 0x2898 PMON_COUNTER_0_9
+XEONSCAL4 0x2899 PMON_COUNTER_1_9
+XEONSCAL4 0x289A PMON_COUNTER_2_9
+XEONSCAL4 0x289B PMON_COUNTER_3_9
+XEONSCAL4 0x28A0 PMON_UNIT_CTRL_10
+XEONSCAL4 0x28A1 PMON_COUNTER_STATUS_10
+XEONSCAL4 0x28A2 PMON_COUNTER_CTRL_0_10
+XEONSCAL4 0x28A3 PMON_COUNTER_CTRL_1_10
+XEONSCAL4 0x28A4 PMON_COUNTER_CTRL_2_10
+XEONSCAL4 0x28A5 PMON_COUNTER_CTRL_3_10
+XEONSCAL4 0x28A8 PMON_COUNTER_0_10
+XEONSCAL4 0x28A9 PMON_COUNTER_1_10
+XEONSCAL4 0x28AA PMON_COUNTER_2_10
+XEONSCAL4 0x28AB PMON_COUNTER_3_10
+XEONSCAL4 0x28B0 PMON_UNIT_CTRL_11
+XEONSCAL4 0x28B1 PMON_COUNTER_STATUS_11
+XEONSCAL4 0x28B2 PMON_COUNTER_CTRL_0_11
+XEONSCAL4 0x28B3 PMON_COUNTER_CTRL_1_11
+XEONSCAL4 0x28B4 PMON_COUNTER_CTRL_2_11
+XEONSCAL4 0x28B5 PMON_COUNTER_CTRL_3_11
+XEONSCAL4 0x28B8 PMON_COUNTER_0_11
+XEONSCAL4 0x28B9 PMON_COUNTER_1_11
+XEONSCAL4 0x28BA PMON_COUNTER_2_11
+XEONSCAL4 0x28BB PMON_COUNTER_3_11
+XEONSCAL4 0x28C0 PMON_UNIT_CTRL_12
+XEONSCAL4 0x28C1 PMON_COUNTER_STATUS_12
+XEONSCAL4 0x28C2 PMON_COUNTER_CTRL_0_12
+XEONSCAL4 0x28C3 PMON_COUNTER_CTRL_1_12
+XEONSCAL4 0x28C4 PMON_COUNTER_CTRL_2_12
+XEONSCAL4 0x28C5 PMON_COUNTER_CTRL_3_12
+XEONSCAL4 0x28C8 PMON_COUNTER_0_12
+XEONSCAL4 0x28C9 PMON_COUNTER_1_12
+XEONSCAL4 0x28CA PMON_COUNTER_2_12
+XEONSCAL4 0x28CB PMON_COUNTER_3_12
+XEONSCAL4 0x28D0 PMON_UNIT_CTRL_13
+XEONSCAL4 0x28D1 PMON_COUNTER_STATUS_13
+XEONSCAL4 0x28D2 PMON_COUNTER_CTRL_0_13
+XEONSCAL4 0x28D3 PMON_COUNTER_CTRL_1_13
+XEONSCAL4 0x28D4 PMON_COUNTER_CTRL_2_13
+XEONSCAL4 0x28D5 PMON_COUNTER_CTRL_3_13
+XEONSCAL4 0x28D8 PMON_COUNTER_0_13
+XEONSCAL4 0x28D9 PMON_COUNTER_1_13
+XEONSCAL4 0x28DA PMON_COUNTER_2_13
+XEONSCAL4 0x28DB PMON_COUNTER_3_13
+XEONSCAL4 0x28E0 PMON_UNIT_CTRL_14
+XEONSCAL4 0x28E1 PMON_COUNTER_STATUS_14
+XEONSCAL4 0x28E2 PMON_COUNTER_CTRL_0_14
+XEONSCAL4 0x28E3 PMON_COUNTER_CTRL_1_14
+XEONSCAL4 0x28E4 PMON_COUNTER_CTRL_2_14
+XEONSCAL4 0x28E5 PMON_COUNTER_CTRL_3_14
+XEONSCAL4 0x28E8 PMON_COUNTER_0_14
+XEONSCAL4 0x28E9 PMON_COUNTER_1_14
+XEONSCAL4 0x28EA PMON_COUNTER_2_14
+XEONSCAL4 0x28EB PMON_COUNTER_3_14
+XEONSCAL4 0x28F0 PMON_UNIT_CTRL_15
+XEONSCAL4 0x28F1 PMON_COUNTER_STATUS_15
+XEONSCAL4 0x28F2 PMON_COUNTER_CTRL_0_15
+XEONSCAL4 0x28F3 PMON_COUNTER_CTRL_1_15
+XEONSCAL4 0x28F4 PMON_COUNTER_CTRL_2_15
+XEONSCAL4 0x28F5 PMON_COUNTER_CTRL_3_15
+XEONSCAL4 0x28F8 PMON_COUNTER_0_15
+XEONSCAL4 0x28F9 PMON_COUNTER_1_15
+XEONSCAL4 0x28FA PMON_COUNTER_2_15
+XEONSCAL4 0x28FB PMON_COUNTER_3_15
+XEONSCAL4 0x2900 PMON_UNIT_CTRL_16
+XEONSCAL4 0x2901 PMON_COUNTER_STATUS_16
+XEONSCAL4 0x2902 PMON_COUNTER_CTRL_0_16
+XEONSCAL4 0x2903 PMON_COUNTER_CTRL_1_16
+XEONSCAL4 0x2904 PMON_COUNTER_CTRL_2_16
+XEONSCAL4 0x2905 PMON_COUNTER_CTRL_3_16
+XEONSCAL4 0x2908 PMON_COUNTER_0_16
+XEONSCAL4 0x2909 PMON_COUNTER_1_16
+XEONSCAL4 0x290A PMON_COUNTER_2_16
+XEONSCAL4 0x290B PMON_COUNTER_3_16
+XEONSCAL4 0x2910 PMON_UNIT_CTRL_17
+XEONSCAL4 0x2911 PMON_COUNTER_STATUS_17
+XEONSCAL4 0x2912 PMON_COUNTER_CTRL_0_17
+XEONSCAL4 0x2913 PMON_COUNTER_CTRL_1_17
+XEONSCAL4 0x2914 PMON_COUNTER_CTRL_2_17
+XEONSCAL4 0x2915 PMON_COUNTER_CTRL_3_17
+XEONSCAL4 0x2918 PMON_COUNTER_0_17
+XEONSCAL4 0x2919 PMON_COUNTER_1_17
+XEONSCAL4 0x291A PMON_COUNTER_2_17
+XEONSCAL4 0x291B PMON_COUNTER_3_17
+XEONSCAL4 0x2920 PMON_UNIT_CTRL_18
+XEONSCAL4 0x2921 PMON_COUNTER_STATUS_18
+XEONSCAL4 0x2922 PMON_COUNTER_CTRL_0_18
+XEONSCAL4 0x2923 PMON_COUNTER_CTRL_1_18
+XEONSCAL4 0x2924 PMON_COUNTER_CTRL_2_18
+XEONSCAL4 0x2925 PMON_COUNTER_CTRL_3_18
+XEONSCAL4 0x2928 PMON_COUNTER_0_18
+XEONSCAL4 0x2929 PMON_COUNTER_1_18
+XEONSCAL4 0x292A PMON_COUNTER_2_18
+XEONSCAL4 0x292B PMON_COUNTER_3_18
+XEONSCAL4 0x2930 PMON_UNIT_CTRL_19
+XEONSCAL4 0x2931 PMON_COUNTER_STATUS_19
+XEONSCAL4 0x2932 PMON_COUNTER_CTRL_0_19
+XEONSCAL4 0x2933 PMON_COUNTER_CTRL_1_19
+XEONSCAL4 0x2934 PMON_COUNTER_CTRL_2_19
+XEONSCAL4 0x2935 PMON_COUNTER_CTRL_3_19
+XEONSCAL4 0x2938 PMON_COUNTER_0_19
+XEONSCAL4 0x2939 PMON_COUNTER_1_19
+XEONSCAL4 0x293A PMON_COUNTER_2_19
+XEONSCAL4 0x293B PMON_COUNTER_3_19
+XEONSCAL4 0x2940 PMON_UNIT_CTRL_20
+XEONSCAL4 0x2941 PMON_COUNTER_STATUS_20
+XEONSCAL4 0x2942 PMON_COUNTER_CTRL_0_20
+XEONSCAL4 0x2943 PMON_COUNTER_CTRL_1_20
+XEONSCAL4 0x2944 PMON_COUNTER_CTRL_2_20
+XEONSCAL4 0x2945 PMON_COUNTER_CTRL_3_20
+XEONSCAL4 0x2948 PMON_COUNTER_0_20
+XEONSCAL4 0x2949 PMON_COUNTER_1_20
+XEONSCAL4 0x294A PMON_COUNTER_2_20
+XEONSCAL4 0x294B PMON_COUNTER_3_20
+XEONSCAL4 0x2950 PMON_UNIT_CTRL_21
+XEONSCAL4 0x2951 PMON_COUNTER_STATUS_21
+XEONSCAL4 0x2952 PMON_COUNTER_CTRL_0_21
+XEONSCAL4 0x2953 PMON_COUNTER_CTRL_1_21
+XEONSCAL4 0x2954 PMON_COUNTER_CTRL_2_21
+XEONSCAL4 0x2955 PMON_COUNTER_CTRL_3_21
+XEONSCAL4 0x2958 PMON_COUNTER_0_21
+XEONSCAL4 0x2959 PMON_COUNTER_1_21
+XEONSCAL4 0x295A PMON_COUNTER_2_21
+XEONSCAL4 0x295B PMON_COUNTER_3_21
+XEONSCAL4 0x2960 PMON_UNIT_CTRL_22
+XEONSCAL4 0x2961 PMON_COUNTER_STATUS_22
+XEONSCAL4 0x2962 PMON_COUNTER_CTRL_0_22
+XEONSCAL4 0x2963 PMON_COUNTER_CTRL_1_22
+XEONSCAL4 0x2964 PMON_COUNTER_CTRL_2_22
+XEONSCAL4 0x2965 PMON_COUNTER_CTRL_3_22
+XEONSCAL4 0x2968 PMON_COUNTER_0_22
+XEONSCAL4 0x2969 PMON_COUNTER_1_22
+XEONSCAL4 0x296A PMON_COUNTER_2_22
+XEONSCAL4 0x296B PMON_COUNTER_3_22
+XEONSCAL4 0x2970 PMON_UNIT_CTRL_23
+XEONSCAL4 0x2971 PMON_COUNTER_STATUS_23
+XEONSCAL4 0x2972 PMON_COUNTER_CTRL_0_23
+XEONSCAL4 0x2973 PMON_COUNTER_CTRL_1_23
+XEONSCAL4 0x2974 PMON_COUNTER_CTRL_2_23
+XEONSCAL4 0x2975 PMON_COUNTER_CTRL_3_23
+XEONSCAL4 0x2978 PMON_COUNTER_0_23
+XEONSCAL4 0x2979 PMON_COUNTER_1_23
+XEONSCAL4 0x297A PMON_COUNTER_2_23
+XEONSCAL4 0x297B PMON_COUNTER_3_23
+XEONSCAL4 0x2980 PMON_UNIT_CTRL_24
+XEONSCAL4 0x2981 PMON_COUNTER_STATUS_24
+XEONSCAL4 0x2982 PMON_COUNTER_CTRL_0_24
+XEONSCAL4 0x2983 PMON_COUNTER_CTRL_1_24
+XEONSCAL4 0x2984 PMON_COUNTER_CTRL_2_24
+XEONSCAL4 0x2985 PMON_COUNTER_CTRL_3_24
+XEONSCAL4 0x2988 PMON_COUNTER_0_24
+XEONSCAL4 0x2989 PMON_COUNTER_1_24
+XEONSCAL4 0x298A PMON_COUNTER_2_24
+XEONSCAL4 0x298B PMON_COUNTER_3_24
+XEONSCAL4 0x2990 PMON_UNIT_CTRL_25
+XEONSCAL4 0x2991 PMON_COUNTER_STATUS_25
+XEONSCAL4 0x2992 PMON_COUNTER_CTRL_0_25
+XEONSCAL4 0x2993 PMON_COUNTER_CTRL_1_25
+XEONSCAL4 0x2994 PMON_COUNTER_CTRL_2_25
+XEONSCAL4 0x2995 PMON_COUNTER_CTRL_3_25
+XEONSCAL4 0x2998 PMON_COUNTER_0_25
+XEONSCAL4 0x2999 PMON_COUNTER_1_25
+XEONSCAL4 0x299A PMON_COUNTER_2_25
+XEONSCAL4 0x299B PMON_COUNTER_3_25
+XEONSCAL4 0x29A0 PMON_UNIT_CTRL_26
+XEONSCAL4 0x29A1 PMON_COUNTER_STATUS_26
+XEONSCAL4 0x29A2 PMON_COUNTER_CTRL_0_26
+XEONSCAL4 0x29A3 PMON_COUNTER_CTRL_1_26
+XEONSCAL4 0x29A4 PMON_COUNTER_CTRL_2_26
+XEONSCAL4 0x29A5 PMON_COUNTER_CTRL_3_26
+XEONSCAL4 0x29A8 PMON_COUNTER_0_26
+XEONSCAL4 0x29A9 PMON_COUNTER_1_26
+XEONSCAL4 0x29AA PMON_COUNTER_2_26
+XEONSCAL4 0x29AB PMON_COUNTER_3_26
+XEONSCAL4 0x29B0 PMON_UNIT_CTRL_27
+XEONSCAL4 0x29B1 PMON_COUNTER_STATUS_27
+XEONSCAL4 0x29B2 PMON_COUNTER_CTRL_0_27
+XEONSCAL4 0x29B3 PMON_COUNTER_CTRL_1_27
+XEONSCAL4 0x29B4 PMON_COUNTER_CTRL_2_27
+XEONSCAL4 0x29B5 PMON_COUNTER_CTRL_3_27
+XEONSCAL4 0x29B8 PMON_COUNTER_0_27
+XEONSCAL4 0x29B9 PMON_COUNTER_1_27
+XEONSCAL4 0x29BA PMON_COUNTER_2_27
+XEONSCAL4 0x29BB PMON_COUNTER_3_27
+XEONSCAL4 0x29C0 PMON_UNIT_CTRL_28
+XEONSCAL4 0x29C1 PMON_COUNTER_STATUS_28
+XEONSCAL4 0x29C2 PMON_COUNTER_CTRL_0_28
+XEONSCAL4 0x29C3 PMON_COUNTER_CTRL_1_28
+XEONSCAL4 0x29C4 PMON_COUNTER_CTRL_2_28
+XEONSCAL4 0x29C5 PMON_COUNTER_CTRL_3_28
+XEONSCAL4 0x29C8 PMON_COUNTER_0_28
+XEONSCAL4 0x29C9 PMON_COUNTER_1_28
+XEONSCAL4 0x29CA PMON_COUNTER_2_28
+XEONSCAL4 0x29CB PMON_COUNTER_3_28
+XEONSCAL4 0x29D0 PMON_UNIT_CTRL_29
+XEONSCAL4 0x29D1 PMON_COUNTER_STATUS_29
+XEONSCAL4 0x29D2 PMON_COUNTER_CTRL_0_29
+XEONSCAL4 0x29D3 PMON_COUNTER_CTRL_1_29
+XEONSCAL4 0x29D4 PMON_COUNTER_CTRL_2_29
+XEONSCAL4 0x29D5 PMON_COUNTER_CTRL_3_29
+XEONSCAL4 0x29D8 PMON_COUNTER_0_29
+XEONSCAL4 0x29D9 PMON_COUNTER_1_29
+XEONSCAL4 0x29DA PMON_COUNTER_2_29
+XEONSCAL4 0x29DB PMON_COUNTER_3_29
+XEONSCAL4 0x29E0 PMON_UNIT_CTRL_30
+XEONSCAL4 0x29E1 PMON_COUNTER_STATUS_30
+XEONSCAL4 0x29E2 PMON_COUNTER_CTRL_0_30
+XEONSCAL4 0x29E3 PMON_COUNTER_CTRL_1_30
+XEONSCAL4 0x29E4 PMON_COUNTER_CTRL_2_30
+XEONSCAL4 0x29E5 PMON_COUNTER_CTRL_3_30
+XEONSCAL4 0x29E8 PMON_COUNTER_0_30
+XEONSCAL4 0x29E9 PMON_COUNTER_1_30
+XEONSCAL4 0x29EA PMON_COUNTER_2_30
+XEONSCAL4 0x29EB PMON_COUNTER_3_30
+XEONSCAL4 0x29F0 PMON_UNIT_CTRL_31
+XEONSCAL4 0x29F1 PMON_COUNTER_STATUS_31
+XEONSCAL4 0x29F2 PMON_COUNTER_CTRL_0_31
+XEONSCAL4 0x29F3 PMON_COUNTER_CTRL_1_31
+XEONSCAL4 0x29F4 PMON_COUNTER_CTRL_2_31
+XEONSCAL4 0x29F5 PMON_COUNTER_CTRL_3_31
+XEONSCAL4 0x29F8 PMON_COUNTER_0_31
+XEONSCAL4 0x29F9 PMON_COUNTER_1_31
+XEONSCAL4 0x29FA PMON_COUNTER_2_31
+XEONSCAL4 0x29FB PMON_COUNTER_3_31
+XEONSCAL4 0x2A00 PMON_UNIT_CTRL_32
+XEONSCAL4 0x2A01 PMON_COUNTER_STATUS_32
+XEONSCAL4 0x2A02 PMON_COUNTER_CTRL_0_32
+XEONSCAL4 0x2A03 PMON_COUNTER_CTRL_1_32
+XEONSCAL4 0x2A04 PMON_COUNTER_CTRL_2_32
+XEONSCAL4 0x2A05 PMON_COUNTER_CTRL_3_32
+XEONSCAL4 0x2A08 PMON_COUNTER_0_32
+XEONSCAL4 0x2A09 PMON_COUNTER_1_32
+XEONSCAL4 0x2A0A PMON_COUNTER_2_32
+XEONSCAL4 0x2A0B PMON_COUNTER_3_32
+XEONSCAL4 0x2A10 PMON_UNIT_CTRL_33
+XEONSCAL4 0x2A11 PMON_COUNTER_STATUS_33
+XEONSCAL4 0x2A12 PMON_COUNTER_CTRL_0_33
+XEONSCAL4 0x2A13 PMON_COUNTER_CTRL_1_33
+XEONSCAL4 0x2A14 PMON_COUNTER_CTRL_2_33
+XEONSCAL4 0x2A15 PMON_COUNTER_CTRL_3_33
+XEONSCAL4 0x2A18 PMON_COUNTER_0_33
+XEONSCAL4 0x2A19 PMON_COUNTER_1_33
+XEONSCAL4 0x2A1A PMON_COUNTER_2_33
+XEONSCAL4 0x2A1B PMON_COUNTER_3_33
+XEONSCAL4 0x2A20 PMON_UNIT_CTRL_34
+XEONSCAL4 0x2A21 PMON_COUNTER_STATUS_34
+XEONSCAL4 0x2A22 PMON_COUNTER_CTRL_0_34
+XEONSCAL4 0x2A23 PMON_COUNTER_CTRL_1_34
+XEONSCAL4 0x2A24 PMON_COUNTER_CTRL_2_34
+XEONSCAL4 0x2A25 PMON_COUNTER_CTRL_3_34
+XEONSCAL4 0x2A28 PMON_COUNTER_0_34
+XEONSCAL4 0x2A29 PMON_COUNTER_1_34
+XEONSCAL4 0x2A2A PMON_COUNTER_2_34
+XEONSCAL4 0x2A2B PMON_COUNTER_3_34
+XEONSCAL4 0x2A30 PMON_UNIT_CTRL_35
+XEONSCAL4 0x2A31 PMON_COUNTER_STATUS_35
+XEONSCAL4 0x2A32 PMON_COUNTER_CTRL_0_35
+XEONSCAL4 0x2A33 PMON_COUNTER_CTRL_1_35
+XEONSCAL4 0x2A34 PMON_COUNTER_CTRL_2_35
+XEONSCAL4 0x2A35 PMON_COUNTER_CTRL_3_35
+XEONSCAL4 0x2A38 PMON_COUNTER_0_35
+XEONSCAL4 0x2A39 PMON_COUNTER_1_35
+XEONSCAL4 0x2A3A PMON_COUNTER_2_35
+XEONSCAL4 0x2A3B PMON_COUNTER_3_35
+XEONSCAL4 0x2A40 PMON_UNIT_CTRL_36
+XEONSCAL4 0x2A41 PMON_COUNTER_STATUS_36
+XEONSCAL4 0x2A42 PMON_COUNTER_CTRL_0_36
+XEONSCAL4 0x2A43 PMON_COUNTER_CTRL_1_36
+XEONSCAL4 0x2A44 PMON_COUNTER_CTRL_2_36
+XEONSCAL4 0x2A45 PMON_COUNTER_CTRL_3_36
+XEONSCAL4 0x2A48 PMON_COUNTER_0_36
+XEONSCAL4 0x2A49 PMON_COUNTER_1_36
+XEONSCAL4 0x2A4A PMON_COUNTER_2_36
+XEONSCAL4 0x2A4B PMON_COUNTER_3_36
+XEONSCAL4 0x2A50 PMON_UNIT_CTRL_37
+XEONSCAL4 0x2A51 PMON_COUNTER_STATUS_37
+XEONSCAL4 0x2A52 PMON_COUNTER_CTRL_0_37
+XEONSCAL4 0x2A53 PMON_COUNTER_CTRL_1_37
+XEONSCAL4 0x2A54 PMON_COUNTER_CTRL_2_37
+XEONSCAL4 0x2A55 PMON_COUNTER_CTRL_3_37
+XEONSCAL4 0x2A58 PMON_COUNTER_0_37
+XEONSCAL4 0x2A59 PMON_COUNTER_1_37
+XEONSCAL4 0x2A5A PMON_COUNTER_2_37
+XEONSCAL4 0x2A5B PMON_COUNTER_3_37
+XEONSCAL4 0x2A60 PMON_UNIT_CTRL_38
+XEONSCAL4 0x2A61 PMON_COUNTER_STATUS_38
+XEONSCAL4 0x2A62 PMON_COUNTER_CTRL_0_38
+XEONSCAL4 0x2A63 PMON_COUNTER_CTRL_1_38
+XEONSCAL4 0x2A64 PMON_COUNTER_CTRL_2_38
+XEONSCAL4 0x2A65 PMON_COUNTER_CTRL_3_38
+XEONSCAL4 0x2A68 PMON_COUNTER_0_38
+XEONSCAL4 0x2A69 PMON_COUNTER_1_38
+XEONSCAL4 0x2A6A PMON_COUNTER_2_38
+XEONSCAL4 0x2A6B PMON_COUNTER_3_38
+XEONSCAL4 0x2A70 PMON_UNIT_CTRL_39
+XEONSCAL4 0x2A71 PMON_COUNTER_STATUS_39
+XEONSCAL4 0x2A72 PMON_COUNTER_CTRL_0_39
+XEONSCAL4 0x2A73 PMON_COUNTER_CTRL_1_39
+XEONSCAL4 0x2A74 PMON_COUNTER_CTRL_2_39
+XEONSCAL4 0x2A75 PMON_COUNTER_CTRL_3_39
+XEONSCAL4 0x2A78 PMON_COUNTER_0_39
+XEONSCAL4 0x2A79 PMON_COUNTER_1_39
+XEONSCAL4 0x2A7A PMON_COUNTER_2_39
+XEONSCAL4 0x2A7B PMON_COUNTER_3_39
+XEONSCAL4 0x2FC0 PCUPMONUNITCTRL
+XEONSCAL4 0x2FC1 PCUPMONUNITSTATUS
+XEONSCAL4 0x2FC2 PCUPMONCNTRCFG_0
+XEONSCAL4 0x2FC3 PCUPMONCNTRCFG_1
+XEONSCAL4 0x2FC4 PCUPMONCNTRCFG_2
+XEONSCAL4 0x2FC5 PCUPMONCNTRCFG_3
+XEONSCAL4 0x2FC8 PCUPMONCNTR_0
+XEONSCAL4 0x2FC9 PCUPMONCNTR_1
+XEONSCAL4 0x2FCA PCUPMONCNTR_2
+XEONSCAL4 0x2FCB PCUPMONCNTR_3
+XEONSCAL4 0x2FCE PCUPMONFILTER
+XEONSCAL4 0x2FD0 UNIT_CONTROL_REGISTER
+XEONSCAL4 0x2FD2 PERFEVTSEL0_0
+XEONSCAL4 0x2FD3 PERFEVTSEL1_1
+XEONSCAL4 0x2FD8 PERFCTR0_0
+XEONSCAL4 0x2FD9 PERFCTR1_1
+XEONSCAL4 0x2FDA PERFCTR0
+XEONSCAL4 0x2FDB PERFCTR1
+XEONSCAL4 0x2FDD PERF_CTRL
+XEONSCAL4 0x2FDE NCUPMONCTLFIX
+XEONSCAL4 0x2FDF NCUPMONCTRFX
+XEONSCAL4 0x2FF0 NCUPMONGLCTRL  # Global PerfMon
+XEONSCAL4 0x2FF1 NCUPMONGLCTRL2
+XEONSCAL4 0x2FF2 NCUPMONGLSTS0
+XEONSCAL4 0x2FF3 NCUPMONGLSTS1
+XEONSCAL4 0x2FF4 NCUPMONGLSTS2
+XEONSCAL4 0x2FF5 NCUPMONGLSTS3
+XEONSCAL4 0x2FFB UBOX_PMON_EVENT_NCDEC_MASK_CTL0
+XEONSCAL4 0x2FFC UBOX_PMON_EVENT_NCDEC_MASK_CTL1
+XEONSCAL4 0x2FFD UBOX_PMON_EVENT_NCDEC_MATCH_ADDR
+XEONSCAL4 0x2FFF NCUPMONCTRLGLCTR
+
+XEONSCAL4 0x3000 IIOPMONUNITCTRL_0
+XEONSCAL4 0x3001 IIOPMONUNITSTATUS_0
+XEONSCAL4 0x3002 IOPMONCNTRCFG_0_0
+XEONSCAL4 0x3003 IOPMONCNTRCFG_1_0
+XEONSCAL4 0x3004 IOPMONCNTRCFG_2_0
+XEONSCAL4 0x3005 IOPMONCNTRCFG_3_0
+XEONSCAL4 0x3010 IIOPMONUNITCTRL_1
+XEONSCAL4 0x3011 IIOPMONUNITSTATUS_1
+XEONSCAL4 0x3012 IOPMONCNTRCFG_0_1
+XEONSCAL4 0x3013 IOPMONCNTRCFG_1_1
+XEONSCAL4 0x3014 IOPMONCNTRCFG_2_1
+XEONSCAL4 0x3015 IOPMONCNTRCFG_3_1
+XEONSCAL4 0x3020 IIOPMONUNITCTRL_2
+XEONSCAL4 0x3021 IIOPMONUNITSTATUS_2
+XEONSCAL4 0x3022 IOPMONCNTRCFG_0_2
+XEONSCAL4 0x3023 IOPMONCNTRCFG_1_2
+XEONSCAL4 0x3024 IOPMONCNTRCFG_2_2
+XEONSCAL4 0x3025 IOPMONCNTRCFG_3_2
+XEONSCAL4 0x3030 IIOPMONUNITCTRL_3
+XEONSCAL4 0x3031 IIOPMONUNITSTATUS_3
+XEONSCAL4 0x3032 IOPMONCNTRCFG_0_3
+XEONSCAL4 0x3033 IOPMONCNTRCFG_1_3
+XEONSCAL4 0x3034 IOPMONCNTRCFG_2_3
+XEONSCAL4 0x3035 IOPMONCNTRCFG_3_3
+XEONSCAL4 0x3040 IIOPMONUNITCTRL_4
+XEONSCAL4 0x3041 IIOPMONUNITSTATUS_4
+XEONSCAL4 0x3042 IOPMONCNTRCFG_0_4
+XEONSCAL4 0x3043 IOPMONCNTRCFG_1_4
+XEONSCAL4 0x3044 IOPMONCNTRCFG_2_4
+XEONSCAL4 0x3045 IOPMONCNTRCFG_3_4
+XEONSCAL4 0x3050 IIOPMONUNITCTRL_5
+XEONSCAL4 0x3051 IIOPMONUNITSTATUS_5
+XEONSCAL4 0x3052 IOPMONCNTRCFG_0_5
+XEONSCAL4 0x3053 IOPMONCNTRCFG_1_5
+XEONSCAL4 0x3054 IOPMONCNTRCFG_2_5
+XEONSCAL4 0x3055 IOPMONCNTRCFG_3_5
+XEONSCAL4 0x3060 IIOPMONUNITCTRL_6
+XEONSCAL4 0x3061 IIOPMONUNITSTATUS_6
+XEONSCAL4 0x3062 IOPMONCNTRCFG_0_6
+XEONSCAL4 0x3063 IOPMONCNTRCFG_1_6
+XEONSCAL4 0x3064 IOPMONCNTRCFG_2_6
+XEONSCAL4 0x3065 IOPMONCNTRCFG_3_6
+XEONSCAL4 0x3070 IIOPMONUNITCTRL_7
+XEONSCAL4 0x3071 IIOPMONUNITSTATUS_7
+XEONSCAL4 0x3072 IOPMONCNTRCFG_0_7
+XEONSCAL4 0x3073 IOPMONCNTRCFG_1_7
+XEONSCAL4 0x3074 IOPMONCNTRCFG_2_7
+XEONSCAL4 0x3075 IOPMONCNTRCFG_3_7
+XEONSCAL4 0x3080 IIOPMONUNITCTRL_8
+XEONSCAL4 0x3081 IIOPMONUNITSTATUS_8
+XEONSCAL4 0x3082 IOPMONCNTRCFG_0_8
+XEONSCAL4 0x3083 IOPMONCNTRCFG_1_8
+XEONSCAL4 0x3084 IOPMONCNTRCFG_2_8
+XEONSCAL4 0x3085 IOPMONCNTRCFG_3_8
+XEONSCAL4 0x3090 IIOPMONUNITCTRL_9
+XEONSCAL4 0x3091 IIOPMONUNITSTATUS_9
+XEONSCAL4 0x3092 IOPMONCNTRCFG_0_9
+XEONSCAL4 0x3093 IOPMONCNTRCFG_1_9
+XEONSCAL4 0x3094 IOPMONCNTRCFG_2_9
+XEONSCAL4 0x3095 IOPMONCNTRCFG_3_9
+XEONSCAL4 0x30A0 IIOPMONUNITCTRL_10
+XEONSCAL4 0x30A1 IIOPMONUNITSTATUS_10
+XEONSCAL4 0x30A2 IOPMONCNTRCFG_0_10
+XEONSCAL4 0x30A3 IOPMONCNTRCFG_1_10
+XEONSCAL4 0x30A4 IOPMONCNTRCFG_2_10
+XEONSCAL4 0x30A5 IOPMONCNTRCFG_3_10
+XEONSCAL4 0x30B0 IIOPMONUNITCTRL_11
+XEONSCAL4 0x30B1 IIOPMONUNITSTATUS_11
+XEONSCAL4 0x30B2 IOPMONCNTRCFG_0_11
+XEONSCAL4 0x30B3 IOPMONCNTRCFG_1_11
+XEONSCAL4 0x30B4 IOPMONCNTRCFG_2_11
+XEONSCAL4 0x30B5 IOPMONCNTRCFG_3_11
+XEONSCAL4 0x3202 M2PPMONCNTRCFG_0_0
+XEONSCAL4 0x3203 M2PPMONCNTRCFG_1_0
+XEONSCAL4 0x3204 M2PPMONCNTRCFG_2_0
+XEONSCAL4 0x3205 M2PPMONCNTRCFG_3_0
+XEONSCAL4 0x320A IIOPMONCNTR_2_0
+XEONSCAL4 0x320B IIOPMONCNTR_3_0
+XEONSCAL4 0x3212 M2PPMONCNTRCFG_0_1
+XEONSCAL4 0x3213 M2PPMONCNTRCFG_1_1
+XEONSCAL4 0x3214 M2PPMONCNTRCFG_2_1
+XEONSCAL4 0x3215 M2PPMONCNTRCFG_3_1
+XEONSCAL4 0x321A IIOPMONCNTR_2_1
+XEONSCAL4 0x321B IIOPMONCNTR_3_1
+XEONSCAL4 0x3222 M2PPMONCNTRCFG_0_2
+XEONSCAL4 0x3223 M2PPMONCNTRCFG_1_2
+XEONSCAL4 0x3224 M2PPMONCNTRCFG_2_2
+XEONSCAL4 0x3225 M2PPMONCNTRCFG_3_2
+XEONSCAL4 0x322A IIOPMONCNTR_2_2
+XEONSCAL4 0x322B IIOPMONCNTR_3_2
+XEONSCAL4 0x3232 M2PPMONCNTRCFG_0_3
+XEONSCAL4 0x3233 M2PPMONCNTRCFG_1_3
+XEONSCAL4 0x3234 M2PPMONCNTRCFG_2_3
+XEONSCAL4 0x3235 M2PPMONCNTRCFG_3_3
+XEONSCAL4 0x323A IIOPMONCNTR_2_3
+XEONSCAL4 0x323B IIOPMONCNTR_3_3
+XEONSCAL4 0x3242 M2PPMONCNTRCFG_0_4
+XEONSCAL4 0x3243 M2PPMONCNTRCFG_1_4
+XEONSCAL4 0x3244 M2PPMONCNTRCFG_2_4
+XEONSCAL4 0x3245 M2PPMONCNTRCFG_3_4
+XEONSCAL4 0x324A IIOPMONCNTR_2_4
+XEONSCAL4 0x324B IIOPMONCNTR_3_4
+XEONSCAL4 0x3252 M2PPMONCNTRCFG_0_5
+XEONSCAL4 0x3253 M2PPMONCNTRCFG_1_5
+XEONSCAL4 0x3254 M2PPMONCNTRCFG_2_5
+XEONSCAL4 0x3255 M2PPMONCNTRCFG_3_5
+XEONSCAL4 0x325A IIOPMONCNTR_2_5
+XEONSCAL4 0x325B IIOPMONCNTR_3_5
+XEONSCAL4 0x3262 M2PPMONCNTRCFG_0_6
+XEONSCAL4 0x3263 M2PPMONCNTRCFG_1_6
+XEONSCAL4 0x3264 M2PPMONCNTRCFG_2_6
+XEONSCAL4 0x3265 M2PPMONCNTRCFG_3_6
+XEONSCAL4 0x326A IIOPMONCNTR_2_6
+XEONSCAL4 0x326B IIOPMONCNTR_3_6
+XEONSCAL4 0x3272 M2PPMONCNTRCFG_0_7
+XEONSCAL4 0x3273 M2PPMONCNTRCFG_1_7
+XEONSCAL4 0x3274 M2PPMONCNTRCFG_2_7
+XEONSCAL4 0x3275 M2PPMONCNTRCFG_3_7
+XEONSCAL4 0x327A IIOPMONCNTR_2_7
+XEONSCAL4 0x327B IIOPMONCNTR_3_7
+XEONSCAL4 0x3282 M2PPMONCNTRCFG_0_8
+XEONSCAL4 0x3283 M2PPMONCNTRCFG_1_8
+XEONSCAL4 0x3284 M2PPMONCNTRCFG_2_8
+XEONSCAL4 0x3285 M2PPMONCNTRCFG_3_8
+XEONSCAL4 0x328A IIOPMONCNTR_2_8
+XEONSCAL4 0x328B IIOPMONCNTR_3_8
+XEONSCAL4 0x3292 M2PPMONCNTRCFG_0_9
+XEONSCAL4 0x3293 M2PPMONCNTRCFG_1_9
+XEONSCAL4 0x3294 M2PPMONCNTRCFG_2_9
+XEONSCAL4 0x3295 M2PPMONCNTRCFG_3_9
+XEONSCAL4 0x329A IIOPMONCNTR_2_9
+XEONSCAL4 0x329B IIOPMONCNTR_3_9
+XEONSCAL4 0x32A2 M2PPMONCNTRCFG_0_10
+XEONSCAL4 0x32A3 M2PPMONCNTRCFG_1_10
+XEONSCAL4 0x32A4 M2PPMONCNTRCFG_2_10
+XEONSCAL4 0x32A5 M2PPMONCNTRCFG_3_10
+XEONSCAL4 0x32AA IIOPMONCNTR_2_10
+XEONSCAL4 0x32AB IIOPMONCNTR_3_10
+XEONSCAL4 0x32B2 M2PPMONCNTRCFG_0_11
+XEONSCAL4 0x32B3 M2PPMONCNTRCFG_1_11
+XEONSCAL4 0x32B4 M2PPMONCNTRCFG_2_11
+XEONSCAL4 0x32B5 M2PPMONCNTRCFG_3_11
+XEONSCAL4 0x32BA IIOPMONCNTR_2_11
+XEONSCAL4 0x32BB IIOPMONCNTR_3_11
+XEONSCAL4 0x3402 IRPPMONCNTRCFG_0_0
+XEONSCAL4 0x3403 IRPPMONCNTRCFG_1_0
+XEONSCAL4 0x3408 IIOPMONCNTR_0_0
+XEONSCAL4 0x3409 IIOPMONCNTR_1_0
+XEONSCAL4 0x340E IIOPMONFRCNTRCLK_0
+XEONSCAL4 0x3412 IRPPMONCNTRCFG_0_1
+XEONSCAL4 0x3413 IRPPMONCNTRCFG_1_1
+XEONSCAL4 0x3418 IIOPMONCNTR_0_1
+XEONSCAL4 0x3419 IIOPMONCNTR_1_1
+XEONSCAL4 0x341E IIOPMONFRCNTRCLK_1
+XEONSCAL4 0x3422 IRPPMONCNTRCFG_0_2
+XEONSCAL4 0x3423 IRPPMONCNTRCFG_1_2
+XEONSCAL4 0x3428 IIOPMONCNTR_0_2
+XEONSCAL4 0x3429 IIOPMONCNTR_1_2
+XEONSCAL4 0x342E IIOPMONFRCNTRCLK_2
+XEONSCAL4 0x3432 IRPPMONCNTRCFG_0_3
+XEONSCAL4 0x3433 IRPPMONCNTRCFG_1_3
+XEONSCAL4 0x3438 IIOPMONCNTR_0_3
+XEONSCAL4 0x3439 IIOPMONCNTR_1_3
+XEONSCAL4 0x343E IIOPMONFRCNTRCLK_3
+XEONSCAL4 0x3442 IRPPMONCNTRCFG_0_4
+XEONSCAL4 0x3443 IRPPMONCNTRCFG_1_4
+XEONSCAL4 0x3448 IIOPMONCNTR_0_4
+XEONSCAL4 0x3449 IIOPMONCNTR_1_4
+XEONSCAL4 0x344E IIOPMONFRCNTRCLK_4
+XEONSCAL4 0x3452 IRPPMONCNTRCFG_0_5
+XEONSCAL4 0x3453 IRPPMONCNTRCFG_1_5
+XEONSCAL4 0x3458 IIOPMONCNTR_0_5
+XEONSCAL4 0x3459 IIOPMONCNTR_1_5
+XEONSCAL4 0x345E IIOPMONFRCNTRCLK_5
+XEONSCAL4 0x3462 IRPPMONCNTRCFG_0_6
+XEONSCAL4 0x3463 IRPPMONCNTRCFG_1_6
+XEONSCAL4 0x3468 IIOPMONCNTR_0_6
+XEONSCAL4 0x3469 IIOPMONCNTR_1_6
+XEONSCAL4 0x346E IIOPMONFRCNTRCLK_6
+XEONSCAL4 0x3472 IRPPMONCNTRCFG_0_7
+XEONSCAL4 0x3473 IRPPMONCNTRCFG_1_7
+XEONSCAL4 0x3478 IIOPMONCNTR_0_7
+XEONSCAL4 0x3479 IIOPMONCNTR_1_7
+XEONSCAL4 0x347E IIOPMONFRCNTRCLK_7
+XEONSCAL4 0x3482 IRPPMONCNTRCFG_0_8
+XEONSCAL4 0x3483 IRPPMONCNTRCFG_1_8
+XEONSCAL4 0x3488 IIOPMONCNTR_0_8
+XEONSCAL4 0x3489 IIOPMONCNTR_1_8
+XEONSCAL4 0x348E IIOPMONFRCNTRCLK_8
+XEONSCAL4 0x3492 IRPPMONCNTRCFG_0_9
+XEONSCAL4 0x3493 IRPPMONCNTRCFG_1_9
+XEONSCAL4 0x3498 IIOPMONCNTR_0_9
+XEONSCAL4 0x3499 IIOPMONCNTR_1_9
+XEONSCAL4 0x349E IIOPMONFRCNTRCLK_9
+XEONSCAL4 0x34A2 IRPPMONCNTRCFG_0_10
+XEONSCAL4 0x34A3 IRPPMONCNTRCFG_1_10
+XEONSCAL4 0x34A8 IIOPMONCNTR_0_10
+XEONSCAL4 0x34A9 IIOPMONCNTR_1_10
+XEONSCAL4 0x34AE IIOPMONFRCNTRCLK_10
+XEONSCAL4 0x34B2 IRPPMONCNTRCFG_0_11
+XEONSCAL4 0x34B3 IRPPMONCNTRCFG_1_11
+XEONSCAL4 0x34B8 IIOPMONCNTR_0_11
+XEONSCAL4 0x34B9 IIOPMONCNTR_1_11
+XEONSCAL4 0x34BE IIOPMONFRCNTRCLK_11
+XEONSCAL4 0x3800 IIOPMONFRCNTR_0
+XEONSCAL4 0x3801 IIOPMONFRCNTR_1
+XEONSCAL4 0x3802 IIOPMONFRCNTR_2
+XEONSCAL4 0x3803 IIOPMONFRCNTR_3
+XEONSCAL4 0x3804 IIOPMONFRCNTR_4
+XEONSCAL4 0x3805 IIOPMONFRCNTR_5
+XEONSCAL4 0x3806 IIOPMONFRCNTR_6
+XEONSCAL4 0x3807 IIOPMONFRCNTR_7
+XEONSCAL4 0x3808 IIOPMONFRCNTR_8
+XEONSCAL4 0x3809 IIOPMONFRCNTR_9
+XEONSCAL4 0x380A IIOPMONFRCNTR_10
+XEONSCAL4 0x380B IIOPMONFRCNTR_11
+XEONSCAL4 0x380C IIOPMONFRCNTR_12
+XEONSCAL4 0x380D IIOPMONFRCNTR_13
+XEONSCAL4 0x380E IIOPMONFRCNTR_14
+XEONSCAL4 0x380F IIOPMONFRCNTR_15
+XEONSCAL4 0x3810 IIOPMONFRCNTR_16
+XEONSCAL4 0x3811 IIOPMONFRCNTR_17
+XEONSCAL4 0x3812 IIOPMONFRCNTR_18
+XEONSCAL4 0x3813 IIOPMONFRCNTR_19
+XEONSCAL4 0x3814 IIOPMONFRCNTR_20
+XEONSCAL4 0x3815 IIOPMONFRCNTR_21
+XEONSCAL4 0x3816 IIOPMONFRCNTR_22
+XEONSCAL4 0x3817 IIOPMONFRCNTR_23
+XEONSCAL4 0x3818 IIOPMONFRCNTR_24
+XEONSCAL4 0x3819 IIOPMONFRCNTR_25
+XEONSCAL4 0x381A IIOPMONFRCNTR_26
+XEONSCAL4 0x381B IIOPMONFRCNTR_27
+XEONSCAL4 0x381C IIOPMONFRCNTR_28
+XEONSCAL4 0x381D IIOPMONFRCNTR_29
+XEONSCAL4 0x381E IIOPMONFRCNTR_30
+XEONSCAL4 0x381F IIOPMONFRCNTR_31
+XEONSCAL4 0x3820 IIOPMONFRCNTR_32
+XEONSCAL4 0x3821 IIOPMONFRCNTR_33
+XEONSCAL4 0x3822 IIOPMONFRCNTR_34
+XEONSCAL4 0x3823 IIOPMONFRCNTR_35
+XEONSCAL4 0x3824 IIOPMONFRCNTR_36
+XEONSCAL4 0x3825 IIOPMONFRCNTR_37
+XEONSCAL4 0x3826 IIOPMONFRCNTR_38
+XEONSCAL4 0x3827 IIOPMONFRCNTR_39
+XEONSCAL4 0x3828 IIOPMONFRCNTR_40
+XEONSCAL4 0x3829 IIOPMONFRCNTR_41
+XEONSCAL4 0x382A IIOPMONFRCNTR_42
+XEONSCAL4 0x382B IIOPMONFRCNTR_43
+XEONSCAL4 0x382C IIOPMONFRCNTR_44
+XEONSCAL4 0x382D IIOPMONFRCNTR_45
+XEONSCAL4 0x382E IIOPMONFRCNTR_46
+XEONSCAL4 0x382F IIOPMONFRCNTR_47
+XEONSCAL4 0x3830 IIOPMONFRCNTR_48
+XEONSCAL4 0x3831 IIOPMONFRCNTR_49
+XEONSCAL4 0x3832 IIOPMONFRCNTR_50
+XEONSCAL4 0x3833 IIOPMONFRCNTR_51
+XEONSCAL4 0x3834 IIOPMONFRCNTR_52
+XEONSCAL4 0x3835 IIOPMONFRCNTR_53
+XEONSCAL4 0x3836 IIOPMONFRCNTR_54
+XEONSCAL4 0x3837 IIOPMONFRCNTR_55
+XEONSCAL4 0x3838 IIOPMONFRCNTR_56
+XEONSCAL4 0x3839 IIOPMONFRCNTR_57
+XEONSCAL4 0x383A IIOPMONFRCNTR_58
+XEONSCAL4 0x383B IIOPMONFRCNTR_59
+XEONSCAL4 0x383C IIOPMONFRCNTR_60
+XEONSCAL4 0x383D IIOPMONFRCNTR_61
+XEONSCAL4 0x383E IIOPMONFRCNTR_62
+XEONSCAL4 0x383F IIOPMONFRCNTR_63
+XEONSCAL4 0x3840 IIOPMONFRCNTR_64
+XEONSCAL4 0x3841 IIOPMONFRCNTR_65
+XEONSCAL4 0x3842 IIOPMONFRCNTR_66
+XEONSCAL4 0x3843 IIOPMONFRCNTR_67
+XEONSCAL4 0x3844 IIOPMONFRCNTR_68
+XEONSCAL4 0x3845 IIOPMONFRCNTR_69
+XEONSCAL4 0x3846 IIOPMONFRCNTR_70
+XEONSCAL4 0x3847 IIOPMONFRCNTR_71
+XEONSCAL4 0x3848 IIOPMONFRCNTR_72
+XEONSCAL4 0x3849 IIOPMONFRCNTR_73
+XEONSCAL4 0x384A IIOPMONFRCNTR_74
+XEONSCAL4 0x384B IIOPMONFRCNTR_75
+XEONSCAL4 0x384C IIOPMONFRCNTR_76
+XEONSCAL4 0x384D IIOPMONFRCNTR_77
+XEONSCAL4 0x384E IIOPMONFRCNTR_78
+XEONSCAL4 0x384F IIOPMONFRCNTR_79
+XEONSCAL4 0x3850 IIOPMONFRCNTR_80
+XEONSCAL4 0x3851 IIOPMONFRCNTR_81
+XEONSCAL4 0x3852 IIOPMONFRCNTR_82
+XEONSCAL4 0x3853 IIOPMONFRCNTR_83
+XEONSCAL4 0x3854 IIOPMONFRCNTR_84
+XEONSCAL4 0x3855 IIOPMONFRCNTR_85
+XEONSCAL4 0x3856 IIOPMONFRCNTR_86
+XEONSCAL4 0x3857 IIOPMONFRCNTR_87
+XEONSCAL4 0x3858 IIOPMONFRCNTR_88
+XEONSCAL4 0x3859 IIOPMONFRCNTR_89
+XEONSCAL4 0x385A IIOPMONFRCNTR_90
+XEONSCAL4 0x385B IIOPMONFRCNTR_91
+XEONSCAL4 0x385C IIOPMONFRCNTR_92
+XEONSCAL4 0x385D IIOPMONFRCNTR_93
+XEONSCAL4 0x385E IIOPMONFRCNTR_94
+XEONSCAL4 0x385F IIOPMONFRCNTR_95
+XEONSCAL4 0x3860 IIOPMONFRCNTR_96
+XEONSCAL4 0x3861 IIOPMONFRCNTR_97
+XEONSCAL4 0x3862 IIOPMONFRCNTR_98
+XEONSCAL4 0x3863 IIOPMONFRCNTR_99
+XEONSCAL4 0x3864 IIOPMONFRCNTR_100
+XEONSCAL4 0x3865 IIOPMONFRCNTR_101
+XEONSCAL4 0x3866 IIOPMONFRCNTR_102
+XEONSCAL4 0x3867 IIOPMONFRCNTR_103
+XEONSCAL4 0x3868 IIOPMONFRCNTR_104
+XEONSCAL4 0x3869 IIOPMONFRCNTR_105
+XEONSCAL4 0x386A IIOPMONFRCNTR_106
+XEONSCAL4 0x386B IIOPMONFRCNTR_107
+XEONSCAL4 0x386C IIOPMONFRCNTR_108
+XEONSCAL4 0x386D IIOPMONFRCNTR_109
+XEONSCAL4 0x386E IIOPMONFRCNTR_110
+XEONSCAL4 0x386F IIOPMONFRCNTR_111
+XEONSCAL4 0x3870 IIOPMONFRCNTR_112
+XEONSCAL4 0x3871 IIOPMONFRCNTR_113
+XEONSCAL4 0x3872 IIOPMONFRCNTR_114
+XEONSCAL4 0x3873 IIOPMONFRCNTR_115
+XEONSCAL4 0x3874 IIOPMONFRCNTR_116
+XEONSCAL4 0x3875 IIOPMONFRCNTR_117
+XEONSCAL4 0x3876 IIOPMONFRCNTR_118
+XEONSCAL4 0x3877 IIOPMONFRCNTR_119
+XEONSCAL4 0x3878 IIOPMONFRCNTR_120
+XEONSCAL4 0x3879 IIOPMONFRCNTR_121
+XEONSCAL4 0x387A IIOPMONFRCNTR_122
+XEONSCAL4 0x387B IIOPMONFRCNTR_123
+XEONSCAL4 0x387C IIOPMONFRCNTR_124
+XEONSCAL4 0x387D IIOPMONFRCNTR_125
+XEONSCAL4 0x387E IIOPMONFRCNTR_126
+XEONSCAL4 0x387F IIOPMONFRCNTR_127
+XEONSCAL4 0x3880 IIOPMONFRCNTR_128
+XEONSCAL4 0x3881 IIOPMONFRCNTR_129
+XEONSCAL4 0x3882 IIOPMONFRCNTR_130
+XEONSCAL4 0x3883 IIOPMONFRCNTR_131
+XEONSCAL4 0x3884 IIOPMONFRCNTR_132
+XEONSCAL4 0x3885 IIOPMONFRCNTR_133
+XEONSCAL4 0x3886 IIOPMONFRCNTR_134
+XEONSCAL4 0x3887 IIOPMONFRCNTR_135
+XEONSCAL4 0x3888 IIOPMONFRCNTR_136
+XEONSCAL4 0x3889 IIOPMONFRCNTR_137
+XEONSCAL4 0x388A IIOPMONFRCNTR_138
+XEONSCAL4 0x388B IIOPMONFRCNTR_139
+XEONSCAL4 0x388C IIOPMONFRCNTR_140
+XEONSCAL4 0x388D IIOPMONFRCNTR_141
+XEONSCAL4 0x388E IIOPMONFRCNTR_142
+XEONSCAL4 0x388F IIOPMONFRCNTR_143
+XEONSCAL4 0x3890 IIOPMONFRCNTR_144
+XEONSCAL4 0x3891 IIOPMONFRCNTR_145
+XEONSCAL4 0x3892 IIOPMONFRCNTR_146
+XEONSCAL4 0x3893 IIOPMONFRCNTR_147
+XEONSCAL4 0x3894 IIOPMONFRCNTR_148
+XEONSCAL4 0x3895 IIOPMONFRCNTR_149
+XEONSCAL4 0x3896 IIOPMONFRCNTR_150
+XEONSCAL4 0x3897 IIOPMONFRCNTR_151
+XEONSCAL4 0x3898 IIOPMONFRCNTR_152
+XEONSCAL4 0x3899 IIOPMONFRCNTR_153
+XEONSCAL4 0x389A IIOPMONFRCNTR_154
+XEONSCAL4 0x389B IIOPMONFRCNTR_155
+XEONSCAL4 0x389C IIOPMONFRCNTR_156
+XEONSCAL4 0x389D IIOPMONFRCNTR_157
+XEONSCAL4 0x389E IIOPMONFRCNTR_158
+XEONSCAL4 0x389F IIOPMONFRCNTR_159
+XEONSCAL4 0x38A0 IIOPMONFRCNTR_160
+XEONSCAL4 0x38A1 IIOPMONFRCNTR_161
+XEONSCAL4 0x38A2 IIOPMONFRCNTR_162
+XEONSCAL4 0x38A3 IIOPMONFRCNTR_163
+XEONSCAL4 0x38A4 IIOPMONFRCNTR_164
+XEONSCAL4 0x38A5 IIOPMONFRCNTR_165
+XEONSCAL4 0x38A6 IIOPMONFRCNTR_166
+XEONSCAL4 0x38A7 IIOPMONFRCNTR_167
+XEONSCAL4 0x38A8 IIOPMONFRCNTR_168
+XEONSCAL4 0x38A9 IIOPMONFRCNTR_169
+XEONSCAL4 0x38AA IIOPMONFRCNTR_170
+XEONSCAL4 0x38AB IIOPMONFRCNTR_171
+XEONSCAL4 0x38AC IIOPMONFRCNTR_172
+XEONSCAL4 0x38AD IIOPMONFRCNTR_173
+XEONSCAL4 0x38AE IIOPMONFRCNTR_174
+XEONSCAL4 0x38AF IIOPMONFRCNTR_175
+XEONSCAL4 0x38B0 IIOPMONFRCNTR_176
+XEONSCAL4 0x38B1 IIOPMONFRCNTR_177
+XEONSCAL4 0x38B2 IIOPMONFRCNTR_178
+XEONSCAL4 0x38B3 IIOPMONFRCNTR_179
+XEONSCAL4 0x38B4 IIOPMONFRCNTR_180
+XEONSCAL4 0x38B5 IIOPMONFRCNTR_181
+XEONSCAL4 0x38B6 IIOPMONFRCNTR_182
+XEONSCAL4 0x38B7 IIOPMONFRCNTR_183
+XEONSCAL4 0x38B8 IIOPMONFRCNTR_184
+XEONSCAL4 0x38B9 IIOPMONFRCNTR_185
+XEONSCAL4 0x38BA IIOPMONFRCNTR_186
+XEONSCAL4 0x38BB IIOPMONFRCNTR_187
+XEONSCAL4 0x38BC IIOPMONFRCNTR_188
+XEONSCAL4 0x38BD IIOPMONFRCNTR_189
+XEONSCAL4 0x38BE IIOPMONFRCNTR_190
+XEONSCAL4 0x38BF IIOPMONFRCNTR_191
 
 # Intel-SDM-Vol4 (Intel Core Microarchitecture)
 0x107CC EMON_L3_CTR_CTL0 # GBUSQ Event Control/Counter Register
