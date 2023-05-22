@@ -1011,7 +1011,11 @@
 
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0x86,  x (0x8066x): Atom Tremont X (Jacobsville)
-0x86,  4 (0x80664): "SNR" Snow Ridge  BTS (Tremont) (Stepping B0)
+0x86,  0 (0x80660): "SNR" Snow Ridge BTS (Tremont) (Stepping A0)
+0x86,  1 (0x80661): "SNR" Snow Ridge BTS (Tremont) (Stepping A1)
+0x86,  2 (0x80662): "SNR" Snow Ridge BTS (Tremont) (Stepping A2)
+0x86,  3 (0x80663): "SNR" Snow Ridge BTS (Tremont) (Stepping A3)
+0x86,  4 (0x80664): "SNR" Snow Ridge BTS (Tremont) (Stepping B0)
     Intel® Atom® Processor P59xxB
     Intel® Atom® Processor P5942B, P5931B, P5962B, P5921B
 
