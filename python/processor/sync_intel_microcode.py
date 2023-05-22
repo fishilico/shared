@@ -205,11 +205,19 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
             ]
         elif field_product_name == "Core w/Hybrid Technology":
             new_names = ["Intel® Core™ Processor with Hybrid Technology"]
+        elif field_product_name == "Core i3-N305/N300, N50/N97/N100/N200, Atom x7211E/x7213E/x7425E":
+            new_names = [
+                "Intel® Core i3-N305/N300",
+                "Intel® Processor N50/N97/N100/N200",
+                "Intel® Atom® Processor x7211E/x7213E/x7425E",
+            ]
         elif field_product_name == "Atom x5/7-E39xx":
             new_names = [
                 "Intel® Atom® Processor x5-E39xx",
                 "Intel® Atom® Processor x7-E39xx",
             ]
+        elif field_product_name == "Intel(R) Atom(R) C1100":
+            new_names = ["Intel® Atom® Processor C1100"]
         elif field_product_name == "Xeon Scalable":
             new_names = ["Intel® Xeon® Scalable Processor Family"]
         elif field_product_name == "Xeon Scalable Gen2":
