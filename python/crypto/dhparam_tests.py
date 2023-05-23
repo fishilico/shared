@@ -142,11 +142,21 @@ def run_openssl_test(bits, generator, colorize):
         param_der = base64.b64decode(''.join(param_lines[1:-1]))
         param_asn1 = Cryptodome.Util.asn1.DerSequence()
         param_asn1.decode(param_der)
-        assert len(param_asn1) == 2
-        param_p, param_g = param_asn1
+        assert len(param_asn1) in {2, 3}
+        param_p, param_g = param_asn1[:2]
+        # OpenSSL 3.1.0 introduced a 3rd field, "recommended-private-length"
+        # https://github.com/openssl/openssl/commit/ddb13b283be84d771deba1e964610b1670641f03
+        # (125 for 512 bits, 175 for 1024, 225 for 2048, 275 for 3072, 325 for 4096)
+        # Formula: length = (2*security_bits(prime_len) + 24) / 25 * 25
+        # from https://www.rfc-editor.org/rfc/rfc7919
+        # with security bits defined in
+        # https://github.com/openssl/openssl/blob/openssl-3.1.0/crypto/rsa/rsa_lib.c#L313-L372
+        param_rec_priv_len = param_asn1[2] if len(param_asn1) >= 3 else None
         print("DH-{} OpenSSL-generated parameters:".format(bits))
         print("  p({}) = {}{:#x}{}".format(param_p.bit_length(), color_green, param_p, color_norm))
         print("  g({}) = {}{:#x}{}".format(param_g.bit_length(), color_green, param_g, color_norm))
+        if param_rec_priv_len is not None:
+            print("  recommended-private-length: {}".format(param_rec_priv_len))
         assert 1 < param_g < param_p - 1
         assert Cryptodome.Util.number.isPrime(param_p)
         assert Cryptodome.Util.number.isPrime((param_p - 1) // 2)
