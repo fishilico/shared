@@ -957,7 +957,14 @@ static int __init pt_dump_init(void)
 	}
 
 	/* Create /sys/class/pagetables */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 4, 0)
+	/* Commit 1aaba11da9aa ("driver core: class: remove module * from
+	 * class_create()") removed the first parameter of class_create.
+	 */
+	chrdev_class = class_create("pagetables");
+#else
 	chrdev_class = class_create(THIS_MODULE, "pagetables");
+#endif
 	if (IS_ERR(chrdev_class)) {
 		result = PTR_ERR(chrdev_class);
 		goto error_chrdev;
