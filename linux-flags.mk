@@ -87,6 +87,8 @@ ifeq ($(call ccpp-has-option,-Weverything), y)
 	CFLAGS += $(call cc-disable-warning,c99-extensions)
 	# clang 13.0 added -Wreserved-identifier, which triggers many warnings in headers when names starts with _
 	CFLAGS += $(call cc-disable-warning,reserved-identifier)
+	# clang 16.0 added -Wunsafe-buffer-usage, which warnings in any use of raw pointers
+	CFLAGS += $(call cc-disable-warning,unsafe-buffer-usage)
 endif
 
 # Add GCC-specific options unknown to clang
