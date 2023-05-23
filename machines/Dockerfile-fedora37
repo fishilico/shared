@@ -99,18 +99,18 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (GCC) 12.2.1 20221121 (Red Hat 12.2.1-4)
+#       gcc: gcc (GCC) 12.3.1 20230508 (Red Hat 12.3.1-1)
 #       clang: clang version 15.0.7 (Fedora 15.0.7-2.fc37)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 12.2.1 20221121 (Fedora MinGW 12.2.1-6.fc37)
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 12.2.1 20221121 (Fedora MinGW 12.2.1-6.fc37)
-#       wine: wine-8.5 (Staging)
-#       Linux kernel: 6.2.9-200.fc37.x86_64
+#       wine: wine-8.6 (Staging)
+#       Linux kernel: 6.2.15-200.fc37.x86_64
 #       /lib/ld-linux.so.2: ld.so (GNU libc) stable release version 2.36.
-#       python: Python 3.11.2
-#       python3: Python 3.11.2
-#       javac: javac 11.0.18
-#       java: openjdk 11.0.18 2023-01-17
-#       rustc: rustc 1.68.2 (9eb3afe9e 2023-03-27) (Fedora 1.68.2-1.fc37)
-#       cargo: cargo 1.68.2
+#       python: Python 3.11.3
+#       python3: Python 3.11.3
+#       javac: javac 11.0.19
+#       java: openjdk 11.0.19 2023-04-18
+#       rustc: rustc 1.69.0 (84c898d65 2023-04-16) (Fedora 1.69.0-1.fc37)
+#       cargo: cargo 1.69.0
 #       coqc: The Coq Proof Assistant, version 8.16.1 compiled with OCaml 4.14.0
 #       openssl: OpenSSL 3.0.8 7 Feb 2023 (Library: OpenSSL 3.0.8 7 Feb 2023)

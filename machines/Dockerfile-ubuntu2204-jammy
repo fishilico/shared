@@ -98,17 +98,17 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0
+#       gcc: gcc (Ubuntu 11.3.0-1ubuntu1~22.04.1) 11.3.0
 #       clang: Ubuntu clang version 14.0.0-1ubuntu1
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 10-win32 20220113
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 10-win32 20220113
 #       wine: wine-6.0.3 (Ubuntu 6.0.3~repack-1)
-#       Linux kernel: 5.15.0-69-generic
+#       Linux kernel: 5.15.0-72-generic
 #       /lib/ld-linux.so.2: ld.so (Ubuntu GLIBC 2.35-0ubuntu3.1) stable release version 2.35.
 #       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.2
 #       python3: Python 3.10.6
-#       javac: javac 11.0.18
-#       java: openjdk 11.0.18 2023-01-17
+#       javac: javac 11.0.19
+#       java: openjdk 11.0.19 2023-04-18
 #       rustc: rustc 1.65.0
 #       cargo: cargo 1.65.0
 #       coqc: The Coq Proof Assistant, version 8.15.0 compiled with OCaml 4.13.1
