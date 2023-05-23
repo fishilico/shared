@@ -5,6 +5,9 @@
 #    define _GNU_SOURCE /* for name_to_handle_at */
 #endif
 
+/* Force using 64-bit directory entries */
+#define _FILE_OFFSET_BITS 64
+
 #include <assert.h>
 #include <dirent.h>
 #include <errno.h>
@@ -62,7 +65,7 @@ int main(void)
         struct stat st;
         int new_dirfd;
         DIR *dir = NULL;
-        struct dirent64 *entry;
+        struct dirent *entry;
 
         /* Start with the root directory */
         if (!path_part) {
@@ -91,14 +94,15 @@ int main(void)
             fprintf(stderr, "A component in the working directory is not a directory\n");
             goto cleanup;
         }
-        printf("  device %" PRIu64 " inode %ld (0x%08lx)\n", st.st_dev, st.st_ino, st.st_ino);
+        printf("  device %" PRIu64 " inode %" PRIu64 " (0x%08" PRIx64 ")\n", st.st_dev, st.st_ino,
+               st.st_ino);
 
         /* Find the entry in the directory enumeration */
         if (dir_fd != AT_FDCWD) {
             dir = fdopendir(dir_fd);
             while (true) {
                 errno = 0;
-                entry = readdir64(dir);
+                entry = readdir(dir);
                 if (!entry) {
                     if (errno) {
                         perror("readdir");
@@ -111,7 +115,8 @@ int main(void)
                     if (entry->d_ino != st.st_ino) {
                         /* direntry inode number of mountpoints comes from the parent filesystem,
                          * and stat inode number comes from the mounted filesystem. */
-                        printf("  dir entry inode: %" PRId64 " (0x%08" PRIx64 ")\n", entry->d_ino, entry->d_ino);
+                        printf("  dir entry inode: %" PRId64 " (0x%08" PRIx64 ")\n", entry->d_ino,
+                               entry->d_ino);
                     }
                     assert(entry->d_type == DT_DIR || entry->d_type == DT_UNKNOWN);
                     break;
