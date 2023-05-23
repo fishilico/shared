@@ -220,7 +220,10 @@ static void print_access_mask(ULONG ulAccessMask)
     assert(0x1f0003 == SEMAPHORE_ALL_ACCESS);
     assert(0x1f0003 == TIMER_ALL_ACCESS);
     assert(0x1f0003 == IO_COMPLETION_ALL_ACCESS);
-    assert(0x1f001f == JOB_OBJECT_ALL_ACCESS);
+    /* JOB_OBJECT_ALL_ACCESS was misdefined as 0x1f001f in MinGW until 2022-06-16
+     * https://sourceforge.net/p/mingw-w64/mingw-w64/ci/35fa6bdbc14383c9078520492974ff5ab31ba796/
+     */
+    assert(0x1f001f == JOB_OBJECT_ALL_ACCESS || 0x1f003f == JOB_OBJECT_ALL_ACCESS);
     assert(0x1f003f == TRANSACTION_ALL_ACCESS);
     assert(0x1f01ff == FILE_ALL_ACCESS);
     assert(0x1f03ff == THREAD_ALL_ACCESS || 0x1fffff == THREAD_ALL_ACCESS);
@@ -306,7 +309,7 @@ static void print_access_mask(ULONG ulAccessMask)
     } else if (ulAccessMask == 0x1f001f) {
         _tprintf(_T("job_all (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x1f003f) {
-        _tprintf(_T("transaction_all (%#lx)"), ulAccessMask);
+        _tprintf(_T("transaction_all=job_all (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x1f01ff) {
         _tprintf(_T("file_all (%#lx)"), ulAccessMask);
     } else if (ulAccessMask == 0x1f0fff) {
