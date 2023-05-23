@@ -70,6 +70,7 @@ $(GTK_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKGCONF) --libs gtk+-3.0)
 $(GTK_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKGCONF) --cflags gtk+-3.0) \
 	$(call cc-disable-warning,pedantic) \
 	$(call cc-disable-warning,cast-qual) \
+	$(call cc-disable-warning,cast-function-type-strict) \
 	$(call cc-disable-warning,redundant-parens) \
 	$(call cc-disable-warning,typedef-redefinition) \
 	$(call cc-disable-warning,used-but-marked-unused)
