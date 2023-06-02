@@ -1419,6 +1419,9 @@
 # https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
 0xb7,  x (0xb067x): "RPL-S" Raptor Lake-S
 
+# https://twitter.com/d0cTB/status/1660763526359547904 gives the CPUID of RPL-A0
+0xb7,  0 (0xb0670): "RPL-S" Raptor Lake S (Raptor Cove/Gracemont) (Stepping A-0)
+
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0xb7,  1 (0xb0671): "RPL-S" Raptor Lake S 8P+16E, HX 8P+16E (Raptor Cove/Gracemont) (Stepping B-0)
