@@ -35,6 +35,32 @@
 # * http://users.atw.hu/instlatx64/ and https://github.com/InstLatx64/InstLatx64/blob/master/ChangeLog.htm
 # * https://en.wikichip.org/wiki/intel/microarchitectures/cascade_lake
 
+[Family 5]
+#https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000517_P5_CPUID.txt
+0x01,  7 (0x00517): Pentium 5
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000525_P54C_CPUID.txt
+0x02,  5 (0x00525): P54C
+    Intel® Pentium® P54C
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel000052C_P54C_CPUID.txt
+0x02, 12 (0x0052c): P54C
+    Intel® Pentium® P54C
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000532_P24T_CPUID.txt : CPUID is 0x01532 but this "1" is later reserved, so write 0 in this file.
+0x03,  2 (0x00532): P24T OverDrive
+    Intel® Pentium® OverDrive, 83 MHz (2.5 x 33)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000543_P55C_CPUID.txt
+0x04,  4 (0x00544): P55C
+    2x Intel® Pentium® MMX, 200 MHz
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000582_P55C_Tillamook_CPUID.txt
+0x08,  2 (0x00582): P55C
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000590_Lakemont_CPUID2.txt
+0x09,  0 (0x00590): Lakemont
+
 [Family 6]
 # https://github.com/coreboot/coreboot/blob/4.19/src/cpu/intel/model_6xx/model_6xx_init.c
 0x01,  1 (0x00611): Pentium Pro, B0
@@ -47,9 +73,12 @@
     2x Intel® Pentium® Pro, 200 MHz (3 x 67) (32 bits)
 
 0x03,  0 (0x00630): ?
-0x03,  2 (0x00632): ?
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000632_P2OD_CPUID.txt
+0x03,  2 (0x00632): P2OD
     Intel® PII overdrive (32 bits)
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000633_P2_Klamath_CPUID.txt
 0x03,  3 (0x00633): PII, C0
     Intel® PII (Klamath) (32 bits)
 
@@ -57,20 +86,28 @@
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/cpu/intel/model_65x/model_65x_init.c
 0x05,  0 (0x00650): PII/Celeron, dA0/mdA0/A0
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000651_P2_Covington_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000651_P2_Descuthes_CPUID.txt
 0x05,  1 (0x00651): PII/Celeron, dA1/A1
     Intel® Celeron®, 266 MHz (4 x 67) (Covington) (32 bits)
     2x Intel® Pentium® II, 333 MHz (5 x 67) (Deschutes) (32 bits)
 
 0x05,  2 (0x00652): PII/Celeron/Xeon, dB0/mdB0/B0
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000653_P2_Deschutes_CPUID.txt
 0x05,  3 (0x00653): PII/Xeon, dB1/B1
     Intel® PII (Deschutes) (32 bits)
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000660_P2_Mendocino_CPUID.txt
 0x06,  0 (0x00660): Celeron, A0
     Intel® Celeron®-A, 300 MHz (4.5 x 67) (Mendocino) (32 bits)
 
+#https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000665_P2_Mendocino_CPUID.txt
 0x06,  5 (0x00665): Celeron, B0
     Intel® PII Celeron (Mendocino) (32 bits)
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel000066A_P2_Dixon_CPUID.txt
 0x06, 10 (0x0066a): PII, mdxA0/dmmA0
     Intel® PII Celeron (Dixon) (32 bits)
 
@@ -80,6 +117,10 @@
 0x07,  0 (0x00670): PIII
 0x07,  1 (0x00671): PIII
 0x07,  2 (0x00672): PIII, kB0
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000673_P3_KatmaiDP_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000673_P3_Katmai_CPUID.txt
+#https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000673_P3_Tanner_CPUID.txt
 0x07,  3 (0x00673): PIII, kC0
     2x Intel® Pentium® III, 500 MHz (5 x 100) (Katmai) (32 bits)
     Intel® Pentium® III, 450 MHz (4.5 x 100) (Katmai) (32 bits)
@@ -88,9 +129,12 @@
 # https://github.com/coreboot/coreboot/blob/4.19/src/cpu/intel/model_68x/model_68x_init.c
 0x08,  0 (0x00680): PIII
 0x08,  1 (0x00681): PIII, cA2/cA2c/A2/BA2/PA2/MA2
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000683_P3_Coppermine_CPUID.txt
 0x08,  3 (0x00683): PIII/Celeron, cB0/cB0c/B0/BB0/PB0/MB0
     2x Intel® Pentium® IIIE, 733 MHz (5.5 x 133) (32 bits)
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000686_P3_Coppermine_CPUID.txt
 0x08,  6 (0x00686): PIII/Celeron, cC0/C0/BC0/PC0/MC0
     Intel® Celeron®, 700 MHz (10.5 x 67) (Coppermine-128) (32 bits)
 
@@ -100,20 +144,30 @@
 0x09,  1 (0x00691): ?
 0x09,  2 (0x00692): ?
 0x09,  4 (0x00694): ?
-0x09,  5 (0x00695): ?
+
+#https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000695_PM_Banias_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000695_PM_Shelton_CPUID.txt
+0x09,  5 (0x00695): Celeron M
     Mobile Intel® Celeron® M 320, 1300 MHz (13 x 100) (Banias-512) (32 bits)
     Mobile Intel Shelton, 600 MHz (6 x 100) (Banias-0, 0MB L2) (32 bits)
+    Intel(R) Celeron(R) M processor         1300MHz
+    Intel(R) Celeron(R) processor            600MHz
 
 0x09,  6 (0x00696): ?
 
 0x0a,  0 (0x006a0): PIII, A0
 0x0a,  1 (0x006a1): PIII, A1
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006A4_P3_Cascades_CPUID.txt
 0x0a,  4 (0x006a4): PIII, B0
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/cpu/intel/model_6bx/model_6bx_init.c
 0x0b,  0 (0x006b0): PIII
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006B1_P3_Tualatin_CPUID.txt
 0x0b,  1 (0x006b1): Pentium III/Celeron, tA1/A1/FPA1
     2x Intel® Pentium® III-S, 1266 MHz (9.5 x 133) (Tualatin, A80530) (32 bits)
+    Intel(R) Pentium(R) III CPU family      1266MHz
 
 0x0b,  4 (0x006b4): Pentium III, tB1/FPB1
 
@@ -121,64 +175,105 @@
 0x0d,  1 (0x006d1): ?
 0x0d,  2 (0x006d2): ?
 0x0d,  6 (0x006d6): ?
-0x0d,  8 (0x006d8): ?
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006D8_PM_Dothan_CPUID.txt
+0x0d,  8 (0x006d8): Pentium M
     Mobile Intel® Pentium® M 730, 1600 MHz (12 x 133) (Dothan) (32 bits)
+    Intel(R) Pentium(R) M processor 1.60GHz
 
 0x0e,  0 (0x006e0): Core Yonah Solo/Core Duo
 0x0e,  1 (0x006e1): Core Yonah Solo/Core Duo
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006E4_PM_Yonah_CPUID.txt
 0x0e,  4 (0x006e4): Core Yonah
     Mobile DualCore Intel® Core™ Duo T2500, 2000 MHz (12 x 167) (Yonah) (32 bits)
+    Intel(R) Pentium(R) M CPU        000  @ 2.00GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006E8_PM_Yonah_CPUID.txt
 0x0e,  8 (0x006e8): Core Yonah
     Mobile Intel® Celeron® 215, 1333 MHz (10 x 133) (Yonah-512) (32 bits)
+    Intel(R) Celeron(R) CPU          215  @ 1.33GHz
 
 0x0e, 12 (0x006ec): Core Yonah Solo/Core Duo
 
 0x0f,  0 (0x006f0): Core 2 Merom Solo/Core Duo
 0x0f,  1 (0x006f1): Core 2 Merom Solo/Core Duo
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F2_Conroe_CPUID.txt
 0x0f,  2 (0x006f2): Core 2 Merom Solo/Core Duo
     DualCore Intel® Core™ 2 Duo E6300, 1866 MHz (7 x 267) (Conroe-2M)
+    Intel(R) Core(TM)2 CPU          6300  @ 1.86GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F4_Conroe_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F4_Woodcrest_CPUID.txt
 0x0f,  4 (0x006f4): Core 2 Merom Solo/Core Duo
     DualCore Intel® Core™ 2 Duo E6700, 2666 MHz (10 x 267) (Conroe)
+    Genuine Intel(R) CPU                  @ 2.66GHz
     2x DualCore Intel® Xeon® 5140, 2333 MHz (7 x 333) (Woodcrest)
+    Genuine Intel(R) CPU                  @ 2.33GHz
 
 0x0f,  5 (0x006f5): Core 2 Merom Solo/Core Duo
 
 # https://lore.kernel.org/lkml/1A7043D5F58CCB44A599DFD55ED4C948469380B6@fmsmsx115.amr.corp.intel.com/T/
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F6_Merom_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F6_Conroe_CPUID.txt
 0x0f,  6 (0x006f6): Core 2 Merom Solo/Core Duo
     Mobile DualCore Intel® Core™ 2 Duo T5600, 1833 MHz (11 x 167) (Merom-2M)
+    Intel(R) Core(TM)2 CPU         T5600  @ 1.83GHz
     Intel(R) Core(TM)2 CPU          6400  @ 2.13GHz
+    Intel(R) Core(TM)2 CPU         X6800  @ 2.93GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F7_Clovertown_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F7_Kentsfield_DDR2_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F7_Kentsfield_DDR3_CPUID.txt
 0x0f,  7 (0x006f7): Core 2 Merom Solo/Core Duo
     2x QuadCore Intel® Xeon® L5320, 1866 MHz (7 x 267) (Clovertown)
     QuadCore Intel® Xeon® X3210, 2133 MHz (8 x 267) (Kentsfield)
     QuadCore Intel® Core™ 2 Extreme QX6700, 2666 MHz (10 x 267) (Kentsfield)
+    Intel(R) Xeon(R) CPU           L5320  @ 1.86GHz
+    Intel(R) Xeon(R) CPU           X3210  @ 2.13GHz
+    Intel(R) Core(TM)2 Quad CPU           @ 2.66GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F9_Tigerton_CPUID.txt
 0x0f,  9 (0x006f9): Core 2 Merom Solo/Core Duo
     2x QuadCore Intel® Core™ 2 Quad Q6400, 2133 MHz (8 x 267) (Tigerton)
+    Genuine Intel(R) CPU                  @ 2.13GHz
 
 0x0f, 10 (0x006fa): Core 2 Merom Solo/Core Duo
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006FB_Conroe_CPUID.txt
 0x0f, 11 (0x006fb): Core 2 Merom Solo/Core Duo
     DualCore Intel® Core™ 2 Duo E6750, 2666 MHz (8 x 333) (Conroe)
     Intel(R) Core(TM)2 Duo CPU E6550 @ 2.33GHz
+    Intel(R) Core(TM)2 Duo CPU     E6750  @ 2.66GHz
     Intel(R) Core(TM)2 Duo CPU     E6850  @ 3.00GHz
 
 # https://forum.recalbox.com/topic/30080/deuxi%C3%A8me-%C3%A9cran-vga-pour-les-scrapes-et-les-vid%C3%A9os
 0x0f, 13 (0x006fd): Core 2 Merom Solo/Core Duo
     Intel(R) Pentium(R) Dual CPU E2160 @ 1.80GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0010650_Tolapai_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0010650_Tolapai_CPUID2.txt
 0x15,  0 (0x10650): ?
     Intel® LE80578, 800 MHz (16 x 50) (Vermilion)
+    Genuine Intel(R) processor               800MHz
+    Genuine Intel(R) processor              1.20GHz
 
 0x16,  0 (0x10660): Core 2 Merom L
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0010661_ConroeL_CPUID.txt
 0x16,  1 (0x10661): Core 2 Merom L
     Intel® Celeron® 420, 1600 MHz (8 x 200) (Conroe-L)
     Intel(R) Celeron(R) CPU          220  @ 1.20GHz
+    Intel(R) Celeron(R) CPU          420  @ 1.60GHz
 
 0x17,  0 (0x10670): Core 2 Penryn
 0x17,  1 (0x10671): Core 2 Penryn
 0x17,  4 (0x10674): Core 2 Penryn
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0010676_Harpertown_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0010676_Penryn_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0010676_Yorkfield_CPUID.txt
 0x17,  6 (0x10676): Core 2 Penryn, Harpertown, Wolfdale C0, M0, Wolfdale Xeon C0
     2x QuadCore Intel® Xeon® E5462, 2800 MHz (7 x 400) (Harpertown)
     Mobile DualCore Intel® Core™ 2 Duo P8400, 2400 MHz (9 x 267) (Penryn-3M)
@@ -189,14 +284,20 @@
     Intel® Xeon® Processor X5450, X5460, X5470, X5472, X5482
     Intel® Core™ 2 Duo Processor E7200, E7300, E8190, E8200, E8300, E8400, E8500
     Intel® Xeon® Processor E3110, E5205, E5220, L5240, X5260, X5272
+    Intel(R) Xeon(R) CPU           E5462  @ 2.80GHz
+    Intel(R) Core(TM)2 Duo CPU     P8400  @ 2.26GHz
+    Intel(R) Core(TM)2 Extreme CPU X9650  @ 3.00GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0010677_Yorkfield_CPUID.txt
 0x17,  7 (0x10677): Core 2 Penryn, Yorkfield, Yorkfield Xeon
     Intel® Core™ 2 Quad Q9300 (Yorkfield)
     Intel® Core™2 Extreme Processor QX9650, QX9770, QX9775
     Intel® Core™2 Quad Processor Q8200, Q8200S, Q8400, Q8400S, Q9300, Q9400, Q9400S, Q9450, Q9500, Q9505, Q9505S, Q9550, Q9550S, Q9650
     Intel® Xeon® Processor L3360, X3320, X3330, X3350, X3360, X3370, X3380
+    Intel(R) Core(TM)2 Quad  CPU   Q9300  @ 2.50GHz
 
 # https://forum.xda-developers.com/t/intel_rapl-driver-does-not-support-cpu-family-6-model-70.3630730/
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel001067A_Penryn_CPUID.txt
 0x17, 10 (0x1067a): Core 2 Penryn, Penryn/QC, Harpertown, Wolfdale DP, Wolfdale E0, R0, Wolfdale Xeon E0
     Pentium Dual-Core CPU T4200, 2000MHz (Penryn) (CPUID level 0xD, SSE4.1 disabled)
     Intel® Core™ 2 processor, Intel® Pentium® Processor E
@@ -216,21 +317,29 @@
     Intel® Xeon® Processor E3110, E3120, E5205, E5220, L3110, L5215, L5240, X5260, X5270, X5272
     Intel(R) Core(TM)2 Duo CPU     E7500  @ 2.93GHz
     Intel(R) Core(TM)2 Duo CPU T9400 @ 2.53GHz
+    Pentium(R) Dual-Core CPU       T4200  @ 2.00GHz
 
 0x1a,  1 (0x106a1): Nehalem EP
     Intel Nehalem ES (bad L1D data, 4 way instead of 8 way in CPUID level 00000004)
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106A2_Nehalem-DP_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106A2_Nehalem-EP_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106A2_Nehalem-EP_CPUID_2.txt
 0x1a,  2 (0x106a2): Nehalem EP
     QuadCore Intel® Xeon® X5550, 2666 MHz (20 x 133) (Nehalem-EP, Gainestown)
     2x QuadCore Intel® Xeon® X5550, 2666 MHz (20 x 133) (Nehalem-EP, Gainestown)
     2x DualCore Intel® Xeon® E5502, 1866 MHz (14 x 133) (Nehalem-EP, Gainestown)
+    Genuine Intel(R) CPU           @ 0000 @ 1.87GHz
+    Genuine Intel(R) CPU           @ 0000 @ 2.67GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106A4_Bloomfield_CPUID.txt
 0x1a,  4 (0x106a4): Nehalem EP, Bloomfield
     QuadCore Intel® Core™ i7 Extreme 965, 3333 MHz (25 x 133) (Bloomfield)
     Intel® Core™ i7-965/975 Extreme Processor
     Intel® Core™ Processor i7-920, 930, 950, 960
     Intel® Core™ Processor Extreme Edition i7-965
     Intel® Core™ Processor i7-920, 940
+    Genuine Intel(R) CPU             000  @ 3.20GHz
 
 0x1a,  5 (0x106a5): Bloomfield, Nehalem EP, Nehalem WS
     Intel® Core™ Processor Extreme Edition i7-965
@@ -251,25 +360,39 @@
 
 0x1c,  1 (0x106c1): ?
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106C2_Diamondville_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106C2_DiamondvilleDC_CPUID.txt
 0x1c,  2 (0x106c2): Atom Pineview
     Intel® Atom® 230, 1600 MHz (12 x 133) (Diamondville-SC, Bonnell core)
     DualCore Intel® Atom® (Silverthorne, Bonnell core)
     DualCore Intel® Atom® 330, 1600 MHz (12 x 133) (Diamondville-DC, Bonnell core)
+    Intel(R) Atom(TM) CPU  230   @ 1.60GHz
+    Intel(R) Atom(TM) CPU  330   @ 1.60GHz
 
 0x1c,  9 (0x106c9): ?
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/cpu/intel/model_106cx/model_106cx_init.c
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106CA_PineView_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106CA_PineviewD_CPUID.txt
 0x1c, 10 (0x106ca): Atom Pineview
     DualCore Intel® Atom® D525, 1800 MHz (9 x 200) (Pineview-D, Bonnell core)
+    Genuine Intel(R) CPU        @ 1.66GHz
+    Intel(R) Atom(TM) CPU D525   @ 1.80GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106D0_Dunnington_CPUID.txt
 0x1d,  0 (0x106d0): Core 2 Dunnington
     4x HexaCore Intel® Xeon® ES
+    Genuine Intel(R) CPU                  @ 2.13GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106D1_Dunnington_CPUID.txt
 0x1d,  1 (0x106d1): Core 2 Dunnington
     4x HexaCore Intel® Xeon® MP E7450 (Dunnington-6C)
+    Intel(R) Xeon(R) CPU           E7450  @ 2.40GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106E0_Lynnfield_CPUID.txt
 0x1e,  0 (0x106e0): "NHM" Nehalem
     QuadCore Lynnfield ES (Core i5)
+    Genuine Intel(R) CPU             000  @ 2.13GHz
 
 0x1e,  4 (0x106e4): "NHM" Nehalem, Jasper (embedded Nehalem)
     Intel® Xeon® C5500 (Jasper Forest)
@@ -277,6 +400,9 @@
     Intel® Xeon® Processor ECxxxx, LCxxxx
     Intel® Xeon® Processor EC3528, EC3529, EC5509, EC5539, EC5549, LC3518, LC3528, LC5518, LC5528
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106E5_Clarksfield_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106E5_Lynnfield_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106E5_Lynnfield_CPUID_6MBL3.txt
 0x1e,  5 (0x106e5): Clarksfield, Lynnfield, Lynnfield Xeon
     QuadCore Intel® Core™ i7 860, 3366 MHz (25 x 135) (Lynnfield)
     Intel® Core™ Q820 (Clarksfield)
@@ -291,10 +417,16 @@
     Intel® Core™ Processor i5-750, 750S, 760
     Intel® Xeon® Processor L3426
     Intel® Xeon® Processor X3430, X3440, X3450, X3460, X3470, X3480
+    Intel(R) Core(TM) CPU          Q 820  @ 1.73GHz
+    Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz
+    Intel(R) Core(TM) i7 CPU       Q 720  @ 1.60GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106F1_Auburndale_CPUID.txt
 0x1f,  1 (0x106f1): "NHM" Nehalem G (Auburndale / Havendale)
     Havendale, Auburndale (Core i3, cancelled)
+    Genuine Intel(R) CPU             0000 @ 2.40GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0020652_Clarkdale_CPUID.txt
 0x25,  2 (0x20652): "WSM" Westmere Client (Clarkdale, Arrandale, Clarkdale Xeon)
     DualCore Intel® Core™ i5 650, 3600 MHz (26 x 138) (Clarkdale)
     Intel® Xeon® Processor L3406
@@ -305,6 +437,7 @@
     Intel® Core™ Processor i5-650, 660, 661, 670
     Intel® Core™ Processor i3-530, 540, 550, 560
     Intel® Pentium® Processor G6950
+    Intel(R) Core(TM) i5 CPU         650  @ 3.20GHz
 
 0x25,  5 (0x20655): Arrandale, Clarkdale
     Intel® Celeron® Mobile P4xxx, U3xxx Processor
@@ -324,27 +457,43 @@
     Intel® Pentium® Processor G6950, G6951, G6960
 
 0x26,  x (0x2066x): Atom Bonnell Mid (Silverthorne, Lincroft)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0020661_TunnelCreek_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0020661_TunnelCreek_CPUID2.txt
 0x26,  1 (0x20661): Atom Lincroft
     Intel® Atom® Z670 (Tunnel Creek)
+    Intel(R) Atom(TM) CPU Z670   @ 1.50GHz
+    Intel(R) Atom(TM) CPU E680   @ 1.60GHz
 
 0x27,  x (0x2067x): Atom Saltwell Mid (Penwell)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0020672_Medfield_CPUID.txt
 0x27,  2 (0x20672): Atom Penwell
     Intel® Atom® Z2460 1.6GHz (Medfield platform, Penwell SoC, Saltwell core)
+    Intel(R) Atom(TM) CPU Z2460  @ 1.60GHz
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/cpu/intel/model_206ax/model_206ax_init.c
 0x2a,  0 (0x206a0): "SNB" Sandy Bridge
 0x2a,  1 (0x206a1): "SNB" Sandy Bridge
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206A2_SandyBridge_CPUID.txt
 0x2a,  2 (0x206a2): "SNB" Sandy Bridge
     2nd Generation Intel® Core™ Processor Family
     Sandy Bridge ES
+    Genuine Intel(R) CPU            0     @ 1.60GHz
 
 0x2a,  3 (0x206a3): "SNB" Sandy Bridge
 0x2a,  4 (0x206a4): "SNB" Sandy Bridge
 0x2a,  5 (0x206a5): "SNB" Sandy Bridge
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206A6_SandyBridge_CPUID.txt
 0x2a,  6 (0x206a6): "SNB" Sandy Bridge D1
     2nd Generation Intel® Core™ Processor Family
     QuadCore Intel® Core™ i7-2600K, 3400 MHz (Sandy Bridge)
+    Intel(R) Core(TM) i7-2600K CPU @ 3.40GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206A7_SandyBridge4_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206A7_SandyBridge_CPUID.txt
 0x2a,  7 (0x206a7): "SNB" Sandy Bridge D2/J1 (Xeon E3)
     2nd Generation Intel® Core™ Processor Family
     Intel® Xeon® Processor E3 Family
@@ -370,10 +519,16 @@
     Intel® Celeron® Processor 787, 797, 807, 807UE, 827E, 847, 847E, 857, 867, 877, 887, B710, B720, B800, B810, B810E, B815, B820, B830, B840, G440, G460, G465, G470, G530, G530T, G540, G540T, G550, G550T, G555
     Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
     Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz
+    Intel(R) Pentium(R) CPU G840 @ 2.80GHz
+    Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz
 
+#https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C1_Gulftown_CPUID.txt
 0x2c,  1 (0x206c1): Westmere EP (Gulftown)
     2x QuadCore Intel® Xeon® X5667, 3066 MHz (23 x 133) (Gulftown)
+    Intel(R) Xeon(R) CPU           X5667  @ 3.07GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C2_Gulftown_01_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C2_Gulftown_CPUID.txt
 0x2c,  2 (0x206c2): Westmere EP (Gulftown), Westmere EP, WS
     Intel® Core™ i7-970, 980
     Intel® Core™ Processor Extreme Edition i7-980X, 990X
@@ -384,17 +539,24 @@
     Intel® Xeon® Processor L5609, L5618, L5630, L5638, L5640
     Intel® Xeon® Processor W3670, W3680
     Intel® Xeon® Processor X5647, X5650, X5660, X5667, X5670, X5672, X5675, X5677, X5680, X5687, X5690, X5698
+    Intel(R) Xeon(R) CPU           W3670  @ 3.20GHz
+    Intel(R) Core(TM) i7 CPU       X 990  @ 3.47GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206D5_SandyBridgeEP_CPUID.txt
 0x2d,  5 (0x206d5): "SNBX" Sandy Bridge Xeon (Sandy Bridge E, EN, EP, EP4S)
     2x OctalCore Intel® Xeon®, 3000 MHz (30 x 100) (Sandy Bridge-EP)
+    Genuine Intel(R) CPU  @ 2.60GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206D6_SandyBridgeE_CPUID.txt
 0x2d,  6 (0x206d6): "SNBX/SNB-E/EN/EP" Sandy Bridge Xeon (Sandy Bridge E, EN, EP, EP4S)
     Intel® Xeon® Processor E3 Product Family
     Intel® Xeon® Processor E5 Product Family
     Intel® Xeon® Processor E5-2620, E5-2630, E5-2630L, E5-2640, E5-2650, E5-2650L, E5-2660, E5-2667, E5-2670, E5-2680, E5-2690
     Intel® Pentium® Processor 1405
     HexaCore Intel® Core™ i7-3960X Extreme Edition, 3600 MHz (36 x 100) (Sandy Bridge-E)
+    Intel(R) Core(TM) i7-3960X CPU @ 3.30GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206D7_SandyBridgeE_00_CPUID.txt
 0x2d,  7 (0x206d7): "SNBX/SNB-E/EN/EP" Sandy Bridge Xeon (Sandy Bridge E, EN, EP, EP4S)
     Intel® Core™ X-series Processors
     Intel® Xeon® Processor E3 Product Family
@@ -404,32 +566,46 @@
     Intel(R) Xeon(R) CPU E5-2420 0 @ 1.90GHz
     Intel® Core™ Processor Extreme Edition i7-3960X, i7-3970X
     Intel® Core™ Processor i7-3820, 3930K
+    Intel(R) Core(TM) i7-3930K CPU @ 3.20GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206E4_Beckton_CPUID.txt
 0x2e,  4 (0x206e4): Nehalem-EX Xeon (Beckton)
     4x HexaCore Intel® Xeon® (Beckton, 48 threads)
+    Genuine Intel(R) CPU             0000 @ 1.73GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206E5_Beckton_CPUID.txt
 0x2e,  5 (0x206e5): Nehalem-EX Xeon (Beckton)
     4x QuadCore Intel® Xeon® E7520 (Beckton)
+    Intel(R) Xeon(R) CPU           E7520  @ 1.87GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206E6_Beckton_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206E6_Beckton_CPUID2.txt
 0x2e,  6 (0x206e6): Nehalem-EX Xeon (Beckton)
     4x OctaCore Intel® Xeon® X7560 (Beckton)
     Intel® Xeon® 65xx, Intel® Xeon® 75xx
     Intel® Xeon® Processor E6510, E6540, E7520, E7530, E7540, L7545, L7555, X6550, X7542, X7550, X7560
+    Intel(R) Xeon(R) CPU           X6550  @ 2.00GHz
+    Intel(R) Xeon(R) CPU           X7560  @ 2.27GHz
 
 0x2f,  0 (0x206f0): Westmere-EX
 0x2f,  1 (0x206f1): Westmere-EX
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206F2_Eagleton_CPUID.txt
 0x2f,  2 (0x206f2): "EGL/WSM" Westmere-EX Xeon (Eagleton), Westmere EX
     Intel® Xeon® Processor E7 Family
     4x 10-Core Intel® Xeon® MP E7-4870, 2400 MHz (18 x 133) (Eagleton, Westmere-EX)
     Intel® Xeon® Processor E7-2803, 2820, 2830, 2850, 2860, 2870, 4807, 4820, 4830, 4850, 4860, 4870, 8830, 8837, 8850, 8860, 8867L, 8870
+    Intel(R) Xeon(R) CPU E7- 4870  @ 2.40GHz
 
 0x35,  x (0x3065x): Atom Saltwell Tablet (Cloverview)
 0x35,  0 (0x30650): ?
 
 # https://github.com/chipsec/chipsec/blob/1.10.4/chipsec/cfg/8086/cht.xml
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0030651_Cloverview_CPUID.txt
 0x35,  1 (0x30651): "CHT" Atom Braswell/Cherry Trail, Atom Cloverview
     DualCore Intel® Atom® Z2760, 1800MHz (Cloverview, Saltwell core)
     Intel® Atom™ Processor Z8000 series
+    Intel(R) Atom(TM) CPU Z2760  @ 1.80GHz
 
 # https://boxmatrix.info/wiki/Property:Puma6
 0x35,  8 (0x30658): ?
@@ -437,18 +613,29 @@
 
 0x36,  x (0x3066x): Atom Saltwell (Cedarview)
 0x36,  0 (0x30660): ?
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0030661_Cedarview_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0030661_Cedarview2_CPUID.txt
 0x36,  1 (0x30661): Atom Cedarview
     DualCore Intel® Atom® D2700, 2133 MHz (16 x 133) (Cedarview, Saltwell core) Bonnell vs. Saltwell
     DualCore Intel® Atom® D2500, 1866 MHz (14 x 133) (Cedarview)
+    Intel(R) Atom(TM) CPU D2700   @ 2.13GHz
+    Intel(R) Atom(TM) CPU D2500   @ 1.86GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0030669_Centerton_CPUID.txt
 0x36,  9 (0x30669): Atom Cedarview
     Intel® Atom® S1260 @ 2.00GHz (Centerton, Saltwell core)
+    Intel(R) Atom(TM) CPU S1260   @ 2.00GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x37,  x (0x3067x): Atom Silvermont (Bay Trail, Valleyview)
 
 0x37,  1 (0x30671): "BYT" Atom Silvermont (BayTrail)
 0x37,  2 (0x30672): "BYT" Atom Silvermont (BayTrail)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0030673_Silvermont_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0030673_Silvermont_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0030673_Silvermont3_CPUID.txt
 0x37,  3 (0x30673): "BYT" Atom Silvermont (BayTrail/BYT / Valley View), Valley View, Bay Trail I (B2, B3 step)
     Intel® Atom® Processor Z Series
     Intel® Celeron® Processor J Series
@@ -467,7 +654,11 @@
     Intel® Pentium® Processor N3520, N3510
     Intel® Celeron® Processor J1900, J1850, J1800, J1750
     Intel® Celeron® Processor N2920, N2910, N2820, N2815, N2810, N2806, N2805
+    Intel(R) Atom(TM) CPU  Z3740  @ 1.33GHz
+    Intel(R) Celeron(R) CPU  N2820  @ 2.13GHz
+    Intel(R) Celeron(R) CPU  J1900  @ 1.99GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0030678_Silvermont_CPUID.txt
 0x37,  8 (0x30678): "BYT/VLV" Atom Silvermont (BayTrail/BYT / Valley View), Valley View, Bay Trail M/D (C0 step)
     Intel® Atom® Processor Z Series
     Intel® Celeron® Processor N Series
@@ -481,13 +672,16 @@
     Intel® Atom® Processor Z3745, Z3745D, Z3735D, Z3735E, Z3735F, Z3735G, Z3736F, Z3736G, Z3775, Z3775D, Z3785, Z3795
     Intel® Pentium® Processor N3540, N3530
     Intel® Celeron® Processor N2940, N2930, N2840, N2830, N2808, N2807
+    Intel(R) Atom(TM) CPU  Z3745  @ 1.33GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0030679_Silvermont_CPUID.txt
 0x37,  9 (0x30679): "VLV/BYT" Valley View, Bay Trail I (D0, D1 step) ; Valley View, Bay Trail M/D (D1 step)
     Intel® Atom® Processor E3800 Product Family
     Intel® Celeron® Processor N2807, N2930
     Intel® Pentium® Processor J1800, J1900
     Intel® Atom® Processor E3845, E3827, E3826, E3825, E3815, E3805
     Intel® Atom® Processor E38xx
+    Intel(R) Atom(TM) CPU  E3827  @ 1.74GHz
 
 0x3a,  0 (0x306a0): "IVB" Ivy Bridge
 0x3a,  2 (0x306a2): "IVB" Ivy Bridge
@@ -495,6 +689,9 @@
 0x3a,  5 (0x306a5): "IVB" Ivy Bridge
 0x3a,  6 (0x306a6): "IVB" Ivy Bridge
 0x3a,  8 (0x306a8): "IVB" Ivy Bridge
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306A9_IvyBridge_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306A9_IvyBridge_CPUID2.txt
 0x3a,  9 (0x306a9): "IVB" Ivy Bridge, Ivy Bridge Xeon E3, Gladden
     3rd Generation Intel® Core™ Processor Family
     3rd Generation Intel® Core™ Mobile Processor Family
@@ -518,7 +715,12 @@
     Intel® Core™ Processor i5-3210M, i5-3210M, i5-3230M, i5-3230M, i5-3317U, i5-3320M, i5-3330, i5-3330S, i5-3337U, i5-3339Y, i5-3340, i5-3340M, i5-3340S, i5-3350P, i5-3360M, i5-3380M, i5-3427U, i5-3437U, i5-3439Y, i5-3450, i5-3450S, i5-3470, i5-3470S, i5-3470T, i5-3475S, i5-3550, i5-3550S, i5-3570, i5-3570K, i5-3570S, i5-3570T, i5-3610ME
     Intel® Core™ Processor i3-3110M, i3-3120M, i3-3120ME, i3-3130M, i3-3210, i3-3217U, i3-3217UE, i3-3220, i3-3220T, i3-3225, i3-3227U, i3-3229Y, i3-3240, i3-3240T, i3-3245, i3-3250, i3-3250T
     Intel® Pentium® Processor 1405 v2, 2020M, 2030M, 2117U, 2127U, 2129Y, A1018, G2010, G2020, G2020T, G2030, G2030T, G2100T, G2120, G2120T, G2130, G2140
+    Intel(R) Core(TM) i7-3770K CPU @ 3.50GHz
+    Intel(R) Celeron(R) CPU G1610 @ 2.60GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306C3_Haswell2_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306C3_HaswellXeon_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306C3_Haswell_CPUID11.txt
 0x3c,  3 (0x306c3): "HSW" Haswell Core, Haswell Xeon E3, Haswell Desktop, Haswell M
     4th Generation Intel® Core™ Processor Family
     4th Generation Intel® Core™ Mobile Processor Family
@@ -541,11 +743,17 @@
     Intel® Pentium® 3560M
     Intel® Celeron® 2970M
     Intel(R) Core(TM) i7-4770 CPU @ 3.40GHz
+    Intel(R) Core(TM) i7-4765T CPU @ 2.00GHz
+    Intel(R) Xeon(R) CPU E3-1245 v3 @ 3.40GHz
+    Intel(R) Xeon(R) CPU E3-1265L v3 @ 2.50GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x3d,  x (0x306dx): "BDW" Broadwell
     5th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306D4_Broadwell_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306D4_Broadwell_CPUID3.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306D4_Broadwell2_CPUID.txt
 0x3d,  4 (0x306d4): "BDW-U/Y" Broadwell Core (Broadwell U/Y)
     5th Generation Intel® Core™ Processor Family
     Intel® Pentium® Mobile Processor Family
@@ -559,12 +767,20 @@
     Intel® Core™ Processor M-5Y71, M-5Y70, M-5Y51, M-5Y3, M-5Y10c, M -5Y10a, M-5Y10
     Intel® Pentium® Processor 3805U, 3825U, 3765U, 3755U, 3215U, 3205U
     Intel® Celeron® 3765U
+    Intel(R) Processor 5Y70 CPU @ 1.10GHz
+    Intel(R) Core(TM) i7-5500U CPU @ 2.40GHz
+    Intel(R) Core(TM) i5-5250U CPU @ 1.60GHz
 
 0x3e,  0 (0x306e0): "IVBX" Ivy Bridge Xeon
 0x3e,  2 (0x306e2): "IVBX" Ivy Bridge Xeon
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306E3_IvyBridgeEP_CPUID.txt
 0x3e,  3 (0x306e3): "IVBX" Ivy Bridge Xeon (Ivy Bridge EN, EP)
     2x 12-Core Genuine Intel® CPU @ 2.40GHz ES (Ivy Bridge-EP, Ivytown, 30MB L3)
+    Genuine Intel(R) CPU  @ 2.40GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306E4_IvyBridgeEP_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306E4_IvyBridgeE_CPUID.txt
 0x3e,  4 (0x306e4): "IVBX/IVB-E/EP" Ivy Bridge Xeon (Ivy Bridge EN, EP), Ivy Bridge Server E, EN, EP, EP4S
     3rd Generation Intel® Core™ Processor Family
     Intel® Xeon® Processor E5v2 Product Family
@@ -575,6 +791,8 @@
     Intel® Xeon® Processor v2 E5-1428L, E5-1620, E5-1650, E5-1660, E5-2403, E5-2407, E5-2418L, E5-2420, E5-2428L, E5-2430, E5-2430L, E5-2440, E5-2448L, E5-2450, E5-2450L, E5-2470, E5-2603, E5-2609, E5-2618L, E5-2620, E5-2628L, E5-2630, E5-2630L, E5-2637, E5-2640, E5-2643, E5-2648L, E5-2650, E5-2650L, E5-2658, E5-2660, E5-2667, E5-2670, E5-2680, E5-2687W, E5-2690, E5-2695, E5-2697, E5-4603, E5-4607, E5-4610, E5-4620, E5-4624L, E5-4627, E5-4640, E5-4650, E5-4657L
     Intel® Core™ Processor Extreme Edition i7-4960X
     Intel® Core™ Processor i7-4820K, i7-4930K
+    Intel(R) Xeon(R) CPU E5-2697 v2 @ 2.70GHz
+    Intel(R) Core(TM) i7-4930K CPU @ 3.40GHz
 
 0x3e,  6 (0x306e6): "IVBX" Ivy Bridge Xeon
 0x3e,  7 (0x306e7): "IVBX/IVB-EX" Ivy Bridge Xeon (Ivy Bridge Server EX)
@@ -584,6 +802,10 @@
 0x3f,  x (0x306fx): "HSX" Haswell X (Haswell EP, EN)
     OctalCore Intel® Core™ i7-5960X Extreme Edition, 3300 MHz (33 x 100) (Haswell-E)
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306F2_HaswellE2_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306F2_HaswellEP2_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306F2_HaswellEP_01_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306F2_HaswellEP_CPUID.txt
 0x3f,  2 (0x306f2): "HSX-E/EP" Haswell X (Haswell EP, EN), Haswell Server E, EP, EP4S (Stepping Cx/M1)
     4th Generation Intel® Core™ Processor Family
     Intel® Xeon® Processor E5v3 Product Family
@@ -594,6 +816,10 @@
     Intel® Core™ Processor Extreme Edition i7-5960X
     Intel® Core™ Processor i7-5820K, i7-5930K
     Intel® Xeon® Processor v3 E5-1428L, E5-1603, E5-1607, E5-1620, E5-1630, E5-1650, E5-1660, E5-1680, E5-2408L, E5-2418L, E5-2428L, E5-2438L, E5-2603, E5-2608L, E5-2608L, E5-2609, E5-2618L, E5-2620, E5-2623, E5-2628L, E5-2630, E5-2630L, E5-2637, E5-2640, E5-2643, E5-2648L, E5-2650, E5-2650L, E5-2658, E5-2660, E5-2667, E5-2670, E5-2680, E5-2683, E5-2685, E5-2687W, E5-2690, E5-2695, E5-2697, E5-2698, E5-2699, E5-4610, E5-4620, E5-4627, E5-4640, E5-4648, E5-4650, E5-4655, E5-4660, E5-4667, E5-4669
+    Intel(R) Core(TM) i7-5820K CPU @ 3.30GHz
+    Intel(R) Xeon(R) CPU E5-2660 v3 @ 2.60GHz
+    Genuine Intel(R) CPU @ 2.70GHz
+    Intel(R) Xeon(R) CPU E5-2699 v3 @ 2.30GHz
 
 0x3f,  4 (0x306f4): "HSX-EX" Haswell X (Haswell EX), Haswell Server EX (Stepping E0)
     Intel® Xeon® Processor E7v3 Product Family
@@ -620,6 +846,7 @@
 0x46,  x (0x4066x): "HSW" Haswell
     4th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0040661_CrystalWell_CPUID.txt
 0x46,  1 (0x40661): "HSW-H" Haswell GT3E (Haswell Perf), Haswell Perf Halo, Haswell H, Haswell R
     4th Generation Intel® Core™ Processor Family
     Intel® Core™ Extreme Processor (5960x, 5930x, 5820x)
@@ -628,11 +855,13 @@
     Intel® Core™ Processor i5-4210H, i5-4402EC
     Intel® Core™ Processor i7-4770R
     Intel® Core™ Processor i5-4570R, i5-4670R
+    Intel(R) Core(TM) i7-4770R CPU @ 3.20GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x47,  x (0x4067x): "BDW-G" Broadwell-G
     5th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0040671_BroadwellH_CPUID.txt
 0x47,  1 (0x40671): "BDW-H/E3" Broadwell GT3E (Broadwell H 43e), Broadwell Xeon E3
     5th Generation Intel® Core™ Processor Family
     5th Generation Intel® Core™ Mobile Processor Family
@@ -641,6 +870,7 @@
     QuadCore Intel® Core™ i7-5775C, 3300 MHz (33 x 100) (Broadwell-H)
     Intel® Core™ Processor i7-5700EQ, i7-5700HQ, i7-5750HQ, i7-5850EQ , i7-5850HQ, i7-5950HQ
     Intel® Core™ Processor i5-5575R, i5-5675C, i5-5675R, i7-5775C, i7-5775R
+    Intel(R) Core(TM) i7-5775C CPU @ 3.30GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x4a,  x (0x406ax): Atom Merrifield (Tangier), Atom Silvermont Mid
@@ -659,6 +889,9 @@
 
 0x4c,  1 (0x406c1): ?
 0x4c,  2 (0x406c2): ?
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406C3_Braswell_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406C3_CherryTrail_CPUID.txt
 0x4c,  3 (0x406c3): "CHV" Atom Airmont (CherryTrail / Braswell), Cherry View (Cherry Trail, Braswell)
     QuadCore Intel® Atom® x7-Z8700, 1600MHz (Cherry Trail)
     QuadCore Intel® Celeron® N3150, 2083 MHz (26 x 80) (Braswell) Silvermont vs. Airmont
@@ -667,6 +900,8 @@
     Intel® Atom® x5-Zxxxx CPU
     Intel® Atom® Processor x7-Z8700, x5-Z8500, x5-Z8300
     Intel(R) Celeron(R) CPU  N3050  @ 1.60GHz
+    Intel(R) Celeron(R) CPU  N3150  @ 1.60GHz
+    Intel(R) Atom(TM) x7-Z8700  CPU @ 1.60GHz
 
 0x4c,  4 (0x406c4): "CHV" Cherry View (Cherry Trail, Braswell)
     Intel® Celeron® Processor Jxxxx
@@ -683,12 +918,17 @@
 0x4d,  0 (0x406d0): "AVN" Atom Avoton (Stepping A0, A1)
     Intel® Atom® Processor C2xxx
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406D8_Avoton_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406D8_Avoton_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406D8_Rangeley_CPUID.txt
 0x4d,  8 (0x406d8): "AVN" Atom Silvermont D (Avoton/Rangely) (Stepping B0, C0)
     Intel® Atom® Processor C2xxx
     OctalCore Intel® Atom® C2750, 2400 MHz (24 x 100) (Avoton)
     OctalCore Intel® Atom® C2758, 2400 MHz (24 x 100) (Rangeley)
     Intel® Atom® Processor C2000 Product Family
     Intel® Atom® Processor C2750, C2730, C2550, C2530, C2350 (Avoton)
+    Intel(R) Atom(TM) CPU  C2750  @ 2.40GHz
+    Intel(R) Atom(TM) CPU  C2758  @ 2.40GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x4e,  x (0x406ex): "SKL" Skylake-L
@@ -701,6 +941,8 @@
 0x4e,  2 (0x406e2): "SKL" Skylake (Stepping C0)
     6th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406E3_Skylake_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406E3_Skylake_CPUID5.txt
 0x4e,  3 (0x406e3): "SKL-U/Y/SKL-U23e" Skylake Mobile (Skylake U/Y/U23e) (Stepping D0, K1)
     6th Generation Intel® Core™ Processor Family
     6th Generation Intel® Core™ Mobile Processor Family
@@ -719,11 +961,19 @@
     Intel® Core™ Processor m3-6Y30
     Intel® Pentium® Processor 4405Y
     Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+    Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz
+    Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x4e,  8 (0x406e8): "KBL" Kaby Lake (Stepping G0)
 
 0x4f,  0 (0x406f0): "BDX" Broadwell X
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406F1_BroadwellE_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406F1_BroadwellE_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406F1_BroadwellE_CPUID4.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406F1_BroadwellE_CPUID5.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406F1_BroadwellE_CPUID6.txt
 0x4f,  1 (0x406f1): "BDX-ML" Broadwell X (Broadwell Server E, EP, EP4S, EX) (Stepping B0/M0/R0)
     Intel® Xeon® Processor E5v4 Product Family
     Intel® Xeon® Processor E7v4 Product Family
@@ -738,6 +988,11 @@
     Intel® Core™ Processor i7-6800K, i7-6850, i7-6900K
     Intel® Xeon® Processor v4 E5-2603, E5-2608L, E5-2609, E5-2618L, E5-2620, E5-2623, E5-2628L, E5-2630L, E5-2630, E5-2637, E5-2640, E5-2643, E5-2648L, E5-2650L, E5-2650, E5-2658, E5-2660, E5-2667, E5-2679, E5-2680, E5-2683, E5-2690, E5-2695, E5-2697A, E5-2697, E5-2698, E5-2699A, E5-2699, E5-2699R, E5-4628L
     Intel® Xeon® Processor v4 E7-4809, E7-4820, E7-4830, E7-4850, E7-8855, E7-8860, E7-8867, E7-8870, E7-8880, E7-8890, E7-8891, E7-8893, E7-8894
+    Intel(R) Core(TM) i7-6850K CPU @ 3.60GHz
+    Intel(R) Xeon(R) CPU E5-2696 v4 @ 2.20GHz
+    Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz
+    Intel(R) Core(TM) i7-6950X CPU @ 3.00GHz
+    Intel(R) Core(TM) i7-6800K CPU @ 3.40GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x55,  0 (0x50650): "SKX" Skylake Server
@@ -755,6 +1010,21 @@
     Intel® Xeon® Scalable Processor Family
     Intel® Xeon® Platinum Processor P-8124, P-8136
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeD_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeX_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeX_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeX_CPUID3.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_20_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID10.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID11.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID16.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID5.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID6.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID8.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID9.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_Jintide_CPUID1.txt
 0x55,  4 (0x50654): "SKX-SP/D" Skylake X (Skylake SP, Basin Falls ; Skylake D, Bakerville ; W) (Stepping H0/M0/U0, M1)
     Intel® Core™ i9 79xxX, 78xxX
     Intel® Xeon® Scalable Processor Family
@@ -781,13 +1051,38 @@
     Intel® Core™ Extreme Edition Processor i9-7980XE
     Intel® Core™ X-series Processor i9-7900X, i9-7920X, i9-7940X, i9-7960X
     Intel® Core™ X-series Processor i7-7800X, i7-7820X
+    Intel(R) Xeon(R) D-2183IT CPU @ 2.20GHz
+    Intel(R) Core(TM) i9-7900X CPU @ 3.30GHz
+    Intel(R) Core(TM) i7-7800X CPU @ 3.50GHz
+    Intel(R) Core(TM) i9-7980XE CPU @ 2.60GHz
+    Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
+    Intel(R) Xeon(R) Gold 6154 CPU @ 3.00GHz
+    Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz
+    Intel(R) Xeon(R) W-3175X CPU @ 3.10GHz
+    Intel(R) Xeon(R) Gold 6146 CPU @ 3.20GHz
+    Intel(R) Xeon(R) Gold 6130 CPU @ 2.10GHz
+    Intel(R) Xeon(R) Gold 6154 CPU @ 3.00GHz
+    Intel(R) Xeon(R) Platinum 8180 CPU @ 2.50GHz
+    Intel(R) Xeon(R) Silver 4108 CPU @ 1.80GHz
+    Intel(R) Xeon(R) Bronze 3104 CPU @ 1.70GHz
+    Montage(R) Jintide(R) C2460 1
 
 0x55,  5 (0x50655): "CLX-SP" Cascade Lake Server (Stepping A0)
     2nd Generation Intel® Xeon® Scalable Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050656_CascadeLakeSP_CPUID.txt
 0x55,  6 (0x50656): "CLX-SP" Cascade Lake Server (Stepping B0)
     2nd Generation Intel® Xeon® Scalable Processor Family
+    Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeSP_CPUID1.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeSP_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeSP_CPUID3.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeW_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeX_CPUID1.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeX_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeXeon2_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeXeon_CPUID.txt
 0x55,  7 (0x50657): "CLX-SP" Cascade Lake Server, Cascade Lake W (Stepping B1)
     2nd Generation Intel® Xeon® Scalable Processor Family
     Intel® Xeon® W Processor Family
@@ -796,6 +1091,14 @@
     Intel® Xeon® Silver Processor 4208, 4208R, 4209T, 4210, 4210R, 4214, 4214C, 4214R, 4214Y, 4215, 4216, 4216R
     Intel® Xeon® Bronze Processor 3204, 3206R
     Intel® Xeon® Processor W-3275M, W-3275, W-3265M, W-3265, W-3245M, W-3245, W-3235, W-3225, W-3223, W-2295, W-2275, W-2265, W-2255, W-2245, W-2235, W-2225, W-2223
+    Intel(R) Xeon(R) Gold 5215 CPU @ 2.50GHz
+    Intel(R) Xeon(R) Silver 4214 CPU @ 2.20GHz
+    Intel(R) Xeon(R) Gold 6212U CPU @ 2.40GHz
+    Intel(R) Xeon(R) W-3275 CPU @ 2.50GHz
+    Intel(R) Core(TM) i9-10980XE CPU @ 3.00GHz
+    Intel(R) Core(TM) i9-10940X CPU @ 3.30GHz
+    Intel(R) Xeon(R) Gold 6226R CPU @ 2.90GHz
+    Intel(R) Xeon(R) Platinum 8280 CPU @ 2.70GHz
 
 0x55, 10 (0x5065a): "CPX-SP" Cooper Lake SP (Stepping A0)
     3rd Generation Intel® Xeon® Scalable Processor Family
@@ -803,19 +1106,23 @@
 0x55, 11 (0x5065b): "CPX-SP" Cooper Lake SP (Stepping A1)
     3rd Generation Intel® Xeon® Scalable Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050662_BroadwellDE_CPUID.txt
 0x56,  2 (0x50662): "BDX-DE" Broadwell Xeon D (Broadwell DE V1)
     Intel® Xeon® Processor D-1500 Product Family
     OctalCore Intel® Xeon® D-1540, 2000 MHz (20 x 100) (Broadwell-DE)
     Intel® Xeon® Processor D-1520, D-1540
+    Intel(R) Xeon(R) CPU D-1540 @ 2.00GHz
 
 0x56,  3 (0x50663): "BDX-DE" Broadwell Xeon D (Broadwell DE V2,V3)
     Intel® Xeon® Processor D-1500 Product Family
     Intel® Xeon® Processor D-1518, D-1519, D-1521, D-1527, D-1528, D-1531, D-1533, D-1537, D-1541, D-1548
     Intel® Pentium® Processor D1507, D1508, D1509, D1517, D1519
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050664_BroadwellDE_CPUID4.txt
 0x56,  4 (0x50664): "BDX-DE" Broadwell Xeon D (Broadwell DE Y0)
     Intel® Xeon® Processor D-1500 Product Family
     Intel® Xeon® Processor D-1557, D-1559, D-1567, D-1571, D-1577, D-1581, D-1587
+    Intel(R) Xeon(R) CPU D-1559 @ 1.50GHz
 
 0x56,  5 (0x50665): "BDX-DE/NS" Broadwell Xeon D (Broadwell NS, Broadwell DE A1), Hewitt Lake (Stepping A1)
     Intel® Xeon® Processor D-1500 NS Product Family
@@ -823,18 +1130,25 @@
     Intel® Xeon® Processor D-1513N, D-1523N, D-1533N, D1543N, D1553N
     Intel® Xeon® Processor D-1602, D-1622, D-1623N, D-1627 , D-1633N, D-1637, D-1649N, D-1653N
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050671_KnightsLanding_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050671_KnightsLanding_CPUID2.txt
 0x57,  1 (0x50671): "PHI KNL" Xeon Phi Knights Landing
     Intel® Xeon® Phi™ Processor 72xx
     Intel® Xeon Phi™ x200 Product Family
     64-Core Intel® Xeon® Phi™ 7210 (Knights Landing, 256 threads)
     72-Core Intel® Xeon® Phi™ 7290 (Knights Landing, 288 threads)
     Intel® Xeon Phi™ 7210, 7210F, 7230, 7230F, 7250, 7250F, 7290, 7290F
+    Intel(R) Xeon Phi(TM) CPU 7210 @ 1.30GHz
+    Intel(R) Xeon Phi(TM) CPU 7290 @ 1.50GHz
 
 0x5a,  x (0x506ax): Atom Airmont Mid (Moorefield)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506A0_Moorefield_CPUID.txt
 0x5a,  0 (0x506a0): Atom Moorefield (Anniedale)
     Intel® Atom® Processor Z Series
     Intel® Atom® 1.0GHz (Moorefield)
     Intel® Atom® Processor Z3530, Z3560, Z3570, Z3580, Z3590
+    Genuine Intel(R) CPU   4000  @ 1.00GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x5c,  x (0x506cx): Atom Goldmont (Apollo Lake)
@@ -844,6 +1158,9 @@
     Intel® Atom® Processor T5500, T5700
 
 0x5c,  8 (0x506c8): "APL" Apollo Lake (Stepping A0)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506C9_Goldmont_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506C9_Goldmont_CPUID3.txt
 0x5c,  9 (0x506c9): "BXT/APL" Atom Goldmont, Apollo Lake (Stepping B0, D0)
     Intel® Pentium® Processor N4xxx/J4xxx
     Intel® Celeron® Processor N3xxx/J3xxx
@@ -857,6 +1174,8 @@
     Intel® Atom® Processor x5-A3930, x5-A3940, x7-A3950, x7-A3960
     Intel® Atom® Processor x5-E3930, x5-E3940, x7-E3950
     Intel(R) Celeron(R) CPU J3455 @ 1.50GHz
+    Intel(R) Pentium(R) CPU N4200 @ 1.10GHz
+    Intel(R) Celeron(R) CPU N3450 @ 1.10GHz
 
 0x5c, 10 (0x506ca): "APL" Apollo Lake (Stepping E0)
     Intel® Pentium® J4205, N4200
@@ -866,15 +1185,19 @@
     Intel® Atom® Processor x5-E39xx
     Intel® Atom® Processor x7-E39xx
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506D1_SoFIA_CPUID.txt
 0x5d,  1 (0x506d1): ?
     Intel® Atom® x3-C3230 (SoFIA, Smart or Feature phone with Intel Architecture)
+    Genuine Intel(R) CPU         @ 728MHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x5e,  x (0x506ex): "SKL" Skylake
     6th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506E0_Skylake_CPUID2.txt
 0x5e,  0 (0x506e0): "SKL" Skylake
     6th Generation Intel® Core™ Processor Family
+    Genuine Intel(R) CPU 0000 @ 2.20GHz
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x5e,  1 (0x506e1): "SKL-H" Skylake H (Stepping Q0)
@@ -882,6 +1205,9 @@
 0x5e,  2 (0x506e2): "SKL" Skylake
     6th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506E3_Skylake_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506E3_Skylake_CPUID05.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506E3_Skylake_CPUID4.txt
 0x5e,  3 (0x506e3): "SKL-H/S/E3" Skylake Desktop (Skylake H/S, Xeon E3) (Stepping R0/N0)
     6th Generation Intel® Core™ Processor Family
     Intel® Xeon® Processor E3 v5 Product Family
@@ -900,6 +1226,9 @@
     Intel® Pentium® Processor G4400, G4400T, G4420, G4420T, G4500, G4500T, G4520, G4520T, G4540
     Intel® Celeron® Processor G3900, G3900T, G3920, G3920T, G3940
     Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz
+    Intel(R) Core(TM) i5-6400T CPU @ 2.20GHz
+    Intel(R) Core(TM) i3-6100 CPU @ 3.70GHz
+    Intel(R) Pentium(R) CPU G4400 @ 3.30GHz
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x5e,  8 (0x506e8): "KBL-H" Kaby Lake (Stepping A0)
@@ -910,11 +1239,13 @@
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x5f,  0 (0x506f0): "DNV" Atom Denverton (Goldmont Microserver) (Stepping A0, A1), Skylake SP (Stepping A0, A1)
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506F1_Denverton_CPUID.txt
 0x5f,  1 (0x506f1): "DNV" Atom Denverton (Goldmont Microserver) (Stepping B0), Skylake SP (Stepping B0)
     16-Core Intel® Atom® C3958, 2000 MHz (20 x 100) (Denverton)
     Intel® Atom® Processor C Series
     Intel® Atom® Processor C3000 Product Family
     Intel® Atom® Processor C3308, C3338, C3508, C3538, C3558, C3708, C3750, C3758, C3808, C3830, C3850, C3858, C3950, C3955, C3958
+    Intel(R) Atom(TM) CPU C3958 @ 2.00GHz
 
 0x65,  0 (0x60650): XGold 7272
     Intel® Mobile Communications Platforms
@@ -932,8 +1263,10 @@
 0x66,  2 (0x60662): "CNL" Cannon Lake (Stepping C0)
     8th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0060663_CannonLake_CPUID2.txt
 0x66,  3 (0x60663): "CNL-U" Cannon Lake Mobile (Stepping D0)
     8th Generation Intel® Core™ Mobile Processor Family
+    Intel(R) Core(TM) i3-8121U CPU @ 2.20GHz
 
 0x6a,  x (0x606ax): "ICL" Ice Lake
 0x6a,  4 (0x606a4): "ICX-SP" Ice Lake Xeon-SP
@@ -942,9 +1275,13 @@
 0x6a,  5 (0x606a5): "ICX-SP" Ice Lake Xeon-SP (Stepping C0)
     3rd Generation Intel® Xeon® Scalable Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00606A6_ICX_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00606A6_ICX_CPUID3.txt
 0x6a,  6 (0x606a6): "ICX-SP" Ice Lake Xeon-SP (Stepping D0)
     3rd Generation Intel® Xeon® Scalable Processor Family
     Intel(R) Xeon(R) Gold 6336Y CPU @ 2.40GHz
+    Intel(R) Xeon(R) Gold 6330 CPU @ 2.00GHz
+    Intel(R) Xeon(R) Platinum 8351N CPU @ 2.40GHz
 
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0x6c,  x (0x606cx): "ICXD" Ice Lake Xeon D
@@ -956,11 +1293,13 @@
     Intel® Xeon® D-1602, D-1612, D-1622, D-1623N, D-1627, D-1632, D-1633N, D-1637, D-1649N, D-1653N
     Intel® Xeon® D-2123IT, D-2141I, D-2142IT, D-2143IT, D-2145NT, D-2146NT, D-2161I, D-2163IT, D-2166NT, D-2173IT, D-2177NT, D-2183IT, D-2187NT, D-2191
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00606C1_ICX_01v_CPUID.txt
 0x6c,  1 (0x606c1): "ICL-D" Ice Lake Xeon D
     3rd Generation Intel® Xeon® Scalable Processor Family
     Intel® Xeon® Processor D-17xx, D-27xx
     Intel® Xeon® D-1702, D-1712TR, D-1713NT, D-1713NTE, D-1714, D-1715TER, D-1718T, D-1722NE, D-1726, D-1732TE, D-1733NT, D-1734NT, D-1735TR, D-1736, D-1736NT, D-1739, D-1746TER, D-1747NTE, D-1748TE, D-1749NT
     Intel® Xeon® D-2712T, D-2733NT, D-2738, D-2745NX, D-2752NTE, D-2752TER, D-2753NT, D-2757NX, D-2766NT, D-2775TE, D-2776NT, D-2777NX, D-2779, D-2786NTE, D-2795NT, D-2796NT, D-2796TE, D-2798NT, D-2798NX, D-2799
+    Intel(R) Xeon(R) D-1718T CPU @ 2.60GHz
 
 # Extrapolated from 0x606e1
 0x6e,  x (0x606ex): Cougar Mountain
@@ -976,11 +1315,17 @@
 0x75,  x (0x7065x): Atom Airmont NP (Lightning Mountain)
     Intel Spreadtrum SC9853I-IA
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel007065A_Spreadtrum_CPUID.txt
+0x75, 10 (0x7065a): Atom Airmont NP
+    Spreadtrum SC9853I-IA   728MHz
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x7a,  x (0x706ax): "GLK" Atom Goldmont Plus (Gemini Lake)
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x7a,  0 (0x706a0): "GLK" Gemini Lake (Stepping A0)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00706A1_GoldmontPlus_CPUID2.txt
 0x7a,  1 (0x706a1): "GLK" Gemini Lake (Stepping B0)
     Intel® Pentium® Processor Silver Series
     Intel® Celeron® Processor J Series
@@ -991,7 +1336,10 @@
     Intel® Celeron® Processor J4005, J4105
     Intel® Celeron® Processor N4000, N4100
     Intel(R) Celeron(R) J4005 CPU @ 2.00GHz
+    Intel(R) Celeron(R) J4105 CPU @ 1.50GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00706A8_GoldmontPlus_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00706A8_GoldmontPlus_CPUID2.txt
 0x7a,  8 (0x706a8): "GLK-R" Gemini Lake (Stepping R0)
     Inteli LakeeddedmbeddedProcessor J5005, N5000 Intel® CelProcessor J Series
     Intel® Celeron® Processor N Series
@@ -1001,6 +1349,8 @@
     Intel® Celeron® Processor J4025
     Intel® Celeron® Processor N4020
     Intel® Celeron® Processor N4120
+    Intel(R) Pentium(R) Silver N5030 CPU @ 1.10GHz
+    Intel(R) Pentium(R) Silver J5040 CPU @ 2.00GHz
 
 0x7d,  x (0x706dx): "ICL" Ice Lake Desktop
 
@@ -1015,12 +1365,18 @@
 0x7e,  4 (0x706e4): "ICL-U/Y" Ice Lake
     10th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00706E5_IceLakeY_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00706E5_IceLakeY_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00706E5_IceLakeY_CPUID3.txt
 0x7e,  5 (0x706e5): "ICL-U/Y" Ice Lake (Stepping D1)
     10th Generation Intel® Core™ Processor Family
     10th Generation Intel® Core™ Mobile Processor Family
     Intel® Core™ Processor i7-1060G7, i7-1065G7
     Intel® Core™ Processor i5-1030G4, i5-1030G7, i5-1035G1, i5-1035G4, i5-1035G7
     Intel® Core™ Processor i3-1000G1, i3-1000G4, i3-1005G1
+    Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz
+    Intel(R) Core(TM) i5-1035G4 CPU @ 1.10GHz
+    Intel(R) Core(TM) i3-1005G1 CPU @ 1.20GHz
 
 0x85,  0 (0x80650): "PHI KNM" Xeon Phi Knights Mill
     Intel® Xeon® Phi™ Processor Family
@@ -1050,9 +1406,11 @@
 0x8a,  0 (0x806a0): "LKF" Lakefield (Tremont, Sunny Cove) (Stepping Bx)
     Intel® Core™ Processor i3-L13G4, i5-L16G7
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806A1_Lakefield_CPUID.txt
 0x8a,  1 (0x806a1): "LKF" Lakefield (Tremont, Sunny Cove) (Stepping B2/B3)
     Intel® Core™ Processor with Hybrid Technology
     Intel® Core™ Processor i3-L13G4, i5-L16G7
+    Intel(R) Core(TM) i5-L16G7 CPU @ 1.40GHz
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x8c,  0 (0x806c0): "TGL" Tiger Lake U (Stepping A0)
@@ -1062,6 +1420,11 @@
     Intel® Core™ i7-1185G7, i7-1165G7, i7-1185GRE, i7-1185G7E, i7-1180G7, i7-1160G7
     Intel® Celeron® 6305 Processor, Intel® Celeron® 6305E Processor
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806C1_TigerLake_CPUID3.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806C1_TigerLake_CPUID5.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806C1_TigerLake_CPUID6.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806C1_TigerLake_CPUID9.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806D1_TigerLakeH_CPUID1.txt
 0x8c,  1 (0x806c1): "TGL" Tiger Lake U/H35 (Stepping B0, B1)
     11th Generation Intel® Core™ Processor Family
     11th Generation Intel® Core™ Mobile Processor Family
@@ -1071,6 +1434,10 @@
     Intel® Pentium® Gold 7505
     11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz
     11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz
+    11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz
+    11th Gen Intel(R) Core(TM) i7-11375H @ 3.30GHz
+    Intel(R) Pentium(R) Gold 7505 @ 2.00GHz
+    Intel(R) Celeron(R) 6305 @ 1.80GHz
 
 0x8c,  2 (0x806c2): "TGL-R" Tiger Lake U Refresh (Stepping C0)
     11th Generation Intel® Core™ Processor Family
@@ -1083,6 +1450,7 @@
     Intel® Xeon® Processor Family
     Intel® Xeon® W-11955M, Intel® Xeon® W-11855M
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806D1_TigerLakeH_CPUID1.txt
 0x8d,  1 (0x806d1): "TGL-H" Tiger Lake (Stepping R0)
     11th Generation Intel® Core™ Processor Family
     11th Generation Intel® Core™ Mobile Processor Family
@@ -1090,7 +1458,12 @@
     Intel® Core™ Processor i9-11980HK, i9-11950H, i9-11900H, i7-11850H, i7-11800H, i5-11500H, i5-11400H, i5-11260H, i7-11390H, i7-11375H, i7-11370H, i5-11320H, i5-11300H
     Intel® Xeon® Processor Family
     Intel® Xeon® W-11955M, Intel® Xeon® W-11855M
+    11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806E9_AmberLakeY_02_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806E9_AmberLakeY_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806E9_Kabylake_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806E9_Kabylake_CPUID2.txt
 0x8e,  9 (0x806e9): "KBL-U/Y/U23e/AML-Y22" Kaby Lake Mobile (Kaby Lake U/Y, U23e), Amber Lake Y (Stepping H0)
     7th Generation Intel® Core™ Processor Family
     7th Generation Intel® Core™ Mobile Processor Family
@@ -1118,7 +1491,12 @@
     Intel(R) Core(TM) i5-7260U CPU @ 2.20GHz
     Intel(R) Core(TM) i7-7567U CPU @ 3.50GHz
     Intel(R) Core(TM) m3-7Y30 CPU @ 1.00GHz
+    Intel(R) Pentium(R) CPU 4425Y @ 1.70GHz
+    Intel(R) Core(TM) m3-8100Y CPU @ 1.10GHz
+    Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz
+    Intel(R) Pentium(R) CPU 4415U @ 2.30GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806EA_Kabylake_CPUID.txt
 0x8e, 10 (0x806ea): "KBL-R-U/CFL-U43e" Kaby Lake Mobile (Kaby Lake Refresh U4+2) (Stepping Y0), Coffee Lake U43e (Stepping D0)
     8th Generation Intel® Core™ Mobile Processor Family
     8th Generation Intel® Core™ Processor Family
@@ -1130,7 +1508,10 @@
     Intel® Core™ Processor i5-8250U, i5-8350U
     Intel® Core™ Processor i3-7020U, i3-8130U
     Intel(R) Core(TM) i3-8109U CPU @ 3.00GHz
+    Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806EB_WhiskeyLake_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806EB_WhiskeyLake_CPUID3.txt
 0x8e, 11 (0x806eb): "WHL-U" Whiskey Lake U (Stepping W0)
     8th Generation Intel® Core™ Processors
     8th Generation Intel® Core™ Mobile Processor Family
@@ -1138,7 +1519,11 @@
     Intel® Core™ Processor i5-8265U
     Intel® Core™ Processor i3-8145U
     Intel® Core™ Processor 4205U, 5405U
+    Intel(R) Core(TM) i7-8565U CPU @ 1.80GHz
+    Intel(R) Pentium(R) CPU 5405U @ 2.30GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806EC_CometLake_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806EC_CometLake_CPUID3.txt
 0x8e, 12 (0x806ec): "WHL-U/AML-Y/Y42/CML-U42/Y42" Whiskey Lake U, Amber Lake Y (Stepping V0)
     8th Generation Intel® Core™ Processors
     8th Generation Intel® Core™ Mobile Processor Family
@@ -1157,6 +1542,8 @@
     Intel® Core™ Processor i5-10210U
     Intel® Pentium® Gold Processor 6405U
     Intel® Celeron® Processor 5305U
+    Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz
+    Intel(R) Core(TM) i3-10110U CPU @ 2.10GHz
 
 # FIXME: this may be (0x9e, 13) from https://software.intel.com/security-software-guidance/insights/processors-affected-l1d-eviction-sampling
 0x8e, 13 (0x806ed): "WHL-U" Whiskey Lake (Desktop)
@@ -1194,17 +1581,26 @@
     Intel® Xeon® Gold 6414UL, Intel® Xeon® Gold 6430CL, Intel® Xeon® Gold 6430L
 
 # https://www.vmware.com/resources/compatibility/detail.php?deviceCategory=cpu&productid=153&vcl=true
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806F8_SapphireRapids_05_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/fbda7ba291abc0d9ddb41f788f3afd774782251d/GenuineIntel/GenuineIntel00806F8_SapphireRapids_06_CPUID.txt
 0x8f,  8 (0x806f8): "SPR-SP/HBM" Xeon Sapphire Rapids-SP, Xeon Max (Sapphire Rapids HBM) (Stepping E5/B3)
     4th Generation Intel® Xeon® Scalable Processor Family
     Intel® Xeon® Max Processor
     Intel Xeon Silver 4400, Bronze 3400 (Sapphire-Rapids-SP) Series
+    Intel(R) Xeon(R) w7-2475X
+    Intel(R) Xeon(R) w9-3475X
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x96,  0 (0x90660): "EHL" Elkhart Lake (Tremont) (Stepping A0)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090661_ElkhartLake_02_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090661_ElkhartLake_CPUID01.txt
 0x96,  1 (0x90661): "EHL" Elkhart Lake (Tremont) (Stepping B0, B1)
     Intel® Pentium® J6426/N6415
     Intel® Celeron® J6412/J6413/N6210/N6211
     Intel® Atom® x6000E
+    Intel Atom(R) x6425RE Processor @ 1.90GHz
+    Intel(R) Celeron(R) J6412 @ 2.00GHz
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
@@ -1214,13 +1610,24 @@
 0x97,  1 (0x90671): "ADL" Alder Lake S (Stepping B0)
     12th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090672_AlderLake_01_LC_BC_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090672_AlderLake_02_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090672_AlderLake_03_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090672_AlderLake_BC_AVX512_CPUID01.txt
 0x97,  2 (0x90672): "ADL" Alder Lake S (Stepping C0)
     12th Generation Intel® Core™ Processor Family
+    12th Gen Intel(R) Core(TM) i9-12900K
     12th Gen Intel(R) Core(TM) i5-12400
+    12th Gen Intel(R) Core(TM) i7-12800HX
+    12th Gen Intel(R) Core(TM) i9-12900K
 
 0x97,  4 (0x90674): "ADL" Alder Lake S (Stepping G0)
     12th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090675_AlderLake_00_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090675_AlderLake_01_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090675_AlderLake_02_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090675_AlderLake_03_CPUID.txt
 0x97,  5 (0x90675): "ADL" Alder Lake S (Golden Cove, Gracemont) (Stepping H0)
     12th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i5-12600, i5-12500, i5-12400, i5-12400F, i3-12300, i3-12100, i3-12100F, i5-12600T, i5-12500T, i5-12400T, i3-12300T, i3-12100T
@@ -1228,6 +1635,10 @@
     Intel® Pentium® Gold Processor G7400, G7400T
     Intel® Celeron® Processor Family
     Intel® Celeron® Processor G6900, G6900T
+    12th Gen Intel(R) Core(TM) i3-12100
+    12th Gen Intel(R) Core(TM) i5-12500T
+    Intel(R) Pentium(R) Gold G7400
+    12th Gen Intel(R) Core(TM) i5-12500
 
 # https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
 0x9a,  x (0x906ax): "ADL-P" Alder Lake P
@@ -1239,12 +1650,19 @@
 0x9a,  1 (0x906a1): "ADL" Alder Lake U (Stepping Q0)
     12th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906A2_AlderLakeP_00_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906A2_AlderLakeP_01_CPUID.txt
 0x9a,  2 (0x906a2): "ADL" Alder Lake U (Stepping K0)
     12th Generation Intel® Core™ Processor Family
+    12th Gen Intel(R) Core(TM) i7-12700H
+    12th Gen Intel(R) Core(TM) i9-12900HK
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906A3_AlderLakeP_00_CPUID.txt
 0x9a,  3 (0x906a3): "ADL" Alder Lake U (Stepping L0)
     12th Generation Intel® Core™ Processor Family
+    12th Gen Intel(R) Core(TM) i9-12900H
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906A4_AlderLakeP_00_CPUID.txt
 0x9a,  4 (0x906a4): "ADL/AZB" Alder Lake U (Golden Cove, Gracemont) (Stepping R0), Arizona Beach
     12th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i7-1265U, i7-1260U, i7-1255U, i7-1250U, i5-1245U, i5-1240U, i5-1235U, i5-1230U, i3-1215U, i3-1210U
@@ -1253,15 +1671,29 @@
     Intel® Celeron® Processor Family
     Intel® Celeron® Processor 7305, 7300
     Intel® Atom® Processor C1100
+    12th Gen Intel(R) Core(TM) i3-1220P
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906C0_JasperLake_06_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906C0_JasperLake_CPUID01.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906C0_JasperLake_CPUID02.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906C0_JasperLake_CPUID03.txt
 0x9c,  0 (0x906c0): "JSL" Jasper Lake (Tremont L) (Stepping A0/A1)
     Intel® Pentium® N6000/N6005
     Intel® Celeron® N4500/N4505/N5100/N5105
     Genuine Intel(R) CPU 0000 @ 1.10GHz
+    Intel(R) Celeron(R) N5095A @ 2.00GHz
+    Intel(R) Celeron(R) N4505 @ 2.00GHz
+    Intel(R) Pentium(R) Silver N6005 @ 2.00GHz
+    Intel(R) Celeron(R) N5100 @ 1.10GHz
 
 0x9d,  x (0x906dx): "ICL-NNPI" Ice Lake Neural Network Processor for Deep Learning Inference
 
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906E9_KabyLake_01_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906E9_KabylakeG_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906E9_KabylakeX_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906E9_Kabylake_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906E9_Kabylake_CPUID4.txt
 0x9e,  9 (0x906e9): "KBL-G/H/S/X/E3" Kaby Lake Desktop (Kaby Lake H/S/X/G, Xeon E3), Greenlow (Stepping B0)
     7th Generation Intel® Core™ Processor Family
     7th Generation Intel® Core™ Mobile Processor Family
@@ -1289,7 +1721,19 @@
     Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz
     Intel(R) Core(TM) i7-8809G CPU @ 3.10GHz
     Intel(R) Xeon(R) CPU E3-1275 v6 @ 3.80GHz
+    Intel(R) Core(TM) i3-7100 CPU @ 3.90GHz
+    Intel(R) Core(TM) i7-8705G CPU @ 3.10GHz
+    Intel(R) Core(TM) i7-7740X CPU @ 4.30GHz
+    Intel(R) Core(TM) i5-7600K CPU @ 3.80GHz
+    Intel(R) Pentium(R) CPU G4600 @ 3.60GHz
+    Intel(R) Pentium(R) Silver N6005 @ 2.00GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906EA_CoffeelakeH_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906EA_Coffeelake_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906EA_Coffeelake_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906EA_Coffeelake_CPUID3.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906EA_Coffeelake_CPUID4.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906EA_Coffeelake_CPUID6.txt
 0x9e, 10 (0x906ea): "KBL/CFL-H/S/E3" Kaby Lake Desktop, Coffee Lake H (6+2), Coffee Lake S (6+2), Coffee Lake S (6+2) Xeon E3, Coffee Lake S (4+2) Xeon E, Coffee Lake S (6+2) x/KBP (Stepping U0)
     8th Generation Intel® Core™ Processor Family
     8th Generation Intel® Core™ Mobile Processor Family
@@ -1304,8 +1748,14 @@
     Intel® Xeon® Processor E-2186G, E-2176G, E-2146G, E-2136, E-2126G
     Intel® Xeon® Processor E-2174G, E-2144G, E-2134, E-2124, E-2124G
     Genuine Intel(R) CPU 0000 @ 2.40GHz
+    Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
     Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz
+    Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+    Intel(R) Pentium(R) Gold G5400 CPU @ 3.70GHz
+    Intel(R) Core(TM) i7-8086K CPU @ 4.00GHz
+    Intel(R) Xeon(R) E-2226G CPU @ 3.40GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906EB_Coffeelake_CPUID.txt
 0x9e, 11 (0x906eb): "KBL/CFL-S" Kaby Lake Desktop (Coffee Lake-S), Coffee Lake-S (4+2) + KBL PCH, Coffee Lake-S (4+2) Xeon E3 (Stepping B0)
     8th Generation Intel® Core™ Desktop Processor Family
     8th Generation Intel® Core™ Processor Family
@@ -1315,7 +1765,9 @@
     Intel® Core™ Processor i3-8000, i3-8000T, i3-8020, i3-8100, i3-8100, i3-8100T, i3-8120, i3-8300, i3-8300T, i3-8350K
     Intel® Pentium® Gold G5400, G5400T, G5400T, G5420, G5420T, G5420T, G5500, G5500T, G5600
     Intel® Celeron® Processor G4900, G4900T, G4920
+    Intel(R) Core(TM) i3-8350K CPU @ 4.00GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906EC_CoffeeLake_CPUID4.txt
 0x9e, 12 (0x906ec): "CFL-H/S" Coffee Lake H (8+2), Coffee Lake S (8+2) (Stepping P0)
     9th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i9-9980HK, 9880H
@@ -1325,7 +1777,9 @@
     Intel® Core™ Processor i7-9700K, i7-9700KF
     Intel® Core™ Processor i5-9600K, i5-9600KF, i5-9400, i5-9400F
     Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
+    Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906ED_CoffeeLake_CPUID.txt
 0x9e, 13 (0x906ed): "CFL-H/S/E3" Coffee Lake H (8+2), Coffee Lake S (8+2) (Stepping R0)
     9th Generation Intel® Core™ Processor Family
     9th Generation Intel® Core™ Mobile Processor Family
@@ -1338,6 +1792,7 @@
     Intel® Core™ Processor i5-9600K, i5-9600KF, i5-9400, i5-9400F
     Intel® Xeon® Processor E-2288G, E-2286M, E-2278GEL, E-2278GE, E-2278G
     Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
+    Intel(R) CC150 CPU @ 3.50GHz
 
 0xa5,  0 (0xa0650): "CML" Comet Lake H S 6 2 (Stepping G0, P0)
     10th Generation Intel® Core™ Processor Family
@@ -1345,9 +1800,11 @@
 0xa5,  1 (0xa0651): "CML" Comet Lake H S 10 2 (Stepping P0)
     10th Generation Intel® Core™ Processor Family
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0652_CometLake_CPUID1.txt
 0xa5,  2 (0xa0652): "CML-H" Comet Lake H (Stepping R1)
     10th Generation Intel® Core™ Processor Family
     10th Generation Intel® Core™ Mobile Processor Family
+    Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz
 
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0xa5,  3 (0xa0653): "CML-S62" Comet Lake H S 6 2 (Stepping G1)
@@ -1361,9 +1818,15 @@
     Intel® Xeon® W processor family
     Intel® Xeon® W-1250 processors
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0654_CometLake_CPUID.txt
 0xa5,  4 (0xa0654): "CML" Comet Lake H S 10 2 (Stepping P1)
+    Intel(R) Xeon(R) W-1290P CPU @ 3.70GHz
 
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0655_CometLake_CPUID.pcHT_16th.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0655_CometLake_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0655_CometLake_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0655_CometLake_CPUID3.txt
 0xa5,  5 (0xa0655): "CML-S102" Comet Lake H S 10 2 (Stepping Q0)
     10th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i5-10600K, i5-10600KF, i5-10400, i5-10400F
@@ -1371,11 +1834,16 @@
     Intel® Core™ Processor i9-10900K, i9-10900KF, i9-10900, i9-10900T, i9-10900F, i9-10850K
     Intel® Xeon® W processor family
     Intel® Xeon® W-1290P, W-1290, W-1290T, W-1270P, W-1270, W-1250P
+    Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz
+    Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz
+    Intel(R) Core(TM) i5-10600K CPU @ 4.10GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0660_CometLake_CPUID1.txt
 0xa6,  0 (0xa0660): "CML-U62-V1" Comet Lake U A0 (Stepping A0)
     10th Generation Intel® Core™ Processor Family
     10th Generation Intel® Core™ Mobile Processor Family
     Intel® Core™ Processor i7-10710U
+    Intel(R) Core(TM) i7-10710U CPU @ 1.10GHz
 
 0xa6,  1 (0xa0661): "CML-U62-V2" Comet Lake U K0 S0 (Stepping K1)
     10th Generation Intel® Core™ Processor Family
@@ -1400,6 +1868,11 @@
     Intel® Xeon® W-1300 processor family
     Intel® Xeon® W-1300 Processors W-1390P, W-1390, W-1390T, W-1370P, W-1370, W-1350P, W-1350
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0671_RocketLakeE_01_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0671_RocketLake_CPUID01.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0671_RocketLake_CPUID05.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0671_RocketLake_CPUID1.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0671_RocketLake_CPUID4.txt
 0xa7,  1 (0xa0671): "RKL-S" Rocket Lake (Stepping B0)
     11th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i5-11600K, i5-11600KF, i5-11600, i5-11600T, i5-11500, i5-11500T, i5-11400, i5-11400F, i5-11400T
@@ -1411,6 +1884,11 @@
     Intel® Xeon® W-1300 Processors W-1390P, W-1390, W-1390T, W-1370P, W-1370, W-1350P, W-1350
     11th Gen Intel(R) Core(TM) i5-11500 @ 2.70GHz
     11th Gen Intel(R) Core(TM) i5-11600K @ 3.90GHz
+    Intel(R) Xeon(R) E-2356G CPU @ 3.20GHz
+    11th Gen Intel(R) Core(TM) i9-11900K @ 3.50GHz
+    11th Gen Intel(R) Core(TM) i9-11900K @ 3.50GHz
+    11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+    11th Gen Intel(R) Core(TM) i7-11700K @ 3.60GHz
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
@@ -1465,20 +1943,36 @@
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B0671_RaptorLake_01_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B0671_RaptorLake_02_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B0671_RaptorLake_04_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B0671_RaptorLake_05_CPUID.txt
 0xb7,  1 (0xb0671): "RPL-S" Raptor Lake S 8P+16E, HX 8P+16E (Raptor Cove/Gracemont) (Stepping B-0)
     13th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i9-13900K, i7-13700K, i5-13600K, i9-13900KF, i7-13700KF, i5-13600KF
+    13th Gen Intel(R) Core(TM) i9-13900K
+    13th Gen Intel(R) Core(TM) i9-13900KF
+    13th Gen Intel(R) Core(TM) i5-13600K
+    13th Gen Intel(R) Core(TM) i7-13700K
 
 # https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
 0xba,  x (0xb06ax): "RPL-P" Raptor Lake-P
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06A2_RaptorLakeP_02_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06A2_RaptorLakeP_03_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06A2_RaptorLakeP_04_CPUID.txt
 0xba,  2 (0xb06a2): "RPL-H/P/PX/U" Raptor Lake H 6P+8E, P 6P+8E, PX 6E+8P (Stepping J-0)
     13th Generation Intel® Core™ Processor Family
+    13th Gen Intel(R) CoreT i5-1350P
+    13th Gen Intel(R) CoreT i7-1370P
+    13th Gen Intel(R) Core(TM) i9-13900H
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06A3_RaptorLakeP_01_CPUID.txt
 0xba,  3 (0xb06a3): "RPL-U" Raptor Lake U 2E+8P (Stepping Q-0)
     13th Generation Intel® Core™ Processor Family
+    13th Gen Intel(R) Core(TM) i7-1365U
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0xbd,  x (0xb06dx): "LNL" Lunar Lake
@@ -1486,17 +1980,22 @@
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 # https://en.wikipedia.org/wiki/Gracemont_(microarchitecture)
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06E0_AlderLakeN_02_CPUID.txt
 0xbe,  0 (0xb06e0): "ADL-N" Alder Lake N (Stepping A0)
     12th Generation Intel® Core™ Processor Family
     Intel® Core i3-N305/N300
     Intel® Processor N50/N97/N100/N200
     Intel® Atom® Processor x7211E/x7213E/x7425E
     Intel(R) N200
+    Intel(R) N95
+    Intel(R) Core(TM) i3-N305
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06F2_RaptorLakeS_02_CPUID.txt
 0xbf,  2 (0xb06f2): "ADL/RPL-S/HX" Alder Lake, Raptor Lake S 8P+8E, HX 8P+8E (Stepping C-0)
     12th Generation Intel® Core™ Processor Family
     13th Generation Intel® Core™ Processor Family
+    13th Gen Intel(R) Core(TM) i5-13500
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 0xbf,  5 (0xb06f5): "ADL/RPL-S" Alder Lake, Raptor Lake S 6P+0E (Stepping C-0)
@@ -1528,83 +2027,139 @@
 [Family 15]
 0x00,  x (0x00f0x): ?
 0x00,  7 (0x00f07): Pentium 4 (Willamette) (Stepping B2)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F0A_P4_Willamette_CPUID.txt
 0x00, 10 (0x00f0a): Pentium 4 (Willamette), Xeon (Foster) (Stepping C1)
+    Intel(R) Pentium(R) 4 CPU 1700MHz
 
 0x01,  1 (0x00f11): Xeon MP (Foster) (Stepping C0)
 0x01,  2 (0x00f12): Pentium 4 (Willamette), Xeon (Foster) (Stepping D0)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F13_P4_Willamette_CPUID.txt
 0x01,  3 (0x00f13): Pentium 4 (Willamette), Xeon (Foster) (Stepping E0)
     Intel® Celeron®, 1715 MHz (17 x 101) (Willamette-128) (32 bits)
+    Intel(R) Celeron(R) CPU 1.70GHz
 
 0x02,  0 (0x00f20): ?
 0x02,  1 (0x00f21): ?
 0x02,  2 (0x00f22): Xeon MP (Gallatin) (Stepping A0)
 0x02,  3 (0x00f23): ?
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F24_P4_Northwood_CPUID.txt
 0x02,  4 (0x00f24): Mobile Pentium 4 Processor-M (Northwood), Mobile Celeron (Northwood), Xeon (Prestonia) (Stepping B0)
     Intel® Pentium® 4, 1600 MHz (16 x 100) (Northwood) (32 bits)
+    Intel(R) Pentium(R) 4 CPU 1.60GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F25_P4_Gallatin_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F25_P4_GallatinDP_CPUID.txt
 0x02,  5 (0x00f25): Pentium 4 (Northwood), Xeon MP (Gallatin), Xeon (Prestonia) (Stepping B1)
     2x Intel® Xeon®, 3066 MHz (23 x 133) (Gallatin DP) (32 bits)
     Intel® Pentium® 4 Extreme Edition, 3466 MHz (13 x 267) (Gallatin) (32 bits)
+    Intel(R) Pentium(R) 4 CPU 3.46GHz
+    Intel(R) Xeon(TM) CPU 3.06GHz
 
 0x02,  6 (0x00f26): Xeon MP (Gallatin) (Stepping C0)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F27_P4_NorthwoodCeleron_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F27_P4_Nortwood_CPUID.txt
 0x02,  7 (0x00f27): Mobile Pentium 4 Processor-M (Northwood), Mobile Celeron (Northwood), Xeon (Prestonia) (Stepping C1)
     Intel® Celeron®, 2033 MHz (20 x 102) (Northwood-128) (32 bits)
     Intel® Pentium® 4, 2400 MHz (18 x 133) (Northwood) (32 bits)
+    Intel(R) Celeron(R) CPU 2.00GHz
+    Intel(R) Pentium(R) 4 CPU 2.40GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F29_P4_Northwood_CPUID.txt
 0x02,  9 (0x00f29): Mobile Pentium 4 Processor-M (Northwood), Mobile Celeron (Northwood), Xeon (Prestonia) (Stepping D1
     Intel® Pentium® 4, 2800 MHz (14 x 200) (Northwood HyperThreading) (32 bits)
     Intel(R) Xeon(TM) CPU 3.06GHz
+    Intel(R) Pentium(R) 4 CPU 2.80GHz
 
 0x03,  0 (0x00f30): ?
 0x03,  1 (0x00f31): ?
 0x03,  2 (0x00f32): ?
 0x03,  3 (0x00f33): Pentium 4 (Prescott) (Stepping C0)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F34_P4_Prescott_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F34_P4_Nocona_CPUID.txt
 0x03,  4 (0x00f34): Pentium 4 (Prescott) (Stepping D0)
-    2x Intel® Xeon® (Nocona) (32 bits)
     Intel Pentium 4 (Prescott) (32 bits)
+    2x Intel® Xeon® (Nocona) (32 bits)
+    Intel(R) Pentium(R) 4 CPU 3.00GHz
+    Intel(R) Xeon(TM) CPU 2.80GHz
 
 0x03,  6 (0x00f36): ?
 0x03,  7 (0x00f37): ?
 
 0x04,  0 (0x00f40): ?
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F41_P4_Prescott_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F41_P4_Cranford_CPUID.txt
 0x04,  1 (0x00f41): Intel Pentium 4 (Prescott), Xeon (Nocona) (Stepping E0), Xeon MP (Cranford A0), Xeon MP (Potomac C0)
     Intel® Celeron® D 326, 2533 MHz (19 x 133) (Prescott-256)
     2x Intel P4 Xeon 3.40GHz (Cranford)
+    Intel(R) Celeron(R) CPU 2.53GHz
+    Intel(R) Xeon(TM) CPU 3.40GHz
 
 0x04,  2 (0x00f42): ?
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F43_P4_Prescott_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F43_P4EE_Prescott_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F43_P4_Irwindale_CPUID.txt
 0x04,  3 (0x00f43): Intel Pentium 4 (Prescott), Xeon (Nocona), Xeon (Irwindale) (Stepping N0)
     Intel® Xeon®, 3200 MHz (16 x 200) (Irwindale)
     Intel® Pentium® 4 640, 3200 MHz (16 x 200) (Prescott-2M)
     Intel® Pentium® 4 Extreme Edition, 3733 MHz (14 x 267) (Prescott-2M)
+    Intel(R) Pentium(R) 4 CPU 3.20GHz
+    Intel(R) Pentium(R) 4 CPU 3.73GHz
+    Intel(R) Xeon(TM) CPU 3.20GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F44_P4_Smithfield_CPUID.txt
 0x04,  4 (0x00f44): Pentium D (Smithfield) (Stepping A0)
     DualCore Intel® Pentium® D 820, 2800 MHz (14 x 200) (Smithfield)
+    Intel(R) Pentium(R) D CPU 2.80GHz
 
 0x04,  6 (0x00f46): ?
 
 0x04,  7 (0x00f47): Pentium D (Smithfield) (Stepping B0)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F48_P4_Paxville_CPUID.txt
 0x04,  8 (0x00f48): Dual-Core Xeon (Paxville) (Stepping A0)
     4x Intel® Xeon® 7020 2667.2 MHz (16.0 x 166.7 MHz) (Paxville)
+    Intel(R) Xeon(TM) CPU 2.66GHz
 
 0x04,  9 (0x00f49): Pentium 4 (Prescott) (Stepping G1), Xeon MP (Cranford) (Stepping B0)
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F4A_P4_Irwindale_CPUID.txt
 0x04, 10 (0x00f4a): Pentium 4 (Prescott), Xeon (Nocona), Xeon (Irwindale) (Stepping R0)
     2x Intel® Xeon®, 3400 MHz (17 x 200) (Irwindale)
+    Intel(R) Xeon(TM) CPU 3.40GHz
 
 0x06,  0 (0x00f60): ?
 0x06,  1 (0x00f61): ?
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F62_P4_Presler_CPUID.txt
 0x06,  2 (0x00f62): Pentium 4 (Cedar Mill), Pentium D (Presler) (Stepping B1)
     DualCore Intel® Pentium® Extreme Edition 955, 3466 MHz (13 x 267) (Presler)
+    Genuine Intel(R) CPU 3.46GHz
 
 0x06,  3 (0x00f63): ?
+
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F64_P4_Dempsey_CPUID.txt
 0x06,  4 (0x00f64): Pentium 4 (Cedar Mill), Pentium D (Presler) (Stepping C1)
     Intel® Xeon® 5060 3192 MHz 3066.7MHz (Dempsey)
+    Intel(R) Xeon(TM) CPU 3.20GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F65_P4_CedarMill_CPUID.txt
 0x06,  5 (0x00f65): Pentium 4 (Cedar Mill), Pentium D (Presler) (Stepping D0)
     Intel® Celeron® D 347, 3066 MHz (23 x 133) (Cedar Mill)
+    Intel(R) Celeron(R) D CPU 3.06GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F66_P4_Tulsa_CPUID.txt
 0x06,  6 (0x00f66): ?
     2x DualCore Intel® Xeon®, 3000 MHz (18 x 167) (Tulsa)
+    Genuine Intel(R) CPU 3.00GHz
 
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F68_P4_Tulsa_CPUID.txt
 0x06,  8 (0x00f68): Xeon (Tulsa) (Stepping B0)
     2x Intel® Xeon® MP 7140M 2792.7 MHz (14.0 x 199.5 MHz) (Tulsa)
+    Intel(R) Xeon(TM) CPU 3.40GHz
