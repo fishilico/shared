@@ -196,6 +196,23 @@ __extension__ static const char* cpuidstr_7_edx[32] = {
 };
 
 /**
+ * cpuid 0x00000007:1, eax register
+ */
+__extension__ static const char* cpuidstr_7_1_eax[32] = {
+    [4] = "avx_vnni",
+    [5] = "avx512_bf16",
+    [7] = "cmpccxadd",
+    [8] = "arch_perfmon_ext",
+    [10] = "fzrm",
+    [11] = "fsrs",
+    [12] = "fsrc",
+    [18] = "lkgs",
+    [21] = "amx_fp16",
+    [23] = "avx_ifma",
+    [26] = "lam",
+};
+
+/**
  * cpuid 0x80000001, edx register
  */
 __extension__ static const char* cpuidstr_ext1_edx[32] = {
@@ -277,6 +294,13 @@ static void add_manual_cpuid_str(void)
      */
     assert(cpuidstr_ext7_edx[8] == NULL);
     cpuidstr_ext7_edx[8] = "constant_tsc";
+
+    /* Documented in
+     * https://cdrdv2-public.intel.com/779982/346446-flexible-return-and-event-delivery.pdf
+     * Flexible Return and Event Delivery (FRED)
+     */
+    assert(cpuidstr_7_1_eax[17] == NULL);
+    cpuidstr_7_1_eax[17] = "fred";
 }
 
 #endif

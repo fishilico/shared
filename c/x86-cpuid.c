@@ -151,6 +151,12 @@ int main(void)
         if (ecx) {
             print_features("Features 7:0.ecx", ecx, cpuidstr_7_ecx);
         }
+
+        ecx = 1;
+        asm_cpuid(7, &eax, &ebx, &ecx, &edx);
+        if (eax) {
+            print_features("Features 7:1.eax", eax, cpuidstr_7_1_eax);
+        }
     }
 
     /* CPUID 0x80000000: extended features */
