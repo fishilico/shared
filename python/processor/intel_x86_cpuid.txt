@@ -144,8 +144,11 @@
     2x DualCore Intel® Xeon® 5140, 2333 MHz (7 x 333) (Woodcrest)
 
 0x0f,  5 (0x006f5): Core 2 Merom Solo/Core Duo
+
+# https://lore.kernel.org/lkml/1A7043D5F58CCB44A599DFD55ED4C948469380B6@fmsmsx115.amr.corp.intel.com/T/
 0x0f,  6 (0x006f6): Core 2 Merom Solo/Core Duo
     Mobile DualCore Intel® Core™ 2 Duo T5600, 1833 MHz (11 x 167) (Merom-2M)
+    Intel(R) Core(TM)2 CPU          6400  @ 2.13GHz
 
 0x0f,  7 (0x006f7): Core 2 Merom Solo/Core Duo
     2x QuadCore Intel® Xeon® L5320, 1866 MHz (7 x 267) (Clovertown)
@@ -161,7 +164,9 @@
     Intel(R) Core(TM)2 Duo CPU E6550 @ 2.33GHz
     Intel(R) Core(TM)2 Duo CPU     E6850  @ 3.00GHz
 
+# https://forum.recalbox.com/topic/30080/deuxi%C3%A8me-%C3%A9cran-vga-pour-les-scrapes-et-les-vid%C3%A9os
 0x0f, 13 (0x006fd): Core 2 Merom Solo/Core Duo
+    Intel(R) Pentium(R) Dual CPU E2160 @ 1.80GHz
 
 0x15,  0 (0x10650): ?
     Intel® LE80578, 800 MHz (16 x 50) (Vermilion)
@@ -191,6 +196,7 @@
     Intel® Core™2 Quad Processor Q8200, Q8200S, Q8400, Q8400S, Q9300, Q9400, Q9400S, Q9450, Q9500, Q9505, Q9505S, Q9550, Q9550S, Q9650
     Intel® Xeon® Processor L3360, X3320, X3330, X3350, X3360, X3370, X3380
 
+# https://forum.xda-developers.com/t/intel_rapl-driver-does-not-support-cpu-family-6-model-70.3630730/
 0x17, 10 (0x1067a): Core 2 Penryn, Penryn/QC, Harpertown, Wolfdale DP, Wolfdale E0, R0, Wolfdale Xeon E0
     Pentium Dual-Core CPU T4200, 2000MHz (Penryn) (CPUID level 0xD, SSE4.1 disabled)
     Intel® Core™ 2 processor, Intel® Pentium® Processor E
@@ -209,6 +215,7 @@
     Intel® Celeron® Processor E3200, E3300, E3400, E3500
     Intel® Xeon® Processor E3110, E3120, E5205, E5220, L3110, L5215, L5240, X5260, X5270, X5272
     Intel(R) Core(TM)2 Duo CPU     E7500  @ 2.93GHz
+    Intel(R) Core(TM)2 Duo CPU T9400 @ 2.53GHz
 
 0x1a,  1 (0x106a1): Nehalem EP
     Intel Nehalem ES (bad L1D data, 4 way instead of 8 way in CPUID level 00000004)
@@ -261,10 +268,10 @@
 0x1d,  1 (0x106d1): Core 2 Dunnington
     4x HexaCore Intel® Xeon® MP E7450 (Dunnington-6C)
 
-0x1e,  0 (0x106e0): Nehalem
+0x1e,  0 (0x106e0): "NHM" Nehalem
     QuadCore Lynnfield ES (Core i5)
 
-0x1e,  4 (0x106e4): Nehalem, Jasper (embedded Nehalem)
+0x1e,  4 (0x106e4): "NHM" Nehalem, Jasper (embedded Nehalem)
     Intel® Xeon® C5500 (Jasper Forest)
     Intel® Celeron® Processor P1053
     Intel® Xeon® Processor ECxxxx, LCxxxx
@@ -285,10 +292,10 @@
     Intel® Xeon® Processor L3426
     Intel® Xeon® Processor X3430, X3440, X3450, X3460, X3470, X3480
 
-0x1f,  1 (0x106f1): Nehalem G (Auburndale / Havendale)
+0x1f,  1 (0x106f1): "NHM" Nehalem G (Auburndale / Havendale)
     Havendale, Auburndale (Core i3, cancelled)
 
-0x25,  2 (0x20652): Westmere Client (Clarkdale, Arrandale, Clarkdale Xeon)
+0x25,  2 (0x20652): "WSM" Westmere Client (Clarkdale, Arrandale, Clarkdale Xeon)
     DualCore Intel® Core™ i5 650, 3600 MHz (26 x 138) (Clarkdale)
     Intel® Xeon® Processor L3406
     Intel® Core™ Processor i7-620M/LM/UM, i7-640LM/UM
@@ -411,7 +418,7 @@
 
 0x2f,  0 (0x206f0): Westmere-EX
 0x2f,  1 (0x206f1): Westmere-EX
-0x2f,  2 (0x206f2): Westmere-EX Xeon (Eagleton), Westmere EX (EGL, WSM)
+0x2f,  2 (0x206f2): "EGL/WSM" Westmere-EX Xeon (Eagleton), Westmere EX
     Intel® Xeon® Processor E7 Family
     4x 10-Core Intel® Xeon® MP E7-4870, 2400 MHz (18 x 133) (Eagleton, Westmere-EX)
     Intel® Xeon® Processor E7-2803, 2820, 2830, 2850, 2860, 2870, 4807, 4820, 4830, 4850, 4860, 4870, 8830, 8837, 8850, 8860, 8867L, 8870
@@ -648,7 +655,7 @@
     Intel® Atom® Processor Z3460, Z3480
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0x4c,  x (0x406cx): Atom Airmont (Cherry Trail, Braswell)
+0x4c,  x (0x406cx): "AMT" Atom Airmont (Cherry Trail, Braswell)
 
 0x4c,  1 (0x406c1): ?
 0x4c,  2 (0x406c2): ?
