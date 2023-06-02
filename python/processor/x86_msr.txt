@@ -186,8 +186,13 @@ CORESOLO 0x47 LASTBRANCH_7
 0x47 LASTBRANCH_7_FROM_IP
 
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
-0x48 IA32_SPEC_CTRL # Intel-SDM-Vol4 Speculation Control
-0x49 IA32_PRED_CMD  # Intel-SDM-Vol4 Prediction Command
+# IBRS = Indirect Branch Restricted Speculation
+# STIBP = Single Thread Indirect Branch Predictors
+# SSBD = Speculative Store Bypass Disable
+# PSFD = disable Fast Store Forwarding Predictor
+0x48 IA32_SPEC_CTRL # Intel-SDM-Vol4 Speculation Control (bit 0 is IBRS, bit 1 is STIBP, bit 2 is SSBD, bit 3 is IPRED_DIS_U, bit 4 is IPRED_DIS_S, bit 5 is RRSBA_DIS_U, bit 6 is RRSBA_DIS_S, bit 7 is PSFD, bit 8 is DDPD_U, bit 10 is BHI_DIS_S)
+# IBPB = Indirect Branch Prediction Barrier
+0x49 IA32_PRED_CMD  # Intel-SDM-Vol4 Prediction Command (bit 0 is IBPB)
 0x4E IA32_PPIN_CTL  # Intel-SDM-Vol4 Protected Processor Inventory Number Enable Control
 0x4F IA32_PPIN      # Intel-SDM-Vol4 Protected Processor Inventory Number
 
@@ -440,9 +445,27 @@ XEONSCAL4 0x10B DCU_FLUSH_CMD              # Write-only virtual MSR to activate 
 0xFE IA32_MTRRCAP            # Intel-SDM-Vol4 MTRR Capability
 
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
-0x10A IA32_ARCH_CAPABILITIES # Intel-SDM-Vol4 Enumeration of Architectural Features
-0x10B IA32_FLUSH_CMD         # Intel-SDM-Vol4 Flush Command
-0x10F IA32_TSX_FORCE_ABORT   # Intel-SDM-Vol4 TSX Force Abort
+# RDCL = Rogue Data Cache Load
+# IBRS = Indirect Branch Restriction Speculation
+# RSBA = Return Stack Buffer Alternate
+# SSB = Speculative Store Bypass
+# MDS = Microarchitectural Data Sampling
+# TSX = Transactional Synchronization Extensions
+# TAA = TSX Asynchronous Abort
+# DOITM = Data Operand Independent Timing Mode
+# SBDR = Shared Buffers Data Read
+# SSDP = Sideband Stale Data Propagator
+# FBSDP = Fill Buffer Stale Data Propagator
+# PSDP = Primary Stale Data Propagator
+# PBRSB = Post-Barrier Return Stack Buffer Prediction
+0x10A IA32_ARCH_CAPABILITIES # Intel-SDM-Vol4 Enumeration of Architectural Features (bit 0 is RDCL_NO, bit 1 is IBRS_ALL, bit 2 is RSBA, bit 3 is SKIP_L1DFL_VMENTRY, bit 4 is SSB_NO, bit 5 is MDS_NO, bit 6 is IF_PSCHANGE_MC_NO, bit 7 is TSX_CTRL, bit 8 is TAA_NO, bit 10 is MISC_PACKAGE_CTRLS, bit 11 is ENERGY_FILTERING_CTL, bit 12 is DOITM, bit 13 is SBDR_SSDP_NO, bit 14 is FBSDP_NO, bit 15 is PSDP_NO, bit 17 is FB_CLEAR, bit 19 is RRSBA, bit 20 is BHI_NO, bit 21 is XAPIC_DISABLE_STATUS, bit 23 is OVERCLOCKING_STATUS, bit 24 is PBRSB_NO)
+
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
+# https://www.intel.com/content/dam/develop/external/us/en/documents/336996-speculative-execution-side-channel-mitigations.pdf
+0x10B IA32_FLUSH_CMD         # Intel-SDM-Vol4 Flush Command (bit 0 is L1D_FLUSH)
+
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
+0x10F IA32_TSX_FORCE_ABORT   # Intel-SDM-Vol4 TSX Force Abort (bit 0 is RTM_FORCE_ABORT or FORCE_ABORT_RTM, bit 1 is TSX_CPUID_CLEAR, bit 2 is SDV_ENABLE_RTM)
 
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
 XEONSCAL4 0x110 PLAT_FRMW_PROT_CTRL       # Platform Firmware Control MSR
@@ -476,8 +499,8 @@ ATOMBRASWELL 0x120 POWER_MISC
 XEONSCAL4 0x121 BIOS_UCODE_PM_TMR_EMULATION_CFG # his is a read/write MSR that will control the ucode emulation of the PM_TMR. BIOS will program this register
 
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
-0x122 IA32_TSX_CTRL     # Intel-SDM-Vol4 TSX Control
-0x123 IA32_MCU_OPT_CTRL # Intel-SDM-Vol4 Microcode Update Option Control
+0x122 IA32_TSX_CTRL     # Intel-SDM-Vol4 TSX Control (bit 0 is RTM_DISABLE, bit 1 is TSX_CPUID_CLEAR)
+0x123 IA32_MCU_OPT_CTRL # Intel-SDM-Vol4 Microcode Update Option Control (bit 0 is RNGDS_MITG_DIS, bit 1 is RTM_ALLOW, bit 2 is RTM_LOCKED, bit 3 is FB_CLEAR_DIS)
 
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
 XEONSCAL4 0x128 CPU_BUSNUMBER # This RO MSR will be used to read the Ubox CPUBUSNO/CPUBUSNO1/CPUBUSNO_VALID CSRs
@@ -3818,7 +3841,8 @@ XEONSCAL4 0x1A97 STLB_QOS_MASK_7_7
 
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/data-operand-independent-timing-isa-guidance.html
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
-0x1B01 IA32_UARCH_MISC_CTL            # Intel-SDM-Vol4
+# DOITM = Data Operand Independent Timing Mode
+0x1B01 IA32_UARCH_MISC_CTL            # Intel-SDM-Vol4 (bit 0 is DOITM)
 
 # Intel-SDM-Vol4 (12th and 13th Generation Intel Core Processors)
 CORE12 0x2000 UNC_CBO_0_PERFEVTSEL0  # Uncore C-Box 0, Counter 0 Event Select MSR
