@@ -760,6 +760,17 @@ CORE1 0x1C8 LBR_SELECT # Last Branch Record Filtering Select Register
 0x1CA DD_DI_CAPABILITY  # Read only register for DEDUP capability
 0x1CB DD_DI_ACTIVATE    # Rd/Wr register to specify keyID for dedup domain isolation
 
+# https://cdrdv2-public.intel.com/779982/346446-flexible-return-and-event-delivery.pdf Flexible Return and Event Delivery (FRED)
+0x1CC IA32_FRED_RSP0    # FRED Stack Pointer when transitioning from ring 3 to 0
+0x1CD IA32_FRED_RSP1
+0x1CE IA32_FRED_RSP2
+0x1CF IA32_FRED_RSP3
+0x1D0 IA32_FRED_STKLVLS # FRED Stack levels for exceptions
+0x1D1 IA32_FRED_SSP1    # FRED Supervisor Shadow Stack (FRED_SSP0 is IA32_PL0_SSP at 0x6A4)
+0x1D2 IA32_FRED_SSP2    # FRED Supervisor Shadow Stack
+0x1D3 IA32_FRED_SSP3    # FRED Supervisor Shadow Stack
+0x1D4 IA32_FRED_CONFIG  # FRED configuration
+
 # Also known as MSR_DEBUGCTLMSR in 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/ArchMsr.h
 0x1D9 IA32_DEBUGCTL # Intel-SDM-Vol4 Trace/Profile Resource Control
 
