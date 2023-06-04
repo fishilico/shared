@@ -26,8 +26,33 @@
  */
 #define X86_CR4_UINTR 0x02000000
 #define X86_CR4_PKS 0x01000000
+#define X86_CR4_FRED 0x100000000
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 4, 0)
+#define X86_CR3_LAM_U57 0x2000000000000000
+#define X86_CR3_LAM_U48 0x4000000000000000
+#define X86_CR4_LAM_SUP 0x10000000
+#endif
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 18, 0)
 #define X86_CR4_CET 0x00800000
+#endif
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
+#define X86_CR4_UMIP 0x00000800
+#endif
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 14, 11)
+/* Introduced in 4.15, backported in 4.14.11 LTS:
+ * https://elixir.bootlin.com/linux/v4.14.11/source/arch/x86/include/uapi/asm/processor-flags.h#L85
+ * and in 4.9.75 LTS
+ * https://elixir.bootlin.com/linux/v4.9.75/source/arch/x86/include/uapi/asm/processor-flags.h
+ * and in 3.16.53 LTS
+ * https://elixir.bootlin.com/linux/v3.16.53/source/arch/x86/include/uapi/asm/processor-flags.h
+ * and many more LTS versions
+ */
+#ifndef X86_CR3_PCID_NOFLUSH
+#define X86_CR3_PCID_NOFLUSH 0x8000000000000000
+#endif
+#endif
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 13, 0)
+#define X86_CR4_LA57 0x00001000
 #endif
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 6, 0)
 #define X86_CR4_PKE 0x00400000
@@ -135,9 +160,13 @@ static void dump_x86_cr(void)
 	cr = read_cr3();
 #endif
 	pr_info("cr3 = 0x%08lx\n", cr);
+	pr_info("  0...11: 0x%03lx PCID (Process-Context Identifier)\n", cr & 0xfff);
 	show_cr_bit(cr, 3, PWT, "Page Write Through");
 	show_cr_bit(cr, 3, PCD, "Page Cache Disable");
 	pr_info("  12...: 0x%08lx PDBR (Page Directory Base Register)\n", cr >> 12);
+	show_cr_bit(cr, 3, LAM_U57, "Activate LAM for userspace, 62:57 bits masked");
+	show_cr_bit(cr, 3, LAM_U48, "Activate LAM for userspace, 62:48 bits masked");
+	show_cr_bit(cr, 3, PCID_NOFLUSH, "Preserve old PCID");
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 9, 0)
 	/* Commit 1ef55be16ed6 ("x86/asm: Get rid of __read_cr4_safe()") dropped
@@ -164,6 +193,8 @@ static void dump_x86_cr(void)
 	show_cr_bit(cr, 4, PCE, "enable performance counters at ipl 3");
 	show_cr_bit(cr, 4, OSFXSR, "enable fast FPU save and restore");
 	show_cr_bit(cr, 4, OSXMMEXCPT, "enable unmasked SSE exceptions");
+	show_cr_bit(cr, 4, UMIP, "enable User-Mode Instruction Prevention (UMIP) support");
+	show_cr_bit(cr, 4, LA57, "enable 5-level page tables");
 	show_cr_bit(cr, 4, VMXE, "enable Virtual Machine Extensions");
 	show_cr_bit(cr, 4, SMXE, "enable Safer Mode Extensions (TXT)");
 	show_cr_bit(cr, 4, FSGSBASE, "enable RDWRFSGS instructions support");
@@ -175,6 +206,8 @@ static void dump_x86_cr(void)
 	show_cr_bit(cr, 4, CET, "enable Control-flow Enforcement Technology");
 	show_cr_bit(cr, 4, PKS, "enable Protection Keys for Supervisor-Mode Pages");
 	show_cr_bit(cr, 4, UINTR, "enable User Interrupts");
+	show_cr_bit(cr, 4, LAM_SUP, "Linear Address Masking (LAM) for supervisor pointers");
+	show_cr_bit(cr, 4, FRED, "enable Flexible Return and Event Delivery (FRED)");
 
 #ifdef CONFIG_X86_64
 	cr = read_cr8();
