@@ -217,6 +217,10 @@ AARCH64_PARTS = {
         0x029: 'M1 Firestorm Max',
         0x032: 'M2 Blizzard',
         0x033: 'M2 Avalanche',
+        0x034: 'M2 Blizzard Pro',
+        0x035: 'M2 Avalanche Pro',
+        0x038: 'M2 Blizzard Max',
+        0x039: 'M2 Avalanche Max',
     }),
     0xc0: ('Ampere', {
         0xac3: 'Ampere 1',
