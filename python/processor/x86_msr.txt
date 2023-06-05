@@ -3647,6 +3647,10 @@ CORE12 0x1309 RELOAD_FIXED_CTR0
 CORE12 0x130A RELOAD_FIXED_CTR1
 CORE12 0x130B RELOAD_FIXED_CTR2
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=38aaf921e92dc5cf87e4a6c5a4b24dd99155cace "perf/x86: Add Meteor Lake support"
+CORE14 0x1328 SNOOP_RSP_0   # Module Snoop Response Events on the e-core
+CORE14 0x1329 SNOOP_RSP_1
+
 # https://www.intel.com/content/dam/develop/external/us/en/documents-tps/intel-tdx-cpu-architectural-specification.pdf Intel Trust Domain CPU Architectural Extensions
 0x1400 IA32_SEAMRR_PHYS_BASE   # Secure Arbitration Mode Range Register - Physical Base Control Register
 0x1401 IA32_SEAMRR_PHYS_MASK   # Secure Arbitration Mode Range Register - Physical Mask Control Register
@@ -5568,12 +5572,18 @@ AMD64 0xC000010F DEBUG_EXTN_CTL           # AMD64-Vol2 Software Debug "Debug-Ext
 # https://github.com/intel/intel-cmt-cat/blob/6f385efba25682bc1d3dd2332fd177639ac8d0c7/lib/cpu_registers.h defines PQOS_MSR_MBA_MASK_START_AMD=0xC0000200
 AMD64 0xC0000200 MBA_BW_0  # Memory Bandwidth Allocation
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=5b6fac3fa44bafee12e0c3d1c5cbae6d058e9c98 defines MSR_IA32_SMBA_BW_BASE=0xc0000280
+AMD64 0xC0000280 SMBA_BW_BASE   # Slow Memory Bandwidth Allocation
+
 AMD64 0xC0000300 PERF_CNTR_GLOBAL_STATUS     # AMD64-Vol2 Core Performance Counter Status Registers
 AMD64 0xC0000301 PERF_CNTR_GLOBAL_CTL        # AMD64-Vol2 Core Performance Global Control Register (with a typo: "PerfCntrGobalCtl" in the spec)
 AMD64 0xC0000302 PERF_CNTR_GLOBAL_STATUS_CLR # AMD64-Vol2 Performance Counter Global Status Clear Register
 AMD64 0xC0000303 PERF_CNTR_GLOBAL_STATUS_SET # AMD64-Vol2 Performance Counter Global Status Set Register
 
-# # AMD64-Vol2 Additional Machine-Check Miscellaneous-Error Information Registers
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=dc2a3e857981f859889933cf66ded117d74edff1 defines MSR_IA32_EVT_CFG_BASE=0xc0000400
+AMD64 0xC0000400 EVT_CFG_BASE   # Monitor Event Configuration
+
+# AMD64-Vol2 Additional Machine-Check Miscellaneous-Error Information Registers
 AMD64 0xC0000408 MC4_MISC1    # AMD64-Vol2 (AMD-2013: "Link Thresholding")
 AMD64 0xC0000409 MC4_MISC2    # AMD64-Vol2 (AMD-2013: "L3 Thresholding")
 AMD64 0xC000040A MC4_MISC3    # AMD64-Vol2
