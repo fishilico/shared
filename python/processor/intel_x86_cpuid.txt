@@ -319,6 +319,9 @@
     Intel(R) Core(TM)2 Duo CPU T9400 @ 2.53GHz
     Pentium(R) Dual-Core CPU       T4200  @ 2.00GHz
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x1a,  x (0x106ax): Nehalem EP
+
 0x1a,  1 (0x106a1): Nehalem EP
     Intel Nehalem ES (bad L1D data, 4 way instead of 8 way in CPUID level 00000004)
 
@@ -389,6 +392,9 @@
     4x HexaCore Intel® Xeon® MP E7450 (Dunnington-6C)
     Intel(R) Xeon(R) CPU           E7450  @ 2.40GHz
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x1e,  x (0x106ex): "NHM" Nehalem
+
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106E0_Lynnfield_CPUID.txt
 0x1e,  0 (0x106e0): "NHM" Nehalem
     QuadCore Lynnfield ES (Core i5)
@@ -421,10 +427,16 @@
     Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz
     Intel(R) Core(TM) i7 CPU       Q 720  @ 1.60GHz
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x1f,  x (0x106fx): "NHM" Nehalem
+
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106F1_Auburndale_CPUID.txt
 0x1f,  1 (0x106f1): "NHM" Nehalem G (Auburndale / Havendale)
     Havendale, Auburndale (Core i3, cancelled)
     Genuine Intel(R) CPU             0000 @ 2.40GHz
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x25,  x (0x2065x): "WSM" Westmere
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0020652_Clarkdale_CPUID.txt
 0x25,  2 (0x20652): "WSM" Westmere Client (Clarkdale, Arrandale, Clarkdale Xeon)
@@ -471,6 +483,9 @@
 0x27,  2 (0x20672): Atom Penwell
     Intel® Atom® Z2460 1.6GHz (Medfield platform, Penwell SoC, Saltwell core)
     Intel(R) Atom(TM) CPU Z2460  @ 1.60GHz
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x2a,  x (0x206ax): "SNB" Sandy Bridge
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/cpu/intel/model_206ax/model_206ax_init.c
 0x2a,  0 (0x206a0): "SNB" Sandy Bridge
@@ -522,6 +537,9 @@
     Intel(R) Pentium(R) CPU G840 @ 2.80GHz
     Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x2c,  x (0x206cx): Westmere DP
+
 #https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C1_Gulftown_CPUID.txt
 0x2c,  1 (0x206c1): Westmere EP (Gulftown)
     2x QuadCore Intel® Xeon® X5667, 3066 MHz (23 x 133) (Gulftown)
@@ -541,6 +559,9 @@
     Intel® Xeon® Processor X5647, X5650, X5660, X5667, X5670, X5672, X5675, X5677, X5680, X5687, X5690, X5698
     Intel(R) Xeon(R) CPU           W3670  @ 3.20GHz
     Intel(R) Core(TM) i7 CPU       X 990  @ 3.47GHz
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x2d,  x (0x206dx): "SNBX" Sandy Bridge Xeon
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206D5_SandyBridgeEP_CPUID.txt
 0x2d,  5 (0x206d5): "SNBX" Sandy Bridge Xeon (Sandy Bridge E, EN, EP, EP4S)
@@ -568,6 +589,9 @@
     Intel® Core™ Processor i7-3820, 3930K
     Intel(R) Core(TM) i7-3930K CPU @ 3.20GHz
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x2e,  x (0x206ex): Nehalem-EX
+
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206E4_Beckton_CPUID.txt
 0x2e,  4 (0x206e4): Nehalem-EX Xeon (Beckton)
     4x HexaCore Intel® Xeon® (Beckton, 48 threads)
@@ -586,6 +610,9 @@
     Intel® Xeon® Processor E6510, E6540, E7520, E7530, E7540, L7545, L7555, X6550, X7542, X7550, X7560
     Intel(R) Xeon(R) CPU           X6550  @ 2.00GHz
     Intel(R) Xeon(R) CPU           X7560  @ 2.27GHz
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x2f,  x (0x206fx): Westmere-EX
 
 0x2f,  0 (0x206f0): Westmere-EX
 0x2f,  1 (0x206f1): Westmere-EX
@@ -683,6 +710,10 @@
     Intel® Atom® Processor E38xx
     Intel(R) Atom(TM) CPU  E3827  @ 1.74GHz
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x3a,  x (0x306ax): "IVB" Ivy Bridge
+    3rd Generation Intel® Core™ Processor Family
+
 0x3a,  0 (0x306a0): "IVB" Ivy Bridge
 0x3a,  2 (0x306a2): "IVB" Ivy Bridge
 0x3a,  4 (0x306a4): "IVB" Ivy Bridge
@@ -717,6 +748,10 @@
     Intel® Pentium® Processor 1405 v2, 2020M, 2030M, 2117U, 2127U, 2129Y, A1018, G2010, G2020, G2020T, G2030, G2030T, G2100T, G2120, G2120T, G2130, G2140
     Intel(R) Core(TM) i7-3770K CPU @ 3.50GHz
     Intel(R) Celeron(R) CPU G1610 @ 2.60GHz
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x3c,  x (0x306cx): "HSW" Haswell
+    4th Generation Intel® Core™ Processor Family
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306C3_Haswell2_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306C3_HaswellXeon_CPUID.txt
@@ -770,6 +805,10 @@
     Intel(R) Processor 5Y70 CPU @ 1.10GHz
     Intel(R) Core(TM) i7-5500U CPU @ 2.40GHz
     Intel(R) Core(TM) i5-5250U CPU @ 1.60GHz
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x3e,  x (0x306ex): "IVBX" Ivy Bridge Xeon
+    3rd Generation Intel® Core™ Processor Family
 
 0x3e,  0 (0x306e0): "IVBX" Ivy Bridge Xeon
 0x3e,  2 (0x306e2): "IVBX" Ivy Bridge Xeon
@@ -825,6 +864,10 @@
     Intel® Xeon® Processor E7v3 Product Family
     Intel® Xeon® Processor v3 E7-4809, E7-4820, E7-4830, E7-4850, E7-8860, E7-8867, E7-8870, E7-8880L, E7-8880, E7-8890, E7-8891, E7-8893
     Intel® Xeon® Processor E7-4809V3, E7-4820V3, E7-4830V3, E7-4850V3, E7-8860V3, E7-8867V3, E7-8870V3, E7-8880LV3, E7-8880V3, E7-8890V3, E7-8891V3, E7-8893V3
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x45,  x (0x4065x): "HSW" Haswell
+    4th Generation Intel® Core™ Processor Family
 
 0x45,  1 (0x40651): "HSW-U" Haswell ULT, Haswell U, Haswell Y
     4th Generation Intel® Core™ Processor Family
@@ -967,7 +1010,10 @@
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x4e,  8 (0x406e8): "KBL" Kaby Lake (Stepping G0)
 
-0x4f,  0 (0x406f0): "BDX" Broadwell X
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x4f,  x (0x406fx): "BDX" Broadwell Xeon
+
+0x4f,  0 (0x406f0): "BDX" Broadwell Xeon
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406F1_BroadwellE_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00406F1_BroadwellE_CPUID2.txt
@@ -1106,6 +1152,9 @@
 0x55, 11 (0x5065b): "CPX-SP" Cooper Lake SP (Stepping A1)
     3rd Generation Intel® Xeon® Scalable Processor Family
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x56,  x (0x5066x): "BDX" Broadwell Xeon
+
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050662_BroadwellDE_CPUID.txt
 0x56,  2 (0x50662): "BDX-DE" Broadwell Xeon D (Broadwell DE V1)
     Intel® Xeon® Processor D-1500 Product Family
@@ -1129,6 +1178,9 @@
     Intel® Xeon® D Processor Family
     Intel® Xeon® Processor D-1513N, D-1523N, D-1533N, D1543N, D1553N
     Intel® Xeon® Processor D-1602, D-1622, D-1623N, D-1627 , D-1633N, D-1637, D-1649N, D-1653N
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x57,  x (0x5067x): "PHI KNL" Xeon Phi Knights Landing
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050671_KnightsLanding_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050671_KnightsLanding_CPUID2.txt
@@ -1378,6 +1430,9 @@
     Intel(R) Core(TM) i5-1035G4 CPU @ 1.10GHz
     Intel(R) Core(TM) i3-1005G1 CPU @ 1.20GHz
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x85,  x (0x8065x): "PHI KNM" Xeon Phi Knights Mill
+
 0x85,  0 (0x80650): "PHI KNM" Xeon Phi Knights Mill
     Intel® Xeon® Phi™ Processor Family
     Intel® Xeon Phi™ 72x5 Processor Family
@@ -1412,6 +1467,10 @@
     Intel® Core™ Processor i3-L13G4, i5-L16G7
     Intel(R) Core(TM) i5-L16G7 CPU @ 1.40GHz
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x8c,  x (0x806cx): "TGL" Tiger Lake
+    11th Generation Intel® Core™ Processor Family
+
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x8c,  0 (0x806c0): "TGL" Tiger Lake U (Stepping A0)
     11th Generation Intel® Core™ Processor Family
@@ -1444,6 +1503,10 @@
     11th Generation Intel® Core™ Mobile Processor Family
     Intel® Celeron® Processor UP3-Refresh, H35-Refresh
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x8d,  x (0x806dx): "TGL-H" Tiger Lake
+    11th Generation Intel® Core™ Processor Family
+
 0x8d,  0 (0x806d0): "TGL-H" Tiger Lake
     11th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i9-11980HK, i9-11950H, i9-11900H, i7-11850H, i7-11800H, i5-11500H, i5-11400H, i5-11260H, i7-11390H, i7-11375H, i7-11370H, i5-11320H, i5-11300H
@@ -1459,6 +1522,10 @@
     Intel® Xeon® Processor Family
     Intel® Xeon® W-11955M, Intel® Xeon® W-11855M
     11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x8e,  x (0x806ex): "KBL" Kaby Lake
+    7th Generation Intel® Core™ Processor Family
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806E9_AmberLakeY_02_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00806E9_AmberLakeY_CPUID.txt
@@ -1590,6 +1657,9 @@
     Intel(R) Xeon(R) w7-2475X
     Intel(R) Xeon(R) w9-3475X
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x96,  x (0x9066x): "EHL" Elkhart Lake (Tremont)
+
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x96,  0 (0x90660): "EHL" Elkhart Lake (Tremont) (Stepping A0)
 
@@ -1601,6 +1671,10 @@
     Intel® Atom® x6000E
     Intel Atom(R) x6425RE Processor @ 1.90GHz
     Intel(R) Celeron(R) J6412 @ 2.00GHz
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x97,  x (0x9067x): "ADL" Alder Lake
+    12th Generation Intel® Core™ Processor Family
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
@@ -1673,6 +1747,9 @@
     Intel® Atom® Processor C1100
     12th Gen Intel(R) Core(TM) i3-1220P
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x9c,  x (0x906cx): "JSL" Jasper Lake (Tremont L)
+
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906C0_JasperLake_06_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906C0_JasperLake_CPUID01.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906C0_JasperLake_CPUID02.txt
@@ -1687,6 +1764,10 @@
     Intel(R) Celeron(R) N5100 @ 1.10GHz
 
 0x9d,  x (0x906dx): "ICL-NNPI" Ice Lake Neural Network Processor for Deep Learning Inference
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0x9e,  x (0x906ex): "KBL" Kaby Lake
+    7th Generation Intel® Core™ Processor Family
 
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906E9_KabyLake_01_CPUID.txt
@@ -1794,6 +1875,10 @@
     Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
     Intel(R) CC150 CPU @ 3.50GHz
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0xa5,  x (0xa065x): "CML" Comet Lake
+    10th Generation Intel® Core™ Processor Family
+
 0xa5,  0 (0xa0650): "CML" Comet Lake H S 6 2 (Stepping G0, P0)
     10th Generation Intel® Core™ Processor Family
 
@@ -1838,6 +1923,10 @@
     Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz
     Intel(R) Core(TM) i5-10600K CPU @ 4.10GHz
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0xa6,  x (0xa066x): "CML" Comet Lake
+    10th Generation Intel® Core™ Processor Family
+
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00A0660_CometLake_CPUID1.txt
 0xa6,  0 (0xa0660): "CML-U62-V1" Comet Lake U A0 (Stepping A0)
     10th Generation Intel® Core™ Processor Family
@@ -1857,6 +1946,10 @@
 
 0xa6,  5 (0xa0665): "CML" Comet Lake S (Stepping Q0)
     10th Generation Intel® Core™ Processor Family
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0xa7,  x (0xa067x): "RKL-S" Rocket Lake
+    11th Generation Intel® Core™ Processor Family
 
 0xa7,  0 (0xa0670): "RKL-S" Rocket Lake
     11th Generation Intel® Core™ Processor Family
@@ -1889,6 +1982,9 @@
     11th Gen Intel(R) Core(TM) i9-11900K @ 3.50GHz
     11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
     11th Gen Intel(R) Core(TM) i7-11700K @ 3.60GHz
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0xaa,  x (0xa06ax): "MTL" Meteor Lake
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
@@ -1978,6 +2074,10 @@
 0xbd,  x (0xb06dx): "LNL" Lunar Lake
     16th Generation Intel® Core™ Processor Family
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0xbe,  x (0xb06ex): "ADL-N" Alder Lake N
+    12th Generation Intel® Core™ Processor Family
+
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 # https://en.wikipedia.org/wiki/Gracemont_(microarchitecture)
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06E0_AlderLakeN_02_CPUID.txt
@@ -1989,6 +2089,10 @@
     Intel(R) N200
     Intel(R) N95
     Intel(R) Core(TM) i3-N305
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
+0xbf,  x (0xb06fx): "ADL" Alder Lake
+    12th Generation Intel® Core™ Processor Family
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06F2_RaptorLakeS_02_CPUID.txt
