@@ -75,6 +75,7 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("nehalemep", "Nehalem EP"),
         ("nehalemep", "Nehalem"),
         ("nehalemex", "Nehalem-EX"),
+        ("rocketlake", "Rocket Lake"),
         ("sandybridge", "Sandy Bridge"),
         ("sapphirerapids", "Emerald Rapids Xeon"),
         ("sapphirerapids", "Sapphire Rapids Xeon"),
