@@ -284,6 +284,10 @@ XEONSCAL4 0x6D FEATURE_TUNING_1 # Register to tune HL configuration
 # https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/IpBlock/MemoryInit/Tgl/MiniBios/Common/CpuRegs.h for Tiger Lake (11th gen Core)
 CORE11 0x7A IA32_BIOS_ENBL_XU
 
+# https://cdrdv2-public.intel.com/782715/356111-ucode-update.pdf Runtime Microcode Update (June 2023, 356111-001US)
+0x7B IA32_MCU_ENUMERATION   # information about the microcode update capabilities of the processor
+0x7C IA32_MCU_STATUS        # status information for the most recent attempt to load a microcode update
+
 # https://twitter.com/_markel___/status/1578749396547932160 2022-10 Alder Lake
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
 0x7D SE_RDINFO_CMD # Allows Probe Mode ITP (In Target Probe) software to access relevant information located in the SECS and EPCM that is not accessible using EDBGRD instruction
@@ -472,7 +476,7 @@ XEONSCAL4 0x10B DCU_FLUSH_CMD              # Write-only virtual MSR to activate 
 # FBSDP = Fill Buffer Stale Data Propagator
 # PSDP = Primary Stale Data Propagator
 # PBRSB = Post-Barrier Return Stack Buffer Prediction
-0x10A IA32_ARCH_CAPABILITIES # Intel-SDM-Vol4 Enumeration of Architectural Features (bit 0 is RDCL_NO, bit 1 is IBRS_ALL, bit 2 is RSBA, bit 3 is SKIP_L1DFL_VMENTRY, bit 4 is SSB_NO, bit 5 is MDS_NO, bit 6 is IF_PSCHANGE_MC_NO, bit 7 is TSX_CTRL, bit 8 is TAA_NO, bit 10 is MISC_PACKAGE_CTRLS, bit 11 is ENERGY_FILTERING_CTL, bit 12 is DOITM, bit 13 is SBDR_SSDP_NO, bit 14 is FBSDP_NO, bit 15 is PSDP_NO, bit 17 is FB_CLEAR, bit 19 is RRSBA, bit 20 is BHI_NO, bit 21 is XAPIC_DISABLE_STATUS, bit 23 is OVERCLOCKING_STATUS, bit 24 is PBRSB_NO)
+0x10A IA32_ARCH_CAPABILITIES # Intel-SDM-Vol4 Enumeration of Architectural Features (bit 0 is RDCL_NO, bit 1 is IBRS_ALL, bit 2 is RSBA, bit 3 is SKIP_L1DFL_VMENTRY, bit 4 is SSB_NO, bit 5 is MDS_NO, bit 6 is IF_PSCHANGE_MC_NO, bit 7 is TSX_CTRL, bit 8 is TAA_NO, bit 10 is MISC_PACKAGE_CTRLS, bit 11 is ENERGY_FILTERING_CTL, bit 12 is DOITM, bit 13 is SBDR_SSDP_NO, bit 14 is FBSDP_NO, bit 15 is PSDP_NO, bit 16 is for Microcode Update Enumeration and Status, bit 17 is FB_CLEAR, bit 19 is RRSBA, bit 20 is BHI_NO, bit 21 is XAPIC_DISABLE_STATUS, bit 23 is OVERCLOCKING_STATUS, bit 24 is PBRSB_NO)
 
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
 # https://www.intel.com/content/dam/develop/external/us/en/documents/336996-speculative-execution-side-channel-mitigations.pdf
@@ -2006,6 +2010,13 @@ XEONSCAL4 0x79F UNCORE_SPARE_13_13
 # https://enveloper14.rssing.com/chan-8140356/article43.html "Intel Xeon Processor E7-8800/4800 V3 Product Family Technical Overview", for Enhanced machine check architecture recovery Gen2 (EMCA2)
 # https://cdrdv2-public.intel.com/671064/329176-mca-enhancements-in-intel-xeon-processors.pdf (formerly http://www.intel.com/content/dam/www/public/us/en/documents/white-papers/enhanced-mca-logging-xeon-paper.pdf) "MCA Enhancements in Intel Xeon Processors"
 0x793 EXTENDED_MCG_PTR      # Extended Machine Check Pointer
+
+# https://cdrdv2-public.intel.com/782715/356111-ucode-update.pdf Runtime Microcode Update (June 2023, 356111-001US)
+0x7A0 IA32_MCU_SVN_CONFIG   # Microcode Update config (bit 0 is LOCK, bit 1 is DEFER_SVN (manual commit))
+0x7A1 IA32_MCU_COMMIT_SVN   # Microcode Update commit Secure Version Number
+0x7A2 IA32_MCU_SVN_INFO     # Microcode Update commited and pending SVN
+0x7A4 IA32_MCU_ROLLBACK_MIN_ID # Minimal MCU revision ID for rollback
+0x7A5 IA32_MCU_STAGING_MBOX_ADDR # MMIO platform physical address of the MCU Staging Control register
 
 # 0x800-0x8FF is the x2APIC range
 
