@@ -129,6 +129,9 @@ PENTIUM4 0x2B EBC_SOFT_POWERON # Intel-SDM-Vol4 (Pentium 4 and Xeon) Processor S
 # Intel-SDM-Vol4 (Pentium 4) Processor Frequency Configuration
 PENTIUM4 0x2C EBC_FREQUENCY_ID
 
+# https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/Include/Library/SocketLga1156Lib.h Socket LGA1156 and LGA1366 based MSR definitions
+LGA1156 0x2D CHL_CONTROLS
+
 # https://review.coreboot.org/c/coreboot/+/51796/14/src/include/cpu/intel/msr.h#10
 # https://source.denx.de/u-boot/u-boot/-/blob/v2022.10/arch/x86/include/asm/msr-index.h
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
@@ -198,6 +201,9 @@ CORESOLO 0x47 LASTBRANCH_7
 0x4E IA32_PPIN_CTL  # Intel-SDM-Vol4 Protected Processor Inventory Number Enable Control
 0x4F IA32_PPIN      # Intel-SDM-Vol4 Protected Processor Inventory Number
 
+# https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/Include/Library/SocketLga1156Lib.h Socket LGA1156 and LGA1366 based MSR definitions
+LGA1156 0x4B VLW_CONTROL
+
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
 0x50 QUIESCE_CTL1 # MSR that is used to initiate quiesce and unquiesce of CSI links
 0x51 QUIESCE_CTL2 # MSR that is used for PSMI handshake before initiating a RAS quiesce
@@ -206,6 +212,9 @@ CORESOLO 0x47 LASTBRANCH_7
 # Intel-SDM-Vol4 (Xeon Processor E5 v3)
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h defines it as SPR_MSR_THD_LOGICAL_ID
 XEONE5V3 0x53 THREAD_ID_INFO # A Hardware Assigned ID for the Logical Processor
+
+# https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/Include/Library/SocketLga1156Lib.h Socket LGA1156 and LGA1366 based MSR definitions
+LGA1156 0x54 PECI_DNSTRM_WRITE_EN
 
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/SprMsr.h
 XEONSCAL4 0x56 ADR_CACHE_FLUSH # new MSR to flush caches
@@ -271,6 +280,9 @@ XEONSCAL4 0x6D FEATURE_TUNING_1 # Register to tune HL configuration
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
 0x7A BIOS_UPGD_TRIG
+
+# https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/IpBlock/MemoryInit/Tgl/MiniBios/Common/CpuRegs.h for Tiger Lake (11th gen Core)
+CORE11 0x7A IA32_BIOS_ENBL_XU
 
 # https://twitter.com/_markel___/status/1578749396547932160 2022-10 Alder Lake
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
@@ -521,6 +533,11 @@ XEONSCAL4 0x12A MMCFG_RULE_TARGET_LIST
 0x137 BTG_BP_RSVD3
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h defines MSR_ANC_FORCE_BOOT_POLICY_ENFORCED: Anchor Cove MSR to indicate that the initial boot block is complete, and to re-enable events. Write-only and accessible via the ACM
 0x138 BTG_BOOT_STATUS # BootGuard Boot Status
+
+# https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/Include/Library/SocketLga1156Lib.h Socket LGA1156 and LGA1366 based MSR definitions
+LGA1156 0x130 CPUID1_FEATURE_MASK
+LGA1156 0x131 CPUID80000001_FEATURE_MASK
+LGA1156 0x13D PCID_ENABLE_FEATURE
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/include/cpu/intel/msr.h
 0x139 BC_PBEC
@@ -829,6 +846,10 @@ XEONSCAL4 0x1E7 ULI_TARGET_RIP  # User-level Interrupts Target RIP
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
 XEONSCAL4 0x1F0 VLW_CAPABILITY # VLW capability MSR that reports information about the VLW messages that are supported
 
+# https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/Include/Library/SocketLga1156Lib.h Socket LGA1156 and LGA1366 based MSR definitions
+LGA1156 0x1F0 VLW_CAPABILITY
+LGA1156 0x1F1 FERR_CAPABILITY
+
 # Intel-SDM-Vol4 (10th Generation Intel Core)
 CORE10 0x1F1 CRASHLOG_CONTROL # Write Data to a Crash Log Configuration
 
@@ -838,6 +859,10 @@ CORE10 0x1F1 CRASHLOG_CONTROL # Write Data to a Crash Log Configuration
 # Intel-SDM-Vol4 (7th and 8th Generation Intel Core Processors)
 CORE7 0x1F4 PRMRR_PHYS_BASE  # Processor Reserved Memory Range Register - Physical Base Control Register
 CORE7 0x1F5 PRMRR_PHYS_MASK  # Processor Reserved Memory Range Register - Physical Mask Control Register
+
+# https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/Include/Library/SocketLga1156Lib.h Socket LGA1156 and LGA1366 based MSR definitions
+LGA1156 0x1F4 EMRR_PHYSBASE
+LGA1156 0x1F5 EMRR_PHYSMASK
 
 # From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
 0x1F5 PRMRR_MASK # Mask for PRMRR_BASE=0x2A0
@@ -985,6 +1010,10 @@ XEONSCAL4 0x2D9 INTEGRITY_CAPABILITIES
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
 XEONSCAL4 0x2E0 NEM # No-Evict Mode MSR
 
+# https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/Include/Library/SocketLga1156Lib.h Socket LGA1156 and LGA1366 based MSR definitions
+LGA1156 0x2E2 UNCORE_CR_MEMLOCK_COMMANDS
+LGA1156 0x2E3 UNCORE_CR_UNCORE_MC_CFG_CONTROL
+
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
 0x2E6 LT_UNLOCK_MEMORY # Used by Intel TXT enabled BIOS to unlock memory after checking that the TPM is valid
 
@@ -1006,6 +1035,9 @@ CORE7 0x2F5 UNCORE_PRMRR_PHYS_MASK
 
 # From https://github.com/intel/seam-loader/blob/eadff76d36d214419c801f1cee1828ea437c91a5/np-seam-loader/seamldr_src/Core/Include/common.h
 0x300 BUS_NUM
+
+# https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/Include/Library/SocketLga1156Lib.h Socket LGA1156 and LGA1366 based MSR definitions
+LGA1156 0x300 PCIEXBAR
 
 # Intel-SDM-Vol4 (6th-13th Xeon Processor) Lower 64 Bit CR_SGXOWNEREPOCH
 XEON6 0x300 SGXOWNEREPOCH0
@@ -1124,6 +1156,9 @@ XEONSCAL4 0x307 COMPOUND_PERF_CTR # PerfMon Compound Counter enhancement
 0x309 IA32_FIXED_CTR0   # Value of fixed counter 0 (cycles)
 0x30A IA32_FIXED_CTR1   # Value of fixed counter 1 (instructions)
 0x30B IA32_FIXED_CTR2   # Value of fixed counter 2 (reference cycles)
+
+# https://github.com/jmpoep/ElkhartLake_Silicon_reference_and_Platform_Sample_Code/blob/b0149682f932de6bb88199814f9885abcdb97579/Intel/ClientOneSiliconPkg/IpBlock/MemoryInit/Tgl/MiniBios/Common/CpuRegs.h for Tiger Lake (11th gen Core)
+CORE11 0x30B IA32_BIOS_MEM_DUMP_XU
 
 # Intel-SDM-Vol4 (10th Generation Intel Core)
 0x30C IA32_FIXED_CTR3 # Fixed-Function Performance Counter Register 3
@@ -1423,7 +1458,9 @@ XEONPHI7215 0x491 IA32_VMX_FMFUNC  # Capability Reporting Register of VM-Functio
 0x4D0 IA32_MCG_EXT_CTL # Intel-SDM-Vol4 Allows software to signal some MCEs to only a single logical processor in the system
 
 # Intel-SDM-Vol4 (4th Gen Core, Haswell Microarchitecture)
+# https://github.com/LongJohnCoder/zprj/blob/b7c51c9cf4864df6aabb99a1ae843becd577237c/ReferenceCode/Haswell/Include/CpuRegs.h#L463-L469
 CORE4 0x4E0 SMM_FEATURE_CONTROL # Enhanced SMM Feature Control
+CORE4 0x4E1 SMM_ENABLE          # SMM Enable
 CORE4 0x4E2 SMM_DELAYED         # SMM Delayed
 CORE4 0x4E3 SMM_BLOCKED         # SMM Blocked
 
