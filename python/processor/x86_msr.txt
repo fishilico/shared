@@ -155,7 +155,9 @@ XEONE5V3 0x35 CORE_THREAD_COUNT # Configured State of Enabled Processor Core Cou
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
 XEONSCAL4 0x39 SOCKET_ID # The SOCKET_ID MSR is used to reassign the package-specific portions of the APIC ID. This MSR is intended only to be used on scalable DP and high-end MP platforms to resolve legacy-mode APIC ID conflicts
 
-0x3A IA32_FEATURE_CONTROL # Intel-SDM-Vol4 Control Features in Intel 64 Processor
+# Bit 3 named IA32_SMRR_ENABLE_BIT in https://github.com/killvxk/LoginDemo/blob/859b3d842c61b130b6ec115373447650759aee9a/ServerCommonPkg/TXT/GetSec/Dxe/Common/x64/txt.inc#L80
+# Bit 11 named B_EFI_MSR_IA32_FEATURE_CONTROL_D3ST in https://github.com/killvxk/LoginDemo/blob/859b3d842c61b130b6ec115373447650759aee9a/ServerCommonPkg/Include/CpuRegs.h#L113
+0x3A IA32_FEATURE_CONTROL # Intel-SDM-Vol4 Control Features in Intel 64 Processor (bit 0 is Lock ; bit 1 is Enable VMX inside SMX operation : bit 2 is Enable VMX outside SMX operation ; bit 3 is Enable SMRR ; bit 11 is D3ST ; bits 0x7f00 is SENTER Local Functions Enable ; bit 15 is SENTER Global Enable ; bit 17 is SGX Launch Control Enable ; bit 18 is SGX Global Enable ; bit 20 is "LMCE" Turn Local Machine Check On)
 
 0x3B IA32_TSC_ADJUST # Intel-SDM-Vol4 Per Logical Processor TSC Adjust
 
