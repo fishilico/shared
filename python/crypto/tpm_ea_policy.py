@@ -540,6 +540,38 @@ WELL_KNOWN_EA_POLICIES = {
     'e6ef4f0296ac3ef0f53906480985b1be8058e0e517e5f74a5b8a415efe339d87': 'PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(01,01,00))',  # noqa
     '44447900cbb83f5b15765650ef96980a2b966ea909044a01b85fa54a96fc5984': '(PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is ZEROS)) OR (PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(00,01,00))) OR (PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial) AND PolicyPCR(0 is extended from SHA1(01,01,00)))',  # noqa
 
+    # Policy with secret, seen on some Lenovo laptops.
+    # Intel TXT documentation states that the auth policy of these NV Indexes is "OEM policy"
+    # tpm2_nvreadpublic 0x01c10103 : LCP Platform Supplier (Intel TXT "PS")
+    #   attributes:
+    #     friendly: authwrite|policydelete|writelocked|writedefine|authread|no_da|written|platformcreate
+    #     value: 0x42C0462
+    #   authorization policy: B75CE1946F78DF8BAA426918DB09318017E6B38D048C954E05C2C4F34BD44060
+    # tpm2_nvreadpublic 0x01c10104 : SGX Software Version Number (Intel TXT "SGX SVN")
+    #   attributes:
+    #     friendly: authwrite|policydelete|authread|no_da|written|platformcreate
+    #     value: 0x4040462
+    #   authorization policy: B75CE1946F78DF8BAA426918DB09318017E6B38D048C954E05C2C4F34BD44060
+    #
+    # Found in CFL_WHL_CML_U_V1_V2_H_ACM_KIt_WW11_2020/Tools/System_Guard_PS2_TPM_Ref
+    # ExampleSecret is 771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4
+    # ExamplePhSecretORSha256.pDef is 22030B7E0BB1F9D50657571EE2F7FCE1EB91990C8B8AE977FCB3F158B03EBA96
+    # UnDefineSpaceSpecial.pDef is B75CE1946F78DF8BAA426918DB09318017E6B38D048C954E05C2C4F34BD44060
+    # ExamplePsFinalOrSha256.pDef is C001C8000210D0FAA4F4F4F8A78EF4F8264E6F8555340D2F04180F8CF110FFDD
+    '22030b7e0bb1f9d50657571ee2f7fce1eb91990c8b8ae977fcb3f158b03eba96': 'zeros OR 771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4',  # noqa
+    'b75ce1946f78df8baa426918db09318017e6b38d048c954e05c2c4f34bd44060': '(zeros OR 771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)',  # noqa
+    'c001c8000210d0faa4f4f4f8a78ef4f8264e6f8555340d2f04180f8cf110ffdd': '((zeros OR 771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)) OR (zeros OR 771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4) OR PolicyNvWritten(NO)',  # noqa
+
+    # Found in CFL_WHL_CML_U_V1_V2_H_ACM_KIt_WW11_2020/Tools/System_Guard_PS2_TPM_Ref
+    # DefaultPsFinalORSha256.pDef is 9F970E88340B836B768E682DB1BE76EC3F4284282FDDF64B05ACF8FD2699A71C
+    'a4469af0287113e5d5eb95287d94bab42bd166a42dfa89fe91866e7034420805': 'FD516FA72051D00FA032B98DF1E2110A20C2766E49B5FB417621D5572601743A AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)',  # noqa
+    '9f970e88340b836b768e682db1be76ec3f4284282fddf64b05acf8fd2699a71c': '(FD516FA72051D00FA032B98DF1E2110A20C2766E49B5FB417621D5572601743A AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)) OR FD516FA72051D00FA032B98DF1E2110A20C2766E49B5FB417621D5572601743A OR PolicyNvWritten(NO)',  # noqa
+
+    # Found in CFL_WHL_CML_U_V1_V2_H_ACM_KIt_WW11_2020/Tools/System_Guard_PS2_TPM_Ref
+    # OriginalDefaultPsFinalORSha256.pDef is 6CE3379D380001BD45B1F6B3DFFFF39A03CA61BFFB13FEAFC2F257196DF49FE4
+    'a8652ea8a9787937bc33c4164b58f07f8378bbae396875293a626048b5955c4c': '061408869C564D49F631C981EA9C303AA0B126671532CBA86ABBEDC73B8A5692 AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)',  # noqa
+    '6ce3379d380001bd45b1f6b3dffff39a03ca61bffb13feafc2f257196df49fe4': '(061408869C564D49F631C981EA9C303AA0B126671532CBA86ABBEDC73B8A5692 AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)) OR 061408869C564D49F631C981EA9C303AA0B126671532CBA86ABBEDC73B8A5692 OR PolicyNvWritten(NO)',  # noqa
+
     # Unknown policy seen on some Lenovo laptops.
     # Intel TXT documentation states that the auth policy of these NV Indexes is "OEM policy"
     # tpm2_nvreadpublic 0x01800001 : LCP Platform Supplier (Intel TXT "PS", old)
@@ -553,20 +585,6 @@ WELL_KNOWN_EA_POLICIES = {
     #     value: 0x4040462
     #   authorization policy: 1169A46A813A8CCDD0F3066785207BB9B67AFD3A6CD6DFE5C5AEE120867A96DF
     '1169a46a813a8ccdd0f3066785207bb9b67afd3a6cd6dfe5c5aee120867a96df': 'Unknown (used by Intel TXT for LCP Platform Supplier and SGX SVN)',  # noqa
-
-    # Unknown policy seen on some Lenovo laptops.
-    # Intel TXT documentation states that the auth policy of these NV Indexes is "OEM policy"
-    # tpm2_nvreadpublic 0x01c10103 : LCP Platform Supplier (Intel TXT "PS")
-    #   attributes:
-    #     friendly: authwrite|policydelete|writelocked|writedefine|authread|no_da|written|platformcreate
-    #     value: 0x42C0462
-    #   authorization policy: B75CE1946F78DF8BAA426918DB09318017E6B38D048C954E05C2C4F34BD44060
-    # tpm2_nvreadpublic 0x01c10104 : SGX Software Version Number (Intel TXT "SGX SVN")
-    #   attributes:
-    #     friendly: authwrite|policydelete|authread|no_da|written|platformcreate
-    #     value: 0x4040462
-    #   authorization policy: B75CE1946F78DF8BAA426918DB09318017E6B38D048C954E05C2C4F34BD44060
-    'b75ce1946f78df8baa426918db09318017e6b38d048c954e05c2c4f34bd44060': 'Unknown (used by Intel TXT for LCP Platform Supplier and SGX SVN)',  # noqa
 }
 
 
@@ -930,6 +948,56 @@ def check_well_known_ea_policies():
         policy_pcr(
             {0: hashlib.sha256(b'\x00' * 32 + hashlib.sha1(b'\x01\x01\x00').digest() + b'\x00' * 12).digest()},
             policy_command_code(Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial)),
+    ))
+
+    computed['zeros OR 771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4'] = policy_or((
+        b'\x00' * 32,
+        bytes.fromhex("771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4"),
+    ))
+    computed['(zeros OR 771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)'] = policy_command_code(  # noqa
+        Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial,
+        policy_or((
+            b'\x00' * 32,
+            bytes.fromhex("771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4"),
+        )),
+    )
+    computed['((zeros OR 771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)) OR (zeros OR 771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4) OR PolicyNvWritten(NO)'] = policy_or((  # noqa
+        policy_command_code(
+            Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial,
+            policy_or((
+                b'\x00' * 32,
+                bytes.fromhex("771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4"),
+            )),
+        ),
+        policy_or((
+            b'\x00' * 32,
+            bytes.fromhex("771CEB9D52438BB72009A316750DEA301A6A62ED3835A18ED9AF89F9EF36EBE4"),
+        )),
+        policy_nv_written(False),
+    ))
+    computed['FD516FA72051D00FA032B98DF1E2110A20C2766E49B5FB417621D5572601743A AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)'] =policy_command_code(  # noqa
+        Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial,
+        bytes.fromhex("FD516FA72051D00FA032B98DF1E2110A20C2766E49B5FB417621D5572601743A"),
+    )
+    computed['(FD516FA72051D00FA032B98DF1E2110A20C2766E49B5FB417621D5572601743A AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)) OR FD516FA72051D00FA032B98DF1E2110A20C2766E49B5FB417621D5572601743A OR PolicyNvWritten(NO)'] = policy_or((  # noqa
+        policy_command_code(
+            Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial,
+            bytes.fromhex("FD516FA72051D00FA032B98DF1E2110A20C2766E49B5FB417621D5572601743A"),
+        ),
+        bytes.fromhex("FD516FA72051D00FA032B98DF1E2110A20C2766E49B5FB417621D5572601743A"),
+        policy_nv_written(False),
+    ))
+    computed['061408869C564D49F631C981EA9C303AA0B126671532CBA86ABBEDC73B8A5692 AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)'] =policy_command_code(  # noqa
+        Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial,
+        bytes.fromhex("061408869C564D49F631C981EA9C303AA0B126671532CBA86ABBEDC73B8A5692"),
+    )
+    computed['(061408869C564D49F631C981EA9C303AA0B126671532CBA86ABBEDC73B8A5692 AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)) OR 061408869C564D49F631C981EA9C303AA0B126671532CBA86ABBEDC73B8A5692 OR PolicyNvWritten(NO)'] = policy_or((  # noqa
+        policy_command_code(
+            Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial,
+            bytes.fromhex("061408869C564D49F631C981EA9C303AA0B126671532CBA86ABBEDC73B8A5692"),
+        ),
+        bytes.fromhex("061408869C564D49F631C981EA9C303AA0B126671532CBA86ABBEDC73B8A5692"),
+        policy_nv_written(False),
     ))
 
     # Hard-code the policy for Microsoft NV Index, as the signing key is not documented
