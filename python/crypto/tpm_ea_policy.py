@@ -387,8 +387,10 @@ WELL_KNOWN_EA_POLICIES = {
     # documented in Appendix I of https://drive.google.com/file/d/1-vn6C-yPAR19xXILOE0FZ2-ARWbvr1t1/view
     # (Intel Trusted Execution Technology (Intel TXT), Software Development Guide,
     # Measured Launched Environment Developer's Guide, September 2019, Revision 016)
-    # and in https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-system-guard/system-guard-secure-launch-and-smm-protection
+    # and in https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-system-guard/system-guard-secure-launch-and-smm-protection  # noqa
     # (System Guard Secure Launch and SMM protection)
+    # and in https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-system-guard/how-hardware-based-root-of-trust-helps-protect-windows  # noqa
+    # (Windows Defender System Guard: How a hardware-based root of trust helps protect Windows 10)
     '06c7d805ad3bec1106502a44c6b2e3b36d157750e8efca1fff998c874a7664c5': 'PolicyLocality(THREE, FOUR) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial)',  # noqa
     'ef9a26fc22d1ae8cecff59e9481ac1ec533dbe228bec6d17930f4cb2cc5b9724': 'PolicyLocality(THREE, FOUR) OR (PolicyLocality(THREE, FOUR) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial))',  # noqa
 
@@ -397,6 +399,12 @@ WELL_KNOWN_EA_POLICIES = {
     # (Intel Trusted Execution Technology (Intel TXT), Software Development Guide,
     # Measured Launched Environment Developer's Guide, August 2016, Revision 013)
     'dffdb6c8eafcbe691e358882b18703121eab40de2386f7a8e7b4a06591e1f0ee': '(PolicyLocality(THREE, FOUR) AND PolicyCommandCode(TPM2_CC_NV_Write)) OR (PolicyLocality(THREE, FOUR) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial))',  # noqa
+
+    # Policy for Microsoft TPM NV Index (0x01C101C0)
+    # documented in https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-system-guard/how-hardware-based-root-of-trust-helps-protect-windows  # noqa
+    # (Windows Defender System Guard: How a hardware-based root of trust helps protect Windows 10)
+    # and https://github.com/MicrosoftDocs/windows-itpro-docs/blob/fecd3dbc321e9b702bf56fe2fe2c5bb03077a78a/windows/security/threat-protection/windows-defender-system-guard/how-hardware-based-root-of-trust-helps-protect-windows.md  # noqa
+    'cb45c81ff34bcf0afb9e1a8029fa231c8727303c0922dcce684be3db817c20e1': 'PolicyAuthorize(MSFT_DRTM_AUTH_BLOB_SigningKey) OR (PolicyAuthorize(MSFT_DRTM_AUTH_BLOB_SigningKey) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial))',  # noqa
 
     # Policy from tpm2-pkcs11 project:
     # https://github.com/tpm2-software/tpm2-pkcs11/blob/1.5.0/docs/tpm2-pkcs11_object_auth_model.md
@@ -923,6 +931,10 @@ def check_well_known_ea_policies():
             {0: hashlib.sha256(b'\x00' * 32 + hashlib.sha1(b'\x01\x01\x00').digest() + b'\x00' * 12).digest()},
             policy_command_code(Tpm20CommandCode.TPM2_CC_NV_UndefineSpaceSpecial)),
     ))
+
+    # Hard-code the policy for Microsoft NV Index, as the signing key is not documented
+    computed['PolicyAuthorize(MSFT_DRTM_AUTH_BLOB_SigningKey) OR (PolicyAuthorize(MSFT_DRTM_AUTH_BLOB_SigningKey) AND PolicyCommandCode(TPM2_CC_NV_UndefineSpaceSpecial))'] = bytes.fromhex(  # noqa
+        'cb45c81ff34bcf0afb9e1a8029fa231c8727303c0922dcce684be3db817c20e1')
 
     # Compare the computed digests with the reference ones
     if sys.version_info < (3, 5):
