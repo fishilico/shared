@@ -22,6 +22,7 @@
 """Extract information from Linux source code"""
 import argparse
 import re
+import sys
 import urllib.request
 from pathlib import Path
 from typing import FrozenSet, Mapping, Tuple
@@ -98,9 +99,12 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
     )
 )
 
+emitted_warning = False
+
 
 def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
     """Parse tools/perf/pmu-events/arch/x86/mapfile.csv"""
+    global emitted_warning
     for line in content.splitlines():
         if line == "Family-model,Version,Filename,EventType":
             # Skip the header
@@ -119,6 +123,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
         cpu_models = CPU_MODELS.get(vendor, {}).get(family)
         if cpu_models is None:
             print(f"Warning(mapfile, {line!r}): unknown {vendor} family {family}")
+            emitted_warning = True
             continue
         # The stepping is specific with model 55
         if model_str.startswith("55-"):
@@ -130,6 +135,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
                 cpuid_data = [(0x55, cpu_models.get((0x55, 5)))]
             else:
                 print(f"Warning(mapfile, {line!r}): stepping for model 0x55")
+                emitted_warning = True
                 continue
         else:
             # Expand the model
@@ -142,6 +148,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
                 models = [high_hexdigit | int(low, 16) for low in model_str[2:-1]]
             else:
                 print(f"Warning(mapfile, {line!r}): Unsupported {model_str}")
+                emitted_warning = True
                 continue
             # print(f"{model_str!r} -> {models!r}")
             cpuid_data = [(m, cpu_models.get((m, -1))) for m in models]
@@ -149,6 +156,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
         for model, model_data in cpuid_data:
             if model_data is None:
                 print(f"Warning(mapfile, {line!r}): Unknown model {model:#04x}")
+                emitted_warning = True
                 continue
             abbrev = model_data[0]
             name = model_data[1]
@@ -159,6 +167,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
                 name = (m.group(1) + m.group(2)).strip()
             if (filename, name) not in KNOWN_FILENAME_MODEL:
                 print(f"Warning(mapfile, {line!r}): missing association in known list {(filename, name)!r}")
+                emitted_warning = True
 
 
 # Name of bit fields in the value of a MSR in
@@ -316,6 +325,7 @@ LINUX_MSR_MAPPING: Mapping[str, str] = {
 
 def parse_msr_define(content: str, verbose: bool = False) -> None:
     """Load MSR from arch/x86/include/asm/msr-index.h"""
+    global emitted_warning
     for line in content.splitlines():
         if matches := re.match(r"^#define\s+MSR_(\S*)\s+([0-9a-fA-Fx]+)(\s.*)?$", line):
             name = matches.group(1)
@@ -396,6 +406,7 @@ def parse_msr_define(content: str, verbose: bool = False) -> None:
                     print(f"Update(MSR 0x{value:X}): new {name} with processor {processor}")
                 else:
                     print(f"Update(MSR 0x{value:X}): new {name}")
+                emitted_warning = True
             elif known_names.get(processor) == name:
                 # Usual case: the MSR is known
                 pass
@@ -411,6 +422,7 @@ def parse_msr_define(content: str, verbose: bool = False) -> None:
                     f"{name}({prefix})" if prefix else name for prefix, name in sorted(known_names.items())
                 )
                 print(f"Update(MSR 0x{value:X}): {name} (known {desc_names})")
+                emitted_warning = True
 
 
 def parse_linux_directory(linux: Path, verbose: bool = False) -> None:
@@ -462,3 +474,5 @@ if __name__ == "__main__":
         parse_linux_directory(args.linux, verbose=args.verbose)
     else:
         parse_linux_from_web(verbose=args.verbose)
+
+    sys.exit(1 if emitted_warning else 0)
