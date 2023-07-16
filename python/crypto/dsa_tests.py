@@ -30,9 +30,9 @@ Digital Signature Algorithm, used by NIST in DSS (FIPS 186). Standard revisions:
 Parameters:
 * L, N = key lengths (for example L = 1024, N = 160)
 * q = N-bit prime
-* p = L-bit prime such that p − 1 is a multiple of q
+* p = L-bit prime such that p - 1 is a multiple of q
 * g a number which multiplicative order modulo p is q (ie. g^q = 1 mod p ; as q is prime this makes q the order)
-  For example g = h^((p − 1)/q) mod p for some h like 2
+  For example g = h^((p - 1)/q) mod p for some h like 2
 
 Keys:
 * 0 < privkey < q
