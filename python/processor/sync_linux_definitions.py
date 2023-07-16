@@ -25,9 +25,9 @@ import re
 import sys
 import urllib.request
 from pathlib import Path
-from typing import FrozenSet, Mapping, Tuple
+from typing import FrozenSet, List, Mapping, Optional, Tuple
 
-from cpu_model import CPU_MODELS, X86CPUInfo
+from cpu_model import CPU_MODELS
 from x86_msr import MSRS
 
 
