@@ -43,12 +43,12 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("alderlaken", "Alder Lake N"),
         ("bonnell", "Atom Bonnell Mid"),
         ("bonnell", "Atom Bonnell"),
-        ("bonnell", "Atom Saltwell Mid"),
-        ("bonnell", "Atom Saltwell Tablet"),
-        ("bonnell", "Atom Saltwell"),
+        ("bonnell", "Atom Bonnel, Atom Saltwell Mid"),
+        ("bonnell", "Atom Bonnel, Atom Saltwell Tablet"),
+        ("bonnell", "Atom Bonnel, Atom Saltwell"),
         ("broadwell", "Broadwell"),
         ("broadwell", "Broadwell-G"),
-        ("broadwellde", "Broadwell Xeon"),
+        ("broadwellde", "Broadwell Xeon DE"),
         ("broadwellx", "Broadwell Xeon"),
         ("cascadelakex", "Cascade Lake Server"),
         ("elkhartlake", "Elkhart Lake"),
@@ -81,8 +81,8 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("sapphirerapids", "Emerald Rapids Xeon"),
         ("sapphirerapids", "Sapphire Rapids Xeon"),
         ("sierraforest", "Sierra Forest Xeon"),
-        ("silvermont", "Atom Airmont Mid"),
-        ("silvermont", "Atom Airmont"),
+        ("silvermont", "Atom Silvermont, Atom Airmont Mid"),
+        ("silvermont", "Atom Silvermont, Atom Airmont"),
         ("silvermont", "Atom Merrifield , Atom Silvermont Mid"),
         ("silvermont", "Atom Silvermont D"),
         ("silvermont", "Atom Silvermont"),
@@ -91,7 +91,7 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("skylake", "Skylake"),
         ("skylake", "Skylake-L"),
         ("skylakex", "Skylake Server"),
-        ("snowridgex", "Atom Tremont X"),
+        ("snowridgex", "Snow Ridge, Atom Tremont X"),
         ("tigerlake", "Tiger Lake"),
         ("westmereep-dp", "Westmere DP"),
         ("westmereep-sp", "Westmere"),
@@ -107,7 +107,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
     global emitted_warning
     for line in content.splitlines():
         if line == "Family-model,Version,Filename,EventType":
-            # Skip the header
+            # Skip the header from Linux
             continue
         if line.startswith("AuthenticAMD-"):
             # Skip AMD specifications
@@ -125,12 +125,11 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
             print(f"Warning(mapfile, {line!r}): unknown {vendor} family {family}")
             emitted_warning = True
             continue
+        cpuid_data: List[Tuple[int, Optional[List[Optional[str]]]]]
         # The stepping is specific with model 55
         if model_str.startswith("55-"):
             if model_str == "55-[01234]":
-                cpuid_data: List[Tuple[int, Optional[Tuple[Optional[str], Optional[str], ...]]]] = [
-                    (0x55, cpu_models.get((0x55, 0)))
-                ]
+                cpuid_data = [(0x55, cpu_models.get((0x55, 0)))]
             elif model_str == "55-[56789ABCDEF]":
                 cpuid_data = [(0x55, cpu_models.get((0x55, 5)))]
             else:
@@ -163,6 +162,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
             if verbose:
                 print(f"{model:#04x}: {filename:15} {abbrev or '?':7} {name}")
             # Strip parenthesis from the name
+            assert name is not None
             while m := re.match(r"^(.* )\([^)]*\)(.*)$", name):
                 name = (m.group(1) + m.group(2)).strip()
             if (filename, name) not in KNOWN_FILENAME_MODEL:

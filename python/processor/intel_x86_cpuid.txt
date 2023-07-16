@@ -320,15 +320,15 @@
     Pentium(R) Dual-Core CPU       T4200  @ 2.00GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
-0x1a,  x (0x106ax): Nehalem EP
+0x1a,  x (0x106ax): "NHM-EP" Nehalem EP
 
-0x1a,  1 (0x106a1): Nehalem EP
+0x1a,  1 (0x106a1): "NHM-EP" Nehalem EP
     Intel Nehalem ES (bad L1D data, 4 way instead of 8 way in CPUID level 00000004)
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106A2_Nehalem-DP_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106A2_Nehalem-EP_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106A2_Nehalem-EP_CPUID_2.txt
-0x1a,  2 (0x106a2): Nehalem EP
+0x1a,  2 (0x106a2): "NHM-EP" Nehalem EP
     QuadCore Intel® Xeon® X5550, 2666 MHz (20 x 133) (Nehalem-EP, Gainestown)
     2x QuadCore Intel® Xeon® X5550, 2666 MHz (20 x 133) (Nehalem-EP, Gainestown)
     2x DualCore Intel® Xeon® E5502, 1866 MHz (14 x 133) (Nehalem-EP, Gainestown)
@@ -336,7 +336,7 @@
     Genuine Intel(R) CPU           @ 0000 @ 2.67GHz
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106A4_Bloomfield_CPUID.txt
-0x1a,  4 (0x106a4): Nehalem EP, Bloomfield
+0x1a,  4 (0x106a4): "NHM-EP" Nehalem EP, Bloomfield
     QuadCore Intel® Core™ i7 Extreme 965, 3333 MHz (25 x 133) (Bloomfield)
     Intel® Core™ i7-965/975 Extreme Processor
     Intel® Core™ Processor i7-920, 930, 950, 960
@@ -344,7 +344,7 @@
     Intel® Core™ Processor i7-920, 940
     Genuine Intel(R) CPU             000  @ 3.20GHz
 
-0x1a,  5 (0x106a5): Bloomfield, Nehalem EP, Nehalem WS
+0x1a,  5 (0x106a5): "NHM-EP" Bloomfield, Nehalem EP, Nehalem WS
     Intel® Core™ Processor Extreme Edition i7-965
     Intel® Core™ Processor i7-920, 940
     Intel® Core™ Processor i7-920, 930, 950, 960
@@ -355,7 +355,7 @@
     Intel® Xeon® Processor X5550, X5560, X5570
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0x1c,  x (0x106cx): Atom Bonnell (Diamondville, Pineview)
+0x1c,  x (0x106cx): "BNL" Atom Bonnell (Diamondville, Pineview)
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/cpu/intel/model_106cx/model_106cx_init.c#L83
 0x1c,  0 (0x106c0): Atom Diamondville
@@ -393,7 +393,7 @@
     Intel(R) Xeon(R) CPU           E7450  @ 2.40GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
-0x1e,  x (0x106ex): "NHM" Nehalem
+0x1e,  x (0x106ex): "NHM-EP" Nehalem
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106E0_Lynnfield_CPUID.txt
 0x1e,  0 (0x106e0): "NHM" Nehalem
@@ -428,7 +428,7 @@
     Intel(R) Core(TM) i7 CPU       Q 720  @ 1.60GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
-0x1f,  x (0x106fx): "NHM" Nehalem
+0x1f,  x (0x106fx): "NHM-EP" Nehalem
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106F1_Auburndale_CPUID.txt
 0x1f,  1 (0x106f1): "NHM" Nehalem G (Auburndale / Havendale)
@@ -436,7 +436,7 @@
     Genuine Intel(R) CPU             0000 @ 2.40GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
-0x25,  x (0x2065x): "WSM" Westmere
+0x25,  x (0x2065x): "WSM-EP-SP" Westmere
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0020652_Clarkdale_CPUID.txt
 0x25,  2 (0x20652): "WSM" Westmere Client (Clarkdale, Arrandale, Clarkdale Xeon)
@@ -468,7 +468,7 @@
     Intel® Core™ Processor i3-530, 540
     Intel® Pentium® Processor G6950, G6951, G6960
 
-0x26,  x (0x2066x): Atom Bonnell Mid (Silverthorne, Lincroft)
+0x26,  x (0x2066x): "BNL" Atom Bonnell Mid (Silverthorne, Lincroft)
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0020661_TunnelCreek_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0020661_TunnelCreek_CPUID2.txt
@@ -477,7 +477,7 @@
     Intel(R) Atom(TM) CPU Z670   @ 1.50GHz
     Intel(R) Atom(TM) CPU E680   @ 1.60GHz
 
-0x27,  x (0x2067x): Atom Saltwell Mid (Penwell)
+0x27,  x (0x2067x): "BNL" Atom Bonnel, Atom Saltwell Mid (Penwell)
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0020672_Medfield_CPUID.txt
 0x27,  2 (0x20672): Atom Penwell
@@ -538,16 +538,16 @@
     Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
-0x2c,  x (0x206cx): Westmere DP
+0x2c,  x (0x206cx): "WSM-EP-DP" Westmere DP
 
 #https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C1_Gulftown_CPUID.txt
-0x2c,  1 (0x206c1): Westmere EP (Gulftown)
+0x2c,  1 (0x206c1): "WSM-EP-DP" Westmere EP (Gulftown)
     2x QuadCore Intel® Xeon® X5667, 3066 MHz (23 x 133) (Gulftown)
     Intel(R) Xeon(R) CPU           X5667  @ 3.07GHz
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C2_Gulftown_01_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C2_Gulftown_CPUID.txt
-0x2c,  2 (0x206c2): Westmere EP (Gulftown), Westmere EP, WS
+0x2c,  2 (0x206c2): "WSM-EP-DP" Westmere EP (Gulftown), Westmere EP, WS
     Intel® Core™ i7-970, 980
     Intel® Core™ Processor Extreme Edition i7-980X, 990X
     Intel® Xeon® Processor W3690
@@ -590,7 +590,7 @@
     Intel(R) Core(TM) i7-3930K CPU @ 3.20GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
-0x2e,  x (0x206ex): Nehalem-EX
+0x2e,  x (0x206ex): "NHM-EX" Nehalem-EX
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206E4_Beckton_CPUID.txt
 0x2e,  4 (0x206e4): Nehalem-EX Xeon (Beckton)
@@ -612,19 +612,19 @@
     Intel(R) Xeon(R) CPU           X7560  @ 2.27GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
-0x2f,  x (0x206fx): Westmere-EX
+0x2f,  x (0x206fx): "WSM-EX" Westmere-EX
 
-0x2f,  0 (0x206f0): Westmere-EX
-0x2f,  1 (0x206f1): Westmere-EX
+0x2f,  0 (0x206f0): "WSM-EX" Westmere-EX
+0x2f,  1 (0x206f1): "WSM-EX" Westmere-EX
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206F2_Eagleton_CPUID.txt
-0x2f,  2 (0x206f2): "EGL/WSM" Westmere-EX Xeon (Eagleton), Westmere EX
+0x2f,  2 (0x206f2): "EGL/WSM-EX" Westmere-EX Xeon (Eagleton), Westmere EX
     Intel® Xeon® Processor E7 Family
     4x 10-Core Intel® Xeon® MP E7-4870, 2400 MHz (18 x 133) (Eagleton, Westmere-EX)
     Intel® Xeon® Processor E7-2803, 2820, 2830, 2850, 2860, 2870, 4807, 4820, 4830, 4850, 4860, 4870, 8830, 8837, 8850, 8860, 8867L, 8870
     Intel(R) Xeon(R) CPU E7- 4870  @ 2.40GHz
 
-0x35,  x (0x3065x): Atom Saltwell Tablet (Cloverview)
+0x35,  x (0x3065x): "BNL" Atom Bonnel, Atom Saltwell Tablet (Cloverview)
 0x35,  0 (0x30650): ?
 
 # https://github.com/chipsec/chipsec/blob/1.10.4/chipsec/cfg/8086/cht.xml
@@ -638,7 +638,7 @@
 0x35,  8 (0x30658): ?
     Intel® Atom™ CPU 652 @ 1.20GHz
 
-0x36,  x (0x3066x): Atom Saltwell (Cedarview)
+0x36,  x (0x3066x): "BNL" Atom Bonnel, Atom Saltwell (Cedarview)
 0x36,  0 (0x30660): ?
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0030661_Cedarview_CPUID.txt
@@ -655,7 +655,7 @@
     Intel(R) Atom(TM) CPU S1260   @ 2.00GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0x37,  x (0x3067x): Atom Silvermont (Bay Trail, Valleyview)
+0x37,  x (0x3067x): "SLM" Atom Silvermont (Bay Trail, Valleyview)
 
 0x37,  1 (0x30671): "BYT" Atom Silvermont (BayTrail)
 0x37,  2 (0x30672): "BYT" Atom Silvermont (BayTrail)
@@ -916,7 +916,7 @@
     Intel(R) Core(TM) i7-5775C CPU @ 3.30GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0x4a,  x (0x406ax): Atom Merrifield (Tangier), Atom Silvermont Mid
+0x4a,  x (0x406ax): "SLM" Atom Merrifield (Tangier), Atom Silvermont Mid
 0x4a,  8 (0x406a8): Tangier (SLM)
     Intel® Atom™ Processor Z Series
     Intel® Atom® Processor Z34XX
@@ -928,7 +928,7 @@
     Intel® Atom® Processor Z3460, Z3480
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0x4c,  x (0x406cx): "AMT" Atom Airmont (Cherry Trail, Braswell)
+0x4c,  x (0x406cx): "SLM/AMT" Atom Silvermont, Atom Airmont (Cherry Trail, Braswell)
 
 0x4c,  1 (0x406c1): ?
 0x4c,  2 (0x406c2): ?
@@ -956,7 +956,7 @@
     Intel® Atom® Processor x7-Z8750, x5-Z8550, x5-Z8350, x5-Z8330
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0x4d,  x (0x406dx): Atom Silvermont D (Avoton/Rangely)
+0x4d,  x (0x406dx): "SLM" Atom Silvermont D (Avoton/Rangely)
 
 0x4d,  0 (0x406d0): "AVN" Atom Avoton (Stepping A0, A1)
     Intel® Atom® Processor C2xxx
@@ -1153,7 +1153,7 @@
     3rd Generation Intel® Xeon® Scalable Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
-0x56,  x (0x5066x): "BDX" Broadwell Xeon
+0x56,  x (0x5066x): "BDW-DE" Broadwell Xeon DE
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050662_BroadwellDE_CPUID.txt
 0x56,  2 (0x50662): "BDX-DE" Broadwell Xeon D (Broadwell DE V1)
@@ -1193,7 +1193,7 @@
     Intel(R) Xeon Phi(TM) CPU 7210 @ 1.30GHz
     Intel(R) Xeon Phi(TM) CPU 7290 @ 1.50GHz
 
-0x5a,  x (0x506ax): Atom Airmont Mid (Moorefield)
+0x5a,  x (0x506ax): "SLM/AMT" Atom Silvermont, Atom Airmont Mid (Moorefield)
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506A0_Moorefield_CPUID.txt
 0x5a,  0 (0x506a0): Atom Moorefield (Anniedale)
@@ -1203,7 +1203,7 @@
     Genuine Intel(R) CPU   4000  @ 1.00GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0x5c,  x (0x506cx): Atom Goldmont (Apollo Lake)
+0x5c,  x (0x506cx): "GLM" Atom Goldmont (Apollo Lake)
 
 0x5c,  2 (0x506c2): Broxton
     Intel® Atom® Scalable Platform
@@ -1286,7 +1286,7 @@
 0x5e,  8 (0x506e8): "KBL-H" Kaby Lake (Stepping A0)
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0x5f,  x (0x506fx): Atom Goldmont D (Denverton)
+0x5f,  x (0x506fx): "GLM" Atom Goldmont D (Denverton)
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x5f,  0 (0x506f0): "DNV" Atom Denverton (Goldmont Microserver) (Stepping A0, A1), Skylake SP (Stepping A0, A1)
@@ -1439,7 +1439,7 @@
     Intel® Xeon Phi™ 7235, 7285, 7295
 
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
-0x86,  x (0x8066x): Atom Tremont X (Jacobsville)
+0x86,  x (0x8066x): "SNR" Snow Ridge, Atom Tremont X (Jacobsville)
 0x86,  0 (0x80660): "SNR" Snow Ridge BTS (Tremont) (Stepping A0)
 0x86,  1 (0x80661): "SNR" Snow Ridge BTS (Tremont) (Stepping A1)
 0x86,  2 (0x80662): "SNR" Snow Ridge BTS (Tremont) (Stepping A2)

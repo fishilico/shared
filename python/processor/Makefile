@@ -1,6 +1,6 @@
 include ../../env-python.mk
 
-NEVER_TEST_BINARIES := sync_chipsec_definitions.py sync_intel_microcode.py sync_linux_definitions.py
+NEVER_TEST_BINARIES := sync_chipsec_definitions.py sync_intel_microcode.py sync_linux_definitions.py sync_perfmon_definitions.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
 HAVE_PYTHON_FSTRING := $(call can-run,$(PYTHON) -c 'f""')
@@ -34,6 +34,7 @@ sync-inet:
 	$(PYTHON3) sync_chipsec_definitions.py
 	$(PYTHON3) sync_intel_microcode.py -w
 	$(PYTHON3) sync_linux_definitions.py
+	$(PYTHON3) sync_perfmon_definitions.py
 
 .PHONY: all clean lint list-nobuild test sync-inet
 
