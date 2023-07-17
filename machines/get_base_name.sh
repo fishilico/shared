@@ -80,6 +80,9 @@ do
         *debian12*|*bookworm*)
             echo "debian12-bookworm"
             ;;
+        *debian13*|*trixie*)
+            echo "debian13-trixie"
+            ;;
 
         *ubuntu1404*|*ubuntu14.04*|*trusty*)
             echo "ubuntu1404-trusty"

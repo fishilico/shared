@@ -1,0 +1,116 @@
+FROM debian:trixie-slim
+LABEL Description="Debian 13 Trixie with build dependencies for shared"
+
+# Override the language to force UTF-8 output
+ENV LANG=C.UTF-8
+
+# Install apt-utils first, in order to apply package configuration tasks
+# Install wine last, because otherwise apt fails to configure it
+RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
+    dpkg --add-architecture i386 && \
+    apt-get -qq update && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy apt-utils && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
+        binutils-mingw-w64 \
+        cargo \
+        clang \
+        coq \
+        gcc-mingw-w64 \
+        gcc-multilib \
+        gdb \
+        libc-dev \
+        libc6-dev-i386 \
+        libgmp-dev \
+        libgtk-3-dev \
+        libmnl-dev \
+        libomp-dev \
+        libpulse-dev \
+        libsdl2-dev \
+        libssl-dev \
+        linux-headers-amd64 \
+        m4 \
+        make \
+        musl-dev \
+        musl-tools \
+        openjdk-17-jdk \
+        openssh-client \
+        openssl \
+        pkgconf \
+        python3 \
+        python3-cffi \
+        python3-cryptography \
+        python3-dev \
+        python3-gmpy2 \
+        python3-nacl \
+        python3-numpy \
+        python3-pil \
+        python3-pycryptodome \
+        python3-z3 \
+        sagemath && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
+        wine \
+        wine32 \
+        wine64 && \
+    apt-get clean
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]
+
+# make list-nobuild:
+#    Global blacklist: latex%
+#    In sub-directories:
+#       c:
+#       glossaries:
+#       java/keystore:
+#       linux:
+#       python:
+#       python/crypto:
+#       python/network:
+#       python/network/dnssec:
+#       python/processor:
+#       python/qrcode:
+#       rust:
+#       verification:
+#    With gcc -m32:
+#       Global blacklist: latex%
+#       In sub-directories:
+#          c: gmp_functions gtk_alpha_window
+#          glossaries:
+#          java/keystore:
+#          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
+#          python:
+#          python/crypto:
+#          python/network:
+#          python/network/dnssec:
+#          python/processor:
+#          python/qrcode:
+#          rust:
+#          verification:
+#    Compilers:
+#       gcc -m64: ok
+#       gcc -m32: ok
+#       clang -m64: ok
+#       clang -m32: ok
+#       musl-gcc: ok
+#       x86_64-w64-mingw32-gcc: ok
+#       i686-w64-mingw32-gcc: ok
+#    Versions:
+#       gcc: gcc (Debian 12.3.0-5) 12.3.0
+#       clang: Debian clang version 14.0.6
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 12-win32
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 12-win32
+#       wine: wine-8.0 (Debian 8.0~repack-4)
+#       Linux kernel: 6.3.0-1-amd64
+#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.37-5) stable release version 2.37.
+#       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.3
+#       python3: Python 3.11.4
+#       javac: javac 17.0.8-ea
+#       java: openjdk 17.0.8-ea 2023-07-18
+#       rustc: rustc 1.66.0
+#       cargo: cargo 1.65.0
+#       coqc: The Coq Proof Assistant, version 8.17.0 compiled with OCaml 4.13.1
+#       openssl: OpenSSL 3.0.9 30 May 2023 (Library: OpenSSL 3.0.9 30 May 2023)
