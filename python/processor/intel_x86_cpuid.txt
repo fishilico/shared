@@ -1658,6 +1658,10 @@
     Intel(R) Xeon(R) w7-2475X
     Intel(R) Xeon(R) w9-3475X
 
+# https://tweetdeck.twitter.com/InstLatX64/status/1684483554531594240
+0x95,  0 (0x90650): "SPR" Sapphire Rapids Xeon
+    4th Generation Intel® Xeon® Scalable Processor Family
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
 0x96,  x (0x9066x): "EHL" Elkhart Lake (Tremont)
 
@@ -2108,7 +2112,8 @@
     13th Generation Intel® Core™ Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.3
-0xc6,  x (0xc066x): "ARL" Arrow Lake
+# https://twitter.com/InstLatX64/status/1675346430951665664
+0xc6,  x (0xc066x): "ARL-S" Arrow Lake S
     15th Generation Intel® Core™ Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
