@@ -301,15 +301,18 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
                 cpuid_db_needs_update = True
 
 
-def parse_intel_ucode(file_data: bytes, ucode_versions: Optional[Set[Tuple[int, int, str]]] = None) -> None:
+def parse_intel_ucode(
+    file_data: bytes, ucode_versions: Optional[Set[Tuple[int, int, str]]] = None, verbose: bool = False
+) -> bool:
     """Parse Intel Microcode file
 
     Extract the same information as: iucode-tool -tb -l $FILE
 
     This is also like https://github.com/platomav/MCExtractor
 
-    Return tuples of (cpuid, revision, date)
+    Return true if a new microcode was found
     """
+    found_new = False
     while file_data:
         if len(file_data) < 0x30:
             raise ValueError(f"Microcode file too small: {len(file_data)}")
@@ -348,38 +351,54 @@ def parse_intel_ucode(file_data: bytes, ucode_versions: Optional[Set[Tuple[int, 
 
         # The date is encode "decimal as hexadecimal"
         date = f"{year:04x}-{month:02x}-{day:02x}"
-        is_known = "(known)" if (cpuid, update_rev, date) in KNOWN_INTEL_UCODE_VERSIONS else "NEW!"
-        print(f"  {date}: cpuid {cpuid:#07x} rev {update_rev:#6x} platform {platform_id:#04x} {is_known}")
+        if (cpuid, update_rev, date) in KNOWN_INTEL_UCODE_VERSIONS:
+            if verbose:
+                print(f"  {date}: cpuid {cpuid:#07x} rev {update_rev:#6x} platform {platform_id:#04x} (known)")
+        else:
+            found_new = True
+            print(f"  {date}: cpuid {cpuid:#07x} rev {update_rev:#6x} platform {platform_id:#04x} NEW!")
+
         if ucode_versions is not None:
             ucode_versions.add((cpuid, update_rev, date))
         file_data = file_data[total_size:]
+    return found_new
 
 
-def parse_intel_ucode_directory(directory: Path, ucode_versions: Optional[Set[Tuple[int, int, str]]] = None) -> None:
+def parse_intel_ucode_directory(
+    directory: Path, ucode_versions: Optional[Set[Tuple[int, int, str]]] = None, verbose: bool = False
+) -> None:
     """Parse files present in a clone of Intel-Linux-Processor-Microcode-Data-Files"""
     for releasenote_file in directory.glob("**/releasenote.md"):
-        print(f"Parsing {releasenote_file.absolute()}")
+        if verbose:
+            print(f"Parsing {releasenote_file.absolute()}")
         with releasenote_file.open("r") as stream_text:
             file_text = stream_text.read()
         parse_intel_ucode_releasenote_cfg(file_text)
 
     for ucode_file in sorted(directory.glob("**/intel-ucode/??-??-??")):
-        print(f"Parsing {ucode_file.absolute()}")
+        if verbose:
+            print(f"Parsing {ucode_file.absolute()}")
         with ucode_file.open("rb") as stream:
             file_data = stream.read()
-        parse_intel_ucode(file_data, ucode_versions=ucode_versions)
+        if parse_intel_ucode(file_data, ucode_versions=ucode_versions, verbose=verbose) and not verbose:
+            print(f"  ... found in {ucode_file.absolute()}")
 
     # Parse also directories like the one from https://github.com/platomav/CPUMicrocodes
     for ucode_file in sorted(directory.glob("**/Intel/*.bin")):
-        print(f"Parsing {ucode_file.absolute()}")
+        if verbose:
+            print(f"Parsing {ucode_file.absolute()}")
         with ucode_file.open("rb") as stream:
             file_data = stream.read()
-        parse_intel_ucode(file_data, ucode_versions=ucode_versions)
+        if parse_intel_ucode(file_data, ucode_versions=ucode_versions, verbose=verbose) and not verbose:
+            print(f"  ... found in {ucode_file.absolute()}")
 
 
-def parse_intel_ucode_from_github(ucode_versions: Optional[Set[Tuple[int, int, str]]] = None) -> None:
+def parse_intel_ucode_from_github(
+    ucode_versions: Optional[Set[Tuple[int, int, str]]] = None, verbose: bool = False
+) -> None:
     """Download Intel microcode's main branch and analyze it"""
-    print(f"Downloading {INTEL_UCODE_GIT_MAIN_ZIP_URL}")
+    if verbose:
+        print(f"Downloading {INTEL_UCODE_GIT_MAIN_ZIP_URL}")
     with urllib.request.urlopen(INTEL_UCODE_GIT_MAIN_ZIP_URL) as response:
         zip_data = response.read()
     with zipfile.ZipFile(io.BytesIO(zip_data), "r") as archive:
@@ -387,20 +406,24 @@ def parse_intel_ucode_from_github(ucode_versions: Optional[Set[Tuple[int, int, s
             if file_info.is_dir():
                 continue
             if re.match(r"^.*/releasenote\.md$", file_info.filename):
-                print(f"Parsing {file_info.filename}")
+                if verbose:
+                    print(f"Parsing {file_info.filename}")
                 file_text = archive.read(file_info.filename).decode()
                 parse_intel_ucode_releasenote_cfg(file_text)
             if re.match(r"^.*/intel-ucode/[0-9a-f][0-9a-f]-[0-9a-f][0-9a-f]-[0-9a-f][0-9a-f]$", file_info.filename):
-                print(f"Parsing {file_info.filename}")
+                if verbose:
+                    print(f"Parsing {file_info.filename}")
                 file_data = archive.read(file_info.filename)
-                parse_intel_ucode(file_data, ucode_versions=ucode_versions)
+                if parse_intel_ucode(file_data, ucode_versions=ucode_versions, verbose=verbose) and not verbose:
+                    print(f"  ... found in Intel's {file_info.filename}")
 
 
 def parse_platomav_intel_microcode_versions_from_github(
-    ucode_versions: Optional[Set[Tuple[int, int, str]]] = None
+    ucode_versions: Optional[Set[Tuple[int, int, str]]] = None, verbose: bool = False
 ) -> None:
     """Download Platomav microcode's main branch and analyze it"""
-    print(f"Downloading {PLATOMAV_UCODE_GIT_MAIN_ZIP_URL}")
+    if verbose:
+        print(f"Downloading {PLATOMAV_UCODE_GIT_MAIN_ZIP_URL}")
     with urllib.request.urlopen(PLATOMAV_UCODE_GIT_MAIN_ZIP_URL) as response:
         zip_data = response.read()
     with zipfile.ZipFile(io.BytesIO(zip_data), "r") as archive:
@@ -408,9 +431,11 @@ def parse_platomav_intel_microcode_versions_from_github(
             if file_info.is_dir():
                 continue
             if re.match(r"^.*/Intel/.*\.bin$", file_info.filename):
-                print(f"Parsing {file_info.filename}")
+                if verbose:
+                    print(f"Parsing {file_info.filename}")
                 file_data = archive.read(file_info.filename)
-                parse_intel_ucode(file_data, ucode_versions=ucode_versions)
+                if parse_intel_ucode(file_data, ucode_versions=ucode_versions, verbose=verbose) and not verbose:
+                    print(f"  ... found in Platomav's {file_info.filename}")
 
 
 def update_intel_microcode_versions(ucode_versions: Set[Tuple[int, int, str]]) -> None:
@@ -440,19 +465,21 @@ if __name__ == "__main__":
         type=Path,
         help="directory where https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files is cloned (optional)",
     )
+    parser.add_argument("-v", "--verbose", action="store_true", help="be verbose")
     parser.add_argument("-w", "--write", action="store_true", help="update intel_microcode_versions.txt automatically")
     args = parser.parse_args()
 
     ucode_versions: Set[Tuple[int, int, str]] = set()
 
     if args.ucode:
-        parse_intel_ucode_directory(args.ucode, ucode_versions=ucode_versions)
+        parse_intel_ucode_directory(args.ucode, ucode_versions=ucode_versions, verbose=args.verbose)
     else:
-        parse_intel_ucode_from_github(ucode_versions=ucode_versions)
-        parse_platomav_intel_microcode_versions_from_github(ucode_versions=ucode_versions)
+        parse_intel_ucode_from_github(ucode_versions=ucode_versions, verbose=args.verbose)
+        parse_platomav_intel_microcode_versions_from_github(ucode_versions=ucode_versions, verbose=args.verbose)
 
     new_ucode_versions = ucode_versions - KNOWN_INTEL_UCODE_VERSIONS
-    print(f"Found {len(ucode_versions)} distinct microcodes, {len(new_ucode_versions)} new")
+    if args.verbose or new_ucode_versions:
+        print(f"Found {len(ucode_versions)} distinct microcodes, {len(new_ucode_versions)} new")
 
     if new_ucode_versions and args.write:
         update_intel_microcode_versions(ucode_versions)
