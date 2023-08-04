@@ -1,4 +1,4 @@
-# Database of CPU Identifier information for x86 processors
+# Database of CPU Identifier information for Intel x86 processors
 #
 # Instruction CPUID[EAX=1] returns in register EAX an identifier which
 # identifies the processor with a (family, model, stepping) triple.
@@ -34,9 +34,10 @@
 # * https://en.wikipedia.org/wiki/Intel_Core
 # * http://users.atw.hu/instlatx64/ and https://github.com/InstLatx64/InstLatx64/blob/master/ChangeLog.htm
 # * https://en.wikichip.org/wiki/intel/microarchitectures/cascade_lake
+# * https://en.wikichip.org/wiki/intel/cpuid
 
 [Family 5]
-#https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000517_P5_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000517_P5_CPUID.txt
 0x01,  7 (0x00517): Pentium 5
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000525_P54C_CPUID.txt
@@ -103,7 +104,7 @@
 0x06,  0 (0x00660): Celeron, A0
     Intel® Celeron®-A, 300 MHz (4.5 x 67) (Mendocino) (32 bits)
 
-#https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000665_P2_Mendocino_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000665_P2_Mendocino_CPUID.txt
 0x06,  5 (0x00665): Celeron, B0
     Intel® PII Celeron (Mendocino) (32 bits)
 
@@ -120,7 +121,7 @@
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000673_P3_KatmaiDP_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000673_P3_Katmai_CPUID.txt
-#https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000673_P3_Tanner_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000673_P3_Tanner_CPUID.txt
 0x07,  3 (0x00673): PIII, kC0
     2x Intel® Pentium® III, 500 MHz (5 x 100) (Katmai) (32 bits)
     Intel® Pentium® III, 450 MHz (4.5 x 100) (Katmai) (32 bits)
@@ -145,7 +146,7 @@
 0x09,  2 (0x00692): ?
 0x09,  4 (0x00694): ?
 
-#https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000695_PM_Banias_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000695_PM_Banias_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000695_PM_Shelton_CPUID.txt
 0x09,  5 (0x00695): Celeron M
     Mobile Intel® Celeron® M 320, 1300 MHz (13 x 100) (Banias-512) (32 bits)
@@ -540,7 +541,7 @@
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
 0x2c,  x (0x206cx): "WSM-EP-DP" Westmere DP
 
-#https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C1_Gulftown_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C1_Gulftown_CPUID.txt
 0x2c,  1 (0x206c1): "WSM-EP-DP" Westmere EP (Gulftown)
     2x QuadCore Intel® Xeon® X5667, 3066 MHz (23 x 133) (Gulftown)
     Intel(R) Xeon(R) CPU           X5667  @ 3.07GHz
@@ -1206,7 +1207,7 @@
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x5c,  x (0x506cx): "GLM" Atom Goldmont (Apollo Lake)
 
-0x5c,  2 (0x506c2): Broxton
+0x5c,  2 (0x506c2): "BXT" Broxton
     Intel® Atom® Scalable Platform
     Intel® Atom® Processor T5500, T5700
 
@@ -1305,6 +1306,7 @@
     Intel® XMM™ 7272 Modem
 
 0x66,  x (0x6066x): "CNL" Cannon Lake Mobile
+    8th Generation Intel® Core™ Processor Family
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 0x66,  0 (0x60660): "CNL" Cannon Lake (Stepping A0)
@@ -1406,6 +1408,7 @@
     Intel(R) Pentium(R) Silver J5040 CPU @ 2.00GHz
 
 0x7d,  x (0x706dx): "ICL" Ice Lake Desktop
+    10th Generation Intel® Core™ Processor Family
 
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0x7e,  x (0x706ex): "ICL-U/Y" Ice Lake Mobile
@@ -1742,6 +1745,7 @@
     12th Gen Intel(R) Core(TM) i9-12900H
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00906A4_AlderLakeP_00_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/GenuineIntel/GenuineIntel00906A4_AlderLakeP_01_CPUID.txt
 0x9a,  4 (0x906a4): "ADL/AZB" Alder Lake U (Golden Cove, Gracemont) (Stepping R0), Arizona Beach
     12th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i7-1265U, i7-1260U, i7-1255U, i7-1250U, i5-1245U, i5-1240U, i5-1235U, i5-1230U, i3-1215U, i3-1210U
@@ -1751,6 +1755,7 @@
     Intel® Celeron® Processor 7305, 7300
     Intel® Atom® Processor C1100
     12th Gen Intel(R) Core(TM) i3-1220P
+    Intel(R) Pentium(R) Gold 8505
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
 0x9c,  x (0x906cx): "JSL" Jasper Lake (Tremont L)
