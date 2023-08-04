@@ -197,29 +197,31 @@
 
 0x0e, 12 (0x006ec): Core Yonah Solo/Core Duo
 
-0x0f,  0 (0x006f0): Core 2 Merom Solo/Core Duo
-0x0f,  1 (0x006f1): Core 2 Merom Solo/Core Duo
+0x0f,  0 (0x006f0): "MRM" Core 2 Merom Solo/Core Duo
+0x0f,  1 (0x006f1): "MRM" Core 2 Merom Solo/Core Duo
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F2_Conroe_CPUID.txt
-0x0f,  2 (0x006f2): Core 2 Merom Solo/Core Duo
+0x0f,  2 (0x006f2): "MRM" Core 2 Merom Solo/Core Duo
     DualCore Intel® Core™ 2 Duo E6300, 1866 MHz (7 x 267) (Conroe-2M)
     Intel(R) Core(TM)2 CPU          6300  @ 1.86GHz
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F4_Conroe_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F4_Woodcrest_CPUID.txt
-0x0f,  4 (0x006f4): Core 2 Merom Solo/Core Duo
+0x0f,  4 (0x006f4): "MRM" Core 2 Merom Solo/Core Duo
     DualCore Intel® Core™ 2 Duo E6700, 2666 MHz (10 x 267) (Conroe)
     Genuine Intel(R) CPU                  @ 2.66GHz
     2x DualCore Intel® Xeon® 5140, 2333 MHz (7 x 333) (Woodcrest)
     Genuine Intel(R) CPU                  @ 2.33GHz
 
-0x0f,  5 (0x006f5): Core 2 Merom Solo/Core Duo
+0x0f,  5 (0x006f5): "MRM" Core 2 Merom Solo/Core Duo
 
 # https://lore.kernel.org/lkml/1A7043D5F58CCB44A599DFD55ED4C948469380B6@fmsmsx115.amr.corp.intel.com/T/
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F6_Merom_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F6_Conroe_CPUID.txt
-0x0f,  6 (0x006f6): Core 2 Merom Solo/Core Duo
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
+0x0f,  6 (0x006f6): "MRM" Core 2 Merom Solo/Core Duo
     Mobile DualCore Intel® Core™ 2 Duo T5600, 1833 MHz (11 x 167) (Merom-2M)
+    Intel(R) Core(TM)2 CPU          6300  @ 1.86GHz
     Intel(R) Core(TM)2 CPU         T5600  @ 1.83GHz
     Intel(R) Core(TM)2 CPU          6400  @ 2.13GHz
     Intel(R) Core(TM)2 CPU         X6800  @ 2.93GHz
@@ -227,7 +229,7 @@
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F7_Clovertown_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F7_Kentsfield_DDR2_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F7_Kentsfield_DDR3_CPUID.txt
-0x0f,  7 (0x006f7): Core 2 Merom Solo/Core Duo
+0x0f,  7 (0x006f7): "MRM" Core 2 Merom Solo/Core Duo
     2x QuadCore Intel® Xeon® L5320, 1866 MHz (7 x 267) (Clovertown)
     QuadCore Intel® Xeon® X3210, 2133 MHz (8 x 267) (Kentsfield)
     QuadCore Intel® Core™ 2 Extreme QX6700, 2666 MHz (10 x 267) (Kentsfield)
@@ -236,21 +238,21 @@
     Intel(R) Core(TM)2 Quad CPU           @ 2.66GHz
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006F9_Tigerton_CPUID.txt
-0x0f,  9 (0x006f9): Core 2 Merom Solo/Core Duo
+0x0f,  9 (0x006f9): "MRM" Core 2 Merom Solo/Core Duo
     2x QuadCore Intel® Core™ 2 Quad Q6400, 2133 MHz (8 x 267) (Tigerton)
     Genuine Intel(R) CPU                  @ 2.13GHz
 
-0x0f, 10 (0x006fa): Core 2 Merom Solo/Core Duo
+0x0f, 10 (0x006fa): "MRM" Core 2 Merom Solo/Core Duo
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00006FB_Conroe_CPUID.txt
-0x0f, 11 (0x006fb): Core 2 Merom Solo/Core Duo
+0x0f, 11 (0x006fb): "MRM" Core 2 Merom Solo/Core Duo
     DualCore Intel® Core™ 2 Duo E6750, 2666 MHz (8 x 333) (Conroe)
     Intel(R) Core(TM)2 Duo CPU E6550 @ 2.33GHz
     Intel(R) Core(TM)2 Duo CPU     E6750  @ 2.66GHz
     Intel(R) Core(TM)2 Duo CPU     E6850  @ 3.00GHz
 
 # https://forum.recalbox.com/topic/30080/deuxi%C3%A8me-%C3%A9cran-vga-pour-les-scrapes-et-les-vid%C3%A9os
-0x0f, 13 (0x006fd): Core 2 Merom Solo/Core Duo
+0x0f, 13 (0x006fd): "MRM" Core 2 Merom Solo/Core Duo
     Intel(R) Pentium(R) Dual CPU E2160 @ 1.80GHz
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0010650_Tolapai_CPUID.txt
@@ -260,10 +262,10 @@
     Genuine Intel(R) processor               800MHz
     Genuine Intel(R) processor              1.20GHz
 
-0x16,  0 (0x10660): Core 2 Merom L
+0x16,  0 (0x10660): "MRM" Core 2 Merom L
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0010661_ConroeL_CPUID.txt
-0x16,  1 (0x10661): Core 2 Merom L
+0x16,  1 (0x10661): "MRM" Core 2 Merom L
     Intel® Celeron® 420, 1600 MHz (8 x 200) (Conroe-L)
     Intel(R) Celeron(R) CPU          220  @ 1.20GHz
     Intel(R) Celeron(R) CPU          420  @ 1.60GHz
@@ -354,6 +356,7 @@
     Intel® Xeon® Processor L5506, L5508, L5518, L5520, L5530
     Intel® Xeon® Processor W5580, W5590
     Intel® Xeon® Processor X5550, X5560, X5570
+    Intel(R) Xeon(R) CPU           E5520  @ 2.27GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x1c,  x (0x106cx): "BNL" Atom Bonnell (Diamondville, Pineview)
@@ -366,10 +369,12 @@
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106C2_Diamondville_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106C2_DiamondvilleDC_CPUID.txt
-0x1c,  2 (0x106c2): Atom Pineview
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
+0x1c,  2 (0x106c2): "SLT" Atom Pineview
     Intel® Atom® 230, 1600 MHz (12 x 133) (Diamondville-SC, Bonnell core)
     DualCore Intel® Atom® (Silverthorne, Bonnell core)
     DualCore Intel® Atom® 330, 1600 MHz (12 x 133) (Diamondville-DC, Bonnell core)
+    Genuine Intel(R) CPU        @ 1.60GHz
     Intel(R) Atom(TM) CPU  230   @ 1.60GHz
     Intel(R) Atom(TM) CPU  330   @ 1.60GHz
 
@@ -389,9 +394,11 @@
     Genuine Intel(R) CPU                  @ 2.13GHz
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106D1_Dunnington_CPUID.txt
-0x1d,  1 (0x106d1): Core 2 Dunnington
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
+0x1d,  1 (0x106d1): "PNR" Core 2 Dunnington
     4x HexaCore Intel® Xeon® MP E7450 (Dunnington-6C)
     Intel(R) Xeon(R) CPU           E7450  @ 2.40GHz
+    Genuine Intel(R) CPU                  @ 2.66GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
 0x1e,  x (0x106ex): "NHM-EP" Nehalem
@@ -510,6 +517,7 @@
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206A7_SandyBridge4_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206A7_SandyBridge_CPUID.txt
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
 0x2a,  7 (0x206a7): "SNB" Sandy Bridge D2/J1 (Xeon E3)
     2nd Generation Intel® Core™ Processor Family
     Intel® Xeon® Processor E3 Family
@@ -537,6 +545,7 @@
     Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz
     Intel(R) Pentium(R) CPU G840 @ 2.80GHz
     Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz
+    Intel(R) Core(TM) i7-2720QM CPU @ 2.20GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
 0x2c,  x (0x206cx): "WSM-EP-DP" Westmere DP
@@ -548,6 +557,7 @@
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C2_Gulftown_01_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00206C2_Gulftown_CPUID.txt
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
 0x2c,  2 (0x206c2): "WSM-EP-DP" Westmere EP (Gulftown), Westmere EP, WS
     Intel® Core™ i7-970, 980
     Intel® Core™ Processor Extreme Edition i7-980X, 990X
@@ -560,6 +570,7 @@
     Intel® Xeon® Processor X5647, X5650, X5660, X5667, X5670, X5672, X5675, X5677, X5680, X5687, X5690, X5698
     Intel(R) Xeon(R) CPU           W3670  @ 3.20GHz
     Intel(R) Core(TM) i7 CPU       X 990  @ 3.47GHz
+    Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
 0x2d,  x (0x206dx): "SNBX" Sandy Bridge Xeon
@@ -724,6 +735,7 @@
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306A9_IvyBridge_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306A9_IvyBridge_CPUID2.txt
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
 0x3a,  9 (0x306a9): "IVB" Ivy Bridge, Ivy Bridge Xeon E3, Gladden
     3rd Generation Intel® Core™ Processor Family
     3rd Generation Intel® Core™ Mobile Processor Family
@@ -747,6 +759,7 @@
     Intel® Core™ Processor i5-3210M, i5-3210M, i5-3230M, i5-3230M, i5-3317U, i5-3320M, i5-3330, i5-3330S, i5-3337U, i5-3339Y, i5-3340, i5-3340M, i5-3340S, i5-3350P, i5-3360M, i5-3380M, i5-3427U, i5-3437U, i5-3439Y, i5-3450, i5-3450S, i5-3470, i5-3470S, i5-3470T, i5-3475S, i5-3550, i5-3550S, i5-3570, i5-3570K, i5-3570S, i5-3570T, i5-3610ME
     Intel® Core™ Processor i3-3110M, i3-3120M, i3-3120ME, i3-3130M, i3-3210, i3-3217U, i3-3217UE, i3-3220, i3-3220T, i3-3225, i3-3227U, i3-3229Y, i3-3240, i3-3240T, i3-3245, i3-3250, i3-3250T
     Intel® Pentium® Processor 1405 v2, 2020M, 2030M, 2117U, 2127U, 2129Y, A1018, G2010, G2020, G2020T, G2030, G2030T, G2100T, G2120, G2120T, G2130, G2140
+    Intel(R) Core(TM) i7- CPU @ 2.90GHz
     Intel(R) Core(TM) i7-3770K CPU @ 3.50GHz
     Intel(R) Celeron(R) CPU G1610 @ 2.60GHz
 
@@ -754,9 +767,15 @@
 0x3c,  x (0x306cx): "HSW" Haswell
     4th Generation Intel® Core™ Processor Family
 
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
+0x3c,  1 (0x306c1): "HSW" Haswell
+    4th Generation Intel® Core™ Processor Family
+    Genuine Intel(R) CPU 0000 @ 2.00GHz
+
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306C3_Haswell2_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306C3_HaswellXeon_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306C3_Haswell_CPUID11.txt
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
 0x3c,  3 (0x306c3): "HSW" Haswell Core, Haswell Xeon E3, Haswell Desktop, Haswell M
     4th Generation Intel® Core™ Processor Family
     4th Generation Intel® Core™ Mobile Processor Family
@@ -778,6 +797,7 @@
     Intel® Core™ Processor i3-4100M, i3-4110M
     Intel® Pentium® 3560M
     Intel® Celeron® 2970M
+    Intel(R) Core(TM) i5-4670T CPU @ 2.30GHz
     Intel(R) Core(TM) i7-4770 CPU @ 3.40GHz
     Intel(R) Core(TM) i7-4765T CPU @ 2.00GHz
     Intel(R) Xeon(R) CPU E3-1245 v3 @ 3.40GHz
@@ -976,6 +996,10 @@
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x4e,  x (0x406ex): "SKL" Skylake-L
+    6th Generation Intel® Core™ Processor Family
+
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
+0x4e,  0 (0x406e0): "SKL" Skylake
     6th Generation Intel® Core™ Processor Family
 
 0x4e,  1 (0x406e1): "SKL" Skylake
@@ -1184,6 +1208,9 @@
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
 0x57,  x (0x5067x): "PHI KNL" Xeon Phi Knights Landing
 
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
+0x57,  0 (0x50670): "PHI KNL" Xeon Phi Knights Landing
+
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050671_KnightsLanding_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050671_KnightsLanding_CPUID2.txt
 0x57,  1 (0x50671): "PHI KNL" Xeon Phi Knights Landing
@@ -1198,18 +1225,22 @@
 0x5a,  x (0x506ax): "SLM/AMT" Atom Silvermont, Atom Airmont Mid (Moorefield)
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00506A0_Moorefield_CPUID.txt
-0x5a,  0 (0x506a0): Atom Moorefield (Anniedale)
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
+0x5a,  0 (0x506a0): "SLM" Atom Moorefield (Anniedale)
     Intel® Atom® Processor Z Series
     Intel® Atom® 1.0GHz (Moorefield)
     Intel® Atom® Processor Z3530, Z3560, Z3570, Z3580, Z3590
     Genuine Intel(R) CPU   4000  @ 1.00GHz
+    Genuine Intel(R) CPU   4000  @ 1.60GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0x5c,  x (0x506cx): "GLM" Atom Goldmont (Apollo Lake)
 
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
 0x5c,  2 (0x506c2): "BXT" Broxton
     Intel® Atom® Scalable Platform
     Intel® Atom® Processor T5500, T5700
+    Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
 0x5c,  8 (0x506c8): "APL" Apollo Lake (Stepping A0)
 
@@ -1324,6 +1355,12 @@
     Intel(R) Core(TM) i3-8121U CPU @ 2.20GHz
 
 0x6a,  x (0x606ax): "ICL" Ice Lake
+    3rd Generation Intel® Xeon® Scalable Processor Family
+
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
+0x6a,  0 (0x606a0): "ICL" Ice Lake
+    3rd Generation Intel® Xeon® Scalable Processor Family
+
 0x6a,  4 (0x606a4): "ICX-SP" Ice Lake Xeon-SP
     3rd Generation Intel® Xeon® Scalable Processor Family
 
@@ -1444,7 +1481,11 @@
 
 # https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0x86,  x (0x8066x): "SNR" Snow Ridge, Atom Tremont X (Jacobsville)
+
+# https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.21.1
 0x86,  0 (0x80660): "SNR" Snow Ridge BTS (Tremont) (Stepping A0)
+    Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
+
 0x86,  1 (0x80661): "SNR" Snow Ridge BTS (Tremont) (Stepping A1)
 0x86,  2 (0x80662): "SNR" Snow Ridge BTS (Tremont) (Stepping A2)
 0x86,  3 (0x80663): "SNR" Snow Ridge BTS (Tremont) (Stepping A3)
@@ -1661,7 +1702,11 @@
     Intel(R) Xeon(R) w7-2475X
     Intel(R) Xeon(R) w9-3475X
 
-# https://tweetdeck.twitter.com/InstLatX64/status/1684483554531594240
+# https://twitter.com/InstLatX64/status/1685680065508515841
+0x95,  x (0x9065x): "SPR" Sapphire Rapids Xeon
+    4th Generation Intel® Xeon® Scalable Processor Family
+
+# https://twitter.com/InstLatX64/status/1684483554531594240
 0x95,  0 (0x90650): "SPR" Sapphire Rapids Xeon
     4th Generation Intel® Xeon® Scalable Processor Family
 
@@ -1669,7 +1714,9 @@
 0x96,  x (0x9066x): "EHL" Elkhart Lake (Tremont)
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
 0x96,  0 (0x90660): "EHL" Elkhart Lake (Tremont) (Stepping A0)
+    Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090661_ElkhartLake_02_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0090661_ElkhartLake_CPUID01.txt
@@ -2028,6 +2075,9 @@
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
 0xad,  x (0xa06dx): "GNR-X" Granite Rapids Xeon
 
+# https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.21.1
+0xad,  0 (0xa06d0): "GNR-X" Granite Rapids Xeon
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
 0xae,  x (0xa06ex): "GNR-D" Granite Rapids D
@@ -2036,9 +2086,17 @@
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
 0xaf,  x (0xa06fx): "SRF" Sierra Forest Xeon
 
+# https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.21.1
+0xaf,  0 (0xa06f0): "SRF" Sierra Forest Xeon
+    Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
 0xb6,  x (0xb066x): "GRR" Grand Ridge
+
+# https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.21.1
+0xb6,  0 (0xb0660): "GRR" Grand Ridge
+    Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
@@ -2080,6 +2138,15 @@
     13th Generation Intel® Core™ Processor Family
     13th Gen Intel(R) Core(TM) i7-1365U
 
+# https://twitter.com/InstLatX64/status/1685680065508515841
+0xbc,  x (0xb06cx): "LNL" Lunar Lake
+    16th Generation Intel® Core™ Processor Family
+
+# https://www.intel.com/content/www/us/en/download/684897/intel-software-development-emulator.html Intel Software Development Emulator 9.24.0
+# https://twitter.com/InstLatX64/status/1684109011572998144
+0xbc,  0 (0xb06c0): "LNL" Lunar Lake
+    16th Generation Intel® Core™ Processor Family
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0xbd,  x (0xb06dx): "LNL" Lunar Lake
     16th Generation Intel® Core™ Processor Family
@@ -2116,10 +2183,19 @@
     12th Generation Intel® Core™ Processor Family
     13th Generation Intel® Core™ Processor Family
 
+# https://twitter.com/InstLatX64/status/1685680065508515841
+0xc5,  x (0xc065x): "ARL" Arrow Lake
+    15th Generation Intel® Core™ Processor Family
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.3
 # https://twitter.com/InstLatX64/status/1675346430951665664
 0xc6,  x (0xc066x): "ARL-S" Arrow Lake S
     15th Generation Intel® Core™ Processor Family
+
+# https://www.intel.com/content/www/us/en/download/684897/intel-software-development-emulator.html Intel Software Development Emulator 9.24.0
+0xc6,  0 (0xc0660): "ARL-S" Arrow Lake S
+    15th Generation Intel® Core™ Processor Family
+    Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0xcf,  x (0xc06fx): "EMR-X" Emerald Rapids Xeon
@@ -2275,6 +2351,8 @@
     Genuine Intel(R) CPU 3.00GHz
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0000F68_P4_Tulsa_CPUID.txt
-0x06,  8 (0x00f68): Xeon (Tulsa) (Stepping B0)
+# https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
+0x06,  8 (0x00f68): Pentium 4P, Xeon (Tulsa) (Stepping B0)
     2x Intel® Xeon® MP 7140M 2792.7 MHz (14.0 x 199.5 MHz) (Tulsa)
     Intel(R) Xeon(TM) CPU 3.40GHz
+    Genuine Intel(R) CPU 3.40GHz
