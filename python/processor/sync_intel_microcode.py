@@ -349,7 +349,7 @@ def parse_intel_ucode(
         if reserved_zero != 0:
             raise ValueError(f"Unexpected reserved value in microcode: {reserved_zero}")
 
-        # The date is encode "decimal as hexadecimal"
+        # The date is encoded "decimal as hexadecimal"
         date = f"{year:04x}-{month:02x}-{day:02x}"
         if (cpuid, update_rev, date) in KNOWN_INTEL_UCODE_VERSIONS:
             if verbose:

@@ -1181,7 +1181,7 @@ CORE8 0x354 BR_DETECT_COUNTER_CONFIG_0 # Branch Monitoring Detect Counter Config
 CORE8 0x355 BR_DETECT_COUNTER_CONFIG_1 # Branch Monitoring Detect Counter Configuration
 
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ClientOneSiliconPkg/Cpu/Include/Register/CommonMsr.h
-XEONSCAL4 0x350 ROP_DETECT_CTRL         # The BM_DETECT_CTRL is used to enable Branck Monitoring detection (BM), enable PMI exceptions on BM detect, set BM window size, determine counting method for BM window, and determine if trip is due to all counting conditions being met
+XEONSCAL4 0x350 ROP_DETECT_CTRL         # The BM_DETECT_CTRL is used to enable Branch Monitoring detection (BM), enable PMI exceptions on BM detect, set BM window size, determine counting method for BM window, and determine if trip is due to all counting conditions being met
 XEONSCAL4 0x351 ROP_DETECT_STATUS       # Branch Monitoring detect status - threshold tripped, which counter tripped, and tripping count
 XEONSCAL4 0x352 ROP_DETECT_CAPABILITIES # Branch Monitoring Detect Capabilities
 XEONSCAL4 0x354 ROP_COUNTER_CONFIG_0    # Counter_0: Counter enables, events selection, counter trip threshold
@@ -2014,7 +2014,7 @@ XEONSCAL4 0x79F UNCORE_SPARE_13_13
 # https://cdrdv2-public.intel.com/782715/356111-ucode-update.pdf Runtime Microcode Update (June 2023, 356111-001US)
 0x7A0 IA32_MCU_SVN_CONFIG   # Microcode Update config (bit 0 is LOCK, bit 1 is DEFER_SVN (manual commit))
 0x7A1 IA32_MCU_COMMIT_SVN   # Microcode Update commit Secure Version Number
-0x7A2 IA32_MCU_SVN_INFO     # Microcode Update commited and pending SVN
+0x7A2 IA32_MCU_SVN_INFO     # Microcode Update committed and pending SVN
 0x7A4 IA32_MCU_ROLLBACK_MIN_ID # Minimal MCU revision ID for rollback
 0x7A5 IA32_MCU_STAGING_MBOX_ADDR # MMIO platform physical address of the MCU Staging Control register
 

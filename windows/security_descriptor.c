@@ -130,7 +130,7 @@ static const struct WELL_KNOWN_SID_DESC g_well_known_sids[] = {
     {_T("S-1-5-32-574"), _T("CD (Built-in CertSVC (Certificate Service) DCOM Access Group)")},
 
     /* NT Service Account
-     * The SID is "S-1-5-80-SHA1(upercase name in UTF-16LE)"
+     * The SID is "S-1-5-80-SHA1(uppercase name in UTF-16LE)"
      * For example in Python:
      *     >>> struct.unpack('<5I', hashlib.sha1('TRUSTEDINSTALLER'.encode('utf-16le')).digest())
      *     (956008885, 3418522649, 1831038044, 1853292631, 2271478464)
@@ -144,7 +144,7 @@ static const struct WELL_KNOWN_SID_DESC g_well_known_sids[] = {
     {_T("S-1-15-2-2"), _T("(All Restricted App Packages)")},
 
     /* LPAC capabilities, Low Privilege AppContainer
-     * The SID is "S-1-15-3-1024-SHA256(upercase name in UTF-16LE)"
+     * The SID is "S-1-15-3-1024-SHA256(uppercase name in UTF-16LE)"
      * For example in Python:
      *     >>> struct.unpack('<8I', hashlib.sha256('REGISTRYREAD'.encode('utf-16le')).digest())
      *     (1065365936, 1281604716, 3511738428, 1654721687, 432734479, 3232135806, 4053264122, 3456934681)

@@ -324,7 +324,7 @@ class SvnDumpStream:
         self.current_revision = rev_number
 
     def read_node(self, outdir: Optional[Path] = None) -> None:
-        """Read a SVN Node and optionaly extract it to the output directory"""
+        """Read a SVN Node and optionally extract it to the output directory"""
         # Decode headers
         headers: Dict[str, str] = {}
         line = self.read_line()

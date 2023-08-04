@@ -32,7 +32,7 @@ from cpu_model import CPU_MODELS
 
 INTEL_PERFMON_GIT_RAW_URL = "https://github.com/intel/perfmon/raw/main"
 
-# Known associations between abbrevation in perfmon and abbreviation in the database
+# Known associations between abbreviation in perfmon and abbreviation in the database
 KNOWN_PERFMON_ABBREV: FrozenSet[Tuple[str, str]] = frozenset(
     (
         ("ADL", "ADL-N"),

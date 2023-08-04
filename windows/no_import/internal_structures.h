@@ -340,7 +340,7 @@ static const PEB *_NtCurrentPeb(VOID)
 }
 
 /**
- * Find a module using the Processus Environment Block
+ * Find a module using the Process Environment Block
  */
 static LPCVOID _GetModuleBase(LPCWSTR szModuleName)
 {
