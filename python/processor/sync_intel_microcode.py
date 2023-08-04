@@ -454,7 +454,7 @@ def update_intel_microcode_versions(ucode_versions: Set[Tuple[int, int, str]]) -
         for line in file_header:
             print(line, file=fout, end="")
         for cpuid, version, date in new_ucode_versions:
-            print(f"{cpuid:#010x}  {version:#10x}  {date}", file=fout)
+            print(f"{cpuid:#07x}  {version:#10x}  {date}", file=fout)
 
 
 if __name__ == "__main__":
