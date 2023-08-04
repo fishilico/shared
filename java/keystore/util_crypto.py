@@ -48,7 +48,16 @@ def describe_der_certificate(certificate):
         return None
 
     backend = cryptography.hazmat.backends.default_backend()
-    cert = cryptography.x509.load_der_x509_certificate(certificate, backend)
+    try:
+        cert = cryptography.x509.load_der_x509_certificate(certificate, backend)
+    except ValueError as exc:
+        if cryptography.__version__.startswith("41.0."):
+            # Cryptography 41.0.2 fails to parse certificate signed with DSA
+            # generated with OpenJDK<21
+            # https://github.com/pyca/cryptography/issues/9253
+            logger.warning("PyCryptography 41.0 failed to load the certificate: %s", exc)
+            return None
+        raise
     try:
         cert_subject = cert.subject
     except ValueError as exc:
