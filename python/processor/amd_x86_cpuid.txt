@@ -1,0 +1,704 @@
+# Database of CPU Identifier information for AMD x86 processors
+#
+# Instruction CPUID[EAX=1] returns in register EAX an identifier named
+# CPUID_Fn00000001_EAX which identifies the processor with a
+# (family, model, stepping) triple.
+#
+# The names come from:
+# * https://en.wikichip.org/wiki/amd/cpuid
+# * https://gmplib.org/repo/gmp-6.3/file/59f9fa8ad6b6/config.guess
+# * https://github.com/InstLatx64/InstLatx64/tree/master/AuthenticAMD
+# * https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/amd-ucode
+
+[Family 5]
+0x00,  x (0x00050x): "K5" SSA/5
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000500_K5_CPUID.txt
+0x00,  0 (0x000500): "K5" SSA/5
+    AMD K5 SSA/5, 75 MHz PR75
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000501_K5_CPUID.txt
+0x00,  1 (0x000501): "K5" SSA/5
+    AMD K5 SSA/5, 100 MHz PR100
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000511_K5_CPUID.txt
+0x01,  1 (0x000511): "K5" Krypton, 5k86
+    AMD K5, 100 MHz PR133
+    AMD-K5(tm) Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000514_K5_CPUID.txt
+0x01,  4 (0x000514): "K5" Krypton, 5k86
+    AMD K5, 100 MHz PR133
+    AMD-K5(tm) Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000524_K5_CPUID.txt
+0x02,  4 (0x000524): "K5" Krypton, 5k86
+    AMD K5, 116 MHz PR166
+    AMD-K5(tm) Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000534_K5_CPUID.txt
+0x03,  4 (0x000534): "K5" K5
+    AMD-K5(tm) Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000562_K6_CPUID.txt
+0x06,  2 (0x000562): "K6" 6k86
+    AMD K6, 233 MHz
+    AMD-K6tm w/ multimedia extensions
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000570_K6_CPUID.txt
+0x07,  0 (0x000570): "K6" Littlefoot
+    AMD K6, 233 MHz
+    AMD-K6tm w/ multimedia extensions
+
+0x08,  x (0x00058x): "K6-2" Chomper
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000580_K6_Chomper_CPUID.txt
+0x08,  0 (0x000580): "K6-2" Chomper, K6 3D, 6k86 3D
+    AMD K6-2, 333 MHz
+    AMD-K6(tm) 3D processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD000058C_K6_ChomperExt_CPUID.txt
+0x08, 12 (0x00058c): "K6-2" Chomper Extended, K6-2-CXT
+    AMD K6-2, 450 MHz (4.5 x 100)
+    AMD-K6(tm) 3D processor
+
+0x09,  x (0x00059x): "K6-3" Sharptooth
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000591_K6_Sharptooth_CPUID.txt
+0x09,  1 (0x000591): "K6-3" Sharptooth, K6+ 3D, 6k86+ 3D
+    AMD K6-III, 400 MHz (4 x 100)
+    AMD-K6(tm) 3D+ Processor
+
+0x0a,  x (0x0005ax): Geode
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD00005A2_GeodeLX_CPUID.txt
+0x0a,  2 (0x0005a2): Geode LX
+    Geode(TM) Integrated Processor by AMD PCS
+
+0x0d,  x (0x0005dx): "K63" K6-III
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD00005D0_K63Plus_CPUID.txt
+0x0d,  0 (0x0005d0): "K63" K6-III
+    AMD K6-III+, 550 MHz (5.5 x 100)
+    AMD-K6(tm)-III Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD00005D4_K62Plus_CPUID.txt
+0x0d,  4 (0x0005d4): "K63" K6-III
+    AMD K6-2+, 550 MHz (5.5 x 100)
+    AMD-K6(tm)-III Processor
+
+[Family 6]
+# Family for K7 processors
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000612_K7_Argon_CPUID.txt
+0x01,  2 (0x000612): "K7" Argon
+    AMD-K7(tm) Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000622_K7_Pluto_CPUID.txt
+0x02,  2 (0x000622): "K7" Pluto, K75
+    AMD Athlon, 750 MHz (7.5 x 100)
+    AMD Athlon(tm) Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000630_K7_Spitfire_CPUID.txt
+0x03,  0 (0x000630): "K7" Spitfire
+    AMD Duron, 600 MHz (6 x 100)
+    AMD Duron(tm) processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000644_K7_Thunderbird_CPUID.txt
+0x04,  4 (0x000644): "K7" Thunderbird
+    AMD Athlon, 1400 MHz (10.5 x 133)
+    AMD Athlon(tm) Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000662_K7_Palomino_CPUID.txt
+0x06,  2 (0x000662): "K7" Palomino
+    AMD Athlon XP, 1400 MHz (10.5 x 133) 1600+
+    Athlon XP (Palomin?00+
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000670_K7_Morgan_CPUID.txt
+0x07,  0 (0x000670): "K7" Morgan
+    AMD Duron(tm) processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000680_K7_Thoroughbred_CPUID.txt
+0x08,  0 (0x000680): "K7" Thoroughbred-A
+    AMD Athlon XP, 1800 MHz (13.5 x 133) 2200+
+    AMD Athlon(tm) XP 2200+
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000681_K7_Applebred_CPUID.txt
+0x08,  1 (0x000681): "K7" Applebred
+    AMD Duron, 1600 MHz (12 x 133)
+    AMD Duron(tm) processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD00006A0_K7_Barton_CPUID.txt
+0x0a,  0 (0x0006a0): "K7" Barton
+    AMD Athlon(tm) XP 3200+
+
+[Family 15]
+# Family for K8 processors
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000F4A_K8_Clawhammer_CPUID.txt
+0x04, 10 (0x000f4a): "K8" ClawHammer-512 S754
+    AMD Athlon 64, 1800 MHz (9 x 200) 2800+
+    AMD Athlon(tm) 64 Processor 2800+
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000F51_K8_Sledgehammer_CPUID.txt
+0x05,  1 (0x000f51): "K8" SledgeHammer
+    2x AMD Opteron 240, 1400 MHz (7 x 200)
+    AMD Opteron(tm) Processor 240 HE
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0000F5A_K8_Sledgehammer_CPUID.txt
+0x05, 10 (0x000f5a): "K8" SledgeHammer
+    AMD Opteron 248, 2200 MHz (11 x 200)
+    AMD Opteron(tm) Processor 248
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0010FC0_K8_Winchester_CPUID.txt
+0x1c,  0 (0x010fc0): "K8" Winchester
+    AMD Sempron(tm) Processor 2800+
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0010FF0_K8_Palermo_CPUID.txt
+0x1f,  0 (0x010ff0): "K8" Palermo
+    AMD Sempron(tm) Processor 3000+
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0020FB1_K8_Manchester_CPUID.txt
+0x2b,  1 (0x020fb1): "K8" Manchester
+    DualCore AMD Athlon 64 X2, 2000 MHz (10 x 200) 3800+
+    AMD Athlon(tm) 64 X2 Dual Core Processor 3800+
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0020FC2_K8_Palermo_CPUID.txt
+0x2c,  2 (0x020fc2): "K8" Palermo (Venice-128)
+    AMD Sempron, 1600 MHz (8 x 200) 2600+
+    AMD Sempron(tm) Processor 2600+
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0020FF0_K8_Venice_CPUID.txt
+0x2f,  0 (0x020ff0): "K8" Venice S939
+    AMD Athlon 64, 2000 MHz (10 x 200) 3200+
+    AMD Athlon(tm) 64 Processor 3200+
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0040F12_K8_SantaRosa_CPUID_S2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0040F12_K8_SantaRosa_CPUID_S8.txt
+0x41,  2 (0x040f12): "K8" Santa Rosa
+    2x DualCore AMD Opteron HE 2210, 1800 MHz (9 x 200)
+    Dual-Core AMD Opteron(tm) Processor 2210 HE
+    Dual-Core AMD Opteron(tm) Processor 8220 SE
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0040F33_K8_Windsor_CPUID.txt
+0x43,  3 (0x040f33): "K8" Windsor
+    DualCore AMD Athlon 64 X2 Black Edition, 3200 MHz (16 x 200) 6400+
+    AMD Athlon(tm) 64 X2 Dual Core Processor 6400+
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0050FF3_K8_Orleans_CPUID.txt
+0x5f,  3 (0x050ff3): "K8" Orleans
+    AMD Processor model unknown
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0060FB1_K8_Brisbane_CPUID.txt
+0x6b,  1 (0x060fb1): "K8" Brisbane
+    DualCore AMD Athlon 64 X2, 2100 MHz (10.5 x 200) 4000+
+    AMD Athlon(tm) 64 X2 Dual Core Processor 4000+
+
+# https://en.wikichip.org/wiki/amd/cpuid
+0x6f,  2 (0x060ff2): "K8" Athlon, Sempron
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0070FF1_K8_Lima_CPUID.txt
+0x7f,  1 (0x070ff1): "K8" Lima
+    AMD Processor model unknown
+
+# https://en.wikichip.org/wiki/amd/cpuid
+0x7f,  2 (0x070ff2): "K8" Athlon, Sempron
+
+# https://en.wikichip.org/wiki/amd/cpuid
+0xc1,  3 (0x0c0f13): "K8" Windsor
+
+[Family 16] # Family 10h
+# Family for K10 processors
+
+# https://en.wikichip.org/wiki/amd/cpuid lists also Budapest and Toliman in model 0x02
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F21_K10_Barcelona_CPUID.txt
+0x02,  1 (0x100f21): "K10" Barcelona
+    2x QuadCore AMD Opteron 2347, 1900 MHz (9.5 x 200)
+    Quad-Core AMD Opteron(tm) Processor 2347 HE
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F22_K10_Agena_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F22_K10_Agena_CPUID_2.txt
+0x02,  2 (0x100f22): "K10" Agena
+    QuadCore AMD Phenom, 2600 MHz (13 x 200)
+    AMD Engineering Sample
+    QuadCore AMD Phenom 9500, 2200 MHz (11 x 200)
+    AMD Phenom(tm) 9500 Quad-Core Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F23_K10_Kuma_CPUID.txt
+0x02,  3 (0x100f23): "K10" Kuma
+    AMD Athlon(tm) 7750 Dual-Core Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F2A_K10_Barcelona_CPUID.txt
+0x02, 10 (0x100f2a): "K10" Barcelona
+    2x QuadCore AMD Opteron HE 2344, 1700 MHz (8.5 x 200)
+    Quad-Core AMD Opteron(tm) Processor 2344 HE
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F42_K10_Callisto_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F42_K10_DenebTWKR_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F42_K10_Deneb_CPUID.txt
+# # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F42_K10_Shanghai_CPUID.txt
+0x04,  2 (0x100f42): "K10" Callisto, DenebTWKR, Deneb, Heka, Shanghai
+    AMD Phenom(tm) II X2 550 Processor
+    AMD Phenom(tm) II 42 TWKR Black Edition
+    QuadCore AMD Phenom II X4 Black Edition 940, 3000 MHz (15 x 200)
+    AMD Phenom(tm) II X4 940 Processor
+    AMD Processor model unknown
+    2x QuadCore AMD Opteron 2378, 2400 MHz (12 x 200)
+    Quad-Core AMD Opteron(tm) Processor 2378
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F42_K10_Callisto_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F43_K10_Callisto_CPUID03.txt
+0x04,  3 (0x100f43): "K10" Callisto
+    AMD Phenom(tm) II X2 B55 Processor
+    AMD Phenom(tm) II X2 B55 Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F52_K10_Propus_CPUID_C3.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F52_K10_Propus_CPUID_C4.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F52_K10_Rana_CPUID1.txt
+0x05,  2 (0x100f52): "K10" Propus
+    AMD Engineering Sample
+    AMD Athlon(tm) II X4 620 Processor
+    AMD Athlon(tm) II X3 425 Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F62_K10_Regor_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F62_K10_Sargas_CPUID.txt
+0x06,  2 (0x100f62): "K10" Regor, Sargas
+    DualCore AMD Athlon II X2 245, 2900 MHz (14.5 x 200)
+    AMD Athlon(tm) II X2 245 Processor
+    AMD Sempron 140, 2700 MHz (13.5 x 200)
+    AMD Sempron(tm) 140 Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F63_K10_Regor_CPUID.txt
+0x06,  3 (0x100f63): "K10" Regor
+    AMD Athlon(tm) II X2 280 Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F80_K10_Istanbul_CPUID.txt
+0x08,  0 (0x100f80): "K10" Istanbul
+    2x HexaCore AMD Opteron 2431, 2400 MHz (12 x 200)
+    Six-Core AMD Opteron(tm) Processor 2431
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F81_K10_Lisbon_CPUID.txt
+0x08,  1 (0x100f81): "K10" Lisbon
+    AMD Opteron(tm) Processor 4176 HE
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100F91_K10_MagnyCours_CPUID.txt
+0x09,  1 (0x100f91): "K10" Magny Cours
+    AMD Engineering Sample
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0100FA0_K10_Thuban_CPUID.txt
+0x0a,  0 (0x100fa0): "K10" Thuban, Zosma
+    HexaCore AMD Phenom II X6 1055T, 2800 MHz (14 x 200)
+    AMD Phenom(tm) II X6 1055T Processor
+
+[Family 17] # Family 11h
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0200F30_K11_Griffin_CPUID.txt
+0x03,  0 (0x200f30): Griffin
+    AMD Engineering Sample
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0200F31_K11_Griffin_CPUID_Turion_RM-70.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0200F31_K11_Griffin_CPUID_Turion_ZM-82.txt
+0x03,  1 (0x200f31): Griffin Turion
+    AMD Turion Dual-Core RM-70
+    AMD Turion(tm) X2 Ultra Dual-Core Mobile ZM-82
+
+[Family 18] # Family 12h
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0300F10_K12_Llano_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0300F10_K12_Llano_CPUID2.txt
+0x01,  0 (0x300f10): Llano (LN)
+    QuadCore AMD A8-3850, 2900 MHz (29 x 100)
+    AMD A8-3850 APU with Radeon(tm) HD Graphics
+    AMD E2-3000M APU with Radeon(tm) HD Graphics
+
+[Family 20] # Family 14h
+# Family for Bobcat
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0500F01_K14_Bobcat_CPUID.txt
+0x00,  1 (0x500f01): Bobcat
+    AMD Engineering Sample
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0500F10_K14_Bobcat2_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0500F10_K14_Bobcat3_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0500F10_K14_Bobcat_CPUID.txt
+0x01,  0 (0x500f10): Bobcat, Zacate
+    AMD C-50 Processor
+    AMD G-T56N Processor
+    DualCore AMD E-350, 1581 MHz (16 x 99)
+    AMD E-350 Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0500F20_K14_Bobcat_CPUID.txt
+0x02,  0 (0x500f20): Bobcat
+    AMD E-450 APU with Radeon(tm) HD Graphics
+
+[Family 21] # Family 15h
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0600F01_K15_Bulldozer_CPUID.txt
+0x00,  1 (0x600f01): Bulldozer
+    AMD Eng Sample, ZD302046W4K43_36/30/20_2/8_A
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0600F12_Interlagos_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0600F12_K15_Interlagos_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0600F12_K15_Interlagos_CPUID3.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0600F12_K15_Zambezi6C_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0600F12_K15_Zambezi8C_CPUID.txt
+0x01,  2 (0x600f12): Bulldozer, Interlagos, Valencia, Zurich, Zambezi
+    2x 16-Core AMD Opteron 6274, 2200 MHz (11 x 200)
+    AMD Opteron(TM) Processor 6274
+    AMD Opteron(TM) Processor 6238
+    AMD Opteron(TM) Processor 6238
+    HexaCore AMD FX-6100, 3900 MHz (19.5 x 200)
+    AMD FX(tm)-6100 Six-Core Processor
+    OctalCore AMD FX-8150, 4200 MHz (21 x 200)
+    AMD FX(tm)-8150 Eight-Core Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0600F20_K15_AbuDhabi_CPUID0.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0600F20_K15_AbuDhabi_CPUID1.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0600F20_K15_AbuDhabi_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0600F20_K15_Vishera_CPUID.txt
+0x02,  0 (0x600f20): Piledriver, Abu Dhabi, Warsaw, Seoul, Delhi, Vishera
+    AMD Opteron(tm) Processor 6376
+    AMD Opteron(tm) Processor 6344
+    AMD Opteron(tm) Processor 6380
+    OctalCore AMD FX-8350, 4200 MHz (21 x 200)
+    AMD FX(tm)-8350 Eight-Core Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0610F01_K15_Piledriver_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0610F01_K15_Piledriver_CPUID2.txt
+0x10,  1 (0x610f01): Piledriver, Trinity (TN)
+    AMD A10-4600M APU with Radeon(tm) HD Graphics
+    QuadCore AMD A10-5800K, 3800 MHz (38 x 100)
+    AMD A10-5800K APU with Radeon(tm) HD Graphics
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0610F31_K15_Richland_CPUID.txt
+0x13,  1 (0x610f31): Piledriver, Richland (RL)
+    QuadCore AMD A10-6800K, 4300 MHz (43 x 100)
+    AMD A10-6800K APU with Radeon(tm) HD Graphics
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0630F01_K15_BaldEagle_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0630F01_K15_Berlin_00_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0630F01_K15_Kaveri_CPUID.txt
+0x30,  1 (0x630f01): Steamroller, Bald Eagle, Berlin, Kaveri (KV)
+    AMD RX-427BB with AMD Radeon(tm) R7 Graphics
+    Mobile QuadCore AMD A10 Pro-7350B, 3342 MHz (33 x 101)
+    AMD A10 PRO-7350B R6, 10 Compute Cores 4C+6G
+    QuadCore AMD A10-7850K, 4000 MHz (40 x 100)
+    AMD A10-7850K Radeon R7, 12 Compute Cores 4C+8G
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0630F81_K15_Godavari_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0630F81_K15_Godavari_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0630F81_K15_Godavari_CPUID3.txt
+0x38,  1 (0x630f81): Steamroller, Godavari (GV)
+    AMD A8-7670K Radeon R7, 10 Compute Cores 4C+6G
+    AMD A10-7890K Radeon R7, 12 Compute Cores 4C+8G
+    AMD A10-8750 Radeon R7, 12 Compute Cores 4C+8G
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0660F01_K15_Carrizo_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0660F01_K15_Carrizo_CPUID2.txt
+0x60,  1 (0x660f01): Excavator, Carrizo (CZ)
+    QuadCore AMD FX-8800P, 2100 MHz (21 x 100)
+    AMD FX-8800P Radeon R7, 12 Compute Cores 4C+8G
+    AMD Opteron(tm) X3216 APU
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0660F51_K15_BristolRidge_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0660F51_K15_BristolRidge_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0660F51_K15_Carrizo_CPUID.txt
+0x65,  1 (0x660f51): Excavator, Bristol Ridge (BR), Carrizo (CZ)
+    QuadCore AMD A12-9800, 4000 MHz (40 x 100)
+    AMD A12-9800 RADEON R7, 12 COMPUTE CORES 4C+8G
+    AMD A12-9700P RADEON R7, 10 COMPUTE CORES 4C+6G
+    AMD PRO A12-8870 R7, 12 COMPUTE CORES 4C+8G
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0670F00_K15_StoneyRidge_CPUID.txt
+0x70,  0 (0x670f00): Excavator, Stoney Ridge (ST)
+    AMD A9-9410 RADEON R5, 5 COMPUTE CORES 2C+3G
+
+[Family 22] # Family 16h
+# Family for Jaguar
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0700F01_K16_Kabini2_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0700F01_K16_Kabini3_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0700F01_K16_Kabini_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0700F01_K16_Temash_CPUID.txt
+0x00,  1 (0x700f01): Kabini, Temash, Kyoto
+    QuadCore AMD Athlon 5350, 2046 MHz (20.5 x 100)
+    AMD Athlon(tm) 5350 APU with Radeon(tm) R3
+    AMD Athlon 5370 APU with Radeon R3
+    QuadCore AMD A4-5000, 1500 MHz (15 x 100)
+    AMD A4-5000 APU with Radeon(TM) HD Graphics
+    Quad-Core Processor (up to 1.4GHz)
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0720F61_K16_Cato_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0720F61_K16_Cato_CPUID2.txt
+0x26,  1 (0x720f61): Cato
+    AMD A9-9820 Processor
+    AMD RX-8120 Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0730F01_K16_Beema_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0730F01_K16_Beema_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0730F01_K16_SteppeEagle_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0730F01_K16_SteppeEagle_CPUID2.txt
+# https://einsteinathome.org/host/13142930
+0x30,  1 (0x730f01): Beema, Steppe Eagle, Crowned Eagle, Puma, Mullins
+    AMD A8-6410 APU with AMD Radeon R5 Graphics
+    QuadCore AMD A6-6310, 2200 MHz (22 x 100)
+    AMD A6-6310 APU with AMD Radeon R4 Graphics
+    AMD A6-7310 APU with AMD Radeon R4 Graphics
+    AMD GX-212JC SOC with Radeon(TM) R2E Graphics
+    AMD GX-218GL SOC with Radeon(TM) R1E Graphics
+
+[Family 23] # Family 17h
+# Family for Zen and Zen 2 processors
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F00_K17_Zen_CPUID3.txt
+0x00,  0 (0x800f00): "ZEN" Summit Ridge
+    OctalCore AMD Summit Ridge, 13174 MHz (132 x 100)
+    AMD Eng Sample: 2D3151A2M88E4_35/31_N
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F11_K17_Zen2_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F11_K17_Zen3_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F11_K17_Zen_CPUID15_TR.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F11_K17_Zen_CPUID16_TR.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F11_K17_Zen_CPUID4.txt
+# https://en.wikichip.org/wiki/amd/cpuid
+0x01,  1 (0x800f11): "ZEN" Naples, Whitehaven, Summit Ridge, Snowy Owl
+    OctalCore AMD Ryzen 7 1700X, 3400 MHz (34 x 100)
+    AMD Ryzen 7 1700X Eight-Core Processor
+    QuadCore AMD Ryzen 5 1500X, 3600 MHz (36 x 100)
+    AMD Ryzen 5 1500X Quad-Core Processor
+    AMD Ryzen Threadripper 1950X 16-Core Processor
+    AMD Ryzen Threadripper 1920X 12-Core Processor
+    OctalCore AMD Ryzen 7 1800X, 3600 MHz (36 x 100)
+    AMD Ryzen 7 1800X Eight-Core Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F12_K17_Zen_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F12_K17_Zen_CPUID4.txt
+0x01,  2 (0x800f12): "ZEN" Zen
+    AMD EPYC 7551P 32-Core Processor
+    AMD EPYC 7401P 24-Core Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F82_K17_ZenP2_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F82_K17_ZenP3_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F82_K17_ZenP_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F82_K17_ZenP_CPUID2.txt
+0x08,  2 (0x800f82): "ZEN" Threadripper, Pinnacle Ridge, Colfax
+    32-Core AMD Ryzen Threadripper 2990WX, 3000 MHz (30 x 100)
+    AMD Ryzen Threadripper 2990WX 32-Core Processor
+    AMD Ryzen Threadripper 2950X 16-Core Processor
+    OctalCore AMD Ryzen 7 2700X, 3700 MHz (37 x 100)
+    AMD Ryzen 7 2700X Eight-Core Processor
+    AMD Ryzen Threadripper 2990WX 32-Core Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0810F10_K17_GreatHornedOwl_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0810F10_K17_Zen_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0810F10_K17_Zen_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0810F10_K17_Zen_CPUID3.txt
+0x11,  0 (0x810f10): "ZEN" Great Horned Owl, Raven Ridge
+    AMD Ryzen Embedded V1605B with Radeon Vega Gfx
+    Mobile QuadCore AMD Ryzen 5 2500U, 2400 MHz (24 x 100)
+    AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx
+    AMD Ryzen 3 2200G with Radeon Vega Graphics
+    AMD Ryzen 5 2400G with Radeon Vega Graphics
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0810F81_K17_Picasso_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0810F81_K17_Picasso_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0810F81_K17_Picasso3_CPUID.txt
+0x18,  1 (0x810f81): "ZEN" Picasso, Banded Kestrel
+    AMD Ryzen 5 3500U with Radeon Vega Mobile Gfx
+    AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx
+    AMD Athlon PRO 300GE w/ Radeon Vega Graphics
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0820F01_K17_Dali_CPUID.txt
+0x20,  1 (0x820f01): "ZEN" Dali
+    AMD 3020e with Radeon Graphics
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0830F10_K17_CastlePeak_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0830F10_K17_CastlePeak_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0830F10_K17_Rome_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0830F10_K17_Rome_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0830F10_K17_Rome_CPUID6.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0830F10_K17_Rome_CPUID7.txt
+0x31,  0 (0x830f10): "ZEN2" Castle Peak, Rome
+    32-Core AMD Ryzen Threadripper 3970X, 3700 MHz (37 x 100)
+    AMD Ryzen Threadripper 3970X 32-Core Processor
+    AMD Ryzen Threadripper 3960X 24-Core Processor
+    AMD EPYC 7742 64-Core Processor
+    AMD EPYC 7402P 24-Core Processor
+    AMD Ryzen Threadripper PRO 3955WX 16-Cores
+    AMD Ryzen Threadripper PRO 3975WX 32-Cores
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0840F70_K17_CPUID.txt
+0x47,  0 (0x840f70): "ZEN2" Xbox Series X
+    AMD 4700S 8-Core Processor Desktop Kit
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0850F00_K17_Zen_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0850F00_K17_Zen_CPUID3.txt
+0x50,  0 (0x850f00): Zen
+    DG02SRTBP4MFA
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0860F01_K17_Renoir_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0860F01_K17_Renoir_CPUID3.txt
+0x60,  1 (0x860f01): "ZEN2" Renoir, Grey Hawk
+    AMD Ryzen 7 4800H with Radeon Graphics
+    AMD Ryzen 5 4500U with Radeon Graphics
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0860F81_K17_Lucienne_CPUID04.txt
+0x68,  1 (0x860f81): "ZEN2" Lucienne
+    AMD Ryzen 5 5500U with Radeon Graphics
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID3.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID4.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID5.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID6.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID7.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID_7.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID8.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID9.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_CPUID10.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0870F10_K17_Matisse_11_CPUID.txt
+0x71,  0 (0x870f10): "ZEN2" Matisse
+    12-Core AMD Ryzen 9 PRO 3900, 3100 MHz (31 x 100)
+    AMD Ryzen 9 PRO 3900 12-Core Processor
+    AMD Ryzen 5 3600 6-Core Processor
+    AMD Ryzen 9 3900X 12-Core Processor
+    AMD Ryzen 7 3700X 8-Core Processor
+    AMD Ryzen 5 3600 6-Core Processor
+    12-Core AMD Ryzen 9 PRO 3900, 4342 MHz (43.5 x 100)
+    AMD Ryzen 9 PRO 3900 12-Core Processor
+    AMD Ryzen 9 3900XT 12-Core Processor
+    16-Core AMD Ryzen 9 3950X, 4542 MHz (45.5 x 100)
+    AMD Ryzen 9 3950X 16-Core Processor
+    AMD Ryzen 5 3600XT 6-Core Processor
+    AMD Ryzen 3 3100 4-Core Processor
+    AMD Ryzen 7 3800XT 8-Core Processor
+    HexaCore AMD Ryzen 5 3600X, 4325 MHz (43.25 x 100)
+    AMD Ryzen 5 3600X 6-Core Processor
+
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0880F40_K17_CPUID.txt
+0x84,  0 (0x880f40): Zen
+    AMD 4800S 8-Core Processor Desktop Kit
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0890F02_K17_VanGogh_01_CPUID.txt
+0x90,  2 (0x890f02): "ZEN2" Van Gogh
+    AMD Custom APU 0405  AmdCcxVhFf3PeiInit Entry
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD08A0F00_K17_Mendocino_01_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD08A0F00_K17_Mendocino_02_CPUID.txt
+0xa0,  0 (0x8a0f00): "ZEN2" Mendocino
+    AMD Ryzen 5 7520U with Radeon Graphics
+    AMD Ryzen 3 7320U with Radeon Graphics
+
+[Family 24] # Family 18h
+
+# https://en.wikichip.org/wiki/amd/cpuid
+0x00,  0 (0x900f00): "ZEN" Dhyana
+
+[Family 25] # Family 19h
+# Family for Zen 3 and Zen 4 processors
+
+0x00,  x (0xa00f0x): "ZEN3" Zen 3
+
+# https://en.wikichip.org/wiki/amd/cpuid
+0x00,  0 (0xa00f00): "ZEN3" Zen 3
+    AMD Engineering Sample
+
+0x01,  x (0xa00f1x): "ZEN3" Zen 3
+
+# https://en.wikichip.org/wiki/amd/cpuid
+0x01,  0 (0xa00f10): "ZEN3" Zen 3
+    AMD Engineering Sample
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A00F11_K19_Milan_CPUID1.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A00F11_K19_Milan_CPUID2.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A00F11_K19_Milan_02_CPUID.txt
+0x01,  1 (0xa00f11): "ZEN3" Milan
+    AMD EPYC 7713 64-Core Processor
+    AMD EPYC 7763 64-Core Processor
+
+# https://en.wikichip.org/wiki/amd/cpuid
+0x01,  2 (0xa00f12): "ZEN3" Zen 3
+    AMD Engineering Sample
+
+# https://en.wikichip.org/wiki/amd/cpuid
+0x08,  x (0xa00f8x): "ZEN3" Threadripper 5900 Chagall
+
+# https://en.wikichip.org/wiki/amd/cpuid
+0x10,  0 (0xa10f00): "ZEN4" Zen 4
+    AMD Engineering Sample
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A10F11_K19_Genoa_01_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A10F11_K19_Genoa_02_CPUID.txt
+0x11,  1 (0xa10f11): Genoa
+    AMD EPYC 9654 96-Core Processor
+    AMD EPYC 9124 16-Core Processor
+
+0x21,  x (0xa20f1x): "ZEN3" Zen 3
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A20F10_K19_Vermeer2_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A20F10_K19_Vermeer_CPUID1.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A20F10_K19_Vermeer_CPUID2.txt
+0x21,  0 (0xa20f10): "ZEN3" Vermeer (VMR)
+    12-Core AMD Ryzen 9 5900X, 4941 MHz (49.5 x 100)
+    AMD Ryzen 9 5900X 12-Core Processor
+    AMD Ryzen 9 5950X 16-Core Processor
+    AMD Ryzen 9 5900X 12-Core Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A20F12_K19_Warhol_00_CPUID.txt
+0x21,  2 (0xa20f12): "ZEN3" Warhol
+    AMD Ryzen 7 5800X3D 8-Core Processor
+
+0x40,  x (0xa40f0x): "ZEN3" Rembrant
+
+0x44,  x (0xa40f4x): "ZEN3" Zen 3
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A40F41_K19_Rembrandt_01_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A40F41_K19_Rembrandt_03_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A40F41_K19_Rembrandt_06_CPUID.txt
+0x44,  1 (0xa40f41): "ZEN3" Rembrandt
+    AMD Ryzen 7 6800HS with Radeon Graphics
+    AMD Ryzen 9 6900HX with Radeon Graphics
+    AMD Ryzen 7 7735HS with Radeon Graphics
+
+0x50,  x (0xa50f0x): "ZEN3" Zen 3
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A50F00_K19_Barcelo_00_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A50F00_K19_Cezanne_CPUID6.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A50F00_K19_Cezanne_CPUID7.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A50F00_K19_Cezanne_CPUID9.txt
+0x50,  0 (0xa50f00): "ZEN3" Barcelo, Cezanne (CZN)
+    AMD Ryzen 7 5825U with Radeon Graphics
+    AMD Ryzen 7 5800H with Radeon Graphics
+    AMD Ryzen 9 5900HS with Radeon Graphics
+    AMD Ryzen 7 5800HS Creator Edition    Set bran
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A60F12_K19_Raphael_01_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A60F12_K19_Raphael_02_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A60F12_K19_Raphael_03_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A60F12_K19_Raphael_04_CPUID.txt
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A60F12_K19_Raphael_05_CPUID.txt
+0x61,  2 (0xa60f12): "ZEN4" Raphael
+    AMD Ryzen 5 7600X 6-Core Processor
+    AMD Ryzen 9 7900X 12-Core Processor
+    AMD Ryzen 7 7700X 8-Core Processor
+    16-Core AMD Ryzen 9 7950X, 4500 MHz (45 x 100)
+    AMD Ryzen 9 7950X 16-Core Processor
+    AMD Ryzen 9 7900X3D 12-Core Processor
+
+# https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A70F41_K19_Phoenix_03_CPUID.txt
+0x74,  1 (0xa70f41): "ZEN4" Phoenix
+    AMD Ryzen 9 7940H w/ Radeon 780M Graphics
+
+[Family 26] # Family 1ah
+
+# https://twitter.com/InstLatX64/status/1685680065508515841
+# https://milkyway.cs.rpi.edu/milkyway/show_host_detail.php?hostid=996435
+0x20,  0 (0xb20f00): STX1
+    AMD Eng Sample: 100-000000994-03_N
+
+# https://twitter.com/InstLatX64/status/1685680065508515841
+# https://einsteinathome.org/host/13142934
+0x40,  0 (0xb40f00): Granite Ridge
+    AMD Eng Sample: 100-000001290-11_N
