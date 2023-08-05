@@ -7,11 +7,13 @@ ENV LANG=C.UTF-8
 # Install apt-utils first, in order to apply package configuration tasks
 # Install wine last, because otherwise apt fails to configure it
 # Debian 12 removed sagemath because it failed to build from source
+# Install openjdk-17-jre-headless before openjdk, as ca-certificates-java configuration requires loading a java.security file in /etc/java-17-openjdk/security/ which otherwise is named java.security.dpkg-new (https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/1998697)
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
     apt-get -qq update && \
     apt-get install --no-install-recommends --no-install-suggests -qqy apt-utils && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy openjdk-17-jre-headless && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         cargo \
