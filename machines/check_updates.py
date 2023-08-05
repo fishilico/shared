@@ -107,6 +107,8 @@ def is_usable_tag(image, tag):
         # (they are for example issues with the package manager)
         if tag == 'wheezy-slim':
             return False
+        if tag == 'jessie-slim':
+            return False
         # Do not use images with dynamic names
         if re.match(r'^(oldoldstable|oldstable|stable|sid|testing|unstable)(-slim)?$', tag):
             return False

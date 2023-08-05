@@ -65,9 +65,6 @@ do
             echo "alpine3.18"
             ;;
 
-        *debian8*|*jessie*)
-            echo "debian8-jessie"
-            ;;
         *debian9*|*stretch*)
             echo "debian9-stretch"
             ;;
