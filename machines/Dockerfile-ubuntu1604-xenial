@@ -32,7 +32,7 @@ RUN \
         make \
         musl-dev \
         musl-tools \
-        openjdk-8-jdk \
+        openjdk-8-jdk-headless \
         openssh-client \
         openssl \
         pkgconf \

@@ -35,7 +35,7 @@ RUN \
         make \
         musl-dev \
         musl-tools \
-        openjdk-17-jdk \
+        openjdk-17-jdk-headless \
         openssh-client \
         openssl \
         pkgconf \
