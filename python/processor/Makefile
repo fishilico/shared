@@ -1,6 +1,6 @@
 include ../../env-python.mk
 
-NEVER_TEST_BINARIES := sync_chipsec_definitions.py sync_intel_microcode.py sync_intel_sde.py sync_linux_definitions.py sync_perfmon_definitions.py
+NEVER_TEST_BINARIES := sync_amd_microcode.py sync_chipsec_definitions.py sync_intel_microcode.py sync_intel_sde.py sync_linux_definitions.py sync_perfmon_definitions.py
 NONTEST_BINARIES := $(NEVER_TEST_BINARIES)
 
 HAVE_PYTHON_FSTRING := $(call can-run,$(PYTHON) -c 'f""')
@@ -32,6 +32,7 @@ test: all
 
 sync-inet:
 	$(PYTHON3) sync_chipsec_definitions.py
+	$(PYTHON3) sync_amd_microcode.py -w
 	$(PYTHON3) sync_intel_microcode.py -w
 	$(PYTHON3) sync_linux_definitions.py
 	$(PYTHON3) sync_perfmon_definitions.py

@@ -39,12 +39,12 @@ import sys
 logger = logging.getLogger(__name__)
 
 
-def load_intel_x86_cpuid():
-    """Load intel_x86_cpuid.txt"""
+def load_x86_cpuid(filename):
+    """Load amd_x86_cpuid.txt and intel_x86_cpuid.txt"""
     models_by_family = {}
     current_family = None
     last_model_stepping = None
-    with open(os.path.join(os.path.dirname(__file__), "intel_x86_cpuid.txt"), "r") as fmicrocode:
+    with open(os.path.join(os.path.dirname(__file__), filename), "r") as fmicrocode:
         for line in fmicrocode:
             if "\t" in line:
                 raise ValueError("Invalid line: tabulation is present in {}".format(repr(line)))
@@ -61,13 +61,27 @@ def load_intel_x86_cpuid():
                 last_model_stepping = None
                 continue
 
+            # Start family definitions with hexadecimal such as "[Family 25] # Family 19h"
+            matches = re.match(r"^\[Family ([0-9]+)\] # Family ([0-9a-f]+)h$", line)
+            if matches:
+                current_family = int(matches.group(1))
+                current_family_bis = int(matches.group(2), 16)
+                if current_family != current_family_bis:
+                    raise ValueError("Mismatched family numbers in {}".format(repr(line)))
+                models_by_family[current_family] = {}
+                last_model_stepping = None
+                continue
+
             if current_family is None:
                 raise ValueError("Invalid line: no family defined before {}".format(repr(line)))
 
-            matches = re.match(r"^0x([0-9a-f][0-9a-f]), +([0-9]+|x) \(0x([0-9a-f]{4}[0-9a-fx])\): (.*)$", line)
+            matches = re.match(r"^0x([0-9a-f][0-9a-f]), +([0-9]+|x) \(0x([0-9a-f]{4,5}[0-9a-fx])\): (.*)$", line)
             if matches:
                 model_str, stepping_str, cpuid_str, main_desc = matches.groups()
                 model = int(model_str, 16)
+                expected_cpuid_len = 6 if filename == "amd_x86_cpuid.txt" else 5
+                if len(cpuid_str) != expected_cpuid_len:
+                    raise ValueError("Invalid line: CPUID value not of the expected length {}".format(repr(line)))
                 if stepping_str == "x":
                     stepping = -1
                     if not cpuid_str.endswith("x"):
@@ -76,11 +90,8 @@ def load_intel_x86_cpuid():
                 else:
                     stepping = int(stepping_str, 10)
                     cpuid = int(cpuid_str, 16)
-                expected_cpuid = (
-                    ((model & 0xf0) << 12) |
-                    (current_family << 8) |
-                    ((model & 0xf) << 4) |
-                    (stepping if stepping != -1 else 0))
+
+                expected_cpuid = X86CPUInfo.encode_cpuid(current_family, model, stepping if stepping != -1 else 0)
                 if cpuid != expected_cpuid:
                     raise ValueError("Invalid line: expected CPUID {:#x} != {:#x} in {}".format(
                         expected_cpuid, cpuid, repr(line)))
@@ -119,15 +130,10 @@ def load_intel_x86_cpuid():
     return models_by_family
 
 
-CPU_MODELS = {
-    'GenuineIntel': load_intel_x86_cpuid(),
-}
-
-
-def load_intel_microcode_versions():
-    """Load intel_microcode_versions.txt"""
+def load_x86_microcode_versions(filename):
+    """Load amd_microcode_versions.txt or intel_microcode_versions.txt"""
     versions = []
-    with open(os.path.join(os.path.dirname(__file__), "intel_microcode_versions.txt"), "r") as fmicrocode:
+    with open(os.path.join(os.path.dirname(__file__), filename), "r") as fmicrocode:
         for line in fmicrocode:
             line = line.strip()
             if not line or line.startswith("#"):
@@ -140,7 +146,8 @@ def load_intel_microcode_versions():
     return versions
 
 
-INTEL_UCODE_VERSIONS = load_intel_microcode_versions()
+AMD_UCODE_VERSIONS = load_x86_microcode_versions("amd_microcode_versions.txt")
+INTEL_UCODE_VERSIONS = load_x86_microcode_versions("intel_microcode_versions.txt")
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/include/asm/cputype.h
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/kernel/cpuinfo.c
@@ -425,12 +432,8 @@ class CPUInfo(object):
             model = fields.get('model')
             stepping = fields.get('stepping')
             if family is not None and model is not None and stepping is not None:
-                cpuid = (
-                    ((model & 0xf0) << 12) |
-                    (family << 8) |
-                    ((model & 0xf) << 4) |
-                    stepping)
-            if cpuid is None:
+                cpuid = X86CPUInfo.encode_cpuid(family, model, stepping)
+            else:
                 logger.error("CPUID components not found in %s", filename)
                 return
 
@@ -502,13 +505,13 @@ class X86CPUInfo(CPUInfo):
     CPUID[EAX=1].EAX contains version information (Type, Family, Model, and Stepping ID)
         bits  0- 3 Stepping ID
         bits  4- 7 Model
-        bits  8-11 Family ID (in practice: 6 or 0xf)
+        bits  8-11 Family ID (for example: 6 or 0xf)
         bits 12-13 Processor Type
                     (in practice: 0 (Original OEM Processor)
                     or 1 (Intel OverDrive, only found for CPUID 0x00001632))
         bits 14-15 Reserved
         bits 16-19 Extended Model ID
-        bits 20-27 Extended Family ID (in practice: 0)
+        bits 20-27 Extended Family ID (in practice: 0 for Intel)
         bits 28-31 Reserved
     CPUID[EAX=0x80000002,0x80000003,0x80000004] contains the Processor Brand String
     """
@@ -531,10 +534,31 @@ class X86CPUInfo(CPUInfo):
             hex(self.cpuid),
             hex(self.microcode_version) if self.microcode_version is not None else 'None')
 
+    @staticmethod
+    def encode_cpuid(family, model, stepping):
+        """Encode the CPUID of x86 CPU"""
+        assert 0 <= family <= 0xff + 0xf
+        assert 0 <= model <= 0xff
+        assert 0 <= stepping <= 0xf
+
+        if family <= 0xf:
+            base_family = family
+            extended_family = 0
+        else:
+            base_family = 0xf
+            extended_family = family - 0xf
+
+        return (
+            (extended_family << 20) |
+            ((model & 0xf0) << 12) |
+            (base_family << 8) |
+            ((model & 0xf) << 4) |
+            stepping)
+
     @property
     def x86_family(self):
         """Returns the family identifier, encoded in bits 8-11 and 20-27"""
-        return ((self.cpuid >> 8) & 0xf) + ((self.cpuid >> 16) & 0xff0)
+        return ((self.cpuid >> 8) & 0xf) + ((self.cpuid >> 20) & 0xff)
 
     @property
     def x86_model(self):
@@ -576,8 +600,14 @@ class X86CPUInfo(CPUInfo):
         version_date = None
         available_upgrade_ver = None
         available_upgrade_date = None
-        if self.vendor_id == 'GenuineIntel':
-            for known_cpuid, known_ver, update_date in INTEL_UCODE_VERSIONS:
+        if self.vendor_id == 'AuthenticAMD':
+            ucode_versions = AMD_UCODE_VERSIONS
+        elif self.vendor_id == 'GenuineIntel':
+            ucode_versions = INTEL_UCODE_VERSIONS
+        else:
+            ucode_versions = None
+        if ucode_versions:
+            for known_cpuid, known_ver, update_date in ucode_versions:
                 if known_cpuid != self.cpuid:
                     continue
                 microcode_list.append((known_ver, update_date))
@@ -813,6 +843,12 @@ class X86CPUInfo(CPUInfo):
         return X86CPUInfo(vendor_id.decode('ascii'), model_name, cpuid_1)
 
 
+CPU_MODELS = {
+    "AuthenticAMD": load_x86_cpuid("amd_x86_cpuid.txt"),
+    "GenuineIntel": load_x86_cpuid("intel_x86_cpuid.txt"),
+}
+
+
 def main(argv=None):
     """Program entry point"""
     parser = argparse.ArgumentParser(description="Find the CPU model")
@@ -829,13 +865,11 @@ def main(argv=None):
                         level=logging.DEBUG if args.debug else logging.INFO)
 
     if args.list:
-        for _, families in sorted(CPU_MODELS.items()):
+        for vendor, families in sorted(CPU_MODELS.items()):
             for family, models in sorted(families.items()):
                 for model, stepping in sorted(models.keys()):
-                    cpuid = (family << 8)  # family
-                    cpuid |= ((model & 0xf0) << 12) | ((model & 0xf) << 4)
-                    cpuid |= stepping & 0xf
-                    cpuinfo = X86CPUInfo('GenuineIntel', None, cpuid)
+                    cpuid = X86CPUInfo.encode_cpuid(family, model, 15 if stepping == -1 else stepping)
+                    cpuinfo = X86CPUInfo(vendor, None, cpuid)
                     desc_list = cpuinfo.desc_cpuid()
                     desc = ' '.join(desc_list[:2])
                     if stepping < 0:
@@ -845,24 +879,28 @@ def main(argv=None):
                         print('\n'.join(desc_list[2:]))
 
     if args.list_microcodes:
-        ucodes_for_cpuid = {}
-        for cpuid, microcode_version, update_date in INTEL_UCODE_VERSIONS:
-            if cpuid not in ucodes_for_cpuid:
-                ucodes_for_cpuid[cpuid] = {}
-            if microcode_version not in ucodes_for_cpuid[cpuid]:
-                ucodes_for_cpuid[cpuid][microcode_version] = update_date
-            elif ucodes_for_cpuid[cpuid][microcode_version] < update_date:
-                # This can occur if a platform received an update with a
-                # different date
-                ucodes_for_cpuid[cpuid][microcode_version] = update_date
-        for cpuid, ucodes in sorted(ucodes_for_cpuid.items()):
-            cpuinfo = X86CPUInfo('GenuineIntel', None, cpuid)
-            desc_list = cpuinfo.desc_cpuid()
-            print('Intel {}'.format(' '.join(desc_list[:2])))
-            for microcode_version, update_date in sorted(ucodes.items()):
-                print('    Microcode version {:#x} {}'.format(
-                    microcode_version, update_date))
-            print('')
+        for vendor, vendor_id, ucode_versions in (
+            ("AMD", "AuthenticAMD", AMD_UCODE_VERSIONS),
+            ("Intel", "GenuineIntel", INTEL_UCODE_VERSIONS),
+        ):
+            ucodes_for_cpuid = {}
+            for cpuid, microcode_version, update_date in ucode_versions:
+                if cpuid not in ucodes_for_cpuid:
+                    ucodes_for_cpuid[cpuid] = {}
+                if microcode_version not in ucodes_for_cpuid[cpuid]:
+                    ucodes_for_cpuid[cpuid][microcode_version] = update_date
+                elif ucodes_for_cpuid[cpuid][microcode_version] < update_date:
+                    # This can occur if a platform received an update with a
+                    # different date
+                    ucodes_for_cpuid[cpuid][microcode_version] = update_date
+            for cpuid, ucodes in sorted(ucodes_for_cpuid.items()):
+                cpuinfo = X86CPUInfo(vendor_id, None, cpuid)
+                desc_list = cpuinfo.desc_cpuid()
+                print('{} {}'.format(vendor, ' '.join(desc_list[:2])))
+                for microcode_version, update_date in sorted(ucodes.items()):
+                    print('    Microcode version {:#x} {}'.format(
+                        microcode_version, update_date))
+                print('')
 
     if args.list or args.list_microcodes:
         return 0
