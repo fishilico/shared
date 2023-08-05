@@ -65,9 +65,6 @@ do
             echo "alpine3.18"
             ;;
 
-        *debian9*|*stretch*)
-            echo "debian9-stretch"
-            ;;
         *debian10*|*buster*)
             echo "debian10-buster"
             ;;
