@@ -226,20 +226,23 @@ def parse_chipsec_cfg(file_data: bytes) -> None:
                 for values_str in detection_value.split(","):
                     values_str = values_str.strip().lower()
                     has_wildcard = False
-                    if matches := re.match(r"^([0-9a-f]+)-([0-9a-f]+)$", values_str):
+                    if matches := re.match(r"^0x([0-9a-f]+)-0x([0-9a-f]+)$", values_str):
                         # Interval
                         values_start = int(matches.group(1), 16)
                         values_end = int(matches.group(2), 16)
                         if (values_start & ~0xF) != (values_end & ~0xF):
                             print(f"Warning: interval too large {values_str} in {line!r}")
-                        values = list(range(values_start, values_end + 1))
-                    elif matches := re.match(r"^([0-9a-f]+)$", values_str):
+
+                        # Detect wide range as "unknown stepping"
+                        value_without_stepping = values_start & ~0xF
+                        if values_start == value_without_stepping and values_end == value_without_stepping | 0xF:
+                            has_wildcard = True
+                            values = [value_without_stepping]
+                        else:
+                            values = list(range(values_start, values_end + 1))
+                    elif matches := re.match(r"^0x([0-9a-f]+)$", values_str):
                         # Raw value
                         values = [int(matches.group(1), 16)]
-                    elif matches := re.match(r"^([0-9a-f]+)x$", values_str):
-                        # Unknown stepping
-                        has_wildcard = True
-                        values = [int(matches.group(1), 16) << 4]
                     else:
                         print(f"Warning: unknown detection_value format {values_str!r} in {line!r}")
                         values = []
