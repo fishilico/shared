@@ -266,13 +266,15 @@ def parse_chipsec_cfg(file_data: bytes) -> None:
                         elif cpuid_data is None:
                             print(f"Update({cpuid_value:#x}): {cpuid_desc} is {platform}")
                         else:
-                            if cpuid_data[0] is None:
+                            if cpuid_data.acronym is None:
                                 # No abbreviation
-                                print(f"Update({cpuid_value:#x}): abbrev {platform} for {cpuid_desc} [{cpuid_data[1]}]")
-                            elif platform not in cpuid_data[0]:
+                                print(
+                                    f"Update({cpuid_value:#x}): abbrev {platform} for {cpuid_desc} [{cpuid_data.main_desc}]"  # noqa
+                                )
+                            elif platform and platform not in cpuid_data.acronym:
                                 # Missing platform
                                 print(
-                                    f"Update({cpuid_value:#x}): missing {platform} in {cpuid_data[0]} for {cpuid_desc} [{cpuid_data[1]}]"  # noqa
+                                    f"Update({cpuid_value:#x}): missing {platform} in {cpuid_data.acronym} for {cpuid_desc} [{cpuid_data.main_desc}]"  # noqa
                                 )
             else:
                 print(f"Warning: unable to parse info from {line!r}")

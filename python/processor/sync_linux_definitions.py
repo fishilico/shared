@@ -27,9 +27,8 @@ import urllib.request
 from pathlib import Path
 from typing import FrozenSet, List, Mapping, Optional, Tuple
 
-from cpu_model import CPU_MODELS
+from cpu_model import CPU_MODELS, CpuidInformation
 from x86_msr import MSRS
-
 
 LINUX_GIT_PLAIN_URL = "https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain"
 
@@ -125,7 +124,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
             print(f"Warning(mapfile, {line!r}): unknown {vendor} family {family}")
             emitted_warning = True
             continue
-        cpuid_data: List[Tuple[int, Optional[List[Optional[str]]]]]
+        cpuid_data: List[Tuple[int, Optional[CpuidInformation]]]
         # The stepping is specific with model 55
         if model_str.startswith("55-"):
             if model_str == "55-[01234]":
@@ -157,12 +156,11 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
                 print(f"Warning(mapfile, {line!r}): Unknown model {model:#04x}")
                 emitted_warning = True
                 continue
-            abbrev = model_data[0]
-            name = model_data[1]
+            acronym = model_data.acronym or "?"
+            name = model_data.main_desc
             if verbose:
-                print(f"{model:#04x}: {filename:15} {abbrev or '?':7} {name}")
+                print(f"{model:#04x}: {filename:15} {acronym:7} {name}")
             # Strip parenthesis from the name
-            assert name is not None
             while m := re.match(r"^(.* )\([^)]*\)(.*)$", name):
                 name = (m.group(1) + m.group(2)).strip()
             if (filename, name) not in KNOWN_FILENAME_MODEL:
@@ -341,7 +339,7 @@ def parse_msr_define(content: str, verbose: bool = False) -> None:
             # Map the macro name to a processor and a name in our database
             processor = ""
             if name.startswith("MTRRfix"):
-                name = "IA32_MTRR_FIX" + name[len("MTRRfix") :]
+                name = "IA32_MTRR_FIX" + name[len("MTRRfix") :]  # noqa
             elif name == "LBR_NHM_FROM":
                 processor = "CORE1"
                 name = "LASTBRANCH_0_FROM_IP"
@@ -359,7 +357,7 @@ def parse_msr_define(content: str, verbose: bool = False) -> None:
                 processor = "ATOM"
                 name = name[5:]
             elif name.startswith("ARCH_LBR_"):
-                name = "IA32_LBR_" + name[len("ARCH_LBR_") :]
+                name = "IA32_LBR_" + name[len("ARCH_LBR_") :]  # noqa
             elif name == "KNL_CORE_C6_RESIDENCY":
                 name = name[4:]
                 processor = "XEONPHI"
@@ -375,12 +373,12 @@ def parse_msr_define(content: str, verbose: bool = False) -> None:
                 name = "IA32_" + name[5:]
             elif name.startswith("IA32_MCG_E") and name != "IA32_MCG_EXT_CTL":
                 processor = "PENTIUM4"
-                name = "MCG_R" + name[len("IA32_MCG_E") :]
+                name = "MCG_R" + name[len("IA32_MCG_E") :]  # noqa
             elif name.startswith("K7_"):
                 processor = "AMD64"
                 name = name[3:]
                 if name.startswith("EVNTSEL"):
-                    name = "PERFEVTSEL" + name[len("EVNTSEL") :]
+                    name = "PERFEVTSEL" + name[len("EVNTSEL") :]  # noqa
             elif name.startswith("K8_"):
                 processor = "AMD64"
                 name = name[3:]

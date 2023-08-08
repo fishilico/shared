@@ -122,7 +122,7 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
             continue
 
         # Compare acronyms
-        db_acronym = cpuid_data[0]
+        db_acronym = cpuid_data.acronym
 
         if not re.match(r"^[0-9A-Ze/-]+$", field_acronym):
             raise ValueError(f"Unexpected processor acronym {field_acronym!r} in {line!r}")
@@ -144,7 +144,7 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
                     continue
 
         # Gather information about Core generation
-        db_names: Set[str] = set(cpuid_data[2]) if len(cpuid_data) >= 3 else set()
+        db_names: Set[str] = set(cpuid_data.desc_list)
         new_names: List[str] = []
         if field_product_name == "Pentium Silver N/J5xxx, Celeron N/J4xxx":
             new_names = ["Intel® Pentium® Silver processors N5xxx, J5xxx", "Intel® Celeron® processors N4xxx, J4xxx"]

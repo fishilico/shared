@@ -24,16 +24,16 @@
 @author: Nicolas Iooss
 @license: MIT
 """
-from pathlib import Path
 import re
+from pathlib import Path
 from typing import Dict
-
 
 MSR_FILE = Path(__file__).parent / "x86_msr.txt"
 
 
 class x86Msrs:
     """Known x86 Model-Specific Registers"""
+
     def __init__(self) -> None:
         msrs: Dict[int, Dict[str, str]] = {}
         last_msr_for_prefix: Dict[str, int] = {}

@@ -27,13 +27,12 @@ import urllib.request
 from pathlib import Path
 from typing import FrozenSet, List, Optional, Tuple
 
-from cpu_model import CPU_MODELS
-
+from cpu_model import CPU_MODELS, CpuidInformation
 
 INTEL_PERFMON_GIT_RAW_URL = "https://github.com/intel/perfmon/raw/main"
 
-# Known associations between abbreviation in perfmon and abbreviation in the database
-KNOWN_PERFMON_ABBREV: FrozenSet[Tuple[str, str]] = frozenset(
+# Known associations between acronym in perfmon and acronym in the database
+KNOWN_PERFMON_ACRONYM: FrozenSet[Tuple[str, str]] = frozenset(
     (
         ("ADL", "ADL-N"),
         ("ADL", "ADL-P"),
@@ -141,12 +140,12 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
         # Match "GenuineIntel-6-2E,V3,/NHM-EX/events/NehalemEX_core.json,core,,,"
         # and "GenuineIntel-6-55-[01234],V1.30,/SKX/events/skylakex_core.json,core,,,"
         matches = re.match(
-            r"^(GenuineIntel)-(6)-([0-9A-F\[\]-]+),V[0-9.]+,/([A-Z-]+)/events/([A-Za-z_-]+)\.json,([ a-z_]+),[0-9x]*,[0-9x]*,(?:|Atom|Core)$",
+            r"^(GenuineIntel)-(6)-([0-9A-F\[\]-]+),V[0-9.]+,/([A-Z-]+)/events/([A-Za-z_-]+)\.json,([ a-z_]+),[0-9x]*,[0-9x]*,(?:|Atom|Core)$",  # noqa
             line,
         )
         if not matches:
             raise ValueError(f"Unexpected line in mapfile.csv: {line!r}")
-        vendor, fam_str, model_str, abbrev_from_map, filename, name_suffix = matches.groups()
+        vendor, fam_str, model_str, acronym_from_map, filename, name_suffix = matches.groups()
         family = int(fam_str)
 
         if name_suffix == "hybridcore":
@@ -171,7 +170,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
             emitted_warning = True
             continue
         # The stepping is specific with model 55
-        cpuid_data: List[Tuple[int, Optional[List[Optional[str]]]]]
+        cpuid_data: List[Tuple[int, Optional[CpuidInformation]]]
         if model_str.startswith("55-"):
             if model_str == "55-[01234]":
                 cpuid_data = [(0x55, cpu_models.get((0x55, 0)))]
@@ -194,15 +193,15 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
             if model_data is None:
                 print(f"Warning(mapfile, {line!r}): Unknown model {model:#04x}")
                 continue
-            abbrev = model_data[0]
-            name = model_data[1]
-            if abbrev_from_map != abbrev and (abbrev_from_map, abbrev) not in KNOWN_PERFMON_ABBREV:
+            acronym = model_data.acronym
+            name = model_data.main_desc
+            if acronym_from_map != acronym and (acronym_from_map, acronym) not in KNOWN_PERFMON_ACRONYM:
                 print(
-                    f"Warning(mapfile, {line!r}): missing abbreviation association in known list {(abbrev_from_map, abbrev)!r}"
+                    f"Warning(mapfile, {line!r}): missing acronym association in known list {(acronym_from_map, acronym)!r}"  # noqa
                 )
                 emitted_warning = True
             if verbose:
-                print(f"{model:#04x}: {abbrev_from_map:9}/{filename:22} {abbrev or '?':7} {name}")
+                print(f"{model:#04x}: {acronym_from_map:9}/{filename:22} {acronym or '?':7} {name}")
             # Strip parenthesis from the name
             assert name is not None
             while m := re.match(r"^(.* )\([^)]*\)(.*)$", name):

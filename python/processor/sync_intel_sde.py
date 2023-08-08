@@ -38,12 +38,12 @@ import argparse
 import re
 import struct
 from pathlib import Path
-from typing import Dict, FrozenSet, List, Optional, Tuple
+from typing import Dict, FrozenSet, List, Tuple
 
 from cpu_model import CPU_MODELS, X86CPUInfo
 
-# Known associations between abbreviation in SDE path and abbreviation in the database
-KNOWN_SDE_ABBREV: FrozenSet[Tuple[int, str, str]] = frozenset(
+# Known associations between acronym_from_map in SDE path and acronym_from_map in the database
+KNOWN_SDE_ACRONYM: FrozenSet[Tuple[int, str, str]] = frozenset(
     (
         # Version 8.69.1 may confuse Broadwell and Haswell
         (0x306C1, "bdw", "HSW"),
@@ -146,32 +146,31 @@ def parse_sde_directory(sde_path: Path, verbose: bool = False) -> None:
         cpu_models = CPU_MODELS.get(cpuinfo.vendor_id, {}).get(cpuinfo.x86_family)
         if cpu_models is None:
             print(f"Warning({cpuid_value:#x}): unknown Intel family {cpuinfo.x86_family}")
-            model_data: Optional[List[Optional[str]]] = None
+            model_data = None
         else:
             model_data = cpu_models.get((cpuinfo.x86_model, cpuinfo.x86_stepping))
 
         if model_data is None:
             # Missing CPUID
             print(
-                f"Update({cpuid_value:#x}): Unknown model/stepping {cpuinfo.x86_model:#x}, {cpuinfo.x86_stepping} for {path_acronym}"
+                f"Update({cpuid_value:#x}): Unknown model/stepping {cpuinfo.x86_model:#x}, {cpuinfo.x86_stepping} for {path_acronym}"  # noqa
             )
         else:
-            abbrev = model_data[0]
-            name = model_data[1]
-            if abbrev is None:
+            acronym = model_data.acronym
+            if acronym is None:
                 if path_acronym not in {"pentium3", "pentium4", "pentium4p", "quark"}:
                     print(
-                        f"Update({cpuid_value:#x}): CPUID model/stepping {cpuinfo.x86_model:#x}, {cpuinfo.x86_stepping} uses path acronym {path_acronym}"
+                        f"Update({cpuid_value:#x}): CPUID model/stepping {cpuinfo.x86_model:#x}, {cpuinfo.x86_stepping} uses path acronym {path_acronym}"  # noqa
                     )
             elif (
-                path_acronym != abbrev.split("-", 1)[0].lower()
-                and (cpuid_value, path_acronym, abbrev) not in KNOWN_SDE_ABBREV
+                path_acronym != acronym.split("-", 1)[0].lower()
+                and (cpuid_value, path_acronym, acronym) not in KNOWN_SDE_ACRONYM
             ):
                 print(
-                    f"Warning({cpuid_value:#x}): missing abbreviation association in known list ({cpuid_value:#07x}, {path_acronym!r}, {abbrev!r})"
+                    f"Warning({cpuid_value:#x}): missing acronym_from_map association in known list ({cpuid_value:#07x}, {path_acronym!r}, {acronym!r})"  # noqa
                 )
 
-            if brand_string and (len(model_data) < 3 or brand_string not in model_data[2]):
+            if brand_string and brand_string not in model_data.desc_list:
                 print(f"Update({cpuid_value:#x}): missing brand string: {brand_string}")
 
 
