@@ -383,9 +383,11 @@
 # https://github.com/coreboot/coreboot/blob/4.19/src/cpu/intel/model_106cx/model_106cx_init.c
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106CA_PineView_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106CA_PineviewD_CPUID.txt
-0x1c, 10 (0x106ca): Atom Pineview
+# https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_13470/fi-pnv-d510/boot0.txt
+0x1c, 10 (0x106ca): "PNV" Atom Pineview
     DualCore Intel® Atom® D525, 1800 MHz (9 x 200) (Pineview-D, Bonnell core)
     Genuine Intel(R) CPU        @ 1.66GHz
+    Intel(R) Atom(TM) CPU D510   @ 1.66GHz
     Intel(R) Atom(TM) CPU D525   @ 1.80GHz
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00106D0_Dunnington_CPUID.txt
@@ -459,6 +461,7 @@
     Intel® Pentium® Processor G6950
     Intel(R) Core(TM) i5 CPU         650  @ 3.20GHz
 
+# https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_13470/fi-ilk-650/boot0.txt (ILK is Ironlake, Gen5 GPU on https://dri.freedesktop.org/wiki/IntelCodenames/)
 0x25,  5 (0x20655): Arrandale, Clarkdale
     Intel® Celeron® Mobile P4xxx, U3xxx Processor
     Intel® Pentium® Mobile P6xxx, U5xxx Processor
@@ -475,6 +478,7 @@
     Intel® Core™ Processor i5-650, 655K, 660, 661, 670, 680
     Intel® Core™ Processor i3-530, 540
     Intel® Pentium® Processor G6950, G6951, G6960
+    Intel(R) Core(TM) i5 CPU         650  @ 3.20GHz
 
 0x26,  x (0x2066x): "BNL" Atom Bonnell Mid (Silverthorne, Lincroft)
 
@@ -736,6 +740,7 @@
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306A9_IvyBridge_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00306A9_IvyBridge_CPUID2.txt
 # https://www.intel.com/content/www/us/en/download/684897/684910/intel-software-development-emulator.html Intel Software Development Emulator 8.69.1
+# https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_13470/fi-ivb-3770/boot0.txt
 0x3a,  9 (0x306a9): "IVB" Ivy Bridge, Ivy Bridge Xeon E3, Gladden
     3rd Generation Intel® Core™ Processor Family
     3rd Generation Intel® Core™ Mobile Processor Family
@@ -760,6 +765,7 @@
     Intel® Core™ Processor i3-3110M, i3-3120M, i3-3120ME, i3-3130M, i3-3210, i3-3217U, i3-3217UE, i3-3220, i3-3220T, i3-3225, i3-3227U, i3-3229Y, i3-3240, i3-3240T, i3-3245, i3-3250, i3-3250T
     Intel® Pentium® Processor 1405 v2, 2020M, 2030M, 2117U, 2127U, 2129Y, A1018, G2010, G2020, G2020T, G2030, G2030T, G2100T, G2120, G2120T, G2130, G2140
     Intel(R) Core(TM) i7- CPU @ 2.90GHz
+    Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
     Intel(R) Core(TM) i7-3770K CPU @ 3.50GHz
     Intel(R) Celeron(R) CPU G1610 @ 2.60GHz
 
@@ -2057,8 +2063,10 @@
 
 # https://twitter.com/InstLatX64/status/1661625710471962625
 # https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_13187/bat-mtlp-8/boot0.txt
+# https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_13470/bat-mtlp-6/boot0.txt
 0xaa,  4 (0xa06a4): "MTL" Meteor Lake
     14th Generation Intel® Core™ Processor Family
+    Intel(R) Core(TM) Ultra 7 1002H
     Intel(R) Core(TM) Ultra 7 1003H
 
 # https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
