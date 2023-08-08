@@ -35,21 +35,26 @@ import re
 import struct
 import sys
 
+try:
+    from typing import Callable, Dict, List, Optional, Sequence, Tuple, Type, Union
+except ImportError:
+    pass
+
 
 logger = logging.getLogger(__name__)
 
 
-def load_x86_cpuid(filename):
+def load_x86_cpuid(filename): # type: (str) -> Dict[int, Dict[Tuple[int, int], List[Union[str, List[str], None]]]]
     """Load amd_x86_cpuid.txt and intel_x86_cpuid.txt"""
-    models_by_family = {}
-    current_family = None
-    last_model_stepping = None
-    with open(os.path.join(os.path.dirname(__file__), filename), "r") as fmicrocode:
-        for line in fmicrocode:
-            if "\t" in line:
-                raise ValueError("Invalid line: tabulation is present in {}".format(repr(line)))
+    models_by_family = {}  # type: Dict[int, Dict[Tuple[int, int],List[Union[str, List[str], None]]]]
+    current_family = None  # type: Optional[int]
+    last_model_stepping = None  # type: Optional[Tuple[int, int]]
+    with open(os.path.join(os.path.dirname(__file__), filename), "rb") as fmicrocode:
+        for raw_line in fmicrocode:
+            if b"\t" in raw_line:
+                raise ValueError("Invalid line: tabulation is present in {}".format(repr(raw_line)))
 
-            line = line.rstrip()
+            line = raw_line.decode("utf-8").rstrip()
             if not line or line.startswith("#"):
                 continue
 
@@ -122,7 +127,9 @@ def load_x86_cpuid(filename):
                     raise ValueError("Invalid line: too many leading spaces in {}".format(repr(line)))
                 if len(models_by_family[current_family][last_model_stepping]) == 2:
                     models_by_family[current_family][last_model_stepping].append([])
-                models_by_family[current_family][last_model_stepping][2].append(name)
+                desc_list = models_by_family[current_family][last_model_stepping][2]
+                assert isinstance(desc_list, list)
+                desc_list.append(name)
                 continue
 
             raise ValueError("Invalid line: failed to match any known pattern {}".format(repr(line)))
@@ -130,7 +137,7 @@ def load_x86_cpuid(filename):
     return models_by_family
 
 
-def load_x86_microcode_versions(filename):
+def load_x86_microcode_versions(filename):  # type: (str) -> List[Tuple[int, int, str]]
     """Load amd_microcode_versions.txt or intel_microcode_versions.txt"""
     versions = []
     with open(os.path.join(os.path.dirname(__file__), filename), "r") as fmicrocode:
@@ -368,16 +375,16 @@ AARCH64_PARTS = {
         0xac3: 'Ampere 1',
         0xac4: 'Ampere-1a',
     }),
-}
+}  # type: Dict[int, Tuple[str, Dict[int, str]]]
 
 
 class CPUInfo(object):
     """Information about a CPU"""
-    def __init__(self, architecture):
+    def __init__(self, architecture):  # type: (CPUInfo, str) -> None
         self.architecture = architecture
 
     @staticmethod
-    def decode_cpuinfo(filename=None):
+    def decode_cpuinfo(filename=None):  # type: (Optional[str]) -> Union[None, Aarch64CPUInfo, X86CPUInfo]
         """Build a CPUInfo object from /proc/cpuinfo content"""
         field_names = set((
             # x86
@@ -395,26 +402,28 @@ class CPUInfo(object):
             'CPU part',
             'CPU revision',
         ))
-        fields = {}
+        fields = {}  # type: Dict[str, Union[int, str]]
         if filename is None:
             filename = '/proc/cpuinfo'
             if not os.path.exists(filename):
                 logger.debug("%s does not exist, skipping it", filename)
-                return
+                return None
 
         logger.debug("Reading %r", filename)
         with open(filename, 'r') as cpuinfo_file:
             for line in cpuinfo_file:
                 if ':' in line:
-                    key, value = line.split(':', 1)
+                    key, value_str = line.split(':', 1)
                     key = key.strip()
-                    value = value.strip()
+                    value_str = value_str.strip()
                     if key in field_names:
                         # Decode the value if it is an int
-                        if re.match(r'^[0-9]+$', value):
-                            value = int(value)
-                        elif re.match(r'^0x[0-9a-fA-F]+$', value):
-                            value = int(value[2:], 16)
+                        if re.match(r'^[0-9]+$', value_str):
+                            value = int(value_str)  # type: Union[int, str]
+                        elif re.match(r'^0x[0-9a-fA-F]+$', value_str):
+                            value = int(value_str[2:], 16)
+                        else:
+                            value = value_str
                         cur_value = fields.get(key)
                         if cur_value is None:
                             fields[key] = value
@@ -427,10 +436,17 @@ class CPUInfo(object):
         model_name = fields.get('model name')
         microcode_version = fields.get('microcode')
         if vendor_id is not None and model_name is not None:
+            # Do not use isinstance(..., str) because in Python 2, they are unicode strings
+            assert not isinstance(vendor_id, int)
+            assert not isinstance(model_name, int)
+            assert isinstance(microcode_version, int)
             cpuid = None
             family = fields.get('cpu family')
+            assert isinstance(family, int)
             model = fields.get('model')
+            assert isinstance(model, int)
             stepping = fields.get('stepping')
+            assert isinstance(stepping, int)
             if family is not None and model is not None and stepping is not None:
                 cpuid = X86CPUInfo.encode_cpuid(family, model, stepping)
             else:
@@ -442,14 +458,20 @@ class CPUInfo(object):
         implementer = fields.get('CPU implementer')
         architecture = fields.get('CPU architecture')
         if implementer is not None and architecture is not None:
+            assert isinstance(implementer, int)
+            assert not isinstance(architecture, int)
             variant = fields.get('CPU variant')
+            assert isinstance(variant, int)
             part = fields.get('CPU part')
+            assert isinstance(part, int)
             revision = fields.get('CPU revision')
+            assert isinstance(revision, int)
             return Aarch64CPUInfo(implementer, architecture, variant, part, revision)
 
         logger.error(
             "Unable to find key fields in %s (vendor_id, CPU implementer, etc.)",
             filename)
+        return None
 
 
 class Aarch64CPUInfo(CPUInfo):
@@ -462,7 +484,7 @@ class Aarch64CPUInfo(CPUInfo):
     It is also accessible from
     /sys/devices/system/cpu/cpu0/regs/identification/midr_el1
     """
-    def __init__(self, implementer, architecture, variant, part, revision):
+    def __init__(self, implementer, architecture, variant, part, revision):  # type: (Aarch64CPUInfo, int, str, int, int, int) -> None
         super(Aarch64CPUInfo, self).__init__('aarch64')
         self.implementer = implementer
         self.architecture = architecture
@@ -470,20 +492,20 @@ class Aarch64CPUInfo(CPUInfo):
         self.part = part
         self.revision = revision
 
-    def unique_key(self):
+    def unique_key(self):  # type: (Aarch64CPUInfo) -> Tuple[str, int, str, int, int, int]
         """Get a unique key representing the CPU"""
         return self.architecture, self.implementer, self.architecture, self.variant, self.part, self.revision
 
-    def __repr__(self):
+    def __repr__(self):  # type: (Aarch64CPUInfo) -> str
         return '{}({}, {}, {}, {}, {})'.format(
             self.__class__.__name__,
             hex(self.implementer),
-            hex(self.architecture),
+            self.architecture,
             hex(self.variant),
             hex(self.part),
             hex(self.revision))
 
-    def describe(self):
+    def describe(self):  # type: (Aarch64CPUInfo) -> None
         impl_data = AARCH64_PARTS.get(self.implementer)
         if impl_data is not None:
             impl_name, impl_parts = impl_data
@@ -515,18 +537,18 @@ class X86CPUInfo(CPUInfo):
         bits 28-31 Reserved
     CPUID[EAX=0x80000002,0x80000003,0x80000004] contains the Processor Brand String
     """
-    def __init__(self, vendor_id, model_name, cpuid, microcode_version=None):
+    def __init__(self, vendor_id, model_name, cpuid, microcode_version=None):  # type: (X86CPUInfo, str, Optional[str], int, Optional[int]) -> None
         super(X86CPUInfo, self).__init__('x86')
         self.vendor_id = vendor_id
         self.model_name = model_name
         self.cpuid = cpuid
         self.microcode_version = microcode_version
 
-    def unique_key(self):
+    def unique_key(self):  # type: (X86CPUInfo) -> Tuple[str, str, Optional[str], int]
         """Get a unique key representing the CPU"""
         return self.architecture, self.vendor_id, self.model_name, self.cpuid
 
-    def __repr__(self):
+    def __repr__(self):  # type: (X86CPUInfo) -> str
         return '{}({}, {}, {}, {})'.format(
             self.__class__.__name__,
             repr(self.vendor_id),
@@ -535,7 +557,7 @@ class X86CPUInfo(CPUInfo):
             hex(self.microcode_version) if self.microcode_version is not None else 'None')
 
     @staticmethod
-    def encode_cpuid(family, model, stepping):
+    def encode_cpuid(family, model, stepping):  # type: (int, int, int) -> int
         """Encode the CPUID of x86 CPU"""
         assert 0 <= family <= 0xff + 0xf
         assert 0 <= model <= 0xff
@@ -556,20 +578,20 @@ class X86CPUInfo(CPUInfo):
             stepping)
 
     @property
-    def x86_family(self):
+    def x86_family(self):  # type: (X86CPUInfo) -> int
         """Returns the family identifier, encoded in bits 8-11 and 20-27"""
         return ((self.cpuid >> 8) & 0xf) + ((self.cpuid >> 20) & 0xff)
 
     @property
-    def x86_model(self):
+    def x86_model(self):  # type: (X86CPUInfo) -> int
         """Returns the model number, encoded in bits 4-7 and 16-19"""
         return ((self.cpuid >> 4) & 0xf) + ((self.cpuid >> 12) & 0xf0)
 
     @property
-    def x86_stepping(self):
+    def x86_stepping(self):  # type: (X86CPUInfo) -> int
         return self.cpuid & 0xf
 
-    def desc_cpuid(self):
+    def desc_cpuid(self):  # type: (X86CPUInfo) -> List[str]
         """Describe the cpuid signature in a list of strings"""
         lines = ["{0:#x} (family {1:d} model {2:d}={2:#x} stepping {3:d})".format(
             self.cpuid, self.x86_family, self.x86_model, self.x86_stepping)]
@@ -583,23 +605,25 @@ class X86CPUInfo(CPUInfo):
                                self.x86_family, self.x86_model, self.x86_stepping)
             else:
                 second_line = cpuid_data[1]
+                assert isinstance(second_line, str)
                 if cpuid_data[0] is not None:
                     second_line = '"{}" {}'.format(cpuid_data[0], second_line)
                 lines.append(second_line)
                 if len(cpuid_data) > 2:
                     assert len(cpuid_data) == 3
+                    assert isinstance(cpuid_data[2], list)
                     for public_name in cpuid_data[2]:
                         lines.append("    {}".format(public_name))
         return lines
 
-    def desc_microcode_version(self):
+    def desc_microcode_version(self):  # type: (X86CPUInfo) -> List[str]
         """Describe the microcode version in a list of strings"""
         if self.microcode_version is None:
             return ['unknown']
-        microcode_list = []
-        version_date = None
-        available_upgrade_ver = None
-        available_upgrade_date = None
+        microcode_list = []  # type: List[Tuple[int, str]]
+        version_date = None  # type: Optional[str]
+        available_upgrade_ver = None  # type: Optional[int]
+        available_upgrade_date = None  # type: Optional[str]
         if self.vendor_id == 'AuthenticAMD':
             ucode_versions = AMD_UCODE_VERSIONS
         elif self.vendor_id == 'GenuineIntel':
@@ -623,6 +647,7 @@ class X86CPUInfo(CPUInfo):
             desc += " from {}".format(version_date)
         lines = [desc]
         if available_upgrade_date and available_upgrade_date != version_date:
+            assert available_upgrade_ver is not None
             lines.append("Available upgrade {:#x} from {}".format(
                 available_upgrade_ver, available_upgrade_date))
         if microcode_list:
@@ -642,7 +667,7 @@ class X86CPUInfo(CPUInfo):
                 logger.warning("Current microcode version is newer than known ones")
         return lines
 
-    def describe(self):
+    def describe(self):  # type: (X86CPUInfo) -> None
         print("- Vendor ID: {}".format(self.vendor_id))
         print("- Model name: {}".format(self.model_name))
         cpuid_lines = self.desc_cpuid()
@@ -655,7 +680,7 @@ class X86CPUInfo(CPUInfo):
             print("    {}".format(line))
 
     @classmethod
-    def decode_x86_cpuid(cls):
+    def decode_x86_cpuid(cls):  # type: (Type[X86CPUInfo]) -> Optional[X86CPUInfo]
         """Run cpuid if on x86 to get the relevant CPUInfo"""
         plat_mach = platform.machine()
         plat_sys = platform.system()
@@ -665,13 +690,13 @@ class X86CPUInfo(CPUInfo):
             ptrsize = 32
         else:
             logger.warning("Not using x86 cpuid instruction on %s", platform.machine())
-            return
+            return None
 
-        if ptrsize != ctypes.sizeof(ctypes.c_voidp) * 8:
+        if ptrsize != ctypes.sizeof(ctypes.c_void_p) * 8:
             logger.error(
                 "platform.machine() %r is inconsistent with sizeof(void*) = %d",
-                plat_mach, ctypes.sizeof(ctypes.c_voidp))
-            return
+                plat_mach, ctypes.sizeof(ctypes.c_void_p))
+            return None
 
         # Find a assembly function which performs:
         # void do_cpuid(uint32_t regs[4]) // regs are eax, ebx, ecx, edx
@@ -743,7 +768,7 @@ class X86CPUInfo(CPUInfo):
         cpuid_func = cpuid_functions_map.get((plat_sys, ptrsize))
         if cpuid_func is None:
             logger.error("Unsupported operating system")
-            return
+            return None
 
         logger.debug("Using CPUID instruction for %d-bit %s", ptrsize, plat_sys)
 
@@ -759,7 +784,7 @@ class X86CPUInfo(CPUInfo):
             mem = libc.mmap(0, len(cpuid_func), 3, 0x22, -1, 0)
             if int(mem) & 0xffffffff == 0xffffffff:
                 libc.perror(b"mmap")
-                return
+                return None
 
             # Copy the function
             ctypes.memmove(mem, cpuid_func, len(cpuid_func))
@@ -768,7 +793,7 @@ class X86CPUInfo(CPUInfo):
             if libc.mprotect(mem, len(cpuid_func), 5) == -1:
                 libc.perror(b"mprotect")
                 libc.munmap(mem, len(cpuid_func))
-                return
+                return None
 
             # Transmute the memory to a suitable function
             memfun = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_uint32))(mem)
@@ -786,7 +811,7 @@ class X86CPUInfo(CPUInfo):
             if ptrsize == 64:
                 k32 = ctypes.CDLL("kernel32.dll")
             else:
-                k32 = ctypes.windll.kernel32
+                k32 = ctypes.windll.kernel32  # type: ignore
             k32.VirtualAlloc.restype = ctypes.c_void_p
             int_p = ctypes.POINTER(ctypes.c_int)
             k32.VirtualProtect.argtypes = [ctypes.c_void_p, ctypes.c_size_t,
@@ -798,8 +823,8 @@ class X86CPUInfo(CPUInfo):
             # PAGE_READWRITE = 4
             mem = k32.VirtualAlloc(0, len(cpuid_func), 0x3000, 4)
             if not mem:
-                sys.stderr.write("VirtualAlloc: {}\n".format(ctypes.FormatError()))
-                return
+                sys.stderr.write("VirtualAlloc: {}\n".format(ctypes.FormatError()))  # type: ignore
+                return None
 
             # Copy the function
             ctypes.memmove(mem, cpuid_func, len(cpuid_func))
@@ -807,10 +832,10 @@ class X86CPUInfo(CPUInfo):
             # Change protection to PAGE_EXECUTE_READ = 0x20
             oldprot = ctypes.c_int()
             if not k32.VirtualProtect(mem, len(cpuid_func), 32, ctypes.byref(oldprot)):
-                sys.stderr.write("VirtualProtect: {}\n".format(ctypes.FormatError()))
+                sys.stderr.write("VirtualProtect: {}\n".format(ctypes.FormatError()))  # type: ignore
                 # MEM_RELEASE = 0x8000
                 k32.VirtualFree(mem, len(cpuid_func), 0x8000)
-                return
+                return None
 
             # Transmute the memory to a suitable function
             memfun = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_uint32))(mem)
@@ -820,13 +845,15 @@ class X86CPUInfo(CPUInfo):
             k32.VirtualFree(mem, len(cpuid_func), 0x8000)
             return result
 
-    @classmethod
-    def decode_x86_cpuid_with_helper(cls, cpuid_function):
-        def cpuid(code):
+        return None
+
+    @staticmethod
+    def decode_x86_cpuid_with_helper(cpuid_function):  # type: (Callable[[ctypes.Array[ctypes.c_uint32]], None]) -> X86CPUInfo
+        def cpuid(code):  # type: (int) -> Tuple[int, int, int, int]
             regs = (ctypes.c_uint32 * 4)()
             regs[0] = code
             cpuid_function(regs)
-            return regs
+            return (regs[0], regs[1], regs[2], regs[3])
         max_code, vendor0, vendor2, vendor1 = cpuid(0)
         vendor_id = struct.pack(b'<III', vendor0, vendor1, vendor2)
         cpuid_1 = cpuid(1)[0] if max_code >= 1 else 0
@@ -849,7 +876,7 @@ CPU_MODELS = {
 }
 
 
-def main(argv=None):
+def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
     """Program entry point"""
     parser = argparse.ArgumentParser(description="Find the CPU model")
     parser.add_argument('cpuinfo', nargs='*', type=str,
@@ -869,8 +896,8 @@ def main(argv=None):
             for family, models in sorted(families.items()):
                 for model, stepping in sorted(models.keys()):
                     cpuid = X86CPUInfo.encode_cpuid(family, model, 15 if stepping == -1 else stepping)
-                    cpuinfo = X86CPUInfo(vendor, None, cpuid)
-                    desc_list = cpuinfo.desc_cpuid()
+                    cpuinfo_x86 = X86CPUInfo(vendor, None, cpuid)
+                    desc_list = cpuinfo_x86.desc_cpuid()
                     desc = ' '.join(desc_list[:2])
                     if stepping < 0:
                         desc = desc.replace(' stepping 15', '')
@@ -883,7 +910,7 @@ def main(argv=None):
             ("AMD", "AuthenticAMD", AMD_UCODE_VERSIONS),
             ("Intel", "GenuineIntel", INTEL_UCODE_VERSIONS),
         ):
-            ucodes_for_cpuid = {}
+            ucodes_for_cpuid = {}  # type: Dict[int, Dict[int, str]]
             for cpuid, microcode_version, update_date in ucode_versions:
                 if cpuid not in ucodes_for_cpuid:
                     ucodes_for_cpuid[cpuid] = {}
@@ -894,8 +921,8 @@ def main(argv=None):
                     # different date
                     ucodes_for_cpuid[cpuid][microcode_version] = update_date
             for cpuid, ucodes in sorted(ucodes_for_cpuid.items()):
-                cpuinfo = X86CPUInfo(vendor_id, None, cpuid)
-                desc_list = cpuinfo.desc_cpuid()
+                cpuinfo_x86 = X86CPUInfo(vendor_id, None, cpuid)
+                desc_list = cpuinfo_x86.desc_cpuid()
                 print('{} {}'.format(vendor, ' '.join(desc_list[:2])))
                 for microcode_version, update_date in sorted(ucodes.items()):
                     print('    Microcode version {:#x} {}'.format(
@@ -915,15 +942,15 @@ def main(argv=None):
                 cpuinfo.describe()
     else:
         cpuinfo_proc = CPUInfo.decode_cpuinfo()
-        cpuinfo_x86 = X86CPUInfo.decode_x86_cpuid()
+        cpuinfo_x86_cpuid = X86CPUInfo.decode_x86_cpuid()
         if cpuinfo_proc is not None:
             cpuinfo = cpuinfo_proc
             cpuinfo_k = cpuinfo.unique_key()
-            if cpuinfo_x86 is not None and cpuinfo_x86.unique_key() != cpuinfo_k:
+            if cpuinfo_x86_cpuid is not None and cpuinfo_x86_cpuid.unique_key() != cpuinfo_k:
                 logger.warning("/proc/cpuinfo and cpuid disagree: %r vs %r",
-                               cpuinfo_proc, cpuinfo_x86)
-        elif cpuinfo_x86 is not None:
-            cpuinfo = cpuinfo_x86
+                               cpuinfo_proc, cpuinfo_x86_cpuid)
+        elif cpuinfo_x86_cpuid is not None:
+            cpuinfo = cpuinfo_x86_cpuid
         else:
             logger.error("Unable to find a source of CPU information")
             return 1
