@@ -21,9 +21,10 @@
 #include <linux/printk.h>
 #include <linux/version.h>
 
-/* Add missing bitmask definitions which were added in recent kernels in
- * arch/x86/include/uapi/asm/processor-flags.h
+/* Add Intel Key Locker (bit 18) defined in
+ * https://www.intel.com/content/www/us/en/develop/download/intel-key-locker-specification.html
  */
+#define X86_CR4_KL 0x00080000
 #define X86_CR4_UINTR 0x02000000
 #define X86_CR4_PKS 0x01000000
 #define X86_CR4_FRED 0x100000000
@@ -200,6 +201,7 @@ static void dump_x86_cr(void)
 	show_cr_bit(cr, 4, FSGSBASE, "enable RDWRFSGS instructions support");
 	show_cr_bit(cr, 4, PCIDE, "enable Process Context ID support");
 	show_cr_bit(cr, 4, OSXSAVE, "enable XSAVE and XRESTORE instructions");
+	show_cr_bit(cr, 4, KL, "enable Intel Key Locker");
 	show_cr_bit(cr, 4, SMEP, "enable Supervisor Mode Execution Protection");
 	show_cr_bit(cr, 4, SMAP, "enable Supervisor Mode Access Prevention");
 	show_cr_bit(cr, 4, PKE, "enable Protection Keys support");

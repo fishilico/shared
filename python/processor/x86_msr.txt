@@ -2426,6 +2426,7 @@ XEONSCAL4 0x988 IA32_CR_UINT_MISC # Bits 31:0 hold the current value of UITTSZ. 
 XEONSCAL4 0x989 UINT_PD # This MSR holds the current value of UPIDADDR. This is a linear address that must be canonical relative to the maximum linear-address width supported by the processor
 XEONSCAL4 0x98A UINT_TT # Bits 63:4 of this MSR holds the current value of UITTADDR. This is a linear address that must be canonical relative to the maximum linear-address width supported by the processor
 
+# Intel Key Locker https://www.intel.com/content/www/us/en/develop/download/intel-key-locker-specification.html
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/GnrMsr.h
 XEONSCAL4 0x990 COPY_STATUS # FSCP To hold keylocker information
 XEONSCAL4 0x991 IWKEYBACKUP_STATUS # Status of IWKey Backup in PCH
@@ -3209,8 +3210,11 @@ XEONSCAL4 0xD5D QOS_EXT_BW_THRTL_13_13
 XEONSCAL4 0xD5E QOS_EXT_BW_THRTL_14_14
 
 0xD90 IA32_BNDCFGS                # Intel-SDM-Vol4 Supervisor State of MPX Configuration
+
+# Intel Key Locker https://www.intel.com/content/www/us/en/develop/download/intel-key-locker-specification.html
 0xD91 IA32_COPY_LOCAL_TO_PLATFORM # Intel-SDM-Vol4 Copy Local State to Platform State
 0xD92 IA32_COPY_PLATFORM_TO_LOCAL # Intel-SDM-Vol4 Copy Platform State to Local State
+
 0xD93 IA32_PASID                  # Intel-SDM-Vol4 Process Address Space Identifier
 
 0xDA0 IA32_XSS  # Intel-SDM-Vol4 Extended Supervisor State Mask
