@@ -33,6 +33,13 @@
 #define X86_CR3_LAM_U48 0x4000000000000000
 #define X86_CR4_LAM_SUP 0x10000000
 #endif
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 3, 0)
+/* Introduced in 6.3
+ * "x86/cpu: Support AMD Automatic IBRS"
+ * https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=e7862eda309ecfccc36bb5558d937ed3ace07f3f
+ */
+#define _EFER_AUTOIBRS 21
+#endif
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 18, 0)
 #define X86_CR4_CET 0x00800000
 #endif
@@ -76,7 +83,6 @@
 #define _EFER_MCOMMIT 17
 #define _EFER_INTWB 18
 #define _EFER_UAIE 20
-#define _EFER_AIBRSE 20
 
 #define show_reg_bit(reg, bitname, bitmask, desc) \
 	pr_info("  %2d (0x%08lx): %s %s (%s)\n", \
@@ -258,7 +264,7 @@ static void dump_x86_cr(void)
  *        17 (0x00020000): - MCOMMIT (MCOMMIT instruction Enable)
  *        18 (0x00040000): - INTWB (Interrupt WBINVD/WBNOINVD Enable)
  *        20 (0x00100000): - UAIE (Upper Address Ignore Enable)
- *        20 (0x00100000): - AIBRSE (Automatic IBRS Enable)
+ *        21 (0x00200000): - AUTOIBRS (Automatic IBRS Enable)
  *      msr:ia32_sysenter_CS(0x174) = 0x10
  *      msr:ia32_sysenter_ESP(0x175) = 0xfffffe0000035200
  *      msr:ia32_sysenter_EIP(0x176) = 0xffffffffa8801600 (entry_SYSENTER_compat+0x0/0x91)
@@ -293,7 +299,7 @@ static void dump_x86_msr(void)
 	show_efer_bit(msr, MCOMMIT, "MCOMMIT instruction Enable");
 	show_efer_bit(msr, INTWB, "Interrupt WBINVD/WBNOINVD Enable");
 	show_efer_bit(msr, UAIE, "Upper Address Ignore Enable");
-	show_efer_bit(msr, AIBRSE, "Automatic IBRS Enable");
+	show_efer_bit(msr, AUTOIBRS, "Automatic IBRS Enable");
 
 	rdmsrl(MSR_IA32_SYSENTER_CS, msr);
 	pr_info("msr:ia32_sysenter_CS(0x%x) = 0x%llx\n", MSR_IA32_SYSENTER_CS, msr);
