@@ -476,7 +476,7 @@ XEONSCAL4 0x10B DCU_FLUSH_CMD              # Write-only virtual MSR to activate 
 # FBSDP = Fill Buffer Stale Data Propagator
 # PSDP = Primary Stale Data Propagator
 # PBRSB = Post-Barrier Return Stack Buffer Prediction
-0x10A IA32_ARCH_CAPABILITIES # Intel-SDM-Vol4 Enumeration of Architectural Features (bit 0 is RDCL_NO, bit 1 is IBRS_ALL, bit 2 is RSBA, bit 3 is SKIP_L1DFL_VMENTRY, bit 4 is SSB_NO, bit 5 is MDS_NO, bit 6 is IF_PSCHANGE_MC_NO, bit 7 is TSX_CTRL, bit 8 is TAA_NO, bit 10 is MISC_PACKAGE_CTRLS, bit 11 is ENERGY_FILTERING_CTL, bit 12 is DOITM, bit 13 is SBDR_SSDP_NO, bit 14 is FBSDP_NO, bit 15 is PSDP_NO, bit 16 is for Microcode Update Enumeration and Status, bit 17 is FB_CLEAR, bit 19 is RRSBA, bit 20 is BHI_NO, bit 21 is XAPIC_DISABLE_STATUS, bit 23 is OVERCLOCKING_STATUS, bit 24 is PBRSB_NO)
+0x10A IA32_ARCH_CAPABILITIES # Intel-SDM-Vol4 Enumeration of Architectural Features (bit 0 is RDCL_NO, bit 1 is IBRS_ALL, bit 2 is RSBA, bit 3 is SKIP_L1DFL_VMENTRY, bit 4 is SSB_NO, bit 5 is MDS_NO, bit 6 is IF_PSCHANGE_MC_NO, bit 7 is TSX_CTRL, bit 8 is TAA_NO, bit 10 is MISC_PACKAGE_CTRLS, bit 11 is ENERGY_FILTERING_CTL, bit 12 is DOITM, bit 13 is SBDR_SSDP_NO, bit 14 is FBSDP_NO, bit 15 is PSDP_NO, bit 16 is for Microcode Update Enumeration and Status, bit 17 is FB_CLEAR, bit 19 is RRSBA, bit 20 is BHI_NO, bit 21 is XAPIC_DISABLE_STATUS, bit 23 is OVERCLOCKING_STATUS, bit 24 is PBRSB_NO, bit 25 is GDS_CTRL, bit 26 is GDS_NO)
 
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
 # https://www.intel.com/content/dam/develop/external/us/en/documents/336996-speculative-execution-side-channel-mitigations.pdf
@@ -518,7 +518,8 @@ XEONSCAL4 0x121 BIOS_UCODE_PM_TMR_EMULATION_CFG # his is a read/write MSR that w
 
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
 0x122 IA32_TSX_CTRL     # Intel-SDM-Vol4 TSX Control (bit 0 is RTM_DISABLE, bit 1 is TSX_CPUID_CLEAR)
-0x123 IA32_MCU_OPT_CTRL # Intel-SDM-Vol4 Microcode Update Option Control (bit 0 is RNGDS_MITG_DIS, bit 1 is RTM_ALLOW, bit 2 is RTM_LOCKED, bit 3 is FB_CLEAR_DIS)
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/gather-data-sampling.html
+0x123 IA32_MCU_OPT_CTRL # Intel-SDM-Vol4 Microcode Update Option Control (bit 0 is RNGDS_MITG_DIS, bit 1 is RTM_ALLOW, bit 2 is RTM_LOCKED, bit 3 is FB_CLEAR_DIS, bit 4 is GDS_MITG_DIS, bit 5 is GDS_MITG_LOCK)
 
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
 XEONSCAL4 0x128 CPU_BUSNUMBER # This RO MSR will be used to read the Ubox CPUBUSNO/CPUBUSNO1/CPUBUSNO_VALID CSRs

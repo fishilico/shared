@@ -1102,6 +1102,7 @@
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID8.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_CPUID9.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050654_SkylakeXeon_Jintide_CPUID1.txt
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/gather-data-sampling.html
 0x55,  4 (0x50654): "SKX-SP/D" Skylake X (Skylake SP, Basin Falls ; Skylake D, Bakerville ; W) (Stepping H0/M0/U0, M1)
     Intel® Core™ i9 79xxX, 78xxX
     Intel® Xeon® Scalable Processor Family
@@ -1148,6 +1149,7 @@
     2nd Generation Intel® Xeon® Scalable Processor Family
 
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050656_CascadeLakeSP_CPUID.txt
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/gather-data-sampling.html
 0x55,  6 (0x50656): "CLX-SP" Cascade Lake Server (Stepping B0)
     2nd Generation Intel® Xeon® Scalable Processor Family
     Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
@@ -1160,7 +1162,8 @@
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeX_CPUID2.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeXeon2_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel0050657_CascadeLakeXeon_CPUID.txt
-0x55,  7 (0x50657): "CLX-SP" Cascade Lake Server, Cascade Lake W (Stepping B1)
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/gather-data-sampling.html
+0x55,  7 (0x50657): "CLX-SP" Cascade Lake Server, Cascade Lake W, Cascade Lake X (Stepping B1)
     2nd Generation Intel® Xeon® Scalable Processor Family
     Intel® Xeon® W Processor Family
     Intel® Xeon® Platinum Processor 8253, 8256, 8260, 8260L, 8260M, 8260Y, 8268, 8270, 8276, 8276L, 8276M, 8280, 8280L, 8280M, 9220, 9221, 9222, 9242, 9282
@@ -1178,9 +1181,11 @@
     Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz
     Intel(R) Xeon(R) Platinum 8280 CPU @ 2.70GHz
 
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/gather-data-sampling.html
 0x55, 10 (0x5065a): "CPX-SP" Cooper Lake SP (Stepping A0)
     3rd Generation Intel® Xeon® Scalable Processor Family
 
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/gather-data-sampling.html
 0x55, 11 (0x5065b): "CPX-SP" Cooper Lake SP (Stepping A1)
     3rd Generation Intel® Xeon® Scalable Processor Family
 
