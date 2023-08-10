@@ -69,6 +69,15 @@
 #define X86_CR4_PCIDE 0x00020000
 #endif
 
+/* Add EFER bits defined in Little Kernel, for AMD CPU
+ * https://github.com/littlekernel/lk/blob/30dc320054f70910e1c1ee40a6948ee99672acec/arch/x86/include/arch/x86.h
+ */
+#define _EFER_TCE 15
+#define _EFER_MCOMMIT 17
+#define _EFER_INTWB 18
+#define _EFER_UAIE 20
+#define _EFER_AIBRSE 20
+
 #define show_reg_bit(reg, bitname, bitmask, desc) \
 	pr_info("  %2d (0x%08lx): %s %s (%s)\n", \
 		ilog2(bitmask), (unsigned long)(bitmask), \
@@ -104,12 +113,16 @@
  *        29 (0x20000000): - NW (Not Write-through)
  *        30 (0x40000000): - CD (Cache Disable)
  *        31 (0x80000000): + PG (Paging)
- *      cr2 = 0x0229e678 PFLA (Page Fault Linear Address)
- *      cr3 = 0x2b8c08000
+ *      cr2 = 0x0229e678 PFLA (Page Fault Linear Address)[54154.124922] cpu_x86: cr3 = 0x5b8904006
+ *      cr3 = 0x5b8904006
+ *        0...11: 0x006 PCID (Process-Context Identifier)
  *         3 (0x00000008): - PWT (Page Write Through)
  *         4 (0x00000010): - PCD (Page Cache Disable)
- *        12...: 0x002b8c08 PDBR (Page Directory Base Register)
- *      cr4 = 0x00360ee0
+ *        12...: 0x005b8904 PDBR (Page Directory Base Register)
+ *        61 (0x2000000000000000): - LAM_U57 (Activate LAM for userspace, 62:57 bits masked)
+ *        62 (0x4000000000000000): - LAM_U48 (Activate LAM for userspace, 62:48 bits masked)
+ *        63 (0x8000000000000000): - PCID_NOFLUSH (Preserve old PCID)
+ *      cr4 = 0x00770ee0
  *         0 (0x00000001): - VME (enable vm86 extensions)
  *         1 (0x00000002): - PVI (virtual interrupts flag enable)
  *         2 (0x00000004): - TSD (disable time stamp at ipl 3)
@@ -121,14 +134,22 @@
  *         8 (0x00000100): - PCE (enable performance counters at ipl 3)
  *         9 (0x00000200): + OSFXSR (enable fast FPU save and restore)
  *        10 (0x00000400): + OSXMMEXCPT (enable unmasked SSE exceptions)
- *        13 (0x00002000): - VMXE (enable VMX virtualization)
- *        14 (0x00004000): - SMXE (enable safer mode (TXT))
- *        16 (0x00010000): - FSGSBASE (enable RDWRFSGS support)
- *        17 (0x00020000): + PCIDE (enable PCID support)
- *        18 (0x00040000): + OSXSAVE (enable xsave and xrestore)
+ *        11 (0x00000800): + UMIP (enable User-Mode Instruction Prevention (UMIP) support)
+ *        12 (0x00001000): - LA57 (enable 5-level page tables)
+ *        13 (0x00002000): - VMXE (enable Virtual Machine Extensions)
+ *        14 (0x00004000): - SMXE (enable Safer Mode Extensions (TXT))
+ *        16 (0x00010000): + FSGSBASE (enable RDWRFSGS instructions support)
+ *        17 (0x00020000): + PCIDE (enable Process Context ID support)
+ *        18 (0x00040000): + OSXSAVE (enable XSAVE and XRESTORE instructions)
+ *        19 (0x00080000): - KL (enable Intel Key Locker)
  *        20 (0x00100000): + SMEP (enable Supervisor Mode Execution Protection)
  *        21 (0x00200000): + SMAP (enable Supervisor Mode Access Prevention)
- *        22 (0x00400000): - PKE (enable Protection Keys support)
+ *        22 (0x00400000): + PKE (enable Protection Keys support)
+ *        23 (0x00800000): - CET (enable Control-flow Enforcement Technology)
+ *        24 (0x01000000): - PKS (enable Protection Keys for Supervisor-Mode Pages)
+ *        25 (0x02000000): - UINTR (enable User Interrupts)
+ *        28 (0x10000000): - LAM_SUP (Linear Address Masking (LAM) for supervisor pointers)
+ *        32 (0x100000000): - FRED (enable Flexible Return and Event Delivery (FRED))
  *      cr8 = 0x0 TPR (Task-Priority Register)
  */
 static void dump_x86_cr(void)
@@ -233,6 +254,11 @@ static void dump_x86_cr(void)
  *        12 (0x00001000): - SVME (Virtualization Enable)
  *        13 (0x00002000): - LMSLE (Long Mode Segment Limit Enable)
  *        14 (0x00004000): - FFXSR (Fast FXSAVE/FXRSTOR)
+ *        15 (0x00008000): - TCE (Translation Cache Extension)
+ *        17 (0x00020000): - MCOMMIT (MCOMMIT instruction Enable)
+ *        18 (0x00040000): - INTWB (Interrupt WBINVD/WBNOINVD Enable)
+ *        20 (0x00100000): - UAIE (Upper Address Ignore Enable)
+ *        20 (0x00100000): - AIBRSE (Automatic IBRS Enable)
  *      msr:ia32_sysenter_CS(0x174) = 0x10
  *      msr:ia32_sysenter_ESP(0x175) = 0xfffffe0000035200
  *      msr:ia32_sysenter_EIP(0x176) = 0xffffffffa8801600 (entry_SYSENTER_compat+0x0/0x91)
@@ -263,6 +289,11 @@ static void dump_x86_msr(void)
 	show_efer_bit(msr, SVME, "Virtualization Enable");
 	show_efer_bit(msr, LMSLE, "Long Mode Segment Limit Enable");
 	show_efer_bit(msr, FFXSR, "Fast FXSAVE/FXRSTOR");
+	show_efer_bit(msr, TCE, "Translation Cache Extension");
+	show_efer_bit(msr, MCOMMIT, "MCOMMIT instruction Enable");
+	show_efer_bit(msr, INTWB, "Interrupt WBINVD/WBNOINVD Enable");
+	show_efer_bit(msr, UAIE, "Upper Address Ignore Enable");
+	show_efer_bit(msr, AIBRSE, "Automatic IBRS Enable");
 
 	rdmsrl(MSR_IA32_SYSENTER_CS, msr);
 	pr_info("msr:ia32_sysenter_CS(0x%x) = 0x%llx\n", MSR_IA32_SYSENTER_CS, msr);
