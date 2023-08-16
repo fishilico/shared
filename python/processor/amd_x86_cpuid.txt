@@ -691,6 +691,10 @@
 0x74,  1 (0xa70f41): "ZEN4" Phoenix
     AMD Ryzen 9 7940H w/ Radeon 780M Graphics
 
+# https://twitter.com/InstLatX64/status/1687505449992560657 https://lkml.org/lkml/2023/7/21/835
+# 0x80..0x8f (0xa80fxx): MI300C Zen4 server + CDNA3 + HBM3
+# 0x90..0x9f (0xa90fxx): MI300A Zen4 server + CDNA3 + HBM3
+
 [Family 26] # Family 1ah
 
 # https://twitter.com/InstLatX64/status/1685680065508515841
