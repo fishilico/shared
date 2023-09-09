@@ -15,6 +15,9 @@ lint:
 
 # Download GnuPG keys
 sync-inet:
+	$(SH) ./send_often_missing_keys.sh
+	$(SH) ./send_often_missing_keys.sh
+	$(SH) ./send_often_missing_keys.sh
 	$(PYTHON) ./sync_keys.py
 
 test: all
