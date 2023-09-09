@@ -475,6 +475,7 @@
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F12_K17_Zen_CPUID4.txt
 0x01,  2 (0x800f12): "ZEN" Zen
     AMD EPYC 7551P 32-Core Processor
+    AMD EPYC 7571
     AMD EPYC 7401P 24-Core Processor
 
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F82_K17_ZenP2_CPUID.txt
@@ -635,6 +636,9 @@
     AMD EPYC 9654 96-Core Processor
     AMD EPYC 9124 16-Core Processor
 
+# https://github.com/InstLatx64/InstLatx64/commit/6ca20b9b71e9da283d114e67da89fa4f706c9f02
+0x18,  x (0xa10f8x): "ZEN4" Zen 4 Threadripper Storm Peak
+
 0x21,  x (0xa20f1x): "ZEN3" Zen 3
 
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A20F10_K19_Vermeer2_CPUID.txt
@@ -692,17 +696,25 @@
     AMD Ryzen 9 7940H w/ Radeon 780M Graphics
 
 # https://twitter.com/InstLatX64/status/1687505449992560657 https://lkml.org/lkml/2023/7/21/835
+# https://github.com/InstLatx64/InstLatx64/commit/6ca20b9b71e9da283d114e67da89fa4f706c9f02
 # 0x80..0x8f (0xa80fxx): MI300C Zen4 server + CDNA3 + HBM3
 # 0x90..0x9f (0xa90fxx): MI300A Zen4 server + CDNA3 + HBM3
+
+# https://twitter.com/InstLatX64/status/1695745258724667794
+# https://www.amd.com/content/dam/amd/en/documents/epyc-technical-docs/tuning-guides/58015-epyc-9004-tg-architecture-overview.pdf
+# https://github.com/cyring/CoreFreq/blob/7a330816443bfa7a5f1c2623a3f77c97fd5a2c40/x86_64/corefreqk.h#L2028
+# 0xa0..0xaf (0xaa0fxx): Zen4 model 97xx Bergamo (97xx 4th Gen AMD EPYC 9004)
 
 [Family 26] # Family 1ah
 
 # https://twitter.com/InstLatX64/status/1685680065508515841
+# https://github.com/InstLatx64/InstLatx64/commit/201d8af39a4addb6b72628af2292253d8a7f4c09
 # https://milkyway.cs.rpi.edu/milkyway/show_host_detail.php?hostid=996435
 0x20,  0 (0xb20f00): STX1
     AMD Eng Sample: 100-000000994-03_N
 
 # https://twitter.com/InstLatX64/status/1685680065508515841
+# https://github.com/InstLatx64/InstLatx64/commit/201d8af39a4addb6b72628af2292253d8a7f4c09
 # https://einsteinathome.org/host/13142934
 0x40,  0 (0xb40f00): Granite Ridge
     AMD Eng Sample: 100-000001290-11_N
