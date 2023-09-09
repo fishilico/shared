@@ -441,9 +441,10 @@
 #define __NR_process_mrelease 448
 #define __NR_futex_waitv 449
 #define __NR_set_mempolicy_home_node 450
+#define __NR_cachestat 451
 
 #ifdef __KERNEL__
-#define __NR_syscalls 451
+#define __NR_syscalls 452
 #endif
 
 #endif /* _UAPI_ASM_UNISTD_32_H */
