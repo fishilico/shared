@@ -21,6 +21,11 @@ void_t = ghidra.program.model.data.VoidDataType()
 void_p_t = ghidra.program.model.data.PointerDataType(void_t)
 
 
+def get_pc_bitlen():
+    """Get the number of bits of the Program Counter"""
+    currentProgram.getLanguage().getProgramCounter().getBitLength()
+
+
 def get_string_at(addr):
     """Get the NUL-terminated string at the given address"""
     data = getDataAt(addr)
