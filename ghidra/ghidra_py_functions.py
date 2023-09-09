@@ -141,6 +141,16 @@ def define_rwv_memregion(name, addr, size, type_name, arcname="common", category
         print("Creating {} at {:#x}".format(name, addr))
         mem.createUninitializedBlock(name, ram.getAddress(addr), size, False)
     block = mem.getBlock(ram.getAddress(addr))
+    if block.getStart() != addr:
+        # If the start address is wrong, report an error because the use needs to split the block
+        print("Error: block start of {}@{:#x} is not {:#x}".format(block.name, block.getStart(), add)
+        return
+    if block.size != size:
+        # If the block size is different, report a warning because the user needs to adjust it
+        print("Warning block size {}@{:#x} is {:#x} != {:#x}".format(block.name, addr, block.size, size))
+    if block.name != name:
+        print("Changing block name {}@{:#x} to {}".format(block.name, addr, name))
+        block.setName(name)
     if block.permissions != 0xe:
         print("Changing block permissions {}@{:#x} from {:#x}".format(name, addr, block.permissions))
         block.setPermissions(True, True, False)
