@@ -4,9 +4,10 @@ LABEL Description="Fedora 39 with build dependencies for shared"
 # Override the language to force UTF-8 output
 ENV LANG=C.UTF-8
 
+# dnf was replaced with dnf5: https://fedoraproject.org/wiki/Changes/MajorUpgradeOfMicrodnf
 RUN \
-    dnf update -q -y --setopt=deltarpm=false && \
-    dnf install -q -y --setopt=deltarpm=false \
+    dnf5 update -q -y --setopt=deltarpm=false && \
+    dnf5 install -q -y --setopt=deltarpm=false \
         cargo \
         clang \
         coq \
@@ -52,7 +53,7 @@ RUN \
         which \
         wine \
         xorg-x11-server-Xvfb && \
-    dnf clean all
+    dnf5 clean all
 
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
@@ -100,17 +101,17 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
 #       gcc: gcc (GCC) 13.2.1 20230728 (Red Hat 13.2.1-1)
-#       clang: clang version 16.0.6 (Fedora 16.0.6-3.fc39)
+#       clang: clang version 17.0.0 (Fedora 17.0.0~rc3-1.fc40)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 13.2.1 20230728 (Fedora MinGW 13.2.1-5.fc39)
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 13.2.1 20230728 (Fedora MinGW 13.2.1-5.fc39)
-#       wine: wine-8.12 (Staging)
-#       Linux kernel: 6.5.0-0.rc4.31.fc39.x86_64
-#       /lib/ld-linux.so.2: ld.so (GNU libc) development release version 2.37.9000.
-#       python: Python 3.12.0b4
-#       python3: Python 3.12.0b4
-#       javac: javac 11.0.19
-#       java: openjdk 11.0.19 2023-04-18
-#       rustc: rustc 1.71.0 (8ede3aae2 2023-07-12) (Fedora 1.71.0-3.fc39)
-#       cargo: cargo 1.71.0
+#       wine: wine-8.14 (Staging)
+#       Linux kernel: 6.6.0-0.rc0.20230908gita48fa7efaf11.10.fc40.x86_64
+#       /lib/ld-linux.so.2: ld.so (GNU libc) development release version 2.38.9000.
+#       python: Python 3.12.0rc2
+#       python3: Python 3.12.0rc2
+#       javac: javac 11.0.20
+#       java: openjdk 11.0.20 2023-07-18
+#       rustc: rustc 1.72.0 (5680fa18f 2023-08-23) (Fedora 1.72.0-1.fc40)
+#       cargo: cargo 1.72.0
 #       coqc: The Coq Proof Assistant, version 8.17.1 compiled with OCaml 5.0.1+dev0-2022-12-15
 #       openssl: OpenSSL 3.1.1 30 May 2023 (Library: OpenSSL 3.1.1 30 May 2023)

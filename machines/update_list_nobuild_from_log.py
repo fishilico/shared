@@ -93,6 +93,7 @@ def parse_log_file(filepath):
                         '0017:err:service:process_send_command service protocol error - failed to read pipe r = 0  count = 0!',  # noqa
                         '0018:err:ntdll:RtlLeaveCriticalSection section 0x10f40 is not acquired',
                         '001c:err:ntdll:RtlLeaveCriticalSection section 0x11f1e0 is not acquired',
+                        '002a:fixme:rpc:handle_bind_error unexpected status value 1765',
                         '007c:err:rpc:RpcAssoc_BindConnection receive failed with error 1726',
                         '0080:err:rpc:RpcAssoc_BindConnection receive failed with error 1726',
                         '008c:err:rpc:I_RpcReceive we got fault packet with status 0x1c010003',
