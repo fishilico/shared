@@ -104,14 +104,17 @@ else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-4]\
 #   error[E0723]: loops and conditional expressions are not stable in const fn
 #   note: for more information, see issue https://github.com/rust-lang/rust/issues/57563
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(4[5-9]\|5[0-9]\)\.'),y)
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(4[5-9]\|5[0-9]\|60\)\.'),y)
 # Old versions of rustc (<=1.52) fail to build libz-sys-1.1.8 because:
 #   error[E0658]: arbitrary expressions in key-value attributes are unstable
 #   note: see issue #78835 <https://github.com/rust-lang/rust/issues/78835> for more information
 # Old versions of rustc (<=1.60) fail to build log-0.4.19 because:
 #   error: package `log v0.4.19` cannot be built because it requires rustc 1.60.0 or newer
+# Old versions of rustc (<=1.61) fail to build `memchr-v2.6.3 because:
+#   error: package `memchr v2.6.3` cannot be built because it requires rustc 1.61 or newer, while the currently active
+#   rustc version is 1.60.0
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(6[0-4]\)\.'),y)
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(6[1-4]\)\.'),y)
 # Old versions of cargo (<=1.47) fail to build rug-1.19.0 because:
 #   failed to parse manifest at .../.cargo/registry/src/github.com-1ecc6299db9ec823/rug-1.19.0/Cargo.toml
 #   failed to parse the `edition` key
