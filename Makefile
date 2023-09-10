@@ -104,7 +104,7 @@ else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-4]\
 #   error[E0723]: loops and conditional expressions are not stable in const fn
 #   note: for more information, see issue https://github.com/rust-lang/rust/issues/57563
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(4[5-9]\|5[0-9]\|60\)\.'),y)
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(4[5-9]\|5[0-9]\|6[0-4]\)\.'),y)
 # Old versions of rustc (<=1.52) fail to build libz-sys-1.1.8 because:
 #   error[E0658]: arbitrary expressions in key-value attributes are unstable
 #   note: see issue #78835 <https://github.com/rust-lang/rust/issues/78835> for more information
@@ -113,8 +113,6 @@ else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(4[5-9]\|5[0-9]\
 # Old versions of rustc (<=1.61) fail to build `memchr-v2.6.3 because:
 #   error: package `memchr v2.6.3` cannot be built because it requires rustc 1.61 or newer, while the currently active
 #   rustc version is 1.60.0
-SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(6[1-4]\)\.'),y)
 # Old versions of cargo (<=1.47) fail to build rug-1.19.0 because:
 #   failed to parse manifest at .../.cargo/registry/src/github.com-1ecc6299db9ec823/rug-1.19.0/Cargo.toml
 #   failed to parse the `edition` key
@@ -122,7 +120,10 @@ else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(6[1-4]\)\.'),y)
 # Old versions of cargo (<=1.64) fail to build rug-1.19.0 because:
 #   error: package `rug v1.19.0` cannot be built because it requires rustc 1.65 or newer, while the currently active
 #   rustc version is 1.61.0
-SUBDIRS_BLACKLIST += rust/asymkeyfind%
+# Old versions of cargo (<=1.64) fail to build addr2line-v0.21.0` because:
+#   error: package `addr2line v0.21.0` cannot be built because it requires rustc 1.65 or newer, while the currently
+#   active rustc version is 1.63.0
+SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/download_web%
 endif
 
 # Show "SUBDIR ..." only if -w and -s and V=1 are not given, and then add
