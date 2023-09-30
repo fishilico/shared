@@ -527,6 +527,7 @@ class CPUInfo(object):
         return None
 
 
+
 class Aarch64CPUInfo(CPUInfo):
     """Information about an Aarch64 (ARM64) CPU from MIDR_EL1 register
 
