@@ -581,7 +581,8 @@ then
     pkg wabt
     pkg zbar
 
-    grouppkg texlive-most
+    grouppkg texlive
+    pkg texlive-langfrench
 
     aurpkg android-apktool
     aurpkg arm-linux-gnueabihf-binutils
