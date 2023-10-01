@@ -2213,9 +2213,19 @@
     15th Generation Intel® Core™ Processor Family
     Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
+# https://cdrdv2-public.intel.com/790021/architecture-instruction-set-extensions-programming-reference.pdf
+# https://twitter.com/InstLatX64/status/1708121836595143148
+# https://github.com/InstLatx64/InstLatx64/commit/9e40a5acf06db45a47a3f5b55c4b7c23d15350a1
+0xcc,  x (0xc06cx): Panther Lake
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0xcf,  x (0xc06fx): "EMR-X" Emerald Rapids Xeon
     5th Generation Intel® Xeon® Scalable Processor Family
+
+# https://cdrdv2-public.intel.com/790021/architecture-instruction-set-extensions-programming-reference.pdf
+# https://twitter.com/InstLatX64/status/1708121836595143148
+# https://github.com/InstLatx64/InstLatx64/commit/9e40a5acf06db45a47a3f5b55c4b7c23d15350a1
+0xdd,  x (0xd06dx): Clearwater Forest
 
 
 [Family 11]

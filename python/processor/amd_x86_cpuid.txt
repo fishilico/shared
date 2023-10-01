@@ -695,6 +695,11 @@
 0x74,  1 (0xa70f41): "ZEN4" Phoenix
     AMD Ryzen 9 7940H w/ Radeon 780M Graphics
 
+# https://github.com/InstLatx64/InstLatx64/blob/33c980db26c0792fda0b663aeb58991eb3435fe5/AuthenticAMD/AuthenticAMD0A70F80_K19_Phoenix2_01_CPUID.txt
+# https://twitter.com/InstLatX64/status/1705200080599290158
+0x78,  0 (0xa70f80): "ZEN4" Phoenix
+    AMD Ryzen Z1
+
 # https://twitter.com/InstLatX64/status/1687505449992560657 https://lkml.org/lkml/2023/7/21/835
 # https://github.com/InstLatx64/InstLatx64/commit/6ca20b9b71e9da283d114e67da89fa4f706c9f02
 # 0x80..0x8f (0xa80fxx): MI300C Zen4 server + CDNA3 + HBM3
@@ -703,7 +708,10 @@
 # https://twitter.com/InstLatX64/status/1695745258724667794
 # https://www.amd.com/content/dam/amd/en/documents/epyc-technical-docs/tuning-guides/58015-epyc-9004-tg-architecture-overview.pdf
 # https://github.com/cyring/CoreFreq/blob/7a330816443bfa7a5f1c2623a3f77c97fd5a2c40/x86_64/corefreqk.h#L2028
+# https://twitter.com/InstLatX64/status/1704044472990876156
+# https://twitter.com/InstLatX64/status/1705200080599290158
 # 0xa0..0xaf (0xaa0fxx): Zen4 model 97xx Bergamo (97xx 4th Gen AMD EPYC 9004)
+    AMD Siena EPYC 8004
 
 [Family 26] # Family 1ah
 
