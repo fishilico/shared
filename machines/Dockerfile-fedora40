@@ -4,9 +4,11 @@ LABEL Description="Fedora 40 with build dependencies for shared"
 # Override the language to force UTF-8 output
 ENV LANG=C.UTF-8
 
+# dnf was replaced with dnf5: https://fedoraproject.org/wiki/Changes/MajorUpgradeOfMicrodnf
 RUN \
-    dnf update -q -y --setopt=deltarpm=false && \
-    dnf install -q -y --setopt=deltarpm=false \
+    dnf install -q -y --setopt=deltarpm=false dnf5 && \
+    dnf5 update -q -y --setopt=deltarpm=false && \
+    dnf5 install -q -y --setopt=deltarpm=false \
         cargo \
         clang \
         coq \
@@ -52,7 +54,7 @@ RUN \
         which \
         wine \
         xorg-x11-server-Xvfb && \
-    dnf clean all
+    dnf5 clean all
 
 WORKDIR /shared
 RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
@@ -103,14 +105,14 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       clang: clang version 17.0.1 (Fedora 17.0.1-1.fc40)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 13.2.1 20230728 (Fedora MinGW 13.2.1-5.fc39)
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 13.2.1 20230728 (Fedora MinGW 13.2.1-5.fc39)
-#       wine: wine-8.14 (Staging)
-#       Linux kernel: 6.6.0-0.rc3.20230928git633b47cb009d.29.fc40.x86_64
+#       wine: wine-8.17 (Staging)
+#       Linux kernel: 6.6.0-0.rc3.20230929git9ed22ae6be81.30.fc40.x86_64
 #       /lib/ld-linux.so.2: ld.so (GNU libc) development release version 2.38.9000.
 #       python: Python 3.12.0rc3
 #       python3: Python 3.12.0rc3
 #       javac: javac 11.0.20
 #       java: openjdk 11.0.20 2023-07-18
-#       rustc: rustc 1.72.1 (d5c2e9c34 2023-09-13) (Fedora 1.72.1-2.fc40)
+#       rustc: rustc 1.72.1 (d5c2e9c34 2023-09-13) (Fedora 1.72.1-3.fc40)
 #       cargo: cargo 1.72.1
 #       coqc: The Coq Proof Assistant, version 8.17.1 compiled with OCaml 5.0.1+dev0-2022-12-15
 #       openssl: OpenSSL 3.1.1 30 May 2023 (Library: OpenSSL 3.1.1 30 May 2023)
