@@ -235,7 +235,7 @@ class GhidraProject:
             if fct.typeinfo:
                 print(f"rename_function(toAddr({fct.entrypoint:#x}), {fct.name!r}, typeinfo={fct.typeinfo!r})", file=fout)
             else:
-                print(f"rename_function(toAddr({fct.entrypoint:#x}), {fct.name!r})")
+                print(f"rename_function(toAddr({fct.entrypoint:#x}), {fct.name!r})", file=fout)
 
 def get_comments_from_xml(item: xml.etree.ElementTree.Element) -> List[str]:
     """Get the comments related to an XML item"""

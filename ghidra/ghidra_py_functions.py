@@ -141,9 +141,9 @@ def define_rwv_memregion(name, addr, size, type_name, arcname="common", category
         print("Creating {} at {:#x}".format(name, addr))
         mem.createUninitializedBlock(name, ram.getAddress(addr), size, False)
     block = mem.getBlock(ram.getAddress(addr))
-    if block.getStart() != addr:
+    if block.start.offset != addr:
         # If the start address is wrong, report an error because the use needs to split the block
-        print("Error: block start of {}@{:#x} is not {:#x}".format(block.name, block.getStart(), add)
+        print("Error: block start of {}@{:#x} is not {:#x}".format(block.name, block.start.offset, addr))
         return
     if block.size != size:
         # If the block size is different, report a warning because the user needs to adjust it
@@ -213,7 +213,7 @@ def iter_called_functions(fct):
     for body_range in fct.getBody():
         for addr in body_range:
             for ref in currentProgram.referenceManager.getReferencesFrom(addr):
-                if ref.getReferenceType() in {ghidra.program.model.symbol.FlowType.UNCONDITIONAL_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL_TERMINATOR}}:
+                if ref.getReferenceType() in {ghidra.program.model.symbol.FlowType.UNCONDITIONAL_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL_TERMINATOR}:
                     called_fct = currentProgram.listing.getFunctionContaining(ref.getToAddress())
                     if called_fct:
                         yield ref, called_fct
@@ -222,7 +222,7 @@ def iter_called_functions(fct):
 def iter_functions_calling(fct):
     """Get the functions calling the given function, by XRef"""
     for ref in currentProgram.referenceManager.getReferencesTo(fct.getSymbol().getAddress()):
-        if ref.getReferenceType() in {ghidra.program.model.symbol.FlowType.UNCONDITIONAL_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL_TERMINATOR}}:
+        if ref.getReferenceType() in {ghidra.program.model.symbol.FlowType.UNCONDITIONAL_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL_TERMINATOR}:
             calling_fct = currentProgram.listing.getFunctionContaining(ref.getFromAddress())
             if calling_fct:
                 yield calling_fct
@@ -354,7 +354,7 @@ def get_c_statements(fct, decomp):
     """Get all C statements of a given function. Use getMinAddress() to get the address
     https://ghidra.re/ghidra_docs/api/ghidra/app/decompiler/DecompInterface.html
     """
-    decomp_result = decompile_fun(fct, decomp):
+    decomp_result = decompile_fun(fct, decomp)
     result = []
     def _walker(node):  # noqa
         if isinstance(node, ghidra.app.decompiler.ClangStatement):
