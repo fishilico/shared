@@ -5904,6 +5904,9 @@ AMD64 0xC001102B CU_CFG3 # AMD-2013 Combined Unit Configuration 3
 AMD64 0xC001102C EX_CFG  # AMD-2013 Execution Unit Configuration
 AMD64 0xC001102D LS_CFG2 # AMD-2013 Load-Store Configuration 2
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=f454b18e07f518bcd0c05af17a2239138bff52de
+AMD64 0xC001102E ZEN4_BP_CFG
+
 AMD64 0xC0011030 IBS_FETCH_CTL      # AMD-2017 IBS Fetch Control (AMD-2013 IC_IBS_CTL)
 AMD64 0xC0011031 IBS_FETCH_LINADDR  # AMD-2017 IBS Fetch Linear Address (AMD-2013 IC_IBS_LIN_AD)
 AMD64 0xC0011032 IBS_FETCH_PHYSADDR # AMD-2017 IBS Fetch Physical Address (AMD-2013 IC_IBS_PHYS_AD)
