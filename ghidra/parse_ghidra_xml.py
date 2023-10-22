@@ -209,7 +209,6 @@ class GhidraProject:
 
             maybe_comment_prefix = ""
             comment_parts = []
-            args = [f"toAddr({sym.address:#x})", repr(sym.name)]
             if sym.is_user_defined:
                 comment_parts.append("user-defined")
             if sym.is_imported:
@@ -220,22 +219,41 @@ class GhidraProject:
             if not sym.is_primary:
                 maybe_comment_prefix = "# "
                 comment_parts.append("non-primary")
+            if sym.namespace:
+                # Do not create names in specific namespace, for now
+                maybe_comment_prefix = "# "
+                comment_parts.append("namespace={sym.namespace!r}")
 
             maybe_comment = f"  # {', '.join(comment_parts)}" if comment_parts else ""
-            if sym.namespace:
-                args.append(f"namespace={sym.namespace!r}")
+            print(f"{maybe_comment_prefix}set_label(toAddr({sym.address:#x}), {sym.name!r}){maybe_comment}", file=fout)
             if sym.datatype:
-                args.append(f"datatype={sym.datatype!r}")
                 if sym.dtnamespace and sym.dtnamespace != "/":
-                    args.append(f"dtnamespace={sym.dtnamespace!r}")
-            print(f"{maybe_comment_prefix}rename_addr({', '.join(args)}){maybe_comment}", file=fout)
+                    # Do not set data type which are using namespaces
+                    print(
+                        f"# set_data_type(toAddr({sym.address:#x}), get_data_type({sym.datatype!r}))  # dtnamespace={sym.dtnamespace!r}",
+                        file=fout,
+                    )
+                else:
+                    print(
+                        f"{maybe_comment_prefix}set_data_type(toAddr({sym.address:#x}), get_data_type({sym.datatype!r}))",
+                        file=fout,
+                    )
 
         print("", file=fout)
         for fct in self.functions:
             if fct.typeinfo:
-                print(f"rename_function(toAddr({fct.entrypoint:#x}), {fct.name!r}, typeinfo={fct.typeinfo!r})", file=fout)
+                print(
+                    f"create_fun_at_if_absent(toAddr({fct.entrypoint:#x}), {fct.typeinfo!r})  # {fct.name!r}", file=fout
+                )
+            elif fct.name == f"FUN_{fct.entrypoint:08x}":
+                # Do not rename functions with automatic name
+                print(f"create_fun_at_if_absent(toAddr({fct.entrypoint:#x}), None)", file=fout)
+            elif re.match(r"^thunk_FUN_[0-9a-f]{8}$", fct.name):
+                # Do not rename thunk functions with automatic name
+                print(f"create_fun_at_if_absent(toAddr({fct.entrypoint:#x}), None)  # {fct.name!r}", file=fout)
             else:
-                print(f"rename_function(toAddr({fct.entrypoint:#x}), {fct.name!r})", file=fout)
+                print(f"create_fun_at_if_absent(toAddr({fct.entrypoint:#x}), {fct.name!r})", file=fout)
+
 
 def get_comments_from_xml(item: xml.etree.ElementTree.Element) -> List[str]:
     """Get the comments related to an XML item"""

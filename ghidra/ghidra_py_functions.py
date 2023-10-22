@@ -39,6 +39,23 @@ def get_string_at(addr):
         result.append(chr(new_char))
 
 
+def get_data_type(type_name):
+    """Get a data type from its name"""
+    data_types = getDataTypes(type_name)
+    if data_types:
+        if len(data_types) != 1:
+            raise ValueError("Error: data type {} matches {} types".format(type_name, len(data_types)))
+        return data_types[0]
+    # Create array types automatically
+    if "[" in type_name:
+        matches = re.match(r"^(.*)\[([0-9]+)\]$", type_name)
+        if matches:
+            base_type = get_data_type(matches.group(1))
+            count = int(matches.group(2))
+            return ghidra.program.model.data.ArrayDataType(base_type, count, base_type.getLength())
+    raise ValueError("Error: unknown data type {}".format(type_name))
+
+
 def import_data_type(type_name, arcname="", category="/"):
     """Import data type from an archive"""
     data_types = getDataTypes(type_name)
@@ -126,6 +143,33 @@ def set_data_type_array(addr, new_data_type, count, force=False, desc=None):
     """Set the type of the data at the given address to an array"""
     array_dt = ghidra.program.model.data.ArrayDataType(new_data_type, count, new_data_type.getLength())
     set_data_type(addr, array_dt, force=force, desc=desc)
+
+
+def define_memregion(name, addr, size, permissions):
+    """Define a memory region
+    Example: to define a read-write 64KB area at 0x20000000:
+        define_memregion("RAM", 0x20000000, 0x10000, 6)
+    """
+    ram = currentProgram.getAddressFactory().getAddressSpace("ram")
+    mem = currentProgram.getMemory()
+    if mem.getBlock(ram.getAddress(addr)) is None:
+        print("Creating {} at {:#x}".format(name, addr))
+        mem.createUninitializedBlock(name, ram.getAddress(addr), size, False)
+    block = mem.getBlock(ram.getAddress(addr))
+    if block.start.offset != addr:
+        # If the start address is wrong, report an error because the use needs to split the block
+        print("Error: block start of {}@{:#x} is not {:#x}".format(block.name, block.start.offset, addr))
+        return
+    if block.size != size:
+        # If the block size is different, report a warning because the user needs to adjust it
+        print("Warning block size {}@{:#x} is {:#x} != {:#x}".format(block.name, addr, block.size, size))
+    if block.name != name:
+        print("Changing block name {}@{:#x} to {}".format(block.name, addr, name))
+        block.setName(name)
+    if block.permissions != permissions:
+        print("Changing block permissions {}@{:#x} from {:#x} to {:#x}".format(name, addr, block.permissions, permissions))
+        block.setPermissions((permissions & 4) != 0, (permissions & 2) != 0, (permissions & 1) != 0)
+        block.setVolatile((permissions & 8) != 0)
 
 
 def define_rwv_memregion(name, addr, size, type_name, arcname="common", category="/"):
@@ -324,7 +368,7 @@ def get_or_create_fun_at(addr, name_or_sign, rename=True, verbose=True):
 
 
 def create_fun_at_if_absent(addr, name_or_sign, rename=True, verbose=True):
-    """Like get_or_create_fun_at, but without a return value"""
+    """Like get_or_create_fun_at, but without a return value. By default, it renames the function"""
     get_or_create_fun_at(addr, name_or_sign, rename=rename, verbose=verbose)
 
 
