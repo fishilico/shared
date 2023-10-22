@@ -47,10 +47,11 @@ def get_data_type(type_name):
             raise ValueError("Error: data type {} matches {} types".format(type_name, len(data_types)))
         return data_types[0]
     # Create array types automatically
+    # char[10][20] is an array of 10 char[20], so make sure the parsing is done in the right order
     if "[" in type_name:
-        matches = re.match(r"^(.*)\[([0-9]+)\]$", type_name)
+        matches = re.match(r"^([^\[]*)\[([0-9]+)\]([0-9\[\]]*)$", type_name)
         if matches:
-            base_type = get_data_type(matches.group(1))
+            base_type = get_data_type(matches.group(1) + matches.group(3))
             count = int(matches.group(2))
             return ghidra.program.model.data.ArrayDataType(base_type, count, base_type.getLength())
     raise ValueError("Error: unknown data type {}".format(type_name))
