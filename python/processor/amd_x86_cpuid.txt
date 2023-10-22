@@ -639,6 +639,11 @@
 # https://github.com/InstLatx64/InstLatx64/commit/6ca20b9b71e9da283d114e67da89fa4f706c9f02
 0x18,  x (0xa10f8x): "ZEN4" Zen 4 Threadripper Storm Peak
 
+# https://twitter.com/InstLatX64/status/1715297803390287932
+# https://github.com/InstLatx64/InstLatx64/blob/37bd7b1ac29d95ddcf1fed90efaf7e82c89ab65d/AuthenticAMD/AuthenticAMD0A10F81_K19_StormPeak_01_CPUID.txt
+0x18,  1 (0xa10f81): "ZEN4" Zen 4 Threadripper Storm Peak
+    96-Core AMD Ryzen Threadripper Pro 7995WX, 5342 MHz (53.5 x 100)
+
 0x21,  x (0xa20f1x): "ZEN3" Zen 3
 
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A20F10_K19_Vermeer2_CPUID.txt
