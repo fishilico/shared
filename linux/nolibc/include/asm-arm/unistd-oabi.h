@@ -417,5 +417,6 @@
 #define __NR_futex_waitv 449
 #define __NR_set_mempolicy_home_node 450
 #define __NR_cachestat 451
+#define __NR_fchmodat2 452
 
 #endif /* _UAPI_ASM_UNISTD_OABI_H */
