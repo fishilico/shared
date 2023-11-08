@@ -148,6 +148,7 @@ __extension__ static const char* cpuidstr_7_ecx[32] = {
     [4] = "ospke",
     [5] = "waitpkg",
     [6] = "avx512_vbmi2",
+    [7] = "shstk",
     [8] = "gfni",
     [9] = "vaes",
     [10] = "vpclmulqdq",
