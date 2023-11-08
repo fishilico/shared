@@ -50,6 +50,7 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("broadwellde", "Broadwell Xeon DE"),
         ("broadwellx", "Broadwell Xeon"),
         ("cascadelakex", "Cascade Lake Server"),
+        ("emeraldrapids", "Emerald Rapids Xeon"),
         ("elkhartlake", "Elkhart Lake"),
         ("elkhartlake", "Jasper Lake"),
         ("goldmont", "Atom Goldmont D"),
@@ -70,6 +71,7 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("jaketown", "Sandy Bridge Xeon"),
         ("knightslanding", "Xeon Phi Knights Landing"),
         ("knightslanding", "Xeon Phi Knights Mill"),
+        ("lunarlake", "Lunar Lake"),
         ("meteorlake", "Meteor Lake"),
         ("meteorlake", "Meteor Lake-S"),
         ("nehalemep", "Nehalem EP"),
@@ -77,7 +79,6 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("nehalemex", "Nehalem-EX"),
         ("rocketlake", "Rocket Lake"),
         ("sandybridge", "Sandy Bridge"),
-        ("sapphirerapids", "Emerald Rapids Xeon"),
         ("sapphirerapids", "Sapphire Rapids Xeon"),
         ("sierraforest", "Sierra Forest Xeon"),
         ("silvermont", "Atom Silvermont, Atom Airmont Mid"),
@@ -317,7 +318,7 @@ LINUX_MSR_MAPPING: Mapping[str, str] = {
     "SYSCALL_MASK": "IA32_FMASK",
     "TEST_CTRL": "TEST_CTL",
     "VM_IGNNE": "IGNNE",
-    "ZEN2_SPECTRAL_CHICKEN": "AMD64_DE_CFG2",
+    "ZEN2_SPECTRAL_CHICKEN": "ZEN2_DE_CFG2",
 }
 
 
@@ -397,6 +398,15 @@ def parse_msr_define(content: str, verbose: bool = False) -> None:
             elif name.startswith("KNC_"):
                 processor = "XEONKNC"
                 name = name[4:]
+            elif name.startswith("ZEN2_"):
+                processor = "AMD64ZEN2"
+                name = name[5:]
+            elif name.startswith("ZEN4_"):
+                processor = "AMD64ZEN4"
+                name = name[5:]
+            elif name.startswith("F19H_"):
+                processor = "AMD64ZEN4"
+                name = name[5:]
 
             known_names = MSRS.msrs.get(value)
             if not known_names:
@@ -419,7 +429,10 @@ def parse_msr_define(content: str, verbose: bool = False) -> None:
                 desc_names = " ".join(
                     f"{name}({prefix})" if prefix else name for prefix, name in sorted(known_names.items())
                 )
-                print(f"Update(MSR 0x{value:X}): {name} (known {desc_names})")
+                if processor:
+                    print(f"Update(MSR 0x{value:X}): {name} ({processor}) (known {desc_names})")
+                else:
+                    print(f"Update(MSR 0x{value:X}): {name} (known {desc_names})")
                 emitted_warning = True
 
 

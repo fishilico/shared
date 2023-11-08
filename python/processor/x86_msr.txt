@@ -197,7 +197,8 @@ CORESOLO 0x47 LASTBRANCH_7
 # PSFD = disable Fast Store Forwarding Predictor
 0x48 IA32_SPEC_CTRL # Intel-SDM-Vol4 Speculation Control (bit 0 is IBRS, bit 1 is STIBP, bit 2 is SSBD, bit 3 is IPRED_DIS_U, bit 4 is IPRED_DIS_S, bit 5 is RRSBA_DIS_U, bit 6 is RRSBA_DIS_S, bit 7 is PSFD, bit 8 is DDPD_U, bit 10 is BHI_DIS_S)
 # IBPB = Indirect Branch Prediction Barrier
-0x49 IA32_PRED_CMD  # Intel-SDM-Vol4 Prediction Command (bit 0 is IBPB)
+# SBPB = Selective Branch Prediction Barrier
+0x49 IA32_PRED_CMD  # Intel-SDM-Vol4 Prediction Command (bit 0 is IBPB, bit 7 is SBPB)
 0x4E IA32_PPIN_CTL  # Intel-SDM-Vol4 Protected Processor Inventory Number Enable Control
 0x4F IA32_PPIN      # Intel-SDM-Vol4 Protected Processor Inventory Number
 
@@ -5877,6 +5878,10 @@ AMD64 0xC0010413 MCA_CTL_MASK_PB  # AMD-2017 PB Machine Check Control Mask
 AMD64 0xC0010414 MCA_CTL_MASK_CS  # AMD-2017 CS Machine Check Control Mask
 AMD64 0xC0010416 MCA_CTL_MASK_PIE # AMD-2017 PIE Machine Check Control Mask
 
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=25e56847821f7375bdee7dae1027c7917d07ce4b for Performance Monitoring Version 2 (PerfMonV2) introduced in Zen 4 defines MSR_F19H_UMC_PERF_CTL and MSR_F19H_UMC_PERF_CTR
+AMD64ZEN4 0xC0010800 UMC_PERF_CTL
+AMD64ZEN4 0xC0010801 UMC_PERF_CTR
+
 AMD64 0xC0011002 CPUID_7_FEATURES   # AMD-2017 CPUID Features for CPUID Fn00000007_E[A,B]X
 AMD64 0xC0011003 CPUID_PWR_THERM    # AMD-2017 Thermal and Power Management CPUID Features
 AMD64 0xC0011004 CPUID_FEATURES     # AMD-2017 CPUID Features for CPUID Fn00000001_E[C,D]X
@@ -5892,8 +5897,9 @@ AMD64 0xC001101B DR3_ADDR_MASK # AMD64-Vol2 Address Mask for DR3 Breakpoint
 AMD64 0xC0011020 LS_CFG # AMD-2013 Load-Store Configuration
 AMD64 0xC0011021 IC_CFG # AMD-2013 Instruction Cache Configuration
 AMD64 0xC0011022 DC_CFG # AMD-2013 Data Cache Configuration
-AMD64 0xC0011023 CU_CFG # AMD-2013 Combined Unit Configuration
-# AMD64 0xC0011023 TW_CFG # AMD-2017 Table Walker Configuration
+#AMD64 0xC0011023 CU_CFG # AMD-2013 Combined Unit Configuration
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=2770d4722036d6bd24bcb78e9cd7f6e572077d03
+AMD64 0xC0011023 TW_CFG # AMD-2017 Table Walker Configuration
 
 AMD64 0xC0011027 DR0_ADDR_MASK # AMD64-Vol2 Address Mask for DR0 Breakpoint
 
@@ -5904,8 +5910,8 @@ AMD64 0xC001102B CU_CFG3 # AMD-2013 Combined Unit Configuration 3
 AMD64 0xC001102C EX_CFG  # AMD-2013 Execution Unit Configuration
 AMD64 0xC001102D LS_CFG2 # AMD-2013 Load-Store Configuration 2
 
-# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=f454b18e07f518bcd0c05af17a2239138bff52de
-AMD64 0xC001102E ZEN4_BP_CFG
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=f454b18e07f518bcd0c05af17a2239138bff52de "x86/cpu: Fix AMD erratum #1485 on Zen4-based CPUs" defines MSR_ZEN4_BP_CFG
+AMD64ZEN4 0xC001102E BP_CFG # (bit 5 is shared BTB fix)
 
 AMD64 0xC0011030 IBS_FETCH_CTL      # AMD-2017 IBS Fetch Control (AMD-2013 IC_IBS_CTL)
 AMD64 0xC0011031 IBS_FETCH_LINADDR  # AMD-2017 IBS Fetch Linear Address (AMD-2013 IC_IBS_LIN_AD)
@@ -5929,4 +5935,4 @@ AMD64 0xC001109A L3_RANGE_RESERVE_WAY_MASK  # AMD64-Vol2
 
 # https://github.com/xen-project/xen/blob/RELEASE-4.17.0/xen/arch/x86/include/asm/msr-index.h
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=d7caac991feeef1b871ee6988fd2c9725df09039 Linux named this MSR_ZEN2_SPECTRAL_CHICKEN, as it contains a chicken bit which is offered on the altar of Speculation
-AMD64 0xC00110E3 DE_CFG2 # Decode Configuration 2
+AMD64ZEN2 0xC00110E3 DE_CFG2 # Decode Configuration 2
