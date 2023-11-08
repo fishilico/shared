@@ -105,11 +105,11 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       clang: clang version 17.0.1 (Fedora 17.0.1-1.fc39)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 13.2.1 20230728 (Fedora MinGW 13.2.1-5.fc39)
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 13.2.1 20230728 (Fedora MinGW 13.2.1-5.fc39)
-#       wine: wine-8.17 (Staging)
-#       Linux kernel: 6.5.5-300.fc39.x86_64
+#       wine: wine-8.14 (Staging)
+#       Linux kernel: 6.5.6-300.fc39.x86_64
 #       /lib/ld-linux.so.2: ld.so (GNU libc) stable release version 2.38.
-#       python: Python 3.12.0rc3
-#       python3: Python 3.12.0rc3
+#       python: Python 3.12.0
+#       python3: Python 3.12.0
 #       javac: javac 11.0.20
 #       java: openjdk 11.0.20 2023-07-18
 #       rustc: rustc 1.72.1 (d5c2e9c34 2023-09-13) (Fedora 1.72.1-1.fc39)
