@@ -2062,8 +2062,10 @@
 0xaa,  0 (0xa06a0): "MTL" Meteor Lake (Stepping A0-1)
     14th Generation Intel® Core™ Processor Family
 
-0xaa,  1 (0xa06a1): "MTL" Meteor Lake (Stepping A0-2)
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
+0xaa,  1 (0xa06a1): "MTL" Meteor Lake (Redwood Cove, Crestmont) (Stepping A0-2)
     14th Generation Intel® Core™ Processor Family
+    Intel® Core™ Ultra
 
 # https://twitter.com/InstLatX64/status/1647504366251679744
 0xaa,  2 (0xa06a2): "MTL" Meteor Lake (Stepping B0)
@@ -2127,6 +2129,7 @@
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B0671_RaptorLake_02_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B0671_RaptorLake_04_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B0671_RaptorLake_05_CPUID.txt
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
 0xb7,  1 (0xb0671): "RPL-S" Raptor Lake S 8P+16E, HX 8P+16E (Raptor Cove/Gracemont) (Stepping B-0)
     13th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i9-13900K, i7-13700K, i5-13600K, i9-13900KF, i7-13700KF, i5-13600KF
@@ -2142,6 +2145,7 @@
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06A2_RaptorLakeP_02_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06A2_RaptorLakeP_03_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06A2_RaptorLakeP_04_CPUID.txt
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
 0xba,  2 (0xb06a2): "RPL-H/P/PX/U" Raptor Lake H 6P+8E, P 6P+8E, PX 6E+8P (Stepping J-0)
     13th Generation Intel® Core™ Processor Family
     13th Gen Intel(R) CoreT i5-1350P
@@ -2150,6 +2154,7 @@
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06A3_RaptorLakeP_01_CPUID.txt
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
 0xba,  3 (0xb06a3): "RPL-U" Raptor Lake U 2E+8P (Stepping Q-0)
     13th Generation Intel® Core™ Processor Family
     13th Gen Intel(R) Core(TM) i7-1365U
@@ -2174,7 +2179,8 @@
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 # https://en.wikipedia.org/wiki/Gracemont_(microarchitecture)
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06E0_AlderLakeN_02_CPUID.txt
-0xbe,  0 (0xb06e0): "ADL-N" Alder Lake N (Stepping A0)
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
+0xbe,  0 (0xb06e0): "ADL-N" Alder Lake N (Gracemont) (Stepping A0)
     12th Generation Intel® Core™ Processor Family
     Intel® Core i3-N305/N300
     Intel® Processor N50/N97/N100/N200
@@ -2189,12 +2195,14 @@
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06F2_RaptorLakeS_02_CPUID.txt
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
 0xbf,  2 (0xb06f2): "ADL/RPL-S/HX" Alder Lake, Raptor Lake S 8P+8E, HX 8P+8E (Stepping C-0)
     12th Generation Intel® Core™ Processor Family
     13th Generation Intel® Core™ Processor Family
     13th Gen Intel(R) Core(TM) i5-13500
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
 0xbf,  5 (0xb06f5): "ADL/RPL-S" Alder Lake, Raptor Lake S 6P+0E (Stepping C-0)
     12th Generation Intel® Core™ Processor Family
     13th Generation Intel® Core™ Processor Family
@@ -2221,6 +2229,10 @@
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0xcf,  x (0xc06fx): "EMR-X" Emerald Rapids Xeon
+    5th Generation Intel® Xeon® Scalable Processor Family
+
+# https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
+0xcf,  2 (0xc06f2): "EMR-X" Emerald Rapids Xeon (Raptor Cove)
     5th Generation Intel® Xeon® Scalable Processor Family
 
 # https://cdrdv2-public.intel.com/790021/architecture-instruction-set-extensions-programming-reference.pdf
