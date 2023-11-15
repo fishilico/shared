@@ -50,6 +50,9 @@
 # Glibc, https://www.gnu.org/software/libc/
 0x16792B4EA25340F8 carlos@redhat.com
 
+# Gmp, https://gmplib.org/
+0xF3599FF828C67298 nisse@lysator.liu.se
+
 # Google Linux Packages Signing Authority, for BinDiff https://www.zynamics.com/bindiff/manual/#N20240
 # and for Chrome https://www.google.com/linuxrepositories/
 0xA040830F7FAC5991 linux-packages-keymaster@google.com
@@ -76,6 +79,13 @@
 
 # Microsoft (for Visual Studio Code), https://code.visualstudio.com/docs/setup/linux
 0xEB3E94ADBE1229CF gpgsecurity@microsoft.com https://packages.microsoft.com/keys/microsoft.asc
+
+# Mpc, https://www.multiprecision.org/mpc/download.html
+0xF7D5C9BF765C61E3 andreas.enge@inria.fr https://www.multiprecision.org/downloads/enge.gpg
+
+# Mpfr, https://www.mpfr.org/mpfr-current/
+0x980C197698C3739D vincent@vinc17.net https://www.vinc17.net/key.asc
+0x5831D11A0D4DB02A vincent@vinc17.net
 
 # Ncurses, https://invisible-island.net/ncurses/ncurses.html
 0x702353E0F7E48EDB dickey@invisible-island.net
