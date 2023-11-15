@@ -262,6 +262,66 @@ def public_key(private_key, curve='secp256k1'):
     return (b'\x03' if pubkey.y & 1 else b'\x02') + pubkey.x.to_bytes(32, 'big')
 
 
+BASE58_BITCOIN_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+assert len(BASE58_BITCOIN_ALPHABET) == 58
+
+
+def base58_decode(data, size=None):
+    """Decode some data encoded using Base58 bitcoin alphabet"""
+    value = 0
+    leading_zeros = 0
+    for char in data:
+        value = value * 58 + BASE58_BITCOIN_ALPHABET.index(char)
+        if value == 0:
+            leading_zeros += 1
+    if size is None:
+        size = leading_zeros + (value.bit_length() + 7) // 8
+    return value.to_bytes(size, 'big')
+
+
+def base58_encode(data):
+    """Encode some data using Base58 bitcoin alphabet"""
+    value = int.from_bytes(data, 'big')
+    result = []
+    while value:
+        value, rem = divmod(value, 58)
+        result.append(BASE58_BITCOIN_ALPHABET[rem])
+    # Add leading zeros
+    for by in data:
+        if by != 0:
+            break
+        result.append('1')
+    return "".join(result[::-1])
+
+
+def btc_wallet_addr_p2pkh(public_key):
+    """Compute the Bitcoin Pay-to-Public-Key-Hash (P2PKH) address from a public key
+
+    This is one of the first ways of computing a Bitcoin address from a public key.
+    The address begins with 1 and contains between 26 and 34 characters:
+    https://bitcoin.stackexchange.com/questions/36944/what-are-the-minimum-and-maximum-lengths-of-a-mainnet-bitcoin-address/36948
+    """
+    # Version byte 0
+    p2pkh_bytes = b"\x00" + public_key.bitcoin_hash160()
+    p2pkh_bytes_checksum = hashlib.sha256(hashlib.sha256(p2pkh_bytes).digest()).digest()[:4]
+    return base58_encode(p2pkh_bytes + p2pkh_bytes_checksum)
+
+
+def btc_wallet_addr_p2sh(public_key):
+    """Compute the Bitcoin Pay-to-Script-Hash (P2SH) address from a public key
+
+    A Pay to Witness Public Key Hash (P2WPKH) script is:
+
+        OP_0 0x14 <PubKey Hash>
+
+    A Pay to Script Hash is the RIPEMD160 of SHA256 of this script, prefixed
+    by 05 and encoded in base58.
+    """
+    p2sh_bytes = b'\x05' + bitcoin_pubkey.bitcoin_p2sh_p2wpkh()
+    p2sh_bytes_checksum = hashlib.sha256(hashlib.sha256(p2sh_bytes).digest()).digest()[:4]
+    return base58_encode(p2sh_bytes + p2sh_bytes_checksum)
+
+
 def eth_wallet_addr(public_key, chain_id=None):
     """Compute the Ethereum address from a public key"""
     hex_addr = keccak256(public_key.x.to_bytes(32, 'big') + public_key.y.to_bytes(32, 'big'))[-20:].hex()
@@ -696,24 +756,10 @@ SLIP0010_TEST_VECTORS = (
 )
 
 
-BASE58_BITCOIN_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-assert len(BASE58_BITCOIN_ALPHABET) == 58
-
-
-def base58_decode(data, size=None):
-    """Decode some data encoded using Base58 bitcoin alphabet"""
-    value = 0
-    leading_zeros = 0
-    for char in data:
-        value = value * 58 + BASE58_BITCOIN_ALPHABET.index(char)
-        if value == 0:
-            leading_zeros += 1
-    if size is None:
-        size = leading_zeros + (value.bit_length() + 7) // 8
-    return value.to_bytes(size, 'big')
-
-
 if __name__ == '__main__':
+    assert base58_encode(b"\0\0\0") == "111"
+    assert base58_decode("111") == b"\0\0\0"
+
     # Run test vectors from https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#test-vectors
     for test_vector in BIP32_TEST_VECTORS:
         seed = test_vector['seed']
@@ -728,6 +774,8 @@ if __name__ == '__main__':
             # Key encoding
             decoded_pub = base58_decode(expected_pub, 0x52)
             decoded_priv = base58_decode(expected_priv, 0x52)
+            assert base58_encode(decoded_pub) == expected_pub
+            assert base58_encode(decoded_priv) == expected_priv
             # Version bytes
             assert decoded_pub[:4] == b'\x04\x88\xb2\x1e'
             assert decoded_priv[:4] == b'\x04\x88\xad\xe4'
@@ -816,12 +864,16 @@ if __name__ == '__main__':
     p2sh_bytes_checksum = hashlib.sha256(hashlib.sha256(p2sh_bytes).digest()).digest()[:4]
     assert base58_decode('3HX5tttedDehKWTTGpxaPAbo157fnjn89s') == p2sh_bytes + p2sh_bytes_checksum
     assert base58_decode('3HX5tttedDehKWTTGpxaPAbo157fnjn89s', 0x19) == p2sh_bytes + p2sh_bytes_checksum
+    assert '3HX5tttedDehKWTTGpxaPAbo157fnjn89s' == base58_encode(p2sh_bytes + p2sh_bytes_checksum)
+    assert '3HX5tttedDehKWTTGpxaPAbo157fnjn89s' == btc_wallet_addr_p2sh(bitcoin_pubkey)
 
     # Old encoding
     p2pkh_bytes = b'\x00' + bitcoin_pubkey.bitcoin_hash160()
     p2pkh_bytes_checksum = hashlib.sha256(hashlib.sha256(p2pkh_bytes).digest()).digest()[:4]
     assert base58_decode('1F2C2dfD8B5qLM7ZrW4Ag1kLUg8sZjfyBB') == p2pkh_bytes + p2pkh_bytes_checksum
     assert base58_decode('1F2C2dfD8B5qLM7ZrW4Ag1kLUg8sZjfyBB', 0x19) == p2pkh_bytes + p2pkh_bytes_checksum
+    assert '1F2C2dfD8B5qLM7ZrW4Ag1kLUg8sZjfyBB' == base58_encode(p2pkh_bytes + p2pkh_bytes_checksum)
+    assert '1F2C2dfD8B5qLM7ZrW4Ag1kLUg8sZjfyBB' == btc_wallet_addr_p2pkh(bitcoin_pubkey)
 
     # Test mnemonic phrase used by Hardhat: https://hardhat.org/hardhat-network/docs/reference#accounts
     mnemonics = 'test test test test test test test test test test test junk'
