@@ -13,18 +13,20 @@ jobs:
           - clang -m64
           - clang -m32
         python:
+          - "3.12"
           - "3.11"
           - "3.10"
           - "3.9"
           - "3.8"
           - "3.7"
+          - "pypy-3.10"
           - "pypy-3.9"
           - "pypy-3.8"
           - "pypy-3.7"
           - "pypy-3.6"
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Python ${{ matrix.python }}
       uses: actions/setup-python@v4
@@ -64,6 +66,7 @@ jobs:
             numpy \
             Pillow \
             pycryptodome \
+            setuptools \
             z3
 
     - name: Configure the environment
