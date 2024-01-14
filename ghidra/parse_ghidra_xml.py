@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """Parse Ghidra XML export files"""
 import argparse
-from dataclasses import dataclass
-from pathlib import Path
 import re
 import sys
-from typing import List, Mapping, Optional, TextIO, Union
 import xml.etree.ElementTree
-
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, List, Mapping, Optional, TextIO, Tuple, Union
 
 YESNO_BOOL: Mapping[str, bool] = {
     "n": False,
@@ -230,12 +229,12 @@ class GhidraProject:
                 if sym.dtnamespace and sym.dtnamespace != "/":
                     # Do not set data type which are using namespaces
                     print(
-                        f"# set_data_type(toAddr({sym.address:#x}), get_data_type({sym.datatype!r}))  # dtnamespace={sym.dtnamespace!r}",
+                        f"# set_data_type(toAddr({sym.address:#x}), get_data_type({sym.datatype!r}))  # dtnamespace={sym.dtnamespace!r}",  # noqa
                         file=fout,
                     )
                 else:
                     print(
-                        f"{maybe_comment_prefix}set_data_type(toAddr({sym.address:#x}), get_data_type({sym.datatype!r}))",
+                        f"{maybe_comment_prefix}set_data_type(toAddr({sym.address:#x}), get_data_type({sym.datatype!r}))",  # noqa
                         file=fout,
                     )
 
@@ -304,7 +303,7 @@ def load_xml_file(file_path: Path) -> GhidraProject:
     tree = xml.etree.ElementTree.parse(file_path)
     xml_root = tree.getroot()
     datatypes: List[Union[DTStruct, DTUnion, DTFunc, DTEnum, DTTypedef]] = []
-    defined_data: Dict[int, [str, str]] = {}
+    defined_data: Dict[int, Tuple[str, str]] = {}
     symbols = []
     functions = []
 
@@ -429,7 +428,14 @@ def load_xml_file(file_path: Path) -> GhidraProject:
         for x_symbol in x_symbol_table.findall("SYMBOL"):
             sym_type = get_name_from_xml(x_symbol, "TYPE")
             sym_src_type = get_name_from_xml(x_symbol, "SOURCE_TYPE")
-            sym_addr = int(x_symbol.attrib["ADDRESS"], 16)
+            sym_addr_str = x_symbol.attrib["ADDRESS"]
+            if sym_addr_str.startswith("ram:"):
+                sym_addr = int(sym_addr_str[4:], 16)
+            elif sym_addr_str.startswith(("global:", "table:")):
+                # Ignore special symbols used in WebAssembly
+                continue
+            else:
+                sym_addr = int(sym_addr_str, 16)
             sym_defdata = defined_data.get(sym_addr)
             sym = Symbol(
                 address=sym_addr,
@@ -448,6 +454,11 @@ def load_xml_file(file_path: Path) -> GhidraProject:
     # Load functions
     for x_functions in xml_root.findall("FUNCTIONS"):
         for x_function in x_functions.findall("FUNCTION"):
+            entrypoint_str = x_function.attrib["ENTRY_POINT"]
+            if entrypoint_str.startswith("ram:"):
+                entrypoint = int(entrypoint_str[4:], 16)
+            else:
+                entrypoint = int(entrypoint_str, 16)
             x_typeinfo = x_function.find("TYPEINFO_CMT")
             if x_typeinfo is not None:
                 fct_typeinfo = x_typeinfo.text
@@ -456,7 +467,7 @@ def load_xml_file(file_path: Path) -> GhidraProject:
             else:
                 fct_typeinfo = None
             fct = Function(
-                entrypoint=int(x_function.attrib["ENTRY_POINT"], 16),
+                entrypoint=entrypoint,
                 name=get_name_from_xml(x_function),
                 is_library=YESNO_BOOL[x_function.attrib["LIBRARY_FUNCTION"]],
                 typeinfo=fct_typeinfo,
