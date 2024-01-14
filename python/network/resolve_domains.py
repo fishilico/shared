@@ -26,6 +26,12 @@ domains.txt, a cache in directory dns/, writing results in results.out.txt:
 
     ./resolve_domains.py -gMOs -o dns_resolutions.out.txt -d cache_dns domains.txt
 
+This is similar as other tools used to find possible domain take-overs (or
+subdomain takeovers):
+- https://iamaakashrathee.medium.com/subdomain-takeovers-by-iamaakashrathee-12512fc8d9ce
+  (references Sublist3r, Amass, Recon-ng, Subfinder)
+- https://shrewdeye.app/ (from https://twitter.com/0xloooser/status/1739281835858026566?t=YrSP5FhRVFjZDDNQ109b3A&s=19)
+
 @author: Nicolas Iooss
 @license: MIT
 """
