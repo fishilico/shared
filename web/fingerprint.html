@@ -160,6 +160,7 @@ function fill_fingerprint_infos() {
     e_list = document.createElement('ul');
     e_list.appendChild(create_list_item('navigator.userAgent', navigator.userAgent));
     e_list.appendChild(create_list_item('navigator.platform', navigator.platform));
+    e_list.appendChild(create_list_item('navigator.vendor', navigator.vendor));
     e_list.appendChild(create_list_item('navigator.language', navigator.language));
     e_list.appendChild(create_list_item('navigator.cpuClass', navigator.cpuClass));
     e_list.appendChild(create_list_item('navigator.onLine', navigator.onLine));
@@ -172,7 +173,65 @@ function fill_fingerprint_infos() {
     // On Microsoft Internet Explorer <= 10, navigator.msDoNotTrack = "1" or "0"
     e_list.appendChild(create_list_item('navigator.doNotTrack', navigator.doNotTrack));
     e_list.appendChild(create_list_item('navigator.msDoNotTrack', navigator.msDoNotTrack));
+    // https://wicg.github.io/ua-client-hints/#interface
+    if (typeof navigator.userAgentData === 'undefined') {
+        e_list.appendChild(create_list_item('navigator.userAgentData', navigator.userAgentData));
+    } else if (typeof navigator.userAgentData !== 'undefined') {
+        e_list.appendChild(create_list_item('navigator.userAgentData.platform', navigator.userAgentData.platform));
+        e_list.appendChild(create_list_item('navigator.userAgentData.mobile', navigator.userAgentData.mobile));
+        if (typeof navigator.userAgentData.brands !== 'undefined') {
+            for (var i = 0; i < navigator.userAgentData.brands.length; i++) {
+                e_list.appendChild(create_list_item('navigator.userAgentData.brands[' + i + '].brand', navigator.userAgentData.brands[i].brand));
+                e_list.appendChild(create_list_item('navigator.userAgentData.brands[' + i + '].version', navigator.userAgentData.brands[i].version));
+            }
+        }
+    }
     container.appendChild(e_list);
+
+    // Try getting the high-entropy values
+    if (typeof navigator.userAgentData !== 'undefined' && typeof navigator.userAgentData.getHighEntropyValues !== 'undefined') {
+        container.innerHTML += '<h2>navigator.userAgentData.getHighEntropyValues</h2>';
+        container.innerHTML += '<div id="high-entropy-values-result">No high entropy value</div>';
+
+        function high_entropy_values_success(values) {
+            console.log('Navigator high entropy values: ', values);
+            var elem = document.getElementById('high-entropy-values-result');
+            e_list = document.createElement('ul');
+            for (var i = 0; i < values.brands.length; i++) {
+                e_list.appendChild(create_list_item('brands[' + i + '].brand', values.brands[i].brand));
+                e_list.appendChild(create_list_item('brands[' + i + '].version', values.brands[i].version));
+            }
+            e_list.appendChild(create_list_item('uaFullVersion', values.uaFullVersion));
+            for (var i = 0; i < values.fullVersionList.length; i++) {
+                e_list.appendChild(create_list_item('fullVersionList[' + i + '].brand', values.fullVersionList[i].brand));
+                e_list.appendChild(create_list_item('fullVersionList[' + i + '].version', values.fullVersionList[i].version));
+            }
+            e_list.appendChild(create_list_item('architecture', values.architecture));
+            e_list.appendChild(create_list_item('bitness', values.bitness));
+            e_list.appendChild(create_list_item('wow64', values.wow64));
+            e_list.appendChild(create_list_item('platform', values.platform));
+            e_list.appendChild(create_list_item('platformVersion', values.platformVersion));
+            e_list.appendChild(create_list_item('mobile', values.mobile));
+            e_list.appendChild(create_list_item('formFactor', values.formFactor));
+            e_list.appendChild(create_list_item('model', values.model));
+            elem.innerHTML = '';
+            elem.appendChild(e_list);
+        }
+        function high_entropy_values_error() {
+            var elem = document.getElementById('high-entropy-values-result');
+            elem.innerHTML = 'getHighEntropyValues error';
+        }
+        navigator.userAgentData.getHighEntropyValues([
+            "architecture",
+            "bitness",
+            "formFactor",
+            "fullVersionList",
+            "model",
+            "platformVersion",
+            "uaFullVersion",
+            "wow64"]
+        ).then(high_entropy_values_success, high_entropy_values_error);
+    }
 
     // Gather information from window
     container.innerHTML += '<h2>window</h2>';
