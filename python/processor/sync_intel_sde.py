@@ -69,6 +69,8 @@ KNOWN_SDE_ACRONYM: FrozenSet[Tuple[int, str, str]] = frozenset(
         (0x90660, "srf", "EHL"),
         # Version 8.69.1 defines 0x90660 as Tremont, which is the microarchitecture of Elkhart Lake
         (0x90660, "tnt", "EHL"),
+        # Version 9.33.0 uses "GNR 256"
+        (0xA06D0, "gnr256", "GNR-X"),
     )
 )
 

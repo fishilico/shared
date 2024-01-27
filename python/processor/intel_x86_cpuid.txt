@@ -2094,11 +2094,15 @@
 0xad,  x (0xa06dx): "GNR-X" Granite Rapids Xeon
 
 # https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.21.1
+# https://twitter.com/InstLatX64/status/1748426947615396154
 0xad,  0 (0xa06d0): "GNR-X" Granite Rapids Xeon
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
 0xae,  x (0xa06ex): "GNR-D" Granite Rapids D
+
+# https://twitter.com/InstLatX64/status/1748426947615396154
+0xae,  0 (0xa06e0): "GNR-D" Granite Rapids D
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
@@ -2106,6 +2110,11 @@
 
 # https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.21.1
 0xaf,  0 (0xa06f0): "SRF" Sierra Forest Xeon
+    Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
+
+# https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.33
+# https://twitter.com/InstLatX64/status/1748426947615396154
+0xb5,  0 (0xb0650): "ARL-S" Arrow Lake S
     Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
@@ -2227,6 +2236,9 @@
 # https://twitter.com/InstLatX64/status/1713964530848411829
 0xcc,  x (0xc06cx): Panther Lake
 
+# https://twitter.com/InstLatX64/status/1748426947615396154
+0xcc,  0 (0xc06c0): Panther Lake
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0xcf,  x (0xc06fx): "EMR-X" Emerald Rapids Xeon
     5th Generation Intel® Xeon® Scalable Processor Family
@@ -2235,12 +2247,19 @@
 0xcf,  2 (0xc06f2): "EMR-X" Emerald Rapids Xeon (Raptor Cove)
     5th Generation Intel® Xeon® Scalable Processor Family
 
+# https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.33
+# https://twitter.com/InstLatX64/status/1748426947615396154
+0xcf,  5 (0xc06f5): "EMR-X" Emerald Rapids Xeon (Raptor Cove)
+    5th Generation Intel® Xeon® Scalable Processor Family
+
 # https://cdrdv2-public.intel.com/790021/architecture-instruction-set-extensions-programming-reference.pdf
 # https://twitter.com/InstLatX64/status/1708121836595143148
 # https://github.com/InstLatx64/InstLatx64/commit/9e40a5acf06db45a47a3f5b55c4b7c23d15350a1
 # https://twitter.com/InstLatX64/status/1713964530848411829
 0xdd,  x (0xd06dx): Clearwater Forest
 
+# https://twitter.com/InstLatX64/status/1748426947615396154
+0xdd,  0 (0xd06d0): Clearwater Forest
 
 [Family 11]
 # https://www.intel.com/content/dam/www/public/us/en/documents/specification-updates/xeon-phi-coprocessor-specification-update.pdf (328205-016)
