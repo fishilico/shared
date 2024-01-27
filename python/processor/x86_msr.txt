@@ -509,6 +509,7 @@ P6 0x11E BBL_CR_CTL3 # Control register 3: used to configure the L2 Cache
 XEONSCAL4 0x11F BIOS_INFO_FLAGS # Read bits 23:16 of uncore SCP (storage for this 8b MSR)
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/braswell/include/soc/msr.h
+# https://twitter.com/_markel___/status/1747727699798306878 : bit 8 is WBINVAL_DL1, used to flush L1D cache to L2 on Atom processors
 ATOMBRASWELL 0x120 POWER_MISC
 
 # https://github.com/coreboot/coreboot/blob/4.18/src/soc/intel/common/block/include/intelblocks/msr.h
