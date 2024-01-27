@@ -8,6 +8,7 @@ The version information can be obtained through ``winver.exe`` (popup window) or
 
 * https://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions
 * https://en.wikipedia.org/wiki/Windows_10_version_history
+* https://en.wikipedia.org/wiki/Windows_11_version_history
 * https://answers.microsoft.com/en-us/insider/forum/all/complete-list-of-windows-insider-build-numbers/d1583f70-8e7f-45b9-8bf7-bfa5ae673303
 * http://techthoughts.info/windows-version-numbers/
 * https://support.microsoft.com/en-us/lifecycle/search/
@@ -16,14 +17,22 @@ The version information can be obtained through ``winver.exe`` (popup window) or
 +-------------------------+---------+--------------+--------------+---------------------------+-------------------------+
 | Version name            | Version | Build number | Release date | End of mainstream support | End of extended support |
 +=========================+=========+==============+==============+===========================+=========================+
-| Windows 10 22H2         | NT 10.0 | 19045        | 2022-10-18   | 2024-05-14 for Home, Pro  |                         |
-| "2022 Update"           |         |              |              | 2025-05-13 for Entr, Edu  |                         |
+| Windows Server 2025     |         | 26040        |              |                           |                         |
++-------------------------+---------+--------------+--------------+---------------------------+-------------------------+
+| Windows 11 24H2         | NT 11.0 |              |              |                           |                         |
+| "Hudson Valley"         |         |              |              |                           |                         |
++-------------------------+---------+--------------+--------------+---------------------------+-------------------------+
+| Windows 11 23H2         | NT 11.0 | 22631        | 2023-10-31   | 2025-11-11 for Home, Pro  |                         |
+| "Sun Valley 3"          |         |              |              | 2026-10-10 for Entr, Edu  |                         |
++-------------------------+---------+--------------+--------------+---------------------------+-------------------------+
+| Windows 10 22H2         | NT 10.0 | 19045        | 2022-10-18   | 2025-10-14                |                         |
+| "2022 Update"           |         |              |              |                           |                         |
 +-------------------------+---------+--------------+--------------+---------------------------+-------------------------+
 | Windows 11 22H2         | NT 11.0 | 22621        | 2022-09-20   | 2024-10-08 for Home, Pro  |                         |
 | "Sun Valley 2"          |         |              |              | 2025-10-14 for Entr, Edu  |                         |
 +-------------------------+---------+--------------+--------------+---------------------------+-------------------------+
-| Windows 10 21H2         | NT 10.0 | 19044        | 2021-11-16   | 2023-06-13 for Home, Pro  |                         |
-| "November 2021 Update"  |         |              |              | 2024-06-11 for Entr, Edu  |                         |
+| Windows 10 21H2         | NT 10.0 | 19044        | 2021-11-16   | 2023-06-13 for Home, Pro  | 2027-01-12 or Entr      |
+| "November 2021 Update"  |         |              |              | 2024-06-11 for Entr, Edu  | 2032-01-13 or IoT Entr  |
 +-------------------------+---------+--------------+--------------+---------------------------+-------------------------+
 | Windows 11 21H2         | NT 11.0 | 22000        | 2021-10-05   | 2023-10-10 for Home, Pro  |                         |
 | "Sun Valley"            |         |              |              | 2024-10-08 for Entr, Edu  |                         |
