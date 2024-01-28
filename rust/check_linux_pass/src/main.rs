@@ -1,7 +1,7 @@
 extern crate clap;
 extern crate pwhash;
 extern crate termios;
-extern crate users;
+extern crate uzers;
 
 use clap::{App, Arg};
 use std::error;
@@ -213,7 +213,7 @@ fn main_with_result() -> Result<(), Error> {
         Some(u) => u,
         None => {
             current_username =
-                users::get_current_username().ok_or("unable to get the current user name")?;
+                uzers::get_current_username().ok_or("unable to get the current user name")?;
             current_username
                 .to_str()
                 .ok_or("unable to convert the current user name to str")?
