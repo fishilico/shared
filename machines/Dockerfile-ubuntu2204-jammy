@@ -5,7 +5,6 @@ LABEL Description="Ubuntu 22.04 LTS Jammy Jellyfish with build dependencies for 
 ENV LANG=C.UTF-8
 
 # Install apt-utils first, in order to apply package configuration tasks
-# Debian 12 (and Ubuntu 22.04) removed sagemath because it failed to build from source
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -46,7 +45,8 @@ RUN \
         python3-numpy \
         python3-pil \
         python3-pycryptodome \
-        python3-z3 && \
+        python3-z3 \
+        sagemath && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         wine-stable \
         wine32 \
