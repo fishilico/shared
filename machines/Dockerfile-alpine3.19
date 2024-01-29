@@ -2,7 +2,6 @@ FROM alpine:3.19
 LABEL Description="Alpine Linux 3.19 with build dependencies for shared"
 
 # Alpine does not provide coq
-# Z3's python package requires importlib.resources but does not depend on py3-importlib-resources, so it must be listed explicitly: https://gitlab.alpinelinux.org/alpine/aports/-/issues/15727
 RUN \
     apk --no-cache --update add \
         cargo \
@@ -30,7 +29,6 @@ RUN \
         pulseaudio-dev \
         py3-cffi \
         py3-cryptography \
-        py3-importlib-resources \
         py3-numpy \
         py3-pillow \
         py3-setuptools \
