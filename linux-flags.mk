@@ -19,11 +19,14 @@ include $(dir $(lastword $(MAKEFILE_LIST)))common.mk
 CC ?= cc
 
 # C preprocessor flags
+# Generate dependencies files targeting $@ in a .$@.d file
+# ... while allowing using CPPFLAGS outside of a target (where $@ is empty).
 # Gentoo Hardened already defines _FORTIFY_SOURCE in the compiler and warns
 # about possible redefinition, so detect these warnings.
-# Generate dependencies files targeting $@ in a .$@.d file
-# ... while allowing using CPPFLAGS outside of a target (where $@ is empty)
-CPPFLAGS = $(call ccpp-option,-D_FORTIFY_SOURCE=2) $(@:%=-Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d)
+# Ubuntu 24.04 defines _FORTIFY_SOURCE as built-in when optimizations are enabled,
+# so using ccpp-option is not directly possible.
+CPPFLAGS = $(@:%=-Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d) \
+	$(call try-run,$(CC) -O2 -Werror -D_FORTIFY_SOURCE=2 -E - < /dev/null,-D_FORTIFY_SOURCE=2)
 
 # C compiler flags
 # list of warnings from https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
