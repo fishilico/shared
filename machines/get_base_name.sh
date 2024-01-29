@@ -96,6 +96,9 @@ do
         *ubuntu2204*|*ubuntu22.04*|*jammy*)
             echo "ubuntu2204-jammy"
             ;;
+        *ubuntu2404*|*ubuntu24.04*|*noble*)
+            echo "ubuntu2404-noble"
+            ;;
 
         *fedora22*)
             echo "fedora22"
