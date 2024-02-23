@@ -125,12 +125,12 @@ static LPCVOID get_stack_pointer(void)
          *   838 | __buildreadseg(__readgsqword, unsigned __int64, "gs", "q")
          *       | ^~~~~~~~~~~~~~
          */
-#if __GNUC__ >= 12 && __GNUC__ <= 13
+#if __GNUC__ >= 12 && __GNUC__ <= 14
 #    pragma GCC diagnostic push
 #    pragma GCC diagnostic ignored "-Warray-bounds"
 #endif
         const NT_TIB *pTib = (PNT_TIB)NtCurrentTeb();
-#if __GNUC__ >= 12 && __GNUC__ <= 13
+#if __GNUC__ >= 12 && __GNUC__ <= 14
 #    pragma GCC diagnostic pop
 #endif
         if (pTib->StackLimit < pTib->StackBase) {
@@ -266,12 +266,12 @@ int _tmain(int argc, TCHAR **argv)
      *   838 | __buildreadseg(__readgsqword, unsigned __int64, "gs", "q")
      *       | ^~~~~~~~~~~~~~
      */
-#if __GNUC__ >= 12 && __GNUC__ <= 13
+#if __GNUC__ >= 12 && __GNUC__ <= 14
 #    pragma GCC diagnostic push
 #    pragma GCC diagnostic ignored "-Warray-bounds"
 #endif
     pTeb = NtCurrentTeb();
-#if ___GNUC__ >= 12 && __GNUC__ <= 13
+#if ___GNUC__ >= 12 && __GNUC__ <= 14
 #    pragma GCC diagnostic pop
 #endif
     pPeb = get_peb();

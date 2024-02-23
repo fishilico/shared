@@ -346,7 +346,7 @@ int _tmain(void)
      *   838 | __buildreadseg(__readgsqword, unsigned __int64, "gs", "q")
      *       | ^~~~~~~~~~~~~~
      */
-#if __GNUC__ >= 12 && __GNUC__ <= 13
+#if __GNUC__ >= 12 && __GNUC__ <= 14
 #    pragma GCC diagnostic push
 #    pragma GCC diagnostic ignored "-Warray-bounds"
 #endif
@@ -364,7 +364,7 @@ int _tmain(void)
 #else
 #    warning Unsupported architecture
 #endif
-#if __GNUC__ >= 12 && __GNUC__ <= 13
+#if __GNUC__ >= 12 && __GNUC__ <= 14
 #    pragma GCC diagnostic pop
 #endif
     pbUserProcParams = (BYTE *)ProcessEnvironmentBlock->ProcessParameters;
