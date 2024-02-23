@@ -700,10 +700,16 @@
 0x74,  1 (0xa70f41): "ZEN4" Phoenix
     AMD Ryzen 9 7940H w/ Radeon 780M Graphics
 
+# https://twitter.com/InstLatX64/status/1753402299714605404
+0x75,  2 (0xa70f52): "ZEN4" Phoenix
+    AMD Ryzen 7 8700G w/ Radeon 780M Graphics
+
 # https://github.com/InstLatx64/InstLatx64/blob/33c980db26c0792fda0b663aeb58991eb3435fe5/AuthenticAMD/AuthenticAMD0A70F80_K19_Phoenix2_01_CPUID.txt
 # https://twitter.com/InstLatX64/status/1705200080599290158
+# https://twitter.com/InstLatX64/status/1755515341516521651
 0x78,  0 (0xa70f80): "ZEN4" Phoenix
     AMD Ryzen Z1
+    AMD Ryzen 5 8500G w/ Radeon 740M Graphics
 
 # https://twitter.com/InstLatX64/status/1687505449992560657 https://lkml.org/lkml/2023/7/21/835
 # https://github.com/InstLatx64/InstLatx64/commit/6ca20b9b71e9da283d114e67da89fa4f706c9f02
@@ -720,14 +726,34 @@
 
 [Family 26] # Family 1ah
 
+# https://twitter.com/InstLatX64/status/1752056221673075094
+# https://twitter.com/9550pro/status/1751251557314924780
+# 0x00..0x0f (0xb00fxx): AMD Zen5 EPYC/Turin
+
+# https://twitter.com/InstLatX64/status/1752056221673075094
+# https://twitter.com/9550pro/status/1751251557314924780
+# 0x20..0x2f (0xb20fxx): AMD Zen5 Strix Point
+
 # https://twitter.com/InstLatX64/status/1685680065508515841
 # https://github.com/InstLatx64/InstLatx64/commit/201d8af39a4addb6b72628af2292253d8a7f4c09
 # https://milkyway.cs.rpi.edu/milkyway/show_host_detail.php?hostid=996435
 0x20,  0 (0xb20f00): STX1
     AMD Eng Sample: 100-000000994-03_N
 
+# https://twitter.com/InstLatX64/status/1752056221673075094
+# https://twitter.com/9550pro/status/1751251557314924780
+# 0x40..0x4f (0xb40fxx): AMD Zen5 Granite Ridge
+
 # https://twitter.com/InstLatX64/status/1685680065508515841
 # https://github.com/InstLatx64/InstLatx64/commit/201d8af39a4addb6b72628af2292253d8a7f4c09
 # https://einsteinathome.org/host/13142934
 0x40,  0 (0xb40f00): Granite Ridge
     AMD Eng Sample: 100-000001290-11_N
+
+# https://twitter.com/InstLatX64/status/1752056221673075094
+# https://twitter.com/Kepler_L2/status/1751280179576488037
+# 0x60..0x6f (0xb60fxx): AMD Zen5 Krackan Point
+
+# https://twitter.com/InstLatX64/status/1752056221673075094
+# https://twitter.com/Kepler_L2/status/1751279949573431364
+# 0x70..0x7f (0xb70fxx): AMD Zen5 Strix Halo
