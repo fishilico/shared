@@ -31,6 +31,10 @@ ifneq ($(HAVE_FSTRINGS),y)
 NONTEST_BINARIES += eth_functions_keccak.py
 endif
 
+ifneq ($(HAVE_PYTHON_CRYPTODOME)$(HAVE_FSTRINGS),yy)
+NONTEST_BINARIES += starknet_curve.py
+endif
+
 BINARIES := $(wildcard *.py)
 TEST_BINARIES := $(filter-out $(NONTEST_BINARIES), $(BINARIES))
 
