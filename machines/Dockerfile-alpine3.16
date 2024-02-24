@@ -77,11 +77,11 @@ CMD ["/run_shared_test.sh"]
 #       gcc: gcc (Alpine 11.2.1_git20220219) 11.2.1 20220219
 #       clang: Alpine clang version 13.0.1
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 11.3.0
-#       Linux kernel: 5.15.130-0-lts
+#       Linux kernel: 5.15.148-0-lts
 #       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.3
 #       python3: Python 3.10.13
-#       javac: javac 11.0.20
-#       java: openjdk 11.0.20 2023-07-18
+#       javac: javac 11.0.22
+#       java: openjdk 11.0.22 2024-01-16
 #       rustc: rustc 1.60.0
 #       cargo: cargo 1.60.0
-#       openssl: OpenSSL 1.1.1v  1 Aug 2023
+#       openssl: OpenSSL 1.1.1w  11 Sep 2023

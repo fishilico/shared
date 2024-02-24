@@ -61,7 +61,7 @@ COPY . /shared/
 CMD ["xvfb-run", "/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
+#    Global blacklist: latex% rust/asymkeyfind% rust/download_web%
 #    In sub-directories:
 #       c:
 #       glossaries:
@@ -76,7 +76,7 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex% rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
+#       Global blacklist: latex% rust/asymkeyfind% rust/download_web%
 #       In sub-directories:
 #          c: gtk_alpha_window
 #          glossaries:
@@ -99,18 +99,18 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (GCC) 11.2.1 20220127 (Red Hat 11.2.1-9)
+#       gcc: gcc (GCC) 11.3.1 20220421 (Red Hat 11.3.1-2)
 #       clang: clang version 12.0.1 (Fedora 12.0.1-1.fc34)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 10.3.1 20210422 (Fedora MinGW 10.3.1-2.fc34)
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 10.3.1 20210422 (Fedora MinGW 10.3.1-2.fc34)
 #       wine: wine-7.2 (Staging)
-#       Linux kernel: 5.16.16-100.fc34.x86_64
+#       Linux kernel: 5.17.12-100.fc34.x86_64
 #       /lib/ld-linux.so.2: ld.so (GNU libc) release release version 2.33.
-#       python: Python 3.9.10
-#       python3: Python 3.9.10
-#       javac: javac 11.0.14.1
-#       java: openjdk 11.0.14.1 2022-02-08
-#       rustc: rustc 1.59.0 (Fedora 1.59.0-2.fc34)
-#       cargo: cargo 1.59.0
+#       python: Python 3.9.13
+#       python3: Python 3.9.13
+#       javac: javac 11.0.15
+#       java: openjdk 11.0.15 2022-04-19
+#       rustc: rustc 1.61.0 (Fedora 1.61.0-2.fc34)
+#       cargo: cargo 1.61.0
 #       coqc: The Coq Proof Assistant, version 8.13.2 (June 2021) compiled on Jun 4 2021 0:00:00 with OCaml 4.11.1
-#       openssl: OpenSSL 1.1.1l  FIPS 24 Aug 2021
+#       openssl: OpenSSL 1.1.1n  FIPS 15 Mar 2022
