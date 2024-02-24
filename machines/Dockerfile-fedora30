@@ -5,6 +5,7 @@ LABEL Description="Fedora 30 with build dependencies for shared"
 ENV LANG=C.UTF-8
 
 # Fedora>=30 provides python3-z3 but not python2-z3 (cf. https://src.fedoraproject.org/rpms/z3/c/9257eb278f0353c184d5f68286fe4df7b6a0e504)
+# Fedora 30 uses Wine Staging 5.0 which is actually buggy: CURRENT_USER\Environment is not found and CreateProcess(cmd.exe) fails with "File not found". So do not install wine.
 RUN \
     dnf update -q -y --setopt=deltarpm=false && \
     dnf install -q -y --setopt=deltarpm=false \
@@ -52,8 +53,7 @@ RUN \
         python2-pillow \
         python2-pycryptodomex \
         SDL2-devel \
-        which \
-        wine && \
+        which && \
     dnf clean all
 
 WORKDIR /shared
@@ -80,7 +80,7 @@ CMD ["/run_shared_test.sh"]
 #    With gcc -m32:
 #       Global blacklist: latex% rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
 #       In sub-directories:
-#          c: gtk_alpha_window
+#          c: gtk_alpha_window openmp_matrix
 #          glossaries:
 #          java/keystore:
 #          linux: pulseaudio_echo sdl_v4l_video
@@ -98,14 +98,13 @@ CMD ["/run_shared_test.sh"]
 #       clang -m64: ok
 #       clang -m32: ok
 #       musl-gcc: not working
-#       x86_64-w64-mingw32-gcc: ok
-#       i686-w64-mingw32-gcc: ok
+#       x86_64-w64-mingw32-gcc: only compiling
+#       i686-w64-mingw32-gcc: only compiling
 #    Versions:
 #       gcc: gcc (GCC) 9.3.1 20200408 (Red Hat 9.3.1-2)
 #       clang: clang version 8.0.0 (Fedora 8.0.0-3.fc30)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 8.3.0 20190222 (Fedora MinGW 8.3.0-2.fc30)
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 8.3.0 20190222 (Fedora MinGW 8.3.0-2.fc30)
-#       wine: wine-5.0 (Staging)
 #       Linux kernel: 5.6.13-100.fc30.x86_64
 #       python3: Python 3.7.7
 #       javac: javac 11.0.7
