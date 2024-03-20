@@ -205,6 +205,8 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
             ]
         elif field_product_name == "Core w/Hybrid Technology":
             new_names = ["Intel® Core™ Processor with Hybrid Technology"]
+        elif field_product_name == "Core™ Ultra Processor":
+            new_names = ["Intel® Core™ Ultra Processor"]
         elif field_product_name == "Core i3-N305/N300, N50/N97/N100/N200, Atom x7211E/x7213E/x7425E":
             new_names = [
                 "Intel® Core i3-N305/N300",
@@ -268,6 +270,10 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
         elif field_product_name == "Xeon Max":
             new_names = [
                 "Intel® Xeon® Max Processor",
+            ]
+        elif field_product_name == "Xeon Scalable Gen5":
+            new_names = [
+                "5th Generation Intel® Xeon® Scalable Processor Family",
             ]
         elif matches := re.match(r"^Atom (.*)$", field_product_name):
             new_names = [

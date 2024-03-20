@@ -2074,8 +2074,10 @@
 # https://twitter.com/InstLatX64/status/1661625710471962625
 # https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_13187/bat-mtlp-8/boot0.txt
 # https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_13470/bat-mtlp-6/boot0.txt
-0xaa,  4 (0xa06a4): "MTL" Meteor Lake
+# https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/blob/microcode-20240312/releasenote.md#new-platforms
+0xaa,  4 (0xa06a4): "MTL" Meteor Lake (Stepping C-0)
     14th Generation Intel® Core™ Processor Family
+    Intel® Core™ Ultra Processor
     Intel(R) Core(TM) Ultra 7 1002H
     Intel(R) Core(TM) Ultra 7 1003H
 
@@ -2243,8 +2245,13 @@
 0xcf,  x (0xc06fx): "EMR-X" Emerald Rapids Xeon
     5th Generation Intel® Xeon® Scalable Processor Family
 
+# https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/blob/microcode-20240312/releasenote.md#new-platforms
+0xcf,  1 (0xc06f1): "EMR-SP" Emerald Rapids Xeon (Raptor Cove) (Stepping A-0)
+    5th Generation Intel® Xeon® Scalable Processor Family
+
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
-0xcf,  2 (0xc06f2): "EMR-X" Emerald Rapids Xeon (Raptor Cove)
+# https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/blob/microcode-20240312/releasenote.md#new-platforms
+0xcf,  2 (0xc06f2): "EMR-X/EMR-SP" Emerald Rapids Xeon (Raptor Cove) (Stepping A-1)
     5th Generation Intel® Xeon® Scalable Processor Family
 
 # https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.33
