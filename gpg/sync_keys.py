@@ -78,7 +78,13 @@ def unarmor_gpg(armored: Union[bytes, str]) -> bytes:
     if isinstance(armored, str):
         lines = armored.splitlines()
     else:
-        lines = armored.decode("ascii").splitlines()
+        try:
+            lines = armored.decode("ascii").splitlines()
+        except ValueError:
+            if any(x < 9 or 0x0d < x < 0x20 or x >= 0x80 for x in armored[:10]):
+                # If the key starts with non-ASCII data, assume it is a raw key
+                assert isinstance(armored, bytes)
+                return armored
     if lines[0] != "-----BEGIN PGP PUBLIC KEY BLOCK-----":
         raise ValueError(f"unexpected first line {lines[0]!r}")
     if lines[-1] != "-----END PGP PUBLIC KEY BLOCK-----":
