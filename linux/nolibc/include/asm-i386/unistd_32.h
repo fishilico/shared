@@ -447,9 +447,14 @@
 #define __NR_futex_wake 454
 #define __NR_futex_wait 455
 #define __NR_futex_requeue 456
+#define __NR_statmount 457
+#define __NR_listmount 458
+#define __NR_lsm_get_self_attr 459
+#define __NR_lsm_set_self_attr 460
+#define __NR_lsm_list_modules 461
 
 #ifdef __KERNEL__
-#define __NR_syscalls 457
+#define __NR_syscalls 462
 #endif
 
 #endif /* _UAPI_ASM_UNISTD_32_H */
