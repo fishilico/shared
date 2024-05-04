@@ -2114,6 +2114,11 @@
 0xaf,  0 (0xa06f0): "SRF" Sierra Forest Xeon
     Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
+# https://twitter.com/InstLatX64/status/1771477032137900150
+# https://lore.kernel.org/lkml/20240322161725.195614-1-tony.luck@intel.com/T/ "for the regular laptop CPU"
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/arch/x86/include/asm/intel-family.h?id=8a8a9c9047d1089598bdb010ec44d7f14b4f9203
+0xb5,  x (0xb065x): "ARL-U" Arrow Lake U
+
 # https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.33
 # https://twitter.com/InstLatX64/status/1748426947615396154
 0xb5,  0 (0xb0650): "ARL-S" Arrow Lake S
