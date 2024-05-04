@@ -586,6 +586,11 @@
 0x90,  2 (0x890f02): "ZEN2" Van Gogh
     AMD Custom APU 0405  AmdCcxVhFf3PeiInit Entry
 
+# https://github.com/InstLatx64/InstLatx64/blob/8684ca320eb5b12f8796cb5f63de531dd286420a/AuthenticAMD/AuthenticAMD0890F10_K17_VanGogh_01_CPUID.txt
+# https://twitter.com/InstLatX64/status/1780315103058927827
+0x91,  0 (0x890f10): "ZEN2" Van Gogh
+    AMD Custom APU 0932  AmdCcxVhFf3PeiInit Entry
+
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD08A0F00_K17_Mendocino_01_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD08A0F00_K17_Mendocino_02_CPUID.txt
 0xa0,  0 (0x8a0f00): "ZEN2" Mendocino
@@ -711,6 +716,11 @@
     AMD Ryzen Z1
     AMD Ryzen 5 8500G w/ Radeon 740M Graphics
 
+# https://twitter.com/InstLatX64/status/1776336696113496207
+# https://browser.geekbench.com/v6/cpu/5601227
+0x7c,  0 (0xa70fc0): "ZEN4" Phoenix
+    AMD Ryzen 5 8540U w/ Radeon 740M Graphics (HawkPoint)
+
 # https://twitter.com/InstLatX64/status/1687505449992560657 https://lkml.org/lkml/2023/7/21/835
 # https://github.com/InstLatx64/InstLatx64/commit/6ca20b9b71e9da283d114e67da89fa4f706c9f02
 # 0x80..0x8f (0xa80fxx): MI300C Zen4 server + CDNA3 + HBM3
@@ -729,6 +739,9 @@
 # https://twitter.com/InstLatX64/status/1752056221673075094
 # https://twitter.com/9550pro/status/1751251557314924780
 # 0x00..0x0f (0xb00fxx): AMD Zen5 EPYC/Turin
+
+# https://twitter.com/InstLatX64/status/1772523704649404855
+0x10,  0 (0xb10f00): AMD Zen5c EPIC
 
 # https://twitter.com/InstLatX64/status/1752056221673075094
 # https://twitter.com/9550pro/status/1751251557314924780
@@ -749,6 +762,9 @@
 # https://einsteinathome.org/host/13142934
 0x40,  0 (0xb40f00): Granite Ridge
     AMD Eng Sample: 100-000001290-11_N
+
+# https://twitter.com/InstLatX64/status/1780315103058927827
+0x44,  0 (0xb40f40): AMD Zen5 Granite Ridge
 
 # https://twitter.com/InstLatX64/status/1752056221673075094
 # https://twitter.com/Kepler_L2/status/1751280179576488037

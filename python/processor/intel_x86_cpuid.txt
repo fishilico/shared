@@ -2055,7 +2055,8 @@
     11th Gen Intel(R) Core(TM) i7-11700K @ 3.60GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
-0xaa,  x (0xa06ax): "MTL" Meteor Lake
+# https://github.com/intel/dptf/blob/00b9ac15bb46859c2fd20f10fa0bc66a7bc6f5af/Common/esif_ccb_cpuid.h
+0xaa,  x (0xa06ax): "MTL" Meteor Lake M and P
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
@@ -2083,44 +2084,56 @@
 
 # https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
 # https://fossies.org/linux/misc/cpuid-20230406.src.tar.gz/cpuid-20230406/cpuid.c
-0xab,  x (0xa06bx): "MTL-N" Meteor Lake-N
+0xab,  x (0xa06bx): "MTL-N" Meteor Lake N
     14th Generation Intel® Core™ Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
-0xac,  x (0xa06cx): "MTL-S" Meteor Lake-S
+# https://twitter.com/InstLatX64/status/1786318690528432348
+0xac,  x (0xa06cx): "MTL-S" Meteor Lake S (Redwood Cove/Crestmont)
     14th Generation Intel® Core™ Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
-0xad,  x (0xa06dx): "GNR-X" Granite Rapids Xeon
+# https://twitter.com/InstLatX64/status/1786318690528432348
+0xad,  x (0xa06dx): "GNR-X" Granite Rapids Xeon (Redwood Cove)
+    6th Generation Intel® Xeon® Scalable Processor Family
 
 # https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.21.1
 # https://twitter.com/InstLatX64/status/1748426947615396154
-0xad,  0 (0xa06d0): "GNR-X" Granite Rapids Xeon
+0xad,  0 (0xa06d0): "GNR-X" Granite Rapids Xeon (Redwood Cove)
+    6th Generation Intel® Xeon® Scalable Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
-0xae,  x (0xa06ex): "GNR-D" Granite Rapids D
+# https://twitter.com/InstLatX64/status/1786318690528432348
+0xae,  x (0xa06ex): "GNR-D" Granite Rapids D (Redwood Cove)
+    6th Generation Intel® Xeon® Scalable Processor Family
 
 # https://twitter.com/InstLatX64/status/1748426947615396154
-0xae,  0 (0xa06e0): "GNR-D" Granite Rapids D
+0xae,  0 (0xa06e0): "GNR-D" Granite Rapids D (Redwood Cove)
+    6th Generation Intel® Xeon® Scalable Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
-0xaf,  x (0xa06fx): "SRF" Sierra Forest Xeon
+# https://twitter.com/InstLatX64/status/1786318690528432348
+0xaf,  x (0xa06fx): "SRF" Sierra Forest Xeon (Sierra Glen, Crestmont)
+    6th Generation Intel® Xeon® Scalable Processor Family
 
 # https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.21.1
-0xaf,  0 (0xa06f0): "SRF" Sierra Forest Xeon
+0xaf,  0 (0xa06f0): "SRF" Sierra Forest Xeon (Sierra Glen, Crestmont)
+    6th Generation Intel® Xeon® Scalable Processor Family
     Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
 # https://twitter.com/InstLatX64/status/1771477032137900150
 # https://lore.kernel.org/lkml/20240322161725.195614-1-tony.luck@intel.com/T/ "for the regular laptop CPU"
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/arch/x86/include/asm/intel-family.h?id=8a8a9c9047d1089598bdb010ec44d7f14b4f9203
+# https://twitter.com/InstLatX64/status/1786318690528432348
 0xb5,  x (0xb065x): "ARL-U" Arrow Lake U
 
 # https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.33
 # https://twitter.com/InstLatX64/status/1748426947615396154
+# https://twitter.com/InstLatX64/status/1772523704649404855
 0xb5,  0 (0xb0650): "ARL-S" Arrow Lake S
     Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
@@ -2134,7 +2147,8 @@
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
-0xb7,  x (0xb067x): "RPL-S" Raptor Lake-S
+# https://twitter.com/InstLatX64/status/1786318690528432348
+0xb7,  x (0xb067x): "RPL-S" Raptor Lake S, Bartlett Lake S
 
 # https://twitter.com/d0cTB/status/1660763526359547904 gives the CPUID of RPL-A0
 0xb7,  0 (0xb0670): "RPL-S" Raptor Lake S (Raptor Cove/Gracemont) (Stepping A-0)
@@ -2155,7 +2169,7 @@
     13th Gen Intel(R) Core(TM) i7-13700K
 
 # https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
-0xba,  x (0xb06ax): "RPL-P" Raptor Lake-P
+0xba,  x (0xb06ax): "RPL-P" Raptor Lake P
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06A2_RaptorLakeP_02_CPUID.txt
@@ -2185,8 +2199,15 @@
     16th Generation Intel® Core™ Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
-0xbd,  x (0xb06dx): "LNL" Lunar Lake
+# https://twitter.com/InstLatX64/status/1786318690528432348
+0xbd,  x (0xb06dx): "LNL" Lunar Lake M (Lion Cove/Skymont)
     16th Generation Intel® Core™ Processor Family
+
+# https://twitter.com/InstLatX64/status/1776336696113496207
+# https://intel-gfx-ci.01.org/tree/intel-xe/xe-1040-7392b2b6f33eb4d279abf14e33e73f491f7f9191/bat-lnl-1/boot0.txt
+0xbd,  1 (0xb06d1): "LNL" Lunar Lake M
+    16th Generation Intel® Core™ Processor Family
+    Intel(R) Core(TM) Ultra 5 234V 2.10GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
 0xbe,  x (0xb06ex): "ADL-N" Alder Lake N
@@ -2224,11 +2245,15 @@
     13th Generation Intel® Core™ Processor Family
 
 # https://twitter.com/InstLatX64/status/1685680065508515841
-0xc5,  x (0xc065x): "ARL" Arrow Lake
+# https://twitter.com/InstLatX64/status/1772523704649404855
+# https://github.com/torvalds/linux/commit/b99d70c0d1380f1368fd4a82271280c4fd28558b https://lore.kernel.org/all/20231025202513.12358-1-tony.luck@intel.com/ (_H - premium mobile parts)
+# https://twitter.com/InstLatX64/status/1786318690528432348
+0xc5,  x (0xc065x): "ARL-H" Arrow Lake H
     15th Generation Intel® Core™ Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.3
 # https://twitter.com/InstLatX64/status/1675346430951665664
+# https://twitter.com/InstLatX64/status/1786318690528432348
 0xc6,  x (0xc066x): "ARL-S" Arrow Lake S
     15th Generation Intel® Core™ Processor Family
 
@@ -2241,10 +2266,11 @@
 # https://twitter.com/InstLatX64/status/1708121836595143148
 # https://github.com/InstLatx64/InstLatx64/commit/9e40a5acf06db45a47a3f5b55c4b7c23d15350a1
 # https://twitter.com/InstLatX64/status/1713964530848411829
-0xcc,  x (0xc06cx): Panther Lake
+# https://github.com/intel/dptf/blob/00b9ac15bb46859c2fd20f10fa0bc66a7bc6f5af/Common/esif_ccb_cpuid.h
+0xcc,  x (0xc06cx): (PTL) Panther Lake
 
 # https://twitter.com/InstLatX64/status/1748426947615396154
-0xcc,  0 (0xc06c0): Panther Lake
+0xcc,  0 (0xc06c0): (PTL) Panther Lake
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0xcf,  x (0xc06fx): "EMR-X" Emerald Rapids Xeon
@@ -2256,8 +2282,11 @@
 
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
 # https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/blob/microcode-20240312/releasenote.md#new-platforms
+# https://twitter.com/InstLatX64/status/1775620902681510357
+# https://github.com/InstLatx64/InstLatx64/blob/8684ca320eb5b12f8796cb5f63de531dd286420a/GenuineIntel/GenuineIntel00C06F2_EmeraldRapids_01_CPUID.txt
 0xcf,  2 (0xc06f2): "EMR-X/EMR-SP" Emerald Rapids Xeon (Raptor Cove) (Stepping A-1)
     5th Generation Intel® Xeon® Scalable Processor Family
+    INTEL(R) XEON(R) GOLD 5520+
 
 # https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.33
 # https://twitter.com/InstLatX64/status/1748426947615396154
