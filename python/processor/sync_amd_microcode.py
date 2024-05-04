@@ -181,6 +181,8 @@ KNOWN_EQUIVALENCE_TABLE: Mapping[int, Tuple[int, ...]] = {
     0xAA00: (0xAA0F00,),
     0xAA01: (0xAA0F01,),
     0xAA02: (0xAA0F02,),
+    0xB400: (0xB40F00,),
+    0xB440: (0xB40F40,),
 }
 
 
