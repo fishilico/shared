@@ -47,6 +47,12 @@ $(PULSE_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(shell $(PKGCONF) --libs libpulse)
 $(PULSE_PROGRAMS:%=.%.o): CFLAGS += $(shell $(PKGCONF) --cflags libpulse) --std=c99
 endif
 
+# Python assignment expressions were introduced in Python 3.8
+HAVE_PYTHON_ASSIGN := $(call can-run,$(PYTHON) -c '(a:=0)')
+ifneq ($(HAVE_PYTHON_ASSIGN), y)
+	NONTEST_BINARIES += kernel_notes.py
+endif
+
 HAVE_SDL2 := $(call pkgconf-with-options,sdl2,-include SDL2/SDL.h)
 ifeq ($(HAVE_SDL2), y)
 	PROGRAMS += $(SDL_PROGRAMS)
