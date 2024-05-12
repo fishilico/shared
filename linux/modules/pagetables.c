@@ -71,9 +71,20 @@
 /* Merge large pagetables together on x86 */
 #define PAGETABLES_MERGE_LARGE 1
 
-/* Define some macros which prevents some #ifdef */
+/* Commit e72c7c2b8866 ("mm/treewide: drop pXd_large()") replaced pXd_large()
+ * with pXd_leaf() in Linux 6.9. These macro were introduced by commit
+ * 93fab1b22ef7 ("mm: add generic p?d_leaf() macros") in Linux 5.6.
+ */
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 6, 0)
+# define pmd_leaf(pmd) pmd_large(pmd)
+# define pud_leaf(pud) pud_large(pud)
+# define p4d_leaf(p4d) p4d_large(p4d)
+# define pgd_leaf(pgd) pgd_large(pgd)
+#endif
+
+/* Define some macros which prevent some #ifdef */
 #ifdef CONFIG_ARM
-# define pud_large(pgd) false
+# define pud_large(pud) false
 # define pgd_large(pgd) false
 
 /* pmd_large has been introduced in ARM in Linux 3.14 by commit 1fd15b879d00
@@ -535,7 +546,7 @@ static void walk_pmd(struct pg_state *st, pmd_t *pmd, unsigned long addr)
 	unsigned int i;
 
 	for (i = 0; i < PTRS_PER_PMD; i++, pmd++, addr += PMD_SIZE) {
-		if (pmd_none(*pmd) || pmd_large(*pmd) || !pmd_present(*pmd))
+		if (pmd_none(*pmd) || pmd_leaf(*pmd) || !pmd_present(*pmd))
 			note_page(st, addr, 3, pmd_val_nopfn(*pmd));
 		else
 			walk_pte(st, pte_offset_kernel(pmd, 0), addr);
@@ -566,7 +577,7 @@ static void walk_pud(struct pg_state *st, pud_t *pud, unsigned long addr)
 		walk_pmd(st, (pmd_t *)pud, addr);
 	} else {
 		for (i = 0; i < PTRS_PER_PUD; i++, pud++, addr += PUD_SIZE) {
-			if (pud_none(*pud) || pud_large(*pud) ||
+			if (pud_none(*pud) || pud_leaf(*pud) ||
 			    !pud_present(*pud))
 				note_page(st, addr, 2, pud_val_nopfn(*pud));
 			else
@@ -587,7 +598,7 @@ static void walk_p4d(struct pg_state *st, p4d_t *p4d, unsigned long addr)
 	unsigned int i;
 
 	for (i = 0; i < PTRS_PER_P4D; i++, p4d++, addr += P4D_SIZE) {
-		if (p4d_none(*p4d) || !p4d_present(*p4d))
+		if (p4d_none(*p4d) || p4d_leaf(*p4d) || !p4d_present(*p4d))
 			note_page(st, addr, 2, p4d_val_nopfn(*p4d));
 		else
 			walk_pud(st, pud_offset(p4d, 0), addr);
@@ -625,7 +636,7 @@ static void walk_pgd(struct pg_state *st, pgd_t *pgd)
 	addr = st->marker->address;
 	i = pgd_index(addr);
 	for (pgd = &pgd[i]; i < PTRS_PER_PGD; i++, pgd++, addr += PGDIR_SIZE) {
-		if (pgd_none(*pgd) || pgd_large(*pgd) || !pgd_present(*pgd))
+		if (pgd_none(*pgd) || pgd_leaf(*pgd) || !pgd_present(*pgd))
 			note_page(st, addr, 1, pgd_val_nopfn(*pgd));
 		else
 			walk_p4d(st, p4d_offset(pgd, 0), addr);
