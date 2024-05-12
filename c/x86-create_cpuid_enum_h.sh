@@ -90,13 +90,6 @@ static void add_manual_cpuid_str(void)
      */
     assert(cpuidstr_ext7_edx[8] == NULL);
     cpuidstr_ext7_edx[8] = "constant_tsc";
-
-    /* Documented in
-     * https://cdrdv2-public.intel.com/779982/346446-flexible-return-and-event-delivery.pdf
-     * Flexible Return and Event Delivery (FRED)
-     */
-    assert(cpuidstr_7_1_eax[17] == NULL);
-    cpuidstr_7_1_eax[17] = "fred";
 }
 EOF
 
