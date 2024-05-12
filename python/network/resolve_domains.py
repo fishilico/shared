@@ -32,6 +32,10 @@ subdomain takeovers):
   (references Sublist3r, Amass, Recon-ng, Subfinder)
 - https://shrewdeye.app/ (from https://twitter.com/0xloooser/status/1739281835858026566?t=YrSP5FhRVFjZDDNQ109b3A&s=19)
 
+There are also repositories with many subdomains:
+- https://github.com/danielmiessler/SecLists/tree/master/Discovery/DNS
+- https://github.com/netsecurity-as/subfuz/blob/master/subdomain_megalist.txt
+
 @author: Nicolas Iooss
 @license: MIT
 """
