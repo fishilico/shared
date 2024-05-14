@@ -90,8 +90,10 @@ ifeq ($(call ccpp-has-option,-Weverything), y)
 	CFLAGS += $(call cc-disable-warning,c99-extensions)
 	# clang 13.0 added -Wreserved-identifier, which triggers many warnings in headers when names starts with _
 	CFLAGS += $(call cc-disable-warning,reserved-identifier)
-	# clang 16.0 added -Wunsafe-buffer-usage, which warnings in any use of raw pointers
+	# clang 16.0 added -Wunsafe-buffer-usage, which warns in any use of raw pointers
 	CFLAGS += $(call cc-disable-warning,unsafe-buffer-usage)
+	# clang 18 added -Wswitch-default, which is incompatible with using switch statements with intended missing default
+	CFLAGS += $(call cc-disable-warning,switch-default)
 endif
 
 # Add GCC-specific options unknown to clang
