@@ -7,6 +7,7 @@ ENV LANG=C.UTF-8
 # python-z3 does not install an __init__.py file, which is required with Python 2
 # Install OpenJDK 8 because OpenJDK 9 package is buggy: https://bugs.launchpad.net/ubuntu/+source/openjdk-9/+bug/1593191
 # Ubuntu 16.04 provides a version of Cargo (1.46.0)  fails to load https://github.com/rust-lang/crates.io-index
+# Ubuntu 16.04 provides a version of coq which is too old to have PeanoNat (8.4pl4 < 8.5)
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -14,7 +15,6 @@ RUN \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         clang \
-        coq \
         gcc-mingw-w64 \
         gcc-multilib \
         gdb \
@@ -76,7 +76,7 @@ CMD ["/run_shared_test.sh"]
 #       python/network/dnssec: verify_dnssec.py
 #       python/processor: x86_msr.py
 #       python/qrcode:
-#       verification:
+#       verification: ackermann.vo
 #    With gcc -m32:
 #       Global blacklist: latex% rust%
 #       In sub-directories:
@@ -90,7 +90,7 @@ CMD ["/run_shared_test.sh"]
 #          python/network/dnssec: verify_dnssec.py
 #          python/processor: x86_msr.py
 #          python/qrcode:
-#          verification:
+#          verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok
 #       gcc -m32: ok
@@ -108,5 +108,4 @@ CMD ["/run_shared_test.sh"]
 #       Linux kernel: 4.4.0-210-generic
 #       /lib/ld-musl-x86_64.so.1: musl libc Version 1.1.9
 #       python3: Python 3.5.2
-#       coqc: The Coq Proof Assistant, version 8.4pl4 (November 2015) compiled on Nov 04 2015 12:56:53 with OCaml 4.02.3
 #       openssl: OpenSSL 1.0.2g  1 Mar 2016

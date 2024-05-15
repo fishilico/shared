@@ -6,7 +6,7 @@
  * Wikipedia article: https://en.wikipedia.org/wiki/Ackermann_function
  *)
 
-Require Import NPeano.
+Require Import PeanoNat.
 
 Fixpoint ack (m: nat) : nat -> nat :=
   match m with

@@ -8,6 +8,7 @@ ENV LANG=C.UTF-8
 #   so do not install musl-dev and musl-tools packages
 # Ubuntu<16.04 does not provide python-z3
 # Ubuntu 14.04 provides a version of Rust (1.31.0) which is too old
+# Ubuntu 14.04 provides a version of coq which is too old to have PeanoNat (8.4pl3 < 8.5)
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -15,7 +16,6 @@ RUN \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         binutils-mingw-w64 \
         clang \
-        coq \
         gcc-mingw-w64 \
         gcc-multilib \
         gdb \
@@ -69,7 +69,7 @@ CMD ["/run_shared_test.sh"]
 #       python/network/dnssec: verify_dnssec.py
 #       python/processor: x86_msr.py
 #       python/qrcode:
-#       verification:
+#       verification: ackermann.vo
 #    With gcc -m32:
 #       Global blacklist: latex% rust%
 #       In sub-directories:
@@ -83,7 +83,7 @@ CMD ["/run_shared_test.sh"]
 #          python/network/dnssec: verify_dnssec.py
 #          python/processor: x86_msr.py
 #          python/qrcode:
-#          verification:
+#          verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok
 #       gcc -m32: ok
@@ -100,5 +100,4 @@ CMD ["/run_shared_test.sh"]
 #       wine: wine-1.6.2
 #       Linux kernel: 3.13.0-170-generic
 #       python3: Python 3.4.3
-#       coqc: The Coq Proof Assistant, version 8.4pl3 (January 2014) compiled on Jan 19 2014 23:14:16 with OCaml 4.01.0
 #       openssl: OpenSSL 1.0.1f 6 Jan 2014

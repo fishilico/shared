@@ -7,11 +7,11 @@ ENV LANG=C.UTF-8 \
 
 # Fedora<28 does not provide python3-z3 nor python-z3
 # Fedora<24 does not provide cargo
+# Fedora<24 provides a version of coq which is too old to have PeanoNat (8.4pl6 < 8.5)
 RUN \
     dnf update -q -y --setopt=deltarpm=false && \
     dnf install -q -y --setopt=deltarpm=false \
         clang \
-        coq \
         gcc \
         gdb \
         glibc-devel.x86_64 \
@@ -70,7 +70,7 @@ CMD ["/run_shared_test.sh"]
 #       python/network/dnssec: verify_dnssec.py
 #       python/processor: x86_msr.py
 #       python/qrcode:
-#       verification:
+#       verification: ackermann.vo
 #    With gcc -m32:
 #       Global blacklist: latex% rust%
 #       In sub-directories:
@@ -84,7 +84,7 @@ CMD ["/run_shared_test.sh"]
 #          python/network/dnssec: verify_dnssec.py
 #          python/processor: x86_msr.py
 #          python/qrcode:
-#          verification:
+#          verification: ackermann.vo
 #    Compilers:
 #       gcc -m64: ok
 #       gcc -m32: ok
@@ -101,5 +101,4 @@ CMD ["/run_shared_test.sh"]
 #       wine: wine-1.9.12 (Staging)
 #       Linux kernel: 4.4.14-200.fc22.x86_64
 #       python3: Python 3.4.2
-#       coqc: The Coq Proof Assistant, version 8.4pl6 (April 2015) compiled on Apr 12 2015 02:22:31 with OCaml 4.02.0
 #       openssl: OpenSSL 1.0.1k-fips 8 Jan 2015
