@@ -99,18 +99,18 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (Debian 13.2.0-13) 13.2.0
-#       clang: Debian clang version 16.0.6 (19)
-#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 12-win32
-#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 12-win32
-#       wine: wine-9.0 (Debian 9.0~repack-4)
-#       Linux kernel: 6.6.15-amd64
-#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.37-15) stable release version 2.37.
-#       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.4
-#       python3: Python 3.11.8
-#       javac: javac 17.0.10
-#       java: openjdk 17.0.10 2024-01-16
+#       gcc: gcc (Debian 13.2.0-24) 13.2.0
+#       clang: Debian clang version 16.0.6 (27)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 13-win32
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 13-win32
+#       wine: wine-9.0 (Debian 9.0~repack-4+b1)
+#       Linux kernel: 6.7.12-amd64
+#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.38-10) stable release version 2.38.
+#       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.5
+#       python3: Python 3.11.9
+#       javac: javac 17.0.11
+#       java: openjdk 17.0.11 2024-04-16
 #       rustc: rustc 1.70.0
-#       cargo: cargo 1.69.1
+#       cargo: cargo 1.70.0
 #       coqc: The Coq Proof Assistant, version 8.18.0 compiled with OCaml 4.14.1
-#       openssl: OpenSSL 3.1.5 30 Jan 2024 (Library: OpenSSL 3.1.5 30 Jan 2024)
+#       openssl: OpenSSL 3.2.2-dev  (Library: OpenSSL 3.2.2-dev )
