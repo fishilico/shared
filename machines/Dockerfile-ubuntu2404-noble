@@ -47,6 +47,7 @@ RUN \
         python3-numpy \
         python3-pil \
         python3-pycryptodome \
+        python3-setuptools \
         python3-z3 && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         wine-stable \
