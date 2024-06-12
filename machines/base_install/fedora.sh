@@ -192,6 +192,7 @@ pkg libcap-ng-utils
 pkg libcgroup-tools
 pkg make
 pkg pkgconf-pkg-config
+pkg protobuf-compiler
 pkg python2.7
 pkg python3
 pkg python3-isort

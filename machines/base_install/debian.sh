@@ -253,6 +253,7 @@ pkg mypy
 pkg nodejs
 #pkg php
 pkg pkgconf
+pkg protobuf-compiler
 pkg pwgen
 pkg pypy3
 #pkg python-virtualenv  # Removed package

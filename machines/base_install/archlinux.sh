@@ -316,6 +316,7 @@ pkg mypy
 pkg nodejs
 pkg npm
 pkg pkgconf
+pkg protobuf
 pkg pwgen
 pkg pypy
 pkg pypy3
