@@ -538,6 +538,7 @@ then
     pkg podman
     pkg python-argon2_cffi
     pkg python-gmpy2
+    pkg python-isort
     pkg python-kaitaistruct
     pkg python-keystone
     pkg python-lxml

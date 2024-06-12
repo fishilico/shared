@@ -254,6 +254,7 @@ pkg pypy3
 #pkg python-virtualenv  # Removed package
 pkg python3
 pkg python3-dev
+pkg python3-isort
 pkg python3-venv
 pkg python3-setuptools
 pkg rake
