@@ -296,6 +296,12 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
                     f"{gen_th} Generation Intel® Core™ Processor Family",
                     f"{gen_th} Generation Intel® Core™ Mobile Processor Family",
                 ]
+            elif field_product_name == "Core Gen13/Gen14":
+                assert gen_th == "13th"
+                new_names = [
+                    f"{gen_th} Generation Intel® Core™ Processor Family",
+                    "14th Generation Intel® Core™ Processor Family",
+                ]
             else:
                 raise ValueError(f"Unable to parse Core product name in {line!r}")
         else:

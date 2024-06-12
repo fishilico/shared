@@ -2167,8 +2167,9 @@
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B0671_RaptorLake_04_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B0671_RaptorLake_05_CPUID.txt
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
-0xb7,  1 (0xb0671): "RPL-S" Raptor Lake S 8P+16E, HX 8P+16E (Raptor Cove/Gracemont) (Stepping B-0)
+0xb7,  1 (0xb0671): "RPL-S/HX/E" Raptor Lake S 8P+16E, HX 8P+16E (Raptor Cove/Gracemont) (Stepping B-0)
     13th Generation Intel® Core™ Processor Family
+    14th Generation Intel® Core™ Processor Family
     Intel® Core™ Processor i9-13900K, i7-13700K, i5-13600K, i9-13900KF, i7-13700KF, i5-13600KF
     13th Gen Intel(R) Core(TM) i9-13900K
     13th Gen Intel(R) Core(TM) i9-13900KF
@@ -2246,6 +2247,7 @@
 0xbf,  2 (0xb06f2): "ADL/RPL-S/HX" Alder Lake, Raptor Lake S 8P+8E, HX 8P+8E (Stepping C-0)
     12th Generation Intel® Core™ Processor Family
     13th Generation Intel® Core™ Processor Family
+    14th Generation Intel® Core™ Processor Family
     13th Gen Intel(R) Core(TM) i5-13500
 
 # https://edc.intel.com/content/www/us/en/design/products/platforms/details/raptor-lake-s/13th-generation-core-processors-datasheet-volume-1-of-2/003/cpuid/
@@ -2253,6 +2255,7 @@
 0xbf,  5 (0xb06f5): "ADL/RPL-S" Alder Lake, Raptor Lake S 6P+0E (Stepping C-0)
     12th Generation Intel® Core™ Processor Family
     13th Generation Intel® Core™ Processor Family
+    14th Generation Intel® Core™ Processor Family
 
 # https://twitter.com/InstLatX64/status/1685680065508515841
 # https://twitter.com/InstLatX64/status/1772523704649404855
