@@ -2101,6 +2101,8 @@
 
 # https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.21.1
 # https://twitter.com/InstLatX64/status/1748426947615396154
+# https://twitter.com/InstLatX64/status/1790477798337085778
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
 0xad,  0 (0xa06d0): "GNR-X" Granite Rapids Xeon (Redwood Cove)
     6th Generation Intel® Xeon® Scalable Processor Family
 
@@ -2124,6 +2126,11 @@
 0xaf,  0 (0xa06f0): "SRF" Sierra Forest Xeon (Sierra Glen, Crestmont)
     6th Generation Intel® Xeon® Scalable Processor Family
     Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
+
+# https://twitter.com/InstLatX64/status/1790477798337085778
+# https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html
+0xaf,  2 (0xa06f2): "SRF" Sierra Forest Xeon (Sierra Glen, Crestmont)
+    6th Generation Intel® Xeon® Scalable Processor Family
 
 # https://twitter.com/InstLatX64/status/1771477032137900150
 # https://lore.kernel.org/lkml/20240322161725.195614-1-tony.luck@intel.com/T/ "for the regular laptop CPU"
@@ -2217,6 +2224,8 @@
 # https://en.wikipedia.org/wiki/Gracemont_(microarchitecture)
 # https://github.com/InstLatx64/InstLatx64/blob/0bdd8e4674a285e851fa394a27d76cbefb6bf1c1/GenuineIntel/GenuineIntel00B06E0_AlderLakeN_02_CPUID.txt
 # https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/redundant-prefix-issue.html
+# https://twitter.com/InstLatX64/status/1790299969871548447
+# https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_14758/bat-twl-1/boot0.txt
 0xbe,  0 (0xb06e0): "ADL-N" Alder Lake N (Gracemont) (Stepping A0)
     12th Generation Intel® Core™ Processor Family
     Intel® Core i3-N305/N300
@@ -2225,6 +2234,7 @@
     Intel(R) N200
     Intel(R) N95
     Intel(R) Core(TM) i3-N305
+    Intel(R) N250
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
 0xbf,  x (0xb06fx): "ADL" Alder Lake
@@ -2261,6 +2271,11 @@
 0xc6,  0 (0xc0660): "ARL-S" Arrow Lake S
     15th Generation Intel® Core™ Processor Family
     Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
+
+# https://x.com/InstLatX64/status/1799124303985963355
+# https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_14901/bat-arls-5/boot0.txt
+0xc6,  2 (0xc0662): "ARL-S" Arrow Lake S
+    15th Generation Intel® Core™ Processor Family
 
 # https://cdrdv2-public.intel.com/790021/architecture-instruction-set-extensions-programming-reference.pdf
 # https://twitter.com/InstLatX64/status/1708121836595143148
