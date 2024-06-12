@@ -147,7 +147,6 @@ KNOWN_NORMALIZED_MSR_NAMES: Dict[str, str] = {
     "CPUID_7_Features": "CPUID_7_FEATURES",  # From AMD Renoir 0xC0011002
     "CPUID_Features": "CPUID_FEATURES",  # From AMD Renoir 0xC0011004
     "CPUID_ExtFeatures": "CPUID_EXT_FEATURES",  # From AMD Renoir 0xC0011005
-    "TW_CFG": "CU_CFG",  # From AMD Renoir 0xC0011023
     "MCA_CTL_LS": "IA32_MC0_CTL",  # From AMD Renoir 0x400
     "MCA_STATUS_LS": "MCTR",  # From AMD Renoir 0x1
     "MCA_ADDR_LS": "MCAR",  # From AMD Renoir 0x0
@@ -280,7 +279,7 @@ def parse_chipsec_cfg(file_data: bytes) -> None:
                 print(f"Warning: unable to parse info from {line!r}")
 
         if " msr=" in line.lower():
-            if matches := re.match(r'^ *<register name="([0-9A-Za-z_]+)" +type="msr" msr="(0x[0-9A-F]+)"', line):
+            if matches := re.match(r'^ *<register name="([0-9A-Za-z_]+)" +type="msr" msr="(0x[0-9A-Fa-f]+)"', line):
                 msr_name, msr_index_hex = matches.groups()
                 msr_index = int(msr_index_hex, 0)
 
