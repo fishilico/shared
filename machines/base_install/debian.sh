@@ -234,6 +234,9 @@ pkg whois
 pkg build-essential
 pkg cargo
 pkg clang
+pkg clang-format
+pkg clang-tidy
+pkg clang-tools
 pkg cmake
 #pkg devscripts  # For building packages, but with many dependencies
 pkg fakeroot
@@ -243,6 +246,7 @@ pkg highlight
 pkg ipython3
 pkg lcov
 pkg libcap-ng-utils
+pkg llvm
 pkg ltrace
 pkg meson
 pkg mypy

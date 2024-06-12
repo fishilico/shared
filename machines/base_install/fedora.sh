@@ -179,6 +179,8 @@ pkg whois
 
 # Development
 pkg clang
+pkg clang-analyzer
+pkg clang-tools-extra
 pkg cmake
 pkg fakeroot
 pkg gcc
