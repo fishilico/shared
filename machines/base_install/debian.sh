@@ -343,6 +343,7 @@ then
     pkg gparted
     pkg graphviz
     pkg gvfs
+    pkg inkscape
     if is_available kismet
     then
         # kismet was removed in Debian 11 but is still in sid

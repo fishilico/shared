@@ -415,6 +415,7 @@ then
     pkg gvfs
     pkg gvfs-smb
     pkg imagemagick
+    pkg inkscape
     pkg keepass
     pkg kismet
     pkg libreoffice-fresh

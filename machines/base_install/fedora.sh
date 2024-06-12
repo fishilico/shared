@@ -244,6 +244,7 @@ then
     pkg gparted
     pkg graphviz
     pkg gvfs
+    pkg inkscape
     pkg keepassxc
     pkg kismet
     pkg libreoffice
