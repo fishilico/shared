@@ -345,8 +345,8 @@ pkg lolcat
 pkg sl
 
 # Arch Linux-specific packages
-pkg asp
-pkg aurphan
+#aurpkg asp
+#pkg aurphan
 pkg pacman-contrib
 
 if "$INSTALL_DESKTOP"
@@ -451,7 +451,8 @@ then
     pkg xdot
     pkg xsensors
     pkg xterm
-    pkg youtube-dl
+    #aurpkg youtube-dl
+    pkg yt-dlp
     pkg zenity
 
     aurpkg burpsuite
