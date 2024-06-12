@@ -3,6 +3,8 @@
  *
  * This is quite similar to "busybox inotifyd - /tmp", from:
  * https://git.busybox.net/busybox/tree/miscutils/inotifyd.c
+ * Or "inotifywait -m --timefmt '%H:%M:%S' --format '%T %w %e %f' /tmp"
+ * from inotify-tools (https://github.com/inotify-tools/inotify-tools)
  */
 #include <assert.h>
 #include <errno.h>
