@@ -86,7 +86,7 @@ endif
 # Test rust/cargo availability
 ifneq ($(call can-run,$(CARGO) --version),y)
 SUBDIRS_BLACKLIST += rust%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-9]\|5[0-9]\)\.'),y)
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-9]\|5[0-9]\|6[0-1]\)\.'),y)
 # Old versions of rustc (<=1.39) fail to build subtle-2.3.0 because:
 #   error[E0210]: type parameter `T` must be used as the type parameter for some
 #   local type (e.g., `MyStruct<T>`)
@@ -107,8 +107,12 @@ else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-9]\
 #   this version of Cargo is older than the `2021` edition, and only supports `2015` and `2018` editions.
 # Old versions of rustc (<=1.59) fail to build byteorder-1.5.0 because:
 #   error: package `byteorder v1.5.0` cannot be built because it requires rustc 1.60 or newer, while the currently active rustc version is 1.56.1
+# Old versions of rustc (<=1.61) fail to build unicode-width-0.1.13 because:
+#   error[E0658]: deriving `Default` on enums is experimental
+#   note: see issue #86985 <https://github.com/rust-lang/rust/issues/86985> for more information
+#   note: this error originates in the derive macro `Default` (in Nightly builds, run with -Z macro-backtrace for more info)
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(6[0-4]\)\.'),y)
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(6[1-4]\)\.'),y)
 # Old versions of rustc (<=1.52) fail to build libz-sys-1.1.8 because:
 #   error[E0658]: arbitrary expressions in key-value attributes are unstable
 #   note: see issue #78835 <https://github.com/rust-lang/rust/issues/78835> for more information
