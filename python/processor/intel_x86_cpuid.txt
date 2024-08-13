@@ -2218,7 +2218,8 @@
     Intel(R) Core(TM) Ultra 5 234V 2.10GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
-0xbe,  x (0xb06ex): "ADL-N" Alder Lake N
+# https://x.com/InstLatX64/status/1789005786955317480 Twin Lake for Chromebook
+0xbe,  x (0xb06ex): "ADL-N" Alder Lake N, Twin Lake
     12th Generation Intel® Core™ Processor Family
 
 # https://github.com/coreboot/coreboot/blob/4.19/src/include/cpu/intel/cpu_ids.h
@@ -2264,6 +2265,10 @@
 0xc5,  x (0xc065x): "ARL-H" Arrow Lake H
     15th Generation Intel® Core™ Processor Family
 
+# https://x.com/InstLatX64/status/1801535265581810010
+# https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_14937/bat-arlh-2/boot0.txt DMI: Intel Corporation Arrow Lake Client Platform/ARL-H Lp5x T4 RVP, BIOS MTLPFWI1.R00.4144.D02.2404050317 04/05/2024
+0xc5,  2 (0xc0652): "ARL-H" Arrow Lake H
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.3
 # https://twitter.com/InstLatX64/status/1675346430951665664
 # https://twitter.com/InstLatX64/status/1786318690528432348
@@ -2271,6 +2276,8 @@
     15th Generation Intel® Core™ Processor Family
 
 # https://www.intel.com/content/www/us/en/download/684897/intel-software-development-emulator.html Intel Software Development Emulator 9.24.0
+# https://x.com/InstLatX64/status/1804803274714812587
+# https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_14989/bat-arlh-1/boot0.txt DMI: Intel Corporation Arrow Lake Client Platform/ARL-S BGA SODIMM 2DPC Board, BIOS MTLSFWI1.R00.3494.D96.2401230818 01/23/2024
 0xc6,  0 (0xc0660): "ARL-S" Arrow Lake S
     15th Generation Intel® Core™ Processor Family
     Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
@@ -2280,6 +2287,14 @@
 0xc6,  2 (0xc0662): "ARL-S" Arrow Lake S
     15th Generation Intel® Core™ Processor Family
 
+# https://x.com/InstLatX64/status/1807169476598665591
+# https://github.com/platomav/MCExtractor/releases/tag/r301
+0xc6,  4 (0xc0664): "ARL-S" Arrow Lake S
+
+# https://x.com/InstLatX64/status/1807169476598665591
+# https://github.com/platomav/MCExtractor/releases/tag/r301
+0xca,  2 (0xc06a2): "ARL-S" Arrow Lake S
+
 # https://cdrdv2-public.intel.com/790021/architecture-instruction-set-extensions-programming-reference.pdf
 # https://twitter.com/InstLatX64/status/1708121836595143148
 # https://github.com/InstLatx64/InstLatx64/commit/9e40a5acf06db45a47a3f5b55c4b7c23d15350a1
@@ -2288,7 +2303,12 @@
 0xcc,  x (0xc06cx): (PTL) Panther Lake
 
 # https://twitter.com/InstLatX64/status/1748426947615396154
-0xcc,  0 (0xc06c0): (PTL) Panther Lake
+# https://x.com/InstLatX64/status/1788284820231004312
+# https://review.coreboot.org/c/coreboot/+/81849
+0xcc,  0 (0xc06c0): (PTL) Panther Lake (Stepping A-0)
+
+# https://x.com/InstLatX64/status/1788284820231004312
+0xcc,  1 (0xc06c1): (PTL) Panther Lake (Stepping B-0)
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0xcf,  x (0xc06fx): "EMR-X" Emerald Rapids Xeon

@@ -473,6 +473,7 @@
 
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F12_K17_Zen_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F12_K17_Zen_CPUID4.txt
+# https://x.com/InstLatX64/status/1791830391025742310
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
 0x01,  2 (0x800f12): "ZEN" Zen, Naples
     AMD EPYC 7551P 32-Core Processor
@@ -520,6 +521,7 @@
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0830F10_K17_Rome_CPUID2.txt
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0830F10_K17_Rome_CPUID6.txt
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0830F10_K17_Rome_CPUID7.txt
+# https://x.com/InstLatX64/status/1791830391025742310
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
 0x31,  0 (0x830f10): "ZEN2" Castle Peak, Rome
     32-Core AMD Ryzen Threadripper 3970X, 3700 MHz (37 x 100)
@@ -622,6 +624,7 @@
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A00F11_K19_Milan_CPUID1.txt
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A00F11_K19_Milan_CPUID2.txt
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A00F11_K19_Milan_02_CPUID.txt
+# https://x.com/InstLatX64/status/1791830391025742310
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
 0x01,  1 (0xa00f11): "ZEN3" Milan
     AMD EPYC 7713 64-Core Processor
@@ -641,6 +644,7 @@
 
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A10F11_K19_Genoa_01_CPUID.txt
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A10F11_K19_Genoa_02_CPUID.txt
+# https://x.com/InstLatX64/status/1791830391025742310
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
 0x11,  1 (0xa10f11): "ZEN4" Genoa
     AMD EPYC 9654 96-Core Processor
@@ -739,11 +743,13 @@
 # https://github.com/cyring/CoreFreq/blob/7a330816443bfa7a5f1c2623a3f77c97fd5a2c40/x86_64/corefreqk.h#L2028
 # https://twitter.com/InstLatX64/status/1704044472990876156
 # https://twitter.com/InstLatX64/status/1705200080599290158
+# https://x.com/InstLatX64/status/1789337289543360544 https://www.amd.com/content/dam/amd/en/documents/epyc-technical-docs/user-guides/58268_amd-epyc-8004-tg-architecture-overview.pdf
 # 0xa0..0xaf (0xaa0fxx): Zen4 model 97xx Bergamo (97xx 4th Gen AMD EPYC 9004)
     AMD Siena EPYC 8004
 
+# https://x.com/InstLatX64/status/1791830391025742310
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
-0xa0,  2 (0xaa0f02): "ZEN4" Bergamo/Siena
+0xa0,  2 (0xaa0f02): "ZEN4" Zen4c Bergamo/Siena
 
 [Family 26] # Family 1ah
 
@@ -751,16 +757,20 @@
 # https://twitter.com/9550pro/status/1751251557314924780
 # 0x00..0x0f (0xb00fxx): AMD Zen5 EPYC/Turin
 
+# https://x.com/InstLatX64/status/1791830391025742310
+0x00,  0 (0xb00f00): "ZEN5" Zen5 EPYC/Turin
+
 # https://x.com/InstLatX64/status/1800152528203743671
-0x02,  x (0xb00f2x): AMD Zen5 EPYC/Turin
+0x02,  x (0xb00f2x): "ZEN5" AMD Zen5 EPYC/Turin
 
 # https://twitter.com/InstLatX64/status/1772523704649404855
+# https://x.com/InstLatX64/status/1791830391025742310
 # https://x.com/InstLatX64/status/1800152528203743671
-0x10,  0 (0xb10f00): AMD Zen5c EPIC Turin Dense
+0x10,  0 (0xb10f00): "ZEN5" AMD Zen5c EPIC Turin Dense
 
 # https://twitter.com/InstLatX64/status/1752056221673075094
 # https://twitter.com/9550pro/status/1751251557314924780
-# 0x20..0x2f (0xb20fxx): AMD Zen5 Strix Point
+# 0x20..0x2f (0xb20fxx): "ZEN5" AMD Zen5 Strix Point
 
 # https://twitter.com/InstLatX64/status/1685680065508515841
 # https://github.com/InstLatx64/InstLatx64/commit/201d8af39a4addb6b72628af2292253d8a7f4c09
@@ -782,7 +792,10 @@
     AMD Eng Sample: 100-000001290-11_N
 
 # https://twitter.com/InstLatX64/status/1780315103058927827
+# https://x.com/InstLatX64/status/1822699473358795106
+# https://github.com/InstLatx64/InstLatx64/blob/4b94fc56e1d959d5124fae901679b434263bdd6e/AuthenticAMD/AuthenticAMD0B40F40_K20_GraniteRidge_03_CPUID.txt
 0x44,  0 (0xb40f40): AMD Zen5 Granite Ridge
+    AMD Ryzen 7 9700X 8-Core Processor
 
 # https://twitter.com/InstLatX64/status/1752056221673075094
 # https://twitter.com/Kepler_L2/status/1751280179576488037

@@ -39,7 +39,7 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("alderlake", "Alder Lake"),
         ("alderlake", "Raptor Lake P"),
         ("alderlake", "Raptor Lake S, Bartlett Lake S"),
-        ("alderlaken", "Alder Lake N"),
+        ("alderlaken", "Alder Lake N, Twin Lake"),
         ("bonnell", "Atom Bonnell Mid"),
         ("bonnell", "Atom Bonnell"),
         ("bonnell", "Atom Bonnel, Atom Saltwell Mid"),
