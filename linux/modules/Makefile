@@ -87,6 +87,7 @@ checkpatch:
 		--ignore LONG_LINE \
 		--ignore LONG_LINE_COMMENT \
 		--ignore LONG_LINE_STRING \
+		--ignore MACRO_ARG_UNUSED \
 		--ignore REPEATED_WORD
 
 .PHONY: all clean install infos test checkpatch
