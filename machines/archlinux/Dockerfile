@@ -24,12 +24,12 @@ RUN \
     apt-get install -qqy sq libarchive-tools wget && \
     apt-get clean && \
     mkdir /arch && cd /arch && \
-    sq wkd get pierre@archlinux.org > release-key.pgp && \
+    sq network wkd fetch pierre@archlinux.org --output release-key.pgp && \
     (wget -qO- https://mirror.rackspace.com/archlinux/iso/latest/sha256sums.txt | fgrep 'archlinux-bootstrap-x86_64.tar.zst' > sha256sums.txt) && \
     read -r SHA256 FILE < sha256sums.txt && \
     wget -q "https://mirror.rackspace.com/archlinux/iso/latest/$FILE" && \
     wget -q "https://mirror.rackspace.com/archlinux/iso/latest/$FILE.sig" && \
-    sq verify --signer-cert release-key.pgp --detached "$FILE.sig" "$FILE" && \
+    sq verify --signer-file release-key.pgp --detached "$FILE.sig" "$FILE" && \
     sha256sum -c sha256sums.txt && \
     bsdtar -xpf "$FILE" && \
     cd /arch/root.x86_64 && \
