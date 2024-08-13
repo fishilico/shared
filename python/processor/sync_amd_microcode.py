@@ -181,6 +181,7 @@ KNOWN_EQUIVALENCE_TABLE: Mapping[int, Tuple[int, ...]] = {
     0xAA00: (0xAA0F00,),
     0xAA01: (0xAA0F01,),
     0xAA02: (0xAA0F02,),
+    0xB240: (0xB20F40,),
     0xB400: (0xB40F00,),
     0xB440: (0xB40F40,),
 }
@@ -226,7 +227,7 @@ def parse_amd_ucode(
             ucode_versions.add((cpuid, patch_id, date))
         if (cpuid, patch_id, date) not in KNOWN_AMD_UCODE_VERSIONS:
             found_new = True
-            print(f"  {date}: cpuid {cpuid:#07x} rev {patch_id:#010x} NEW!")
+            print(f"  {date} cpuid {cpuid:#07x} rev {patch_id:#010x} NEW!")
     return found_new
 
 
