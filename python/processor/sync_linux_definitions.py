@@ -315,6 +315,7 @@ LINUX_MSR_MAPPING: Mapping[str, str] = {
     "PKG_BOTH_CORE_GFXE_C0_RES": "CORE_GFXE_OVERLAP_C0",
     "PKG_WEIGHTED_CORE_C0_RES": "WEIGHTED_CORE_C0",
     "PLATFORM_ENERGY_STATUS": "PLATFORM_ENERGY_COUNTER",
+    "RMID_SNC_CONFIG": "RMID_SNC_DISABLE",
     "SYSCALL_MASK": "IA32_FMASK",
     "TEST_CTRL": "TEST_CTL",
     "VM_IGNNE": "IGNNE",
@@ -333,6 +334,10 @@ def parse_msr_define(content: str, verbose: bool = False) -> None:
             if name in KNOWN_MSR_BIT_FIELD_NAMES:
                 continue
             if name.endswith("_BIT") and 0 <= value <= 63:
+                continue
+
+            # Skip "step" value
+            if name == "IA32_PMC_V6_STEP" and value == 4:
                 continue
 
             name = LINUX_MSR_MAPPING.get(name, name)

@@ -3076,6 +3076,7 @@ XEONE5V4 0xC9E IA32_L3_QOS_MASK_14
 XEONE5V4 0xC9F IA32_L3_QOS_MASK_15
 
 # 4th Generation Intel Xeon Scalable Processor Family UEFI source: Intel/ServerSiliconPkg/Include/Cpu/Msr/CommonMsr.h
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=21b362cc762aabb3e8496d33d7b4538154c95a0b defines MSR_RMID_SNC_CONFIG
 XEONSCAL4 0xCA0 RMID_SNC_DISABLE        # If set, RMID will be compared with FinalCHAID = BaseCHA_Cluster + HashCHAID. If not set, RMID will be compared with HashCHAID
 XEONSCAL4 0xCA1 QMC_CNTR_CORRECTION     # Apply correction factor upon data return through the IA32_QM_CTR MSR
 
@@ -3896,6 +3897,23 @@ XEONSCAL4 0x18DC WRC_COS_WAY_MASK_12_12
 XEONSCAL4 0x18DD WRC_COS_WAY_MASK_13_13
 XEONSCAL4 0x18DE WRC_COS_WAY_MASK_14_14
 XEONSCAL4 0x18DF WRC_COS_WAY_MASK_15_15
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=149fd4712bcd492a031945f92e5ce19879f62311 "perf/x86/intel: Support Perfmon MSRs aliasing" define MSR for "architectural performance monitoring V6"
+# https://cdrdv2-public.intel.com/819680/architecture-instruction-set-extensions-programming-reference.pdf
+0x1900 IA32_PMC_V6_GP0_CTR      # General Counter 0
+0x1901 IA32_PMC_V6_GP0_CFG_A    # General Counter 0 Event-Select
+0x1902 IA32_PMC_V6_GP0_CFG_B    # General Counter 0 Reload Config
+0x1903 IA32_PMC_V6_GP0_CFG_C    # General Counter 0 Event-Select Extended
+0x1904 IA32_PMC_V6_GP1_CTR      # General Counter 1
+0x1905 IA32_PMC_V6_GP1_CFG_A    # General Counter 1 Event-Select
+0x1906 IA32_PMC_V6_GP1_CFG_B    # General Counter 1 Reload Config
+0x1907 IA32_PMC_V6_GP1_CFG_C    # General Counter 1 Event-Select Extended
+0x1980 IA32_PMC_V6_FX0_CTR      # Fixed Counter 0
+0x1982 IA32_PMC_V6_FX0_CFG_B    # Fixed Counter 0 Reload Config
+0x1983 IA32_PMC_V6_FX0_CFG_C    # Fixed Counter 0 Event-Select Extended
+0x1984 IA32_PMC_V6_FX1_CTR      # Fixed Counter 1
+0x1986 IA32_PMC_V6_FX1_CFG_B    # Fixed Counter 1 Reload Config
+0x1987 IA32_PMC_V6_FX1_CFG_C    # Fixed Counter 1 Event-Select Extended
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.1 Geode defined MSRs
 GEODE 0x1900 BUSCONT_CONF0
@@ -5937,3 +5955,7 @@ AMD64 0xC001109A L3_RANGE_RESERVE_WAY_MASK  # AMD64-Vol2
 # https://github.com/xen-project/xen/blob/RELEASE-4.17.0/xen/arch/x86/include/asm/msr-index.h
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=d7caac991feeef1b871ee6988fd2c9725df09039 Linux named this MSR_ZEN2_SPECTRAL_CHICKEN, as it contains a chicken bit which is offered on the altar of Speculation
 AMD64ZEN2 0xC00110E3 DE_CFG2 # Decode Configuration 2
+
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=1beb348d5c7fdef502a581bd73f792a2cf1535d6 : return the physical calling area address (CAA) on reads of this MSR
+AMD64 0xC001F000 SVSM_CAA # SVSM (Secure VM Service Module) Calling Area Address
