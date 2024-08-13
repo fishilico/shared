@@ -25,13 +25,13 @@ RUN \
     apt-get clean && \
     mkdir /arch && cd /arch && \
     sq wkd get pierre@archlinux.org > release-key.pgp && \
-    (wget -qO- https://mirror.rackspace.com/archlinux/iso/latest/sha256sums.txt | fgrep 'archlinux-bootstrap-x86_64.tar.gz' > sha256sums.txt) && \
+    (wget -qO- https://mirror.rackspace.com/archlinux/iso/latest/sha256sums.txt | fgrep 'archlinux-bootstrap-x86_64.tar.zst' > sha256sums.txt) && \
     read -r SHA256 FILE < sha256sums.txt && \
     wget -q "https://mirror.rackspace.com/archlinux/iso/latest/$FILE" && \
     wget -q "https://mirror.rackspace.com/archlinux/iso/latest/$FILE.sig" && \
     sq verify --signer-cert release-key.pgp --detached "$FILE.sig" "$FILE" && \
     sha256sum -c sha256sums.txt && \
-    bsdtar -xpzf "$FILE" && \
+    bsdtar -xpf "$FILE" && \
     cd /arch/root.x86_64 && \
     (rm -r /usr/share/doc /usr/lib/x86_64-linux-gnu/perl-base ; true) && \
     rm -r /bin /lib* /opt /root /sbin /srv /usr /var && \
