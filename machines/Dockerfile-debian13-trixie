@@ -46,6 +46,7 @@ RUN \
         python3-numpy \
         python3-pil \
         python3-pycryptodome \
+        python3-setuptools \
         python3-z3 \
         sagemath && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
@@ -99,18 +100,18 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (Debian 13.2.0-24) 13.2.0
-#       clang: Debian clang version 16.0.6 (27)
+#       gcc: gcc (Debian 14.2.0-1) 14.2.0
+#       clang: Debian clang version 16.0.6 (27+b1)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 13-win32
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 13-win32
 #       wine: wine-9.0 (Debian 9.0~repack-4+b1)
-#       Linux kernel: 6.7.12-amd64
-#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.38-10) stable release version 2.38.
+#       Linux kernel: 6.10.3-amd64
+#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.39-6) stable release version 2.39.
 #       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.5
-#       python3: Python 3.11.9
-#       javac: javac 17.0.11
-#       java: openjdk 17.0.11 2024-04-16
-#       rustc: rustc 1.70.0
-#       cargo: cargo 1.70.0
-#       coqc: The Coq Proof Assistant, version 8.18.0 compiled with OCaml 4.14.1
-#       openssl: OpenSSL 3.2.2-dev  (Library: OpenSSL 3.2.2-dev )
+#       python3: Python 3.12.4
+#       javac: javac 17.0.12
+#       java: openjdk 17.0.12 2024-07-16
+#       rustc: rustc 1.79.0
+#       cargo: cargo 1.79.0
+#       coqc: The Coq Proof Assistant, version 8.19.1 compiled with OCaml 4.14.1
+#       openssl: OpenSSL 3.2.2 4 Jun 2024 (Library: OpenSSL 3.2.2 4 Jun 2024)
