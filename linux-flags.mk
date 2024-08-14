@@ -94,6 +94,8 @@ ifeq ($(call ccpp-has-option,-Weverything), y)
 	CFLAGS += $(call cc-disable-warning,unsafe-buffer-usage)
 	# clang 18 added -Wswitch-default, which is incompatible with using switch statements with intended missing default
 	CFLAGS += $(call cc-disable-warning,switch-default)
+	# clang 18 on Fedora 41 reports that 'printf' was marked unused but was used
+	CFLAGS += $(call cc-disable-warning,used-but-marked-unused)
 endif
 
 # Add GCC-specific options unknown to clang
