@@ -104,9 +104,9 @@ build_and_run() {
     then
         if "$DO_PRETEND"
         then
-            echo "docker build -f 'Dockerfile-$BASE_NAME' -t '$IMAGE_NAME' .."
+            echo "docker buildx build -f 'Dockerfile-$BASE_NAME' -t '$IMAGE_NAME' .."
         else
-            docker build -f "Dockerfile-$BASE_NAME" -t "$IMAGE_NAME" .. || return $?
+            docker buildx build -f "Dockerfile-$BASE_NAME" -t "$IMAGE_NAME" .. || return $?
         fi
     fi
 

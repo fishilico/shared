@@ -514,6 +514,7 @@ then
     pkg clinfo
     pkg codespell
     pkg cppcheck
+    pkg docker-buildx
     pkg docker-compose
     pkg earlyoom
     pkg flake8
