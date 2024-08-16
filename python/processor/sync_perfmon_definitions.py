@@ -80,7 +80,7 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("WestmereEP-DP", "Westmere DP"),
         ("WestmereEP-SP", "Westmere"),
         ("WestmereEX", "Westmere-EX"),
-        ("alderlake", "Alder Lake N"),
+        ("alderlake", "Alder Lake N, Twin Lake"),
         ("alderlake", "Alder Lake P"),
         ("alderlake", "Alder Lake"),
         ("alderlake", "Raptor Lake P"),
@@ -149,8 +149,9 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
             continue
         # Match "GenuineIntel-6-2E,V3,/NHM-EX/events/NehalemEX_core.json,core,,,"
         # and "GenuineIntel-6-55-[01234],V1.30,/SKX/events/skylakex_core.json,core,,,"
+        # and "GenuineIntel-6-3C,V0,/HSW/metrics/haswell_metrics.json,metrics,,,"
         matches = re.match(
-            r"^(GenuineIntel)-(6)-([0-9A-F\[\]-]+),V[0-9.]+,/([A-Z-]+)/events/([A-Za-z_-]+)\.json,([ a-z_]+),[0-9x]*,[0-9x]*,(?:|Atom|Core)$",  # noqa
+            r"^(GenuineIntel)-(6)-([0-9A-F\[\]-]+),V[0-9.]+,/([A-Z-]+)/(?:events|metrics)/([A-Za-z_-]+)\.json,([ a-z_]+),[0-9x]*,[0-9x]*,(?:|Atom|Core)$",  # noqa
             line,
         )
         if not matches:
