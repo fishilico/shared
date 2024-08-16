@@ -67,6 +67,9 @@ do
         *alpine319*|*alpine3.19*)
             echo "alpine3.19"
             ;;
+        *alpine320*|*alpine3.20*)
+            echo "alpine3.20"
+            ;;
 
         *debian10*|*buster*)
             echo "debian10-buster"
