@@ -28,6 +28,8 @@ def get_pc_bitlen():
 
 def get_string_at(addr):
     """Get the NUL-terminated string at the given address"""
+    if isinstance(addr, (int, long)):
+        addr = toAddr(addr)
     data = getDataAt(addr)
     if data is not None:
         return "".join(chr(d) for d in data.getBytes()).split("\0", 1)[0]
@@ -99,6 +101,8 @@ def get_symbol_addr(name):
 
 def describe_data_addr(addr, return_none=False):
     """Get the label of a given address"""
+    if isinstance(addr, (int, long)):
+        addr = toAddr(addr)
     existing_syms = currentProgram.symbolTable.getSymbols(addr)
     primary_sym_names = [sym.getName() for sym in existing_syms if sym.isPrimary()]
     if primary_sym_names:
@@ -108,6 +112,8 @@ def describe_data_addr(addr, return_none=False):
 
 def set_label(addr, name, make_primary=True, verbose=True):
     """Set the label of an address, making it the primary symbol"""
+    if isinstance(addr, (int, long)):
+        addr = toAddr(addr)
     existing_syms = currentProgram.symbolTable.getSymbols(addr)
     existing_sym = [sym for sym in existing_syms if sym.getName() == name]
     if existing_sym:
@@ -124,6 +130,8 @@ def set_label(addr, name, make_primary=True, verbose=True):
 
 def set_data_type(addr, new_data_type, force=False, desc=None):
     """Set the type of the data at the given address to a given type (use a description to be verbose)"""
+    if isinstance(addr, (int, long)):
+        addr = toAddr(addr)
     current_data = getDataAt(addr)
     if current_data is None:
         if desc:
@@ -142,6 +150,8 @@ def set_data_type(addr, new_data_type, force=False, desc=None):
 
 def set_data_type_array(addr, new_data_type, count, force=False, desc=None):
     """Set the type of the data at the given address to an array"""
+    if isinstance(addr, (int, long)):
+        addr = toAddr(addr)
     array_dt = ghidra.program.model.data.ArrayDataType(new_data_type, count, new_data_type.getLength())
     set_data_type(addr, array_dt, force=force, desc=desc)
 
@@ -358,6 +368,8 @@ def rename_fun_and_apply(fct, fct_sign, verbose=True):
 
 def get_or_create_fun_at(addr, name_or_sign, rename=True, verbose=True):
     """Get the function at the given address, or create it if needed"""
+    if isinstance(addr, (int, long)):
+        addr = toAddr(addr)
     if not name_or_sign:
         # Just create the function, without any name
         fct_sign = None
