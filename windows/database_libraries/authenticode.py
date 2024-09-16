@@ -72,6 +72,7 @@ KNOWN_OID = {
     '1.2.840.113549.1.7.2': 'pkcs7-signedData',
 
     # {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)}
+    '1.2.840.113549.1.9.1': 'emailAddress',
     '1.2.840.113549.1.9.3': 'id-contentType',
     '1.2.840.113549.1.9.4': 'id-messageDigest',
     '1.2.840.113549.1.9.5': 'id-signingTime',
@@ -135,6 +136,9 @@ KNOWN_OID = {
 
     '1.3.6.1.4.1.311.10.41.1': 'SPC_WINDOWS_HELLO_COMPATIBILITY_OBJID',
 
+    # {iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) 311 ev(60) 2 1}
+    '1.3.6.1.4.1.311.60.2.1.3': 'jurisdictionOfIncorporationCountryName',
+
     # Unknown? Used in TSAPolicyId in timestamp counter signing
     '1.3.6.1.4.1.601.10.3.1': 'unknownTimeStampingAuthorityPolicy',
 
@@ -153,12 +157,14 @@ KNOWN_OID = {
 
     # {joint-iso-itu-t(2) ds(5) attributeType(4)}
     '2.5.4.3': 'commonName',
+    '2.5.4.5': 'serialNumber',
     '2.5.4.6': 'countryName',
     '2.5.4.7': 'localityName',
     '2.5.4.8': 'stateOrProvinceName',
     '2.5.4.9': 'streetAddress',
     '2.5.4.10': 'organizationName',
     '2.5.4.11': 'organizationalUnitName',
+    '2.5.4.15': 'businessCategory',
     '2.5.4.17': 'postalCode',
 
     # {joint-iso-itu-t(2) country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
@@ -168,16 +174,23 @@ KNOWN_OID = {
     # {joint-iso-itu-t(2) country(16) us(840) organization(1) symantec(113733)
     #  pki(1) policies(7) vtn-cp(23) class3(3)}
     '2.16.840.1.113733.1.7.23.3': 'symantec-policies-class3',
+
+    # {joint-iso-itu-t(2) country(16) us(840) organization(1) digicert(114412) time-stamping(7)}
+    '2.16.840.1.114412.7.1': 'time-stamping.1',
 }
 
 NAME_TYPE_ABBREVIATION = {
+    'businessCategory': 'businessCategory',
     'commonName': 'CN',
     'countryName': 'C',
     'domainComponent': 'DC',
+    'emailAddress': 'emailAddress',
+    'jurisdictionOfIncorporationCountryName': 'jurisdictionC',
     'localityName': 'L',
     'organizationName': 'O',
     'organizationalUnitName': 'OU',
     'postalCode': 'postalCode',
+    'serialNumber': 'serialNumber',
     'stateOrProvinceName': 'ST',
     'streetAddress': 'street',
 }
@@ -417,6 +430,8 @@ def decode_x509_name_type_and_value(der_object: bytes) -> str:
         value = decode_utf8_string(value_der)
     elif value_der[0] == 0x14:  # The string may be a Teletex String
         value = decode_teletex_string(value_der)
+    elif value_der[0] == 0x16:  # The string may be a IA5 String
+        value = decode_ia5_string(value_der)
     else:
         value = decode_printable_string(value_der)
     return "{}={}".format(type_abbrev, value)
@@ -567,9 +582,16 @@ class AuthenticodeSpcPeImageData:
 
     def to_dict_description(self) -> Mapping[str, str]:
         """Convert to a dictionary describing the object"""
+        if self.file_der == b'\xa0\x04\xa2\x02\x80\x00':
+            # The content is: cont[0] -> cont[2] -> cont[0]
+            desc_file = "(ASN.1 cont[0] -> cont[2] -> cont[0])"
+        else:
+            file_der_hex_start = binascii.hexlify(self.file_der[:10]).decode('ascii')
+            desc_file = "({} bytes possibly with page hashes starting with {})".format(
+                len(self.file_der), file_der_hex_start)
         return {
             'flags': self.flags,
-            'file': "({} bytes possibly with page hashes)".format(len(self.file_der)),
+            'file': desc_file,
         }
 
 
@@ -642,13 +664,14 @@ class Rfc3161TSTInfo:
         }
     """
     def __init__(self, der_content: bytes):
-        seq = decode_sequence(der_content, counts=(6, 7))
+        seq = decode_sequence(der_content, counts=(5, 6, 7))
         assert isinstance(seq[0], int)
         assert isinstance(seq[1], bytes)
         assert isinstance(seq[2], bytes)
         assert isinstance(seq[3], int)
         assert isinstance(seq[4], bytes)
-        assert isinstance(seq[5], bytes)
+        if len(seq) >= 6:
+            assert isinstance(seq[5], bytes)
 
         self.version = seq[0]
         if self.version != 1:
@@ -659,7 +682,8 @@ class Rfc3161TSTInfo:
         if self.tsa_policy_id not in (
                 'rfc3161-tst-policy-sha1',
                 'symantec-policies-class3',
-                'unknownTimeStampingAuthorityPolicy'):
+                'unknownTimeStampingAuthorityPolicy',
+                'time-stamping.1'):
             raise ValueError("Unexpected policy in TSTInfo: {}".format(
                 repr(self.tsa_policy_id)))
 
@@ -710,11 +734,15 @@ class Rfc3161TSTInfo:
             self.accuracy = accuracy
             seq_idx = 6
 
-        tsa_der_bytes = seq[seq_idx]
-        assert isinstance(tsa_der_bytes, bytes)
-        tsa_der = decode_cont_object(tsa_der_bytes, 0)
-        tsa_name_der = decode_cont_object(tsa_der, 4)
-        self.tsa_name = decode_x509_name(tsa_name_der)
+        if len(seq) < 6:
+            assert seq_idx == 5
+            self.tsa_name = None
+        else:
+            tsa_der_bytes = seq[seq_idx]
+            assert isinstance(tsa_der_bytes, bytes)
+            tsa_der = decode_cont_object(tsa_der_bytes, 0)
+            tsa_name_der = decode_cont_object(tsa_der, 4)
+            self.tsa_name = decode_x509_name(tsa_name_der)
 
     def to_dict_description(self) -> Mapping[str, Union[float, int, str]]:
         """Convert to a dictionary describing the object"""

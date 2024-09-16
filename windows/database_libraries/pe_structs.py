@@ -660,6 +660,9 @@ class PEFile:
             elif start - 8 < self.authenticode_file_end < start:
                 # Consider alignment: padding is also signed
                 self.authenticode_file_end = start + size
+            elif self.authenticode_file_end < start:
+                # Expand the authenticode-signed data until the excluded data
+                self.authenticode_file_end = start + size
         self.compute_authenticode_digests()
         if self.signatures and self.authenticode_file_end != len(self.file_content):
             if any(x != 0 for x in self.file_content[self.authenticode_file_end:]):
