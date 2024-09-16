@@ -98,6 +98,7 @@ __extension__ static const char* cpuidstr_6_eax[32] = {
     [9] = "hwp_act_window",
     [10] = "hwp_epp",
     [11] = "hwp_pkg_req",
+    [15] = "hwp_highest_perf_change",
     [19] = "hfi",
 };
 
@@ -278,6 +279,7 @@ __extension__ static const char* cpuidstr_ext7_edx[32] = {
     [7] = "hw_pstate",
     [9] = "cpb",
     [11] = "proc_feedback",
+    [15] = "fast_cppc",
 };
 
 static void add_manual_cpuid_str(void)
