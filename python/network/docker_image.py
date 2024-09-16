@@ -42,6 +42,11 @@ Usage example:
     # (https://hub.docker.com/_/microsoft-mssql-server)
     docker_image.py -o docker_cache.out -r mcr.microsoft.com mssql/server:latest-ubuntu
 
+This is similar as tools such as skopeo: https://github.com/containers/skopeo
+
+    skopeo list-tags docker://docker.io/library/alpine
+    skopeo copy docker://docker.io/library/centos:8 docker-archive:centos8_image.tar:centos:8
+
 Documentation:
 * https://docs.docker.com/registry/spec/api/
   Specification of Docker registry API
