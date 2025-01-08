@@ -323,6 +323,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                 # Decode small numbers (0 or 1)
                 value, = struct.unpack(f"{endianness}I", n_desc)
                 desc_str = str(value)
+            elif type_xen == NoteTypeXen.XEN_ELFNOTE_L1_MFN_VALID and len(n_desc) == 16:
+                # Decode (PG_V, PG_V) from 
+                # https://github.com/mirage/xen/blob/RELEASE-4.8.1/docs/misc/pvh.markdown
+                # and
+                # https://xenbits.xen.org/docs/4.3-testing/hypercall/include,public,elfnote.h.html
+                mask, value = struct.unpack(f"{endianness}2Q", n_desc)
+                desc_str = f"mask={mask:#x}, value={value:#x}"
             elif type_xen == NoteTypeXen.XEN_ELFNOTE_PHYS32_RELOC and len(n_desc) == 12:
                 # Decode 3 32-bit values from
                 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/platform/pvh/head.S?h=v6.12#n297
