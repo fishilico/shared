@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   linux-test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         compiler:
@@ -19,7 +19,6 @@ jobs:
           - "3.10"
           - "3.9"
           - "3.8"
-          - "3.7"
           - "pypy-3.10"
           - "pypy-3.9"
           - "pypy-3.8"
@@ -51,8 +50,8 @@ jobs:
             libsdl2-dev \
             libz3-dev \
             openjdk-11-jdk \
+            pandoc \
             pkgconf \
-            sagemath \
             texlive-fonts-extra \
             texlive-lang-french \
             texlive-science
