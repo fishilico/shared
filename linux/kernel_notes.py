@@ -68,7 +68,7 @@ class NoteTypeLinux(enum.IntEnum):
     LINUX_ELFNOTE_LTO_INFO = 0x101  # Contains CONFIG_LTO
 
 
-# From https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/xen/interface/elfnote.h?h=v6.8
+# From https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/xen/interface/elfnote.h?h=v6.12
 @enum.unique
 class NoteTypeXen(enum.IntEnum):
     XEN_ELFNOTE_INFO = 0
@@ -90,6 +90,13 @@ class NoteTypeXen(enum.IntEnum):
     XEN_ELFNOTE_MOD_START_PFN = 16
     XEN_ELFNOTE_SUPPORTED_FEATURES = 17
     XEN_ELFNOTE_PHYS32_ENTRY = 18
+    XEN_ELFNOTE_PHYS32_RELOC = 19
+    XEN_ELFNOTE_CRASH_INFO = 0x1000001
+    XEN_ELFNOTE_CRASH_REGS = 0x1000002
+    XEN_ELFNOTE_DUMPCORE_NONE = 0x2000000
+    XEN_ELFNOTE_DUMPCORE_HEADER = 0x2000001
+    XEN_ELFNOTE_DUMPCORE_XEN_VERSION = 0x2000002
+    XEN_ELFNOTE_DUMPCORE_FORMAT_VERSION = 0x2000003
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -316,6 +323,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 # Decode small numbers (0 or 1)
                 value, = struct.unpack(f"{endianness}I", n_desc)
                 desc_str = str(value)
+            elif type_xen == NoteTypeXen.XEN_ELFNOTE_PHYS32_RELOC and len(n_desc) == 12:
+                # Decode 3 32-bit values from
+                # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/platform/pvh/head.S?h=v6.12#n297
+                # (CONFIG_PHYSICAL_ALIGN, LOAD_PHYSICAL_ADDR, KERNEL_IMAGE_SIZE - 1)
+                phys_align, load_phys_addr, load_max = struct.unpack(f"{endianness}3I", n_desc)
+                desc_str = f"align={phys_align:#x}, addr={load_phys_addr:#x}, max={load_max:#x}"
         else:
             print(f"Warning: unknown name {n_name!r}", file=sys.stderr)
             name_str = repr(n_name)
