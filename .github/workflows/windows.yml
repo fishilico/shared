@@ -12,6 +12,7 @@ jobs:
           - i686-w64-mingw32-gcc
         unicode: [y, n]
         python:
+          - "3.13"
           - "3.12"
           - "3.11"
           - "3.10"
