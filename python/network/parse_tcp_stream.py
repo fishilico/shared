@@ -111,7 +111,7 @@ class TcpStream:
                 return
 
             if self.current_data_c2s:  # Drop sent bytes when receiving
-                logger.warning("Ignoring %d sent bytes", len(self.current_data_s2c))
+                logger.warning("Ignoring %d sent bytes", len(self.current_data_c2s))
                 self.current_data_c2s = b''
 
             if self.expected_tcpseq_s2c != seq:
