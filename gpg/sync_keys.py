@@ -87,8 +87,11 @@ def unarmor_gpg(armored: Union[bytes, str]) -> bytes:
                 return armored
     if lines[0] != "-----BEGIN PGP PUBLIC KEY BLOCK-----":
         raise ValueError(f"unexpected first line {lines[0]!r}")
+    if lines[-1] == "":
+        # Remove trailing empty line
+        lines = lines[:-1]
     if lines[-1] != "-----END PGP PUBLIC KEY BLOCK-----":
-        raise ValueError(f"unexpected last line {lines[0]!r}")
+        raise ValueError(f"unexpected last line {lines[-1]!r}")
     first_empty_line = lines.index("")
     data = base64.b64decode("".join(lines[first_empty_line + 1:-2]))
     computed_checksum = opgp_crc24_b64(data)
