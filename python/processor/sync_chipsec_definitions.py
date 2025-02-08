@@ -192,6 +192,8 @@ KNOWN_NORMALIZED_MSR_NAMES: Dict[str, str] = {
     "MCA_STATUS_UMC": "IA32_MC15_STATUS",  # From AMD Renoir 0x43D
     "MCA_ADDR_UMC": "IA32_MC15_ADDR",  # From AMD Renoir 0x43E
     "MCA_MISC0_UMC": "IA32_MC15_MISC",  # From AMD Renoir 0x43F
+    "SMMADDR": "SMM_ADDR",  # From AMD Strix Point
+    "SMMMASK": "SMM_MASK",  # From AMD Strix Point
 }
 
 
@@ -210,7 +212,7 @@ def parse_chipsec_cfg(file_data: bytes) -> None:
         ):
             if platform is not None:
                 print(f"Warning: duplicate '<configuration' tag in {line!r}")
-            if matches := re.match(r'^<configuration +platform="([0-9A-Za-z_]+)"', line):
+            if matches := re.match(r'^<configuration +platform="([0-9A-Za-z_ ]+)"', line):
                 platform = matches.group(1)
             else:
                 print(f"Warning: unable to parse platform from {line!r}")
