@@ -5,6 +5,9 @@ Test with:
     ./https_server.py -k /tmp/test_https_server.key -c /tmp/test_https_server.crt -g localhost test example.com
     curl --cacert /tmp/test_https_server.crt --resolve test:443:127.0.0.1 https://test
 
+A test TLS server could also be spawned with socat:
+
+    socat OPENSSL-LISTEN:443,verify=0,cert=/tmp/test_https_server.crt,key=/tmp/test_https_server.key,fork,reuseaddr -
 """
 from __future__ import annotations
 
