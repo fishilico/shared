@@ -38,6 +38,7 @@ KNOWN_PERFMON_ACRONYM: FrozenSet[Tuple[str, str]] = frozenset(
         ("ADL", "ADL-P"),
         ("ADL", "RPL-P"),
         ("ADL", "RPL-S"),
+        ("ARL", "ARL-H"),
         ("ARL", "ARL-S"),
         ("BDW", "BDW-G"),
         ("CLX", "CLX-SP"),
@@ -54,6 +55,7 @@ KNOWN_PERFMON_ACRONYM: FrozenSet[Tuple[str, str]] = frozenset(
         ("KNL", "PHI KNL"),
         ("KNL", "PHI KNM"),
         ("KNM", "PHI KNM"),
+        ("MTL", "ARL-U"),
         ("MTL", "MTL-S"),
         ("RKL", "RKL-S"),
         ("SKL", "CML"),
@@ -85,8 +87,12 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("alderlake", "Alder Lake"),
         ("alderlake", "Raptor Lake P"),
         ("alderlake", "Raptor Lake S, Bartlett Lake S"),
+        ("arrowlake", "Arrow Lake H"),
         ("arrowlake", "Arrow Lake S"),
+        ("arrowlake_crestmont", "Arrow Lake H"),
+        ("arrowlake_lioncove", "Arrow Lake H"),
         ("arrowlake_lioncove", "Arrow Lake S"),
+        ("arrowlake_skymont", "Arrow Lake H"),
         ("arrowlake_skymont", "Arrow Lake S"),
         ("bonnell", "Atom Bonnel, Atom Saltwell Mid"),
         ("bonnell", "Atom Bonnel, Atom Saltwell Tablet"),
@@ -98,6 +104,7 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("broadwellde", "Broadwell Xeon DE"),
         ("broadwellx", "Broadwell Xeon"),
         ("cascadelakex", "Cascade Lake Server"),
+        ("clearwaterforest", "Clearwater Forest"),
         ("elkhartlake", "Elkhart Lake"),
         ("elkhartlake", "Jasper Lake"),
         ("emeraldrapids", "Emerald Rapids Xeon"),
@@ -120,6 +127,7 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("lunarlake", "Lunar Lake M"),
         ("lunarlake_lioncove", "Lunar Lake M"),
         ("lunarlake_skymont", "Lunar Lake M"),
+        ("meteorlake", "Arrow Lake U"),
         ("meteorlake", "Meteor Lake M and P"),
         ("meteorlake", "Meteor Lake S"),
         ("rocketlake", "Rocket Lake"),
@@ -151,7 +159,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
         # and "GenuineIntel-6-55-[01234],V1.30,/SKX/events/skylakex_core.json,core,,,"
         # and "GenuineIntel-6-3C,V0,/HSW/metrics/haswell_metrics.json,metrics,,,"
         matches = re.match(
-            r"^(GenuineIntel)-(6)-([0-9A-F\[\]-]+),V[0-9.]+,/([A-Z-]+)/(?:events|metrics)/([A-Za-z_-]+)\.json,([ a-z_]+),[0-9x]*,[0-9x]*,(?:|Atom|Core)$",  # noqa
+            r"^(GenuineIntel)-(6)-([0-9A-F\[\]-]+),V[0-9.]+,/([A-Z-]+)/(?:events|metrics)/([A-Za-z_-]+)\.json,([ a-z_]+),[0-9x]*,[0-9x]*,(?:|Atom|Core|LowPower_Atom)$",  # noqa: E501
             line,
         )
         if not matches:
@@ -208,7 +216,7 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
             name = model_data.main_desc
             if acronym_from_map != acronym and (acronym_from_map, acronym) not in KNOWN_PERFMON_ACRONYM:
                 print(
-                    f"Warning(mapfile, {line!r}): missing acronym association in known list {(acronym_from_map, acronym)!r}"  # noqa
+                    f"Warning(mapfile, {line!r}): missing acronym association in known list {(acronym_from_map, acronym)!r}"  # noqa: E501
                 )
                 emitted_warning = True
             if verbose:
