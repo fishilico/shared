@@ -5825,6 +5825,10 @@ AMD64 0xC0010133 RMP_END    # AMD64-Vol2 Ending address of RMP
 
 AMD64 0xC0010134 GUEST_TSC_FREQ  # AMD64-Vol2 Guest TSC Frequency
 AMD64 0xC0010135 VIRTUAL_TOM     # AMD64-Vol2 SVM Virtual Top-of-Memory
+
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=8ae3291f773befee8fdeae11b0b1b5d380e4dfb6
+AMD64 0xC0010136 RMP_CFG
+
 AMD64 0xC0010137 IDLE_WAKEUP_ICR # AMD64-Vol2 SVM "Side-Channel Protection" (require sibling threads of a SEV-SNP VM to be idle, Interrupt Command Register)
 
 AMD64 0xC0010140 OSVW_ID_LENGTH  # AMD64-Vol2 OS-Visible Workarounds, length of the status vector OSVW_E in bits
