@@ -32,6 +32,7 @@ In practise, function selectors can be exported from Remix IDE
 Similar project:
 - https://www.4byte.directory/ (Ethereum Signature Database)
   Source code: https://github.com/pipermerriam/ethereum-function-signature-registry/
+- https://openchain.xyz/signatures (used by Foundry's "cast 4byte")
 
 @author: Nicolas Iooss
 @license: MIT
