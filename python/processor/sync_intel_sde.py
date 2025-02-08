@@ -32,7 +32,13 @@ https://www.intel.com/content/www/us/en/download/684897/intel-software-developme
         9.7.0
         9.14.0
         9.21.1
-        9.24.0
+        9.24.0 from 2023-07-13
+        9.27.0 from 2023-09-13
+        9.33.0 from 2024-01-07
+        9.38.0 from 2024-04-18
+        9.44.0 from 2024-08-22
+        9.48.0 from 2024-11-25
+
 """
 import argparse
 import re

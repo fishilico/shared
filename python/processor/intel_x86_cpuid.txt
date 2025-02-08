@@ -1761,6 +1761,7 @@
     12th Gen Intel(R) Core(TM) i5-12400
     12th Gen Intel(R) Core(TM) i7-12800HX
     12th Gen Intel(R) Core(TM) i9-12900K
+    12th Gen Intel(R) Core(TM) i9-12900KS
 
 0x97,  4 (0x90674): "ADL" Alder Lake S (Stepping G0)
     12th Generation Intel® Core™ Processor Family
@@ -2206,6 +2207,7 @@
 # https://twitter.com/InstLatX64/status/1684109011572998144
 0xbc,  0 (0xb06c0): "LNL" Lunar Lake
     16th Generation Intel® Core™ Processor Family
+    12th Gen Intel(R) Core(TM) i9-12900KS
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://twitter.com/InstLatX64/status/1786318690528432348
@@ -2266,9 +2268,14 @@
 0xc5,  x (0xc065x): "ARL-H" Arrow Lake H
     15th Generation Intel® Core™ Processor Family
 
+0xc5, 0 (0xc0650): "ARL-H" Arrow Lake H
+    15th Generation Intel® Core™ Processor Family
+    12th Gen Intel(R) Core(TM) i9-12900KS
+
 # https://x.com/InstLatX64/status/1801535265581810010
 # https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_14937/bat-arlh-2/boot0.txt DMI: Intel Corporation Arrow Lake Client Platform/ARL-H Lp5x T4 RVP, BIOS MTLPFWI1.R00.4144.D02.2404050317 04/05/2024
 0xc5,  2 (0xc0652): "ARL-H" Arrow Lake H
+    15th Generation Intel® Core™ Processor Family
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.3
 # https://twitter.com/InstLatX64/status/1675346430951665664
@@ -2301,15 +2308,16 @@
 # https://github.com/InstLatx64/InstLatx64/commit/9e40a5acf06db45a47a3f5b55c4b7c23d15350a1
 # https://twitter.com/InstLatX64/status/1713964530848411829
 # https://github.com/intel/dptf/blob/00b9ac15bb46859c2fd20f10fa0bc66a7bc6f5af/Common/esif_ccb_cpuid.h
-0xcc,  x (0xc06cx): (PTL) Panther Lake
+0xcc,  x (0xc06cx): "PTL" Panther Lake
 
 # https://twitter.com/InstLatX64/status/1748426947615396154
 # https://x.com/InstLatX64/status/1788284820231004312
 # https://review.coreboot.org/c/coreboot/+/81849
-0xcc,  0 (0xc06c0): (PTL) Panther Lake (Stepping A-0)
+0xcc,  0 (0xc06c0): "PTL" Panther Lake (Stepping A-0)
+    12th Gen Intel(R) Core(TM) i9-12900KS
 
 # https://x.com/InstLatX64/status/1788284820231004312
-0xcc,  1 (0xc06c1): (PTL) Panther Lake (Stepping B-0)
+0xcc,  1 (0xc06c1): "PTL" Panther Lake (Stepping B-0)
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0xcf,  x (0xc06fx): "EMR-X" Emerald Rapids Xeon
@@ -2332,14 +2340,17 @@
 0xcf,  5 (0xc06f5): "EMR-X" Emerald Rapids Xeon (Raptor Cove)
     5th Generation Intel® Xeon® Scalable Processor Family
 
+0xd6,  0 (0xd0660): "DMR" Diamond Rapids
+
 # https://cdrdv2-public.intel.com/790021/architecture-instruction-set-extensions-programming-reference.pdf
 # https://twitter.com/InstLatX64/status/1708121836595143148
 # https://github.com/InstLatx64/InstLatx64/commit/9e40a5acf06db45a47a3f5b55c4b7c23d15350a1
 # https://twitter.com/InstLatX64/status/1713964530848411829
-0xdd,  x (0xd06dx): Clearwater Forest
+0xdd,  x (0xd06dx): "CWF" Clearwater Forest
 
 # https://twitter.com/InstLatX64/status/1748426947615396154
-0xdd,  0 (0xd06d0): Clearwater Forest
+0xdd,  0 (0xd06d0): "CWF" Clearwater Forest
+    Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
 [Family 11]
 # https://www.intel.com/content/dam/www/public/us/en/documents/specification-updates/xeon-phi-coprocessor-specification-update.pdf (328205-016)
