@@ -123,6 +123,7 @@ class VsVersionInfo:
         'Internal Build Number',
         'InternalName',
         'InternetSite',
+        'ISInternalDescription',
         'ISInternalVersion',
         'KB Article Number',
         'Language',
