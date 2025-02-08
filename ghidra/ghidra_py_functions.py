@@ -206,8 +206,8 @@ def define_rwv_memregion(name, addr, size, type_name, arcname="common", category
     if block.name != name:
         print("Changing block name {}@{:#x} to {}".format(block.name, addr, name))
         block.setName(name)
-    if block.permissions != 0xe:
-        print("Changing block permissions {}@{:#x} from {:#x}".format(name, addr, block.permissions))
+    if block.flags != 0xe:
+        print("Changing block flags {}@{:#x} from {:#x}".format(name, addr, block.flags))
         block.setPermissions(True, True, False)
         block.setVolatile(True)
     if type_name:
