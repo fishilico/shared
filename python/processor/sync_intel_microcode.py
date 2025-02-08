@@ -267,6 +267,10 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
             new_names = [
                 "Intel® Xeon® Processor D-17xx, D-27xx",
             ]
+        elif field_product_name == "Xeon D-17xx/D-18xx, D-27xx/D-28xx":
+            new_names = [
+                "Intel® Xeon® Processor D-17xx/D-18xx, D-27xx/D-28xx",
+            ]
         elif field_product_name == "Xeon Max":
             new_names = [
                 "Intel® Xeon® Max Processor",
