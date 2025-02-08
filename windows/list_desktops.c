@@ -136,9 +136,19 @@ static BOOL CALLBACK EnumDesktopProc(LPTSTR lpszDesktop, LPARAM lParam)
     HeapFree(GetProcessHeap(), 0, lpszType);
     HeapFree(GetProcessHeap(), 0, lpszName);
 
+    SetLastError(0);
     bResult = EnumDesktopWindows(hDesktop, EnumDesktopWindowsProc, (LPARAM)pCtx);
     if (!bResult) {
-        print_winerr(_T("EnumDesktopWindows"));
+        if (GetLastError() == 0) {
+            /* Wine 9.22 bug: EnumDesktopWindows does not set the Last Error
+             * when NtUserBuildHwndList fails.
+             * https://bugs.winehq.org/show_bug.cgi?id=57813
+             */
+            _tprintf(_T("    (EnumDesktopWindows failed without setting the Last Error, ignoring Wine bug 57813)\n"));
+            bResult = TRUE;
+        } else {
+            print_winerr(_T("EnumDesktopWindows"));
+        }
     }
     CloseDesktop(hDesktop);
     return bResult;
