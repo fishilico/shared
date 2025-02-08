@@ -201,6 +201,9 @@ __extension__ static const char* cpuidstr_7_edx[32] = {
  * cpuid 0x00000007:1, eax register
  */
 __extension__ static const char* cpuidstr_7_1_eax[32] = {
+    [0] = "sha512",
+    [1] = "sm3",
+    [2] = "sm4",
     [4] = "avx_vnni",
     [5] = "avx512_bf16",
     [7] = "cmpccxadd",
@@ -279,7 +282,7 @@ __extension__ static const char* cpuidstr_ext7_edx[32] = {
     [7] = "hw_pstate",
     [9] = "cpb",
     [11] = "proc_feedback",
-    [15] = "fast_cppc",
+    [15] = "amd_fast_cppc",
 };
 
 static void add_manual_cpuid_str(void)
