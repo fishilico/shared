@@ -86,7 +86,7 @@ endif
 # Test rust/cargo availability
 ifneq ($(call can-run,$(CARGO) --version),y)
 SUBDIRS_BLACKLIST += rust%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-9]\|5[0-9]\|6[0-1]\)\.'),y)
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-9]\|5[0-9]\|6[0-5]\)\.'),y)
 # Old versions of rustc (<=1.39) fail to build subtle-2.3.0 because:
 #   error[E0210]: type parameter `T` must be used as the type parameter for some
 #   local type (e.g., `MyStruct<T>`)
@@ -103,35 +103,35 @@ else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-9]\
 # Old versions of rustc (<=1.44) fail to build clap-2.33.3 because:
 #   error[E0723]: loops and conditional expressions are not stable in const fn
 #   note: for more information, see issue https://github.com/rust-lang/rust/issues/57563
-# Old versions of rustc (<=1.52) fail to build byteorder-1.5.0 because:
-#   this version of Cargo is older than the `2021` edition, and only supports `2015` and `2018` editions.
-# Old versions of rustc (<=1.59) fail to build byteorder-1.5.0 because:
-#   error: package `byteorder v1.5.0` cannot be built because it requires rustc 1.60 or newer, while the currently active rustc version is 1.56.1
-# Old versions of rustc (<=1.61) fail to build unicode-width-0.1.13 because:
-#   error[E0658]: deriving `Default` on enums is experimental
-#   note: see issue #86985 <https://github.com/rust-lang/rust/issues/86985> for more information
-#   note: this error originates in the derive macro `Default` (in Nightly builds, run with -Z macro-backtrace for more info)
-SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(6[1-4]\)\.'),y)
-# Old versions of rustc (<=1.52) fail to build libz-sys-1.1.8 because:
-#   error[E0658]: arbitrary expressions in key-value attributes are unstable
-#   note: see issue #78835 <https://github.com/rust-lang/rust/issues/78835> for more information
-# Old versions of rustc (<=1.60) fail to build log-0.4.19 because:
-#   error: package `log v0.4.19` cannot be built because it requires rustc 1.60.0 or newer
-# Old versions of rustc (<=1.61) fail to build `memchr-v2.6.3 because:
-#   error: package `memchr v2.6.3` cannot be built because it requires rustc 1.61 or newer, while the currently active
-#   rustc version is 1.60.0
 # Old versions of cargo (<=1.47) fail to build rug-1.19.0 because:
 #   failed to parse manifest at .../.cargo/registry/src/github.com-1ecc6299db9ec823/rug-1.19.0/Cargo.toml
 #   failed to parse the `edition` key
 #   this version of Cargo is older than the `2021` edition, and only supports `2015` and `2018` editions.
+# Old versions of rustc (<=1.52) fail to build byteorder-1.5.0 because:
+#   this version of Cargo is older than the `2021` edition, and only supports `2015` and `2018` editions.
+# Old versions of rustc (<=1.52) fail to build libz-sys-1.1.8 because:
+#   error[E0658]: arbitrary expressions in key-value attributes are unstable
+#   note: see issue #78835 <https://github.com/rust-lang/rust/issues/78835> for more information
+# Old versions of rustc (<=1.59) fail to build byteorder-1.5.0 because:
+#   error: package `byteorder v1.5.0` cannot be built because it requires rustc 1.60 or newer, while the currently active rustc version is 1.56.1
+# Old versions of rustc (<=1.60) fail to build log-0.4.19 because:
+#   error: package `log v0.4.19` cannot be built because it requires rustc 1.60.0 or newer
+# Old versions of rustc (<=1.60) fail to build `memchr-v2.6.3 because:
+#   error: package `memchr v2.6.3` cannot be built because it requires rustc 1.61 or newer, while the currently active
+# Old versions of rustc (<=1.61) fail to build unicode-width-0.1.13 because:
+#   error[E0658]: deriving `Default` on enums is experimental
+#   note: see issue #86985 <https://github.com/rust-lang/rust/issues/86985> for more information
+#   note: this error originates in the derive macro `Default` (in Nightly builds, run with -Z macro-backtrace for more info)
 # Old versions of cargo (<=1.64) fail to build rug-1.19.0 because:
 #   error: package `rug v1.19.0` cannot be built because it requires rustc 1.65 or newer, while the currently active
 #   rustc version is 1.61.0
 # Old versions of cargo (<=1.64) fail to build addr2line-v0.21.0` because:
 #   error: package `addr2line v0.21.0` cannot be built because it requires rustc 1.65 or newer, while the currently
 #   active rustc version is 1.63.0
-SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/download_web%
+# Old versions of rustc (<=1.65) fail to build unicode-width-0.1.14 because:
+#   error[E0658]: use of unstable library feature 'mixed_integer_ops'
+#   note: see issue #87840 <https://github.com/rust-lang/rust/issues/87840> for more information
+SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
 endif
 
 # Show "SUBDIR ..." only if -w and -s and V=1 are not given, and then add
