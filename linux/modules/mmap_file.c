@@ -176,7 +176,7 @@ static const struct file_operations mmap_file_fops = {
 
 static int __init mmap_file_init(void)
 {
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 7, 0) && defined(CONFIG_DEBUG_FS)
+#if LINUX_VERSION_CODE < (IS_ENABLED(CONFIG_DEBUG_FS) ? KERNEL_VERSION(4, 7, 0) : KERNEL_VERSION(4, 14, 0))
 	/* Commit 149d200deaa68 ("debugfs: prevent access to removed files'
 	 * private data") introduced a file operation proxy which does not
 	 * support mmap(). Using an "unsafe" debugfs file is needed to make
@@ -186,6 +186,9 @@ static int __init mmap_file_init(void)
 	 * just define debugfs_create_file to debugfs_create_file_unsafe, since
 	 * Linux 6.13. Instead, define a macro the other way round, to ensure
 	 * maximum compatibility.
+	 * Unfortunately, the dummy implementation of debugfs_create_file_unsafe
+	 * when CONFIG_DEBUG_FS is unset was introduced later, in Linux 4.14, by
+	 * commit c2a737eb2ea5 ("debugfs: Add dummy implementation of few helpers").
 	 */
 #define debugfs_create_file_unsafe debugfs_create_file
 #endif
