@@ -35,16 +35,16 @@ int main(void)
                    #opcode, asm_instr, instrstr); \
             retval = 1; \
         } else if (R_##reg(&ctx) != (val)) { \
-            printf("[FAIL] %-24s %s: %s = 0x%"PRIxREG", expected 0x%"PRIxREG"\n", \
-                   #opcode, instrstr, #reg, (asm_instr_reg)R_##reg(&ctx), (asm_instr_reg)(val)); \
+            printf("[FAIL] %-24s %s: %s = 0x%" PRIxREG ", expected 0x%" PRIxREG "\n", \
+                   #opcode, instrstr, #reg, (uint64_t)R_##reg(&ctx), (uint64_t)(val)); \
             retval = 1; \
         } else if (R_PC(&ctx) != final_pc) { \
-            printf("[FAIL] %-24s %s: PC is 0x%"PRIxREG" instead of 0x%"PRIxREG"\n", \
-                   #opcode, instrstr, (asm_instr_reg)R_PC(&ctx), final_pc); \
+            printf("[FAIL] %-24s %s: PC is 0x%" PRIxREG " instead of 0x%" PRIxREG "\n", \
+                   #opcode, instrstr, R_PC_U(&ctx), (uint64_t)final_pc); \
             retval = 1; \
         } else { \
-            printf("[ OK ] %-24s %-36s ; %-3s = 0x%"PRIxREG"\n", \
-                   #opcode, instrstr, #reg, (asm_instr_reg)R_##reg(&ctx)); \
+            printf("[ OK ] %-24s %-36s ; %-3s = 0x%" PRIxREG "\n", \
+                   #opcode, instrstr, #reg, (uint64_t)R_##reg(&ctx)); \
         } \
         memset(&ctx, 0xff, sizeof(ctx)); \
     } while (0)

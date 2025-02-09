@@ -127,7 +127,7 @@ bool run_mov_asm_instruction_p(
     if (cpsr & ARM_CPSR_T) {
         /* TODO Add Thumb mode */
         fprintf(stderr, "Thumb mode not yet implemented @%" PRIxREG ": %x\n",
-            R_PC(ctx), instr);
+            R_PC_U(ctx), instr);
         return false;
     }
 
@@ -202,7 +202,7 @@ bool run_mov_asm_instruction_p(
     }
     if (!is_ok) {
         fprintf(stderr, "Invalid condition for ARM instruction @%" PRIxREG ": %x, CPSR = %" PRIxREG "\n",
-                R_PC(ctx), instr, cpsr);
+                R_PC_U(ctx), instr, (uint32_t)cpsr);
         return false;
     }
 
@@ -491,6 +491,6 @@ bool run_mov_asm_instruction_p(
 #undef ARM_LDM_L_MASK
 
     fprintf(stderr, "Unknown ARM instruction @%" PRIxREG ": %x\n",
-            R_PC(ctx), instr);
+            R_PC_U(ctx), instr);
     return false;
 }

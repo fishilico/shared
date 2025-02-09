@@ -53,4 +53,7 @@
 
 typedef uint64_t asm_instr_reg;
 
+/* Get unsigned value of registers from a context */
+#define R_PC_U(ctx) ((uint64_t)R_PC(ctx))
+
 #endif /* ARCH_ARM64 */

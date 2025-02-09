@@ -34,6 +34,11 @@
 
 typedef asm_instr_ctx_regtype(EAX, Eax) asm_instr_reg;
 
+/* Get unsigned value of registers from a context */
+#define R_ESI_U(ctx) ((uint32_t)R_ESI(ctx))
+#define R_EDI_U(ctx) ((uint32_t)R_EDI(ctx))
+#define R_EIP_U(ctx) ((uint32_t)R_EIP(ctx))
+
 /* XMM registers for SSE2, low double-word part */
 #define R_XMM0LL(ctx) (*(asm_instr_reg*)(void*)asm_instr_ctx_xmm_addr((ctx), 0))
 #define R_XMM1LL(ctx) (*(asm_instr_reg*)(void*)asm_instr_ctx_xmm_addr((ctx), 1))

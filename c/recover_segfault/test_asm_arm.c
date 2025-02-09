@@ -67,15 +67,15 @@ int main(void)
             retval = 1; \
         } else if (R_##reg(&ctx) != (val)) { \
             printf("[FAIL] 0x%08x %s: %s = 0x%" PRIxREG ", expected 0x%" PRIxREG "\n", \
-                   opcode, instrstr, #reg, (asm_instr_reg)R_##reg(&ctx), (asm_instr_reg)(val)); \
+                   opcode, instrstr, #reg, (uint32_t)R_##reg(&ctx), (uint32_t)(val)); \
             retval = 1; \
         } else if (R_PC(&ctx) != final_pc) { \
             printf("[FAIL] 0x%08x %s: PC is 0x%" PRIxREG " instead of 0x%" PRIxREG "\n", \
-                   opcode, instrstr, R_PC(&ctx), final_pc); \
+                   opcode, instrstr, R_PC_U(&ctx), (uint32_t)final_pc); \
             retval = 1; \
         } else { \
             printf("[ OK ] 0x%08x %-36s ; %-3s = 0x%" PRIxREG "\n", \
-                   opcode, instrstr, #reg, (asm_instr_reg)R_##reg(&ctx)); \
+                   opcode, instrstr, #reg, (uint32_t)R_##reg(&ctx)); \
         } \
         memset(&ctx, 0, sizeof(ctx)); \
     } while (0)

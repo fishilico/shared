@@ -618,7 +618,7 @@ bool run_mov_asm_instruction_p(
             fprintf(stderr, "Error: mem parameter rsi is not address %" PRIxPTR "\n", data_addr);
             return false;
         }
-        asm_printf(asm_instr, "movsb (rsi=0x%" PRIxREG "), (rdi)", R_RSI(ctx));
+        asm_printf(asm_instr, "movsb (rsi=0x%" PRIxREG "), (rdi)", R_RSI_U(ctx));
         memcpy((uint8_t *)(uint64_t)R_RDI(ctx), data, 1);
         R_RDI(ctx) += 1;
         R_RSI(ctx) += 1;
@@ -633,7 +633,7 @@ bool run_mov_asm_instruction_p(
             fprintf(stderr, "Error: mem parameter rsi is not address %" PRIxPTR "\n", data_addr);
             return false;
         }
-        asm_printf(asm_instr, "movsw (rsi=0x%" PRIxREG "), (rdi)", R_RSI(ctx));
+        asm_printf(asm_instr, "movsw (rsi=0x%" PRIxREG "), (rdi)", R_RSI_U(ctx));
         memcpy((uint8_t *)(uint64_t)R_RDI(ctx), data, 2);
         R_RDI(ctx) += 2;
         R_RSI(ctx) += 2;
@@ -648,7 +648,7 @@ bool run_mov_asm_instruction_p(
             fprintf(stderr, "Error: mem parameter rsi is not address %" PRIxPTR "\n", data_addr);
             return false;
         }
-        asm_printf(asm_instr, "movsl (rsi=0x%" PRIxREG "), (rdi)", R_RSI(ctx));
+        asm_printf(asm_instr, "movsl (rsi=0x%" PRIxREG "), (rdi)", R_RSI_U(ctx));
         memcpy((uint8_t *)(uint64_t)R_RDI(ctx), data, 4);
         R_RDI(ctx) += 4;
         R_RSI(ctx) += 4;
@@ -665,10 +665,10 @@ bool run_mov_asm_instruction_p(
             return false;
         }
         if (rexprefix & X86_64_REX_W) {
-            asm_printf(asm_instr, "req movsq (rsi=0x%" PRIxREG "), (rdi)", R_RSI(ctx));
+            asm_printf(asm_instr, "req movsq (rsi=0x%" PRIxREG "), (rdi)", R_RSI_U(ctx));
             rep_count *= 8;
         } else {
-            asm_printf(asm_instr, "req movsw (rsi=0x%" PRIxREG "), (rdi)", R_RSI(ctx));
+            asm_printf(asm_instr, "req movsw (rsi=0x%" PRIxREG "), (rdi)", R_RSI_U(ctx));
             rep_count *= 4;
         }
         memcpy((uint8_t *)(uint64_t)R_RDI(ctx), data, rep_count);
@@ -691,7 +691,7 @@ bool run_mov_asm_instruction_p(
             R_RCX(ctx) -= 1;
         }
         assert(i < datalen);
-        asm_printf(asm_instr, "repnz scas (rdi=0x%" PRIxREG "), al=0x%02x", R_RDI(ctx), al);
+        asm_printf(asm_instr, "repnz scas (rdi=0x%" PRIxREG "), al=0x%02x", R_RDI_U(ctx), al);
         R_RDI(ctx) += i;
         R_RIP(ctx) += 1;
         R_RCX(ctx) -= 1;

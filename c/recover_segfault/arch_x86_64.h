@@ -3,20 +3,9 @@
 
 #include "recover_segfault.h"
 
-/* printf format for general purpose registers */
-#if defined(__linux__) || defined(__unix__) || defined(__posix__)
-/* Since glibc 2.16 greg_t has been long long. It was long before
- * Commit: https://sourceware.org/git/?p=glibc.git;a=commitdiff;h=d5e051198503e74256b72fee7b93e681f1de6b57
- */
-#    if defined(__GNU_LIBRARY__) && ((__GLIBC__ << 16) + __GLIBC_MINOR__ < 0x20010)
-#        define PRIxREG "lx"
-#    else
-#        define PRIxREG "llx"
-#    endif
-#else
-#    include <inttypes.h>
-#    define PRIxREG PRIx64
-#endif
+/* printf format for general purpose registers, which need to be cast to unsigned before being formatted */
+#include <inttypes.h>
+#define PRIxREG PRIx64
 
 /* Some processor flags, from Linux header asm/processor-flags.h */
 #define X86_EFLAGS_CF 0x0001 /* Carry Flag */
@@ -55,6 +44,11 @@
 #define R_EFL(ctx) asm_instr_ctx_reg_with_gregs((ctx), EFL, EFlags)
 
 typedef asm_instr_ctx_regtype(RAX, Rax) asm_instr_reg;
+
+/* Get unsigned value of registers from a context */
+#define R_RSI_U(ctx) ((uint64_t)R_RSI(ctx))
+#define R_RDI_U(ctx) ((uint64_t)R_RDI(ctx))
+#define R_RIP_U(ctx) ((uint64_t)R_RIP(ctx))
 
 /* XMM registers for SSE2 */
 #ifdef __clang__

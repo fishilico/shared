@@ -442,7 +442,7 @@ bool run_mov_asm_instruction_p(
             fprintf(stderr, "Error: mem parameter esi is not address %" PRIxPTR "\n", data_addr);
             return 0;
         }
-        asm_printf(asm_instr, "movsb (esi=0x%" PRIxREG "), (edi)", R_ESI(ctx));
+        asm_printf(asm_instr, "movsb (esi=0x%" PRIxREG "), (edi)", R_ESI_U(ctx));
         *(uint8_t *)R_EDI(ctx) = *data;
         R_ESI(ctx) += 1;
         R_EDI(ctx) += 1;
@@ -458,7 +458,7 @@ bool run_mov_asm_instruction_p(
             fprintf(stderr, "Error: mem parameter esi is not address %" PRIxPTR "\n", data_addr);
             return false;
         }
-        asm_printf(asm_instr, "rep movsb (esi=0x%" PRIxREG "), (edi)", R_ESI(ctx));
+        asm_printf(asm_instr, "rep movsb (esi=0x%" PRIxREG "), (edi)", R_ESI_U(ctx));
         len = (size_t)R_ECX(ctx);
         memcpy((void *)R_EDI(ctx), data, len);
         R_ESI(ctx) += len;
@@ -475,7 +475,7 @@ bool run_mov_asm_instruction_p(
             fprintf(stderr, "Error: mem parameter esi is not address %" PRIxPTR "\n", data_addr);
             return 0;
         }
-        asm_printf(asm_instr, "movsw (esi=0x%" PRIxREG "), (edi)", R_ESI(ctx));
+        asm_printf(asm_instr, "movsw (esi=0x%" PRIxREG "), (edi)", R_ESI_U(ctx));
         memcpy((void *)R_EDI(ctx), data, 2);
         R_ESI(ctx) += 2;
         R_EDI(ctx) += 2;
@@ -490,7 +490,7 @@ bool run_mov_asm_instruction_p(
             fprintf(stderr, "Error: mem parameter esi is not address %" PRIxPTR "\n", data_addr);
             return 0;
         }
-        asm_printf(asm_instr, "movsl (esi=0x%" PRIxREG "), (edi)", R_ESI(ctx));
+        asm_printf(asm_instr, "movsl (esi=0x%" PRIxREG "), (edi)", R_ESI_U(ctx));
         memcpy((void *)R_EDI(ctx), data, 4);
         R_ESI(ctx) += 4;
         R_EDI(ctx) += 4;
@@ -506,7 +506,7 @@ bool run_mov_asm_instruction_p(
             fprintf(stderr, "Error: mem parameter esi is not address %" PRIxPTR "\n", data_addr);
             return 0;
         }
-        asm_printf(asm_instr, "rep movsl (esi=0x%" PRIxREG "), (edi)", R_ESI(ctx));
+        asm_printf(asm_instr, "rep movsl (esi=0x%" PRIxREG "), (edi)", R_ESI_U(ctx));
         len = (size_t)R_ECX(ctx);
         assert(len < 0x40000000);
         memcpy((void *)R_EDI(ctx), data, len * 4);
@@ -529,7 +529,7 @@ bool run_mov_asm_instruction_p(
             R_ECX(ctx) -= 1;
         }
         assert(i < datalen);
-        asm_printf(asm_instr, "repnz scas (edi=0x%" PRIxREG "), al=0x%02x", R_EDI(ctx), al);
+        asm_printf(asm_instr, "repnz scas (edi=0x%" PRIxREG "), al=0x%02x", R_EDI_U(ctx), al);
         R_EDI(ctx) += i;
         R_EIP(ctx) += 1;
         R_ECX(ctx) -= 1;

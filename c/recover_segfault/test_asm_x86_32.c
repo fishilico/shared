@@ -69,16 +69,16 @@ int main(void)
                    #opcode, asm_instr, instrstr); \
             retval = 1; \
         } else if (R_##reg(&ctx) != (val)) { \
-            printf("[FAIL] %-24s %s: %s = 0x%"PRIxREG", expected 0x%"PRIxREG"\n", \
-                   #opcode, instrstr, #reg, (asm_instr_reg)R_##reg(&ctx), (asm_instr_reg)(val)); \
+            printf("[FAIL] %-24s %s: %s = 0x%" PRIxREG ", expected 0x%" PRIxREG "\n", \
+                   #opcode, instrstr, #reg, (uint32_t)R_##reg(&ctx), (uint32_t)(val)); \
             retval = 1; \
         } else if (R_EIP(&ctx) != final_eip) { \
-            printf("[FAIL] %-24s %s: EIP is 0x%"PRIxREG" instead of 0x%"PRIxREG"\n", \
-                   #opcode, instrstr, R_EIP(&ctx), final_eip); \
+            printf("[FAIL] %-24s %s: EIP is 0x%" PRIxREG " instead of 0x%" PRIxREG "\n", \
+                   #opcode, instrstr, R_EIP_U(&ctx), (uint32_t)final_eip); \
             retval = 1; \
         } else { \
-            printf("[ OK ] %-24s %-36s ; %-3s = 0x%"PRIxREG"\n", \
-                   #opcode, instrstr, #reg, (asm_instr_reg)R_##reg(&ctx)); \
+            printf("[ OK ] %-24s %-36s ; %-3s = 0x%" PRIxREG "\n", \
+                   #opcode, instrstr, #reg, (uint32_t)R_##reg(&ctx)); \
         } \
         memset(&ctx, 0, sizeof(ctx)); \
         reset_ctx_fpregs(); \

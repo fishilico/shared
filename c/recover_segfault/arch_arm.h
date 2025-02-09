@@ -4,7 +4,8 @@
 #include "recover_segfault.h"
 
 /* printf format for general purpose registers */
-#define PRIxREG "lx"
+#include <inttypes.h>
+#define PRIxREG PRIx32
 
 /* Some CPSR flags */
 #define ARM_CPSR_T 0x00000020 /* Thumb state */
@@ -42,5 +43,8 @@
 #define R_CPSR(ctx) asm_instr_ctx_reg_lw((ctx), arm_cpsr, R15)
 
 typedef asm_instr_ctx_regtype(arm_r0, R0) asm_instr_reg;
+
+/* Get unsigned value of registers from a context */
+#define R_PC_U(ctx) ((uint32_t)R_PC(ctx))
 
 #endif /* ARCH_ARM */
