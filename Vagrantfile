@@ -165,12 +165,17 @@ EOF
     chmod +x bin/enter-arm-debian
 
     # Install the same packages as the last Debian machine, but without the x86-specific packages
-    sed -n '/^RUN \\\\/,/[^\\\\]\$/{p}' /vagrant/machines/Dockerfile-debian10-buster | \\
+    sed -n '/^RUN \\\\/,/[^\\\\]\$/{p}' /vagrant/machines/Dockerfile-debian13-trixie | \\
         tail -n +2 | \\
         sed 's/dpkg --add-architecture i386/true/' | \\
+        sed 's/ coq / /g' | \\
+        sed 's/ gcc-mingw-w64 / /g' | \\
         sed 's/ gcc-multilib / gcc /g' | \\
         sed 's/ libc6-dev-i386 / /g' | \\
+        sed 's/ libomp-dev / /g' | \\
         sed 's/ linux-headers-amd64 / /g' | \\
+        sed 's/ wine / /g' | \\
+        sed 's/ wine32 / /g' | \\
         sed 's/ wine64 / /g' | \\
         arch-chroot arm-debian /usr/bin/env PATH=/usr/sbin:/usr/bin:/sbin:/bin DEBIAN_FRONTEND=noninteractive sh -x
 
