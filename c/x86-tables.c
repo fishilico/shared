@@ -187,7 +187,7 @@ static void show_gdt(int cpu)
     __asm__ volatile ("sgdt %0" : "=m"(descriptor) : : "memory");
     memcpy(&size, descriptor, 2);
     memcpy(&address, descriptor + 2, sizeof(void *));
-    printf("CPU %2d GDT @%p, size %u (%u 8-byte entries)\n", cpu, address, size, (size + 1) / 8);
+    printf("CPU %2d GDT @%p, size %u (%u 8-byte entries)\n", cpu, address, size, ((unsigned int)size + 1) / 8);
     UMIP_SECTION_END
 }
 
@@ -205,7 +205,7 @@ static void show_idt(int cpu)
     __asm__ volatile ("sidt %0" : "=m"(descriptor) : : "memory");
     memcpy(&size, descriptor, 2);
     memcpy(&address, descriptor + 2, sizeof(void *));
-    printf("CPU %2d IDT @%p, size %u (256 %u-byte vectors)\n", cpu, address, size, (size + 1) / 256);
+    printf("CPU %2d IDT @%p, size %u (256 %u-byte vectors)\n", cpu, address, size, ((unsigned int)size + 1) / 256);
     UMIP_SECTION_END
 }
 

@@ -193,7 +193,7 @@ static bool test_sha256(void)
             perror("write");
         } else {
             fprintf(
-                stderr, "Not enough bytes sent: %" PRIuPTR "/%" PRIuPTR "\n",
+                stderr, "Not enough bytes sent: %" PRIdPTR "/%" PRIuPTR "\n",
                 bytes, strlen(message));
         }
         close(opfd);
@@ -206,7 +206,7 @@ static bool test_sha256(void)
             perror("read");
         } else {
             fprintf(
-                stderr, "Not enough bytes read: %" PRIuPTR "/%" PRIuPTR "\n",
+                stderr, "Not enough bytes read: %" PRIdPTR "/%" PRIuPTR "\n",
                 bytes, sizeof(digest));
         }
         close(opfd);
@@ -356,7 +356,7 @@ static bool test_aes_xts_enc(void)
             perror("sendmsg");
         } else {
             fprintf(
-                stderr, "Not enough bytes sent: %" PRIuPTR "/%" PRIuPTR "\n",
+                stderr, "Not enough bytes sent: %" PRIdPTR "/%" PRIuPTR "\n",
                 bytes, sizeof(message));
         }
         close(opfd);
@@ -369,7 +369,7 @@ static bool test_aes_xts_enc(void)
             perror("read");
         } else {
             fprintf(
-                stderr, "Not enough bytes read: %" PRIuPTR "/%" PRIuPTR "\n",
+                stderr, "Not enough bytes read: %" PRIdPTR "/%" PRIuPTR "\n",
                 bytes, sizeof(encrypted));
         }
         close(opfd);
@@ -498,7 +498,7 @@ static bool test_aes_cbc_dec(void)
             perror("sendmsg");
         } else {
             fprintf(
-                stderr, "Not enough bytes sent: %" PRIuPTR "/%" PRIuPTR "\n",
+                stderr, "Not enough bytes sent: %" PRIdPTR "/%" PRIuPTR "\n",
                 bytes, sizeof(encrypted));
         }
         close(opfd);
@@ -511,7 +511,7 @@ static bool test_aes_cbc_dec(void)
             perror("read");
         } else {
             fprintf(
-                stderr, "Not enough bytes read: %" PRIuPTR "/%" PRIuPTR "\n",
+                stderr, "Not enough bytes read: %" PRIdPTR "/%" PRIuPTR "\n",
                 bytes, sizeof(decrypted));
         }
         close(opfd);
@@ -636,7 +636,7 @@ static bool show_cipher_info(const char *ciphername)
             }
         } else {
             fprintf(
-                stderr, "Not enough bytes sent: %" PRIuPTR "/%u\n",
+                stderr, "Not enough bytes sent: %" PRIdPTR "/%u\n",
                 bytes, request.hdr.nlmsg_len);
         }
         close(nlsock);
@@ -670,13 +670,13 @@ static bool show_cipher_info(const char *ciphername)
         return false;
     } else if (bytes < (ssize_t)sizeof(struct nlmsghdr)) {
         fprintf(
-            stderr, "Not enough bytes read: %" PRIuPTR "/%" PRIuPTR "\n",
+            stderr, "Not enough bytes read: %" PRIdPTR "/%" PRIuPTR "\n",
             bytes, sizeof(buffer));
         close(nlsock);
         return false;
     } else if (bytes > (ssize_t)sizeof(buffer)) {
         fprintf(
-            stderr, "Too many bytes read: %" PRIuPTR "/%" PRIuPTR "\n",
+            stderr, "Too many bytes read: %" PRIdPTR "/%" PRIuPTR "\n",
             bytes, sizeof(buffer));
         close(nlsock);
         return false;
@@ -717,7 +717,7 @@ static bool show_cipher_info(const char *ciphername)
     }
     if (reply_hdr->nlmsg_len != (size_t)bytes) {
         fprintf(
-            stderr, "Unexpected Netlink message size: %u advertized but %" PRIuPTR " received\n",
+            stderr, "Unexpected Netlink message size: %u advertized but %" PRIdPTR " received\n",
             reply_hdr->nlmsg_len, bytes);
         return false;
     }
@@ -817,7 +817,7 @@ static bool show_cipher_info(const char *ciphername)
         }
     }
     if (bytes) {
-        fprintf(stderr, "Unprocessed %" PRIuPTR " bytes after attributes\n", bytes);
+        fprintf(stderr, "Unprocessed %" PRIdPTR " bytes after attributes\n", bytes);
         return false;
     }
     return true;

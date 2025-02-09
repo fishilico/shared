@@ -307,7 +307,7 @@ static void print_gdt_limits(void)
 
     memcpy(&gdt_size, gdt_descriptor, 2);
     if (gdt_size) {
-        printf("GDT limits and access rights (%u entries):\n", (gdt_size + 1) / 8);
+        printf("GDT limits and access rights (%u entries):\n", ((unsigned int)gdt_size + 1) / 8);
     } else {
         /* Try 256 entries */
         printf("GDT limits and access rights (? entries):\n");

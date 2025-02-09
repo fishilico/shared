@@ -356,11 +356,11 @@ int main(void)
     /* Initialize registers */
     check_initial_regval(regs.rip, 0xfff0LLU, "llx");
     check_initial_regval(sregs.cs.base, 0xffff0000LLU, "llx");
-    check_initial_regval(sregs.cs.selector, 0xf000, PRIx16);
-    check_initial_regval(sregs.cs.type, 0xb, PRIx8);
+    check_initial_regval(sregs.cs.selector, 0xf000U, PRIx16);
+    check_initial_regval(sregs.cs.type, 0xbU, PRIx8);
     check_initial_regval(sregs.ds.base, 0LLU, "llx");
-    check_initial_regval(sregs.ds.selector, 0, PRIx16);
-    check_initial_regval(sregs.ds.type, 3, PRIx8);
+    check_initial_regval(sregs.ds.selector, 0U, PRIx16);
+    check_initial_regval(sregs.ds.type, 3U, PRIx8);
 #    undef check_initial_regval
 
     /* Write 16-bit x86 code:

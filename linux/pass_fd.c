@@ -91,7 +91,7 @@ static int child1_main(const char *sockpath)
         perror("listen");
         return 1;
     }
-    printf("[%u] Created Unix socket %s\n", getpid(), sockpath);
+    printf("[%d] Created Unix socket %s\n", getpid(), sockpath);
 
     /* Wait for an incoming connection */
     clientfd = accept4(sockfd, (struct sockaddr *)&addr, &addrlen, SOCK_CLOEXEC);
@@ -100,7 +100,7 @@ static int child1_main(const char *sockpath)
         return 1;
     }
     assert(addrlen <= sizeof(addr));
-    printf("[%u] Accepted client on %s\n", getpid(), addr.sun_path);
+    printf("[%d] Accepted client on %s\n", getpid(), addr.sun_path);
     close(sockfd);
 
     /* Receive a file descriptor */
@@ -118,31 +118,31 @@ static int child1_main(const char *sockpath)
         return 1;
     }
     buffer[bytes] = '\0';
-    printf("[%u] Received %ld bytes: %s\n", getpid(), (long)bytes, buffer);
+    printf("[%d] Received %ld bytes: %s\n", getpid(), (long)bytes, buffer);
 
     fd = -1;
     for (cmsg = CMSG_FIRSTHDR(&msg); cmsg; cmsg = CMSG_NXTHDR(&msg, cmsg)) {
         if (cmsg->cmsg_level != SOL_SOCKET) {
-            printf("[%u] * unknown control message %d-%d\n",
+            printf("[%d] * unknown control message %d-%d\n",
                    getpid(), cmsg->cmsg_level, cmsg->cmsg_type);
             continue;
         }
         if (cmsg->cmsg_type == SCM_RIGHTS) {
             if (cmsg->cmsg_len != CMSG_LEN(sizeof(int))) {
-                printf("[%u] * Invalid message size for fd (%lu)!\n",
+                printf("[%d] * Invalid message size for fd (%lu)!\n",
                        getpid(), (unsigned long)cmsg->cmsg_len);
                 return 1;
             }
             memcpy(&fd, CMSG_DATA(cmsg), sizeof(int));
-            printf("[%u] * File descriptor: %d\n", getpid(), fd);
+            printf("[%d] * File descriptor: %d\n", getpid(), fd);
         } else if (cmsg->cmsg_type == SCM_CREDENTIALS) {
             if (cmsg->cmsg_len != CMSG_LEN(sizeof(struct ucred))) {
-                printf("[%u] * Invalid message size for creds (%lu)!\n",
+                printf("[%d] * Invalid message size for creds (%lu)!\n",
                        getpid(), (unsigned long)cmsg->cmsg_len);
                 return 1;
             }
             memcpy(&cred, CMSG_DATA(cmsg), sizeof(struct ucred));
-            printf("[%u] * Credentials: %u:%u@%u\n", getpid(),
+            printf("[%d] * Credentials: %u:%u@%d\n", getpid(),
                    cred.uid, cred.gid, cred.pid);
         } else if (cmsg->cmsg_type == SCM_SECURITY) {
             len = cmsg->cmsg_len - CMSG_LEN(0);
@@ -151,26 +151,26 @@ static int child1_main(const char *sockpath)
             }
             memcpy(buffer, CMSG_DATA(cmsg), len);
             buffer[len] = '\0';
-            printf("[%u] * Security label: %s\n", getpid(), buffer);
+            printf("[%d] * Security label: %s\n", getpid(), buffer);
         } else {
-            printf("[%u] * unknown control message type %d\n",
+            printf("[%d] * unknown control message type %d\n",
                    getpid(), cmsg->cmsg_type);
         }
     }
     if (fd == -1) {
-        fprintf(stderr, "[%u] No fd in received message!\n", getpid());
+        fprintf(stderr, "[%d] No fd in received message!\n", getpid());
         return 1;
     }
     close(clientfd);
 
     /* Write a message in the fd */
-    snprintf(buffer, sizeof(buffer), "Hello world, here is pid %u!", getpid());
+    snprintf(buffer, sizeof(buffer), "Hello world, here is pid %d!", getpid());
     bytes = write(fd, buffer, strlen(buffer));
     if (bytes < 0) {
         perror("write");
         return 1;
     }
-    printf("[%u] Wrote message to the fd\n", getpid());
+    printf("[%d] Wrote message to the fd\n", getpid());
     close(fd);
     return 0;
 }
@@ -226,7 +226,7 @@ static int child2_main(const char *sockpath)
              * Then sleeps a little and try again.
              */
             if (errno == ECONNREFUSED) {
-                printf("[%u] Failed to connect because of a race condition, trying again.\n",
+                printf("[%d] Failed to connect because of a race condition, trying again.\n",
                        getpid());
                 close(sockfd);
                 sockfd = -1;
@@ -237,12 +237,12 @@ static int child2_main(const char *sockpath)
             return 1;
         }
     }
-    printf("[%u] Connected to the socket\n", getpid());
+    printf("[%d] Connected to the socket\n", getpid());
 
     /* Send the write size of the pipe over the socket */
     memset(&control, 0, sizeof(control));
     memset(&iov, 0, sizeof(iov));
-    snprintf(buffer, sizeof(buffer), "Here is a fd from process %u!", getpid());
+    snprintf(buffer, sizeof(buffer), "Here is a fd from process %d!", getpid());
     iov.iov_base = buffer;
     iov.iov_len = strlen(buffer);
     memset(&msg, 0, sizeof(msg));
@@ -260,7 +260,7 @@ static int child2_main(const char *sockpath)
         perror("sendmsg");
         return 1;
     }
-    printf("[%u] Sent a pipe over the socket\n", getpid());
+    printf("[%d] Sent a pipe over the socket\n", getpid());
     close(sockfd);
     close(pipefd[1]);
 
@@ -271,12 +271,12 @@ static int child2_main(const char *sockpath)
         return 1;
     }
     if (bytes == 0) {
-        fprintf(stderr, "[%u] The pipe did not received anything!\n", getpid());
+        fprintf(stderr, "[%d] The pipe did not received anything!\n", getpid());
         return 1;
     }
     assert(bytes >= 0);
     buffer[bytes] = '\0';
-    printf("[%u] Read %ld bytes from the pipe: %s\n", getpid(), (long)bytes, buffer);
+    printf("[%d] Read %ld bytes from the pipe: %s\n", getpid(), (long)bytes, buffer);
     close(pipefd[0]);
     return 0;
 }
@@ -415,7 +415,7 @@ int main(void)
         perror("fork");
         return 1;
     } else if (child1 == 0) {
-        printf("[%u] Start first child\n", getpid());
+        printf("[%d] Start first child\n", getpid());
         exit(child1_main(sockpath));
     }
 
@@ -425,7 +425,7 @@ int main(void)
         perror("fork");
         return 1;
     } else if (child2 == 0) {
-        printf("[%u] Start second child\n", getpid());
+        printf("[%d] Start second child\n", getpid());
         exit(child2_main(sockpath));
     }
 
@@ -442,19 +442,19 @@ int main(void)
         }
         if (WIFEXITED(status)) {
             if (WEXITSTATUS(status) != EXIT_SUCCESS) {
-                fprintf(stderr, "Child %u exited with status %d\n", pid, WEXITSTATUS(status));
+                fprintf(stderr, "Child %d exited with status %d\n", pid, WEXITSTATUS(status));
                 return_value = 1;
             } else {
-                printf("[parent] Child %u successfully exited\n", pid);
+                printf("[parent] Child %d successfully exited\n", pid);
             }
         } else if (WIFSIGNALED(status)) {
-            fprintf(stderr, "Child %u was killed by signal %d\n", pid, WTERMSIG(status));
+            fprintf(stderr, "Child %d was killed by signal %d\n", pid, WTERMSIG(status));
             return_value = 1;
         } else if (WIFSTOPPED(status)) {
-            fprintf(stderr, "Child %u has been stopped by signal %d\n", pid, WSTOPSIG(status));
+            fprintf(stderr, "Child %d has been stopped by signal %d\n", pid, WSTOPSIG(status));
             return_value = 1;
         } else {
-            fprintf(stderr, "Child %u has been waited with unexpected status %d\n", pid, status);
+            fprintf(stderr, "Child %d has been waited with unexpected status %d\n", pid, status);
             return_value = 1;
         }
     }

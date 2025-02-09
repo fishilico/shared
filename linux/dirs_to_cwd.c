@@ -115,7 +115,7 @@ int main(void)
                     if (entry->d_ino != st.st_ino) {
                         /* direntry inode number of mountpoints comes from the parent filesystem,
                          * and stat inode number comes from the mounted filesystem. */
-                        printf("  dir entry inode: %" PRId64 " (0x%08" PRIx64 ")\n", entry->d_ino,
+                        printf("  dir entry inode: %" PRIu64 " (0x%08" PRIx64 ")\n", entry->d_ino,
                                entry->d_ino);
                     }
                     assert(entry->d_type == DT_DIR || entry->d_type == DT_UNKNOWN);

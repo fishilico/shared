@@ -1541,7 +1541,7 @@ static bool find_aes_keys_in_file(const char *filename)
                     addr += expanded_key_size;
                 } else if ((key_len = aes_detect_dec((const uint32_t *)&buffer[offset], key))) {
                     expanded_key_size = 4 * (28 + key_len);
-                    printf("[%#" PRIx64 "..%#" PRIx64 "] Found AES-%d decryption key: ",
+                    printf("[%#" PRIx64 "..%#" PRIx64 "] Found AES-%u decryption key: ",
                            addr, addr + expanded_key_size, key_len * 8);
                     for (i = 0; i < key_len; i++) {
                         printf("%02x", key[i]);

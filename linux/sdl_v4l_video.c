@@ -26,7 +26,7 @@
 
 #include <SDL2/SDL.h>
 
-#define NB_BUFFER 4
+#define NB_BUFFER 4U
 
 /* musl uses POSIX specification for ioctl(int, int, ...) instead of glibc
  * ioctl(int, unsigned long, ...). This causes a -Woverflow to occur when

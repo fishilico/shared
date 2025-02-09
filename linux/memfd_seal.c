@@ -231,13 +231,13 @@ static bool test_memfd(void)
         close(fd);
         return false;
     }
-    printf("memfd's seals: %#x:\n", current_seals); /* 0xf */
-    printf("  * F_SEAL_SEAL = %#x\n", F_SEAL_SEAL); /* 1 */
-    printf("  * F_SEAL_SHRINK = %#x\n", F_SEAL_SHRINK); /* 2 */
-    printf("  * F_SEAL_GROW = %#x\n", F_SEAL_GROW); /* 4 */
-    printf("  * F_SEAL_WRITE = %#x\n", F_SEAL_WRITE); /* 8 */
+    printf("memfd's seals: %#x:\n", (unsigned int)current_seals); /* 0xf */
+    printf("  * F_SEAL_SEAL = %#x\n", (unsigned int)F_SEAL_SEAL); /* 1 */
+    printf("  * F_SEAL_SHRINK = %#x\n", (unsigned int)F_SEAL_SHRINK); /* 2 */
+    printf("  * F_SEAL_GROW = %#x\n", (unsigned int)F_SEAL_GROW); /* 4 */
+    printf("  * F_SEAL_WRITE = %#x\n", (unsigned int)F_SEAL_WRITE); /* 8 */
     if (current_seals != 0xf) {
-        fprintf(stderr, "Unexpected current seals: %#x != 0xf\n", current_seals);
+        fprintf(stderr, "Unexpected current seals: %#x != 0xf\n", (unsigned int)current_seals);
         close(fd);
         return false;
     }
@@ -261,10 +261,10 @@ static bool test_memfd(void)
     printf("stat():\n");
     printf("  * dev: %#" PRIx64 "\n", sb.st_dev); /* 5 on a normal system, where 4 is /proc and 6 is /dev in /proc/1/mountinfo */
     printf("  * ino: %#lx\n", sb.st_ino);
-    printf("  * mode: 0o%o (S_IFREG = 0o%o)\n", sb.st_mode, S_IFREG);
+    printf("  * mode: 0o%o (S_IFREG = 0o%o)\n", sb.st_mode, (unsigned int)S_IFREG);
     printf("  * uid: %u\n", sb.st_uid);
     printf("  * gid: %u\n", sb.st_gid);
-    printf("  * size: %lu bytes (expected %lu)\n", sb.st_size, (unsigned long)sizeof(memfd_content));
+    printf("  * size: %ld bytes (expected %lu)\n", sb.st_size, (unsigned long)sizeof(memfd_content));
 
     printf("xattrs:\n");
     print_xattrs(fd_link_path);
@@ -394,7 +394,7 @@ int main(int argc, char **argv)
             return 1;
         }
         if (current_seals != (F_SEAL_SEAL | F_SEAL_SHRINK | F_SEAL_GROW | F_SEAL_WRITE)) {
-            printf("/proc/self/exe does not have all the seals: %#x\n", current_seals);
+            printf("/proc/self/exe does not have all the seals: %#x\n", (unsigned int)current_seals);
             close(fd);
             return 1;
         }

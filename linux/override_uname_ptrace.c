@@ -283,7 +283,7 @@ static int handle_ptrace_events(pid_t child)
                 return EXIT_FAILURE;
             }
         } else {
-            fprintf(stderr, "Child has reported an unknown state 0x%x.\n", status);
+            fprintf(stderr, "Child has reported an unknown state 0x%x.\n", (unsigned int)status);
             return EXIT_FAILURE;
         }
     }

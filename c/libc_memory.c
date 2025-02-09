@@ -60,7 +60,7 @@ static void show_malloc_metadata(void)
         addr_high = (uintptr_t)p1;
     }
     printf("Difference: %" PRIdPTR " = %u + %" PRIdPTR "\n",
-           addr_high - addr_low, allocsize, addr_high - addr_low - allocsize);
+           (intptr_t)(addr_high - addr_low), allocsize, (intptr_t)(addr_high - addr_low - allocsize));
     assert(addr_low + allocsize <= addr_high);
 
     if (addr_low + allocsize + 1024 <= addr_high) {
@@ -149,7 +149,7 @@ static void dump_freechunk_content(const void *freeptr, unsigned int size)
  */
 static void show_free_metadata(void)
 {
-#define NUM_ALLOCATED_BLOCKS 5
+#define NUM_ALLOCATED_BLOCKS 5U
     const unsigned int allocsize = 4096;
     void *ptr[NUM_ALLOCATED_BLOCKS];
     uintptr_t addr[NUM_ALLOCATED_BLOCKS];

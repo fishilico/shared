@@ -38,7 +38,7 @@ int main(void)
             return 1;
         } else if (pids[i] == 0) {
             unsigned int val = 3 + i;
-            printf("Process %u (PID %u): write %u to eventfd.\n", i, getpid(), val);
+            printf("Process %u (PID %d): write %u to eventfd.\n", i, getpid(), val);
             if (eventfd_write(efd, val) == -1) {
                 perror("eventfd_write");
                 exit(EXIT_FAILURE);
@@ -52,7 +52,7 @@ int main(void)
         int status = 0;
         pid_t pid;
         for (;;) {
-            printf("waiting %d...\n", i);
+            printf("waiting %u...\n", i);
             pid = waitpid(pids[i], &status, WUNTRACED);
             if (pid == -1) {
                 perror("waitpid");
@@ -68,7 +68,7 @@ int main(void)
             }
         }
         if (!WIFEXITED(status) || WEXITSTATUS(status) != EXIT_SUCCESS) {
-            fprintf(stderr, "Child %u failed (PID %u), exiting.\n", i, pid);
+            fprintf(stderr, "Child %u failed (PID %d), exiting.\n", i, pid);
             if (WIFSIGNALED(status)) {
                 kill(getpid(), WTERMSIG(status));
             }

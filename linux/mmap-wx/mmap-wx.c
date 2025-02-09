@@ -247,7 +247,7 @@ static void test_mmap_rw_rx_fd(int fd)
         printf("[+] Code successfully executed.\n");
 #endif
     } else {
-        fprintf(stderr, "[!] Unexpected result: %x\n", result);
+        fprintf(stderr, "[!] Unexpected result: %x\n", (unsigned int)result);
     }
     if (munmap(xptr, sizeof(CODE)) < 0)
         perror("[-] munmap-RX");

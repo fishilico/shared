@@ -701,7 +701,7 @@ static void diff_registers(const uintptr_t *data_00, const uintptr_t *data_ff, u
     }
 
     for (reg_idx = 0; reg_idx < real_nregs; reg_idx++) {
-        printf("  [%2ld: @%#05lx] ", reg_idx, reg_idx * (unsigned int)sizeof(uintptr_t));
+        printf("  [%2lu: @%#05lx] ", reg_idx, reg_idx * (unsigned int)sizeof(uintptr_t));
 
         value = data_00[reg_idx];
         /* Mark in-structure padding */
