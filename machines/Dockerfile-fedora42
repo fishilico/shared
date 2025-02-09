@@ -19,7 +19,7 @@ RUN \
         gmp-devel.x86_64 \
         gmp-devel.i686 \
         gtk3-devel \
-        java-11-openjdk-devel \
+        java-latest-openjdk-devel \
         kernel \
         kernel-devel \
         libmnl-devel.i686 \
@@ -100,18 +100,18 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (GCC) 14.2.1 20240801 (Red Hat 14.2.1-1)
-#       clang: clang version 18.1.8 (Fedora 18.1.8-3.fc41)
-#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 14.2.1 20240801 (Fedora MinGW 14.2.1-1.fc42)
-#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 14.2.1 20240801 (Fedora MinGW 14.2.1-1.fc42)
-#       wine: wine-9.15 (Staging)
-#       Linux kernel: 6.11.0-0.rc6.20240905gitc763c4339688.52.fc42.x86_64
-#       /lib/ld-linux.so.2: ld.so (GNU libc) stable release version 2.40.
-#       python: Python 3.13.0rc1
-#       python3: Python 3.13.0rc1
-#       javac: javac 11.0.24
-#       java: openjdk 11.0.24 2024-07-16
-#       rustc: rustc 1.80.1 (3f5fd8dd4 2024-08-06) (Fedora 1.80.1-1.fc41)
-#       cargo: cargo 1.80.1 (376290515 2024-07-16)
+#       gcc: gcc (GCC) 14.2.1 20241104 (Red Hat 14.2.1-6)
+#       clang: clang version 19.1.6 (Fedora 19.1.6-2.fc42)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 14.2.1 20240801 (Fedora MinGW 14.2.1-3.fc42)
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 14.2.1 20240801 (Fedora MinGW 14.2.1-3.fc42)
+#       wine: wine-10.0-rc4 (Staging)
+#       Linux kernel: 6.13.0-0.rc6.20250108git09a0fa92e5b4.50.fc42.x86_64
+#       /lib/ld-linux.so.2: ld.so (GNU libc) development release version 2.40.9000.
+#       python: Python 3.13.1
+#       python3: Python 3.13.1
+#       javac: javac 23.0.1
+#       java: openjdk 23.0.1 2024-10-15
+#       rustc: rustc 1.83.0 (90b35a623 2024-11-26) (Fedora 1.83.0-2.fc42)
+#       cargo: cargo 1.83.0 (5ffbef321 2024-10-29)
 #       coqc: The Coq Proof Assistant, version 8.18.0 compiled with OCaml 5.2.0
 #       openssl: OpenSSL 3.2.2 4 Jun 2024 (Library: OpenSSL 3.2.2 4 Jun 2024)
