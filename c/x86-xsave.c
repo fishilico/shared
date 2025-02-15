@@ -217,7 +217,8 @@ static void hexdump_both(const uint8_t *data1, const uint8_t *data2, unsigned in
             while (j < 16) {
                 if (!(j % 4))
                     printf(" ");
-                printf(" ");
+                printf("   ");
+                j++;
             }
         }
 
