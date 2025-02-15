@@ -128,6 +128,28 @@ This can be proved by drawing an arc of radius 1 with angle :math:`\theta` and u
     As $\frac{\sin(-\theta)}{-\theta} = \frac{\sin \theta}{\theta}$, this can be extended to $\theta < 0$.
     QED.
 
+However this proof is based on an assumption about distances which is actually not so straightforward.
+Instead, it is possible to reason about the areas of a similar figure:
+
+* The area of a right triangle with angle :math:`\theta` and hypothenuse 1 is :math:`\frac{\cos\theta \sin\theta}{2}`
+* The area of a portion of a disc of radius 1 delimited by angle :math:`\theta` is :math:`\frac{\theta}{2}` (in radians)
+* The area of a right triandle with angle :math:`\theta` and side 1 next to it is :math:`\frac{\tan\theta}{2}`
+
+.. raw:: latex
+
+    \begin{eqnarray*}
+      \frac{\cos\theta \sin\theta}{2} < &\frac{\theta}{2}& < \frac{\tan\theta}{2} \\
+      \cos\theta \frac{\sin\theta}{\theta} < 1 & \text{ and } & \cos\theta < \frac{\sin\theta}{\theta} \\
+      \cos\theta &<& \frac{\sin\theta}{\theta} < 1
+    \end{eqnarray*}
+
+    As $\lim_{\theta \rightarrow 0} \cos\theta = \cos 0 = 1$,
+    \begin{eqnarray*}
+      \lim_{\theta \rightarrow 0^+}\frac{\sin \theta}{\theta} = 1
+    \end{eqnarray*}
+    And like the previous proof, this can be extended to $\theta < 0$.
+    QED.
+
 This allows to compute the derivative of trigonometric functions.
 
 .. raw:: latex
@@ -179,7 +201,7 @@ This function obeys an exponential relationship: :math:`\exp(x + y) = \exp(x)\ex
 
 The exponential function is the reciproqual of the logarithm function defined as :math:`\ln: x \in ]0, +\infty[ \mapsto \int_1^x \frac{1}{t} dt`.
 
-It can be show that the function is the limit of an infinite sum:
+It can be shown that the function is the limit of an infinite sum:
 
 .. raw:: latex
 
