@@ -27,6 +27,7 @@ RUN \
         ocaml-findlib \
         openmp \
         openssh \
+        openssl \
         pkgconf \
         python \
         python-cffi \
@@ -91,19 +92,19 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (GCC) 14.2.1 20240805
-#       clang: clang version 18.1.8
-#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 13.1.0
-#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 13.1.0
-#       wine: wine-9.14
-#       Linux kernel: 6.10.4-arch2-1
-#       /lib/ld-linux.so.2: ld.so (GNU libc) stable release version 2.40.
+#       gcc: gcc (GCC) 14.2.1 20250207
+#       clang: clang version 19.1.7
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 14.2.0
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 14.2.0
+#       wine: wine-10.1
+#       Linux kernel: 6.13.2-arch1-1
+#       /lib/ld-linux.so.2: ld.so (GNU libc) stable release version 2.41.
 #       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.5
-#       python: Python 3.12.4
-#       python3: Python 3.12.4
-#       javac: javac 22.0.2
-#       java: openjdk 22.0.2 2024-07-16
-#       rustc: rustc 1.80.1 (3f5fd8dd4 2024-08-06) (Arch Linux rust 1:1.80.1-1)
-#       cargo: cargo 1.80.1 (376290515 2024-07-16)
-#       coqc: The Coq Proof Assistant, version 8.19.2 compiled with OCaml 5.2.0
-#       openssl: OpenSSL 3.3.1 4 Jun 2024 (Library: OpenSSL 3.3.1 4 Jun 2024)
+#       python: Python 3.13.1
+#       python3: Python 3.13.1
+#       javac: javac 23.0.2
+#       java: openjdk 23.0.2 2025-01-21
+#       rustc: rustc 1.84.1 (e71f9a9a9 2025-01-27) (Arch Linux rust 1:1.84.1-1)
+#       cargo: cargo 1.84.1 (66221abde 2024-11-19)
+#       coqc: The Coq Proof Assistant, version 8.20.1 compiled with OCaml 5.3.0
+#       openssl: OpenSSL 3.4.1 11 Feb 2025 (Library: OpenSSL 3.4.1 11 Feb 2025)
