@@ -10,6 +10,8 @@ RUN \
     echo '[multilib]' >> /etc/pacman.conf && \
     echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf && \
     pacman --noconfirm -Sy && \
+    pacman-key --init && \
+    pacman --noconfirm -S archlinux-keyring && \
     pacman --noconfirm -S \
         base-devel \
         clang \
