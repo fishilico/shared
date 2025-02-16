@@ -101,18 +101,18 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (GCC) 14.1.1 20240701 (Red Hat 14.1.1-7)
-#       clang: clang version 18.1.8 (Fedora 18.1.8-3.fc41)
-#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 14.1.1 20240701 (Fedora MinGW 14.1.1-5.fc41)
-#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 14.1.1 20240701 (Fedora MinGW 14.1.1-5.fc41)
-#       wine: wine-9.15 (Staging)
-#       Linux kernel: 6.11.0-0.rc3.20240814git6b0f8db921ab.32.fc42.x86_64
+#       gcc: gcc (GCC) 14.2.1 20250110 (Red Hat 14.2.1-7)
+#       clang: clang version 19.1.7 (Fedora 19.1.7-2.fc41)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 14.2.1 20240801 (Fedora MinGW 14.2.1-3.fc41)
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 14.2.1 20240801 (Fedora MinGW 14.2.1-3.fc41)
+#       wine: wine-10.1 (Staging)
+#       Linux kernel: 6.12.13-200.fc41.x86_64
 #       /lib/ld-linux.so.2: ld.so (GNU libc) stable release version 2.40.
-#       python: Python 3.13.0rc1
-#       python3: Python 3.13.0rc1
-#       javac: javac 11.0.24
-#       java: openjdk 11.0.24 2024-07-16
-#       rustc: rustc 1.80.1 (3f5fd8dd4 2024-08-06) (Fedora 1.80.1-1.fc41)
-#       cargo: cargo 1.80.1 (376290515 2024-07-16)
-#       coqc: The Coq Proof Assistant, version 8.18.0 compiled with OCaml 5.2.0
-#       openssl: OpenSSL 3.2.2 4 Jun 2024 (Library: OpenSSL 3.2.2 4 Jun 2024)
+#       python: Python 3.13.2
+#       python3: Python 3.13.2
+#       javac: javac 11.0.26
+#       java: openjdk 11.0.26 2025-01-21
+#       rustc: rustc 1.84.1 (e71f9a9a9 2025-01-27) (Fedora 1.84.1-1.fc41)
+#       cargo: cargo 1.84.1 (66221abde 2024-11-19)
+#       coqc: The Coq Proof Assistant, version 8.18.0 compiled with OCaml 5.2.1
+#       openssl: OpenSSL 3.2.4 11 Feb 2025 (Library: OpenSSL 3.2.4 11 Feb 2025)

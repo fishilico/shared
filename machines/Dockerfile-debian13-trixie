@@ -100,18 +100,18 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (Debian 14.2.0-1) 14.2.0
-#       clang: Debian clang version 16.0.6 (27+b1)
+#       gcc: gcc (Debian 14.2.0-16) 14.2.0
+#       clang: Debian clang version 19.1.7 (1+b1)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 13-win32
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 13-win32
-#       wine: wine-9.0 (Debian 9.0~repack-4+b1)
-#       Linux kernel: 6.10.3-amd64
-#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.39-6) stable release version 2.39.
+#       wine: wine-9.0 (Debian 9.0~repack-7)
+#       Linux kernel: 6.12.12-amd64
+#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.40-6) stable release version 2.40.
 #       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.5
-#       python3: Python 3.12.4
-#       javac: javac 17.0.12
-#       java: openjdk 17.0.12 2024-07-16
-#       rustc: rustc 1.79.0
-#       cargo: cargo 1.79.0
-#       coqc: The Coq Proof Assistant, version 8.19.1 compiled with OCaml 4.14.1
-#       openssl: OpenSSL 3.2.2 4 Jun 2024 (Library: OpenSSL 3.2.2 4 Jun 2024)
+#       python3: Python 3.13.2
+#       javac: javac 17.0.14
+#       java: openjdk 17.0.14 2025-01-21
+#       rustc: rustc 1.84.0 (9fc6b4312 2025-01-07) (built from a source tarball)
+#       cargo: cargo 1.84.0 (66221abde 2024-11-19)
+#       coqc: The Coq Proof Assistant, version 8.20.0 compiled with OCaml 5.3.0
+#       openssl: OpenSSL 3.4.0 22 Oct 2024 (Library: OpenSSL 3.4.0 22 Oct 2024)
