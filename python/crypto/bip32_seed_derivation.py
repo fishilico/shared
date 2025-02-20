@@ -59,17 +59,16 @@ Here are other websites:
   Mnemonic Code Converter
 """
 import base64
-import binascii
 import hashlib
 import hmac
 import itertools
 import os.path
 import unicodedata
 
-from typing import Iterable
+from typing import Any, Iterable, Sequence
 
-from ec_tests import SECP256K1, SECP256R1, decode_bigint_be, has_cryptodome_ripemd160
-from ed25519_tests import Ed25519
+from ec_tests import ECPoint, SECP256K1, SECP256R1, StandardCurve, decode_bigint_be, has_cryptodome_ripemd160
+from ed25519_tests import Ed25519, Ed25519Point
 from eth_functions_keccak import keccak256
 
 
@@ -84,10 +83,12 @@ KNOWN_CURVES = {
     'nist256p1': (SECP256R1, b'Nist256p1 seed'),
     'secp256k1': (SECP256K1, b'Bitcoin seed'),
     'secp256r1': (SECP256R1, b'Nist256p1 seed'),
-}
+}  # type: dict[str, tuple[StandardCurve | Ed25519, bytes]]
 
 
-def bip32derive_priv_int(privkey, chaincode, child_index, curve='secp256k1'):
+def bip32derive_priv_int(
+    privkey, chaincode, child_index, curve="secp256k1"
+):  # type: (bytes, bytes, int, str) -> tuple[bytes, bytes]
     """Derive a key from a seed according to a BIP-0032 derivation path as integer"""
     try:
         curve_obj, _ = KNOWN_CURVES[curve.lower()]
@@ -106,6 +107,7 @@ def bip32derive_priv_int(privkey, chaincode, child_index, curve='secp256k1'):
     else:
         if curve_obj == ED25519:
             raise ValueError("Ed25519 derivation does not support non-hardened key")
+        assert isinstance(curve_obj, StandardCurve)
         pubkey = curve_obj.g * kpar
         data = (b'\x03' if pubkey.y & 1 else b'\x02') + pubkey.x.to_bytes(32, 'big') + index_bytes
 
@@ -114,6 +116,7 @@ def bip32derive_priv_int(privkey, chaincode, child_index, curve='secp256k1'):
         if curve_obj == ED25519:
             kpar = int.from_bytes(child_i[:32], 'big')
         else:
+            assert isinstance(curve_obj, StandardCurve)
             int_ileft = int.from_bytes(child_i[:32], 'big')
             kpar_new = (kpar + int_ileft) % curve_obj.g.order
             if int_ileft >= curve_obj.g.order or kpar_new == 0:
@@ -127,7 +130,7 @@ def bip32derive_priv_int(privkey, chaincode, child_index, curve='secp256k1'):
     return kpar.to_bytes(32, 'big'), child_i[32:]
 
 
-def bip32derive(derivation_path, seed, curve='secp256k1'):
+def bip32derive(derivation_path, seed, curve='secp256k1'):  # type: (str, bytes, str) -> tuple[bytes, bytes]
     """Derive a key from a seed according to a BIP-0032 derivation path
 
     Returns (k, c) with:
@@ -153,15 +156,17 @@ def bip32derive(derivation_path, seed, curve='secp256k1'):
         cpar = master_key[32:]
 
         # Retry with a slightly different seed, if the result is invalid
-        if curve_obj != ED25519 and (kpar == 0 or kpar >= curve_obj.g.order):
-            seed = master_key
-            continue
+        if curve_obj != ED25519:
+            assert isinstance(curve_obj, StandardCurve)
+            if kpar == 0 or kpar >= curve_obj.g.order:
+                seed = master_key
+                continue
         break
 
     kpar_bytes = master_key[:32]
     for child in parts[1:]:
         if child.endswith("'"):
-            index = (0x80000000 + int(child[:-1]))
+            index = 0x80000000 + int(child[:-1])
         else:
             index = int(child)
         kpar_bytes, cpar = bip32derive_priv_int(kpar_bytes, cpar, index, curve=curve)
@@ -169,7 +174,7 @@ def bip32derive(derivation_path, seed, curve='secp256k1'):
     return kpar_bytes, cpar
 
 
-def bip39toseed(sentence, passphrase=None):
+def bip39toseed(sentence, passphrase=None):  # type: (str, str | None) -> bytes
     """Compute the deterministic key (seed) associated with a sentence of BIP-0039 mnemonics"""
     sentence = unicodedata.normalize('NFKD', sentence)
     salt = b'mnemonic'
@@ -179,7 +184,7 @@ def bip39toseed(sentence, passphrase=None):
     return hashlib.pbkdf2_hmac('sha512', sentence.encode('utf-8'), salt, 2048, 64)
 
 
-def load_bip39_wordlist(lang):
+def load_bip39_wordlist(lang):  # type: (str) -> tuple[str, ...]
     """Load a list of words for the specified language
 
     Dictionaries are available on:
@@ -192,10 +197,10 @@ def load_bip39_wordlist(lang):
     return words
 
 
-BIP39_ENGLISH = load_bip39_wordlist("english")
+BIP39_ENGLISH = load_bip39_wordlist("english")  # type: tuple[str, ...]
 
 
-def bip39_entropy2mnemonics(entropy, wordlist=BIP39_ENGLISH):
+def bip39_entropy2mnemonics(entropy, wordlist=BIP39_ENGLISH):  # type: (bytes, Sequence[str]) -> str
     """Convert some bytes to a BIP-0039 mnemonic sentence"""
     assert len(entropy) in {16, 20, 24, 28, 32}  # Entropy of 128, 160, 192, 224 or 256 bits
     checksum_size_bits = len(entropy) // 4  # In BIP-0039: CS = ENT / 32
@@ -217,7 +222,9 @@ def bip39_entropy2mnemonics(entropy, wordlist=BIP39_ENGLISH):
     return " ".join(words)
 
 
-def bip39_mnemonics2entropy(mnemonics, verify_checksum=True, wordlist=BIP39_ENGLISH):
+def bip39_mnemonics2entropy(
+    mnemonics, verify_checksum=True, wordlist=BIP39_ENGLISH
+):  # type: (str, bool, Sequence[str]) -> bytes
     """Convert a BIP-0039 mnemonic sentence to the underlying entropy"""
     words = mnemonics.split()
     assert len(words) in {12, 15, 18, 21, 24}
@@ -239,27 +246,28 @@ def bip39_mnemonics2entropy(mnemonics, verify_checksum=True, wordlist=BIP39_ENGL
     else:
         checksum = int.from_bytes(checksum_full[:checksum_size_bytes + 1], "big") >> (8 - checksum_size_rem)
     if checksum != checksum_int:
-        raise ValueError("Invalid checksum: {} != {}".format(checksum, checksum_int))
+        raise ValueError(f"Invalid checksum: {checksum} != {checksum_int}")
     return entropy
 
 
-def public_point(private_key, curve='secp256k1'):
+def public_point(private_key, curve='secp256k1'):  # type: (bytes, str) -> ECPoint | Ed25519Point
     """Retrieve the public key as a point object"""
     try:
         curve_obj = KNOWN_CURVES[curve.lower()][0]
     except KeyError:
-        raise ValueError("Unknown curve name {}".format(repr(curve)))
+        raise ValueError(f"Unknown curve name {curve!r}")
     return curve_obj.public_point(private_key)
 
 
-def public_key(private_key, curve='secp256k1'):
+def public_key(private_key, curve='secp256k1'):  # type: (bytes, str) -> bytes
     """Retrieve the public key as bytes"""
     try:
         curve_obj = KNOWN_CURVES[curve.lower()][0]
     except KeyError:
-        raise ValueError("Unknown curve name {}".format(repr(curve)))
+        raise ValueError(f"Unknown curve name {curve!r}")
     pubkey = curve_obj.public_point(private_key)
     if curve_obj == ED25519:
+        assert isinstance(curve_obj, Ed25519)
         encoded = pubkey.encode()
         assert encoded == curve_obj.public_key(private_key)
         return b'\x00' + encoded
@@ -270,7 +278,7 @@ BASE58_BITCOIN_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstu
 assert len(BASE58_BITCOIN_ALPHABET) == 58
 
 
-def base58_decode(data, size=None):
+def base58_decode(data, size=None):  # type: (str, int | None) -> bytes
     """Decode some data encoded using Base58 bitcoin alphabet"""
     value = 0
     leading_zeros = 0
@@ -283,7 +291,7 @@ def base58_decode(data, size=None):
     return value.to_bytes(size, 'big')
 
 
-def base58_encode(data):
+def base58_encode(data):  # type: (bytes) -> str
     """Encode some data using Base58 bitcoin alphabet"""
     value = int.from_bytes(data, 'big')
     result = []
@@ -298,7 +306,7 @@ def base58_encode(data):
     return "".join(result[::-1])
 
 
-def btc_wallet_addr_p2pkh(public_key):
+def btc_wallet_addr_p2pkh(public_key):  # type: (ECPoint) -> str
     """Compute the Bitcoin Pay-to-Public-Key-Hash (P2PKH) address from a public key
 
     This is one of the first ways of computing a Bitcoin address from a public key.
@@ -311,7 +319,7 @@ def btc_wallet_addr_p2pkh(public_key):
     return base58_encode(p2pkh_bytes + p2pkh_bytes_checksum)
 
 
-def btc_wallet_addr_p2sh(public_key):
+def btc_wallet_addr_p2sh(public_key):  # type: (ECPoint) -> str
     """Compute the Bitcoin Pay-to-Script-Hash (P2SH) address from a public key
 
     A Pay to Witness Public Key Hash (P2WPKH) script is:
@@ -423,7 +431,7 @@ def bech32_decode(bech, expected_hrp=None):  # type: (str, str | None) -> bytes
     return bytes(decoded)
 
 
-def eth_wallet_addr(public_key, chain_id=None):
+def eth_wallet_addr(public_key, chain_id=None):  # type: (ECPoint, int | None) -> str
     """Compute the Ethereum address from a public key"""
     hex_addr = keccak256(public_key.x.to_bytes(32, 'big') + public_key.y.to_bytes(32, 'big'))[-20:].hex()
     addr_for_checksum = (str(chain_id) + '0x' + hex_addr) if chain_id is not None else hex_addr
@@ -521,7 +529,7 @@ BIP32_TEST_VECTORS = (
             ),
         ),
     },
-)
+)  # type: tuple[dict[str, Any], ...]
 
 
 # Test vectors from https://github.com/satoshilabs/slips/blob/master/slip-0010.md#test-vectors
@@ -854,7 +862,7 @@ SLIP0010_TEST_VECTORS = (
             ),
         ),
     },
-)
+)  # type: tuple[dict[str, Any], ...]
 
 
 if __name__ == '__main__':
@@ -984,9 +992,8 @@ if __name__ == '__main__':
 
     # Run test vectors from https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#test-vectors
     for test_vector in BIP32_TEST_VECTORS:
-        seed = test_vector['seed']
-        # Python 3.5 introduced bytes.hex() instead of binascii.hexlify(), but this code works with Python 3.4 too.
-        print("Testing BIP32 test vector {}".format(binascii.hexlify(seed).decode('ascii')))
+        seed = test_vector['seed']  # type: bytes
+        print(f"Testing BIP32 test vector {seed.hex()}")
         for derivation_path, expected_pub, expected_priv in test_vector['keys']:
             key, chaincode = bip32derive(derivation_path, seed)
 
@@ -1036,13 +1043,13 @@ if __name__ == '__main__':
             checksum = hashlib.sha256(checksum).digest()
             assert decoded_priv[0x4e:] == checksum[:4]
 
-            print("- {}: OK".format(derivation_path))
+            print(f"- {derivation_path}: OK")
 
     # Run test vectors from https://github.com/satoshilabs/slips/blob/master/slip-0010.md#test-vectors
     for test_vector in SLIP0010_TEST_VECTORS:
-        curve = test_vector['curve']
+        curve = test_vector['curve']  # type: str
         seed = test_vector['seed']
-        print("Testing SLIP-0010 test vector {}:{}".format(curve, binascii.hexlify(seed).decode('ascii')))
+        print(f"Testing SLIP-0010 test vector {curve}:{seed.hex()}")
         for derivation_path, exp_fingerprint, exp_chaincode, exp_private, exp_public in test_vector['keys']:
             key, chaincode = bip32derive(derivation_path, seed, curve=curve)
             assert exp_chaincode == chaincode
@@ -1054,7 +1061,7 @@ if __name__ == '__main__':
             curve_obj = KNOWN_CURVES[curve][0]
             pubkey_bytes = public_key(key, curve=curve)
             assert exp_public == pubkey_bytes
-            print("- {}: OK".format(derivation_path))
+            print(f"- {derivation_path}: OK")
 
     # Test mnemonics with 12 words
     mnemonics = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about'
@@ -1146,10 +1153,10 @@ if __name__ == '__main__':
         "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199",
     )
     seed = bip39toseed(mnemonics)
-    print("Testing Hardhat seed {}".format(binascii.hexlify(seed).decode('ascii')))
+    print(f"Testing Hardhat seed {seed.hex()}")
     for idx in range(20):
-        eth_privkey = bip32derive("m/44'/60'/0'/0/{}".format(idx), seed)[0]
+        eth_privkey = bip32derive(f"m/44'/60'/0'/0/{idx}", seed)[0]
         assert eth_privkey == hardhat_20_privkeys[idx]
         eth_addr = eth_wallet_addr(SECP256K1.public_point(eth_privkey))
-        print("- m/44'/60'/0'/0/{:<2d}: {}".format(idx, eth_addr))
+        print(f"- m/44'/60'/0'/0/{idx:<2d}: {eth_addr}")
         assert eth_addr == hardhat_20_addresses[idx]
