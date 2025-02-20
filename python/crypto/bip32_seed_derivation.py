@@ -58,13 +58,17 @@ Here are other websites:
 * https://iancoleman.io/bip39
   Mnemonic Code Converter
 """
+import base64
 import binascii
 import hashlib
 import hmac
+import itertools
 import os.path
 import unicodedata
 
-from ec_tests import SECP256K1, SECP256R1
+from typing import Iterable
+
+from ec_tests import SECP256K1, SECP256R1, decode_bigint_be, has_cryptodome_ripemd160
 from ed25519_tests import Ed25519
 from eth_functions_keccak import keccak256
 
@@ -320,6 +324,103 @@ def btc_wallet_addr_p2sh(public_key):
     p2sh_bytes = b'\x05' + bitcoin_pubkey.bitcoin_p2sh_p2wpkh()
     p2sh_bytes_checksum = hashlib.sha256(hashlib.sha256(p2sh_bytes).digest()).digest()[:4]
     return base58_encode(p2sh_bytes + p2sh_bytes_checksum)
+
+
+BECH32_BITCOIN_ALPHABET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l"
+assert len(BECH32_BITCOIN_ALPHABET) == 32
+BECH32_GEN = (0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3)
+
+
+def bech32_polymod(values):  # type: (Iterable[int]) -> int
+    """Function from https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki"""
+    chk = 1
+    for v in values:
+        b = chk >> 25
+        chk = ((chk & 0x1ffffff) << 5) ^ v
+        for i in range(5):
+            if (b >> i) & 1:
+                chk ^= BECH32_GEN[i]
+    return chk
+
+
+def bech32_hrp_expand(s):  # type: (str) -> list[int]
+    """Expand the human-readable part for the Bech32 checksum computation
+
+    Function from https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki
+    """
+    return [ord(x) >> 5 for x in s] + [0] + [ord(x) & 31 for x in s]
+
+
+def bech32_encode(hrp, data):  # type: (str, bytes) -> str
+    """Encode some data using Bech32 bitcoin encoding, with a human-readable part
+
+    https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki
+    "Base32 address format for native v0-16 witness outputs"
+
+    Reference implementation:
+    https://github.com/sipa/bech32/blob/7a7d7ab158db7078a333384e0e918c90dbc42917/ref/python/segwit_addr.py
+    """
+    # Convert data to 5-bit numbers
+    acc = 0
+    bits = 0
+    data_5bits = []  # type: list[int]
+    for value in data:
+        assert 0 <= value <= 0xFF
+        acc = (acc << 8) | value
+        bits += 8
+        while bits >= 5:
+            bits -= 5
+            data_5bits.append((acc >> bits) & 0x1F)
+        acc &= (1 << bits) - 1
+    if bits:
+        # Add padding
+        data_5bits.append((acc << (5 - bits)) & 0x1F)
+
+    if hrp in {"bc", "tb"}:
+        # Special treatment for Bitcoin addresses: insert the witness version 0
+        data_5bits.insert(0, 0)
+    polymod = bech32_polymod(itertools.chain(bech32_hrp_expand(hrp), data_5bits, [0, 0, 0, 0, 0, 0]))
+    polymod ^= 1
+    checksum = [(polymod >> 5 * (5 - i)) & 31 for i in range(6)]
+    return hrp + '1' + ''.join(BECH32_BITCOIN_ALPHABET[d] for d in itertools.chain(data_5bits, checksum))
+
+
+def bech32_decode(bech, expected_hrp=None):  # type: (str, str | None) -> bytes
+    """Decode some data using Bech32 bitcoin encoding
+
+    This is voluntary less strict than the reference implementation
+    https://github.com/sipa/bech32/blob/7a7d7ab158db7078a333384e0e918c90dbc42917/ref/python/segwit_addr.py
+    """
+    bech = bech.lower()
+    # Find the separator
+    hrp, encoded_data = bech.rsplit('1', 1)
+    if expected_hrp is not None and hrp != expected_hrp:
+        raise ValueError(f"Unexpected human-readable part {hrp!r} != {expected_hrp!r}")
+    data = [BECH32_BITCOIN_ALPHABET.index(x) for x in encoded_data]
+    checksum = bech32_polymod(bech32_hrp_expand(hrp) + data)
+    if checksum != 1:
+        raise ValueError(f"Invalid checksum in Bech32 {bech!r}: {checksum!r}")
+    if hrp in {"bc", "tb"}:
+        # Special treatment for Bitcoin addresses
+        if data[0] != 0:
+            raise ValueError(f"Invalid version in Bech32 data {data!r}")
+        data = data[1:]
+
+    # Remove the checksum from the data and convert the 5-bit numbers to octets
+    acc = 0
+    bits = 0
+    decoded = []  # type: list[int]
+    for value in data[:-6]:
+        assert 0 <= value <= 0x1F
+        acc = (acc << 5) | value
+        bits += 5
+        while bits >= 8:
+            bits -= 8
+            decoded.append((acc >> bits) & 0xFF)
+        acc &= (1 << bits) - 1
+    if bits >= 5 or acc:
+        raise ValueError(f"Unexpected passing from base32 data: bits={bits}, acc={acc}")
+    return bytes(decoded)
 
 
 def eth_wallet_addr(public_key, chain_id=None):
@@ -759,6 +860,127 @@ SLIP0010_TEST_VECTORS = (
 if __name__ == '__main__':
     assert base58_encode(b"\0\0\0") == "111"
     assert base58_decode("111") == b"\0\0\0"
+
+    BECH32_TEST_VECTORS = (
+        # Test vectors from
+        # https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki
+        # and https://github.com/iqlusioninc/crates/blob/subtle-encoding/v0.5.1/subtle-encoding/src/bech32.rs
+        ("a", "A12UEL5L", ""),
+        ("a", "a12uel5l", ""),
+        (
+            "an83characterlonghumanreadablepartthatcontainsthenumber1andtheexcludedcharactersbio",
+            "an83characterlonghumanreadablepartthatcontainsthenumber1andtheexcludedcharactersbio1tt5tgs",
+            "",
+        ),
+        ("abcdef", "abcdef1qpzry9x8gf2tvdw0s3jn54khce6mua7lmqqqxw", "00443214c74254b635cf84653a56d7c675be77df"),
+        (
+            "1",
+            "11qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqc8247j",
+            "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        ),
+        (
+            "split",
+            "split1checkupstagehandshakeupstreamerranterredcaperred2y9e3w",
+            "c5f38b70305f519bf66d85fb6cf03058f3dde463ecd7918f2dc743918f2d",
+        ),
+        ("?", "?1ezyfcl", ""),
+        # https://github.com/sipa/bech32/blob/7a7d7ab158db7078a333384e0e918c90dbc42917/ref/python/tests.py#L88-L102
+        ("bc", "BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4", "751e76e8199196d454941c45d1b3a323f1433bd6"),
+        ("tb", "tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx", "751e76e8199196d454941c45d1b3a323f1433bd6"),
+        (
+            "bc",
+            "bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3",
+            "1863143c14c5166804bd19203356da136c985678cd4d27a1b8c6329604903262",
+        ),
+        (
+            "tb",
+            "tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7",
+            "1863143c14c5166804bd19203356da136c985678cd4d27a1b8c6329604903262",
+        ),
+        (
+            "tb",
+            "tb1qqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvsesrxh6hy",
+            "000000c4a5cad46221b2a187905e5266362b99d5e91c6ce24d165dab93e86433",
+        ),
+        # https://stackoverflow.com/questions/70981681/how-to-generate-hd-wallet-keys-addresses-given-seed-phrase-with-cosmos-sdk
+        # ("04" and public key)
+        # https://github.com/cosmos/cosmos-sdk/blob/main/docs/architecture/adr-028-public-key-addresses.md
+        # Encoding:
+        # https://github.com/cometbft/cometbft/blob/4226b0ea6ab4725ef807a16b86d6d24835bb45d4/spec/core/encoding.md
+        (
+            "atom",
+            "atom1qspau72rtj7g57v7lsjvmnna8vvqlvq56hcejj0m34sau0eph8mvr7qgl9avu",
+            "0403de79435cbc8a799efc24cdce7d3b180fb014d5f19949fb8d61de3f21b9f6c1f8",
+        ),
+        # https://github.com/ChorusOne/cosmos-bech32-convertor/blob/ab9886f2580cb85b40ed06db45c07d0f1e38afa7/README.md
+        (
+            "cosmosaccpub",
+            "cosmosaccpub1addwnpepqg5ec06deee7rk3s0xmwn0f3e66wv65l2xc07ynxzj67z9ld5dcwv6ljvv9",
+            "eb5ae9872102299c3f4dce73e1da3079b6e9bd31ceb4e66a9f51b0ff126614b5e117eda370e6",
+        ),
+        (
+            "cosmospub",
+            "cosmospub1addwnpepqg5ec06deee7rk3s0xmwn0f3e66wv65l2xc07ynxzj67z9ld5dcwvwgyrcu",
+            "eb5ae9872102299c3f4dce73e1da3079b6e9bd31ceb4e66a9f51b0ff126614b5e117eda370e6",
+        ),
+        # https://github.com/nymtech/nym/blob/v1.1.22/envs/mainnet.env
+        (
+            "n",
+            "n17srjznxl9dvzdkpwpw24gg668wc73val88a6m5ajg6ankwvz9wtst0cznr",
+            "f407214cdf2b5826d82e0b9554235a3bb1e8b3bf39fbadd3b246bb3b39822b97",
+        ),
+        (
+            "n",
+            "n1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrq73f2nw",
+            "9e28beafa966b2407bffb0d48651e94972a56e69f3c0897d9e8facbdaeb98386",
+        ),
+        (
+            "n",
+            "n19lc9u84cz0yz3fww5283nucc9yvr8gsjmgeul0",
+            "2ff05e1eb813c828a5cea28f19f318291833a212",
+        ),
+        (
+            "n",
+            "n1rw8fw2mpcpzzq3jpa4e52ufawnmj5a4u68p35umvgskewuw0nlzsaa5w4m",
+            "1b8e972b61c044204641ed7345713d74f72a76bcd1c31a736c442d9771cf9fc5",
+        ),
+        (
+            "n",
+            "n10yyd98e2tuwu0f7ypz9dy3hhjw7v772q6287gy",
+            "7908d29f2a5f1dc7a7c4088ad246f793bccf7940",
+        ),
+        # https://github.com/confio/cosmos-hd-key-derivation-spec/blob/76f9ec9e34dfab2a6dda71aff334a03d9e2a3121/README.md#reuse-of-the-cosmos-hub-path-in-cosmos
+        (
+            "achain",
+            "achain1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmjufvfw",
+            "0d82b1e7c96dbfa42462fe612932e6bff111d51b",
+        ),
+        (
+            "bitwhatever",
+            "bitwhatever1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmtwnu3c",
+            "0d82b1e7c96dbfa42462fe612932e6bff111d51b",
+        ),
+    )
+    for test_hrp, test_bech32, test_hex in BECH32_TEST_VECTORS:
+        test_raw = bytes.fromhex(test_hex)
+        test_decoded = bech32_decode(test_bech32, expected_hrp=test_hrp)
+        assert test_decoded == test_raw, f"Unexpected Bech32 {test_decoded.hex()} from {test_bech32}"
+        test_encoded = bech32_encode(test_hrp, test_raw)
+        assert test_encoded == test_bech32.lower()
+
+    # Cosmos derivation from
+    # https://github.com/confio/cosmos-hd-key-derivation-spec/blob/76f9ec9e34dfab2a6dda71aff334a03d9e2a3121/README.md#reuse-of-the-cosmos-hub-path-in-cosmos
+    if has_cryptodome_ripemd160:
+        import Cryptodome.Hash.RIPEMD160
+
+        pubkey_bytes = base64.b64decode("A08EGB7ro1ORuFhjOnZcSgwYlpe0DSFjVNUIkNNQxwKQ")
+        assert Cryptodome.Hash.RIPEMD160.new(hashlib.sha256(pubkey_bytes).digest()).digest() == bytes.fromhex(
+            "0d82b1e7c96dbfa42462fe612932e6bff111d51b"
+        )
+        assert pubkey_bytes[0] == 3
+        assert len(pubkey_bytes) == 33
+        pubkey = SECP256K1.pt_from_x(decode_bigint_be(pubkey_bytes[1:]), is_odd=True)
+        assert pubkey.bitcoin_hash160() == bytes.fromhex("0d82b1e7c96dbfa42462fe612932e6bff111d51b")
 
     # Run test vectors from https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#test-vectors
     for test_vector in BIP32_TEST_VECTORS:

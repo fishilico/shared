@@ -16,7 +16,7 @@ HAVE_PYTHON_TYPES := $(call can-run,$(PYTHON) -c 'a:int=0')
 HAVE_FSTRINGS := $(call can-run,$(PYTHON) -c 'print(f"{repr(6*7)}")')
 
 ifneq ($(HAVE_PYTHON_CRYPTODOME),y)
-NONTEST_BINARIES += bip32_seed_derivation.py chacha20_poly1305_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py
+NONTEST_BINARIES += chacha20_poly1305_tests.py dhparam_tests.py dsa_tests.py ec_tests.py parse_openssl_enc.py rsa_tests.py
 endif
 
 ifneq ($(HAVE_PYTHON_ENUM),y)
@@ -32,7 +32,7 @@ NONTEST_BINARIES += eth_functions_keccak.py
 endif
 
 ifneq ($(HAVE_PYTHON_CRYPTODOME)$(HAVE_FSTRINGS),yy)
-NONTEST_BINARIES += starknet_curve.py
+NONTEST_BINARIES += bip32_seed_derivation.py starknet_curve.py
 endif
 
 BINARIES := $(wildcard *.py)
