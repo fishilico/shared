@@ -51,6 +51,13 @@ import sys
 import tempfile
 
 try:
+    from typing import TYPE_CHECKING
+except ImportError:
+    # typing.TYPE_CHECKING was introduced in Python 3.5.2
+    assert sys.version_info < (3, 5, 2)
+    TYPE_CHECKING = False
+
+try:
     import Cryptodome.Hash.RIPEMD160
 
     has_cryptodome_ripemd160 = True
@@ -59,6 +66,15 @@ except OSError:
     has_cryptodome_ripemd160 = False
 
 import Cryptodome.Util.asn1
+
+if TYPE_CHECKING:
+    from typing import Sequence, TypeAlias
+
+    # Defines a type which is bytes in Python 3 but str in Python 2
+    if sys.version_info >= (3,):
+        Py3Bytes = bytes  # type: TypeAlias
+    else:
+        Py3Bytes = str
 
 
 logger = logging.getLogger(__name__)
@@ -70,7 +86,7 @@ COLOR_PURPLE = '\033[35m'
 COLOR_NORM = '\033[m'
 
 
-def colorprint(color, text):
+def colorprint(color, text):  # type: (str, str) -> None
     """Print the text in color"""
     if color:
         print('{}{}{}'.format(color, text, COLOR_NORM))
@@ -79,7 +95,7 @@ def colorprint(color, text):
 
 
 # pylint: disable=invalid-name
-def extended_gcd(aa, bb):
+def extended_gcd(aa, bb):  # type: (int, int) -> tuple[int, int, int]
     """Extended greatest common divisor
 
     from https://rosettacode.org/wiki/Modular_inverse#Python
@@ -93,7 +109,7 @@ def extended_gcd(aa, bb):
     return lastremainder, lastx * (-1 if aa < 0 else 1), lasty * (-1 if bb < 0 else 1)
 
 
-def modinv(a, m):
+def modinv(a, m):  # type: (int, int) -> int
     """Modular inverse
 
     from https://rosettacode.org/wiki/Modular_inverse#Python
@@ -107,7 +123,7 @@ def modinv(a, m):
     return pow(a, -1, m)
 
 
-def mod_sqrt(n, p):
+def mod_sqrt(n, p):  # type: (int, int) -> int
     """Modular square root
 
     Cipolla's algorithm from https://en.wikipedia.org/wiki/Cipolla%27s_algorithm
@@ -139,7 +155,7 @@ def mod_sqrt(n, p):
     return u
 
 
-def test_mod_sqrt():
+def test_mod_sqrt():  # type: () -> None
     """Test the implementation of modular square root"""
     for prime in (5, 7, 11, 13, 17, 19, 23, 29, 31):
         assert pow(mod_sqrt(4, prime), 2, prime) == 4
@@ -148,7 +164,7 @@ def test_mod_sqrt():
 test_mod_sqrt()
 
 
-def hexdump(data, color=''):
+def hexdump(data, color=''):  # type: (Py3Bytes, str) -> None
     """Show an hexadecimal dump of binary data"""
     if color:
         sys.stdout.write(color)
@@ -160,7 +176,11 @@ def hexdump(data, color=''):
                 hexline += '  '
             else:
                 # pylint: disable=invalid-name
-                x = data[iline + i] if sys.version_info >= (3,) else ord(data[iline + i])
+                if sys.version_info >= (3,):
+                    x = data[iline + i]
+                else:
+                    assert isinstance(data, str)
+                    x = ord(data[iline + i])
                 hexline += '{:02x}'.format(x)
                 ascline += chr(x) if 32 <= x < 127 else '.'
             if i % 2:
@@ -170,14 +190,14 @@ def hexdump(data, color=''):
         sys.stdout.write(COLOR_NORM)
 
 
-def decode_bigint_be(data):
+def decode_bigint_be(data):  # type: (Py3Bytes) -> int
     """Decode a Big-Endian big integer"""
     if sys.version_info < (3, 2):
         return int(binascii.hexlify(data).decode('ascii'), 16)
     return int.from_bytes(data, 'big')
 
 
-def encode_bigint_be(value, bytelen=None):
+def encode_bigint_be(value, bytelen=None):  # type: (int, int | None) -> bytes
     """Encode a Big-Endian big integer"""
     if bytelen is None:
         bytelen = (value.bit_length() + 7) // 8
@@ -187,13 +207,14 @@ def encode_bigint_be(value, bytelen=None):
     return value.to_bytes(bytelen, 'big')
 
 
-def run_process_with_input(cmdline, data, color=None):
+def run_process_with_input(cmdline, data, color=None):  # type: (Sequence[str], Py3Bytes, str | None) -> bool
     """Run the given command with the given data and show its output in colors"""
     print("Output of \"{}\":".format(' '.join(cmdline)))
     if color:
         sys.stdout.write(color)
     sys.stdout.flush()
     proc = subprocess.Popen(cmdline, stdin=subprocess.PIPE, stderr=subprocess.STDOUT)
+    assert proc.stdin is not None
     proc.stdin.write(data)
     proc.stdin.close()
     ret = proc.wait()
@@ -208,8 +229,12 @@ def run_process_with_input(cmdline, data, color=None):
 
 class ECPoint(object):
     """A point on an elliptic curve"""
-    def __init__(self, curve, x, y, order=None):
+    def __init__(
+        self, curve, x, y, order=None
+    ):  # type: (StandardCurve | None, int | None, int | None, int | None) -> None
         if curve is not None:
+            assert x is not None
+            assert y is not None
             assert curve.has_point(x, y)
         else:
             # Infinity point
@@ -223,25 +248,30 @@ class ECPoint(object):
         if order is not None:
             assert self * order == INFINITY
 
-    def __hash__(self):
+    def __hash__(self):  # type: () -> int
         return hash((self.curve, self.x, self.y))
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # type: (object) -> bool
+        if not isinstance(other, ECPoint):
+            return NotImplemented
         return self.curve == other.curve and self.x == other.x and self.y == other.y
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # type: (object) -> bool
+        if not isinstance(other, ECPoint):
+            return NotImplemented
         return self.curve != other.curve or self.x != other.x or self.y != other.y
 
-    def __neg__(self):
+    def __neg__(self):  # type: () -> ECPoint
         """Return the opposite value of the point"""
         if self == INFINITY:
             return INFINITY
         # Use "-y" modulo curve.p
         if not self.y:
             return ECPoint(self.curve, self.x, self.y, self.order)
+        assert self.curve is not None
         return ECPoint(self.curve, self.x, self.curve.p - self.y, self.order)
 
-    def mul_2(self):
+    def mul_2(self):  # type: () -> ECPoint
         """Compute the double of the point on curve y^2 = x^3 + a*x + b mod p
 
         The tangent at (x, y) has a slope l := dy/dx = (3x^2 + a) / (2y)
@@ -264,6 +294,9 @@ class ECPoint(object):
         """
         if self == INFINITY:
             return INFINITY
+        assert self.curve is not None
+        assert self.x is not None
+        assert self.y is not None
 
         p = self.curve.p
         a = self.curve.a
@@ -272,7 +305,7 @@ class ECPoint(object):
         y3 = (slope * (self.x - x3) - self.y) % p
         return ECPoint(self.curve, x3, y3)
 
-    def __add__(self, other):
+    def __add__(self, other):  # type: (ECPoint) -> ECPoint
         """Add two points on the same curve
 
         with S=self and O=other and I(X,Y)=intersection, S + O = -I:
@@ -310,6 +343,11 @@ class ECPoint(object):
         if self == INFINITY:
             return other
         assert self.curve == other.curve
+        assert self.curve is not None
+        assert self.x is not None
+        assert self.y is not None
+        assert other.x is not None
+        assert other.y is not None
 
         p = self.curve.p
         if self.x == other.x:
@@ -324,11 +362,11 @@ class ECPoint(object):
         y3 = (slope * (self.x - x3) - self.y) % p
         return ECPoint(self.curve, x3, y3)
 
-    def __sub__(self, other):
+    def __sub__(self, other):  # type: (ECPoint) -> ECPoint
         """Subtract a point with another"""
         return self + (-other)
 
-    def __mul__(self, other):
+    def __mul__(self, other):  # type: (int) -> ECPoint
         """Multiply a point by an integer (exponent)"""
         if self == INFINITY:
             return INFINITY
@@ -353,17 +391,20 @@ class ECPoint(object):
             bitmask = bitmask // 2
         return result
 
-    def __rmul__(self, other):
+    def __rmul__(self, other):  # type: (int) -> ECPoint
         """Reverse multiplication by an integer"""
         return self * other
 
-    def __str__(self):
+    def __str__(self):  # type: () -> str
         if self == INFINITY:
             return 'INFINITY'
         return '({},{})'.format(self.x, self.y)
 
-    def normalized_coordinates(self):
+    def normalized_coordinates(self):  # type: () -> tuple[int, int]
         """Return the coordinates of the point, normalized in the usual range"""
+        assert self.curve is not None
+        assert self.x is not None
+        assert self.y is not None
         x = self.x
         if not 0 <= x < self.curve.p:
             x %= self.curve.p
@@ -372,26 +413,28 @@ class ECPoint(object):
             y %= self.curve.p
         return x, y
 
-    def bytes_compressed(self):
+    def bytes_compressed(self):  # type: () -> bytes
         """Return the compressed form of the point
 
             02 + x if y is even
             03 + x if y is odd
         """
+        assert self.curve is not None
         coord_size = self.curve.coord_size()
         x, y = self.normalized_coordinates()
         return (b'\x03' if y & 1 else b'\x02') + encode_bigint_be(x, coord_size)
 
-    def bytes_uncompressed(self):
+    def bytes_uncompressed(self):  # type: () -> bytes
         """Return the uncompressed form of the point
 
             04 + x + y
         """
+        assert self.curve is not None
         coord_size = self.curve.coord_size()
         x, y = self.normalized_coordinates()
         return b'\x04' + encode_bigint_be(x, coord_size) + encode_bigint_be(y, coord_size)
 
-    def bitcoin_hash160(self, compress=True):
+    def bitcoin_hash160(self, compress=True):  # type: (bool) -> bytes
         """Bitcoin hash of a public key: SHA256 and RIPEMD160
 
         A Pay to Public Key Hash (P2PKH) is the base58 of [00 + hash160(pubkey)].
@@ -402,7 +445,7 @@ class ECPoint(object):
         pubkey_sha256 = hashlib.sha256(pubkey_bytes).digest()
         return Cryptodome.Hash.RIPEMD160.new(pubkey_sha256).digest()
 
-    def bitcoin_p2sh_p2wpkh(self, compress=True):
+    def bitcoin_p2sh_p2wpkh(self, compress=True):  # type: (bool) -> bytes
         """Bitcoin P2SH hash of P2WPKH script
 
         A Pay to Witness Public Key Hash (P2WPKH) script is:
@@ -425,7 +468,9 @@ INFINITY = ECPoint(None, None, None)
 
 class StandardCurve(object):
     """Standard elliptic curve"""
-    def __init__(self, openssl_name, p, p2, a, b, g_x, g_y, g_order, seed=None, seed_check=None):
+    def __init__(
+        self, openssl_name, p, p2, a, b, g_x, g_y, g_order, seed=None, seed_check=None,
+    ):  # type: (str, int, int, int, int, int, int, int, int | None, int | None) -> None
         """Define a standard elliptic curve
 
         Curve: y^2 = x^3 + a*x + b mod p
@@ -440,14 +485,15 @@ class StandardCurve(object):
         assert (4 * (self.a ** 3) + 27 * (self.b ** 2)) % self.p != 0
         self.g = ECPoint(self, g_x, g_y, g_order)
         if seed is not None:
+            assert seed_check is not None
             self.verify_generation_from_seed(seed, seed_check)
 
-    def has_point(self, x, y):
+    def has_point(self, x, y):  # type: (int, int) -> bool
         assert 0 <= x < self.p
         assert 0 <= y < self.p
         return (y * y - (x * x * x + self.a * x + self.b)) % self.p == 0
 
-    def y_from_x(self, x, is_odd=None):
+    def y_from_x(self, x, is_odd=None):  # type: (int, bool | None) -> int
         """Return the y coordinate of a point which has a known x coordinate
 
         There are always 1 candidates modulo p. Return the one that matches
@@ -461,12 +507,12 @@ class StandardCurve(object):
                 y = self.p - y
         return y
 
-    def pt_from_x(self, x, is_odd=None):
+    def pt_from_x(self, x, is_odd=None):  # type: (int, bool | None) -> ECPoint
         """Return a point on the curve from its x coordinate"""
         y = self.y_from_x(x, is_odd=is_odd)
         return ECPoint(self, x, y)
 
-    def verify_generation_from_seed(self, seed, seed_check):
+    def verify_generation_from_seed(self, seed, seed_check):  # type: (int, int) -> None
         """Verify that the generated parameters come from the given SHA-1 seed"""
         assert 152 < seed.bit_length() <= 160
         plen = self.p.bit_length()
@@ -480,21 +526,23 @@ class StandardCurve(object):
         assert seed_check == c
         assert (self.b * self.b * c + 27) % self.p == 0
 
-    def __repr__(self):
+    def __repr__(self):  # type: () -> str
         return "{}({}, bits={})".format(
             self.__class__.__name__,
             repr(self.openssl_name),
             self.p.bit_length())
 
-    def coord_size(self):
+    def coord_size(self):  # type: () -> int
         """Get the size in bytes of a point coordinate"""
         return (self.p.bit_length() + 7) // 8
 
-    def public_point(self, private):
+    def public_point(self, private):  # type: (bytes) -> ECPoint
         """Get the public key associated with a private key (as bytes)"""
         return self.g * decode_bigint_be(private)
 
-    def recover_ecdsa_public_key_from_int(self, z, r, s, ry_is_odd=None):
+    def recover_ecdsa_public_key_from_int(
+        self, z, r, s, ry_is_odd=None
+    ):  # type: (int, int, int, bool | None) -> ECPoint
         """Recover the public key that has been used to generate an ECDSA signature
 
         This is used in Ethereum blockchain, where some signatures are made in
@@ -519,6 +567,7 @@ class StandardCurve(object):
         if r >= self.p:
             raise ValueError("Invalid ECDSA signature: r is too large")
         j = 0
+        assert self.g.order is not None
         while True:
             x = r + j * self.g.order
             if j > 0 and x >= self.p:
@@ -536,8 +585,11 @@ class StandardCurve(object):
             inv_r = modinv(x, self.g.order)
             return r_pt * ((s * inv_r) % self.g.order) - self.g * ((z * inv_r) % self.g.order)
 
-    def recover_ecdsa_public_key_from_bytes(self, hash_msg, r, s, rec_id=None):
+    def recover_ecdsa_public_key_from_bytes(
+        self, hash_msg, r, s, rec_id=None
+    ):  # type: (Py3Bytes, Py3Bytes, Py3Bytes, Py3Bytes | None) -> ECPoint
         """Decode bytes as integers and call recover_ecdsa_public_key_from_int"""
+        assert self.g.order is not None
         z = decode_bigint_be(hash_msg)
         if self.p.bit_length() < len(hash_msg) * 8:
             z = z >> (len(hash_msg) * 8 - self.p.bit_length())
@@ -613,27 +665,27 @@ NISTP256 = StandardCurve(
 )
 NISTP384 = StandardCurve(
     openssl_name='secp384r1',
-    p=39402006196394479212279040100143613805079739270465446667948293404245721771496870329047266088258938001861606973112319,
+    p=39402006196394479212279040100143613805079739270465446667948293404245721771496870329047266088258938001861606973112319,  # noqa: E501
     p2=2**384 - 2**128 - 2**96 + 2**32 - 1,
     a=-3,
     b=0xb3312fa7e23ee7e4988e056be3f82d19181d9c6efe8141120314088f5013875ac656398d8a2ed19d2a85c8edd3ec2aef,
     g_x=0xaa87ca22be8b05378eb1c71ef320ad746e1d3b628ba79b9859f741e082542a385502f25dbf55296c3a545e3872760ab7,
     g_y=0x3617de4a96262c6f5d9e98bf9292dc29f8f41dbd289a147ce9da3113b5f0b8c00a60b1ce1d7e819d7a431d7c90ea0e5f,
-    g_order=39402006196394479212279040100143613805079739270465446667946905279627659399113263569398956308152294913554433653942643,
+    g_order=39402006196394479212279040100143613805079739270465446667946905279627659399113263569398956308152294913554433653942643,  # noqa: E501
     seed=0xa335926aa319a27a1d00896a6773a4827acdac73,
     seed_check=0x79d1e655f868f02fff48dcdee14151ddb80643c1406d0ca10dfe6fc52009540a495e8042ea5f744f6e184667cc722483,
 )
 NISTP521 = StandardCurve(
     openssl_name='secp521r1',
-    p=6864797660130609714981900799081393217269435300143305409394463459185543183397656052122559640661454554977296311391480858037121987999716643812574028291115057151,
+    p=6864797660130609714981900799081393217269435300143305409394463459185543183397656052122559640661454554977296311391480858037121987999716643812574028291115057151,  # noqa: E501
     p2=2**521 - 1,
     a=-3,
-    b=0x051953eb9618e1c9a1f929a21a0b68540eea2da725b99b315f3b8b489918ef109e156193951ec7e937b1652c0bd3bb1bf073573df883d2c34f1ef451fd46b503f00,
-    g_x=0xc6858e06b70404e9cd9e3ecb662395b4429c648139053fb521f828af606b4d3dbaa14b5e77efe75928fe1dc127a2ffa8de3348b3c1856a429bf97e7e31c2e5bd66,
-    g_y=0x11839296a789a3bc0045c8a5fb42c7d1bd998f54449579b446817afbd17273e662c97ee72995ef42640c550b9013fad0761353c7086a272c24088be94769fd16650,
-    g_order=6864797660130609714981900799081393217269435300143305409394463459185543183397655394245057746333217197532963996371363321113864768612440380340372808892707005449,
+    b=0x051953eb9618e1c9a1f929a21a0b68540eea2da725b99b315f3b8b489918ef109e156193951ec7e937b1652c0bd3bb1bf073573df883d2c34f1ef451fd46b503f00,  # noqa: E501
+    g_x=0xc6858e06b70404e9cd9e3ecb662395b4429c648139053fb521f828af606b4d3dbaa14b5e77efe75928fe1dc127a2ffa8de3348b3c1856a429bf97e7e31c2e5bd66,  # noqa: E501
+    g_y=0x11839296a789a3bc0045c8a5fb42c7d1bd998f54449579b446817afbd17273e662c97ee72995ef42640c550b9013fad0761353c7086a272c24088be94769fd16650,  # noqa: E501
+    g_order=6864797660130609714981900799081393217269435300143305409394463459185543183397655394245057746333217197532963996371363321113864768612440380340372808892707005449,  # noqa: E501
     seed=0xd09e8800291cb85396cc6717393284aaa0da64ba,
-    seed_check=0x0b48bfa5f420a34949539d2bdfc264eeeeb077688e44fbf0ad8f6d0edb37bd6b533281000518e19f1b9ffbe0fe9ed8a3c2200b8f875e523868c70c1e5bf55bad637,
+    seed_check=0x0b48bfa5f420a34949539d2bdfc264eeeeb077688e44fbf0ad8f6d0edb37bd6b533281000518e19f1b9ffbe0fe9ed8a3c2200b8f875e523868c70c1e5bf55bad637,  # noqa: E501
 )
 
 # Aliases from https://tools.ietf.org/html/rfc4492#section-5.1.1
@@ -665,12 +717,14 @@ CURVES = collections.OrderedDict((
 ))
 
 
-def run_curve_test(curve, colorize):
+def run_curve_test(curve, colorize):  # type: (StandardCurve, bool) -> bool
     """Perform some operations on the given curve"""
     color_red = COLOR_RED if colorize else ''
     color_green = COLOR_GREEN if colorize else ''
     color_norm = COLOR_NORM if colorize else ''
     color_purple = COLOR_PURPLE if colorize else ''
+
+    assert curve.g.order is not None
 
     temporary_dir = tempfile.mkdtemp(suffix='_curve-test')
     logger.debug("Created temporary directory %s/", temporary_dir)
@@ -711,6 +765,7 @@ def run_curve_test(curve, colorize):
         privkey_asn1.decode(privkey_der)
         assert len(privkey_asn1) == 4
         assert privkey_asn1[0] == 1
+        assert privkey_asn1[1] is not None
         assert privkey_asn1[2] == struct.pack('BB', 0xa0, len(ec_params_der)) + ec_params_der
         privkey_asn1_obj = Cryptodome.Util.asn1.DerObject()
         privkey_asn1_obj.decode(privkey_asn1[1])
@@ -817,7 +872,7 @@ def run_curve_test(curve, colorize):
             signature_binary = fsig.read()
         sig_asn1 = Cryptodome.Util.asn1.DerSequence()
         sig_asn1.decode(signature_binary)
-        sig_r, sig_s = sig_asn1[:]  # noqa
+        sig_r, sig_s = sig_asn1[:]  # type: tuple[int, int]  # noqa
         assert 0 <= sig_r < curve.g.order
         assert 0 <= sig_s < curve.g.order
         hash_msg = hashlib.sha512(test_message).digest()
@@ -895,12 +950,14 @@ def run_curve_test(curve, colorize):
     return True
 
 
-def run_ssh_test(curve, colorize):
+def run_ssh_test(curve, colorize):  # type: (StandardCurve, bool) -> bool
     """Parse ECDSA OpenSSH keys"""
     color_red = COLOR_RED if colorize else ''
     color_green = COLOR_GREEN if colorize else ''
     color_norm = COLOR_NORM if colorize else ''
     color_purple = COLOR_PURPLE if colorize else ''
+
+    assert curve.g.order is not None
 
     # Find out a matching key type for the specified curve
     if curve.openssl_name == 'prime256v1':  # NIST P-256
@@ -941,7 +998,7 @@ def run_ssh_test(curve, colorize):
         with open(id_key_path, 'r') as fpriv:
             privkey_lines = fpriv.readlines()
 
-        def pop_string(key, offset):
+        def pop_string(key, offset):  # type: (Py3Bytes, int) -> tuple[Py3Bytes, int]
             """Pop a string from the private key"""
             field_size = struct.unpack('>I', key[offset:offset + 4])[0]
             offset += 4
@@ -1002,12 +1059,14 @@ def run_ssh_test(curve, colorize):
             privkey_asn1.decode(private_key)
             assert len(privkey_asn1) == 4
             assert privkey_asn1[0] == 1
+            assert privkey_asn1[1] is not None
             privkey_asn1_obj = Cryptodome.Util.asn1.DerObject()
             privkey_asn1_obj.decode(privkey_asn1[1])
             private_key_secret = decode_bigint_be(privkey_asn1_obj.payload)
             print("* private key({}): {}{:#x}{}".format(
                 len(privkey_asn1_obj.payload) * 8, color_red, private_key_secret, color_norm))
 
+            assert privkey_asn1[2] is not None
             privkey_asn1_curvecont = Cryptodome.Util.asn1.DerObject()
             privkey_asn1_curvecont.decode(privkey_asn1[2])
             privkey_asn1_curve = Cryptodome.Util.asn1.DerObject()
@@ -1015,6 +1074,7 @@ def run_ssh_test(curve, colorize):
             print("* hexadecimal curve OID: {}".format(
                 binascii.hexlify(privkey_asn1_curve.payload).decode('ascii')))
 
+            assert privkey_asn1[3] is not None
             privkey_asn1_pubcont = Cryptodome.Util.asn1.DerObject()
             privkey_asn1_pubcont.decode(privkey_asn1[3])
             privkey_asn1_pub = Cryptodome.Util.asn1.DerObject()
@@ -1108,7 +1168,7 @@ def run_ssh_test(curve, colorize):
     return True
 
 
-def run_bitcoin_address_test():
+def run_bitcoin_address_test():  # type: () -> bool
     """Test bitcoin address code"""
     # Test key from https://medium.com/coinmonks/how-to-generate-a-bitcoin-address-step-by-step-9d7fcbf1ad0b
     test_priv_key = binascii.unhexlify('a966eb6058f8ec9f47074a2faadd3dab42e2c60ed05bc34d39d6c0e1d32b8bdf')
@@ -1122,7 +1182,7 @@ def run_bitcoin_address_test():
     return True
 
 
-def main(argv=None):
+def main(argv=None):  # type: (Sequence[str] | None) -> int
     """Program entry point"""
     parser = argparse.ArgumentParser(
         description="Perform operations related to Elliptic Curves",
@@ -1154,12 +1214,14 @@ def main(argv=None):
                 return 1
         return 0
 
-    curve = CURVES.get(args.curve)
-    if curve is None:
+    maybe_curve = CURVES.get(args.curve)
+    if maybe_curve is None:
         possible_curves = [c for c in CURVES.values() if c.openssl_name == args.curve]
         if len(possible_curves) != 1:
             parser.error("Curve not found: {}".format(args.curve))
         curve = possible_curves[0]
+    else:
+        curve = maybe_curve
 
     if not run_curve_test(curve, args.color):
         return 1

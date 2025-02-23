@@ -108,7 +108,10 @@ def bip32derive_priv_int(
         if curve_obj == ED25519:
             raise ValueError("Ed25519 derivation does not support non-hardened key")
         assert isinstance(curve_obj, StandardCurve)
+        assert curve_obj.g.order is not None
         pubkey = curve_obj.g * kpar
+        assert pubkey.x is not None
+        assert pubkey.y is not None
         data = (b'\x03' if pubkey.y & 1 else b'\x02') + pubkey.x.to_bytes(32, 'big') + index_bytes
 
     while True:
@@ -117,6 +120,7 @@ def bip32derive_priv_int(
             kpar = int.from_bytes(child_i[:32], 'big')
         else:
             assert isinstance(curve_obj, StandardCurve)
+            assert curve_obj.g.order is not None
             int_ileft = int.from_bytes(child_i[:32], 'big')
             kpar_new = (kpar + int_ileft) % curve_obj.g.order
             if int_ileft >= curve_obj.g.order or kpar_new == 0:
@@ -158,6 +162,7 @@ def bip32derive(derivation_path, seed, curve='secp256k1'):  # type: (str, bytes,
         # Retry with a slightly different seed, if the result is invalid
         if curve_obj != ED25519:
             assert isinstance(curve_obj, StandardCurve)
+            assert curve_obj.g.order is not None
             if kpar == 0 or kpar >= curve_obj.g.order:
                 seed = master_key
                 continue
@@ -268,9 +273,12 @@ def public_key(private_key, curve='secp256k1'):  # type: (bytes, str) -> bytes
     pubkey = curve_obj.public_point(private_key)
     if curve_obj == ED25519:
         assert isinstance(curve_obj, Ed25519)
+        assert isinstance(pubkey, Ed25519Point)
         encoded = pubkey.encode()
         assert encoded == curve_obj.public_key(private_key)
         return b'\x00' + encoded
+    assert pubkey.x is not None
+    assert pubkey.y is not None
     return (b'\x03' if pubkey.y & 1 else b'\x02') + pubkey.x.to_bytes(32, 'big')
 
 
@@ -433,6 +441,8 @@ def bech32_decode(bech, expected_hrp=None):  # type: (str, str | None) -> bytes
 
 def eth_wallet_addr(public_key, chain_id=None):  # type: (ECPoint, int | None) -> str
     """Compute the Ethereum address from a public key"""
+    assert public_key.x is not None
+    assert public_key.y is not None
     hex_addr = keccak256(public_key.x.to_bytes(32, 'big') + public_key.y.to_bytes(32, 'big'))[-20:].hex()
     addr_for_checksum = (str(chain_id) + '0x' + hex_addr) if chain_id is not None else hex_addr
     checksum = keccak256(addr_for_checksum.encode('ascii'))[:20].hex()
@@ -998,6 +1008,8 @@ if __name__ == '__main__':
             key, chaincode = bip32derive(derivation_path, seed)
 
             pubkey = SECP256K1.g * int.from_bytes(key, 'big')
+            assert pubkey.x is not None
+            assert pubkey.y is not None
             pubkey_bytes = (b'\x03' if pubkey.y & 1 else b'\x02') + pubkey.x.to_bytes(32, 'big')
 
             # Key encoding
