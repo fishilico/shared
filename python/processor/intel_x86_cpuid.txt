@@ -2134,6 +2134,11 @@
 0xaf,  2 (0xa06f2): "SRF" Sierra Forest Xeon (Sierra Glen, Crestmont)
     6th Generation Intel® Xeon® Scalable Processor Family
 
+# https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20250211
+0xaf,  3 (0xa06f3): "SRF-SP" Sierra Forest Xeon (Sierra Glen, Crestmont) (Stepping C0)
+    6th Generation Intel® Xeon® Scalable Processor Family
+    Xeon 6700-Series Processors with E-Cores
+
 # https://twitter.com/InstLatX64/status/1771477032137900150
 # https://lore.kernel.org/lkml/20240322161725.195614-1-tony.luck@intel.com/T/ "for the regular laptop CPU"
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/arch/x86/include/asm/intel-family.h?id=8a8a9c9047d1089598bdb010ec44d7f14b4f9203

@@ -279,6 +279,10 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
             new_names = [
                 "5th Generation Intel® Xeon® Scalable Processor Family",
             ]
+        elif field_product_name == "Xeon 6700-Series Processors with E-Cores":
+            new_names = [
+                field_product_name,
+            ]
         elif matches := re.match(r"^Atom (.*)$", field_product_name):
             new_names = [
                 f"Intel® Atom® Processor {matches.group(1).replace(' series', ' Series')}",
