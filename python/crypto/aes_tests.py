@@ -2112,6 +2112,45 @@ def check_test_vectors():
             assert encryptor.finalize() == b''
             assert decryptor.finalize() == b''
 
+            # Test encrypting with CTR mode and decrypting with ECB (to understand CTR)
+            key = os.urandom(keysize // 8)
+            # test_nonce = os.urandom(15) + b"\xfe"  # Force the last byte of the nonce to wrap
+            test_nonce = b"\xff" * 15 + b"\xfe"  # Force the nonce to wrap completly
+            test_plaintext = os.urandom(64)
+            cipher = Cipher(algorithms.AES(key), modes.CTR(nonce=test_nonce), backend=default_backend())
+            encryptor = cipher.encryptor()
+            test_ciphertext = encryptor.update(test_plaintext)
+            assert encryptor.finalize() == b""
+            assert len(test_ciphertext) == len(test_plaintext)
+            ctr_keystream = struct.pack("64B", *(
+                p ^ c for p, c in zip(struct.unpack("64B", test_plaintext), struct.unpack("64B", test_ciphertext))
+            ))
+            aes = SimpleAES_4x32bWords(key)
+            nonce_as_int = int(xx(test_nonce), 16)
+            assert ctr_keystream[:16] == aes.encrypt(unxx("{:032x}".format(nonce_as_int)))
+            assert ctr_keystream[16:32] == aes.encrypt(unxx("{:032x}".format(nonce_as_int + 1)[-32:]))
+            assert ctr_keystream[32:48] == aes.encrypt(unxx("{:032x}".format(nonce_as_int + 2)[-32:]))
+            assert ctr_keystream[48:64] == aes.encrypt(unxx("{:032x}".format(nonce_as_int + 3)[-32:]))
+
+            # Test encrypting with GCM mode and decrypting with ECB (to understand GCM)
+            key = os.urandom(keysize // 8)
+            test_iv = os.urandom(12)  # 96-bit IV
+            test_plaintext = os.urandom(64)
+            cipher = Cipher(algorithms.AES(key), modes.GCM(initialization_vector=test_iv), backend=default_backend())
+            encryptor = cipher.encryptor()
+            test_ciphertext = encryptor.update(test_plaintext)
+            assert encryptor.finalize() == b""
+            assert len(encryptor.tag) == 16
+            assert len(test_ciphertext) == len(test_plaintext)
+            gcm_keystream = struct.pack("64B", *(
+                p ^ c for p, c in zip(struct.unpack("64B", test_plaintext), struct.unpack("64B", test_ciphertext))
+            ))
+            aes = SimpleAES_4x32bWords(key)
+            assert gcm_keystream[:16] == aes.encrypt(test_iv + b"\0\0\0\x02")
+            assert gcm_keystream[16:32] == aes.encrypt(test_iv + b"\0\0\0\x03")
+            assert gcm_keystream[32:48] == aes.encrypt(test_iv + b"\0\0\0\x04")
+            assert gcm_keystream[48:64] == aes.encrypt(test_iv + b"\0\0\0\x05")
+
 
 def study_aes():
     """Perform some tests on AES"""
