@@ -104,6 +104,13 @@ import sys
 import tempfile
 
 try:
+    from typing import TYPE_CHECKING
+except ImportError:
+    # typing.TYPE_CHECKING was introduced in Python 3.5.2
+    assert sys.version_info < (3, 5, 2)
+    TYPE_CHECKING = False
+
+try:
     import Cryptodome.Util.asn1
     has_cryptodome = True
 except ImportError:
@@ -129,6 +136,14 @@ except ImportError:
     sys.stderr.write("Warning: nacl fails to load. Proceeding without it\n")
     has_nacl = False
 
+if TYPE_CHECKING:
+    from typing import Sequence, TypeAlias
+
+    # Defines a type which is bytes in Python 3 but str in Python 2
+    if sys.version_info >= (3,):
+        Py3Bytes = bytes  # type: TypeAlias
+    else:
+        Py3Bytes = str
 
 logger = logging.getLogger(__name__)
 
@@ -144,13 +159,14 @@ ED25519_BITS = 256
 ED25519_I = pow(2, (ED25519_PRIME - 1) // 4, ED25519_PRIME)  # sqrt(-1) in F_q
 
 
-def run_process_with_input(cmdline, data, color=None):
+def run_process_with_input(cmdline, data, color=None):  # type: (Sequence[str], Py3Bytes, str | None) -> bool
     """Run the given command with the given data and show its output in colors"""
     print("Output of \"{}\":".format(' '.join(cmdline)))
     if color:
         sys.stdout.write(color)
     sys.stdout.flush()
     proc = subprocess.Popen(cmdline, stdin=subprocess.PIPE)
+    assert proc.stdin is not None
     proc.stdin.write(data)
     proc.stdin.close()
     ret = proc.wait()
@@ -163,7 +179,7 @@ def run_process_with_input(cmdline, data, color=None):
     return True
 
 
-def hexdump(data, color=''):
+def hexdump(data, color=''):  # type: (Py3Bytes, str) -> None
     """Show an hexadecimal dump of binary data"""
     if color:
         sys.stdout.write(color)
@@ -175,7 +191,11 @@ def hexdump(data, color=''):
                 hexline += '  '
             else:
                 # pylint: disable=invalid-name
-                x = data[iline + i] if sys.version_info >= (3,) else ord(data[iline + i])
+                if sys.version_info >= (3,):
+                    x = data[iline + i]
+                else:
+                    assert isinstance(data, str)
+                    x = ord(data[iline + i])
                 hexline += '{:02x}'.format(x)
                 ascline += chr(x) if 32 <= x < 127 else '.'
             if i % 2:
@@ -185,14 +205,14 @@ def hexdump(data, color=''):
         sys.stdout.write(COLOR_NORM)
 
 
-def xx(data):
+def xx(data):  # type: (Py3Bytes) -> str
     """One-line hexadecimal representation of binary data"""
     if sys.version_info < (3, 5):
         return binascii.hexlify(data).decode('ascii')
     return data.hex()
 
 
-def decode_bigint_le(data):
+def decode_bigint_le(data):  # type: (Py3Bytes) -> int
     """Decode a Little-Endian big integer"""
     if sys.version_info < (3,):
         return sum(ord(x) << (8 * i) for i, x in enumerate(data))
@@ -201,7 +221,7 @@ def decode_bigint_le(data):
     return int.from_bytes(data, 'little')
 
 
-def encode_bigint_le(value, bytelen=None):
+def encode_bigint_le(value, bytelen=None):  # type: (int, int | None) -> bytes
     """Encode a Little-Endian big integer"""
     if bytelen is None:
         bytelen = (value.bit_length() + 7) // 8
@@ -216,7 +236,7 @@ def encode_bigint_le(value, bytelen=None):
 
 
 # pylint: disable=invalid-name
-def extended_gcd(aa, bb):
+def extended_gcd(aa, bb):  # type: (int, int) -> tuple[int, int, int]
     """Extended greatest common divisor
 
     from https://rosettacode.org/wiki/Modular_inverse#Python
@@ -230,7 +250,7 @@ def extended_gcd(aa, bb):
     return lastremainder, lastx * (-1 if aa < 0 else 1), lasty * (-1 if bb < 0 else 1)
 
 
-def modinv(a, m):
+def modinv(a, m):  # type: (int, int) -> int
     """Modular inverse
 
     from https://rosettacode.org/wiki/Modular_inverse#Python
@@ -244,7 +264,7 @@ def modinv(a, m):
     return pow(a, -1, m)
 
 
-def modsqrt25519(x2):
+def modsqrt25519(x2):  # type: (int) -> int
     """Modular square root, modulus 2**255 - 19
 
     As q % 8 = 5, the square root of x can be x^((q+3)/8) or i*x^((q+3)/8)
@@ -266,21 +286,21 @@ def modsqrt25519(x2):
 
 class Ed25519Point(object):
     """Point on Ed25519 curve"""
-    def __init__(self, x, y):
+    def __init__(self, x, y):  # type: (int, int) -> None
         assert 0 <= x < ED25519_PRIME
         assert 0 <= y < ED25519_PRIME
         assert (-x * x + y * y - 1 - ED25519_D * x * x * y * y) % ED25519_PRIME == 0
         self.x = x
         self.y = y
 
-    def __str__(self):
+    def __str__(self):  # type: () -> str
         return '({:#x},{:#x})'.format(self.x, self.y)
 
-    def __repr__(self):
+    def __repr__(self):  # type: () -> str
         return '{}({:#x},{:#x})'.format(self.__class__.__name__, self.x, self.y)
 
     @classmethod
-    def from_y(cls, y):
+    def from_y(cls, y):  # type: (int) -> Ed25519Point
         """Compute x from y
 
         x^2 = (y^2 - 1) / (dy^2 + 1)
@@ -291,21 +311,25 @@ class Ed25519Point(object):
         x = modsqrt25519((y * y - 1) * modinv(ED25519_D * y * y + 1, ED25519_PRIME))
         return cls(x, y)
 
-    def __hash__(self):
+    def __hash__(self):  # type: () -> int
         return hash((self.x, self.y))
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # type: (object) -> bool
+        if not isinstance(other, Ed25519Point):
+            return NotImplemented
         return self.x == other.x and self.y == other.y
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # type: (object) -> bool
+        if not isinstance(other, Ed25519Point):
+            return NotImplemented
         return self.x != other.x or self.y != other.y
 
-    def __neg__(self):
+    def __neg__(self):  # type: () -> Ed25519Point
         if not self.x:
             return Ed25519Point(self.x, self.y)
         return Ed25519Point(ED25519_PRIME - self.x, self.y)
 
-    def __add__(self, other):
+    def __add__(self, other):  # type: (Ed25519Point) -> Ed25519Point
         """Add two points together, on the twisted Edwards curve"""
         q = ED25519_PRIME
         x1 = self.x
@@ -317,10 +341,10 @@ class Ed25519Point(object):
         y3 = ((y1 * y2 + x1 * x2) % q) * modinv(1 - dx1x2y1y2, q)
         return Ed25519Point(x3 % q, y3 % q)
 
-    def __sub__(self, other):
+    def __sub__(self, other):  # type: (Ed25519Point) -> Ed25519Point
         return self + (-other)
 
-    def __mul__(self, other):
+    def __mul__(self, other):  # type: (int) -> Ed25519Point
         """Multiply a point by an integer (exponentiation)"""
         e = other
         if e == 0:
@@ -337,11 +361,11 @@ class Ed25519Point(object):
             bitmask = bitmask // 2
         return result
 
-    def __rmul__(self, other):
+    def __rmul__(self, other):  # type: (int) -> Ed25519Point
         """Right multiply: integer * Point"""
         return self.__mul__(other)
 
-    def encode(self):
+    def encode(self):  # type: () -> bytes
         """Encode a point in a compressed binary form"""
         bits = ED25519_BITS
         if self.x & 1:
@@ -351,7 +375,7 @@ class Ed25519Point(object):
         return encode_bigint_le(y, bits // 8)
 
     @classmethod
-    def decode(cls, compressed):
+    def decode(cls, compressed):  # type: (Py3Bytes) -> Ed25519Point
         """Decode a point in a compressed binary form"""
         y = decode_bigint_le(compressed)
         bits = ED25519_BITS
@@ -363,7 +387,7 @@ class Ed25519Point(object):
             pt.x = ED25519_PRIME - pt.x
         return pt
 
-    def to_montgomery(self):
+    def to_montgomery(self):  # type: () -> Montgomery25519Point
         """Get the equivalent point on the Montgomery curve for Ed25519
 
         u = (1 + y) / (1 - y)
@@ -382,7 +406,7 @@ class Ed25519Point(object):
         v = (u * modinv(self.x, q) * modsqrt25519(-486664)) % q
         return Montgomery25519Point(u, v)
 
-    def order(self):
+    def order(self):  # type: () -> int
         """Get the order of the point"""
         if self.x == 0 and self.y == 1:
             return 1
@@ -404,8 +428,9 @@ class Ed25519Point(object):
 
 class Montgomery25519Point(object):
     """Point on Montgomery curve for Ed25519 (Curve25519)"""
-    def __init__(self, x, y):
+    def __init__(self, x, y):  # type: (int | None, int | None) -> None
         if x is not None or y is not None:
+            assert x is not None and y is not None
             y2 = (y * y) % ED25519_PRIME
             x2 = (x * x) % ED25519_PRIME
             x3 = (x2 * x) % ED25519_PRIME
@@ -413,27 +438,33 @@ class Montgomery25519Point(object):
         self.x = x
         self.y = y
 
-    def __str__(self):
+    def __str__(self):  # type: () -> str
         if self.x is None:
             return 'INFINITY'
+        assert self.y is not None
         return '({:#x},{:#x})'.format(self.x, self.y)
 
-    def __repr__(self):
+    def __repr__(self):  # type: () -> str
         if self.x is None:
             return '{}.INFINITY'.format(self.__class__.__name__)
+        assert self.y is not None
         return '{}({:#x},{:#x})'.format(self.__class__.__name__, self.x, self.y)
 
-    def __hash__(self):
+    def __hash__(self):  # type: () -> int
         return hash((self.x, self.y))
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # type: (object) -> bool
+        if not isinstance(other, Montgomery25519Point):
+            return NotImplemented
         return self.x == other.x and self.y == other.y
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # type: (object) -> bool
+        if not isinstance(other, Montgomery25519Point):
+            return NotImplemented
         return self.x != other.x or self.y != other.y
 
     @classmethod
-    def from_x(cls, x):
+    def from_x(cls, x):  # type: (int) -> Montgomery25519Point
         """Compute y from x and return a point on Curve25519
 
         y**2 = x**3 + 486662 x**2 + x
@@ -445,30 +476,32 @@ class Montgomery25519Point(object):
         return cls(x, y)
 
     @classmethod
-    def decode(cls, binary_x):
+    def decode(cls, binary_x):  # type: (Py3Bytes) -> Montgomery25519Point
         """Decode a point from the x (or u) coordinate"""
         x = decode_bigint_le(binary_x)
         bits = ED25519_BITS
         parity = x >> (bits - 1)
         assert parity in (0, 1)
         pt = cls.from_x(x & ~(1 << (bits - 1)))
+        assert pt.y is not None
         if pt.y & 1 != parity:
             assert pt.y != 0
             pt.y = ED25519_PRIME - pt.y
         return pt
 
-    def encode_x25519(self):
+    def encode_x25519(self):  # type: () -> bytes
         """Encode the x coordinate, for X25519"""
+        assert self.x is not None
         return encode_bigint_le(self.x, ED25519_BITS // 8)
 
-    def __neg__(self):
+    def __neg__(self):  # type: () -> Montgomery25519Point
         if self.x is None:
             return Montgomery25519Point(None, None)  # Infinity
         if not self.y:
             return Montgomery25519Point(self.x, self.y)
         return Montgomery25519Point(self.x, ED25519_PRIME - self.y)
 
-    def mul_2(self):
+    def mul_2(self):  # type: () -> Montgomery25519Point
         """Compute the double of the point on curve y^2 = x^3 + 486662*x^2 + x mod q
         i.e. b*y^2 = x^3 + a*x^2 + x mod q with b = 1 and a = 486662
 
@@ -490,13 +523,14 @@ class Montgomery25519Point(object):
         """
         if self.x is None:
             return Montgomery25519Point(None, None)
+        assert self.y is not None
         q = ED25519_PRIME
         slope = ((3 * self.x * self.x + 2 * 486662 * self.x + 1) * modinv(2 * self.y, q)) % q
         x3 = (slope * slope - 2 * self.x - 486662) % q
         y3 = (slope * (self.x - x3) - self.y) % q
         return Montgomery25519Point(x3, y3)
 
-    def __add__(self, other):
+    def __add__(self, other):  # type: (Montgomery25519Point) -> Montgomery25519Point
         """Add two points together
 
         Curve: y^2 = x^3 + 486662*x^2 + x mod q
@@ -543,6 +577,9 @@ class Montgomery25519Point(object):
             # self + INFINITY = self
             return Montgomery25519Point(self.x, self.y)
 
+        assert self.y is not None
+        assert other.y is not None
+
         q = ED25519_PRIME
 
         if self.x == other.x:
@@ -557,7 +594,7 @@ class Montgomery25519Point(object):
         y3 = (slope * (self.x - x3) - self.y) % q
         return Montgomery25519Point(x3, y3)
 
-    def __mul__(self, other):
+    def __mul__(self, other):  # type: (int) -> Montgomery25519Point
         """Multiply a point by an integer (exponentiation)"""
         e = other
         if e == 0:
@@ -574,11 +611,11 @@ class Montgomery25519Point(object):
             bitmask = bitmask // 2
         return result
 
-    def __rmul__(self, other):
+    def __rmul__(self, other):  # type: (int) -> Montgomery25519Point
         """Right multiply: integer * Point"""
         return self.__mul__(other)
 
-    def to_edwards(self):
+    def to_edwards(self):  # type: () -> Ed25519Point
         """Get the equivalent point on Twisted Edwards curve Ed25519
 
         x = u/v * sqrt(-486664)
@@ -586,6 +623,7 @@ class Montgomery25519Point(object):
         """
         if self.x is None:
             return Ed25519Point(0, 1)
+        assert self.y is not None
         q = ED25519_PRIME
         if self.x == 0:
             assert self.y == 0
@@ -594,7 +632,7 @@ class Montgomery25519Point(object):
         y = ((self.x - 1) * modinv(self.x + 1, q)) % q
         return Ed25519Point(x, y)
 
-    def order(self):
+    def order(self):  # type: () -> int
         """Get the order of the point"""
         if self.x is None and self.y is None:
             return 1
@@ -632,23 +670,23 @@ class Ed25519(object):
     d = ED25519_D
 
     @staticmethod
-    def has_point(x, y):
+    def has_point(x, y):  # type: (int, int) -> bool
         """Check whether (x, y) belongs to the curve"""
         assert 0 <= x < ED25519_PRIME
         assert 0 <= y < ED25519_PRIME
         return (-x * x + y * y - 1 - ED25519_D * x * x * y * y) % ED25519_PRIME == 0
 
     @staticmethod
-    def hash(message):
+    def hash(message):  # type: (bytes) -> bytes
         """Used hash function, SHA-512"""
         return hashlib.sha512(message).digest()
 
-    def hash_int(self, message):
+    def hash_int(self, message):  # type: (bytes) -> int
         """Used hash function with conversion to an integer"""
         return decode_bigint_le(self.hash(message)[:ED25519_BITS // 4])
 
     @staticmethod
-    def decode_scalar(scalar):
+    def decode_scalar(scalar):  # type: (bytes) -> int
         """Decode an X25519 scalar according to RFC7748
 
         This function can also be implemented by modifying its argument:
@@ -659,19 +697,19 @@ class Ed25519(object):
         value = decode_bigint_le(scalar[:ED25519_BITS // 8])
         return (value | (1 << (ED25519_BITS - 2))) & ~(7 | (1 << (ED25519_BITS - 1)))
 
-    def private_key(self, secret):
+    def private_key(self, secret):  # type: (bytes) -> int
         """Get the private key associated with the secret"""
         return self.decode_scalar(self.hash(secret))
 
-    def public_point(self, secret):
+    def public_point(self, secret):  # type: (bytes) -> Ed25519Point
         """Get the public point associated with the secret"""
         return self.b * self.private_key(secret)
 
-    def public_key(self, secret):
+    def public_key(self, secret):  # type: (bytes) -> bytes
         """Get the public key associated with the secret"""
         return self.public_point(secret).encode()
 
-    def sign(self, message, secret, public_key=None):
+    def sign(self, message, secret, public_key=None):  # type: (bytes, bytes, bytes | None) -> bytes
         """Sign a message with Ed25519 and the secret"""
         privkey = self.private_key(secret)
         if public_key is None:
@@ -686,7 +724,7 @@ class Ed25519(object):
         s = (r + privkey * hash_for_s) % ordb
         return r_point + encode_bigint_le(s, bits // 8)
 
-    def check_signature(self, message, signature, public_key):
+    def check_signature(self, message, signature, public_key):  # type: (bytes, bytes, bytes) -> None
         """Check a signed message with the public key"""
         bits = self.bits
         if len(signature) != bits // 4:
@@ -704,7 +742,7 @@ class Ed25519(object):
             raise ValueError("invalid signature")
 
 
-def run_test(colorize):
+def run_test(colorize):  # type: (bool) -> bool
     """Test operations on Ed25519"""
     color_red = COLOR_RED if colorize else ''
     color_green = COLOR_GREEN if colorize else ''
@@ -803,7 +841,7 @@ def run_test(colorize):
     return True
 
 
-def run_cryptography_test(colorize):
+def run_cryptography_test(colorize):  # type: (bool) -> bool
     """Generate a key using Cryptography.io, with API from
     https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ed25519/
     """
@@ -859,7 +897,7 @@ def run_cryptography_test(colorize):
     return True
 
 
-def run_nacl_test(colorize):
+def run_nacl_test(colorize):  # type: (bool) -> bool
     """Compare the implementation with PyNaCl bindings"""
     color_red = COLOR_RED if colorize else ''
     color_green = COLOR_GREEN if colorize else ''
@@ -936,7 +974,7 @@ def run_nacl_test(colorize):
     return True
 
 
-def run_openssl_test(colorize):
+def run_openssl_test(colorize):  # type: (bool) -> bool
     """Generate a key using OpenSSL and load it"""
     color_red = COLOR_RED if colorize else ''
     color_green = COLOR_GREEN if colorize else ''
@@ -984,6 +1022,7 @@ def run_openssl_test(colorize):
         # (no algorithm parameter)
         assert privkey_asn1[1] == b'0\x05\x06\x03+ep'
         # PrivateKey (OCTET STRING, 0x22 bytes, holding an OCTET STRING, 0x20 bytes)
+        assert isinstance(privkey_asn1[2], bytes)
         assert privkey_asn1[2].startswith(b'\x04\x22\x04\x20')
         priv_secret_bin = privkey_asn1[2][4:]
         assert len(priv_secret_bin) == 0x20
@@ -1040,7 +1079,7 @@ def run_openssl_test(colorize):
     return True
 
 
-def run_ssh_test(colorize):
+def run_ssh_test(colorize):  # type: (bool) -> bool
     """Parse Ed25519 OpenSSH keys"""
     color_red = COLOR_RED if colorize else ''
     color_green = COLOR_GREEN if colorize else ''
@@ -1075,7 +1114,7 @@ def run_ssh_test(colorize):
         with open(id_key_path, 'r') as fpriv:
             privkey_lines = fpriv.readlines()
 
-        def pop_string(key, offset):
+        def pop_string(key, offset):  # type: (bytes, int) -> tuple[bytes, int]
             """Pop a string from the private key"""
             field_size = struct.unpack('>I', key[offset:offset + 4])[0]
             offset += 4
@@ -1188,7 +1227,7 @@ def run_ssh_test(colorize):
     return True
 
 
-def main(argv=None):
+def main(argv=None):  # type: (Sequence[str] | None) -> int
     """Program entry point"""
     parser = argparse.ArgumentParser(
         description="Perform operations related to Ed25519")
