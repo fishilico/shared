@@ -179,7 +179,7 @@ def run_openssl_test(bits, generator, colorize):
         realtive_g_pow_q = pow(param_g, (param_p - 1) // 2, param_p)
         if realtive_g_pow_q > (param_p // 2):
             realtive_g_pow_q -= param_p
-        print(f"g^((p-1)/2) mod p = {realtive_g_pow_q}")
+        print("g^((p-1)/2) mod p = {}".format(realtive_g_pow_q))
         assert realtive_g_pow_q in {-1, 1}
         if realtive_g_pow_q == 1:  # OpenSSL>=3.0.0
             # It can be shown that 2 is a quadratic residue modulo p if and only
