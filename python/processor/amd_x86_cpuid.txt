@@ -475,7 +475,9 @@
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0800F12_K17_Zen_CPUID4.txt
 # https://x.com/InstLatX64/status/1791830391025742310
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
+# https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3019.html
 0x01,  2 (0x800f12): "ZEN" Zen, Naples
+    AMD EPYC 7001 Series
     AMD EPYC 7551P 32-Core Processor
     AMD EPYC 7571
     AMD EPYC 7401P 24-Core Processor
@@ -523,7 +525,9 @@
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0830F10_K17_Rome_CPUID7.txt
 # https://x.com/InstLatX64/status/1791830391025742310
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
+# https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3019.html
 0x31,  0 (0x830f10): "ZEN2" Castle Peak, Rome
+    AMD EPYC 7002 Series
     32-Core AMD Ryzen Threadripper 3970X, 3700 MHz (37 x 100)
     AMD Ryzen Threadripper 3970X 32-Core Processor
     AMD Ryzen Threadripper 3960X 24-Core Processor
@@ -626,13 +630,17 @@
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A00F11_K19_Milan_02_CPUID.txt
 # https://x.com/InstLatX64/status/1791830391025742310
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
+# https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3019.html
 0x01,  1 (0xa00f11): "ZEN3" Milan
+    AMD EPYC 7003 Series
     AMD EPYC 7713 64-Core Processor
     AMD EPYC 7763 64-Core Processor
 
 # https://en.wikichip.org/wiki/amd/cpuid
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
+# https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3019.html
 0x01,  2 (0xa00f12): "ZEN3" Zen 3, Milan-X
+    AMD EPYC 7003 Series
     AMD Engineering Sample
 
 # https://en.wikichip.org/wiki/amd/cpuid
@@ -646,12 +654,16 @@
 # https://github.com/InstLatx64/InstLatx64/blob/70dee2400685573c3e4b1f6f833629a7dd357ffe/AuthenticAMD/AuthenticAMD0A10F11_K19_Genoa_02_CPUID.txt
 # https://x.com/InstLatX64/status/1791830391025742310
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
+# https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3019.html
 0x11,  1 (0xa10f11): "ZEN4" Genoa
+    AMD EPYC 9004 Series
     AMD EPYC 9654 96-Core Processor
     AMD EPYC 9124 16-Core Processor
 
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
+# https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3019.html
 0x11,  2 (0xa10f12): "ZEN4" Genoa-X
+    AMD EPYC 9004 Series
 
 # https://github.com/InstLatx64/InstLatx64/commit/6ca20b9b71e9da283d114e67da89fa4f706c9f02
 0x18,  x (0xa10f8x): "ZEN4" Zen 4 Threadripper Storm Peak
@@ -749,7 +761,9 @@
 
 # https://x.com/InstLatX64/status/1791830391025742310
 # https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html
+# https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3019.html
 0xa0,  2 (0xaa0f02): "ZEN4" Zen4c Bergamo/Siena
+    AMD EPYC 9004 Series
 
 [Family 26] # Family 1ah
 
