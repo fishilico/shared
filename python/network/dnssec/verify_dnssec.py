@@ -19,7 +19,13 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-"""Verify the DNSSEC signatures of a domain"""
+"""Verify the DNSSEC signatures of a domain
+
+This downloads the list of Top-Level Domains (TLD) from https://www.openprovider.com/
+
+Another source of information is the Public Suffix List: https://publicsuffix.org/
+https://github.com/publicsuffix/list/blob/main/public_suffix_list.dat
+"""
 import argparse
 import base64
 import binascii
