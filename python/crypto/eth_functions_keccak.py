@@ -43,6 +43,11 @@ import struct
 import sys
 
 try:
+    from typing import Iterable, Mapping  # noqa: F401
+except ImportError:
+    pass
+
+try:
     import Cryptodome.Hash.keccak
 
     has_cryptodome = True
@@ -72,10 +77,11 @@ KNOWN_INTERFACE_IDS = (
 )
 
 
-KNOWN_SELECTORS = []
-KNOWN_SELECTORS_BY_ID = {}
+KNOWN_SELECTORS = []  # type: list[list[int | str | list[str]]]
+KNOWN_SELECTORS_BY_ID = {}  # type: dict[int, dict[str, list[str]]]
 
-def load_selectors():
+
+def load_selectors():  # type: () -> None
     global KNOWN_SELECTORS, KNOWN_SELECTORS_BY_ID
     KNOWN_SELECTORS = []
     KNOWN_SELECTORS_BY_ID = {}
@@ -94,12 +100,14 @@ def load_selectors():
                     KNOWN_SELECTORS_BY_ID[selector] = {}
                 if function_prototype in KNOWN_SELECTORS_BY_ID[selector]:
                     raise RuntimeError(f"Duplicate selector found {selector:#010x} for {function_prototype!r}")
+                assert isinstance(KNOWN_SELECTORS[-1][2], list)
                 KNOWN_SELECTORS_BY_ID[selector][function_prototype] = KNOWN_SELECTORS[-1][2]
                 continue
 
             # Match function APIs
             if re.match(r"^    \S", line):
                 assert len(KNOWN_SELECTORS)
+                assert isinstance(KNOWN_SELECTORS[-1][2], list)
                 KNOWN_SELECTORS[-1][2].append(line.strip())
                 continue
 
@@ -109,7 +117,7 @@ def load_selectors():
 load_selectors()
 
 
-def rol64(x, shift):
+def rol64(x, shift):  # type: (int, int) -> int
     """Rotate X left by the given shift value"""
     assert 0 < shift < 64
     return (x >> (64 - shift)) | ((x << shift) & 0xffffffffffffffff)
@@ -134,7 +142,7 @@ KECCAK_ROTATION_CONSTANTS = (
 KECCAK256_BITRATE_BYTES = 136
 
 
-def keccak256_f_1600(state):
+def keccak256_f_1600(state):  # type: (list[list[int]]) -> None
     """Implement Keccak-f[1600] permutation function for Keccak-256"""
     # For Keccak-256, lanes are 64-bit wide, which is 2**6.
     # So there are 12 + 2 * 6 = 24 rounds
@@ -164,7 +172,7 @@ def keccak256_f_1600(state):
         state[0][0] ^= rc
 
 
-def keccak256(data):
+def keccak256(data):  # type: (bytes) -> bytes
     """Compute Keccak-256 digest of the given data
 
     Hash parameters:
@@ -209,16 +217,22 @@ def keccak256(data):
     return digest
 
 
-def eth_selector(function_prototype):
+def eth_selector(function_prototype):  # type: (str) -> int
     """Compute a 32-bit selector for an Ethereum smart contract"""
     fct_hash = keccak256(function_prototype.encode("ascii"))
     return int.from_bytes(fct_hash[:4], "big")
 
 
-def eth_selector_from_json_func(json_function):
+def eth_selector_from_json_func(
+    json_function
+):  # type: (Mapping[str, bool | str | Iterable[Mapping[str, str]]]) -> tuple[int, str]
     """Parse a JSON contract for a function to compute a selector"""
-    function_prototype = json_function["name"] + "("
+    assert isinstance(json_function["name"], str)
+    function_prototype = json_function["name"] + "("  # type: str
+    assert not isinstance(json_function["inputs"], (bool, int))
     for arg_idx, arg in enumerate(json_function["inputs"]):
+        assert isinstance(arg, dict)
+        assert isinstance(arg["type"], str)
         if arg_idx >= 1:
             function_prototype += ","
         function_prototype += arg["type"]
@@ -226,12 +240,16 @@ def eth_selector_from_json_func(json_function):
     return eth_selector(function_prototype), function_prototype
 
 
-def eth_selectors_from_json_abi(json_abi):
+def eth_selectors_from_json_abi(
+    json_abi,
+):  # type: (Iterable[Mapping[str, bool | str | Iterable[Mapping[str, str]]]]) -> list[tuple[int, str]]
     """Parse a JSON contract ABI to compute all function selectors"""
     return [eth_selector_from_json_func(func) for func in json_abi if func["type"] == "function"]
 
 
-def show_selectors_from_json_abi(json_abi):
+def show_selectors_from_json_abi(
+    json_abi
+):  # type: (Iterable[Mapping[str, bool | str | Iterable[Mapping[str, str]]]]) -> None
     """Show the selectors from a JSON ABI, describing whether they are known"""
     for selector, function_prototype in eth_selectors_from_json_abi(json_abi):
         known_funcs = KNOWN_SELECTORS_BY_ID.get(selector)
@@ -243,7 +261,7 @@ def show_selectors_from_json_abi(json_abi):
             print(f"{selector:#010x}: {function_prototype!r} CONLICT with {sorted(known_funcs.keys())!r}")
 
 
-def check_keccak256():
+def check_keccak256():  # type: () -> None
     """Check that Keccak256 is implemented correctly"""
     assert keccak256(b"") == bytes.fromhex("c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470")
 
@@ -279,7 +297,7 @@ def check_keccak256():
     print("keccak256 self-check passed")
 
 
-def check_known_selectors():
+def check_known_selectors():  # type: () -> None
     """Check that known selectors are correct"""
     # Check eth_selectors_from_json_abi function
     test_contract_abi = [
@@ -302,11 +320,14 @@ def check_known_selectors():
             "stateMutability": "view",
             "type": "function"
         },
-    ]
+    ]  # type: list[dict[str, bool | str | list[dict[str, str]]]]
     assert eth_selectors_from_json_abi(test_contract_abi) == [(0x01ffc9a7, "supportsInterface(bytes4)")]
 
     last_function_prototype = ""
     for selector, function_prototype, function_apis in KNOWN_SELECTORS:
+        assert isinstance(selector, int)
+        assert isinstance(function_prototype, str)
+        assert isinstance(function_apis, list)
         # Check the order and the unicity
         if not (last_function_prototype < function_prototype):
             raise ValueError(f"Error: mis-ordered prototype {function_prototype!r} in KNOWN_SELECTORS")
@@ -388,7 +409,7 @@ def check_known_selectors():
     print(f"Verified {len(KNOWN_SELECTORS)} selectors")
 
 
-def check_known_interfaces():
+def check_known_interfaces():  # type: () -> None
     """Check that known interface identifiers are correct"""
     last_iface_id = ""
     for selector, iface_name in KNOWN_INTERFACE_IDS:
@@ -404,6 +425,9 @@ def check_known_interfaces():
         # Find the selectors from the functions of the interface
         computed_sel = 0
         for fct_selector, function_prototype, function_apis in KNOWN_SELECTORS:
+            assert isinstance(fct_selector, int)
+            assert isinstance(function_prototype, str)
+            assert isinstance(function_apis, list)
             for function_api in function_apis:
                 if function_api.startswith(iface_name + ": "):
                     if fct_selector == 0:
