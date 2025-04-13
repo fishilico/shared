@@ -102,6 +102,8 @@ def parse_log_file(filepath):
                         '009c:err:rpc:I_RpcReceive we got fault packet with status 0x1c010003',
                         '00a0:err:rpc:I_RpcReceive we got fault packet with status 0x1c010003',
                         '00a4:err:rpc:I_RpcReceive we got fault packet with status 0x1c010003',
+                        '02b4:fixme:winediag:loader_init wine-staging 10.4 is a testing version containing experimental patches.',
+                        '02b4:fixme:winediag:loader_init Please mention your exact version when filing bug reports on winehq.org.',
                         ):
                     # Ignore lines generated from stray instances of Wine
                     continue
