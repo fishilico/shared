@@ -65,9 +65,10 @@ import itertools
 import os.path
 import unicodedata
 
-from typing import Any, Iterable, Sequence
+from typing import Any, Iterable, Sequence  # noqa: F401
 
-from ec_tests import ECPoint, SECP256K1, SECP256R1, StandardCurve, decode_bigint_be, has_cryptodome_ripemd160
+from ec_tests import ECPoint  # noqa: F401
+from ec_tests import SECP256K1, SECP256R1, StandardCurve, decode_bigint_be, has_cryptodome_ripemd160
 from ed25519_tests import Ed25519, Ed25519Point
 from eth_functions_keccak import keccak256
 
@@ -450,6 +451,38 @@ def eth_wallet_addr(public_key, chain_id=None):  # type: (ECPoint, int | None) -
         hex_addr_char if ck_char in "01234567" else hex_addr_char.upper()
         for hex_addr_char, ck_char in zip(hex_addr, checksum)
     )
+
+
+class SolanaBadSeedError(Exception):
+    pass
+
+
+def solana_create_program_address(seed, program_id):  # type: (bytes, bytes) -> bytes
+    """Derive a Solana Program Derived Address (PDA) with the given full seed
+
+    In the official implementation, seed is a vector of at most 16 chunks of at most 32 bytes:
+    https://github.com/anza-xyz/solana-sdk/blob/pubkey%40v2.3.0/pubkey/src/lib.rs#L913-L920
+
+    Documentation: https://solana.com/docs/core/pda
+    """
+    pda = hashlib.sha256(seed + program_id + b"ProgramDerivedAddress").digest()
+    if Ed25519Point.is_ycomp_on_curve(pda):
+        raise SolanaBadSeedError()
+    return pda
+
+
+def solana_find_program_address(seed, program_id):  # type: (bytes, bytes) -> tuple[bytes, int]
+    """Derive a Solana Program Derived Address (PDA) with the given seed, bumping it
+
+    Documentation: https://solana.com/docs/core/pda
+    """
+    for bump in range(255, -1, -1):
+        try:
+            pda = solana_create_program_address(seed + bump.to_bytes(1, "big"), program_id)
+            return pda, bump
+        except SolanaBadSeedError:
+            pass
+    raise SolanaBadSeedError()  # Should never happen
 
 
 # Test vectors from https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#test-vectors
@@ -1172,3 +1205,122 @@ if __name__ == '__main__':
         eth_addr = eth_wallet_addr(SECP256K1.public_point(eth_privkey))
         print(f"- m/44'/60'/0'/0/{idx:<2d}: {eth_addr}")
         assert eth_addr == hardhat_20_addresses[idx]
+
+    # Test Solana key encoding
+    # https://github.com/gagliardetto/solana-go/blob/ca3f5f643435c1614475b2e564272bb8e6e21c1e/keys_test.go
+    # https://github.com/gagliardetto/solana-go/blob/98efad3ab010f7aa6abeb78f24f87d3b5c2904c3/testdata/standard.solana-keygen.json
+    print("Testing Solana keys and accounts encoding")
+    solana_test_secret_key = bytes.fromhex(
+        "feeba655701d84107e57ea3a9078628d4b85550a1f474a9351bd80b470156e3ed1ee412af80c981c822eaa2013080b1dffd0cf127b83e63cf99d4485f6bb2d3e"  # noqa: E501
+    )
+    solana_test_secret_key_b58 = "66cDvko73yAf8LYvFMM3r8vF5vJtkk7JKMgEKwkmBC86oHdq41C7i1a2vS3zE1yCcdLLk6VUatUb32ZzVjSBXtRs"  # noqa: E501
+    solana_test_public_key_b58 = "F8UvVsKnzWyp2nF8aDcqvQ2GVcRpqT91WDsAtvBKCMt9"
+    assert len(solana_test_secret_key) == 64
+    assert base58_encode(solana_test_secret_key) == solana_test_secret_key_b58
+    assert base58_decode(solana_test_secret_key_b58) == solana_test_secret_key
+
+    # The secret key actual contains both the EC private key and the public key
+    solana_test_public_key_point = ED25519.public_point(solana_test_secret_key[:32])
+    solana_test_public_key_bytes = ED25519.public_key(solana_test_secret_key[:32])
+    assert Ed25519Point.decode(solana_test_public_key_bytes) == solana_test_public_key_point
+    assert len(solana_test_public_key_bytes) == 32
+    assert solana_test_secret_key[32:] == solana_test_public_key_bytes
+    assert base58_encode(solana_test_public_key_bytes) == solana_test_public_key_b58
+    assert base58_decode(solana_test_public_key_b58) == solana_test_public_key_bytes
+
+    # Test Solana Program Derived Address (PDA, https://solana.com/docs/core/pda)
+    assert Ed25519Point.is_ycomp_on_curve(solana_test_public_key_bytes)
+    # https://github.com/kevinheavey/solders/blob/0.26.0/docs/tutorials/pubkeys.rst#checking-if-an-address-has-a-private-key
+    assert Ed25519Point.is_ycomp_on_curve(base58_decode("5oNDL3swdJJF1g9DzJiZ4ynHXgszjAEpUkxVYejchzrY"))
+    assert not Ed25519Point.is_ycomp_on_curve(base58_decode("4BJXYkfvg37zEmBbsacZjeQDpTNx91KppxFJxRqrz48e"))
+
+    pda, bump = solana_find_program_address(b"", base58_decode("11111111111111111111111111111111"))
+    assert base58_encode(pda) == "Cu7NwqCXSmsR5vgGA3Vw9uYVViPi3kQvkbKByVQ8nPY9"
+    assert bump == 255
+    assert solana_create_program_address(b"\xff", base58_decode("11111111111111111111111111111111")) == pda
+
+    pda, bump = solana_find_program_address(b"helloWorld", base58_decode("11111111111111111111111111111111"))
+    assert base58_encode(pda) == "46GZzzetjCURsdFPb7rcnspbEMnCBXe9kpjrsZAkKb6X"
+    assert bump == 254
+    assert solana_create_program_address(b"helloWorld\xfe", base58_decode("11111111111111111111111111111111")) == pda
+
+    # Solana token program https://explorer.solana.com/address/TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+    # and https://solscan.io/account/TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+    # Created by signature https://explorer.solana.com/tx/3zaRSFwWb8EhEfz5hdrLLepvAAUh2UDjitD3cb5FB1LXVdRoTFRthXzPb5UGremjLo4Un7yhLttzs7RxdVE4wdYm  # noqa: E501
+    # (and the private key could be made public:
+    # https://solana.stackexchange.com/questions/4027/after-deployment-of-a-program-can-the-program-ids-private-key-be-made-public)
+    assert Ed25519Point.is_ycomp_on_curve(base58_decode("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"))
+    # Example of token account from https://solana.com/docs/tokens
+    # spl-token create-account --owner 2i3KvjDCZWxBsqcxBHpdEaZYQwQSYE6LXUMx5VjY5XrR 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg  # noqa: E501
+    # => Creating account Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt
+    # https://explorer.solana.com/address/99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg?cluster=devnet
+    # https://explorer.solana.com/address/Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt?cluster=devnet
+    # https://explorer.solana.com/tx/44vqKdfzspT592REDPY4goaRJH3uJ3Ce13G4BCuUHg35dVUbHuGTHvqn4ZjYF9BGe9QrjMfe9GmuLkQhSZCBQuEt?cluster=devnet
+    # logic from https://github.com/solana-program/associated-token-account/blob/9d94201e8158f06015ff80ad47fefac62a2ec450/program/src/lib.rs#L65  # noqa: E501
+    wallet_address = base58_decode("2i3KvjDCZWxBsqcxBHpdEaZYQwQSYE6LXUMx5VjY5XrR")
+    token_mint_address = base58_decode("99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg")
+    token_program_id = base58_decode("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA")
+    associated_token_program_id = base58_decode("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
+    my_token_account, bump = solana_find_program_address(
+        wallet_address + token_program_id + token_mint_address,
+        associated_token_program_id,
+    )
+    assert base58_encode(my_token_account) == "Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt"
+    assert bump == 251
+
+    # Verify the transaction signature, from data obtained from Solana devnet API:
+    # curl https://api.devnet.solana.com -X POST -H "Content-Type: application/json" -d
+    #   '{"jsonrpc":"2.0", "id":1, "method":"getTransaction", "params":[
+    #       "44vqKdfzspT592REDPY4goaRJH3uJ3Ce13G4BCuUHg35dVUbHuGTHvqn4ZjYF9BGe9QrjMfe9GmuLkQhSZCBQuEt",
+    #       {"encoding": "base64"}]}'
+    #   | jq '.result.transaction[0]'
+    solana_tx_id = "44vqKdfzspT592REDPY4goaRJH3uJ3Ce13G4BCuUHg35dVUbHuGTHvqn4ZjYF9BGe9QrjMfe9GmuLkQhSZCBQuEt"
+    solana_tx_signer_addr = "3z9vL1zjN6qyAFHhHQdWYRTFAcy69pJydkZmSFBKHg1R"
+    solana_tx_bytes = base64.b64decode(
+        "AZlwQM9W2Op/CCyn/lYAXcSwrytT5+iGK+/LuWZJ/RfFquiVyuLGjFzIyu1QebBKPAxedEGSZsDSfmr8jR4kyQ0BAA"
+        "UHLFuQskIMiaj8Oy/WFaidHlRPWUnonjWPq4hkn1vbnHT5QLRxpBvSzC/hNa0VaaR9P9eKEuXi2YcQGLQsEsFJ8wAA"
+        "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABt324ddloZPZy+FGzut5rBy0he1fWzeROoz1hX7/AKkZXyFmpm"
+        "cpze2ukmaRcxpDxtR7XfJoUU6wqxU2MJ9DOnkriYLB9Ko3bwzj/Kw+p5ETc/9yPenW3kzW7FfoR3yPjJclj04kifG7"
+        "PRApFI4NgwtaE5na/xCEBI572Nvp+Fmor83yzqDb/bgHX6OQsThdSMC5WwmW+dTOf1tskfnz7QEGBgABBAUCAwEA"
+    )
+    assert len(solana_tx_bytes) == 336
+    # Transaction format from hexdump:
+    # (doc: https://solana.com/de/docs/core/transactions#transaction )
+    # 01 : 1 signature
+    #   997040cf56d8ea7f082ca7fe56005dc4b0af2b53e7e8862befcbb96649fd17c5
+    #   aae895cae2c68c5cc8caed5079b04a3c0c5e74419266c0d27e6afc8d1e24c90d : signature (64 bytes)
+    # 01 00 05 : message header (v0, 1 signer, 0 read-only signed accounts, 5 read-only unsigned accounts)
+    # 07 : 7 account inputs
+    #     (1 writable and signer)
+    #   2c5b90b2420c89a8fc3b2fd615a89d1e544f5949e89e358fab88649f5bdb9c74 : 3z9vL1zjN6qyAFHhHQdWYRTFAcy69pJydkZmSFBKHg1R (source, fee payer)  # noqa: E501
+    #     (0 read-only and signer)
+    #     (1 writable and not signer)
+    #   f940b471a41bd2cc2fe135ad1569a47d3fd78a12e5e2d9871018b42c12c149f3 : Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt (created token account program)  # noqa: E501
+    #     (5 read-only and not signer)
+    #   0000000000000000000000000000000000000000000000000000000000000000 : 11111111111111111111111111111111 ("System Program")  # noqa: E501
+    #   06ddf6e1d765a193d9cbe146ceeb79ac1cb485ed5f5b37913a8cf5857eff00a9 : TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA ("Token Program")  # noqa: E501
+    #   195f2166a66729cdedae926691731a43c6d47b5df268514eb0ab1536309f433a : 2i3KvjDCZWxBsqcxBHpdEaZYQwQSYE6LXUMx5VjY5XrR (wallet)  # noqa: E501
+    #   792b8982c1f4aa376f0ce3fcac3ea7911373ff723de9d6de4cd6ec57e8477c8f : 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg (token mint)  # noqa: E501
+    #   8c97258f4e2489f1bb3d1029148e0d830b5a1399daff1084048e7bd8dbe9f859 : ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL ("Associated Token Program")  # noqa: E501
+    # a8afcdf2cea0dbfdb8075fa390b1385d48c0b95b0996f9d4ce7f5b6c91f9f3ed : Recent Blockhash, CMUyavo32gpCn9ii7qxM4QrU42kXWQRo2tEYoK6p6RrU  # noqa: E501
+    # 01 : 1 instruction
+    #   06 : program ID index 6 ("Associated Token Program")
+    #   06 : 6 accounts to pass
+    #     00 01 04 05 02 03
+    #   01 : program input data (1 bytes)
+    #     00 : instruction 0 ("Create")
+    solana_tx_signature = base58_decode(solana_tx_id)
+    assert len(solana_tx_signature) == 64
+    assert solana_tx_bytes[1:65] == solana_tx_signature
+    solana_tx_signer_pubkey = base58_decode(solana_tx_signer_addr)
+    ED25519.check_signature(solana_tx_bytes[65:], solana_tx_signature, solana_tx_signer_pubkey)
+
+    # Also use pyca/cryptography library
+    try:
+        from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+    except ImportError:
+        print("Skipping test with pyca/cryptography")
+    else:
+        print("Verifying Solana transaction with pyca/cryptography")
+        solana_tx_signer_pubkey_obj = Ed25519PublicKey.from_public_bytes(solana_tx_signer_pubkey)
+        solana_tx_signer_pubkey_obj.verify(solana_tx_signature, solana_tx_bytes[65:])

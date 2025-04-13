@@ -311,6 +311,26 @@ class Ed25519Point(object):
         x = modsqrt25519((y * y - 1) * modinv(ED25519_D * y * y + 1, ED25519_PRIME))
         return cls(x, y)
 
+    @staticmethod
+    def is_y_on_curve(y):  # type: (int) -> bool
+        """Test whether the y coordinate is on the curve"""
+        if y < 0:
+            raise ValueError("y is supposed to be >= 0")
+        if y >= ED25519_PRIME:
+            return False
+        # x is computed with modsqrt25519((y * y - 1) / (ED25519_D * y * y + 1))
+        # Compute the Legendre symbol of x**2 (with power to ((q - 1) / 2)).
+        # It should be 1 for quadratic primes.
+        # Optimize it by multiplying x**2 by ((ED25519_D * y * y + 1)**2), which
+        # is obviously square and enables skipping the modular inversion.
+        y2 = (y * y) % ED25519_PRIME
+        x2_biased = (y2 - 1) * (ED25519_D * y * y + 1)
+        x2_legsym = pow(x2_biased, (ED25519_PRIME - 1) // 2, ED25519_PRIME)
+        if x2_legsym == 1:
+            return True
+        assert x2_legsym == ED25519_PRIME - 1
+        return False
+
     def __hash__(self):  # type: () -> int
         return hash((self.x, self.y))
 
@@ -386,6 +406,13 @@ class Ed25519Point(object):
             assert pt.x != 0
             pt.x = ED25519_PRIME - pt.x
         return pt
+
+    @classmethod
+    def is_ycomp_on_curve(cls, compressed):  # type: (Py3Bytes) -> bool
+        """Test whether the encoded y coordinate is on the curve"""
+        y = decode_bigint_le(compressed)
+        y &= ~(1 << (ED25519_BITS - 1))
+        return cls.is_y_on_curve(y)
 
     def to_montgomery(self):  # type: () -> Montgomery25519Point
         """Get the equivalent point on the Montgomery curve for Ed25519
