@@ -30,6 +30,12 @@ import bip32_seed_derivation
 import ec_tests
 from eth_functions_keccak import keccak256
 
+try:
+    from typing import Sequence  # noqa: F401
+except ImportError:
+    pass
+
+
 # Define the curve used by Starknet
 # b is the start of PI plus 379:
 #   >>> import mpmath ; mpmath.mp.dps = 76 ; str(mpmath.mp.pi)
@@ -59,7 +65,7 @@ STARKNET_CONTRACT_ADDRESS_PREFIX = 0x535441524b4e45545f434f4e54524143545f4144445
 STARKNET_ADDR_BOUND = 2**251 - 256
 
 
-def stark_erc2645_derive(derivation_path, seed):
+def stark_erc2645_derive(derivation_path, seed):  # type: (str, bytes) -> int
     """Derive a key according to ERC 2645: Hierarchical Deterministic Wallet for Layer-2
 
     https://github.com/ethereum/ERCs/blob/9f3b27ef75cdf3ee4d2d079af76400737ed03ec2/ERCS/erc-2645.md
@@ -74,7 +80,7 @@ def stark_erc2645_derive(derivation_path, seed):
     raise ValueError("Unable to derive a STARK private key")
 
 
-def starknet_keccak(data):
+def starknet_keccak(data):  # type: (bytes) -> int
     """Starknet Keccak is defined as the first 250 bits of the Keccak256 hash
 
     https://docs.starknet.io/documentation/architecture_and_concepts/Cryptography/hash-functions/#starknet_keccak
@@ -128,7 +134,7 @@ STARKNET_PEDERSEN_P3 = ec_tests.ECPoint(
 )
 
 
-def starknet_pedersen_hash(a, b):
+def starknet_pedersen_hash(a, b):  # type: (int, int) -> int
     """Compute the Pedersen hash of two elements
 
     https://docs.starknet.io/documentation/architecture_and_concepts/Cryptography/hash-functions/
@@ -138,16 +144,18 @@ def starknet_pedersen_hash(a, b):
     assert 0 <= b < STARK_CURVE.p
     a_high, a_low = divmod(a, 2**248)
     b_high, b_low = divmod(b, 2**248)
-    return (
+    result = (
         STARKNET_PEDERSEN_SHIFT_POINT
         + STARKNET_PEDERSEN_P0 * a_low
         + STARKNET_PEDERSEN_P1 * a_high
         + STARKNET_PEDERSEN_P2 * b_low
         + STARKNET_PEDERSEN_P3 * b_high
     ).x
+    assert result is not None
+    return result
 
 
-def starknet_hash_on_elements(data):
+def starknet_hash_on_elements(data):  # type: (Sequence[int]) -> int
     """Compute the Pedersen hash of the given list of field elements"""
     result = 0
     for x in data:
@@ -155,7 +163,9 @@ def starknet_hash_on_elements(data):
     return starknet_pedersen_hash(result, len(data))
 
 
-def starknet_address(class_hash, constructor_calldata, salt, deployer_address=0):
+def starknet_address(
+    class_hash, constructor_calldata, salt, deployer_address=0
+):  # type: (int, Sequence[int], int, int) -> int
     """Compute the address of a deployed Starknet contract"""
     constructor_calldata_hash = starknet_hash_on_elements(constructor_calldata)
     raw_address = starknet_hash_on_elements(
@@ -170,7 +180,7 @@ def starknet_address(class_hash, constructor_calldata, salt, deployer_address=0)
     return raw_address % STARKNET_ADDR_BOUND
 
 
-def selftests():
+def selftests():  # type: () -> None
     """Perform some self tests"""
     assert STARK_CURVE.p == 0x800000000000011000000000000000000000000000000000000000000000001
     assert STARK_CURVE.p.bit_length() == 252
@@ -181,6 +191,7 @@ def selftests():
 
     # Ensure the randomness from ERC-2645 key derivation is indeed uniform
     secp256k1_order = ec_tests.SECP256K1.g.order
+    assert secp256k1_order is not None
     assert ERC2645_STARK_RANDOM_N == secp256k1_order - (secp256k1_order % STARK_ORDER)
 
     # Check Starknet Keccak
@@ -286,7 +297,7 @@ def selftests():
     assert starknet_keccak(b"owner") == 907111799109225873672206001743429201758838553092777504370151546632448000192
 
 
-def test_braavos_challenge_feb2024(verbose=False):
+def test_braavos_challenge_feb2024(verbose=False):  # type: (bool) -> None
     """Test using data from the Braavos challenge, which occured in February 2024
 
     https://braavos.app/capture-the-flag-challenge-grab-150k/
