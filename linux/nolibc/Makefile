@@ -83,7 +83,8 @@ INCLUDE_FILES := \
     include/asm-x86_64/unistd_64.h \
     include/sys/syscall.h \
     include/sys/utsname.h
-LINUX_URL := https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain
+#LINUX_URL := https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain
+LINUX_URL := https://raw.githubusercontent.com/torvalds/linux/refs/heads/master
 
 sync-inet:
 	$(RM) -rf include

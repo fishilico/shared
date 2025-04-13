@@ -137,7 +137,8 @@ sync-inet: update_cpuid
 update_cpuid: x86-linux-cpufeatures.h.tmp x86-linux-cpu-scattered.c.tmp x86-create_cpuid_enum_h.sh
 	$(SH) ./x86-create_cpuid_enum_h.sh > x86-cpuid_enum.h
 
-LINUX_URL := https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain
+#LINUX_URL := https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain
+LINUX_URL := https://raw.githubusercontent.com/torvalds/linux/refs/heads/master
 x86-linux-cpufeatures.h.tmp:
 	$(WGET) -q -O $@ '$(LINUX_URL)/arch/x86/include/asm/cpufeatures.h' || (rm $@ ; false)
 

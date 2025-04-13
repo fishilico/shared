@@ -30,7 +30,8 @@ from typing import FrozenSet, List, Mapping, Optional, Tuple
 from cpu_model import CPU_MODELS, CpuidInformation
 from x86_msr import MSRS
 
-LINUX_GIT_PLAIN_URL = "https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain"
+# LINUX_GIT_PLAIN_URL = "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain"
+LINUX_GIT_PLAIN_URL = "https://raw.githubusercontent.com/torvalds/linux/refs/heads/master"
 
 # Known associations between filename and model name
 KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
