@@ -338,7 +338,7 @@ def btc_wallet_addr_p2sh(public_key):  # type: (ECPoint) -> str
     A Pay to Script Hash is the RIPEMD160 of SHA256 of this script, prefixed
     by 05 and encoded in base58.
     """
-    p2sh_bytes = b'\x05' + bitcoin_pubkey.bitcoin_p2sh_p2wpkh()
+    p2sh_bytes = b'\x05' + public_key.bitcoin_p2sh_p2wpkh()
     p2sh_bytes_checksum = hashlib.sha256(hashlib.sha256(p2sh_bytes).digest()).digest()[:4]
     return base58_encode(p2sh_bytes + p2sh_bytes_checksum)
 
