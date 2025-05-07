@@ -1108,7 +1108,8 @@ if __name__ == '__main__':
             assert exp_public == pubkey_bytes
             print(f"- {derivation_path}: OK")
 
-    # Test mnemonics with 12 words
+    # Test mnemonics with 12 words from
+    # https://github.com/trezor/python-mnemonic/blob/b57a5ad77a981e743f4167ab2f7927a55c1e82a8/vectors.json
     mnemonics = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about'
     assert bip39_entropy2mnemonics(b"\0" * 16) == mnemonics
     assert b"\0" * 16 == bip39_mnemonics2entropy(mnemonics)
@@ -1148,6 +1149,26 @@ if __name__ == '__main__':
     assert base58_decode('1F2C2dfD8B5qLM7ZrW4Ag1kLUg8sZjfyBB', 0x19) == p2pkh_bytes + p2pkh_bytes_checksum
     assert '1F2C2dfD8B5qLM7ZrW4Ag1kLUg8sZjfyBB' == base58_encode(p2pkh_bytes + p2pkh_bytes_checksum)
     assert '1F2C2dfD8B5qLM7ZrW4Ag1kLUg8sZjfyBB' == btc_wallet_addr_p2pkh(bitcoin_pubkey)
+
+    # Test Bitcoin and Ethereum derivation from the 12-word zero mnemonics, with https://app.devicesdk.ledger.com/
+    mnemonics = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about'
+    seed = bip39toseed(mnemonics)
+    # Bitcoin Nested Segwit
+    bitcoin_privkey = bip32derive("m/49'/0'/0'/0/0", seed)[0]
+    bitcoin_pubkey = SECP256K1.public_point(bitcoin_privkey)
+    assert '37VucYSaXLCAsxYyAPfbSi9eh4iEcbShgf' == btc_wallet_addr_p2sh(bitcoin_pubkey)
+    # Bitcoin Native Segwit
+    bitcoin_privkey = bip32derive("m/84'/0'/0'/0/0", seed)[0]
+    bitcoin_pubkey = SECP256K1.public_point(bitcoin_privkey)
+    assert 'bc1qcr8te4kr609gcawutmrza0j4xv80jy8z306fyu' == bech32_encode("bc", bitcoin_pubkey.bitcoin_hash160())
+    # Ethereum
+    eth_privkey = bip32derive("m/44'/60'/0'/0/0", seed)[0]
+    eth_pubkey = SECP256K1.public_point(eth_privkey)
+    assert '0x9858EfFD232B4033E47d90003D41EC34EcaEda94' == eth_wallet_addr(eth_pubkey)
+    # Solana
+    solana_privkey = bip32derive("m/44'/501'/0'/0'", seed, curve="ed25519")[0]
+    solana_pubkey = ED25519.public_key(solana_privkey)
+    assert 'HAgk14JpMQLgt6rVgv7cBQFJWFto5Dqxi472uT3DKpqk' == base58_encode(solana_pubkey)
 
     # Test mnemonic phrase used by Hardhat: https://hardhat.org/hardhat-network/docs/reference#accounts
     mnemonics = 'test test test test test test test test test test test junk'
