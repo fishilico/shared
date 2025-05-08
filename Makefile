@@ -132,6 +132,11 @@ else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-9]\
 #   error[E0658]: use of unstable library feature 'mixed_integer_ops'
 #   note: see issue #87840 <https://github.com/rust-lang/rust/issues/87840> for more information
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(6[6-9]\|7[0-9]\|8[0-1]\)\.'),y)
+# Old versions of rustc (<=1.81) fail to build `backtrace because:
+#   error: package `backtrace v0.3.75` cannot be built because it requires rustc 1.82.0 or newer, while the currently
+#   active rustc version is 1.71.1
+SUBDIRS_BLACKLIST += rust/download_web%
 endif
 
 # Show "SUBDIR ..." only if -w and -s and V=1 are not given, and then add
