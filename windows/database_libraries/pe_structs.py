@@ -931,23 +931,27 @@ class PEFile:
         md5_engine = hashlib.md5()  # noqa
         sha1_engine = hashlib.sha1()  # noqa
         sha256_engine = hashlib.sha256()
+        sha512_engine = hashlib.sha512()
         current_offset = 0
         for start, size, _name in self.authenticode_excluded:
             chunk = self.file_content[current_offset:start]
             md5_engine.update(chunk)
             sha1_engine.update(chunk)
             sha256_engine.update(chunk)
+            sha512_engine.update(chunk)
             current_offset = start + size
         if current_offset < self.authenticode_file_end:
             chunk = self.file_content[current_offset:self.authenticode_file_end]
             md5_engine.update(chunk)
             sha1_engine.update(chunk)
             sha256_engine.update(chunk)
+            sha512_engine.update(chunk)
 
         self.authenticode_digests = {
             'MD5': md5_engine.digest(),
             'SHA1': sha1_engine.digest(),
             'SHA256': sha256_engine.digest(),
+            'SHA512': sha512_engine.digest(),
         }
 
         # Check the digest if there is a signature

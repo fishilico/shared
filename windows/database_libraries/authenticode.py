@@ -64,6 +64,7 @@ KNOWN_OID = {
     '1.2.840.113549.1.1.5': 'sha1WithRSAEncryption',
     '1.2.840.113549.1.1.11': 'sha256WithRSAEncryption',
     '1.2.840.113549.1.1.12': 'sha384WithRSAEncryption',
+    '1.2.840.113549.1.1.13': 'sha512WithRSAEncryption',
 
     # {iso(1) member-body(2) us(840) rsadsi(113549) digestAlgorithm(2)}
     '1.2.840.113549.2.5': 'md5',
@@ -170,6 +171,8 @@ KNOWN_OID = {
     # {joint-iso-itu-t(2) country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
     #  hashAlgs(2) sha256(1)}
     '2.16.840.1.101.3.4.2.1': 'sha256',
+    '2.16.840.1.101.3.4.2.2': 'sha384',
+    '2.16.840.1.101.3.4.2.3': 'sha512',
 
     # {joint-iso-itu-t(2) country(16) us(840) organization(1) symantec(113733)
     #  pki(1) policies(7) vtn-cp(23) class3(3)}
@@ -407,11 +410,15 @@ def decode_x509_algid(der_algorithm_identifier: bytes) -> str:
     if alg_id == 'sha1' and not alg_params:
         return 'SHA1'
     if alg_id == 'sha1WithRSAEncryption' and not alg_params:
-        return 'RSA-SHA251'
+        return 'RSA-SHA1'
     if alg_id == 'sha256' and not alg_params:
         return 'SHA256'
     if alg_id == 'sha256WithRSAEncryption' and not alg_params:
         return 'RSA-SHA256'
+    if alg_id == 'sha512' and not alg_params:
+        return 'SHA512'
+    if alg_id == 'sha512WithRSAEncryption' and not alg_params:
+        return 'RSA-SHA512'
 
     logger.warning("Unknown algorithm identifier %r (params %r)", alg_id, alg_params)
     return 'Unknown<OID={}, params={}>'.format(alg_id, repr(alg_params))
