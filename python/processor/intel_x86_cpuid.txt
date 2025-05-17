@@ -2108,6 +2108,10 @@
 0xad,  0 (0xa06d0): "GNR-X" Granite Rapids Xeon (Redwood Cove)
     6th Generation Intel® Xeon® Scalable Processor Family
 
+# https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20250512
+0xad,  1 (0xa06d1): "GNR-X/AP/SP" Granite Rapids Xeon (Redwood Cove)
+    6th Generation Intel® Xeon® Scalable Processor Family
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
 # https://twitter.com/InstLatX64/status/1786318690528432348
@@ -2148,7 +2152,8 @@
 # https://www.intel.com/content/www/us/en/download/684897/777395/intel-software-development-emulator.html Intel Software Development Emulator 9.33
 # https://twitter.com/InstLatX64/status/1748426947615396154
 # https://twitter.com/InstLatX64/status/1772523704649404855
-0xb5,  0 (0xb0650): "ARL-S" Arrow Lake S
+0xb5,  0 (0xb0650): "ARL-S/U" Arrow Lake S
+    Intel® Core™ Ultra Processor (Series2)
     Intel(R) Xeon(R) CPU           X5680  @ 3.33GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
@@ -2223,6 +2228,7 @@
 # https://intel-gfx-ci.01.org/tree/intel-xe/xe-1040-7392b2b6f33eb4d279abf14e33e73f491f7f9191/bat-lnl-1/boot0.txt
 0xbd,  1 (0xb06d1): "LNL" Lunar Lake M
     16th Generation Intel® Core™ Processor Family
+    Intel® Core™ Ultra 200 V Series Processor
     Intel(R) Core(TM) Ultra 5 234V 2.10GHz
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/pmu-events/arch/x86/mapfile.csv?h=v6.3
@@ -2281,6 +2287,7 @@
 # https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_14937/bat-arlh-2/boot0.txt DMI: Intel Corporation Arrow Lake Client Platform/ARL-H Lp5x T4 RVP, BIOS MTLPFWI1.R00.4144.D02.2404050317 04/05/2024
 0xc5,  2 (0xc0652): "ARL-H" Arrow Lake H
     15th Generation Intel® Core™ Processor Family
+    Intel® Core™ Ultra Processor (Series2)
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.3
 # https://twitter.com/InstLatX64/status/1675346430951665664
@@ -2297,8 +2304,9 @@
 
 # https://x.com/InstLatX64/status/1799124303985963355
 # https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_14901/bat-arls-5/boot0.txt
-0xc6,  2 (0xc0662): "ARL-S" Arrow Lake S
+0xc6,  2 (0xc0662): "ARL-S/HX" Arrow Lake S
     15th Generation Intel® Core™ Processor Family
+    Intel® Core™ Ultra Processor (Series2)
 
 # https://x.com/InstLatX64/status/1807169476598665591
 # https://github.com/platomav/MCExtractor/releases/tag/r301

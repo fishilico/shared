@@ -101,7 +101,7 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
 
         # Extract the processor acronym
         field_acronym = fields[0].replace(" ", "-")
-        if field_acronym.endswith(("-2+8", "-6+8")):
+        if field_acronym.endswith(("-2+8", "-6+8", "-(8P)")):
             # Remove suffixes such as "6+8"
             field_acronym = field_acronym.rsplit("-", 1)[0]
 
@@ -205,8 +205,12 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
             ]
         elif field_product_name == "Core w/Hybrid Technology":
             new_names = ["Intel® Core™ Processor with Hybrid Technology"]
-        elif field_product_name == "Core™ Ultra Processor":
-            new_names = ["Intel® Core™ Ultra Processor"]
+        elif field_product_name in {
+            "Core™ Ultra Processor",
+            "Core™ Ultra Processor (Series2)",
+            "Core™ Ultra 200 V Series Processor",
+        }:
+            new_names = [f"Intel® {field_product_name}"]
         elif field_product_name == "Core i3-N305/N300, N50/N97/N100/N200, Atom x7211E/x7213E/x7425E":
             new_names = [
                 "Intel® Core i3-N305/N300",
@@ -278,6 +282,10 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
         elif field_product_name == "Xeon Scalable Gen5":
             new_names = [
                 "5th Generation Intel® Xeon® Scalable Processor Family",
+            ]
+        elif field_product_name == "Xeon Scalable Gen6":
+            new_names = [
+                "6th Generation Intel® Xeon® Scalable Processor Family",
             ]
         elif field_product_name == "Xeon 6700-Series Processors with E-Cores":
             new_names = [
@@ -362,7 +370,7 @@ def parse_intel_ucode(
             raise ValueError(f"Unexpected total size in microcode: {total_size} > {len(file_data)}")
         if data_size > total_size:
             raise ValueError(f"Unexpected sizes in microcode: {data_size} > {total_size}")
-        if metadata_size not in {0, 0x74}:
+        if metadata_size not in {0, 0x14, 0x74}:
             raise ValueError(f"Unexpected metadata in microcode: {metadata_size:#x}")
         if update_rev_min >= update_rev:
             raise ValueError(f"Unexpected minimal update revision in microcode: {update_rev_min}")
