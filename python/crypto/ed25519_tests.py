@@ -157,6 +157,7 @@ COLOR_NORM = '\033[m'
 ED25519_PRIME = 2**255 - 19
 ED25519_BITS = 256
 ED25519_I = pow(2, (ED25519_PRIME - 1) // 4, ED25519_PRIME)  # sqrt(-1) in F_q
+BASE_ORDER = 2**252 + 27742317777372353535851937790883648493  # order of B
 
 
 def run_process_with_input(cmdline, data, color=None):  # type: (Sequence[str], Py3Bytes, str | None) -> bool
@@ -284,6 +285,9 @@ def modsqrt25519(x2):  # type: (int) -> int
     return x
 
 
+ED25519_D = (-121665 * modinv(121666, ED25519_PRIME)) % ED25519_PRIME
+
+
 class Ed25519Point(object):
     """Point on Ed25519 curve"""
     def __init__(self, x, y):  # type: (int, int) -> None
@@ -356,7 +360,7 @@ class Ed25519Point(object):
         y1 = self.y
         x2 = other.x
         y2 = other.y
-        dx1x2y1y2 = (Ed25519.d * x1 * x2 * y1 * y2) % q
+        dx1x2y1y2 = (ED25519_D * x1 * x2 * y1 * y2) % q
         x3 = ((x1 * y2 + y1 * x2) % q) * modinv(1 + dx1x2y1y2, q)
         y3 = ((y1 * y2 + x1 * x2) % q) * modinv(1 - dx1x2y1y2, q)
         return Ed25519Point(x3 % q, y3 % q)
@@ -680,10 +684,8 @@ class Montgomery25519Point(object):
 
 
 # Define base points
-ED25519_D = (-121665 * modinv(121666, ED25519_PRIME)) % ED25519_PRIME
 ED25519_BASE = Ed25519Point.from_y((4 * modinv(5, ED25519_PRIME)) % ED25519_PRIME)
 CURVE25519_BASE = Montgomery25519Point.from_x(9)
-BASE_ORDER = 2**252 + 27742317777372353535851937790883648493  # order of B
 
 
 class Ed25519(object):
