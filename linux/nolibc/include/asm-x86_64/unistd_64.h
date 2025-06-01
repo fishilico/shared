@@ -380,9 +380,10 @@
 #define __NR_getxattrat 464
 #define __NR_listxattrat 465
 #define __NR_removexattrat 466
+#define __NR_open_tree_attr 467
 
 #ifdef __KERNEL__
-#define __NR_syscalls 467
+#define __NR_syscalls 468
 #endif
 
 #endif /* _UAPI_ASM_UNISTD_64_H */

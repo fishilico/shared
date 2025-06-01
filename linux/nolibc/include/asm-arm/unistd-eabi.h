@@ -420,5 +420,6 @@
 #define __NR_getxattrat 464
 #define __NR_listxattrat 465
 #define __NR_removexattrat 466
+#define __NR_open_tree_attr 467
 
 #endif /* _UAPI_ASM_UNISTD_EABI_H */
