@@ -4,7 +4,12 @@ on: [push, pull_request]
 
 jobs:
   mingw-linux-test:
+    # Use a container to avoid an installation conflict between the 32-bit packages
+    # and the pre-installed packages on GitHub Actions runner images.
     runs-on: ubuntu-24.04
+    container:
+      image: docker://docker.io/library/ubuntu:24.04
+
     strategy:
       matrix:
         compiler:
@@ -12,10 +17,19 @@ jobs:
           - i686-w64-mingw32-gcc
         unicode: [y, n]
 
-    container:
-      image: docker://docker.io/library/ubuntu:22.04
-
     steps:
+    - name: Configure APT mirrors
+      run: |
+        # Use the same mirrors as https://github.com/actions/runner-images/blob/ubuntu24/20250527.1/images/ubuntu/scripts/build/configure-apt-sources.sh
+        printf "http://azure.archive.ubuntu.com/ubuntu/\tpriority:1\n" >> /etc/apt/apt-mirrors.txt
+        printf "https://archive.ubuntu.com/ubuntu/\tpriority:2\n" >> /etc/apt/apt-mirrors.txt
+        printf "https://security.ubuntu.com/ubuntu/\tpriority:3\n" >> /etc/apt/apt-mirrors.txt
+        sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//mirror+file:\/etc\/apt\/apt-mirrors.txt/' /etc/apt/sources.list.d/ubuntu.sources
+        sed -i 's/http:\/\/security\.ubuntu\.com\/ubuntu\//mirror+file:\/etc\/apt\/apt-mirrors.txt/' /etc/apt/sources.list.d/ubuntu.sources
+
+        # Configure retry like https://github.com/actions/runner-images/blob/ubuntu24/20250527.1/images/ubuntu/scripts/build/configure-apt.sh#L18
+        echo 'APT::Acquire::Retries "10";' > /etc/apt/apt.conf.d/80-retries
+
     - name: Install dependencies
       run: |
         # 32-bit wine is needed to run many installers (even the 64-bit Python installer!)
@@ -49,7 +63,7 @@ jobs:
         else
             # Download 64-bit Python from https://www.python.org/downloads/windows/
             wget https://www.python.org/ftp/python/3.10.1/python-3.10.1-amd64.exe
-            xvfb-run wine64 python-3.10.1-amd64.exe /quiet InstallAllUsers=1 PrependPath=1
+            xvfb-run wine python-3.10.1-amd64.exe /quiet InstallAllUsers=1 PrependPath=1
         fi
 
         # Add a helper to launch "wine python" without spaces
