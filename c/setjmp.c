@@ -482,8 +482,13 @@ static const struct known_libc libc_database[] = {
         "",
         windows_x86_64_jmp_buf_desc, no_sigjmp_buf_desc, NULL, NULL),
     /* https://github.com/wine-mirror/wine/blob/wine-5.15/dlls/winecrt0/exception.c#L69-L94 */
-    DEFINE_KNOWN_LIBC("Windows", "Wine>=4.0 msvcrt.dll", "x86_64 (amd64)",
+    DEFINE_KNOWN_LIBC("Windows", "Wine 4.10...6.12 msvcrt.dll", "x86_64 (amd64)",
         "H\x89\x11H\x89Y\x08H\x8d\x44$\x08H\x89\x41\x10H\x89i\x18H\x89q H\x89y(L\x89\x61\x30L\x89i8L\x89q@L\x89yHH\x8b\x04$H\x89\x41Pf\x0f\x7fq`f\x0f\x7fypfD\x0f\x7f\x81\x80\0\0\0\x66\x44\x0f\x7f\x89\x90\0\0\0\x66\x44\x0f\x7f\x91\xa0\0\0\0\x66\x44\x0f\x7f\x99\xb0\0\0\0\x66\x44\x0f\x7f\xa1\xc0\0\0\0\x66\x44\x0f\x7f\xa9\xd0\0\0\0\x66\x44\x0f\x7f\xb1\xe0\0\0\0\x66\x44\x0f\x7f\xb9\xf0\0\0\0H1\xc0\xc3",
+        "",
+        windows_x86_64_jmp_buf_desc, no_sigjmp_buf_desc, NULL, NULL),
+    /* https://github.com/wine-mirror/wine/blob/wine-6.13/dlls/winecrt0/setjmp.c#L55-L82 */
+    DEFINE_KNOWN_LIBC("Windows", "Wine 6.13... msvcrt.dll", "x86_64 (amd64)",
+        "H\x89\x11H\x89Y\x08H\x8d\x44$\x08H\x89\x41\x10H\x89i\x18H\x89q H\x89y(L\x89\x61\x30L\x89i8L\x89q@L\x89yHH\x8b\x04$H\x89\x41P\x0f\xaeYX\xd9y\\f\x0f\x7fq`f\x0f\x7fypfD\x0f\x7f\x81\x80\0\0\0\x66\x44\x0f\x7f\x89\x90\0\0\0\x66\x44\x0f\x7f\x91\xa0\0\0\0\x66\x44\x0f\x7f\x99\xb0\0\0\0\x66\x44\x0f\x7f\xa1\xc0\0\0\0\x66\x44\x0f\x7f\xa9\xd0\0\0\0\x66\x44\x0f\x7f\xb1\xe0\0\0\0\x66\x44\x0f\x7f\xb9\xf0\0\0\0H1\xc0\xc3",
         "",
         windows_x86_64_jmp_buf_desc, no_sigjmp_buf_desc, NULL, NULL),
     /* Windows uses stmxcsr 0x58(%rcx);fnstcw 0x5c(%rcx) to save SSE and FPU control registers */
