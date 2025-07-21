@@ -326,7 +326,13 @@ static void print_additional_desc(struct pg_state *st, unsigned long last_addr)
 	describe_with_pointer(&addr, "current stack");
 
 #ifdef CONFIG_X86
-# if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0)
+# if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 15, 0)
+	/* Commit a1e4cc0155ad ("x86/percpu: Move current_task to percpu hot
+	 * section") replaced pcpu_hot.current_task with current_task again.
+	 * Show where the percpu area is on x86, using current_task
+	 */
+	describe_with_pointer(per_cpu_ptr(&current_task, 0), "percpu area");
+# elif LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0)
 	/* Commit e57ef2ed97c1 ("x86: Put hot per CPU variables into a struct")
 	 * replaced current_task with pcpu_hot.current_task.
 	 * Show where the percpu area is on x86, using pcpu_hot
