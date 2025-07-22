@@ -41,6 +41,15 @@ def get_string_at(addr):
         result.append(chr(new_char))
 
 
+def get_nstring_at(addr, size):
+    """Get the string of the given size at the given location"""
+    if isinstance(addr, (int, long)):
+        addr = toAddr(addr)
+    if size == 0:
+        return ""
+    return "".join(chr(c) for c in getBytes(addr, size))
+
+
 def get_data_type(type_name):
     """Get a data type from its name"""
     data_types = getDataTypes(type_name)
@@ -154,6 +163,25 @@ def set_data_type_array(addr, new_data_type, count, force=False, desc=None):
         addr = toAddr(addr)
     array_dt = ghidra.program.model.data.ArrayDataType(new_data_type, count, new_data_type.getLength())
     set_data_type(addr, array_dt, force=force, desc=desc)
+
+
+def define_fixed_len_string(addr, size, force=False):
+    """Define a fixed-length string at the given location"""
+    if size == 0:
+        return
+    if isinstance(addr, (int, long)):
+        addr = toAddr(addr)
+    if force:
+        ghidra.program.model.data.DataUtilities.createData(
+            currentProgram,
+            addr,
+            ghidra.program.model.data.StringDataType.dataType,
+            size,
+            False,  # stackPointers
+            ghidra.program.model.data.DataUtilities.ClearDataMode.CLEAR_ALL_CONFLICT_DATA,
+        )
+    else:
+        createAsciiString(addr, size)
 
 
 def define_memregion(name, addr, size, permissions):
