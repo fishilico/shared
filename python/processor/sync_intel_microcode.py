@@ -370,7 +370,7 @@ def parse_intel_ucode(
             raise ValueError(f"Unexpected total size in microcode: {total_size} > {len(file_data)}")
         if data_size > total_size:
             raise ValueError(f"Unexpected sizes in microcode: {data_size} > {total_size}")
-        if metadata_size not in {0, 0x14, 0x74}:
+        if metadata_size not in {0, 0x14, 0x74, 0x80}:
             raise ValueError(f"Unexpected metadata in microcode: {metadata_size:#x}")
         if update_rev_min >= update_rev:
             raise ValueError(f"Unexpected minimal update revision in microcode: {update_rev_min}")
