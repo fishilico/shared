@@ -455,6 +455,32 @@ def print_high_pcode(high_fct):
         print("{}".format(pcodeop.toString()))
 
 
+def iter_high_pcodeop_calling(fct, decomp):
+    """Get the CALL high P-Code instructions calling the given function"""
+    called_fct_addr = fct.getSymbol().getAddress()
+    caller_high_function = None
+    for caller_fct, instr_call_addr in iter_functions_calling(fct):
+        if caller_high_function is not None and caller_high_function.getFunction() == caller_fct:
+            # Re-use the previous high function
+            pass
+        else:
+            caller_high_function = decompile_fun(caller_fct, decomp).getHighFunction()
+            assert caller_high_function.getFunction() == caller_fct  # The function can be retrieved this way
+        seen_call = False
+        for pcodeop in caller_high_function.getPcodeOps(instr_call_addr):
+            if pcodeop.getMnemonic() == "CALL":
+                if seen_call:
+                    print("[{} in {}@{}] Error: second CALL instruction found at the same address: {}".format(instr_call_addr, caller_fct, caller_fct.getEntryPoint(), pcodeop))
+                    continue
+                seen_call = True
+                assert pcodeop.getSeqnum().getTarget() == instr_call_addr  # The calling address can be retrieved this way
+                # To log messages, it is possible to define:
+                # log_prefix = "[{} in {}@{}] ".format(pcodeop.getSeqnum().getTarget(), caller_high_function.getFunction(), caller_high_function.getFunction().getEntryPoint())
+                yield pcodeop, caller_high_function
+        if not seen_call:
+            print("[{} in {}@{}] Error: no CALL instruction found at an address with a XREF".format(instr_call_addr, caller_fct, caller_fct.getEntryPoint()))
+
+
 def get_c_statements(fct, decomp):
     """Get all C statements of a given function. Use getMinAddress() to get the address
     https://ghidra.re/ghidra_docs/api/ghidra/app/decompiler/DecompInterface.html
