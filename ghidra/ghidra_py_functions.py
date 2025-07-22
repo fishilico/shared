@@ -485,78 +485,136 @@ def c_varnode_to_bytes(varnode):
 
 def c_varnode_to_pointer(varnode):
     """Get the pointer referenced by a decompiler varnode"""
-    data = c_varnode_to_bytes(varnode)
-    if currentProgram.getLanguage().isBigEndian():
-        addr = sum(((d & 0xff) << (8 * (len(data) - 1 - i))) for i, d in enumerate(data))
+    if varnode.isConstant():
+        # The address is directly a constant
+        addr = varnode.getOffset()
     else:
-        addr = sum(((d & 0xff) << (8 * i)) for i, d in enumerate(data))
+        # The address needs to be dereferenced first
+        data = c_varnode_to_bytes(varnode)
+        if currentProgram.getLanguage().isBigEndian():
+            addr = sum(((d & 0xff) << (8 * (len(data) - 1 - i))) for i, d in enumerate(data))
+        else:
+            addr = sum(((d & 0xff) << (8 * i)) for i, d in enumerate(data))
     return toAddr(addr)
 
 
-def c_sta_get_function_call_name_and_childpos(sta):
-    """Return the name of the called function and its index, if the C statement is about a function call"""
-    if sta.numChildren() >= 4 and isinstance(sta.Child(0), ghidra.app.decompiler.ClangFuncNameToken):
-        # Match "fct(...)"
-        assert isinstance(sta.Child(1), ghidra.app.decompiler.ClangSyntaxToken), "issue with child 1 in {}".format(sta)
-        assert sta.Child(1).getText() == "", "issue with child 1 {!r} in {}".format(sta.Child(1).getText(), sta)
-        assert isinstance(sta.Child(2), ghidra.app.decompiler.ClangSyntaxToken), "issue with child 2 in {}".format(sta)
-        assert sta.Child(2).getText() == "(", "issue with child 2 {!r} in {}".format(sta.Child(2).getText(), sta)
-        return sta.Child(0).getText(), 3
-    if (sta.numChildren() >= 8 and
-            isinstance(sta.Child(0), ghidra.app.decompiler.ClangVariableToken) and
-            isinstance(sta.Child(1), ghidra.app.decompiler.ClangSyntaxToken) and sta.Child(1).getText() == " " and
-            isinstance(sta.Child(2), ghidra.app.decompiler.ClangOpToken) and sta.Child(2).getText() == "=" and
-            isinstance(sta.Child(3), ghidra.app.decompiler.ClangSyntaxToken) and sta.Child(3).getText() == " " and
-            isinstance(sta.Child(4), ghidra.app.decompiler.ClangFuncNameToken)):
+def c_sta_get_funcall_name_and_args(sta):
+    """Return the name of the called function and its arguments, if the C statement is about a function call.
+    The arguments are returned as a list of list of tokens from module ghidra.app.decompiler
+    https://ghidra.re/ghidra_docs/api/ghidra/app/decompiler/package-summary.html
+    """
+    pos = 0
+    num_children = sta.numChildren()
+    if num_children < 4:
+        return None, None
+    if (
+            isinstance(sta.Child(pos), ghidra.app.decompiler.ClangVariableToken) and
+            isinstance(sta.Child(pos + 1), ghidra.app.decompiler.ClangSyntaxToken) and sta.Child(1).getText() == " " and
+            isinstance(sta.Child(pos + 2), ghidra.app.decompiler.ClangOpToken) and sta.Child(2).getText() == "=" and
+            isinstance(sta.Child(pos + 3), ghidra.app.decompiler.ClangSyntaxToken) and sta.Child(3).getText() == " "
+        ):
         # Match "res = fct(...)"
-        assert isinstance(sta.Child(5), ghidra.app.decompiler.ClangSyntaxToken), "issue with child 5 in {}".format(sta)
-        assert sta.Child(5).getText() == "", "issue with child 5 {!r} in {}".format(sta.Child(5).getText(), sta)
-        assert isinstance(sta.Child(6), ghidra.app.decompiler.ClangSyntaxToken), "issue with child 6 in {}".format(sta)
-        assert sta.Child(6).getText() == "(", "issue with child 6 {!r} in {}".format(sta.Child(6).getText(), sta)
-        return sta.Child(4).getText(), 7
-    return None, None
+        pos += 4
+        if pos + 5 >= num_children:
+            return None, None
+    if not isinstance(sta.Child(pos), ghidra.app.decompiler.ClangFuncNameToken):
+        # Match "fct(...)"
+        return None, None
+    fct_name = sta.Child(pos).getText()
+    if not fct_name:
+        raise ValueError("Function call has uses an empty name at {}: {}".format(pos, sta))
+    pos += 1
+    if not isinstance(sta.Child(pos), (ghidra.app.decompiler.ClangBreak, ghidra.app.decompiler.ClangSyntaxToken)) or sta.Child(pos).getText() != "":
+        raise ValueError("Function call {} has an invalid syntax (unexpected {} {!r} at {})".format(sta, type(sta.Child(pos)), repr(sta.Child(pos)), pos))
+    pos += 1
+    if not isinstance(sta.Child(pos), ghidra.app.decompiler.ClangSyntaxToken) or sta.Child(pos).getText() != "(":
+        raise ValueError("Function call {} has an invalid syntax (unexpected {} {!r} at {})".format(sta, type(sta.Child(pos)), repr(sta.Child(pos)), pos))
+    pos += 1
+    if pos >= num_children:
+        raise ValueError("Function call {} has an invalid syntax ({} >= {})".format(sta, pos, num_children))
+    fct_args = []
+    while True:
+        current_fct_arg = []
+        opened_parentheses = 0  # Count parentheses open for example with casts "(byte *)&DAT_00001234"
+        while True:
+            if isinstance(sta.Child(pos), ghidra.app.decompiler.ClangOpToken) and sta.Child(pos).getText() == ",":
+                # End of the current argument
+                if not current_fct_arg:
+                    raise ValueError("Function call {} has an invalid syntax, empty arg at {}".format(sta, pos))
+                fct_args.append(current_fct_arg)
+                pos += 1
+                if pos >= sta.numChildren():
+                    raise ValueError("Function call {} has an invalid syntax ({} >= {})".format(sta, pos, num_children))
+                break
+            if isinstance(sta.Child(pos), ghidra.app.decompiler.ClangSyntaxToken) and sta.Child(pos).getText() == "(":
+                opened_parentheses += 1
+            if isinstance(sta.Child(pos), ghidra.app.decompiler.ClangSyntaxToken) and sta.Child(pos).getText() == ")":
+                if opened_parentheses > 0:
+                    opened_parentheses -= 1
+                else:
+                    # End of the all arguments
+                    if not current_fct_arg:
+                        # No argument, which is ok if we were expecting the first argument
+                        if fct_args:
+                            raise ValueError("Function call {} has an invalid syntax, empty last arg at {}".format(sta, pos))
+                    else:
+                        fct_args.append(current_fct_arg)
+                    pos += 1
+                    if pos != sta.numChildren():
+                        raise ValueError("Function call {} has trailing children ({} < {})".format(sta, pos, num_children))
+                    return fct_name, fct_args
+            # Add token to the current argument, if it is not empty
+            if isinstance(sta.Child(pos), (ghidra.app.decompiler.ClangBreak, ghidra.app.decompiler.ClangSyntaxToken)) and sta.Child(pos).getText() == "":
+                pass
+            else:
+                current_fct_arg.append(sta.Child(pos))
+            pos += 1
+            if pos >= num_children:
+                raise ValueError("Function call {} has an invalid syntax ({} >= {})".format(sta, pos, num_children))
 
 
-def c_sta_get_function_call_name(sta):
+def c_sta_get_funcall_name(sta):
     """Return the name of the called function, if the C statement is about a function call"""
-    name, _ = c_sta_get_function_call_name_and_childpos(sta)
+    name, _ = c_sta_get_funcall_name_and_args(sta)
     return name
 
 
-def c_sta_call_get_arg_ptr(sta, arg_idx):
-    """Return the pointer at the given argument index, in a C statement calling a function"""
-    _, pos = c_sta_get_function_call_name_and_childpos(sta)
-    cur_idx = 0
-    while cur_idx < arg_idx:
-        if isinstance(sta.Child(pos), ghidra.app.decompiler.ClangOpToken) and sta.Child(pos).getText() == ",":
-            cur_idx += 1
-        pos += 1
-        if pos >= sta.numChildren():
-            raise ValueError("Function call has {} args but trying to access {}: {}".format(cur_idx, arg_idx, sta))
-    while isinstance(sta.Child(pos), ghidra.app.decompiler.ClangSyntaxToken) and sta.Child(pos).getText() == "":
-        pos += 1
-        if pos >= sta.numChildren():
-            raise ValueError("Function call {} has an invalid syntax".format(sta))
-    if isinstance(sta.Child(pos), ghidra.app.decompiler.ClangVariableToken):
-        ptr_value = c_varnode_to_pointer(sta.Child(pos).getVarnode())
-    else:
-        raise ValueError("Argument {} does not start with a pointer but with {!r}: {}".format(arg_idx, sta.Child(pos), sta))
-    pos += 1
-    if pos >= sta.numChildren():
-        raise ValueError("Function call {} has an invalid syntax".format(sta))
-    while isinstance(sta.Child(pos), ghidra.app.decompiler.ClangSyntaxToken) and sta.Child(pos).getText() == "":
-        pos += 1
-        if pos >= sta.numChildren():
-            raise ValueError("Function call {} has an invalid syntax".format(sta))
-    if isinstance(sta.Child(pos), ghidra.app.decompiler.ClangOpToken) and sta.Child(pos).getText() == ",":
-        # End of argument
-        return ptr_value
-    if isinstance(sta.Child(pos), ghidra.app.decompiler.ClangSyntaxToken) and sta.Child(pos).getText() == ")":
-        # End of all arguments
-        return ptr_value
-    raise ValueError("Argument {} ends with an unexpected child {}, {}, {!r}: {}".format(arg_idx, pos, type(sta.Child(pos)), sta.Child(pos), sta))
+def c_sta_get_funcall_arg_const_int(arg_tokens, unsigned=False):
+    """Return the constant integer from the tokens retrieved from c_sta_get_funcall_name_and_args"""
+    if len(arg_tokens) != 1:
+        raise ValueError("Argument for const int contains multiple tokens: {!r}".format(arg_tokens))
+    scalar = arg_tokens[0].getScalar()
+    if scalar is None:
+        raise ValueError("Argument for const int is not a scalar: {!r}".format(arg_tokens))
+    return scalar.getUnsignedValue() if unsigned else scalar.getValue()
 
 
-def c_sta_call_get_arg_string(sta, arg_idx):
-    """Return the string at the given argument index, in a C statement calling a function"""
-    return get_string_at(c_sta_call_get_arg_ptr(sta, arg_idx))
+def c_sta_get_funcall_arg_ptr(arg_tokens):
+    """Return the pointer from the tokens retrieved from c_sta_get_funcall_name_and_args"""
+    if len(arg_tokens) == 1 and isinstance(arg_tokens[0], ghidra.app.decompiler.ClangVariableToken):
+        # Match a varnode directly
+        varnode = arg_tokens[0].getVarnode()
+        if varnode is None:
+            raise ValueError("Unexpected empty varnode for {!r}".format(arg_tokens[0]))
+        return c_varnode_to_pointer(varnode)
+    if (
+            len(arg_tokens) == 2 and
+            isinstance(arg_tokens[0],ghidra.app.decompiler.ClangOpToken) and
+            arg_tokens[0].getText() == "&" and
+            isinstance(arg_tokens[1], ghidra.app.decompiler.ClangVariableToken)
+        ):
+        # Match "&DAT_00001234"
+        pcodeop = arg_tokens[1].getPcodeOp()
+        if (
+                pcodeop.getMnemonic() == "PTRSUB" and
+                pcodeop.getInput(0).isConstant() and
+                pcodeop.getInput(0).getOffset() == 0 and
+                pcodeop.getInput(1).isConstant()
+            ):
+            return toAddr(pcodeop.getInput(1).getOffset())
+    raise ValueError("Unexpected argument for pointer: {!r}".format(arg_tokens))
+
+
+def c_sta_call_get_arg_string(arg_tokens):
+    """Return the string from the tokens retrieved from c_sta_get_funcall_name_and_args"""
+    return get_string_at(c_sta_get_funcall_arg_ptr(arg_tokens))
