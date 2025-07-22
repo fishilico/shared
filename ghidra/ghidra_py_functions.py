@@ -177,8 +177,8 @@ def define_memregion(name, addr, size, permissions):
     if block.name != name:
         print("Changing block name {}@{:#x} to {}".format(block.name, addr, name))
         block.setName(name)
-    if block.permissions != permissions:
-        print("Changing block permissions {}@{:#x} from {:#x} to {:#x}".format(name, addr, block.permissions, permissions))
+    if block.flags != permissions:
+        print("Changing block permissions {}@{:#x} from {:#x} to {:#x}".format(name, addr, block.flags, permissions))
         block.setPermissions((permissions & 4) != 0, (permissions & 2) != 0, (permissions & 1) != 0)
         block.setVolatile((permissions & 8) != 0)
 
