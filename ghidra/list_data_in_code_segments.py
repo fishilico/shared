@@ -44,7 +44,7 @@ NOP_PATTERNS = {
 for block in currentProgram.memory.blocks:
     addr = block.start
     try:
-        if block.permissions & 1:
+        if block.flags & 1:
             # In an executable block, find data between instructions
             while addr.compareTo(block.end) <= 0:
                 instr = currentProgram.listing.getInstructionAt(addr)
