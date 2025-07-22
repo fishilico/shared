@@ -14,10 +14,10 @@ import re
 
 
 # Some types
-char_t = ghidra.program.model.data.CharDataType()
-byte_t = ghidra.program.model.data.ByteDataType()
-uint_t = ghidra.program.model.data.UnsignedIntegerDataType()
-void_t = ghidra.program.model.data.VoidDataType()
+char_t = ghidra.program.model.data.CharDataType.dataType
+byte_t = ghidra.program.model.data.ByteDataType.dataType
+uint_t = ghidra.program.model.data.UnsignedIntegerDataType.dataType
+void_t = ghidra.program.model.data.VoidDataType.dataType
 void_p_t = ghidra.program.model.data.PointerDataType(void_t)
 
 
