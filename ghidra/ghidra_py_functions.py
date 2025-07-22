@@ -383,7 +383,7 @@ def rename_fun_and_apply(fct, fct_sign, verbose=True):
     set_fun_signature(fct, fct_sign, verbose=verbose)
 
 
-def get_or_create_fun_at(addr, name_or_sign, rename=True, verbose=True):
+def get_or_create_fun_at(addr, name_or_sign, rename=True, comment=None, verbose=True):
     """Get the function at the given address, or create it if needed"""
     if isinstance(addr, (int, long)):
         addr = toAddr(addr)
@@ -411,6 +411,8 @@ def get_or_create_fun_at(addr, name_or_sign, rename=True, verbose=True):
         rename_fun(fct, fct_name, verbose=verbose)
     if fct_sign:
         set_fun_signature(fct, fct_sign, verbose=verbose)
+    if comment:
+        fct.setComment(comment)
     return fct
 
 
