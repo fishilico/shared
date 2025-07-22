@@ -256,9 +256,11 @@ def iterate_table(tbl):
         yield tbl.getComponent(i)
 
 
-def get_global_function(name):
+def get_global_function(name, maybe=False):
     """Get the function object from the given name"""
     result = list(getGlobalFunctions(name))
+    if not result and maybe:
+        return None
     if len(result) != 1:
         raise RuntimeError("Function {} is defined {} times".format(name, len(result)))
     return result[0]
