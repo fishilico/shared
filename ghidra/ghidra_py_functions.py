@@ -343,7 +343,7 @@ def set_fun_signature(fct, fct_sign, force_name=None, verbose=True):
         new_signature.setCallingConvention(new_calling_conv)
     else:
         # Re-use the existing calling convention
-        new_signature.setCallingConvention(str(fct.getCallingConvention()))
+        new_signature.setCallingConvention(fct.getCallingConventionName())
     if new_signature != fct.getSignature():
         if verbose:
             print("Setting function signature {}@{} to {}".format(fct, fct.getSymbol().getAddress(), new_signature))
