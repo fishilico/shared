@@ -443,6 +443,17 @@ def decompile_fun(fct, decomp):
     return decomp_result
 
 
+def print_high_pcode(high_fct):
+    """Show the refined P-Code from a High function, for example decompiled using decompile_fun(fct, decomp).getHighFunction()
+    Code inspired from https://github.com/NationalSecurityAgency/ghidra/issues/2183#issuecomment-670180624
+    """
+    if isinstance(high_fct, ghidra.app.decompiler.DecompileResults):
+        # Allow using the decompilation result directly
+        high_fct = high_fct.getHighFunction()
+    for pcodeop in high_fct.getPcodeOps():
+        print("{}".format(pcodeop.toString()))
+
+
 def get_c_statements(fct, decomp):
     """Get all C statements of a given function. Use getMinAddress() to get the address
     https://ghidra.re/ghidra_docs/api/ghidra/app/decompiler/DecompInterface.html
@@ -459,43 +470,44 @@ def get_c_statements(fct, decomp):
     return result
 
 
-def c_varnode_to_bytes(varnode):
-    """Get the bytes referenced by a decompiler varnode (like sta.Child(4).getVarnode(), for the first arg of a call)"""
-    if varnode.isAddress():
-        return getBytes(varnode.getAddress(), varnode.getSize())
+def varnode_propagate_unique(varnode):
+    """Propagate the Unique definition of a decompiler varnode (either from C statements or from high function pcodeOps)
+    cf. https://github.com/NationalSecurityAgency/ghidra/discussions/3711#discussioncomment-2138061
+    """
     if varnode.isUnique():
-        # Merge several origins, if they are the same
-        # cf. https://github.com/NationalSecurityAgency/ghidra/discussions/3711#discussioncomment-2138061
-        origins = set()
-        remaining_uniques_stack = [varnode]
-        while remaining_uniques_stack:
-            for inp in remaining_uniques_stack.pop().getDef().getInputs():
-                if inp.isAddress():
-                    origins.add((inp.getAddress(), inp.getSize()))
-                elif inp.isUnique():
-                    remaining_uniques_stack.append(inp)
-                else:
-                    raise ValueError("Varnode refers to Unique which is not an address: {} -> {}".format(varnode, inp))
-            if len(origins) != 1:
-                raise ValueError("Varnode refers to Unique which is not memory: {} -> {}".format(varnode, varnode.getDef().getInputs()))
-        for addr, size in origins:
-            return getBytes(addr, size)
-    raise ValueError("Varnode does to refers to memory: {}".format(varnode))
+        # Retrieve the pcodeop defining the unique
+        pcodeop = varnode.getDef()
+        if pcodeop.getMnemonic() == "COPY" and pcodeop.numInputs == 1:
+            # Match a direct copy of some other varnode
+            return varnode_propagate_unique(pcodeop.getInput(0))
+        if pcodeop.getMnemonic() == "CAST" and pcodeop.numInputs == 1:
+            # Match a type cast of some other varnode
+            return varnode_propagate_unique(pcodeop.getInput(0))
+        if (
+                pcodeop.getMnemonic() == "PTRSUB" and
+                pcodeop.numInputs == 2 and
+                pcodeop.getInput(0).isConstant() and
+                pcodeop.getInput(0).getOffset() == 0
+            ):
+            # Match a Pointer subtraction with zero:
+            #    (unique, 0x10000000, 8) PTRSUB (const, 0x0, 8) , (const, 0x1234, 8)
+            # => (const, 0x1234, 8)
+            return varnode_propagate_unique(pcodeop.getInput(1))
+    return varnode
 
 
-def c_varnode_to_pointer(varnode):
-    """Get the pointer referenced by a decompiler varnode"""
+def varnode_get_constant(varnode):
+    """Retrieve the constant value from a varnode"""
+    if varnode.isUnique():
+        varnode = varnode_propagate_unique(varnode)
     if varnode.isConstant():
-        # The address is directly a constant
-        addr = varnode.getOffset()
-    else:
-        # The address needs to be dereferenced first
-        data = c_varnode_to_bytes(varnode)
-        if currentProgram.getLanguage().isBigEndian():
-            addr = sum(((d & 0xff) << (8 * (len(data) - 1 - i))) for i, d in enumerate(data))
-        else:
-            addr = sum(((d & 0xff) << (8 * i)) for i, d in enumerate(data))
-    return toAddr(addr)
+        return varnode.getOffset()
+    raise ValueError("Varnode does not contain a constant: {!r}".format(varnode))
+
+
+def varnode_get_constant_ptr(varnode):
+    """Retrieve the constant pointer from a varnode"""
+    return toAddr(varnode_get_constant(varnode))
 
 
 def c_sta_get_funcall_name_and_args(sta):
@@ -596,7 +608,7 @@ def c_sta_get_funcall_arg_ptr(arg_tokens):
         varnode = arg_tokens[0].getVarnode()
         if varnode is None:
             raise ValueError("Unexpected empty varnode for {!r}".format(arg_tokens[0]))
-        return c_varnode_to_pointer(varnode)
+        return toAddr(varnode_get_constant(varnode))
     if (
             len(arg_tokens) == 2 and
             isinstance(arg_tokens[0],ghidra.app.decompiler.ClangOpToken) and
