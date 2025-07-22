@@ -57,8 +57,8 @@ for block in currentProgram.memory.blocks:
                     addr = addr.add(1)
                 size = addr.subtract(data_start)
                 data_bytes = getBytes(data_start, min(100, size))
-                data_hex =  " ".join("%02x" % (x&0xff) for x in data_bytes)
-                if data_hex not in X86_NOP_PATTERNS:
+                data_hex =  " ".join("%02x" % (x & 0xff) for x in data_bytes)
+                if data_hex not in NOP_PATTERNS:
                     print("Data in %s at %s .. %s [%d]: %s" % (block.name, data_start, addr, size, data_hex))
         else:
             # In a non-executable block, find instructions in data
