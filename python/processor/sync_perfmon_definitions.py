@@ -130,6 +130,8 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("meteorlake", "Arrow Lake U"),
         ("meteorlake", "Meteor Lake M and P"),
         ("meteorlake", "Meteor Lake S"),
+        ("pantherlake_cougarcove", "Panther Lake"),
+        ("pantherlake_darkmont", "Panther Lake"),
         ("rocketlake", "Rocket Lake"),
         ("sandybridge", "Sandy Bridge"),
         ("sapphirerapids", "Emerald Rapids Xeon"),
@@ -173,9 +175,16 @@ def parse_perf_events_x86_mapfile(content: str, verbose: bool = False) -> None:
             name_suffix = "_matrix"
         else:
             name_suffix = "_" + name_suffix.replace(" ", "_")
-        if not filename.endswith(name_suffix):
-            raise ValueError(f"Unexpected file name without the right suffix: {line!r}")
-        filename = filename[: -len(name_suffix)]
+        if name_suffix == "_metrics" and filename.endswith("_core"):
+            # Special cases for metric file such as /ADL/metrics/alderlake_metrics_goldencove_core.json
+            matches = re.match(r"^([a-z]+)_metrics_([a-z]+)_core$", filename)
+            if not matches:
+                raise ValueError(f"Unexpected metrics file name format: {line!r}")
+            filename = "_".join(matches.groups())
+        else:
+            if not filename.endswith(name_suffix):
+                raise ValueError(f"Unexpected file name without the right suffix: {line!r}")
+            filename = filename[: -len(name_suffix)]
 
         # Remove filename suffix
         if filename in {"alderlake_gracemont", "alderlake_goldencove"}:
