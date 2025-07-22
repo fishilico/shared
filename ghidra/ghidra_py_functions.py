@@ -281,7 +281,7 @@ def iter_called_functions(fct):
                         yield ref, called_fct
 
 
-def iter_functions_calling(fct):
+def iter_functions_calling(fct, with_thunk=True):
     """Get the functions calling the given function and the addresses where calls happened, by XRef"""
     for ref in currentProgram.referenceManager.getReferencesTo(fct.getSymbol().getAddress()):
         if ref.getReferenceType() in {ghidra.program.model.symbol.FlowType.UNCONDITIONAL_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL_TERMINATOR}:
@@ -289,6 +289,14 @@ def iter_functions_calling(fct):
             calling_fct = currentProgram.listing.getFunctionContaining(ref.getFromAddress())
             if calling_fct:
                 yield calling_fct, instr_call_addr
+    if with_thunk:
+        # Consider thunk functions too
+        thunk_fcts = fct.getFunctionThunkAddresses(True)  # parameter: recursive=True
+        if thunk_fcts:
+            for thunk_fct_addr in thunk_fcts:
+                thunk_fct = currentProgram.listing.getFunctionAt(thunk_fct_addr)
+                for calling_fct, instr_call_addr in iter_functions_calling(thunk_fct, with_thunk=False):
+                    yield calling_fct, instr_call_addr
 
 
 def describe_fun_addr(addr, with_address=False, return_none=False):
@@ -455,11 +463,11 @@ def print_high_pcode(high_fct):
         print("{}".format(pcodeop.toString()))
 
 
-def iter_high_pcodeop_calling(fct, decomp):
+def iter_high_pcodeop_calling(fct, decomp, with_thunk=True):
     """Get the CALL high P-Code instructions calling the given function"""
     called_fct_addr = fct.getSymbol().getAddress()
     caller_high_function = None
-    for caller_fct, instr_call_addr in iter_functions_calling(fct):
+    for caller_fct, instr_call_addr in iter_functions_calling(fct, with_thunk=with_thunk):
         if caller_high_function is not None and caller_high_function.getFunction() == caller_fct:
             # Re-use the previous high function
             pass
