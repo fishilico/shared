@@ -236,14 +236,21 @@ def get_global_function(name):
     return result[0]
 
 
-def get_imported_function(name):
-    """Get the function object from the given program import"""
+def get_imported_function(name, maybe=False):
+    """Get the function object from the given program import. If maybe=True, return None when the function is not found"""
     sym = currentProgram.symbolTable.getExternalSymbol(name)
+    if sym is None:
+        if maybe:
+            return None
+        raise RuntimeError("No external symbol {} found".format(name))
     if sym.getReferenceCount() != 1:
         raise RuntimeError("External symbol {} is referenced {} times".format(name, sym.getReferenceCount()))
     thunk_addr = sym.getReferences()[0].getFromAddress()
+    fct = currentProgram.listing.getFunctionAt(thunk_addr)
+    if fct is not None:
+        return fct
     possible_functions = []
-    for ref in currentProgram.referenceManager.getReferencesTo(sym.getReferences()[0].getFromAddress()):
+    for ref in currentProgram.referenceManager.getReferencesTo(thunk_addr):
         if ref.getReferenceType() == ghidra.program.model.symbol.FlowType.UNCONDITIONAL_CALL:
             fct = currentProgram.listing.getFunctionContaining(ref.getFromAddress())
             assert fct.name == name, "Unexpected function name: {} for import {}".format(fct, name)
@@ -356,6 +363,16 @@ def apply_fun_signature(fct_sign, verbose=True):
     """Apply a function signature, finding the relevant function"""
     fct_name = fct_sign.split("(", 1)[0].split()[-1]
     fct = get_global_function(fct_name)
+    set_fun_signature(fct, fct_sign, verbose=verbose)
+
+
+def apply_imported_fun_signature(fct_sign, verbose=True, maybe=False):
+    """Apply a function signature, finding the relevant function"""
+    fct_name = fct_sign.split("(", 1)[0].split()[-1]
+    fct = get_imported_function(fct_name, maybe=maybe)
+    if maybe and fct is None:
+        # The function was not imported
+        return
     set_fun_signature(fct, fct_sign, verbose=verbose)
 
 
