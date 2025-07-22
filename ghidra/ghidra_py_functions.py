@@ -282,12 +282,13 @@ def iter_called_functions(fct):
 
 
 def iter_functions_calling(fct):
-    """Get the functions calling the given function, by XRef"""
+    """Get the functions calling the given function and the addresses where calls happened, by XRef"""
     for ref in currentProgram.referenceManager.getReferencesTo(fct.getSymbol().getAddress()):
         if ref.getReferenceType() in {ghidra.program.model.symbol.FlowType.UNCONDITIONAL_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL, ghidra.program.model.symbol.FlowType.COMPUTED_CALL_TERMINATOR}:
+            instr_call_addr = ref.getFromAddress()
             calling_fct = currentProgram.listing.getFunctionContaining(ref.getFromAddress())
             if calling_fct:
-                yield calling_fct
+                yield calling_fct, instr_call_addr
 
 
 def describe_fun_addr(addr, with_address=False, return_none=False):
