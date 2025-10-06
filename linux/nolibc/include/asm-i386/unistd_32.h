@@ -458,9 +458,11 @@
 #define __NR_listxattrat 465
 #define __NR_removexattrat 466
 #define __NR_open_tree_attr 467
+#define __NR_file_getattr 468
+#define __NR_file_setattr 469
 
 #ifdef __KERNEL__
-#define __NR_syscalls 468
+#define __NR_syscalls 470
 #endif
 
 #endif /* _UAPI_ASM_UNISTD_32_H */
