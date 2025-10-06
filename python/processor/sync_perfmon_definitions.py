@@ -130,6 +130,7 @@ KNOWN_FILENAME_MODEL: FrozenSet[Tuple[str, str]] = frozenset(
         ("meteorlake", "Arrow Lake U"),
         ("meteorlake", "Meteor Lake M and P"),
         ("meteorlake", "Meteor Lake S"),
+        ("pantherlake", "Panther Lake"),
         ("pantherlake_cougarcove", "Panther Lake"),
         ("pantherlake_darkmont", "Panther Lake"),
         ("rocketlake", "Rocket Lake"),
