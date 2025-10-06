@@ -1,11 +1,12 @@
-FROM debian:trixie-slim
-LABEL Description="Debian 13 Trixie with build dependencies for shared"
+FROM debian:forky-slim
+LABEL Description="Debian 14 Forky with build dependencies for shared"
 
 # Override the language to force UTF-8 output
 ENV LANG=C.UTF-8
 
 # Install apt-utils first, in order to apply package configuration tasks
 # Install wine last, because otherwise apt fails to configure it
+# Remove sagemath, as it is no longer packaged
 RUN \
     export DEBIAN_FRONTEND=noninteractive && \
     dpkg --add-architecture i386 && \
@@ -33,7 +34,7 @@ RUN \
         make \
         musl-dev \
         musl-tools \
-        openjdk-25-jdk-headless \
+        openjdk-26-jdk-headless \
         openssh-client \
         openssl \
         pkgconf \
@@ -47,8 +48,7 @@ RUN \
         python3-pil \
         python3-pycryptodome \
         python3-setuptools \
-        python3-z3 \
-        sagemath && \
+        python3-z3 && \
     apt-get install --no-install-recommends --no-install-suggests -qqy \
         wine \
         wine32 \
@@ -100,18 +100,18 @@ CMD ["/run_shared_test.sh"]
 #       x86_64-w64-mingw32-gcc: ok
 #       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (Debian 14.2.0-19) 14.2.0
-#       clang: Debian clang version 19.1.7 (3)
+#       gcc: gcc (Debian 15.2.0-4) 15.2.0
+#       clang: Debian clang version 19.1.7 (3+b2)
 #       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 14-win32
 #       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 14-win32
-#       wine: wine-10.0 (Debian 10.0~repack-3)
-#       Linux kernel: 6.12.21-amd64
-#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.41-6) stable release version 2.41.
+#       wine: wine-10.0 (Debian 10.0~repack-6)
+#       Linux kernel: 6.16.9+deb14-amd64
+#       /lib/ld-linux.so.2: ld.so (Debian GLIBC 2.41-12) stable release version 2.41.
 #       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.5
-#       python3: Python 3.13.2
-#       javac: javac 25-ea
-#       java: openjdk 25-ea 2025-09-16
-#       rustc: rustc 1.85.0 (4d91de4e4 2025-02-17) (built from a source tarball)
-#       cargo: cargo 1.85.0 (d73d2caf9 2024-12-31)
+#       python3: Python 3.13.7
+#       javac: javac 26-ea
+#       java: openjdk 26-ea 2026-03-17
+#       rustc: rustc 1.87.0 (17067e9ac 2025-05-09) (built from a source tarball)
+#       cargo: cargo 1.87.0 (99624be96 2025-05-06) (built from a source tarball)
 #       coqc: The Coq Proof Assistant, version 8.20.1 compiled with OCaml 5.3.0
-#       openssl: OpenSSL 3.5.0 8 Apr 2025 (Library: OpenSSL 3.5.0 8 Apr 2025)
+#       openssl: OpenSSL 3.5.4 30 Sep 2025 (Library: OpenSSL 3.5.4 30 Sep 2025)

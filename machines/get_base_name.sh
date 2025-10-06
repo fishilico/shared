@@ -89,6 +89,9 @@ do
         *debian13*|*trixie*)
             echo "debian13-trixie"
             ;;
+        *debian14*|*forky*)
+            echo "debian14-forky"
+            ;;
 
         *ubuntu1404*|*ubuntu14.04*|*trusty*)
             echo "ubuntu1404-trusty"
