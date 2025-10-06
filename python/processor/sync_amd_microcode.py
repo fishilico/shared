@@ -199,6 +199,7 @@ KNOWN_EQUIVALENCE_TABLE: Mapping[int, Tuple[int, ...]] = {
     0xB440: (0xB40F40,),
     0xB441: (0xB40F41,),
     0xB600: (0xB60F00,),
+    0xB680: (0xB60F80,),
     0xB700: (0xB70F00,),
 }
 
