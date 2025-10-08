@@ -23,6 +23,9 @@ ifeq ($(TARGET_ARCH),x86_64)
         ifeq ($(HAVE_CPUINFO_EVEX),y)
             RUN_TEST_PREFIX := echo SKIP because current CPU supports EVEX
         endif
+    else ifeq ($(TARGET_OS),windows)
+        # Recent versions of Windows also use AVX-512
+        RUN_TEST_PREFIX := echo SKIP because Windows can support AVX-512
     endif
 endif
 
