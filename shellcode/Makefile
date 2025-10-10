@@ -50,6 +50,8 @@ shcdump: $(SHELLCODE_RAW) $(SHELLCODE_BIN)
 %.$(BIN_EXT): .%.o
 	$(V_CCLD)$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
+# clang warns about xor being a C++ keyword
+.%.o: CFLAGS += $(call cc-disable-warning,c++-keyword)
 .%.o: %.S
 	$(V_CC)$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
