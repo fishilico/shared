@@ -1,13 +1,34 @@
 CC ?= cc
 LD ?= ld
-OBJCOPY ?= objcopy
 UNAME ?= uname
 
 include ../../common.mk
 
 TARGET_ARCH := $(or $(get-cc-target-arch),unknown-arch)
-# Use ia32 instead of x86_32 for EFI
-ARCH := $(if $(filter x86_32,$(TARGET_ARCH)),ia32,$(TARGET_ARCH))
+# Find the right objcopy variant depending on the architecture
+ifeq ($(TARGET_ARCH),x86_32)
+	# Use ARCH=ia32 instead of x86_32 for EFI
+	ARCH := ia32
+	ifeq ($(call can-run,i686-w64-mingw32-objcopy --version),y)
+		OBJCOPY ?= i686-w64-mingw32-objcopy
+	else ifeq ($(call can-run,x86_64-w64-mingw32-objcopy --version),y)
+		OBJCOPY ?= x86_64-w64-mingw32-objcopy
+	else
+		OBJCOPY ?= objcopy
+	endif
+	# Add -m32 flag to allow building 32-bits EFI with "linux32 make"
+	CFLAGS += -m32
+else ifeq ($(TARGET_ARCH),x86_64)
+	ARCH := $(TARGET_ARCH)
+	ifeq ($(call can-run,x86_64-w64-mingw32-objcopy --version),y)
+		OBJCOPY ?= x86_64-w64-mingw32-objcopy
+	else
+		OBJCOPY ?= objcopy
+	endif
+else
+	ARCH := $(TARGET_ARCH)
+	OBJCOPY ?= objcopy
+endif
 
 CPPFLAGS = -Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d
 CFLAGS = -O2 -fPIC -Wall -Wextra \
@@ -32,10 +53,6 @@ SOURCES := $(wildcard *.c)
 EFI_SOURCES := $(filter-out efi_crt.c, $(SOURCES))
 EFIS := $(EFI_SOURCES:%.c=%.efi)
 
-# Add -m32 flag to allow building 32-bits EFI with "linux32 make"
-ifeq ($(ARCH), ia32)
-CFLAGS += -m32
-endif
 
 all: $(EFIS)
 	@:

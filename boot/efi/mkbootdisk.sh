@@ -93,6 +93,10 @@ fi
 #       /usr/share/edk2-ovmf/x64/OVMF_VARS.fd
 #       /usr/share/edk2-ovmf/ia32/OVMF_CODE.fd
 #       /usr/share/edk2-ovmf/ia32/OVMF_VARS.fd
+#       /usr/share/edk2-ovmf/x64/OVMF_CODE.4m.fd
+#       /usr/share/edk2-ovmf/x64/OVMF_VARS.4m.fd
+#       /usr/share/edk2-ovmf/ia32/OVMF_CODE.4m.fd
+#       /usr/share/edk2-ovmf/ia32/OVMF_VARS.4m.fd
 # - Debian https://packages.debian.org/fr/sid/all/ovmf/filelist
 #       /usr/share/OVMF/OVMF_CODE.fd
 #       /usr/share/OVMF/OVMF_VARS.fd
@@ -108,7 +112,7 @@ case "$ARCH" in
     x86_64)
         EFI_FILE_IN_PART="/EFI/BOOT/BOOTX64.efi"
         QEMU_COMMAND="qemu-system-x86_64"
-        for FILE in /usr/share/edk2-ovmf/x64/OVMF_CODE.fd /usr/share/OVMF/OVMF_CODE.fd /usr/share/edk2/ovmf/OVMF_CODE.fd
+        for FILE in /usr/share/edk2-ovmf/x64/OVMF_CODE.fd /usr/share/edk2-ovmf/x64/OVMF_CODE.4m.fd /usr/share/OVMF/OVMF_CODE.fd /usr/share/edk2/ovmf/OVMF_CODE.fd
         do
             if [ -e "$FILE" ]
             then
@@ -120,7 +124,7 @@ case "$ARCH" in
     ia32)
         EFI_FILE_IN_PART="/EFI/BOOT/BOOTIA32.efi"
         QEMU_COMMAND="qemu-system-i386"
-        for FILE in /usr/share/edk2-ovmf/ia32/OVMF_CODE.fd /usr/share/OVMF/OVMF32_CODE_4M.secboot.fd
+        for FILE in /usr/share/edk2-ovmf/ia32/OVMF_CODE.fd /usr/share/edk2-ovmf/ia32/OVMF_CODE.4m.fd /usr/share/OVMF/OVMF32_CODE_4M.secboot.fd
         do
             if [ -e "$FILE" ]
             then
