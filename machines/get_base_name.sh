@@ -178,6 +178,9 @@ do
         *fedora43*)
             echo "fedora43"
             ;;
+        *fedora44*)
+            echo "fedora44"
+            ;;
 
         *)
             echo >&2 "Error: invalid name $NAME (from $1)"

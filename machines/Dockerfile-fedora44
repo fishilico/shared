@@ -1,0 +1,118 @@
+FROM fedora:44
+LABEL Description="Fedora 44 with build dependencies for shared"
+# Override the language to force UTF-8 output
+ENV LANG=C.UTF-8
+
+RUN \
+    dnf install -q -y --setopt=deltarpm=false dnf5 && \
+    dnf5 update -q -y --setopt=deltarpm=false && \
+    dnf5 install -q -y --setopt=deltarpm=false \
+        cargo \
+        clang \
+        coq \
+        diffutils \
+        elfutils-libelf-devel \
+        gawk \
+        gcc \
+        gdb \
+        glibc-devel.x86_64 \
+        glibc-devel.i686 \
+        gmp-devel.x86_64 \
+        gmp-devel.i686 \
+        gtk3-devel \
+        java-latest-openjdk-devel \
+        kernel \
+        kernel-devel \
+        libmnl-devel.i686 \
+        libmnl-devel.x86_64 \
+        m4 \
+        make \
+        mingw32-gcc \
+        mingw64-gcc \
+        numpy \
+        openssh \
+        openssl \
+        openssl-devel \
+        openssl-devel-engine \
+        perl-Getopt-Long \
+        perl-Term-ANSIColor \
+        pkgconf \
+        pulseaudio-libs-devel \
+        python-unversioned-command \
+        python3 \
+        python3-cffi \
+        python3-cryptography \
+        python3-devel \
+        python3-gmpy2 \
+        python3-numpy \
+        python3-pillow \
+        python3-pycryptodomex \
+        python3-pynacl \
+        python3-setuptools \
+        python3-z3 \
+        SDL2-devel \
+        which \
+        wine \
+        xorg-x11-server-Xvfb && \
+    dnf5 clean all
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["xvfb-run", "/run_shared_test.sh"]
+
+# make list-nobuild:
+#    Global blacklist: latex%
+#    In sub-directories:
+#       c:
+#       glossaries:
+#       java/keystore:
+#       linux:
+#       python:
+#       python/crypto:
+#       python/network:
+#       python/network/dnssec:
+#       python/processor:
+#       python/qrcode:
+#       rust:
+#       verification:
+#    With gcc -m32:
+#       Global blacklist: latex%
+#       In sub-directories:
+#          c: gtk_alpha_window openmp_matrix
+#          glossaries:
+#          java/keystore:
+#          linux: pulseaudio_echo sdl_v4l_video
+#          python:
+#          python/crypto:
+#          python/network:
+#          python/network/dnssec:
+#          python/processor:
+#          python/qrcode:
+#          rust:
+#          verification:
+#    Compilers:
+#       gcc -m64: ok
+#       gcc -m32: ok
+#       clang -m64: ok
+#       clang -m32: ok
+#       musl-gcc: not working
+#       x86_64-w64-mingw32-gcc: ok
+#       i686-w64-mingw32-gcc: ok
+#    Versions:
+#       gcc: gcc (GCC) 15.2.1 20250924 (Red Hat 15.2.1-2)
+#       clang: clang version 21.1.2 (Fedora 21.1.2-1.fc44)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 15.2.1 20250808 (Fedora MinGW 15.2.1-2.fc44)
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 15.2.1 20250808 (Fedora MinGW 15.2.1-2.fc44)
+#       wine: wine-10.15 (Staging)
+#       Linux kernel: 6.18.0-0.rc0.251003ge406d57be7bd.6.fc44.x86_64
+#       /lib/ld-linux.so.2: ld.so (GNU libc) development release version 2.42.9000.
+#       python: Python 3.14.0rc3
+#       python3: Python 3.14.0rc3
+#       javac: javac 25
+#       java: openjdk 25 2025-09-16
+#       rustc: rustc 1.90.0 (1159e78c4 2025-09-14) (Fedora 1.90.0-1.fc44)
+#       cargo: cargo 1.90.0 (840b83a10 2025-07-30) (Fedora 1.90.0-1.fc44)
+#       coqc: The Coq Proof Assistant, version 8.20.1 compiled with OCaml 5.3.0
+#       openssl: OpenSSL 3.5.1 1 Jul 2025 (Library: OpenSSL 3.5.1 1 Jul 2025)
