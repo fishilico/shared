@@ -794,6 +794,11 @@ static bool show_cipher_info(const char *ciphername)
                 break;
             case CRYPTOCFGA_REPORT_COMPRESS:
                 printf("  * Compress (%lu bytes)\n", (unsigned long)RTA_PAYLOAD(rta));
+                if (RTA_PAYLOAD(rta) == sizeof(struct crypto_report_comp)) {
+                    struct crypto_report_comp *rcomp = (struct crypto_report_comp *)RTA_DATA(rta);
+
+                    printf("    - type: %.*s\n", (int)sizeof(rcomp->type), rcomp->type);
+                }
                 break;
             case CRYPTOCFGA_REPORT_RNG:
                 printf("  * RNG (%lu bytes)\n", (unsigned long)RTA_PAYLOAD(rta));
@@ -853,6 +858,10 @@ int main(void)
     }
     if (!show_cipher_info("stdrng")) {
         fprintf(stderr, "Failed to show information about stdrng.\n");
+        return 1;
+    }
+    if (!show_cipher_info("deflate")) {
+        fprintf(stderr, "Failed to show information about deflate\n");
         return 1;
     }
     return 0;
