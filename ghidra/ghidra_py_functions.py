@@ -57,6 +57,10 @@ def get_data_type(type_name):
         if len(data_types) != 1:
             raise ValueError("Error: data type {} matches {} types".format(type_name, len(data_types)))
         return data_types[0]
+    if type_name.endswith("*"):
+        # Create pointer type
+        base_type = get_data_type(type_name[:-1].rstrip())
+        return ghidra.program.model.data.PointerDataType(base_type)
     # Create array types automatically
     # char[10][20] is an array of 10 char[20], so make sure the parsing is done in the right order
     if "[" in type_name:
