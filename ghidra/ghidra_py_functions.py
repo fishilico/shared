@@ -353,13 +353,9 @@ def rename_fun(fct, name, verbose=True):
         fct.setName(name, ghidra.program.model.symbol.SourceType.DEFAULT)
 
 
-def set_fun_signature(fct, fct_sign, force_name=None, verbose=True):
-    """Set the signature of the given function"""
-    if force_name:
-        # Use this name instead of the one in fct_sign
-        retval_and_name, args = fct_sign.split("(", 1)
-        retval, _ = retval_and_name.rsplit(" ", 1)
-        fct_sign = retval + " " + force_name + "(" + args
+def parse_fun_signature(fct_sign, old_signature=None, force_name=None):
+    """Use Ghidra's function signature parser to create a FunctionDefinitionDataType
+    https://ghidra.re/ghidra_docs/api/ghidra/app/util/parser/FunctionSignatureParser.html"""
     signature_parser = ghidra.app.util.parser.FunctionSignatureParser(currentProgram.getDataTypeManager(), None)
     # Identify the new calling convention before parsing the signature, as the parser ignores it
     new_calling_conv = None
@@ -374,16 +370,28 @@ def set_fun_signature(fct, fct_sign, force_name=None, verbose=True):
             assert new_fct_sign == fct_sign.replace(" " + new_calling_conv + " ", " ")
             fct_sign = new_fct_sign
     try:
-        new_signature = signature_parser.parse(fct.getSignature(), fct_sign)
-    except ghidra.app.util.cparser.C.ParseException:
-        print("Error while parsing {!r} for {}".format(fct_sign, fct))
+        new_signature = signature_parser.parse(old_signature, fct_sign)
+    except ghidra.app.util.cparser.C.ParseException as exc:
+        print("Error while parsing function signature {!r}: {}".format(fct_sign, exc))
         raise
+    if force_name:
+        new_signature.setName(force_name)
     if new_calling_conv:
         new_signature.setCallingConvention(new_calling_conv)
-    else:
+    elif old_signature is not None:
         # Re-use the existing calling convention
-        new_signature.setCallingConvention(fct.getCallingConventionName())
-    if new_signature != fct.getSignature():
+        new_signature.setCallingConvention(old_signature.getCallingConventionName())
+    return new_signature
+
+
+def set_fun_signature(fct, fct_sign, force_name=None, verbose=True):
+    """Set the signature of the given function"""
+    new_signature = parse_fun_signature(fct_sign, old_signature=fct.getSignature(), force_name=force_name)
+    if not force_name:
+        # Copy the name from the function, without any namespace
+        new_signature.setName(fct.getName())
+    # new_signature.isEquivalentSignature(fct.getSignature()) does not work well, so use string comparison instead
+    if new_signature.toString() != fct.getSignature().toString():
         if verbose:
             print("Setting function signature {}@{} to {}".format(fct, fct.getSymbol().getAddress(), new_signature))
         command = ghidra.app.cmd.function.ApplyFunctionSignatureCmd(
@@ -392,7 +400,8 @@ def set_fun_signature(fct, fct_sign, force_name=None, verbose=True):
             ghidra.program.model.symbol.SourceType.ANALYSIS)
         if not runCommand(command):
             raise RuntimeError("Failed to run ApplyFunctionSignatureCmd for {}".format(fct_sign))
-    if new_calling_conv and new_calling_conv != str(fct.getCallingConvention()):
+    new_calling_conv = new_signature.getCallingConvention()
+    if new_calling_conv is not None and new_calling_conv != fct.getCallingConvention():
         if verbose:
             print("Setting function calling convention {}@{} to {}".format(fct, fct.getSymbol().getAddress(), new_calling_conv))
         fct.setCallingConvention(new_calling_conv)
