@@ -23,7 +23,7 @@ static void perror_exit(const char *s)
 
 int main(void)
 {
-    const char template[] = "./mmap-wx-XXXXXX";
+    const char path_template[] = "./mmap-wx-XXXXXX";
 #if defined(__i386__) || defined(__x86_64__)
     const uint8_t code[] = { 0x31, 0xc0, 0xc3 };
 #elif defined(__arm__)
@@ -37,7 +37,7 @@ int main(void)
     int fd, result;
     void *wptr, *xptr;
 
-    memcpy(filename, template, sizeof(template));
+    memcpy(filename, path_template, sizeof(path_template));
     fd = mkstemp(filename);
     if (fd == -1)
         perror_exit("mkstemp");

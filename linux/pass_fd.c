@@ -396,13 +396,13 @@ static int recursive_sockets(void)
 int main(void)
 {
     const char unixfile[] = "unix.sock";
-    char template[] = "/tmp/pass-fd-XXXXXX", *dirpath;
-    char sockpath[sizeof(template) + sizeof(unixfile)];
+    char path_template[] = "/tmp/pass-fd-XXXXXX", *dirpath;
+    char sockpath[sizeof(path_template) + sizeof(unixfile)];
     pid_t child1, child2, pid;
     int status = 0, return_value = 0;
 
     /* Create a dir which will contains a Unix socket */
-    dirpath = mkdtemp(template);
+    dirpath = mkdtemp(path_template);
     if (!dirpath) {
         perror("mkdtemp");
         return 1;
