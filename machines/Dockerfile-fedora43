@@ -99,20 +99,20 @@ CMD ["xvfb-run", "/run_shared_test.sh"]
 #       clang -m32: ok
 #       musl-gcc: not working
 #       x86_64-w64-mingw32-gcc: ok
-#       i686-w64-mingw32-gcc: only compiling
+#       i686-w64-mingw32-gcc: ok
 #    Versions:
-#       gcc: gcc (GCC) 15.0.1 20250313 (Red Hat 15.0.1-0)
-#       clang: clang version 20.1.1 (Fedora 20.1.1-1.fc43)
-#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 15.0.1 20250204 (Fedora MinGW 15.0.1-1.fc43)
-#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 15.0.1 20250204 (Fedora MinGW 15.0.1-1.fc43)
-#       wine: wine-10.4 (Staging)
-#       Linux kernel: 6.15.0-0.rc0.20250327git1a9239bb4253.5.fc43.x86_64
-#       /lib/ld-linux.so.2: ld.so (GNU libc) development release version 2.41.9000.
-#       python: Python 3.13.2
-#       python3: Python 3.13.2
-#       javac: javac 24
-#       java: openjdk 24 2025-03-18
-#       rustc: rustc 1.85.1 (4eb161250 2025-03-15) (Fedora 1.85.1-1.fc43)
-#       cargo: cargo 1.85.1 (d73d2caf9 2024-12-31)
+#       gcc: gcc (GCC) 15.2.1 20250924 (Red Hat 15.2.1-2)
+#       clang: clang version 21.1.2 (Fedora 21.1.2-1.fc43)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 15.2.1 20250808 (Fedora MinGW 15.2.1-2.fc43)
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 15.2.1 20250808 (Fedora MinGW 15.2.1-2.fc43)
+#       wine: wine-10.15 (Staging)
+#       Linux kernel: 6.17.0-63.fc43.x86_64
+#       /lib/ld-linux.so.2: ld.so (GNU libc) stable release version 2.42.
+#       python: Python 3.14.0rc3
+#       python3: Python 3.14.0rc3
+#       javac: javac 25
+#       java: openjdk 25 2025-09-16
+#       rustc: rustc 1.90.0 (1159e78c4 2025-09-14) (Fedora 1.90.0-1.fc43)
+#       cargo: cargo 1.90.0 (840b83a10 2025-07-30) (Fedora 1.90.0-1.fc43)
 #       coqc: The Coq Proof Assistant, version 8.20.1 compiled with OCaml 5.3.0
-#       openssl: OpenSSL 3.5.0-beta1 25 Mar 2025 (Library: OpenSSL 3.5.0-beta1 25 Mar 2025)
+#       openssl: OpenSSL 3.5.1 1 Jul 2025 (Library: OpenSSL 3.5.1 1 Jul 2025)
