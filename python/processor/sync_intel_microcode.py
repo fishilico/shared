@@ -214,9 +214,9 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
             "Core™ Ultra Processor (Series2)",
             "Core Ultra Processor (Series 2)",
         }:
-            new_names = [f"Intel® Core™ Ultra Processor (Series 2)"]
+            new_names = ["Intel® Core™ Ultra Processor (Series 2)"]
         elif field_product_name == "Core Ultra 200 V Series Processor":
-            new_names = [f"Intel® Core™ Ultra 200 V Series Processor"]
+            new_names = ["Intel® Core™ Ultra 200 V Series Processor"]
         elif field_product_name == "Core i3-N305/N300, N50/N97/N100/N200, Atom x7211E/x7213E/x7425E":
             new_names = [
                 "Intel® Core i3-N305/N300",
