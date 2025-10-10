@@ -32,13 +32,13 @@ def get_string_at(addr):
         addr = toAddr(addr)
     data = getDataAt(addr)
     if data is not None:
-        return "".join(chr(d) for d in data.getBytes()).split("\0", 1)[0]
+        return "".join(chr(d & 0xff) for d in data.getBytes()).split("\0", 1)[0]
     result = []
     while True:
         new_char = getByte(addr.add(len(result)))
         if new_char == 0:
             return "".join(result)
-        result.append(chr(new_char))
+        result.append(chr(new_char & 0xff))
 
 
 def get_nstring_at(addr, size):
@@ -47,7 +47,7 @@ def get_nstring_at(addr, size):
         addr = toAddr(addr)
     if size == 0:
         return ""
-    return "".join(chr(c) for c in getBytes(addr, size))
+    return "".join(chr(c & 0xff) for c in getBytes(addr, size))
 
 
 def get_data_type(type_name):
@@ -171,6 +171,9 @@ def define_fixed_len_string(addr, size, force=False):
         return
     if isinstance(addr, (int, long)):
         addr = toAddr(addr)
+    current_data = getDataAt(addr)
+    if current_data is not None and current_data.getLength() == size and current_data.getDataType().isEquivalent(ghidra.program.model.data.StringDataType.dataType):
+        return
     if force:
         ghidra.program.model.data.DataUtilities.createData(
             currentProgram,
