@@ -347,10 +347,27 @@ def rename_fun(fct, name, verbose=True):
     """Rename a function, which was for example obtained through getFunctionAt(toAddr(0x00010000))
     or currentProgram.listing.getFunctionContaining(toAddr(0x00010000))
     """
-    if fct and name and fct.getName() != name:
-        if verbose:
-            print("Renaming function {}@{} -> {}".format(fct, fct.getSymbol().getAddress(), name))
-        fct.setName(name, ghidra.program.model.symbol.SourceType.DEFAULT)
+    if not name:
+        return
+    # Split name with namespace
+    parts = name.rsplit("::", 1)
+    if len(parts) == 2:
+        if fct.getName(True) != name:
+            if verbose:
+                print("Renaming function {}@{} -> {}".format(fct, fct.getSymbol().getAddress(), name))
+            namespaces = ghidra.app.util.NamespaceUtils.getNamespaceByPath(currentProgram, None, parts[0])
+            if namespaces:
+                namespace = namespaces[0]
+            else:
+                namespace = ghidra.app.util.NamespaceUtils.createNamespaceHierarchy(parts[0], None, currentProgram, ghidra.program.model.symbol.SourceType.ANALYSIS)
+            fct.setParentNamespace(namespace)
+            fct.setName(parts[1], ghidra.program.model.symbol.SourceType.DEFAULT)
+    else:
+        # Name does not use namespace
+        if fct.getName() != name:
+            if verbose:
+                print("Renaming function {}@{} -> {}".format(fct, fct.getSymbol().getAddress(), name))
+            fct.setName(name, ghidra.program.model.symbol.SourceType.DEFAULT)
 
 
 def parse_fun_signature(fct_sign, old_signature=None, force_name=None):
