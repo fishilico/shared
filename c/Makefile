@@ -60,6 +60,8 @@ endif
 $(OPENMP_PROGRAMS:%=%.$(BIN_EXT)): LDFLAGS += -fopenmp
 $(OPENMP_PROGRAMS:%=%.$(BIN_EXT)): LIBS += $(LIBATOMIC_LIBS)
 $(OPENMP_PROGRAMS:%=.%.o): CFLAGS += -fopenmp $(call cc-disable-warning,source-uses-openmp)
+# clang 21 warns about the 'private' keyword in some OpenMP statements
+$(OPENMP_PROGRAMS:%=.%.o): CFLAGS += $(call cc-disable-warning,c++-keyword)
 
 # Only compile Gtk+ programs where $(CC) is not used for cross-compilation
 ifeq ($(filter-out cc gcc clang, $(CC)),)
