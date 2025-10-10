@@ -84,7 +84,7 @@ test: all
 
 .crypto_socket.o: CFLAGS += $(call cc-disable-warning,strict-aliasing)
 message_queue.$(BIN_EXT): LIBS += -lrt
-.override_uname_dl.o: CFLAGS += $(LIB_CFLAGS)
+.override_uname_dl.o: CFLAGS += $(LIB_CFLAGS) $(call cc-disable-warning,global-constructors)
 override_uname_dl.$(LIB_EXT): LIBS += -ldl
 pass_fd.$(BIN_EXT): LIBS += -lrt
 sdl_v4l_video.$(BIN_EXT): LIBS += -lrt
