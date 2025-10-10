@@ -143,7 +143,9 @@ static bool test_sha256(void)
     ssize_t bytes;
     size_t i;
 
-    /* Load algif_hash module */
+    /* Load algif_hash module and create a transformation socket (tfm)
+     * cf. https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/crypto/hash.h?h=v6.16#n140
+     */
     memset(&sa, 0, sizeof(sa));
     sa.salg_family = AF_ALG;
     snprintf((char *)sa.salg_type, sizeof(sa.salg_type), "hash");
