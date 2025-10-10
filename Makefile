@@ -136,7 +136,15 @@ else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(6[6-9]\|7[0-9]\
 # Old versions of rustc (<=1.81) fail to build `backtrace because:
 #   error: package `backtrace v0.3.75` cannot be built because it requires rustc 1.82.0 or newer, while the currently
 #   active rustc version is 1.71.1
-SUBDIRS_BLACKLIST += rust/download_web%
+SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/download_web%
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(8[2-4]\)\.'),y)
+# Old versions of cargo (<=1.71) fail to build rug-1.28.0 because:
+#   this version of Cargo is older than the `2024` edition, and only supports `2015`, `2018`, and `2021` editions.
+# Old versions of cargo (<=1.84) fail to build rug-1.28.0 because:
+#   The package requires the Cargo feature called `edition2024`, but that feature is not stabilized in this version of Cargo (1.78.0).
+#   https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#edition-2024
+#       The 2024 edition has been stabilized in the 1.85 release.
+SUBDIRS_BLACKLIST += rust/asymkeyfind%
 endif
 
 # Show "SUBDIR ..." only if -w and -s and V=1 are not given, and then add

@@ -60,7 +60,7 @@ COPY . /shared/
 CMD ["/run_shared_test.sh"]
 
 # make list-nobuild:
-#    Global blacklist: latex% rust/download_web%
+#    Global blacklist: latex% rust/asymkeyfind% rust/download_web%
 #    In sub-directories:
 #       c:
 #       glossaries:
@@ -75,7 +75,7 @@ CMD ["/run_shared_test.sh"]
 #       rust:
 #       verification:
 #    With gcc -m32:
-#       Global blacklist: latex% rust/download_web%
+#       Global blacklist: latex% rust/asymkeyfind% rust/download_web%
 #       In sub-directories:
 #          c: gmp_functions gtk_alpha_window
 #          glossaries:
