@@ -96,6 +96,8 @@ ifeq ($(call ccpp-has-option,-Weverything), y)
 	CFLAGS += $(call cc-disable-warning,switch-default)
 	# clang 18 on Fedora 41 reports that 'printf' was marked unused but was used
 	CFLAGS += $(call cc-disable-warning,used-but-marked-unused)
+	# clang 21 on Fedora 43 reports casts from void * to pointer types
+	CFLAGS += $(call cc-disable-warning,implicit-void-ptr-cast)
 endif
 
 # Add GCC-specific options unknown to clang
