@@ -343,7 +343,7 @@ int main(void)
     }
 
     /* Connect to the default PulseAudio server */
-    error = pa_context_connect(g_context, NULL, 0, NULL);
+    error = pa_context_connect(g_context, NULL, PA_CONTEXT_NOFLAGS, NULL);
     if (error < 0) {
         assert(error == -pa_context_errno(g_context));
         fprintf(stderr, "pa_context_connect: %s\n", pa_strerror(-error));
