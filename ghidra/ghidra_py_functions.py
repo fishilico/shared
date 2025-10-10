@@ -258,6 +258,19 @@ def iterate_table(tbl):
 
 def get_global_function(name, maybe=False):
     """Get the function object from the given name"""
+    parts = name.rsplit("::", 1)
+    if len(parts) == 2:
+        # Try getting the function in the given namespace
+        result = []
+        for namespace in ghidra.app.util.NamespaceUtils.getNamespaceByPath(currentProgram, None, parts[0]):
+            for symbol in currentProgram.getSymbolTable().getSymbols(parts[1], namespace):
+                if symbol.getSymbolType() == ghidra.program.model.symbol.SymbolType.FUNCTION:
+                    result.append(symbol.getObject())
+        if len(result) == 1:
+            return result[0]
+        if len(result) > 1:
+            raise RuntimeError("Function {} is defined {} times".format(name, len(result)))
+        # Fallthrough to global functions search
     result = list(getGlobalFunctions(name))
     if not result and maybe:
         return None
