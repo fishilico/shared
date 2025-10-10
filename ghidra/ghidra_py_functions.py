@@ -11,6 +11,7 @@
 # - https://github.com/schlafwandler/ghidra_ExportToX64dbg/blob/master/ExportToX64dbg.py
 #   uses the decompiler
 import re
+import sys
 
 
 # Some types
@@ -48,6 +49,16 @@ def get_nstring_at(addr, size):
     if size == 0:
         return ""
     return "".join(chr(c & 0xff) for c in getBytes(addr, size))
+
+
+def get_bytes_at(addr, size):
+    """Get the bytes at the given location
+    Ghidra's getBytes returns an array.array("b", ...). Convert it to bytes.
+    """
+    if isinstance(addr, (int, long)):
+        addr = toAddr(addr)
+    data = getBytes(addr, size)
+    return data.tobytes() if sys.version_info >= (3, 2) else data.tostring()
 
 
 def get_data_type(type_name):
