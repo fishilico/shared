@@ -517,6 +517,13 @@ def create_fun_at_if_absent(addr, name_or_sign, rename=True, verbose=True):
     get_or_create_fun_at(addr, name_or_sign, rename=rename, verbose=verbose)
 
 
+def print_fun_code_units(fct):
+    """Show the code units (disassembly) of a function"""
+    for cu in listing.getCodeUnits(fct.getBody(), True):
+        cu_hex =  " ".join("%02x" % (x & 0xff) for x in cu.getBytes())
+        print("{}: {}  {}".format(cu.getAddress(), cu_hex, cu.toString()))
+
+
 def init_decomp():
     """Initialize a decompiler instance"""
     decomp = ghidra.app.decompiler.DecompInterface()
