@@ -504,7 +504,6 @@ def print_high_pcode(high_fct):
 
 def iter_high_pcodeop_calling(fct, decomp, with_thunk=True):
     """Get the CALL high P-Code instructions calling the given function"""
-    called_fct_addr = fct.getSymbol().getAddress()
     caller_high_function = None
     for caller_fct, instr_call_addr in iter_functions_calling(fct, with_thunk=with_thunk):
         if caller_high_function is not None and caller_high_function.getFunction() == caller_fct:
