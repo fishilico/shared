@@ -221,7 +221,7 @@ class GhidraProject:
             if sym.namespace:
                 # Do not create names in specific namespace, for now
                 maybe_comment_prefix = "# "
-                comment_parts.append("namespace={sym.namespace!r}")
+                comment_parts.append(f"namespace={sym.namespace!r}")
 
             maybe_comment = f"  # {', '.join(comment_parts)}" if comment_parts else ""
             print(f"{maybe_comment_prefix}set_label(toAddr({sym.address:#x}), {sym.name!r}){maybe_comment}", file=fout)
