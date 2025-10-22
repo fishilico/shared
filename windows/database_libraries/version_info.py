@@ -162,6 +162,7 @@ class VsVersionInfo:
         'SharedMemoryVersion',
         'SourceId',
         'SpecialBuild',
+        'SquirrelAwareVersion',
         'StubName',
         'StubVersion',
         'Support Link',
