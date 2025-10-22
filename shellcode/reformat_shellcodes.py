@@ -169,9 +169,15 @@ def reformat_shc_with_file(filename, objdumpcmd):
 
             # objdump 2.42 use "shr $1,%edx" instead of "shr %edx",
             # otherwise there will be correctness issues when it is extended to support APX NDD
-            # https://sourceware.org/git/?p=binutils-gdb.git;a=commit;h=b70a487d5945b13e5ab503be4fc37b964819ec0e
+            # https://sourceware.org/git/?p=binutils-gdb.git;a=commitdiff;h=b70a487d5945b13e5ab503be4fc37b964819ec0e
             if asmfile.endswith(("x86_32.S", "x86_64.S")) and disasm_instr == "shr    $1,%edx":
                 disasm_instr = "shr    %edx"
+
+            # objdump 2.45 removed default segment prefixes for string
+            # instructions such as lods, in 64-bit mode
+            # https://sourceware.org/git/?p=binutils-gdb.git;a=commitdiff;h=36fa5275c164c3eea585ff0a5aaefc235a18b298
+            if asmfile.endswith("x86_64.S") and disasm_instr == "lods   (%rsi),%rax":
+                disasm_instr = "lods   %ds:(%rsi), %rax"
 
             if not instr_match(asminstr, disasm_instr):
                 sys.stderr.write("Instructions did not match: {} vs {}\n"
