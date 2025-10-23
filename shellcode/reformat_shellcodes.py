@@ -174,10 +174,15 @@ def reformat_shc_with_file(filename, objdumpcmd):
                 disasm_instr = "shr    %edx"
 
             # objdump 2.45 removed default segment prefixes for string
-            # instructions such as lods, in 64-bit mode
+            # instructions such as lods and stos, in 64-bit mode
             # https://sourceware.org/git/?p=binutils-gdb.git;a=commitdiff;h=36fa5275c164c3eea585ff0a5aaefc235a18b298
-            if asmfile.endswith("x86_64.S") and disasm_instr == "lods   (%rsi),%rax":
-                disasm_instr = "lods   %ds:(%rsi), %rax"
+            if asmfile.endswith("x86_64.S"):
+                if disasm_instr == "lods   (%rsi),%rax":
+                    disasm_instr = "lods   %ds:(%rsi), %rax"
+                elif disasm_instr == "lods   (%rsi),%al":
+                    disasm_instr = "lods   %ds:(%rsi), %al"
+                elif disasm_instr == "rep stos %al,(%rdi)":
+                    disasm_instr = "rep stos %al, %es:(%rdi)"
 
             if not instr_match(asminstr, disasm_instr):
                 sys.stderr.write("Instructions did not match: {} vs {}\n"
