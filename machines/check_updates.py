@@ -138,6 +138,13 @@ def is_usable_tag(image, tag):
         # (they are for example issues with the package manager)
         if tag in ('20', '21'):
             return False
+        # Filter out ancient some releases which are still working, but take place
+        # Only keep 1/5 of such releases
+        if tag in (
+            '23', '24', '26', '27', '28', '29',
+            '31', '32', '33', '34', '36', '37', '38', '39',
+        ):
+            return False
         # Use the 2-digit number
         if re.match(r'^[0-9][0-9]$', tag):
             return True

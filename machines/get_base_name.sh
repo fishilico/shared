@@ -115,56 +115,14 @@ do
         *fedora22*)
             echo "fedora22"
             ;;
-        *fedora23*)
-            echo "fedora23"
-            ;;
-        *fedora24*)
-            echo "fedora24"
-            ;;
         *fedora25*)
             echo "fedora25"
-            ;;
-        *fedora26*)
-            echo "fedora26"
-            ;;
-        *fedora27*)
-            echo "fedora27"
-            ;;
-        *fedora28*)
-            echo "fedora28"
-            ;;
-        *fedora29*)
-            echo "fedora29"
             ;;
         *fedora30*)
             echo "fedora30"
             ;;
-        *fedora31*)
-            echo "fedora31"
-            ;;
-        *fedora32*)
-            echo "fedora32"
-            ;;
-        *fedora33*)
-            echo "fedora33"
-            ;;
-        *fedora34*)
-            echo "fedora34"
-            ;;
         *fedora35*)
             echo "fedora35"
-            ;;
-        *fedora36*)
-            echo "fedora36"
-            ;;
-        *fedora37*)
-            echo "fedora37"
-            ;;
-        *fedora38*)
-            echo "fedora38"
-            ;;
-        *fedora39*)
-            echo "fedora39"
             ;;
         *fedora40*)
             echo "fedora40"
