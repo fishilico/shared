@@ -512,9 +512,9 @@ def get_or_create_fun_at(addr, name_or_sign, rename=True, comment=None, verbose=
     return fct
 
 
-def create_fun_at_if_absent(addr, name_or_sign, rename=True, verbose=True):
+def create_fun_at_if_absent(addr, name_or_sign, rename=True, comment=None, verbose=True):
     """Like get_or_create_fun_at, but without a return value. By default, it renames the function"""
-    get_or_create_fun_at(addr, name_or_sign, rename=rename, verbose=verbose)
+    get_or_create_fun_at(addr, name_or_sign, rename=rename, comment=comment, verbose=verbose)
 
 
 def print_fun_code_units(fct):
