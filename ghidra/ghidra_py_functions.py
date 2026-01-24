@@ -24,7 +24,7 @@ void_p_t = ghidra.program.model.data.PointerDataType(void_t)
 
 def get_pc_bitlen():
     """Get the number of bits of the Program Counter"""
-    currentProgram.getLanguage().getProgramCounter().getBitLength()
+    return currentProgram.getLanguage().getProgramCounter().getBitLength()
 
 
 def get_string_at(addr):
