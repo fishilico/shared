@@ -1,0 +1,116 @@
+FROM ubuntu:26.04
+LABEL Description="Ubuntu 26.04 LTS Resolute Raccoon with build dependencies for shared"
+
+# Override the language to force UTF-8 output
+ENV LANG=C.UTF-8
+
+# Install apt-utils first, in order to apply package configuration tasks
+RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
+    dpkg --add-architecture i386 && \
+    apt-get -qq update && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy apt-utils && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
+        binutils-mingw-w64 \
+        cargo \
+        clang \
+        coq \
+        gcc-mingw-w64 \
+        gcc-multilib \
+        gdb \
+        libc-dev \
+        libc6-dev-i386 \
+        libgmp-dev \
+        libgtk-3-dev \
+        libmnl-dev \
+        libomp-dev \
+        libpulse-dev \
+        libsdl2-dev \
+        libssl-dev \
+        linux-headers-generic \
+        m4 \
+        make \
+        musl-dev \
+        musl-tools \
+        openjdk-11-jdk-headless \
+        openssh-client \
+        openssl \
+        perl \
+        pkgconf \
+        python3 \
+        python3-cffi \
+        python3-cryptography \
+        python3-dev \
+        python3-gmpy2 \
+        python3-nacl \
+        python3-numpy \
+        python3-pil \
+        python3-pycryptodome \
+        python3-setuptools \
+        python3-z3 && \
+    apt-get install --no-install-recommends --no-install-suggests -qqy \
+        wine-stable \
+        wine32 \
+        wine64 && \
+    apt-get clean
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]
+
+# make list-nobuild:
+#    Global blacklist: latex%
+#    In sub-directories:
+#       c:
+#       glossaries:
+#       java/keystore:
+#       linux:
+#       python:
+#       python/crypto:
+#       python/network:
+#       python/network/dnssec:
+#       python/processor:
+#       python/qrcode:
+#       rust:
+#       verification:
+#    With gcc -m32:
+#       Global blacklist: latex%
+#       In sub-directories:
+#          c: gmp_functions gtk_alpha_window
+#          glossaries:
+#          java/keystore:
+#          linux: enum_link_addrs pulseaudio_echo sdl_v4l_video
+#          python:
+#          python/crypto:
+#          python/network:
+#          python/network/dnssec:
+#          python/processor:
+#          python/qrcode:
+#          rust:
+#          verification:
+#    Compilers:
+#       gcc -m64: ok
+#       gcc -m32: ok
+#       clang -m64: ok
+#       clang -m32: ok
+#       musl-gcc: ok
+#       x86_64-w64-mingw32-gcc: ok
+#       i686-w64-mingw32-gcc: ok
+#    Versions:
+#       gcc: gcc (Ubuntu 15.2.0-11ubuntu1) 15.2.0
+#       clang: Ubuntu clang version 21.1.8 (1ubuntu1)
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 13-win32
+#       i686-w64-mingw32-gcc: i686-w64-mingw32-gcc (GCC) 13-win32
+#       wine: wine-10.0 (Ubuntu 10.0~repack-11)
+#       Linux kernel: 6.18.0-9-generic
+#       /lib/ld-linux.so.2: ld.so (Ubuntu GLIBC 2.42-2ubuntu4) stable release version 2.42.
+#       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.5
+#       python3: Python 3.13.11
+#       javac: javac 11.0.30
+#       java: openjdk 11.0.30 2026-01-20
+#       rustc: rustc 1.88.0 (6b00bc388 2025-06-23) (built from a source tarball)
+#       cargo: cargo 1.88.0 (873a06493 2025-05-10) (built from a source tarball)
+#       coqc: The Coq Proof Assistant, version 8.20.1 compiled with OCaml 5.4.0
+#       openssl: OpenSSL 3.5.3 16 Sep 2025 (Library: OpenSSL 3.5.3 16 Sep 2025)
