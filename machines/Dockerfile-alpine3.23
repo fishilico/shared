@@ -1,0 +1,88 @@
+FROM alpine:3.23
+LABEL Description="Alpine Linux 3.23 with build dependencies for shared"
+
+# Alpine does not provide coq
+RUN \
+    apk --no-cache --update add \
+        cargo \
+        clang \
+        clang-dev \
+        gcc \
+        gdb \
+        gmp-dev \
+        gtk+3.0-dev \
+        iproute2 \
+        libmnl-dev \
+        linux-headers \
+        linux-lts-dev \
+        llvm-dev \
+        make \
+        mingw-w64-gcc \
+        musl-dev \
+        musl-utils \
+        nss \
+        openjdk21 \
+        openmp-dev \
+        openssh \
+        openssl \
+        openssl-dev \
+        pulseaudio-dev \
+        py3-cffi \
+        py3-cryptography \
+        py3-numpy \
+        py3-pillow \
+        py3-setuptools \
+        py3-pycryptodomex \
+        py3-pynacl \
+        py3-z3 \
+        python3-dev \
+        sdl2-dev \
+        z3-dev && \
+    rm -rf /var/cache/apk/*
+
+# Add OpenJDK to $PATH
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+WORKDIR /shared
+RUN ln -s shared/machines/run_shared_test.sh /run_shared_test.sh
+COPY . /shared/
+
+CMD ["/run_shared_test.sh"]
+
+# make list-nobuild:
+#    Global blacklist: latex%
+#    In sub-directories:
+#       c: x86-read_64b_regs_in_32b_mode
+#       glossaries:
+#       java/keystore:
+#       linux:
+#       python:
+#       python/crypto:
+#       python/network:
+#       python/network/dnssec:
+#       python/processor:
+#       python/qrcode:
+#       rust:
+#       verification: ackermann.vo
+#    Compilers:
+#       gcc -m64: ok
+#       gcc -m32: not working
+#       clang -m64: ok
+#       clang -m32: not working
+#       musl-gcc: not working
+#       x86_64-w64-mingw32-gcc: only compiling
+#       i686-w64-mingw32-gcc: not working
+#    Versions:
+#       gcc: gcc (Alpine 15.2.0) 15.2.0
+#       clang: Alpine clang version 21.1.2
+#       x86_64-w64-mingw32-gcc: x86_64-w64-mingw32-gcc (GCC) 15.2.0
+#       Linux kernel: 6.18.5-0-lts
+#       /lib/ld-musl-x86_64.so.1: musl libc (x86_64) Version 1.2.5
+#       python: Python 3.12.12
+#       python3: Python 3.12.12
+#       javac: javac 21.0.9
+#       java: openjdk 21.0.9 2025-10-21
+#       rustc: rustc 1.91.1 (ed61e7d7e 2025-11-07) (Alpine Linux Rust 1.91.1-r0)
+#       cargo: cargo 1.91.1 (ea2d97820 2025-10-10) (Alpine Linux Rust 1.91.1-r0)
+#       openssl: OpenSSL 3.5.4 30 Sep 2025 (Library: OpenSSL 3.5.4 30 Sep 2025)
