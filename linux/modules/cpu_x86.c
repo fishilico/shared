@@ -27,10 +27,25 @@
 #define X86_CR4_KL 0x00080000
 #define X86_CR4_UINTR 0x02000000
 #define X86_CR4_PKS 0x01000000
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 19, 0)
+/* Introduced in 6.19
+ * "x86/cpufeatures: Enumerate the LASS feature bits"
+ * https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=7baadd463e147fdcb6d3a091d85e23f89832569c
+ */
+#define X86_CR4_LASS 0x08000000
+#endif
 #if LINUX_VERSION_CODE < KERNEL_VERSION(6, 9, 0)
+/* Introduced in 6.9
+ * "x86/cpu: Add X86_CR4_FRED macro"
+ * https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=ff45746fbf005f96e42bea466698e3fdbf926013
+ */
 #define X86_CR4_FRED 0x100000000
 #endif
 #if LINUX_VERSION_CODE < KERNEL_VERSION(6, 4, 0)
+/* Introduced in 6.4
+ * "x86: CPUID and CR3/CR4 flags for Linear Address Masking"
+ * https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=6449dcb0cac738219d13c618af7fd8664735f99d
+ */
 #define X86_CR3_LAM_U57 0x2000000000000000
 #define X86_CR3_LAM_U48 0x4000000000000000
 #define X86_CR4_LAM_SUP 0x10000000
@@ -156,6 +171,7 @@
  *        23 (0x00800000): - CET (enable Control-flow Enforcement Technology)
  *        24 (0x01000000): - PKS (enable Protection Keys for Supervisor-Mode Pages)
  *        25 (0x02000000): - UINTR (enable User Interrupts)
+ *        27 (0x08000000): - LASS (enable Linear Address Space Separation)
  *        28 (0x10000000): - LAM_SUP (Linear Address Masking (LAM) for supervisor pointers)
  *        32 (0x100000000): - FRED (enable Flexible Return and Event Delivery (FRED))
  *      cr8 = 0x0 TPR (Task-Priority Register)
@@ -237,6 +253,7 @@ static void dump_x86_cr(void)
 	show_cr_bit(cr, 4, CET, "enable Control-flow Enforcement Technology");
 	show_cr_bit(cr, 4, PKS, "enable Protection Keys for Supervisor-Mode Pages");
 	show_cr_bit(cr, 4, UINTR, "enable User Interrupts");
+	show_cr_bit(cr, 4, LASS, "enable Linear Address Space Separation");
 	show_cr_bit(cr, 4, LAM_SUP, "Linear Address Masking (LAM) for supervisor pointers");
 	show_cr_bit(cr, 4, FRED, "enable Flexible Return and Event Delivery (FRED)");
 
