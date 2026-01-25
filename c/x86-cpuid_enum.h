@@ -206,6 +206,7 @@ __extension__ static const char* cpuidstr_7_1_eax[32] = {
     [2] = "sm4",
     [4] = "avx_vnni",
     [5] = "avx512_bf16",
+    [6] = "lass",
     [7] = "cmpccxadd",
     [8] = "arch_perfmon_ext",
     [10] = "fzrm",
