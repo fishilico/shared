@@ -96,7 +96,7 @@ static int mmap_file_open(struct inode *inode, struct file *filp)
 {
 	uint8_t *data;
 	unsigned long index;
-	struct qstr *filename;
+	const struct qstr *filename;
 
 	/* Forbid call to seek() */
 	nonseekable_open(inode, filp);
