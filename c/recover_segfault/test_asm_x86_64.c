@@ -217,6 +217,14 @@ int main(void)
     R_RAX(&ctx) = data_addr;
     test("\xf3\x44\x0f\x6f\x20", "movdqu (rax=0xda7a0000), xmm12", XMM12H, data64h);
     R_RSI(&ctx) = data_addr;
+    test("\x66\x0f\x6e\x0e", "movd (rsi=0xda7a0000), xmm1", XMM1L, data32);
+    R_RSI(&ctx) = data_addr;
+    test("\x66\x0f\x6e\x0e", "movd (rsi=0xda7a0000), xmm1", XMM1H, 0);
+    R_RBP(&ctx) = data_addr - 0x20;
+    test("\x66\x44\x0f\x6e\x65\x20", "movd 0x20(rbp=0xda79ffe0), xmm12", XMM12L, data32);
+    R_RBP(&ctx) = data_addr - 0x20;
+    test("\x66\x44\x0f\x6e\x65\x20", "movd 0x20(rbp=0xda79ffe0), xmm12", XMM12H, 0);
+    R_RSI(&ctx) = data_addr;
     R_RDX(&ctx) = 0x10;
     test("\xf3\x44\x0f\x6f\x44\x16\xf0", "movdqu -0x10(rsi+1*rdx=0xda7a0010), xmm8", XMM8L, data64);
     R_RSI(&ctx) = data_addr;

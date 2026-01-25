@@ -445,6 +445,21 @@ bool run_mov_asm_instruction_p(
             return true;
         }
 
+        /* 66 0f 6e /r: movd xmm, r/m32 */
+        if (has_66_prefix && instr[1] == 0x6e) {
+            unsigned int xmmreg = ((instr[2] >> 3) & 7) | ((rexprefix & X86_64_REX_R) ? 8 : 0);
+            paramlen = decode_modrm_check(ctx, instr + 2, rexprefix, data_addr, NULL, NULL, &operand_rm);
+            if (!paramlen) {
+                return false;
+            }
+            asm_printf(asm_instr, "movd %s, xmm%u", operand_rm, xmmreg);
+            free(operand_rm);
+            memset(asm_instr_ctx_xmm_addr(ctx, xmmreg), 0, 16);
+            memcpy(asm_instr_ctx_xmm_addr(ctx, xmmreg), data, 4);
+            R_RIP(ctx) += 2 + paramlen;
+            return true;
+        }
+
         /* 66 0f 74 /r: pcmpeqb xmm2/mem, xmm1 ; compare bytes and set 0xff if equal, 0 if not */
         if (has_66_prefix && instr[1] == 0x74) {
             unsigned int xmmreg = ((instr[2] >> 3) & 7) | ((rexprefix & X86_64_REX_R) ? 8 : 0);
