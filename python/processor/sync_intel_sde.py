@@ -38,6 +38,8 @@ https://www.intel.com/content/www/us/en/download/684897/intel-software-developme
         9.38.0 from 2024-04-18
         9.44.0 from 2024-08-22
         9.48.0 from 2024-11-25
+        9.53.0 from 2025-03-16
+        9.58.0 from 2025-06-16
 
 """
 import argparse
@@ -77,6 +79,8 @@ KNOWN_SDE_ACRONYM: FrozenSet[Tuple[int, str, str]] = frozenset(
         (0x90660, "tnt", "EHL"),
         # Version 9.33.0 uses "GNR 256"
         (0xA06D0, "gnr256", "GNR-X"),
+        # Version 9.58.0 uses "future" for Diamonds Rapids
+        (0x400F10, 'future', 'DMR')
     )
 )
 

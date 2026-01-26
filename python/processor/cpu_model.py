@@ -93,9 +93,14 @@ def load_x86_cpuid(filename):  # type: (str) -> Dict[int, Dict[Tuple[int, int], 
             if matches:
                 model_str, stepping_str, cpuid_str, main_desc = matches.groups()
                 model = int(model_str, 16)
-                expected_cpuid_len = 6 if filename == "amd_x86_cpuid.txt" else 5
-                if len(cpuid_str) != expected_cpuid_len:
-                    raise ValueError("Invalid line: CPUID value not of the expected length {}".format(repr(line)))
+                if filename == "amd_x86_cpuid.txt":
+                    if len(cpuid_str) != 6:
+                        raise ValueError("Invalid line: CPUID value not of the expected length {} in {}".format(repr(line), filename))
+                elif filename == "intel_x86_cpuid.txt":
+                    if len(cpuid_str) not in {5, 6}:
+                        raise ValueError("Invalid line: CPUID value not of the expected length {} in {}".format(repr(line), filename))
+                else:
+                    raise NotImplementedError("Unknown file name {}".format(filename))
                 if stepping_str == "x":
                     stepping = -1
                     if not cpuid_str.endswith("x"):
