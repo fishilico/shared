@@ -1258,6 +1258,11 @@ PENTIUM4 0x3F2 PEBS_MATRIX_VERT
 # Intel-SDM-Vol4 (10th Generation Intel Core)
 CORE10 0x3F2 PEBS_DATA_CFG # PEBS Data Configuration
 
+# https://cdrdv2-public.intel.com/836496/architecture-instruction-set-extensions-programming-reference.pdf Intel Architecture Instruction Set Extensions and Future Features (October 2024, 319433-055)
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/msr-index.h?h=v6.19-rc1#n335
+0x3F4 IA32_PEBS_BASE
+0x3F5 IA32_PEBS_INDEX
+
 # Intel-SDM-Vol4 (1st Gen Core, Nehalem Microarchitecture) See Section 20.3.1.1.2, "Load Latency Performance Monitoring Facility."
 CORE1 0x3F6 PEBS_LD_LAT
 
