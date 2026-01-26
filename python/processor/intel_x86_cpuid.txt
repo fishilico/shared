@@ -2109,8 +2109,11 @@
     6th Generation Intel® Xeon® Scalable Processor Family
 
 # https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20250512
-0xad,  1 (0xa06d1): "GNR-X/AP/SP" Granite Rapids Xeon (Redwood Cove)
+# https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20251111
+0xad,  1 (0xa06d1): "GNR-X/AP/SP/GNR-SP-R1S" Granite Rapids Xeon (Redwood Cove)
     6th Generation Intel® Xeon® Scalable Processor Family
+    Xeon 6700/6500-Series Processors with P-Cores
+    Xeon 6900-6700/6500-Series Processors with P-Cores
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
@@ -2121,6 +2124,11 @@
 # https://twitter.com/InstLatX64/status/1748426947615396154
 0xae,  0 (0xa06e0): "GNR-D" Granite Rapids D (Redwood Cove)
     6th Generation Intel® Xeon® Scalable Processor Family
+
+# https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20251111
+0xae,  1 (0xa06e1): "GNR-D" Granite Rapids D (Redwood Cove)
+    6th Generation Intel® Xeon® Scalable Processor Family
+    Xeon 6700P-B/6500P-B Series SoC with P-Cores
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 # https://github.com/intel/perfmon/blob/16447cf3a2bfb0ed2a3c4649878baaefa9b3b332/mapfile.csv
@@ -2139,9 +2147,11 @@
     6th Generation Intel® Xeon® Scalable Processor Family
 
 # https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20250211
-0xaf,  3 (0xa06f3): "SRF-SP" Sierra Forest Xeon (Sierra Glen, Crestmont) (Stepping C0)
+# https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20251111
+0xaf,  3 (0xa06f3): "SRF-AP/SP" Sierra Forest Xeon (Sierra Glen, Crestmont) (Stepping C0)
     6th Generation Intel® Xeon® Scalable Processor Family
     Xeon 6700-Series Processors with E-Cores
+    Xeon 6900/6700-Series Processors with E-Cores
 
 # https://twitter.com/InstLatX64/status/1771477032137900150
 # https://lore.kernel.org/lkml/20240322161725.195614-1-tony.luck@intel.com/T/ "for the regular laptop CPU"
