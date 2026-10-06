@@ -8,6 +8,11 @@
  * * http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/fpu/xstate.c
  * * http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/fpu/types.h
  * * http://events.linuxfoundation.org/sites/events/files/slides/LinuxCon_NA_2014.pdf
+ * * https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-1-manual.pdf
+ *   Intel® 64 and IA-32 Architectures Software Developer’s Manual Volume 1: Basic Architecture
+ *   Section 13.4.3 Extended Region of an XSAVE Area
+ * * https://intel.github.io/SDM/definition/XSAVE_BitVector_Type.html
+ *   Enumeration of XSAVE components
  *
  * Output example (on a Skylake processor)
  *     CPUID 0xd.0:
@@ -30,6 +35,16 @@
  *       [ 7] -AVX-512 Hi_ZMM256 (ZMM16-ZMM31)
  *       [ 8] -PT (Intel Processor Trace MSRs)
  *       [ 9] -PKRU (Protection Keys Rights for User Pages)
+ *       [10] -PASID (Process Address Space ID)
+ *       [11] -CET User (Intel Control-Flow Enforcement Technology)
+ *       [12] -CET Kernel (Intel Control-Flow Enforcement Technology)
+ *       [13] -HDC (Hardware Duty Cycling)
+ *       [14] -UINTR (User Interrupt)
+ *       [15] -ARCH LBR (Intel Architectural Last Branch Record)
+ *       [16] -HWP (Intel Hardware P-State)
+ *       [17] -AMX-TILECFG (Intel Advanced Matrix Extensions Configuration)
+ *       [18] -AMX-TILEDATA (Intel Advanced Matrix Extensions Tile Data)
+ *       [19] -APX (Intel Advanced Performance Extensions)
  *
  *     Current processor extended states:
  *       000000:  7f 03 00 00  00 00 00 00  00 00 00 00  00 00 00 00  FCW, FSW, FTW, FOP, FPU IP, CS
@@ -126,8 +141,18 @@ __extension__ static struct xstate_metadata xstate_desc[65] = {
     [5] = {"AVX-512 opmask (k0-k7 registers)", 0, 64},
     [6] = {"AVX-512 ZMM_Hi256 (upper 256 bits of ZMM0-ZMM15)", 0, 512},
     [7] = {"AVX-512 Hi_ZMM256 (ZMM16-ZMM31)", 0, 1024},
-    [8] = {"PT (Intel Processor Trace MSRs)", 0, 0},
+    [8] = {"PT (Intel Processor Trace MSRs)", 0, 72},
     [9] = {"PKRU (Protection Keys Rights for User Pages)", 0, 8},
+    [10] = {"PASID (Process Address Space ID)", 0, 0},
+    [11] = {"CET User (Intel Control-Flow Enforcement Technology)", 0, 0},
+    [12] = {"CET Kernel (Intel Control-Flow Enforcement Technology)", 0, 0},
+    [13] = {"HDC (Hardware Duty Cycling)", 0, 0},
+    [14] = {"UINTR (User Interrupt)", 0, 0},
+    [15] = {"ARCH LBR (Intel Architectural Last Branch Record)", 0, 0},
+    [16] = {"HWP (Intel Hardware P-State)", 0, 0},
+    [17] = {"AMX-TILECFG (Intel Advanced Matrix Extensions Configuration)", 0, 64},
+    [18] = {"AMX-TILEDATA (Intel Advanced Matrix Extensions Tile Data)", 0, 8192},
+    [19] = {"APX (Intel Advanced Performance Extensions)", 0, 0},
 };
 
 static void asm_cpuid(uint32_t code, uint32_t *peax, uint32_t *pebx, uint32_t *pecx, uint32_t *pedx)
@@ -315,8 +340,8 @@ static void hexdump_both(const uint8_t *data1, const uint8_t *data2, unsigned in
 
 int main(void)
 {
-    static uint8_t xsave_buffer1[4096] __attribute__ ((__aligned__(64)));
-    static uint8_t xsave_buffer2[4096] __attribute__ ((__aligned__(64)));
+    static uint8_t xsave_buffer1[16384] __attribute__ ((__aligned__(64)));
+    static uint8_t xsave_buffer2[16384] __attribute__ ((__aligned__(64)));
     uint32_t eax = 0, ebx = 0, ecx = 0, edx = 0;
     uint64_t xcr0;
     bool is_active;
