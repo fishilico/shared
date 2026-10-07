@@ -73,7 +73,7 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
 
     # "checkout" requires git to be installed, which is why it is used after installing software
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
 
     - name: Configure the environment
       run: |
