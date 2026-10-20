@@ -285,6 +285,7 @@ __extension__ static const char* cpuidstr_ext7_edx[32] = {
     [9] = "cpb",
     [11] = "proc_feedback",
     [15] = "amd_fast_cppc",
+    [16] = "cppc_perf_prio",
 };
 
 static void add_manual_cpuid_str(void)
