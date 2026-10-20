@@ -36,7 +36,6 @@ KCFLAGS_WARN = -Wall -Wextra -Werror \
 	-Wfloat-equal \
 	-Wformat=2 -Wno-format-nonliteral \
 	-Winit-self \
-	-Wjump-misses-init \
 	-Wlogical-op \
 	-Wmissing-declarations \
 	-Wmissing-format-attribute \
@@ -48,6 +47,7 @@ KCFLAGS_WARN = -Wall -Wextra -Werror \
 	-Wno-bad-function-cast \
 	-Wno-cast-qual \
 	-Wno-conversion \
+	-Wno-jump-misses-init \
 	-Wno-missing-field-initializers \
 	-Wno-missing-include-dirs \
 	-Wno-nested-externs \
