@@ -529,6 +529,9 @@ def init_decomp():
     decomp = ghidra.app.decompiler.DecompInterface()
     decomp.toggleSyntaxTree(True)
     decomp.toggleCCode(True)
+    opt = ghidra.app.decompiler.DecompileOptions()
+    opt.grabFromProgram(currentProgram)
+    decomp.setOptions(opt)
     decomp.openProgram(currentProgram)
     return decomp
 
