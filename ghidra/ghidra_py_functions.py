@@ -83,6 +83,35 @@ def get_data_type(type_name):
     raise ValueError("Error: unknown data type {}".format(type_name))
 
 
+def to_bigint(value):
+    """Convert a value to a Java Big Integer"""
+    from java.math import BigInteger
+    if isinstance(value, BigInteger):
+        return value
+    if isinstance(value, str):
+        if value.startswith("0x"):
+            return BigInteger(value[2:], 16)
+        return BigInteger(value)
+    if isinstance(value, (int, long)):
+        return BigInteger.valueOf(value)
+    if hasattr(value, "getOffsetAsBigInteger"):  # ghidra.program.model.address.GenericAddress
+        return value.getOffsetAsBigInteger()
+    raise NotImplementedError("Error: unable to convert {} to BigInteger: {}".format(type(value).__name__, repr(value)))
+
+
+def set_register_value_everywhere(regname, value):
+    """Set a register value everywhere in the program
+    For example to define r9 to .data address in ARM ropi/rwpi firmware:
+        set_register_value_everywhere("r9", 0xda7a0000)
+    """
+    ram = currentProgram.getAddressFactory().getAddressSpace("ram")
+    pc = currentProgram.getProgramContext()
+    reg = pc.getRegister(regname)
+    value_bi = to_bigint(value)
+    with currentProgram.openTransaction("Set register value"):
+        pc.setValue(reg, ram.getMinAddress(), ram.getMaxAddress(), value_bi)
+
+
 def import_data_type(type_name, arcname="", category="/"):
     """Import data type from an archive"""
     data_types = getDataTypes(type_name)
