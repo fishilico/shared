@@ -266,6 +266,16 @@ static void dump_x86_cr(void)
 #define show_efer_bit(efer, bitname, desc) \
 	show_reg_bit((efer), #bitname, 1 << _EFER_##bitname, (desc))
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 16, 0)
+/* Commit 666a5742b721 ("x86/msr: Remove rdmsrl()") removed in Linux 7.2 the
+ * compatibility wrapper rdmsrl->rdmsrq introduced by commit a5447e92e169
+ * ("x86/msr: Add compatibility wrappers for rdmsrl()/wrmsrl()") in Linux 6.16,
+ * after commit c435e608cf59 ("x86/msr: Rename 'rdmsrl()' to 'rdmsrq()'") also
+ * in Linux 6.16.
+ */
+#define rdmsrq(msr, val) rdmsrl((msr), val)
+#endif
+
 /**
  * Output example on x86_64:
  *      msr:fs_base(0xc0000100) = 0x7fdb12083740
@@ -297,14 +307,14 @@ static void dump_x86_msr(void)
 #ifdef CONFIG_X86_64
 	unsigned long long msr;
 
-	rdmsrl(MSR_FS_BASE, msr);
+	rdmsrq(MSR_FS_BASE, msr);
 	pr_info("msr:fs_base(0x%x) = 0x%llx\n", MSR_FS_BASE, msr);
-	rdmsrl(MSR_GS_BASE, msr);
+	rdmsrq(MSR_GS_BASE, msr);
 	pr_info("msr:gs_base(0x%x) = 0x%llx\n", MSR_GS_BASE, msr);
-	rdmsrl(MSR_KERNEL_GS_BASE, msr);
+	rdmsrq(MSR_KERNEL_GS_BASE, msr);
 	pr_info("msr:kernel_gs_base(0x%x) = 0x%llx\n", MSR_KERNEL_GS_BASE, msr);
 
-	rdmsrl(MSR_EFER, msr);
+	rdmsrq(MSR_EFER, msr);
 	pr_info("msr:EFER(0x%x) = 0x%08llx (Extended Feature Enable Register)\n",
 		MSR_EFER, msr);
 	show_efer_bit(msr, SCE, "SYSCALL/SYSRET");
@@ -320,11 +330,11 @@ static void dump_x86_msr(void)
 	show_efer_bit(msr, UAIE, "Upper Address Ignore Enable");
 	show_efer_bit(msr, AUTOIBRS, "Automatic IBRS Enable");
 
-	rdmsrl(MSR_IA32_SYSENTER_CS, msr);
+	rdmsrq(MSR_IA32_SYSENTER_CS, msr);
 	pr_info("msr:ia32_sysenter_CS(0x%x) = 0x%llx\n", MSR_IA32_SYSENTER_CS, msr);
-	rdmsrl(MSR_IA32_SYSENTER_ESP, msr);
+	rdmsrq(MSR_IA32_SYSENTER_ESP, msr);
 	pr_info("msr:ia32_sysenter_ESP(0x%x) = 0x%llx\n", MSR_IA32_SYSENTER_ESP, msr);
-	rdmsrl(MSR_IA32_SYSENTER_EIP, msr);
+	rdmsrq(MSR_IA32_SYSENTER_EIP, msr);
 	pr_info("msr:ia32_sysenter_EIP(0x%x) = 0x%llx (%pS)\n",
 		MSR_IA32_SYSENTER_EIP, msr, (void *)msr);
 
@@ -332,14 +342,14 @@ static void dump_x86_msr(void)
 	 * Setup in /usr/src/linux/arch/x86/kernel/cpu/common.c
 	 * STAR = Syscall Target
 	 */
-	rdmsrl(MSR_STAR, msr);
+	rdmsrq(MSR_STAR, msr);
 	pr_info("msr:star(0x%x) = user32 CS 0x%llx, kernel CS 0x%llx, EIP 0x%llx\n",
 		MSR_STAR, msr >> 48, (msr >> 32) & 0xffff, msr & 0xffffffff);
-	rdmsrl(MSR_LSTAR, msr); /* Long mode */
+	rdmsrq(MSR_LSTAR, msr); /* Long mode */
 	pr_info("msr:lstar(0x%x) = 0x%llx (%pS)\n", MSR_LSTAR, msr, (void *)msr);
-	rdmsrl(MSR_CSTAR, msr); /* Compatibility mode */
+	rdmsrq(MSR_CSTAR, msr); /* Compatibility mode */
 	pr_info("msr:cstar(0x%x) = 0x%llx (%pS)\n", MSR_CSTAR, msr, (void *)msr);
-	rdmsrl(MSR_SYSCALL_MASK, msr);
+	rdmsrq(MSR_SYSCALL_MASK, msr);
 	pr_info("msr:sfmask(0x%x) = 0x%llx\n", MSR_SYSCALL_MASK, msr);
 #endif
 }
