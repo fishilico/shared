@@ -299,6 +299,7 @@ def parse_intel_ucode_releasenote_cfg(file_data: str) -> None:
             "Xeon 6700P-B/6500P-B Series SoC with P-Cores",
             "Xeon 6900/6700-Series Processors with E-Cores",
             "Xeon 6900-6700/6500-Series Processors with P-Cores",
+            "Xeon 6900/6700/6500 Series Processors with P-Cores",
         }:
             new_names = [
                 field_product_name,
