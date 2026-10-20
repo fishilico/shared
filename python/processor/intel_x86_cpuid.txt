@@ -2199,6 +2199,9 @@
     13th Gen Intel(R) Core(TM) i5-13600K
     13th Gen Intel(R) Core(TM) i7-13700K
 
+0xb7,  4 (0xb0674): "BTL-S816" Bartlett Lake S
+    Intel® Core™ Processors (Series 2 with P-cores)
+
 # https://github.com/intel/dptf/blob/0495c575bd2973bc1bd7811d62982ad32df1ebde/Common/esif_ccb_cpuid.h
 0xba,  x (0xb06ax): "RPL-P" Raptor Lake P
 
@@ -2343,10 +2346,10 @@
 # https://x.com/InstLatX64/status/1788284820231004312
 0xcc,  1 (0xc06c1): "PTL" Panther Lake (Stepping B-0)
 
-0xcc,  2 (0xc06c2): "PTL/PTL-H-484/PTL-12Xe" Panther Lake
+0xcc,  2 (0xc06c2): "PTL/PTL-H484/PTL-H-484/PTL-12Xe/PTL-H12Xe" Panther Lake
     Intel® Core™ Ultra Processor (Series 3)
 
-0xcc,  3 (0xc06c3): "PTL/PTL-404" Panther Lake
+0xcc,  3 (0xc06c3): "PTL/PTL-404/PTL-H204" Panther Lake
     Intel® Core™ Ultra Processor (Series 3)
 
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
@@ -2370,8 +2373,14 @@
 0xcf,  5 (0xc06f5): "EMR-X" Emerald Rapids Xeon (Raptor Cove)
     5th Generation Intel® Xeon® Scalable Processor Family
 
+0xd5,  1 (0xd0651): "WCL" Wildcat Lake
+    Intel® Core™ Processors (Series 3)
+
 # https://bsky.app/profile/instlatx64.bsky.social/post/3ltmcvpgxxk2c
 0xd6,  0 (0xd0660): "DMR" Diamond Rapids
+
+0xd7,  0 (0xd0670): "BTL-S12P" Bartlett Lake
+    Intel® Core™ Processors (Series 2 with P-cores)
 
 # https://cdrdv2-public.intel.com/790021/architecture-instruction-set-extensions-programming-reference.pdf
 # https://twitter.com/InstLatX64/status/1708121836595143148
