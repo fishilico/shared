@@ -79,6 +79,9 @@ do
         *alpine323*|*alpine3.23*)
             echo "alpine3.23"
             ;;
+        *alpine324*|*alpine3.24*)
+            echo "alpine3.24"
+            ;;
 
         *debian12*|*bookworm*)
             echo "debian12-bookworm"
