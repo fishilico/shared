@@ -424,5 +424,6 @@
 #define __NR_file_getattr 468
 #define __NR_file_setattr 469
 #define __NR_listns 470
+#define __NR_rseq_slice_yield 471
 
 #endif /* _UAPI_ASM_UNISTD_EABI_H */
