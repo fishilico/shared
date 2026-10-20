@@ -84,7 +84,7 @@ cat > /etc/docker/daemon.json << EOF
 EOF
 systemctl enable --now docker
 gpasswd -a vagrant docker
-(docker images |grep -q '^archlinux ') || su vagrant -c 'docker docker-buildx build -t archlinux /vagrant/machines/archlinux'
+(docker images |grep -q '^archlinux ') || su vagrant -c 'docker buildx build -t archlinux /vagrant/machines/archlinux'
 
 # Use vsyscall=emulate on the command line, for Debian 7 Wheezy
 if [ -e /boot/syslinux/syslinux.cfg ] && ! grep vsyscall=emulate /boot/syslinux/syslinux.cfg > /dev/null
