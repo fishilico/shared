@@ -440,6 +440,16 @@ static const struct known_libc libc_database[] = {
         "\xf3\x0f\x1e\xfaH\x89\x1fH\x89\xe8\x64H3\x04%0\0\0\0H\xc1\xc0\x11H\x89G\x08L\x89g\x10L\x89o\x18L\x89w L\x89\x7f(H\x8dT$\x08\x64H3\x14%0\0\0\0H\xc1\xc2\x11H\x89W0H\x8b\x04$\x90\x64H3\x04%0\0\0\0H\xc1\xc0\x11H\x89G8d\xf7\x04%H\0\0\0\x02\0\0\0t\t\xf3H\x0f\x1e\xc8H\x89GX\xe9",
         linux_glibc_x86_64_sigjmp_buf_desc, linux_glibc_x86_64_sigjmp_buf_desc,
         glibc_unmangle_value, glibc_unmangle_value),
+    /* Use a global variable instead of fs:0x30 to access the pointer guard
+     * cf. https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/x86_64/pointer_guard-asm.h;h=11b0ea3f83b19e1485d68bd71872e4f70812f724;hb=refs/tags/glibc-2.44
+     * This has been seen on:
+     * * Arch Linux with glibc 2.44
+     */
+    DEFINE_KNOWN_LIBC("Linux", "glibc", "x86_64 (amd64) with endbr64, shadow stack and global variable",
+        "\xf3\x0f\x1e\xfa\xbe\x01\0\0\0",
+        "\xf3\x0f\x1e\xfaH\x89\x1fH\x89\xe8L\x8b\x1d",
+        linux_glibc_x86_64_sigjmp_buf_desc, linux_glibc_x86_64_sigjmp_buf_desc,
+        glibc_unmangle_value, glibc_unmangle_value),
 
     /* http://git.musl-libc.org/cgit/musl/tree/src/setjmp/x86_64/setjmp.s?h=v1.1.24 */
     /* http://git.musl-libc.org/cgit/musl/tree/src/signal/x86_64/sigsetjmp.s?h=v1.1.24 */
