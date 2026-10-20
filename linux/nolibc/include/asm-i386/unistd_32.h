@@ -462,9 +462,10 @@
 #define __NR_file_setattr 469
 #define __NR_listns 470
 #define __NR_rseq_slice_yield 471
+#define __NR_fchroot 472
 
 #ifdef __KERNEL__
-#define __NR_syscalls 472
+#define __NR_syscalls 473
 #endif
 
 #endif /* _UAPI_ASM_UNISTD_32_H */
