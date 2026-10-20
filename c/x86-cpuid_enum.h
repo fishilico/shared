@@ -100,6 +100,7 @@ __extension__ static const char* cpuidstr_6_eax[32] = {
     [11] = "hwp_pkg_req",
     [15] = "hwp_highest_perf_change",
     [19] = "hfi",
+    [24] = "dpti",
 };
 
 /**
