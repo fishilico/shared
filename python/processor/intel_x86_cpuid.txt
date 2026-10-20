@@ -2343,6 +2343,12 @@
 # https://x.com/InstLatX64/status/1788284820231004312
 0xcc,  1 (0xc06c1): "PTL" Panther Lake (Stepping B-0)
 
+0xcc,  2 (0xc06c2): "PTL/PTL-H-484/PTL-12Xe" Panther Lake
+    Intel® Core™ Ultra Processor (Series 3)
+
+0xcc,  3 (0xc06c3): "PTL/PTL-404" Panther Lake
+    Intel® Core™ Ultra Processor (Series 3)
+
 # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/include/asm/intel-family.h?h=v6.2
 0xcf,  x (0xc06fx): "EMR-X" Emerald Rapids Xeon
     5th Generation Intel® Xeon® Scalable Processor Family
