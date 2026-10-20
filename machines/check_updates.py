@@ -113,6 +113,8 @@ def is_usable_tag(image, tag):
             return False
         if tag == 'buster-slim':
             return False
+        if tag == 'bullseye-slim':
+            return False
         # Do not use images with dynamic names
         if re.match(r'^(oldoldstable|oldstable|stable|sid|testing|unstable)(-slim)?$', tag):
             return False

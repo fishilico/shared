@@ -80,9 +80,6 @@ do
             echo "alpine3.23"
             ;;
 
-        *debian11*|*bullseye*)
-            echo "debian11-bullseye"
-            ;;
         *debian12*|*bookworm*)
             echo "debian12-bookworm"
             ;;
