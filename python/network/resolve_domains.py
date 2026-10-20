@@ -22,7 +22,7 @@
 """Resolve a list DNS domains with a caching directory
 
 Usage example to resolve domains using Google's DNS-over-HTTPS API, a list in
-domains.txt, a cache in directory dns/, writing results in results.out.txt:
+domains.txt, a cache in directory cache_dns/, writing results in results.out.txt:
 
     ./resolve_domains.py -gMOs -o dns_resolutions.out.txt -d cache_dns domains.txt
 
