@@ -218,6 +218,7 @@ __extension__ static const char* cpuidstr_7_1_eax[32] = {
     [21] = "amx_fp16",
     [23] = "avx_ifma",
     [26] = "lam",
+    [31] = "movrs",
 };
 
 /**
