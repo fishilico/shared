@@ -86,6 +86,8 @@ ifeq ($(call ccpp-has-option,-Weverything), y)
 	CFLAGS += $(call cc-disable-warning,reserved-id-macro)
 	# clang 3.7 added -Wdocumentation-unknown-command and -fcatch-undefined-behavior
 	CFLAGS += $(call cc-disable-warning,documentation-unknown-command)
+	# clang 21 warns about using _Generic C11 extenstion in glibc 2.43's string.h
+	CFLAGS += $(call cc-disable-warning,c11-extensions)
 	# clang 10.0 warns about using "bool", with -Wc99-extensions
 	CFLAGS += $(call cc-disable-warning,c99-extensions)
 	# clang 13.0 added -Wreserved-identifier, which triggers many warnings in headers when names starts with _
