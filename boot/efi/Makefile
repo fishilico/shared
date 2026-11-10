@@ -1,33 +1,18 @@
 CC ?= cc
 LD ?= ld
+OBJCOPY ?= objcopy
 UNAME ?= uname
 
 include ../../common.mk
 
 TARGET_ARCH := $(or $(get-cc-target-arch),unknown-arch)
-# Find the right objcopy variant depending on the architecture
 ifeq ($(TARGET_ARCH),x86_32)
 	# Use ARCH=ia32 instead of x86_32 for EFI
 	ARCH := ia32
-	ifeq ($(call can-run,i686-w64-mingw32-objcopy --version),y)
-		OBJCOPY ?= i686-w64-mingw32-objcopy
-	else ifeq ($(call can-run,x86_64-w64-mingw32-objcopy --version),y)
-		OBJCOPY ?= x86_64-w64-mingw32-objcopy
-	else
-		OBJCOPY ?= objcopy
-	endif
-	# Add -m32 flag to allow building 32-bits EFI with "linux32 make"
+	# Add -m32 flag to enable building 32-bits EFI with "linux32 make"
 	CFLAGS += -m32
-else ifeq ($(TARGET_ARCH),x86_64)
-	ARCH := $(TARGET_ARCH)
-	ifeq ($(call can-run,x86_64-w64-mingw32-objcopy --version),y)
-		OBJCOPY ?= x86_64-w64-mingw32-objcopy
-	else
-		OBJCOPY ?= objcopy
-	endif
 else
 	ARCH := $(TARGET_ARCH)
-	OBJCOPY ?= objcopy
 endif
 
 CPPFLAGS = -Wp,-MT,$@ -Wp,-MD,$(dir $@).$(notdir $@).d
@@ -65,7 +50,7 @@ test: all
 
 %.efi: %.so
 	$(V_OBJCOPY)$(OBJCOPY) -j .text -j .sdata -j .data -j .dynamic -j .dynsym \
-		-j .rel* -j .rela* -j .reloc --target=efi-app-$(ARCH) $< $@
+		-j .rel* -j .rela* -j .reloc --output-target=efi-app-$(ARCH) $< $@
 
 %.so: .%.o .efi_crt.o
 	$(V_LD)$(LD) $(LDFLAGS) $^ -o $@ $(LIBS)
