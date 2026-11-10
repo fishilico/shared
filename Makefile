@@ -86,7 +86,7 @@ endif
 # Test rust/cargo availability
 ifneq ($(call can-run,$(CARGO) --version),y)
 SUBDIRS_BLACKLIST += rust%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-9]\|5[0-9]\|6[0-5]\)\.'),y)
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-9]\|5[0-9]\|6[0-9]\|70\)\.'),y)
 # Old versions of rustc (<=1.39) fail to build subtle-2.3.0 because:
 #   error[E0210]: type parameter `T` must be used as the type parameter for some
 #   local type (e.g., `MyStruct<T>`)
@@ -131,8 +131,11 @@ else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(3[0-9]\|4[0-9]\
 # Old versions of rustc (<=1.65) fail to build unicode-width-0.1.14 because:
 #   error[E0658]: use of unstable library feature 'mixed_integer_ops'
 #   note: see issue #87840 <https://github.com/rust-lang/rust/issues/87840> for more information
+# Old versions of rustc (<=1.71) fail to build log-0.4.35 because:
+#   error: package `log v0.4.35` cannot be built because it requires rustc 1.71.0 or newer, while the currently active
+#   rustc version is 1.70.0
 SUBDIRS_BLACKLIST += rust/asymkeyfind% rust/check_linux_pass% rust/download_web%
-else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(6[6-9]\|7[0-9]\|8[0-1]\)\.'),y)
+else ifeq ($(call can-run,$(RUSTC) --version | grep '^rustc 1\.\(7[1-9]\|8[0-1]\)\.'),y)
 # Old versions of rustc (<=1.81) fail to build `backtrace because:
 #   error: package `backtrace v0.3.75` cannot be built because it requires rustc 1.82.0 or newer, while the currently
 #   active rustc version is 1.71.1
