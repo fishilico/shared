@@ -1256,6 +1256,70 @@ def run_ssh_test(colorize):  # type: (bool) -> bool
     return True
 
 
+def run_nats_nkeys_test(colorize):  # type: (bool) -> bool
+    """Parse NATS NKeys
+
+    https://docs.nats.io/learn/security/authentication-basics#other-ways-a-user-entry-can-authenticate
+    https://github.com/nats-io/nkeys/blob/v0.4.0/strkey.go
+    """
+    color_red = COLOR_RED if colorize else ''
+    color_green = COLOR_GREEN if colorize else ''
+    color_norm = COLOR_NORM if colorize else ''
+    color_purple = COLOR_PURPLE if colorize else ''
+
+    curve = Ed25519()
+
+    nkeys = (  # type: tuple[tuple[str, str], ...]
+        (
+            # https://web.archive.org/web/20260628161801/https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/nkey_auth#generating-nkeys-and-configuring-the-server
+            "SUACSSL3UAHUDXKFSNVUZRF5UHPMWZ6BFDTJ7M6USDXIEDNPPQYYYCU3VY",
+            "UDXU4RCSJNZOIQHZNWXHXORDPRTGNJAHAHFRGZNEEJCPQTT2M7NLCNF4",
+        ),
+        (
+            # https://github.com/nats-io/nkeys/blob/v0.4.0/README.md#basic-api-usage
+            "SUAKYRHVIOREXV7EUZTBHUHL7NUMHPMAS7QMDU3GTIUWEI5LDNOXD43IZY",
+            "UD466L6EBCM3YY5HEGHJANNTN4LSKTSUXTH7RILHCKEQMQHTBNLHJJXT",
+        ),
+    )
+    for nkey_seed, nkey_pub in nkeys:
+        nkey_seed_raw = base64.b32decode(nkey_seed + "=" * ((8 - len(nkey_seed)) % 8))
+        nkey_pub_raw = base64.b32decode(nkey_pub + "=" * ((8 - len(nkey_pub)) % 8))
+        print("NKey seed: {}{}{}".format(color_red, nkey_seed, color_norm))
+        hexdump(nkey_seed_raw, color=color_red)
+        nkey_seed_prefix = nkey_seed_raw[:2]
+        nkey_seed_secret = nkey_seed_raw[2:-2]
+        nkey_seed_crc16 = decode_bigint_le(nkey_seed_raw[-2:])
+        print("* prefix: {}".format(xx(nkey_seed_prefix)))
+        print("* secret({}): {}{}{}".format(len(nkey_seed_secret) * 8, color_red, xx(nkey_seed_secret), color_norm))
+        print("* crc16: {:#06x}".format(nkey_seed_crc16))
+        assert nkey_seed_prefix == b"\x95\x00"
+        assert 0x95 == (18 << 3) + (20 >> 2)  # "SU" prefix
+        assert 0x00 == ((20 << 6) & 0xff)
+        assert len(nkey_seed_secret) == 32
+        assert nkey_seed_crc16 == binascii.crc_hqx(nkey_seed_raw[:-2], 0)
+
+        print("NKey public key: {}{}{}".format(color_green, nkey_pub, color_norm))
+        hexdump(nkey_pub_raw, color=color_green)
+        nkey_pub_prefix = nkey_pub_raw[:1]
+        nkey_pub_bytes = nkey_pub_raw[1:-2]
+        nkey_pub_point = Ed25519Point.decode(nkey_pub_bytes)
+        nkey_pub_crc16 = decode_bigint_le(nkey_pub_raw[-2:])
+        print("* prefix: {}".format(xx(nkey_pub_prefix)))
+        print("* public bytes({}): {}{}{}".format(len(nkey_pub_bytes) * 8, color_green, xx(nkey_pub_bytes), color_norm))
+        print("* crc16: {:#06x}".format(nkey_pub_crc16))
+        assert nkey_pub_prefix == b"\xa0"
+        assert 0xa0 == (20 << 3)  # "U" prefix
+        assert len(nkey_pub_bytes) == 32
+        assert nkey_pub_crc16 == binascii.crc_hqx(nkey_pub_raw[:-2], 0)
+
+        # Ensure the public key matches the seed
+        public_point = curve.public_point(nkey_seed_secret)
+        assert public_point.encode() == nkey_pub_bytes
+        assert public_point == nkey_pub_point
+
+    return True
+
+
 def main(argv=None):  # type: (Sequence[str] | None) -> int
     """Program entry point"""
     parser = argparse.ArgumentParser(
@@ -1288,6 +1352,9 @@ def main(argv=None):  # type: (Sequence[str] | None) -> int
         return 1
     print("")
     if not run_ssh_test(args.color):
+        return 1
+    print("")
+    if not run_nats_nkeys_test(args.color):
         return 1
     return 0
 
