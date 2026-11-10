@@ -129,6 +129,14 @@ pkg tmux
 pkg vim
 pkg zsh
 
+if is_available wtmpdb
+then
+    # wtmpdb appeared in Debian 13 and Ubuntu 26.04
+    # cf. https://packages.debian.org/trixie/wtmpdb
+    # and https://launchpad.net/ubuntu/resolute/+source/wtmpdb
+    pkg wtmpdb
+fi
+
 # Hardware and TTY
 pkg acpica-tools
 pkg console-data
